@@ -1,0 +1,72 @@
+import { z } from "zod";
+
+/* The shape of the thesis pipeline's graph dataset catalogue (Mearman/Thesis, experiments/pipeline/graphs/catalog.json, with its own catalog.schema.json beside it), as far as the seed import reads it. The upstream schema leaves `citation` and `sources` open, so each of their recorded variants is spelled out here: a variant the import has never seen fails the parse loudly rather than converting into something unchecked. The graphbox catalogue (Mearman/graphbox, src/data/catalog.json) has the same outer shape and is read only for the overlap report. */
+
+/** One download of a dataset: a URL in a stated format, optionally naming the archive member to read, or a generator description for a synthetic dataset. */
+export const SourceDownloadSchema = z.looseObject({
+  format: z.string().optional(),
+  url: z.string().optional(),
+  innerPath: z.string().optional(),
+  generator: z.string().optional(),
+});
+export type SourceDownload = z.infer<typeof SourceDownloadSchema>;
+
+/** One source of a dataset: a bare landing-page URL (the catalogue's legacy form), a named source with downloads, or a cached-JSON record listing URLs. The two object forms list only the keys the import reads, so the union narrows on `downloads`. */
+export const SourceEntrySchema = z.union([z.string(), z.object({ source: z.string().optional(), downloads: z.array(SourceDownloadSchema) }), z.object({ format: z.string(), urls: z.array(z.string()) })]);
+export type SourceEntry = z.infer<typeof SourceEntrySchema>;
+
+/** A structured citation as the catalogue records most of them. */
+export const StructuredCitationSchema = z.looseObject({
+  authors: z.array(z.string()),
+  title: z.string(),
+  type: z.string(),
+  year: z.union([z.number(), z.string()]),
+  journal: z.string().optional(),
+  volume: z.union([z.number(), z.string()]).optional(),
+  number: z.union([z.number(), z.string()]).optional(),
+  pages: z.union([z.number(), z.string()]).optional(),
+  publisher: z.string().optional(),
+  doi: z.string().optional(),
+});
+export type StructuredCitation = z.infer<typeof StructuredCitationSchema>;
+
+/** A citation: structured, a list of `[reference, url]` pairs (the Netzschleuder-derived entries), or null where none is recorded. */
+export const SourceCitationSchema = z.union([StructuredCitationSchema, z.array(z.tuple([z.string(), z.string()])), z.null()]);
+
+/** One dataset of the source catalogue. */
+export const SourceDatasetSchema = z.looseObject({
+  id: z.string(),
+  name: z.string(),
+  description: z.string().optional(),
+  domain: z.string().optional(),
+  category: z.string().optional(),
+  citation: SourceCitationSchema.optional(),
+  retrieved: z.union([z.string(), z.null()]).optional(),
+  sources: z.union([z.array(SourceEntrySchema), z.null()]).optional(),
+  nodeCount: z.int().min(0),
+  edgeCount: z.int().min(0),
+  rawBytes: z.int().min(0).optional(),
+  preferredFormat: z.string().optional(),
+  properties: z.record(z.string(), z.unknown()),
+});
+export type SourceDataset = z.infer<typeof SourceDatasetSchema>;
+
+/** The source catalogue document. */
+export const SourceCatalogueSchema = z.looseObject({
+  version: z.string(),
+  generated: z.string(),
+  datasets: z.record(z.string(), SourceDatasetSchema),
+});
+export type SourceCatalogue = z.infer<typeof SourceCatalogueSchema>;
+
+/** A graphbox dataset, read only for its id and download URLs. */
+export const GraphboxDatasetSchema = z.looseObject({
+  id: z.string(),
+  sources: z.union([z.array(SourceEntrySchema), z.null()]).optional(),
+});
+
+/** The graphbox catalogue document. */
+export const GraphboxCatalogueSchema = z.looseObject({
+  datasets: z.record(z.string(), GraphboxDatasetSchema),
+});
+export type GraphboxCatalogue = z.infer<typeof GraphboxCatalogueSchema>;
