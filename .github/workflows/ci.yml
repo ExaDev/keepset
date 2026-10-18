@@ -65,6 +65,8 @@ jobs:
           key: eslintcache-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml', 'eslint.config.ts') }}
           restore-keys: eslintcache-${{ runner.os }}-
       - run: pnpm install --frozen-lockfile
+      # Type-aware lint resolves the schema generation script's import of the built dist, so the build runs first.
+      - run: pnpm build
       # The check-only script: `pnpm lint` fixes in place, so it would exit 0 on a fixable violation that never reaches the commit.
       - run: pnpm lint:check
 
