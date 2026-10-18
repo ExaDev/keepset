@@ -2,6 +2,6 @@
   "description": "The keepset catalogue: datasets with machine-readable recipes that fetch each one and normalise it into its category's target shape.",
   "id": "keepset",
   "name": "keepset",
-  "repository": "https://github.com/ExaDev/keepset",
+  "repository": "https://github.com/Mearman/keepset",
   "version": "1.0.0"
 }

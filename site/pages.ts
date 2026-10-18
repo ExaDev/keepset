@@ -64,7 +64,7 @@ export function layout(context: PageContext, page: PageContent): string {
 <meta name="theme-color" content="#1f4e79">
 ${head}</head>
 <body data-root="${root}">
-<header><a class="home" href="${root}">keepset</a><nav><a href="${root}">All datasets</a><a href="${root}domains/">Domains</a><a href="${root}kinds/">Kinds</a><a href="https://github.com/ExaDev/keepset">Source</a></nav></header>
+<header><a class="home" href="${root}">keepset</a><nav><a href="${root}">All datasets</a><a href="${root}domains/">Domains</a><a href="${root}kinds/">Kinds</a><a href="https://github.com/Mearman/keepset">Source</a></nav></header>
 <main>
 ${body}
 </main>

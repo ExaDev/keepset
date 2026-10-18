@@ -8,7 +8,7 @@ const root = {
   name: "keepset graphs",
   description: "Graph datasets with recipes that resolve to graph/v1.",
   version: "1.0.0",
-  repository: "https://github.com/ExaDev/keepset",
+  repository: "https://github.com/Mearman/keepset",
 };
 
 const fork = {
@@ -16,7 +16,7 @@ const fork = {
   id: "example-lab-graphs",
   version: "0.1.0",
   repository: "https://example.org/lab/graphs",
-  lineage: { catalogue: "keepset-graphs", version: "1.0.0", repository: "https://github.com/ExaDev/keepset" },
+  lineage: { catalogue: "keepset-graphs", version: "1.0.0", repository: "https://github.com/Mearman/keepset" },
 };
 
 describe("the catalogue manifest", () => {
@@ -34,7 +34,7 @@ describe("the catalogue manifest", () => {
   });
 
   it("rejects lineage missing the version it forked at", () => {
-    expect(ManifestSchema.is({ ...fork, lineage: { catalogue: "keepset-graphs", repository: "https://github.com/ExaDev/keepset" } })).toBe(false);
+    expect(ManifestSchema.is({ ...fork, lineage: { catalogue: "keepset-graphs", repository: "https://github.com/Mearman/keepset" } })).toBe(false);
   });
 
   it("rejects a version that is not semantic", () => {
