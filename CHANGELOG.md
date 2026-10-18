@@ -1,3 +1,10 @@
+# [0.8.0](https://github.com/Mearman/keepset/compare/v0.7.0...v0.8.0) (2026-10-18)
+
+
+### Features
+
+* rebuild the site island on React, Mantine and vanilla-extract ([3e89847](https://github.com/Mearman/keepset/commit/3e898477a767bf9239455b53c5db86099a1e85ac))
+
 # [0.7.0](https://github.com/Mearman/keepset/compare/v0.6.2...v0.7.0) (2026-10-18)
 
 
