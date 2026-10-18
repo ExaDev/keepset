@@ -5,5 +5,5 @@
   },
   "exclude": [],
   "extends": "./tsconfig.json",
-  "include": ["src/node/**/*.ts", "src/**/*.test.ts", "src/test-support/**/*.ts", "scripts/**/*.ts", "*.config.ts"]
+  "include": ["cli/**/*.ts", "src/node/**/*.ts", "src/**/*.test.ts", "src/test-support/**/*.ts", "scripts/**/*.ts", "*.config.ts"]
 }

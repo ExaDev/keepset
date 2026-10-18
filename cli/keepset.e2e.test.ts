@@ -1,0 +1,39 @@
+// Runs the built command (dist-cli/keepset.mjs) as a child process, the way `npx keepset` does, so what is checked is the shipped file: its shebang, its imports of the library through the package's own name, and its exit status. package.json's bin must name that same file. No command here touches the network.
+
+import { spawnSync } from "node:child_process";
+import { readFileSync } from "node:fs";
+import { fileURLToPath } from "node:url";
+import { describe, expect, it } from "vitest";
+import { EXIT_FAILED, EXIT_OK } from "./run";
+
+const binPath = fileURLToPath(new URL("../dist-cli/keepset.mjs", import.meta.url));
+const packageJsonPath = fileURLToPath(new URL("../package.json", import.meta.url));
+
+function keepset(args: readonly string[]) {
+  return spawnSync(process.execPath, [binPath, ...args], { encoding: "utf8" });
+}
+
+describe("the keepset command", () => {
+  it("is the file package.json's bin names, with a node shebang, and is not an export", () => {
+    const manifest: unknown = JSON.parse(readFileSync(packageJsonPath, "utf8"));
+    expect(manifest).toMatchObject({ bin: { keepset: "./dist-cli/keepset.mjs" } });
+    expect(JSON.stringify(manifest)).not.toMatch(/"exports":\{[^}]*dist-cli/);
+    expect(readFileSync(binPath, "utf8").startsWith("#!/usr/bin/env node\n")).toBe(true);
+  });
+
+  it("searches and shows the bundled catalogue", () => {
+    const search = keepset(["search", "karate"]);
+    expect(search.status).toBe(EXIT_OK);
+    expect(search.stdout).toMatch(/^karate\tZachary's Karate Club\tgraph\/v1\tfetchable$/m);
+    const show = keepset(["show", "karate", "--json"]);
+    expect(show.status).toBe(EXIT_OK);
+    expect(JSON.parse(show.stdout)).toMatchObject({ entry: { id: "karate" }, kind: "graph" });
+    expect(keepset(["validate", "karate"]).stdout).toBe("karate is valid\n");
+  });
+
+  it("exits 2 with the library's message for an unknown dataset", () => {
+    const result = keepset(["show", "no-such-entry"]);
+    expect(result.status).toBe(EXIT_FAILED);
+    expect(result.stderr).toBe('no dataset "no-such-entry" in the catalogue\n');
+  });
+});
