@@ -8,8 +8,9 @@ import { KeepsetError, RecipeError, type RecipeStep } from "../errors";
 import { parseNative } from "../parsers/parse-native";
 import type { JsonScalar } from "../targets/graph-v1";
 import { unpack, type Unpacked } from "./archive";
+import { downloadRaw } from "./download";
 
-/** The network port a recipe downloads through: the platform `fetch`, or a stand-in under test. */
+/** The network port a recipe downloads through: `downloadRaw` by default, which returns the bytes exactly as served, or a stand-in under test. */
 export type FetchPort = (url: string, init: { readonly signal?: AbortSignal }) => Promise<Response>;
 
 /** What a fetch may be given beyond the dataset: the network port, an abort signal and the clock that dates the provenance record. */
@@ -94,7 +95,7 @@ function metaOf(entry: Entry): Record<string, JsonScalar> {
  */
 export async function fetchEntry(dataset: Dataset, options: FetchOptions = {}): Promise<FetchedDataset> {
   const { entry, crosswalk } = dataset;
-  const { fetch: fetchPort = globalThis.fetch, signal, now = () => new Date() } = options;
+  const { fetch: fetchPort = downloadRaw, signal, now = () => new Date() } = options;
   const { recipe } = entry;
   if (recipe.status === "not-fetchable") {
     throw new RecipeError(entry.id, "recipe", `the entry has no fetchable recipe: ${recipe.reason}`);
@@ -147,7 +148,7 @@ export async function fetchEntry(dataset: Dataset, options: FetchOptions = {}): 
 }
 
 /**
- * Fetches a dataset of the bundled catalogue by id and resolves it to its category's target shape, so `fetchDataset("cora")` yields graph/v1 `{ meta, nodes, edges }` directly. Node-only: it downloads with the platform `fetch` and unpacks with Node's zlib.
+ * Fetches a dataset of the bundled catalogue by id and resolves it to its category's target shape, so `fetchDataset("cora")` yields graph/v1 `{ meta, nodes, edges }` directly. Node-only: it downloads with Node's http and https clients and unpacks with Node's zlib.
  * @param id - The entry id.
  * @param options - The network port, abort signal and clock.
  * @returns The resolved target with its provenance and any count warnings.
