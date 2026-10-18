@@ -79,7 +79,7 @@ describe("buildSite on a fixture catalogue", () => {
   it("links the exact fetch command and renders the recipe and crosswalk as tables", () => {
     const karate = page(files, "datasets/karate/index.html");
     expect(karate).toContain("<code>npx keepset fetch karate</code>");
-    expect(karate).toContain('<button type="button" data-copy="npx keepset fetch karate" hidden>Copy</button>');
+    expect(karate).toContain('<span data-copy-command="npx keepset fetch karate"></span>');
     expect(karate).toContain("<tr><td>move</td><td><code>nodes[].id</code></td><td><code>nodes[].id</code></td><td>both</td></tr>");
     expect(karate).toContain('<th scope="row">Parser delimiter</th><td><code>&quot;whitespace&quot;</code></td>');
     expect(page(files, "datasets/auth-walled/index.html")).toContain("This entry has no fetchable recipe yet: the source requires an account to download");
