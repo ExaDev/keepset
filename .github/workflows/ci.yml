@@ -83,9 +83,10 @@ jobs:
           node-version: '22'
           cache: pnpm
       - run: pnpm install --frozen-lockfile
+      # The build comes first: the schema generation script imports the built dist, and the schema tests read the generated schemas.
+      - run: pnpm build
       - run: pnpm typecheck
       - run: pnpm test
-      - run: pnpm build
       - run: pnpm exec publint
       - run: pnpm exec attw --pack --profile esm-only
 
