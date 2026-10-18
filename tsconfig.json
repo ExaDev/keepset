@@ -6,7 +6,7 @@
     "exactOptionalPropertyTypes": true,
     "forceConsistentCasingInFileNames": true,
     "isolatedModules": true,
-    "lib": ["ES2024"],
+    "lib": ["ES2024", "WebWorker"],
     "module": "ESNext",
     "moduleResolution": "bundler",
     "noEmit": true,
@@ -23,7 +23,7 @@
     "strict": true,
     "strictBuiltinIteratorReturn": true,
     "target": "ES2024",
-    // No Node types: this program is the isomorphism gate for the browser-safe runtime, so a Node-only global referenced from src/ fails to compile here rather than in a consumer's browser bundle. Tests, scripts and the Node-only surfaces are checked by tsconfig.node.json.
+    // No Node types and a WebWorker lib: this program is the isomorphism gate for the browser-safe runtime, so a Node-only global referenced from src/ fails to compile here rather than in a consumer's browser bundle, while the web platform's own globals (TextDecoder) stay available. Tests, scripts and the Node-only surfaces are checked by tsconfig.node.json.
     "types": [],
     "verbatimModuleSyntax": true
   },
