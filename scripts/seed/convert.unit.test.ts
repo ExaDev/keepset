@@ -43,7 +43,7 @@ describe("the seed import's classification", () => {
     expect(outcome("nell-995").flags).toContain("pipeline parser override: skip 1 header line");
     expect(entry("nell-995").recipe).toMatchObject({ parser: { skipLines: 1 } });
     expect(outcome("adjnoun")).toMatchObject({ outcome: "converted-with-flags", recipe: "fetchable" });
-    expect(outcome("csphd").flags).toEqual(["archive member chosen by extension .net, which the source catalogue does not record", "the source is dead and the recipe fetches its pinned Wayback snapshot"]);
+    expect(outcome("csphd").flags).toEqual(["archive member chosen by extension .net or .paj, which the source catalogue does not record", "the source is dead and the recipe fetches its pinned Wayback snapshot"]);
     expect(outcome("advogato").flags).toEqual(["archive member chosen by extension .edges, which the source catalogue does not record"]);
   });
 
@@ -59,7 +59,7 @@ describe("the seed import's classification", () => {
   });
 
   it("reads LINQS citations from the citing paper to the cited one", () => {
-    expect(entry("cora").recipe).toMatchObject({ archive: { kind: "tar.gz", member: { extension: ".cites" } }, parser: { delimiter: "tab", sourceColumn: 1, targetColumn: 0 } });
+    expect(entry("cora").recipe).toMatchObject({ archive: { kind: "tar.gz", member: { extensions: [".cites"] } }, parser: { delimiter: "tab", sourceColumn: 1, targetColumn: 0 } });
   });
 
   it("applies the Netzschleuder rule to landing pages and graph-tool files alike", () => {
@@ -80,6 +80,19 @@ describe("the seed import's classification", () => {
     expect(outcome("lesmis")).toMatchObject({ outcome: "converted-with-flags", recipe: "not-fetchable" });
     expect(entry("lesmis").recipe).toEqual({ status: "not-fetchable", reason: "no download is in a form keepset reads yet (konect-tarbz2: bzip2 compression has no keepset unpacker yet)" });
     expect(entry("ieee-cis-g").recipe).toMatchObject({ status: "not-fetchable" });
+  });
+
+  it("resolves a snapshot of a snapshot to the innermost capture and skips a directory listing", () => {
+    const journals = entry("pajek-journals");
+    expect(journals.sources[1]).toMatchObject({ url: "http://vlado.fmf.uni-lj.si/pub/networks/data/2mode/revije.zip", status: "dead", snapshot: { timestamp: "20130507053929" } });
+    expect(journals.recipe).toMatchObject({ status: "fetchable", source: 1 });
+  });
+
+  it("does not guess the columns of a knowledge-graph triple file or the member of an archive in format various", () => {
+    expect(entry("kg-nations").recipe).toMatchObject({ status: "not-fetchable" });
+    expect(JSON.stringify(entry("kg-nations").recipe)).toMatch(/head and tail columns/);
+    // arenas-pgp's first download is an archive in format various, so the recipe reads its second, a GML archive.
+    expect(entry("arenas-pgp").recipe).toMatchObject({ status: "fetchable", source: 1, parser: { format: "gml" } });
   });
 
   it("skips a download that is a web page and reads the next one", () => {
