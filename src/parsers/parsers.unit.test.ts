@@ -161,6 +161,14 @@ describe("the Pajek parser", () => {
     });
   });
 
+  it("reads keywords case-insensitively and abbreviated, as Pajek does", () => {
+    const text = "*net cities\n*VERT 3\n*edge\n1 2\n*arcsl\n2 3\n";
+    expect(parseNative(utf8(text), pajek).edges).toEqual([
+      { source: "1", target: "2" },
+      { source: "2", target: "3" },
+    ]);
+  });
+
   it("reads a two-mode matrix with rows as the first mode and columns as the second", () => {
     const text = "*Vertices 4 2\n*Matrix\n1 0\n0 2\n";
     expect(parseNative(utf8(text), pajek).edges).toEqual([

@@ -4,8 +4,9 @@ import { lines, type NativeEdge, type NativeGraph, type NativeNode } from "./nat
 /** The section a line belongs to. */
 type Section = "preamble" | "vertices" | "pairs" | "lists" | "matrix" | "attributes";
 
-/** Section keywords, lower-cased, mapped to how their lines are read. `*Partition` and `*Vector` hold node attributes this version does not carry, so their lines are skipped, as are the `*Vertices` lines inside them. */
-const sections: ReadonlyMap<string, Section> = new Map([
+/** Section keywords, lower-cased, mapped to how their lines are read. `*Network` names the network and starts no section. `*Partition` and `*Vector` hold node attributes this version does not carry, so their lines are skipped, as are the `*Vertices` lines inside them. */
+const sections: ReadonlyMap<string, Section | "network"> = new Map([
+  ["*network", "network"],
   ["*vertices", "vertices"],
   ["*arcs", "pairs"],
   ["*edges", "pairs"],
@@ -15,6 +16,22 @@ const sections: ReadonlyMap<string, Section> = new Map([
   ["*partition", "attributes"],
   ["*vector", "attributes"],
 ]);
+
+/**
+ * Resolves a section keyword, which Pajek reads case-insensitively and accepts abbreviated (`*net` for `*Network`, `*vert` for `*Vertices`): an exact keyword first, otherwise the shortest keyword it abbreviates, so `*edge` is `*Edges` rather than `*Edgeslist`.
+ * @param keyword - The keyword as written.
+ * @returns How its section is read, or undefined for a keyword that abbreviates none.
+ */
+function sectionOf(keyword: string): Section | "network" | undefined {
+  const name = keyword.toLowerCase();
+  const exact = sections.get(name);
+  if (exact !== undefined) {
+    return exact;
+  }
+  const [shortest] = [...sections.keys()].filter((candidate) => candidate.startsWith(name)).sort((left, right) => left.length - right.length);
+
+  return shortest === undefined ? undefined : sections.get(shortest);
+}
 
 /**
  * Reads a vertex number, which Pajek numbers from 1 to the declared vertex count.
@@ -53,17 +70,16 @@ export function parsePajek(text: string): NativeGraph {
     const tokens = content.split(/\s+/);
     const [keyword] = tokens;
     if (keyword?.startsWith("*") === true) {
-      const name = keyword.toLowerCase();
-      if (name === "*network") {
+      const next = sectionOf(keyword);
+      if (next === undefined) {
+        throw new NativeParseError("pajek", lineNumber, `unknown section ${keyword}`);
+      }
+      if (next === "network") {
         networks++;
         if (networks > 1) {
           throw new NativeParseError("pajek", lineNumber, "a project file holding more than one network is not supported");
         }
         continue;
-      }
-      const next = sections.get(name);
-      if (next === undefined) {
-        throw new NativeParseError("pajek", lineNumber, `unknown section ${keyword}`);
       }
       // A partition's or vector's own *Vertices line belongs to that attribute block, not to the network.
       if (next === "vertices" && section !== "attributes") {
