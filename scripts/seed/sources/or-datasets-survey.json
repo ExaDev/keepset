@@ -1,0 +1,1530 @@
+{
+ "survey": "operations-research instance datasets, shape-matched for a routing-with-rewards evaluation",
+ "surveyed": "2026-07-23 to 2026-07-24",
+ "shape": [
+  "Each entry was scored against a nine-field routing-with-rewards node model (the survey's own standard terms): location, travelTime, duration, prize, prizeProbability, territory, skills, lifecycle, deadline. An entry's fields list names the fields it carries directly; a -deriv suffix marks a field derivable from stored columns."
+ ],
+ "entries": [
+  {
+   "id": "or-0",
+   "title": "Team Orienteering Problem — Chao/Tsiligirides/Fischetti instances",
+   "url": "https://www.mech.kuleuven.be/en/mim/op",
+   "theme": "selection + prize + travel — orienteering family",
+   "fields": [
+    "prize",
+    "location",
+    "travelTime"
+   ]
+  },
+  {
+   "id": "or-1",
+   "title": "Team Orienteering Problem with Time Windows (TOPTW)",
+   "url": "https://www.mech.kuleuven.be/en/mim/op",
+   "theme": "selection + prize + travel — orienteering family",
+   "fields": [
+    "prize",
+    "deadline",
+    "location",
+    "duration",
+    "travelTime"
+   ]
+  },
+  {
+   "id": "or-10",
+   "title": "DOPLRP — Park-and-Loop Routing (Cabrera et al., 2021, real French client locations)",
+   "url": "http://www.vrp-rep.org/datasets/download/cabrera-et-al-2021.zip",
+   "theme": "duration + deadline, must-serve — VRPTW family",
+   "fields": [
+    "location",
+    "duration"
+   ]
+  },
+  {
+   "id": "or-100",
+   "title": "Code Enforcement All Hearings (New Orleans)",
+   "url": "https://data.nola.gov/Housing-Land-Use-and-Blight/Code-Enforcement-All-Hearings/44ct-56tr",
+   "theme": "case lifecycle records: permits, inspections, prosecutions & enforcement",
+   "fields": [
+    "deadline",
+    "location",
+    "territory",
+    "lifecycle"
+   ]
+  },
+  {
+   "id": "or-101",
+   "title": "DOF Scofftow Case Information (NYC)",
+   "url": "https://data.cityofnewyork.us/City-Government/DOF-Scofftow-Case-Information/qmh3-uvgq",
+   "theme": "case lifecycle records: permits, inspections, prosecutions & enforcement",
+   "fields": [
+    "prize",
+    "lifecycle"
+   ]
+  },
+  {
+   "id": "or-102",
+   "title": "NYC Evictions",
+   "url": "https://data.cityofnewyork.us/City-Government/Evictions/6z8x-wfk4",
+   "theme": "case lifecycle records: permits, inspections, prosecutions & enforcement",
+   "fields": [
+    "location",
+    "territory",
+    "lifecycle"
+   ]
+  },
+  {
+   "id": "or-103",
+   "title": "Sheriff Evictions (San Diego County, CA)",
+   "url": "https://hub.arcgis.com/datasets/bf8254d2e7bd4ecaa17a03cdc37f90ee",
+   "theme": "case lifecycle records: permits, inspections, prosecutions & enforcement",
+   "fields": [
+    "prizeProbability",
+    "location",
+    "territory",
+    "lifecycle"
+   ]
+  },
+  {
+   "id": "or-104",
+   "title": "LAHD Property Look-Up for Eviction Cases (Los Angeles)",
+   "url": "https://data.lacity.org/Housing/LAHD-Property-Look-Up-for-Eviction-Cases/2u8b-eyuu",
+   "theme": "case lifecycle records: permits, inspections, prosecutions & enforcement",
+   "fields": [
+    "lifecycle"
+   ]
+  },
+  {
+   "id": "or-105",
+   "title": "CFPB Consumer Complaint Database — Debt Collection",
+   "url": "https://www.consumerfinance.gov/data-research/consumer-complaints/",
+   "theme": "case lifecycle records: permits, inspections, prosecutions & enforcement",
+   "fields": [
+    "territory",
+    "lifecycle"
+   ]
+  },
+  {
+   "id": "or-106",
+   "title": "Animals Field Data (Dallas, TX)",
+   "url": "https://www.dallasopendata.com/City-Services/Dallas-Animals-Field-Data-Fiscal-Year-2016-2017/xy7j-y59g",
+   "theme": "case lifecycle records: permits, inspections, prosecutions & enforcement",
+   "fields": [
+    "deadline",
+    "location",
+    "territory",
+    "skills",
+    "lifecycle"
+   ]
+  },
+  {
+   "id": "or-107",
+   "title": "FDNY EMS Incident Dispatch Data",
+   "url": "https://data.cityofnewyork.us/Public-Safety/EMS-Incident-Dispatch-Data/76xm-jjuj",
+   "theme": "severity, stored travel time & real territory — emergency dispatch",
+   "fields": [
+    "prizeProbability",
+    "location",
+    "territory",
+    "duration",
+    "lifecycle",
+    "travelTime"
+   ]
+  },
+  {
+   "id": "or-108",
+   "title": "NYPD Calls for Service",
+   "url": "https://data.cityofnewyork.us/Public-Safety/NYPD-Calls-for-Service/n2zq-pubd",
+   "theme": "severity, stored travel time & real territory — emergency dispatch",
+   "fields": [
+    "location",
+    "territory",
+    "duration",
+    "lifecycle",
+    "travelTime"
+   ]
+  },
+  {
+   "id": "or-109",
+   "title": "Police Dispatch Events (Mesa, AZ)",
+   "url": "https://citydata.mesaaz.gov/Police/Police-Dispatch-Events-2021-Present-/izhu-764k",
+   "theme": "severity, stored travel time & real territory — emergency dispatch",
+   "fields": [
+    "location",
+    "territory",
+    "duration",
+    "lifecycle",
+    "travelTime"
+   ]
+  },
+  {
+   "id": "or-11",
+   "title": "Dynamic Workforce Scheduling & Routing with Time Windows and Skill Constraints (DWSRP-TW-SC)",
+   "url": "https://data.mendeley.com/datasets/dbsf73xpg5",
+   "theme": "skill requirement + duration + deadline — technician & home-care routing",
+   "fields": [
+    "prize",
+    "deadline",
+    "location",
+    "skills",
+    "duration",
+    "lifecycle",
+    "travelTime"
+   ]
+  },
+  {
+   "id": "or-110",
+   "title": "Fire and Medical Dispatch Events (Mesa, AZ)",
+   "url": "https://citydata.mesaaz.gov/Fire-and-Medical/Fire-and-Medical-Dispatch-Events/3wic-ufd2",
+   "theme": "severity, stored travel time & real territory — emergency dispatch",
+   "fields": [
+    "location",
+    "territory",
+    "duration",
+    "lifecycle",
+    "travelTime"
+   ]
+  },
+  {
+   "id": "or-111",
+   "title": "Incident Records (London Fire Brigade)",
+   "url": "https://data.london.gov.uk/dataset/london-fire-brigade-incident-records",
+   "theme": "severity, stored travel time & real territory — emergency dispatch",
+   "fields": [
+    "prize",
+    "location",
+    "territory",
+    "duration",
+    "lifecycle",
+    "travelTime"
+   ]
+  },
+  {
+   "id": "or-112",
+   "title": "Live Power Outage Feeds (Northern Powergrid, UK Power Networks & California statewide)",
+   "url": "https://northernpowergrid.opendatasoft.com/explore/dataset/live-power-cuts-data/information/",
+   "theme": "severity, stored travel time & real territory — emergency dispatch",
+   "fields": [
+    "deadline",
+    "location",
+    "territory",
+    "duration",
+    "lifecycle"
+   ]
+  },
+  {
+   "id": "or-113",
+   "title": "Water Leak Repairs (Live) — Arlington County, VA",
+   "url": "https://utility.arcgis.com/usrsvcs/servers/53520af18235499d9ecd9c96f624eeae/rest/services/AM/Leak_Repairs_Live/FeatureServer",
+   "theme": "severity, stored travel time & real territory — emergency dispatch",
+   "fields": [
+    "deadline",
+    "location",
+    "skills",
+    "duration",
+    "lifecycle"
+   ]
+  },
+  {
+   "id": "or-114",
+   "title": "Water Shut Off (Christchurch City Council, New Zealand)",
+   "url": "https://gis.ccc.govt.nz/server/rest/services/OpenData/WaterSupply/FeatureServer/3",
+   "theme": "severity, stored travel time & real territory — emergency dispatch",
+   "fields": [
+    "prizeProbability",
+    "deadline",
+    "location",
+    "territory",
+    "duration",
+    "lifecycle"
+   ]
+  },
+  {
+   "id": "or-115",
+   "title": "On-street Parking Bay Sensors (City of Melbourne, Australia)",
+   "url": "https://data.melbourne.vic.gov.au/explore/dataset/on-street-parking-bay-sensors/",
+   "theme": "severity, stored travel time & real territory — emergency dispatch",
+   "fields": [
+    "location",
+    "territory",
+    "lifecycle"
+   ]
+  },
+  {
+   "id": "or-116",
+   "title": "NYC 311 Service Requests",
+   "url": "https://data.cityofnewyork.us/Social-Services/311-Service-Requests-from-2020-to-Present/erm2-nwe9",
+   "theme": "deadline, case status & regulatory event data — civic & environmental monitoring",
+   "fields": [
+    "deadline",
+    "location",
+    "territory",
+    "skills",
+    "duration",
+    "lifecycle"
+   ]
+  },
+  {
+   "id": "or-117",
+   "title": "Customer Service Requests, with Resolution Time (City of Melbourne, Australia)",
+   "url": "https://data.melbourne.vic.gov.au/explore/dataset/customer-service-requests-with-resolution-time/",
+   "theme": "deadline, case status & regulatory event data — civic & environmental monitoring",
+   "fields": [
+    "duration",
+    "lifecycle"
+   ]
+  },
+  {
+   "id": "or-118",
+   "title": "Troubled Properties Analysis (Montgomery County, MD)",
+   "url": "https://data.montgomerycountymd.gov/Housing/Troubled-Properties-Analysis/bw2r-araf",
+   "theme": "deadline, case status & regulatory event data — civic & environmental monitoring",
+   "fields": [
+    "prizeProbability",
+    "deadline",
+    "location",
+    "territory",
+    "lifecycle"
+   ]
+  },
+  {
+   "id": "or-119",
+   "title": "Event Duration Monitoring — Storm Overflows (England & Wales)",
+   "url": "https://environment.data.gov.uk/dataset/21e15f12-0df8-4bfc-b763-45226c16a8ac",
+   "theme": "deadline, case status & regulatory event data — civic & environmental monitoring",
+   "fields": [
+    "location",
+    "territory",
+    "duration",
+    "lifecycle"
+   ]
+  },
+  {
+   "id": "or-12",
+   "title": "Transportation Work Orders — Public View (Mesa, AZ)",
+   "url": "https://citydata.mesaaz.gov/Transportation/Transportation-Work-Orders-Public-View/ay68-xuca",
+   "theme": "skill requirement + duration + deadline — technician & home-care routing",
+   "fields": [
+    "prize",
+    "prizeProbability",
+    "deadline",
+    "location",
+    "skills",
+    "duration",
+    "lifecycle"
+   ]
+  },
+  {
+   "id": "or-120",
+   "title": "Historic Flood Warnings (England)",
+   "url": "https://environment.data.gov.uk/dataset/88bed270-d465-11e4-8669-f0def148f590",
+   "theme": "deadline, case status & regulatory event data — civic & environmental monitoring",
+   "fields": [
+    "prizeProbability",
+    "territory",
+    "lifecycle"
+   ]
+  },
+  {
+   "id": "or-121",
+   "title": "Street Resurfacing Schedule (NYC DOT)",
+   "url": "https://data.cityofnewyork.us/Transportation/Street-Resurfacing-Schedule/xnfm-u3k5",
+   "theme": "deadline, case status & regulatory event data — civic & environmental monitoring",
+   "fields": [
+    "deadline",
+    "location",
+    "territory",
+    "skills"
+   ]
+  },
+  {
+   "id": "or-122",
+   "title": "FEMA NFIP Redacted Claims",
+   "url": "https://www.fema.gov/openfema-data-page/fima-nfip-redacted-claims-v2",
+   "theme": "real monetary value without routing — insurance claims & unclaimed money",
+   "fields": [
+    "prize",
+    "prizeProbability",
+    "location",
+    "territory"
+   ]
+  },
+  {
+   "id": "or-123",
+   "title": "Building Fire Investigations (Dallas Fire-Rescue, TX)",
+   "url": "https://www.dallasopendata.com/Public-Safety/Building-Fire/skju-bfp8",
+   "theme": "real monetary value without routing — insurance claims & unclaimed money",
+   "fields": [
+    "prize",
+    "location",
+    "territory",
+    "lifecycle"
+   ]
+  },
+  {
+   "id": "or-124",
+   "title": "Unclaimed Monies (Queensland, Australia)",
+   "url": "https://www.data.qld.gov.au/dataset/unclaimed-monies",
+   "theme": "real monetary value without routing — insurance claims & unclaimed money",
+   "fields": [
+    "prize",
+    "territory"
+   ]
+  },
+  {
+   "id": "or-13",
+   "title": "Water Resources Work Orders (Mesa, AZ)",
+   "url": "https://citydata.mesaaz.gov/Water-Resources/Water-Resources-Work-Orders-Public-View/7rqv-jcr4",
+   "theme": "skill requirement + duration + deadline — technician & home-care routing",
+   "fields": [
+    "prize",
+    "prizeProbability",
+    "deadline",
+    "location",
+    "skills",
+    "duration",
+    "lifecycle"
+   ]
+  },
+  {
+   "id": "or-14",
+   "title": "Work Orders (City of Norfolk, VA)",
+   "url": "https://data.norfolk.gov/Government/Work-Orders/qzfe-wj25",
+   "theme": "skill requirement + duration + deadline — technician & home-care routing",
+   "fields": [
+    "prize",
+    "deadline",
+    "location",
+    "territory",
+    "skills",
+    "lifecycle"
+   ]
+  },
+  {
+   "id": "or-15",
+   "title": "Forestry Work Orders (NYC Parks)",
+   "url": "https://data.cityofnewyork.us/Environment/Forestry-Work-Orders/bdjm-n7q4",
+   "theme": "skill requirement + duration + deadline — technician & home-care routing",
+   "fields": [
+    "prizeProbability",
+    "deadline",
+    "location",
+    "territory",
+    "lifecycle"
+   ]
+  },
+  {
+   "id": "or-16",
+   "title": "Home Health Care Routing & Scheduling (HHCRSP), multi-window variant",
+   "url": "https://data.mendeley.com/datasets/hp3xftsrfx/1",
+   "theme": "skill requirement + duration + deadline — technician & home-care routing",
+   "fields": [
+    "deadline",
+    "location",
+    "skills",
+    "duration",
+    "travelTime"
+   ]
+  },
+  {
+   "id": "or-17",
+   "title": "HHCRSP curated instances (Kummer, 2021) — Porto Alegre, Brazil",
+   "url": "https://github.com/afkummer/hhcrsp-dataset-2021",
+   "theme": "skill requirement + duration + deadline — technician & home-care routing",
+   "fields": [
+    "deadline",
+    "location",
+    "skills",
+    "duration",
+    "travelTime"
+   ]
+  },
+  {
+   "id": "or-18",
+   "title": "EV Home Health Care Routing & Scheduling, multi-period variant (Yin et al., 2026)",
+   "url": "https://doi.org/10.1016/j.omega.2026.103587",
+   "theme": "skill requirement + duration + deadline — technician & home-care routing",
+   "fields": [
+    "deadline",
+    "location",
+    "skills",
+    "duration",
+    "travelTime"
+   ]
+  },
+  {
+   "id": "or-19",
+   "title": "CQC Care Directory (England)",
+   "url": "https://www.cqc.org.uk/about-us/transparency/using-cqc-data",
+   "theme": "skill requirement + duration + deadline — technician & home-care routing",
+   "fields": [
+    "location",
+    "territory",
+    "skills"
+   ]
+  },
+  {
+   "id": "or-2",
+   "title": "Dynamic Team Orienteering Problem (DTOP)",
+   "url": "https://data.mendeley.com/datasets/xnf6c4d5gt/1",
+   "theme": "selection + prize + travel — orienteering family",
+   "fields": [
+    "prize",
+    "location",
+    "lifecycle",
+    "travelTime"
+   ]
+  },
+  {
+   "id": "or-20",
+   "title": "L&I Contractor License Data (Washington State)",
+   "url": "https://data.wa.gov/Licensing/L-I-Contractor-License-Data-General/m8qx-ubtq",
+   "theme": "skill requirement + duration + deadline — technician & home-care routing",
+   "fields": [
+    "deadline",
+    "location",
+    "territory",
+    "skills",
+    "lifecycle"
+   ]
+  },
+  {
+   "id": "or-21",
+   "title": "Technician Routing & Scheduling Problem (TRSP)",
+   "url": "http://www.vrp-rep.org/datasets/download/pillac-et-al-2013.zip",
+   "theme": "skill requirement + duration + deadline — technician & home-care routing",
+   "fields": [
+    "deadline",
+    "location",
+    "skills",
+    "duration",
+    "travelTime"
+   ]
+  },
+  {
+   "id": "or-22",
+   "title": "Real Operational Data for the Concrete Delivery Problem (Tzanetos & Blondin, 2023)",
+   "url": "https://doi.org/10.1016/j.dib.2023.109189",
+   "theme": "skill requirement + duration + deadline — technician & home-care routing",
+   "fields": [
+    "deadline",
+    "location",
+    "skills",
+    "duration",
+    "lifecycle",
+    "travelTime"
+   ]
+  },
+  {
+   "id": "or-23",
+   "title": "Facility Management Unified Classification Database — FMUCD (Pampana, Jeon, Yoon & Weidner, 2024)",
+   "url": "https://doi.org/10.1016/j.dib.2024.110845",
+   "theme": "skill requirement + duration + deadline — technician & home-care routing",
+   "fields": [
+    "prize",
+    "location",
+    "skills",
+    "duration",
+    "lifecycle"
+   ]
+  },
+  {
+   "id": "or-24",
+   "title": "VeRoLog Solver Challenge 2019 — machine delivery & installation (ORTEC)",
+   "url": "https://github.com/BasCoding/VeRoLog-2019",
+   "theme": "skill requirement + duration + deadline — technician & home-care routing",
+   "fields": [
+    "deadline",
+    "location",
+    "skills",
+    "travelTime"
+   ]
+  },
+  {
+   "id": "or-25",
+   "title": "TDC technician dispatch data (Mathlouthi, Gendreau & Potvin)",
+   "url": "https://zenodo.org/records/7904015",
+   "theme": "skill requirement + duration + deadline — technician & home-care routing",
+   "fields": [
+    "prize",
+    "prizeProbability",
+    "deadline",
+    "location",
+    "skills",
+    "duration",
+    "lifecycle",
+    "travelTime"
+   ]
+  },
+  {
+   "id": "or-26",
+   "title": "VeRoLog Solver Challenge 2016–2017 — scarce-equipment pickup & delivery (ORTEC)",
+   "url": "http://web.archive.org/web/20240523121816/https://verolog2017.ortec.com/instances",
+   "theme": "skill requirement + duration + deadline — technician & home-care routing",
+   "fields": [
+    "deadline",
+    "location",
+    "skills",
+    "travelTime"
+   ]
+  },
+  {
+   "id": "or-27",
+   "title": "2021 Amazon Last Mile Routing Research Challenge",
+   "url": "https://registry.opendata.aws/amazon-last-mile-challenges/",
+   "theme": "real-world territory + time window — last-mile logistics",
+   "fields": [
+    "deadline",
+    "location",
+    "territory",
+    "duration",
+    "travelTime"
+   ]
+  },
+  {
+   "id": "or-28",
+   "title": "LaDe — Cainiao (Alibaba) last-mile delivery dataset",
+   "url": "https://huggingface.co/datasets/Cainiao-AI/LaDe",
+   "theme": "real-world territory + time window — last-mile logistics",
+   "fields": [
+    "deadline",
+    "location",
+    "territory",
+    "travelTime"
+   ]
+  },
+  {
+   "id": "or-29",
+   "title": "JD.com Cold-Chain Delivery Case (Beijing)",
+   "url": "https://github.com/zhangchenhaoseu/Database-for-HMCVRPTW-SD",
+   "theme": "real-world territory + time window — last-mile logistics",
+   "fields": [
+    "deadline",
+    "location",
+    "skills",
+    "travelTime"
+   ]
+  },
+  {
+   "id": "or-3",
+   "title": "Probabilistic Orienteering Problem (POP)",
+   "url": "http://www.vrp-rep.org/datasets/download/angelelli-et-al-2017.zip",
+   "theme": "selection + prize + travel — orienteering family",
+   "fields": [
+    "prize",
+    "prizeProbability",
+    "location",
+    "travelTime"
+   ]
+  },
+  {
+   "id": "or-30",
+   "title": "Meituan-INFORMS-TSL Research Challenge dataset",
+   "url": "https://github.com/meituan/Meituan-INFORMS-TSL-Research-Challenge",
+   "theme": "real-world territory + time window — last-mile logistics",
+   "fields": [
+    "location",
+    "territory",
+    "duration",
+    "lifecycle",
+    "travelTime"
+   ]
+  },
+  {
+   "id": "or-31",
+   "title": "DoorDash delivery dataset (historical order data-science dataset)",
+   "url": "https://www.kaggle.com/datasets/dharun4772/doordash-eta-prediction",
+   "theme": "real-world territory + time window — last-mile logistics",
+   "fields": [
+    "prize",
+    "territory"
+   ]
+  },
+  {
+   "id": "or-32",
+   "title": "Medical Appointment No Shows",
+   "url": "https://www.kaggle.com/datasets/joniarroba/noshowappointments",
+   "theme": "risk without routing — real-world risk/outcome proxies",
+   "fields": [
+    "prizeProbability",
+    "deadline",
+    "territory"
+   ]
+  },
+  {
+   "id": "or-33",
+   "title": "Food Hygiene Rating Scheme (FHRS)",
+   "url": "https://ratings.food.gov.uk/open-data",
+   "theme": "risk without routing — real-world risk/outcome proxies",
+   "fields": [
+    "prizeProbability",
+    "location",
+    "territory",
+    "lifecycle"
+   ]
+  },
+  {
+   "id": "or-34",
+   "title": "Flood risk: postcode search tool data",
+   "url": "https://environment.data.gov.uk/dataset/53cba123-71f8-417a-8441-4c7ba111e8e1",
+   "theme": "risk without routing — real-world risk/outcome proxies",
+   "fields": [
+    "prizeProbability",
+    "territory"
+   ]
+  },
+  {
+   "id": "or-35",
+   "title": "Appointment Wait Times (US Veterans Health Administration vs. Community Care)",
+   "url": "https://doi.org/10.1016/j.dib.2021.107134",
+   "theme": "risk without routing — real-world risk/outcome proxies",
+   "fields": [
+    "prizeProbability",
+    "deadline",
+    "territory",
+    "skills",
+    "lifecycle"
+   ]
+  },
+  {
+   "id": "or-36",
+   "title": "ITS4US HIRTA Health Connector Performance Evaluation Dataset",
+   "url": "https://datahub.transportation.gov/Automobiles/ITS4US-HIRTA-Health-Connector-Performance-Evaluat/pwxe-equ8",
+   "theme": "risk without routing — real-world risk/outcome proxies",
+   "fields": [
+    "prizeProbability",
+    "lifecycle",
+    "travelTime"
+   ]
+  },
+  {
+   "id": "or-37",
+   "title": "Nigerian Energy & Utilities — Field Technician Logs",
+   "url": "https://huggingface.co/datasets/electricsheepafrica/nigerian_energy_and_utilities_field_technician_logs",
+   "theme": "synthetic, schema-only — generated logs",
+   "fields": [
+    "location",
+    "territory",
+    "skills",
+    "duration",
+    "lifecycle",
+    "travelTime"
+   ]
+  },
+  {
+   "id": "or-38",
+   "title": "Cash-collection routing — Perm, Russia (ATM/POS clustering + TSP)",
+   "url": "https://github.com/Oberfichtner/Clustering_and_TSP_with_R",
+   "theme": "the field-collection literature's one open exception — cash-collection clustering",
+   "fields": [
+    "location",
+    "territory",
+    "travelTime"
+   ]
+  },
+  {
+   "id": "or-39",
+   "title": "New York State Tax Warrants & Child Support Warrants",
+   "url": "https://data.ny.gov/Government-Finance/New-York-State-Tax-Warrants-Beginning-7-1-2025/v7ua-z23v",
+   "theme": "case lifecycle records: permits, inspections, prosecutions & enforcement",
+   "fields": [
+    "prize",
+    "deadline",
+    "location",
+    "territory",
+    "lifecycle"
+   ]
+  },
+  {
+   "id": "or-4",
+   "title": "Clustered Orienteering Problem (COP)",
+   "url": "http://www.vrp-rep.org/datasets/download/angelelli-et-al-2014.zip",
+   "theme": "selection + prize + travel — orienteering family",
+   "fields": [
+    "prize",
+    "location",
+    "territory",
+    "travelTime"
+   ]
+  },
+  {
+   "id": "or-40",
+   "title": "Real Estate Tax Delinquencies (Philadelphia, PA)",
+   "url": "https://hub.arcgis.com/datasets/b8ac65c653b343739be21cb2773faace",
+   "theme": "case lifecycle records: permits, inspections, prosecutions & enforcement",
+   "fields": [
+    "prize",
+    "deadline",
+    "location",
+    "territory",
+    "skills",
+    "lifecycle"
+   ]
+  },
+  {
+   "id": "or-41",
+   "title": "iTaukei Land Trust Board — Lease Arrears (Fiji)",
+   "url": "https://hub.arcgis.com/datasets/a963186c15d845bb93cce1c00022e380",
+   "theme": "case lifecycle records: permits, inspections, prosecutions & enforcement",
+   "fields": [
+    "prize",
+    "deadline",
+    "location",
+    "territory",
+    "skills",
+    "lifecycle"
+   ]
+  },
+  {
+   "id": "or-42",
+   "title": "District Court of Maryland Eviction Case Data",
+   "url": "https://opendata.maryland.gov/Housing/District-Court-of-Maryland-Eviction-Case-Data/mvqb-b4hf",
+   "theme": "case lifecycle records: permits, inspections, prosecutions & enforcement",
+   "fields": [
+    "deadline",
+    "location",
+    "territory",
+    "lifecycle"
+   ]
+  },
+  {
+   "id": "or-43",
+   "title": "Allegheny County Tax Liens (filings, satisfactions & current status)",
+   "url": "https://data.wprdc.org/dataset/allegheny-county-tax-liens-filed-and-satisfied",
+   "theme": "case lifecycle records: permits, inspections, prosecutions & enforcement",
+   "fields": [
+    "prize",
+    "deadline",
+    "location",
+    "territory",
+    "lifecycle"
+   ]
+  },
+  {
+   "id": "or-44",
+   "title": "Tax Liens (Douglas County, CO)",
+   "url": "https://services.arcgis.com/seTexOicoRXDvRsJ/arcgis/rest/services/OpenData/FeatureServer/2",
+   "theme": "case lifecycle records: permits, inspections, prosecutions & enforcement",
+   "fields": [
+    "prize",
+    "location",
+    "lifecycle"
+   ]
+  },
+  {
+   "id": "or-45",
+   "title": "List of Tax Defaulters (Ireland, Revenue Commissioners)",
+   "url": "https://www.revenue.ie/en/corporate/press-office/list-of-defaulters/index.aspx",
+   "theme": "case lifecycle records: permits, inspections, prosecutions & enforcement",
+   "fields": [
+    "prize",
+    "location",
+    "territory",
+    "lifecycle"
+   ]
+  },
+  {
+   "id": "or-46",
+   "title": "Sheriff Foreclosure Sales (Dakota County, MN)",
+   "url": "https://hub.arcgis.com/datasets/297fcd81118a4d5cbf2fd07ebdee628c",
+   "theme": "case lifecycle records: permits, inspections, prosecutions & enforcement",
+   "fields": [
+    "prize",
+    "location",
+    "territory"
+   ]
+  },
+  {
+   "id": "or-47",
+   "title": "Delinquent Real Estate Taxes (Virginia Beach, VA)",
+   "url": "https://hub.arcgis.com/datasets/1b2d03addfaa41bb83c17f9237e1504c",
+   "theme": "case lifecycle records: permits, inspections, prosecutions & enforcement",
+   "fields": [
+    "prize",
+    "location",
+    "territory"
+   ]
+  },
+  {
+   "id": "or-48",
+   "title": "Treasurer Annual Tax Sale (Cook County, IL)",
+   "url": "https://datacatalog.cookcountyil.gov/Property-Taxation/Treasurer-Annual-Tax-Sale/55ju-2fs9",
+   "theme": "case lifecycle records: permits, inspections, prosecutions & enforcement",
+   "fields": [
+    "prize",
+    "location",
+    "territory",
+    "lifecycle"
+   ]
+  },
+  {
+   "id": "or-49",
+   "title": "NYC Tax Lien Sale Lists",
+   "url": "https://data.cityofnewyork.us/City-Government/Tax-Lien-Sale-Lists/9rz4-mjek",
+   "theme": "case lifecycle records: permits, inspections, prosecutions & enforcement",
+   "fields": [
+    "deadline",
+    "location",
+    "territory",
+    "lifecycle"
+   ]
+  },
+  {
+   "id": "or-5",
+   "title": "Solomon VRPTW benchmark (1983) — C1/C2/R1/R2/RC1/RC2",
+   "url": "https://neo.lcc.uma.es/vrp/vrp-instances/capacitated-vrp-with-time-windows-instances/",
+   "theme": "duration + deadline, must-serve — VRPTW family",
+   "fields": [
+    "deadline",
+    "location",
+    "duration",
+    "travelTime"
+   ]
+  },
+  {
+   "id": "or-50",
+   "title": "Environment Agency Prosecutions",
+   "url": "https://environment.data.gov.uk/dataset/9c7728fc-68e2-46e1-addb-63790b6b5313",
+   "theme": "case lifecycle records: permits, inspections, prosecutions & enforcement",
+   "fields": [
+    "prize",
+    "prizeProbability",
+    "location",
+    "territory",
+    "lifecycle"
+   ]
+  },
+  {
+   "id": "or-51",
+   "title": "UK Parking Penalty Charge Notices (Lincolnshire & Camden, standardised LGA schema)",
+   "url": "https://data.lincolnshire.gov.uk/@place/pcns",
+   "theme": "case lifecycle records: permits, inspections, prosecutions & enforcement",
+   "fields": [
+    "prize",
+    "location",
+    "territory",
+    "lifecycle"
+   ]
+  },
+  {
+   "id": "or-52",
+   "title": "Environmental Enforcement Fixed Penalty Notices (London Borough of Barnet)",
+   "url": "https://open.barnet.gov.uk/dataset/environmental-enforcement-fixed-penalty-notices-2n1ne",
+   "theme": "case lifecycle records: permits, inspections, prosecutions & enforcement",
+   "fields": [
+    "prize",
+    "territory",
+    "lifecycle"
+   ]
+  },
+  {
+   "id": "or-53",
+   "title": "Litter Fixed Penalty Notices issued by 3GS (Leeds City Council)",
+   "url": "https://datamillnorth.org/dataset/litter-fines-issued-by-3gs",
+   "theme": "case lifecycle records: permits, inspections, prosecutions & enforcement",
+   "fields": [
+    "prize",
+    "prizeProbability",
+    "location",
+    "lifecycle"
+   ]
+  },
+  {
+   "id": "or-54",
+   "title": "Fixed Penalty Notices (Leeds City Council, officer-issued)",
+   "url": "https://opendata.leeds.gov.uk/downloads/EAS/FPNs/FPN.csv",
+   "theme": "case lifecycle records: permits, inspections, prosecutions & enforcement",
+   "fields": [
+    "prize",
+    "prizeProbability",
+    "territory",
+    "lifecycle"
+   ]
+  },
+  {
+   "id": "or-55",
+   "title": "Fixed Penalty Notices (Camden Education and Enforcement Team)",
+   "url": "https://opendata.camden.gov.uk/Environment/Fixed-Penalty-Notices/i6r8-r9vt",
+   "theme": "case lifecycle records: permits, inspections, prosecutions & enforcement",
+   "fields": [
+    "prize",
+    "lifecycle"
+   ]
+  },
+  {
+   "id": "or-56",
+   "title": "Planning Applications (Camden, UK LGA schema & Dún Laoghaire-Rathdown, Ireland)",
+   "url": "https://opendata.camden.gov.uk/Environment/Planning-Applications/2eiu-s2cw",
+   "theme": "case lifecycle records: permits, inspections, prosecutions & enforcement",
+   "fields": [
+    "deadline",
+    "location",
+    "territory",
+    "skills",
+    "lifecycle"
+   ]
+  },
+  {
+   "id": "or-57",
+   "title": "Street Works Register (Camden)",
+   "url": "https://opendata.camden.gov.uk/",
+   "theme": "case lifecycle records: permits, inspections, prosecutions & enforcement",
+   "fields": [
+    "deadline",
+    "location",
+    "territory",
+    "duration",
+    "lifecycle"
+   ]
+  },
+  {
+   "id": "or-58",
+   "title": "HMO Licensing Register (Camden)",
+   "url": "https://opendata.camden.gov.uk/",
+   "theme": "case lifecycle records: permits, inspections, prosecutions & enforcement",
+   "fields": [
+    "deadline",
+    "location",
+    "territory",
+    "lifecycle"
+   ]
+  },
+  {
+   "id": "or-59",
+   "title": "Code Enforcement Cases (Toronto, Cincinnati, Charlotte, Columbus, Orlando, Syracuse, Fort Worth, Las Vegas & Montgomery County MD)",
+   "url": "https://open.toronto.ca/dataset/municipal-licensing-and-standards-investigation-activity/",
+   "theme": "case lifecycle records: permits, inspections, prosecutions & enforcement",
+   "fields": [
+    "deadline",
+    "location",
+    "territory",
+    "skills",
+    "lifecycle"
+   ]
+  },
+  {
+   "id": "or-6",
+   "title": "Meter Reading Problem instance (Hartford, CT)",
+   "url": "https://zenodo.org/records/5823834",
+   "theme": "duration + deadline, must-serve — VRPTW family",
+   "fields": [
+    "location"
+   ]
+  },
+  {
+   "id": "or-60",
+   "title": "Housing Maintenance Code Violations (NYC HPD)",
+   "url": "https://data.cityofnewyork.us/Housing-Development/Housing-Maintenance-Code-Violations/wvxf-dwi5",
+   "theme": "case lifecycle records: permits, inspections, prosecutions & enforcement",
+   "fields": [
+    "deadline",
+    "location",
+    "territory",
+    "lifecycle"
+   ]
+  },
+  {
+   "id": "or-61",
+   "title": "Code Compliance Cases (Mesa, AZ)",
+   "url": "https://citydata.mesaaz.gov/Code-Compliance/Code-Compliance/hgf6-yenu",
+   "theme": "case lifecycle records: permits, inspections, prosecutions & enforcement",
+   "fields": [
+    "prize",
+    "deadline",
+    "location",
+    "territory",
+    "skills",
+    "lifecycle"
+   ]
+  },
+  {
+   "id": "or-62",
+   "title": "Property Maintenance Inspection Violations (Louisville, KY)",
+   "url": "https://hub.arcgis.com/datasets/1fd891c3301c4c4581b86c338468fbe4",
+   "theme": "case lifecycle records: permits, inspections, prosecutions & enforcement",
+   "fields": [
+    "prize",
+    "location",
+    "territory",
+    "skills",
+    "lifecycle"
+   ]
+  },
+  {
+   "id": "or-63",
+   "title": "OATH Hearings Division Case Status (NYC)",
+   "url": "https://data.cityofnewyork.us/City-Government/OATH-Hearings-Division-Case-Status/jz4z-kudi",
+   "theme": "case lifecycle records: permits, inspections, prosecutions & enforcement",
+   "fields": [
+    "prize",
+    "location",
+    "territory",
+    "lifecycle"
+   ]
+  },
+  {
+   "id": "or-64",
+   "title": "Bureau of Fire Prevention — Inspections, Historical (NYC)",
+   "url": "https://data.cityofnewyork.us/Housing-Development/Bureau-of-Fire-Prevention-Inspections-Historical-/ssq6-fkht",
+   "theme": "case lifecycle records: permits, inspections, prosecutions & enforcement",
+   "fields": [
+    "location",
+    "territory",
+    "lifecycle"
+   ]
+  },
+  {
+   "id": "or-65",
+   "title": "Ordinance Violations (Chicago Department of Administrative Hearings)",
+   "url": "https://data.cityofchicago.org/Administration-Finance/Ordinance-Violations/6br9-quuz",
+   "theme": "case lifecycle records: permits, inspections, prosecutions & enforcement",
+   "fields": [
+    "prize",
+    "location",
+    "territory",
+    "lifecycle"
+   ]
+  },
+  {
+   "id": "or-66",
+   "title": "Transportation Department Permits — Current and Future (Chicago)",
+   "url": "https://data.cityofchicago.org/Transportation/Transportation-Department-Permits-Current-and-Future/hr8i-6s6s",
+   "theme": "case lifecycle records: permits, inspections, prosecutions & enforcement",
+   "fields": [
+    "prize",
+    "deadline",
+    "location",
+    "skills",
+    "lifecycle"
+   ]
+  },
+  {
+   "id": "or-67",
+   "title": "Building Permits — Active Permits (Toronto)",
+   "url": "https://ckan0.cf.opendata.inter.prod-toronto.ca/dataset/building-permits-active-permits",
+   "theme": "case lifecycle records: permits, inspections, prosecutions & enforcement",
+   "fields": [
+    "prize",
+    "location",
+    "territory",
+    "skills",
+    "lifecycle"
+   ]
+  },
+  {
+   "id": "or-68",
+   "title": "Utility Cut Permits (Toronto)",
+   "url": "https://ckan0.cf.opendata.inter.prod-toronto.ca/dataset/utility-cut-permits",
+   "theme": "case lifecycle records: permits, inspections, prosecutions & enforcement",
+   "fields": [
+    "deadline",
+    "location",
+    "territory",
+    "skills",
+    "lifecycle"
+   ]
+  },
+  {
+   "id": "or-69",
+   "title": "Building Permits (Vancouver & Calgary)",
+   "url": "https://opendata.vancouver.ca/explore/dataset/issued-building-permits/information/",
+   "theme": "case lifecycle records: permits, inspections, prosecutions & enforcement",
+   "fields": [
+    "prize",
+    "location",
+    "territory",
+    "skills",
+    "lifecycle"
+   ]
+  },
+  {
+   "id": "or-7",
+   "title": "Real-World Pharmaceutical Last-Mile Delivery Dataset (Vrani et al., 2025)",
+   "url": "https://doi.org/10.1016/j.dib.2025.111762",
+   "theme": "duration + deadline, must-serve — VRPTW family",
+   "fields": [
+    "deadline",
+    "location",
+    "duration",
+    "travelTime"
+   ]
+  },
+  {
+   "id": "or-70",
+   "title": "HMO Licensing Register (London Borough of Camden)",
+   "url": "https://opendata.camden.gov.uk/Housing/HMO-Licensing-Register/x43g-c2rf",
+   "theme": "case lifecycle records: permits, inspections, prosecutions & enforcement",
+   "fields": [
+    "deadline",
+    "location",
+    "territory",
+    "lifecycle"
+   ]
+  },
+  {
+   "id": "or-71",
+   "title": "Business Licenses — Rental Registry (Philadelphia)",
+   "url": "https://opendataphilly.org/datasets/licenses-and-inspections-business-licenses/",
+   "theme": "case lifecycle records: permits, inspections, prosecutions & enforcement",
+   "fields": [
+    "deadline",
+    "location",
+    "territory",
+    "skills",
+    "lifecycle"
+   ]
+  },
+  {
+   "id": "or-72",
+   "title": "Sitadel Housing Permits (Île-de-France, France)",
+   "url": "https://www.data.gouv.fr/datasets/logements-autorises-par-permis-de-construire-et-declarations-prealables-en-ile-de-france",
+   "theme": "case lifecycle records: permits, inspections, prosecutions & enforcement",
+   "fields": [
+    "location",
+    "territory",
+    "lifecycle"
+   ]
+  },
+  {
+   "id": "or-73",
+   "title": "Wabo Vergunningen (The Hague, Netherlands)",
+   "url": "https://data.overheid.nl/en/dataset/wabovergunningen",
+   "theme": "case lifecycle records: permits, inspections, prosecutions & enforcement",
+   "fields": [
+    "location",
+    "territory",
+    "lifecycle"
+   ]
+  },
+  {
+   "id": "or-74",
+   "title": "Officiële Bekendmakingen — Gemeenteblad Vergunningen (nationwide Netherlands)",
+   "url": "https://repository.overheid.nl/sru",
+   "theme": "case lifecycle records: permits, inspections, prosecutions & enforcement",
+   "fields": [
+    "location",
+    "territory",
+    "lifecycle"
+   ]
+  },
+  {
+   "id": "or-75",
+   "title": "Road Works in Public Space (Barcelona, Spain)",
+   "url": "https://opendata-ajuntament.barcelona.cat/data/en/dataset/obres",
+   "theme": "case lifecycle records: permits, inspections, prosecutions & enforcement",
+   "fields": [
+    "prize",
+    "deadline",
+    "location",
+    "territory",
+    "skills",
+    "lifecycle"
+   ]
+  },
+  {
+   "id": "or-76",
+   "title": "Multas de Circulación: Detalle (Madrid, Spain)",
+   "url": "https://datos.madrid.es/dataset/210104-0-multas-circulacion-detalle",
+   "theme": "case lifecycle records: permits, inspections, prosecutions & enforcement",
+   "fields": [
+    "prize",
+    "location",
+    "skills",
+    "lifecycle"
+   ]
+  },
+  {
+   "id": "or-77",
+   "title": "Permessi di Costruire Rilasciati (Bologna, Italy)",
+   "url": "https://opendata.comune.bologna.it/explore/dataset/permessi-di-costruire-rilasciati/",
+   "theme": "case lifecycle records: permits, inspections, prosecutions & enforcement",
+   "fields": [
+    "location",
+    "lifecycle"
+   ]
+  },
+  {
+   "id": "or-78",
+   "title": "Building Warrant Applications (North Ayrshire, Scotland)",
+   "url": "https://hub.arcgis.com/datasets/596fa66b53a948e4b74fea86dbe44690",
+   "theme": "case lifecycle records: permits, inspections, prosecutions & enforcement",
+   "fields": [
+    "deadline",
+    "location",
+    "territory",
+    "skills",
+    "lifecycle"
+   ]
+  },
+  {
+   "id": "or-79",
+   "title": "Parking Expiations (Adelaide, Australia)",
+   "url": "https://data.sa.gov.au/data/dataset/parking-expiations",
+   "theme": "case lifecycle records: permits, inspections, prosecutions & enforcement",
+   "fields": [
+    "prize",
+    "location",
+    "lifecycle"
+   ]
+  },
+  {
+   "id": "or-8",
+   "title": "Last-Mile Delivery Route Deviations: Planned vs. Actual (Konovalenko, Hvattum & Iversen, 2026)",
+   "url": "https://doi.org/10.1016/j.dib.2026.112744",
+   "theme": "duration + deadline, must-serve — VRPTW family",
+   "fields": [
+    "deadline",
+    "location",
+    "travelTime"
+   ]
+  },
+  {
+   "id": "or-80",
+   "title": "Expiation Notice System Data (South Australia, statewide)",
+   "url": "https://data.sa.gov.au/data/dataset/expiation-notice-system-data",
+   "theme": "case lifecycle records: permits, inspections, prosecutions & enforcement",
+   "fields": [
+    "prize",
+    "territory",
+    "lifecycle"
+   ]
+  },
+  {
+   "id": "or-81",
+   "title": "Handyman Work Order (HWO) Charges (NYC HPD)",
+   "url": "https://data.cityofnewyork.us/Housing-Development/Handyman-Work-Order-HWO-Charges/sbnd-xujn",
+   "theme": "case lifecycle records: permits, inspections, prosecutions & enforcement",
+   "fields": [
+    "prize",
+    "location",
+    "territory",
+    "lifecycle"
+   ]
+  },
+  {
+   "id": "or-82",
+   "title": "Sidewalk Management Database — Violations (NYC DOT)",
+   "url": "https://data.cityofnewyork.us/Transportation/Sidewalk-Management-Database-Violations/6kbp-uz6m",
+   "theme": "case lifecycle records: permits, inspections, prosecutions & enforcement",
+   "fields": [
+    "deadline",
+    "location",
+    "territory",
+    "lifecycle"
+   ]
+  },
+  {
+   "id": "or-83",
+   "title": "DOB NOW: Safety Boiler (NYC)",
+   "url": "https://data.cityofnewyork.us/Housing-Development/DOB-NOW-Safety-Boiler/52dp-yji6",
+   "theme": "case lifecycle records: permits, inspections, prosecutions & enforcement",
+   "fields": [
+    "prize",
+    "deadline",
+    "skills",
+    "lifecycle"
+   ]
+  },
+  {
+   "id": "or-84",
+   "title": "DOB NOW: Safety — Facades Compliance Filings (NYC FISP)",
+   "url": "https://data.cityofnewyork.us/Housing-Development/DOB-NOW-Safety-Facades-Compliance-Filings/xubg-57si",
+   "theme": "case lifecycle records: permits, inspections, prosecutions & enforcement",
+   "fields": [
+    "prize",
+    "location",
+    "territory",
+    "skills",
+    "lifecycle"
+   ]
+  },
+  {
+   "id": "or-85",
+   "title": "Permits and Inspections (City of Norfolk, VA)",
+   "url": "https://data.norfolk.gov/Permits/Permits-and-Inspections/bnrb-u445",
+   "theme": "case lifecycle records: permits, inspections, prosecutions & enforcement",
+   "fields": [
+    "prize",
+    "prizeProbability",
+    "deadline",
+    "location",
+    "territory",
+    "skills",
+    "lifecycle"
+   ]
+  },
+  {
+   "id": "or-86",
+   "title": "DOB Permit Issuance (NYC)",
+   "url": "https://data.cityofnewyork.us/Housing-Development/DOB-Permit-Issuance/ipu4-2q9a",
+   "theme": "case lifecycle records: permits, inspections, prosecutions & enforcement",
+   "fields": [
+    "deadline",
+    "location",
+    "territory",
+    "skills",
+    "lifecycle"
+   ]
+  },
+  {
+   "id": "or-87",
+   "title": "DOB Job Application Filings (NYC)",
+   "url": "https://data.cityofnewyork.us/Housing-Development/DOB-Job-Application-Filings/ic3t-wcy2",
+   "theme": "case lifecycle records: permits, inspections, prosecutions & enforcement",
+   "fields": [
+    "prize",
+    "location",
+    "territory",
+    "skills",
+    "lifecycle"
+   ]
+  },
+  {
+   "id": "or-88",
+   "title": "DOB NOW: Electrical Permit Applications (NYC)",
+   "url": "https://data.cityofnewyork.us/Housing-Development/DOB-NOW-Electrical-Permit-Applications/dm9a-ab7w",
+   "theme": "case lifecycle records: permits, inspections, prosecutions & enforcement",
+   "fields": [
+    "prize",
+    "deadline",
+    "location",
+    "territory",
+    "skills",
+    "lifecycle"
+   ]
+  },
+  {
+   "id": "or-89",
+   "title": "DOB NOW: Build Elevator Permit Applications (NYC)",
+   "url": "https://data.cityofnewyork.us/Housing-Development/DOB-NOW-Build-Elevator-Permit-Applications/kfp4-dz4h",
+   "theme": "case lifecycle records: permits, inspections, prosecutions & enforcement",
+   "fields": [
+    "prize",
+    "deadline",
+    "location",
+    "territory",
+    "skills",
+    "lifecycle"
+   ]
+  },
+  {
+   "id": "or-9",
+   "title": "MOVRPTW-Generator — Real Tenerife Distribution Instances",
+   "url": "https://github.com/psxjpc/MOVRPTW-Generator",
+   "theme": "duration + deadline, must-serve — VRPTW family",
+   "fields": [
+    "deadline",
+    "location",
+    "duration",
+    "travelTime"
+   ]
+  },
+  {
+   "id": "or-90",
+   "title": "Derelict Sites Register (Dublin City Council, Ireland)",
+   "url": "https://services-eu1.arcgis.com/PyGgzM45TvWtSBsM/arcgis/rest/services/DCC_Derelict_Sites_Register_Public_points/FeatureServer",
+   "theme": "case lifecycle records: permits, inspections, prosecutions & enforcement",
+   "fields": [
+    "location",
+    "territory",
+    "lifecycle"
+   ]
+  },
+  {
+   "id": "or-91",
+   "title": "Vacant & Foreclosed Property Registration (Cincinnati, OH)",
+   "url": "https://data.cincinnati-oh.gov/Thriving-Neighborhoods/Vacant-Foreclosed-Property-Registration/w3jp-dfxy",
+   "theme": "case lifecycle records: permits, inspections, prosecutions & enforcement",
+   "fields": [
+    "location",
+    "territory",
+    "lifecycle"
+   ]
+  },
+  {
+   "id": "or-92",
+   "title": "Weed Abatement Locations (Orange County, CA)",
+   "url": "https://utility.arcgis.com/usrsvcs/servers/931a175b8eaa4abebf1379743e6d71c1/rest/services/Environmental_Resources/Weed_Abatement/FeatureServer",
+   "theme": "case lifecycle records: permits, inspections, prosecutions & enforcement",
+   "fields": [
+    "location",
+    "territory",
+    "lifecycle"
+   ]
+  },
+  {
+   "id": "or-93",
+   "title": "Weed Abatement (City of Temecula, CA)",
+   "url": "https://services3.arcgis.com/IgR6ay8jzuIj7VSF/arcgis/rest/services/Weed_Abatement_2017/FeatureServer",
+   "theme": "case lifecycle records: permits, inspections, prosecutions & enforcement",
+   "fields": [
+    "location",
+    "skills",
+    "lifecycle"
+   ]
+  },
+  {
+   "id": "or-94",
+   "title": "Weed Abatement Parcels (City of Fairfield, CA)",
+   "url": "https://services1.arcgis.com/A14KNJpxNyBTu19J/arcgis/rest/services/Weed_Abatement_Parcels/FeatureServer",
+   "theme": "case lifecycle records: permits, inspections, prosecutions & enforcement",
+   "fields": [
+    "location",
+    "territory",
+    "skills",
+    "lifecycle"
+   ]
+  },
+  {
+   "id": "or-95",
+   "title": "Vehicle Towing (City of Norfolk, VA)",
+   "url": "https://data.norfolk.gov/Government/Towing/4dwc-v3t8",
+   "theme": "case lifecycle records: permits, inspections, prosecutions & enforcement",
+   "fields": [
+    "prize",
+    "deadline",
+    "location",
+    "lifecycle"
+   ]
+  },
+  {
+   "id": "or-96",
+   "title": "Tow/Repo Log (Town of Pembroke Park, FL)",
+   "url": "https://services3.arcgis.com/vtilYbC3YeF6EBJ1/arcgis/rest/services/service_05f1e63ba1494703b42f0dd606859f0b/FeatureServer",
+   "theme": "case lifecycle records: permits, inspections, prosecutions & enforcement",
+   "fields": [
+    "prize",
+    "location",
+    "lifecycle"
+   ]
+  },
+  {
+   "id": "or-97",
+   "title": "Recent Tows (City of Buffalo, NY)",
+   "url": "https://data.buffalony.gov/Vehicles-Equipment/Recent-Tows/pamv-gash",
+   "theme": "case lifecycle records: permits, inspections, prosecutions & enforcement",
+   "fields": [
+    "location",
+    "lifecycle"
+   ]
+  },
+  {
+   "id": "or-98",
+   "title": "Towed Vehicles (City of Chicago, IL)",
+   "url": "https://data.cityofchicago.org/Transportation/Towed-Vehicles/ygr5-vcbg",
+   "theme": "case lifecycle records: permits, inspections, prosecutions & enforcement",
+   "fields": []
+  },
+  {
+   "id": "or-99",
+   "title": "Abandoned Vehicles (City & County of Honolulu, HI)",
+   "url": "https://data.honolulu.gov/Public-Safety/Abandoned-Vehicles/7mwf-c3z3",
+   "theme": "case lifecycle records: permits, inspections, prosecutions & enforcement",
+   "fields": [
+    "prizeProbability",
+    "location",
+    "duration",
+    "lifecycle"
+   ]
+  }
+ ]
+}
