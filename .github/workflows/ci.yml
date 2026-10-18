@@ -190,9 +190,9 @@ jobs:
         run: |
           cat > check.mjs <<'EOF'
           import assert from 'node:assert/strict';
-          import * as setlist from 'setlist';
+          import * as keepset from 'keepset';
 
-          assert.ok(typeof setlist === 'object');
+          assert.ok(typeof keepset === 'object');
           EOF
           node check.mjs
 

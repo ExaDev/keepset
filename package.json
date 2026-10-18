@@ -1,5 +1,5 @@
 {
-  "name": "setlist",
+  "name": "keepset",
   "description": "Library, CLI and statically generated catalogue for dataset fetch-and-normalise recipes",
   "version": "0.0.0",
   "dependencies": {
@@ -58,7 +58,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ExaDev/setlist.git"
+    "url": "git+https://github.com/ExaDev/keepset.git"
   },
   "scripts": {
     "build": "tsdown",
