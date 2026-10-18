@@ -1,0 +1,64 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "text": "Christian, R. R., Luczkovich, J. J. (1999). Organizing and understanding a winter's seagrass foodweb network through effective trophic levels. Ecological Modelling."
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "Undirected unweighted simple graph derived from the St. Marks seagrass food web. Directed predation edges merged to undirected connections. Edge weights removed. Contains self-loops (cannibalistic taxa). Nodes represent species/taxa with heterogeneous trophic roles.",
+  "domain": "Ecology",
+  "expectedCounts": {
+    "edges": 356,
+    "nodes": 54
+  },
+  "id": "nr-eco-stmarks-undirected",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "St. Marks Food Web (Undirected)",
+  "properties": {
+    "directed": false,
+    "heterogeneous": true,
+    "multigraph": true,
+    "rawBytes": 0,
+    "selfLoops": true,
+    "weighted": true
+  },
+  "recipe": {
+    "archive": {
+      "kind": "zip",
+      "member": {
+        "extensions": [
+          ".edges"
+        ]
+      }
+    },
+    "parser": {
+      "commentPrefixes": [
+        "#",
+        "%"
+      ],
+      "delimiter": "detect",
+      "encoding": "utf-8",
+      "format": "edge-list",
+      "skipLines": 0,
+      "sourceColumn": 0,
+      "targetColumn": 1
+    },
+    "source": 0,
+    "status": "fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-04-20",
+      "status": "live",
+      "url": "https://nrvis.com/download/data/eco/eco-stmarks.zip"
+    }
+  ],
+  "tags": [
+    "unweighted"
+  ]
+}

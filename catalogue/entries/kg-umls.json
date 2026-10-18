@@ -1,0 +1,43 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "text": "S. Kok, P. Domingos (2007). Statistical Predicate Invention. Proceedings of the 24th International Conference on Machine Learning, 433-440."
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "Directed knowledge graph from the Unified Medical Language System semantic network. Nodes are biomedical concepts and edges are semantic relations (e.g. 'treats', 'diagnoses', 'prevents'). Multiple relation types can connect the same concept pair, making it a directed multigraph. 46 relation types serve as edge attributes.",
+  "domain": "Biomedical knowledge graph",
+  "expectedCounts": {
+    "edges": 6529,
+    "nodes": 135
+  },
+  "id": "kg-umls",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "UMLS Knowledge Graph",
+  "properties": {
+    "directed": true,
+    "heterogeneous": true,
+    "multigraph": true,
+    "selfLoops": false,
+    "weighted": false
+  },
+  "recipe": {
+    "reason": "no download is in a form keepset reads yet (tsv: format tsv is a triple file whose head and tail columns the catalogue does not record)",
+    "status": "not-fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-04-19",
+      "status": "live",
+      "url": "https://github.com/TimDettmers/ConvE/raw/master/umls.tar.gz"
+    }
+  ],
+  "tags": [
+    "knowledge-graph"
+  ]
+}

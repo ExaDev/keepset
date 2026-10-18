@@ -1,0 +1,67 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "text": "T. A. Davis, Y. Hu (2011). The University of Florida Sparse Matrix Collection. ACM Transactions on Mathematical Software 38, 1:1-1:25."
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "random undirected weighted graph (134,217,726 nodes, 4,223,264,644 non-zeros)",
+  "expectedCounts": {
+    "edges": 4223264644,
+    "nodes": 134217726
+  },
+  "id": "ss-gap-gap-kron",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "GAP/GAP-kron",
+  "properties": {
+    "components": 130997571,
+    "connected": false,
+    "cyclic": true,
+    "density": 2.344382910762151e-7,
+    "directed": false,
+    "edgeTypes": 1,
+    "heterogeneous": false,
+    "multigraph": false,
+    "nodeTypes": 1,
+    "rawBytes": 0,
+    "selfLoops": false,
+    "weighted": true
+  },
+  "recipe": {
+    "archive": {
+      "kind": "tar.gz",
+      "member": {
+        "path": "GAP-kron/GAP-kron.mtx"
+      }
+    },
+    "parser": {
+      "encoding": "utf-8",
+      "format": "matrix-market"
+    },
+    "source": 0,
+    "status": "fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-02-16",
+      "status": "live",
+      "url": "https://sparse.tamu.edu/MM/GAP/GAP-kron.tar.gz"
+    },
+    {
+      "retrieved": "2026-02-16",
+      "status": "live",
+      "url": "https://sparse.tamu.edu/RB/GAP/GAP-kron.tar.gz"
+    },
+    {
+      "retrieved": "2026-02-16",
+      "status": "live",
+      "url": "https://sparse.tamu.edu/mat/GAP/GAP-kron.tar.gz"
+    }
+  ],
+  "tags": []
+}

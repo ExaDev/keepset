@@ -1,0 +1,65 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "text": "Andrew Carlson, Justin Betteridge, Bryan Kisiel, Burr Settles, Estevam R. Hruschka Jr., Tom M. Mitchell (2010). Toward an Architecture for Never-Ending Language Learning. Proceedings of the AAAI Conference on Artificial Intelligence."
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "Heterogeneous knowledge graph from CMU's Never-Ending Language Learning system. Contains entities and relations automatically extracted from web text with 200 relation types. Used for knowledge graph completion, link prediction, and reasoning tasks. Challenging due to sparse triple coverage for many relations.",
+  "domain": "General knowledge graph",
+  "expectedCounts": {
+    "edges": 149678,
+    "nodes": 74432
+  },
+  "id": "nell-995",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "NELL-995",
+  "properties": {
+    "components": 8595,
+    "connected": false,
+    "cyclic": true,
+    "density": 0.000046516201857617345,
+    "directed": true,
+    "edgeTypes": 1,
+    "heterogeneous": true,
+    "multigraph": true,
+    "nodeTypes": 2,
+    "rawBytes": 0,
+    "selfLoops": true,
+    "weighted": false
+  },
+  "recipe": {
+    "archive": {
+      "kind": "none"
+    },
+    "parser": {
+      "commentPrefixes": [
+        "#",
+        "%"
+      ],
+      "delimiter": "detect",
+      "encoding": "utf-8",
+      "format": "edge-list",
+      "skipLines": 1,
+      "sourceColumn": 0,
+      "targetColumn": 1
+    },
+    "source": 0,
+    "status": "fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-03-03",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/thunlp/OpenKE/OpenKE-PyTorch/benchmarks/NELL-995/train2id.txt"
+    }
+  ],
+  "tags": [
+    "heterogeneous"
+  ]
+}

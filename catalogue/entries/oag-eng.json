@@ -1,0 +1,47 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "text": "Junheng Lin, Yibin Shen, Yifan Wang, Fangzhao Wu, Xiang Wang (2024). H2GB: A Hierarchical Heterogeneous Graph Benchmark for Node Property Prediction. Proceedings of the AAAI Conference on Artificial Intelligence."
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "Heterogeneous academic graph from the Open Academic Graph, focused on engineering papers. Contains papers, authors, venues, institutions, and fields of study with 22 relation types.",
+  "expectedCounts": {
+    "edges": 12346854,
+    "nodes": 929315
+  },
+  "id": "oag-eng",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "OAG-Eng",
+  "properties": {
+    "components": 3217795,
+    "connected": false,
+    "cyclic": false,
+    "density": 0,
+    "directed": true,
+    "edgeTypes": 1,
+    "heterogeneous": true,
+    "multigraph": false,
+    "nodeTypes": 1,
+    "rawBytes": 0,
+    "selfLoops": false,
+    "weighted": false
+  },
+  "recipe": {
+    "reason": "no download is in a form keepset reads yet (pytorch-hetero: format pytorch-hetero has a pipeline-specific parser with no declarative keepset form yet)",
+    "status": "not-fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-02-16",
+      "status": "live",
+      "url": "https://huggingface.co/datasets/junhongmit/H2GB/resolve/main/OAG_Engineering.pt"
+    }
+  ],
+  "tags": []
+}

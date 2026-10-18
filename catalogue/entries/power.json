@@ -1,0 +1,74 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "text": "D. J. Watts, S. H. Strogatz (1998). Collective dynamics of 'small-world' networks. Nature 393, 440-442."
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "Undirected, unweighted network representing the topology of the Western States Power Grid of the United States. Nodes represent generators, transformers, and substations.",
+  "expectedCounts": {
+    "edges": 0,
+    "nodes": 0
+  },
+  "id": "power",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "Western States Power Grid",
+  "properties": {
+    "components": 1,
+    "connected": true,
+    "cyclic": true,
+    "density": 0.0005403026973346214,
+    "directed": false,
+    "edgeTypes": 1,
+    "heterogeneous": false,
+    "multigraph": false,
+    "nodeTypes": 1,
+    "rawBytes": 449931,
+    "selfLoops": false,
+    "weighted": false
+  },
+  "recipe": {
+    "archive": {
+      "kind": "zip",
+      "member": {
+        "extensions": [
+          ".gml"
+        ]
+      }
+    },
+    "parser": {
+      "encoding": "utf-8",
+      "format": "gml"
+    },
+    "source": 0,
+    "status": "fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-01-17",
+      "status": "live",
+      "url": "https://websites.umich.edu/~mejn/netdata/power.zip"
+    },
+    {
+      "retrieved": "2026-01-17",
+      "status": "live",
+      "url": "https://sparse.tamu.edu/MM/Newman/power.tar.gz"
+    },
+    {
+      "retrieved": "2026-01-17",
+      "status": "live",
+      "url": "https://sparse.tamu.edu/RB/Newman/power.tar.gz"
+    },
+    {
+      "retrieved": "2026-01-17",
+      "status": "live",
+      "url": "https://sparse.tamu.edu/mat/Newman/power.tar.gz"
+    }
+  ],
+  "tags": []
+}

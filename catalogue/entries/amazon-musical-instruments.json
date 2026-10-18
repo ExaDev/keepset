@@ -1,0 +1,47 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "text": "McAuley, Julian, Targett, Christopher, Shi, Qinfeng, van den Hengel, Anton (2015). Image-Based Recommendations on Styles and Substitutes. Proceedings of the 38th International ACM SIGIR Conference on Research and Development in Information Retrieval."
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "Directed bipartite user-product review network for Musical Instruments on Amazon. Users are linked to products they reviewed; edge weights are normalised star ratings.",
+  "expectedCounts": {
+    "edges": 500176,
+    "nodes": 422277
+  },
+  "id": "amazon-musical-instruments",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "Amazon Musical Instruments Reviews",
+  "properties": {
+    "components": 23753,
+    "connected": false,
+    "cyclic": true,
+    "density": 0.000005609950357320079,
+    "directed": true,
+    "edgeTypes": 1,
+    "heterogeneous": true,
+    "multigraph": false,
+    "nodeTypes": 2,
+    "rawBytes": 0,
+    "selfLoops": false,
+    "weighted": true
+  },
+  "recipe": {
+    "reason": "no download is in a form keepset reads yet (amazon-ratings: format amazon-ratings has a pipeline-specific parser with no declarative keepset form yet)",
+    "status": "not-fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-03-27",
+      "status": "live",
+      "url": "http://jmcauley.ucsd.edu/data/amazon/categoryFiles/ratings_Musical_Instruments.csv"
+    }
+  ],
+  "tags": []
+}

@@ -1,0 +1,62 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "text": "Leskovec et al. (2005). Graphs over time: densification laws, shrinking diameters and possible explanations. ACM SIGKDD Explorations Newsletter 7, 4-13."
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "Very large directed acyclic graph (DAG) of US patent citations. Patents can only cite patents filed earlier, creating a strict temporal ordering. Edge direction goes from citing patent to cited patent. One of the largest real-world DAGs available. Useful for evaluating algorithms on massive acyclic graphs and temporal graphs.",
+  "expectedCounts": {
+    "edges": 16518948,
+    "nodes": 4894081
+  },
+  "id": "citation-patent",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "US Patent Citation Network (DAG)",
+  "properties": {
+    "components": 3627,
+    "connected": false,
+    "cyclic": true,
+    "density": 0.0000023186327578363246,
+    "directed": true,
+    "edgeTypes": 1,
+    "heterogeneous": false,
+    "multigraph": false,
+    "nodeTypes": 1,
+    "rawBytes": 0,
+    "selfLoops": false,
+    "weighted": false
+  },
+  "recipe": {
+    "archive": {
+      "kind": "gzip"
+    },
+    "parser": {
+      "commentPrefixes": [
+        "#",
+        "%"
+      ],
+      "delimiter": "detect",
+      "encoding": "utf-8",
+      "format": "edge-list",
+      "skipLines": 0,
+      "sourceColumn": 0,
+      "targetColumn": 1
+    },
+    "source": 0,
+    "status": "fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-03-26",
+      "status": "live",
+      "url": "https://snap.stanford.edu/data/cit-Patents.txt.gz"
+    }
+  ],
+  "tags": []
+}

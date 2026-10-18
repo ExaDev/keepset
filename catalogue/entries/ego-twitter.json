@@ -1,0 +1,62 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "text": "J. McAuley, J. Leskovec (2012). Learning to Discover Social Circles in Ego Networks. NIPS."
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "Social circles from Twitter. Nodes are users and edges represent following relationships.",
+  "expectedCounts": {
+    "edges": 2420766,
+    "nodes": 81306
+  },
+  "id": "ego-twitter",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "Twitter Social Circles",
+  "properties": {
+    "components": 1,
+    "connected": true,
+    "cyclic": true,
+    "density": 0.0004061072162436206,
+    "directed": true,
+    "edgeTypes": 1,
+    "heterogeneous": false,
+    "multigraph": false,
+    "nodeTypes": 1,
+    "rawBytes": 143762659,
+    "selfLoops": false,
+    "weighted": false
+  },
+  "recipe": {
+    "archive": {
+      "kind": "gzip"
+    },
+    "parser": {
+      "commentPrefixes": [
+        "#",
+        "%"
+      ],
+      "delimiter": "detect",
+      "encoding": "utf-8",
+      "format": "edge-list",
+      "skipLines": 0,
+      "sourceColumn": 0,
+      "targetColumn": 1
+    },
+    "source": 0,
+    "status": "fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-01-17",
+      "status": "live",
+      "url": "https://snap.stanford.edu/data/twitter_combined.txt.gz"
+    }
+  ],
+  "tags": []
+}

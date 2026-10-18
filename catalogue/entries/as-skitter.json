@@ -1,0 +1,65 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "text": "Jure Leskovec, Jon Kleinberg, Christos Faloutsos (2005). Graphs over Time: Densification Laws, Shrinking Diameters and Possible Explanations. ACM KDD."
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "Internet topology graph from traceroutes collected by CAIDA.",
+  "domain": "Internet topology",
+  "expectedCounts": {
+    "edges": 11095298,
+    "nodes": 1696415
+  },
+  "id": "as-skitter",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "AS-Skitter",
+  "properties": {
+    "components": 756,
+    "connected": false,
+    "cyclic": true,
+    "density": 0.000007710899005763673,
+    "directed": false,
+    "edgeTypes": 1,
+    "heterogeneous": false,
+    "multigraph": false,
+    "nodeTypes": 1,
+    "rawBytes": 0,
+    "selfLoops": false,
+    "weighted": false
+  },
+  "recipe": {
+    "archive": {
+      "kind": "gzip"
+    },
+    "parser": {
+      "commentPrefixes": [
+        "#",
+        "%"
+      ],
+      "delimiter": "tab",
+      "encoding": "utf-8",
+      "format": "edge-list",
+      "skipLines": 0,
+      "sourceColumn": 0,
+      "targetColumn": 1
+    },
+    "source": 0,
+    "status": "fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-02-16",
+      "status": "live",
+      "url": "https://snap.stanford.edu/data/as-skitter.txt.gz"
+    }
+  ],
+  "tags": [
+    "infrastructure"
+  ]
+}

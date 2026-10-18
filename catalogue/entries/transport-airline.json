@@ -1,0 +1,47 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "text": "Barrat et al. (2004). The architecture of complex weighted networks. Proceedings of the National Academy of Sciences."
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "Undirected, weighted transportation network of airline routes between world airports. Nodes are major airports globally, edges represent direct flight routes. Edge weights represent the number of direct flights (or airline routes) between airports. Scale-free small-world network demonstrating weight heterogeneity in real transportation systems.",
+  "expectedCounts": {
+    "edges": 0,
+    "nodes": 0
+  },
+  "id": "transport-airline",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "Worldwide Airline Network",
+  "properties": {
+    "components": 8,
+    "connected": false,
+    "cyclic": true,
+    "density": 0.003205795074698138,
+    "directed": false,
+    "edgeTypes": 1,
+    "heterogeneous": false,
+    "multigraph": false,
+    "nodeTypes": 1,
+    "rawBytes": 0,
+    "selfLoops": false,
+    "weighted": true
+  },
+  "recipe": {
+    "reason": "no download is in a form keepset reads yet (csv: format csv has a pipeline-specific parser with no declarative keepset form yet)",
+    "status": "not-fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-03-26",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/jpatokal/openflights/master/data/routes.dat"
+    }
+  ],
+  "tags": []
+}

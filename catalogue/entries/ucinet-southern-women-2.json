@@ -1,0 +1,44 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "text": "A. Davis, B. Gardner, M. Gardner (1941). Deep South. University of Chicago Press."
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "Bipartite network of 18 Southern women attending 14 social events in the 1930s. Cell (i,j) is 1 if woman i attended event j. From the same UCINET source as ucinet-davis but preserved in bipartite (two-mode) form rather than one-mode projection.",
+  "expectedCounts": {
+    "edges": 93,
+    "nodes": 32
+  },
+  "id": "ucinet-southern-women-2",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "Southern Women Event Attendance (Bipartite)",
+  "properties": {
+    "directed": false,
+    "heterogeneous": true,
+    "multigraph": false,
+    "selfLoops": false,
+    "weighted": false
+  },
+  "recipe": {
+    "reason": "no download is in a form keepset reads yet (ucinet-dl: format ucinet-dl has a pipeline-specific parser with no declarative keepset form yet)",
+    "status": "not-fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-05-06",
+      "snapshot": {
+        "timestamp": "20231006152128",
+        "url": "https://web.archive.org/web/20231006152128/http://vlado.fmf.uni-lj.si/pub/networks/data/Ucinet/davis.dat"
+      },
+      "status": "dead",
+      "url": "http://vlado.fmf.uni-lj.si/pub/networks/data/Ucinet/davis.dat"
+    }
+  ],
+  "tags": []
+}

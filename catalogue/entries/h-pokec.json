@@ -1,0 +1,67 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "text": "Junheng Lin, Yibin Shen, Yifan Wang, Fangzhao Wu, Xiang Wang (2024). H2GB: A Hierarchical Heterogeneous Graph Benchmark for Node Property Prediction. Proceedings of the AAAI Conference on Artificial Intelligence."
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "Heterogeneous social network derived from the Slovak Pokec social network. Contains users with multiple attribute-based node types and 31 edge types representing different social interactions and attribute similarities.",
+  "expectedCounts": {
+    "edges": 30622564,
+    "nodes": 1632803
+  },
+  "id": "h-pokec",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "H-Pokec",
+  "properties": {
+    "components": 1,
+    "connected": true,
+    "cyclic": true,
+    "density": 0.000016730379518484355,
+    "directed": true,
+    "edgeTypes": 1,
+    "heterogeneous": true,
+    "multigraph": false,
+    "nodeTypes": 1,
+    "rawBytes": 0,
+    "selfLoops": false,
+    "weighted": false
+  },
+  "recipe": {
+    "archive": {
+      "kind": "gzip"
+    },
+    "parser": {
+      "commentPrefixes": [
+        "#",
+        "%"
+      ],
+      "delimiter": "detect",
+      "encoding": "utf-8",
+      "format": "edge-list",
+      "skipLines": 0,
+      "sourceColumn": 0,
+      "targetColumn": 1
+    },
+    "source": 0,
+    "status": "fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-02-16",
+      "status": "live",
+      "url": "https://snap.stanford.edu/data/soc-pokec-relationships.txt.gz"
+    },
+    {
+      "retrieved": "2026-02-16",
+      "status": "live",
+      "url": "https://networkrepository.com/datasets/pokec.tar.gz"
+    }
+  ],
+  "tags": []
+}

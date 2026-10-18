@@ -1,0 +1,67 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "text": "T. A. Davis, Y. Hu (2011). The University of Florida Sparse Matrix Collection. ACM Transactions on Mathematical Software 38, 1:1-1:25."
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "undirected graph (170,728,175 nodes, 360,585,172 non-zeros)",
+  "expectedCounts": {
+    "edges": 360585172,
+    "nodes": 170728175
+  },
+  "id": "ss-genbank-kmer-a2a",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "GenBank/kmer_A2a",
+  "properties": {
+    "components": 5353,
+    "connected": false,
+    "cyclic": true,
+    "density": 1.2370791016738799e-8,
+    "directed": false,
+    "edgeTypes": 1,
+    "heterogeneous": false,
+    "multigraph": false,
+    "nodeTypes": 1,
+    "rawBytes": 0,
+    "selfLoops": false,
+    "weighted": false
+  },
+  "recipe": {
+    "archive": {
+      "kind": "tar.gz",
+      "member": {
+        "path": "kmer_A2a/kmer_A2a.mtx"
+      }
+    },
+    "parser": {
+      "encoding": "utf-8",
+      "format": "matrix-market"
+    },
+    "source": 0,
+    "status": "fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-02-16",
+      "status": "live",
+      "url": "https://sparse.tamu.edu/MM/GenBank/kmer_A2a.tar.gz"
+    },
+    {
+      "retrieved": "2026-02-16",
+      "status": "live",
+      "url": "https://sparse.tamu.edu/RB/GenBank/kmer_A2a.tar.gz"
+    },
+    {
+      "retrieved": "2026-02-16",
+      "status": "live",
+      "url": "https://sparse.tamu.edu/mat/GenBank/kmer_A2a.tar.gz"
+    }
+  ],
+  "tags": []
+}

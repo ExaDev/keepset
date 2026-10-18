@@ -1,0 +1,72 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "text": "D. J. Watts, S. H. Strogatz (1998). Collective dynamics of 'small-world' networks. Nature 393, 440-442."
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "Directed, weighted network representing the neural connectome of Caenorhabditis elegans nematode. Multiple sources available: Stanford SNAP (frontal neurons), Network Data Repository (full connectome), and Hugging Face (comprehensive 2024 data with gap junctions and weights).",
+  "expectedCounts": {
+    "edges": 764,
+    "nodes": 131
+  },
+  "id": "celegans",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "C. Elegans Neural Network",
+  "properties": {
+    "components": 1,
+    "connected": true,
+    "cyclic": true,
+    "density": 0.08068115091015854,
+    "directed": true,
+    "edgeTypes": 1,
+    "heterogeneous": false,
+    "multigraph": false,
+    "nodeTypes": 1,
+    "rawBytes": 154557,
+    "selfLoops": false,
+    "weighted": false
+  },
+  "recipe": {
+    "archive": {
+      "kind": "gzip"
+    },
+    "parser": {
+      "commentPrefixes": [
+        "#",
+        "%"
+      ],
+      "delimiter": "detect",
+      "encoding": "utf-8",
+      "format": "edge-list",
+      "skipLines": 0,
+      "sourceColumn": 0,
+      "targetColumn": 1
+    },
+    "source": 0,
+    "status": "fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-01-17",
+      "status": "live",
+      "url": "https://snap.stanford.edu/data/C-elegans-frontal.txt.gz"
+    },
+    {
+      "retrieved": "2026-01-17",
+      "status": "live",
+      "url": "https://nrvis.com/download/data/bio/bio-celegans-dir.zip"
+    },
+    {
+      "retrieved": "2026-01-17",
+      "status": "live",
+      "url": "https://huggingface.co/datasets/qsimeon/celegans_connectome_data/raw/main/celegans_connectome_data.csv"
+    }
+  ],
+  "tags": []
+}

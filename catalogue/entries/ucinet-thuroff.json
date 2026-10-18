@@ -1,0 +1,51 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "text": "B. Thurman (1979). In the office: Networks and coalitions. Social Networks 2, 47-63."
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "Formal and informal ties among 15 employees in an overseas branch office of a large multinational corporation.",
+  "expectedCounts": {
+    "edges": 34,
+    "nodes": 15
+  },
+  "id": "ucinet-thuroff",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "Thurman Office",
+  "properties": {
+    "components": 1,
+    "connected": true,
+    "cyclic": false,
+    "density": 0.1619047619047619,
+    "directed": false,
+    "edgeTypes": 1,
+    "heterogeneous": false,
+    "multigraph": true,
+    "nodeTypes": 1,
+    "rawBytes": 2776,
+    "selfLoops": false,
+    "weighted": false
+  },
+  "recipe": {
+    "reason": "no download is in a form keepset reads yet (ucinet: format ucinet has a pipeline-specific parser with no declarative keepset form yet)",
+    "status": "not-fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-02-16",
+      "snapshot": {
+        "timestamp": "20230601",
+        "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/UciNet/thuroff.dat"
+      },
+      "status": "dead",
+      "url": "http://vlado.fmf.uni-lj.si/pub/networks/data/UciNet/thuroff.dat"
+    }
+  ],
+  "tags": []
+}

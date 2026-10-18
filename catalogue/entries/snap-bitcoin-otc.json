@@ -1,0 +1,62 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "text": "Kumar et al. (2019). Predicting Dynamic Embedding Trajectory in Temporal Interaction Networks."
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "Weighted, signed, directed network of Bitcoin trading relationships on the OTC exchange. Nodes represent traders, edges represent trust ratings. Edges are weighted from -10 to +10 indicating trust (positive) or distrust (negative). Contains temporal information about when each rating was established.",
+  "expectedCounts": {
+    "edges": 35592,
+    "nodes": 5881
+  },
+  "id": "snap-bitcoin-otc",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "Bitcoin OTC Trading Network",
+  "properties": {
+    "components": 4,
+    "connected": false,
+    "cyclic": true,
+    "density": 0.001243020588612932,
+    "directed": true,
+    "edgeTypes": 1,
+    "heterogeneous": false,
+    "multigraph": false,
+    "nodeTypes": 1,
+    "rawBytes": 0,
+    "selfLoops": false,
+    "weighted": true
+  },
+  "recipe": {
+    "archive": {
+      "kind": "gzip"
+    },
+    "parser": {
+      "commentPrefixes": [
+        "#",
+        "%"
+      ],
+      "delimiter": "detect",
+      "encoding": "utf-8",
+      "format": "edge-list",
+      "skipLines": 0,
+      "sourceColumn": 0,
+      "targetColumn": 1
+    },
+    "source": 0,
+    "status": "fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-03-26",
+      "status": "live",
+      "url": "https://snap.stanford.edu/data/soc-sign-bitcoinotc.csv.gz"
+    }
+  ],
+  "tags": []
+}

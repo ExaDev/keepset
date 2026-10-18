@@ -1,0 +1,68 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "doi": "10.1057/jors.2008.110",
+      "text": "C. J. Rhodes and P. Jones, \"Inferring missing links in partially observed social networks.\" Journal of the Operational Research Society 60(10), 1373-1383 (2009)"
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "A network representing connections among members of the November 17 (N17) Greek terrorist group. Nodes are members, and an edge exists if two members have some connection in the past. Metadata include role, function, resources. Some attributes are missing.[^icon]\n[^icon]: Description obtained from the [ICON](https://icon.colorado.edu) project.",
+  "expectedCounts": {
+    "edges": 66,
+    "nodes": 22
+  },
+  "id": "netzschleuder-november17",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "November17 members (2009)",
+  "properties": {
+    "directed": false,
+    "heterogeneous": true,
+    "multigraph": false,
+    "selfLoops": false,
+    "weighted": false
+  },
+  "recipe": {
+    "archive": {
+      "kind": "zip",
+      "member": {
+        "path": "edges.csv"
+      }
+    },
+    "parser": {
+      "commentPrefixes": [
+        "#"
+      ],
+      "delimiter": "comma",
+      "encoding": "utf-8",
+      "format": "edge-list",
+      "skipLines": 0,
+      "sourceColumn": 0,
+      "targetColumn": 1
+    },
+    "source": 2,
+    "status": "fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-04-20",
+      "status": "live",
+      "url": "https://sites.google.com/site/ucinetsoftware/datasets/covert-networks/rhodesbombing"
+    },
+    {
+      "retrieved": "2026-04-20",
+      "status": "live",
+      "url": "https://networks.skewed.de/net/november17"
+    },
+    {
+      "retrieved": "2026-04-20",
+      "status": "live",
+      "url": "https://networks.skewed.de/net/november17/files/november17.csv.zip"
+    }
+  ],
+  "tags": []
+}

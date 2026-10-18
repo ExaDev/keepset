@@ -1,0 +1,58 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "text": "Vladimir Batagelj, Andrej Mrvar (2006). Pajek Datasets."
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "Graph Drawing 2000 contest, Problem A. 352 vertices, 458 arcs.",
+  "expectedCounts": {
+    "edges": 458,
+    "nodes": 352
+  },
+  "id": "pajek-gd00",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "GD00 Contest Graph A",
+  "properties": {
+    "components": 7,
+    "connected": false,
+    "cyclic": true,
+    "density": 0.006237006237006237,
+    "directed": true,
+    "edgeTypes": 1,
+    "heterogeneous": false,
+    "multigraph": true,
+    "nodeTypes": 1,
+    "rawBytes": 68418,
+    "selfLoops": false,
+    "weighted": false
+  },
+  "recipe": {
+    "archive": {
+      "kind": "none"
+    },
+    "parser": {
+      "encoding": "latin1",
+      "format": "pajek"
+    },
+    "source": 0,
+    "status": "fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-02-16",
+      "snapshot": {
+        "timestamp": "20230601",
+        "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/GD/gd00/A00.net"
+      },
+      "status": "dead",
+      "url": "http://vlado.fmf.uni-lj.si/pub/networks/data/GD/gd00/A00.net"
+    }
+  ],
+  "tags": []
+}

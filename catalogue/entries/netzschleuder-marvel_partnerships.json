@@ -1,0 +1,68 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "text": "\"Ulf Aslak (@ulfaslak) Tweet\", Twitter (2018)",
+      "url": "https://twitter.com/ulfaslak/status/1048126665338101760"
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "A network of partnerships among characters in the Marvel comic book universe. Nodes are either heroes or villains, and edges represent partnerships between such characters. The partnership network was extracted from Wikipedia pages of these characters, which indicate partnership relations with other such pages.[^icon]\n[^icon]: Description obtained from the [ICON](https://icon.colorado.edu) project.",
+  "expectedCounts": {
+    "edges": 346,
+    "nodes": 350
+  },
+  "id": "netzschleuder-marvel_partnerships",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "Marvel character partnerships (2018)",
+  "properties": {
+    "directed": false,
+    "heterogeneous": false,
+    "multigraph": false,
+    "selfLoops": false,
+    "weighted": false
+  },
+  "recipe": {
+    "archive": {
+      "kind": "zip",
+      "member": {
+        "path": "edges.csv"
+      }
+    },
+    "parser": {
+      "commentPrefixes": [
+        "#"
+      ],
+      "delimiter": "comma",
+      "encoding": "utf-8",
+      "format": "edge-list",
+      "skipLines": 0,
+      "sourceColumn": 0,
+      "targetColumn": 1
+    },
+    "source": 2,
+    "status": "fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-04-20",
+      "status": "live",
+      "url": "http://ix.io/1omF"
+    },
+    {
+      "retrieved": "2026-04-20",
+      "status": "live",
+      "url": "https://networks.skewed.de/net/marvel_partnerships"
+    },
+    {
+      "retrieved": "2026-04-20",
+      "status": "live",
+      "url": "https://networks.skewed.de/net/marvel_partnerships/files/marvel_partnerships.csv.zip"
+    }
+  ],
+  "tags": []
+}

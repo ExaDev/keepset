@@ -1,0 +1,66 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "text": "Cardillo, A., Gomez-Gardenes, J., et al. (2013). Emergence of network features from multiplexity. Scientific Reports 3."
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "Multiplex airline network in Europe. Nodes are airports with location attributes. Multiple layers represent different airlines creating multi-edges. No self-loops.",
+  "domain": "Transportation network",
+  "expectedCounts": {
+    "edges": 3588,
+    "nodes": 450
+  },
+  "id": "netzschleuder-eu-airlines",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "EU Airlines (Multiplex)",
+  "properties": {
+    "directed": false,
+    "heterogeneous": true,
+    "multigraph": true,
+    "rawBytes": 0,
+    "selfLoops": false,
+    "weighted": false
+  },
+  "recipe": {
+    "archive": {
+      "kind": "zip",
+      "member": {
+        "path": "edges.csv"
+      }
+    },
+    "parser": {
+      "commentPrefixes": [
+        "#"
+      ],
+      "delimiter": "comma",
+      "encoding": "utf-8",
+      "format": "edge-list",
+      "skipLines": 0,
+      "sourceColumn": 0,
+      "targetColumn": 1
+    },
+    "source": 1,
+    "status": "fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-04-20",
+      "status": "live",
+      "url": "https://networks.skewed.de/net/eu_airlines"
+    },
+    {
+      "retrieved": "2026-04-20",
+      "status": "live",
+      "url": "https://networks.skewed.de/net/eu_airlines/files/eu_airlines.csv.zip"
+    }
+  ],
+  "tags": [
+    "unweighted"
+  ]
+}

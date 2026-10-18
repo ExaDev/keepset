@@ -1,0 +1,43 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "text": "T. Safavi, D. Koutra (2020). CoDEx: A Comprehensive Knowledge Graph Completion Benchmark. Proceedings of the 4th Conference on Automated Knowledge Base Construction."
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "Small knowledge graph from the CoDEx (Comprehensive Distillation and Extraction) benchmark. Extracted from Wikidata and Wikipedia. Contains 42 relation types connecting entities, with 337 entity pairs having multiple relation types. Directed triples (head, relation, tail) format.",
+  "domain": "Encyclopedic knowledge graph",
+  "expectedCounts": {
+    "edges": 0,
+    "nodes": 0
+  },
+  "id": "kg-codex-s",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "CoDEx-S Knowledge Graph",
+  "properties": {
+    "directed": true,
+    "heterogeneous": true,
+    "multigraph": true,
+    "selfLoops": false,
+    "weighted": false
+  },
+  "recipe": {
+    "reason": "no download is in a form keepset reads yet (tsv: format tsv is a triple file whose head and tail columns the catalogue does not record)",
+    "status": "not-fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-04-19",
+      "status": "live",
+      "url": "https://github.com/tsafavi/codex/raw/master/data/triples/codex-s/train.txt"
+    }
+  ],
+  "tags": [
+    "knowledge-graph"
+  ]
+}

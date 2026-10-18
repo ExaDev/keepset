@@ -89,6 +89,8 @@ jobs:
       - run: pnpm build
       - run: pnpm typecheck
       - run: pnpm test
+      # The committed seed entries and report must be exactly what the import produces from the committed source copies.
+      - run: pnpm run seed:check
       - run: pnpm exec publint
       - run: pnpm exec attw --pack --profile esm-only
 

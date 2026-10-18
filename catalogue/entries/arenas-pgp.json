@@ -1,0 +1,68 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "text": "M. Boguña, R. Pastor-Satorras, A. Diaz-Guilera, A. Arenas (2004). Models of social networks based on social distance attachment. Physical Review E 70, 056122."
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "Giant component of the network of users of the Pretty-Good-Privacy algorithm for secure information interchange.",
+  "expectedCounts": {
+    "edges": 35021,
+    "nodes": 21361
+  },
+  "id": "arenas-pgp",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "PGP Network",
+  "properties": {
+    "components": 1,
+    "connected": true,
+    "cyclic": false,
+    "density": 0.00021320151945099995,
+    "directed": false,
+    "edgeTypes": 1,
+    "heterogeneous": false,
+    "multigraph": false,
+    "nodeTypes": 1,
+    "rawBytes": 2998684,
+    "selfLoops": false,
+    "weighted": true
+  },
+  "recipe": {
+    "archive": {
+      "kind": "tar.gz",
+      "member": {
+        "extensions": [
+          ".gml"
+        ]
+      }
+    },
+    "parser": {
+      "encoding": "utf-8",
+      "format": "gml"
+    },
+    "source": 1,
+    "status": "fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-02-16",
+      "snapshot": {
+        "timestamp": "20230601",
+        "url": "https://web.archive.org/web/20230601/http://deim.urv.cat/~aarenas/data/xarxes/PGP.zip"
+      },
+      "status": "dead",
+      "url": "http://deim.urv.cat/~aarenas/data/xarxes/PGP.zip"
+    },
+    {
+      "retrieved": "2026-02-16",
+      "status": "live",
+      "url": "http://networkrepository.com/datasets/pgp.tar.gz"
+    }
+  ],
+  "tags": []
+}

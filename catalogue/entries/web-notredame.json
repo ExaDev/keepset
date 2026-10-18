@@ -1,0 +1,77 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "text": "R. Albert, H. Jeong, A. Barabasi (1999). Diameter of the World Wide Web. Nature."
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "Web graph of Notre Dame.",
+  "expectedCounts": {
+    "edges": 1497134,
+    "nodes": 325729
+  },
+  "id": "web-notredame",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "Notre Dame Web Graph",
+  "properties": {
+    "components": 1,
+    "connected": true,
+    "cyclic": true,
+    "density": 0.000021066408037288526,
+    "directed": true,
+    "edgeTypes": 1,
+    "heterogeneous": false,
+    "multigraph": false,
+    "nodeTypes": 1,
+    "rawBytes": 88627172,
+    "selfLoops": false,
+    "weighted": false
+  },
+  "recipe": {
+    "archive": {
+      "kind": "gzip"
+    },
+    "parser": {
+      "commentPrefixes": [
+        "#",
+        "%"
+      ],
+      "delimiter": "detect",
+      "encoding": "utf-8",
+      "format": "edge-list",
+      "skipLines": 0,
+      "sourceColumn": 0,
+      "targetColumn": 1
+    },
+    "source": 0,
+    "status": "fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-01-17",
+      "status": "live",
+      "url": "https://snap.stanford.edu/data/web-NotreDame.txt.gz"
+    },
+    {
+      "retrieved": "2026-01-17",
+      "status": "live",
+      "url": "https://sparse.tamu.edu/MM/SNAP/web-NotreDame.tar.gz"
+    },
+    {
+      "retrieved": "2026-01-17",
+      "status": "live",
+      "url": "https://sparse.tamu.edu/RB/SNAP/web-NotreDame.tar.gz"
+    },
+    {
+      "retrieved": "2026-01-17",
+      "status": "live",
+      "url": "https://sparse.tamu.edu/mat/SNAP/web-NotreDame.tar.gz"
+    }
+  ],
+  "tags": []
+}

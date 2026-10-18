@@ -1,0 +1,70 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "text": "Andrew Kachites McCallum, Kamal Nigam, Jason Rennie, Kristie Seymore (2000). Automating the Construction of Internet Portals with Machine Learning. Information Retrieval 3, 127-163."
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "Citation network of machine learning papers with 7 topic classes.",
+  "domain": "Citation network",
+  "expectedCounts": {
+    "edges": 5429,
+    "nodes": 2708
+  },
+  "id": "cora",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "Cora",
+  "properties": {
+    "components": 78,
+    "connected": false,
+    "cyclic": true,
+    "density": 0.0014399999126942077,
+    "directed": true,
+    "edgeTypes": 1,
+    "heterogeneous": true,
+    "multigraph": false,
+    "nodeTypes": 1,
+    "rawBytes": 0,
+    "selfLoops": false,
+    "weighted": false
+  },
+  "recipe": {
+    "archive": {
+      "kind": "tar.gz",
+      "member": {
+        "extensions": [
+          ".cites"
+        ]
+      }
+    },
+    "parser": {
+      "commentPrefixes": [
+        "#",
+        "%"
+      ],
+      "delimiter": "tab",
+      "encoding": "utf-8",
+      "format": "edge-list",
+      "skipLines": 0,
+      "sourceColumn": 1,
+      "targetColumn": 0
+    },
+    "source": 0,
+    "status": "fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-02-16",
+      "status": "live",
+      "url": "https://linqs-data.soe.ucsc.edu/public/lbc/cora.tgz"
+    }
+  ],
+  "tags": [
+    "citation"
+  ]
+}

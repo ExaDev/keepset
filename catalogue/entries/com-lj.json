@@ -1,0 +1,65 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "text": "Jaewon Yang, Jure Leskovec (2012). Defining and Evaluating Network Communities based on Ground-truth. IEEE ICDM."
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "LiveJournal online social network with ground-truth communities.",
+  "domain": "Social network",
+  "expectedCounts": {
+    "edges": 34681189,
+    "nodes": 3997962
+  },
+  "id": "com-lj",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "LiveJournal Communities",
+  "properties": {
+    "components": 1,
+    "connected": true,
+    "cyclic": true,
+    "density": 0.000004339570605276457,
+    "directed": false,
+    "edgeTypes": 1,
+    "heterogeneous": false,
+    "multigraph": false,
+    "nodeTypes": 1,
+    "rawBytes": 0,
+    "selfLoops": false,
+    "weighted": false
+  },
+  "recipe": {
+    "archive": {
+      "kind": "gzip"
+    },
+    "parser": {
+      "commentPrefixes": [
+        "#",
+        "%"
+      ],
+      "delimiter": "tab",
+      "encoding": "utf-8",
+      "format": "edge-list",
+      "skipLines": 0,
+      "sourceColumn": 0,
+      "targetColumn": 1
+    },
+    "source": 0,
+    "status": "fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-02-16",
+      "status": "live",
+      "url": "https://snap.stanford.edu/data/bigdata/communities/com-lj.ungraph.txt.gz"
+    }
+  ],
+  "tags": [
+    "social"
+  ]
+}

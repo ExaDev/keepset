@@ -1,0 +1,51 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "text": "R. Guimera, L. Danon, A. Diaz-Guilera, F. Giralt, A. Arenas (2003). Self-similar community structure in a network of human interactions. Physical Review E 68, 065103(R)."
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "E-mail interchanges between members of the University Rovira i Virgili (Tarragona).",
+  "expectedCounts": {
+    "edges": 0,
+    "nodes": 0
+  },
+  "id": "arenas-email",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "Email Network URV",
+  "properties": {
+    "components": 1,
+    "connected": true,
+    "cyclic": true,
+    "density": 0.0085017730219967,
+    "directed": true,
+    "edgeTypes": 1,
+    "heterogeneous": false,
+    "multigraph": false,
+    "nodeTypes": 1,
+    "rawBytes": 722086,
+    "selfLoops": false,
+    "weighted": true
+  },
+  "recipe": {
+    "reason": "no download is in a form keepset reads yet (various: an archive in format various, whose member and format the catalogue does not record)",
+    "status": "not-fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-02-16",
+      "snapshot": {
+        "timestamp": "20230601",
+        "url": "https://web.archive.org/web/20230601/http://deim.urv.cat/~aarenas/data/xarxes/email.zip"
+      },
+      "status": "dead",
+      "url": "http://deim.urv.cat/~aarenas/data/xarxes/email.zip"
+    }
+  ],
+  "tags": []
+}

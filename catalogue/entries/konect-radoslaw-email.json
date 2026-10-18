@@ -1,0 +1,43 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "text": "M. Michalski (2010). Manufacturing Company Emails."
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "Internal email communication network between employees of a mid-sized manufacturing company. Directed edges represent individual emails (sender to recipient). Same employee pairs communicate multiple times (multigraph with up to 1,458 emails between one pair). Edges carry timestamps (Unix epoch) as attributes. All weights are 1 (functionally unweighted). Contains self-loops (employees emailing themselves).",
+  "domain": "Communication network",
+  "expectedCounts": {
+    "edges": 82927,
+    "nodes": 167
+  },
+  "id": "konect-radoslaw-email",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "Manufacturing Emails",
+  "properties": {
+    "directed": true,
+    "heterogeneous": false,
+    "multigraph": true,
+    "selfLoops": true,
+    "weighted": false
+  },
+  "recipe": {
+    "reason": "no download is in a form keepset reads yet (tsv: bzip2 compression has no keepset unpacker yet)",
+    "status": "not-fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-04-19",
+      "status": "live",
+      "url": "http://konect.cc/files/download.tsv.radoslaw_email.tar.bz2"
+    }
+  ],
+  "tags": [
+    "communication"
+  ]
+}

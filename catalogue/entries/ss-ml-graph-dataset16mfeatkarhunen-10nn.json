@@ -1,0 +1,67 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "text": "T. A. Davis, Y. Hu (2011). The University of Florida Sparse Matrix Collection. ACM Transactions on Mathematical Software 38, 1:1-1:25."
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "undirected weighted graph (2,000 nodes, 27,668 non-zeros)",
+  "expectedCounts": {
+    "edges": 27668,
+    "nodes": 2000
+  },
+  "id": "ss-ml-graph-dataset16mfeatkarhunen-10nn",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "ML_Graph/dataset16mfeatkarhunen_10NN",
+  "properties": {
+    "components": 1,
+    "connected": true,
+    "cyclic": true,
+    "density": 0.006920460230115058,
+    "directed": false,
+    "edgeTypes": 1,
+    "heterogeneous": false,
+    "multigraph": false,
+    "nodeTypes": 1,
+    "rawBytes": 0,
+    "selfLoops": false,
+    "weighted": true
+  },
+  "recipe": {
+    "archive": {
+      "kind": "tar.gz",
+      "member": {
+        "path": "dataset16mfeatkarhunen_10NN/dataset16mfeatkarhunen_10NN.mtx"
+      }
+    },
+    "parser": {
+      "encoding": "utf-8",
+      "format": "matrix-market"
+    },
+    "source": 0,
+    "status": "fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-02-16",
+      "status": "live",
+      "url": "https://sparse.tamu.edu/MM/ML_Graph/dataset16mfeatkarhunen_10NN.tar.gz"
+    },
+    {
+      "retrieved": "2026-02-16",
+      "status": "live",
+      "url": "https://sparse.tamu.edu/RB/ML_Graph/dataset16mfeatkarhunen_10NN.tar.gz"
+    },
+    {
+      "retrieved": "2026-02-16",
+      "status": "live",
+      "url": "https://sparse.tamu.edu/mat/ML_Graph/dataset16mfeatkarhunen_10NN.tar.gz"
+    }
+  ],
+  "tags": []
+}

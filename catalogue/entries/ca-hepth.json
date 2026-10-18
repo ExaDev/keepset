@@ -1,0 +1,77 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "text": "J. Leskovec, J. Kleinberg, C. Faloutsos (2007). Graph Evolution: Densification and Shrinking Diameters. ACM TKDD."
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "Collaboration network of Arxiv High Energy Physics Theory category.",
+  "expectedCounts": {
+    "edges": 51971,
+    "nodes": 9877
+  },
+  "id": "ca-hepth",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "Arxiv High Energy Physics Theory Collaborations",
+  "properties": {
+    "components": 429,
+    "connected": false,
+    "cyclic": true,
+    "density": 0.000532788617943188,
+    "directed": false,
+    "edgeTypes": 1,
+    "heterogeneous": false,
+    "multigraph": false,
+    "nodeTypes": 1,
+    "rawBytes": 2941184,
+    "selfLoops": false,
+    "weighted": false
+  },
+  "recipe": {
+    "archive": {
+      "kind": "gzip"
+    },
+    "parser": {
+      "commentPrefixes": [
+        "#",
+        "%"
+      ],
+      "delimiter": "detect",
+      "encoding": "utf-8",
+      "format": "edge-list",
+      "skipLines": 0,
+      "sourceColumn": 0,
+      "targetColumn": 1
+    },
+    "source": 0,
+    "status": "fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-01-17",
+      "status": "live",
+      "url": "https://snap.stanford.edu/data/ca-HepTh.txt.gz"
+    },
+    {
+      "retrieved": "2026-01-17",
+      "status": "live",
+      "url": "https://sparse.tamu.edu/MM/SNAP/ca-HepTh.tar.gz"
+    },
+    {
+      "retrieved": "2026-01-17",
+      "status": "live",
+      "url": "https://sparse.tamu.edu/RB/SNAP/ca-HepTh.tar.gz"
+    },
+    {
+      "retrieved": "2026-01-17",
+      "status": "live",
+      "url": "https://sparse.tamu.edu/mat/SNAP/ca-HepTh.tar.gz"
+    }
+  ],
+  "tags": []
+}

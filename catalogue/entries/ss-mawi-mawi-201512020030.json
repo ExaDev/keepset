@@ -1,0 +1,67 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "text": "T. A. Davis, Y. Hu (2011). The University of Florida Sparse Matrix Collection. ACM Transactions on Mathematical Software 38, 1:1-1:25."
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "undirected weighted graph (68,863,315 nodes, 143,414,960 non-zeros)",
+  "expectedCounts": {
+    "edges": 143414960,
+    "nodes": 68863315
+  },
+  "id": "ss-mawi-mawi-201512020030",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "MAWI/mawi_201512020030",
+  "properties": {
+    "components": 1284884,
+    "connected": false,
+    "cyclic": true,
+    "density": 3.02425642391067e-8,
+    "directed": false,
+    "edgeTypes": 1,
+    "heterogeneous": false,
+    "multigraph": false,
+    "nodeTypes": 1,
+    "rawBytes": 0,
+    "selfLoops": false,
+    "weighted": true
+  },
+  "recipe": {
+    "archive": {
+      "kind": "tar.gz",
+      "member": {
+        "path": "mawi_201512020030/mawi_201512020030.mtx"
+      }
+    },
+    "parser": {
+      "encoding": "utf-8",
+      "format": "matrix-market"
+    },
+    "source": 0,
+    "status": "fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-02-16",
+      "status": "live",
+      "url": "https://sparse.tamu.edu/MM/MAWI/mawi_201512020030.tar.gz"
+    },
+    {
+      "retrieved": "2026-02-16",
+      "status": "live",
+      "url": "https://sparse.tamu.edu/RB/MAWI/mawi_201512020030.tar.gz"
+    },
+    {
+      "retrieved": "2026-02-16",
+      "status": "live",
+      "url": "https://sparse.tamu.edu/mat/MAWI/mawi_201512020030.tar.gz"
+    }
+  ],
+  "tags": []
+}

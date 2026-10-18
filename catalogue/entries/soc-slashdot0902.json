@@ -1,0 +1,77 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "text": "Jure Leskovec, Andrej Krevl (2014). SNAP Datasets: Stanford Large Network Dataset Collection."
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "Slashdot social network from February 2009.",
+  "expectedCounts": {
+    "edges": 948464,
+    "nodes": 82168
+  },
+  "id": "soc-slashdot0902",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "Slashdot Network Feb 2009",
+  "properties": {
+    "components": 1,
+    "connected": true,
+    "cyclic": true,
+    "density": 0.00017256407249715723,
+    "directed": true,
+    "edgeTypes": 1,
+    "heterogeneous": false,
+    "multigraph": false,
+    "nodeTypes": 1,
+    "rawBytes": 50389963,
+    "selfLoops": false,
+    "weighted": false
+  },
+  "recipe": {
+    "archive": {
+      "kind": "gzip"
+    },
+    "parser": {
+      "commentPrefixes": [
+        "#",
+        "%"
+      ],
+      "delimiter": "detect",
+      "encoding": "utf-8",
+      "format": "edge-list",
+      "skipLines": 0,
+      "sourceColumn": 0,
+      "targetColumn": 1
+    },
+    "source": 0,
+    "status": "fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-01-17",
+      "status": "live",
+      "url": "https://snap.stanford.edu/data/soc-Slashdot0902.txt.gz"
+    },
+    {
+      "retrieved": "2026-01-17",
+      "status": "live",
+      "url": "https://sparse.tamu.edu/MM/SNAP/soc-Slashdot0902.tar.gz"
+    },
+    {
+      "retrieved": "2026-01-17",
+      "status": "live",
+      "url": "https://sparse.tamu.edu/RB/SNAP/soc-Slashdot0902.tar.gz"
+    },
+    {
+      "retrieved": "2026-01-17",
+      "status": "live",
+      "url": "https://sparse.tamu.edu/mat/SNAP/soc-Slashdot0902.tar.gz"
+    }
+  ],
+  "tags": []
+}

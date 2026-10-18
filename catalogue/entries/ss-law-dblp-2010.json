@@ -1,0 +1,67 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "text": "T. A. Davis, Y. Hu (2011). The University of Florida Sparse Matrix Collection. ACM Transactions on Mathematical Software 38, 1:1-1:25."
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "undirected graph (326,186 nodes, 1,615,400 non-zeros)",
+  "expectedCounts": {
+    "edges": 1615400,
+    "nodes": 326186
+  },
+  "id": "ss-law-dblp-2010",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "LAW/dblp-2010",
+  "properties": {
+    "components": 22954,
+    "connected": false,
+    "cyclic": true,
+    "density": 0.000017871778526503032,
+    "directed": false,
+    "edgeTypes": 1,
+    "heterogeneous": false,
+    "multigraph": false,
+    "nodeTypes": 1,
+    "rawBytes": 0,
+    "selfLoops": false,
+    "weighted": false
+  },
+  "recipe": {
+    "archive": {
+      "kind": "tar.gz",
+      "member": {
+        "path": "dblp-2010/dblp-2010.mtx"
+      }
+    },
+    "parser": {
+      "encoding": "utf-8",
+      "format": "matrix-market"
+    },
+    "source": 0,
+    "status": "fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-02-16",
+      "status": "live",
+      "url": "https://sparse.tamu.edu/MM/LAW/dblp-2010.tar.gz"
+    },
+    {
+      "retrieved": "2026-02-16",
+      "status": "live",
+      "url": "https://sparse.tamu.edu/RB/LAW/dblp-2010.tar.gz"
+    },
+    {
+      "retrieved": "2026-02-16",
+      "status": "live",
+      "url": "https://sparse.tamu.edu/mat/LAW/dblp-2010.tar.gz"
+    }
+  ],
+  "tags": []
+}

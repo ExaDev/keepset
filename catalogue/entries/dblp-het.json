@@ -1,0 +1,50 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "text": "Xinyu Lv, Tong Zhao, Yozen Liu, Neil Shah, Yong Li (2021). Are we really making much progress? Revisiting, benchmarking and refining heterogeneous graph neural networks. Proceedings of the 27th ACM SIGKDD Conference on Knowledge Discovery and Data Mining."
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "Heterogeneous academic network from DBLP. Contains authors, papers, terms, and venues with authorship, term-usage, and publication-venue relations. Distinct from the homogeneous DBLP coauthorship network.",
+  "domain": "Academic heterogeneous",
+  "expectedCounts": {
+    "edges": 239566,
+    "nodes": 26128
+  },
+  "id": "dblp-het",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "DBLP (Heterogeneous)",
+  "properties": {
+    "components": 1,
+    "connected": true,
+    "cyclic": true,
+    "density": 0.00035093725028794413,
+    "directed": false,
+    "edgeTypes": 1,
+    "heterogeneous": true,
+    "multigraph": true,
+    "nodeTypes": 2,
+    "rawBytes": 0,
+    "selfLoops": false,
+    "weighted": false
+  },
+  "recipe": {
+    "reason": "no download is in a form keepset reads yet (hgb: format hgb has a pipeline-specific parser with no declarative keepset form yet)",
+    "status": "not-fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-02-16",
+      "status": "live",
+      "url": "https://drive.google.com/uc?id=1fLLoy559V7jJaQ_9mQEsC06VKd6Qd3SC&export=download"
+    }
+  ],
+  "tags": [
+    "heterogeneous"
+  ]
+}

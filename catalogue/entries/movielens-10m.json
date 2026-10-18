@@ -1,0 +1,47 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "text": "Harper, F. Maxwell, Konstan, Joseph A. (2016). The MovieLens Datasets: History and Context. ACM Transactions on Interactive Intelligent Systems."
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "Bipartite user-movie rating network from the GroupLens research group. 10,000,054 ratings from 71,567 users on 10,681 movies. Edge weights are ratings normalised to [0, 1].",
+  "expectedCounts": {
+    "edges": 10000054,
+    "nodes": 80555
+  },
+  "id": "movielens-10m",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "MovieLens 10M User-Movie Ratings",
+  "properties": {
+    "components": 1,
+    "connected": true,
+    "cyclic": true,
+    "density": 0.0030821426003302156,
+    "directed": false,
+    "edgeTypes": 1,
+    "heterogeneous": true,
+    "multigraph": false,
+    "nodeTypes": 2,
+    "rawBytes": 0,
+    "selfLoops": false,
+    "weighted": true
+  },
+  "recipe": {
+    "reason": "no download is in a form keepset reads yet (movielens: format movielens has a pipeline-specific parser with no declarative keepset form yet)",
+    "status": "not-fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-03-27",
+      "status": "live",
+      "url": "https://files.grouplens.org/datasets/movielens/ml-10m.zip"
+    }
+  ],
+  "tags": []
+}

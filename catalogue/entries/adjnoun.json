@@ -1,0 +1,82 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "text": "M. E. J. Newman (2006). Finding community structure in very large networks. Physical Review E 74, 036104."
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "Adjacency network of common adjectives and nouns in the novel David Copperfield by Charles Dickens. Nodes represent words and edges connect words that appear adjacent to each other. The 'value' property indicates word type: 0 for adjective, 1 for noun.",
+  "domain": "Linguistic network",
+  "expectedCounts": {
+    "edges": 425,
+    "nodes": 112
+  },
+  "id": "adjnoun",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "Word Adjacencies",
+  "properties": {
+    "components": 1,
+    "connected": true,
+    "cyclic": true,
+    "density": 0.06837194337194337,
+    "directed": false,
+    "edgeTypes": 1,
+    "heterogeneous": false,
+    "multigraph": false,
+    "nodeTypes": 1,
+    "rawBytes": 27333,
+    "selfLoops": false,
+    "weighted": false
+  },
+  "recipe": {
+    "archive": {
+      "kind": "zip",
+      "member": {
+        "extensions": [
+          ".gml"
+        ]
+      }
+    },
+    "parser": {
+      "encoding": "utf-8",
+      "format": "gml"
+    },
+    "source": 0,
+    "status": "fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-01-17",
+      "status": "live",
+      "url": "https://websites.umich.edu/~mejn/netdata/adjnoun.zip"
+    },
+    {
+      "retrieved": "2026-01-17",
+      "status": "live",
+      "url": "https://sparse.tamu.edu/MM/Newman/adjnoun.tar.gz"
+    },
+    {
+      "retrieved": "2026-01-17",
+      "status": "live",
+      "url": "https://sparse.tamu.edu/RB/Newman/adjnoun.tar.gz"
+    },
+    {
+      "retrieved": "2026-01-17",
+      "status": "live",
+      "url": "https://sparse.tamu.edu/mat/Newman/adjnoun.tar.gz"
+    },
+    {
+      "retrieved": "2026-01-17",
+      "status": "live",
+      "url": "https://networkdata.ics.uci.edu/data/adjnoun/adjnoun.gml"
+    }
+  ],
+  "tags": [
+    "labeled"
+  ]
+}

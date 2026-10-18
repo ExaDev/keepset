@@ -1,0 +1,52 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "text": "Hu et al. (2020). Open Graph Benchmark: Datasets for Machine Learning on Graphs. NeurIPS."
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "Heterogeneous biomedical knowledge graph with 5 node types: drugs, diseases, proteins, side effects, and genes. Contains 51 different relation types representing various biomedical relationships (drug-target, gene-disease, protein-gene, disease-symptom, etc.). Useful for evaluating link prediction in highly heterogeneous, multi-relational knowledge graphs.",
+  "expectedCounts": {
+    "edges": 5088454,
+    "nodes": 93773
+  },
+  "id": "ogbl-biokg",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "Open Graph Benchmark - BioKG (Biomedical Knowledge Graph)",
+  "properties": {
+    "components": 6,
+    "connected": false,
+    "cyclic": true,
+    "density": 0.0005063503164744946,
+    "directed": true,
+    "edgeTypes": 1,
+    "heterogeneous": false,
+    "multigraph": true,
+    "nodeTypes": 2,
+    "rawBytes": 0,
+    "selfLoops": false,
+    "weighted": false
+  },
+  "recipe": {
+    "reason": "no download is in a form keepset reads yet (ogb-zip: the download is a directory listing, not a data file; ogb-zip: format ogb-zip has a pipeline-specific parser with no declarative keepset form yet)",
+    "status": "not-fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-03-26",
+      "status": "live",
+      "url": "https://ogb.stanford.edu/docs/linkprop/#ogbl-biokg"
+    },
+    {
+      "retrieved": "2026-03-26",
+      "status": "live",
+      "url": "https://data.pyg.org/datasets/ogbl_biokg.zip"
+    }
+  ],
+  "tags": []
+}

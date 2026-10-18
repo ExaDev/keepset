@@ -1,0 +1,57 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "text": "D. E. Knuth (1993). The Stanford GraphBase: A Platform for Combinatorial Computing. Addison-Wesley."
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "Co-appearance network of characters in Victor Hugo's novel Les Miserables. Edges connect characters that appear in the same chapter.",
+  "expectedCounts": {
+    "edges": 254,
+    "nodes": 77
+  },
+  "id": "lesmiserables",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "Les Miserables",
+  "properties": {
+    "components": 1,
+    "connected": true,
+    "cyclic": true,
+    "density": 0.08680792891319207,
+    "directed": false,
+    "edgeTypes": 1,
+    "heterogeneous": false,
+    "multigraph": false,
+    "nodeTypes": 1,
+    "rawBytes": 21702,
+    "selfLoops": false,
+    "weighted": false
+  },
+  "recipe": {
+    "archive": {
+      "kind": "zip",
+      "member": {
+        "path": "lesmis.gml"
+      }
+    },
+    "parser": {
+      "encoding": "utf-8",
+      "format": "gml"
+    },
+    "source": 0,
+    "status": "fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-01-17",
+      "status": "live",
+      "url": "https://websites.umich.edu/~mejn/netdata/lesmis.zip"
+    }
+  ],
+  "tags": []
+}

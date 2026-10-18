@@ -1,0 +1,66 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "text": "Duch, J., Arenas, A. (2005). Community detection in complex networks using extremal optimization. Physical Review E 72."
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "Undirected metabolic network of C. elegans. Nodes are metabolites/enzymes. Multiple edges and self-loops present. Heterogeneous with named vertices and structural attributes.",
+  "domain": "Biological network",
+  "expectedCounts": {
+    "edges": 4596,
+    "nodes": 453
+  },
+  "id": "netzschleuder-celegans-metabolic",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "C. elegans Metabolic Network",
+  "properties": {
+    "directed": false,
+    "heterogeneous": true,
+    "multigraph": true,
+    "rawBytes": 0,
+    "selfLoops": true,
+    "weighted": false
+  },
+  "recipe": {
+    "archive": {
+      "kind": "zip",
+      "member": {
+        "path": "edges.csv"
+      }
+    },
+    "parser": {
+      "commentPrefixes": [
+        "#"
+      ],
+      "delimiter": "comma",
+      "encoding": "utf-8",
+      "format": "edge-list",
+      "skipLines": 0,
+      "sourceColumn": 0,
+      "targetColumn": 1
+    },
+    "source": 1,
+    "status": "fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-04-20",
+      "status": "live",
+      "url": "https://networks.skewed.de/net/celegans_metabolic"
+    },
+    {
+      "retrieved": "2026-04-20",
+      "status": "live",
+      "url": "https://networks.skewed.de/net/celegans_metabolic/files/celegans_metabolic.csv.zip"
+    }
+  ],
+  "tags": [
+    "unweighted"
+  ]
+}

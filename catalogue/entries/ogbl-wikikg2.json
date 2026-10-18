@@ -1,0 +1,47 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "text": "Weihua Hu, Matthias Fey, Marinka Zitnik, Yuxiao Dong, Hongyu Ren, Bowen Liu, Michele Catasta, Jure Leskovec (2020). Open Graph Benchmark: Datasets for Machine Learning on Graphs. Advances in Neural Information Processing Systems (NeurIPS)."
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "Large-scale heterogeneous knowledge graph from Wikidata. Contains 2.5 million entities connected through 535 relation types with over 17 million factual triples. Challenging benchmark for knowledge graph completion requiring prediction of potential relationships among massive complex facts. Part of the Open Graph Benchmark.",
+  "expectedCounts": {
+    "edges": 17137181,
+    "nodes": 2500604
+  },
+  "id": "ogbl-wikikg2",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "OGBL-WikiKG2",
+  "properties": {
+    "components": 25,
+    "connected": false,
+    "cyclic": true,
+    "density": 0.000002692292964066484,
+    "directed": true,
+    "edgeTypes": 1,
+    "heterogeneous": true,
+    "multigraph": true,
+    "nodeTypes": 2,
+    "rawBytes": 0,
+    "selfLoops": false,
+    "weighted": false
+  },
+  "recipe": {
+    "reason": "no download is in a form keepset reads yet (kge-triples-zip: format kge-triples-zip has a pipeline-specific parser with no declarative keepset form yet)",
+    "status": "not-fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-03-03",
+      "status": "live",
+      "url": "https://data.dgl.ai/dataset/wikikg2.zip"
+    }
+  ],
+  "tags": []
+}

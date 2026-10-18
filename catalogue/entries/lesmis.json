@@ -1,0 +1,50 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "text": "Donald E. Knuth (1993). The Stanford GraphBase: A Platform for Combinatorial Computing. Addison-Wesley."
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "Character co-appearance network from Les Misérables by Victor Hugo.",
+  "domain": "Fictional network",
+  "expectedCounts": {
+    "edges": 254,
+    "nodes": 77
+  },
+  "id": "lesmis",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "Les Misérables",
+  "properties": {
+    "components": 1,
+    "connected": true,
+    "cyclic": true,
+    "density": 0.08680792891319207,
+    "directed": false,
+    "edgeTypes": 1,
+    "heterogeneous": false,
+    "multigraph": false,
+    "nodeTypes": 1,
+    "rawBytes": 0,
+    "selfLoops": false,
+    "weighted": true
+  },
+  "recipe": {
+    "reason": "no download is in a form keepset reads yet (konect-tarbz2: bzip2 compression has no keepset unpacker yet)",
+    "status": "not-fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-02-16",
+      "status": "live",
+      "url": "http://konect.cc/files/download.tsv.moreno_lesmis.tar.bz2"
+    }
+  ],
+  "tags": [
+    "small"
+  ]
+}

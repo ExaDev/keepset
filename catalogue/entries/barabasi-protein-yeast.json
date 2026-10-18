@@ -1,0 +1,66 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "text": "H. Jeong, S. Mason, A.-L. Barabási, Z. N. Oltvai (2001). Centrality and lethality of protein networks. Nature 411, 41-42."
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "Protein-protein interaction network for Saccharomyces cerevisiae (yeast).",
+  "expectedCounts": {
+    "edges": 4480,
+    "nodes": 1870
+  },
+  "id": "barabasi-protein-yeast",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "Yeast Protein Interaction Network",
+  "properties": {
+    "components": 173,
+    "connected": false,
+    "cyclic": true,
+    "density": 0.0013029931073553016,
+    "directed": false,
+    "edgeTypes": 1,
+    "heterogeneous": false,
+    "multigraph": false,
+    "nodeTypes": 1,
+    "rawBytes": 265179,
+    "selfLoops": false,
+    "weighted": false
+  },
+  "recipe": {
+    "archive": {
+      "kind": "gzip"
+    },
+    "parser": {
+      "commentPrefixes": [
+        "#",
+        "%"
+      ],
+      "delimiter": "detect",
+      "encoding": "utf-8",
+      "format": "edge-list",
+      "skipLines": 0,
+      "sourceColumn": 0,
+      "targetColumn": 1
+    },
+    "source": 0,
+    "status": "fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-02-16",
+      "snapshot": {
+        "timestamp": "20061110114126",
+        "url": "https://web.archive.org/web/20061110114126/http://www.nd.edu/~networks/resources/protein/bo.dat.gz"
+      },
+      "status": "dead",
+      "url": "http://www.nd.edu/~networks/resources/protein/bo.dat.gz"
+    }
+  ],
+  "tags": []
+}

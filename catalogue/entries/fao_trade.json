@@ -1,0 +1,65 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "text": "FAO (2020). Food and Agriculture Organization of the United Nations - Trade Data."
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "Multiplex international trade network from FAO data. Nodes are countries (with nodeLabel attribute) and directed weighted edges represent trade volumes between countries across multiple commodity layers. Heterogeneous via layer (commodity type) and nodeLabel (country/region) attributes.",
+  "domain": "Economic network",
+  "expectedCounts": {
+    "edges": 318346,
+    "nodes": 214
+  },
+  "id": "fao_trade",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "FAO Trade Network",
+  "properties": {
+    "directed": true,
+    "heterogeneous": true,
+    "multigraph": true,
+    "selfLoops": true,
+    "weighted": false
+  },
+  "recipe": {
+    "archive": {
+      "kind": "zip",
+      "member": {
+        "path": "edges.csv"
+      }
+    },
+    "parser": {
+      "commentPrefixes": [
+        "#"
+      ],
+      "delimiter": "comma",
+      "encoding": "utf-8",
+      "format": "edge-list",
+      "skipLines": 0,
+      "sourceColumn": 0,
+      "targetColumn": 1
+    },
+    "source": 1,
+    "status": "fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-04-19",
+      "status": "live",
+      "url": "https://networks.skewed.de/net/fao_trade"
+    },
+    {
+      "retrieved": "2026-04-19",
+      "status": "live",
+      "url": "https://networks.skewed.de/net/fao_trade/files/fao_trade.csv.zip"
+    }
+  ],
+  "tags": [
+    "heterogeneous"
+  ]
+}

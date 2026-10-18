@@ -1,0 +1,50 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "text": "Weihua Hu, Matthias Fey, Marinka Zitnik, Yuxiao Dong, Hongyu Ren, Bowen Liu, Michele Catasta, Jure Leskovec (2020). Open Graph Benchmark: Datasets for Machine Learning on Graphs. NeurIPS."
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "Open Graph Benchmark academic citation network derived from MAG.",
+  "domain": "Citation network",
+  "expectedCounts": {
+    "edges": 30387995,
+    "nodes": 2926620
+  },
+  "id": "ogbl-citation2",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "OGB Citation v2",
+  "properties": {
+    "components": 4617,
+    "connected": false,
+    "cyclic": true,
+    "density": 0.000007087336746478315,
+    "directed": true,
+    "edgeTypes": 1,
+    "heterogeneous": true,
+    "multigraph": false,
+    "nodeTypes": 2,
+    "rawBytes": 0,
+    "selfLoops": false,
+    "weighted": false
+  },
+  "recipe": {
+    "reason": "no download is in a form keepset reads yet (ogb: format ogb has a pipeline-specific parser with no declarative keepset form yet)",
+    "status": "not-fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-02-16",
+      "status": "live",
+      "url": "https://snap.stanford.edu/ogb/data/linkproppred/citation-v2.zip"
+    }
+  ],
+  "tags": [
+    "citation"
+  ]
+}

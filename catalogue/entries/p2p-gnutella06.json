@@ -1,0 +1,77 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "text": "M. Ripeanu, I. Foster, A. Iamnitchi (2002). Mapping the Gnutella Network. IEEE Internet Computing."
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "Gnutella peer to peer network from August 6 2002.",
+  "expectedCounts": {
+    "edges": 31525,
+    "nodes": 8717
+  },
+  "id": "p2p-gnutella06",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "Gnutella P2P Aug 6 2002",
+  "properties": {
+    "components": 1,
+    "connected": true,
+    "cyclic": true,
+    "density": 0.0008298523407732502,
+    "directed": true,
+    "edgeTypes": 1,
+    "heterogeneous": false,
+    "multigraph": false,
+    "nodeTypes": 1,
+    "rawBytes": 1779879,
+    "selfLoops": false,
+    "weighted": false
+  },
+  "recipe": {
+    "archive": {
+      "kind": "gzip"
+    },
+    "parser": {
+      "commentPrefixes": [
+        "#",
+        "%"
+      ],
+      "delimiter": "detect",
+      "encoding": "utf-8",
+      "format": "edge-list",
+      "skipLines": 0,
+      "sourceColumn": 0,
+      "targetColumn": 1
+    },
+    "source": 0,
+    "status": "fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-01-17",
+      "status": "live",
+      "url": "https://snap.stanford.edu/data/p2p-Gnutella06.txt.gz"
+    },
+    {
+      "retrieved": "2026-01-17",
+      "status": "live",
+      "url": "https://sparse.tamu.edu/MM/SNAP/p2p-Gnutella06.tar.gz"
+    },
+    {
+      "retrieved": "2026-01-17",
+      "status": "live",
+      "url": "https://sparse.tamu.edu/RB/SNAP/p2p-Gnutella06.tar.gz"
+    },
+    {
+      "retrieved": "2026-01-17",
+      "status": "live",
+      "url": "https://sparse.tamu.edu/mat/SNAP/p2p-Gnutella06.tar.gz"
+    }
+  ],
+  "tags": []
+}

@@ -1,0 +1,44 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "text": "S. F. Sampson (1968). A Novitiate in a Period of Change: An Experimental and Case Study of Social Relationships. Cornell University."
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "Social relations among 18 monk-novitiates preparing to enter a monastery. Includes liking, esteem, influence, and praise relations. From Sampson (1968), collected retrospectively during a period of conflict that resulted in several monks leaving.",
+  "expectedCounts": {
+    "edges": 55,
+    "nodes": 18
+  },
+  "id": "ucinet-sampson-monastery",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "Sampson's Monastery (Undirected)",
+  "properties": {
+    "directed": false,
+    "heterogeneous": false,
+    "multigraph": true,
+    "selfLoops": false,
+    "weighted": false
+  },
+  "recipe": {
+    "reason": "no download is in a form keepset reads yet (ucinet-dl: format ucinet-dl has a pipeline-specific parser with no declarative keepset form yet)",
+    "status": "not-fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-05-06",
+      "snapshot": {
+        "timestamp": "20230601195358",
+        "url": "https://web.archive.org/web/20230601195358/http://vlado.fmf.uni-lj.si/pub/networks/data/UciNet/sampson.dat"
+      },
+      "status": "dead",
+      "url": "http://vlado.fmf.uni-lj.si/pub/networks/data/UciNet/sampson.dat"
+    }
+  ],
+  "tags": []
+}

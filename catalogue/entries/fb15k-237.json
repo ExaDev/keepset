@@ -1,0 +1,57 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "text": "Kristina Toutanova, Danqi Chen, Patrick Pantel, Hoifung Poon, Pallavi Choudhury, Michael Gamon (2015). Representing Text for Joint Embedding of Text and Knowledge Bases. Proceedings of the 2015 Conference on Empirical Methods in Natural Language Processing (EMNLP)."
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "Heterogeneous knowledge graph from Freebase with 237 relation types. A subset of FB15k created by removing inverse relations to prevent test leakage. Contains entities from multiple domains (people, locations, music, film) with directed relation edges. Standard benchmark for knowledge graph completion and link prediction.",
+  "expectedCounts": {
+    "edges": 116,
+    "nodes": 14543
+  },
+  "id": "fb15k-237",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "FB15k-237",
+  "properties": {
+    "components": 116,
+    "connected": false,
+    "cyclic": false,
+    "density": 0.004329004329004329,
+    "directed": true,
+    "edgeTypes": 1,
+    "heterogeneous": true,
+    "multigraph": false,
+    "nodeTypes": 1,
+    "rawBytes": 0,
+    "selfLoops": false,
+    "weighted": false
+  },
+  "recipe": {
+    "reason": "no download is in a form keepset reads yet (kge-triples-tar: format kge-triples-tar has a pipeline-specific parser with no declarative keepset form yet; pykeen: format pykeen has a pipeline-specific parser with no declarative keepset form yet; txt: the download is a web page, not a data file)",
+    "status": "not-fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-03-03",
+      "status": "live",
+      "url": "https://web.informatik.uni-mannheim.de/pi1/kge-datasets/fb15k-237.tar.gz"
+    },
+    {
+      "retrieved": "2026-03-03",
+      "status": "live",
+      "url": "https://github.com/pykeen/pykeen#datasets"
+    },
+    {
+      "retrieved": "2026-03-03",
+      "status": "live",
+      "url": "https://www.microsoft.com/en-us/download/details.aspx?id=52312"
+    }
+  ],
+  "tags": []
+}

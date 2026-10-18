@@ -1,0 +1,68 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "doi": "10.1038/s41746-019-0141-x",
+      "text": "R. Brattig Correia et al. \"City-wide electronic health records reveal gender and age biases in administration of known drug–drug interactions.\" npj Digital Medicine 2, 74 (2019)"
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "A network of drug-drug interactions, extracted from 18 months of electronic health records (EHRs) from the city of Blumenau in Southern Brazil. Nodes are annotated with drug information (separate file), and edges are weighted by the severity of the interaction, along with other information.[^icon]\n[^icon]: Description obtained from the [ICON](https://icon.colorado.edu) project.",
+  "expectedCounts": {
+    "edges": 181,
+    "nodes": 75
+  },
+  "id": "netzschleuder-blumenau_drug",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "Blumenau drug interactions (2019)",
+  "properties": {
+    "directed": false,
+    "heterogeneous": true,
+    "multigraph": false,
+    "selfLoops": false,
+    "weighted": true
+  },
+  "recipe": {
+    "archive": {
+      "kind": "zip",
+      "member": {
+        "path": "edges.csv"
+      }
+    },
+    "parser": {
+      "commentPrefixes": [
+        "#"
+      ],
+      "delimiter": "comma",
+      "encoding": "utf-8",
+      "format": "edge-list",
+      "skipLines": 0,
+      "sourceColumn": 0,
+      "targetColumn": 1
+    },
+    "source": 2,
+    "status": "fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-04-20",
+      "status": "live",
+      "url": "https://github.com/rionbr/DDIBlumenau/tree/master/csv"
+    },
+    {
+      "retrieved": "2026-04-20",
+      "status": "live",
+      "url": "https://networks.skewed.de/net/blumenau_drug"
+    },
+    {
+      "retrieved": "2026-04-20",
+      "status": "live",
+      "url": "https://networks.skewed.de/net/blumenau_drug/files/blumenau_drug.csv.zip"
+    }
+  ],
+  "tags": []
+}

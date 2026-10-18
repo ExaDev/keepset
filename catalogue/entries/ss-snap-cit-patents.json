@@ -1,0 +1,67 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "text": "T. A. Davis, Y. Hu (2011). The University of Florida Sparse Matrix Collection. ACM Transactions on Mathematical Software 38, 1:1-1:25."
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "directed graph (3,774,768 nodes, 16,518,948 non-zeros)",
+  "expectedCounts": {
+    "edges": 16518948,
+    "nodes": 3774768
+  },
+  "id": "ss-snap-cit-patents",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "SNAP/cit-Patents",
+  "properties": {
+    "components": 3627,
+    "connected": false,
+    "cyclic": true,
+    "density": 0.0000011593163789181623,
+    "directed": true,
+    "edgeTypes": 1,
+    "heterogeneous": false,
+    "multigraph": false,
+    "nodeTypes": 1,
+    "rawBytes": 0,
+    "selfLoops": false,
+    "weighted": false
+  },
+  "recipe": {
+    "archive": {
+      "kind": "tar.gz",
+      "member": {
+        "path": "cit-Patents/cit-Patents.mtx"
+      }
+    },
+    "parser": {
+      "encoding": "utf-8",
+      "format": "matrix-market"
+    },
+    "source": 0,
+    "status": "fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-02-16",
+      "status": "live",
+      "url": "https://sparse.tamu.edu/MM/SNAP/cit-Patents.tar.gz"
+    },
+    {
+      "retrieved": "2026-02-16",
+      "status": "live",
+      "url": "https://sparse.tamu.edu/RB/SNAP/cit-Patents.tar.gz"
+    },
+    {
+      "retrieved": "2026-02-16",
+      "status": "live",
+      "url": "https://sparse.tamu.edu/mat/SNAP/cit-Patents.tar.gz"
+    }
+  ],
+  "tags": []
+}

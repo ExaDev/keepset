@@ -1,0 +1,43 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "text": "L. A. Zetterström (2021). Knowledge Graph Embeddings."
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "Directed knowledge graph encoding relationships between 14 countries. Edges represent 55 interaction types (e.g. 'exports', 'accusation', 'aidgiven'). The same country pair can have multiple relation types, creating a dense multigraph. Used as a standard benchmark for knowledge graph embedding methods.",
+  "domain": "International relations knowledge graph",
+  "expectedCounts": {
+    "edges": 1992,
+    "nodes": 14
+  },
+  "id": "kg-nations",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "Nations Knowledge Graph",
+  "properties": {
+    "directed": true,
+    "heterogeneous": true,
+    "multigraph": true,
+    "selfLoops": false,
+    "weighted": false
+  },
+  "recipe": {
+    "reason": "no download is in a form keepset reads yet (tsv: format tsv is a triple file whose head and tail columns the catalogue does not record)",
+    "status": "not-fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-04-19",
+      "status": "live",
+      "url": "https://github.com/TimDettmers/ConvE/raw/master/nations.tar.gz"
+    }
+  ],
+  "tags": [
+    "knowledge-graph"
+  ]
+}

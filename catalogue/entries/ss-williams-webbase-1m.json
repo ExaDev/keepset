@@ -1,0 +1,67 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "text": "T. A. Davis, Y. Hu (2011). The University of Florida Sparse Matrix Collection. ACM Transactions on Mathematical Software 38, 1:1-1:25."
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "weighted directed graph (1,000,005 nodes, 3,105,536 non-zeros)",
+  "expectedCounts": {
+    "edges": 3105536,
+    "nodes": 1000005
+  },
+  "id": "ss-williams-webbase-1m",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "Williams/webbase-1M",
+  "properties": {
+    "components": 2771,
+    "connected": false,
+    "cyclic": true,
+    "density": 0.0000031055080503654366,
+    "directed": true,
+    "edgeTypes": 1,
+    "heterogeneous": false,
+    "multigraph": false,
+    "nodeTypes": 1,
+    "rawBytes": 0,
+    "selfLoops": false,
+    "weighted": true
+  },
+  "recipe": {
+    "archive": {
+      "kind": "tar.gz",
+      "member": {
+        "path": "webbase-1M/webbase-1M.mtx"
+      }
+    },
+    "parser": {
+      "encoding": "utf-8",
+      "format": "matrix-market"
+    },
+    "source": 0,
+    "status": "fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-02-16",
+      "status": "live",
+      "url": "https://sparse.tamu.edu/MM/Williams/webbase-1M.tar.gz"
+    },
+    {
+      "retrieved": "2026-02-16",
+      "status": "live",
+      "url": "https://sparse.tamu.edu/RB/Williams/webbase-1M.tar.gz"
+    },
+    {
+      "retrieved": "2026-02-16",
+      "status": "live",
+      "url": "https://sparse.tamu.edu/mat/Williams/webbase-1M.tar.gz"
+    }
+  ],
+  "tags": []
+}

@@ -1,0 +1,65 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "text": "Netzschleuder (2020). genetic_multiplex - Bos_Multiplex_Genetic sub-network."
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "Multiplex genetic interaction network for Bos taurus (cattle). Nodes are genes and directed edges represent genetic interactions across multiple interaction layers. Heterogeneous via layer attribute (different interaction types).",
+  "domain": "Biological network",
+  "expectedCounts": {
+    "edges": 322,
+    "nodes": 325
+  },
+  "id": "bos_genetic",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "Bovine Genetic Interactome (Bos taurus)",
+  "properties": {
+    "directed": true,
+    "heterogeneous": true,
+    "multigraph": true,
+    "selfLoops": true,
+    "weighted": false
+  },
+  "recipe": {
+    "archive": {
+      "kind": "zip",
+      "member": {
+        "path": "edges.csv"
+      }
+    },
+    "parser": {
+      "commentPrefixes": [
+        "#"
+      ],
+      "delimiter": "comma",
+      "encoding": "utf-8",
+      "format": "edge-list",
+      "skipLines": 0,
+      "sourceColumn": 0,
+      "targetColumn": 1
+    },
+    "source": 1,
+    "status": "fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-04-19",
+      "status": "live",
+      "url": "https://networks.skewed.de/net/genetic_multiplex/files/Bos_Multiplex_Genetic.gt.zst"
+    },
+    {
+      "retrieved": "2026-04-19",
+      "status": "live",
+      "url": "https://networks.skewed.de/net/genetic_multiplex/files/Bos_Multiplex_Genetic.csv.zip"
+    }
+  ],
+  "tags": [
+    "heterogeneous"
+  ]
+}

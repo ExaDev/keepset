@@ -1,0 +1,64 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "text": "Ulanowicz, R. E., Baird, D. (1999). Nutrient controls on ecosystem dynamics: the Chesapeake mesohaline community. Journal of Marine Systems."
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "Trophic interaction network from a mangrove wetland ecosystem. Directed weighted edges represent carbon flow between species.",
+  "domain": "Ecology",
+  "expectedCounts": {
+    "edges": 1492,
+    "nodes": 97
+  },
+  "id": "nr-eco-mangwet",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "Mangrove Wetland Food Web",
+  "properties": {
+    "directed": true,
+    "heterogeneous": true,
+    "multigraph": false,
+    "rawBytes": 0,
+    "selfLoops": false,
+    "weighted": true
+  },
+  "recipe": {
+    "archive": {
+      "kind": "zip",
+      "member": {
+        "extensions": [
+          ".edges"
+        ]
+      }
+    },
+    "parser": {
+      "commentPrefixes": [
+        "#",
+        "%"
+      ],
+      "delimiter": "detect",
+      "encoding": "utf-8",
+      "format": "edge-list",
+      "skipLines": 0,
+      "sourceColumn": 0,
+      "targetColumn": 1
+    },
+    "source": 0,
+    "status": "fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-04-20",
+      "status": "live",
+      "url": "https://nrvis.com/download/data/eco/eco-mangwet.zip"
+    }
+  ],
+  "tags": [
+    "weighted"
+  ]
+}

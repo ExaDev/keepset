@@ -1,0 +1,65 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "text": "N. D. Martinez (1991). Artifacts or attributes? Effects of resolution on the Little Rock Lake food web. Ecological Monographs 61, 367-392."
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "Trophic food web of the Little Rock Lake ecosystem in Wisconsin. Nodes are taxa (species/trophic groups) and directed edges represent predation (who eats whom). Node 'group' property encodes 37 trophic types, making this a heterogeneous graph. Weights represent interaction strength.",
+  "domain": "Ecological network",
+  "expectedCounts": {
+    "edges": 2494,
+    "nodes": 183
+  },
+  "id": "foodweb_little_rock",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "Little Rock Lake Food Web",
+  "properties": {
+    "directed": true,
+    "heterogeneous": true,
+    "multigraph": false,
+    "selfLoops": true,
+    "weighted": false
+  },
+  "recipe": {
+    "archive": {
+      "kind": "zip",
+      "member": {
+        "path": "edges.csv"
+      }
+    },
+    "parser": {
+      "commentPrefixes": [
+        "#"
+      ],
+      "delimiter": "comma",
+      "encoding": "utf-8",
+      "format": "edge-list",
+      "skipLines": 0,
+      "sourceColumn": 0,
+      "targetColumn": 1
+    },
+    "source": 1,
+    "status": "fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-04-19",
+      "status": "live",
+      "url": "https://networks.skewed.de/net/foodweb_little_rock"
+    },
+    {
+      "retrieved": "2026-04-19",
+      "status": "live",
+      "url": "https://networks.skewed.de/net/foodweb_little_rock/files/foodweb_little_rock.csv.zip"
+    }
+  ],
+  "tags": [
+    "heterogeneous"
+  ]
+}

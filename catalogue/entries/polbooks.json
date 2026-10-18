@@ -1,0 +1,82 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "text": "V. Krebs (2004). Books about US Politics."
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "Network of books about US politics published around the time of the 2004 presidential election, sold by Amazon.com. Edges connect books frequently co-purchased by the same buyers. The 'value' property indicates political alignment: 'l' for liberal, 'n' for neutral, 'c' for conservative.",
+  "domain": "Co-purchasing network",
+  "expectedCounts": {
+    "edges": 441,
+    "nodes": 105
+  },
+  "id": "polbooks",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "Books about US Politics",
+  "properties": {
+    "components": 1,
+    "connected": true,
+    "cyclic": true,
+    "density": 0.08076923076923077,
+    "directed": false,
+    "edgeTypes": 1,
+    "heterogeneous": false,
+    "multigraph": false,
+    "nodeTypes": 1,
+    "rawBytes": 41015,
+    "selfLoops": false,
+    "weighted": false
+  },
+  "recipe": {
+    "archive": {
+      "kind": "zip",
+      "member": {
+        "extensions": [
+          ".gml"
+        ]
+      }
+    },
+    "parser": {
+      "encoding": "utf-8",
+      "format": "gml"
+    },
+    "source": 0,
+    "status": "fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-01-17",
+      "status": "live",
+      "url": "https://websites.umich.edu/~mejn/netdata/polbooks.zip"
+    },
+    {
+      "retrieved": "2026-01-17",
+      "status": "live",
+      "url": "https://sparse.tamu.edu/MM/Newman/polbooks.tar.gz"
+    },
+    {
+      "retrieved": "2026-01-17",
+      "status": "live",
+      "url": "https://sparse.tamu.edu/RB/Newman/polbooks.tar.gz"
+    },
+    {
+      "retrieved": "2026-01-17",
+      "status": "live",
+      "url": "https://sparse.tamu.edu/mat/Newman/polbooks.tar.gz"
+    },
+    {
+      "retrieved": "2026-01-17",
+      "status": "live",
+      "url": "https://networkdata.ics.uci.edu/data/polbooks/polbooks.gml"
+    }
+  ],
+  "tags": [
+    "labeled"
+  ]
+}

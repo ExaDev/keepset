@@ -1,0 +1,47 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "text": "Jie Tang, Jing Zhang, Limin Yao, Juanzi Li, Li Zhang, Zhong Su (2008). ArnetMiner: Extraction and Mining of Academic Social Networks. Proceedings of the 14th ACM SIGKDD International Conference on Knowledge Discovery and Data Mining."
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "Large-scale heterogeneous academic network from AMiner computer science corpus. Contains 3 node types (authors, papers, venues) with undirected co-authorship, authorship, and publication relationships. Used for node classification, clustering, and representation learning. Ground truth labels from Google Scholar Metrics.",
+  "expectedCounts": {
+    "edges": 50000000,
+    "nodes": 4891819
+  },
+  "id": "aminer-cs",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "AMiner CS",
+  "properties": {
+    "components": 9447484,
+    "connected": false,
+    "cyclic": true,
+    "density": 1.1154847375810512e-7,
+    "directed": false,
+    "edgeTypes": 1,
+    "heterogeneous": true,
+    "multigraph": false,
+    "nodeTypes": 1,
+    "rawBytes": 0,
+    "selfLoops": false,
+    "weighted": false
+  },
+  "recipe": {
+    "reason": "no download is in a form keepset reads yet (aminer-7z: 7z compression has no keepset unpacker yet)",
+    "status": "not-fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-03-03",
+      "status": "live",
+      "url": "https://lfs.aminer.cn/misc/dblp.v12.7z"
+    }
+  ],
+  "tags": []
+}

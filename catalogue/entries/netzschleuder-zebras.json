@@ -1,0 +1,68 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "doi": "10.1007/s00442-006-0553-6",
+      "text": "S. R. Sundaresan et al., \"Network metrics reveal differences in social organization between two fission-fusion species, Grevy's zebra and onager.\" Oecologia 151(1), 140-149 (2007)"
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "Social interactions among a group of wild Grevy's zebras (Equus grevyi), observed in Mpala Ranch in Kenya in 2002. Metadata (UCINET version) provides animal sex and lactation status.[^icon]\n[^icon]: Description obtained from the [ICON](https://icon.colorado.edu) project.",
+  "expectedCounts": {
+    "edges": 111,
+    "nodes": 27
+  },
+  "id": "netzschleuder-zebras",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "Zebras (2002)",
+  "properties": {
+    "directed": false,
+    "heterogeneous": false,
+    "multigraph": false,
+    "selfLoops": false,
+    "weighted": false
+  },
+  "recipe": {
+    "archive": {
+      "kind": "zip",
+      "member": {
+        "path": "edges.csv"
+      }
+    },
+    "parser": {
+      "commentPrefixes": [
+        "#"
+      ],
+      "delimiter": "comma",
+      "encoding": "utf-8",
+      "format": "edge-list",
+      "skipLines": 0,
+      "sourceColumn": 0,
+      "targetColumn": 1
+    },
+    "source": 2,
+    "status": "fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-04-20",
+      "status": "live",
+      "url": "http://konect.cc/networks/moreno_zebra"
+    },
+    {
+      "retrieved": "2026-04-20",
+      "status": "live",
+      "url": "https://networks.skewed.de/net/zebras"
+    },
+    {
+      "retrieved": "2026-04-20",
+      "status": "live",
+      "url": "https://networks.skewed.de/net/zebras/files/zebras.csv.zip"
+    }
+  ],
+  "tags": []
+}

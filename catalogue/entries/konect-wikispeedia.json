@@ -1,0 +1,43 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "text": "R. West, J. Leskovec (2012). Human Wayfinding in Information Networks. Proceedings of the 21st International Conference on World Wide Web, 619-628."
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "Directed network of user navigation paths in the Wikispeedia game, where users navigate between Wikipedia articles by clicking links. Nodes are articles and edges represent clicks. Duplicate edges occur when multiple users click the same link during different paths. No weights or metadata beyond source-target pairs.",
+  "domain": "Hyperlink network",
+  "expectedCounts": {
+    "edges": 343950,
+    "nodes": 4179
+  },
+  "id": "konect-wikispeedia",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "Wikispeedia",
+  "properties": {
+    "directed": true,
+    "heterogeneous": false,
+    "multigraph": true,
+    "selfLoops": false,
+    "weighted": false
+  },
+  "recipe": {
+    "reason": "no download is in a form keepset reads yet (tsv: bzip2 compression has no keepset unpacker yet)",
+    "status": "not-fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-04-19",
+      "status": "live",
+      "url": "http://konect.cc/files/download.tsv.wikispeedia.tar.bz2"
+    }
+  ],
+  "tags": [
+    "unweighted"
+  ]
+}

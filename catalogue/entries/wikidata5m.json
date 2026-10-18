@@ -1,0 +1,47 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "text": "Xiaozhi Wang, Tianyu Gao, Zhaochen Song, Zenan Li, Bing Qin, Tie-Yan Liu, Zhiyuan Liu, Jie Tang (2021). KEPLER: A Unified Model for Knowledge Embedding and Pre-trained Language Representation. Transactions of the Association for Computational Linguistics."
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "Large-scale heterogeneous knowledge graph from Wikidata 2021 dump. Contains ~5M entities connected by 822 relation types with ~21M triples. Each entity paired with Wikipedia article text for joint structured-unstructured modeling. Supports transductive and inductive link prediction settings.",
+  "expectedCounts": {
+    "edges": 21000000,
+    "nodes": 5000000
+  },
+  "id": "wikidata5m",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "Wikidata5M",
+  "properties": {
+    "components": 1491,
+    "connected": false,
+    "cyclic": true,
+    "density": 9.770379358670848e-7,
+    "directed": true,
+    "edgeTypes": 1,
+    "heterogeneous": true,
+    "multigraph": false,
+    "nodeTypes": 1,
+    "rawBytes": 0,
+    "selfLoops": false,
+    "weighted": false
+  },
+  "recipe": {
+    "reason": "no download is in a form keepset reads yet (kge-triples-tar: format kge-triples-tar has a pipeline-specific parser with no declarative keepset form yet)",
+    "status": "not-fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-03-03",
+      "status": "live",
+      "url": "https://www.dropbox.com/scl/fi/04itkl1lnxev587n3xkap/wikidata5m_transductive.tar.gz?rlkey=usj1e6dlqgfzruyd7eb58ksht&dl=1"
+    }
+  ],
+  "tags": []
+}
