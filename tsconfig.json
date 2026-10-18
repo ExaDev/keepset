@@ -27,6 +27,6 @@
     "types": [],
     "verbatimModuleSyntax": true
   },
-  "exclude": ["src/**/*.test.ts"],
+  "exclude": ["src/**/*.test.ts", "src/test-support/**/*.ts"],
   "include": ["src"]
 }

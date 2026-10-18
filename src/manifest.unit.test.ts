@@ -1,0 +1,47 @@
+import { describe, expect, it } from "vitest";
+import { CatalogueSyntaxError } from "./errors";
+import { ManifestSchema, parseManifest } from "./manifest";
+import { serialise } from "./serialise";
+
+const root = {
+  id: "keepset-graphs",
+  name: "keepset graphs",
+  description: "Graph datasets with recipes that resolve to graph/v1.",
+  version: "1.0.0",
+  repository: "https://github.com/ExaDev/keepset",
+};
+
+const fork = {
+  ...root,
+  id: "example-lab-graphs",
+  version: "0.1.0",
+  repository: "https://example.org/lab/graphs",
+  lineage: { catalogue: "keepset-graphs", version: "1.0.0", repository: "https://github.com/ExaDev/keepset" },
+};
+
+describe("the catalogue manifest", () => {
+  it("round-trips a root catalogue and a fork through parse and serialise", () => {
+    for (const doc of [root, fork]) {
+      const text = `${JSON.stringify(doc, undefined, 2)}\n`;
+      expect(serialise(parseManifest(JSON.parse(text)))).toBe(text);
+    }
+  });
+
+  it.each(["id", "name", "description", "version", "repository"])("rejects a manifest missing %s", (field) => {
+    const doc = Object.fromEntries(Object.entries(root).filter(([key]) => key !== field));
+    expect(() => parseManifest(doc)).toThrow(CatalogueSyntaxError);
+  });
+
+  it("rejects lineage missing the version it forked at", () => {
+    expect(ManifestSchema.is({ ...fork, lineage: { catalogue: "keepset-graphs", repository: "https://github.com/ExaDev/keepset" } })).toBe(false);
+  });
+
+  it("rejects a version that is not semantic", () => {
+    expect(ManifestSchema.is({ ...root, version: "1.0" })).toBe(false);
+    expect(ManifestSchema.is({ ...fork, lineage: { ...fork.lineage, version: "v1.0.0" } })).toBe(false);
+  });
+
+  it("rejects lineage naming the catalogue itself", () => {
+    expect(ManifestSchema.is({ ...fork, lineage: { ...fork.lineage, catalogue: fork.id } })).toBe(false);
+  });
+});
