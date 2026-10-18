@@ -1,7 +1,7 @@
 {
   "name": "keepset",
   "description": "Library, CLI and statically generated catalogue for dataset fetch-and-normalise recipes",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "dependencies": {
     "twindex": "0.1.1",
     "zod": "4.6.5"
