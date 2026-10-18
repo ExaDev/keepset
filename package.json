@@ -71,7 +71,7 @@
     "prepare": "husky",
     "prepublishOnly": "pnpm run lint:check && pnpm run typecheck && pnpm run test && pnpm run build && publint && attw --pack --profile esm-only",
     "test": "vitest run",
-    "typecheck": "tsc -p tsconfig.json"
+    "typecheck": "tsc -p tsconfig.json && tsc -p tsconfig.node.json"
   },
   "sideEffects": false,
   "type": "module",
