@@ -5,10 +5,10 @@ import exadev from '@exadev/eslint-config';
 export default defineConfig(
   /* schemas/ and src/generated/ are build output (see scripts/generate-json-schema.ts and scripts/build-catalogue.ts), not source to lint.
      scripts/seed/sources/ and scripts/seed/fixtures/ are copies of the upstream catalogues the seed import reads, kept in their own key order. */
-  { ignores: ['dist', 'dist-cli', 'coverage', 'node_modules', 'reports', 'schemas', 'src/generated', 'scripts/seed/sources', 'scripts/seed/fixtures'] },
+  { ignores: ['dist', 'dist-cli', 'site-dist', 'coverage', 'node_modules', 'reports', 'schemas', 'src/generated', 'scripts/seed/sources', 'scripts/seed/fixtures'] },
   {
     languageOptions: {
-      parserOptions: { project: ['./tsconfig.json', './tsconfig.node.json'], tsconfigRootDir: import.meta.dirname },
+      parserOptions: { project: ['./tsconfig.json', './tsconfig.node.json', './tsconfig.site.json', './tsconfig.sw.json'], tsconfigRootDir: import.meta.dirname },
     },
   },
   { ...js.configs.recommended, files: ['**/*.{ts,tsx,mts,cts,js,jsx,mjs,cjs}'] },

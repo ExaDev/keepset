@@ -85,8 +85,9 @@
     "prepublishOnly": "pnpm run lint:check && pnpm run build && pnpm run typecheck && pnpm run test && publint && attw --pack --profile esm-only",
     "seed:check": "tsx scripts/seed/import-phd-catalogue.ts --pipeline scripts/seed/sources/pipeline-catalog.json --graphbox scripts/seed/sources/graphbox-catalog.json --check",
     "seed:import": "tsx scripts/seed/import-phd-catalogue.ts",
+    "site": "tsx site/build.ts",
     "test": "vitest run",
-    "typecheck": "tsc -p tsconfig.json && tsc -p tsconfig.node.json"
+    "typecheck": "tsc -p tsconfig.json && tsc -p tsconfig.node.json && tsc -p tsconfig.site.json && tsc -p tsconfig.sw.json"
   },
   "sideEffects": false,
   "type": "module",
