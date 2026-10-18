@@ -1,3 +1,10 @@
+# [0.7.0](https://github.com/Mearman/keepset/compare/v0.6.2...v0.7.0) (2026-10-18)
+
+
+### Features
+
+* seed the operations-research survey as a catalogue source ([e3b9ec1](https://github.com/Mearman/keepset/commit/e3b9ec173e53e14af7ca23206872f60f4706ec67))
+
 ## [0.6.2](https://github.com/Mearman/keepset/compare/v0.6.1...v0.6.2) (2026-10-18)
 
 ## [0.6.1](https://github.com/ExaDev/keepset/compare/v0.6.0...v0.6.1) (2026-10-18)
