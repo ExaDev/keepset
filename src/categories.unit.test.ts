@@ -71,6 +71,11 @@ describe("the graph/v1 target", () => {
     expect(GraphV1Schema.is({ ...graph, meta: { count: Number.POSITIVE_INFINITY } })).toBe(false);
   });
 
+  it("rejects a __proto__ metadata key rather than dropping it", () => {
+    const meta: unknown = JSON.parse('{"__proto__": "x"}');
+    expect(GraphV1Schema.is({ ...graph, meta })).toBe(false);
+  });
+
   it("rejects a field beyond meta, nodes and edges at the top level", () => {
     expect(GraphV1Schema.is({ ...graph, extra: true })).toBe(false);
   });

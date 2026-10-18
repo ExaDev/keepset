@@ -1,0 +1,90 @@
+import { describe, expect, it } from "vitest";
+import { EntrySchema, parseEntry, SourceSchema, waybackUrl } from "./entry";
+import { CatalogueSyntaxError } from "./errors";
+import { serialise } from "./serialise";
+import { deadEntry, liveEntry, representativeEntries } from "./test-support/entries";
+
+const requiredFields = ["id", "name", "tags", "category", "sources", "licence", "citations", "recipe", "crosswalk", "expectedCounts", "properties"] as const;
+
+function without(doc: Readonly<Record<string, unknown>>, field: string): Record<string, unknown> {
+  return Object.fromEntries(Object.entries(doc).filter(([key]) => key !== field));
+}
+
+describe("the entry format", () => {
+  it("round-trips representative entries through parse and serialise", () => {
+    for (const doc of representativeEntries) {
+      const text = `${JSON.stringify(doc, undefined, 2)}\n`;
+      const parsed = parseEntry(JSON.parse(text));
+      expect(parsed).toEqual(doc);
+      expect(serialise(parsed)).toBe(text);
+      expect(EntrySchema.is(doc)).toBe(true);
+    }
+  });
+
+  it.each(requiredFields)("rejects an entry missing %s", (field) => {
+    expect(() => parseEntry(without(liveEntry, field))).toThrow(CatalogueSyntaxError);
+  });
+
+  it("accepts an entry without the optional description and domain", () => {
+    expect(EntrySchema.is(without(without(liveEntry, "description"), "domain"))).toBe(true);
+  });
+
+  it("rejects an entry whose category names no known category, at the category path", () => {
+    let caught: unknown;
+    try {
+      parseEntry({ ...liveEntry, category: "graph/v9" });
+    } catch (error) {
+      caught = error;
+    }
+    expect(caught).toBeInstanceOf(CatalogueSyntaxError);
+    expect(caught instanceof CatalogueSyntaxError ? caught.issues.map((issue) => issue.path) : []).toContain("category");
+  });
+
+  it("rejects an inline crosswalk whose target is not the entry's category", () => {
+    expect(EntrySchema.is({ ...liveEntry, crosswalk: { ...liveEntry.crosswalk, target: "graph/v2" } })).toBe(false);
+  });
+
+  it("rejects a recipe naming a source the entry does not have", () => {
+    expect(EntrySchema.is({ ...liveEntry, recipe: { ...liveEntry.recipe, source: 1 } })).toBe(false);
+  });
+
+  it("rejects an edge-list parser whose source and target columns coincide", () => {
+    expect(EntrySchema.is({ ...liveEntry, recipe: { ...liveEntry.recipe, parser: { ...liveEntry.recipe.parser, targetColumn: 0 } } })).toBe(false);
+  });
+
+  it("rejects archive member and crosswalk paths that climb out of their directory", () => {
+    expect(EntrySchema.is({ ...deadEntry, recipe: { ...deadEntry.recipe, archive: { kind: "zip", member: { path: "../outside.net" } } } })).toBe(false);
+    expect(EntrySchema.is({ ...deadEntry, crosswalk: { file: "/etc/crosswalk.json" } })).toBe(false);
+  });
+
+  it("rejects record keys Object.prototype would react to", () => {
+    const properties: unknown = JSON.parse('{"__proto__": 1}');
+    expect(EntrySchema.is({ ...liveEntry, properties })).toBe(false);
+    expect(EntrySchema.is({ ...liveEntry, expectedCounts: { constructor: 1 } })).toBe(true);
+  });
+
+  it("rejects a download URL that is not http or https", () => {
+    expect(EntrySchema.is({ ...liveEntry, sources: [{ ...liveEntry.sources[0], url: "file:///scratch/cache.zip" }] })).toBe(false);
+  });
+});
+
+describe("a source's snapshot", () => {
+  const url = "http://example.edu/data/net.zip";
+
+  it("is required when the source is dead", () => {
+    expect(SourceSchema.safeParse({ url, retrieved: "2026-04-19", status: "dead" }).success).toBe(false);
+  });
+
+  it("may pin a live source", () => {
+    expect(SourceSchema.safeParse({ url, retrieved: "2026-04-19", status: "live", snapshot: { url: waybackUrl("20061110114126", url), timestamp: "20061110114126" } }).success).toBe(true);
+  });
+
+  it("must be the Wayback URL of this source at its own timestamp", () => {
+    expect(SourceSchema.safeParse({ url, retrieved: "2026-04-19", status: "dead", snapshot: { url: waybackUrl("20230601", url), timestamp: "20230602" } }).success).toBe(false);
+    expect(SourceSchema.safeParse({ url, retrieved: "2026-04-19", status: "dead", snapshot: { url: waybackUrl("20230601", "http://example.edu/other.zip"), timestamp: "20230601" } }).success).toBe(false);
+  });
+
+  it("rejects a timestamp that is not a Wayback timestamp", () => {
+    expect(SourceSchema.safeParse({ url, retrieved: "2026-04-19", status: "dead", snapshot: { url: waybackUrl("2023-06-01", url), timestamp: "2023-06-01" } }).success).toBe(false);
+  });
+});

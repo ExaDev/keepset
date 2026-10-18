@@ -18,3 +18,22 @@ export class UnknownCategoryError extends KeepsetError {
     this.knownIds = knownIds;
   }
 }
+
+/** One reason a catalogue document failed its schema: the dotted path of the offending value and what is wrong with it. Zod's own issue objects are collapsed into these so the public error surface stays stable across Zod versions. */
+export interface SyntaxIssue {
+  readonly path: string;
+  readonly message: string;
+}
+
+/** Thrown when an entry or a catalogue manifest fails its schema. Carries every issue found, not just the first, so one failed parse reports the whole document. */
+export class CatalogueSyntaxError extends KeepsetError {
+  readonly document: "entry" | "manifest";
+
+  readonly issues: readonly SyntaxIssue[];
+
+  constructor(document: "entry" | "manifest", issues: readonly SyntaxIssue[]) {
+    super(`${document} syntax error: ${issues.map((issue) => `${issue.path}: ${issue.message}`).join("; ")}`);
+    this.document = document;
+    this.issues = issues;
+  }
+}

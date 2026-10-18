@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { define } from "../define";
+import { recordOf } from "../record";
 
 /** A JSON scalar: the only values graph/v1 metadata may hold, so `meta` stays a flat record any consumer can tabulate. `z.number()` already rejects NaN and the infinities, which JSON cannot carry. */
 export const JsonScalarSchema = z.union([z.string(), z.number(), z.boolean(), z.null()]);
@@ -26,7 +27,7 @@ export type GraphEdge = z.infer<typeof GraphEdgeSchema>;
 export const GraphV1Schema = define(
   z
     .object({
-      meta: z.record(z.string(), JsonScalarSchema),
+      meta: recordOf(z.string().min(1), JsonScalarSchema),
       nodes: z.array(GraphNodeSchema),
       edges: z.array(GraphEdgeSchema),
     })
