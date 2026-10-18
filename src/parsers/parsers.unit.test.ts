@@ -54,6 +54,15 @@ describe("the edge-list parser", () => {
     expect(parseNative(utf8("x  y\n"), edgeList({ delimiter: "space", targetColumn: 2 })).edges).toEqual([{ source: "x", target: "y" }]);
   });
 
+  it("detects the delimiter from the first data line: tab, then comma, then whitespace", () => {
+    expect(parseNative(utf8("% header, with a comma\n1,2,.8\n2,3,1\n"), edgeList({ delimiter: "detect" })).edges).toEqual([
+      { source: "1", target: "2" },
+      { source: "2", target: "3" },
+    ]);
+    expect(parseNative(utf8("a b\tc\n"), edgeList({ delimiter: "detect" })).edges).toEqual([{ source: "a b", target: "c" }]);
+    expect(parseNative(utf8("a  b\n"), edgeList({ delimiter: "detect" })).edges).toEqual([{ source: "a", target: "b" }]);
+  });
+
   it("names the line of a row with too few fields or an empty endpoint", () => {
     expect(parseError(() => parseNative(utf8("1 2\n3\n"), edgeList())).line).toBe(2);
     expect(parseError(() => parseNative(utf8("1,2\n,4\n"), edgeList({ delimiter: "comma" }))).line).toBe(2);
