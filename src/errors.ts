@@ -37,3 +37,16 @@ export class CatalogueSyntaxError extends KeepsetError {
     this.issues = issues;
   }
 }
+
+/** Thrown by a parser when a file does not have the format its recipe names. `line` is 1-based, counting every line of the file, so it points at the offending line in an editor. */
+export class NativeParseError extends KeepsetError {
+  readonly format: string;
+
+  readonly line: number;
+
+  constructor(format: string, line: number, message: string) {
+    super(`${format} line ${String(line)}: ${message}`);
+    this.format = format;
+    this.line = line;
+  }
+}
