@@ -82,7 +82,7 @@
       "url": "http://vlado.fmf.uni-lj.si/pub/networks/data/UciNet/UciData.htm"
     }
   },
-  "datasetCount": 20,
+  "datasetCount": 23,
   "datasets": {
     "7th_graders": {
       "category": "heterogeneous",
@@ -115,43 +115,6 @@
             {
               "format": "netzschleuder",
               "url": "https://networks.skewed.de/net/7th_graders"
-            }
-          ],
-          "source": "netzschleuder"
-        }
-      ]
-    },
-    "bos_genetic": {
-      "category": "heterogeneous",
-      "citation": {
-        "authors": [
-          "Netzschleuder"
-        ],
-        "title": "genetic_multiplex - Bos_Multiplex_Genetic sub-network",
-        "type": "dataset",
-        "year": 2020
-      },
-      "description": "Multiplex genetic interaction network for Bos taurus (cattle). Nodes are genes and directed edges represent genetic interactions across multiple interaction layers. Heterogeneous via layer attribute (different interaction types).",
-      "domain": "Biological network",
-      "edgeCount": 322,
-      "id": "bos_genetic",
-      "name": "Bovine Genetic Interactome (Bos taurus)",
-      "nodeCount": 325,
-      "preferredFormat": "csv",
-      "properties": {
-        "has_self_loops": true,
-        "is_directed": true,
-        "is_heterogeneous": true,
-        "is_multigraph": true,
-        "is_weighted": false
-      },
-      "retrieved": "2026-04-19",
-      "sources": [
-        {
-          "downloads": [
-            {
-              "format": "netzschleuder",
-              "url": "https://networks.skewed.de/net/genetic_multiplex/files/Bos_Multiplex_Genetic.gt.zst"
             }
           ],
           "source": "netzschleuder"
@@ -233,261 +196,34 @@
         }
       ]
     },
-    "cora": {
-      "category": "citation",
+    "advogato": {
       "citation": {
         "authors": [
-          "Andrew Kachites McCallum",
-          "Kamal Nigam",
-          "Jason Rennie",
-          "Kristie Seymore"
+          "Raph Levien"
         ],
-        "journal": "Information Retrieval",
-        "pages": "127-163",
-        "title": "Automating the Construction of Internet Portals with Machine Learning",
-        "type": "article",
-        "volume": 3,
-        "year": 2000
+        "journal": "Computing with Social Trust",
+        "title": "Attack-Resistant Trust Metrics",
+        "type": "bookchapter",
+        "year": 2008
       },
-      "citeKey": "sen2008collective",
-      "description": "Citation network of machine learning papers with 7 topic classes.",
-      "domain": "Citation network",
-      "edgeCount": 5429,
-      "id": "cora",
-      "name": "Cora",
-      "nodeCount": 2708,
-      "preferredFormat": "linqs",
+      "description": "Trust network from the Advogato community, a free software development community founded by Raph Levien. Nodes represent users and directed edges indicate trust certifications with four trust levels: Observer (0.4), Apprentice (0.6), Journeyer (0.8), and Master (1.0). Used for research on attack-resistant trust metrics.",
+      "edgeCount": 51127,
+      "id": "advogato",
+      "name": "Advogato Trust Network",
+      "nodeCount": 6539,
+      "preferredFormat": "edge-list",
       "properties": {
-        "density": 0.0014399999126942077,
-        "edge_type_count": 1,
-        "has_self_loops": false,
-        "is_connected": false,
-        "is_cyclic": true,
-        "is_directed": true,
-        "is_heterogeneous": true,
-        "is_multigraph": false,
-        "is_weighted": false,
-        "n_components": 78,
-        "node_type_count": 1
-      },
-      "rawBytes": 0,
-      "retrieved": "2026-02-16",
-      "sources": [
-        {
-          "downloads": [
-            {
-              "description": "LINQS .cites + .content (tgz)",
-              "format": "linqs",
-              "url": "https://linqs-data.soe.ucsc.edu/public/lbc/cora.tgz"
-            }
-          ],
-          "source": "snap"
-        }
-      ]
-    },
-    "cities": {
-      "citation": {
-        "authors": [
-          "Vladimir Batagelj",
-          "Andrej Mrvar"
-        ],
-        "title": "Pajek Datasets",
-        "type": "article",
-        "year": 2006
-      },
-      "description": "Two-mode network of cities and the services they provide.",
-      "edgeCount": 1342,
-      "id": "cities",
-      "name": "Cities and Services",
-      "nodeCount": 101,
-      "properties": {
-        "density": 0.26574257425742576,
+        "density": 0.6666666666666666,
         "edge_type_count": 1,
         "has_self_loops": false,
         "is_connected": true,
         "is_cyclic": true,
-        "is_directed": false,
-        "is_heterogeneous": true,
+        "is_directed": true,
+        "is_heterogeneous": false,
         "is_multigraph": false,
         "is_weighted": true,
         "n_components": 1,
         "node_type_count": 1
-      },
-      "rawBytes": 80291,
-      "retrieved": "2026-02-16",
-      "sources": [
-        {
-          "downloads": [
-            {
-              "format": "pajek",
-              "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/2mode/cities.zip",
-              "innerPath": "da6+.net"
-            }
-          ],
-          "source": "pajek"
-        }
-      ]
-    },
-    "csphd": {
-      "citation": {
-        "authors": [
-          "Vladimir Batagelj",
-          "Andrej Mrvar"
-        ],
-        "title": "Pajek Datasets",
-        "type": "article",
-        "year": 2006
-      },
-      "description": "Computer Science PhD advisor-student relationships.",
-      "edgeCount": 0,
-      "id": "csphd",
-      "name": "CS PhD Genealogy",
-      "nodeCount": 0,
-      "properties": {
-        "density": 0.0009830391842808644,
-        "edge_type_count": 1,
-        "has_self_loops": false,
-        "is_connected": false,
-        "is_cyclic": true,
-        "is_directed": true,
-        "is_heterogeneous": true,
-        "is_multigraph": false,
-        "is_weighted": true,
-        "n_components": 168,
-        "node_type_count": 1
-      },
-      "rawBytes": 141274,
-      "retrieved": "2026-01-17",
-      "sources": [
-        {
-          "downloads": [
-            {
-              "format": "pajek",
-              "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/GED/CSphd.ZIP"
-            }
-          ],
-          "source": "pajek"
-        },
-        {
-          "downloads": [
-            {
-              "format": "matrix-market",
-              "url": "https://sparse.tamu.edu/MM/Pajek/CSphd.tar.gz"
-            },
-            {
-              "format": "rutherford-boeing",
-              "url": "https://sparse.tamu.edu/RB/Pajek/CSphd.tar.gz"
-            },
-            {
-              "format": "matlab",
-              "url": "https://sparse.tamu.edu/mat/Pajek/CSphd.tar.gz"
-            }
-          ],
-          "source": "suitesparse"
-        }
-      ]
-    },
-    "wiki-vote": {
-      "category": "social",
-      "citation": {
-        "authors": [
-          "J. Leskovec",
-          "D. Huttenlocher",
-          "J. Kleinberg"
-        ],
-        "journal": "WWW",
-        "title": "Predicting Positive and Negative Links in Online Social Networks",
-        "type": "article",
-        "year": 2010
-      },
-      "citeKey": "leskovec2010signed",
-      "description": "Wikipedia who-votes-on-whom network for adminship elections.",
-      "domain": "Wikipedia voting network",
-      "edgeCount": 103689,
-      "id": "wiki-vote",
-      "name": "Wikipedia Vote Network",
-      "nodeCount": 7115,
-      "properties": {
-        "density": 0.003981420144693063,
-        "edge_type_count": 1,
-        "has_self_loops": false,
-        "is_connected": false,
-        "is_cyclic": true,
-        "is_directed": true,
-        "is_heterogeneous": false,
-        "is_multigraph": false,
-        "is_weighted": false,
-        "n_components": 24,
-        "node_type_count": 1
-      },
-      "rawBytes": 5316066,
-      "retrieved": "2026-01-17",
-      "sources": [
-        {
-          "downloads": [
-            {
-              "format": "various",
-              "url": "https://snap.stanford.edu/data/wiki-Vote.txt.gz"
-            }
-          ],
-          "source": "snap"
-        },
-        {
-          "downloads": [
-            {
-              "format": "matrix-market",
-              "url": "https://sparse.tamu.edu/MM/SNAP/wiki-Vote.tar.gz"
-            },
-            {
-              "format": "rutherford-boeing",
-              "url": "https://sparse.tamu.edu/RB/SNAP/wiki-Vote.tar.gz"
-            },
-            {
-              "format": "matlab",
-              "url": "https://sparse.tamu.edu/mat/SNAP/wiki-Vote.tar.gz"
-            }
-          ],
-          "source": "suitesparse"
-        }
-      ]
-    },
-    "nell-995": {
-      "category": "heterogeneous",
-      "citation": {
-        "authors": [
-          "Andrew Carlson",
-          "Justin Betteridge",
-          "Bryan Kisiel",
-          "Burr Settles",
-          "Estevam R. Hruschka Jr.",
-          "Tom M. Mitchell"
-        ],
-        "publisher": "Proceedings of the AAAI Conference on Artificial Intelligence",
-        "title": "Toward an Architecture for Never-Ending Language Learning",
-        "type": "conference",
-        "year": 2010
-      },
-      "citeKey": "carlson2010toward",
-      "description": "Heterogeneous knowledge graph from CMU's Never-Ending Language Learning system. Contains entities and relations automatically extracted from web text with 200 relation types. Used for knowledge graph completion, link prediction, and reasoning tasks. Challenging due to sparse triple coverage for many relations.",
-      "domain": "General knowledge graph",
-      "edgeCount": 149678,
-      "id": "nell-995",
-      "maxPaths": 15,
-      "name": "NELL-995",
-      "nodeCount": 74432,
-      "preferredFormat": "txt",
-      "properties": {
-        "density": 4.6516201857617345e-05,
-        "edge_type_count": 1,
-        "has_self_loops": true,
-        "is_connected": false,
-        "is_cyclic": true,
-        "is_directed": true,
-        "is_heterogeneous": true,
-        "is_multigraph": true,
-        "is_weighted": false,
-        "n_components": 8595,
-        "node_type_count": 2
       },
       "rawBytes": 0,
       "retrieved": "2026-03-03",
@@ -495,376 +231,20 @@
         {
           "downloads": [
             {
-              "description": "OpenKE preprocessed edge list (train2id.txt)",
-              "format": "txt",
-              "url": "https://raw.githubusercontent.com/thunlp/OpenKE/OpenKE-PyTorch/benchmarks/NELL-995/train2id.txt"
-            }
-          ],
-          "source": "openke"
-        }
-      ]
-    },
-    "ieee-cis-g": {
-      "citation": {
-        "authors": [
-          "Junheng Lin",
-          "Yibin Shen",
-          "Yifan Wang",
-          "Fangzhao Wu",
-          "Xiang Wang"
-        ],
-        "publisher": "Proceedings of the AAAI Conference on Artificial Intelligence",
-        "title": "H2GB: A Hierarchical Heterogeneous Graph Benchmark for Node Property Prediction",
-        "type": "conference",
-        "year": 2024
-      },
-      "description": "Heterogeneous financial fraud detection graph derived from the IEEE-CIS fraud detection dataset. Contains transaction and identity nodes with 22 edge types representing card, address, email, and device relations.",
-      "edgeCount": 1383371,
-      "id": "ieee-cis-g",
-      "name": "IEEE-CIS-G",
-      "nodeCount": 1592008,
-      "preferredFormat": "ieee-cis-zip",
-      "properties": {
-        "density": 1.091637494805802e-06,
-        "edge_type_count": 1,
-        "has_self_loops": false,
-        "is_connected": false,
-        "is_cyclic": true,
-        "is_directed": true,
-        "is_heterogeneous": true,
-        "is_multigraph": false,
-        "is_weighted": false,
-        "n_components": 354216,
-        "node_type_count": 2
-      },
-      "rawBytes": 0,
-      "retrieved": "2026-02-16",
-      "sources": [
-        {
-          "downloads": [
-            {
-              "description": "IEEE-CIS fraud detection graph from HuggingFace H2GB repository (ZIP with CSV files)",
-              "format": "ieee-cis-zip",
-              "url": "https://huggingface.co/datasets/junhongmit/H2GB/resolve/main/IEEE-CIS.zip"
-            }
-          ],
-          "source": "huggingface"
-        },
-        {
-          "downloads": [
-            {
-              "description": "H2GB format via Kaggle (requires authentication)",
-              "format": "h2gb",
-              "url": "https://www.kaggle.com/datasets/junhenglin/h2gb-ieee-cis-g"
-            }
-          ],
-          "source": "kaggle"
-        }
-      ]
-    },
-    "ba-weighted-200k": {
-      "citation": {
-        "authors": [
-          "Generated"
-        ],
-        "title": "Synthetic undirected weighted homogeneous graph",
-        "type": "dataset",
-        "year": 2026
-      },
-      "description": "Synthetic undirected weighted homogeneous Barabasi-Albert graph with 200K nodes. Edge weights are uniform-random floats in [0.1, 5.0]. Generated to fill the UWh-large truth-table cell.",
-      "edgeCount": 399996,
-      "id": "ba-weighted-200k",
-      "name": "Synthetic Weighted BA Graph (200K nodes)",
-      "nodeCount": 200000,
-      "preferredFormat": "gml",
-      "properties": {
-        "has_self_loops": false,
-        "is_directed": false,
-        "is_heterogeneous": false,
-        "is_multigraph": false,
-        "is_weighted": true
-      },
-      "rawBytes": 0,
-      "retrieved": "2026-03-27",
-      "sources": [
-        {
-          "downloads": [
-            {
-              "directed": false,
-              "generator": "barabasi_albert",
-              "m": 2,
-              "n": 200000,
-              "seed": 48,
-              "weighted": true
-            }
-          ],
-          "source": "generated"
-        }
-      ]
-    },
-    "bitcoin-blockchain": {
-      "category": "bitcoin-blockchain",
-      "description": "Graph from benchmark analysis (bitcoin-blockchain)",
-      "edgeCount": 86063840,
-      "id": "bitcoin-blockchain",
-      "name": "bitcoin-blockchain",
-      "nodeCount": 24575382,
-      "properties": {
-        "density": 2.850034901549364e-07,
-        "edge_type_count": 1,
-        "has_self_loops": false,
-        "is_connected": false,
-        "is_cyclic": true,
-        "is_directed": false,
-        "is_heterogeneous": false,
-        "is_multigraph": false,
-        "is_weighted": false,
-        "n_components": 371,
-        "node_type_count": 1
-      }
-    },
-    "ss-hb-bcspwr09": {
-      "category": "suitesparse",
-      "description": "power network problem (1,723 nodes, 6,511 non-zeros)",
-      "edgeCount": 4118,
-      "id": "ss-hb-bcspwr09",
-      "name": "ss-hb-bcspwr09",
-      "nodeCount": 1723,
-      "properties": {
-        "density": 0.002776,
-        "has_self_loops": true,
-        "is_directed": false,
-        "is_multigraph": true,
-        "is_weighted": false,
-        "is_heterogeneous": false
-      },
-      "sources": [
-        {
-          "format": "json-cache",
-          "urls": []
-        }
-      ]
-    },
-    "celegans-metabolic-undir": {
-      "description": "Graph from benchmark analysis (celegans-metabolic-undir)",
-      "edgeCount": 4596,
-      "id": "celegans-metabolic-undir",
-      "name": "celegans-metabolic-undir",
-      "nodeCount": 453,
-      "properties": {
-        "has_self_loops": true,
-        "is_directed": false,
-        "is_heterogeneous": true,
-        "is_multigraph": true,
-        "is_weighted": false
-      },
-      "sources": [
-        {
-          "downloads": [
-            {
-              "format": "netzschleuder",
-              "url": "https://networks.skewed.de/net/celegans_metabolic"
-            }
-          ],
-          "source": "netzschleuder"
-        }
-      ]
-    },
-    "lesmis": {
-      "category": "small",
-      "citation": {
-        "authors": [
-          "Donald E. Knuth"
-        ],
-        "publisher": "Addison-Wesley",
-        "title": "The Stanford GraphBase: A Platform for Combinatorial Computing",
-        "type": "book",
-        "year": 1993
-      },
-      "citeKey": "knuth1993stanford",
-      "description": "Character co-appearance network from Les Misérables by Victor Hugo.",
-      "domain": "Fictional network",
-      "edgeCount": 254,
-      "id": "lesmis",
-      "maxPaths": 18,
-      "name": "Les Misérables",
-      "nodeCount": 77,
-      "preferredFormat": "konect-tarbz2",
-      "properties": {
-        "density": 0.08680792891319207,
-        "edge_type_count": 1,
-        "has_self_loops": false,
-        "is_connected": true,
-        "is_cyclic": true,
-        "is_directed": false,
-        "is_heterogeneous": false,
-        "is_multigraph": false,
-        "is_weighted": true,
-        "n_components": 1,
-        "node_type_count": 1
-      },
-      "rawBytes": 0,
-      "retrieved": "2026-02-16",
-      "sources": [
-        {
-          "downloads": [
-            {
-              "format": "konect-tarbz2",
-              "url": "http://konect.cc/files/download.tsv.moreno_lesmis.tar.bz2"
-            }
-          ],
-          "source": "konect"
-        }
-      ]
-    },
-    "arxiv-citations": {
-      "citation": {
-        "authors": [
-          "Leskovec et al."
-        ],
-        "title": "Signed networks in social media",
-        "type": "conference",
-        "year": 2010
-      },
-      "description": "Directed acyclic graph of paper citations from arXiv high-energy physics preprints. Papers can only cite papers published before them. Medium-sized DAG with clear temporal ordering. Useful for benchmarking DAG algorithms on realistic citation networks and temporal graph analysis.",
-      "edgeCount": 2332014,
-      "id": "arxiv-citations",
-      "name": "arXiv Citation Network (DAG)",
-      "nodeCount": 178569,
-      "preferredFormat": "edge-list",
-      "properties": {
-        "density": 0.0007054197642773696,
-        "edge_type_count": 1,
-        "has_self_loops": false,
-        "is_connected": false,
-        "is_cyclic": true,
-        "is_directed": true,
-        "is_heterogeneous": false,
-        "is_multigraph": false,
-        "is_weighted": false,
-        "n_components": 61,
-        "node_type_count": 1
-      },
-      "rawBytes": 0,
-      "retrieved": "2026-03-26",
-      "sources": [
-        {
-          "downloads": [
-            {
-              "description": "Citation DAG from HEP-PH arXiv papers with temporal structure",
               "format": "edge-list",
-              "url": "https://snap.stanford.edu/data/cit-HepPh.html"
-            },
-            {
-              "description": "Compressed edge list (source target year)",
-              "format": "edge-list",
-              "url": "https://snap.stanford.edu/data/cit-HepPh.txt.gz"
+              "url": "http://nrvis.com/download/data/misc/advogato.zip"
             }
           ],
-          "source": "snap"
-        }
-      ]
-    },
-    "oag-eng": {
-      "citation": {
-        "authors": [
-          "Junheng Lin",
-          "Yibin Shen",
-          "Yifan Wang",
-          "Fangzhao Wu",
-          "Xiang Wang"
-        ],
-        "publisher": "Proceedings of the AAAI Conference on Artificial Intelligence",
-        "title": "H2GB: A Hierarchical Heterogeneous Graph Benchmark for Node Property Prediction",
-        "type": "conference",
-        "year": 2024
-      },
-      "description": "Heterogeneous academic graph from the Open Academic Graph, focused on engineering papers. Contains papers, authors, venues, institutions, and fields of study with 22 relation types.",
-      "edgeCount": 12346854,
-      "id": "oag-eng",
-      "name": "OAG-Eng",
-      "nodeCount": 929315,
-      "preferredFormat": "pytorch-hetero-zip",
-      "properties": {
-        "density": 0,
-        "edge_type_count": 1,
-        "has_self_loops": false,
-        "is_connected": false,
-        "is_cyclic": false,
-        "is_directed": true,
-        "is_heterogeneous": true,
-        "is_multigraph": false,
-        "is_weighted": false,
-        "n_components": 3217795,
-        "node_type_count": 1
-      },
-      "rawBytes": 0,
-      "retrieved": "2026-02-16",
-      "sources": [
-        {
-          "downloads": [
-            {
-              "description": "Pre-cached Kaggle ZIP containing graph_Engineering.pt",
-              "format": "pytorch-hetero-zip",
-              "innerPath": "graph_Engineering.pt",
-              "url": "file:(local path withheld)"
-            }
-          ],
-          "source": "local-cache"
+          "source": "nrvis"
         },
         {
           "downloads": [
             {
-              "description": "OAG Engineering academic graph from HuggingFace H2GB repository (PyTorch HeteroData)",
-              "format": "pytorch-hetero",
-              "url": "https://huggingface.co/datasets/junhongmit/H2GB/resolve/main/OAG_Engineering.pt"
+              "format": "gml",
+              "url": "http://networkrepository.com/datasets/advogato.tar.gz"
             }
           ],
-          "source": "huggingface"
-        },
-        {
-          "downloads": [
-            {
-              "description": "H2GB format via Kaggle (requires authentication)",
-              "format": "h2gb",
-              "url": "https://www.kaggle.com/datasets/junhenglin/h2gb-oag-eng"
-            }
-          ],
-          "source": "kaggle"
-        }
-      ]
-    },
-    "netzschleuder-bison": {
-      "citation": [
-        [
-          "D. F Lott, \"Dominance relations and breeding rate in mature male American bison.\" Zeitschrift für Tierpsychologie 49(4), 418-432 (1979)",
-          "https://doi.org/10.1111/j.1439-0310.1979.tb00302.x"
-        ]
-      ],
-      "description": "Dominance relations among a group of American bisons in the National Bison Range in Moiese Montana, observed in 1972.[^icon]\n[^icon]: Description obtained from the [ICON](https://icon.colorado.edu) project.",
-      "edgeCount": 314,
-      "id": "netzschleuder-bison",
-      "name": "Bison dominance",
-      "nodeCount": 26,
-      "preferredFormat": "csv",
-      "properties": {
-        "has_self_loops": false,
-        "is_directed": true,
-        "is_heterogeneous": false,
-        "is_multigraph": false,
-        "is_weighted": true
-      },
-      "retrieved": "2026-04-20",
-      "sources": [
-        "http://konect.cc/networks/moreno_bison",
-        {
-          "downloads": [
-            {
-              "format": "netzschleuder",
-              "url": "https://networks.skewed.de/net/bison"
-            }
-          ],
-          "source": "netzschleuder"
+          "source": "networkrepository"
         }
       ]
     },
@@ -938,55 +318,384 @@
         }
       ]
     },
-    "advogato": {
+    "arenas-pgp": {
       "citation": {
         "authors": [
-          "Raph Levien"
+          "M. Boguña",
+          "R. Pastor-Satorras",
+          "A. Diaz-Guilera",
+          "A. Arenas"
         ],
-        "journal": "Computing with Social Trust",
-        "title": "Attack-Resistant Trust Metrics",
-        "type": "bookchapter",
-        "year": 2008
+        "journal": "Physical Review E",
+        "pages": "056122",
+        "title": "Models of social networks based on social distance attachment",
+        "type": "article",
+        "volume": 70,
+        "year": 2004
       },
-      "description": "Trust network from the Advogato community, a free software development community founded by Raph Levien. Nodes represent users and directed edges indicate trust certifications with four trust levels: Observer (0.4), Apprentice (0.6), Journeyer (0.8), and Master (1.0). Used for research on attack-resistant trust metrics.",
-      "edgeCount": 51127,
-      "id": "advogato",
-      "name": "Advogato Trust Network",
-      "nodeCount": 6539,
-      "preferredFormat": "edge-list",
+      "description": "Giant component of the network of users of the Pretty-Good-Privacy algorithm for secure information interchange.",
+      "edgeCount": 35021,
+      "id": "arenas-pgp",
+      "name": "PGP Network",
+      "nodeCount": 21361,
       "properties": {
-        "density": 0.6666666666666666,
+        "density": 0.00021320151945099995,
         "edge_type_count": 1,
         "has_self_loops": false,
         "is_connected": true,
-        "is_cyclic": true,
-        "is_directed": true,
+        "is_cyclic": false,
+        "is_directed": false,
         "is_heterogeneous": false,
         "is_multigraph": false,
         "is_weighted": true,
         "n_components": 1,
         "node_type_count": 1
       },
-      "rawBytes": 0,
-      "retrieved": "2026-03-03",
+      "rawBytes": 2998684,
+      "retrieved": "2026-02-16",
       "sources": [
         {
           "downloads": [
             {
-              "format": "edge-list",
-              "url": "http://nrvis.com/download/data/misc/advogato.zip"
+              "format": "various",
+              "url": "https://web.archive.org/web/20230601/http://deim.urv.cat/~aarenas/data/xarxes/PGP.zip"
             }
           ],
-          "source": "nrvis"
+          "source": "arenas"
         },
         {
           "downloads": [
             {
               "format": "gml",
-              "url": "http://networkrepository.com/datasets/advogato.tar.gz"
+              "url": "http://networkrepository.com/datasets/pgp.tar.gz"
             }
           ],
           "source": "networkrepository"
+        }
+      ]
+    },
+    "arxiv-citations": {
+      "citation": {
+        "authors": [
+          "Leskovec et al."
+        ],
+        "title": "Signed networks in social media",
+        "type": "conference",
+        "year": 2010
+      },
+      "description": "Directed acyclic graph of paper citations from arXiv high-energy physics preprints. Papers can only cite papers published before them. Medium-sized DAG with clear temporal ordering. Useful for benchmarking DAG algorithms on realistic citation networks and temporal graph analysis.",
+      "edgeCount": 2332014,
+      "id": "arxiv-citations",
+      "name": "arXiv Citation Network (DAG)",
+      "nodeCount": 178569,
+      "preferredFormat": "edge-list",
+      "properties": {
+        "density": 0.0007054197642773696,
+        "edge_type_count": 1,
+        "has_self_loops": false,
+        "is_connected": false,
+        "is_cyclic": true,
+        "is_directed": true,
+        "is_heterogeneous": false,
+        "is_multigraph": false,
+        "is_weighted": false,
+        "n_components": 61,
+        "node_type_count": 1
+      },
+      "rawBytes": 0,
+      "retrieved": "2026-03-26",
+      "sources": [
+        {
+          "downloads": [
+            {
+              "description": "Citation DAG from HEP-PH arXiv papers with temporal structure",
+              "format": "edge-list",
+              "url": "https://snap.stanford.edu/data/cit-HepPh.html"
+            },
+            {
+              "description": "Compressed edge list (source target year)",
+              "format": "edge-list",
+              "url": "https://snap.stanford.edu/data/cit-HepPh.txt.gz"
+            }
+          ],
+          "source": "snap"
+        }
+      ]
+    },
+    "ba-weighted-200k": {
+      "citation": {
+        "authors": [
+          "Generated"
+        ],
+        "title": "Synthetic undirected weighted homogeneous graph",
+        "type": "dataset",
+        "year": 2026
+      },
+      "description": "Synthetic undirected weighted homogeneous Barabasi-Albert graph with 200K nodes. Edge weights are uniform-random floats in [0.1, 5.0]. Generated to fill the UWh-large truth-table cell.",
+      "edgeCount": 399996,
+      "id": "ba-weighted-200k",
+      "name": "Synthetic Weighted BA Graph (200K nodes)",
+      "nodeCount": 200000,
+      "preferredFormat": "gml",
+      "properties": {
+        "has_self_loops": false,
+        "is_directed": false,
+        "is_heterogeneous": false,
+        "is_multigraph": false,
+        "is_weighted": true
+      },
+      "rawBytes": 0,
+      "retrieved": "2026-03-27",
+      "sources": [
+        {
+          "downloads": [
+            {
+              "directed": false,
+              "generator": "barabasi_albert",
+              "m": 2,
+              "n": 200000,
+              "seed": 48,
+              "weighted": true
+            }
+          ],
+          "source": "generated"
+        }
+      ]
+    },
+    "bitcoin-blockchain": {
+      "category": "bitcoin-blockchain",
+      "description": "Graph from benchmark analysis (bitcoin-blockchain)",
+      "edgeCount": 86063840,
+      "id": "bitcoin-blockchain",
+      "name": "bitcoin-blockchain",
+      "nodeCount": 24575382,
+      "properties": {
+        "density": 2.850034901549364e-07,
+        "edge_type_count": 1,
+        "has_self_loops": false,
+        "is_connected": false,
+        "is_cyclic": true,
+        "is_directed": false,
+        "is_heterogeneous": false,
+        "is_multigraph": false,
+        "is_weighted": false,
+        "n_components": 371,
+        "node_type_count": 1
+      }
+    },
+    "bos_genetic": {
+      "category": "heterogeneous",
+      "citation": {
+        "authors": [
+          "Netzschleuder"
+        ],
+        "title": "genetic_multiplex - Bos_Multiplex_Genetic sub-network",
+        "type": "dataset",
+        "year": 2020
+      },
+      "description": "Multiplex genetic interaction network for Bos taurus (cattle). Nodes are genes and directed edges represent genetic interactions across multiple interaction layers. Heterogeneous via layer attribute (different interaction types).",
+      "domain": "Biological network",
+      "edgeCount": 322,
+      "id": "bos_genetic",
+      "name": "Bovine Genetic Interactome (Bos taurus)",
+      "nodeCount": 325,
+      "preferredFormat": "csv",
+      "properties": {
+        "has_self_loops": true,
+        "is_directed": true,
+        "is_heterogeneous": true,
+        "is_multigraph": true,
+        "is_weighted": false
+      },
+      "retrieved": "2026-04-19",
+      "sources": [
+        {
+          "downloads": [
+            {
+              "format": "netzschleuder",
+              "url": "https://networks.skewed.de/net/genetic_multiplex/files/Bos_Multiplex_Genetic.gt.zst"
+            }
+          ],
+          "source": "netzschleuder"
+        }
+      ]
+    },
+    "celegans-metabolic-undir": {
+      "description": "Graph from benchmark analysis (celegans-metabolic-undir)",
+      "edgeCount": 4596,
+      "id": "celegans-metabolic-undir",
+      "name": "celegans-metabolic-undir",
+      "nodeCount": 453,
+      "properties": {
+        "has_self_loops": true,
+        "is_directed": false,
+        "is_heterogeneous": true,
+        "is_multigraph": true,
+        "is_weighted": false
+      },
+      "sources": [
+        {
+          "downloads": [
+            {
+              "format": "netzschleuder",
+              "url": "https://networks.skewed.de/net/celegans_metabolic"
+            }
+          ],
+          "source": "netzschleuder"
+        }
+      ]
+    },
+    "cities": {
+      "citation": {
+        "authors": [
+          "Vladimir Batagelj",
+          "Andrej Mrvar"
+        ],
+        "title": "Pajek Datasets",
+        "type": "article",
+        "year": 2006
+      },
+      "description": "Two-mode network of cities and the services they provide.",
+      "edgeCount": 1342,
+      "id": "cities",
+      "name": "Cities and Services",
+      "nodeCount": 101,
+      "properties": {
+        "density": 0.26574257425742576,
+        "edge_type_count": 1,
+        "has_self_loops": false,
+        "is_connected": true,
+        "is_cyclic": true,
+        "is_directed": false,
+        "is_heterogeneous": true,
+        "is_multigraph": false,
+        "is_weighted": true,
+        "n_components": 1,
+        "node_type_count": 1
+      },
+      "rawBytes": 80291,
+      "retrieved": "2026-02-16",
+      "sources": [
+        {
+          "downloads": [
+            {
+              "format": "pajek",
+              "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/2mode/cities.zip",
+              "innerPath": "da6+.net"
+            }
+          ],
+          "source": "pajek"
+        }
+      ]
+    },
+    "cora": {
+      "category": "citation",
+      "citation": {
+        "authors": [
+          "Andrew Kachites McCallum",
+          "Kamal Nigam",
+          "Jason Rennie",
+          "Kristie Seymore"
+        ],
+        "journal": "Information Retrieval",
+        "pages": "127-163",
+        "title": "Automating the Construction of Internet Portals with Machine Learning",
+        "type": "article",
+        "volume": 3,
+        "year": 2000
+      },
+      "citeKey": "sen2008collective",
+      "description": "Citation network of machine learning papers with 7 topic classes.",
+      "domain": "Citation network",
+      "edgeCount": 5429,
+      "id": "cora",
+      "name": "Cora",
+      "nodeCount": 2708,
+      "preferredFormat": "linqs",
+      "properties": {
+        "density": 0.0014399999126942077,
+        "edge_type_count": 1,
+        "has_self_loops": false,
+        "is_connected": false,
+        "is_cyclic": true,
+        "is_directed": true,
+        "is_heterogeneous": true,
+        "is_multigraph": false,
+        "is_weighted": false,
+        "n_components": 78,
+        "node_type_count": 1
+      },
+      "rawBytes": 0,
+      "retrieved": "2026-02-16",
+      "sources": [
+        {
+          "downloads": [
+            {
+              "description": "LINQS .cites + .content (tgz)",
+              "format": "linqs",
+              "url": "https://linqs-data.soe.ucsc.edu/public/lbc/cora.tgz"
+            }
+          ],
+          "source": "snap"
+        }
+      ]
+    },
+    "csphd": {
+      "citation": {
+        "authors": [
+          "Vladimir Batagelj",
+          "Andrej Mrvar"
+        ],
+        "title": "Pajek Datasets",
+        "type": "article",
+        "year": 2006
+      },
+      "description": "Computer Science PhD advisor-student relationships.",
+      "edgeCount": 0,
+      "id": "csphd",
+      "name": "CS PhD Genealogy",
+      "nodeCount": 0,
+      "properties": {
+        "density": 0.0009830391842808644,
+        "edge_type_count": 1,
+        "has_self_loops": false,
+        "is_connected": false,
+        "is_cyclic": true,
+        "is_directed": true,
+        "is_heterogeneous": true,
+        "is_multigraph": false,
+        "is_weighted": true,
+        "n_components": 168,
+        "node_type_count": 1
+      },
+      "rawBytes": 141274,
+      "retrieved": "2026-01-17",
+      "sources": [
+        {
+          "downloads": [
+            {
+              "format": "pajek",
+              "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/GED/CSphd.ZIP"
+            }
+          ],
+          "source": "pajek"
+        },
+        {
+          "downloads": [
+            {
+              "format": "matrix-market",
+              "url": "https://sparse.tamu.edu/MM/Pajek/CSphd.tar.gz"
+            },
+            {
+              "format": "rutherford-boeing",
+              "url": "https://sparse.tamu.edu/RB/Pajek/CSphd.tar.gz"
+            },
+            {
+              "format": "matlab",
+              "url": "https://sparse.tamu.edu/mat/Pajek/CSphd.tar.gz"
+            }
+          ],
+          "source": "suitesparse"
         }
       ]
     },
@@ -1055,6 +764,454 @@
             }
           ],
           "source": "network-repository"
+        }
+      ]
+    },
+    "ieee-cis-g": {
+      "citation": {
+        "authors": [
+          "Junheng Lin",
+          "Yibin Shen",
+          "Yifan Wang",
+          "Fangzhao Wu",
+          "Xiang Wang"
+        ],
+        "publisher": "Proceedings of the AAAI Conference on Artificial Intelligence",
+        "title": "H2GB: A Hierarchical Heterogeneous Graph Benchmark for Node Property Prediction",
+        "type": "conference",
+        "year": 2024
+      },
+      "description": "Heterogeneous financial fraud detection graph derived from the IEEE-CIS fraud detection dataset. Contains transaction and identity nodes with 22 edge types representing card, address, email, and device relations.",
+      "edgeCount": 1383371,
+      "id": "ieee-cis-g",
+      "name": "IEEE-CIS-G",
+      "nodeCount": 1592008,
+      "preferredFormat": "ieee-cis-zip",
+      "properties": {
+        "density": 1.091637494805802e-06,
+        "edge_type_count": 1,
+        "has_self_loops": false,
+        "is_connected": false,
+        "is_cyclic": true,
+        "is_directed": true,
+        "is_heterogeneous": true,
+        "is_multigraph": false,
+        "is_weighted": false,
+        "n_components": 354216,
+        "node_type_count": 2
+      },
+      "rawBytes": 0,
+      "retrieved": "2026-02-16",
+      "sources": [
+        {
+          "downloads": [
+            {
+              "description": "IEEE-CIS fraud detection graph from HuggingFace H2GB repository (ZIP with CSV files)",
+              "format": "ieee-cis-zip",
+              "url": "https://huggingface.co/datasets/junhongmit/H2GB/resolve/main/IEEE-CIS.zip"
+            }
+          ],
+          "source": "huggingface"
+        },
+        {
+          "downloads": [
+            {
+              "description": "H2GB format via Kaggle (requires authentication)",
+              "format": "h2gb",
+              "url": "https://www.kaggle.com/datasets/junhenglin/h2gb-ieee-cis-g"
+            }
+          ],
+          "source": "kaggle"
+        }
+      ]
+    },
+    "kg-nations": {
+      "category": "knowledge-graph",
+      "citation": {
+        "authors": [
+          "L. A. Zetterström"
+        ],
+        "title": "Knowledge Graph Embeddings",
+        "type": "thesis",
+        "year": 2021
+      },
+      "description": "Directed knowledge graph encoding relationships between 14 countries. Edges represent 55 interaction types (e.g. 'exports', 'accusation', 'aidgiven'). The same country pair can have multiple relation types, creating a dense multigraph. Used as a standard benchmark for knowledge graph embedding methods.",
+      "domain": "International relations knowledge graph",
+      "edgeCount": 1992,
+      "id": "kg-nations",
+      "name": "Nations Knowledge Graph",
+      "nodeCount": 14,
+      "preferredFormat": "tsv",
+      "properties": {
+        "has_self_loops": false,
+        "is_directed": true,
+        "is_heterogeneous": true,
+        "is_multigraph": true,
+        "is_weighted": false
+      },
+      "retrieved": "2026-04-19",
+      "sources": [
+        {
+          "downloads": [
+            {
+              "format": "tsv",
+              "url": "https://github.com/TimDettmers/ConvE/raw/master/nations.tar.gz"
+            }
+          ],
+          "source": "conve"
+        }
+      ]
+    },
+    "lesmis": {
+      "category": "small",
+      "citation": {
+        "authors": [
+          "Donald E. Knuth"
+        ],
+        "publisher": "Addison-Wesley",
+        "title": "The Stanford GraphBase: A Platform for Combinatorial Computing",
+        "type": "book",
+        "year": 1993
+      },
+      "citeKey": "knuth1993stanford",
+      "description": "Character co-appearance network from Les Misérables by Victor Hugo.",
+      "domain": "Fictional network",
+      "edgeCount": 254,
+      "id": "lesmis",
+      "maxPaths": 18,
+      "name": "Les Misérables",
+      "nodeCount": 77,
+      "preferredFormat": "konect-tarbz2",
+      "properties": {
+        "density": 0.08680792891319207,
+        "edge_type_count": 1,
+        "has_self_loops": false,
+        "is_connected": true,
+        "is_cyclic": true,
+        "is_directed": false,
+        "is_heterogeneous": false,
+        "is_multigraph": false,
+        "is_weighted": true,
+        "n_components": 1,
+        "node_type_count": 1
+      },
+      "rawBytes": 0,
+      "retrieved": "2026-02-16",
+      "sources": [
+        {
+          "downloads": [
+            {
+              "format": "konect-tarbz2",
+              "url": "http://konect.cc/files/download.tsv.moreno_lesmis.tar.bz2"
+            }
+          ],
+          "source": "konect"
+        }
+      ]
+    },
+    "nell-995": {
+      "category": "heterogeneous",
+      "citation": {
+        "authors": [
+          "Andrew Carlson",
+          "Justin Betteridge",
+          "Bryan Kisiel",
+          "Burr Settles",
+          "Estevam R. Hruschka Jr.",
+          "Tom M. Mitchell"
+        ],
+        "publisher": "Proceedings of the AAAI Conference on Artificial Intelligence",
+        "title": "Toward an Architecture for Never-Ending Language Learning",
+        "type": "conference",
+        "year": 2010
+      },
+      "citeKey": "carlson2010toward",
+      "description": "Heterogeneous knowledge graph from CMU's Never-Ending Language Learning system. Contains entities and relations automatically extracted from web text with 200 relation types. Used for knowledge graph completion, link prediction, and reasoning tasks. Challenging due to sparse triple coverage for many relations.",
+      "domain": "General knowledge graph",
+      "edgeCount": 149678,
+      "id": "nell-995",
+      "maxPaths": 15,
+      "name": "NELL-995",
+      "nodeCount": 74432,
+      "preferredFormat": "txt",
+      "properties": {
+        "density": 4.6516201857617345e-05,
+        "edge_type_count": 1,
+        "has_self_loops": true,
+        "is_connected": false,
+        "is_cyclic": true,
+        "is_directed": true,
+        "is_heterogeneous": true,
+        "is_multigraph": true,
+        "is_weighted": false,
+        "n_components": 8595,
+        "node_type_count": 2
+      },
+      "rawBytes": 0,
+      "retrieved": "2026-03-03",
+      "sources": [
+        {
+          "downloads": [
+            {
+              "description": "OpenKE preprocessed edge list (train2id.txt)",
+              "format": "txt",
+              "url": "https://raw.githubusercontent.com/thunlp/OpenKE/OpenKE-PyTorch/benchmarks/NELL-995/train2id.txt"
+            }
+          ],
+          "source": "openke"
+        }
+      ]
+    },
+    "netzschleuder-bison": {
+      "citation": [
+        [
+          "D. F Lott, \"Dominance relations and breeding rate in mature male American bison.\" Zeitschrift für Tierpsychologie 49(4), 418-432 (1979)",
+          "https://doi.org/10.1111/j.1439-0310.1979.tb00302.x"
+        ]
+      ],
+      "description": "Dominance relations among a group of American bisons in the National Bison Range in Moiese Montana, observed in 1972.[^icon]\n[^icon]: Description obtained from the [ICON](https://icon.colorado.edu) project.",
+      "edgeCount": 314,
+      "id": "netzschleuder-bison",
+      "name": "Bison dominance",
+      "nodeCount": 26,
+      "preferredFormat": "csv",
+      "properties": {
+        "has_self_loops": false,
+        "is_directed": true,
+        "is_heterogeneous": false,
+        "is_multigraph": false,
+        "is_weighted": true
+      },
+      "retrieved": "2026-04-20",
+      "sources": [
+        "http://konect.cc/networks/moreno_bison",
+        {
+          "downloads": [
+            {
+              "format": "netzschleuder",
+              "url": "https://networks.skewed.de/net/bison"
+            }
+          ],
+          "source": "netzschleuder"
+        }
+      ]
+    },
+    "oag-eng": {
+      "citation": {
+        "authors": [
+          "Junheng Lin",
+          "Yibin Shen",
+          "Yifan Wang",
+          "Fangzhao Wu",
+          "Xiang Wang"
+        ],
+        "publisher": "Proceedings of the AAAI Conference on Artificial Intelligence",
+        "title": "H2GB: A Hierarchical Heterogeneous Graph Benchmark for Node Property Prediction",
+        "type": "conference",
+        "year": 2024
+      },
+      "description": "Heterogeneous academic graph from the Open Academic Graph, focused on engineering papers. Contains papers, authors, venues, institutions, and fields of study with 22 relation types.",
+      "edgeCount": 12346854,
+      "id": "oag-eng",
+      "name": "OAG-Eng",
+      "nodeCount": 929315,
+      "preferredFormat": "pytorch-hetero-zip",
+      "properties": {
+        "density": 0,
+        "edge_type_count": 1,
+        "has_self_loops": false,
+        "is_connected": false,
+        "is_cyclic": false,
+        "is_directed": true,
+        "is_heterogeneous": true,
+        "is_multigraph": false,
+        "is_weighted": false,
+        "n_components": 3217795,
+        "node_type_count": 1
+      },
+      "rawBytes": 0,
+      "retrieved": "2026-02-16",
+      "sources": [
+        {
+          "downloads": [
+            {
+              "description": "Pre-cached Kaggle ZIP containing graph_Engineering.pt",
+              "format": "pytorch-hetero-zip",
+              "innerPath": "graph_Engineering.pt",
+              "url": "file:(local path withheld)"
+            }
+          ],
+          "source": "local-cache"
+        },
+        {
+          "downloads": [
+            {
+              "description": "OAG Engineering academic graph from HuggingFace H2GB repository (PyTorch HeteroData)",
+              "format": "pytorch-hetero",
+              "url": "https://huggingface.co/datasets/junhongmit/H2GB/resolve/main/OAG_Engineering.pt"
+            }
+          ],
+          "source": "huggingface"
+        },
+        {
+          "downloads": [
+            {
+              "description": "H2GB format via Kaggle (requires authentication)",
+              "format": "h2gb",
+              "url": "https://www.kaggle.com/datasets/junhenglin/h2gb-oag-eng"
+            }
+          ],
+          "source": "kaggle"
+        }
+      ]
+    },
+    "pajek-journals": {
+      "citation": {
+        "authors": [
+          "V. Batagelj",
+          "A. Mrvar"
+        ],
+        "title": "Computational journal citation network",
+        "type": "dataset",
+        "year": 2006
+      },
+      "description": "Citation network between 124 computational journals.",
+      "edgeCount": 6096,
+      "id": "pajek-journals",
+      "name": "Citation network between 124 computational journals",
+      "nodeCount": 124,
+      "properties": {
+        "density": 0.7912404930500918,
+        "edge_type_count": 1,
+        "has_self_loops": false,
+        "is_connected": true,
+        "is_cyclic": true,
+        "is_directed": false,
+        "is_heterogeneous": false,
+        "is_multigraph": true,
+        "is_weighted": true,
+        "n_components": 1,
+        "node_type_count": 1
+      },
+      "rawBytes": 739353,
+      "retrieved": "2026-02-16",
+      "sources": [
+        {
+          "downloads": [
+            {
+              "format": "pajek",
+              "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/"
+            },
+            {
+              "description": "Wayback Machine archive of original Pajek dataset",
+              "format": "pajek",
+              "url": "https://web.archive.org/web/20230601/https://web.archive.org/web/20130507053929/http://vlado.fmf.uni-lj.si/pub/networks/data/2mode/revije.zip"
+            }
+          ],
+          "source": "pajek"
+        },
+        {
+          "downloads": [
+            {
+              "format": "matrix-market",
+              "url": "https://sparse.tamu.edu/MM/Pajek/Journals.tar.gz"
+            },
+            {
+              "format": "rutherford-boeing",
+              "url": "https://sparse.tamu.edu/RB/Pajek/Journals.tar.gz"
+            },
+            {
+              "format": "matlab",
+              "url": "https://sparse.tamu.edu/mat/Pajek/Journals.tar.gz"
+            }
+          ],
+          "source": "suitesparse"
+        }
+      ]
+    },
+    "ss-hb-bcspwr09": {
+      "category": "suitesparse",
+      "description": "power network problem (1,723 nodes, 6,511 non-zeros)",
+      "edgeCount": 4118,
+      "id": "ss-hb-bcspwr09",
+      "name": "ss-hb-bcspwr09",
+      "nodeCount": 1723,
+      "properties": {
+        "density": 0.002776,
+        "has_self_loops": true,
+        "is_directed": false,
+        "is_multigraph": true,
+        "is_weighted": false,
+        "is_heterogeneous": false
+      },
+      "sources": [
+        {
+          "format": "json-cache",
+          "urls": []
+        }
+      ]
+    },
+    "wiki-vote": {
+      "category": "social",
+      "citation": {
+        "authors": [
+          "J. Leskovec",
+          "D. Huttenlocher",
+          "J. Kleinberg"
+        ],
+        "journal": "WWW",
+        "title": "Predicting Positive and Negative Links in Online Social Networks",
+        "type": "article",
+        "year": 2010
+      },
+      "citeKey": "leskovec2010signed",
+      "description": "Wikipedia who-votes-on-whom network for adminship elections.",
+      "domain": "Wikipedia voting network",
+      "edgeCount": 103689,
+      "id": "wiki-vote",
+      "name": "Wikipedia Vote Network",
+      "nodeCount": 7115,
+      "properties": {
+        "density": 0.003981420144693063,
+        "edge_type_count": 1,
+        "has_self_loops": false,
+        "is_connected": false,
+        "is_cyclic": true,
+        "is_directed": true,
+        "is_heterogeneous": false,
+        "is_multigraph": false,
+        "is_weighted": false,
+        "n_components": 24,
+        "node_type_count": 1
+      },
+      "rawBytes": 5316066,
+      "retrieved": "2026-01-17",
+      "sources": [
+        {
+          "downloads": [
+            {
+              "format": "various",
+              "url": "https://snap.stanford.edu/data/wiki-Vote.txt.gz"
+            }
+          ],
+          "source": "snap"
+        },
+        {
+          "downloads": [
+            {
+              "format": "matrix-market",
+              "url": "https://sparse.tamu.edu/MM/SNAP/wiki-Vote.tar.gz"
+            },
+            {
+              "format": "rutherford-boeing",
+              "url": "https://sparse.tamu.edu/RB/SNAP/wiki-Vote.tar.gz"
+            },
+            {
+              "format": "matlab",
+              "url": "https://sparse.tamu.edu/mat/SNAP/wiki-Vote.tar.gz"
+            }
+          ],
+          "source": "suitesparse"
         }
       ]
     }

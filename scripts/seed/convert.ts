@@ -66,18 +66,20 @@ interface Download {
   readonly innerPath: string | undefined;
 }
 
+const WAYBACK = /^https?:\/\/web\.archive\.org\/web\/(\d{8}(?:\d{6})?)(?:id_)?\/(https?:\/\/.+)$/;
+
 /**
- * Splits a Wayback Machine URL into the original URL and the snapshot timestamp, accepting both the page form and the raw `id_` form.
+ * Splits a Wayback Machine URL into the original URL and the snapshot timestamp, accepting both the page form and the raw `id_` form. A snapshot of a snapshot (the catalogue holds a few) resolves to the innermost one, whose timestamp is when the file itself was captured.
  * @param url - A URL.
  * @returns The original URL and timestamp, or undefined for a URL that is not a snapshot.
  */
 export function parseWayback(url: string): { readonly original: string; readonly timestamp: string } | undefined {
-  const match = /^https?:\/\/web\.archive\.org\/web\/(\d{8}(?:\d{6})?)(?:id_)?\/(https?:\/\/.+)$/.exec(url);
-  if (match?.[1] === undefined || match[2] === undefined) {
-    return undefined;
+  let found: { original: string; timestamp: string } | undefined;
+  for (let match = WAYBACK.exec(url); match?.[1] !== undefined && match[2] !== undefined; match = WAYBACK.exec(match[2])) {
+    found = { timestamp: match[1], original: match[2] };
   }
 
-  return { timestamp: match[1], original: match[2] };
+  return found;
 }
 
 /**
@@ -121,6 +123,9 @@ function archiveKindOf(url: string): Archive["kind"] | { readonly unsupported: s
   if (path.endsWith(".html") || path.endsWith(".htm") || path.endsWith(".aspx")) {
     return { unsupported: "the download is a web page, not a data file" };
   }
+  if (path.endsWith("/")) {
+    return { unsupported: "the download is a directory listing, not a data file" };
+  }
 
   return "none";
 }
@@ -136,19 +141,17 @@ const PARSERS: ReadonlyMap<string, Parser["format"] | "linqs"> = new Map([
   ["edgelist", "edge-list"],
   ["edges", "edge-list"],
   ["snap", "edge-list"],
-  ["tsv", "edge-list"],
-  ["txt", "edge-list"],
   ["gz", "edge-list"],
   ["linqs", "linqs"],
 ]);
 
-/** The file extension each parser's member usually carries, for an archive whose member the catalogue does not name. */
-const MEMBER_EXTENSIONS: Readonly<Record<Parser["format"] | "linqs", string>> = {
-  "matrix-market": ".mtx",
-  gml: ".gml",
-  pajek: ".net",
-  "edge-list": ".txt",
-  linqs: ".cites",
+/** The file extensions each parser's member carries, for an archive whose member the catalogue does not name. */
+const MEMBER_EXTENSIONS: Readonly<Record<Parser["format"] | "linqs", readonly string[]>> = {
+  "matrix-market": [".mtx"],
+  gml: [".gml"],
+  pajek: [".net", ".paj"],
+  "edge-list": [".txt"],
+  linqs: [".cites"],
 };
 
 /** Inner-path extensions the pipeline resolves a `various` download by (`get_parser_format`); anything else is its default edge list. */
@@ -187,8 +190,15 @@ function recipeFor(download: Download, datasetId: string): Chosen | { readonly u
   if (format === "landing-page") {
     return { unsupported: "a landing page, not a download" };
   }
+  // Knowledge-graph triple files: which columns hold the head and the tail varies by benchmark and is not recorded, so only one the pipeline itself fixes (an entry in PIPELINE_PARSER_OVERRIDES) reads as an edge list.
+  if ((format === "tsv" || format === "txt") && !PIPELINE_PARSER_OVERRIDES.has(datasetId)) {
+    return { unsupported: `format ${format} is a triple file whose head and tail columns the catalogue does not record` };
+  }
+  if (format === "various" && download.innerPath === undefined && kind !== "none" && kind !== "gzip") {
+    return { unsupported: "an archive in format various, whose member and format the catalogue does not record" };
+  }
   const innerExtension = download.innerPath === undefined ? undefined : /\.[^./]+$/.exec(download.innerPath.toLowerCase())?.[0];
-  const mapped = format === "various" ? (innerExtension === undefined ? "edge-list" : (VARIOUS_BY_EXTENSION.get(innerExtension) ?? "edge-list")) : PARSERS.get(format);
+  const mapped = format === "various" ? (innerExtension === undefined ? "edge-list" : (VARIOUS_BY_EXTENSION.get(innerExtension) ?? "edge-list")) : (format === "tsv" || format === "txt") ? "edge-list" : PARSERS.get(format);
   if (mapped === undefined) {
     return { unsupported: `format ${format} has a pipeline-specific parser with no declarative keepset form yet` };
   }
@@ -228,10 +238,10 @@ function recipeFor(download: Download, datasetId: string): Chosen | { readonly u
 
     return { url: download.url, archive: { kind, member: { path: `${name}/${name}.mtx` } }, parser, flags };
   }
-  const extension = format === "edges" || new URL(original).hostname === "nrvis.com" ? ".edges" : MEMBER_EXTENSIONS[mapped];
-  flags.push(`archive member chosen by extension ${extension}, which the source catalogue does not record`);
+  const extensions = format === "edges" || new URL(original).hostname === "nrvis.com" ? [".edges"] : MEMBER_EXTENSIONS[mapped];
+  flags.push(`archive member chosen by extension ${extensions.join(" or ")}, which the source catalogue does not record`);
 
-  return { url: download.url, archive: { kind, member: { extension } }, parser, flags };
+  return { url: download.url, archive: { kind, member: { extensions: [...extensions] } }, parser, flags };
 }
 
 /**
