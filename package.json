@@ -2,6 +2,9 @@
   "name": "keepset",
   "description": "Library, CLI and statically generated catalogue for dataset fetch-and-normalise recipes",
   "version": "0.4.0",
+  "bin": {
+    "keepset": "./dist-cli/keepset.mjs"
+  },
   "dependencies": {
     "fflate": "0.8.3",
     "twindex": "0.1.1",
@@ -49,6 +52,7 @@
   },
   "files": [
     "dist",
+    "dist-cli",
     "schemas"
   ],
   "keywords": [
