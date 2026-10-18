@@ -1,1 +1,1 @@
-npx pnpm run typecheck && npx pnpm run test && npx pnpm run build
+npx pnpm run build && npx pnpm run typecheck && npx pnpm run test
