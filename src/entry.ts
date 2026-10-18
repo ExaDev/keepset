@@ -89,8 +89,11 @@ export const RelativePathSchema = z.string().refine((path) => path.split("/").ev
   message: "must be a relative path of non-empty segments with no '.' or '..'",
 });
 
-/** Which file of an archive to read: a member path, matched against a member's whole path or its trailing segments (so `net.gml` finds `net/net.gml`), or the member whose name ends with an extension. Either must match exactly one member when the recipe runs; macOS resource-fork members (`__MACOSX/` and `._` files) never match. */
-export const ArchiveMemberSchema = z.union([z.object({ path: RelativePathSchema }).strict(), z.object({ extension: z.string().regex(/^\.[A-Za-z0-9][A-Za-z0-9.]*$/, { message: "must be a file extension such as .mtx" }) }).strict()]);
+/** Which file of an archive to read: a member path, matched against a member's whole path or its trailing segments (so `net.gml` finds `net/net.gml`), or the member whose name ends with one of a list of extensions (a format can have several, such as Pajek's `.net` and `.paj`). Either must match exactly one member when the recipe runs; macOS resource-fork members (`__MACOSX/` and `._` files) never match. */
+export const ArchiveMemberSchema = z.union([
+  z.object({ path: RelativePathSchema }).strict(),
+  z.object({ extensions: z.array(z.string().regex(/^\.[A-Za-z0-9][A-Za-z0-9.]*$/, { message: "must be a file extension such as .mtx" })).min(1) }).strict(),
+]);
 export type ArchiveMember = z.infer<typeof ArchiveMemberSchema>;
 
 /** How the downloaded bytes unpack into the one file the parser reads. */
