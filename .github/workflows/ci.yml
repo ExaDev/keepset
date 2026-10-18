@@ -91,6 +91,8 @@ jobs:
       - run: pnpm test
       # The committed seed entries and report must be exactly what the import produces from the committed source copies.
       - run: pnpm run seed:check
+      # The static site builds from the package's own catalogue; the Pages workflow deploys the same build from main.
+      - run: pnpm run site
       - run: pnpm exec publint
       - run: pnpm exec attw --pack --profile esm-only
 
