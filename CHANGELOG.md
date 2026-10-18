@@ -1,3 +1,19 @@
+# [0.4.0](https://github.com/ExaDev/keepset/compare/v0.3.0...v0.4.0) (2026-10-18)
+
+
+### Bug Fixes
+
+* download recipe sources byte for byte, never undoing a Content-Encoding ([bb10f03](https://github.com/ExaDev/keepset/commit/bb10f03d8b315564f2d6b91e0bc99fc7ef942ef9))
+
+
+### Features
+
+* add the seed import from the thesis pipeline's graph catalogue ([8909502](https://github.com/ExaDev/keepset/commit/8909502e374d4da26aca94d7131da9be1a6c04f2))
+* let an archive member selector name several extensions ([2c13182](https://github.com/ExaDev/keepset/commit/2c131821ca094d1e57c6336358c8340d16248e40))
+* read abbreviated Pajek section keywords ([07bd9a9](https://github.com/ExaDev/keepset/commit/07bd9a90ac9a60cadf424db2d5977e1ca8a17232))
+* refine the seed import's recipes against real downloads ([9d0ece3](https://github.com/ExaDev/keepset/commit/9d0ece3cefbe114ab6b1e11b0b2dff11b86a4729))
+* seed the graph/v1 catalogue from the thesis pipeline's catalogue ([db1145e](https://github.com/ExaDev/keepset/commit/db1145e4375ccd82c665cf43e380b8abf1cf43f0)), closes [#10](https://github.com/ExaDev/keepset/issues/10)
+
 # [0.3.0](https://github.com/ExaDev/keepset/compare/v0.2.0...v0.3.0) (2026-10-18)
 
 
