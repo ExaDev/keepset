@@ -1,10 +1,11 @@
 import { createHash } from "node:crypto";
-import { encode } from "twindex";
+import { assertRoundTrip, encode, RoundTripMismatchError } from "twindex";
 import { getDataset } from "../bundled";
 import { countTarget, getTarget, type CategoryTarget } from "../categories";
 import type { Dataset } from "../catalogue";
 import type { Entry, Snapshot, Source } from "../entry";
 import { KeepsetError, RecipeError, type RecipeStep } from "../errors";
+import type { NativeEdge, NativeNode } from "../parsers/native";
 import { parseNative } from "../parsers/parse-native";
 import type { JsonScalar } from "../targets/graph-v1";
 import { unpack, type Unpacked } from "./archive";
@@ -86,15 +87,20 @@ function metaOf(entry: Entry): Record<string, JsonScalar> {
   return { id: entry.id, name: entry.name, ...entry.properties };
 }
 
+/** A recipe run up to the native document, before the crosswalk: what both a fetch and a round-trip check start from. */
+interface NativeRun {
+  readonly native: { readonly meta: Record<string, JsonScalar>; readonly nodes: readonly NativeNode[]; readonly edges: readonly NativeEdge[] };
+  readonly provenance: Provenance;
+}
+
 /**
- * Runs a dataset's recipe: downloads the source (from its pinned snapshot when the source is dead), unpacks the archive, parses the native shape, applies the twindex crosswalk and validates the result against the category target. The native document the crosswalk receives is the parser's output with `meta` built from the entry.
- * @param dataset - A dataset from any catalogue.
+ * Runs a recipe's download, extract and parse steps, and builds the native document the crosswalk receives: the parser's output with `meta` built from the entry.
+ * @param dataset - The dataset.
  * @param options - The network port, abort signal and clock.
- * @returns The resolved target with its provenance and any count warnings.
- * @throws RecipeError naming the entry and the failing step; nothing partial or default-shaped is ever returned.
+ * @returns The native document and the provenance of its bytes.
  */
-export async function fetchEntry(dataset: Dataset, options: FetchOptions = {}): Promise<FetchedDataset> {
-  const { entry, crosswalk } = dataset;
+async function runToNative(dataset: Dataset, options: FetchOptions): Promise<NativeRun> {
+  const { entry } = dataset;
   const { fetch: fetchPort = downloadRaw, signal, now = () => new Date() } = options;
   const { recipe } = entry;
   if (recipe.status === "not-fetchable") {
@@ -116,8 +122,35 @@ export async function fetchEntry(dataset: Dataset, options: FetchOptions = {}): 
     return new Uint8Array(await response.arrayBuffer());
   });
   const unpacked: Unpacked = await step(entry.id, "extract", () => unpack(bytes, recipe.archive));
-  const native = await step(entry.id, "parse", () => parseNative(unpacked.bytes, recipe.parser));
-  const encoded = await step(entry.id, "crosswalk", () => encode(crosswalk, { meta: metaOf(entry), nodes: native.nodes, edges: native.edges }));
+  const parsed = await step(entry.id, "parse", () => parseNative(unpacked.bytes, recipe.parser));
+
+  return {
+    native: { meta: metaOf(entry), nodes: parsed.nodes, edges: parsed.edges },
+    provenance: {
+      entryId: entry.id,
+      catalogue: dataset.catalogue,
+      category: entry.category,
+      source: { url: source.url, status: source.status, ...(source.snapshot === undefined ? {} : { snapshot: source.snapshot }) },
+      fetchedUrl,
+      retrievedAt,
+      sha256: createHash("sha256").update(bytes).digest("hex"),
+      byteLength: bytes.byteLength,
+      ...(unpacked.member === undefined ? {} : { member: unpacked.member }),
+    },
+  };
+}
+
+/**
+ * Runs a dataset's recipe: downloads the source (from its pinned snapshot when the source is dead), unpacks the archive, parses the native shape, applies the twindex crosswalk and validates the result against the category target. The native document the crosswalk receives is the parser's output with `meta` built from the entry.
+ * @param dataset - A dataset from any catalogue.
+ * @param options - The network port, abort signal and clock.
+ * @returns The resolved target with its provenance and any count warnings.
+ * @throws RecipeError naming the entry and the failing step; nothing partial or default-shaped is ever returned.
+ */
+export async function fetchEntry(dataset: Dataset, options: FetchOptions = {}): Promise<FetchedDataset> {
+  const { entry, crosswalk } = dataset;
+  const { native, provenance } = await runToNative(dataset, options);
+  const encoded = await step(entry.id, "crosswalk", () => encode(crosswalk, native));
   const data = await step(entry.id, "validate", () => {
     const result = getTarget(entry.category).safeParse(encoded);
     if (!result.success) {
@@ -132,18 +165,6 @@ export async function fetchEntry(dataset: Dataset, options: FetchOptions = {}): 
     .filter(([key, expected]) => counts.get(key) !== expected)
     .map(([key, expected]) => `${key}: the entry records ${String(expected)}, the fetched result has ${String(counts.get(key))}`);
 
-  const provenance: Provenance = {
-    entryId: entry.id,
-    catalogue: dataset.catalogue,
-    category: entry.category,
-    source: { url: source.url, status: source.status, ...(source.snapshot === undefined ? {} : { snapshot: source.snapshot }) },
-    fetchedUrl,
-    retrievedAt,
-    sha256: createHash("sha256").update(bytes).digest("hex"),
-    byteLength: bytes.byteLength,
-    ...(unpacked.member === undefined ? {} : { member: unpacked.member }),
-  };
-
   return { dataset, data, provenance, warnings };
 }
 
@@ -156,4 +177,40 @@ export async function fetchEntry(dataset: Dataset, options: FetchOptions = {}): 
  */
 export async function fetchDataset(id: string, options: FetchOptions = {}): Promise<FetchedDataset> {
   return fetchEntry(getDataset(id), options);
+}
+
+/** Whether decoding a dataset's encoded native document gives the native document back, with the provenance of the bytes it was checked on. */
+export type RoundTripReport = { readonly holds: true; readonly provenance: Provenance } | { readonly holds: false; readonly path: string; readonly message: string; readonly provenance: Provenance };
+
+/**
+ * Checks a dataset's crosswalk on its real data: runs the recipe to the native document, then twindex's `assertRoundTrip`, which encodes it, decodes the result and compares the two over every path the crosswalk promises to preserve.
+ * @param dataset - A dataset from any catalogue.
+ * @param options - The network port, abort signal and clock.
+ * @returns Whether the round trip holds, and where it first differs when it does not.
+ * @throws RecipeError naming the entry and the failing step when the recipe fails before the comparison, or when the crosswalk cannot run.
+ */
+export async function roundTripEntry(dataset: Dataset, options: FetchOptions = {}): Promise<RoundTripReport> {
+  const { native, provenance } = await runToNative(dataset, options);
+  try {
+    assertRoundTrip(dataset.crosswalk, [native]);
+  } catch (error) {
+    // A mismatch is the answer this check exists to give, so it becomes the report; any other failure is the crosswalk failing to run.
+    if (error instanceof RoundTripMismatchError) {
+      return { holds: false, path: error.path, message: error.message, provenance };
+    }
+    throw new RecipeError(dataset.entry.id, "crosswalk", error instanceof Error ? error.message : String(error), { cause: error });
+  }
+
+  return { holds: true, provenance };
+}
+
+/**
+ * Runs `roundTripEntry` on a dataset of the bundled catalogue by id.
+ * @param id - The entry id.
+ * @param options - The network port, abort signal and clock.
+ * @returns Whether the round trip holds.
+ * @throws DatasetNotFoundError when no entry has that id, and RecipeError as `roundTripEntry` does.
+ */
+export async function roundTripDataset(id: string, options: FetchOptions = {}): Promise<RoundTripReport> {
+  return roundTripEntry(getDataset(id), options);
 }
