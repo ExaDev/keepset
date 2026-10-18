@@ -1,5 +1,18 @@
 import { waybackUrl } from "../entry";
 
+/** The shared topology crosswalk, as catalogue/crosswalks/graph-v1/topology.json holds it. */
+export const topologyCrosswalk = {
+  source: "keepset/topology",
+  target: "graph/v1",
+  rules: [
+    { op: "move", from: "meta", to: "meta" },
+    { op: "move", from: "nodes[].id", to: "nodes[].id" },
+    { op: "move", from: "edges[].source", to: "edges[].source" },
+    { op: "move", from: "edges[].target", to: "edges[].target" },
+  ],
+  oneWay: [],
+};
+
 /** A fetchable entry with a live source and an inline crosswalk. */
 export const liveEntry = {
   id: "karate",
@@ -49,7 +62,7 @@ export const deadEntry = {
   licence: { kind: "spdx", id: "CC-BY-4.0" },
   citations: [],
   recipe: { status: "fetchable", source: 0, archive: { kind: "zip", member: { path: "celegans_metabolic.net" } }, parser: { format: "pajek", encoding: "latin1" } },
-  crosswalk: { file: "crosswalks/graph-v1/pajek.json" },
+  crosswalk: { file: "crosswalks/graph-v1/topology.json" },
   expectedCounts: {},
   properties: {},
 };
@@ -65,3 +78,19 @@ export const notFetchableEntry = {
 
 /** One of each entry shape, for round-trip and schema-agreement tests. */
 export const representativeEntries = [liveEntry, deadEntry, notFetchableEntry];
+
+/** A catalogue manifest for fixture catalogues. */
+export const fixtureManifest = {
+  id: "fixture",
+  name: "fixture catalogue",
+  description: "Entries for tests.",
+  version: "1.2.3",
+  repository: "https://example.org/fixture",
+};
+
+/** A catalogue index over the representative entries, with the topology crosswalk file they reference. */
+export const fixtureIndex = {
+  manifest: fixtureManifest,
+  crosswalks: { "crosswalks/graph-v1/topology.json": topologyCrosswalk },
+  entries: representativeEntries,
+};

@@ -3,6 +3,7 @@
   "description": "Library, CLI and statically generated catalogue for dataset fetch-and-normalise recipes",
   "version": "0.2.0",
   "dependencies": {
+    "fflate": "0.8.3",
     "twindex": "0.1.1",
     "zod": "4.6.5"
   },
@@ -40,6 +41,10 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js"
     },
+    "./node": {
+      "types": "./dist/node/fetch-dataset.d.ts",
+      "import": "./dist/node/fetch-dataset.js"
+    },
     "./schemas/*.schema.json": "./schemas/*.schema.json"
   },
   "files": [
@@ -68,7 +73,8 @@
     "url": "git+https://github.com/ExaDev/keepset.git"
   },
   "scripts": {
-    "build": "tsdown && tsx scripts/generate-json-schema.ts",
+    "build": "pnpm run catalogue && tsdown && tsx scripts/generate-json-schema.ts",
+    "catalogue": "tsx scripts/build-catalogue.ts",
     "lint": "eslint . --fix --cache --max-warnings 0",
     "lint:check": "eslint . --cache --max-warnings 0",
     "prepare": "husky",

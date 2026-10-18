@@ -14,11 +14,15 @@ export interface CategoryTargets {
 /** The normalised shape of any category: what `fetchDataset` can resolve to. */
 export type CategoryTarget = CategoryTargets[CategoryId];
 
-/** One category: its id, what it holds, and the schema of its normalisation target. */
+/** The keys of a target whose values are arrays: the collections an entry's `expectedCounts` may name. */
+export type CountedKey<Target> = { readonly [Key in keyof Target]: Target[Key] extends readonly unknown[] ? Key : never }[keyof Target] & string;
+
+/** One category: its id, what it holds, the schema of its normalisation target, and which of the target's arrays an entry may record expected counts for. */
 export interface Category<Id extends CategoryId = CategoryId> {
   readonly id: Id;
   readonly description: string;
   readonly target: z.ZodType<CategoryTargets[Id]>;
+  readonly counted: readonly CountedKey<CategoryTargets[Id]>[];
 }
 
 /** The registry. Adding a category is adding its id to `CategoryIdSchema` and its entry here, with its target schema beside graph/v1's in src/targets/: the mapped type makes the compiler reject a registry that misses an id or has one too many. */
@@ -27,6 +31,7 @@ const registry: { readonly [Id in CategoryId]: Category<Id> } = {
     id: "graph/v1",
     description: "A graph as { meta, nodes, edges }: a flat record of scalar metadata, nodes carrying at least an id, and edges carrying at least source and target node ids, with optional node and edge types.",
     target: GraphV1Schema,
+    counted: ["nodes", "edges"],
   },
 };
 
@@ -71,4 +76,16 @@ export function kindOf(id: CategoryId): string {
 /** @returns Every registered category, in id order. */
 export function listCategories(): readonly Category[] {
   return CategoryIdSchema.options.map((id) => getCategory(id));
+}
+
+/**
+ * Counts the collections an entry may record expected counts for, in a resolved target.
+ * @param id - The target's category.
+ * @param target - A resolved target of that category.
+ * @returns The length of each counted array, by key.
+ */
+export function countTarget(id: CategoryId, target: CategoryTarget): ReadonlyMap<string, number> {
+  const category = getCategory(id);
+
+  return new Map(category.counted.map((key) => [key, target[key].length]));
 }

@@ -3,8 +3,8 @@ import js from '@eslint/js';
 import exadev from '@exadev/eslint-config';
 
 export default defineConfig(
-  // schemas/ is generated build output (see scripts/generate-json-schema.ts), not source to lint.
-  { ignores: ['dist', 'coverage', 'node_modules', 'reports', 'schemas'] },
+  // schemas/ and src/generated/ are build output (see scripts/generate-json-schema.ts and scripts/build-catalogue.ts), not source to lint.
+  { ignores: ['dist', 'coverage', 'node_modules', 'reports', 'schemas', 'src/generated'] },
   {
     languageOptions: {
       parserOptions: { project: ['./tsconfig.json', './tsconfig.node.json'], tsconfigRootDir: import.meta.dirname },

@@ -1,6 +1,6 @@
 import { CrosswalkSchema } from "twindex";
 import { z } from "zod";
-import { CategoryIdSchema } from "./categories";
+import { CategoryIdSchema, getCategory } from "./categories";
 import { define } from "./define";
 import { CatalogueSyntaxError, type SyntaxIssue } from "./errors";
 import { recordOf } from "./record";
@@ -17,8 +17,8 @@ const RecordKeySchema = z.string().regex(/^[A-Za-z][A-Za-z0-9]*$/, { message: "m
 /** A calendar date, `YYYY-MM-DD`. */
 const IsoDateSchema = z.iso.date();
 
-/** An http or https URL: the only schemes a recipe may download from. */
-const HttpUrlSchema = z.httpUrl();
+/** An http or https URL: the only schemes a recipe may download from. Any host is allowed, an address or a single-label name included, so a fork can point a recipe at a server on its own network. */
+export const HttpUrlSchema = z.url({ protocol: /^https?$/ });
 
 /** A Wayback Machine timestamp, `YYYYMMDD` or `YYYYMMDDhhmmss`: the moment the snapshot is pinned to. */
 export const WaybackTimestampSchema = z.string().regex(/^\d{8}(?:\d{6})?$/, { message: "must be a Wayback timestamp, YYYYMMDD or YYYYMMDDhhmmss" });
@@ -139,6 +139,9 @@ export type Recipe = z.infer<typeof RecipeSchema>;
 export const CrosswalkReferenceSchema = z.union([CrosswalkSchema, z.object({ file: RelativePathSchema.refine((path) => path.endsWith(".json"), { message: "must name a .json file" }) }).strict()]);
 export type CrosswalkReference = z.infer<typeof CrosswalkReferenceSchema>;
 
+/** The meta keys a fetched result takes from the entry's own descriptor, which its `properties` therefore may not also set. */
+export const RESERVED_META_KEYS = ["id", "name"] as const;
+
 /**
  * One catalogue entry: the descriptor (id, name, description, domain, tags), the category whose target the entry resolves to, where the bytes come from, the licence and citations, the recipe, the crosswalk, the counts a fetched result is expected to have and the dataset's recorded properties. The kind of data is the category's (`kindOf(category)`), never a second field that could disagree with it.
  */
@@ -166,6 +169,17 @@ export const EntrySchema = define(
       }
       if ("target" in entry.crosswalk && entry.crosswalk.target !== entry.category) {
         ctx.addIssue({ code: "custom", path: ["crosswalk", "target"], message: `must be the entry's category, ${entry.category}` });
+      }
+      const counted: readonly string[] = getCategory(entry.category).counted;
+      for (const key of Object.keys(entry.expectedCounts)) {
+        if (!counted.includes(key)) {
+          ctx.addIssue({ code: "custom", path: ["expectedCounts", key], message: `${entry.category} counts only ${counted.join(", ")}` });
+        }
+      }
+      for (const key of RESERVED_META_KEYS) {
+        if (Object.hasOwn(entry.properties, key)) {
+          ctx.addIssue({ code: "custom", path: ["properties", key], message: `${key} is set from the entry itself in a fetched result's meta, so it cannot be a property` });
+        }
       }
     }),
 );

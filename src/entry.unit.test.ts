@@ -13,7 +13,7 @@ function without(doc: Readonly<Record<string, unknown>>, field: string): Record<
 describe("the entry format", () => {
   it("round-trips representative entries through parse and serialise", () => {
     for (const doc of representativeEntries) {
-      const text = `${JSON.stringify(doc, undefined, 2)}\n`;
+      const text = serialise(parseEntry(doc));
       const parsed = parseEntry(JSON.parse(text));
       expect(parsed).toEqual(doc);
       expect(serialise(parsed)).toBe(text);
@@ -60,7 +60,22 @@ describe("the entry format", () => {
   it("rejects record keys Object.prototype would react to", () => {
     const properties: unknown = JSON.parse('{"__proto__": 1}');
     expect(EntrySchema.is({ ...liveEntry, properties })).toBe(false);
-    expect(EntrySchema.is({ ...liveEntry, expectedCounts: { constructor: 1 } })).toBe(true);
+    expect(EntrySchema.is({ ...liveEntry, properties: { constructor: 1 } })).toBe(true);
+  });
+
+  it("rejects expected counts for a collection the category does not count", () => {
+    expect(EntrySchema.is({ ...liveEntry, expectedCounts: { meta: 1 } })).toBe(false);
+    expect(EntrySchema.is({ ...liveEntry, expectedCounts: { constructor: 1 } })).toBe(false);
+  });
+
+  it("rejects properties that would overwrite the id or name a fetched result's meta takes from the entry", () => {
+    expect(EntrySchema.is({ ...liveEntry, properties: { id: "other" } })).toBe(false);
+    expect(EntrySchema.is({ ...liveEntry, properties: { name: "other" } })).toBe(false);
+  });
+
+  it("accepts an http URL on an address or a single-label host", () => {
+    expect(EntrySchema.is({ ...liveEntry, sources: [{ ...liveEntry.sources[0], url: "http://127.0.0.1:8080/net.txt" }] })).toBe(true);
+    expect(EntrySchema.is({ ...liveEntry, sources: [{ ...liveEntry.sources[0], url: "http://datastore/net.txt" }] })).toBe(true);
   });
 
   it("rejects a download URL that is not http or https", () => {

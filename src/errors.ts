@@ -1,7 +1,7 @@
 /** The root of this package's error taxonomy: every error keepset throws is a `KeepsetError`, so callers can catch the family with one check. */
 export class KeepsetError extends Error {
-  constructor(message: string) {
-    super(message);
+  constructor(message: string, options?: ErrorOptions) {
+    super(message, options);
     this.name = new.target.name;
   }
 }
@@ -25,13 +25,13 @@ export interface SyntaxIssue {
   readonly message: string;
 }
 
-/** Thrown when an entry or a catalogue manifest fails its schema. Carries every issue found, not just the first, so one failed parse reports the whole document. */
+/** Thrown when an entry, a catalogue manifest or a catalogue index fails its schema. Carries every issue found, not just the first, so one failed parse reports the whole document. */
 export class CatalogueSyntaxError extends KeepsetError {
-  readonly document: "entry" | "manifest";
+  readonly document: "entry" | "manifest" | "catalogue";
 
   readonly issues: readonly SyntaxIssue[];
 
-  constructor(document: "entry" | "manifest", issues: readonly SyntaxIssue[]) {
+  constructor(document: "entry" | "manifest" | "catalogue", issues: readonly SyntaxIssue[]) {
     super(`${document} syntax error: ${issues.map((issue) => `${issue.path}: ${issue.message}`).join("; ")}`);
     this.document = document;
     this.issues = issues;
@@ -48,5 +48,34 @@ export class NativeParseError extends KeepsetError {
     super(`${format} line ${String(line)}: ${message}`);
     this.format = format;
     this.line = line;
+  }
+}
+
+/** Thrown when an archive does not hold exactly one member the recipe's member selector matches, or is not a well-formed archive of its stated kind. */
+export class ArchiveError extends KeepsetError {}
+
+/** Thrown when no entry in the catalogue has the requested id. */
+export class DatasetNotFoundError extends KeepsetError {
+  readonly datasetId: string;
+
+  constructor(datasetId: string) {
+    super(`no dataset ${JSON.stringify(datasetId)} in the catalogue`);
+    this.datasetId = datasetId;
+  }
+}
+
+/** The step of a recipe that failed: the recipe itself (not fetchable), downloading the source, unpacking the archive, parsing the native shape, applying the crosswalk, or validating the result against the category target. */
+export type RecipeStep = "recipe" | "download" | "extract" | "parse" | "crosswalk" | "validate";
+
+/** Thrown when running an entry's recipe fails. Names the entry and the failing step, and carries the underlying error as `cause`; a recipe never resolves to a partial or default-shaped result. */
+export class RecipeError extends KeepsetError {
+  readonly entryId: string;
+
+  readonly step: RecipeStep;
+
+  constructor(entryId: string, step: RecipeStep, message: string, options?: ErrorOptions) {
+    super(`${entryId}: ${step} failed: ${message}`, options);
+    this.entryId = entryId;
+    this.step = step;
   }
 }

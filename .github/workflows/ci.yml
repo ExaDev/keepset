@@ -154,7 +154,7 @@ jobs:
       - name: Audit every workflow and action
         run: uvx zizmor@1.30.1 --offline --config .github/zizmor.yml --no-progress .
 
-  # The packed tarball, not the source tree, is what consumers install: this proves the published files and exports map work in a clean project on every Node line the package supports. The toolchain needs Node 22, so the package is built and packed on 22 and the consumer check runs on the Node under test. Until the library API lands (issue #9), the check proves the entry point installs and imports through the exports map on both Node lines; the listDatasets and fetchDataset checks join it when the library core exists.
+  # The packed tarball, not the source tree, is what consumers install: this proves the published files and exports map work in a clean project on every Node line the package supports. The toolchain needs Node 22, so the package is built and packed on 22 and the consumer check runs on the Node under test.
   package:
     name: Package (Node ${{ matrix.node }})
     needs: determine-runner
@@ -188,14 +188,78 @@ jobs:
       - name: Install the tarball into the scratch project
         working-directory: ${{ runner.temp }}/scratch
         run: npm install "$RUNNER_TEMP"/pack/*.tgz # zizmor: ignore[adhoc-packages]
-      - name: Import the package through its exports map
+      - name: Query the catalogue and run a recipe through the installed package
         working-directory: ${{ runner.temp }}/scratch
         run: |
           cat > check.mjs <<'EOF'
           import assert from 'node:assert/strict';
-          import * as keepset from 'keepset';
+          import { once } from 'node:events';
+          import { readFileSync } from 'node:fs';
+          import { createServer } from 'node:http';
+          import { dirname, join } from 'node:path';
+          import { createCatalogue, DatasetNotFoundError, getDataset, getManifest, listDatasets } from 'keepset';
+          import { fetchEntry } from 'keepset/node';
 
-          assert.ok(typeof keepset === 'object');
+          // The browser-safe entry's whole import graph must be free of Node built-ins: follow its relative imports through the installed dist and refuse any node: specifier.
+          const dist = join(import.meta.dirname, 'node_modules/keepset/dist');
+          const pending = ['index.js'];
+          const seen = new Set();
+          while (pending.length > 0) {
+            const file = pending.pop();
+            if (seen.has(file)) continue;
+            seen.add(file);
+            const source = readFileSync(join(dist, file), 'utf8');
+            assert.doesNotMatch(source, /from\s*["']node:/, `${file} imports a Node built-in`);
+            for (const [, specifier] of source.matchAll(/from\s*["'](\.[^"']+)["']/g)) pending.push(join(dirname(file), specifier));
+          }
+
+          assert.equal(getManifest().id, 'keepset');
+          for (const dataset of listDatasets()) assert.equal(getDataset(dataset.entry.id), dataset);
+          assert.throws(() => getDataset('no-such-entry'), DatasetNotFoundError);
+
+          // A local fixture source: the recipe downloads over real HTTP from this process, so no test depends on the network.
+          const server = createServer((_request, response) => response.end('% fixture\n1 2\n2 3\n'));
+          server.listen(0, '127.0.0.1');
+          await once(server, 'listening');
+          const url = `http://127.0.0.1:${server.address().port}/net.txt`;
+          const catalogue = createCatalogue({
+            manifest: { id: 'scratch', name: 'scratch', description: 'A consumer catalogue.', version: '1.0.0', repository: 'https://example.org/scratch' },
+            crosswalks: {},
+            entries: [
+              {
+                id: 'fixture-net',
+                name: 'Fixture network',
+                tags: [],
+                category: 'graph/v1',
+                sources: [{ url, retrieved: '2026-10-18', status: 'live' }],
+                licence: { kind: 'unrecorded' },
+                citations: [],
+                recipe: { status: 'fetchable', source: 0, archive: { kind: 'none' }, parser: { format: 'edge-list', encoding: 'utf-8', delimiter: 'whitespace', skipLines: 0, commentPrefixes: ['%'], sourceColumn: 0, targetColumn: 1 } },
+                crosswalk: {
+                  source: 'keepset/topology',
+                  target: 'graph/v1',
+                  rules: [
+                    { op: 'move', from: 'meta', to: 'meta' },
+                    { op: 'move', from: 'nodes[].id', to: 'nodes[].id' },
+                    { op: 'move', from: 'edges[].source', to: 'edges[].source' },
+                    { op: 'move', from: 'edges[].target', to: 'edges[].target' },
+                  ],
+                  oneWay: [],
+                },
+                expectedCounts: { nodes: 3, edges: 2 },
+                properties: { directed: true },
+              },
+            ],
+          });
+          const fetched = await fetchEntry(catalogue.getDataset('fixture-net'));
+          server.close();
+          assert.deepEqual(fetched.data, {
+            meta: { id: 'fixture-net', name: 'Fixture network', directed: true },
+            nodes: [{ id: '1' }, { id: '2' }, { id: '3' }],
+            edges: [{ source: '1', target: '2' }, { source: '2', target: '3' }],
+          });
+          assert.deepEqual(fetched.warnings, []);
+          assert.equal(fetched.provenance.fetchedUrl, url);
           EOF
           node check.mjs
 
