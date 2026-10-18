@@ -1,0 +1,17 @@
+# This is a single-package repo, not a real pnpm workspace: packages is deliberately empty. The file exists to carry pnpm settings.
+packages: []
+# Every dependency add or update writes an exact version, never a range: a floating range lets a routine `pnpm install` silently resolve to a version nobody has reviewed.
+saveExact: true
+
+# ExaDev's own packages are exempt from the minimum release age: the gate guards against a compromised third-party maintainer, which does not apply to a package this organisation publishes itself. CI never reads the global pnpm config, so the exemption is stated here. trilean and its exact-pinned dependency trilean-regex are named ahead of their first appearance: the twindex dependency planned for the library core (issue #9) pulls both from the registry, and both are unscoped but ours.
+minimumReleaseAgeExclude:
+  - "@exadev/eslint-config"
+  - "trilean"
+  - "trilean-regex"
+
+# Seven days, matching the global install policy on the development machines: CI never reads a global pnpm config, so the gate is stated here where every install sees it.
+minimumReleaseAge: 10080
+
+# Every dependency in the tree that ships an install script, and whether it may run. pnpm fails the install outright while any is neither allowed nor refused. esbuild (tsdown's bundler) needs its script: it is how the package fetches its own platform's binary, and tsdown does not run at all without it.
+allowBuilds:
+  esbuild: true
