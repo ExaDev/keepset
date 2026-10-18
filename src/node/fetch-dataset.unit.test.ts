@@ -4,7 +4,7 @@ import { createCatalogue, type Dataset } from "../catalogue";
 import { DatasetNotFoundError, KeepsetError, RecipeError, type RecipeStep } from "../errors";
 import { gzip, tar, zip } from "../test-support/archives";
 import { deadEntry, fixtureIndex, liveEntry, notFetchableEntry } from "../test-support/entries";
-import { downloadUrl, fetchDataset, fetchEntry, type FetchPort } from "./fetch-dataset";
+import { downloadUrl, fetchDataset, fetchEntry, roundTripDataset, roundTripEntry, type FetchPort } from "./fetch-dataset";
 
 const karateText = "% karate excerpt\n1 2\n2 3\n3 1\n";
 
@@ -148,5 +148,31 @@ describe("downloadUrl", () => {
 describe("fetchDataset", () => {
   it("resolves ids against the bundled catalogue", async () => {
     await expect(fetchDataset("no-such-entry")).rejects.toThrow(DatasetNotFoundError);
+  });
+});
+
+describe("roundTripEntry", () => {
+  it("holds when the crosswalk preserves every path of the native document", async () => {
+    const { fetch } = servedBy({ "https://example.org/data/karate.txt": karateText });
+    const report = await roundTripEntry(datasetWith(liveEntry), { fetch, now });
+    expect(report).toMatchObject({ holds: true, provenance: { entryId: "karate" } });
+  });
+
+  it("reports the first path a lossy crosswalk loses", async () => {
+    const { fetch } = servedBy({ "https://example.org/data/karate.txt": karateText });
+    const withoutMeta = { ...liveEntry, crosswalk: { ...liveEntry.crosswalk, rules: liveEntry.crosswalk.rules.filter((rule) => rule.from !== "meta") } };
+    const report = await roundTripEntry(datasetWith(withoutMeta), { fetch, now });
+    // twindex names the record whose keys differ, here the document root.
+    expect(report).toMatchObject({ holds: false, path: "" });
+    expect(report.holds ? "" : report.message).toMatch(/records differ in keys: edges,meta,nodes against edges,nodes/);
+  });
+
+  it("fails loudly when the recipe fails before the comparison", async () => {
+    const error = await failure(roundTripEntry(datasetWith(notFetchableEntry), { now }));
+    expect(error.step).toBe("recipe");
+  });
+
+  it("resolves ids against the bundled catalogue", async () => {
+    await expect(roundTripDataset("no-such-entry")).rejects.toThrow(DatasetNotFoundError);
   });
 });
