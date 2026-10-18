@@ -1,0 +1,151 @@
+import { CrosswalkSchema, validateCrosswalk, type Crosswalk } from "twindex";
+import { z } from "zod";
+import { kindOf } from "./categories";
+import { define } from "./define";
+import { EntrySchema, RelativePathSchema, toIssues, type Entry } from "./entry";
+import { CatalogueSyntaxError, DatasetNotFoundError } from "./errors";
+import { ManifestSchema, type Manifest } from "./manifest";
+import { getOwn } from "./own";
+import { recordOf } from "./record";
+
+/**
+ * A catalogue index: the manifest, every entry, and every crosswalk file of the catalogue, keyed by its catalogue-relative path. The build assembles it from a catalogue directory; a consumer holding its own catalogue (a fork, say) can pass one to `createCatalogue`. Entry ids are unique, every crosswalk passes twindex's structural validation, every crosswalk file reference resolves, and every crosswalk's target is the category of each entry that uses it.
+ */
+export const CatalogueIndexSchema = define(
+  z
+    .object({
+      manifest: ManifestSchema,
+      crosswalks: recordOf(RelativePathSchema, CrosswalkSchema),
+      entries: z.array(EntrySchema),
+    })
+    .strict()
+    .superRefine((index, ctx) => {
+      for (const [file, crosswalk] of Object.entries(index.crosswalks)) {
+        for (const issue of validateCrosswalk(crosswalk)) {
+          ctx.addIssue({ code: "custom", path: ["crosswalks", file], message: `rule ${String(issue.ruleIndex)}: ${issue.message}` });
+        }
+      }
+      const seen = new Set<string>();
+      for (const [position, entry] of index.entries.entries()) {
+        if (seen.has(entry.id)) {
+          ctx.addIssue({ code: "custom", path: ["entries", position, "id"], message: `duplicate entry id ${entry.id}` });
+        }
+        seen.add(entry.id);
+        if (!("file" in entry.crosswalk)) {
+          for (const issue of validateCrosswalk(entry.crosswalk)) {
+            ctx.addIssue({ code: "custom", path: ["entries", position, "crosswalk"], message: `rule ${String(issue.ruleIndex)}: ${issue.message}` });
+          }
+        } else {
+          const crosswalk = getOwn(index.crosswalks, entry.crosswalk.file);
+          if (crosswalk === undefined) {
+            ctx.addIssue({ code: "custom", path: ["entries", position, "crosswalk", "file"], message: `no crosswalk file ${entry.crosswalk.file} in the catalogue` });
+          } else if (crosswalk.target !== entry.category) {
+            ctx.addIssue({ code: "custom", path: ["entries", position, "crosswalk", "file"], message: `${entry.crosswalk.file} targets ${crosswalk.target}, not the entry's category ${entry.category}` });
+          }
+        }
+      }
+    }),
+);
+export type CatalogueIndex = z.infer<typeof CatalogueIndexSchema>;
+
+/** One dataset as the library returns it: the entry (descriptor, sources, licence, citations and recipe), the kind of data its category holds, its crosswalk resolved from a file reference where it has one, and the catalogue it came from. */
+export interface Dataset {
+  readonly entry: Entry;
+  readonly kind: string;
+  readonly crosswalk: Crosswalk;
+  readonly catalogue: Pick<Manifest, "id" | "version">;
+}
+
+/** Filters for `listDatasets`. Every filter given must match; none given lists everything. */
+export interface DatasetQuery {
+  /** The kind of data, such as `graph`: the part of the category id before the version. */
+  readonly kind?: string;
+  /** A category id, such as `graph/v1`. */
+  readonly category?: string;
+  /** The entry's domain, matched exactly. */
+  readonly domain?: string;
+  /** Text that must appear, ignoring case, in the entry's id, name, description, domain or one of its tags. */
+  readonly text?: string;
+}
+
+/** A queryable catalogue: the surface `listDatasets` and `getDataset` are bound to. */
+export interface Catalogue {
+  readonly manifest: Manifest;
+  /**
+   * Lists the datasets matching a query, in entry id order.
+   * @param query - The filters; all must match.
+   * @returns The matching datasets.
+   */
+  readonly listDatasets: (query?: DatasetQuery) => Dataset[];
+  /**
+   * Returns one dataset by entry id.
+   * @param id - The entry id; untrusted, so lookup never reaches inherited properties.
+   * @returns The dataset.
+   * @throws DatasetNotFoundError when no entry has that id.
+   */
+  readonly getDataset: (id: string) => Dataset;
+}
+
+/**
+ * Whether a dataset matches a query.
+ * @param dataset - The dataset.
+ * @param query - The filters.
+ * @returns True when every given filter matches.
+ */
+function matches(dataset: Dataset, query: DatasetQuery): boolean {
+  const { entry } = dataset;
+  if (query.kind !== undefined && dataset.kind !== query.kind) {
+    return false;
+  }
+  if (query.category !== undefined && entry.category !== query.category) {
+    return false;
+  }
+  if (query.domain !== undefined && entry.domain !== query.domain) {
+    return false;
+  }
+  if (query.text !== undefined) {
+    const needle = query.text.toLowerCase();
+    const haystack = [entry.id, entry.name, entry.description, entry.domain, ...entry.tags].filter((field) => field !== undefined);
+
+    return haystack.some((field) => field.toLowerCase().includes(needle));
+  }
+
+  return true;
+}
+
+/**
+ * Builds a queryable catalogue from an index. Pure and synchronous: no filesystem, no network, so it runs the same in a browser as in Node.
+ * @param index - A candidate catalogue index.
+ * @returns The catalogue.
+ * @throws CatalogueSyntaxError carrying every issue when the index is not a valid catalogue.
+ */
+export function createCatalogue(index: unknown): Catalogue {
+  const parsed = CatalogueIndexSchema.safeParse(index);
+  if (!parsed.success) {
+    throw new CatalogueSyntaxError("catalogue", toIssues(parsed.error));
+  }
+  const { manifest, crosswalks, entries } = parsed.data;
+  const catalogue = { id: manifest.id, version: manifest.version };
+  const datasets = new Map<string, Dataset>();
+  for (const entry of [...entries].sort((left, right) => (left.id < right.id ? -1 : 1))) {
+    // The schema's refinement has already proved every file reference resolves, so the throw below is unreachable for a parsed index; it narrows the lookup without an assertion.
+    const crosswalk = "file" in entry.crosswalk ? getOwn(crosswalks, entry.crosswalk.file) : entry.crosswalk;
+    if (crosswalk === undefined) {
+      throw new CatalogueSyntaxError("catalogue", [{ path: `entries.${entry.id}.crosswalk.file`, message: "the crosswalk file does not resolve" }]);
+    }
+    datasets.set(entry.id, { entry, kind: kindOf(entry.category), crosswalk, catalogue });
+  }
+
+  return {
+    manifest,
+    listDatasets: (query = {}) => [...datasets.values()].filter((dataset) => matches(dataset, query)),
+    getDataset: (id) => {
+      const dataset = datasets.get(id);
+      if (dataset === undefined) {
+        throw new DatasetNotFoundError(id);
+      }
+
+      return dataset;
+    },
+  };
+}

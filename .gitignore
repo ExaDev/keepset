@@ -7,6 +7,8 @@ coverage/
 .eslintcache
 .turbo/
 reports/
+# Assembled from catalogue/ by scripts/build-catalogue.ts at the start of every build.
+src/generated/
 
 # The instruction files are tracked symlinks to README.md; a global ignore may otherwise exclude them.
 !CLAUDE.md

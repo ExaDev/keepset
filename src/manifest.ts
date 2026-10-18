@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { define } from "./define";
-import { IdSchema, toIssues } from "./entry";
+import { HttpUrlSchema, IdSchema, toIssues } from "./entry";
 import { CatalogueSyntaxError } from "./errors";
 
 /** A semantic version, `MAJOR.MINOR.PATCH` with optional pre-release and build parts (https://semver.org/#is-there-a-suggested-regular-expression-regex-to-check-a-semver-string). */
@@ -13,7 +13,7 @@ export const LineageSchema = z
   .object({
     catalogue: IdSchema,
     version: SemVerSchema,
-    repository: z.httpUrl(),
+    repository: HttpUrlSchema,
   })
   .strict();
 export type Lineage = z.infer<typeof LineageSchema>;
@@ -28,7 +28,7 @@ export const ManifestSchema = define(
       name: z.string().min(1),
       description: z.string().min(1),
       version: SemVerSchema,
-      repository: z.httpUrl(),
+      repository: HttpUrlSchema,
       lineage: LineageSchema.optional(),
     })
     .strict()

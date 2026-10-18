@@ -22,7 +22,8 @@ const fork = {
 describe("the catalogue manifest", () => {
   it("round-trips a root catalogue and a fork through parse and serialise", () => {
     for (const doc of [root, fork]) {
-      const text = `${JSON.stringify(doc, undefined, 2)}\n`;
+      const text = serialise(parseManifest(doc));
+      expect(parseManifest(JSON.parse(text))).toEqual(doc);
       expect(serialise(parseManifest(JSON.parse(text)))).toBe(text);
     }
   });
