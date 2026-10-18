@@ -13,14 +13,12 @@ concurrency:
 permissions:
   contents: read
 
-jobs:
-  determine-runner:
-    uses: ./.github/workflows/determine-runner.yml
+# Every job runs on ubuntu-latest: this repository lives in the Mearman organisation, which has no self-hosted fleet and no Blacksmith pool, so the ExaDev runner resolver (determine-runner.yml, removed with the move) could never resolve and every run queued forever. The Mearman organisation runs GitHub-hosted jobs without a billing block, and the Release job needs a GitHub-hosted runner for npm trusted publishing regardless.
 
+jobs:
   commitlint:
     name: Commitlint
-    needs: determine-runner
-    runs-on: ${{ fromJson(needs.determine-runner.outputs.selected-runner) }}
+    runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -46,8 +44,7 @@ jobs:
 
   lint:
     name: Lint
-    needs: determine-runner
-    runs-on: ${{ fromJson(needs.determine-runner.outputs.selected-runner) }}
+    runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -72,8 +69,7 @@ jobs:
 
   typecheck:
     name: Typecheck
-    needs: determine-runner
-    runs-on: ${{ fromJson(needs.determine-runner.outputs.selected-runner) }}
+    runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -98,8 +94,7 @@ jobs:
 
   actionlint:
     name: Actionlint
-    needs: determine-runner
-    runs-on: ${{ fromJson(needs.determine-runner.outputs.selected-runner) }}
+    runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -142,8 +137,7 @@ jobs:
 
   zizmor:
     name: Zizmor
-    needs: determine-runner
-    runs-on: ${{ fromJson(needs.determine-runner.outputs.selected-runner) }}
+    runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -161,8 +155,7 @@ jobs:
   # The packed tarball, not the source tree, is what consumers install: this proves the published files and exports map work in a clean project on every Node line the package supports. The toolchain needs Node 22, so the package is built and packed on 22 and the consumer check runs on the Node under test.
   package:
     name: Package (Node ${{ matrix.node }})
-    needs: determine-runner
-    runs-on: ${{ fromJson(needs.determine-runner.outputs.selected-runner) }}
+    runs-on: ubuntu-latest
     timeout-minutes: 15
     strategy:
       fail-fast: false
@@ -310,10 +303,10 @@ jobs:
 
   required-checks:
     name: Required Checks
-    needs: [determine-runner, commitlint, lint, typecheck, package, actionlint, zizmor, release]
+    needs: [commitlint, lint, typecheck, package, actionlint, zizmor, release]
     # Always runs, even if a dependency failed, so it reports that failure itself rather than being skipped: a required check that is silently absent blocks a PR indefinitely instead of failing it visibly.
     if: always()
-    runs-on: ${{ fromJson(needs.determine-runner.outputs.selected-runner) }}
+    runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
       - name: Fail if any required job failed or was cancelled
