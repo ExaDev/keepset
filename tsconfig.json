@@ -23,8 +23,10 @@
     "strict": true,
     "strictBuiltinIteratorReturn": true,
     "target": "ES2024",
-    "types": ["node"],
+    // No Node types: this program is the isomorphism gate for the browser-safe runtime, so a Node-only global referenced from src/ fails to compile here rather than in a consumer's browser bundle. Tests, scripts and the Node-only surfaces are checked by tsconfig.node.json.
+    "types": [],
     "verbatimModuleSyntax": true
   },
-  "include": ["src", "test", "*.config.ts"]
+  "exclude": ["src/**/*.test.ts"],
+  "include": ["src"]
 }

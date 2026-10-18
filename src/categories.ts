@@ -1,0 +1,74 @@
+import { z } from "zod";
+import { UnknownCategoryError } from "./errors";
+import { GraphV1Schema, type GraphV1 } from "./targets/graph-v1";
+
+/** Every category id the registry knows. A category id is `<kind>/v<version>`: the kind of data, and the version of its normalisation target, so a breaking change to a target is a new category rather than an edit to an old one. */
+export const CategoryIdSchema = z.enum(["graph/v1"]);
+export type CategoryId = z.infer<typeof CategoryIdSchema>;
+
+/** The normalisation target each category resolves to, keyed by category id. */
+export interface CategoryTargets {
+  readonly "graph/v1": GraphV1;
+}
+
+/** The normalised shape of any category: what `fetchDataset` can resolve to. */
+export type CategoryTarget = CategoryTargets[CategoryId];
+
+/** One category: its id, what it holds, and the schema of its normalisation target. */
+export interface Category<Id extends CategoryId = CategoryId> {
+  readonly id: Id;
+  readonly description: string;
+  readonly target: z.ZodType<CategoryTargets[Id]>;
+}
+
+/** The registry. Adding a category is adding its id to `CategoryIdSchema` and its entry here, with its target schema beside graph/v1's in src/targets/: the mapped type makes the compiler reject a registry that misses an id or has one too many. */
+const registry: { readonly [Id in CategoryId]: Category<Id> } = {
+  "graph/v1": {
+    id: "graph/v1",
+    description: "A graph as { meta, nodes, edges }: a flat record of scalar metadata, nodes carrying at least an id, and edges carrying at least source and target node ids, with optional node and edge types.",
+    target: GraphV1Schema,
+  },
+};
+
+/**
+ * Looks up a category by id.
+ * @param id - Any string; category ids usually come from entry documents, so the argument is untrusted.
+ * @returns The category.
+ * @throws UnknownCategoryError when no category has that id.
+ */
+export function getCategory<Id extends CategoryId>(id: Id): Category<Id>;
+export function getCategory(id: string): Category;
+export function getCategory(id: string): Category {
+  const parsed = CategoryIdSchema.safeParse(id);
+  if (!parsed.success) {
+    throw new UnknownCategoryError(id, CategoryIdSchema.options);
+  }
+
+  return registry[parsed.data];
+}
+
+/**
+ * Returns the schema of a category's normalisation target.
+ * @param id - Any string, as for `getCategory`.
+ * @returns The target schema.
+ * @throws UnknownCategoryError when no category has that id.
+ */
+export function getTarget<Id extends CategoryId>(id: Id): z.ZodType<CategoryTargets[Id]>;
+export function getTarget(id: string): z.ZodType<CategoryTarget>;
+export function getTarget(id: string): z.ZodType<CategoryTarget> {
+  return getCategory(id).target;
+}
+
+/**
+ * The kind of data a category holds: the part of its id before the version.
+ * @param id - A category id.
+ * @returns The kind, such as `graph`.
+ */
+export function kindOf(id: CategoryId): string {
+  return id.slice(0, id.indexOf("/"));
+}
+
+/** @returns Every registered category, in id order. */
+export function listCategories(): readonly Category[] {
+  return CategoryIdSchema.options.map((id) => getCategory(id));
+}

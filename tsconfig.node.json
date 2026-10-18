@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "lib": ["ES2024"],
+    "types": ["node"]
+  },
+  "exclude": [],
+  "extends": "./tsconfig.json",
+  "include": ["src/**/*.test.ts", "*.config.ts"]
+}
