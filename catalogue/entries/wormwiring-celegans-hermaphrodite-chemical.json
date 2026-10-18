@@ -1,0 +1,44 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "text": "White, J. G., Southgate, E., Thomson, J. N., Brenner, S. (1986). The Structure of the Nervous System of the Nematode Caenorhabditis elegans. Phil. Trans. R. Soc. Lond. B 314, 1-340."
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "Directed multigraph of chemical synapses (types Sp, S, R, Rp) in the adult hermaphrodite C. elegans nervous system. Each synapse is a separate unweighted edge; multiple synapses between the same neuron pair create multi-edges. Gap junctions (EJ) and neuromuscular junctions (NMJ) excluded. No autapses. Data from White et al. 1986 via WormAtlas.",
+  "domain": "Neural connectome",
+  "expectedCounts": {
+    "edges": 5233,
+    "nodes": 281
+  },
+  "id": "wormwiring-celegans-hermaphrodite-chemical",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "C. elegans Hermaphrodite Chemical Connectome",
+  "properties": {
+    "directed": true,
+    "heterogeneous": false,
+    "multigraph": true,
+    "rawBytes": 0,
+    "selfLoops": false,
+    "weighted": true
+  },
+  "recipe": {
+    "reason": "no download is in a form keepset reads yet (xls: format xls has a pipeline-specific parser with no declarative keepset form yet)",
+    "status": "not-fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-04-20",
+      "status": "live",
+      "url": "https://www.wormatlas.org/images/NeuronConnect.xls"
+    }
+  ],
+  "tags": [
+    "unweighted"
+  ]
+}

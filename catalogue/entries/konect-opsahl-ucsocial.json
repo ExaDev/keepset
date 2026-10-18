@@ -1,0 +1,44 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "text": "Panzarasa, Pietro, Opsahl, Tore, Carley, Kathleen M. (2009). Patterns and dynamics of users' behavior and interaction: Network analysis of an online community. Journal of the American Society for Information Science and Technology 60(5), 911-932."
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "Directed temporal multigraph of private messages sent on an online social network at UC Irvine. Each edge represents a message from one user to another; multiple messages between the same pair create multi-edges. No self-loops.",
+  "domain": "Communication network",
+  "expectedCounts": {
+    "edges": 59835,
+    "nodes": 1899
+  },
+  "id": "konect-opsahl-ucsocial",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "Opsahl UC Social Network",
+  "properties": {
+    "directed": true,
+    "heterogeneous": false,
+    "multigraph": true,
+    "rawBytes": 0,
+    "selfLoops": false,
+    "weighted": false
+  },
+  "recipe": {
+    "reason": "no download is in a form keepset reads yet (konect-tarbz2: bzip2 compression has no keepset unpacker yet)",
+    "status": "not-fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-04-20",
+      "status": "live",
+      "url": "http://konect.cc/files/download.tsv.opsahl-ucsocial.tar.bz2"
+    }
+  ],
+  "tags": [
+    "unweighted"
+  ]
+}

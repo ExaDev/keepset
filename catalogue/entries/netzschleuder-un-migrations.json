@@ -1,0 +1,66 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "text": "United Nations (2015). International Migration Flows to and from Selected Countries."
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "Directed network of international migration flows between countries. Nodes are countries annotated with region and sub-region. Edges are bilateral migration flows across multiple years.",
+  "domain": "Economic network",
+  "expectedCounts": {
+    "edges": 11228,
+    "nodes": 232
+  },
+  "id": "netzschleuder-un-migrations",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "UN International Migration",
+  "properties": {
+    "directed": true,
+    "heterogeneous": false,
+    "multigraph": false,
+    "rawBytes": 0,
+    "selfLoops": false,
+    "weighted": true
+  },
+  "recipe": {
+    "archive": {
+      "kind": "zip",
+      "member": {
+        "path": "edges.csv"
+      }
+    },
+    "parser": {
+      "commentPrefixes": [
+        "#"
+      ],
+      "delimiter": "comma",
+      "encoding": "utf-8",
+      "format": "edge-list",
+      "skipLines": 0,
+      "sourceColumn": 0,
+      "targetColumn": 1
+    },
+    "source": 1,
+    "status": "fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-04-20",
+      "status": "live",
+      "url": "https://networks.skewed.de/net/un_migrations"
+    },
+    {
+      "retrieved": "2026-04-20",
+      "status": "live",
+      "url": "https://networks.skewed.de/net/un_migrations/files/un_migrations.csv.zip"
+    }
+  ],
+  "tags": [
+    "unweighted"
+  ]
+}

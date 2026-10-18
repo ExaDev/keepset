@@ -1,0 +1,67 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "text": "T. A. Davis, Y. Hu (2011). The University of Florida Sparse Matrix Collection. ACM Transactions on Mathematical Software 38, 1:1-1:25."
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "undirected bipartite graph (512 nodes, 1,127,525 non-zeros)",
+  "expectedCounts": {
+    "edges": 1,
+    "nodes": 395304
+  },
+  "id": "ss-buss-connectus",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "Buss/connectus",
+  "properties": {
+    "components": 1,
+    "connected": true,
+    "cyclic": true,
+    "density": 0.00001447428831286986,
+    "directed": false,
+    "edgeTypes": 1,
+    "heterogeneous": true,
+    "multigraph": false,
+    "nodeTypes": 1,
+    "rawBytes": 0,
+    "selfLoops": false,
+    "weighted": false
+  },
+  "recipe": {
+    "archive": {
+      "kind": "tar.gz",
+      "member": {
+        "path": "connectus/connectus.mtx"
+      }
+    },
+    "parser": {
+      "encoding": "utf-8",
+      "format": "matrix-market"
+    },
+    "source": 0,
+    "status": "fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-02-16",
+      "status": "live",
+      "url": "https://sparse.tamu.edu/MM/Buss/connectus.tar.gz"
+    },
+    {
+      "retrieved": "2026-02-16",
+      "status": "live",
+      "url": "https://sparse.tamu.edu/RB/Buss/connectus.tar.gz"
+    },
+    {
+      "retrieved": "2026-02-16",
+      "status": "live",
+      "url": "https://sparse.tamu.edu/mat/Buss/connectus.tar.gz"
+    }
+  ],
+  "tags": []
+}

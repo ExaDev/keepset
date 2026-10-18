@@ -1,0 +1,76 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "text": "V. Batagelj, A. Mrvar (2006). Zewail citation network."
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "Citation network related to Ahmed Zewail's Nobel Prize publications.",
+  "expectedCounts": {
+    "edges": 0,
+    "nodes": 0
+  },
+  "id": "ss-pajek-zewail",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "Citation network related to Ahmed Zewail's Nobel Prize publications",
+  "properties": {
+    "components": 5,
+    "connected": false,
+    "cyclic": true,
+    "density": 0.002450103608140785,
+    "directed": true,
+    "edgeTypes": 1,
+    "heterogeneous": false,
+    "multigraph": false,
+    "nodeTypes": 1,
+    "rawBytes": 3032293,
+    "selfLoops": false,
+    "weighted": true
+  },
+  "recipe": {
+    "archive": {
+      "kind": "tar.gz",
+      "member": {
+        "path": "Zewail/Zewail.mtx"
+      }
+    },
+    "parser": {
+      "encoding": "utf-8",
+      "format": "matrix-market"
+    },
+    "source": 1,
+    "status": "fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-02-16",
+      "snapshot": {
+        "timestamp": "20230601",
+        "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/"
+      },
+      "status": "dead",
+      "url": "http://vlado.fmf.uni-lj.si/pub/networks/data/"
+    },
+    {
+      "retrieved": "2026-02-16",
+      "status": "live",
+      "url": "https://sparse.tamu.edu/MM/Pajek/Zewail.tar.gz"
+    },
+    {
+      "retrieved": "2026-02-16",
+      "status": "live",
+      "url": "https://sparse.tamu.edu/RB/Pajek/Zewail.tar.gz"
+    },
+    {
+      "retrieved": "2026-02-16",
+      "status": "live",
+      "url": "https://sparse.tamu.edu/mat/Pajek/Zewail.tar.gz"
+    }
+  ],
+  "tags": []
+}

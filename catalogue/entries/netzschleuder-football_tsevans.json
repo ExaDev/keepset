@@ -1,0 +1,72 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "doi": "10.1073/pnas.122653799",
+      "text": "M. Girvan and M. E. J. Newman, \"Community structure in social and biological networks.\" Proc. Natl. Acad. Sci. USA 99(12), 7821-7826 (2002)."
+    },
+    {
+      "doi": "10.1088/1742-5468/2010/12/P12037",
+      "text": "T.S. Evans, \"Clique Graphs and Overlapping Communities\", J. Stat. Mech. (2010) P12037"
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "A network of American football games between Division IA colleges during regular season Fall 2000. This version contains some corrections made by T. S. Evans, in particular:\n\nThere are are two issues with the original GN file. First three teams met twice in one season so the graph is not simple. This is easily dealt with if required. Secondly, the assignments to conferences, the node values, seem to be for the 2001 season and not the 2000 season. The games do appear to be for the 2000 season as ",
+  "expectedCounts": {
+    "edges": 613,
+    "nodes": 115
+  },
+  "id": "netzschleuder-football_tsevans",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "NCAA college football 2000 (corrected metadata)",
+  "properties": {
+    "directed": false,
+    "heterogeneous": false,
+    "multigraph": false,
+    "selfLoops": false,
+    "weighted": false
+  },
+  "recipe": {
+    "archive": {
+      "kind": "zip",
+      "member": {
+        "path": "edges.csv"
+      }
+    },
+    "parser": {
+      "commentPrefixes": [
+        "#"
+      ],
+      "delimiter": "comma",
+      "encoding": "utf-8",
+      "format": "edge-list",
+      "skipLines": 0,
+      "sourceColumn": 0,
+      "targetColumn": 1
+    },
+    "source": 2,
+    "status": "fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-04-20",
+      "status": "live",
+      "url": "https://figshare.com/articles/American_College_Football_Network_Files/93179"
+    },
+    {
+      "retrieved": "2026-04-20",
+      "status": "live",
+      "url": "https://networks.skewed.de/net/football_tsevans"
+    },
+    {
+      "retrieved": "2026-04-20",
+      "status": "live",
+      "url": "https://networks.skewed.de/net/football_tsevans/files/football_tsevans.csv.zip"
+    }
+  ],
+  "tags": []
+}

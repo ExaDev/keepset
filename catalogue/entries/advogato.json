@@ -1,0 +1,72 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "text": "Raph Levien (2008). Attack-Resistant Trust Metrics. Computing with Social Trust."
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "Trust network from the Advogato community, a free software development community founded by Raph Levien. Nodes represent users and directed edges indicate trust certifications with four trust levels: Observer (0.4), Apprentice (0.6), Journeyer (0.8), and Master (1.0). Used for research on attack-resistant trust metrics.",
+  "expectedCounts": {
+    "edges": 51127,
+    "nodes": 6539
+  },
+  "id": "advogato",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "Advogato Trust Network",
+  "properties": {
+    "components": 1,
+    "connected": true,
+    "cyclic": true,
+    "density": 0.6666666666666666,
+    "directed": true,
+    "edgeTypes": 1,
+    "heterogeneous": false,
+    "multigraph": false,
+    "nodeTypes": 1,
+    "rawBytes": 0,
+    "selfLoops": false,
+    "weighted": true
+  },
+  "recipe": {
+    "archive": {
+      "kind": "zip",
+      "member": {
+        "extensions": [
+          ".edges"
+        ]
+      }
+    },
+    "parser": {
+      "commentPrefixes": [
+        "#",
+        "%"
+      ],
+      "delimiter": "detect",
+      "encoding": "utf-8",
+      "format": "edge-list",
+      "skipLines": 0,
+      "sourceColumn": 0,
+      "targetColumn": 1
+    },
+    "source": 0,
+    "status": "fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-03-03",
+      "status": "live",
+      "url": "http://nrvis.com/download/data/misc/advogato.zip"
+    },
+    {
+      "retrieved": "2026-03-03",
+      "status": "live",
+      "url": "http://networkrepository.com/datasets/advogato.tar.gz"
+    }
+  ],
+  "tags": []
+}

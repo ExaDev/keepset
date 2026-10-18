@@ -1,0 +1,74 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "text": "M. E. J. Newman (2001). The structure of scientific collaboration networks. Proceedings of the National Academy of Sciences 98, 404-409."
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "Weighted network of coauthorships between scientists posting preprints on the Condensed Matter E-Print Archive between Jan 1, 1995 and December 31, 1999.",
+  "expectedCounts": {
+    "edges": 47594,
+    "nodes": 16726
+  },
+  "id": "cond-mat",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "Condensed Matter Collaborations 1999",
+  "properties": {
+    "components": 726,
+    "connected": false,
+    "cyclic": true,
+    "density": 0.00035987706864286465,
+    "directed": false,
+    "edgeTypes": 1,
+    "heterogeneous": false,
+    "multigraph": false,
+    "nodeTypes": 1,
+    "rawBytes": 4407269,
+    "selfLoops": false,
+    "weighted": true
+  },
+  "recipe": {
+    "archive": {
+      "kind": "zip",
+      "member": {
+        "extensions": [
+          ".gml"
+        ]
+      }
+    },
+    "parser": {
+      "encoding": "utf-8",
+      "format": "gml"
+    },
+    "source": 0,
+    "status": "fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-01-17",
+      "status": "live",
+      "url": "https://websites.umich.edu/~mejn/netdata/cond-mat.zip"
+    },
+    {
+      "retrieved": "2026-01-17",
+      "status": "live",
+      "url": "https://sparse.tamu.edu/MM/Newman/cond-mat.tar.gz"
+    },
+    {
+      "retrieved": "2026-01-17",
+      "status": "live",
+      "url": "https://sparse.tamu.edu/RB/Newman/cond-mat.tar.gz"
+    },
+    {
+      "retrieved": "2026-01-17",
+      "status": "live",
+      "url": "https://sparse.tamu.edu/mat/Newman/cond-mat.tar.gz"
+    }
+  ],
+  "tags": []
+}

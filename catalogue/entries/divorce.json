@@ -1,0 +1,58 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "text": "Vladimir Batagelj, Andrej Mrvar (2006). Pajek Datasets."
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "Two-mode network of US states and grounds for divorce.",
+  "expectedCounts": {
+    "edges": 225,
+    "nodes": 59
+  },
+  "id": "divorce",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "Divorce in US",
+  "properties": {
+    "components": 1,
+    "connected": true,
+    "cyclic": true,
+    "density": 0.1315020455873758,
+    "directed": false,
+    "edgeTypes": 1,
+    "heterogeneous": true,
+    "multigraph": true,
+    "nodeTypes": 1,
+    "rawBytes": 13580,
+    "selfLoops": false,
+    "weighted": false
+  },
+  "recipe": {
+    "archive": {
+      "kind": "none"
+    },
+    "parser": {
+      "encoding": "latin1",
+      "format": "pajek"
+    },
+    "source": 0,
+    "status": "fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-02-16",
+      "snapshot": {
+        "timestamp": "20230601",
+        "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/2mode/divorce.net"
+      },
+      "status": "dead",
+      "url": "http://vlado.fmf.uni-lj.si/pub/networks/data/2mode/divorce.net"
+    }
+  ],
+  "tags": []
+}

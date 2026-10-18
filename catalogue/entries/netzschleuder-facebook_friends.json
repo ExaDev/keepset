@@ -1,0 +1,68 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "text": "B. F. Maier and D. Brockmann, \"Cover time for random walks on arbitrary complex networks.\" Phys. Rev. E 96, 042307 (2017)",
+      "url": "https://arxiv.org/abs/1706.02356"
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "A small anonymized Facebook ego network, from April 2014. Nodes are Facebook profiles, and an edge exists if the two profiles are \"friends\" on Facebook. Metadata gives the social context for the relationship between ego and alter.[^icon]\n[^icon]: Description obtained from the [ICON](https://icon.colorado.edu) project.",
+  "expectedCounts": {
+    "edges": 1988,
+    "nodes": 362
+  },
+  "id": "netzschleuder-facebook_friends",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "Maier Facebook friends (2014)",
+  "properties": {
+    "directed": false,
+    "heterogeneous": false,
+    "multigraph": false,
+    "selfLoops": false,
+    "weighted": false
+  },
+  "recipe": {
+    "archive": {
+      "kind": "zip",
+      "member": {
+        "path": "edges.csv"
+      }
+    },
+    "parser": {
+      "commentPrefixes": [
+        "#"
+      ],
+      "delimiter": "comma",
+      "encoding": "utf-8",
+      "format": "edge-list",
+      "skipLines": 0,
+      "sourceColumn": 0,
+      "targetColumn": 1
+    },
+    "source": 2,
+    "status": "fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-04-20",
+      "status": "live",
+      "url": "https://github.com/benmaier/BFMaierFBnetwork"
+    },
+    {
+      "retrieved": "2026-04-20",
+      "status": "live",
+      "url": "https://networks.skewed.de/net/facebook_friends"
+    },
+    {
+      "retrieved": "2026-04-20",
+      "status": "live",
+      "url": "https://networks.skewed.de/net/facebook_friends/files/facebook_friends.csv.zip"
+    }
+  ],
+  "tags": []
+}

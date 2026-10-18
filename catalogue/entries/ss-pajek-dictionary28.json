@@ -1,0 +1,76 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "text": "V. Batagelj, A. Mrvar (2006). Dictionary word adjacency network."
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "Word adjacency network from a dictionary. Edges connect words differing by one letter.",
+  "expectedCounts": {
+    "edges": 178076,
+    "nodes": 52652
+  },
+  "id": "ss-pajek-dictionary28",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "Word adjacency network from a dictionary",
+  "properties": {
+    "components": 4578,
+    "connected": false,
+    "cyclic": true,
+    "density": 0.00011514227306719542,
+    "directed": false,
+    "edgeTypes": 1,
+    "heterogeneous": true,
+    "multigraph": false,
+    "nodeTypes": 1,
+    "rawBytes": 11643180,
+    "selfLoops": false,
+    "weighted": false
+  },
+  "recipe": {
+    "archive": {
+      "kind": "tar.gz",
+      "member": {
+        "path": "dictionary28/dictionary28.mtx"
+      }
+    },
+    "parser": {
+      "encoding": "utf-8",
+      "format": "matrix-market"
+    },
+    "source": 1,
+    "status": "fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-02-16",
+      "snapshot": {
+        "timestamp": "20230601",
+        "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/"
+      },
+      "status": "dead",
+      "url": "http://vlado.fmf.uni-lj.si/pub/networks/data/"
+    },
+    {
+      "retrieved": "2026-02-16",
+      "status": "live",
+      "url": "https://sparse.tamu.edu/MM/Pajek/dictionary28.tar.gz"
+    },
+    {
+      "retrieved": "2026-02-16",
+      "status": "live",
+      "url": "https://sparse.tamu.edu/RB/Pajek/dictionary28.tar.gz"
+    },
+    {
+      "retrieved": "2026-02-16",
+      "status": "live",
+      "url": "https://sparse.tamu.edu/mat/Pajek/dictionary28.tar.gz"
+    }
+  ],
+  "tags": []
+}

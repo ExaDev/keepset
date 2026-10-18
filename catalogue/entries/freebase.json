@@ -1,0 +1,50 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "text": "Xinyu Lv, Tong Zhao, Yozen Liu, Neil Shah, Yong Li (2021). Are we really making much progress? Revisiting, benchmarking and refining heterogeneous graph neural networks. Proceedings of the 27th ACM SIGKDD Conference on Knowledge Discovery and Data Mining."
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "Heterogeneous knowledge graph subset from the Freebase collaborative knowledge base. Contains 8 entity types and 36 relation types spanning people, locations, organisations, and other categories.",
+  "domain": "Knowledge graph",
+  "expectedCounts": {
+    "edges": 1057688,
+    "nodes": 180098
+  },
+  "id": "freebase",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "Freebase",
+  "properties": {
+    "components": 353,
+    "connected": false,
+    "cyclic": true,
+    "density": 0.00004721988619699187,
+    "directed": true,
+    "edgeTypes": 1,
+    "heterogeneous": true,
+    "multigraph": false,
+    "nodeTypes": 2,
+    "rawBytes": 0,
+    "selfLoops": true,
+    "weighted": false
+  },
+  "recipe": {
+    "reason": "no download is in a form keepset reads yet (hgb: format hgb has a pipeline-specific parser with no declarative keepset form yet)",
+    "status": "not-fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-02-16",
+      "status": "live",
+      "url": "https://drive.google.com/uc?id=1vw-uqbroJZfFsWpriC1CWbtHCJMGdWJ7&export=download"
+    }
+  ],
+  "tags": [
+    "heterogeneous"
+  ]
+}

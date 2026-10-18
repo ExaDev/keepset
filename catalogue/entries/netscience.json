@@ -1,0 +1,74 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "text": "M. E. J. Newman (2006). Finding community structure in very large networks. Physical Review E 74, 036104."
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "Coauthorship network of scientists working on network theory and experiment, compiled by M. Newman in May 2006.",
+  "expectedCounts": {
+    "edges": 0,
+    "nodes": 0
+  },
+  "id": "netscience",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "Network Science Coauthorships",
+  "properties": {
+    "components": 268,
+    "connected": false,
+    "cyclic": true,
+    "density": 0.0025709544035329526,
+    "directed": false,
+    "edgeTypes": 1,
+    "heterogeneous": false,
+    "multigraph": false,
+    "nodeTypes": 1,
+    "rawBytes": 271157,
+    "selfLoops": false,
+    "weighted": true
+  },
+  "recipe": {
+    "archive": {
+      "kind": "zip",
+      "member": {
+        "extensions": [
+          ".gml"
+        ]
+      }
+    },
+    "parser": {
+      "encoding": "utf-8",
+      "format": "gml"
+    },
+    "source": 0,
+    "status": "fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-01-17",
+      "status": "live",
+      "url": "https://websites.umich.edu/~mejn/netdata/netscience.zip"
+    },
+    {
+      "retrieved": "2026-01-17",
+      "status": "live",
+      "url": "https://sparse.tamu.edu/MM/Newman/netscience.tar.gz"
+    },
+    {
+      "retrieved": "2026-01-17",
+      "status": "live",
+      "url": "https://sparse.tamu.edu/RB/Newman/netscience.tar.gz"
+    },
+    {
+      "retrieved": "2026-01-17",
+      "status": "live",
+      "url": "https://sparse.tamu.edu/mat/Newman/netscience.tar.gz"
+    }
+  ],
+  "tags": []
+}

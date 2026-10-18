@@ -1,0 +1,50 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "text": "Xinyu Lv, Tong Zhao, Yozen Liu, Neil Shah, Yong Li (2021). Are We Really Making Much Progress? Revisiting, Benchmarking and Refining Heterogeneous Graph Neural Networks. Proceedings of the 27th ACM SIGKDD Conference on Knowledge Discovery and Data Mining."
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "Heterogeneous music recommendation network from Last.fm. Contains users, artists, and tags with directed user-to-artist listening relationships, social user-user connections, and artist-tag associations. Used for link prediction and recommendation tasks in heterogeneous graph neural network benchmarks.",
+  "domain": "Music recommendation network",
+  "expectedCounts": {
+    "edges": 92835,
+    "nodes": 17646
+  },
+  "id": "lastfm-hgb",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "LastFM (HGB)",
+  "properties": {
+    "components": 2,
+    "connected": false,
+    "cyclic": true,
+    "density": 0.0005933961402754534,
+    "directed": true,
+    "edgeTypes": 1,
+    "heterogeneous": true,
+    "multigraph": false,
+    "nodeTypes": 2,
+    "rawBytes": 0,
+    "selfLoops": true,
+    "weighted": false
+  },
+  "recipe": {
+    "reason": "no download is in a form keepset reads yet (zip: format zip has a pipeline-specific parser with no declarative keepset form yet)",
+    "status": "not-fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-03-03",
+      "status": "live",
+      "url": "https://files.grouplens.org/datasets/hetrec2011/hetrec2011-lastfm-2k.zip"
+    }
+  ],
+  "tags": [
+    "heterogeneous"
+  ]
+}

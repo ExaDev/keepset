@@ -1,0 +1,73 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "text": "Vladimir Batagelj, Andrej Mrvar (2006). Pajek Datasets."
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "Two-mode network of authors and papers on graph products. 674 authors, 314 papers.",
+  "expectedCounts": {
+    "edges": 613,
+    "nodes": 674
+  },
+  "id": "pajek-sandi",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "Graph Products Collaboration",
+  "properties": {
+    "components": 3,
+    "connected": false,
+    "cyclic": true,
+    "density": 0.00939337666357165,
+    "directed": true,
+    "edgeTypes": 1,
+    "heterogeneous": true,
+    "multigraph": true,
+    "nodeTypes": 1,
+    "rawBytes": 102919,
+    "selfLoops": false,
+    "weighted": false
+  },
+  "recipe": {
+    "archive": {
+      "kind": "none"
+    },
+    "parser": {
+      "encoding": "latin1",
+      "format": "pajek"
+    },
+    "source": 0,
+    "status": "fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-02-16",
+      "snapshot": {
+        "timestamp": "20230601",
+        "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/2mode/Sandi/sandi.net"
+      },
+      "status": "dead",
+      "url": "http://vlado.fmf.uni-lj.si/pub/networks/data/2mode/Sandi/sandi.net"
+    },
+    {
+      "retrieved": "2026-02-16",
+      "status": "live",
+      "url": "https://sparse.tamu.edu/MM/Pajek/Sandi_sandi.tar.gz"
+    },
+    {
+      "retrieved": "2026-02-16",
+      "status": "live",
+      "url": "https://sparse.tamu.edu/RB/Pajek/Sandi_sandi.tar.gz"
+    },
+    {
+      "retrieved": "2026-02-16",
+      "status": "live",
+      "url": "https://sparse.tamu.edu/mat/Pajek/Sandi_sandi.tar.gz"
+    }
+  ],
+  "tags": []
+}

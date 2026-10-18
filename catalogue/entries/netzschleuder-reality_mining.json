@@ -1,0 +1,68 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "doi": "10.1007/s00779-005-0046-3",
+      "text": "N. Eagle & A. Pentland, \"Reality mining: sensing complex social systems.\" Personal and Ubiquitous Computing 10(4), 255-268 (2006)."
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "A network of human proximities among students at Massachusetts Institute of Technology (MIT), as measured by personal mobile phones. Nodes represent people (students from the Media Lab and the Sloan Business School) and an edge connects a pair if the two devices made a Bluetooth handshake at the time. Edges are timestamped.[^icon]\n[^icon]: Description obtained from the [ICON](https://icon.colorado.edu) project.",
+  "expectedCounts": {
+    "edges": 1086404,
+    "nodes": 96
+  },
+  "id": "netzschleuder-reality_mining",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "Reality mining proximity network (2004)",
+  "properties": {
+    "directed": false,
+    "heterogeneous": false,
+    "multigraph": true,
+    "selfLoops": false,
+    "weighted": false
+  },
+  "recipe": {
+    "archive": {
+      "kind": "zip",
+      "member": {
+        "path": "edges.csv"
+      }
+    },
+    "parser": {
+      "commentPrefixes": [
+        "#"
+      ],
+      "delimiter": "comma",
+      "encoding": "utf-8",
+      "format": "edge-list",
+      "skipLines": 0,
+      "sourceColumn": 0,
+      "targetColumn": 1
+    },
+    "source": 2,
+    "status": "fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-04-20",
+      "status": "live",
+      "url": "http://konect.cc/networks/mit"
+    },
+    {
+      "retrieved": "2026-04-20",
+      "status": "live",
+      "url": "https://networks.skewed.de/net/reality_mining"
+    },
+    {
+      "retrieved": "2026-04-20",
+      "status": "live",
+      "url": "https://networks.skewed.de/net/reality_mining/files/reality_mining.csv.zip"
+    }
+  ],
+  "tags": []
+}

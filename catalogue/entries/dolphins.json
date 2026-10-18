@@ -1,0 +1,74 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "text": "D. Lusseau, K. Schneider, O. J. Boisseau, P. Haase, E. Slooten, S. M. Dawson (2003). The bottlenose dolphin community of Doubtful Sound features a large proportion of long-lasting associations. Behavioral Ecology and Sociobiology 54, 396-405."
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "Undirected social network of frequent associations between 62 dolphins in a community living off Doubtful Sound, New Zealand.",
+  "expectedCounts": {
+    "edges": 159,
+    "nodes": 62
+  },
+  "id": "dolphins",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "Dolphin Social Network",
+  "properties": {
+    "components": 1,
+    "connected": true,
+    "cyclic": true,
+    "density": 0.08408249603384453,
+    "directed": false,
+    "edgeTypes": 1,
+    "heterogeneous": false,
+    "multigraph": false,
+    "nodeTypes": 1,
+    "rawBytes": 10820,
+    "selfLoops": true,
+    "weighted": false
+  },
+  "recipe": {
+    "archive": {
+      "kind": "zip",
+      "member": {
+        "extensions": [
+          ".gml"
+        ]
+      }
+    },
+    "parser": {
+      "encoding": "utf-8",
+      "format": "gml"
+    },
+    "source": 0,
+    "status": "fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-01-17",
+      "status": "live",
+      "url": "https://websites.umich.edu/~mejn/netdata/dolphins.zip"
+    },
+    {
+      "retrieved": "2026-01-17",
+      "status": "live",
+      "url": "https://sparse.tamu.edu/MM/Newman/dolphins.tar.gz"
+    },
+    {
+      "retrieved": "2026-01-17",
+      "status": "live",
+      "url": "https://sparse.tamu.edu/RB/Newman/dolphins.tar.gz"
+    },
+    {
+      "retrieved": "2026-01-17",
+      "status": "live",
+      "url": "https://sparse.tamu.edu/mat/Newman/dolphins.tar.gz"
+    }
+  ],
+  "tags": []
+}

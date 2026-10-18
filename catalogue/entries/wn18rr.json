@@ -1,0 +1,52 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "text": "Tim Dettmers, Pasquale Minervini, Pontus Stenetorp, Sebastian Riedel (2018). Convolutional 2D Knowledge Graph Embeddings. Proceedings of the AAAI Conference on Artificial Intelligence."
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "Heterogeneous knowledge graph derived from WordNet lexical database. Contains words and their semantic relationships (hypernyms, synonyms, etc.) with 11 relation types. Created to fix test set leakage in the original WN18 dataset by removing inverse relation redundancy. Standard benchmark for knowledge graph completion.",
+  "expectedCounts": {
+    "edges": 3134,
+    "nodes": 2969
+  },
+  "id": "wn18rr",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "WN18RR",
+  "properties": {
+    "components": 2,
+    "connected": false,
+    "cyclic": true,
+    "density": 0.0006858835096536629,
+    "directed": true,
+    "edgeTypes": 1,
+    "heterogeneous": true,
+    "multigraph": true,
+    "nodeTypes": 2,
+    "rawBytes": 0,
+    "selfLoops": false,
+    "weighted": false
+  },
+  "recipe": {
+    "reason": "no download is in a form keepset reads yet (tar.gz: format tar.gz has a pipeline-specific parser with no declarative keepset form yet; pykeen: format pykeen has a pipeline-specific parser with no declarative keepset form yet)",
+    "status": "not-fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-03-03",
+      "status": "live",
+      "url": "https://web.informatik.uni-mannheim.de/pi1/kge-datasets/wnrr.tar.gz"
+    },
+    {
+      "retrieved": "2026-03-03",
+      "status": "live",
+      "url": "https://github.com/pykeen/pykeen#datasets"
+    }
+  ],
+  "tags": []
+}

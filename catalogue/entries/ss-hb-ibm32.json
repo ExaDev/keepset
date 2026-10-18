@@ -1,0 +1,67 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "text": "T. A. Davis, Y. Hu (2011). The University of Florida Sparse Matrix Collection. ACM Transactions on Mathematical Software 38, 1:1-1:25."
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "directed graph (32 nodes, 126 non-zeros)",
+  "expectedCounts": {
+    "edges": 126,
+    "nodes": 32
+  },
+  "id": "ss-hb-ibm32",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "HB/ibm32",
+  "properties": {
+    "components": 1,
+    "connected": true,
+    "cyclic": true,
+    "density": 0.24596774193548387,
+    "directed": true,
+    "edgeTypes": 1,
+    "heterogeneous": false,
+    "multigraph": true,
+    "nodeTypes": 1,
+    "rawBytes": 0,
+    "selfLoops": true,
+    "weighted": false
+  },
+  "recipe": {
+    "archive": {
+      "kind": "tar.gz",
+      "member": {
+        "path": "ibm32/ibm32.mtx"
+      }
+    },
+    "parser": {
+      "encoding": "utf-8",
+      "format": "matrix-market"
+    },
+    "source": 0,
+    "status": "fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-02-16",
+      "status": "live",
+      "url": "https://sparse.tamu.edu/MM/HB/ibm32.tar.gz"
+    },
+    {
+      "retrieved": "2026-02-16",
+      "status": "live",
+      "url": "https://sparse.tamu.edu/RB/HB/ibm32.tar.gz"
+    },
+    {
+      "retrieved": "2026-02-16",
+      "status": "live",
+      "url": "https://sparse.tamu.edu/mat/HB/ibm32.tar.gz"
+    }
+  ],
+  "tags": []
+}

@@ -1,0 +1,76 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "text": "Graph Drawing (1996). Graph Drawing Contest 1996."
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "Graph Drawing Contest 1996, graph C.",
+  "expectedCounts": {
+    "edges": 125,
+    "nodes": 65
+  },
+  "id": "ss-pajek-gd96-c",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "Graph Drawing Contest 1996, graph C",
+  "properties": {
+    "components": 1,
+    "connected": true,
+    "cyclic": true,
+    "density": 0.06009615384615385,
+    "directed": false,
+    "edgeTypes": 1,
+    "heterogeneous": false,
+    "multigraph": true,
+    "nodeTypes": 1,
+    "rawBytes": 13389,
+    "selfLoops": false,
+    "weighted": false
+  },
+  "recipe": {
+    "archive": {
+      "kind": "tar.gz",
+      "member": {
+        "path": "GD96_c/GD96_c.mtx"
+      }
+    },
+    "parser": {
+      "encoding": "utf-8",
+      "format": "matrix-market"
+    },
+    "source": 1,
+    "status": "fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-02-16",
+      "snapshot": {
+        "timestamp": "20230601",
+        "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/"
+      },
+      "status": "dead",
+      "url": "http://vlado.fmf.uni-lj.si/pub/networks/data/"
+    },
+    {
+      "retrieved": "2026-02-16",
+      "status": "live",
+      "url": "https://sparse.tamu.edu/MM/Pajek/GD96_c.tar.gz"
+    },
+    {
+      "retrieved": "2026-02-16",
+      "status": "live",
+      "url": "https://sparse.tamu.edu/RB/Pajek/GD96_c.tar.gz"
+    },
+    {
+      "retrieved": "2026-02-16",
+      "status": "live",
+      "url": "https://sparse.tamu.edu/mat/Pajek/GD96_c.tar.gz"
+    }
+  ],
+  "tags": []
+}

@@ -1,0 +1,52 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "text": "Suchanek et al. (2007). YAGO: A Core of Semantic Knowledge Unifying DBpedia and Wikipedia. ACM International Conference on World Wide Web."
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "Large heterogeneous knowledge graph automatically extracted from Wikipedia and Wikidata. Contains 5 node types: entities, types, literals, relations, and concepts. Contains 37+ relation types (isA, created, hasCapital, etc.). Serves as a reference knowledge base for information retrieval and entity linking. Demonstrates multi-relational graph structure typical of Linked Open Data.",
+  "expectedCounts": {
+    "edges": 1018447,
+    "nodes": 123182
+  },
+  "id": "yago3-10",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "YAGO 3.10 Knowledge Graph",
+  "properties": {
+    "components": 21,
+    "connected": false,
+    "cyclic": true,
+    "density": 0.0004193789497930294,
+    "directed": true,
+    "edgeTypes": 1,
+    "heterogeneous": false,
+    "multigraph": true,
+    "nodeTypes": 2,
+    "rawBytes": 0,
+    "selfLoops": false,
+    "weighted": false
+  },
+  "recipe": {
+    "reason": "no download is in a form keepset reads yet (edge-list: the download is a directory listing, not a data file)",
+    "status": "not-fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-03-26",
+      "status": "live",
+      "url": "https://www.yago-knowledge.org/"
+    },
+    {
+      "retrieved": "2026-03-26",
+      "status": "live",
+      "url": "https://www.yago-knowledge.org/resource/download/yago/YAGO3-10/"
+    }
+  ],
+  "tags": []
+}

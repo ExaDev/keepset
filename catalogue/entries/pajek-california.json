@@ -1,0 +1,76 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "text": "J. Kleinberg (2002). Kleinberg web search: California."
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "Pages matching the query 'California'. Constructed by expanding a 200-page search engine response set.",
+  "expectedCounts": {
+    "edges": 0,
+    "nodes": 0
+  },
+  "id": "pajek-california",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "Pages matching the query 'California'",
+  "properties": {
+    "components": 74,
+    "connected": false,
+    "cyclic": true,
+    "density": 0.0008377301180738345,
+    "directed": true,
+    "edgeTypes": 1,
+    "heterogeneous": true,
+    "multigraph": false,
+    "nodeTypes": 1,
+    "rawBytes": 1604382,
+    "selfLoops": false,
+    "weighted": false
+  },
+  "recipe": {
+    "archive": {
+      "kind": "tar.gz",
+      "member": {
+        "path": "California/California.mtx"
+      }
+    },
+    "parser": {
+      "encoding": "utf-8",
+      "format": "matrix-market"
+    },
+    "source": 1,
+    "status": "fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-02-16",
+      "snapshot": {
+        "timestamp": "20230601",
+        "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/"
+      },
+      "status": "dead",
+      "url": "http://vlado.fmf.uni-lj.si/pub/networks/data/"
+    },
+    {
+      "retrieved": "2026-02-16",
+      "status": "live",
+      "url": "https://sparse.tamu.edu/MM/Pajek/California.tar.gz"
+    },
+    {
+      "retrieved": "2026-02-16",
+      "status": "live",
+      "url": "https://sparse.tamu.edu/RB/Pajek/California.tar.gz"
+    },
+    {
+      "retrieved": "2026-02-16",
+      "status": "live",
+      "url": "https://sparse.tamu.edu/mat/Pajek/California.tar.gz"
+    }
+  ],
+  "tags": []
+}

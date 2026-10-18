@@ -1,0 +1,48 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "text": "Bumbarger, Daniel J., Sommer, Ralf J. (2013). System-wide rewiring underlies behavioral differences in predatory and bacterial-feeding nematodes. Cell 152(1), 109-119."
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "Directed multigraph of chemical synapses in the pharyngeal nervous system of the nematode Pristionchus pacificus. Nodes are neurons and edges are individual chemical synapses. Multiple synapses between the same neuron pair create multi-edges. No autapses. Consensus network from two adult hermaphrodite specimens.",
+  "domain": "Neural connectome",
+  "expectedCounts": {
+    "edges": 533,
+    "nodes": 29
+  },
+  "id": "wormwiring-ppacificus-pharyngeal",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "P. pacificus Pharyngeal Connectome",
+  "properties": {
+    "directed": true,
+    "heterogeneous": false,
+    "multigraph": true,
+    "rawBytes": 0,
+    "selfLoops": false,
+    "weighted": false
+  },
+  "recipe": {
+    "reason": "no download is in a form keepset reads yet (bumbarger-consensus: format bumbarger-consensus has a pipeline-specific parser with no declarative keepset form yet)",
+    "status": "not-fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-04-20",
+      "snapshot": {
+        "timestamp": "20250407124340",
+        "url": "https://web.archive.org/web/20250407124340/https://www.wormwiring.org/si_other/bumbarger-sommer-S2-consensus-network.xlsx"
+      },
+      "status": "dead",
+      "url": "https://www.wormwiring.org/si_other/bumbarger-sommer-S2-consensus-network.xlsx"
+    }
+  ],
+  "tags": [
+    "unweighted"
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "text": "Xinyu Lv, Tong Zhao, Yozen Liu, Neil Shah, Yong Li (2021). Are we really making much progress? Revisiting, benchmarking and refining heterogeneous graph neural networks. Proceedings of the 27th ACM SIGKDD Conference on Knowledge Discovery and Data Mining."
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "Heterogeneous academic network from ACM digital library. Contains papers, authors, and subjects with authorship and subject-assignment relations. Used as a standard benchmark for heterogeneous graph neural networks.",
+  "domain": "Academic heterogeneous",
+  "expectedCounts": {
+    "edges": 547872,
+    "nodes": 10942
+  },
+  "id": "acm",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "ACM",
+  "properties": {
+    "components": 1,
+    "connected": true,
+    "cyclic": true,
+    "density": 0.0045759971008822835,
+    "directed": false,
+    "edgeTypes": 1,
+    "heterogeneous": true,
+    "multigraph": true,
+    "nodeTypes": 2,
+    "rawBytes": 0,
+    "selfLoops": true,
+    "weighted": false
+  },
+  "recipe": {
+    "reason": "no download is in a form keepset reads yet (hgb: format hgb has a pipeline-specific parser with no declarative keepset form yet)",
+    "status": "not-fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-02-16",
+      "status": "live",
+      "url": "https://drive.google.com/uc?id=1xbJ4QE9pcDJOcALv7dYhHDCPITX2Iddz&export=download"
+    }
+  ],
+  "tags": [
+    "heterogeneous"
+  ]
+}

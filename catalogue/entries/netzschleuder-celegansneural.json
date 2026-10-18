@@ -1,0 +1,72 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "doi": "10.1098/rstb.1986.0056",
+      "text": "J. G. White, E. Southgate, J. N. Thompson, and S. Brenner, \"The structure of the nervous system of the nematode Caenorhabditis elegans\", Phil. Trans. R. Soc. London 314, 1-340 (1986)"
+    },
+    {
+      "doi": "10.1038/30918",
+      "text": "D.J. Watts and S.H. Strogatz, \"Collective dynamics of 'small-world' networks.\" Nature 393, 440-442 (1998)."
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "A network representing the neural connections of the Caenorhabditis elegans nematode[^icon]\n[^icon]: Description obtained from the [ICON](https://icon.colorado.edu) project.",
+  "expectedCounts": {
+    "edges": 2359,
+    "nodes": 297
+  },
+  "id": "netzschleuder-celegansneural",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "C. elegans neurons (1986)",
+  "properties": {
+    "directed": true,
+    "heterogeneous": false,
+    "multigraph": true,
+    "selfLoops": false,
+    "weighted": false
+  },
+  "recipe": {
+    "archive": {
+      "kind": "zip",
+      "member": {
+        "path": "edges.csv"
+      }
+    },
+    "parser": {
+      "commentPrefixes": [
+        "#"
+      ],
+      "delimiter": "comma",
+      "encoding": "utf-8",
+      "format": "edge-list",
+      "skipLines": 0,
+      "sourceColumn": 0,
+      "targetColumn": 1
+    },
+    "source": 2,
+    "status": "fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-04-20",
+      "status": "live",
+      "url": "http://www-personal.umich.edu/~mejn/netdata"
+    },
+    {
+      "retrieved": "2026-04-20",
+      "status": "live",
+      "url": "https://networks.skewed.de/net/celegansneural"
+    },
+    {
+      "retrieved": "2026-04-20",
+      "status": "live",
+      "url": "https://networks.skewed.de/net/celegansneural/files/celegansneural.csv.zip"
+    }
+  ],
+  "tags": []
+}

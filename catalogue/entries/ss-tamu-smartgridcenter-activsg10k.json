@@ -1,0 +1,67 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "text": "T. A. Davis, Y. Hu (2011). The University of Florida Sparse Matrix Collection. ACM Transactions on Mathematical Software 38, 1:1-1:25."
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "power network problem (20,000 nodes, 135,888 non-zeros)",
+  "expectedCounts": {
+    "edges": 135888,
+    "nodes": 20000
+  },
+  "id": "ss-tamu-smartgridcenter-activsg10k",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "TAMU_SmartGridCenter/ACTIVSg10K",
+  "properties": {
+    "components": 1,
+    "connected": true,
+    "cyclic": true,
+    "density": 0.00034435721786089306,
+    "directed": false,
+    "edgeTypes": 1,
+    "heterogeneous": false,
+    "multigraph": false,
+    "nodeTypes": 1,
+    "rawBytes": 0,
+    "selfLoops": false,
+    "weighted": true
+  },
+  "recipe": {
+    "archive": {
+      "kind": "tar.gz",
+      "member": {
+        "path": "ACTIVSg10K/ACTIVSg10K.mtx"
+      }
+    },
+    "parser": {
+      "encoding": "utf-8",
+      "format": "matrix-market"
+    },
+    "source": 0,
+    "status": "fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-02-16",
+      "status": "live",
+      "url": "https://sparse.tamu.edu/MM/TAMU_SmartGridCenter/ACTIVSg10K.tar.gz"
+    },
+    {
+      "retrieved": "2026-02-16",
+      "status": "live",
+      "url": "https://sparse.tamu.edu/RB/TAMU_SmartGridCenter/ACTIVSg10K.tar.gz"
+    },
+    {
+      "retrieved": "2026-02-16",
+      "status": "live",
+      "url": "https://sparse.tamu.edu/mat/TAMU_SmartGridCenter/ACTIVSg10K.tar.gz"
+    }
+  ],
+  "tags": []
+}

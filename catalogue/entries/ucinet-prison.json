@@ -1,0 +1,51 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "text": "J. MacRae (1960). Direct factor analysis of sociometric data. Sociometry 23, 360-371."
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "Friendship choices among 67 prison inmates in a 1950s study.",
+  "expectedCounts": {
+    "edges": 182,
+    "nodes": 67
+  },
+  "id": "ucinet-prison",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "Gagnon Prison",
+  "properties": {
+    "components": 1,
+    "connected": true,
+    "cyclic": true,
+    "density": 0.04115784712799638,
+    "directed": false,
+    "edgeTypes": 1,
+    "heterogeneous": false,
+    "multigraph": true,
+    "nodeTypes": 1,
+    "rawBytes": 5887,
+    "selfLoops": false,
+    "weighted": false
+  },
+  "recipe": {
+    "reason": "no download is in a form keepset reads yet (ucinet: format ucinet has a pipeline-specific parser with no declarative keepset form yet)",
+    "status": "not-fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-02-16",
+      "snapshot": {
+        "timestamp": "20230601",
+        "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/UciNet/prison.dat"
+      },
+      "status": "dead",
+      "url": "http://vlado.fmf.uni-lj.si/pub/networks/data/UciNet/prison.dat"
+    }
+  ],
+  "tags": []
+}

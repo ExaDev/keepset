@@ -1,0 +1,63 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "doi": "10.1098/rsif.2020.0813",
+      "text": "Montepietra D., Bellingeri M., Ross A.M., Scotognella F. and Cassi D., \"Modelling photosystem I as a complex interacting network\", J. R. Soc. Interface (2020)"
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "Weighted directed network of the light-harvesting Photosystem Ι (PSI) of the plant Pisum sativum. The nodes represent chromophores with different identities (i.e. chlorophyll a, chlorophyll b, β-carotene and derivates, lutein, violaxanthin), while edges represent FRET transfer between chromophores. The link directionality connecting nodes in the PSI network depends on the energy levels of the connected chromophores. The weights correspond to the FRET Efficiency between connected chromophores.",
+  "expectedCounts": {
+    "edges": 29390,
+    "nodes": 192
+  },
+  "id": "netzschleuder-psi",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "Plant Photosystem I excitation energy transfer network (2020)",
+  "properties": {
+    "directed": true,
+    "heterogeneous": false,
+    "multigraph": false,
+    "selfLoops": false,
+    "weighted": true
+  },
+  "recipe": {
+    "archive": {
+      "kind": "zip",
+      "member": {
+        "path": "edges.csv"
+      }
+    },
+    "parser": {
+      "commentPrefixes": [
+        "#"
+      ],
+      "delimiter": "comma",
+      "encoding": "utf-8",
+      "format": "edge-list",
+      "skipLines": 0,
+      "sourceColumn": 0,
+      "targetColumn": 1
+    },
+    "source": 1,
+    "status": "fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-04-20",
+      "status": "live",
+      "url": "https://networks.skewed.de/net/psi"
+    },
+    {
+      "retrieved": "2026-04-20",
+      "status": "live",
+      "url": "https://networks.skewed.de/net/psi/files/psi.csv.zip"
+    }
+  ],
+  "tags": []
+}

@@ -1,0 +1,66 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "text": "Lazega, E. (2001). The Collegial Phenomenon: The Social Mechanisms of Cooperation among Peers in a Corporate Law Partnership. Oxford University Press."
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "Multiplex social network of a corporate law firm with 3 relationship types (coworkers, friendship, advice). Nodes are lawyers with status, gender, office, seniority, age, practice, and law school attributes. Directed multiplex edges create multi-edges between pairs. No self-loops.",
+  "domain": "Social network",
+  "expectedCounts": {
+    "edges": 2571,
+    "nodes": 71
+  },
+  "id": "netzschleuder-law-firm",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "Lazega Law Firm",
+  "properties": {
+    "directed": true,
+    "heterogeneous": true,
+    "multigraph": true,
+    "rawBytes": 0,
+    "selfLoops": false,
+    "weighted": false
+  },
+  "recipe": {
+    "archive": {
+      "kind": "zip",
+      "member": {
+        "path": "edges.csv"
+      }
+    },
+    "parser": {
+      "commentPrefixes": [
+        "#"
+      ],
+      "delimiter": "comma",
+      "encoding": "utf-8",
+      "format": "edge-list",
+      "skipLines": 0,
+      "sourceColumn": 0,
+      "targetColumn": 1
+    },
+    "source": 1,
+    "status": "fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-04-20",
+      "status": "live",
+      "url": "https://networks.skewed.de/net/law_firm"
+    },
+    {
+      "retrieved": "2026-04-20",
+      "status": "live",
+      "url": "https://networks.skewed.de/net/law_firm/files/law_firm.csv.zip"
+    }
+  ],
+  "tags": [
+    "unweighted"
+  ]
+}

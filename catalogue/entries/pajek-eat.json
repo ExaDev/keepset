@@ -1,0 +1,79 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "text": "G. R. Kiss, C. Armstrong, R. Milroy, J. Piper (1973). An associative thesaurus of English."
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "Word association network from the Edinburgh Associative Thesaurus. 23,219 words, 325,624 associations.",
+  "expectedCounts": {
+    "edges": 325593,
+    "nodes": 23219
+  },
+  "id": "pajek-eat",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "Edinburgh Associative Thesaurus",
+  "properties": {
+    "components": 1,
+    "connected": true,
+    "cyclic": true,
+    "density": 0.0011323305963121687,
+    "directed": true,
+    "edgeTypes": 1,
+    "heterogeneous": true,
+    "multigraph": false,
+    "nodeTypes": 1,
+    "rawBytes": 22979702,
+    "selfLoops": false,
+    "weighted": true
+  },
+  "recipe": {
+    "archive": {
+      "kind": "zip",
+      "member": {
+        "extensions": [
+          ".net",
+          ".paj"
+        ]
+      }
+    },
+    "parser": {
+      "encoding": "latin1",
+      "format": "pajek"
+    },
+    "source": 0,
+    "status": "fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-02-16",
+      "snapshot": {
+        "timestamp": "20230601",
+        "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/dic/eat/EATnew.zip"
+      },
+      "status": "dead",
+      "url": "http://vlado.fmf.uni-lj.si/pub/networks/data/dic/eat/EATnew.zip"
+    },
+    {
+      "retrieved": "2026-02-16",
+      "status": "live",
+      "url": "https://sparse.tamu.edu/MM/Pajek/EAT_RS.tar.gz"
+    },
+    {
+      "retrieved": "2026-02-16",
+      "status": "live",
+      "url": "https://sparse.tamu.edu/RB/Pajek/EAT_RS.tar.gz"
+    },
+    {
+      "retrieved": "2026-02-16",
+      "status": "live",
+      "url": "https://sparse.tamu.edu/mat/Pajek/EAT_RS.tar.gz"
+    }
+  ],
+  "tags": []
+}

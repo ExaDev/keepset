@@ -1,0 +1,68 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "doi": "10.1016/s0304-422x(99)00009-1",
+      "text": "W. De Nooy, \"A literary playground: Literary criticism and balance theory.\" Poetics 26 (5-6), 385-404 (1999)."
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "A network of criticisms among Dutch literary authors in 1976. The directed edge (i,j) denotes that an author i passed judgment on author j's work in an interview or review.[^icon]\n[^icon]: Description obtained from the [ICON](https://icon.colorado.edu) project.",
+  "expectedCounts": {
+    "edges": 81,
+    "nodes": 35
+  },
+  "id": "netzschleuder-dutch_criticism",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "Dutch literacy criticism (1976)",
+  "properties": {
+    "directed": false,
+    "heterogeneous": false,
+    "multigraph": true,
+    "selfLoops": false,
+    "weighted": false
+  },
+  "recipe": {
+    "archive": {
+      "kind": "zip",
+      "member": {
+        "path": "edges.csv"
+      }
+    },
+    "parser": {
+      "commentPrefixes": [
+        "#"
+      ],
+      "delimiter": "comma",
+      "encoding": "utf-8",
+      "format": "edge-list",
+      "skipLines": 0,
+      "sourceColumn": 0,
+      "targetColumn": 1
+    },
+    "source": 2,
+    "status": "fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-04-20",
+      "status": "live",
+      "url": "http://vlado.fmf.uni-lj.si/pub/networks/data/esna/literature.htm"
+    },
+    {
+      "retrieved": "2026-04-20",
+      "status": "live",
+      "url": "https://networks.skewed.de/net/dutch_criticism"
+    },
+    {
+      "retrieved": "2026-04-20",
+      "status": "live",
+      "url": "https://networks.skewed.de/net/dutch_criticism/files/dutch_criticism.csv.zip"
+    }
+  ],
+  "tags": []
+}

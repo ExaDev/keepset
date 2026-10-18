@@ -1,0 +1,68 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "doi": "10.14288/1.0102239",
+      "text": "G. Schwimmer, \"Exchange in the social structure of the Orokaiva.\" St. Martin's Press (1973)"
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "A network of gift-giving relationships (taro exchange) among households in a Papuan village. Data collected by survey c.1970.[^icon]\n[^icon]: Description obtained from the [ICON](https://icon.colorado.edu) project.",
+  "expectedCounts": {
+    "edges": 78,
+    "nodes": 22
+  },
+  "id": "netzschleuder-moreno_taro",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "Papuan gift-giving (1970)",
+  "properties": {
+    "directed": true,
+    "heterogeneous": false,
+    "multigraph": false,
+    "selfLoops": false,
+    "weighted": false
+  },
+  "recipe": {
+    "archive": {
+      "kind": "zip",
+      "member": {
+        "path": "edges.csv"
+      }
+    },
+    "parser": {
+      "commentPrefixes": [
+        "#"
+      ],
+      "delimiter": "comma",
+      "encoding": "utf-8",
+      "format": "edge-list",
+      "skipLines": 0,
+      "sourceColumn": 0,
+      "targetColumn": 1
+    },
+    "source": 2,
+    "status": "fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-04-20",
+      "status": "live",
+      "url": "http://konect.cc/networks/moreno_taro"
+    },
+    {
+      "retrieved": "2026-04-20",
+      "status": "live",
+      "url": "https://networks.skewed.de/net/moreno_taro"
+    },
+    {
+      "retrieved": "2026-04-20",
+      "status": "live",
+      "url": "https://networks.skewed.de/net/moreno_taro/files/moreno_taro.csv.zip"
+    }
+  ],
+  "tags": []
+}

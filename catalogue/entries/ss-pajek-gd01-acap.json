@@ -1,0 +1,76 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "text": "Graph Drawing (2001). Graph Drawing Contest 2001."
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "Graph Drawing Contest 2001, graph A capacities.",
+  "expectedCounts": {
+    "edges": 2548,
+    "nodes": 956
+  },
+  "id": "ss-pajek-gd01-acap",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "Graph Drawing Contest 2001, graph A capacities",
+  "properties": {
+    "components": 6,
+    "connected": false,
+    "cyclic": true,
+    "density": 0.019155367992577294,
+    "directed": true,
+    "edgeTypes": 1,
+    "heterogeneous": true,
+    "multigraph": true,
+    "nodeTypes": 1,
+    "rawBytes": 65790,
+    "selfLoops": false,
+    "weighted": true
+  },
+  "recipe": {
+    "archive": {
+      "kind": "tar.gz",
+      "member": {
+        "path": "GD01_Acap/GD01_Acap.mtx"
+      }
+    },
+    "parser": {
+      "encoding": "utf-8",
+      "format": "matrix-market"
+    },
+    "source": 1,
+    "status": "fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-02-16",
+      "snapshot": {
+        "timestamp": "20230601",
+        "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/"
+      },
+      "status": "dead",
+      "url": "http://vlado.fmf.uni-lj.si/pub/networks/data/"
+    },
+    {
+      "retrieved": "2026-02-16",
+      "status": "live",
+      "url": "https://sparse.tamu.edu/MM/Pajek/GD01_Acap.tar.gz"
+    },
+    {
+      "retrieved": "2026-02-16",
+      "status": "live",
+      "url": "https://sparse.tamu.edu/RB/Pajek/GD01_Acap.tar.gz"
+    },
+    {
+      "retrieved": "2026-02-16",
+      "status": "live",
+      "url": "https://sparse.tamu.edu/mat/Pajek/GD01_Acap.tar.gz"
+    }
+  ],
+  "tags": []
+}

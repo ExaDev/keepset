@@ -1,0 +1,67 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "text": "T. A. Davis, Y. Hu (2011). The University of Florida Sparse Matrix Collection. ACM Transactions on Mathematical Software 38, 1:1-1:25."
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "directed weighted graph (13,209 nodes, 91,465 non-zeros)",
+  "expectedCounts": {
+    "edges": 91465,
+    "nodes": 13209
+  },
+  "id": "ss-gaertner-big",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "Gaertner/big",
+  "properties": {
+    "components": 1,
+    "connected": true,
+    "cyclic": true,
+    "density": 0.0005999731567123878,
+    "directed": true,
+    "edgeTypes": 1,
+    "heterogeneous": false,
+    "multigraph": false,
+    "nodeTypes": 1,
+    "rawBytes": 0,
+    "selfLoops": false,
+    "weighted": true
+  },
+  "recipe": {
+    "archive": {
+      "kind": "tar.gz",
+      "member": {
+        "path": "big/big.mtx"
+      }
+    },
+    "parser": {
+      "encoding": "utf-8",
+      "format": "matrix-market"
+    },
+    "source": 0,
+    "status": "fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-02-16",
+      "status": "live",
+      "url": "https://sparse.tamu.edu/MM/Gaertner/big.tar.gz"
+    },
+    {
+      "retrieved": "2026-02-16",
+      "status": "live",
+      "url": "https://sparse.tamu.edu/RB/Gaertner/big.tar.gz"
+    },
+    {
+      "retrieved": "2026-02-16",
+      "status": "live",
+      "url": "https://sparse.tamu.edu/mat/Gaertner/big.tar.gz"
+    }
+  ],
+  "tags": []
+}

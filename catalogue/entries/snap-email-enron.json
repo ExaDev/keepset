@@ -1,0 +1,67 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "text": "Priebe et al. (2008). Statistical inference and random graphs. Sankhyā: The Indian Journal of Statistics."
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "Directed, weighted email communication network from the Enron corpus. Nodes represent Enron employees, edges represent email communications. Edge weights correspond to the number of emails sent from one employee to another. Useful for studying directed communication patterns in organisational networks.",
+  "expectedCounts": {
+    "edges": 183831,
+    "nodes": 36692
+  },
+  "id": "snap-email-enron",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "Enron Email Communication Network",
+  "properties": {
+    "components": 1065,
+    "connected": false,
+    "cyclic": true,
+    "density": 0.00027309755503535,
+    "directed": true,
+    "edgeTypes": 1,
+    "heterogeneous": false,
+    "multigraph": false,
+    "nodeTypes": 1,
+    "rawBytes": 0,
+    "selfLoops": false,
+    "weighted": true
+  },
+  "recipe": {
+    "archive": {
+      "kind": "gzip"
+    },
+    "parser": {
+      "commentPrefixes": [
+        "#",
+        "%"
+      ],
+      "delimiter": "detect",
+      "encoding": "utf-8",
+      "format": "edge-list",
+      "skipLines": 0,
+      "sourceColumn": 0,
+      "targetColumn": 1
+    },
+    "source": 1,
+    "status": "fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-03-26",
+      "status": "live",
+      "url": "https://snap.stanford.edu/data/email-Enron.html"
+    },
+    {
+      "retrieved": "2026-03-26",
+      "status": "live",
+      "url": "https://snap.stanford.edu/data/email-Enron.txt.gz"
+    }
+  ],
+  "tags": []
+}

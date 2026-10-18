@@ -1,0 +1,65 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "text": "L. A. Adamic, N. Glance (2005). The political blogosphere and the 2004 U.S. Election: Divided they blog. Proceedings of the 3rd International Workshop on Link Discovery, 36-43."
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "Directed network of hyperlinks among U.S. political weblogs from before the 2004 election. The Netzschleuder version preserves the full structure including 65 duplicate directed edges (multiple hyperlinks between same blog pairs) and 3 self-referential links. Node attributes include blog source and political affiliation (liberal/conservative).",
+  "domain": "Social network",
+  "expectedCounts": {
+    "edges": 19090,
+    "nodes": 1490
+  },
+  "id": "netzschleuder-polblogs",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "Political Blogs (Netzschleuder)",
+  "properties": {
+    "directed": true,
+    "heterogeneous": true,
+    "multigraph": true,
+    "selfLoops": true,
+    "weighted": false
+  },
+  "recipe": {
+    "archive": {
+      "kind": "zip",
+      "member": {
+        "path": "edges.csv"
+      }
+    },
+    "parser": {
+      "commentPrefixes": [
+        "#"
+      ],
+      "delimiter": "comma",
+      "encoding": "utf-8",
+      "format": "edge-list",
+      "skipLines": 0,
+      "sourceColumn": 0,
+      "targetColumn": 1
+    },
+    "source": 1,
+    "status": "fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-04-19",
+      "status": "live",
+      "url": "https://networks.skewed.de/net/polblogs"
+    },
+    {
+      "retrieved": "2026-04-19",
+      "status": "live",
+      "url": "https://networks.skewed.de/net/polblogs/files/polblogs.csv.zip"
+    }
+  ],
+  "tags": [
+    "labeled"
+  ]
+}

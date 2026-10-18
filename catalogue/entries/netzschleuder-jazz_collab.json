@@ -1,0 +1,68 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "doi": "10.1142/S0219525903001067",
+      "text": "P. Gleiser and L. Danon, \"Community Structure in Jazz.\" Advances in Complex Systems 6(4), 565-573 (2003)."
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "The network of collaborations among jazz musicians, and among jazz bands, extracted from The Red Hot Jazz Archive digital database, covering bands that performed between 1912 and 1940.[^icon]\n[^icon]: Description obtained from the [ICON](https://icon.colorado.edu) project.",
+  "expectedCounts": {
+    "edges": 2742,
+    "nodes": 198
+  },
+  "id": "netzschleuder-jazz_collab",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "Jazz collaboration network",
+  "properties": {
+    "directed": false,
+    "heterogeneous": false,
+    "multigraph": false,
+    "selfLoops": false,
+    "weighted": false
+  },
+  "recipe": {
+    "archive": {
+      "kind": "zip",
+      "member": {
+        "path": "edges.csv"
+      }
+    },
+    "parser": {
+      "commentPrefixes": [
+        "#"
+      ],
+      "delimiter": "comma",
+      "encoding": "utf-8",
+      "format": "edge-list",
+      "skipLines": 0,
+      "sourceColumn": 0,
+      "targetColumn": 1
+    },
+    "source": 2,
+    "status": "fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-04-20",
+      "status": "live",
+      "url": "https://deim.urv.cat/~alexandre.arenas/data/welcome.htm"
+    },
+    {
+      "retrieved": "2026-04-20",
+      "status": "live",
+      "url": "https://networks.skewed.de/net/jazz_collab"
+    },
+    {
+      "retrieved": "2026-04-20",
+      "status": "live",
+      "url": "https://networks.skewed.de/net/jazz_collab/files/jazz_collab.csv.zip"
+    }
+  ],
+  "tags": []
+}

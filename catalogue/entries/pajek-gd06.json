@@ -1,0 +1,61 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "text": "Vladimir Batagelj, Andrej Mrvar (2006). Pajek Datasets."
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "World Cup network from Graph Drawing 2006 contest. 79 vertices, 1,460 arcs.",
+  "expectedCounts": {
+    "edges": 1460,
+    "nodes": 79
+  },
+  "id": "pajek-gd06",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "GD06 World Cup Network",
+  "properties": {
+    "components": 2,
+    "connected": false,
+    "cyclic": true,
+    "density": 0.14913311783720246,
+    "directed": true,
+    "edgeTypes": 1,
+    "heterogeneous": true,
+    "multigraph": true,
+    "nodeTypes": 1,
+    "rawBytes": 94169,
+    "selfLoops": false,
+    "weighted": true
+  },
+  "recipe": {
+    "archive": {
+      "kind": "zip",
+      "member": {
+        "path": "WC.net"
+      }
+    },
+    "parser": {
+      "encoding": "latin1",
+      "format": "pajek"
+    },
+    "source": 0,
+    "status": "fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-02-16",
+      "snapshot": {
+        "timestamp": "20230601",
+        "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/GD/GD06/WC.net.zip"
+      },
+      "status": "dead",
+      "url": "http://vlado.fmf.uni-lj.si/pub/networks/data/GD/GD06/WC.net.zip"
+    }
+  ],
+  "tags": []
+}

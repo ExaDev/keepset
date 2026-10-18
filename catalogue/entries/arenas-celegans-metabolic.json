@@ -1,0 +1,61 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "text": "J. Duch, A. Arenas (2005). Community identification using Extremal Optimization. Physical Review E 72, 027104."
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "Metabolic network of the nematode C. elegans.",
+  "expectedCounts": {
+    "edges": 4596,
+    "nodes": 453
+  },
+  "id": "arenas-celegans-metabolic",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "C. elegans Metabolic Network",
+  "properties": {
+    "components": 1,
+    "connected": true,
+    "cyclic": true,
+    "density": 0.009963078005040146,
+    "directed": true,
+    "edgeTypes": 1,
+    "heterogeneous": false,
+    "multigraph": true,
+    "nodeTypes": 1,
+    "rawBytes": 348431,
+    "selfLoops": true,
+    "weighted": false
+  },
+  "recipe": {
+    "archive": {
+      "kind": "zip",
+      "member": {
+        "path": "celegans_metabolic.net"
+      }
+    },
+    "parser": {
+      "encoding": "latin1",
+      "format": "pajek"
+    },
+    "source": 0,
+    "status": "fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-02-16",
+      "snapshot": {
+        "timestamp": "20230601",
+        "url": "https://web.archive.org/web/20230601/http://deim.urv.cat/~aarenas/data/xarxes/celegans_metabolic.zip"
+      },
+      "status": "dead",
+      "url": "http://deim.urv.cat/~aarenas/data/xarxes/celegans_metabolic.zip"
+    }
+  ],
+  "tags": []
+}

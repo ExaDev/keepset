@@ -1,0 +1,66 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "text": "R. Albert, H. Jeong, A.-L. Barabási (1999). Diameter of the World Wide Web. Nature 401, 130-131."
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "Hyperlink network of web pages from a 1999 crawl of the nd.edu domain.",
+  "expectedCounts": {
+    "edges": 1497135,
+    "nodes": 325729
+  },
+  "id": "barabasi-www",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "World-Wide-Web",
+  "properties": {
+    "components": 1,
+    "connected": true,
+    "cyclic": true,
+    "density": 0.000021066408037288526,
+    "directed": true,
+    "edgeTypes": 1,
+    "heterogeneous": false,
+    "multigraph": false,
+    "nodeTypes": 1,
+    "rawBytes": 88627319,
+    "selfLoops": false,
+    "weighted": false
+  },
+  "recipe": {
+    "archive": {
+      "kind": "gzip"
+    },
+    "parser": {
+      "commentPrefixes": [
+        "#",
+        "%"
+      ],
+      "delimiter": "detect",
+      "encoding": "utf-8",
+      "format": "edge-list",
+      "skipLines": 0,
+      "sourceColumn": 0,
+      "targetColumn": 1
+    },
+    "source": 0,
+    "status": "fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-02-16",
+      "snapshot": {
+        "timestamp": "20061109214015",
+        "url": "https://web.archive.org/web/20061109214015/http://www.nd.edu/~networks/resources/www/www.dat.gz"
+      },
+      "status": "dead",
+      "url": "http://www.nd.edu/~networks/resources/www/www.dat.gz"
+    }
+  ],
+  "tags": []
+}

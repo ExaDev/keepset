@@ -1,0 +1,67 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "text": "T. A. Davis, Y. Hu (2011). The University of Florida Sparse Matrix Collection. ACM Transactions on Mathematical Software 38, 1:1-1:25."
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "undirected random graph (1,048,576 nodes, 13,783,240 non-zeros)",
+  "expectedCounts": {
+    "edges": 13783240,
+    "nodes": 1048576
+  },
+  "id": "ss-dimacs10-rgg-n-2-20-s0",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "DIMACS10/rgg_n_2_20_s0",
+  "properties": {
+    "components": 3,
+    "connected": false,
+    "cyclic": true,
+    "density": 0.000012535795708331098,
+    "directed": false,
+    "edgeTypes": 1,
+    "heterogeneous": false,
+    "multigraph": false,
+    "nodeTypes": 1,
+    "rawBytes": 0,
+    "selfLoops": false,
+    "weighted": false
+  },
+  "recipe": {
+    "archive": {
+      "kind": "tar.gz",
+      "member": {
+        "path": "rgg_n_2_20_s0/rgg_n_2_20_s0.mtx"
+      }
+    },
+    "parser": {
+      "encoding": "utf-8",
+      "format": "matrix-market"
+    },
+    "source": 0,
+    "status": "fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-02-16",
+      "status": "live",
+      "url": "https://sparse.tamu.edu/MM/DIMACS10/rgg_n_2_20_s0.tar.gz"
+    },
+    {
+      "retrieved": "2026-02-16",
+      "status": "live",
+      "url": "https://sparse.tamu.edu/RB/DIMACS10/rgg_n_2_20_s0.tar.gz"
+    },
+    {
+      "retrieved": "2026-02-16",
+      "status": "live",
+      "url": "https://sparse.tamu.edu/mat/DIMACS10/rgg_n_2_20_s0.tar.gz"
+    }
+  ],
+  "tags": []
+}

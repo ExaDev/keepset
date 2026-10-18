@@ -1,0 +1,73 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "text": "Vladimir Batagelj, Andrej Mrvar (2006). Pajek Datasets."
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "Core Erdos collaboration network, 1998 version.",
+  "expectedCounts": {
+    "edges": 347,
+    "nodes": 485
+  },
+  "id": "pajek-erdos-981",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "Erdos Collaboration 1998 (Core)",
+  "properties": {
+    "components": 4,
+    "connected": false,
+    "cyclic": true,
+    "density": 0.013979147687012855,
+    "directed": false,
+    "edgeTypes": 1,
+    "heterogeneous": false,
+    "multigraph": true,
+    "nodeTypes": 1,
+    "rawBytes": 48735,
+    "selfLoops": false,
+    "weighted": true
+  },
+  "recipe": {
+    "archive": {
+      "kind": "none"
+    },
+    "parser": {
+      "encoding": "latin1",
+      "format": "pajek"
+    },
+    "source": 0,
+    "status": "fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-02-16",
+      "snapshot": {
+        "timestamp": "20230601",
+        "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/erdos/ERDOS981.NET"
+      },
+      "status": "dead",
+      "url": "http://vlado.fmf.uni-lj.si/pub/networks/data/erdos/ERDOS981.NET"
+    },
+    {
+      "retrieved": "2026-02-16",
+      "status": "live",
+      "url": "https://sparse.tamu.edu/MM/Pajek/Erdos981.tar.gz"
+    },
+    {
+      "retrieved": "2026-02-16",
+      "status": "live",
+      "url": "https://sparse.tamu.edu/RB/Pajek/Erdos981.tar.gz"
+    },
+    {
+      "retrieved": "2026-02-16",
+      "status": "live",
+      "url": "https://sparse.tamu.edu/mat/Pajek/Erdos981.tar.gz"
+    }
+  ],
+  "tags": []
+}

@@ -1,0 +1,62 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "text": "Leskovec et al. (2005). Graphs over time: densification laws, shrinking diameters and possible explanations. ACM SIGKDD Explorations Newsletter 7, 4-13."
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "Large undirected, weighted road network of California. Nodes represent road intersections or endpoints, edges represent roads. Edge weights represent the Euclidean distance between intersections in miles. Highly connected large-scale transportation network suitable for testing scalability of graph algorithms.",
+  "expectedCounts": {
+    "edges": 2760388,
+    "nodes": 1971281
+  },
+  "id": "snap-road-network-ca",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "California Road Network",
+  "properties": {
+    "components": 2638,
+    "connected": false,
+    "cyclic": true,
+    "density": 0.0000014327206657979522,
+    "directed": false,
+    "edgeTypes": 1,
+    "heterogeneous": false,
+    "multigraph": false,
+    "nodeTypes": 1,
+    "rawBytes": 0,
+    "selfLoops": false,
+    "weighted": true
+  },
+  "recipe": {
+    "archive": {
+      "kind": "gzip"
+    },
+    "parser": {
+      "commentPrefixes": [
+        "#",
+        "%"
+      ],
+      "delimiter": "detect",
+      "encoding": "utf-8",
+      "format": "edge-list",
+      "skipLines": 0,
+      "sourceColumn": 0,
+      "targetColumn": 1
+    },
+    "source": 0,
+    "status": "fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-03-26",
+      "status": "live",
+      "url": "https://snap.stanford.edu/data/roadNet-CA.txt.gz"
+    }
+  ],
+  "tags": []
+}

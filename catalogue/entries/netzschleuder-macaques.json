@@ -1,0 +1,68 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "text": "Y. Takahata. \"Diachronic changes in the dominance relations of adult female Japanese monkeys of the Arashiyama B group. The Monkeys of Arashiyama.\" State University of New York Press, Albany, 123-139 (1991)",
+      "url": "http://www.sunypress.edu/p-1128-the-monkeys-of-arashiyama.aspx"
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "Dominance interactions among a group of adult female Japanese macaques (Macaca fuscata fuscata), observed during a non-mating season in 1976. Edge weights represent the frequency of interaction.[^icon]\n[^icon]: Description obtained from the [ICON](https://icon.colorado.edu) project.",
+  "expectedCounts": {
+    "edges": 1187,
+    "nodes": 62
+  },
+  "id": "netzschleuder-macaques",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "Japanese macaques (1976)",
+  "properties": {
+    "directed": true,
+    "heterogeneous": false,
+    "multigraph": false,
+    "selfLoops": false,
+    "weighted": true
+  },
+  "recipe": {
+    "archive": {
+      "kind": "zip",
+      "member": {
+        "path": "edges.csv"
+      }
+    },
+    "parser": {
+      "commentPrefixes": [
+        "#"
+      ],
+      "delimiter": "comma",
+      "encoding": "utf-8",
+      "format": "edge-list",
+      "skipLines": 0,
+      "sourceColumn": 0,
+      "targetColumn": 1
+    },
+    "source": 2,
+    "status": "fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-04-20",
+      "status": "live",
+      "url": "http://konect.cc/networks/moreno_mac"
+    },
+    {
+      "retrieved": "2026-04-20",
+      "status": "live",
+      "url": "https://networks.skewed.de/net/macaques"
+    },
+    {
+      "retrieved": "2026-04-20",
+      "status": "live",
+      "url": "https://networks.skewed.de/net/macaques/files/macaques.csv.zip"
+    }
+  ],
+  "tags": []
+}

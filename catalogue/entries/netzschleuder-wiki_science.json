@@ -1,0 +1,68 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "doi": "10.6084/m9.figshare.11638932.v5",
+      "text": "A. Calderone, \"A Wikipedia Based Map of Science.\" Figshare (2020)"
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "A network of scientific fields, extracted from the English Wikipedia in early 2020. Nodes are wikipedia pages representing natural, formal, social and applied sciences, and two nodes are linked if the cosine similarity of the page content is above a threshold. See <http://www.sinnefa.com/wikipediasciencemap/> for an interactive version.[^icon]\n[^icon]: Description obtained from the [ICON](https://icon.colorado.edu) project.",
+  "expectedCounts": {
+    "edges": 6523,
+    "nodes": 687
+  },
+  "id": "netzschleuder-wiki_science",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "Wikipedia Map of Science (2020)",
+  "properties": {
+    "directed": false,
+    "heterogeneous": true,
+    "multigraph": false,
+    "selfLoops": false,
+    "weighted": false
+  },
+  "recipe": {
+    "archive": {
+      "kind": "zip",
+      "member": {
+        "path": "edges.csv"
+      }
+    },
+    "parser": {
+      "commentPrefixes": [
+        "#"
+      ],
+      "delimiter": "comma",
+      "encoding": "utf-8",
+      "format": "edge-list",
+      "skipLines": 0,
+      "sourceColumn": 0,
+      "targetColumn": 1
+    },
+    "source": 2,
+    "status": "fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-04-20",
+      "status": "live",
+      "url": "https://figshare.com/articles/A_Wikipedia_Based_Map_of_Science/11638932"
+    },
+    {
+      "retrieved": "2026-04-20",
+      "status": "live",
+      "url": "https://networks.skewed.de/net/wiki_science"
+    },
+    {
+      "retrieved": "2026-04-20",
+      "status": "live",
+      "url": "https://networks.skewed.de/net/wiki_science/files/wiki_science.csv.zip"
+    }
+  ],
+  "tags": []
+}

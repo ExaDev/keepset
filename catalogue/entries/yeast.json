@@ -1,0 +1,79 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "text": "H. Jeong, S. P. Mason, A.-L. Barabási, Z. N. Oltvai (2001). Lethality and centrality in protein networks. Nature."
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "Protein-protein interaction network in yeast (Saccharomyces cerevisiae).",
+  "expectedCounts": {
+    "edges": 0,
+    "nodes": 0
+  },
+  "id": "yeast",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "Yeast Protein Interactions",
+  "properties": {
+    "components": 101,
+    "connected": false,
+    "cyclic": true,
+    "density": 0.0024817120008040258,
+    "directed": false,
+    "edgeTypes": 1,
+    "heterogeneous": true,
+    "multigraph": false,
+    "nodeTypes": 1,
+    "rawBytes": 462602,
+    "selfLoops": false,
+    "weighted": false
+  },
+  "recipe": {
+    "archive": {
+      "kind": "zip",
+      "member": {
+        "extensions": [
+          ".net",
+          ".paj"
+        ]
+      }
+    },
+    "parser": {
+      "encoding": "latin1",
+      "format": "pajek"
+    },
+    "source": 0,
+    "status": "fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-01-17",
+      "snapshot": {
+        "timestamp": "20230601",
+        "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/bio/Yeast/Yeast.zip"
+      },
+      "status": "dead",
+      "url": "http://vlado.fmf.uni-lj.si/pub/networks/data/bio/Yeast/Yeast.zip"
+    },
+    {
+      "retrieved": "2026-01-17",
+      "status": "live",
+      "url": "https://sparse.tamu.edu/MM/Pajek/yeast.tar.gz"
+    },
+    {
+      "retrieved": "2026-01-17",
+      "status": "live",
+      "url": "https://sparse.tamu.edu/RB/Pajek/yeast.tar.gz"
+    },
+    {
+      "retrieved": "2026-01-17",
+      "status": "live",
+      "url": "https://sparse.tamu.edu/mat/Pajek/yeast.tar.gz"
+    }
+  ],
+  "tags": []
+}

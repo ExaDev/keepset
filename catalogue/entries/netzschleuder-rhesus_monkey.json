@@ -1,0 +1,68 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "doi": "10.1159/000155480",
+      "text": "D.S. Sade. \"Sociometrics of macaca mulatta I. linkages and cliques in grooming matrices.\" Folia Primatologica 18(3-4), 196-223 (1972)"
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "Grooming interactions among a group of wild adult rhesus monkeys (Macaca mulatta) in Cayo Santiago, during a two month period in 1963. Edge weights represent the frequency of interaction. The two versions below are equivalent.[^icon]\n[^icon]: Description obtained from the [ICON](https://icon.colorado.edu) project.",
+  "expectedCounts": {
+    "edges": 111,
+    "nodes": 16
+  },
+  "id": "netzschleuder-rhesus_monkey",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "Rhesus monkey grooming (1963)",
+  "properties": {
+    "directed": true,
+    "heterogeneous": false,
+    "multigraph": false,
+    "selfLoops": false,
+    "weighted": true
+  },
+  "recipe": {
+    "archive": {
+      "kind": "zip",
+      "member": {
+        "path": "edges.csv"
+      }
+    },
+    "parser": {
+      "commentPrefixes": [
+        "#"
+      ],
+      "delimiter": "comma",
+      "encoding": "utf-8",
+      "format": "edge-list",
+      "skipLines": 0,
+      "sourceColumn": 0,
+      "targetColumn": 1
+    },
+    "source": 2,
+    "status": "fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-04-20",
+      "status": "live",
+      "url": "http://konect.cc/networks/moreno_rhesus"
+    },
+    {
+      "retrieved": "2026-04-20",
+      "status": "live",
+      "url": "https://networks.skewed.de/net/rhesus_monkey"
+    },
+    {
+      "retrieved": "2026-04-20",
+      "status": "live",
+      "url": "https://networks.skewed.de/net/rhesus_monkey/files/rhesus_monkey.csv.zip"
+    }
+  ],
+  "tags": []
+}

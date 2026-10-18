@@ -1,0 +1,58 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "text": "Vladimir Batagelj, Andrej Mrvar (2006). Pajek Datasets."
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "Graph Drawing 1998 contest, Problem A. 38 vertices, 50 arcs.",
+  "expectedCounts": {
+    "edges": 50,
+    "nodes": 38
+  },
+  "id": "pajek-gd98",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "GD98 Contest Graph A",
+  "properties": {
+    "components": 4,
+    "connected": false,
+    "cyclic": true,
+    "density": 0.03556187766714083,
+    "directed": true,
+    "edgeTypes": 1,
+    "heterogeneous": false,
+    "multigraph": true,
+    "nodeTypes": 1,
+    "rawBytes": 7582,
+    "selfLoops": false,
+    "weighted": false
+  },
+  "recipe": {
+    "archive": {
+      "kind": "none"
+    },
+    "parser": {
+      "encoding": "latin1",
+      "format": "pajek"
+    },
+    "source": 0,
+    "status": "fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-02-16",
+      "snapshot": {
+        "timestamp": "20230601",
+        "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/GD/gd98/A98.net"
+      },
+      "status": "dead",
+      "url": "http://vlado.fmf.uni-lj.si/pub/networks/data/GD/gd98/A98.net"
+    }
+  ],
+  "tags": []
+}

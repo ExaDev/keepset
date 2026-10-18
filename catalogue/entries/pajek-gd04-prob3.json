@@ -1,0 +1,51 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "text": "S. Kobourov (2004). GD 2004 Graph Drawing Contest."
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "Graph Drawing 2004 crossing minimisation contest, Problem 3. 102 nodes, 224 edges.",
+  "expectedCounts": {
+    "edges": 224,
+    "nodes": 102
+  },
+  "id": "pajek-gd04-prob3",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "GD04 Contest Problem 3",
+  "properties": {
+    "components": 1,
+    "connected": true,
+    "cyclic": true,
+    "density": 0.0434867016113376,
+    "directed": false,
+    "edgeTypes": 1,
+    "heterogeneous": false,
+    "multigraph": false,
+    "nodeTypes": 1,
+    "rawBytes": 15755,
+    "selfLoops": false,
+    "weighted": false
+  },
+  "recipe": {
+    "reason": "no download is in a form keepset reads yet (gd-contest: format gd-contest has a pipeline-specific parser with no declarative keepset form yet)",
+    "status": "not-fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-02-16",
+      "snapshot": {
+        "timestamp": "20230601",
+        "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/GD/gd04/gd04.zip"
+      },
+      "status": "dead",
+      "url": "http://vlado.fmf.uni-lj.si/pub/networks/data/GD/gd04/gd04.zip"
+    }
+  ],
+  "tags": []
+}

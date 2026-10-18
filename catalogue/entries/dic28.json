@@ -1,0 +1,64 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "text": "Donald Knuth (1993). The Stanford GraphBase."
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "Network of English words of length 2-8, connected if they differ by one letter.",
+  "expectedCounts": {
+    "edges": 28635,
+    "nodes": 52652
+  },
+  "id": "dic28",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "Words 2-8",
+  "properties": {
+    "components": 17903,
+    "connected": false,
+    "cyclic": true,
+    "density": 0.00006423679954583274,
+    "directed": false,
+    "edgeTypes": 1,
+    "heterogeneous": true,
+    "multigraph": false,
+    "nodeTypes": 1,
+    "rawBytes": 3168897,
+    "selfLoops": false,
+    "weighted": true
+  },
+  "recipe": {
+    "archive": {
+      "kind": "zip",
+      "member": {
+        "extensions": [
+          ".net",
+          ".paj"
+        ]
+      }
+    },
+    "parser": {
+      "encoding": "latin1",
+      "format": "pajek"
+    },
+    "source": 0,
+    "status": "fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-01-17",
+      "snapshot": {
+        "timestamp": "20230601",
+        "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/dic/knuth/dic28.zip"
+      },
+      "status": "dead",
+      "url": "http://vlado.fmf.uni-lj.si/pub/networks/data/dic/knuth/dic28.zip"
+    }
+  ],
+  "tags": []
+}

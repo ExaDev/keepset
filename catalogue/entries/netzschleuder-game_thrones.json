@@ -1,0 +1,68 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "doi": "10.4169/mathhorizons.23.4.18",
+      "text": "A. Beveridge and J. Shan, \"Network of Thrones.\" Math Horizons 23(4), 18-22 (2016)"
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "Network of coappearances of characters in the Game of Thrones series, by George R. R. Martin, and in particular coappearances in the book \"A Storm of Swords.\" Nodes are unique characters, and edges are weighted by the number of times the two characters' names appeared within 15 words of each other in the text.[^icon]\n[^icon]: Description obtained from the [ICON](https://icon.colorado.edu) project.",
+  "expectedCounts": {
+    "edges": 352,
+    "nodes": 107
+  },
+  "id": "netzschleuder-game_thrones",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "Game of Thrones coappearances",
+  "properties": {
+    "directed": false,
+    "heterogeneous": false,
+    "multigraph": false,
+    "selfLoops": false,
+    "weighted": true
+  },
+  "recipe": {
+    "archive": {
+      "kind": "zip",
+      "member": {
+        "path": "edges.csv"
+      }
+    },
+    "parser": {
+      "commentPrefixes": [
+        "#"
+      ],
+      "delimiter": "comma",
+      "encoding": "utf-8",
+      "format": "edge-list",
+      "skipLines": 0,
+      "sourceColumn": 0,
+      "targetColumn": 1
+    },
+    "source": 2,
+    "status": "fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-04-20",
+      "status": "live",
+      "url": "http://www.macalester.edu/~abeverid/data/stormofswords.csv"
+    },
+    {
+      "retrieved": "2026-04-20",
+      "status": "live",
+      "url": "https://networks.skewed.de/net/game_thrones"
+    },
+    {
+      "retrieved": "2026-04-20",
+      "status": "live",
+      "url": "https://networks.skewed.de/net/game_thrones/files/game_thrones.csv.zip"
+    }
+  ],
+  "tags": []
+}

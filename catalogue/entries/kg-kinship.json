@@ -1,0 +1,43 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "text": "C. Kemp, J. B. Tenenbaum, T. L. Griffiths, T. Yamada, N. Ueda (2006). Learning systems of concepts with an infinite relational model. Proceedings of the 21st National Conference on Artificial Intelligence, 381-388."
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "Directed knowledge graph of kinship relations in the Alyawarra language group of Australia. 25 relation types (kinship terms) connect 104 persons. Each person pair has exactly one kinship relation, making this a simple directed graph (not a multigraph). Edge attributes are the relation types.",
+  "domain": "Anthropological knowledge graph",
+  "expectedCounts": {
+    "edges": 10686,
+    "nodes": 104
+  },
+  "id": "kg-kinship",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "Kinship Knowledge Graph",
+  "properties": {
+    "directed": true,
+    "heterogeneous": true,
+    "multigraph": true,
+    "selfLoops": false,
+    "weighted": false
+  },
+  "recipe": {
+    "reason": "no download is in a form keepset reads yet (tsv: format tsv is a triple file whose head and tail columns the catalogue does not record)",
+    "status": "not-fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-04-19",
+      "status": "live",
+      "url": "https://github.com/TimDettmers/ConvE/raw/master/kinship.tar.gz"
+    }
+  ],
+  "tags": [
+    "knowledge-graph"
+  ]
+}

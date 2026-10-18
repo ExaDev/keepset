@@ -1,0 +1,67 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "text": "T. A. Davis, Y. Hu (2011). The University of Florida Sparse Matrix Collection. ACM Transactions on Mathematical Software 38, 1:1-1:25."
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "power network problem (29,214 nodes, 4,400,122 non-zeros)",
+  "expectedCounts": {
+    "edges": 4400122,
+    "nodes": 29214
+  },
+  "id": "ss-tsopf-tsopf-fs-b300",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "TSOPF/TSOPF_FS_b300",
+  "properties": {
+    "components": 2,
+    "connected": false,
+    "cyclic": true,
+    "density": 0.005164928961800344,
+    "directed": false,
+    "edgeTypes": 1,
+    "heterogeneous": false,
+    "multigraph": false,
+    "nodeTypes": 1,
+    "rawBytes": 0,
+    "selfLoops": false,
+    "weighted": true
+  },
+  "recipe": {
+    "archive": {
+      "kind": "tar.gz",
+      "member": {
+        "path": "TSOPF_FS_b300/TSOPF_FS_b300.mtx"
+      }
+    },
+    "parser": {
+      "encoding": "utf-8",
+      "format": "matrix-market"
+    },
+    "source": 0,
+    "status": "fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-02-16",
+      "status": "live",
+      "url": "https://sparse.tamu.edu/MM/TSOPF/TSOPF_FS_b300.tar.gz"
+    },
+    {
+      "retrieved": "2026-02-16",
+      "status": "live",
+      "url": "https://sparse.tamu.edu/RB/TSOPF/TSOPF_FS_b300.tar.gz"
+    },
+    {
+      "retrieved": "2026-02-16",
+      "status": "live",
+      "url": "https://sparse.tamu.edu/mat/TSOPF/TSOPF_FS_b300.tar.gz"
+    }
+  ],
+  "tags": []
+}

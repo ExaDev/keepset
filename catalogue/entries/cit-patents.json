@@ -1,0 +1,65 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "text": "Bronwyn H. Hall, Adam B. Jaffe, Manuel Trajtenberg (2001). The NBER Patent Citations Data File: Lessons, Insights and Methodological Tools."
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "US patent citation network (patents granted 1975-1999).",
+  "domain": "Patent citation network",
+  "expectedCounts": {
+    "edges": 16518948,
+    "nodes": 3774768
+  },
+  "id": "cit-patents",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "Cit-Patents",
+  "properties": {
+    "components": 3627,
+    "connected": false,
+    "cyclic": true,
+    "density": 0.000002318632687655319,
+    "directed": true,
+    "edgeTypes": 1,
+    "heterogeneous": false,
+    "multigraph": false,
+    "nodeTypes": 1,
+    "rawBytes": 0,
+    "selfLoops": true,
+    "weighted": false
+  },
+  "recipe": {
+    "archive": {
+      "kind": "gzip"
+    },
+    "parser": {
+      "commentPrefixes": [
+        "#",
+        "%"
+      ],
+      "delimiter": "tab",
+      "encoding": "utf-8",
+      "format": "edge-list",
+      "skipLines": 0,
+      "sourceColumn": 0,
+      "targetColumn": 1
+    },
+    "source": 0,
+    "status": "fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-02-16",
+      "status": "live",
+      "url": "https://snap.stanford.edu/data/cit-Patents.txt.gz"
+    }
+  ],
+  "tags": [
+    "citation"
+  ]
+}

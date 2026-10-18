@@ -1,0 +1,67 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "text": "T. A. Davis, Y. Hu (2011). The University of Florida Sparse Matrix Collection. ACM Transactions on Mathematical Software 38, 1:1-1:25."
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "directed graph (118,142,155 nodes, 1,019,903,190 non-zeros)",
+  "expectedCounts": {
+    "edges": 1019903190,
+    "nodes": 118142155
+  },
+  "id": "ss-law-webbase-2001",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "LAW/webbase-2001",
+  "properties": {
+    "components": 2721051,
+    "connected": false,
+    "cyclic": true,
+    "density": 7.307169422704123e-8,
+    "directed": true,
+    "edgeTypes": 1,
+    "heterogeneous": false,
+    "multigraph": false,
+    "nodeTypes": 1,
+    "rawBytes": 0,
+    "selfLoops": false,
+    "weighted": false
+  },
+  "recipe": {
+    "archive": {
+      "kind": "tar.gz",
+      "member": {
+        "path": "webbase-2001/webbase-2001.mtx"
+      }
+    },
+    "parser": {
+      "encoding": "utf-8",
+      "format": "matrix-market"
+    },
+    "source": 0,
+    "status": "fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-02-16",
+      "status": "live",
+      "url": "https://sparse.tamu.edu/MM/LAW/webbase-2001.tar.gz"
+    },
+    {
+      "retrieved": "2026-02-16",
+      "status": "live",
+      "url": "https://sparse.tamu.edu/RB/LAW/webbase-2001.tar.gz"
+    },
+    {
+      "retrieved": "2026-02-16",
+      "status": "live",
+      "url": "https://sparse.tamu.edu/mat/LAW/webbase-2001.tar.gz"
+    }
+  ],
+  "tags": []
+}

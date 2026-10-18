@@ -1,0 +1,47 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "text": "Szklarczyk et al. (2019). STRING: functional protein association networks. Nature Methods."
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "Undirected, weighted network of human protein interactions. Nodes represent proteins, edges represent confirmed physical interactions. Edge weights represent confidence scores (0-1) from interaction prediction methods and experimental evidence aggregation. Heavily connected biological network useful for studying scale-free properties in real biological systems.",
+  "expectedCounts": {
+    "edges": 186481,
+    "nodes": 20194
+  },
+  "id": "ppi-human",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "Human Protein-Protein Interaction Network",
+  "properties": {
+    "components": 3,
+    "connected": false,
+    "cyclic": true,
+    "density": 0.0026566697784573623,
+    "directed": false,
+    "edgeTypes": 1,
+    "heterogeneous": true,
+    "multigraph": false,
+    "nodeTypes": 1,
+    "rawBytes": 0,
+    "selfLoops": false,
+    "weighted": true
+  },
+  "recipe": {
+    "reason": "no download is in a form keepset reads yet (biogrid-zip: format biogrid-zip has a pipeline-specific parser with no declarative keepset form yet)",
+    "status": "not-fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-03-26",
+      "status": "live",
+      "url": "https://downloads.thebiogrid.org/Download/BioGRID/Latest-Release/BIOGRID-ORGANISM-LATEST.tab3.zip"
+    }
+  ],
+  "tags": []
+}

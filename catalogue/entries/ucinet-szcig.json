@@ -1,0 +1,51 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "text": "R. Ziegler, R. Bender, H. Biehler (1985). Industry and banking in the German corporate network. Polity Press."
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "Corporate interlocks among 15 major West German business entities.",
+  "expectedCounts": {
+    "edges": 134,
+    "nodes": 15
+  },
+  "id": "ucinet-szcig",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "Stokman-Ziegler German Interlocks",
+  "properties": {
+    "components": 1,
+    "connected": true,
+    "cyclic": true,
+    "density": 0.7362637362637363,
+    "directed": false,
+    "edgeTypes": 1,
+    "heterogeneous": false,
+    "multigraph": true,
+    "nodeTypes": 1,
+    "rawBytes": 9011,
+    "selfLoops": false,
+    "weighted": true
+  },
+  "recipe": {
+    "reason": "no download is in a form keepset reads yet (ucinet: format ucinet has a pipeline-specific parser with no declarative keepset form yet)",
+    "status": "not-fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-02-16",
+      "snapshot": {
+        "timestamp": "20230601",
+        "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/UciNet/szcig.dat"
+      },
+      "status": "dead",
+      "url": "http://vlado.fmf.uni-lj.si/pub/networks/data/UciNet/szcig.dat"
+    }
+  ],
+  "tags": []
+}

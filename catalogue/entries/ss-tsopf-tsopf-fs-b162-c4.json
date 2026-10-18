@@ -1,0 +1,67 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "text": "T. A. Davis, Y. Hu (2011). The University of Florida Sparse Matrix Collection. ACM Transactions on Mathematical Software 38, 1:1-1:25."
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "power network problem (40,798 nodes, 2,398,220 non-zeros)",
+  "expectedCounts": {
+    "edges": 2398220,
+    "nodes": 40798
+  },
+  "id": "ss-tsopf-tsopf-fs-b162-c4",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "TSOPF/TSOPF_FS_b162_c4",
+  "properties": {
+    "components": 2,
+    "connected": false,
+    "cyclic": true,
+    "density": 0.001447123224514046,
+    "directed": false,
+    "edgeTypes": 1,
+    "heterogeneous": false,
+    "multigraph": false,
+    "nodeTypes": 1,
+    "rawBytes": 0,
+    "selfLoops": false,
+    "weighted": true
+  },
+  "recipe": {
+    "archive": {
+      "kind": "tar.gz",
+      "member": {
+        "path": "TSOPF_FS_b162_c4/TSOPF_FS_b162_c4.mtx"
+      }
+    },
+    "parser": {
+      "encoding": "utf-8",
+      "format": "matrix-market"
+    },
+    "source": 0,
+    "status": "fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-02-16",
+      "status": "live",
+      "url": "https://sparse.tamu.edu/MM/TSOPF/TSOPF_FS_b162_c4.tar.gz"
+    },
+    {
+      "retrieved": "2026-02-16",
+      "status": "live",
+      "url": "https://sparse.tamu.edu/RB/TSOPF/TSOPF_FS_b162_c4.tar.gz"
+    },
+    {
+      "retrieved": "2026-02-16",
+      "status": "live",
+      "url": "https://sparse.tamu.edu/mat/TSOPF/TSOPF_FS_b162_c4.tar.gz"
+    }
+  ],
+  "tags": []
+}

@@ -1,0 +1,68 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "text": "D. Knuth, \"The Stanford GraphBase: a platform for combinatorial computing”. Addison-Wesley Publishing Company (1993).",
+      "url": "http://www-cs-faculty.stanford.edu/~uno/sgb.html"
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "A network of contiguous states in the USA, in which each state is a node and two nodes are connected if they share a land-based geographic border. The dataset includes the lower 48 states, and the District of Columbia.[^icon]\n[^icon]: Description obtained from the [ICON](https://icon.colorado.edu) project.",
+  "expectedCounts": {
+    "edges": 107,
+    "nodes": 49
+  },
+  "id": "netzschleuder-contiguous_usa",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "Contiguous states (USA)",
+  "properties": {
+    "directed": false,
+    "heterogeneous": false,
+    "multigraph": false,
+    "selfLoops": false,
+    "weighted": false
+  },
+  "recipe": {
+    "archive": {
+      "kind": "zip",
+      "member": {
+        "path": "edges.csv"
+      }
+    },
+    "parser": {
+      "commentPrefixes": [
+        "#"
+      ],
+      "delimiter": "comma",
+      "encoding": "utf-8",
+      "format": "edge-list",
+      "skipLines": 0,
+      "sourceColumn": 0,
+      "targetColumn": 1
+    },
+    "source": 2,
+    "status": "fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-04-20",
+      "status": "live",
+      "url": "http://konect.cc/networks/contiguous-usa"
+    },
+    {
+      "retrieved": "2026-04-20",
+      "status": "live",
+      "url": "https://networks.skewed.de/net/contiguous_usa"
+    },
+    {
+      "retrieved": "2026-04-20",
+      "status": "live",
+      "url": "https://networks.skewed.de/net/contiguous_usa/files/contiguous_usa.csv.zip"
+    }
+  ],
+  "tags": []
+}

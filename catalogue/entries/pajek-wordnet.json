@@ -1,0 +1,79 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "text": "G. A. Miller (1995). WordNet: A Lexical Database for English. CACM."
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "Lexical reference network from Princeton WordNet. 82,670 synsets, 133,445 relations.",
+  "expectedCounts": {
+    "edges": 98678,
+    "nodes": 82670
+  },
+  "id": "pajek-wordnet",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "WordNet",
+  "properties": {
+    "components": 413,
+    "connected": false,
+    "cyclic": true,
+    "density": 0.00004107710791579482,
+    "directed": true,
+    "edgeTypes": 1,
+    "heterogeneous": true,
+    "multigraph": false,
+    "nodeTypes": 1,
+    "rawBytes": 9736311,
+    "selfLoops": false,
+    "weighted": true
+  },
+  "recipe": {
+    "archive": {
+      "kind": "zip",
+      "member": {
+        "extensions": [
+          ".net",
+          ".paj"
+        ]
+      }
+    },
+    "parser": {
+      "encoding": "latin1",
+      "format": "pajek"
+    },
+    "source": 0,
+    "status": "fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-02-16",
+      "snapshot": {
+        "timestamp": "20230601",
+        "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/dic/Wordnet/wordNet.zip"
+      },
+      "status": "dead",
+      "url": "http://vlado.fmf.uni-lj.si/pub/networks/data/dic/Wordnet/wordNet.zip"
+    },
+    {
+      "retrieved": "2026-02-16",
+      "status": "live",
+      "url": "https://sparse.tamu.edu/MM/Pajek/Wordnet3.tar.gz"
+    },
+    {
+      "retrieved": "2026-02-16",
+      "status": "live",
+      "url": "https://sparse.tamu.edu/RB/Pajek/Wordnet3.tar.gz"
+    },
+    {
+      "retrieved": "2026-02-16",
+      "status": "live",
+      "url": "https://sparse.tamu.edu/mat/Pajek/Wordnet3.tar.gz"
+    }
+  ],
+  "tags": []
+}

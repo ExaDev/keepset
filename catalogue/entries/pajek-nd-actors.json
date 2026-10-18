@@ -1,0 +1,88 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "text": "Vladimir Batagelj, Andrej Mrvar (2006). Pajek Datasets."
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "Two-mode network of actors and films. 392,400 actors, 127,823 films, 1,470,418 appearances.",
+  "expectedCounts": {
+    "edges": 127823,
+    "nodes": 520223
+  },
+  "id": "pajek-nd-actors",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "Notre Dame Actors",
+  "properties": {
+    "components": 11902,
+    "connected": false,
+    "cyclic": true,
+    "density": 0.000010866468052283042,
+    "directed": false,
+    "edgeTypes": 1,
+    "heterogeneous": true,
+    "multigraph": false,
+    "nodeTypes": 1,
+    "rawBytes": 23140773,
+    "selfLoops": false,
+    "weighted": true
+  },
+  "recipe": {
+    "archive": {
+      "kind": "zip",
+      "member": {
+        "extensions": [
+          ".net",
+          ".paj"
+        ]
+      }
+    },
+    "parser": {
+      "encoding": "latin1",
+      "format": "pajek"
+    },
+    "source": 0,
+    "status": "fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-02-16",
+      "snapshot": {
+        "timestamp": "20100310000000",
+        "url": "https://web.archive.org/web/20100310000000/http://vlado.fmf.uni-lj.si/pub/networks/data/ND/NDactors.zip"
+      },
+      "status": "dead",
+      "url": "http://vlado.fmf.uni-lj.si/pub/networks/data/ND/NDactors.zip"
+    },
+    {
+      "retrieved": "2026-02-16",
+      "snapshot": {
+        "timestamp": "20230601",
+        "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/ND/NDactors.zip"
+      },
+      "status": "dead",
+      "url": "http://vlado.fmf.uni-lj.si/pub/networks/data/ND/NDactors.zip"
+    },
+    {
+      "retrieved": "2026-02-16",
+      "status": "live",
+      "url": "https://sparse.tamu.edu/MM/Pajek/NotreDame_actors.tar.gz"
+    },
+    {
+      "retrieved": "2026-02-16",
+      "status": "live",
+      "url": "https://sparse.tamu.edu/RB/Pajek/NotreDame_actors.tar.gz"
+    },
+    {
+      "retrieved": "2026-02-16",
+      "status": "live",
+      "url": "https://sparse.tamu.edu/mat/Pajek/NotreDame_actors.tar.gz"
+    }
+  ],
+  "tags": []
+}

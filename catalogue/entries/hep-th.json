@@ -1,0 +1,74 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "text": "M. E. J. Newman (2001). The structure of scientific collaboration networks. Proceedings of the National Academy of Sciences 98, 404-409."
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "Weighted network of coauthorships between scientists posting preprints on the High-Energy Theory E-Print Archive between Jan 1, 1995 and December 31, 1999.",
+  "expectedCounts": {
+    "edges": 0,
+    "nodes": 0
+  },
+  "id": "hep-th",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "High-Energy Theory Collaborations",
+  "properties": {
+    "components": 581,
+    "connected": false,
+    "cyclic": true,
+    "density": 0.0005440338046324214,
+    "directed": false,
+    "edgeTypes": 1,
+    "heterogeneous": false,
+    "multigraph": false,
+    "nodeTypes": 1,
+    "rawBytes": 1531855,
+    "selfLoops": false,
+    "weighted": true
+  },
+  "recipe": {
+    "archive": {
+      "kind": "zip",
+      "member": {
+        "extensions": [
+          ".gml"
+        ]
+      }
+    },
+    "parser": {
+      "encoding": "utf-8",
+      "format": "gml"
+    },
+    "source": 0,
+    "status": "fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-01-17",
+      "status": "live",
+      "url": "https://websites.umich.edu/~mejn/netdata/hep-th.zip"
+    },
+    {
+      "retrieved": "2026-01-17",
+      "status": "live",
+      "url": "https://sparse.tamu.edu/MM/Newman/hep-th.tar.gz"
+    },
+    {
+      "retrieved": "2026-01-17",
+      "status": "live",
+      "url": "https://sparse.tamu.edu/RB/Newman/hep-th.tar.gz"
+    },
+    {
+      "retrieved": "2026-01-17",
+      "status": "live",
+      "url": "https://sparse.tamu.edu/mat/Newman/hep-th.tar.gz"
+    }
+  ],
+  "tags": []
+}

@@ -1,0 +1,70 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "text": "C. Lee Giles, Kurt D. Bollacker, Steve Lawrence (1998). CiteSeer: An Automatic Citation Indexing System. ACM."
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "Citation network of computer science papers with 6 topic classes.",
+  "domain": "Citation network",
+  "expectedCounts": {
+    "edges": 4732,
+    "nodes": 3327
+  },
+  "id": "citeseer",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "CiteSeer",
+  "properties": {
+    "components": 438,
+    "connected": false,
+    "cyclic": true,
+    "density": 0.0008339356503152743,
+    "directed": true,
+    "edgeTypes": 1,
+    "heterogeneous": true,
+    "multigraph": false,
+    "nodeTypes": 1,
+    "rawBytes": 0,
+    "selfLoops": true,
+    "weighted": false
+  },
+  "recipe": {
+    "archive": {
+      "kind": "tar.gz",
+      "member": {
+        "extensions": [
+          ".cites"
+        ]
+      }
+    },
+    "parser": {
+      "commentPrefixes": [
+        "#",
+        "%"
+      ],
+      "delimiter": "tab",
+      "encoding": "utf-8",
+      "format": "edge-list",
+      "skipLines": 0,
+      "sourceColumn": 1,
+      "targetColumn": 0
+    },
+    "source": 0,
+    "status": "fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-02-16",
+      "status": "live",
+      "url": "https://linqs-data.soe.ucsc.edu/public/lbc/citeseer.tgz"
+    }
+  ],
+  "tags": [
+    "citation"
+  ]
+}

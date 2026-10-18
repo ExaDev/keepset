@@ -1,0 +1,52 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "text": "Szklarczyk, Damian, Kirsch, Rebecca, Koutrouli, Mikaela, Nastou, Katerina, Mehryary, Farrokh, Hachilif, Radja, Annika, Gable, Fang, Tao, Doncheva, Nadezhda T., Letunic, Ivica, Bork, Peer, Jensen, Lars J., von Mering, Christian (2023). The STRING database in 2023: protein–protein association networks and functional enrichment analyses for any of 12 535 organisms. Nucleic Acids Research."
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "Protein-protein interaction network for Homo sapiens from the STRING database v12.0. Edge weights are combined confidence scores normalised to [0, 1].",
+  "expectedCounts": {
+    "edges": 13715404,
+    "nodes": 19622
+  },
+  "id": "string-human-ppi",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "STRING Human Protein Interaction Network",
+  "properties": {
+    "components": 1,
+    "connected": true,
+    "cyclic": false,
+    "density": 1,
+    "directed": false,
+    "edgeTypes": 1,
+    "heterogeneous": false,
+    "multigraph": true,
+    "nodeTypes": 1,
+    "rawBytes": 0,
+    "selfLoops": false,
+    "weighted": true
+  },
+  "recipe": {
+    "reason": "no download is in a form keepset reads yet (string-ppi: format string-ppi has a pipeline-specific parser with no declarative keepset form yet)",
+    "status": "not-fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-03-27",
+      "status": "live",
+      "url": "https://stringdb-downloads.org/download/protein.links.v12.0/9606.protein.links.v12.0.txt.gz"
+    },
+    {
+      "retrieved": "2026-03-27",
+      "status": "live",
+      "url": "https://version-12-0.string-db.org/download/protein.links.v12.0/9606.protein.links.v12.0.txt.gz"
+    }
+  ],
+  "tags": []
+}

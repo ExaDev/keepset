@@ -1,0 +1,48 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "doi": "10.48550/arXiv.2205.01833",
+      "text": "Priem, J., Piwowar, H., Larivière, V. (2022). OpenAlex: A fully-open index of scholarly works, authors, institutions, venues, and concepts."
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "Full OpenAlex scholarly citation graph. Nodes are works (250M+), directed edges represent citation relationships (work A references work B). Stored as Parquet relationship tables, queried via DuckDB without loading into memory.",
+  "domain": "Scholarly citations",
+  "expectedCounts": {
+    "edges": 3040000000,
+    "nodes": 250000000
+  },
+  "id": "openalex-citations",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "OpenAlex Citation Graph",
+  "properties": {
+    "backend": "duckdb",
+    "directed": true,
+    "edgeSourceCol": "work_id",
+    "edgeTargetCol": "referenced_work_id",
+    "heterogeneous": false,
+    "multigraph": false,
+    "parquetDir": "data/works/referenced_works",
+    "selfLoops": false,
+    "weighted": false
+  },
+  "recipe": {
+    "reason": "no download is in a form keepset reads yet (parquet: format parquet has a pipeline-specific parser with no declarative keepset form yet)",
+    "status": "not-fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-06-05",
+      "status": "live",
+      "url": "https://huggingface.co/datasets/Mearman/OpenAlex"
+    }
+  ],
+  "tags": [
+    "citation-network"
+  ]
+}

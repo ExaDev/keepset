@@ -1,0 +1,47 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "text": "Junheng Lin, Yibin Shen, Yifan Wang, Fangzhao Wu, Xiang Wang (2024). H2GB: A Hierarchical Heterogeneous Graph Benchmark for Node Property Prediction. Proceedings of the AAAI Conference on Artificial Intelligence."
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "Heterogeneous financial fraud detection graph derived from the IEEE-CIS fraud detection dataset. Contains transaction and identity nodes with 22 edge types representing card, address, email, and device relations.",
+  "expectedCounts": {
+    "edges": 1383371,
+    "nodes": 1592008
+  },
+  "id": "ieee-cis-g",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "IEEE-CIS-G",
+  "properties": {
+    "components": 354216,
+    "connected": false,
+    "cyclic": true,
+    "density": 0.000001091637494805802,
+    "directed": true,
+    "edgeTypes": 1,
+    "heterogeneous": true,
+    "multigraph": false,
+    "nodeTypes": 2,
+    "rawBytes": 0,
+    "selfLoops": false,
+    "weighted": false
+  },
+  "recipe": {
+    "reason": "no download is in a form keepset reads yet (ieee-cis-zip: format ieee-cis-zip has a pipeline-specific parser with no declarative keepset form yet)",
+    "status": "not-fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-02-16",
+      "status": "live",
+      "url": "https://huggingface.co/datasets/junhongmit/H2GB/resolve/main/IEEE-CIS.zip"
+    }
+  ],
+  "tags": []
+}

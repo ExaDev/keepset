@@ -1,0 +1,68 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "doi": "10.1126/science.298.5594.824",
+      "text": "R. Milo et al., \"Network Motifs: Simple Building Blocks of Complex Networks.\" Science 298, 824-827 (2002)."
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "Network of operons and their pairwise interactions, via transcription factor-based regulation, within the yeast Saccharomyces cerevisiae[^icon]\n[^icon]: Description obtained from the [ICON](https://icon.colorado.edu) project.",
+  "expectedCounts": {
+    "edges": 1094,
+    "nodes": 916
+  },
+  "id": "netzschleuder-yeast_transcription",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "Yeast transcription network (2002)",
+  "properties": {
+    "directed": true,
+    "heterogeneous": false,
+    "multigraph": false,
+    "selfLoops": true,
+    "weighted": false
+  },
+  "recipe": {
+    "archive": {
+      "kind": "zip",
+      "member": {
+        "path": "edges.csv"
+      }
+    },
+    "parser": {
+      "commentPrefixes": [
+        "#"
+      ],
+      "delimiter": "comma",
+      "encoding": "utf-8",
+      "format": "edge-list",
+      "skipLines": 0,
+      "sourceColumn": 0,
+      "targetColumn": 1
+    },
+    "source": 2,
+    "status": "fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-04-20",
+      "status": "live",
+      "url": "http://www.weizmann.ac.il/mcb/UriAlon/download/collection-complex-networks"
+    },
+    {
+      "retrieved": "2026-04-20",
+      "status": "live",
+      "url": "https://networks.skewed.de/net/yeast_transcription"
+    },
+    {
+      "retrieved": "2026-04-20",
+      "status": "live",
+      "url": "https://networks.skewed.de/net/yeast_transcription/files/yeast_transcription.csv.zip"
+    }
+  ],
+  "tags": []
+}

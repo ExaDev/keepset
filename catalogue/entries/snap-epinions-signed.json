@@ -1,0 +1,47 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "text": "Leskovec, Jure, Huttenlocher, Daniel, Kleinberg, Jon (2010). Signed Networks in Social Media. Proceedings of the SIGCHI Conference on Human Factors in Computing Systems."
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "Directed signed trust network from Epinions.com. Users express trust (+1) or distrust (-1) towards other users. Edge weights are ±1.",
+  "expectedCounts": {
+    "edges": 841372,
+    "nodes": 131828
+  },
+  "id": "snap-epinions-signed",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "Epinions Signed Trust Network",
+  "properties": {
+    "components": 5816,
+    "connected": false,
+    "cyclic": true,
+    "density": 0.00008191540346643227,
+    "directed": true,
+    "edgeTypes": 1,
+    "heterogeneous": false,
+    "multigraph": false,
+    "nodeTypes": 1,
+    "rawBytes": 0,
+    "selfLoops": false,
+    "weighted": true
+  },
+  "recipe": {
+    "reason": "no download is in a form keepset reads yet (snap-signed: format snap-signed has a pipeline-specific parser with no declarative keepset form yet)",
+    "status": "not-fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-03-27",
+      "status": "live",
+      "url": "https://snap.stanford.edu/data/soc-sign-epinions.txt.gz"
+    }
+  ],
+  "tags": []
+}

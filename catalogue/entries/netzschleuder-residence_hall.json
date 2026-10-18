@@ -1,0 +1,68 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "doi": "10.1016/s0378-8733(97)00016-6",
+      "text": "L. Freeman, C. Webster, & D. Kirke, \"Exploring social structure using dynamic three-dimensional color images.\" Social Networks 20(2), 109-118 (1998)"
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "A network of friendships among students living in a residence hall at Australian National University (date unknown). Edge direction indicates that resident i named resident j as a friend, and edge weight indicates the level of friendship: 5 (best friend), 4 (close friend), 3 (friend), 2, 1.[^icon]\n[^icon]: Description obtained from the [ICON](https://icon.colorado.edu) project.",
+  "expectedCounts": {
+    "edges": 2672,
+    "nodes": 217
+  },
+  "id": "netzschleuder-residence_hall",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "ANU Residence Hall network",
+  "properties": {
+    "directed": true,
+    "heterogeneous": false,
+    "multigraph": false,
+    "selfLoops": false,
+    "weighted": true
+  },
+  "recipe": {
+    "archive": {
+      "kind": "zip",
+      "member": {
+        "path": "edges.csv"
+      }
+    },
+    "parser": {
+      "commentPrefixes": [
+        "#"
+      ],
+      "delimiter": "comma",
+      "encoding": "utf-8",
+      "format": "edge-list",
+      "skipLines": 0,
+      "sourceColumn": 0,
+      "targetColumn": 1
+    },
+    "source": 2,
+    "status": "fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-04-20",
+      "status": "live",
+      "url": "http://konect.cc/networks/moreno_oz"
+    },
+    {
+      "retrieved": "2026-04-20",
+      "status": "live",
+      "url": "https://networks.skewed.de/net/residence_hall"
+    },
+    {
+      "retrieved": "2026-04-20",
+      "status": "live",
+      "url": "https://networks.skewed.de/net/residence_hall/files/residence_hall.csv.zip"
+    }
+  ],
+  "tags": []
+}

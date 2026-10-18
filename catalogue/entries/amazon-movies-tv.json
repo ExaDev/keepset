@@ -1,0 +1,47 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "text": "McAuley, Julian, Targett, Christopher, Shi, Qinfeng, van den Hengel, Anton (2015). Image-Based Recommendations on Styles and Substitutes. Proceedings of the 38th International ACM SIGIR Conference on Research and Development in Information Retrieval."
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "Directed bipartite user-product review network for Movies and TV on Amazon. Users are linked to products they reviewed; edge weights are normalised star ratings.",
+  "expectedCounts": {
+    "edges": 4607047,
+    "nodes": 2289561
+  },
+  "id": "amazon-movies-tv",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "Amazon Movies and TV Reviews",
+  "properties": {
+    "components": 19678,
+    "connected": false,
+    "cyclic": true,
+    "density": 0.0000017577147235987306,
+    "directed": false,
+    "edgeTypes": 1,
+    "heterogeneous": true,
+    "multigraph": false,
+    "nodeTypes": 2,
+    "rawBytes": 0,
+    "selfLoops": false,
+    "weighted": true
+  },
+  "recipe": {
+    "reason": "no download is in a form keepset reads yet (amazon-ratings-undirected: format amazon-ratings-undirected has a pipeline-specific parser with no declarative keepset form yet)",
+    "status": "not-fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-03-27",
+      "status": "live",
+      "url": "http://jmcauley.ucsd.edu/data/amazon/categoryFiles/ratings_Movies_and_TV.csv"
+    }
+  ],
+  "tags": []
+}

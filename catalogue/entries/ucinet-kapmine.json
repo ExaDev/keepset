@@ -1,0 +1,51 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "text": "B. Kapferer (1969). Norms and the manipulation of relationships in a work context. Manchester University Press."
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "Multiplex and uniplex ties among 15 workers in a Zambian mining operation.",
+  "expectedCounts": {
+    "edges": 38,
+    "nodes": 15
+  },
+  "id": "ucinet-kapmine",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "Kapferer Mine",
+  "properties": {
+    "components": 1,
+    "connected": true,
+    "cyclic": true,
+    "density": 0.24358974358974358,
+    "directed": false,
+    "edgeTypes": 1,
+    "heterogeneous": true,
+    "multigraph": true,
+    "nodeTypes": 1,
+    "rawBytes": 3061,
+    "selfLoops": false,
+    "weighted": false
+  },
+  "recipe": {
+    "reason": "no download is in a form keepset reads yet (ucinet: format ucinet has a pipeline-specific parser with no declarative keepset form yet)",
+    "status": "not-fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-02-16",
+      "snapshot": {
+        "timestamp": "20230601",
+        "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/UciNet/kapmine.dat"
+      },
+      "status": "dead",
+      "url": "http://vlado.fmf.uni-lj.si/pub/networks/data/UciNet/kapmine.dat"
+    }
+  ],
+  "tags": []
+}

@@ -1,0 +1,65 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "text": "Netzschleuder (2020). cintestinalis gene regulatory network."
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "Gene regulatory network for Ciona intestinalis (sea squirt). Nodes are genes and directed weighted edges represent regulatory interactions. Node 'group' property encodes gene functional categories, making this heterogeneous. Weights represent interaction strength (depth).",
+  "domain": "Biological network",
+  "expectedCounts": {
+    "edges": 2903,
+    "nodes": 205
+  },
+  "id": "cintestinalis",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "Ciona intestinalis Gene Regulatory Network",
+  "properties": {
+    "directed": true,
+    "heterogeneous": true,
+    "multigraph": false,
+    "selfLoops": true,
+    "weighted": false
+  },
+  "recipe": {
+    "archive": {
+      "kind": "zip",
+      "member": {
+        "path": "edges.csv"
+      }
+    },
+    "parser": {
+      "commentPrefixes": [
+        "#"
+      ],
+      "delimiter": "comma",
+      "encoding": "utf-8",
+      "format": "edge-list",
+      "skipLines": 0,
+      "sourceColumn": 0,
+      "targetColumn": 1
+    },
+    "source": 1,
+    "status": "fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-04-19",
+      "status": "live",
+      "url": "https://networks.skewed.de/net/cintestinalis"
+    },
+    {
+      "retrieved": "2026-04-19",
+      "status": "live",
+      "url": "https://networks.skewed.de/net/cintestinalis/files/cintestinalis.csv.zip"
+    }
+  ],
+  "tags": [
+    "heterogeneous"
+  ]
+}

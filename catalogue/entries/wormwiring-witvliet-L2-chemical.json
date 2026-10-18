@@ -1,0 +1,44 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "text": "Witvliet, Daniel, et al. (2020). Connectomes across development reveal principles of brain maturation. Nature."
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "Directed multigraph of chemical synapses in the L2 larval stage C. elegans. Each synapse is a separate unweighted edge. Multiple synapses create multi-edges. Gap junctions excluded. No autapses.",
+  "domain": "Neural connectome",
+  "expectedCounts": {
+    "edges": 0,
+    "nodes": 0
+  },
+  "id": "wormwiring-witvliet-L2-chemical",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "C. elegans L2 Larval Chemical Connectome (Witvliet 2020)",
+  "properties": {
+    "directed": true,
+    "heterogeneous": false,
+    "multigraph": true,
+    "rawBytes": 0,
+    "selfLoops": false,
+    "weighted": false
+  },
+  "recipe": {
+    "reason": "no download is in a form keepset reads yet (witvliet-json: format witvliet-json has a pipeline-specific parser with no declarative keepset form yet)",
+    "status": "not-fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-04-20",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/dwitvliet/nature2021/master/data/synapses/Dataset5_synapses.json"
+    }
+  ],
+  "tags": [
+    "unweighted"
+  ]
+}

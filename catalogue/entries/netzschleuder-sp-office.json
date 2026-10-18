@@ -1,0 +1,66 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "text": "Genois, M., Barrat, A. (2018). Can co-location be used as a proxy for face-to-face contacts?. EPJ Data Science 7."
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "Temporal face-to-face contact network in an office building. Nodes have department and gender attributes. Multiple contacts create multi-edges. No self-loops.",
+  "domain": "Contact network",
+  "expectedCounts": {
+    "edges": 9827,
+    "nodes": 92
+  },
+  "id": "netzschleuder-sp-office",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "SocioPatterns Office",
+  "properties": {
+    "directed": false,
+    "heterogeneous": true,
+    "multigraph": true,
+    "rawBytes": 0,
+    "selfLoops": false,
+    "weighted": false
+  },
+  "recipe": {
+    "archive": {
+      "kind": "zip",
+      "member": {
+        "path": "edges.csv"
+      }
+    },
+    "parser": {
+      "commentPrefixes": [
+        "#"
+      ],
+      "delimiter": "comma",
+      "encoding": "utf-8",
+      "format": "edge-list",
+      "skipLines": 0,
+      "sourceColumn": 0,
+      "targetColumn": 1
+    },
+    "source": 1,
+    "status": "fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-04-20",
+      "status": "live",
+      "url": "https://networks.skewed.de/net/sp_office"
+    },
+    {
+      "retrieved": "2026-04-20",
+      "status": "live",
+      "url": "https://networks.skewed.de/net/sp_office/files/sp_office.csv.zip"
+    }
+  ],
+  "tags": [
+    "unweighted"
+  ]
+}

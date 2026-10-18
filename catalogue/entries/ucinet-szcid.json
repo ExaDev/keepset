@@ -1,0 +1,51 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "text": "F. Stokman, F. Wasseur, D. Elsas (1985). The Dutch network: Types of interlocks and network structure. Polity Press."
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "Corporate interlocks among 16 major Dutch business entities.",
+  "expectedCounts": {
+    "edges": 120,
+    "nodes": 16
+  },
+  "id": "ucinet-szcid",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "Stokman-Ziegler Netherlands Interlocks",
+  "properties": {
+    "components": 1,
+    "connected": true,
+    "cyclic": true,
+    "density": 0.5714285714285714,
+    "directed": false,
+    "edgeTypes": 1,
+    "heterogeneous": false,
+    "multigraph": true,
+    "nodeTypes": 1,
+    "rawBytes": 7527,
+    "selfLoops": false,
+    "weighted": true
+  },
+  "recipe": {
+    "reason": "no download is in a form keepset reads yet (ucinet: format ucinet has a pipeline-specific parser with no declarative keepset form yet)",
+    "status": "not-fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-02-16",
+      "snapshot": {
+        "timestamp": "20230601",
+        "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/UciNet/szcid.dat"
+      },
+      "status": "dead",
+      "url": "http://vlado.fmf.uni-lj.si/pub/networks/data/UciNet/szcid.dat"
+    }
+  ],
+  "tags": []
+}

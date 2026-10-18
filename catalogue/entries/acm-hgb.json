@@ -1,0 +1,47 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "text": "Lv et al. (2021). Are We Really Making Much Progress? A Worrying Analysis of Recent Neural Relation Extraction Models."
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "Heterogeneous academic network from the Heterogeneous Graph Benchmark suite. Contains papers, authors, and subject categories as node types with 3 relation types: writes (author-paper), published-in (paper-subject), and related subject links. Moderate-size heterogeneous graph used for benchmarking heterogeneous graph neural networks on node classification.",
+  "expectedCounts": {
+    "edges": 65407,
+    "nodes": 10024
+  },
+  "id": "acm-hgb",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "Heterogeneous Graph Benchmark - ACM",
+  "properties": {
+    "components": 1,
+    "connected": true,
+    "cyclic": true,
+    "density": 0.004575930276299103,
+    "directed": true,
+    "edgeTypes": 1,
+    "heterogeneous": true,
+    "multigraph": false,
+    "nodeTypes": 1,
+    "rawBytes": 0,
+    "selfLoops": false,
+    "weighted": false
+  },
+  "recipe": {
+    "reason": "no download is in a form keepset reads yet (hgb-zip: format hgb-zip has a pipeline-specific parser with no declarative keepset form yet)",
+    "status": "not-fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-03-26",
+      "status": "live",
+      "url": "https://drive.google.com/uc?export=download&id=1xbJ4QE9pcDJOcALv7dYhHDCPITX2Iddz"
+    }
+  ],
+  "tags": []
+}

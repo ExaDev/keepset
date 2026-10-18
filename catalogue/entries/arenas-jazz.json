@@ -1,0 +1,61 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "text": "P. Gleiser, L. Danon (2003). Community Structure in Jazz. Advances in Complex Systems 6, 565."
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "Collaboration network of jazz musicians. Nodes are musicians and edges represent playing together in a band.",
+  "expectedCounts": {
+    "edges": 5484,
+    "nodes": 198
+  },
+  "id": "arenas-jazz",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "Jazz Musicians Network",
+  "properties": {
+    "components": 1,
+    "connected": true,
+    "cyclic": false,
+    "density": 0.07029687740347638,
+    "directed": true,
+    "edgeTypes": 1,
+    "heterogeneous": false,
+    "multigraph": true,
+    "nodeTypes": 1,
+    "rawBytes": 350926,
+    "selfLoops": false,
+    "weighted": false
+  },
+  "recipe": {
+    "archive": {
+      "kind": "zip",
+      "member": {
+        "path": "jazz.net"
+      }
+    },
+    "parser": {
+      "encoding": "latin1",
+      "format": "pajek"
+    },
+    "source": 0,
+    "status": "fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-02-16",
+      "snapshot": {
+        "timestamp": "20230601",
+        "url": "https://web.archive.org/web/20230601/http://deim.urv.cat/~aarenas/data/xarxes/jazz.zip"
+      },
+      "status": "dead",
+      "url": "http://deim.urv.cat/~aarenas/data/xarxes/jazz.zip"
+    }
+  ],
+  "tags": []
+}

@@ -1,0 +1,67 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "text": "T. A. Davis, Y. Hu (2011). The University of Florida Sparse Matrix Collection. ACM Transactions on Mathematical Software 38, 1:1-1:25."
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "directed temporal multigraph (456,626 nodes, 14,855,842 non-zeros)",
+  "expectedCounts": {
+    "edges": 14855842,
+    "nodes": 456626
+  },
+  "id": "ss-snap-higgs-twitter",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "SNAP/higgs-twitter",
+  "properties": {
+    "components": 156,
+    "connected": false,
+    "cyclic": true,
+    "density": 0.00011998105736069538,
+    "directed": true,
+    "edgeTypes": 1,
+    "heterogeneous": false,
+    "multigraph": false,
+    "nodeTypes": 1,
+    "rawBytes": 0,
+    "selfLoops": false,
+    "weighted": false
+  },
+  "recipe": {
+    "archive": {
+      "kind": "tar.gz",
+      "member": {
+        "path": "higgs-twitter/higgs-twitter.mtx"
+      }
+    },
+    "parser": {
+      "encoding": "utf-8",
+      "format": "matrix-market"
+    },
+    "source": 0,
+    "status": "fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-02-16",
+      "status": "live",
+      "url": "https://sparse.tamu.edu/MM/SNAP/higgs-twitter.tar.gz"
+    },
+    {
+      "retrieved": "2026-02-16",
+      "status": "live",
+      "url": "https://sparse.tamu.edu/RB/SNAP/higgs-twitter.tar.gz"
+    },
+    {
+      "retrieved": "2026-02-16",
+      "status": "live",
+      "url": "https://sparse.tamu.edu/mat/SNAP/higgs-twitter.tar.gz"
+    }
+  ],
+  "tags": []
+}

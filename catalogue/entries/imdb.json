@@ -1,0 +1,50 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "text": "Xinyu Lv, Tong Zhao, Yozen Liu, Neil Shah, Yong Li (2021). Are we really making much progress? Revisiting, benchmarking and refining heterogeneous graph neural networks. Proceedings of the 27th ACM SIGKDD Conference on Knowledge Discovery and Data Mining."
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "Heterogeneous film network from the Internet Movie Database. Contains movies, directors, and actors with directed-by and acted-in relations. Used as a standard benchmark for heterogeneous graph neural networks.",
+  "domain": "Film heterogeneous",
+  "expectedCounts": {
+    "edges": 86642,
+    "nodes": 21420
+  },
+  "id": "imdb",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "IMDB",
+  "properties": {
+    "components": 63,
+    "connected": false,
+    "cyclic": true,
+    "density": 0.00018884687883899688,
+    "directed": false,
+    "edgeTypes": 1,
+    "heterogeneous": true,
+    "multigraph": true,
+    "nodeTypes": 2,
+    "rawBytes": 0,
+    "selfLoops": false,
+    "weighted": false
+  },
+  "recipe": {
+    "reason": "no download is in a form keepset reads yet (hgb: format hgb has a pipeline-specific parser with no declarative keepset form yet)",
+    "status": "not-fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-02-16",
+      "status": "live",
+      "url": "https://drive.google.com/uc?id=18qXmmwKJBrEJxVQaYwKTL3Ny3fPqJeJ2&export=download"
+    }
+  ],
+  "tags": [
+    "heterogeneous"
+  ]
+}

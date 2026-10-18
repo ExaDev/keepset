@@ -1,0 +1,61 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "text": "Philip Schrodt (2001). Kansas Event Data System."
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "Political event network from the Kansas Event Data System (Gulf War, daily aggregation).",
+  "expectedCounts": {
+    "edges": 57131,
+    "nodes": 174
+  },
+  "id": "pajek-keds",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "KEDS Gulf War Political Events",
+  "properties": {
+    "components": 12,
+    "connected": false,
+    "cyclic": false,
+    "density": 0.03764981761334028,
+    "directed": true,
+    "edgeTypes": 1,
+    "heterogeneous": false,
+    "multigraph": true,
+    "nodeTypes": 1,
+    "rawBytes": 3677179,
+    "selfLoops": true,
+    "weighted": false
+  },
+  "recipe": {
+    "archive": {
+      "kind": "zip",
+      "member": {
+        "path": "gulfLDays.net"
+      }
+    },
+    "parser": {
+      "encoding": "latin1",
+      "format": "pajek"
+    },
+    "source": 0,
+    "status": "fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-02-16",
+      "snapshot": {
+        "timestamp": "20230601",
+        "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/KEDS/GulfLDays.zip"
+      },
+      "status": "dead",
+      "url": "http://vlado.fmf.uni-lj.si/pub/networks/data/KEDS/GulfLDays.zip"
+    }
+  ],
+  "tags": []
+}

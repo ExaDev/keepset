@@ -1,0 +1,51 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "text": "L. Wolfe (1984). Japanese macaques at the Arashiyama West and Silver Springs troops."
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "Interactions and kin relationships among 20 monkeys observed in Ocala, Florida.",
+  "expectedCounts": {
+    "edges": 15,
+    "nodes": 20
+  },
+  "id": "ucinet-wolf",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "Wolfe Primates",
+  "properties": {
+    "components": 2,
+    "connected": false,
+    "cyclic": false,
+    "density": 0.0625,
+    "directed": false,
+    "edgeTypes": 1,
+    "heterogeneous": false,
+    "multigraph": true,
+    "nodeTypes": 1,
+    "rawBytes": 1680,
+    "selfLoops": false,
+    "weighted": false
+  },
+  "recipe": {
+    "reason": "no download is in a form keepset reads yet (ucinet: format ucinet has a pipeline-specific parser with no declarative keepset form yet)",
+    "status": "not-fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-02-16",
+      "snapshot": {
+        "timestamp": "20230601",
+        "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/UciNet/wolf.dat"
+      },
+      "status": "dead",
+      "url": "http://vlado.fmf.uni-lj.si/pub/networks/data/UciNet/wolf.dat"
+    }
+  ],
+  "tags": []
+}

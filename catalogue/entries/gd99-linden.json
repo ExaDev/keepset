@@ -1,0 +1,61 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "text": "Vladimir Batagelj, Andrej Mrvar (2006). Pajek Datasets."
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "Social network from German TV series Lindenstrasse, from Graph Drawing 1999 contest.",
+  "expectedCounts": {
+    "edges": 326,
+    "nodes": 234
+  },
+  "id": "gd99-linden",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "GD99 Lindenstrasse",
+  "properties": {
+    "components": 4,
+    "connected": false,
+    "cyclic": true,
+    "density": 0.00881316098707403,
+    "directed": true,
+    "edgeTypes": 1,
+    "heterogeneous": true,
+    "multigraph": true,
+    "nodeTypes": 1,
+    "rawBytes": 42534,
+    "selfLoops": false,
+    "weighted": false
+  },
+  "recipe": {
+    "archive": {
+      "kind": "zip",
+      "member": {
+        "path": "A99m.paj"
+      }
+    },
+    "parser": {
+      "encoding": "latin1",
+      "format": "pajek"
+    },
+    "source": 0,
+    "status": "fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-02-16",
+      "snapshot": {
+        "timestamp": "20230601",
+        "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/GD/a99m.zip"
+      },
+      "status": "dead",
+      "url": "http://vlado.fmf.uni-lj.si/pub/networks/data/GD/a99m.zip"
+    }
+  ],
+  "tags": []
+}

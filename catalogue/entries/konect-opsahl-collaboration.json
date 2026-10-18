@@ -1,0 +1,47 @@
+{
+  "category": "graph/v1",
+  "citations": [
+    {
+      "text": "Opsahl, Tore (2013). Triadic closure in two-mode networks: Redefining the global and local clustering coefficients. Social Networks."
+    }
+  ],
+  "crosswalk": {
+    "file": "crosswalks/graph-v1/topology.json"
+  },
+  "description": "Undirected weighted co-authorship network from the arXiv. Edge weights represent the number of papers co-authored by each pair of researchers, making it genuinely weighted.",
+  "expectedCounts": {
+    "edges": 58595,
+    "nodes": 22015
+  },
+  "id": "konect-opsahl-collaboration",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "Opsahl Collaboration Network",
+  "properties": {
+    "components": 1,
+    "connected": true,
+    "cyclic": true,
+    "density": 0.00024177210459736553,
+    "directed": false,
+    "edgeTypes": 1,
+    "heterogeneous": false,
+    "multigraph": true,
+    "nodeTypes": 1,
+    "rawBytes": 0,
+    "selfLoops": true,
+    "weighted": true
+  },
+  "recipe": {
+    "reason": "no download is in a form keepset reads yet (konect-tarbz2: bzip2 compression has no keepset unpacker yet)",
+    "status": "not-fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-03-27",
+      "status": "live",
+      "url": "http://konect.cc/files/download.tsv.opsahl-collaboration.tar.bz2"
+    }
+  ],
+  "tags": []
+}
