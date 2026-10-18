@@ -23,10 +23,19 @@ function sortKeys(value: unknown): unknown {
 }
 
 /**
+ * Serialises any JSON value in the committed form: two-space indented, keys in ascending order, with a trailing newline.
+ * @param value - A JSON value.
+ * @returns The file text.
+ */
+export function canonicalJson(value: unknown): string {
+  return `${JSON.stringify(sortKeys(value), undefined, 2)}\n`;
+}
+
+/**
  * Serialises a catalogue document (an entry, a manifest or a crosswalk file) as its file holds it: two-space indented JSON with keys in ascending order and a trailing newline. The form depends only on the document's content, so parsing a file written this way and serialising the result reproduces the file byte for byte.
  * @param doc - A parsed entry, manifest or crosswalk.
  * @returns The file text.
  */
 export function serialise(doc: Entry | Manifest | Crosswalk): string {
-  return `${JSON.stringify(sortKeys(doc), undefined, 2)}\n`;
+  return canonicalJson(doc);
 }

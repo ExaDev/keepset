@@ -1,0 +1,213 @@
+{
+  "$schema": "./catalog.schema.json",
+  "version": "2.0.0",
+  "generated": "2026-02-16T11:37:07.367Z",
+  "sources": {
+    "newman": {
+      "name": "Mark Newman's Network Data",
+      "url": "https://websites.umich.edu/~mejn/netdata/",
+      "description": "Network datasets compiled by Mark Newman at the University of Michigan.",
+      "format": "gml"
+    },
+    "snap": {
+      "name": "Stanford Large Network Dataset Collection",
+      "url": "https://snap.stanford.edu/data/",
+      "description": "Large-scale network datasets from Stanford Network Analysis Project.",
+      "format": "various"
+    },
+    "ucinet": {
+      "name": "UCINet Datasets",
+      "url": "http://vlado.fmf.uni-lj.si/pub/networks/data/UciNet/UciData.htm",
+      "description": "Social network datasets released with UCINet software.",
+      "format": "ucinet"
+    },
+    "pajek": {
+      "name": "Pajek Datasets",
+      "url": "http://vlado.fmf.uni-lj.si/pub/networks/data/",
+      "description": "Example datasets released with Pajek network analysis software.",
+      "format": "pajek"
+    },
+    "barabasi": {
+      "name": "Barabási Lab Datasets",
+      "url": "http://www.nd.edu/~networks/resources.htm",
+      "description": "Network datasets from Albert-László Barabási's research group.",
+      "format": "various"
+    },
+    "arenas": {
+      "name": "Alex Arenas Datasets",
+      "url": "http://deim.urv.cat/~aarenas/data/welcome.htm",
+      "description": "Network datasets from Alexandre Arenas at Universitat Rovira i Virgili.",
+      "format": "various"
+    },
+    "suitesparse": {
+      "name": "SuiteSparse Matrix Collection",
+      "url": "https://sparse.tamu.edu/",
+      "description": "Sparse matrix benchmarks from diverse applications, formerly the UF Sparse Matrix Collection.",
+      "format": "matrix-market"
+    }
+  },
+  "datasetCount": 704,
+  "datasets": {
+    "adjnoun": {
+      "id": "adjnoun",
+      "name": "Word Adjacencies",
+      "description": "Adjacency network of common adjectives and nouns in the novel David Copperfield by Charles Dickens. Nodes represent words and edges connect words that appear adjacent to each other. The 'value' property indicates word type: 0 for adjective, 1 for noun.",
+      "citation": {
+        "authors": [
+          "M. E. J. Newman"
+        ],
+        "title": "Finding community structure in very large networks",
+        "journal": "Physical Review E",
+        "volume": 74,
+        "pages": "036104",
+        "year": 2006,
+        "type": "article"
+      },
+      "retrieved": "2026-01-17",
+      "creator": "Mark Newman on Fri Jul 21 13:00:02 2006",
+      "rawBytes": 27333,
+      "nodeCount": 112,
+      "edgeCount": 425,
+      "directed": false,
+      "weighted": false,
+      "hasNodeAttributes": true,
+      "hasEdgeAttributes": false,
+      "labeled": true,
+      "sources": [
+        {
+          "source": "newman",
+          "downloads": [
+            {
+              "url": "https://websites.umich.edu/~mejn/netdata/adjnoun.zip",
+              "format": "gml"
+            }
+          ]
+        },
+        {
+          "source": "suitesparse",
+          "downloads": [
+            {
+              "url": "https://suitesparse-collection-website.herokuapp.com/MM/Newman/adjnoun.tar.gz",
+              "format": "matrix-market"
+            },
+            {
+              "url": "https://suitesparse-collection-website.herokuapp.com/RB/Newman/adjnoun.tar.gz",
+              "format": "rutherford-boeing"
+            },
+            {
+              "url": "https://suitesparse-collection-website.herokuapp.com/mat/Newman/adjnoun.tar.gz",
+              "format": "matlab"
+            }
+          ]
+        }
+      ]
+    },
+    "cit-hepph": {
+      "id": "cit-hepph",
+      "name": "HEP-PH Citation Network",
+      "description": "Arxiv High Energy Physics paper citation network.",
+      "citation": {
+        "authors": [
+          "J. Leskovec",
+          "J. Kleinberg",
+          "C. Faloutsos"
+        ],
+        "title": "Graph Evolution: Densification and Shrinking Diameters",
+        "journal": "ACM TKDD",
+        "year": 2007,
+        "type": "article"
+      },
+      "retrieved": "2026-01-17",
+      "rawBytes": 24094154,
+      "nodeCount": 34546,
+      "edgeCount": 421578,
+      "directed": true,
+      "weighted": false,
+      "hasNodeAttributes": false,
+      "hasEdgeAttributes": false,
+      "labeled": false,
+      "sources": [
+        {
+          "source": "snap",
+          "downloads": [
+            {
+              "url": "https://snap.stanford.edu/data/cit-HepPh.txt.gz",
+              "format": "various"
+            }
+          ]
+        },
+        {
+          "source": "suitesparse",
+          "downloads": [
+            {
+              "url": "https://suitesparse-collection-website.herokuapp.com/MM/SNAP/cit-HepPh.tar.gz",
+              "format": "matrix-market"
+            },
+            {
+              "url": "https://suitesparse-collection-website.herokuapp.com/RB/SNAP/cit-HepPh.tar.gz",
+              "format": "rutherford-boeing"
+            },
+            {
+              "url": "https://suitesparse-collection-website.herokuapp.com/mat/SNAP/cit-HepPh.tar.gz",
+              "format": "matlab"
+            }
+          ]
+        }
+      ]
+    },
+    "karate": {
+      "id": "karate",
+      "name": "Zachary's Karate Club",
+      "description": "Social network of friendships between 34 members of a karate club at a US university in the 1970s.",
+      "citation": {
+        "authors": [
+          "W. W. Zachary"
+        ],
+        "title": "An information flow model for conflict and fission in small groups",
+        "journal": "Journal of Anthropological Research",
+        "volume": 33,
+        "pages": "452-473",
+        "year": 1977,
+        "type": "article"
+      },
+      "retrieved": "2026-01-17",
+      "creator": "Mark Newman on Fri Jul 21 12:39:27 2006",
+      "rawBytes": 5004,
+      "nodeCount": 34,
+      "edgeCount": 78,
+      "directed": false,
+      "weighted": false,
+      "hasNodeAttributes": false,
+      "hasEdgeAttributes": false,
+      "labeled": false,
+      "sources": [
+        {
+          "source": "newman",
+          "downloads": [
+            {
+              "url": "https://websites.umich.edu/~mejn/netdata/karate.zip",
+              "format": "gml"
+            }
+          ]
+        },
+        {
+          "source": "suitesparse",
+          "downloads": [
+            {
+              "url": "https://suitesparse-collection-website.herokuapp.com/MM/Newman/karate.tar.gz",
+              "format": "matrix-market"
+            },
+            {
+              "url": "https://suitesparse-collection-website.herokuapp.com/RB/Newman/karate.tar.gz",
+              "format": "rutherford-boeing"
+            },
+            {
+              "url": "https://suitesparse-collection-website.herokuapp.com/mat/Newman/karate.tar.gz",
+              "format": "matlab"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
