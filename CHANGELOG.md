@@ -1,3 +1,11 @@
+# [0.5.0](https://github.com/ExaDev/keepset/compare/v0.4.0...v0.5.0) (2026-10-18)
+
+
+### Features
+
+* add the keepset command with search, show, fetch, validate and roundtrip ([26ed58d](https://github.com/ExaDev/keepset/commit/26ed58df237518d9eb63500f391bde5c2cb57468)), closes [#11](https://github.com/ExaDev/keepset/issues/11)
+* add validateDataset and roundTripEntry to the library ([ba4f7ed](https://github.com/ExaDev/keepset/commit/ba4f7ed5fe8701446f4866c2843e8b6215b56298))
+
 # [0.4.0](https://github.com/ExaDev/keepset/compare/v0.3.0...v0.4.0) (2026-10-18)
 
 
