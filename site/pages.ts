@@ -60,7 +60,7 @@ export function layout(context: PageContext, page: PageContent): string {
 <meta name="description" content="${e(description)}">
 <link rel="manifest" href="${root}manifest.webmanifest">
 <link rel="icon" href="${root}icon.svg" type="image/svg+xml">
-<link rel="stylesheet" href="${root}styles.css">
+<link rel="stylesheet" href="${root}app.css">
 <meta name="theme-color" content="#1f4e79">
 ${head}</head>
 <body data-root="${root}">
@@ -82,17 +82,9 @@ ${body}
  * @returns The document.
  */
 export function homePage(context: PageContext, datasets: readonly Dataset[]): string {
-  const kinds = [...new Set(datasets.map((dataset) => dataset.kind))].sort();
-  const domains = [...new Set(datasets.map((dataset) => dataset.entry.domain).filter((domain) => domain !== undefined))].sort();
-  const options = (values: readonly string[]): string => values.map((value) => `<option value="${e(value)}">${e(value)}</option>`).join("");
   const body = `<h1>keepset</h1>
 <p>${e(context.manifest.description)} Each entry's page shows its sources, licence, recipe and crosswalk, and the command that fetches it.</p>
-<form class="search" role="search" hidden>
-<label>Search <input type="search" name="text" autocomplete="off"></label>
-<label>Kind <select name="kind"><option value="">any</option>${options(kinds)}</select></label>
-<label>Domain <select name="domain"><option value="">any</option>${options(domains)}</select></label>
-<output name="count"></output>
-</form>
+<div id="island-root"></div>
 ${listing(datasets, context.root)}`;
 
   return layout(context, { title: "keepset: dataset catalogue", description: context.manifest.description, body });
@@ -115,7 +107,7 @@ export function entryPage(context: PageContext, dataset: Dataset): string {
   const sections = [
     `<h1>${e(entry.name)}</h1>`,
     entry.description === undefined ? "" : `<p class="description">${e(entry.description)}</p>`,
-    `<p class="command"><code>${e(command)}</code> <button type="button" data-copy="${e(command)}" hidden>Copy</button></p>`,
+    `<p class="command"><code>${e(command)}</code> <span data-copy-command="${e(command)}"></span></p>`,
     recipe.status === "fetchable" ? "" : `<p class="warning">This entry has no fetchable recipe yet: ${e(recipe.reason)}</p>`,
     "<h2>Overview</h2>",
     facts([

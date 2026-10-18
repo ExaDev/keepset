@@ -1,12 +1,13 @@
-/* Builds the static site into site-dist/: `pnpm run site`, after `pnpm build`. The pages are generated from the catalogue the package bundles, read through the package's own exports (`keepset`), so the site and the library can never disagree. The client island and the service worker are bundled from site/client/ with tsdown; styles and the icon are copied from site/static/.
+/* Builds the static site into site-dist/: `pnpm run site`, after `pnpm build`. The pages are generated from the catalogue the package bundles, read through the package's own exports (`keepset`), so the site and the library can never disagree. The client island and the service worker are bundled with esbuild carrying the vanilla-extract plugin, so the island's `.css.ts` (which also holds the site's global stylesheet) compiles to `app.css` next to `app.js`; the icon is copied from site/static/.
 
    No try/catch: any failure exits non-zero. */
 
 import { copyFileSync, mkdirSync, readFileSync, rmSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
+import { build } from "esbuild";
+import { vanillaExtractPlugin } from "@vanilla-extract/esbuild-plugin";
 import { getManifest, listDatasets } from "keepset";
-import { build } from "tsdown";
 import { buildSite } from "./build-site";
 
 /** Where GitHub Pages publishes the site: the project site of Mearman/keepset. Absolute URLs (canonical links, JSON-LD) are built from it; every link between pages is relative. */
@@ -24,18 +25,18 @@ if (typeof packageJson !== "object" || packageJson === null || !("version" in pa
 rmSync(outDir, { recursive: true, force: true });
 mkdirSync(outDir, { recursive: true });
 const files = buildSite({ datasets: listDatasets(), manifest: getManifest(), packageVersion: packageJson.version, siteUrl: SITE_URL, outDir });
-for (const asset of ["styles.css", "icon.svg"]) {
-  copyFileSync(join(here, "static", asset), join(outDir, asset));
-}
+copyFileSync(join(here, "static", "icon.svg"), join(outDir, "icon.svg"));
 await build({
-  entry: { app: join(here, "client/app.ts"), sw: join(here, "client/sw.ts") },
-  outDir,
-  format: ["esm"],
+  entryPoints: { app: join(here, "client/app.tsx"), sw: join(here, "client/sw.ts") },
+  outdir: outDir,
+  bundle: true,
+  format: "esm",
   platform: "browser",
-  dts: false,
+  jsx: "automatic",
   minify: true,
-  clean: false,
-  config: false,
-  outExtensions: () => ({ js: ".js" }),
+  splitting: true,
+  outExtension: { ".js": ".js" },
+  plugins: [vanillaExtractPlugin()],
+  loader: { ".svg": "dataurl" },
 });
 console.log(`Wrote ${String(files.size)} generated files and the client bundle to site-dist/`);

@@ -93,7 +93,7 @@ export function buildSite(options: SiteOptions): SiteFiles {
     JSON.stringify({ name: "keepset", short_name: "keepset", description: manifest.description, start_url: "./", scope: "./", display: "standalone", background_color: "#ffffff", theme_color: "#1f4e79", icons: [{ src: "icon.svg", sizes: "any", type: "image/svg+xml" }] }, undefined, 2),
   );
   // The service worker precaches the shell and every listing page, and caches entry pages as they are visited: the entry pages together are most of the site, too much to download on a first visit.
-  const shell = ["./", "styles.css", "app.js", "icon.svg", "manifest.webmanifest", "search-index.json", ...[...files.keys()].filter((path) => path.startsWith("domains/") || path.startsWith("kinds/")).map((path) => path.replace(/index\.html$/, ""))];
+  const shell = ["./", "app.css", "app.js", "icon.svg", "manifest.webmanifest", "search-index.json", ...[...files.keys()].filter((path) => path.startsWith("domains/") || path.startsWith("kinds/")).map((path) => path.replace(/index\.html$/, ""))];
   files.set("precache.json", JSON.stringify({ version: `${packageVersion}+${manifest.id}@${manifest.version}`, urls: shell }));
 
   for (const [path, text] of files) {
