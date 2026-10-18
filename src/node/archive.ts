@@ -21,7 +21,7 @@ function isResourceFork(path: string): boolean {
 }
 
 /**
- * Whether a member path matches a selector: a path selector matches the whole member path or its trailing segments, an extension selector the end of the member's name.
+ * Whether a member path matches a selector: a path selector matches the whole member path or its trailing segments, an extensions selector the end of the member's name, ignoring case.
  * @param path - The member path.
  * @param member - The recipe's selector.
  * @returns True on a match.
@@ -34,7 +34,7 @@ function selects(path: string, member: ArchiveMember): boolean {
     return path === member.path || path.endsWith(`/${member.path}`);
   }
 
-  return path.toLowerCase().endsWith(member.extension.toLowerCase());
+  return member.extensions.some((extension) => path.toLowerCase().endsWith(extension.toLowerCase()));
 }
 
 /**
@@ -48,7 +48,7 @@ function pick(paths: readonly string[], member: ArchiveMember): string {
   const matched = paths.filter((path) => selects(path, member));
   const [only] = matched;
   if (matched.length !== 1 || only === undefined) {
-    const wanted = "path" in member ? `member ${member.path}` : `one member ending ${member.extension}`;
+    const wanted = "path" in member ? `member ${member.path}` : `one member ending ${member.extensions.join(" or ")}`;
     throw new ArchiveError(`expected ${wanted}, found ${String(matched.length)} among: ${paths.join(", ")}`);
   }
 

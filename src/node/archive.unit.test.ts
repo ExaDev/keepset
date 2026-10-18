@@ -38,7 +38,7 @@ describe("readTar", () => {
       writeFileSync(join(dir, "net", "net.mtx"), "matrix");
       writeFileSync(join(dir, "net", longDir, "deep.txt"), "deep");
       execFileSync("tar", ["-czf", join(dir, "net.tar.gz"), "-C", dir, "net"]);
-      const unpacked = unpack(readFileSync(join(dir, "net.tar.gz")), { kind: "tar.gz", member: { extension: ".txt" } });
+      const unpacked = unpack(readFileSync(join(dir, "net.tar.gz")), { kind: "tar.gz", member: { extensions: [".txt"] } });
       expect(unpacked.member).toBe(`net/${longDir}/deep.txt`);
       expect(text(unpacked.bytes)).toBe("deep");
       expect(text(unpack(readFileSync(join(dir, "net.tar.gz")), { kind: "tar.gz", member: { path: "net.mtx" } }).bytes)).toBe("matrix");
@@ -76,13 +76,13 @@ describe("unpack", () => {
     ]);
     expect(unpack(archive, { kind: "zip", member: { path: "data/net.gml" } })).toEqual({ bytes: new TextEncoder().encode("gml"), member: "data/net.gml" });
     expect(unpack(archive, { kind: "zip", member: { path: "net.gml" } }).member).toBe("data/net.gml");
-    expect(unpack(archive, { kind: "zip", member: { extension: ".GML" } }).member).toBe("data/net.gml");
+    expect(unpack(archive, { kind: "zip", member: { extensions: [".GML"] } }).member).toBe("data/net.gml");
   });
 
   it("selects a tar.gz member", () => {
     const archive = gzip(tar([{ path: "adjnoun/adjnoun.mtx", text: "mtx" }]));
     expect(unpack(archive, { kind: "tar.gz", member: { path: "adjnoun/adjnoun.mtx" } }).member).toBe("adjnoun/adjnoun.mtx");
-    expect(text(unpack(tar([{ path: "a.net", text: "net" }]), { kind: "tar", member: { extension: ".net" } }).bytes)).toBe("net");
+    expect(text(unpack(tar([{ path: "a.net", text: "net" }]), { kind: "tar", member: { extensions: [".net"] } }).bytes)).toBe("net");
   });
 
   it("rejects a selector matching no member or several, listing what the archive holds", () => {
@@ -91,7 +91,7 @@ describe("unpack", () => {
       { path: "b.txt", text: "b" },
     ]);
     expect(() => unpack(archive, { kind: "zip", member: { path: "c.txt" } })).toThrow(/found 0 among: a.txt, b.txt/);
-    expect(() => unpack(archive, { kind: "zip", member: { extension: ".txt" } })).toThrow(/found 2/);
+    expect(() => unpack(archive, { kind: "zip", member: { extensions: [".txt"] } })).toThrow(/found 2/);
   });
 
   it("rejects bytes that are not the stated archive kind", () => {
