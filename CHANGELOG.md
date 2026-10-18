@@ -1,3 +1,12 @@
+# [0.3.0](https://github.com/ExaDev/keepset/compare/v0.2.0...v0.3.0) (2026-10-18)
+
+
+### Features
+
+* add the library core with listDatasets, getDataset and fetchDataset ([ff1c7af](https://github.com/ExaDev/keepset/commit/ff1c7afb5d2de939d8ec0f62ffa11937a46430e6))
+* let an edge-list recipe detect its delimiter from the data ([092b354](https://github.com/ExaDev/keepset/commit/092b354000b7501abe92c4125928e9968c9c501b))
+* parse edge lists, Matrix Market, GML and Pajek into a native graph ([51f0863](https://github.com/ExaDev/keepset/commit/51f0863d9ade3406c93510c209a44306c6a54d84))
+
 # [0.2.0](https://github.com/ExaDev/keepset/compare/v0.1.0...v0.2.0) (2026-10-18)
 
 
