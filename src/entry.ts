@@ -114,7 +114,7 @@ export const ParserSchema = z.discriminatedUnion("format", [
     .object({
       format: z.literal("edge-list"),
       encoding: EncodingSchema,
-      delimiter: z.enum(["whitespace", "tab", "comma", "space"]),
+      delimiter: z.enum(["detect", "whitespace", "tab", "comma", "space"]),
       skipLines: z.int().min(0),
       commentPrefixes: z.array(z.string().min(1)),
       sourceColumn: ColumnSchema,
