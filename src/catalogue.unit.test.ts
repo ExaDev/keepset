@@ -59,7 +59,7 @@ describe("createCatalogue", () => {
 
 describe("the bundled catalogue", () => {
   it("is the keepset catalogue", () => {
-    expect(getManifest()).toMatchObject({ id: "keepset", repository: "https://github.com/ExaDev/keepset" });
+    expect(getManifest()).toMatchObject({ id: "keepset", repository: "https://github.com/Mearman/keepset" });
   });
 
   it("answers listDatasets and getDataset consistently", () => {

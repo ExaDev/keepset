@@ -88,7 +88,7 @@ describe("the generated JSON Schemas", () => {
 
   it("agrees with the Zod manifest schema", () => {
     const validate = validatorFor("manifest.schema.json");
-    const manifest = { id: "keepset-graphs", name: "keepset graphs", description: "Graphs.", version: "1.0.0", repository: "https://github.com/ExaDev/keepset" };
+    const manifest = { id: "keepset-graphs", name: "keepset graphs", description: "Graphs.", version: "1.0.0", repository: "https://github.com/Mearman/keepset" };
     expect(validate(manifest)).toBe(true);
     expect(ManifestSchema.is(manifest)).toBe(true);
     expect(validate({ ...manifest, version: "1.0" })).toBe(false);

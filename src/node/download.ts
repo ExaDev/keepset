@@ -11,7 +11,7 @@ const REDIRECT_STATUS = { movedPermanently: 301, found: 302, seeOther: 303, temp
 const REDIRECTS: ReadonlySet<number> = new Set(Object.values(REDIRECT_STATUS));
 
 /** What the downloader says it is, so a server operator can tell where the traffic comes from. */
-const USER_AGENT = "keepset (+https://github.com/ExaDev/keepset)";
+const USER_AGENT = "keepset (+https://github.com/Mearman/keepset)";
 
 /** Options for one download: the signal that aborts it. */
 export interface DownloadInit {

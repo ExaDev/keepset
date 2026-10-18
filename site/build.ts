@@ -9,8 +9,8 @@ import { getManifest, listDatasets } from "keepset";
 import { build } from "tsdown";
 import { buildSite } from "./build-site";
 
-/** Where GitHub Pages publishes the site: the project site of ExaDev/keepset. Absolute URLs (canonical links, JSON-LD) are built from it; every link between pages is relative. */
-export const SITE_URL = "https://exadev.github.io/keepset/";
+/** Where GitHub Pages publishes the site: the project site of Mearman/keepset. Absolute URLs (canonical links, JSON-LD) are built from it; every link between pages is relative. */
+export const SITE_URL = "https://mearman.github.io/keepset/";
 
 const here = dirname(fileURLToPath(import.meta.url));
 const repoRoot = join(here, "..");

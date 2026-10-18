@@ -74,7 +74,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ExaDev/keepset.git"
+    "url": "git+https://github.com/Mearman/keepset.git"
   },
   "scripts": {
     "build": "pnpm run catalogue && tsdown && tsx scripts/generate-json-schema.ts",
