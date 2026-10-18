@@ -89,7 +89,7 @@ export const RelativePathSchema = z.string().refine((path) => path.split("/").ev
   message: "must be a relative path of non-empty segments with no '.' or '..'",
 });
 
-/** Which file of an archive to read: one exact member path, or the single member whose name ends with an extension. Both must match exactly one member when the recipe runs. */
+/** Which file of an archive to read: a member path, matched against a member's whole path or its trailing segments (so `net.gml` finds `net/net.gml`), or the member whose name ends with an extension. Either must match exactly one member when the recipe runs; macOS resource-fork members (`__MACOSX/` and `._` files) never match. */
 export const ArchiveMemberSchema = z.union([z.object({ path: RelativePathSchema }).strict(), z.object({ extension: z.string().regex(/^\.[A-Za-z0-9][A-Za-z0-9.]*$/, { message: "must be a file extension such as .mtx" }) }).strict()]);
 export type ArchiveMember = z.infer<typeof ArchiveMemberSchema>;
 
@@ -105,11 +105,15 @@ export type Archive = z.infer<typeof ArchiveSchema>;
 
 const ColumnSchema = z.int().min(0);
 
+/** The text encoding of the unpacked file. Decoding is strict: bytes that are not valid in the stated encoding fail the recipe rather than turning into replacement characters. */
+const EncodingSchema = z.enum(["utf-8", "latin1"]);
+
 /** The parser that reads the unpacked file into the dataset's native JSON shape, with the options that format needs. Every option is stated in the entry, so a recipe reads the same way wherever it runs. */
 export const ParserSchema = z.discriminatedUnion("format", [
   z
     .object({
       format: z.literal("edge-list"),
+      encoding: EncodingSchema,
       delimiter: z.enum(["whitespace", "tab", "comma", "space"]),
       skipLines: z.int().min(0),
       commentPrefixes: z.array(z.string().min(1)),
@@ -118,9 +122,9 @@ export const ParserSchema = z.discriminatedUnion("format", [
     })
     .strict()
     .refine((parser) => parser.sourceColumn !== parser.targetColumn, { message: "sourceColumn and targetColumn must differ", path: ["targetColumn"] }),
-  z.object({ format: z.literal("matrix-market") }).strict(),
-  z.object({ format: z.literal("gml") }).strict(),
-  z.object({ format: z.literal("pajek") }).strict(),
+  z.object({ format: z.literal("matrix-market"), encoding: EncodingSchema }).strict(),
+  z.object({ format: z.literal("gml"), encoding: EncodingSchema }).strict(),
+  z.object({ format: z.literal("pajek"), encoding: EncodingSchema }).strict(),
 ]);
 export type Parser = z.infer<typeof ParserSchema>;
 

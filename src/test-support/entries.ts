@@ -15,7 +15,7 @@ export const liveEntry = {
     status: "fetchable",
     source: 0,
     archive: { kind: "none" },
-    parser: { format: "edge-list", delimiter: "whitespace", skipLines: 0, commentPrefixes: ["#", "%"], sourceColumn: 0, targetColumn: 1 },
+    parser: { format: "edge-list", encoding: "utf-8", delimiter: "whitespace", skipLines: 0, commentPrefixes: ["#", "%"], sourceColumn: 0, targetColumn: 1 },
   },
   crosswalk: {
     source: "edge-list",
@@ -48,7 +48,7 @@ export const deadEntry = {
   ],
   licence: { kind: "spdx", id: "CC-BY-4.0" },
   citations: [],
-  recipe: { status: "fetchable", source: 0, archive: { kind: "zip", member: { path: "celegans_metabolic.net" } }, parser: { format: "pajek" } },
+  recipe: { status: "fetchable", source: 0, archive: { kind: "zip", member: { path: "celegans_metabolic.net" } }, parser: { format: "pajek", encoding: "latin1" } },
   crosswalk: { file: "crosswalks/graph-v1/pajek.json" },
   expectedCounts: {},
   properties: {},
