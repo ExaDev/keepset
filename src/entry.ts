@@ -149,9 +149,11 @@ export const ParserSchema = z.discriminatedUnion("format", [
       skipLines: z.int().min(0),
       idColumn: ColumnNameSchema.nullable(),
       numericColumns: z.array(z.object({ column: ColumnNameSchema, factor: z.number().positive() }).strict()),
+      columns: z.array(ColumnNameSchema).optional(),
     })
     .strict()
-    .refine((parser) => new Set(parser.numericColumns.map((numeric) => numeric.column)).size === parser.numericColumns.length, { message: "a column may be declared numeric once", path: ["numericColumns"] }),
+    .refine((parser) => new Set(parser.numericColumns.map((numeric) => numeric.column)).size === parser.numericColumns.length, { message: "a column may be declared numeric once", path: ["numericColumns"] })
+    .refine((parser) => parser.columns === undefined || new Set(parser.columns).size === parser.columns.length, { message: "a column may be listed once", path: ["columns"] }),
 ]);
 export type Parser = z.infer<typeof ParserSchema>;
 

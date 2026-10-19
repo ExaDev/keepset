@@ -1,8 +1,8 @@
 import { describe, expect, it } from "vitest";
 import type { Parser } from "../entry";
 import { NativeParseError } from "../errors";
-import { columnName, columnNames, headerCells } from "./csv-table";
-import { parseNative } from "./parse-native";
+import { columnName, columnNames, headerCells, parseCsvTable } from "./csv-table";
+import { decodePieces, parseNative } from "./parse-native";
 
 const utf8 = (text: string): Uint8Array => new TextEncoder().encode(text);
 
@@ -15,8 +15,12 @@ const bytesOf = (text: string): Uint8Array => Uint8Array.from(text, (char) => ch
 /** The 1-based lines the tests below expect an error on: the second data row of a three-line file, and the row after a quoted field that spans two lines. */
 const THIRD_LINE = 3;
 const FOURTH_LINE = 4;
+const FIFTH_LINE = 5;
+/** The longest piece the decoding test cuts the text into, and the bytes of a utf-8 string with an invalid byte between two valid ones. */
+const LONGEST_PIECE = 6;
+const INVALID_UTF8 = bytesOf("a\u00ffb");
 
-const table = (options: Partial<Extract<Parser, { format: "csv-table" }>> = {}): Parser => ({
+const table = (options: Partial<Extract<Parser, { format: "csv-table" }>> = {}): Extract<Parser, { format: "csv-table" }> => ({
   format: "csv-table",
   encoding: "utf-8",
   delimiter: "comma",
@@ -136,6 +140,26 @@ describe("the csv-table parser", () => {
     expect(error.line).toBe(THIRD_LINE);
   });
 
+  it("keeps only the columns the recipe lists, in header order, and still checks every row's width", () => {
+    const parser = table({ idColumn: "k", columns: ["c", "a"], numericColumns: [{ column: "c", factor: 2 }] });
+    expect(parseNative(utf8("k,a,b,c\nx,1,2,3\ny,,5,\n"), parser).nodes).toEqual([
+      { c: 6, a: "1", id: "x" },
+      { c: null, a: null, id: "y" },
+    ]);
+    expect(parseError(() => parseNative(utf8("k,a,b,c\nx,1,2\n"), parser)).line).toBe(2);
+  });
+
+  it("refuses a listed column the header lacks, the id column among the columns, and a numeric column that is not kept", () => {
+    expect(parseError(() => parseNative(utf8("a,b\n1,2\n"), table({ columns: ["missing"] }))).message).toMatch(/names the column missing/);
+    expect(parseError(() => parseNative(utf8("k,a\nx,1\n"), table({ idColumn: "k", columns: ["k", "a"] }))).message).toMatch(/is the row's id/);
+    expect(parseError(() => parseNative(utf8("a,b\n1,2\n"), table({ columns: ["a"], numericColumns: [{ column: "b", factor: 1 }] }))).message).toMatch(/not among the columns kept/);
+  });
+
+  it("reads a quoted field that spans many lines and counts every line it spans", () => {
+    const error = parseError(() => parseNative(utf8('a,b\n"x\ny\nz",1\n2\n'), table()));
+    expect(error.line).toBe(FIFTH_LINE);
+  });
+
   it("refuses a row with a different number of fields than the header, naming its line", () => {
     const error = parseError(() => parseNative(utf8("a,b\n1,2\n3\n"), table()));
     expect(error.line).toBe(THIRD_LINE);
@@ -177,4 +201,33 @@ describe("the csv-table parser", () => {
     expect(headerCells("note\na\tb\n", { delimiter: "tab", skipLines: 1 })).toEqual(["a", "b"]);
     expect(() => headerCells("\n\n", { delimiter: "comma", skipLines: 0 })).toThrow(/no header row/);
   });
+
+  it("reads the same table however the text is cut into pieces, even between the two quotes of a doubled quote or a CR and its LF", () => {
+    const text = `${BYTE_ORDER_MARK}junk\r\nname,note,\u00e9\r\n"a ""quoted"" one",x,1\ny,,2\r\n"multi\nline",,\u{1F600}\r\rz,"",w\n`;
+    const parser = table({ skipLines: 1 });
+    const whole = parseCsvTable(text, parser);
+    for (let size = 1; size <= text.length; size += 1) {
+      const pieces = Array.from({ length: Math.ceil(text.length / size) }, (_, index) => text.slice(index * size, (index + 1) * size));
+      expect(parseCsvTable(pieces, parser)).toEqual(whole);
+    }
+  });
+
+  it("reports the same error on the same line however the text is cut", () => {
+    const text = 'a,b\n1,2\n"x\ny",3\n4\n';
+    const wholeError = parseError(() => parseCsvTable(text, table()));
+    for (let size = 1; size <= text.length; size += 1) {
+      const pieces = Array.from({ length: Math.ceil(text.length / size) }, (_, index) => text.slice(index * size, (index + 1) * size));
+      expect(parseError(() => parseCsvTable(pieces, table())).line).toBe(wholeError.line);
+    }
+  });
+
+  it("decodes in pieces without splitting a character that spans two of them, and still refuses invalid utf-8", () => {
+    const text = "caf\u00e9 \u{1F600} \u4e2d";
+    for (let size = 1; size <= LONGEST_PIECE; size += 1) {
+      expect([...decodePieces(utf8(text), table(), size)].join("")).toBe(text);
+    }
+    expect(parseError(() => [...decodePieces(INVALID_UTF8, table(), 1)]).message).toMatch(/not valid utf-8/);
+    expect([...decodePieces(bytesOf("caf\u00e9"), table({ encoding: "latin1" }), 2)].join("")).toBe("caf\u00e9");
+  });
+
 });
