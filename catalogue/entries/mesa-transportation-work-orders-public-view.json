@@ -79,6 +79,10 @@
     "archive": {
       "kind": "none"
     },
+    "paging": {
+      "kind": "socrata-resource",
+      "pageSize": 50000
+    },
     "parser": {
       "columns": [
         "date_work_order_closed",
@@ -122,7 +126,7 @@
     {
       "retrieved": "2026-10-19",
       "status": "live",
-      "url": "https://citydata.mesaaz.gov/resource/ay68-xuca.csv?%24limit=1000000"
+      "url": "https://citydata.mesaaz.gov/resource/ay68-xuca.csv"
     }
   ],
   "tags": [

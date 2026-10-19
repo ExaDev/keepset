@@ -129,7 +129,10 @@
       "downloadUrl": "https://data.cityofnewyork.us/resource/qmh3-uvgq.csv",
       "flags": [
         "The table holds vehicle plates, which would not be mapped.",
-        "The NYC terms page returned HTTP 403 to the survey, so no licence is recorded."
+        "The NYC terms page returned HTTP 403 to the survey, so no licence is recorded.",
+        "the plate column holds vehicle registration numbers and is deliberately not mapped",
+        "the table has no coordinates, so no location is mapped",
+        "the case number repeats in the full table, so rows are numbered"
       ],
       "id": "nyc-open-data-dof-scofftow-case-information",
       "licence": {
@@ -138,8 +141,43 @@
       "name": "DOF Scofftow Case Information (NYC)",
       "namespace": "nyc-open-data",
       "outcome": {
-        "reason": "The table has 1,539,045 rows, more than a recipe can read.",
-        "status": "not-fetchable"
+        "delimiter": "comma",
+        "encoding": "utf-8",
+        "header": [
+          "case_number",
+          "case_status",
+          "plate",
+          "state",
+          "type",
+          "judgment_amount",
+          "boot_date",
+          "tow_y_n",
+          "tow_date",
+          "redeemed_y_n",
+          "redemption_date",
+          "total_amount_owed",
+          "total_amount_collected",
+          "auctioned_y_n",
+          "auction_date",
+          "auction_amount"
+        ],
+        "idColumn": null,
+        "map": {
+          "closed": "redemption_date",
+          "opened": "boot_date",
+          "prize": "judgment_amount",
+          "skill": "type",
+          "status": "case_status"
+        },
+        "numericColumns": [
+          {
+            "column": "judgment_amount",
+            "factor": 1
+          }
+        ],
+        "rowCount": 1539045,
+        "skipLines": 0,
+        "status": "fetchable"
       },
       "surveyId": "or-101"
     },
@@ -412,7 +450,7 @@
       "name": "FDNY EMS Incident Dispatch Data",
       "namespace": "nyc-open-data",
       "outcome": {
-        "reason": "The table has 30,389,767 rows, more than a recipe can read.",
+        "reason": "The table has 30,389,767 rows, so even one mapped column and the id hold more cells than a fetch can hold in memory.",
         "status": "not-fetchable"
       },
       "surveyId": "or-107"
@@ -431,7 +469,7 @@
       "name": "NYPD Calls for Service",
       "namespace": "nyc-open-data",
       "outcome": {
-        "reason": "The table has 10,484,258 rows, more than a recipe can read.",
+        "reason": "The table has 10,484,258 rows, so a mapping of even two columns and the id holds more cells than a fetch can hold in memory.",
         "status": "not-fetchable"
       },
       "surveyId": "or-108"
@@ -441,7 +479,9 @@
       "downloadUrl": "https://citydata.mesaaz.gov/resource/izhu-764k.csv",
       "flags": [
         "The Socrata licence field reads See Terms of Use with no terms URL.",
-        "The geolocation text is written latitude first, the reverse of WKT order."
+        "The geolocation text is written latitude first, the reverse of WKT order.",
+        "the location is a street address and a WKT point with the latitude first, so no coordinates are mapped",
+        "response and on scene times are stored in seconds"
       ],
       "id": "mesa-police-dispatch-events",
       "licence": {
@@ -450,8 +490,62 @@
       "name": "Police Dispatch Events (Mesa, AZ)",
       "namespace": "mesa",
       "outcome": {
-        "reason": "The table has 1,631,480 rows, more than a recipe can read.",
-        "status": "not-fetchable"
+        "delimiter": "comma",
+        "encoding": "utf-8",
+        "header": [
+          "event_number",
+          "received_date_time",
+          "dispatch_date_time",
+          "call_handling_time_seconds",
+          "at_scene_date_time",
+          "response_time_seconds",
+          "clear_date_time",
+          "on_scene_time_seconds",
+          "initial_priority",
+          "dispatch_priority",
+          "arrive_priority",
+          "final_priority",
+          "initial_case_type",
+          "initial_case_type_description",
+          "final_case_type",
+          "final_case_type_description",
+          "call_source",
+          "municipality",
+          ":@computed_region_yvgd_jnii",
+          ":@computed_region_5spd_7gy6",
+          ":@computed_region_jbri_cbif",
+          ":@computed_region_v3p2_n653",
+          ":@computed_region_by5m_u9f6",
+          "call_handling_time_minutes",
+          "response_time_minutes",
+          "on_scene_time_minutes",
+          "location",
+          "geolocation",
+          "district",
+          "zip_code"
+        ],
+        "idColumn": "event_number",
+        "map": {
+          "closed": "clear_date_time",
+          "duration": "on_scene_time_seconds",
+          "opened": "received_date_time",
+          "skill": "initial_case_type",
+          "territory": "district",
+          "travelTime": "response_time_seconds"
+        },
+        "numericColumns": [
+          {
+            "column": "response_time_seconds",
+            "factor": 1
+          },
+          {
+            "column": "on_scene_time_seconds",
+            "factor": 1
+          }
+        ],
+        "rowCount": 1632301,
+        "skipLines": 0,
+        "status": "fetchable"
       },
       "surveyId": "or-109"
     },
@@ -576,7 +670,10 @@
       "downloadUrl": "https://data.london.gov.uk/download/em8xy/73728cf4-b70e-48e2-9b97-4e4341a2110d/LFB%20Incident%20data%20from%202009%20-%202017.csv",
       "flags": [
         "The csv covers 2009 to 2017 only.",
-        "Missing values are written as the text NULL."
+        "Missing values are written as the text NULL.",
+        "this download covers incidents from 2009 to 2017 only; later years are published as separate files",
+        "coordinates are not mapped because the latitude and longitude cells hold the text NULL when unknown",
+        "the notional cost is mapped as the prize, a cost rather than a reward"
       ],
       "id": "london-fire-brigade-incident-records",
       "licence": {
@@ -586,8 +683,70 @@
       "name": "Incident Records (London Fire Brigade)",
       "namespace": "london-fire-brigade",
       "outcome": {
-        "reason": "The 2009 to 2017 csv is 328,582,222 bytes, over the 256 MiB a recipe can read, and the later years are published as spreadsheets (xlsx).",
-        "status": "not-fetchable"
+        "delimiter": "comma",
+        "encoding": "utf-8",
+        "header": [
+          "IncidentNumber",
+          "DateOfCall",
+          "CalYear",
+          "TimeOfCall",
+          "HourOfCall",
+          "IncidentGroup",
+          "StopCodeDescription",
+          "SpecialServiceType",
+          "PropertyCategory",
+          "PropertyType",
+          "AddressQualifier",
+          "Postcode_full",
+          "Postcode_district",
+          "UPRN",
+          "USRN",
+          "IncGeo_BoroughCode",
+          "IncGeo_BoroughName",
+          "ProperCase",
+          "IncGeo_WardCode",
+          "IncGeo_WardName",
+          "IncGeo_WardNameNew",
+          "Easting_m",
+          "Northing_m",
+          "Easting_rounded",
+          "Northing_rounded",
+          "Latitude",
+          "Longitude",
+          "FRS",
+          "IncidentStationGround",
+          "FirstPumpArriving_AttendanceTime",
+          "FirstPumpArriving_DeployedFromStation",
+          "SecondPumpArriving_AttendanceTime",
+          "SecondPumpArriving_DeployedFromStation",
+          "NumStationsWithPumpsAttending",
+          "NumPumpsAttending",
+          "PumpCount",
+          "PumpMinutesRounded",
+          "Notional Cost (£)",
+          "NumCalls"
+        ],
+        "idColumn": "IncidentNumber",
+        "map": {
+          "duration": "PumpMinutesRounded",
+          "opened": "DateOfCall",
+          "prize": "Notional_Cost",
+          "skill": "IncidentGroup",
+          "territory": "IncGeo_BoroughName"
+        },
+        "numericColumns": [
+          {
+            "column": "Notional_Cost",
+            "factor": 1
+          },
+          {
+            "column": "PumpMinutesRounded",
+            "factor": 60
+          }
+        ],
+        "rowCount": 988279,
+        "skipLines": 0,
+        "status": "fetchable"
       },
       "surveyId": "or-111"
     },
@@ -871,7 +1030,7 @@
       "name": "NYC 311 Service Requests from 2020 to Present",
       "namespace": "nyc-open-data",
       "outcome": {
-        "reason": "The table has 22,844,087 rows, more than a recipe can read.",
+        "reason": "The table has 22,844,087 rows, so even one mapped column and the id hold more cells than a fetch can hold in memory.",
         "status": "not-fetchable"
       },
       "surveyId": "or-116"
@@ -1338,11 +1497,15 @@
     },
     {
       "description": "Water resources maintenance work orders raised and completed by the City of Mesa, with costs, status and dates.",
+      "downloadUrl": "https://citydata.mesaaz.gov/resource/7rqv-jcr4.csv",
       "flags": [
-        "Location is a street address with no coordinates.",
         "Some sample rows carry an initiated date of 1969, an epoch default.",
         "Socrata gives the licence only as \"See Terms of Use\", and the terms text was not read.",
-        "Names of staff and requesters are present as columns and would not be mapped."
+        "staff names are present as columns and are deliberately not mapped",
+        "some rows carry an initiated date of 1969, an epoch default",
+        "the location is a street address with no coordinates, so none is mapped",
+        "no column is unique in every row, so rows are numbered",
+        "the cost is mapped as the prize, a monetary amount rather than a reward"
       ],
       "id": "mesa-water-resources-work-orders",
       "licence": {
@@ -1351,8 +1514,151 @@
       "name": "Mesa water resources work orders",
       "namespace": "mesa",
       "outcome": {
-        "reason": "The table has 934800 rows of more than 100 columns, and the sample rows are about a kilobyte each, so the download is far larger than the 256 MiB a recipe can read into memory.",
-        "status": "not-fetchable"
+        "delimiter": "comma",
+        "encoding": "utf-8",
+        "header": [
+          "account_number",
+          "activity_zone",
+          "actual_finish_date",
+          "actual_finish_month",
+          "actual_finish_month_date",
+          "actual_finish_year",
+          "actual_start_date",
+          "actual_start_month",
+          "actual_start_month_date",
+          "actual_start_year",
+          "asset_group",
+          "asset_unattached",
+          "cancel_reason",
+          "cancelled",
+          "cancelled_by",
+          "cancelled_by_id",
+          "cancelled_date",
+          "cancelled_month",
+          "cancelled_month_date",
+          "cancelled_year",
+          "close_by_id",
+          "contractor_id",
+          "contract_billable",
+          "contract_work_order_id",
+          "created_by_cycle",
+          "cycle_from",
+          "cycle_interval",
+          "cycle_interval_unit",
+          "district",
+          "domain_id",
+          "effort",
+          "entity_type",
+          "enumeration",
+          "enumeration1000",
+          "expense_type",
+          "from_date",
+          "from_month",
+          "from_month_date",
+          "from_year",
+          "guid",
+          "initiated_month",
+          "initiated_month_date",
+          "initiated_year",
+          "initiated_by",
+          "initiated_by_app",
+          "initiated_by_id",
+          "initiated_date",
+          "is_it_reportable",
+          "is_reactive",
+          "legally_billable",
+          "line_item_cost",
+          "location",
+          "map_page",
+          "map_template_name",
+          "number_of_days_before",
+          "primary_contract_id",
+          "printed_date",
+          "printed_month",
+          "printed_month_date",
+          "printed_year",
+          "priority",
+          "project_finish_month",
+          "project_finish_month_date",
+          "project_finish_year",
+          "project_id",
+          "project_name",
+          "project_start_month",
+          "project_start_month_date",
+          "project_start_year",
+          "projected_finish_date",
+          "projected_start_date",
+          "requested_by",
+          "requested_by_id",
+          "resolution",
+          "scheduled_date",
+          "scheduled_month",
+          "scheduled_month_date",
+          "scheduled_year",
+          "service_interruption_duration",
+          "service_interruption_ratio",
+          "shop",
+          "source_work_order_id",
+          "stage",
+          "status",
+          "submit_to",
+          "submit_to_date",
+          "submit_to_id",
+          "submit_to_month",
+          "submit_to_month_date",
+          "submit_to_open_month",
+          "submit_to_open_month_date",
+          "submit_to_open_year",
+          "submit_to_opened_by",
+          "submit_to_opened_by_id",
+          "submit_to_opened_date",
+          "submit_to_year",
+          "supervisor",
+          "supervisor_id",
+          "tile_no",
+          "trans_to_work_order_id",
+          "units_accomplished",
+          "units_description",
+          "units_locked",
+          "update_map",
+          "work_completed_by",
+          "work_completed_by_id",
+          "work_order_category",
+          "work_order_close_date",
+          "work_order_closed_by",
+          "work_order_closed_month",
+          "work_order_closed_month_date",
+          "work_order_closed_year",
+          "work_order_cost",
+          "work_order_custom_field",
+          "work_order_description",
+          "work_order_equipment_cost",
+          "work_order_labor_cost",
+          "work_order_map_extent",
+          "work_order_map_scale",
+          "work_order_material_cost",
+          "work_order_output",
+          "work_order_permit_cost",
+          "work_order_template_id"
+        ],
+        "idColumn": null,
+        "map": {
+          "closed": "work_order_close_date",
+          "deadline": "projected_finish_date",
+          "opened": "initiated_date",
+          "prize": "work_order_cost",
+          "skill": "work_order_category",
+          "status": "status"
+        },
+        "numericColumns": [
+          {
+            "column": "work_order_cost",
+            "factor": 1
+          }
+        ],
+        "rowCount": 934803,
+        "skipLines": 0,
+        "status": "fetchable"
       },
       "surveyId": "or-13"
     },
@@ -1430,8 +1736,11 @@
     },
     {
       "description": "Tree removal and pruning work orders from NYC Parks with status, dates and coordinates.",
+      "downloadUrl": "https://data.cityofnewyork.us/resource/bdjm-n7q4.csv",
       "flags": [
-        "Several date columns are text-typed."
+        "Several date columns are text-typed.",
+        "latitude and longitude are empty in many rows",
+        "the table has more columns than a fetch can hold at this many rows, so only the location, work type, status and two dates are mapped; the borough and the work order priority are left out for that reason"
       ],
       "id": "nyc-open-data-forestry-work-orders",
       "licence": {
@@ -1440,8 +1749,83 @@
       "name": "NYC Parks forestry work orders",
       "namespace": "nyc-open-data",
       "outcome": {
-        "reason": "The table has 1561796 rows, more than a recipe can read.",
-        "status": "not-fetchable"
+        "delimiter": "comma",
+        "encoding": "utf-8",
+        "header": [
+          "objectid",
+          "wotype",
+          "wostatus",
+          "wopriority",
+          "boroughcode",
+          "communityboard",
+          "buildingnumber",
+          "streetname",
+          "locationdetails",
+          "actualfinishdate",
+          "wocontract",
+          "parkname",
+          "parkzone",
+          "cancelreason",
+          "wocategory",
+          "sanitationassigneddate",
+          "sanitationremovaldate",
+          "sanitationupdateddate",
+          "wowoodremains",
+          "woequipment",
+          "zipcode",
+          "citycouncil",
+          "statesenate",
+          "stateassembly",
+          "congressional",
+          "sanitationzone",
+          "physicalid",
+          "crossstreet1",
+          "crossstreet2",
+          "plantingspaceglobalid",
+          "treepointglobalid",
+          "inspectionglobalid",
+          "globalid",
+          "sidewalkdamage",
+          "wowireconflict",
+          "crewglobalid",
+          "closeddate",
+          "canceldate",
+          "createddate",
+          "updateddate",
+          "woentity",
+          "projstartdate",
+          "woproject",
+          "recommendedspecies",
+          "latitude",
+          "longitude",
+          "census_tract",
+          "bin",
+          "bbl",
+          "nta",
+          "geometry"
+        ],
+        "idColumn": "objectid",
+        "map": {
+          "closed": "closeddate",
+          "lat": "latitude",
+          "lon": "longitude",
+          "opened": "createddate",
+          "skill": "wotype",
+          "status": "wostatus"
+        },
+        "numericColumns": [
+          {
+            "column": "latitude",
+            "factor": 1
+          },
+          {
+            "column": "longitude",
+            "factor": 1
+          }
+        ],
+        "rowCount": 1561796,
+        "skipLines": 0,
+        "status": "fetchable"
       },
       "surveyId": "or-15"
     },
@@ -1637,7 +2021,7 @@
       "name": "Facility Management Unified Classification Database",
       "namespace": "mendeley-data",
       "outcome": {
-        "reason": "The single CSV is about 1.44 GB, far more than the 256 MiB a recipe can read into memory.",
+        "reason": "The single CSV is about 1.44 GB and was not fetched whole, so its rows are not counted and no recipe is given.",
         "status": "not-fetchable"
       },
       "surveyId": "or-23"
@@ -2019,7 +2403,7 @@
       "name": "US Veterans Health Administration appointment wait times",
       "namespace": "mendeley-data",
       "outcome": {
-        "reason": "The county-level file is 916897688 bytes, far over the 256 MiB a recipe can read, and the other files are larger or are zip and xlsx.",
+        "reason": "The county-level file is 916,897,688 bytes and was not fetched whole, so its rows are not counted and no recipe is given, and the other files are larger or are zip and xlsx.",
         "status": "not-fetchable"
       },
       "surveyId": "or-35"
@@ -3418,7 +3802,7 @@
       "name": "Housing maintenance code violations (NYC HPD)",
       "namespace": "nyc-open-data",
       "outcome": {
-        "reason": "The table has 11,324,217 rows, more than a recipe can read into memory.",
+        "reason": "The table has 11,324,217 rows, so a mapping of even one column and the id holds more cells than a fetch can hold in memory.",
         "status": "not-fetchable"
       },
       "surveyId": "or-60"
@@ -3632,7 +4016,7 @@
       "name": "OATH hearings division case status (NYC)",
       "namespace": "nyc-open-data",
       "outcome": {
-        "reason": "The table has 22,151,329 rows, more than a recipe can read into memory.",
+        "reason": "The table has 22,151,329 rows, so even one mapped column and the id hold more cells than a fetch can hold in memory.",
         "status": "not-fetchable"
       },
       "surveyId": "or-63"
@@ -3701,10 +4085,13 @@
       "surveyId": "or-64"
     },
     {
+      "downloadUrl": "https://data.cityofchicago.org/resource/6br9-quuz.csv",
       "flags": [
         "the Socrata licence field says See Terms of Use and the terms document was not located",
         "the file size was not reported (chunked export), so the size limit is an estimate from the probe rows",
-        "the RESPONDENTS column holds respondent names"
+        "the RESPONDENTS column holds respondent names",
+        "the respondents column holds the names of individuals and businesses and is deliberately not mapped",
+        "the fine is mapped as the prize, a monetary amount rather than a reward"
       ],
       "id": "chicago-ordinance-violations",
       "licence": {
@@ -3713,8 +4100,60 @@
       "name": "Ordinance violations (Chicago Department of Administrative Hearings)",
       "namespace": "chicago",
       "outcome": {
-        "reason": "The table has 824,653 rows and the probe's first rows, with cells already truncated, average about 330 bytes, so the export would exceed the 256 MiB a recipe can read.",
-        "status": "not-fetchable"
+        "delimiter": "comma",
+        "encoding": "utf-8",
+        "header": [
+          "id",
+          "docket_number",
+          "nov_number",
+          "address",
+          "street_number",
+          "street_direction",
+          "street_name",
+          "street_type",
+          "ward",
+          "issuing_department",
+          "hearing_date",
+          "case_disposition",
+          "imposed_fine",
+          "admin_costs",
+          "last_modified_date",
+          "violation_date",
+          "violation_code",
+          "violation_description",
+          "respondents",
+          "latitude",
+          "longitude",
+          "location"
+        ],
+        "idColumn": "id",
+        "map": {
+          "deadline": "hearing_date",
+          "lat": "latitude",
+          "lon": "longitude",
+          "opened": "violation_date",
+          "prize": "imposed_fine",
+          "skill": "violation_description",
+          "status": "case_disposition",
+          "territory": "ward"
+        },
+        "numericColumns": [
+          {
+            "column": "latitude",
+            "factor": 1
+          },
+          {
+            "column": "longitude",
+            "factor": 1
+          },
+          {
+            "column": "imposed_fine",
+            "factor": 1
+          }
+        ],
+        "rowCount": 824653,
+        "skipLines": 0,
+        "status": "fetchable"
       },
       "surveyId": "or-65"
     },
@@ -4480,7 +4919,10 @@
       "flags": [
         "The survey URL is a CKAN landing page; the CSV is on S3.",
         "The table has no coordinates, only street and suburb text.",
-        "The CSV starts with a byte order mark and writes dates as d/mm/yyyy."
+        "The CSV starts with a byte order mark and writes dates as d/mm/yyyy.",
+        "the table covers expiations from 2018 onwards only",
+        "the offence location is a street name, not coordinates, so no location is mapped",
+        "the expiation amount is mapped as the prize, a fine rather than a reward"
       ],
       "id": "adelaide-city-council-parking-expiations",
       "licence": {
@@ -4490,8 +4932,38 @@
       "name": "Parking expiations (Adelaide)",
       "namespace": "adelaide-city-council",
       "outcome": {
-        "reason": "The CSV is about 132 MB and holds more than a million rows (a full count gave over 1.1 million), which is more than a recipe can read into memory.",
-        "status": "not-fetchable"
+        "delimiter": "comma",
+        "encoding": "utf-8",
+        "header": [
+          "OffenceDate",
+          "OffenceType",
+          "LocationOnStreet",
+          "OffenceHour",
+          "ExpiationAmount",
+          "OffenceBalance",
+          "AmountPaid",
+          "PaidDate",
+          "ExemptionTypeDescription",
+          "ExemptionDate",
+          "Status"
+        ],
+        "idColumn": null,
+        "map": {
+          "closed": "PaidDate",
+          "opened": "OffenceDate",
+          "prize": "ExpiationAmount",
+          "skill": "OffenceType",
+          "status": "Status"
+        },
+        "numericColumns": [
+          {
+            "column": "ExpiationAmount",
+            "factor": 1
+          }
+        ],
+        "rowCount": 1119318,
+        "skipLines": 0,
+        "status": "fetchable"
       },
       "surveyId": "or-79"
     },
@@ -4907,7 +5379,7 @@
       "name": "DOB permit issuance (NYC)",
       "namespace": "nyc-open-data",
       "outcome": {
-        "reason": "The CSV has 3990985 rows, which is more than a recipe can read into memory.",
+        "reason": "The table has 3,990,985 rows, so a mapping of more than two columns plus the id holds more cells than a fetch can hold in memory, and two columns would carry too little of what the table offers.",
         "status": "not-fetchable"
       },
       "surveyId": "or-86"
@@ -4925,16 +5397,19 @@
       "name": "DOB job application filings (NYC)",
       "namespace": "nyc-open-data",
       "outcome": {
-        "reason": "The CSV has 2716297 rows, which is more than a recipe can read into memory.",
+        "reason": "The table has 2,716,297 rows, so a mapping of more than three columns plus the id holds more cells than a fetch can hold in memory, and three columns would carry too little of what the table offers.",
         "status": "not-fetchable"
       },
       "surveyId": "or-87"
     },
     {
       "description": "Electrical permit applications filed with the NYC Department of Buildings.",
+      "downloadUrl": "https://data.cityofnewyork.us/resource/dm9a-ab7w.csv",
       "flags": [
         "No licence is recorded in the dataset metadata.",
-        "The table includes applicant, owner and authorised representative names and addresses."
+        "The table includes applicant, owner and authorised representative names and addresses.",
+        "applicant, owner, authorised representative and firm names and addresses are present and deliberately not mapped",
+        "the table has no coordinates, so no location is mapped"
       ],
       "id": "nyc-open-data-dob-now-electrical-permit-applications",
       "licence": {
@@ -4943,8 +5418,105 @@
       "name": "DOB NOW electrical permit applications (NYC)",
       "namespace": "nyc-open-data",
       "outcome": {
-        "reason": "The table has 594449 rows of about 80 wide columns, roughly 900 bytes a row in a sampled export, so the download is well over the 256 MiB a recipe can read.",
-        "status": "not-fetchable"
+        "delimiter": "comma",
+        "encoding": "utf-8",
+        "header": [
+          "job_filing_number",
+          "job_number",
+          "filing_number",
+          "filing_date",
+          "filing_type",
+          "filing_status",
+          "job_status",
+          "house_number",
+          "street_name",
+          "borough",
+          "zip_code",
+          "block",
+          "lot",
+          "bin",
+          "community_board",
+          "joint_venture_work",
+          "building_use_type",
+          "applicant_first_name",
+          "applicant_last_name",
+          "license_type",
+          "license_number",
+          "firm_name",
+          "firm_number",
+          "firm_address",
+          "city",
+          "state",
+          "zip",
+          "general_liability_company",
+          "general_liability_policy",
+          "general_liability_expiration",
+          "worker_comp_company_name",
+          "worker_comp_policy",
+          "worker_comp_expiration_date",
+          "disability_company_name",
+          "disability_policy",
+          "disability_expiration_date",
+          "owner_first_name",
+          "owner_last_name",
+          "title",
+          "business_name",
+          "owner_address",
+          "owner_city",
+          "owner_state",
+          "owner_zip",
+          "owner_type",
+          "auth_rep_first_name",
+          "auth_rep_last_name",
+          "auth_rep_owner_relation",
+          "coo_related",
+          "const_bis_job_number",
+          "removal_of_vio_or_owner",
+          "svc_work_notify_utility",
+          "general_wiring",
+          "lighting_work",
+          "temp_construction_svc",
+          "temp_light_power",
+          "hvac_wiring",
+          "boiler_burner_wiring",
+          "category_work_list",
+          "_3_wire",
+          "_4_wire",
+          "_10_points",
+          "existing_meters",
+          "new_meters",
+          "remove_meters",
+          "total_meters",
+          "job_description",
+          "permit_issued_date",
+          "job_start_date",
+          "completion_date",
+          "filing_fee",
+          "legalization_fee",
+          "nogood_check_fee",
+          "total_billable_work_fee",
+          "amount_paid",
+          "amount_due",
+          "payment_method",
+          "gis_latitude",
+          "gis_longitude",
+          "gis_council_district",
+          "gis_census_tract",
+          "gis_bbl",
+          "gis_nta_name"
+        ],
+        "idColumn": "job_filing_number",
+        "map": {
+          "closed": "completion_date",
+          "opened": "filing_date",
+          "skill": "filing_type",
+          "status": "filing_status",
+          "territory": "borough"
+        },
+        "numericColumns": [],
+        "rowCount": 594449,
+        "skipLines": 0,
+        "status": "fetchable"
       },
       "surveyId": "or-88"
     },

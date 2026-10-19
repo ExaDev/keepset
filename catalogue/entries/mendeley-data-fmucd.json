@@ -22,7 +22,7 @@
     "surveyId": "or-23"
   },
   "recipe": {
-    "reason": "The single CSV is about 1.44 GB, far more than the 256 MiB a recipe can read into memory.",
+    "reason": "The single CSV is about 1.44 GB and was not fetched whole, so its rows are not counted and no recipe is given.",
     "status": "not-fetchable"
   },
   "sources": [

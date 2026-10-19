@@ -64,6 +64,10 @@
     "archive": {
       "kind": "none"
     },
+    "paging": {
+      "kind": "socrata-resource",
+      "pageSize": 50000
+    },
     "parser": {
       "columns": [
         "created_datetime",
@@ -96,7 +100,7 @@
     {
       "retrieved": "2026-10-19",
       "status": "live",
-      "url": "https://data.norfolk.gov/resource/qzfe-wj25.csv?%24limit=1000000"
+      "url": "https://data.norfolk.gov/resource/qzfe-wj25.csv"
     }
   ],
   "tags": [

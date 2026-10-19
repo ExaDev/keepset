@@ -65,6 +65,10 @@
     "archive": {
       "kind": "none"
     },
+    "paging": {
+      "kind": "socrata-resource",
+      "pageSize": 50000
+    },
     "parser": {
       "columns": [
         "completed_date_time",
@@ -92,7 +96,7 @@
     {
       "retrieved": "2026-10-19",
       "status": "live",
-      "url": "https://www.dallasopendata.com/resource/xy7j-y59g.csv?%24limit=1000000"
+      "url": "https://www.dallasopendata.com/resource/xy7j-y59g.csv"
     }
   ],
   "tags": [

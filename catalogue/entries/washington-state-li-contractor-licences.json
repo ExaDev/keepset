@@ -65,6 +65,10 @@
     "archive": {
       "kind": "none"
     },
+    "paging": {
+      "kind": "socrata-resource",
+      "pageSize": 50000
+    },
     "parser": {
       "columns": [
         "licenseexpirationdate",
@@ -92,7 +96,7 @@
     {
       "retrieved": "2026-10-19",
       "status": "live",
-      "url": "https://data.wa.gov/resource/m8qx-ubtq.csv?%24limit=1000000"
+      "url": "https://data.wa.gov/resource/m8qx-ubtq.csv"
     }
   ],
   "tags": [

@@ -5,7 +5,51 @@
   "category": "or/v1",
   "citations": [],
   "crosswalk": {
-    "file": "crosswalks/or-v1/nodes.json"
+    "oneWay": [],
+    "rules": [
+      {
+        "from": "meta",
+        "op": "move",
+        "to": "meta"
+      },
+      {
+        "from": "nodes[].id",
+        "op": "move",
+        "to": "nodes[].id"
+      },
+      {
+        "from": "nodes[].clear_date_time",
+        "op": "move",
+        "to": "nodes[].closed"
+      },
+      {
+        "from": "nodes[].on_scene_time_seconds",
+        "op": "move",
+        "to": "nodes[].duration"
+      },
+      {
+        "from": "nodes[].received_date_time",
+        "op": "move",
+        "to": "nodes[].opened"
+      },
+      {
+        "from": "nodes[].initial_case_type",
+        "op": "move",
+        "to": "nodes[].skill"
+      },
+      {
+        "from": "nodes[].district",
+        "op": "move",
+        "to": "nodes[].territory"
+      },
+      {
+        "from": "nodes[].response_time_seconds",
+        "op": "move",
+        "to": "nodes[].travelTime"
+      }
+    ],
+    "source": "csv-table",
+    "target": "or/v1"
   },
   "description": "Police dispatch events in Mesa, Arizona from 2021, with priorities, case types and call handling and response times.",
   "domain": "Emergency dispatch",
@@ -22,8 +66,40 @@
     "surveyId": "or-109"
   },
   "recipe": {
-    "reason": "The table has 1,631,480 rows, more than a recipe can read.",
-    "status": "not-fetchable"
+    "archive": {
+      "kind": "none"
+    },
+    "paging": {
+      "kind": "socrata-resource",
+      "pageSize": 50000
+    },
+    "parser": {
+      "columns": [
+        "clear_date_time",
+        "on_scene_time_seconds",
+        "received_date_time",
+        "initial_case_type",
+        "district",
+        "response_time_seconds"
+      ],
+      "delimiter": "comma",
+      "encoding": "utf-8",
+      "format": "csv-table",
+      "idColumn": "event_number",
+      "numericColumns": [
+        {
+          "column": "response_time_seconds",
+          "factor": 1
+        },
+        {
+          "column": "on_scene_time_seconds",
+          "factor": 1
+        }
+      ],
+      "skipLines": 0
+    },
+    "source": 1,
+    "status": "fetchable"
   },
   "sources": [
     {

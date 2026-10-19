@@ -49,6 +49,10 @@
     "archive": {
       "kind": "none"
     },
+    "paging": {
+      "kind": "socrata-resource",
+      "pageSize": 50000
+    },
     "parser": {
       "columns": [
         "received",
@@ -73,7 +77,7 @@
     {
       "retrieved": "2026-10-19",
       "status": "live",
-      "url": "https://data.lacity.org/resource/2u8b-eyuu.csv?%24limit=1000000"
+      "url": "https://data.lacity.org/resource/2u8b-eyuu.csv"
     }
   ],
   "tags": [

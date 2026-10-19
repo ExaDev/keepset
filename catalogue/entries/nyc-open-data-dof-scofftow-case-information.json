@@ -5,7 +5,46 @@
   "category": "or/v1",
   "citations": [],
   "crosswalk": {
-    "file": "crosswalks/or-v1/nodes.json"
+    "oneWay": [],
+    "rules": [
+      {
+        "from": "meta",
+        "op": "move",
+        "to": "meta"
+      },
+      {
+        "from": "nodes[].id",
+        "op": "move",
+        "to": "nodes[].id"
+      },
+      {
+        "from": "nodes[].redemption_date",
+        "op": "move",
+        "to": "nodes[].closed"
+      },
+      {
+        "from": "nodes[].boot_date",
+        "op": "move",
+        "to": "nodes[].opened"
+      },
+      {
+        "from": "nodes[].judgment_amount",
+        "op": "move",
+        "to": "nodes[].prize"
+      },
+      {
+        "from": "nodes[].type",
+        "op": "move",
+        "to": "nodes[].skill"
+      },
+      {
+        "from": "nodes[].case_status",
+        "op": "move",
+        "to": "nodes[].status"
+      }
+    ],
+    "source": "csv-table",
+    "target": "or/v1"
   },
   "description": "Boot and tow cases for scofflaw vehicles in New York City, with judgment amounts, amounts owed and case dates.",
   "domain": "Case records",
@@ -22,8 +61,35 @@
     "surveyId": "or-101"
   },
   "recipe": {
-    "reason": "The table has 1,539,045 rows, more than a recipe can read.",
-    "status": "not-fetchable"
+    "archive": {
+      "kind": "none"
+    },
+    "paging": {
+      "kind": "socrata-resource",
+      "pageSize": 50000
+    },
+    "parser": {
+      "columns": [
+        "redemption_date",
+        "boot_date",
+        "judgment_amount",
+        "type",
+        "case_status"
+      ],
+      "delimiter": "comma",
+      "encoding": "utf-8",
+      "format": "csv-table",
+      "idColumn": null,
+      "numericColumns": [
+        {
+          "column": "judgment_amount",
+          "factor": 1
+        }
+      ],
+      "skipLines": 0
+    },
+    "source": 1,
+    "status": "fetchable"
   },
   "sources": [
     {

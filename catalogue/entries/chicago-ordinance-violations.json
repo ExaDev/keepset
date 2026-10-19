@@ -5,7 +5,61 @@
   "category": "or/v1",
   "citations": [],
   "crosswalk": {
-    "file": "crosswalks/or-v1/nodes.json"
+    "oneWay": [],
+    "rules": [
+      {
+        "from": "meta",
+        "op": "move",
+        "to": "meta"
+      },
+      {
+        "from": "nodes[].id",
+        "op": "move",
+        "to": "nodes[].id"
+      },
+      {
+        "from": "nodes[].hearing_date",
+        "op": "move",
+        "to": "nodes[].deadline"
+      },
+      {
+        "from": "nodes[].latitude",
+        "op": "move",
+        "to": "nodes[].lat"
+      },
+      {
+        "from": "nodes[].longitude",
+        "op": "move",
+        "to": "nodes[].lon"
+      },
+      {
+        "from": "nodes[].violation_date",
+        "op": "move",
+        "to": "nodes[].opened"
+      },
+      {
+        "from": "nodes[].imposed_fine",
+        "op": "move",
+        "to": "nodes[].prize"
+      },
+      {
+        "from": "nodes[].violation_description",
+        "op": "move",
+        "to": "nodes[].skill"
+      },
+      {
+        "from": "nodes[].case_disposition",
+        "op": "move",
+        "to": "nodes[].status"
+      },
+      {
+        "from": "nodes[].ward",
+        "op": "move",
+        "to": "nodes[].territory"
+      }
+    ],
+    "source": "csv-table",
+    "target": "or/v1"
   },
   "domain": "Case records",
   "expectedCounts": {},
@@ -21,14 +75,57 @@
     "surveyId": "or-65"
   },
   "recipe": {
-    "reason": "The table has 824,653 rows and the probe's first rows, with cells already truncated, average about 330 bytes, so the export would exceed the 256 MiB a recipe can read.",
-    "status": "not-fetchable"
+    "archive": {
+      "kind": "none"
+    },
+    "paging": {
+      "kind": "socrata-resource",
+      "pageSize": 50000
+    },
+    "parser": {
+      "columns": [
+        "hearing_date",
+        "latitude",
+        "longitude",
+        "violation_date",
+        "imposed_fine",
+        "violation_description",
+        "case_disposition",
+        "ward"
+      ],
+      "delimiter": "comma",
+      "encoding": "utf-8",
+      "format": "csv-table",
+      "idColumn": "id",
+      "numericColumns": [
+        {
+          "column": "latitude",
+          "factor": 1
+        },
+        {
+          "column": "longitude",
+          "factor": 1
+        },
+        {
+          "column": "imposed_fine",
+          "factor": 1
+        }
+      ],
+      "skipLines": 0
+    },
+    "source": 1,
+    "status": "fetchable"
   },
   "sources": [
     {
       "retrieved": "2026-10-19",
       "status": "live",
       "url": "https://data.cityofchicago.org/Administration-Finance/Ordinance-Violations/6br9-quuz"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://data.cityofchicago.org/resource/6br9-quuz.csv"
     }
   ],
   "tags": [
