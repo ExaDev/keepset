@@ -1,16 +1,18 @@
 /* The site's whole stylesheet, as a vanilla-extract module: a theme contract of colour tokens with a dark-mode override, then one globalStyle rule per element selector the generator's HTML uses. The generator emits plain semantic HTML with no class names of its own, so global styling is the whole surface and nothing has to thread generated class names into the page templates. The module is imported for its side effects by the client entry, so its CSS is compiled into the emitted stylesheet at build time and nothing runs in the browser. */
 
-import { createGlobalTheme, globalStyle } from "@vanilla-extract/css";
+import { globalStyle } from "@vanilla-extract/css";
 
-/* Light is the default; the dark override follows the media query rather than a toggle, matching MantineProvider's defaultColorScheme "auto" so the island and the static page never disagree. */
-createGlobalTheme(":root", {
-  accent: "#1f4e79",
-  bg: "#ffffff",
-  fg: "#1c1e21",
-  muted: "#5b616a",
-  border: "rgb(0 0 0 / 15%)",
-  stripe: "rgb(0 0 0 / 3%)",
-  codeBg: "rgb(0 0 0 / 4%)",
+/* The colour tokens are written as real custom properties rather than a createGlobalTheme contract: the contract form emits hashed internal names, and the rules below reference var(--border) and friends literally, which then only resolve where a rule happens to define the plain name. Light is the default; the dark override follows the media query rather than a toggle, matching MantineProvider's defaultColorScheme "auto" so the island and the static page never disagree. The border and stripe tokens are Mantine's table colours (gray-3/gray-0 light, dark-4/dark-6 dark) so a static table and the island's Mantine table beside each other read as one system. */
+globalStyle(":root", {
+  vars: {
+    "--accent": "#1f4e79",
+    "--bg": "#ffffff",
+    "--fg": "#1c1e21",
+    "--muted": "#5b616a",
+    "--border": "#dee2e6",
+    "--stripe": "#f8f9fa",
+    "--codeBg": "rgb(0 0 0 / 4%)",
+  },
 });
 
 globalStyle(":root", {
@@ -21,8 +23,8 @@ globalStyle(":root", {
         "--bg": "#1a1b1e",
         "--fg": "#c9cdd3",
         "--muted": "#9099a4",
-        "--border": "rgb(255 255 255 / 16%)",
-        "--stripe": "rgb(255 255 255 / 4%)",
+        "--border": "#424242",
+        "--stripe": "#2e2e2e",
         "--codeBg": "rgb(255 255 255 / 8%)",
       },
     },
@@ -109,14 +111,17 @@ globalStyle(".description", {
   maxWidth: "50rem",
 });
 
+/* Static tables take Mantine's own measurements (14px text on its line height, 0.7x/1x spacing-xs cells), with plain-value fallbacks, so a dataset page's tables and the island's Mantine table share one scale. Mantine's own table class outranks these element rules on the island, so the duplication never fights. */
 globalStyle("table", {
   borderCollapse: "collapse",
   width: "100%",
+  fontSize: "var(--mantine-font-size-sm, 0.875rem)",
+  lineHeight: "var(--mantine-line-height, 1.55)",
 });
 
 globalStyle("th, td", {
   textAlign: "left",
-  padding: "0.375rem 0.625rem",
+  padding: "calc(var(--mantine-spacing-xs, 0.625rem) * 0.7) var(--mantine-spacing-xs, 0.625rem)",
   borderBottom: "1px solid var(--border)",
   verticalAlign: "top",
   overflowWrap: "anywhere",
