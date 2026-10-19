@@ -9,11 +9,17 @@ import { EXIT_FAILED, EXIT_OK } from "./run";
 const binPath = fileURLToPath(new URL("../dist-cli/keepset.mjs", import.meta.url));
 const packageJsonPath = fileURLToPath(new URL("../package.json", import.meta.url));
 
+/** What one child process may take: a node start and a bundle load, a second or two on an idle machine, with a wide margin for the shared machines this also runs on (load there has passed a hundred), since vitest's default limit assumes a test starts no processes. */
+const SPAWN_BUDGET_MS = 15_000;
+
+/** The most child processes any test below starts, which its limit is sized for. */
+const MOST_SPAWNS_IN_A_TEST = 4;
+
 function keepset(args: readonly string[]) {
   return spawnSync(process.execPath, [binPath, ...args], { encoding: "utf8" });
 }
 
-describe("the keepset command", () => {
+describe("the keepset command", { timeout: MOST_SPAWNS_IN_A_TEST * SPAWN_BUDGET_MS }, () => {
   it("is the file package.json's bin names, with a node shebang, and is not an export", () => {
     const manifest: unknown = JSON.parse(readFileSync(packageJsonPath, "utf8"));
     expect(manifest).toMatchObject({ bin: { keepset: "./dist-cli/keepset.mjs" } });
