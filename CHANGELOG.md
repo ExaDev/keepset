@@ -1,3 +1,13 @@
+# [0.11.0](https://github.com/Mearman/keepset/compare/v0.10.0...v0.11.0) (2026-10-19)
+
+
+### Features
+
+* **cli:** take a qualified name or alias for any dataset ([f350b85](https://github.com/Mearman/keepset/commit/f350b85ce2ed799f344a285ed0eaabf707fd88df))
+* resolve datasets by namespace-qualified name and alias ([bcf9a6e](https://github.com/Mearman/keepset/commit/bcf9a6e792fee5955224120f0375fd53a4bf6b22))
+* **seed:** file collection-prefixed ids under namespaces ([d1cde50](https://github.com/Mearman/keepset/commit/d1cde502bf4d3af50376dd1caa1e4bf802951bb8))
+* **site:** show namespaces and aliases and search by them ([8238292](https://github.com/Mearman/keepset/commit/8238292d9c429b9b44bf1b87c6af0fd27622026c))
+
 # [0.10.0](https://github.com/Mearman/keepset/compare/v0.9.2...v0.10.0) (2026-10-19)
 
 
