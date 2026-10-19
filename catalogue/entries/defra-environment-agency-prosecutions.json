@@ -5,7 +5,46 @@
   "category": "or/v1",
   "citations": [],
   "crosswalk": {
-    "file": "crosswalks/or-v1/nodes.json"
+    "oneWay": [],
+    "rules": [
+      {
+        "from": "meta",
+        "op": "move",
+        "to": "meta"
+      },
+      {
+        "from": "nodes[].id",
+        "op": "move",
+        "to": "nodes[].id"
+      },
+      {
+        "from": "nodes[].Date_of_Action",
+        "op": "move",
+        "to": "nodes[].closed"
+      },
+      {
+        "from": "nodes[].Fine",
+        "op": "move",
+        "to": "nodes[].prize"
+      },
+      {
+        "from": "nodes[].Incident_Type",
+        "op": "move",
+        "to": "nodes[].skill"
+      },
+      {
+        "from": "nodes[].Verdict",
+        "op": "move",
+        "to": "nodes[].status"
+      },
+      {
+        "from": "nodes[].Incident_Area",
+        "op": "move",
+        "to": "nodes[].territory"
+      }
+    ],
+    "source": "csv-table",
+    "target": "or/v1"
   },
   "description": "Environment Agency enforcement actions against defendants, with fines, costs, verdicts and incident area.",
   "domain": "Case records",
@@ -23,14 +62,43 @@
     "surveyId": "or-50"
   },
   "recipe": {
-    "reason": "The download is an xlsx workbook with an explanation sheet and a data sheet, and keepset has no spreadsheet parser yet.",
-    "status": "not-fetchable"
+    "archive": {
+      "kind": "xlsx",
+      "sheet": "Environment Agency Prosecutions"
+    },
+    "parser": {
+      "columns": [
+        "Date_of_Action",
+        "Fine",
+        "Incident_Type",
+        "Verdict",
+        "Incident_Area"
+      ],
+      "delimiter": "comma",
+      "encoding": "utf-8",
+      "format": "csv-table",
+      "idColumn": null,
+      "numericColumns": [
+        {
+          "column": "Fine",
+          "factor": 1
+        }
+      ],
+      "skipLines": 0
+    },
+    "source": 1,
+    "status": "fetchable"
   },
   "sources": [
     {
       "retrieved": "2026-10-19",
       "status": "live",
       "url": "https://environment.data.gov.uk/dataset/9c7728fc-68e2-46e1-addb-63790b6b5313"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://environment.data.gov.uk/api/file/download?fileDataSetId=e06036f5-7f41-46a3-93ff-fbd0fa1a83cc&fileName=Environment_Agency_Prosecutions.xlsx"
     }
   ],
   "tags": [
