@@ -8,6 +8,7 @@ export {
   ArchiveMemberSchema,
   ArchiveSchema,
   CitationSchema,
+  ColumnNameSchema,
   CrosswalkReferenceSchema,
   EntrySchema,
   HttpUrlSchema,
