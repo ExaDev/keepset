@@ -110,11 +110,25 @@ describe("an entry's namespace and aliases", () => {
     expect(parseEntry(JSON.parse(serialise(parseEntry(doc))))).toEqual(parseEntry(doc));
   });
 
-  it("refuses a namespace segment or an alias that is not an id, so none can contain the separator", () => {
+  it("refuses a namespace segment that is not an id, so none can contain the separator", () => {
     for (const bad of ["a/b", "", "_x", "has space"]) {
       expect(EntrySchema.is({ ...liveEntry, namespace: [bad] })).toBe(false);
+    }
+  });
+
+  it("accepts an alias that is an id or a path of ids, and refuses any other", () => {
+    for (const good of ["short", "a/b", "foo/graphs/bar", "a.b/c_d-e"]) {
+      expect(EntrySchema.is({ ...liveEntry, aliases: [good] })).toBe(true);
+    }
+    for (const bad of ["", "_x", "has space", "/a", "a/", "a//b", "a/_b", "a/b/"]) {
       expect(EntrySchema.is({ ...liveEntry, aliases: [bad] })).toBe(false);
     }
+  });
+
+  it("refuses an id and aliases that give the same fully qualified name twice", () => {
+    expect(EntrySchema.is({ ...liveEntry, namespace: ["a", "b"], aliases: [`a/b/${liveEntry.id}`] })).toBe(false);
+    expect(EntrySchema.is({ ...liveEntry, namespace: ["a", "b"], aliases: ["a/b/x", "x"] })).toBe(false);
+    expect(EntrySchema.is({ ...liveEntry, namespace: ["a", "b"], aliases: ["a/x", "x"] })).toBe(true);
   });
 
   it("refuses an empty namespace and an empty alias list, so absence has one form", () => {

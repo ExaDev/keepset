@@ -2,6 +2,7 @@ import { CrosswalkSchema } from "twindex";
 import { z } from "zod";
 import { CategoryIdSchema, getCategory } from "./categories";
 import { define } from "./define";
+import { namesOf } from "./names";
 import { CatalogueSyntaxError, type SyntaxIssue } from "./errors";
 import { recordOf } from "./record";
 import { JsonScalarSchema } from "./targets/graph-v1";
@@ -12,6 +13,11 @@ export const IdSchema = z.string().regex(/^[A-Za-z0-9][A-Za-z0-9._-]*$/, {
 });
 
 /** A key of an entry's `properties` or `expectedCounts` record: an identifier that starts with a letter, so it can never be `__proto__` or another name Object.prototype reacts to on assignment. */
+/** An alias: an id, or a path of ids joined by `/` such as `foo/graphs/bar`. A bare id is a name inside the entry's own namespace; a path is a name of its own, in the group its leading segments name. The segment pattern repeats the one in `IdSchema` so that each part of a path is an id. */
+export const AliasSchema = z.string().regex(/^[A-Za-z0-9][A-Za-z0-9._-]*(?:\/[A-Za-z0-9][A-Za-z0-9._-]*)*$/, {
+  message: "must be an id, or ids joined by '/', each starting with a letter or digit and containing only letters, digits, '.', '_' and '-'",
+});
+
 /** The path a dataset sits under in a collection, outermost segment first, such as `["suitesparse", "gset"]`. Each segment is an id, so a segment can never contain the `/` that joins a namespace to a name. */
 export const NamespaceSchema = z.array(IdSchema).min(1);
 export type Namespace = z.infer<typeof NamespaceSchema>;
@@ -157,7 +163,7 @@ export const EntrySchema = define(
     .object({
       id: IdSchema,
       namespace: NamespaceSchema.optional(),
-      aliases: z.array(IdSchema).min(1).optional(),
+      aliases: z.array(AliasSchema).min(1).optional(),
       name: z.string().min(1),
       description: z.string().min(1).optional(),
       domain: z.string().min(1).optional(),
@@ -176,6 +182,10 @@ export const EntrySchema = define(
       const { aliases = [] } = entry;
       if (new Set(aliases).size !== aliases.length || aliases.includes(entry.id)) {
         ctx.addIssue({ code: "custom", path: ["aliases"], message: "aliases must be unique and differ from the entry's own id" });
+      }
+      const { full } = namesOf(entry);
+      if (new Set(full).size !== full.length) {
+        ctx.addIssue({ code: "custom", path: ["aliases"], message: "the entry's id and aliases must not give the same fully qualified name twice" });
       }
       if (entry.recipe.status === "fetchable" && entry.recipe.source >= entry.sources.length) {
         ctx.addIssue({ code: "custom", path: ["recipe", "source"], message: `names source ${String(entry.recipe.source)} but the entry has ${String(entry.sources.length)}` });
