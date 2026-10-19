@@ -48,7 +48,11 @@ npx keepset fetch gset/g53
 npx keepset fetch g53
 ```
 
-A qualified name joins the namespace to a name with `/`, and any leading part of the namespace may be dropped while the name still means one dataset. An entry's own id always wins; otherwise a name that more than one entry answers to is refused with the ids it could mean (`DatasetAmbiguousError` in the library, exit status 2 in the CLI), and the way out is a longer qualified name or the id. `search --namespace suitesparse` (or `listDatasets({ namespace })`) lists a namespace and everything beneath it. Everything a command writes or prints uses the entry's own id, never the name typed.
+A qualified name joins the namespace to a name with `/`, and any leading part of the namespace may be dropped while the name still means one dataset (a middle part may not be). An entry's own id always wins; otherwise a name that more than one entry answers to is refused with the ids it could mean (`DatasetAmbiguousError` in the library, exit status 2 in the CLI), and the way out is a longer qualified name or the id. Everything a command writes or prints uses the entry's own id, never the name typed.
+
+An alias that is a path, such as `foo/graphs/bar`, files the entry in a second group as well: it is a name in its own right, not prefixed by the entry's namespace, and answers to `bar`, `graphs/bar` and `foo/graphs/bar`. The namespace is where an entry comes from and path aliases are cross-listing, so an entry can sit in several groups. The catalogue manifest can also give a namespace segment aliases (`namespaceAliases`, such as `ss` for `suitesparse`), and a name then answers with the alias in the segment's place.
+
+`search --namespace suitesparse` (or `listDatasets({ namespace })`) lists a group and every group beneath it, an entry once however many of those it is in. `listNamespaces(path)` lists the namespaces directly beneath a path, or the outermost ones, each with the number of entries at or beneath it.
 
 ## The entry format
 
