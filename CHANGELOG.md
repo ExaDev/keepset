@@ -1,3 +1,11 @@
+# [0.13.0](https://github.com/Mearman/keepset/compare/v0.12.0...v0.13.0) (2026-10-19)
+
+
+### Features
+
+* **cli:** add a namespaces command to browse the namespace tree ([a5e84af](https://github.com/Mearman/keepset/commit/a5e84af788734fd0690fb62aa8d56d618c97627c))
+* **site:** add a page for every namespace and link the groups ([9f41789](https://github.com/Mearman/keepset/commit/9f41789612d6b2fd8b0af4b283eee71c44504fd2))
+
 # [0.12.0](https://github.com/Mearman/keepset/compare/v0.11.0...v0.12.0) (2026-10-19)
 
 
