@@ -34,6 +34,41 @@ export function decode(bytes: Uint8Array, parser: Parser): string {
   }
 }
 
+const KIBIBYTE = 1024;
+const PIECE_MEBIBYTES = 8;
+
+/** Bytes decoded at a time for a format that is read in pieces. The decoder holds only a piece's text at once, so this bounds what a large table costs beyond its bytes; it is large enough that the per-piece work is small beside the piece. */
+export const DECODE_PIECE_BYTES = PIECE_MEBIBYTES * KIBIBYTE * KIBIBYTE;
+
+/**
+ * Decodes a file's bytes in the recipe's encoding a piece at a time, as strictly as `decode`, so a file whose text would not fit in one string can still be read.
+ * @param bytes - The unpacked file.
+ * @param parser - The recipe's parser, which names the encoding.
+ * @param pieceBytes - How many bytes to decode at a time.
+ * @returns The text of each piece, in order; a character that spans two pieces is yielded whole with the later one.
+ * @throws NativeParseError when the bytes are not valid in the stated encoding.
+ */
+export function* decodePieces(bytes: Uint8Array, parser: Parser, pieceBytes: number = DECODE_PIECE_BYTES): Generator<string, void, undefined> {
+  const decoder = parser.encoding === "latin1" ? undefined : new TextDecoder("utf-8", { fatal: true });
+  try {
+    for (let start = 0; start < bytes.length; start += pieceBytes) {
+      const piece = bytes.subarray(start, start + pieceBytes);
+      yield decoder === undefined ? decode(piece, parser) : decoder.decode(piece, { stream: true });
+    }
+    if (decoder !== undefined) {
+      const rest = decoder.decode();
+      if (rest !== "") {
+        yield rest;
+      }
+    }
+  } catch (error) {
+    if (error instanceof NativeParseError) {
+      throw error;
+    }
+    throw new NativeParseError(parser.format, 1, `the file is not valid utf-8 (${error instanceof Error ? error.message : String(error)}); a recipe for a latin1 file states encoding latin1`);
+  }
+}
+
 type TableParser = Extract<Parser, { format: "csv-table" }>;
 
 /**
@@ -47,6 +82,9 @@ export function parseNative(bytes: Uint8Array, parser: TableParser): NativeTable
 export function parseNative(bytes: Uint8Array, parser: Exclude<Parser, TableParser>): NativeGraph;
 export function parseNative(bytes: Uint8Array, parser: Parser): NativeDocument;
 export function parseNative(bytes: Uint8Array, parser: Parser): NativeDocument {
+  if (parser.format === "csv-table") {
+    return parseCsvTable(decodePieces(bytes, parser), parser);
+  }
   const text = decode(bytes, parser);
   if (parser.format === "edge-list") {
     return parseEdgeList(text, parser);
@@ -56,9 +94,6 @@ export function parseNative(bytes: Uint8Array, parser: Parser): NativeDocument {
   }
   if (parser.format === "gml") {
     return parseGml(text);
-  }
-  if (parser.format === "csv-table") {
-    return parseCsvTable(text, parser);
   }
 
   return parsePajek(text);
