@@ -17,7 +17,8 @@ const survey = SurveySourceSchema.parse({
   ],
 });
 
-const columns = ["status", "latitude", "longitude", "minutes", "district", "private_note"];
+/** The file's header cells as it writes them: the parser names the last one Private_note and the one called id column_8, since id is the row's id. */
+const header = ["request_id", "status", "latitude", "longitude", "minutes", "district", "Private note", "id"];
 const fetchable = {
   status: "fetchable",
   encoding: "utf-8",
@@ -29,7 +30,7 @@ const fetchable = {
     { column: "longitude", factor: 1 },
     { column: "minutes", factor: 60 },
   ],
-  columns,
+  header,
   map: { status: "status", lat: "latitude", lon: "longitude", duration: "minutes", territory: "district" },
 };
 const curation = {
@@ -99,7 +100,10 @@ describe("convertSurvey", () => {
         { op: "move", from: "nodes[].status", to: "nodes[].status" },
         { op: "move", from: "nodes[].district", to: "nodes[].territory" },
       ],
-      oneWay: [{ op: "drop", from: "nodes[].private_note", direction: "encode" }],
+      oneWay: [
+        { op: "drop", from: "nodes[].Private_note", direction: "encode" },
+        { op: "drop", from: "nodes[].column_8", direction: "encode" },
+      ],
     });
   });
 
@@ -114,7 +118,7 @@ describe("convertSurvey", () => {
   it("builds a fetchable entry that fetches, maps only the mapped columns, and holds the round trip", async () => {
     const nodes = parseCrosswalk(JSON.parse(readFileSync(join(import.meta.dirname, "../../catalogue/crosswalks/or-v1/nodes.json"), "utf8")));
     const dataset = createCatalogue({ manifest: fixtureManifest, crosswalks: { "crosswalks/or-v1/nodes.json": nodes }, entries }).getDataset("example-service-requests");
-    const port = async (): Promise<Response> => Promise.resolve(new Response("request_id,status,latitude,longitude,minutes,district,private_note\nr1,Open,51.5,-0.1,2,Camden,secret\nr2,Closed,,,,,\n"));
+    const port = async (): Promise<Response> => Promise.resolve(new Response("request_id,status,latitude,longitude,minutes,district,Private note,id\nr1,Open,51.5,-0.1,2,Camden,secret,x1\nr2,Closed,,,,,,\n"));
     const fetched = await fetchEntry(dataset, { fetch: port });
     expect(fetched.data).toEqual({
       meta: { id: "example-service-requests", name: "Service requests", surveyId: "or-10" },
@@ -152,9 +156,9 @@ describe("convertSurvey refuses an inconsistent curation", () => {
     expect(() => convertSurvey(survey, withFirst({ rowCount: MAX_ROWS }), none)).not.toThrow();
   });
 
-  it("columns that do not hold together: a repeated column, the id column among them, a mapping to a missing column, one column filling two fields, and an empty map", () => {
-    expect(problem(withFirst({ columns: [...columns, "status"] }))).toMatch(/lists a column twice/);
-    expect(problem(withFirst({ columns: [...columns, "request_id"] }))).toMatch(/id column request_id is also in columns/);
+  it("a header whose cells get the same name, an id column the header does not have, a mapping to a missing column, one column filling two fields, and an empty map", () => {
+    expect(problem(withFirst({ header: [...header, "status "] }))).toMatch(/both become the column status/);
+    expect(problem(withFirst({ idColumn: "nope" }))).toMatch(/id column nope is not one of the parser's column names/);
     expect(problem(withFirst({ map: { ...fetchable.map, skill: "nowhere" } }))).toMatch(/skill maps the column nowhere/);
     expect(problem(withFirst({ map: { ...fetchable.map, skill: "status" } }))).toMatch(/the column status fills more than one field/);
     expect(problem(withFirst({ map: {} }))).toMatch(/fills no field/);
@@ -162,12 +166,12 @@ describe("convertSurvey refuses an inconsistent curation", () => {
 
   it("a number field on a column that is not numeric, a text field on one that is, and a factor on a field that takes the source's own number", () => {
     expect(problem(withFirst({ map: { ...fetchable.map, prize: "district" } }))).toMatch(/prize is a number but district is not declared numeric/);
-    expect(problem(withFirst({ numericColumns: [...fetchable.numericColumns, { column: "private_note", factor: 1 }], map: { ...fetchable.map, skill: "private_note" } }))).toMatch(/skill is text but private_note is declared numeric/);
+    expect(problem(withFirst({ numericColumns: [...fetchable.numericColumns, { column: "Private_note", factor: 1 }], map: { ...fetchable.map, skill: "Private_note" } }))).toMatch(/skill is text but Private_note is declared numeric/);
     expect(problem(withFirst({ numericColumns: [{ column: "latitude", factor: 2 }, ...fetchable.numericColumns.slice(1)] }))).toMatch(/lat takes the source's own number, but latitude has the factor 2/);
   });
 
   it("a numeric column that fills no field or is not in the table", () => {
-    expect(problem(withFirst({ numericColumns: [...fetchable.numericColumns, { column: "private_note", factor: 1 }] }))).toMatch(/private_note is declared numeric but fills no field/);
+    expect(problem(withFirst({ numericColumns: [...fetchable.numericColumns, { column: "Private_note", factor: 1 }] }))).toMatch(/Private_note is declared numeric but fills no field/);
     expect(problem(withFirst({ numericColumns: [...fetchable.numericColumns, { column: "elsewhere", factor: 1 }] }))).toMatch(/numericColumns names elsewhere/);
   });
 

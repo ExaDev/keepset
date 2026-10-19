@@ -1,5 +1,6 @@
 import { CrosswalkSchema, validateCrosswalk, type Crosswalk } from "twindex";
 import { parseEntry, type Entry } from "../../src/entry";
+import { columnNames } from "../../src/parsers/csv-table";
 import { CurationSchema, TARGET_FIELD_NAMES, TARGET_FIELDS, type Curation, type CurationItem, type FetchableOutcome, type SurveyEntry, type SurveySource, type TargetField } from "./or-survey";
 
 /** The shared crosswalk of an entry with no recipe yet: the document's meta and node ids, all that is known of a dataset whose columns have not been read into a mapping. */
@@ -58,6 +59,23 @@ function domainOf(item: SurveyEntry): string {
 }
 
 /**
+ * The parser's names for a fetchable outcome's header, and the columns it emits, which are those names without the id column.
+ * @param id - The surveyed item's id, for errors.
+ * @param outcome - The outcome.
+ * @returns Every name, and the columns of a row other than its id.
+ * @throws Error naming the item when two header cells get the same name.
+ */
+function columnsOf(id: string, outcome: FetchableOutcome): { readonly names: readonly string[]; readonly columns: readonly string[] } {
+  try {
+    const names = columnNames(outcome.header, outcome.idColumn, 1);
+
+    return { names, columns: names.filter((name) => name !== outcome.idColumn) };
+  } catch (error) {
+    throw new Error(`${id}: ${error instanceof Error ? error.message : String(error)}`, { cause: error });
+  }
+}
+
+/**
  * Checks a fetchable outcome against the rules that keep a recipe sound: the columns it names exist, a field is filled by one column and a column fills one field, a number field reads a numeric column and a text field does not, only durations and travel times are scaled, and no table too long to read is given a recipe.
  * @param id - The surveyed item's id, for errors.
  * @param outcome - The outcome.
@@ -70,13 +88,11 @@ function checkFetchable(id: string, outcome: FetchableOutcome): void {
   if (outcome.rowCount !== undefined && outcome.rowCount > MAX_ROWS) {
     fail(`the table has ${String(outcome.rowCount)} rows, more than ${String(MAX_ROWS)}, so it has no recipe`);
   }
-  const columns = new Set(outcome.columns);
-  if (columns.size !== outcome.columns.length) {
-    fail("columns lists a column twice");
+  const named = columnsOf(id, outcome);
+  if (outcome.idColumn !== null && !named.names.includes(outcome.idColumn)) {
+    fail(`the id column ${outcome.idColumn} is not one of the parser's column names for this header`);
   }
-  if (outcome.idColumn !== null && columns.has(outcome.idColumn)) {
-    fail(`the id column ${outcome.idColumn} is also in columns, but the parser does not emit it as a column`);
-  }
+  const columns = new Set(named.columns);
   const numeric = new Map(outcome.numericColumns.map((entry) => [entry.column, entry.factor]));
   const used = new Set<string>();
   const mapped = TARGET_FIELD_NAMES.flatMap((field) => {
@@ -137,7 +153,7 @@ function crosswalkOf(outcome: FetchableOutcome): Crosswalk {
         return column === undefined ? [] : [{ op: "move", from: `nodes[].${column}`, to: `nodes[].${field}` }];
       }),
     ],
-    oneWay: outcome.columns.filter((column) => !mapped.has(column)).map((column) => ({ op: "drop", from: `nodes[].${column}`, direction: "encode" })),
+    oneWay: columnsOf("crosswalk", outcome).columns.filter((column) => !mapped.has(column)).map((column) => ({ op: "drop", from: `nodes[].${column}`, direction: "encode" })),
   };
   const parsed = CrosswalkSchema.parse(crosswalk);
   const issues = validateCrosswalk(parsed);

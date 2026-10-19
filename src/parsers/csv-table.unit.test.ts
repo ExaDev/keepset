@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import type { Parser } from "../entry";
 import { NativeParseError } from "../errors";
-import { columnName } from "./csv-table";
+import { columnName, columnNames, headerCells } from "./csv-table";
 import { parseNative } from "./parse-native";
 
 const utf8 = (text: string): Uint8Array => new TextEncoder().encode(text);
@@ -164,5 +164,17 @@ describe("the csv-table parser", () => {
     const file = bytesOf("n\n\u00e9");
     expect(parseNative(file, table({ encoding: "latin1" })).nodes).toEqual([{ id: "1", n: "\u00e9" }]);
     expect(parseError(() => parseNative(file, table())).message).toMatch(/not valid utf-8/);
+  });
+
+  it("derives every header cell's name in order, with id reserved unless it is the id column", () => {
+    expect(columnNames(["Case id", "id", "Date received", ""], null, 1)).toEqual(["Case_id", "column_2", "Date_received", "column_4"]);
+    expect(columnNames(["Case id", "id", "Date received", ""], "id", 1)).toEqual(["Case_id", "id", "Date_received", "column_4"]);
+    expect(() => columnNames(["a b", "a_b"], null, THIRD_LINE)).toThrow(/header cells 1 and 2 both become the column a_b/);
+  });
+
+  it("reads the header cells exactly as written, after the skipped lines and a byte order mark", () => {
+    expect(headerCells(`${BYTE_ORDER_MARK}Date received,"Zip, code",id\n1,2,3\n`, { delimiter: "comma", skipLines: 0 })).toEqual(["Date received", "Zip, code", "id"]);
+    expect(headerCells("note\na\tb\n", { delimiter: "tab", skipLines: 1 })).toEqual(["a", "b"]);
+    expect(() => headerCells("\n\n", { delimiter: "comma", skipLines: 0 })).toThrow(/no header row/);
   });
 });
