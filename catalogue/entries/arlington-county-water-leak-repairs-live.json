@@ -5,7 +5,56 @@
   "category": "or/v1",
   "citations": [],
   "crosswalk": {
-    "file": "crosswalks/or-v1/nodes.json"
+    "oneWay": [],
+    "rules": [
+      {
+        "from": "meta",
+        "op": "move",
+        "to": "meta"
+      },
+      {
+        "from": "nodes[].id",
+        "op": "move",
+        "to": "nodes[].id"
+      },
+      {
+        "from": "nodes[].StopDateActual",
+        "op": "move",
+        "to": "nodes[].closed"
+      },
+      {
+        "from": "nodes[].StopDateEstimated",
+        "op": "move",
+        "to": "nodes[].deadline"
+      },
+      {
+        "from": "nodes[].geometry_latitude",
+        "op": "move",
+        "to": "nodes[].lat"
+      },
+      {
+        "from": "nodes[].geometry_longitude",
+        "op": "move",
+        "to": "nodes[].lon"
+      },
+      {
+        "from": "nodes[].StartDateActual",
+        "op": "move",
+        "to": "nodes[].opened"
+      },
+      {
+        "from": "nodes[].Activity",
+        "op": "move",
+        "to": "nodes[].skill"
+      },
+      {
+        "from": "nodes[].Status",
+        "op": "move",
+        "to": "nodes[].status"
+      }
+    ],
+    "source": "geojson",
+    "target": "or/v1"
   },
   "description": "Live water leak repair work in Arlington County, Virginia, with activity, priority and estimated and actual start and stop dates.",
   "domain": "Emergency dispatch",
@@ -22,8 +71,44 @@
     "surveyId": "or-113"
   },
   "recipe": {
-    "reason": "The source is an ArcGIS feature service that returns Esri JSON in pages of at most 2000 features, and keepset has no ArcGIS JSON parser or paging yet.",
-    "status": "not-fetchable"
+    "archive": {
+      "kind": "none"
+    },
+    "paging": {
+      "kind": "arcgis-query",
+      "orderBy": "OBJECTID"
+    },
+    "parser": {
+      "columns": [
+        "StopDateActual",
+        "StopDateEstimated",
+        "geometry_latitude",
+        "geometry_longitude",
+        "StartDateActual",
+        "Activity",
+        "Status"
+      ],
+      "dateColumns": [
+        "StartDateActual",
+        "StopDateActual",
+        "StopDateEstimated"
+      ],
+      "encoding": "utf-8",
+      "format": "geojson",
+      "idColumn": "OBJECTID",
+      "numericColumns": [
+        {
+          "column": "geometry_latitude",
+          "factor": 1
+        },
+        {
+          "column": "geometry_longitude",
+          "factor": 1
+        }
+      ]
+    },
+    "source": 1,
+    "status": "fetchable"
   },
   "sources": [
     {
@@ -34,7 +119,7 @@
     {
       "retrieved": "2026-10-19",
       "status": "live",
-      "url": "https://utility.arcgis.com/usrsvcs/servers/53520af18235499d9ecd9c96f624eeae/rest/services/AM/Leak_Repairs_Live/FeatureServer/0/query?where=1%3D1&outFields=*&returnGeometry=false&f=json"
+      "url": "https://utility.arcgis.com/usrsvcs/servers/53520af18235499d9ecd9c96f624eeae/rest/services/AM/Leak_Repairs_Live/FeatureServer/0"
     }
   ],
   "tags": [

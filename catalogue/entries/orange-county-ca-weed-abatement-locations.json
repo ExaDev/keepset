@@ -5,7 +5,46 @@
   "category": "or/v1",
   "citations": [],
   "crosswalk": {
-    "file": "crosswalks/or-v1/nodes.json"
+    "oneWay": [],
+    "rules": [
+      {
+        "from": "meta",
+        "op": "move",
+        "to": "meta"
+      },
+      {
+        "from": "nodes[].id",
+        "op": "move",
+        "to": "nodes[].id"
+      },
+      {
+        "from": "nodes[].geometry_latitude",
+        "op": "move",
+        "to": "nodes[].lat"
+      },
+      {
+        "from": "nodes[].geometry_longitude",
+        "op": "move",
+        "to": "nodes[].lon"
+      },
+      {
+        "from": "nodes[].created_date",
+        "op": "move",
+        "to": "nodes[].opened"
+      },
+      {
+        "from": "nodes[].status",
+        "op": "move",
+        "to": "nodes[].status"
+      },
+      {
+        "from": "nodes[].district",
+        "op": "move",
+        "to": "nodes[].territory"
+      }
+    ],
+    "source": "geojson",
+    "target": "or/v1"
   },
   "description": "Weed abatement parcels of Orange County, California, with district, status and cost of dumped material.",
   "domain": "Case records",
@@ -22,14 +61,51 @@
     "surveyId": "or-92"
   },
   "recipe": {
-    "reason": "The data is an ArcGIS feature service that returns GeoJSON in pages of at most 15000 features, and keepset has no GeoJSON parser or paging yet.",
-    "status": "not-fetchable"
+    "archive": {
+      "kind": "none"
+    },
+    "paging": {
+      "kind": "arcgis-query",
+      "orderBy": "OBJECTID"
+    },
+    "parser": {
+      "columns": [
+        "geometry_latitude",
+        "geometry_longitude",
+        "created_date",
+        "status",
+        "district"
+      ],
+      "dateColumns": [
+        "created_date"
+      ],
+      "encoding": "utf-8",
+      "format": "geojson",
+      "idColumn": "OBJECTID",
+      "numericColumns": [
+        {
+          "column": "geometry_latitude",
+          "factor": 1
+        },
+        {
+          "column": "geometry_longitude",
+          "factor": 1
+        }
+      ]
+    },
+    "source": 1,
+    "status": "fetchable"
   },
   "sources": [
     {
       "retrieved": "2026-10-19",
       "status": "live",
       "url": "https://utility.arcgis.com/usrsvcs/servers/931a175b8eaa4abebf1379743e6d71c1/rest/services/Environmental_Resources/Weed_Abatement/FeatureServer"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://utility.arcgis.com/usrsvcs/servers/931a175b8eaa4abebf1379743e6d71c1/rest/services/Environmental_Resources/Weed_Abatement/FeatureServer/0"
     }
   ],
   "tags": [

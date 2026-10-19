@@ -209,11 +209,12 @@
     },
     {
       "description": "Sheriff eviction records for San Diego County, California, from a 2024 layer attributed to the University of California San Diego.",
-      "downloadUrl": "https://services1.arcgis.com/eGSDp8lpKe5izqVc/arcgis/rest/services/2024_Sheriff_Evictions_WFL1/FeatureServer/0/query?where=1%3D1&outFields=*&f=json",
+      "downloadUrl": "https://services1.arcgis.com/eGSDp8lpKe5izqVc/arcgis/rest/services/2024_Sheriff_Evictions_WFL1/FeatureServer/0",
       "flags": [
         "The Hub item records no licence.",
-        "The landing URL resolves to a 2024 only layer.",
-        "The layer has no probability field."
+        "The layer has no probability field.",
+        "the Address property holds a household's address and is deliberately not mapped",
+        "the layer holds 2024 sales only"
       ],
       "id": "uc-san-diego-sheriff-evictions-san-diego-county",
       "licence": {
@@ -222,8 +223,35 @@
       "name": "Sheriff Evictions (San Diego County, CA)",
       "namespace": "uc-san-diego",
       "outcome": {
-        "reason": "The source is an ArcGIS feature service that returns Esri JSON in pages of at most 2000 features, and keepset has no ArcGIS JSON parser or paging yet.",
-        "status": "not-fetchable"
+        "dateColumns": [],
+        "header": [
+          "OBJECTID",
+          "File_Number",
+          "Date",
+          "Status_1",
+          "Address"
+        ],
+        "idColumn": "OBJECTID",
+        "map": {
+          "lat": "geometry_latitude",
+          "lon": "geometry_longitude",
+          "opened": "Date",
+          "status": "Status_1"
+        },
+        "numericColumns": [
+          {
+            "column": "geometry_latitude",
+            "factor": 1
+          },
+          {
+            "column": "geometry_longitude",
+            "factor": 1
+          }
+        ],
+        "orderBy": "OBJECTID",
+        "point": true,
+        "rowCount": 2881,
+        "status": "fetchable-arcgis"
       },
       "surveyId": "or-103"
     },
@@ -657,9 +685,11 @@
     },
     {
       "description": "Live water leak repair work in Arlington County, Virginia, with activity, priority and estimated and actual start and stop dates.",
-      "downloadUrl": "https://utility.arcgis.com/usrsvcs/servers/53520af18235499d9ecd9c96f624eeae/rest/services/AM/Leak_Repairs_Live/FeatureServer/0/query?where=1%3D1&outFields=*&returnGeometry=false&f=json",
+      "downloadUrl": "https://utility.arcgis.com/usrsvcs/servers/53520af18235499d9ecd9c96f624eeae/rest/services/AM/Leak_Repairs_Live/FeatureServer/0",
       "flags": [
-        "No licence or copyright text is recorded."
+        "No licence or copyright text is recorded.",
+        "the layer is a live view, so its rows change as repairs are logged",
+        "dates are epoch-millisecond fields, written as ISO 8601 text"
       ],
       "id": "arlington-county-water-leak-repairs-live",
       "licence": {
@@ -668,17 +698,75 @@
       "name": "Water Leak Repairs (Live), Arlington County, VA",
       "namespace": "arlington-county",
       "outcome": {
-        "reason": "The source is an ArcGIS feature service that returns Esri JSON in pages of at most 2000 features, and keepset has no ArcGIS JSON parser or paging yet.",
-        "status": "not-fetchable"
+        "dateColumns": [
+          "StartDateActual",
+          "StopDateActual",
+          "StartDateEstimated",
+          "StopDateEstimated",
+          "CombinedDate"
+        ],
+        "header": [
+          "wdTaskMainGeneralOID",
+          "ID",
+          "Status",
+          "Activity",
+          "ActivityFeatureType",
+          "Priority",
+          "cgAssetType",
+          "cgAssetID",
+          "StartDateActual",
+          "StopDateActual",
+          "StartDateEstimated",
+          "StopDateEstimated",
+          "Department",
+          "Emergency",
+          "NumberAffected",
+          "StreetStatus",
+          "AffectedArea",
+          "CombinedDate",
+          "PublicNotes",
+          "ReusableComments",
+          "CommentDescription",
+          "AddressNumber",
+          "Street",
+          "OBJECTID"
+        ],
+        "idColumn": "OBJECTID",
+        "map": {
+          "closed": "StopDateActual",
+          "deadline": "StopDateEstimated",
+          "lat": "geometry_latitude",
+          "lon": "geometry_longitude",
+          "opened": "StartDateActual",
+          "skill": "Activity",
+          "status": "Status"
+        },
+        "numericColumns": [
+          {
+            "column": "geometry_latitude",
+            "factor": 1
+          },
+          {
+            "column": "geometry_longitude",
+            "factor": 1
+          }
+        ],
+        "orderBy": "OBJECTID",
+        "point": true,
+        "rowCount": 1807,
+        "status": "fetchable-arcgis"
       },
       "surveyId": "or-113"
     },
     {
       "description": "Planned and unplanned water shut offs in Christchurch, New Zealand, with suburb, status, planned and actual times and durations.",
-      "downloadUrl": "https://gis.ccc.govt.nz/server/rest/services/OpenData/WaterSupply/FeatureServer/3/query?where=1%3D1&outFields=*&returnGeometry=false&f=json",
+      "downloadUrl": "https://gis.ccc.govt.nz/server/rest/services/OpenData/WaterSupply/FeatureServer/3",
       "flags": [
         "The service carries only a copyright text naming Christchurch City Council, not a licence.",
-        "The layer holds polygons, not points."
+        "The layer holds polygons, not points.",
+        "the planned and actual durations carry no unit in the layer, so none is mapped",
+        "the layer's polygons are not points, so no location is mapped",
+        "the actual finish time is empty in every row, so no closing time is mapped"
       ],
       "id": "christchurch-city-council-water-shut-off",
       "licence": {
@@ -687,8 +775,47 @@
       "name": "Water Shut Off (Christchurch City Council, New Zealand)",
       "namespace": "christchurch-city-council",
       "outcome": {
-        "reason": "The source is an ArcGIS feature service that returns Esri JSON in pages of at most 2000 features, and keepset has no ArcGIS JSON parser or paging yet.",
-        "status": "not-fetchable"
+        "dateColumns": [
+          "PlannedStartTime",
+          "PlannedFinishTime",
+          "ActualStartTime",
+          "ActualFinishTime",
+          "CreateDate",
+          "LastEditDate"
+        ],
+        "header": [
+          "WaterShutOffID",
+          "IsPlanned",
+          "RequestStatus",
+          "ApplicationStatus",
+          "WorkStatus",
+          "PlannedStartTime",
+          "PlannedFinishTime",
+          "ActualStartTime",
+          "ActualFinishTime",
+          "PlannedDuration",
+          "ActualDuration",
+          "NumberOfPropertiesAffected",
+          "Location",
+          "LocationSuburb",
+          "CreateDate",
+          "LastEditDate",
+          "Shape__Area",
+          "Shape__Length"
+        ],
+        "idColumn": "WaterShutOffID",
+        "map": {
+          "deadline": "PlannedFinishTime",
+          "opened": "CreateDate",
+          "skill": "IsPlanned",
+          "status": "WorkStatus",
+          "territory": "LocationSuburb"
+        },
+        "numericColumns": [],
+        "orderBy": "WaterShutOffID",
+        "point": false,
+        "rowCount": 483,
+        "status": "fetchable-arcgis"
       },
       "surveyId": "or-114"
     },
@@ -2137,10 +2264,12 @@
     },
     {
       "description": "Philadelphia properties with delinquent real estate taxes, amounts due and enforcement status.",
+      "downloadUrl": "https://services.arcgis.com/fLeGjb7u4uXqeF9q/arcgis/rest/services/REAL_ESTATE_TAX_DELINQUENCIES/FeatureServer/0",
       "flags": [
         "the ArcGIS service refuses CSV export",
-        "rows include owner names",
-        "survey URL is a Hub landing page; the service URL came from the Hub item API"
+        "survey URL is a Hub landing page; the service URL came from the Hub item API",
+        "owner and co-owner names and mailing addresses are present and deliberately not mapped",
+        "the total due is mapped as the prize, an amount owed rather than a reward"
       ],
       "id": "philadelphia-real-estate-tax-delinquencies",
       "licence": {
@@ -2149,17 +2278,102 @@
       "name": "Real estate tax delinquencies (Philadelphia)",
       "namespace": "philadelphia",
       "outcome": {
-        "reason": "The source is an ArcGIS feature service that returns GeoJSON in pages of a limited number of features and keepset has no GeoJSON parser or paging yet.",
-        "status": "not-fetchable"
+        "dateColumns": [
+          "MOST_RECENT_PAYMENT_DATE"
+        ],
+        "header": [
+          "OBJECTID",
+          "OPA_NUMBER",
+          "STREET_ADDRESS",
+          "ZIP_CODE",
+          "ZIP_4",
+          "UNIT_TYPE",
+          "UNIT_NUM",
+          "OWNER",
+          "CO_OWNER",
+          "PRINCIPAL_DUE",
+          "PENALTY_DUE",
+          "INTEREST_DUE",
+          "OTHER_CHARGES_DUE",
+          "TOTAL_DUE",
+          "IS_ACTIONABLE",
+          "PAYMENT_AGREEMENT",
+          "NUM_YEARS_OWED",
+          "MOST_RECENT_YEAR_OWED",
+          "OLDEST_YEAR_OWED",
+          "MOST_RECENT_PAYMENT_DATE",
+          "YEAR_OF_LAST_ASSESSMENT",
+          "TOTAL_ASSESSMENT",
+          "TAXABLE_ASSESSMENT",
+          "MAILING_ADDRESS",
+          "MAILING_CITY",
+          "MAILING_STATE",
+          "MAILING_ZIP",
+          "RETURN_MAIL",
+          "BUILDING_CODE",
+          "DETAIL_BUILDING_DESCRIPTION",
+          "GENERAL_BUILDING_DESCRIPTION",
+          "BUILDING_CATEGORY",
+          "COLL_AGENCY_NUM_YEARS",
+          "COLL_AGENCY_MOST_RECENT_YEAR",
+          "COLL_AGENCY_OLDEST_YEAR",
+          "COLL_AGENCY_PRINCIPAL_OWED",
+          "COLL_AGENCY_TOTAL_OWED",
+          "EXEMPT_ABATEMENT_ASSESSMENT",
+          "HOMESTEAD_VALUE",
+          "NET_TAX_VALUE_AFTER_HOMESTEAD",
+          "AGREEMENT_AGENCY",
+          "SEQUESTRATION_ENFORCEMENT",
+          "BANKRUPTCY",
+          "YEARS_IN_BANKRUPTCY",
+          "MOST_RECENT_BANKRUPT_YEAR",
+          "OLDEST_BANKRUPT_YEAR",
+          "PRINCIPAL_SUM_BANKRUPT_YEARS",
+          "TOTAL_AMOUNT_BANKRUPT_YEARS",
+          "SHERIFF_SALE",
+          "LIENS_SOLD_1990S",
+          "LIENS_SOLD_2015",
+          "ASSESSMENT_UNDER_APPEAL",
+          "YEAR_MONTH"
+        ],
+        "idColumn": "OBJECTID",
+        "map": {
+          "lat": "geometry_latitude",
+          "lon": "geometry_longitude",
+          "prize": "TOTAL_DUE",
+          "skill": "BUILDING_CATEGORY",
+          "territory": "ZIP_CODE"
+        },
+        "numericColumns": [
+          {
+            "column": "geometry_latitude",
+            "factor": 1
+          },
+          {
+            "column": "geometry_longitude",
+            "factor": 1
+          },
+          {
+            "column": "TOTAL_DUE",
+            "factor": 1
+          }
+        ],
+        "orderBy": "OBJECTID",
+        "point": true,
+        "rowCount": 54401,
+        "status": "fetchable-arcgis"
       },
       "surveyId": "or-40"
     },
     {
       "description": "Lease arrears and enforcement status for iTaukei Land Trust Board leases in Fiji.",
+      "downloadUrl": "https://services3.arcgis.com/UYCjD74OfK5zL9b8/arcgis/rest/services/Arrears_2025/FeatureServer/0",
       "flags": [
-        "the data includes personal names, phone numbers and email addresses",
-        "arrears amounts are text padded with spaces, not numbers",
-        "survey URL is a Hub landing page"
+        "survey URL is a Hub landing page",
+        "lessee names, phone numbers, email and postal addresses are present and deliberately not mapped",
+        "the arrears amounts are text padded with spaces, so no prize is mapped",
+        "the layer holds parcels as polygons, so no location is mapped",
+        "the arrears case date is text as the source writes it, day first"
       ],
       "id": "itaukei-land-trust-board-lease-arrears",
       "licence": {
@@ -2168,8 +2382,67 @@
       "name": "iTaukei Land Trust Board lease arrears (Fiji)",
       "namespace": "itaukei-land-trust-board",
       "outcome": {
-        "reason": "The source is an ArcGIS feature service that returns GeoJSON in pages of a limited number of features and keepset has no GeoJSON parser or paging yet.",
-        "status": "not-fetchable"
+        "dateColumns": [],
+        "header": [
+          "FID",
+          "LeaseMaste",
+          "LeaseStatu",
+          "TLTB_Ref",
+          "LeaseActTy",
+          "RegionDesc",
+          "LeaseTypeD",
+          "SubLeaseTy",
+          "FullName",
+          "LandName",
+          "PhoneNoHom",
+          "MobileNo",
+          "Validity",
+          "Email",
+          "PostalAddr",
+          "Rental",
+          "PremiunDue",
+          "OrgArrears",
+          "LastMonthA",
+          "AsAtTodayA",
+          "Payment_St",
+          "Reduction",
+          "ArrearsCas",
+          "ArrearsC_1",
+          "Arrears_Ye",
+          "ArrearsC_2",
+          "ArrearsSta",
+          "ServeNotic",
+          "LegalStatu",
+          "LegalCaseO",
+          "LegalCaseN",
+          "Legal_Year",
+          "LegaCaseDa",
+          "Legal_Age",
+          "LegalSta_1",
+          "LeaseExpir",
+          "ArrearsCom",
+          "What_Next",
+          "Pre2013_20",
+          "Age",
+          "LeaseAppli",
+          "Age_by_Ren",
+          "Legal_2025",
+          "ArrearsOrL",
+          "Shape__Area",
+          "Shape__Length"
+        ],
+        "idColumn": "FID",
+        "map": {
+          "opened": "ArrearsC_2",
+          "skill": "LeaseTypeD",
+          "status": "ArrearsSta",
+          "territory": "RegionDesc"
+        },
+        "numericColumns": [],
+        "orderBy": "FID",
+        "point": false,
+        "rowCount": 31304,
+        "status": "fetchable-arcgis"
       },
       "surveyId": "or-41"
     },
@@ -2265,9 +2538,11 @@
     },
     {
       "description": "Tax liens in Douglas County, Colorado, with lien balances and sale dates.",
+      "downloadUrl": "https://services.arcgis.com/seTexOicoRXDvRsJ/arcgis/rest/services/OpenData/FeatureServer/2",
       "flags": [
         "the layer has null geometry, so there are no coordinates",
-        "the layer metadata has no licence text"
+        "the layer metadata has no licence text",
+        "the lien balance is mapped as the prize, an amount owed rather than a reward"
       ],
       "id": "douglas-county-co-tax-liens",
       "licence": {
@@ -2276,8 +2551,78 @@
       "name": "Tax liens (Douglas County, CO)",
       "namespace": "douglas-county-co",
       "outcome": {
-        "reason": "The source is an ArcGIS feature service that returns GeoJSON in pages of a limited number of features and keepset has no GeoJSON parser or paging yet.",
-        "status": "not-fetchable"
+        "dateColumns": [],
+        "header": [
+          "OBJECTID",
+          "account_id",
+          "lien_id",
+          "yearly_interest_rate",
+          "monthly_interest_rate",
+          "lien_type",
+          "type",
+          "lien_year",
+          "lien_balance",
+          "sale_or_purchase_date",
+          "subsequent_tax_year_1",
+          "subsequent_tax_year_1_balance",
+          "subsequent_tax_year_1_date",
+          "subsequent_tax_year_2",
+          "subsequent_tax_year_2_balance",
+          "subsequent_tax_year_2_date",
+          "subsequent_tax_year_3",
+          "subsequent_tax_year_3_balance",
+          "subsequent_tax_year_3_date",
+          "subsequent_tax_year_4",
+          "subsequent_tax_year_4_balance",
+          "subsequent_tax_year_4_date",
+          "subsequent_tax_year_5",
+          "subsequent_tax_year_5_balance",
+          "subsequent_tax_year_5_date",
+          "subsequent_tax_year_6",
+          "subsequent_tax_year_6_balance",
+          "subsequent_tax_year_6_date",
+          "subsequent_tax_year_7",
+          "subsequent_tax_year_7_balance",
+          "subsequent_tax_year_7_date",
+          "subsequent_tax_year_8",
+          "subsequent_tax_year_8_balance",
+          "subsequent_tax_year_8_date",
+          "subsequent_tax_year_9",
+          "subsequent_tax_year_9_balance",
+          "subsequent_tax_year_9_date",
+          "subsequent_tax_year_10",
+          "subsequent_tax_year_10_balance",
+          "subsequent_tax_year_10_date",
+          "subsequent_tax_year_11",
+          "subsequent_tax_year_11_balance",
+          "subsequent_tax_year_11_date",
+          "subsequent_tax_year_12",
+          "subsequent_tax_year_12_balance",
+          "subsequent_tax_year_12_date",
+          "subsequent_tax_year_13",
+          "subsequent_tax_year_13_balance",
+          "subsequent_tax_year_13_date",
+          "subsequent_tax_year_14",
+          "subsequent_tax_year_14_balance",
+          "subsequent_tax_year_14_date",
+          "Location"
+        ],
+        "idColumn": "OBJECTID",
+        "map": {
+          "opened": "sale_or_purchase_date",
+          "prize": "lien_balance",
+          "skill": "lien_type"
+        },
+        "numericColumns": [
+          {
+            "column": "lien_balance",
+            "factor": 1
+          }
+        ],
+        "orderBy": "OBJECTID",
+        "point": false,
+        "rowCount": 780,
+        "status": "fetchable-arcgis"
       },
       "surveyId": "or-44"
     },
@@ -2321,9 +2666,11 @@
     },
     {
       "description": "Sheriff foreclosure sales in Dakota County, Minnesota, with sale amounts and dates for 2025.",
+      "downloadUrl": "https://gis2.co.dakota.mn.us/arcgis/rest/services/DCGIS_OL_PropertyInformation/MapServer/80",
       "flags": [
         "layer holds the 2025 sales only",
-        "the disclaimer text was only partly read, so its terms are not summarised here"
+        "the disclaimer text was only partly read, so its terms are not summarised here",
+        "the sale amount is mapped as the prize, and the sale date as the deadline, the date the sale is held"
       ],
       "id": "dakota-county-sheriff-foreclosure-sales",
       "licence": {
@@ -2334,17 +2681,59 @@
       "name": "Sheriff foreclosure sales (Dakota County, MN)",
       "namespace": "dakota-county",
       "outcome": {
-        "reason": "The source is an ArcGIS map service that returns GeoJSON and keepset has no GeoJSON parser yet.",
-        "status": "not-fetchable"
+        "dateColumns": [
+          "SaleDate"
+        ],
+        "header": [
+          "OBJECTID",
+          "CRN",
+          "SaleDate",
+          "SaleAmount",
+          "PersonIsBu",
+          "GeoAddress",
+          "GeoCity",
+          "Month",
+          "Recent",
+          "CITYNAME",
+          "Shape"
+        ],
+        "idColumn": "OBJECTID",
+        "map": {
+          "deadline": "SaleDate",
+          "lat": "geometry_latitude",
+          "lon": "geometry_longitude",
+          "prize": "SaleAmount",
+          "territory": "CITYNAME"
+        },
+        "numericColumns": [
+          {
+            "column": "geometry_latitude",
+            "factor": 1
+          },
+          {
+            "column": "geometry_longitude",
+            "factor": 1
+          },
+          {
+            "column": "SaleAmount",
+            "factor": 1
+          }
+        ],
+        "orderBy": "OBJECTID",
+        "point": true,
+        "rowCount": 110,
+        "status": "fetchable-arcgis"
       },
       "surveyId": "or-46"
     },
     {
       "description": "Delinquent real estate tax amounts by property in Virginia Beach, Virginia.",
+      "downloadUrl": "https://services2.arcgis.com/CyVvlIiUfRBmMQuu/arcgis/rest/services/Delinquent_Real_Estate_Taxes_view/FeatureServer/0",
       "flags": [
         "the hosted view has null geometry, so there are no coordinates",
-        "rows include owner names",
-        "use is subject to terms of use on the site's About page, which were not read in full"
+        "use is subject to terms of use on the site's About page, which were not read in full",
+        "owner names and mailing addresses are present and deliberately not mapped",
+        "the amount due is mapped as the prize, an amount owed rather than a reward"
       ],
       "id": "virginia-beach-delinquent-real-estate-taxes",
       "licence": {
@@ -2355,8 +2744,40 @@
       "name": "Delinquent real estate taxes (Virginia Beach)",
       "namespace": "virginia-beach",
       "outcome": {
-        "reason": "The source is an ArcGIS feature service that returns GeoJSON in pages of a limited number of features and keepset has no GeoJSON parser or paging yet.",
-        "status": "not-fetchable"
+        "dateColumns": [],
+        "header": [
+          "Owner_Name",
+          "Mailing_Address",
+          "City_State_Zip",
+          "GPIN",
+          "Situs_Address",
+          "Property_Description",
+          "District",
+          "Tax_Year",
+          "Bill_Number",
+          "Installment",
+          "Tax_Due",
+          "Penalty_Due",
+          "Interest_Due",
+          "Fee_Due",
+          "Total_Delinquent_Amount_Due",
+          "OBJECTID"
+        ],
+        "idColumn": "OBJECTID",
+        "map": {
+          "prize": "Total_Delinquent_Amount_Due",
+          "territory": "District"
+        },
+        "numericColumns": [
+          {
+            "column": "Total_Delinquent_Amount_Due",
+            "factor": 1
+          }
+        ],
+        "orderBy": "OBJECTID",
+        "point": false,
+        "rowCount": 14286,
+        "status": "fetchable-arcgis"
       },
       "surveyId": "or-47"
     },
@@ -3078,10 +3499,13 @@
       "surveyId": "or-61"
     },
     {
+      "downloadUrl": "https://services1.arcgis.com/79kfd2K6fskCAkyg/arcgis/rest/services/PM_SiteVisit_Violations/FeatureServer/0",
       "flags": [
         "the dataset description says only the last 30 days of violations are published",
         "the licence points to the Open Data Platform terms of use, which were not read",
-        "the survey URL is a Hub landing page; the data is the FeatureServer query"
+        "the survey URL is a Hub landing page; the data is the FeatureServer query",
+        "inspector names and user ids are present and deliberately not mapped",
+        "the citation amount is mapped as the prize, a fine rather than a reward"
       ],
       "id": "louisville-metro-property-maintenance-violations",
       "licence": {
@@ -3090,8 +3514,66 @@
       "name": "Property maintenance inspection violations (Louisville)",
       "namespace": "louisville-metro",
       "outcome": {
-        "reason": "The source is an ArcGIS feature service that returns GeoJSON in pages of a limited number of features, and keepset has no GeoJSON parser or paging yet.",
-        "status": "not-fetchable"
+        "dateColumns": [
+          "G6A_G6_COMPL_DD",
+          "G6A_G6_STATUS_DD"
+        ],
+        "header": [
+          "SERV_PROV_CODE",
+          "B1_PER_ID1",
+          "B1_PER_ID2",
+          "B1_PER_ID3",
+          "B1_SPECIAL_TEXT",
+          "B1_ALT_ID",
+          "FullAddress",
+          "PartialAddress",
+          "Longitude",
+          "Latitude",
+          "EXT_ADDRESS_UID",
+          "PARCEL_ID",
+          "CouncilDist",
+          "G6A_G6_COMPL_T1",
+          "G6A_G6_COMPL_T2",
+          "G6A_G6_COMPL_DD",
+          "G6A_G6_STATUS",
+          "G6A_G6_STATUS_DD",
+          "GA_USERID",
+          "GA_FML",
+          "OccupancyStatus",
+          "GUIDE_ITEM_TEXT",
+          "VIOLATION_CODE",
+          "GUIDE_ITEM_STATUS",
+          "CitationAmount",
+          "ColumnCounts",
+          "ObjectId"
+        ],
+        "idColumn": "ObjectId",
+        "map": {
+          "deadline": "G6A_G6_COMPL_DD",
+          "lat": "geometry_latitude",
+          "lon": "geometry_longitude",
+          "prize": "CitationAmount",
+          "status": "G6A_G6_STATUS",
+          "territory": "CouncilDist"
+        },
+        "numericColumns": [
+          {
+            "column": "geometry_latitude",
+            "factor": 1
+          },
+          {
+            "column": "geometry_longitude",
+            "factor": 1
+          },
+          {
+            "column": "CitationAmount",
+            "factor": 1
+          }
+        ],
+        "orderBy": "ObjectId",
+        "point": true,
+        "rowCount": 13207,
+        "status": "fetchable-arcgis"
       },
       "surveyId": "or-62"
     },
@@ -3887,10 +4369,11 @@
     },
     {
       "description": "Building warrant applications received by North Ayrshire Council, with location, status and decision dates.",
+      "downloadUrl": "https://www.maps.north-ayrshire.gov.uk/arcgis/rest/services/AGOL/Building_Warrant_Applications_Weekly/FeatureServer/2",
       "flags": [
         "The survey URL is an ArcGIS Hub landing page; the data is a FeatureServer layer.",
         "The licence is named only as Open Government Licence without a version.",
-        "The layer holds applicant names (NAME, APPNAME), which would not be mapped."
+        "applicant names are present and deliberately not mapped"
       ],
       "id": "north-ayrshire-council-building-warrant-applications",
       "licence": {
@@ -3901,8 +4384,50 @@
       "name": "Building warrant applications (North Ayrshire)",
       "namespace": "north-ayrshire-council",
       "outcome": {
-        "reason": "The data is an ArcGIS feature service that returns GeoJSON in pages of at most 2000 features, and keepset has no GeoJSON parser or paging yet.",
-        "status": "not-fetchable"
+        "dateColumns": [
+          "RECPTD",
+          "DEPOSD",
+          "DECIDD"
+        ],
+        "header": [
+          "OBJECTID",
+          "KEYVAL",
+          "REFVAL",
+          "UPRN",
+          "APPTYP",
+          "RECPTD",
+          "DSCRPN",
+          "STATUS",
+          "DECISION",
+          "DEPOSD",
+          "DECIDD",
+          "NAME",
+          "APPNAME",
+          "ADDRESS"
+        ],
+        "idColumn": "OBJECTID",
+        "map": {
+          "closed": "DECIDD",
+          "lat": "geometry_latitude",
+          "lon": "geometry_longitude",
+          "opened": "RECPTD",
+          "skill": "APPTYP",
+          "status": "DECISION"
+        },
+        "numericColumns": [
+          {
+            "column": "geometry_latitude",
+            "factor": 1
+          },
+          {
+            "column": "geometry_longitude",
+            "factor": 1
+          }
+        ],
+        "orderBy": "OBJECTID",
+        "point": true,
+        "rowCount": 5940,
+        "status": "fetchable-arcgis"
       },
       "surveyId": "or-78"
     },
@@ -4535,7 +5060,7 @@
     },
     {
       "description": "Sites on the Dublin City Council derelict sites register, with location, status and dates.",
-      "downloadUrl": "https://services-eu1.arcgis.com/PyGgzM45TvWtSBsM/arcgis/rest/services/DCC_Derelict_Sites_Register_Public_points_view/FeatureServer/0/query?where=1%3D1&outFields=*&f=geojson",
+      "downloadUrl": "https://services-eu1.arcgis.com/PyGgzM45TvWtSBsM/arcgis/rest/services/DCC_Derelict_Sites_Register_Public_points_view/FeatureServer/0",
       "flags": [
         "The survey service needs a token; an anonymous sibling view of the same register was found and verified.",
         "The item description limits use to information only, as is, with Dublin City Council acknowledged as the source."
@@ -4547,8 +5072,49 @@
       "name": "Derelict sites register (Dublin City Council)",
       "namespace": "dublin-city-council",
       "outcome": {
-        "reason": "The data is an ArcGIS feature service that returns GeoJSON, and keepset has no GeoJSON parser or paging yet.",
-        "status": "not-fetchable"
+        "dateColumns": [],
+        "header": [
+          "OBJECTID",
+          "GlobalID",
+          "ref_site_master_uuid",
+          "derelict_site_reference_number",
+          "derelict_site_description",
+          "is_active_derelict_site_case",
+          "is_on_current_record_of_protected_structures",
+          "is_owned_by_dublin_city_council",
+          "date_added_to_the_derelict_sites_register",
+          "full_address",
+          "administrative_area_name",
+          "site_location_latitude",
+          "site_location_longitude",
+          "derelict_site_status",
+          "is_on_current_derelict_sites_register",
+          "is_on_current_derelict_sites_register_COUNT",
+          "is_active_derelict_site_case_COUNT",
+          "most_recent_update_date"
+        ],
+        "idColumn": "OBJECTID",
+        "map": {
+          "lat": "geometry_latitude",
+          "lon": "geometry_longitude",
+          "opened": "date_added_to_the_derelict_sites_register",
+          "status": "derelict_site_status",
+          "territory": "administrative_area_name"
+        },
+        "numericColumns": [
+          {
+            "column": "geometry_latitude",
+            "factor": 1
+          },
+          {
+            "column": "geometry_longitude",
+            "factor": 1
+          }
+        ],
+        "orderBy": "OBJECTID",
+        "point": true,
+        "rowCount": 148,
+        "status": "fetchable-arcgis"
       },
       "surveyId": "or-90"
     },
@@ -4622,10 +5188,12 @@
     },
     {
       "description": "Weed abatement parcels of Orange County, California, with district, status and cost of dumped material.",
+      "downloadUrl": "https://utility.arcgis.com/usrsvcs/servers/931a175b8eaa4abebf1379743e6d71c1/rest/services/Environmental_Resources/Weed_Abatement/FeatureServer/0",
       "flags": [
-        "The layer holds property owner names and mailing addresses.",
         "The service states no licence.",
-        "Access goes through a utility.arcgis.com proxy URL, and status is a numeric code."
+        "Access goes through a utility.arcgis.com proxy URL, and status is a numeric code.",
+        "property owner and assessee names and addresses are present and deliberately not mapped",
+        "status and district are numeric codes, written as text"
       ],
       "id": "orange-county-ca-weed-abatement-locations",
       "licence": {
@@ -4634,15 +5202,76 @@
       "name": "Weed abatement locations (Orange County, CA)",
       "namespace": "orange-county-ca",
       "outcome": {
-        "reason": "The data is an ArcGIS feature service that returns GeoJSON in pages of at most 15000 features, and keepset has no GeoJSON parser or paging yet.",
-        "status": "not-fetchable"
+        "dateColumns": [
+          "created_date",
+          "last_edited_date"
+        ],
+        "header": [
+          "OBJECTID",
+          "GlobalID",
+          "created_user",
+          "created_date",
+          "last_edited_user",
+          "last_edited_date",
+          "status",
+          "tax_assesment",
+          "source",
+          "user_address",
+          "owner_address",
+          "owner_city_state",
+          "owner_zip",
+          "prop_address",
+          "prop_city_state",
+          "prop_zip",
+          "lot_sqft",
+          "APN",
+          "owner_2022",
+          "owner_extra_2022",
+          "owner_address_2022",
+          "APN_Formatted",
+          "AssesseeName",
+          "AdditionalAssesseeName",
+          "NewAssesseeName",
+          "MailingAddress",
+          "AssesseeZipCode",
+          "district",
+          "APN_Review_Flag",
+          "Dumped_Material",
+          "Cost_Dumped_Material"
+        ],
+        "idColumn": "OBJECTID",
+        "map": {
+          "lat": "geometry_latitude",
+          "lon": "geometry_longitude",
+          "opened": "created_date",
+          "status": "status",
+          "territory": "district"
+        },
+        "numericColumns": [
+          {
+            "column": "geometry_latitude",
+            "factor": 1
+          },
+          {
+            "column": "geometry_longitude",
+            "factor": 1
+          }
+        ],
+        "orderBy": "OBJECTID",
+        "point": true,
+        "rowCount": 23362,
+        "status": "fetchable-arcgis"
       },
       "surveyId": "or-92"
     },
     {
       "description": "Weed abatement cases of the City of Temecula, California, with location and completion fields.",
+      "downloadUrl": "https://services3.arcgis.com/IgR6ay8jzuIj7VSF/arcgis/rest/services/Weed_Abatement_2017/FeatureServer/0",
       "flags": [
-        "The service states no licence; its copyright text is only the city GIS name."
+        "The service states no licence; its copyright text is only the city GIS name.",
+        "owner names and mailing addresses are present and deliberately not mapped",
+        "the abatement status is a one letter code the layer does not explain",
+        "some features sit at coordinates far outside Temecula, so the layer's positions are not all usable"
       ],
       "id": "temecula-weed-abatement",
       "licence": {
@@ -4651,17 +5280,58 @@
       "name": "Weed abatement (Temecula)",
       "namespace": "temecula",
       "outcome": {
-        "reason": "The data is an ArcGIS feature service that returns GeoJSON in pages of at most 1000 features, and keepset has no GeoJSON parser or paging yet.",
-        "status": "not-fetchable"
+        "dateColumns": [
+          "CreationDate",
+          "EditDate"
+        ],
+        "header": [
+          "OBJECTID",
+          "ABATE",
+          "GlobalID",
+          "CreationDate",
+          "Creator",
+          "EditDate",
+          "Editor",
+          "MAIL_ADDRESS",
+          "OWNER",
+          "CITY_STATE_ZIP",
+          "SITUS_ADDRESS",
+          "APN",
+          "NOTES",
+          "COMPLETED"
+        ],
+        "idColumn": "OBJECTID",
+        "map": {
+          "lat": "geometry_latitude",
+          "lon": "geometry_longitude",
+          "opened": "CreationDate",
+          "status": "ABATE"
+        },
+        "numericColumns": [
+          {
+            "column": "geometry_latitude",
+            "factor": 1
+          },
+          {
+            "column": "geometry_longitude",
+            "factor": 1
+          }
+        ],
+        "orderBy": "OBJECTID",
+        "point": true,
+        "rowCount": 5375,
+        "status": "fetchable-arcgis"
       },
       "surveyId": "or-93"
     },
     {
       "description": "Weed abatement parcels of the City of Fairfield, California, with status and disposition.",
+      "downloadUrl": "https://services1.arcgis.com/A14KNJpxNyBTu19J/arcgis/rest/services/Weed_Abatement_Parcels/FeatureServer/0",
       "flags": [
-        "The layer holds owner names and mailing addresses.",
         "The features are polygon parcels, not points, and the layer has no date fields.",
-        "The item states no licence."
+        "The item states no licence.",
+        "owner names and mailing addresses are present and deliberately not mapped",
+        "the layer holds parcels as polygons, so no location is mapped"
       ],
       "id": "fairfield-ca-weed-abatement-parcels",
       "licence": {
@@ -4670,8 +5340,37 @@
       "name": "Weed abatement parcels (Fairfield, CA)",
       "namespace": "fairfield-ca",
       "outcome": {
-        "reason": "The data is an ArcGIS feature service that returns GeoJSON of parcel polygons in pages of at most 1000 features, and keepset has no GeoJSON parser or paging yet.",
-        "status": "not-fetchable"
+        "dateColumns": [],
+        "header": [
+          "OBJECTID",
+          "APN",
+          "Street_Num",
+          "STNUM",
+          "AssessLink",
+          "CITY",
+          "Parcel_Zip",
+          "OID",
+          "ID",
+          "TYPE",
+          "STATUS",
+          "DISPOSITIO",
+          "OWNER",
+          "OWNERADDRE",
+          "CITYSTATEZ",
+          "PROPERTYAD",
+          "APN_1"
+        ],
+        "idColumn": "OBJECTID",
+        "map": {
+          "skill": "TYPE",
+          "status": "STATUS",
+          "territory": "CITY"
+        },
+        "numericColumns": [],
+        "orderBy": "OBJECTID",
+        "point": false,
+        "rowCount": 592,
+        "status": "fetchable-arcgis"
       },
       "surveyId": "or-94"
     },
@@ -4759,9 +5458,11 @@
     },
     {
       "description": "Vehicle tow and repossession log of the Town of Pembroke Park, Florida.",
+      "downloadUrl": "https://services3.arcgis.com/vtilYbC3YeF6EBJ1/arcgis/rest/services/service_05f1e63ba1494703b42f0dd606859f0b/FeatureServer/0",
       "flags": [
-        "The layer holds vehicle identification numbers, plates, operator names, phone numbers and emails.",
-        "The service states no licence, and the layer has no status field."
+        "The service states no licence, and the layer has no status field.",
+        "vehicle identification numbers, plates, operator names, phone numbers and emails are present and deliberately not mapped",
+        "some features sit at coordinates far outside Pembroke Park, so the layer's positions are not all usable"
       ],
       "id": "pembroke-park-tow-repo-log",
       "licence": {
@@ -4770,8 +5471,84 @@
       "name": "Tow and repo log (Pembroke Park, FL)",
       "namespace": "pembroke-park",
       "outcome": {
-        "reason": "The data is an ArcGIS feature service that returns GeoJSON in pages of at most 1000 features, and keepset has no GeoJSON parser or paging yet.",
-        "status": "not-fetchable"
+        "dateColumns": [
+          "date_towed",
+          "CreationDate",
+          "EditDate"
+        ],
+        "header": [
+          "objectid",
+          "globalid",
+          "tow_repo",
+          "vehicle_type",
+          "tow_repo_company",
+          "operator_name",
+          "operator_number",
+          "tow_company_address",
+          "vehicle_location",
+          "email",
+          "reason",
+          "reason_other",
+          "date_towed",
+          "time_towed",
+          "vehicle_city",
+          "vehicle_city_other",
+          "lien_holder_info",
+          "lien_holder_phone",
+          "repo_number",
+          "tag_number",
+          "tag_state",
+          "tag_year",
+          "vin",
+          "vehicle_year",
+          "make",
+          "model",
+          "vehicle_color",
+          "vehicle_color_other",
+          "registration_number",
+          "registration_state",
+          "registration_year",
+          "hin",
+          "vessel_type",
+          "vessel_year",
+          "vessel_make",
+          "vessel_model",
+          "vessel_color",
+          "vessel_color_other",
+          "CreationDate",
+          "Creator",
+          "EditDate",
+          "Editor",
+          "list_stroage",
+          "vehicle_location_other",
+          "vehicle_location_other1",
+          "vehicle_location_other2",
+          "lien_holder_info1",
+          "lien_holder_email",
+          "vehicle_make_other"
+        ],
+        "idColumn": "objectid",
+        "map": {
+          "lat": "geometry_latitude",
+          "lon": "geometry_longitude",
+          "opened": "date_towed",
+          "skill": "reason",
+          "territory": "vehicle_city"
+        },
+        "numericColumns": [
+          {
+            "column": "geometry_latitude",
+            "factor": 1
+          },
+          {
+            "column": "geometry_longitude",
+            "factor": 1
+          }
+        ],
+        "orderBy": "objectid",
+        "point": true,
+        "rowCount": 2789,
+        "status": "fetchable-arcgis"
       },
       "surveyId": "or-96"
     },

@@ -5,7 +5,41 @@
   "category": "or/v1",
   "citations": [],
   "crosswalk": {
-    "file": "crosswalks/or-v1/nodes.json"
+    "oneWay": [],
+    "rules": [
+      {
+        "from": "meta",
+        "op": "move",
+        "to": "meta"
+      },
+      {
+        "from": "nodes[].id",
+        "op": "move",
+        "to": "nodes[].id"
+      },
+      {
+        "from": "nodes[].ArrearsC_2",
+        "op": "move",
+        "to": "nodes[].opened"
+      },
+      {
+        "from": "nodes[].LeaseTypeD",
+        "op": "move",
+        "to": "nodes[].skill"
+      },
+      {
+        "from": "nodes[].ArrearsSta",
+        "op": "move",
+        "to": "nodes[].status"
+      },
+      {
+        "from": "nodes[].RegionDesc",
+        "op": "move",
+        "to": "nodes[].territory"
+      }
+    ],
+    "source": "geojson",
+    "target": "or/v1"
   },
   "description": "Lease arrears and enforcement status for iTaukei Land Trust Board leases in Fiji.",
   "domain": "Case records",
@@ -22,14 +56,39 @@
     "surveyId": "or-41"
   },
   "recipe": {
-    "reason": "The source is an ArcGIS feature service that returns GeoJSON in pages of a limited number of features and keepset has no GeoJSON parser or paging yet.",
-    "status": "not-fetchable"
+    "archive": {
+      "kind": "none"
+    },
+    "paging": {
+      "kind": "arcgis-query",
+      "orderBy": "FID"
+    },
+    "parser": {
+      "columns": [
+        "ArrearsC_2",
+        "LeaseTypeD",
+        "ArrearsSta",
+        "RegionDesc"
+      ],
+      "dateColumns": [],
+      "encoding": "utf-8",
+      "format": "geojson",
+      "idColumn": "FID",
+      "numericColumns": []
+    },
+    "source": 1,
+    "status": "fetchable"
   },
   "sources": [
     {
       "retrieved": "2026-10-19",
       "status": "live",
       "url": "https://hub.arcgis.com/datasets/a963186c15d845bb93cce1c00022e380"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://services3.arcgis.com/UYCjD74OfK5zL9b8/arcgis/rest/services/Arrears_2025/FeatureServer/0"
     }
   ],
   "tags": [

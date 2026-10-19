@@ -5,7 +5,46 @@
   "category": "or/v1",
   "citations": [],
   "crosswalk": {
-    "file": "crosswalks/or-v1/nodes.json"
+    "oneWay": [],
+    "rules": [
+      {
+        "from": "meta",
+        "op": "move",
+        "to": "meta"
+      },
+      {
+        "from": "nodes[].id",
+        "op": "move",
+        "to": "nodes[].id"
+      },
+      {
+        "from": "nodes[].geometry_latitude",
+        "op": "move",
+        "to": "nodes[].lat"
+      },
+      {
+        "from": "nodes[].geometry_longitude",
+        "op": "move",
+        "to": "nodes[].lon"
+      },
+      {
+        "from": "nodes[].date_towed",
+        "op": "move",
+        "to": "nodes[].opened"
+      },
+      {
+        "from": "nodes[].reason",
+        "op": "move",
+        "to": "nodes[].skill"
+      },
+      {
+        "from": "nodes[].vehicle_city",
+        "op": "move",
+        "to": "nodes[].territory"
+      }
+    ],
+    "source": "geojson",
+    "target": "or/v1"
   },
   "description": "Vehicle tow and repossession log of the Town of Pembroke Park, Florida.",
   "domain": "Case records",
@@ -22,14 +61,51 @@
     "surveyId": "or-96"
   },
   "recipe": {
-    "reason": "The data is an ArcGIS feature service that returns GeoJSON in pages of at most 1000 features, and keepset has no GeoJSON parser or paging yet.",
-    "status": "not-fetchable"
+    "archive": {
+      "kind": "none"
+    },
+    "paging": {
+      "kind": "arcgis-query",
+      "orderBy": "objectid"
+    },
+    "parser": {
+      "columns": [
+        "geometry_latitude",
+        "geometry_longitude",
+        "date_towed",
+        "reason",
+        "vehicle_city"
+      ],
+      "dateColumns": [
+        "date_towed"
+      ],
+      "encoding": "utf-8",
+      "format": "geojson",
+      "idColumn": "objectid",
+      "numericColumns": [
+        {
+          "column": "geometry_latitude",
+          "factor": 1
+        },
+        {
+          "column": "geometry_longitude",
+          "factor": 1
+        }
+      ]
+    },
+    "source": 1,
+    "status": "fetchable"
   },
   "sources": [
     {
       "retrieved": "2026-10-19",
       "status": "live",
       "url": "https://services3.arcgis.com/vtilYbC3YeF6EBJ1/arcgis/rest/services/service_05f1e63ba1494703b42f0dd606859f0b/FeatureServer"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://services3.arcgis.com/vtilYbC3YeF6EBJ1/arcgis/rest/services/service_05f1e63ba1494703b42f0dd606859f0b/FeatureServer/0"
     }
   ],
   "tags": [

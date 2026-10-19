@@ -5,7 +5,36 @@
   "category": "or/v1",
   "citations": [],
   "crosswalk": {
-    "file": "crosswalks/or-v1/nodes.json"
+    "oneWay": [],
+    "rules": [
+      {
+        "from": "meta",
+        "op": "move",
+        "to": "meta"
+      },
+      {
+        "from": "nodes[].id",
+        "op": "move",
+        "to": "nodes[].id"
+      },
+      {
+        "from": "nodes[].TYPE",
+        "op": "move",
+        "to": "nodes[].skill"
+      },
+      {
+        "from": "nodes[].STATUS",
+        "op": "move",
+        "to": "nodes[].status"
+      },
+      {
+        "from": "nodes[].CITY",
+        "op": "move",
+        "to": "nodes[].territory"
+      }
+    ],
+    "source": "geojson",
+    "target": "or/v1"
   },
   "description": "Weed abatement parcels of the City of Fairfield, California, with status and disposition.",
   "domain": "Case records",
@@ -22,14 +51,38 @@
     "surveyId": "or-94"
   },
   "recipe": {
-    "reason": "The data is an ArcGIS feature service that returns GeoJSON of parcel polygons in pages of at most 1000 features, and keepset has no GeoJSON parser or paging yet.",
-    "status": "not-fetchable"
+    "archive": {
+      "kind": "none"
+    },
+    "paging": {
+      "kind": "arcgis-query",
+      "orderBy": "OBJECTID"
+    },
+    "parser": {
+      "columns": [
+        "TYPE",
+        "STATUS",
+        "CITY"
+      ],
+      "dateColumns": [],
+      "encoding": "utf-8",
+      "format": "geojson",
+      "idColumn": "OBJECTID",
+      "numericColumns": []
+    },
+    "source": 1,
+    "status": "fetchable"
   },
   "sources": [
     {
       "retrieved": "2026-10-19",
       "status": "live",
       "url": "https://services1.arcgis.com/A14KNJpxNyBTu19J/arcgis/rest/services/Weed_Abatement_Parcels/FeatureServer"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://services1.arcgis.com/A14KNJpxNyBTu19J/arcgis/rest/services/Weed_Abatement_Parcels/FeatureServer/0"
     }
   ],
   "tags": [

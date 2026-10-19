@@ -5,7 +5,51 @@
   "category": "or/v1",
   "citations": [],
   "crosswalk": {
-    "file": "crosswalks/or-v1/nodes.json"
+    "oneWay": [],
+    "rules": [
+      {
+        "from": "meta",
+        "op": "move",
+        "to": "meta"
+      },
+      {
+        "from": "nodes[].id",
+        "op": "move",
+        "to": "nodes[].id"
+      },
+      {
+        "from": "nodes[].G6A_G6_COMPL_DD",
+        "op": "move",
+        "to": "nodes[].deadline"
+      },
+      {
+        "from": "nodes[].geometry_latitude",
+        "op": "move",
+        "to": "nodes[].lat"
+      },
+      {
+        "from": "nodes[].geometry_longitude",
+        "op": "move",
+        "to": "nodes[].lon"
+      },
+      {
+        "from": "nodes[].CitationAmount",
+        "op": "move",
+        "to": "nodes[].prize"
+      },
+      {
+        "from": "nodes[].G6A_G6_STATUS",
+        "op": "move",
+        "to": "nodes[].status"
+      },
+      {
+        "from": "nodes[].CouncilDist",
+        "op": "move",
+        "to": "nodes[].territory"
+      }
+    ],
+    "source": "geojson",
+    "target": "or/v1"
   },
   "domain": "Case records",
   "expectedCounts": {},
@@ -21,14 +65,56 @@
     "surveyId": "or-62"
   },
   "recipe": {
-    "reason": "The source is an ArcGIS feature service that returns GeoJSON in pages of a limited number of features, and keepset has no GeoJSON parser or paging yet.",
-    "status": "not-fetchable"
+    "archive": {
+      "kind": "none"
+    },
+    "paging": {
+      "kind": "arcgis-query",
+      "orderBy": "ObjectId"
+    },
+    "parser": {
+      "columns": [
+        "G6A_G6_COMPL_DD",
+        "geometry_latitude",
+        "geometry_longitude",
+        "CitationAmount",
+        "G6A_G6_STATUS",
+        "CouncilDist"
+      ],
+      "dateColumns": [
+        "G6A_G6_COMPL_DD"
+      ],
+      "encoding": "utf-8",
+      "format": "geojson",
+      "idColumn": "ObjectId",
+      "numericColumns": [
+        {
+          "column": "geometry_latitude",
+          "factor": 1
+        },
+        {
+          "column": "geometry_longitude",
+          "factor": 1
+        },
+        {
+          "column": "CitationAmount",
+          "factor": 1
+        }
+      ]
+    },
+    "source": 1,
+    "status": "fetchable"
   },
   "sources": [
     {
       "retrieved": "2026-10-19",
       "status": "live",
       "url": "https://hub.arcgis.com/datasets/1fd891c3301c4c4581b86c338468fbe4"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://services1.arcgis.com/79kfd2K6fskCAkyg/arcgis/rest/services/PM_SiteVisit_Violations/FeatureServer/0"
     }
   ],
   "tags": [

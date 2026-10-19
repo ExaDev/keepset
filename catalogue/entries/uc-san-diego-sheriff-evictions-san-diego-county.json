@@ -5,7 +5,41 @@
   "category": "or/v1",
   "citations": [],
   "crosswalk": {
-    "file": "crosswalks/or-v1/nodes.json"
+    "oneWay": [],
+    "rules": [
+      {
+        "from": "meta",
+        "op": "move",
+        "to": "meta"
+      },
+      {
+        "from": "nodes[].id",
+        "op": "move",
+        "to": "nodes[].id"
+      },
+      {
+        "from": "nodes[].geometry_latitude",
+        "op": "move",
+        "to": "nodes[].lat"
+      },
+      {
+        "from": "nodes[].geometry_longitude",
+        "op": "move",
+        "to": "nodes[].lon"
+      },
+      {
+        "from": "nodes[].Date",
+        "op": "move",
+        "to": "nodes[].opened"
+      },
+      {
+        "from": "nodes[].Status_1",
+        "op": "move",
+        "to": "nodes[].status"
+      }
+    ],
+    "source": "geojson",
+    "target": "or/v1"
   },
   "description": "Sheriff eviction records for San Diego County, California, from a 2024 layer attributed to the University of California San Diego.",
   "domain": "Case records",
@@ -22,8 +56,37 @@
     "surveyId": "or-103"
   },
   "recipe": {
-    "reason": "The source is an ArcGIS feature service that returns Esri JSON in pages of at most 2000 features, and keepset has no ArcGIS JSON parser or paging yet.",
-    "status": "not-fetchable"
+    "archive": {
+      "kind": "none"
+    },
+    "paging": {
+      "kind": "arcgis-query",
+      "orderBy": "OBJECTID"
+    },
+    "parser": {
+      "columns": [
+        "geometry_latitude",
+        "geometry_longitude",
+        "Date",
+        "Status_1"
+      ],
+      "dateColumns": [],
+      "encoding": "utf-8",
+      "format": "geojson",
+      "idColumn": "OBJECTID",
+      "numericColumns": [
+        {
+          "column": "geometry_latitude",
+          "factor": 1
+        },
+        {
+          "column": "geometry_longitude",
+          "factor": 1
+        }
+      ]
+    },
+    "source": 1,
+    "status": "fetchable"
   },
   "sources": [
     {
@@ -34,7 +97,7 @@
     {
       "retrieved": "2026-10-19",
       "status": "live",
-      "url": "https://services1.arcgis.com/eGSDp8lpKe5izqVc/arcgis/rest/services/2024_Sheriff_Evictions_WFL1/FeatureServer/0/query?where=1%3D1&outFields=*&f=json"
+      "url": "https://services1.arcgis.com/eGSDp8lpKe5izqVc/arcgis/rest/services/2024_Sheriff_Evictions_WFL1/FeatureServer/0"
     }
   ],
   "tags": [

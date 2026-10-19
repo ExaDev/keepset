@@ -5,7 +5,36 @@
   "category": "or/v1",
   "citations": [],
   "crosswalk": {
-    "file": "crosswalks/or-v1/nodes.json"
+    "oneWay": [],
+    "rules": [
+      {
+        "from": "meta",
+        "op": "move",
+        "to": "meta"
+      },
+      {
+        "from": "nodes[].id",
+        "op": "move",
+        "to": "nodes[].id"
+      },
+      {
+        "from": "nodes[].sale_or_purchase_date",
+        "op": "move",
+        "to": "nodes[].opened"
+      },
+      {
+        "from": "nodes[].lien_balance",
+        "op": "move",
+        "to": "nodes[].prize"
+      },
+      {
+        "from": "nodes[].lien_type",
+        "op": "move",
+        "to": "nodes[].skill"
+      }
+    ],
+    "source": "geojson",
+    "target": "or/v1"
   },
   "description": "Tax liens in Douglas County, Colorado, with lien balances and sale dates.",
   "domain": "Case records",
@@ -22,8 +51,32 @@
     "surveyId": "or-44"
   },
   "recipe": {
-    "reason": "The source is an ArcGIS feature service that returns GeoJSON in pages of a limited number of features and keepset has no GeoJSON parser or paging yet.",
-    "status": "not-fetchable"
+    "archive": {
+      "kind": "none"
+    },
+    "paging": {
+      "kind": "arcgis-query",
+      "orderBy": "OBJECTID"
+    },
+    "parser": {
+      "columns": [
+        "sale_or_purchase_date",
+        "lien_balance",
+        "lien_type"
+      ],
+      "dateColumns": [],
+      "encoding": "utf-8",
+      "format": "geojson",
+      "idColumn": "OBJECTID",
+      "numericColumns": [
+        {
+          "column": "lien_balance",
+          "factor": 1
+        }
+      ]
+    },
+    "source": 0,
+    "status": "fetchable"
   },
   "sources": [
     {
