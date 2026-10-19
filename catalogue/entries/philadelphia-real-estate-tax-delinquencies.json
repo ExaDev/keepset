@@ -5,7 +5,46 @@
   "category": "or/v1",
   "citations": [],
   "crosswalk": {
-    "file": "crosswalks/or-v1/nodes.json"
+    "oneWay": [],
+    "rules": [
+      {
+        "from": "meta",
+        "op": "move",
+        "to": "meta"
+      },
+      {
+        "from": "nodes[].id",
+        "op": "move",
+        "to": "nodes[].id"
+      },
+      {
+        "from": "nodes[].geometry_latitude",
+        "op": "move",
+        "to": "nodes[].lat"
+      },
+      {
+        "from": "nodes[].geometry_longitude",
+        "op": "move",
+        "to": "nodes[].lon"
+      },
+      {
+        "from": "nodes[].TOTAL_DUE",
+        "op": "move",
+        "to": "nodes[].prize"
+      },
+      {
+        "from": "nodes[].BUILDING_CATEGORY",
+        "op": "move",
+        "to": "nodes[].skill"
+      },
+      {
+        "from": "nodes[].ZIP_CODE",
+        "op": "move",
+        "to": "nodes[].territory"
+      }
+    ],
+    "source": "geojson",
+    "target": "or/v1"
   },
   "description": "Philadelphia properties with delinquent real estate taxes, amounts due and enforcement status.",
   "domain": "Case records",
@@ -22,14 +61,53 @@
     "surveyId": "or-40"
   },
   "recipe": {
-    "reason": "The source is an ArcGIS feature service that returns GeoJSON in pages of a limited number of features and keepset has no GeoJSON parser or paging yet.",
-    "status": "not-fetchable"
+    "archive": {
+      "kind": "none"
+    },
+    "paging": {
+      "kind": "arcgis-query",
+      "orderBy": "OBJECTID"
+    },
+    "parser": {
+      "columns": [
+        "geometry_latitude",
+        "geometry_longitude",
+        "TOTAL_DUE",
+        "BUILDING_CATEGORY",
+        "ZIP_CODE"
+      ],
+      "dateColumns": [],
+      "encoding": "utf-8",
+      "format": "geojson",
+      "idColumn": "OBJECTID",
+      "numericColumns": [
+        {
+          "column": "geometry_latitude",
+          "factor": 1
+        },
+        {
+          "column": "geometry_longitude",
+          "factor": 1
+        },
+        {
+          "column": "TOTAL_DUE",
+          "factor": 1
+        }
+      ]
+    },
+    "source": 1,
+    "status": "fetchable"
   },
   "sources": [
     {
       "retrieved": "2026-10-19",
       "status": "live",
       "url": "https://hub.arcgis.com/datasets/b8ac65c653b343739be21cb2773faace"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://services.arcgis.com/fLeGjb7u4uXqeF9q/arcgis/rest/services/REAL_ESTATE_TAX_DELINQUENCIES/FeatureServer/0"
     }
   ],
   "tags": [

@@ -5,7 +5,51 @@
   "category": "or/v1",
   "citations": [],
   "crosswalk": {
-    "file": "crosswalks/or-v1/nodes.json"
+    "oneWay": [],
+    "rules": [
+      {
+        "from": "meta",
+        "op": "move",
+        "to": "meta"
+      },
+      {
+        "from": "nodes[].id",
+        "op": "move",
+        "to": "nodes[].id"
+      },
+      {
+        "from": "nodes[].DECIDD",
+        "op": "move",
+        "to": "nodes[].closed"
+      },
+      {
+        "from": "nodes[].geometry_latitude",
+        "op": "move",
+        "to": "nodes[].lat"
+      },
+      {
+        "from": "nodes[].geometry_longitude",
+        "op": "move",
+        "to": "nodes[].lon"
+      },
+      {
+        "from": "nodes[].RECPTD",
+        "op": "move",
+        "to": "nodes[].opened"
+      },
+      {
+        "from": "nodes[].APPTYP",
+        "op": "move",
+        "to": "nodes[].skill"
+      },
+      {
+        "from": "nodes[].DECISION",
+        "op": "move",
+        "to": "nodes[].status"
+      }
+    ],
+    "source": "geojson",
+    "target": "or/v1"
   },
   "description": "Building warrant applications received by North Ayrshire Council, with location, status and decision dates.",
   "domain": "Case records",
@@ -24,14 +68,53 @@
     "surveyId": "or-78"
   },
   "recipe": {
-    "reason": "The data is an ArcGIS feature service that returns GeoJSON in pages of at most 2000 features, and keepset has no GeoJSON parser or paging yet.",
-    "status": "not-fetchable"
+    "archive": {
+      "kind": "none"
+    },
+    "paging": {
+      "kind": "arcgis-query",
+      "orderBy": "OBJECTID"
+    },
+    "parser": {
+      "columns": [
+        "DECIDD",
+        "geometry_latitude",
+        "geometry_longitude",
+        "RECPTD",
+        "APPTYP",
+        "DECISION"
+      ],
+      "dateColumns": [
+        "RECPTD",
+        "DECIDD"
+      ],
+      "encoding": "utf-8",
+      "format": "geojson",
+      "idColumn": "OBJECTID",
+      "numericColumns": [
+        {
+          "column": "geometry_latitude",
+          "factor": 1
+        },
+        {
+          "column": "geometry_longitude",
+          "factor": 1
+        }
+      ]
+    },
+    "source": 1,
+    "status": "fetchable"
   },
   "sources": [
     {
       "retrieved": "2026-10-19",
       "status": "live",
       "url": "https://hub.arcgis.com/datasets/596fa66b53a948e4b74fea86dbe44690"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://www.maps.north-ayrshire.gov.uk/arcgis/rest/services/AGOL/Building_Warrant_Applications_Weekly/FeatureServer/2"
     }
   ],
   "tags": [

@@ -414,23 +414,24 @@
     {
       "flags": [
         "the ArcGIS service refuses CSV export",
-        "rows include owner names",
-        "survey URL is a Hub landing page; the service URL came from the Hub item API"
+        "survey URL is a Hub landing page; the service URL came from the Hub item API",
+        "owner and co-owner names and mailing addresses are present and deliberately not mapped",
+        "the total due is mapped as the prize, an amount owed rather than a reward"
       ],
       "id": "philadelphia-real-estate-tax-delinquencies",
-      "reason": "The source is an ArcGIS feature service that returns GeoJSON in pages of a limited number of features and keepset has no GeoJSON parser or paging yet.",
-      "recipe": "not-fetchable",
+      "recipe": "fetchable",
       "surveyId": "or-40"
     },
     {
       "flags": [
-        "the data includes personal names, phone numbers and email addresses",
-        "arrears amounts are text padded with spaces, not numbers",
-        "survey URL is a Hub landing page"
+        "survey URL is a Hub landing page",
+        "lessee names, phone numbers, email and postal addresses are present and deliberately not mapped",
+        "the arrears amounts are text padded with spaces, so no prize is mapped",
+        "the layer holds parcels as polygons, so no location is mapped",
+        "the arrears case date is text as the source writes it, day first"
       ],
       "id": "itaukei-land-trust-board-lease-arrears",
-      "reason": "The source is an ArcGIS feature service that returns GeoJSON in pages of a limited number of features and keepset has no GeoJSON parser or paging yet.",
-      "recipe": "not-fetchable",
+      "recipe": "fetchable",
       "surveyId": "or-41"
     },
     {
@@ -460,11 +461,11 @@
     {
       "flags": [
         "the layer has null geometry, so there are no coordinates",
-        "the layer metadata has no licence text"
+        "the layer metadata has no licence text",
+        "the lien balance is mapped as the prize, an amount owed rather than a reward"
       ],
       "id": "douglas-county-co-tax-liens",
-      "reason": "The source is an ArcGIS feature service that returns GeoJSON in pages of a limited number of features and keepset has no GeoJSON parser or paging yet.",
-      "recipe": "not-fetchable",
+      "recipe": "fetchable",
       "surveyId": "or-44"
     },
     {
@@ -482,22 +483,22 @@
     {
       "flags": [
         "layer holds the 2025 sales only",
-        "the disclaimer text was only partly read, so its terms are not summarised here"
+        "the disclaimer text was only partly read, so its terms are not summarised here",
+        "the sale amount is mapped as the prize, and the sale date as the deadline, the date the sale is held"
       ],
       "id": "dakota-county-sheriff-foreclosure-sales",
-      "reason": "The source is an ArcGIS map service that returns GeoJSON and keepset has no GeoJSON parser yet.",
-      "recipe": "not-fetchable",
+      "recipe": "fetchable",
       "surveyId": "or-46"
     },
     {
       "flags": [
         "the hosted view has null geometry, so there are no coordinates",
-        "rows include owner names",
-        "use is subject to terms of use on the site's About page, which were not read in full"
+        "use is subject to terms of use on the site's About page, which were not read in full",
+        "owner names and mailing addresses are present and deliberately not mapped",
+        "the amount due is mapped as the prize, an amount owed rather than a reward"
       ],
       "id": "virginia-beach-delinquent-real-estate-taxes",
-      "reason": "The source is an ArcGIS feature service that returns GeoJSON in pages of a limited number of features and keepset has no GeoJSON parser or paging yet.",
-      "recipe": "not-fetchable",
+      "recipe": "fetchable",
       "surveyId": "or-47"
     },
     {
@@ -656,11 +657,12 @@
       "flags": [
         "the dataset description says only the last 30 days of violations are published",
         "the licence points to the Open Data Platform terms of use, which were not read",
-        "the survey URL is a Hub landing page; the data is the FeatureServer query"
+        "the survey URL is a Hub landing page; the data is the FeatureServer query",
+        "inspector names and user ids are present and deliberately not mapped",
+        "the citation amount is mapped as the prize, a fine rather than a reward"
       ],
       "id": "louisville-metro-property-maintenance-violations",
-      "reason": "The source is an ArcGIS feature service that returns GeoJSON in pages of a limited number of features, and keepset has no GeoJSON parser or paging yet.",
-      "recipe": "not-fetchable",
+      "recipe": "fetchable",
       "surveyId": "or-62"
     },
     {
@@ -836,11 +838,10 @@
       "flags": [
         "The survey URL is an ArcGIS Hub landing page; the data is a FeatureServer layer.",
         "The licence is named only as Open Government Licence without a version.",
-        "The layer holds applicant names (NAME, APPNAME), which would not be mapped."
+        "applicant names are present and deliberately not mapped"
       ],
       "id": "north-ayrshire-council-building-warrant-applications",
-      "reason": "The data is an ArcGIS feature service that returns GeoJSON in pages of at most 2000 features, and keepset has no GeoJSON parser or paging yet.",
-      "recipe": "not-fetchable",
+      "recipe": "fetchable",
       "surveyId": "or-78"
     },
     {
@@ -961,8 +962,7 @@
         "The item description limits use to information only, as is, with Dublin City Council acknowledged as the source."
       ],
       "id": "dublin-city-council-derelict-sites-register",
-      "reason": "The data is an ArcGIS feature service that returns GeoJSON, and keepset has no GeoJSON parser or paging yet.",
-      "recipe": "not-fetchable",
+      "recipe": "fetchable",
       "surveyId": "or-90"
     },
     {
@@ -976,33 +976,35 @@
     },
     {
       "flags": [
-        "The layer holds property owner names and mailing addresses.",
         "The service states no licence.",
-        "Access goes through a utility.arcgis.com proxy URL, and status is a numeric code."
+        "Access goes through a utility.arcgis.com proxy URL, and status is a numeric code.",
+        "property owner and assessee names and addresses are present and deliberately not mapped",
+        "status and district are numeric codes, written as text"
       ],
       "id": "orange-county-ca-weed-abatement-locations",
-      "reason": "The data is an ArcGIS feature service that returns GeoJSON in pages of at most 15000 features, and keepset has no GeoJSON parser or paging yet.",
-      "recipe": "not-fetchable",
+      "recipe": "fetchable",
       "surveyId": "or-92"
     },
     {
       "flags": [
-        "The service states no licence; its copyright text is only the city GIS name."
+        "The service states no licence; its copyright text is only the city GIS name.",
+        "owner names and mailing addresses are present and deliberately not mapped",
+        "the abatement status is a one letter code the layer does not explain",
+        "some features sit at coordinates far outside Temecula, so the layer's positions are not all usable"
       ],
       "id": "temecula-weed-abatement",
-      "reason": "The data is an ArcGIS feature service that returns GeoJSON in pages of at most 1000 features, and keepset has no GeoJSON parser or paging yet.",
-      "recipe": "not-fetchable",
+      "recipe": "fetchable",
       "surveyId": "or-93"
     },
     {
       "flags": [
-        "The layer holds owner names and mailing addresses.",
         "The features are polygon parcels, not points, and the layer has no date fields.",
-        "The item states no licence."
+        "The item states no licence.",
+        "owner names and mailing addresses are present and deliberately not mapped",
+        "the layer holds parcels as polygons, so no location is mapped"
       ],
       "id": "fairfield-ca-weed-abatement-parcels",
-      "reason": "The data is an ArcGIS feature service that returns GeoJSON of parcel polygons in pages of at most 1000 features, and keepset has no GeoJSON parser or paging yet.",
-      "recipe": "not-fetchable",
+      "recipe": "fetchable",
       "surveyId": "or-94"
     },
     {
@@ -1018,12 +1020,12 @@
     },
     {
       "flags": [
-        "The layer holds vehicle identification numbers, plates, operator names, phone numbers and emails.",
-        "The service states no licence, and the layer has no status field."
+        "The service states no licence, and the layer has no status field.",
+        "vehicle identification numbers, plates, operator names, phone numbers and emails are present and deliberately not mapped",
+        "some features sit at coordinates far outside Pembroke Park, so the layer's positions are not all usable"
       ],
       "id": "pembroke-park-tow-repo-log",
-      "reason": "The data is an ArcGIS feature service that returns GeoJSON in pages of at most 1000 features, and keepset has no GeoJSON parser or paging yet.",
-      "recipe": "not-fetchable",
+      "recipe": "fetchable",
       "surveyId": "or-96"
     },
     {
@@ -1093,12 +1095,12 @@
     {
       "flags": [
         "The Hub item records no licence.",
-        "The landing URL resolves to a 2024 only layer.",
-        "The layer has no probability field."
+        "The layer has no probability field.",
+        "the Address property holds a household's address and is deliberately not mapped",
+        "the layer holds 2024 sales only"
       ],
       "id": "uc-san-diego-sheriff-evictions-san-diego-county",
-      "reason": "The source is an ArcGIS feature service that returns Esri JSON in pages of at most 2000 features, and keepset has no ArcGIS JSON parser or paging yet.",
-      "recipe": "not-fetchable",
+      "recipe": "fetchable",
       "surveyId": "or-103"
     },
     {
@@ -1200,21 +1202,24 @@
     },
     {
       "flags": [
-        "No licence or copyright text is recorded."
+        "No licence or copyright text is recorded.",
+        "the layer is a live view, so its rows change as repairs are logged",
+        "dates are epoch-millisecond fields, written as ISO 8601 text"
       ],
       "id": "arlington-county-water-leak-repairs-live",
-      "reason": "The source is an ArcGIS feature service that returns Esri JSON in pages of at most 2000 features, and keepset has no ArcGIS JSON parser or paging yet.",
-      "recipe": "not-fetchable",
+      "recipe": "fetchable",
       "surveyId": "or-113"
     },
     {
       "flags": [
         "The service carries only a copyright text naming Christchurch City Council, not a licence.",
-        "The layer holds polygons, not points."
+        "The layer holds polygons, not points.",
+        "the planned and actual durations carry no unit in the layer, so none is mapped",
+        "the layer's polygons are not points, so no location is mapped",
+        "the actual finish time is empty in every row, so no closing time is mapped"
       ],
       "id": "christchurch-city-council-water-shut-off",
-      "reason": "The source is an ArcGIS feature service that returns Esri JSON in pages of at most 2000 features, and keepset has no ArcGIS JSON parser or paging yet.",
-      "recipe": "not-fetchable",
+      "recipe": "fetchable",
       "surveyId": "or-114"
     },
     {

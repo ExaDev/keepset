@@ -5,7 +5,41 @@
   "category": "or/v1",
   "citations": [],
   "crosswalk": {
-    "file": "crosswalks/or-v1/nodes.json"
+    "oneWay": [],
+    "rules": [
+      {
+        "from": "meta",
+        "op": "move",
+        "to": "meta"
+      },
+      {
+        "from": "nodes[].id",
+        "op": "move",
+        "to": "nodes[].id"
+      },
+      {
+        "from": "nodes[].geometry_latitude",
+        "op": "move",
+        "to": "nodes[].lat"
+      },
+      {
+        "from": "nodes[].geometry_longitude",
+        "op": "move",
+        "to": "nodes[].lon"
+      },
+      {
+        "from": "nodes[].CreationDate",
+        "op": "move",
+        "to": "nodes[].opened"
+      },
+      {
+        "from": "nodes[].ABATE",
+        "op": "move",
+        "to": "nodes[].status"
+      }
+    ],
+    "source": "geojson",
+    "target": "or/v1"
   },
   "description": "Weed abatement cases of the City of Temecula, California, with location and completion fields.",
   "domain": "Case records",
@@ -22,14 +56,50 @@
     "surveyId": "or-93"
   },
   "recipe": {
-    "reason": "The data is an ArcGIS feature service that returns GeoJSON in pages of at most 1000 features, and keepset has no GeoJSON parser or paging yet.",
-    "status": "not-fetchable"
+    "archive": {
+      "kind": "none"
+    },
+    "paging": {
+      "kind": "arcgis-query",
+      "orderBy": "OBJECTID"
+    },
+    "parser": {
+      "columns": [
+        "geometry_latitude",
+        "geometry_longitude",
+        "CreationDate",
+        "ABATE"
+      ],
+      "dateColumns": [
+        "CreationDate"
+      ],
+      "encoding": "utf-8",
+      "format": "geojson",
+      "idColumn": "OBJECTID",
+      "numericColumns": [
+        {
+          "column": "geometry_latitude",
+          "factor": 1
+        },
+        {
+          "column": "geometry_longitude",
+          "factor": 1
+        }
+      ]
+    },
+    "source": 1,
+    "status": "fetchable"
   },
   "sources": [
     {
       "retrieved": "2026-10-19",
       "status": "live",
       "url": "https://services3.arcgis.com/IgR6ay8jzuIj7VSF/arcgis/rest/services/Weed_Abatement_2017/FeatureServer"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://services3.arcgis.com/IgR6ay8jzuIj7VSF/arcgis/rest/services/Weed_Abatement_2017/FeatureServer/0"
     }
   ],
   "tags": [
