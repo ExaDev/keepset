@@ -1,7 +1,8 @@
 import { CrosswalkSchema, validateCrosswalk, type Crosswalk } from "twindex";
 import { parseEntry, type Entry } from "../../src/entry";
 import { columnNames } from "../../src/parsers/csv-table";
-import { CurationSchema, TARGET_FIELD_NAMES, TARGET_FIELDS, type Curation, type CurationItem, type FetchableOutcome, type SurveyEntry, type SurveySource, type TargetField } from "./or-survey";
+import { POINT_COLUMNS } from "../../src/parsers/geojson";
+import { CurationSchema, TARGET_FIELD_NAMES, TARGET_FIELDS, type Curation, type CurationItem, type SurveyEntry, type SurveySource, type TableOutcome, type TargetField } from "./or-survey";
 
 /** The shared crosswalk of an entry with no recipe yet: the document's meta and node ids, all that is known of a dataset whose columns have not been read into a mapping. */
 export const OR_NODES_CROSSWALK = "crosswalks/or-v1/nodes.json";
@@ -77,15 +78,18 @@ function domainOf(item: SurveyEntry): string {
 }
 
 /**
- * The parser's names for a fetchable outcome's header, and the columns it emits, which are those names without the id column.
+ * The parser's names for a table outcome's columns, and the columns it emits, which are those names without the id column. A table's are derived from its header cells; an ArcGIS layer's are its property names as written, then the position columns of a point layer.
  * @param id - The surveyed item's id, for errors.
  * @param outcome - The outcome.
  * @returns Every name, and the columns of a row other than its id.
- * @throws Error naming the item when two header cells get the same name.
+ * @throws Error naming the item when two columns get the same name.
  */
-function columnsOf(id: string, outcome: FetchableOutcome): { readonly names: readonly string[]; readonly columns: readonly string[] } {
+function columnsOf(id: string, outcome: TableOutcome): { readonly names: readonly string[]; readonly columns: readonly string[] } {
   try {
-    const names = columnNames(outcome.header, outcome.idColumn, 1);
+    const names = outcome.status === "fetchable" ? columnNames(outcome.header, outcome.idColumn, 1) : [...outcome.header, ...(outcome.point ? [POINT_COLUMNS.latitude, POINT_COLUMNS.longitude] : [])];
+    if (new Set(names).size !== names.length) {
+      throw new Error("two columns have the same name");
+    }
 
     return { names, columns: names.filter((name) => name !== outcome.idColumn) };
   } catch (error) {
@@ -99,7 +103,7 @@ function columnsOf(id: string, outcome: FetchableOutcome): { readonly names: rea
  * @param outcome - The outcome.
  * @throws Error naming the item and the rule it breaks.
  */
-function checkFetchable(id: string, outcome: FetchableOutcome): void {
+function checkFetchable(id: string, outcome: TableOutcome): void {
   const fail = (message: string): never => {
     throw new Error(`${id}: ${message}`);
   };
@@ -120,6 +124,20 @@ function checkFetchable(id: string, outcome: FetchableOutcome): void {
   });
   if (mapped.length === 0) {
     fail("the map fills no field, so a fetch would carry nothing beyond ids");
+  }
+  if (outcome.status === "fetchable-arcgis") {
+    for (const column of outcome.dateColumns) {
+      if (!columns.has(column)) {
+        fail(`dateColumns names ${column}, which the layer does not have`);
+      }
+      if (numeric.has(column)) {
+        fail(`${column} is both a date and numeric`);
+      }
+      const filled = mapped.find(([, mappedColumn]) => mappedColumn === column);
+      if (filled !== undefined && TARGET_FIELDS[filled[0]] === "number") {
+        fail(`${filled[0]} is a number but ${column} is a date, written as text`);
+      }
+    }
   }
   for (const [field, column] of mapped) {
     if (!columns.has(column)) {
@@ -157,9 +175,9 @@ function checkFetchable(id: string, outcome: FetchableOutcome): void {
  * @returns The crosswalk document.
  * @throws Error when twindex finds the crosswalk structurally invalid.
  */
-function crosswalkOf(outcome: FetchableOutcome): Crosswalk {
+function crosswalkOf(outcome: TableOutcome): Crosswalk {
   const crosswalk = {
-    source: "csv-table",
+    source: outcome.status === "fetchable" ? "csv-table" : "geojson",
     target: "or/v1",
     rules: [
       { op: "move", from: "meta", to: "meta" },
@@ -180,6 +198,39 @@ function crosswalkOf(outcome: FetchableOutcome): Crosswalk {
   return parsed;
 }
 
+/** The columns a recipe's parser keeps: those a field is mapped from, in the order of the fields. */
+const keptColumns = (outcome: TableOutcome): string[] => TARGET_FIELD_NAMES.flatMap((field) => outcome.map[field] ?? []);
+
+/**
+ * The recipe of an outcome.
+ * @param outcome - The outcome.
+ * @param source - The index of the entry's source the recipe reads.
+ * @returns The recipe, fetchable or not.
+ */
+function recipeOf(outcome: CurationItem["outcome"], source: number): unknown {
+  if (outcome.status === "not-fetchable") {
+    return { status: "not-fetchable", reason: outcome.reason };
+  }
+  if (outcome.status === "fetchable-arcgis") {
+    const kept = new Set(keptColumns(outcome));
+
+    return {
+      status: "fetchable",
+      source,
+      paging: { kind: "arcgis-query", orderBy: outcome.orderBy },
+      archive: { kind: "none" },
+      parser: { format: "geojson", encoding: "utf-8", idColumn: outcome.idColumn, numericColumns: outcome.numericColumns, dateColumns: outcome.dateColumns.filter((column) => kept.has(column)), columns: [...kept] },
+    };
+  }
+
+  return {
+    status: "fetchable",
+    source,
+    archive: { kind: "none" },
+    parser: { format: "csv-table", encoding: outcome.encoding, delimiter: outcome.delimiter, skipLines: outcome.skipLines, idColumn: outcome.idColumn, numericColumns: outcome.numericColumns, columns: keptColumns(outcome) },
+  };
+}
+
 /**
  * Builds the entry and the outcome for one surveyed dataset.
  * @param item - The surveyed item.
@@ -191,12 +242,15 @@ function crosswalkOf(outcome: FetchableOutcome): Crosswalk {
 export function convertItem(item: SurveyEntry, curation: CurationItem, probedOn: string): { readonly entry: Entry; readonly outcome: OrOutcome } {
   const { outcome } = curation;
   const givenUrl = curation.downloadUrl ?? item.url;
+  if (outcome.status === "fetchable-arcgis" && curation.downloadUrl === undefined) {
+    throw new Error(`${item.id}: an ArcGIS recipe needs the layer's URL as the downloadUrl`);
+  }
   const tableUrl = outcome.status === "fetchable" ? wholeTableUrl(givenUrl) : givenUrl;
   const dataUrl = tableUrl === item.url ? undefined : tableUrl;
   const sources = [item.url, ...(dataUrl === undefined ? [] : [dataUrl])].map((url) => ({ url, retrieved: probedOn, status: "live" }));
   const prefix = `${curation.namespace}-`;
   const alias = curation.id.startsWith(prefix) ? curation.id.slice(prefix.length) : "";
-  if (outcome.status === "fetchable") {
+  if (outcome.status !== "not-fetchable") {
     checkFetchable(item.id, outcome);
   }
   const entry = parseEntry({
@@ -211,23 +265,15 @@ export function convertItem(item: SurveyEntry, curation: CurationItem, probedOn:
     sources,
     licence: curation.licence,
     citations: [],
-    recipe:
-      outcome.status === "fetchable"
-        ? {
-            status: "fetchable",
-            source: dataUrl === undefined ? 0 : 1,
-            archive: { kind: "none" },
-            parser: { format: "csv-table", encoding: outcome.encoding, delimiter: outcome.delimiter, skipLines: outcome.skipLines, idColumn: outcome.idColumn, numericColumns: outcome.numericColumns, columns: TARGET_FIELD_NAMES.flatMap((field) => outcome.map[field] ?? []) },
-          }
-        : { status: "not-fetchable", reason: outcome.reason },
-    crosswalk: outcome.status === "fetchable" ? crosswalkOf(outcome) : { file: OR_NODES_CROSSWALK },
-    expectedCounts: outcome.status === "fetchable" && outcome.expectedNodes !== undefined ? { nodes: outcome.expectedNodes } : {},
+    recipe: recipeOf(outcome, dataUrl === undefined ? 0 : 1),
+    crosswalk: outcome.status === "not-fetchable" ? { file: OR_NODES_CROSSWALK } : crosswalkOf(outcome),
+    expectedCounts: outcome.status !== "not-fetchable" && outcome.expectedNodes !== undefined ? { nodes: outcome.expectedNodes } : {},
     properties: { surveyId: item.id },
   });
 
   return {
     entry,
-    outcome: { surveyId: item.id, id: curation.id, recipe: outcome.status, ...(outcome.status === "not-fetchable" ? { reason: outcome.reason } : {}), flags: curation.flags },
+    outcome: { surveyId: item.id, id: curation.id, recipe: outcome.status === "not-fetchable" ? "not-fetchable" : "fetchable", ...(outcome.status === "not-fetchable" ? { reason: outcome.reason } : {}), flags: curation.flags },
   };
 }
 

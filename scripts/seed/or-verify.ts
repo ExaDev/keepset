@@ -2,7 +2,7 @@
 
    pnpm exec tsx scripts/seed/or-verify.ts <curation.json> [or-1,or-7] [--whole]
 
-   With `--whole` the flow runs on the entire download instead of a sample, which is the only way to meet a fault that lies further into the file than the sample (an id that repeats or is empty, a malformed row, a table too large to hold in memory) or a source that returns only part of a table; each line then also gives the row count the curation recorded. A whole run downloads every table, so it is slow and is best given a list of items.
+   With `--whole` the flow runs on the entire download instead of a sample (an ArcGIS layer is always read whole, page by page), which is the only way to meet a fault that lies further into the file than the sample (an id that repeats or is empty, a malformed row, a table too large to hold in memory) or a source that returns only part of a table; each line then also gives the row count the curation recorded. A whole run downloads every table, so it is slow and is best given a list of items.
 
    Per item it prints the rows read and, for each mapped field, how many of them have a value, with the range of a number field, so a mapping that picked the wrong column shows as an empty or implausible field. A download that is not a plain table (an archive, a page, an error) fails with the reason. */
 
@@ -119,7 +119,7 @@ function cutBack(bytes: Uint8Array, back: number): Uint8Array {
  */
 async function verifyOne(curated: CurationItem): Promise<string> {
   const item = survey.entries.find((candidate) => candidate.id === curated.surveyId);
-  if (item === undefined || curated.outcome.status !== "fetchable") {
+  if (item === undefined || curated.outcome.status === "not-fetchable") {
     return "";
   }
   const { outcome } = curated;
@@ -128,7 +128,8 @@ async function verifyOne(curated: CurationItem): Promise<string> {
   if (dataset === undefined || entry.recipe.status !== "fetchable") {
     throw new Error("the entry did not build");
   }
-  const sample = whole ? new Uint8Array() : await startOf(entry.sources[entry.recipe.source]?.url ?? "");
+  const entire = whole || outcome.status === "fetchable-arcgis";
+  const sample = entire ? new Uint8Array() : await startOf(entry.sources[entry.recipe.source]?.url ?? "");
   const attempt = async (back: number): Promise<Awaited<ReturnType<typeof fetchEntry>>> => {
     try {
       return await fetchEntry(dataset, { fetch: async () => Promise.resolve(new Response(cutBack(sample, back))) });
@@ -139,7 +140,7 @@ async function verifyOne(curated: CurationItem): Promise<string> {
       throw error;
     }
   };
-  const result = whole ? await fetchEntry(dataset) : await attempt(0);
+  const result = entire ? await fetchEntry(dataset) : await attempt(0);
   const nodes = "nodes" in result.data ? result.data.nodes : [];
   const fields = TARGET_FIELD_NAMES.filter((field) => outcome.map[field] !== undefined).map((field) => {
     const values = nodes.map((node) => (field in node ? node[field] : null)).filter((value) => value !== null && value !== undefined);
@@ -149,7 +150,7 @@ async function verifyOne(curated: CurationItem): Promise<string> {
     return `${field} ${String(values.length)}${range}`;
   });
 
-  const recorded = whole && outcome.rowCount !== undefined ? ` (the curation recorded ${String(outcome.rowCount)})` : "";
+  const recorded = entire && outcome.rowCount !== undefined ? ` (the curation recorded ${String(outcome.rowCount)})` : "";
 
   const warned = result.warnings.length > 0 ? ` WARNING ${result.warnings.join("; ")}` : "";
 
@@ -167,7 +168,7 @@ async function verifyAll(items: readonly CurationItem[]): Promise<number> {
     return 0;
   }
   let failed = 0;
-  if (curated.outcome.status === "fetchable" && (wanted === undefined || wanted.has(curated.surveyId))) {
+  if (curated.outcome.status !== "not-fetchable" && (wanted === undefined || wanted.has(curated.surveyId))) {
     try {
       console.log(await verifyOne(curated));
     } catch (error) {

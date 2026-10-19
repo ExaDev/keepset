@@ -164,7 +164,7 @@ function archiveKindOf(url: string): Archive["kind"] | { readonly unsupported: s
 
 /** The keepset parser each catalogue format reads with, by the pipeline's own dispatch (`_fetch_content_for_format`): formats whose pipeline parser is the generic edge list, GML, Pajek or Matrix Market reader. */
 /** The parser formats that read a graph, which are the ones the graph import maps a source's format to. */
-type GraphFormat = Exclude<Parser["format"], "csv-table">;
+type GraphFormat = Exclude<Parser["format"], "csv-table" | "geojson">;
 
 const PARSERS: ReadonlyMap<string, GraphFormat | "linqs"> = new Map([
   ["matrix-market", "matrix-market"],
