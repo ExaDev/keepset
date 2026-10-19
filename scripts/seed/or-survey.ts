@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { ColumnNameSchema, HttpUrlSchema, IdSchema, LicenceSchema } from "../../src/entry";
+import { ArchiveSchema, ColumnNameSchema, HttpUrlSchema, IdSchema, LicenceSchema } from "../../src/entry";
 
 /* The operations-research survey the seed import reads (scripts/seed/sources/or-datasets-survey.json) and the curation that turns each surveyed item into a catalogue entry. The survey says what each item is and which fields of the routing-with-rewards node model it carries; the curation records, per item, what a download actually gives and how its columns map onto the or/v1 node, because that takes reading each source and is a judgement the survey cannot make. */
 
@@ -77,8 +77,10 @@ export const FetchableOutcomeSchema = z
     encoding: z.enum(["utf-8", "latin1"]),
     delimiter: z.enum(["comma", "tab", "semicolon"]),
     skipLines: z.int().min(0),
-    /** The sheet of an xlsx workbook the download is, read as a table: `skipLines` then counts the sheet's rows above the header, and `encoding` and `delimiter` describe the CSV the workbook is turned into (utf-8, comma). */
-    sheet: z.string().min(1).optional(),
+    /** Cell texts, besides the empty cell, that the source writes for a missing value, such as `NA`. */
+    nullValues: z.array(z.string().min(1)).optional(),
+    /** How the download unpacks into the table's file, when it is an archive: a zip with the member to read, or an xlsx workbook with the sheet (then `skipLines` counts the sheet's rows above the header, and `encoding` and `delimiter` describe the CSV the sheet is turned into: utf-8 and comma). */
+    archive: ArchiveSchema.optional(),
     idColumn: ColumnNameSchema.nullable(),
     numericColumns: z.array(z.object({ column: ColumnNameSchema, factor: z.number().positive() }).strict()),
     header: z.array(z.string()).min(1),

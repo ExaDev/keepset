@@ -10,21 +10,30 @@ export const OR_NODES_CROSSWALK = "crosswalks/or-v1/nodes.json";
 /** The most cells (rows times the cells each row keeps, its id included) a table may have to be given a recipe. A fetch holds every kept cell of the table at once, in the parsed rows, the crosswalk's result and the validated document, so memory grows with the cells and not with the file's size; a table of tens of millions of cells is not read by one fetch and is imported without a recipe, saying so. Measured on whole fetches: a table of about five million cells needed a heap of between 512 and 768 MiB, and one of about eleven million cells between 1 and 1.5 GiB, so this stays within Node's usual default heap. */
 export const MAX_CELLS = 12_000_000;
 
-/** How many rows a page of a Socrata resource holds. A response is a CSV of every column, so a page is a few tens of megabytes for a table of up to a kilobyte a row, short enough that a response is not cut off in transit and long enough that a table of millions of rows is a few dozen requests. */
-export const SOCRATA_PAGE_ROWS = 50_000;
+/** How many rows a page of a paged CSV source holds. A response is a CSV of every column, so a page is a few tens of megabytes for a table of up to a kilobyte a row, short enough that a response is not cut off in transit and long enough that a table of millions of rows is a few dozen requests. */
+export const PAGE_ROWS = 50_000;
 
 /** The path of a Socrata resource endpoint: a four-by-four dataset id and an output format. */
 const SOCRATA_RESOURCE_CSV = /^\/resource\/[a-z0-9]{4}-[a-z0-9]{4}\.csv$/;
 
-/**
- * How a recipe pages a source URL. A Socrata resource endpoint returns a small fixed number of rows unless it is given a limit, and one response of a large table can be cut short in transit, so it is read a page at a time; every other URL is one file.
- * @param url - The URL the survey or the curation gives for the table.
- * @returns The paging of a Socrata resource endpoint with no query, and undefined for any other URL.
- */
-export function socrataPaging(url: string): { readonly kind: "socrata-resource"; readonly pageSize: number } | undefined {
-  const parsed = new URL(url);
+/** The path of a CKAN datastore dump: the resource's UUID after `/datastore/dump/`, on a portal that may serve CKAN under a prefix. */
+const CKAN_DATASTORE_DUMP = /\/datastore\/dump\/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/;
 
-  return SOCRATA_RESOURCE_CSV.test(parsed.pathname) && parsed.search === "" ? { kind: "socrata-resource", pageSize: SOCRATA_PAGE_ROWS } : undefined;
+/**
+ * How a recipe pages a source URL. A Socrata resource endpoint returns a small fixed number of rows unless it is given a limit, and a long download of a large CKAN datastore dump or Socrata table can be cut short in transit, so each is read a page at a time; every other URL is one file.
+ * @param url - The URL the survey or the curation gives for the table.
+ * @returns The paging of a Socrata resource endpoint or a CKAN datastore dump with no query, and undefined for any other URL.
+ */
+export function pagingOf(url: string): { readonly kind: "socrata-resource" | "ckan-datastore"; readonly pageSize: number } | undefined {
+  const parsed = new URL(url);
+  if (parsed.search !== "") {
+    return undefined;
+  }
+  if (SOCRATA_RESOURCE_CSV.test(parsed.pathname)) {
+    return { kind: "socrata-resource", pageSize: PAGE_ROWS };
+  }
+
+  return CKAN_DATASTORE_DUMP.test(parsed.pathname) ? { kind: "ckan-datastore", pageSize: PAGE_ROWS } : undefined;
 }
 
 /** The short label each survey theme is filed under as the entry's domain, matched against the theme text because the survey's own wording is long and uses dashes. Every theme the survey uses must match exactly one. */
@@ -224,14 +233,14 @@ function recipeOf(outcome: CurationItem["outcome"], source: number, url: string)
     };
   }
 
-  const paging = socrataPaging(url);
+  const paging = pagingOf(url);
 
   return {
     status: "fetchable",
     source,
     ...(paging === undefined ? {} : { paging }),
-    archive: outcome.sheet === undefined ? { kind: "none" } : { kind: "xlsx", sheet: outcome.sheet },
-    parser: { format: "csv-table", encoding: outcome.encoding, delimiter: outcome.delimiter, skipLines: outcome.skipLines, idColumn: outcome.idColumn, numericColumns: outcome.numericColumns, columns: keptColumns(outcome) },
+    archive: outcome.archive ?? { kind: "none" },
+    parser: { format: "csv-table", encoding: outcome.encoding, delimiter: outcome.delimiter, skipLines: outcome.skipLines, idColumn: outcome.idColumn, numericColumns: outcome.numericColumns, columns: keptColumns(outcome), ...(outcome.nullValues === undefined ? {} : { nullValues: outcome.nullValues }) },
   };
 }
 
