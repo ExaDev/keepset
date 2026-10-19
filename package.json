@@ -93,8 +93,11 @@
     "lint:check": "eslint . --cache --max-warnings 0",
     "prepare": "husky",
     "prepublishOnly": "pnpm run lint:check && pnpm run build && pnpm run typecheck && pnpm run test && publint && attw --pack --profile esm-only",
-    "seed:check": "tsx scripts/seed/import-phd-catalogue.ts --pipeline scripts/seed/sources/pipeline-catalog.json --graphbox scripts/seed/sources/graphbox-catalog.json --check",
-    "seed:import": "tsx scripts/seed/import-phd-catalogue.ts",
+    "seed:check": "pnpm run seed:check:graph && pnpm run seed:check:or",
+    "seed:check:graph": "tsx scripts/seed/import-phd-catalogue.ts --pipeline scripts/seed/sources/pipeline-catalog.json --graphbox scripts/seed/sources/graphbox-catalog.json --check",
+    "seed:check:or": "tsx scripts/seed/import-or-survey.ts --check",
+    "seed:import:graph": "tsx scripts/seed/import-phd-catalogue.ts",
+    "seed:import:or": "tsx scripts/seed/import-or-survey.ts",
     "site": "tsx site/build.ts",
     "test": "vitest run",
     "typecheck": "tsc -p tsconfig.json && tsc -p tsconfig.node.json && tsc -p tsconfig.site.json && tsc -p tsconfig.sw.json"
