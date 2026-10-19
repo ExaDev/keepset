@@ -68,13 +68,13 @@ function Listing({ records }: { readonly records: readonly SearchRecord[] }): Re
     });
   }, [records, text, kind, domain]);
 
-  // Column definitions are written as plain literals against the hook's own column type, not built through createColumnHelper: the helper infers each accessor over its own value type, which does not inter-type with the widened union under exactOptionalPropertyTypes.
+  // Column definitions are written as plain literals against the hook's own column type, not built through createColumnHelper: the helper infers each accessor over its own value type, which does not inter-type with the widened union under exactOptionalPropertyTypes. The order matches the static table's Name, Id, Kind, Domain so the two views of the listing read the same way.
   const columns: readonly ColumnDef<ListingFeatures, SearchRecord>[] = [
-    { accessorKey: "id", header: "id", cell: (info) => <a href={`datasets/${String(info.getValue())}/`}>{String(info.getValue())}</a> },
-    { accessorKey: "name", header: "name" },
-    { accessorKey: "domain", header: "domain" },
-    { accessorKey: "kind", header: "kind" },
-    { id: "tags", accessorFn: (row) => row.tags.join(", "), header: "tags" },
+    { accessorKey: "name", header: "Name", cell: (info) => <a href={`datasets/${info.row.original.id}/`}>{info.row.original.name}</a> },
+    { accessorKey: "id", header: "Id", cell: (info) => <code>{info.row.original.id}</code> },
+    { accessorKey: "kind", header: "Kind" },
+    { accessorKey: "domain", header: "Domain" },
+    { id: "tags", accessorFn: (row) => row.tags.join(", "), header: "Tags" },
   ];
 
   const table = useTable({ key: "listing", features, data: filtered, columns });
@@ -82,38 +82,50 @@ function Listing({ records }: { readonly records: readonly SearchRecord[] }): Re
   return (
     <>
       <div className="island-controls">
-        <TextInput placeholder="search the catalogue" value={text} onChange={(event) => { setText(event.currentTarget.value); }} style={{ flex: 1 }} />
-        <Select placeholder="kind" data={kinds} value={kind} onChange={(value) => { setKind(value); }} clearable searchable />
-        <Select placeholder="domain" data={domains} value={domain} onChange={(value) => { setDomain(value); }} clearable searchable />
+        <TextInput className="island-search" placeholder="search the catalogue" value={text} onChange={(event) => { setText(event.currentTarget.value); }} />
+        <Select className="island-filter" placeholder="kind" data={kinds} value={kind} onChange={(value) => { setKind(value); }} clearable searchable />
+        <Select className="island-filter" placeholder="domain" data={domains} value={domain} onChange={(value) => { setDomain(value); }} clearable searchable />
         <Badge variant="light" size="lg">
           {String(filtered.length)} of {String(records.length)}
         </Badge>
       </div>
-      <MantineTable striped highlightOnHover>
-        <MantineTable.Thead>
-          {table.getHeaderGroups().map((group) => (
-            <MantineTable.Tr key={group.id}>
-              {group.headers.map((header) => (
-                <MantineTable.Th key={header.id} onClick={header.column.getToggleSortingHandler()} style={{ cursor: header.column.getCanSort() ? "pointer" : "default", userSelect: "none" }}>
-                  <table.FlexRender header={header} />
-                  {header.column.getIsSorted() === false ? "" : header.column.getIsSorted() === "asc" ? " ↑" : " ↓"}
-                </MantineTable.Th>
-              ))}
-            </MantineTable.Tr>
-          ))}
-        </MantineTable.Thead>
-        <MantineTable.Tbody>
-          {table.getRowModel().rows.map((row) => (
-            <MantineTable.Tr key={row.id}>
-              {row.getAllCells().map((cell) => (
-                <MantineTable.Td key={cell.id}>
-                  <table.FlexRender cell={cell} />
-                </MantineTable.Td>
-              ))}
-            </MantineTable.Tr>
-          ))}
-        </MantineTable.Tbody>
-      </MantineTable>
+      {/* The wrapper carries the same classes as the static listing's, so the mobile scroll and the desktop sticky header style both views identically. */}
+      <div className="table-wrap listing">
+        <MantineTable striped highlightOnHover>
+          <MantineTable.Thead>
+            {table.getHeaderGroups().map((group) => (
+              <MantineTable.Tr key={group.id}>
+                {group.headers.map((header) => {
+                  const sorted = header.column.getIsSorted();
+
+                  return (
+                    <MantineTable.Th
+                      key={header.id}
+                      onClick={header.column.getToggleSortingHandler()}
+                      aria-sort={sorted === "asc" ? "ascending" : sorted === "desc" ? "descending" : "none"}
+                      style={{ cursor: header.column.getCanSort() ? "pointer" : "default", userSelect: "none" }}
+                    >
+                      <table.FlexRender header={header} />
+                      {sorted === false ? "" : sorted === "asc" ? " ↑" : " ↓"}
+                    </MantineTable.Th>
+                  );
+                })}
+              </MantineTable.Tr>
+            ))}
+          </MantineTable.Thead>
+          <MantineTable.Tbody>
+            {table.getRowModel().rows.map((row) => (
+              <MantineTable.Tr key={row.id}>
+                {row.getAllCells().map((cell) => (
+                  <MantineTable.Td key={cell.id}>
+                    <table.FlexRender cell={cell} />
+                  </MantineTable.Td>
+                ))}
+              </MantineTable.Tr>
+            ))}
+          </MantineTable.Tbody>
+        </MantineTable>
+      </div>
     </>
   );
 }
