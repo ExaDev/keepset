@@ -144,7 +144,7 @@ async function verifyOne(curated: CurationItem): Promise<string> {
   const fields = TARGET_FIELD_NAMES.filter((field) => outcome.map[field] !== undefined).map((field) => {
     const values = nodes.map((node) => (field in node ? node[field] : null)).filter((value) => value !== null && value !== undefined);
     const numbers = values.filter((value): value is number => typeof value === "number");
-    const range = numbers.length > 0 ? ` [${String(Math.min(...numbers))}..${String(Math.max(...numbers))}]` : values.length > 0 ? ` e.g. ${JSON.stringify(values[0]).slice(0, VALUE_WIDTH)}` : "";
+    const range = numbers.length > 0 ? ` [${String(numbers.reduce((least, number) => Math.min(least, number)))}..${String(numbers.reduce((most, number) => Math.max(most, number)))}]` : values.length > 0 ? ` e.g. ${JSON.stringify(values[0]).slice(0, VALUE_WIDTH)}` : "";
 
     return `${field} ${String(values.length)}${range}`;
   });
