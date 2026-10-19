@@ -16,10 +16,27 @@ const USER_AGENT = "keepset (+https://github.com/Mearman/keepset)";
 /** How long a connection may send nothing, at any point of a download, before it is given up as dead. A healthy server of the open data portals recipes read sends something every few seconds even while it prepares a large page, and a socket that has gone silent otherwise holds the download for ever, as one did in the middle of a table of millions of rows. */
 export const STALL_MILLISECONDS = 120_000;
 
-/** Options for one download: the signal that aborts it, and how long a silent connection is waited on (`STALL_MILLISECONDS` unless a test shortens it). */
+/** How many times a download is tried when its connection fails, and how long each retry waits for the one before it (the delay times the attempt number), so a network that drops for a few seconds is waited out and not hammered. */
+export const DOWNLOAD_ATTEMPTS = 3;
+export const RETRY_DELAY_MILLISECONDS = 3000;
+
+/** Options for one download: the signal that aborts it, how long a silent connection is waited on (`STALL_MILLISECONDS`), and how long a retry waits (`RETRY_DELAY_MILLISECONDS`), the last two only shortened by a test. */
 export interface DownloadInit {
   readonly signal?: AbortSignal;
   readonly stallMilliseconds?: number;
+  readonly retryDelayMilliseconds?: number;
+}
+
+/** The failure of a connection that sent nothing for the stall time. */
+class StalledError extends KeepsetError {}
+
+/**
+ * Whether a failure is the connection's and may pass: a stall, or a socket error such as a reset, a broken pipe or a timeout, which carries an `E` code. A bad URL, a redirect that leads nowhere and an abort are not.
+ * @param error - The failure.
+ * @returns True when asking again may succeed.
+ */
+function isConnectionFailure(error: unknown): boolean {
+  return error instanceof StalledError || (typeof error === "object" && error !== null && "code" in error && typeof error.code === "string" && /^E[A-Z]+$/.test(error.code) && error.code !== "ERR_INVALID_URL");
 }
 
 /**
@@ -44,7 +61,7 @@ async function get(url: URL, signal: AbortSignal | undefined, stall: number): Pr
       },
     );
     request.setTimeout(stall, () => {
-      const dead = new KeepsetError(`${url.href} sent nothing for ${String(stall)} milliseconds, so the connection was given up as dead`);
+      const dead = new StalledError(`${url.href} sent nothing for ${String(stall)} milliseconds, so the connection was given up as dead`);
       // Once the head has arrived the failure belongs to the body being read, which the response reports; before it, to the request.
       (answered ?? request).destroy(dead);
     });
@@ -107,8 +124,31 @@ async function follow(url: URL, init: DownloadInit, redirects: number): Promise<
  * @param url - An http or https URL.
  * @param init - The request options.
  * @returns A Response holding the raw bytes, with the final status.
- * @throws KeepsetError when a redirect has no location, leaves http and https, or passes the redirect limit, or the connection sends nothing for longer than the stall time.
+ * @throws KeepsetError when a redirect has no location, leaves http and https, or passes the redirect limit; the connection's failure, after the tries, when it keeps failing or sends nothing for longer than the stall time.
  */
 export async function downloadRaw(url: string, init: DownloadInit): Promise<Response> {
-  return follow(new URL(url), init, 0);
+  return tryDownload(url, init, 1);
+}
+
+/**
+ * One try of a download, and the tries after it while the connection fails.
+ * @param url - The URL.
+ * @param init - The request options.
+ * @param attempt - Which try this is, from 1.
+ * @returns The response.
+ * @throws The last failure when the tries are used up, or at once for a failure that is not the connection's.
+ */
+async function tryDownload(url: string, init: DownloadInit, attempt: number): Promise<Response> {
+  try {
+    return await follow(new URL(url), init, 0);
+  } catch (error) {
+    if (attempt >= DOWNLOAD_ATTEMPTS || init.signal?.aborted === true || !isConnectionFailure(error)) {
+      throw error;
+    }
+    await new Promise((resolve) => {
+      setTimeout(resolve, (init.retryDelayMilliseconds ?? RETRY_DELAY_MILLISECONDS) * attempt);
+    });
+
+    return tryDownload(url, init, attempt + 1);
+  }
 }

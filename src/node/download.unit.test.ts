@@ -4,7 +4,7 @@ import type { AddressInfo } from "node:net";
 import { gzipSync } from "node:zlib";
 import { afterAll, beforeAll, describe, expect, it } from "vitest";
 import { KeepsetError } from "../errors";
-import { downloadRaw } from "./download";
+import { DOWNLOAD_ATTEMPTS, downloadRaw } from "./download";
 
 const gzipped = gzipSync("1 2\n");
 
@@ -13,6 +13,7 @@ const STATUS = { ok: 200, movedPermanently: 301, found: 302, notFound: 404 } as 
 /** A local server standing in for the hosts recipes download from: no test touches the network. */
 let server: Server;
 let base: string;
+const drops = new Map<string, number>();
 
 beforeAll(async () => {
   server = createServer((request, response) => {
@@ -32,6 +33,16 @@ beforeAll(async () => {
       response.end(request.headers["user-agent"]);
     } else if (path === "/slow") {
       // Never answers, so only an abort ends the request.
+    } else if (path.startsWith("/drops/")) {
+      // Drops the connection without an answer for the first requests of a path, as a flaky network does, then answers.
+      const [, , name, allowed] = path.split("/");
+      const key = name ?? "";
+      drops.set(key, (drops.get(key) ?? 0) + 1);
+      if ((drops.get(key) ?? 0) <= Number(allowed)) {
+        request.socket.destroy();
+      } else {
+        response.end("recovered");
+      }
     } else if (path === "/stalls-mid-body") {
       // Answers, sends the start of a body and then goes silent, as a dead connection does in the middle of a large download.
       response.writeHead(STATUS.ok, { "content-length": "100" });
@@ -79,8 +90,22 @@ describe("downloadRaw", () => {
 
   it("gives up a connection that sends nothing, before the answer and in the middle of a body", async () => {
     const stallMilliseconds = 50;
-    await expect(downloadRaw(`${base}/slow`, { stallMilliseconds })).rejects.toThrow(/sent nothing for 50 milliseconds/);
-    await expect(downloadRaw(`${base}/stalls-mid-body`, { stallMilliseconds })).rejects.toThrow(/sent nothing for 50 milliseconds/);
+    await expect(downloadRaw(`${base}/slow`, { stallMilliseconds, retryDelayMilliseconds: 1 })).rejects.toThrow(/sent nothing for 50 milliseconds/);
+    await expect(downloadRaw(`${base}/stalls-mid-body`, { stallMilliseconds, retryDelayMilliseconds: 1 })).rejects.toThrow(/sent nothing for 50 milliseconds/);
+  });
+
+  it("tries again when the connection drops, waits between tries, and gives up after the tries", async () => {
+    const retryDelayMilliseconds = 1;
+    const recovered = await downloadRaw(`${base}/drops/flaky/2`, { retryDelayMilliseconds });
+    expect(await recovered.text()).toBe("recovered");
+    expect(drops.get("flaky")).toBe(DOWNLOAD_ATTEMPTS);
+    await expect(downloadRaw(`${base}/drops/hopeless/9`, { retryDelayMilliseconds })).rejects.toThrow();
+    expect(drops.get("hopeless")).toBe(DOWNLOAD_ATTEMPTS);
+  });
+
+  it("does not try again for a failure that is not the connection's", async () => {
+    await expect(downloadRaw(`${base}/nowhere`, { retryDelayMilliseconds: 1 })).rejects.toThrow(KeepsetError);
+    await expect(downloadRaw("ftp://example.org/x", { retryDelayMilliseconds: 1 })).rejects.toThrow(/not an http or https URL/);
   });
 
   it("passes a failing status through for the recipe to report", async () => {
