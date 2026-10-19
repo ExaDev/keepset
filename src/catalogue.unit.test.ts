@@ -127,6 +127,101 @@ describe("namespaces and aliases", () => {
   });
 });
 
+/** Entries for grouping: `bar` is in `home/deep`, listed also under `foo/graphs` and `one` by path aliases, and `baz` is in `foo/graphs` only, so the tree has three depths and an entry in two branches. */
+const bar = { ...liveEntry, id: "bar", namespace: ["home", "deep"], aliases: ["foo/graphs/bar", "one/bar"] };
+const baz = { ...liveEntry, id: "baz", namespace: ["foo", "graphs"] };
+const grouped = createCatalogue({ ...fixtureIndex, manifest: { ...fixtureIndex.manifest, namespaceAliases: { foo: ["f"], graphs: ["g"] } }, entries: [bar, baz] });
+
+describe("grouped aliases", () => {
+  it("resolves a path alias and each trailing form of it to the entry", () => {
+    for (const name of ["bar", "graphs/bar", "foo/graphs/bar", "one/bar", "deep/bar", "home/deep/bar"]) {
+      expect(grouped.getDataset(name).entry.id).toBe("bar");
+    }
+  });
+
+  it("does not drop a middle segment of a path alias", () => {
+    expect(() => grouped.getDataset("foo/bar")).toThrow(DatasetNotFoundError);
+    expect(() => grouped.getDataset("home/bar")).toThrow(DatasetNotFoundError);
+  });
+
+  it("refuses a short form that a grouped alias makes ambiguous, and resolves it once qualified", () => {
+    const clash = createCatalogue({ ...fixtureIndex, entries: [bar, { ...baz, id: "bar2", namespace: ["other", "graphs"], aliases: ["bar"] }] });
+    expect(() => clash.getDataset("graphs/bar")).toThrow(DatasetAmbiguousError);
+    expect(clash.getDataset("foo/graphs/bar").entry.id).toBe("bar");
+    expect(clash.getDataset("other/graphs/bar").entry.id).toBe("bar2");
+  });
+
+  it("lists an entry under every group it is in, and every group above", () => {
+    const ids = (namespace: string): string[] => grouped.listDatasets({ namespace }).map((dataset) => dataset.entry.id);
+    expect(ids("home")).toEqual(["bar"]);
+    expect(ids("home/deep")).toEqual(["bar"]);
+    expect(ids("foo")).toEqual(["bar", "baz"]);
+    expect(ids("foo/graphs")).toEqual(["bar", "baz"]);
+    expect(ids("one")).toEqual(["bar"]);
+    expect(ids("foo/graphs/bar")).toEqual([]);
+  });
+
+  it("finds an entry by a group a path alias files it in, in a text search", () => {
+    expect(grouped.listDatasets({ text: "one" }).map((dataset) => dataset.entry.id)).toEqual(["bar"]);
+  });
+
+  it("rejects an entry whose path alias gives a name another entry already has", () => {
+    expect(CatalogueIndexSchema.is({ ...fixtureIndex, entries: [bar, { ...baz, id: "bar3", namespace: ["x"], aliases: ["foo/graphs/bar"] }] })).toBe(false);
+  });
+});
+
+describe("namespace segment aliases", () => {
+  it("resolves a name with an alias in a segment's place, and a segment alias anywhere in the path", () => {
+    expect(grouped.getDataset("f/graphs/bar").entry.id).toBe("bar");
+    expect(grouped.getDataset("f/g/bar").entry.id).toBe("bar");
+    expect(grouped.getDataset("g/bar").entry.id).toBe("bar");
+    expect(grouped.getDataset("f/g/baz").entry.id).toBe("baz");
+  });
+
+  it("accepts a segment alias in the namespace filter and in listNamespaces", () => {
+    expect(grouped.listDatasets({ namespace: "f/g" }).map((dataset) => dataset.entry.id)).toEqual(["bar", "baz"]);
+    expect(grouped.listNamespaces("f").map((node) => node.path)).toEqual(["foo/graphs"]);
+  });
+
+  it("rejects an alias for a segment no entry has, and an alias that is already a segment", () => {
+    const withAliases = (namespaceAliases: Record<string, string[]>) => ({ ...fixtureIndex, manifest: { ...fixtureIndex.manifest, namespaceAliases }, entries: [bar, baz] });
+    expect(CatalogueIndexSchema.is(withAliases({ nothing: ["n"] }))).toBe(false);
+    expect(CatalogueIndexSchema.is(withAliases({ foo: ["home"] }))).toBe(false);
+    expect(CatalogueIndexSchema.is(withAliases({ foo: ["f"] }))).toBe(true);
+  });
+});
+
+describe("listNamespaces", () => {
+  it("lists the outermost namespaces in path order, each with the entries at or beneath it", () => {
+    expect(grouped.listNamespaces()).toEqual([
+      { path: "foo", name: "foo", count: 2 },
+      { path: "home", name: "home", count: 1 },
+      { path: "one", name: "one", count: 1 },
+    ]);
+  });
+
+  it("lists the namespaces directly beneath a path, at any depth", () => {
+    expect(grouped.listNamespaces("foo")).toEqual([{ path: "foo/graphs", name: "graphs", count: 2 }]);
+    expect(grouped.listNamespaces("home")).toEqual([{ path: "home/deep", name: "deep", count: 1 }]);
+  });
+
+  it("lists nothing beneath a leaf or a path that does not exist, and for a catalogue with no namespaces", () => {
+    expect(grouped.listNamespaces("home/deep")).toEqual([]);
+    expect(grouped.listNamespaces("nope")).toEqual([]);
+    expect(grouped.listNamespaces("constructor")).toEqual([]);
+    expect(catalogue.listNamespaces()).toEqual([]);
+  });
+
+  it("counts an entry once however many of a namespace's groups it is in", () => {
+    const twice = createCatalogue({ ...fixtureIndex, entries: [{ ...liveEntry, id: "twice", namespace: ["a", "x"], aliases: ["a/y/twice"] }] });
+    expect(twice.listNamespaces()).toEqual([{ path: "a", name: "a", count: 1 }]);
+    expect(twice.listNamespaces("a")).toEqual([
+      { path: "a/x", name: "x", count: 1 },
+      { path: "a/y", name: "y", count: 1 },
+    ]);
+  });
+});
+
 describe("the bundled catalogue", () => {
   it("is the keepset catalogue", () => {
     expect(getManifest()).toMatchObject({ id: "keepset", repository: "https://github.com/Mearman/keepset" });

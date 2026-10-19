@@ -45,4 +45,15 @@ describe("the catalogue manifest", () => {
   it("rejects lineage naming the catalogue itself", () => {
     expect(ManifestSchema.is({ ...fork, lineage: { ...fork.lineage, catalogue: fork.id } })).toBe(false);
   });
+
+  it("accepts aliases for namespace segments and round-trips them", () => {
+    const doc = { ...root, namespaceAliases: { suitesparse: ["ss", "sparse"], networkrepository: ["nr"] } };
+    expect(parseManifest(JSON.parse(serialise(parseManifest(doc))))).toEqual(doc);
+  });
+
+  it("refuses a segment alias that repeats, names itself, or is the key of another segment's aliases", () => {
+    for (const namespaceAliases of [{ a: ["x"], b: ["x"] }, { a: ["a"] }, { a: ["b"], b: ["c"] }, { a: ["x", "x"] }, { a: [] }]) {
+      expect(ManifestSchema.is({ ...root, namespaceAliases })).toBe(false);
+    }
+  });
 });

@@ -5,12 +5,12 @@ import { define } from "./define";
 import { EntrySchema, RelativePathSchema, toIssues, type Entry } from "./entry";
 import { CatalogueSyntaxError, DatasetAmbiguousError, DatasetNotFoundError } from "./errors";
 import { ManifestSchema, type Manifest } from "./manifest";
-import { NAME_SEPARATOR, namesOf } from "./names";
+import { groupsOf, NAME_SEPARATOR, namesOf } from "./names";
 import { getOwn } from "./own";
 import { recordOf } from "./record";
 
 /**
- * A catalogue index: the manifest, every entry, and every crosswalk file of the catalogue, keyed by its catalogue-relative path. The build assembles it from a catalogue directory; a consumer holding its own catalogue (a fork, say) can pass one to `createCatalogue`. Entry ids are unique, every fully qualified name (the whole namespace and an id or alias) identifies one entry and is not another entry's id, every crosswalk passes twindex's structural validation, every crosswalk file reference resolves, and every crosswalk's target is the category of each entry that uses it.
+ * A catalogue index: the manifest, every entry, and every crosswalk file of the catalogue, keyed by its catalogue-relative path. The build assembles it from a catalogue directory; a consumer holding its own catalogue (a fork, say) can pass one to `createCatalogue`. Entry ids are unique, every fully qualified name (the whole path of an id or alias) identifies one entry and is not another entry's id, every namespace segment the manifest gives aliases to is some entry's segment and no alias is itself one, every crosswalk passes twindex's structural validation, every crosswalk file reference resolves, and every crosswalk's target is the category of each entry that uses it.
  */
 export const CatalogueIndexSchema = define(
   z
@@ -24,6 +24,15 @@ export const CatalogueIndexSchema = define(
       for (const [file, crosswalk] of Object.entries(index.crosswalks)) {
         for (const issue of validateCrosswalk(crosswalk)) {
           ctx.addIssue({ code: "custom", path: ["crosswalks", file], message: `rule ${String(issue.ruleIndex)}: ${issue.message}` });
+        }
+      }
+      const segments = new Set(index.entries.flatMap((entry) => groupsOf(entry).flat()));
+      for (const [segment, aliases] of Object.entries(index.manifest.namespaceAliases ?? {})) {
+        if (!segments.has(segment)) {
+          ctx.addIssue({ code: "custom", path: ["manifest", "namespaceAliases", segment], message: `no entry has a namespace segment ${segment}, so it has nothing to be an alias of` });
+        }
+        for (const alias of aliases.filter((name) => segments.has(name))) {
+          ctx.addIssue({ code: "custom", path: ["manifest", "namespaceAliases", segment], message: `${alias} is already a namespace segment of an entry, so it cannot also be an alias` });
         }
       }
       const seen = new Set<string>();
@@ -77,13 +86,20 @@ export interface DatasetQuery {
   readonly category?: string;
   /** The entry's domain, matched exactly. */
   readonly domain?: string;
-  /** A namespace path such as `suitesparse` or `suitesparse/gset`: matches the entries in that namespace and every namespace beneath it. */
+  /** A group path such as `suitesparse` or `suitesparse/gset`, in which any segment may be an alias the manifest gives it: matches the entries in that group, in any group beneath it, and the entries a path alias files there. */
   readonly namespace?: string;
-  /** Text that must appear, ignoring case, in the entry's id, an alias, its namespace, name, description, domain or one of its tags. */
+  /** Text that must appear, ignoring case, in the entry's id, an alias, one of its groups, name, description, domain or one of its tags. */
   readonly text?: string;
 }
 
-/** A queryable catalogue: the surface `listDatasets` and `getDataset` are bound to. */
+/** One namespace in the tree of groups: its path, its last segment, and how many distinct entries sit in it or in any namespace beneath it. */
+export interface NamespaceNode {
+  readonly path: string;
+  readonly name: string;
+  readonly count: number;
+}
+
+/** A queryable catalogue: the surface `listDatasets`, `getDataset` and `listNamespaces` are bound to. */
 export interface Catalogue {
   readonly manifest: Manifest;
   /**
@@ -100,15 +116,23 @@ export interface Catalogue {
    * @throws DatasetNotFoundError when no entry answers to the name.
    */
   readonly getDataset: (name: string) => Dataset;
+  /**
+   * Lists the namespaces directly beneath a path, or the outermost ones, with how many entries each holds. The tree is every group of every entry and each path above it, so an entry filed in `a/b` counts toward `a/b` and `a`.
+   * @param path - A group path whose children to list, in which any segment may be an alias the manifest gives it; absent for the outermost namespaces.
+   * @returns The child namespaces in path order; empty when the path has none, whether it is unknown or a leaf.
+   */
+  readonly listNamespaces: (path?: string) => NamespaceNode[];
 }
 
 /**
  * Whether a dataset matches a query.
  * @param dataset - The dataset.
  * @param query - The filters.
+ * @param groups - The dataset's groups, each as a path joined by the separator.
+ * @param namespace - The query's namespace with every segment alias replaced by its segment, when it has one.
  * @returns True when every given filter matches.
  */
-function matches(dataset: Dataset, query: DatasetQuery): boolean {
+function matches(dataset: Dataset, query: DatasetQuery, groups: readonly string[], namespace: string | undefined): boolean {
   const { entry } = dataset;
   if (query.kind !== undefined && dataset.kind !== query.kind) {
     return false;
@@ -119,20 +143,43 @@ function matches(dataset: Dataset, query: DatasetQuery): boolean {
   if (query.domain !== undefined && entry.domain !== query.domain) {
     return false;
   }
-  if (query.namespace !== undefined) {
-    const path = (entry.namespace ?? []).join(NAME_SEPARATOR);
-    if (path !== query.namespace && !path.startsWith(`${query.namespace}${NAME_SEPARATOR}`)) {
-      return false;
-    }
+  if (namespace !== undefined && !groups.some((group) => group === namespace || group.startsWith(`${namespace}${NAME_SEPARATOR}`))) {
+    return false;
   }
   if (query.text !== undefined) {
     const needle = query.text.toLowerCase();
-    const haystack = [entry.id, ...(entry.aliases ?? []), (entry.namespace ?? []).join(NAME_SEPARATOR), entry.name, entry.description, entry.domain, ...entry.tags].filter((field): field is string => field !== undefined && field !== "");
+    const haystack = [entry.id, ...(entry.aliases ?? []), ...groups, entry.name, entry.description, entry.domain, ...entry.tags].filter((field): field is string => field !== undefined);
 
     return haystack.some((field) => field.toLowerCase().includes(needle));
   }
 
   return true;
+}
+
+/**
+ * Builds the tree of namespaces: every group of every entry and each path above it, with the ids of the entries at or beneath each.
+ * @param groupsById - Each entry's groups, each as a path joined by the separator.
+ * @returns The child namespaces of each path, the outermost ones under the empty path, each list in path order.
+ */
+function namespaceTree(groupsById: ReadonlyMap<string, readonly string[]>): Map<string, NamespaceNode[]> {
+  const members = new Map<string, Set<string>>();
+  for (const [id, groups] of groupsById) {
+    for (const group of groups) {
+      const segments = group.split(NAME_SEPARATOR);
+      for (let length = 1; length <= segments.length; length += 1) {
+        const path = segments.slice(0, length).join(NAME_SEPARATOR);
+        members.set(path, (members.get(path) ?? new Set<string>()).add(id));
+      }
+    }
+  }
+  const children = new Map<string, NamespaceNode[]>();
+  for (const [path, ids] of [...members].sort(([left], [right]) => (left < right ? -1 : 1))) {
+    const cut = path.lastIndexOf(NAME_SEPARATOR);
+    const parent = cut === -1 ? "" : path.slice(0, cut);
+    children.set(parent, [...(children.get(parent) ?? []), { path, name: path.slice(cut + 1), count: ids.size }]);
+  }
+
+  return children;
 }
 
 /**
@@ -148,7 +195,16 @@ export function createCatalogue(index: unknown): Catalogue {
   }
   const { manifest, crosswalks, entries } = parsed.data;
   const catalogue = { id: manifest.id, version: manifest.version };
+  const segmentAliases = manifest.namespaceAliases ?? {};
+  const segmentOf = new Map(Object.entries(segmentAliases).flatMap(([segment, aliases]) => aliases.map((alias): [string, string] => [alias, segment])));
+  // A group path as the catalogue spells it: every segment alias replaced by the segment it stands for.
+  const canonical = (path: string): string =>
+    path
+      .split(NAME_SEPARATOR)
+      .map((segment) => segmentOf.get(segment) ?? segment)
+      .join(NAME_SEPARATOR);
   const datasets = new Map<string, Dataset>();
+  const groupsById = new Map<string, readonly string[]>();
   // Every name an entry answers to, mapped to the ids of the entries that answer to it, in id order.
   const names = new Map<string, string[]>();
   for (const entry of [...entries].sort((left, right) => (left.id < right.id ? -1 : 1))) {
@@ -158,14 +214,20 @@ export function createCatalogue(index: unknown): Catalogue {
       throw new CatalogueSyntaxError("catalogue", [{ path: `entries.${entry.id}.crosswalk.file`, message: "the crosswalk file does not resolve" }]);
     }
     datasets.set(entry.id, { entry, kind: kindOf(entry.category), crosswalk, catalogue });
-    for (const name of new Set(namesOf(entry).all)) {
+    groupsById.set(entry.id, groupsOf(entry).map((group) => group.join(NAME_SEPARATOR)));
+    for (const name of namesOf(entry, segmentAliases).all) {
       names.set(name, [...(names.get(name) ?? []), entry.id]);
     }
   }
+  const tree = namespaceTree(groupsById);
 
   return {
     manifest,
-    listDatasets: (query = {}) => [...datasets.values()].filter((dataset) => matches(dataset, query)),
+    listDatasets: (query = {}) => {
+      const namespace = query.namespace === undefined ? undefined : canonical(query.namespace);
+
+      return [...datasets.values()].filter((dataset) => matches(dataset, query, groupsById.get(dataset.entry.id) ?? [], namespace));
+    },
     getDataset: (name) => {
       const exact = datasets.get(name);
       if (exact !== undefined) {
@@ -186,5 +248,6 @@ export function createCatalogue(index: unknown): Catalogue {
 
       return dataset;
     },
+    listNamespaces: (path) => tree.get(path === undefined ? "" : canonical(path)) ?? [],
   };
 }
