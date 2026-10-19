@@ -10,6 +10,8 @@ import "../styles.css";
 /** A row of search-index.json, as site/build-site.ts writes it. */
 interface SearchRecord {
   readonly id: string;
+  readonly namespace?: string;
+  readonly aliases?: readonly string[];
   readonly name: string;
   readonly description?: string;
   readonly domain?: string;
@@ -62,7 +64,7 @@ function Listing({ records }: { readonly records: readonly SearchRecord[] }): Re
       if (needle === "") {
         return true;
       }
-      const haystack = [record.id, record.name, record.description, record.domain, ...record.tags].filter((field): field is string => field !== undefined);
+      const haystack = [record.id, record.namespace, ...(record.aliases ?? []), record.name, record.description, record.domain, ...record.tags].filter((field): field is string => field !== undefined);
 
       return haystack.some((field) => field.toLowerCase().includes(needle));
     });

@@ -1,12 +1,14 @@
 import { mkdirSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
-import type { Dataset, Manifest } from "keepset";
+import { NAME_SEPARATOR, type Dataset, type Manifest } from "keepset";
 import { slug } from "./html";
 import { entryPage, groupsPage, homePage, listingPage, type PageContext } from "./pages";
 
 /** One row of the search index the client island loads: enough to filter and label a result without fetching its page. */
 export interface SearchRecord {
   readonly id: string;
+  readonly namespace?: string;
+  readonly aliases?: readonly string[];
   readonly name: string;
   readonly description?: string;
   readonly domain?: string;
@@ -80,6 +82,8 @@ export function buildSite(options: SiteOptions): SiteFiles {
 
   const search: SearchRecord[] = datasets.map(({ entry, kind }) => ({
     id: entry.id,
+    ...(entry.namespace === undefined ? {} : { namespace: entry.namespace.join(NAME_SEPARATOR) }),
+    ...(entry.aliases === undefined ? {} : { aliases: entry.aliases }),
     name: entry.name,
     ...(entry.description === undefined ? {} : { description: entry.description }),
     ...(entry.domain === undefined ? {} : { domain: entry.domain }),

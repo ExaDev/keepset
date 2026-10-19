@@ -3,7 +3,7 @@
 
 import { Fragment, type ReactNode } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
-import type { Dataset, Manifest } from "keepset";
+import { NAME_SEPARATOR, type Dataset, type Manifest } from "keepset";
 import { scriptJson, slug } from "./html";
 import { datasetJsonLd, describe } from "./jsonld";
 
@@ -105,6 +105,8 @@ export function entryPage(context: PageContext, dataset: Dataset): string {
     <h2 key="overview">Overview</h2>,
     <Facts key="overview" rows={[
       ["Id", <code key="id">{entry.id}</code>],
+      ...(entry.namespace === undefined ? [] : [["Namespace", <code key="namespace">{entry.namespace.join(NAME_SEPARATOR)}</code>] as const]),
+      ...(entry.aliases === undefined ? [] : [["Aliases", entry.aliases.map((alias) => <code key={alias}>{alias}</code>).flatMap((alias, index) => (index === 0 ? [alias] : [", ", alias]))] as const]),
       ["Category", <code key="category">{entry.category}</code>],
       ["Kind", <a key="kind" href={`../../kinds/${slug(dataset.kind)}/`}>{dataset.kind}</a>],
       ...(entry.domain === undefined ? [] : [["Domain", <a key="domain" href={`../../domains/${slug(entry.domain)}/`}>{entry.domain}</a>] as const]),
