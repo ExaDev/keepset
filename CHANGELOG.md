@@ -1,3 +1,12 @@
+# [0.20.0](https://github.com/Mearman/keepset/compare/v0.19.0...v0.20.0) (2026-10-19)
+
+
+### Features
+
+* **catalogue:** fetch the Environment Agency prosecutions workbook ([bea8a9f](https://github.com/Mearman/keepset/commit/bea8a9f493a9d3e3e582a1400ff581b3ec35e609))
+* **parsers:** read a sheet of an xlsx workbook as a table ([2bfa6ab](https://github.com/Mearman/keepset/commit/2bfa6ab19838e861833fd37e66c25240d9eb59c7))
+* **seed:** import a workbook sheet as an operations research recipe ([7740b9e](https://github.com/Mearman/keepset/commit/7740b9ebfe151d4ef5ad2a3cae1ed9169c9998fc))
+
 # [0.19.0](https://github.com/Mearman/keepset/compare/v0.18.0...v0.19.0) (2026-10-19)
 
 
