@@ -1,3 +1,12 @@
+# [0.12.0](https://github.com/Mearman/keepset/compare/v0.11.0...v0.12.0) (2026-10-19)
+
+
+### Features
+
+* let an alias be a path that files the entry in another group ([151d4b8](https://github.com/Mearman/keepset/commit/151d4b812f9da399b496e9679c44d67e2c2a02d7))
+* list namespaces and let the manifest alias their segments ([e236acb](https://github.com/Mearman/keepset/commit/e236acbe29a699ff83907f1119d04d03f0d535c3))
+* **seed:** alias the collection namespaces by their id abbreviations ([03fb589](https://github.com/Mearman/keepset/commit/03fb589e82afd9e1fc5285f445cad7cead528378))
+
 # [0.11.0](https://github.com/Mearman/keepset/compare/v0.10.0...v0.11.0) (2026-10-19)
 
 
