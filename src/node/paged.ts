@@ -69,7 +69,7 @@ async function readPages(layer: Readonly<LayerRead>, held: readonly unknown[]): 
     return held;
   }
   const url = `${layer.query}?where=1%3D1&outFields=*&orderByFields=${encodeURIComponent(layer.orderBy)}&resultOffset=${String(held.length)}&f=geojson`;
-  const page = await getJson(layer.port, url, layer.signal);
+  const page = await withAttempts(async () => getJson(layer.port, url, layer.signal), layer.signal);
   const features = FeatureListSchema.safeParse(typeof page === "object" && page !== null && "features" in page ? page.features : undefined);
   if (!features.success || features.data.length === 0) {
     throw new KeepsetError(`${layer.query} gave no features at offset ${String(held.length)}, before the ${String(layer.count)} it reports, so it does not page by offset`);
@@ -96,6 +96,29 @@ async function downloadArcgisLayer(layerUrl: string, orderBy: string, port: Fetc
   const pages = await readPages({ query, orderBy, count, port, signal }, []);
 
   return new TextEncoder().encode(JSON.stringify({ type: "FeatureCollection", features: pages }));
+}
+
+/** How many times a page is requested before the download fails: a connection can drop or go silent in one request of dozens and succeed in the next, and the pages are read by offset so asking again is exact. */
+const PAGE_ATTEMPTS = 3;
+
+/**
+ * Runs one page read, asking again when it fails, so one bad response of a long download does not lose the rest.
+ * @param read - The page read.
+ * @param signal - Aborts the download, which is not asked again.
+ * @param attempt - Which attempt this is, from 1.
+ * @returns What the read returns.
+ * @throws The last failure, when the attempts are used up or the download was aborted.
+ */
+async function withAttempts<Result>(read: () => Promise<Result>, signal: AbortSignal | undefined, attempt = 1): Promise<Result> {
+  try {
+    return await read();
+  } catch (error) {
+    if (attempt >= PAGE_ATTEMPTS || signal?.aborted === true) {
+      throw error;
+    }
+
+    return withAttempts(read, signal, attempt + 1);
+  }
 }
 
 const LINE_FEED = 0x0a;
@@ -158,12 +181,16 @@ async function readResourcePages(read: Readonly<ResourceRead>, held: readonly Ui
   if (offset >= read.count) {
     return held;
   }
-  const page = await getBytes(read.port, `${read.resource}?%24order=%3Aid&%24limit=${String(read.pageSize)}&%24offset=${String(offset)}`, read.signal);
   const expected = Math.min(read.pageSize, read.count - offset);
-  const rows = recordsIn(page) - 1;
-  if (rows !== expected) {
-    throw new KeepsetError(`${read.resource} gave ${String(rows)} rows at offset ${String(offset)} where ${String(expected)} of its ${String(read.count)} were due, so a response was cut short or the table changed during the download`);
-  }
+  const page = await withAttempts(async () => {
+    const bytes = await getBytes(read.port, `${read.resource}?%24order=%3Aid&%24limit=${String(read.pageSize)}&%24offset=${String(offset)}`, read.signal);
+    const rows = recordsIn(bytes) - 1;
+    if (rows !== expected) {
+      throw new KeepsetError(`${read.resource} gave ${String(rows)} rows at offset ${String(offset)} where ${String(expected)} of its ${String(read.count)} were due, so a response was cut short or the table changed during the download`);
+    }
+
+    return bytes;
+  }, read.signal);
   const first = held[0];
   const headerEnd = page.indexOf(LINE_FEED) + 1;
   if (first !== undefined && !page.subarray(0, headerEnd).every((byte, index) => byte === first[index])) {
