@@ -45,6 +45,10 @@
     "archive": {
       "kind": "none"
     },
+    "paging": {
+      "kind": "ckan-datastore",
+      "pageSize": 50000
+    },
     "parser": {
       "columns": [
         "total_amount"

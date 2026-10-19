@@ -14,7 +14,7 @@
       "name": "Team Orienteering Problem instances (Chao and Tsiligirides sets)",
       "namespace": "ku-leuven",
       "outcome": {
-        "reason": "The download is a zip of instance files in a plain text format with a small header and no column names, and keepset has no parser for it yet.",
+        "reason": "The download is a collection of 60 text instance files of one 100 node point set under different budgets (planar coordinates and a prize, with no time quantities), and a collection is more than one or/v1 document, so no recipe reads it.",
         "status": "not-fetchable"
       },
       "surveyId": "or-0"
@@ -33,7 +33,7 @@
       "name": "Team Orienteering Problem with Time Windows instances (Righini)",
       "namespace": "ku-leuven",
       "outcome": {
-        "reason": "The download is a zip of instance files in a Solomon style text format with no column names, and keepset has no parser for it yet.",
+        "reason": "The download is a collection of Solomon style time window instance files (planar coordinates, service durations, prizes and windows in abstract units, not seconds), and a collection is more than one or/v1 document, so no recipe reads it.",
         "status": "not-fetchable"
       },
       "surveyId": "or-1"
@@ -52,7 +52,7 @@
       "name": "Park-and-loop routing instances (Cabrera et al., 2021)",
       "namespace": "vrp-rep",
       "outcome": {
-        "reason": "The download is a zip holding many separate coordinate files plus a readme, and keepset has no zip handling for a recipe yet.",
+        "reason": "The download is a collection of separate coordinate files plus a readme, and a collection is more than one or/v1 document, so no recipe reads it.",
         "status": "not-fetchable"
       },
       "surveyId": "or-10"
@@ -346,7 +346,7 @@
       "name": "CFPB Consumer Complaint Database (Debt Collection)",
       "namespace": "cfpb",
       "outcome": {
-        "reason": "The bulk download is a zip of 355,930,383 bytes covering every product, which is larger than a recipe can read, and the debt collection subset is only reachable through a search API.",
+        "reason": "The bulk download is a zip of 355,930,383 bytes covering every product, and the debt collection subset is only reachable through a search API that keepset cannot page.",
         "status": "not-fetchable"
       },
       "surveyId": "or-105"
@@ -564,7 +564,7 @@
       "name": "Dynamic Workforce Scheduling and Routing with Time Windows and Skill Constraints instances",
       "namespace": "mendeley-data",
       "outcome": {
-        "reason": "The download is a spreadsheet (xlsx) with task, team and distance matrix sheets and no coordinates, and keepset has no spreadsheet parser yet.",
+        "reason": "The download is hundreds of small Excel workbooks whose task sheets have no coordinates (places exist only as distance matrices) and whose file names repeat across folders, so no recipe can name one table.",
         "status": "not-fetchable"
       },
       "surveyId": "or-11"
@@ -1166,7 +1166,7 @@
       "name": "Event Duration Monitoring, Storm Overflows (England and Wales)",
       "namespace": "defra",
       "outcome": {
-        "reason": "The survey URL is a landing page and no direct download could be verified, because the files sit on a host whose TLS connection failed.",
+        "reason": "The yearly download is a zip holding a ten sheet xlsx workbook with a title row above each header, durations as Excel day fractions and outlet positions only as National Grid references, so a workbook inside a zip with no coordinates in degrees has no recipe; the host the landing page names has no address, so the files are fetched through the catalogue's download API.",
         "status": "not-fetchable"
       },
       "surveyId": "or-119"
@@ -1344,7 +1344,7 @@
       "name": "Historic Flood Warnings (England)",
       "namespace": "defra",
       "outcome": {
-        "reason": "The survey URL is a landing page; the zip it names is hosted on api.agrimetrics.co.uk, whose TLS connection failed during the survey, so no direct download or table could be verified, and the page lists the format as ODS (a spreadsheet) which keepset has no parser for yet.",
+        "reason": "The download is a zip holding one OpenDocument spreadsheet whose member name changes every quarter, and keepset reads xlsx and not ods.",
         "status": "not-fetchable"
       },
       "surveyId": "or-120"
@@ -1410,7 +1410,7 @@
       "name": "FEMA NFIP redacted claims",
       "namespace": "fema",
       "outcome": {
-        "reason": "The data is served only as JSON pages by the OpenFEMA API (the survey page itself refuses automated requests), keepset has no JSON paging parser yet, and the successor v3 table holds 2725989 records, more than a recipe can read.",
+        "reason": "The OpenFEMA v3 API pages claims anonymously as CSV, but the table has millions of rows whose locations are rounded to a tenth of a degree, the terms of use limit it to statistical use without reidentification, and keepset has no recipe paging for this API.",
         "status": "not-fetchable"
       },
       "surveyId": "or-122"
@@ -1478,9 +1478,13 @@
       "surveyId": "or-123"
     },
     {
+      "downloadUrl": "https://www.data.qld.gov.au/datastore/dump/872065ae-ddfd-4b5f-ad15-e1935dadd883",
       "flags": [
         "Records name individuals and deceased-estate owners, so the table is personal data.",
-        "The dataset has no location or deadline concept."
+        "the Owner column names individuals, including deceased estates, and is deliberately not mapped or kept",
+        "the published CSV link answers an AWS WAF challenge, so the datastore dump is read, a page at a time",
+        "the amount is mapped as the prize, a sum held for the owner rather than a reward",
+        "the postcode is 0 where the owner has none"
       ],
       "id": "queensland-government-unclaimed-monies",
       "licence": {
@@ -1490,8 +1494,32 @@
       "name": "Unclaimed monies (Queensland)",
       "namespace": "queensland-government",
       "outcome": {
-        "reason": "The CSV download answers with an AWS WAF challenge and an empty body, the CKAN datastore API is paged JSON that keepset cannot read yet, and the table has 2553652 records, more than a recipe can read.",
-        "status": "not-fetchable"
+        "delimiter": "comma",
+        "encoding": "utf-8",
+        "header": [
+          "_id",
+          "ClientId_ActNo",
+          "Owner",
+          "Amount",
+          "SenderName",
+          "DateRec",
+          "PCode"
+        ],
+        "idColumn": "id",
+        "map": {
+          "opened": "DateRec",
+          "prize": "Amount",
+          "territory": "PCode"
+        },
+        "numericColumns": [
+          {
+            "column": "Amount",
+            "factor": 1
+          }
+        ],
+        "rowCount": 2553652,
+        "skipLines": 0,
+        "status": "fetchable"
       },
       "surveyId": "or-124"
     },
@@ -1841,7 +1869,7 @@
       "name": "Home health care routing, multi-window variant",
       "namespace": "mendeley-data",
       "outcome": {
-        "reason": "The download is a RAR archive of macro-enabled Excel workbooks and keepset has no archive or spreadsheet parser yet.",
+        "reason": "The download is a RAR archive of macro enabled Excel workbooks, and keepset reads neither RAR archives nor macro workbooks.",
         "status": "not-fetchable"
       },
       "surveyId": "or-16"
@@ -1857,7 +1885,7 @@
       "name": "HHCRSP curated instances (Kummer, 2021)",
       "namespace": "github-afkummer",
       "outcome": {
-        "reason": "The instances are keyword-format text files that keepset has no parser for yet, and dataset.csv only indexes the selected instances.",
+        "reason": "The instances are keyword format text files of matrices (a collection of many, indexed by dataset.csv), and a collection is more than one or/v1 document, so no recipe reads it.",
         "status": "not-fetchable"
       },
       "surveyId": "or-17"
@@ -1892,7 +1920,7 @@
       "name": "CQC care directory (England)",
       "namespace": "cqc",
       "outcome": {
-        "reason": "The CSV starts with a title line and a production note before any column header, so it is not a rectangular table with the header on its first line.",
+        "reason": "The CSV has a title and a production note above its header and its address contains the month it was produced, so it changes every month and has no stable download URL.",
         "status": "not-fetchable"
       },
       "surveyId": "or-19"
@@ -1909,7 +1937,7 @@
       "name": "Dynamic team orienteering problem",
       "namespace": "mendeley-data",
       "outcome": {
-        "reason": "The only file is an Excel workbook of results and keepset has no spreadsheet parser yet.",
+        "reason": "The only file is an Excel workbook of aggregate results per solved instance, with no row for a place or a task, so there are no nodes to map.",
         "status": "not-fetchable"
       },
       "surveyId": "or-2"
@@ -1985,7 +2013,7 @@
       "name": "Technician routing and scheduling problem (Pillac et al.)",
       "namespace": "vrp-rep",
       "outcome": {
-        "reason": "The download is a zip of instance files in the VRP-REP XML format and keepset has no parser for it yet.",
+        "reason": "The download is a collection of VRP-REP XML instance files holding coordinates and skills but no times, and a collection is more than one or/v1 document, so no recipe reads it.",
         "status": "not-fetchable"
       },
       "surveyId": "or-21"
@@ -2003,7 +2031,7 @@
       "name": "Concrete delivery problem operational data",
       "namespace": "mendeley-data",
       "outcome": {
-        "reason": "The downloads are MATLAB data files and keepset has no parser for them yet.",
+        "reason": "The downloads are MATLAB data files and keepset has no parser for them.",
         "status": "not-fetchable"
       },
       "surveyId": "or-22"
@@ -2037,7 +2065,7 @@
       "name": "VeRoLog 2019 machine delivery and installation instances",
       "namespace": "github-bascoding",
       "outcome": {
-        "reason": "The instances are keyword-format text files (and semicolon-delimited copies with the same content) that keepset has no parser for yet.",
+        "reason": "The instances are keyword format text files in a collection mirrored by a student without a licence statement, and a collection is more than one or/v1 document, so no recipe reads it.",
         "status": "not-fetchable"
       },
       "surveyId": "or-24"
@@ -2054,7 +2082,7 @@
       "name": "Technician dispatch data (Mathlouthi, Gendreau and Potvin)",
       "namespace": "zenodo",
       "outcome": {
-        "reason": "Zenodo refused automated requests, so the file list and formats could not be seen and no direct download could be verified.",
+        "reason": "The Zenodo files are a custom sectioned text format (technicians, tasks and a travel time matrix of millions of lines) and not a table, and two of them are collections of instance files.",
         "status": "not-fetchable"
       },
       "surveyId": "or-25"
@@ -2071,7 +2099,7 @@
       "name": "VeRoLog 2016-2017 scarce-equipment pickup and delivery instances",
       "namespace": "ortec",
       "outcome": {
-        "reason": "The instances are keyword-format text files on a Wayback Machine snapshot and keepset has no parser for them yet.",
+        "reason": "The instances are keyword format text files on a Wayback Machine snapshot, a collection of separate files, and a collection is more than one or/v1 document, so no recipe reads it.",
         "status": "not-fetchable"
       },
       "surveyId": "or-26"
@@ -2222,7 +2250,7 @@
       "name": "Probabilistic orienteering problem",
       "namespace": "vrp-rep",
       "outcome": {
-        "reason": "The download is a zip of TSPLIB-style text files with a POP section and keepset has no parser for it yet.",
+        "reason": "The download is a collection of TSPLIB style instance files with a prize and probability section, half of which carry no coordinates and some of which use the degrees and minutes form, and a collection is more than one or/v1 document, so no recipe reads it.",
         "status": "not-fetchable"
       },
       "surveyId": "or-3"
@@ -2241,16 +2269,21 @@
       "name": "Meituan-INFORMS-TSL research challenge dataset",
       "namespace": "github-meituan",
       "outcome": {
-        "reason": "The plain CSV probed holds only an index, date, dispatch time and order id with no mappable field, and the coordinate data sits in a zip that keepset cannot read.",
+        "reason": "The data is released under CC BY-NC 4.0 with a bar on passing it to third parties without permission, and its coordinates are shifted by the publisher, so they are not WGS84 positions.",
         "status": "not-fetchable"
       },
       "surveyId": "or-30"
     },
     {
       "description": "Historical DoorDash delivery orders with store category, item counts, dasher supply and estimated durations; no coordinates.",
+      "downloadUrl": "https://www.kaggle.com/api/v1/datasets/download/dharun4772/doordash-eta-prediction",
       "flags": [
         "licence is the uploader-declared Kaggle metadata value, not a statement from DoorDash",
-        "no coordinates: only store_id and market_id identify place"
+        "no coordinates: only store_id and market_id identify place",
+        "the download is a Kaggle API link that redirects to a signed temporary address, and answers without an account",
+        "missing values are written NA, which the recipe reads as empty",
+        "the order place and store to consumer driving durations are the estimates the table records, in seconds",
+        "no column is unique in every row, so rows are numbered"
       ],
       "id": "kaggle-doordash-eta-prediction",
       "licence": {
@@ -2260,8 +2293,57 @@
       "name": "DoorDash delivery ETA prediction orders",
       "namespace": "kaggle",
       "outcome": {
-        "reason": "The download is a zip archive holding one CSV and keepset has no archive handling yet, so the table cannot be read directly from the download.",
-        "status": "not-fetchable"
+        "archive": {
+          "kind": "zip",
+          "member": {
+            "path": "historical_data.csv"
+          }
+        },
+        "delimiter": "comma",
+        "encoding": "utf-8",
+        "header": [
+          "market_id",
+          "created_at",
+          "actual_delivery_time",
+          "store_id",
+          "store_primary_category",
+          "order_protocol",
+          "total_items",
+          "subtotal",
+          "num_distinct_items",
+          "min_item_price",
+          "max_item_price",
+          "total_onshift_dashers",
+          "total_busy_dashers",
+          "total_outstanding_orders",
+          "estimated_order_place_duration",
+          "estimated_store_to_consumer_driving_duration"
+        ],
+        "idColumn": null,
+        "map": {
+          "closed": "actual_delivery_time",
+          "duration": "estimated_order_place_duration",
+          "opened": "created_at",
+          "skill": "store_primary_category",
+          "territory": "market_id",
+          "travelTime": "estimated_store_to_consumer_driving_duration"
+        },
+        "nullValues": [
+          "NA"
+        ],
+        "numericColumns": [
+          {
+            "column": "estimated_order_place_duration",
+            "factor": 1
+          },
+          {
+            "column": "estimated_store_to_consumer_driving_duration",
+            "factor": 1
+          }
+        ],
+        "rowCount": 197428,
+        "skipLines": 0,
+        "status": "fetchable"
       },
       "surveyId": "or-31"
     },
@@ -2279,7 +2361,7 @@
       "name": "Medical appointment no-shows (Brazil, 2016)",
       "namespace": "kaggle",
       "outcome": {
-        "reason": "The download is a zip archive holding one CSV and keepset has no archive handling yet, so the table cannot be read directly from the download.",
+        "reason": "The records are patient level health data under CC BY-NC-SA 4.0 with no location column.",
         "status": "not-fetchable"
       },
       "surveyId": "or-32"
@@ -2558,7 +2640,7 @@
       "name": "Perm cash-collection sites (ATM and POS points)",
       "namespace": "github-oberfichtner",
       "outcome": {
-        "reason": "The only data file is an xls spreadsheet and keepset has no spreadsheet parser yet.",
+        "reason": "The only data file is an old binary xls workbook, and keepset reads only xlsx.",
         "status": "not-fetchable"
       },
       "surveyId": "or-38"
@@ -2641,7 +2723,7 @@
       "name": "Clustered orienteering problem instances (Angelelli et al. 2014)",
       "namespace": "vrp-rep",
       "outcome": {
-        "reason": "The download is a zip of TSPLIB-style .cop instance files plus a readme and an xlsx workbook, and keepset has no parser for that format yet.",
+        "reason": "The download is a collection of TSPLIB style instance files whose prizes belong to overlapping clusters of nodes and not to nodes, and a collection is more than one or/v1 document, so no recipe reads it.",
         "status": "not-fetchable"
       },
       "surveyId": "or-4"
@@ -3276,7 +3358,7 @@
       "name": "Solomon VRPTW benchmark instances",
       "namespace": "lcc-malaga",
       "outcome": {
-        "reason": "The download is a zip of plain-text Solomon instance files and keepset has no parser for that format yet.",
+        "reason": "The download is a collection of Solomon instance files (planar coordinates, demands, service times and windows in abstract units, not seconds), and a collection is more than one or/v1 document, so no recipe reads it.",
         "status": "not-fetchable"
       },
       "surveyId": "or-5"
@@ -3303,6 +3385,10 @@
       "name": "Environment Agency prosecutions",
       "namespace": "defra",
       "outcome": {
+        "archive": {
+          "kind": "xlsx",
+          "sheet": "Environment Agency Prosecutions"
+        },
         "delimiter": "comma",
         "encoding": "utf-8",
         "header": [
@@ -3337,7 +3423,6 @@
           }
         ],
         "rowCount": 17652,
-        "sheet": "Environment Agency Prosecutions",
         "skipLines": 0,
         "status": "fetchable"
       },
@@ -3455,7 +3540,7 @@
       "name": "Litter fixed penalty notices issued by 3GS (Leeds)",
       "namespace": "leeds",
       "outcome": {
-        "reason": "The CSV has a title line (FPN Detail) above the real header, so it does not have its header on the first line and is not a plain table.",
+        "reason": "Each quarter is its own file at its own tokenised address, the later quarters are xlsx, and each CSV has a title row above its header and a summary block and blank rows below its data.",
         "status": "not-fetchable"
       },
       "surveyId": "or-53"
@@ -3786,7 +3871,7 @@
       "name": "Meter reading problem instance (Hartford, CT)",
       "namespace": "zenodo",
       "outcome": {
-        "reason": "The download is a zip of plain-text arc-routing instance files (customers, network and links) described by a readme, and keepset has no parser for that format yet.",
+        "reason": "The download is one arc routing instance in two tab separated text files with no column names, holding only planar coordinates of customers and a road network, so there is no field of the or/v1 node beyond a position and no table the parser reads.",
         "status": "not-fetchable"
       },
       "surveyId": "or-6"
@@ -4450,7 +4535,7 @@
       "name": "Pharmaceutical last-mile delivery dataset (Vrani et al.)",
       "namespace": "zenodo",
       "outcome": {
-        "reason": "The download is a zip of Excel (xlsx) files holding distance and time matrices, and keepset has no spreadsheet parser yet.",
+        "reason": "The download is a zip of Excel workbooks that hold distance and time matrices only, so there are no nodes to map, and keepset reads a sheet of a workbook, not a workbook inside a zip.",
         "status": "not-fetchable"
       },
       "surveyId": "or-7"
@@ -4644,7 +4729,7 @@
       "name": "Sitadel housing permits (Ile-de-France)",
       "namespace": "france-sdes",
       "outcome": {
-        "reason": "The download is a zip of shapefile layers, and keepset has no shapefile parser yet.",
+        "reason": "The download is a per-request zip of a point shapefile (the attributes are in a dbf and the positions in a separate shp, in a projected system) with no CSV or GeoJSON route, and keepset has no shapefile parser.",
         "status": "not-fetchable"
       },
       "surveyId": "or-72"
@@ -4717,7 +4802,7 @@
       "name": "Official publications of environmental permit notices (Netherlands)",
       "namespace": "overheid-nl",
       "outcome": {
-        "reason": "The source is an SRU search endpoint that returns XML notices in a query language, not a table, and keepset has no parser for it.",
+        "reason": "The source is an SRU search endpoint that returns XML notices in a query language and not a table, and keepset has no parser for it.",
         "status": "not-fetchable"
       },
       "surveyId": "or-74"
@@ -4983,7 +5068,7 @@
       "name": "Last-mile delivery route deviations, planned vs actual",
       "namespace": "mendeley-data",
       "outcome": {
-        "reason": "The only file is an xlsx workbook of about 19.7 MB, and keepset has no spreadsheet parser yet.",
+        "reason": "The only file is an Excel workbook with a row per stop visit of a route that holds minute offsets and distances between stops and no location, so the only node field it could fill is a time window and a fetch would carry no place.",
         "status": "not-fetchable"
       },
       "surveyId": "or-8"
@@ -5002,7 +5087,7 @@
       "name": "Expiation notice system data (South Australia)",
       "namespace": "south-australia",
       "outcome": {
-        "reason": "The download is a set of zip archives of CSV files, one per financial year and report type with differing columns, and keepset has no archive parser yet.",
+        "reason": "The portal answered a bot challenge to automated requests for the table dumps when probed, and the data is a file per financial year and report type with different columns before and after 2022, so no single recipe covers the dataset.",
         "status": "not-fetchable"
       },
       "surveyId": "or-80"
@@ -5668,7 +5753,7 @@
       "name": "MOVRPTW real Tenerife distribution instances",
       "namespace": "github-psxjpc",
       "outcome": {
-        "reason": "The download is a zip of Solomon-style instance text files and tab-separated matrices, and keepset has no parser for that format yet.",
+        "reason": "The download is a collection of Solomon style instance files and distance matrices, and a collection is more than one or/v1 document, so no recipe reads it.",
         "status": "not-fetchable"
       },
       "surveyId": "or-9"

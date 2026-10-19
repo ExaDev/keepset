@@ -21,7 +21,7 @@
     "surveyId": "or-122"
   },
   "recipe": {
-    "reason": "The data is served only as JSON pages by the OpenFEMA API (the survey page itself refuses automated requests), keepset has no JSON paging parser yet, and the successor v3 table holds 2725989 records, more than a recipe can read.",
+    "reason": "The OpenFEMA v3 API pages claims anonymously as CSV, but the table has millions of rows whose locations are rounded to a tenth of a degree, the terms of use limit it to statistical use without reidentification, and keepset has no recipe paging for this API.",
     "status": "not-fetchable"
   },
   "sources": [

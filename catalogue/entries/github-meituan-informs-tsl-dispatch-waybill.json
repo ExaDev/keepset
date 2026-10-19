@@ -22,7 +22,7 @@
     "surveyId": "or-30"
   },
   "recipe": {
-    "reason": "The plain CSV probed holds only an index, date, dispatch time and order id with no mappable field, and the coordinate data sits in a zip that keepset cannot read.",
+    "reason": "The data is released under CC BY-NC 4.0 with a bar on passing it to third parties without permission, and its coordinates are shifted by the publisher, so they are not WGS84 positions.",
     "status": "not-fetchable"
   },
   "sources": [

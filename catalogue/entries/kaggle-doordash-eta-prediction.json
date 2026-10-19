@@ -5,7 +5,51 @@
   "category": "or/v1",
   "citations": [],
   "crosswalk": {
-    "file": "crosswalks/or-v1/nodes.json"
+    "oneWay": [],
+    "rules": [
+      {
+        "from": "meta",
+        "op": "move",
+        "to": "meta"
+      },
+      {
+        "from": "nodes[].id",
+        "op": "move",
+        "to": "nodes[].id"
+      },
+      {
+        "from": "nodes[].actual_delivery_time",
+        "op": "move",
+        "to": "nodes[].closed"
+      },
+      {
+        "from": "nodes[].estimated_order_place_duration",
+        "op": "move",
+        "to": "nodes[].duration"
+      },
+      {
+        "from": "nodes[].created_at",
+        "op": "move",
+        "to": "nodes[].opened"
+      },
+      {
+        "from": "nodes[].store_primary_category",
+        "op": "move",
+        "to": "nodes[].skill"
+      },
+      {
+        "from": "nodes[].market_id",
+        "op": "move",
+        "to": "nodes[].territory"
+      },
+      {
+        "from": "nodes[].estimated_store_to_consumer_driving_duration",
+        "op": "move",
+        "to": "nodes[].travelTime"
+      }
+    ],
+    "source": "csv-table",
+    "target": "or/v1"
   },
   "description": "Historical DoorDash delivery orders with store category, item counts, dasher supply and estimated durations; no coordinates.",
   "domain": "Last-mile logistics",
@@ -23,14 +67,53 @@
     "surveyId": "or-31"
   },
   "recipe": {
-    "reason": "The download is a zip archive holding one CSV and keepset has no archive handling yet, so the table cannot be read directly from the download.",
-    "status": "not-fetchable"
+    "archive": {
+      "kind": "zip",
+      "member": {
+        "path": "historical_data.csv"
+      }
+    },
+    "parser": {
+      "columns": [
+        "actual_delivery_time",
+        "estimated_order_place_duration",
+        "created_at",
+        "store_primary_category",
+        "market_id",
+        "estimated_store_to_consumer_driving_duration"
+      ],
+      "delimiter": "comma",
+      "encoding": "utf-8",
+      "format": "csv-table",
+      "idColumn": null,
+      "nullValues": [
+        "NA"
+      ],
+      "numericColumns": [
+        {
+          "column": "estimated_order_place_duration",
+          "factor": 1
+        },
+        {
+          "column": "estimated_store_to_consumer_driving_duration",
+          "factor": 1
+        }
+      ],
+      "skipLines": 0
+    },
+    "source": 1,
+    "status": "fetchable"
   },
   "sources": [
     {
       "retrieved": "2026-10-19",
       "status": "live",
       "url": "https://www.kaggle.com/datasets/dharun4772/doordash-eta-prediction"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://www.kaggle.com/api/v1/datasets/download/dharun4772/doordash-eta-prediction"
     }
   ],
   "tags": [

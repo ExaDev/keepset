@@ -22,7 +22,7 @@
     "surveyId": "or-105"
   },
   "recipe": {
-    "reason": "The bulk download is a zip of 355,930,383 bytes covering every product, which is larger than a recipe can read, and the debt collection subset is only reachable through a search API.",
+    "reason": "The bulk download is a zip of 355,930,383 bytes covering every product, and the debt collection subset is only reachable through a search API that keepset cannot page.",
     "status": "not-fetchable"
   },
   "sources": [

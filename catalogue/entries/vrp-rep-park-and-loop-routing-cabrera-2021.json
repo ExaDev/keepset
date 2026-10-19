@@ -22,7 +22,7 @@
     "surveyId": "or-10"
   },
   "recipe": {
-    "reason": "The download is a zip holding many separate coordinate files plus a readme, and keepset has no zip handling for a recipe yet.",
+    "reason": "The download is a collection of separate coordinate files plus a readme, and a collection is more than one or/v1 document, so no recipe reads it.",
     "status": "not-fetchable"
   },
   "sources": [

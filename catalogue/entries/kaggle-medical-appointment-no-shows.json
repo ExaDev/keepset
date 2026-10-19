@@ -23,7 +23,7 @@
     "surveyId": "or-32"
   },
   "recipe": {
-    "reason": "The download is a zip archive holding one CSV and keepset has no archive handling yet, so the table cannot be read directly from the download.",
+    "reason": "The records are patient level health data under CC BY-NC-SA 4.0 with no location column.",
     "status": "not-fetchable"
   },
   "sources": [

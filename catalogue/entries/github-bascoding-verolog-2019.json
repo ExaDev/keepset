@@ -21,7 +21,7 @@
     "surveyId": "or-24"
   },
   "recipe": {
-    "reason": "The instances are keyword-format text files (and semicolon-delimited copies with the same content) that keepset has no parser for yet.",
+    "reason": "The instances are keyword format text files in a collection mirrored by a student without a licence statement, and a collection is more than one or/v1 document, so no recipe reads it.",
     "status": "not-fetchable"
   },
   "sources": [

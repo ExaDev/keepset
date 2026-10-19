@@ -23,7 +23,7 @@
     "surveyId": "or-80"
   },
   "recipe": {
-    "reason": "The download is a set of zip archives of CSV files, one per financial year and report type with differing columns, and keepset has no archive parser yet.",
+    "reason": "The portal answered a bot challenge to automated requests for the table dumps when probed, and the data is a file per financial year and report type with different columns before and after 2022, so no single recipe covers the dataset.",
     "status": "not-fetchable"
   },
   "sources": [

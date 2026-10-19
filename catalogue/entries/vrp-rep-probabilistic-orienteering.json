@@ -21,7 +21,7 @@
     "surveyId": "or-3"
   },
   "recipe": {
-    "reason": "The download is a zip of TSPLIB-style text files with a POP section and keepset has no parser for it yet.",
+    "reason": "The download is a collection of TSPLIB style instance files with a prize and probability section, half of which carry no coordinates and some of which use the degrees and minutes form, and a collection is more than one or/v1 document, so no recipe reads it.",
     "status": "not-fetchable"
   },
   "sources": [

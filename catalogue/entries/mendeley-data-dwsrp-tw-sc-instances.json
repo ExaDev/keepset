@@ -23,7 +23,7 @@
     "surveyId": "or-11"
   },
   "recipe": {
-    "reason": "The download is a spreadsheet (xlsx) with task, team and distance matrix sheets and no coordinates, and keepset has no spreadsheet parser yet.",
+    "reason": "The download is hundreds of small Excel workbooks whose task sheets have no coordinates (places exist only as distance matrices) and whose file names repeat across folders, so no recipe can name one table.",
     "status": "not-fetchable"
   },
   "sources": [

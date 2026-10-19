@@ -23,7 +23,7 @@
     "surveyId": "or-53"
   },
   "recipe": {
-    "reason": "The CSV has a title line (FPN Detail) above the real header, so it does not have its header on the first line and is not a plain table.",
+    "reason": "Each quarter is its own file at its own tokenised address, the later quarters are xlsx, and each CSV has a title row above its header and a summary block and blank rows below its data.",
     "status": "not-fetchable"
   },
   "sources": [

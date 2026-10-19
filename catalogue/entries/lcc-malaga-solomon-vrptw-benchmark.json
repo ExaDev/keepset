@@ -22,7 +22,7 @@
     "surveyId": "or-5"
   },
   "recipe": {
-    "reason": "The download is a zip of plain-text Solomon instance files and keepset has no parser for that format yet.",
+    "reason": "The download is a collection of Solomon instance files (planar coordinates, demands, service times and windows in abstract units, not seconds), and a collection is more than one or/v1 document, so no recipe reads it.",
     "status": "not-fetchable"
   },
   "sources": [

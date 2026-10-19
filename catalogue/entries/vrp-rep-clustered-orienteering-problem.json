@@ -22,7 +22,7 @@
     "surveyId": "or-4"
   },
   "recipe": {
-    "reason": "The download is a zip of TSPLIB-style .cop instance files plus a readme and an xlsx workbook, and keepset has no parser for that format yet.",
+    "reason": "The download is a collection of TSPLIB style instance files whose prizes belong to overlapping clusters of nodes and not to nodes, and a collection is more than one or/v1 document, so no recipe reads it.",
     "status": "not-fetchable"
   },
   "sources": [

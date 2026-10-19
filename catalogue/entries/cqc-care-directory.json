@@ -22,7 +22,7 @@
     "surveyId": "or-19"
   },
   "recipe": {
-    "reason": "The CSV starts with a title line and a production note before any column header, so it is not a rectangular table with the header on its first line.",
+    "reason": "The CSV has a title and a production note above its header and its address contains the month it was produced, so it changes every month and has no stable download URL.",
     "status": "not-fetchable"
   },
   "sources": [

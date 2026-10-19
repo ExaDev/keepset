@@ -22,7 +22,7 @@
     "surveyId": "or-25"
   },
   "recipe": {
-    "reason": "Zenodo refused automated requests, so the file list and formats could not be seen and no direct download could be verified.",
+    "reason": "The Zenodo files are a custom sectioned text format (technicians, tasks and a travel time matrix of millions of lines) and not a table, and two of them are collections of instance files.",
     "status": "not-fetchable"
   },
   "sources": [

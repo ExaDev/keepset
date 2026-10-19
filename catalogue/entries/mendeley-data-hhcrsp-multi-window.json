@@ -22,7 +22,7 @@
     "surveyId": "or-16"
   },
   "recipe": {
-    "reason": "The download is a RAR archive of macro-enabled Excel workbooks and keepset has no archive or spreadsheet parser yet.",
+    "reason": "The download is a RAR archive of macro enabled Excel workbooks, and keepset reads neither RAR archives nor macro workbooks.",
     "status": "not-fetchable"
   },
   "sources": [

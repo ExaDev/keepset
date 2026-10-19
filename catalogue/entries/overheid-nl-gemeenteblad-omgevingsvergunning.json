@@ -21,7 +21,7 @@
     "surveyId": "or-74"
   },
   "recipe": {
-    "reason": "The source is an SRU search endpoint that returns XML notices in a query language, not a table, and keepset has no parser for it.",
+    "reason": "The source is an SRU search endpoint that returns XML notices in a query language and not a table, and keepset has no parser for it.",
     "status": "not-fetchable"
   },
   "sources": [
