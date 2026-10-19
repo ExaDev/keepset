@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import { EntrySchema, parseEntry, SourceSchema, waybackUrl } from "./entry";
 import { CatalogueSyntaxError } from "./errors";
 import { serialise } from "./serialise";
-import { deadEntry, everyEntryShape, liveEntry } from "./test-support/entries";
+import { arcgisEntry, deadEntry, everyEntryShape, liveEntry } from "./test-support/entries";
 
 const requiredFields = ["id", "name", "tags", "category", "sources", "licence", "citations", "recipe", "crosswalk", "expectedCounts", "properties"] as const;
 
@@ -50,6 +50,21 @@ describe("the entry format", () => {
 
   it("rejects an edge-list parser whose source and target columns coincide", () => {
     expect(EntrySchema.is({ ...liveEntry, recipe: { ...liveEntry.recipe, parser: { ...liveEntry.recipe.parser, targetColumn: 0 } } })).toBe(false);
+  });
+
+  it("accepts a paged geojson recipe, and rejects a geojson parser whose columns contradict each other", () => {
+    expect(EntrySchema.is(arcgisEntry)).toBe(true);
+    const withParser = (parser: Record<string, unknown>): unknown => ({ ...arcgisEntry, recipe: { ...arcgisEntry.recipe, parser: { ...arcgisEntry.recipe.parser, ...parser } } });
+    expect(EntrySchema.is(withParser({ columns: ["FINE", "FINE"] }))).toBe(false);
+    expect(EntrySchema.is(withParser({ columns: ["geometry_latitude", "geometry_longitude", "OPENED", "KIND", "OBJECTID"] }))).toBe(false);
+    expect(EntrySchema.is(withParser({ columns: ["geometry_latitude", "geometry_longitude", "OPENED", "KIND"] }))).toBe(false);
+    expect(EntrySchema.is(withParser({ dateColumns: ["FINE"] }))).toBe(false);
+    expect(EntrySchema.is(withParser({ columns: [] }))).toBe(false);
+  });
+
+  it("rejects a paging that is not a known kind or orders by something that is not a field name", () => {
+    expect(EntrySchema.is({ ...arcgisEntry, recipe: { ...arcgisEntry.recipe, paging: { kind: "offset", orderBy: "OBJECTID" } } })).toBe(false);
+    expect(EntrySchema.is({ ...arcgisEntry, recipe: { ...arcgisEntry.recipe, paging: { kind: "arcgis-query", orderBy: "OBJECTID; DROP" } } })).toBe(false);
   });
 
   it("rejects archive member and crosswalk paths that climb out of their directory", () => {

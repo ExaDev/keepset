@@ -10,6 +10,7 @@ import { parseNative } from "../parsers/parse-native";
 import type { JsonScalar } from "../targets/json-scalar";
 import { unpack, type Unpacked } from "./archive";
 import { downloadRaw } from "./download";
+import { downloadPaged } from "./paged";
 
 /** The network port a recipe downloads through: `downloadRaw` by default, which returns the bytes exactly as served, or a stand-in under test. */
 export type FetchPort = (url: string, init: { readonly signal?: AbortSignal }) => Promise<Response>;
@@ -114,6 +115,9 @@ async function runToNative(dataset: Dataset, options: FetchOptions): Promise<Nat
 
   const retrievedAt = now().toISOString();
   const bytes = await step(entry.id, "download", async () => {
+    if (recipe.paging !== undefined) {
+      return downloadPaged(fetchedUrl, recipe.paging, fetchPort, signal);
+    }
     const response = await fetchPort(fetchedUrl, signal === undefined ? {} : { signal });
     if (!response.ok) {
       throw new KeepsetError(`${fetchedUrl} answered ${String(response.status)} ${response.statusText}`);
