@@ -22,7 +22,7 @@
     "surveyId": "or-22"
   },
   "recipe": {
-    "reason": "The downloads are MATLAB data files and keepset has no parser for them yet.",
+    "reason": "The downloads are MATLAB data files and keepset has no parser for them.",
     "status": "not-fetchable"
   },
   "sources": [

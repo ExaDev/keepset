@@ -23,7 +23,7 @@
     "surveyId": "or-72"
   },
   "recipe": {
-    "reason": "The download is a zip of shapefile layers, and keepset has no shapefile parser yet.",
+    "reason": "The download is a per-request zip of a point shapefile (the attributes are in a dbf and the positions in a separate shp, in a projected system) with no CSV or GeoJSON route, and keepset has no shapefile parser.",
     "status": "not-fetchable"
   },
   "sources": [

@@ -22,7 +22,7 @@
     "surveyId": "or-38"
   },
   "recipe": {
-    "reason": "The only data file is an xls spreadsheet and keepset has no spreadsheet parser yet.",
+    "reason": "The only data file is an old binary xls workbook, and keepset reads only xlsx.",
     "status": "not-fetchable"
   },
   "sources": [

@@ -23,7 +23,7 @@
     "surveyId": "or-6"
   },
   "recipe": {
-    "reason": "The download is a zip of plain-text arc-routing instance files (customers, network and links) described by a readme, and keepset has no parser for that format yet.",
+    "reason": "The download is one arc routing instance in two tab separated text files with no column names, holding only planar coordinates of customers and a road network, so there is no field of the or/v1 node beyond a position and no table the parser reads.",
     "status": "not-fetchable"
   },
   "sources": [

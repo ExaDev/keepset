@@ -23,7 +23,7 @@
     "surveyId": "or-8"
   },
   "recipe": {
-    "reason": "The only file is an xlsx workbook of about 19.7 MB, and keepset has no spreadsheet parser yet.",
+    "reason": "The only file is an Excel workbook with a row per stop visit of a route that holds minute offsets and distances between stops and no location, so the only node field it could fill is a time window and a fetch would carry no place.",
     "status": "not-fetchable"
   },
   "sources": [

@@ -23,7 +23,7 @@
     "surveyId": "or-9"
   },
   "recipe": {
-    "reason": "The download is a zip of Solomon-style instance text files and tab-separated matrices, and keepset has no parser for that format yet.",
+    "reason": "The download is a collection of Solomon style instance files and distance matrices, and a collection is more than one or/v1 document, so no recipe reads it.",
     "status": "not-fetchable"
   },
   "sources": [

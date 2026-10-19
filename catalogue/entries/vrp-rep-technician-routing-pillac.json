@@ -21,7 +21,7 @@
     "surveyId": "or-21"
   },
   "recipe": {
-    "reason": "The download is a zip of instance files in the VRP-REP XML format and keepset has no parser for it yet.",
+    "reason": "The download is a collection of VRP-REP XML instance files holding coordinates and skills but no times, and a collection is more than one or/v1 document, so no recipe reads it.",
     "status": "not-fetchable"
   },
   "sources": [

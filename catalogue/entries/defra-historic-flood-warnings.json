@@ -22,7 +22,7 @@
     "surveyId": "or-120"
   },
   "recipe": {
-    "reason": "The survey URL is a landing page; the zip it names is hosted on api.agrimetrics.co.uk, whose TLS connection failed during the survey, so no direct download or table could be verified, and the page lists the format as ODS (a spreadsheet) which keepset has no parser for yet.",
+    "reason": "The download is a zip holding one OpenDocument spreadsheet whose member name changes every quarter, and keepset reads xlsx and not ods.",
     "status": "not-fetchable"
   },
   "sources": [

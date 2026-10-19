@@ -23,7 +23,7 @@
     "surveyId": "or-119"
   },
   "recipe": {
-    "reason": "The survey URL is a landing page and no direct download could be verified, because the files sit on a host whose TLS connection failed.",
+    "reason": "The yearly download is a zip holding a ten sheet xlsx workbook with a title row above each header, durations as Excel day fractions and outlet positions only as National Grid references, so a workbook inside a zip with no coordinates in degrees has no recipe; the host the landing page names has no address, so the files are fetched through the catalogue's download API.",
     "status": "not-fetchable"
   },
   "sources": [

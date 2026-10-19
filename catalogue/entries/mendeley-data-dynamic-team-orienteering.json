@@ -22,7 +22,7 @@
     "surveyId": "or-2"
   },
   "recipe": {
-    "reason": "The only file is an Excel workbook of results and keepset has no spreadsheet parser yet.",
+    "reason": "The only file is an Excel workbook of aggregate results per solved instance, with no row for a place or a task, so there are no nodes to map.",
     "status": "not-fetchable"
   },
   "sources": [

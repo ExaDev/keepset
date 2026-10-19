@@ -23,7 +23,7 @@
     "surveyId": "or-7"
   },
   "recipe": {
-    "reason": "The download is a zip of Excel (xlsx) files holding distance and time matrices, and keepset has no spreadsheet parser yet.",
+    "reason": "The download is a zip of Excel workbooks that hold distance and time matrices only, so there are no nodes to map, and keepset reads a sheet of a workbook, not a workbook inside a zip.",
     "status": "not-fetchable"
   },
   "sources": [
