@@ -1,0 +1,48 @@
+{
+  "aliases": [
+    "311-service-requests-2020-to-present"
+  ],
+  "category": "or/v1",
+  "citations": [],
+  "crosswalk": {
+    "file": "crosswalks/or-v1/nodes.json"
+  },
+  "description": "New York City 311 service requests from 2020, with agency, complaint type, location, status and dates.",
+  "domain": "Civic and environmental monitoring",
+  "expectedCounts": {},
+  "id": "nyc-open-data-311-service-requests-2020-to-present",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "NYC 311 Service Requests from 2020 to Present",
+  "namespace": [
+    "nyc-open-data"
+  ],
+  "properties": {
+    "surveyId": "or-116"
+  },
+  "recipe": {
+    "reason": "The table has 22,844,087 rows, more than a recipe can read.",
+    "status": "not-fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://data.cityofnewyork.us/Social-Services/311-Service-Requests-from-2020-to-Present/erm2-nwe9"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://data.cityofnewyork.us/resource/erm2-nwe9.csv"
+    }
+  ],
+  "tags": [
+    "deadline",
+    "location",
+    "territory",
+    "skills",
+    "duration",
+    "lifecycle"
+  ]
+}

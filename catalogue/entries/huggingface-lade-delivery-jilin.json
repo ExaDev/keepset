@@ -1,0 +1,162 @@
+{
+  "aliases": [
+    "lade-delivery-jilin"
+  ],
+  "category": "or/v1",
+  "citations": [],
+  "crosswalk": {
+    "oneWay": [
+      {
+        "direction": "encode",
+        "from": "nodes[].city",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].courier_id",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].aoi_id",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].accept_gps_time",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].accept_gps_lng",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].accept_gps_lat",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].delivery_gps_time",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].delivery_gps_lng",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].delivery_gps_lat",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].ds",
+        "op": "drop"
+      }
+    ],
+    "rules": [
+      {
+        "from": "meta",
+        "op": "move",
+        "to": "meta"
+      },
+      {
+        "from": "nodes[].id",
+        "op": "move",
+        "to": "nodes[].id"
+      },
+      {
+        "from": "nodes[].delivery_time",
+        "op": "move",
+        "to": "nodes[].closed"
+      },
+      {
+        "from": "nodes[].lat",
+        "op": "move",
+        "to": "nodes[].lat"
+      },
+      {
+        "from": "nodes[].lng",
+        "op": "move",
+        "to": "nodes[].lon"
+      },
+      {
+        "from": "nodes[].accept_time",
+        "op": "move",
+        "to": "nodes[].opened"
+      },
+      {
+        "from": "nodes[].aoi_type",
+        "op": "move",
+        "to": "nodes[].skill"
+      },
+      {
+        "from": "nodes[].region_id",
+        "op": "move",
+        "to": "nodes[].territory"
+      }
+    ],
+    "source": "csv-table",
+    "target": "or/v1"
+  },
+  "description": "Last-mile delivery orders from Cainiao couriers in Jilin, with location, area type, acceptance and delivery times.",
+  "domain": "Last-mile logistics",
+  "expectedCounts": {},
+  "id": "huggingface-lade-delivery-jilin",
+  "licence": {
+    "id": "Apache-2.0",
+    "kind": "spdx"
+  },
+  "name": "LaDe last-mile delivery orders, Jilin",
+  "namespace": [
+    "huggingface"
+  ],
+  "properties": {
+    "surveyId": "or-28"
+  },
+  "recipe": {
+    "archive": {
+      "kind": "none"
+    },
+    "parser": {
+      "delimiter": "comma",
+      "encoding": "utf-8",
+      "format": "csv-table",
+      "idColumn": "order_id",
+      "numericColumns": [
+        {
+          "column": "lat",
+          "factor": 1
+        },
+        {
+          "column": "lng",
+          "factor": 1
+        }
+      ],
+      "skipLines": 0
+    },
+    "source": 1,
+    "status": "fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://huggingface.co/datasets/Cainiao-AI/LaDe"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://huggingface.co/datasets/Cainiao-AI/LaDe/resolve/main/delivery/delivery_jl.csv"
+    }
+  ],
+  "tags": [
+    "deadline",
+    "location",
+    "territory",
+    "travelTime"
+  ]
+}

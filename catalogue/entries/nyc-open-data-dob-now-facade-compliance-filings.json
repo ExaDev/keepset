@@ -1,0 +1,278 @@
+{
+  "aliases": [
+    "dob-now-facade-compliance-filings"
+  ],
+  "category": "or/v1",
+  "citations": [],
+  "crosswalk": {
+    "oneWay": [
+      {
+        "direction": "encode",
+        "from": "nodes[].TR6_NO",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].CONTROL_NO",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].CYCLE",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].BIN",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].HOUSE_NO",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].STREET_NAME",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].BLOCK",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].LOT",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].SEQUENCE_NO",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].QEWI_NAME",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].QEWI_BUS_NAME",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].QEWI_BUS_STREET_NAME",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].QEWI_CITY",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].QEWI_STATE",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].QEWI_ZIP",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].QEWI_NYS_LIC_NO",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].OWNER_NAME",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].OWNER_BUS_NAME",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].OWNER_BUS_STREET_NAME",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].OWNER_CITY",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].OWNER_ZIP",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].OWNER_STATE",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].FILING_DATE",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].FILING_STATUS",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].PRIOR_CYCLE_FILING_DATE",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].PRIOR_STATUS",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].FIELD_INSPECTION_COMPLETED_DATE",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].QEWI_SIGNED_DATE",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].FAILURE_TO_FILE_AMT",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].FAILURE_TO_CORRECT_AMT",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].COMMENTS",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Exterior_Wall_Type_s",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Exterior_Wall_Type_Other_Description",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Exterior_Wall_Material_s",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Exterior_Wall_Material_Other_Description",
+        "op": "drop"
+      }
+    ],
+    "rules": [
+      {
+        "from": "meta",
+        "op": "move",
+        "to": "meta"
+      },
+      {
+        "from": "nodes[].id",
+        "op": "move",
+        "to": "nodes[].id"
+      },
+      {
+        "from": "nodes[].SUBMITTED_ON",
+        "op": "move",
+        "to": "nodes[].opened"
+      },
+      {
+        "from": "nodes[].LATE_FILING_AMT",
+        "op": "move",
+        "to": "nodes[].prize"
+      },
+      {
+        "from": "nodes[].FILING_TYPE",
+        "op": "move",
+        "to": "nodes[].skill"
+      },
+      {
+        "from": "nodes[].CURRENT_STATUS",
+        "op": "move",
+        "to": "nodes[].status"
+      },
+      {
+        "from": "nodes[].BOROUGH",
+        "op": "move",
+        "to": "nodes[].territory"
+      }
+    ],
+    "source": "csv-table",
+    "target": "or/v1"
+  },
+  "description": "Facade inspection compliance filings with the NYC Department of Buildings, with filing type, status and late filing amount.",
+  "domain": "Case records",
+  "expectedCounts": {},
+  "id": "nyc-open-data-dob-now-facade-compliance-filings",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "DOB NOW Safety Facades compliance filings (NYC)",
+  "namespace": [
+    "nyc-open-data"
+  ],
+  "properties": {
+    "surveyId": "or-84"
+  },
+  "recipe": {
+    "archive": {
+      "kind": "none"
+    },
+    "parser": {
+      "delimiter": "comma",
+      "encoding": "utf-8",
+      "format": "csv-table",
+      "idColumn": null,
+      "numericColumns": [
+        {
+          "column": "LATE_FILING_AMT",
+          "factor": 1
+        }
+      ],
+      "skipLines": 0
+    },
+    "source": 1,
+    "status": "fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://data.cityofnewyork.us/Housing-Development/DOB-NOW-Safety-Facades-Compliance-Filings/xubg-57si"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://data.cityofnewyork.us/api/views/xubg-57si/rows.csv?accessType=DOWNLOAD"
+    }
+  ],
+  "tags": [
+    "prize",
+    "location",
+    "territory",
+    "skills",
+    "lifecycle"
+  ]
+}

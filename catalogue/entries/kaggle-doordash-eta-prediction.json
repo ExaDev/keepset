@@ -1,0 +1,40 @@
+{
+  "aliases": [
+    "doordash-eta-prediction"
+  ],
+  "category": "or/v1",
+  "citations": [],
+  "crosswalk": {
+    "file": "crosswalks/or-v1/nodes.json"
+  },
+  "description": "Historical DoorDash delivery orders with store category, item counts, dasher supply and estimated durations; no coordinates.",
+  "domain": "Last-mile logistics",
+  "expectedCounts": {},
+  "id": "kaggle-doordash-eta-prediction",
+  "licence": {
+    "id": "MIT",
+    "kind": "spdx"
+  },
+  "name": "DoorDash delivery ETA prediction orders",
+  "namespace": [
+    "kaggle"
+  ],
+  "properties": {
+    "surveyId": "or-31"
+  },
+  "recipe": {
+    "reason": "The download is a zip archive holding one CSV and keepset has no archive handling yet, so the table cannot be read directly from the download.",
+    "status": "not-fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://www.kaggle.com/datasets/dharun4772/doordash-eta-prediction"
+    }
+  ],
+  "tags": [
+    "prize",
+    "territory"
+  ]
+}

@@ -1,0 +1,184 @@
+{
+  "aliases": [
+    "li-contractor-licences"
+  ],
+  "category": "or/v1",
+  "citations": [],
+  "crosswalk": {
+    "oneWay": [
+      {
+        "direction": "encode",
+        "from": "nodes[].businessname",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].contractorlicensetypecode",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].contractorlicensetypecodedesc",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].address1",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].address2",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].state",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].zip",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].phonenumber",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].businesstypecode",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].businesstypecodedesc",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].specialtycode1",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].specialtycode2",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].specialtycode2desc",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].ubi",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].primaryprincipalname",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].statuscode",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].contractorlicensesuspenddate",
+        "op": "drop"
+      }
+    ],
+    "rules": [
+      {
+        "from": "meta",
+        "op": "move",
+        "to": "meta"
+      },
+      {
+        "from": "nodes[].id",
+        "op": "move",
+        "to": "nodes[].id"
+      },
+      {
+        "from": "nodes[].licenseexpirationdate",
+        "op": "move",
+        "to": "nodes[].deadline"
+      },
+      {
+        "from": "nodes[].licenseeffectivedate",
+        "op": "move",
+        "to": "nodes[].opened"
+      },
+      {
+        "from": "nodes[].specialtycode1desc",
+        "op": "move",
+        "to": "nodes[].skill"
+      },
+      {
+        "from": "nodes[].contractorlicensestatus",
+        "op": "move",
+        "to": "nodes[].status"
+      },
+      {
+        "from": "nodes[].city",
+        "op": "move",
+        "to": "nodes[].territory"
+      }
+    ],
+    "source": "csv-table",
+    "target": "or/v1"
+  },
+  "description": "Register of licensed contractors in Washington State with specialty, status and licence effective and expiry dates.",
+  "domain": "Technician and home-care routing",
+  "expectedCounts": {},
+  "id": "washington-state-li-contractor-licences",
+  "licence": {
+    "id": "PDDL-1.0",
+    "kind": "spdx"
+  },
+  "name": "Washington L&I contractor licences",
+  "namespace": [
+    "washington-state"
+  ],
+  "properties": {
+    "surveyId": "or-20"
+  },
+  "recipe": {
+    "archive": {
+      "kind": "none"
+    },
+    "parser": {
+      "delimiter": "comma",
+      "encoding": "utf-8",
+      "format": "csv-table",
+      "idColumn": "contractorlicensenumber",
+      "numericColumns": [],
+      "skipLines": 0
+    },
+    "source": 1,
+    "status": "fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://data.wa.gov/Licensing/L-I-Contractor-License-Data-General/m8qx-ubtq"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://data.wa.gov/resource/m8qx-ubtq.csv"
+    }
+  ],
+  "tags": [
+    "deadline",
+    "location",
+    "territory",
+    "skills",
+    "lifecycle"
+  ]
+}

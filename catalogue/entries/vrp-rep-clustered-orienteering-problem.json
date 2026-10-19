@@ -1,0 +1,41 @@
+{
+  "aliases": [
+    "clustered-orienteering-problem"
+  ],
+  "category": "or/v1",
+  "citations": [],
+  "crosswalk": {
+    "file": "crosswalks/or-v1/nodes.json"
+  },
+  "description": "Clustered orienteering problem benchmark instances with node coordinates, cluster prizes and a travel budget.",
+  "domain": "Orienteering",
+  "expectedCounts": {},
+  "id": "vrp-rep-clustered-orienteering-problem",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "Clustered orienteering problem instances (Angelelli et al. 2014)",
+  "namespace": [
+    "vrp-rep"
+  ],
+  "properties": {
+    "surveyId": "or-4"
+  },
+  "recipe": {
+    "reason": "The download is a zip of TSPLIB-style .cop instance files plus a readme and an xlsx workbook, and keepset has no parser for that format yet.",
+    "status": "not-fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "http://www.vrp-rep.org/datasets/download/angelelli-et-al-2014.zip"
+    }
+  ],
+  "tags": [
+    "prize",
+    "location",
+    "territory",
+    "travelTime"
+  ]
+}

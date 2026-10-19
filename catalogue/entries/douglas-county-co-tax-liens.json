@@ -1,0 +1,40 @@
+{
+  "aliases": [
+    "tax-liens"
+  ],
+  "category": "or/v1",
+  "citations": [],
+  "crosswalk": {
+    "file": "crosswalks/or-v1/nodes.json"
+  },
+  "description": "Tax liens in Douglas County, Colorado, with lien balances and sale dates.",
+  "domain": "Case records",
+  "expectedCounts": {},
+  "id": "douglas-county-co-tax-liens",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "Tax liens (Douglas County, CO)",
+  "namespace": [
+    "douglas-county-co"
+  ],
+  "properties": {
+    "surveyId": "or-44"
+  },
+  "recipe": {
+    "reason": "The source is an ArcGIS feature service that returns GeoJSON in pages of a limited number of features and keepset has no GeoJSON parser or paging yet.",
+    "status": "not-fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://services.arcgis.com/seTexOicoRXDvRsJ/arcgis/rest/services/OpenData/FeatureServer/2"
+    }
+  ],
+  "tags": [
+    "prize",
+    "location",
+    "lifecycle"
+  ]
+}

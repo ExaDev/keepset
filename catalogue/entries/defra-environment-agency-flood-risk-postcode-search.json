@@ -1,0 +1,97 @@
+{
+  "aliases": [
+    "environment-agency-flood-risk-postcode-search"
+  ],
+  "category": "or/v1",
+  "citations": [],
+  "crosswalk": {
+    "oneWay": [
+      {
+        "direction": "encode",
+        "from": "nodes[].HIGH_CNT",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].MED_CNT",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].LOW_CNT",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].GWTR_RISK",
+        "op": "drop"
+      }
+    ],
+    "rules": [
+      {
+        "from": "meta",
+        "op": "move",
+        "to": "meta"
+      },
+      {
+        "from": "nodes[].id",
+        "op": "move",
+        "to": "nodes[].id"
+      },
+      {
+        "from": "nodes[].Postcode",
+        "op": "move",
+        "to": "nodes[].territory"
+      }
+    ],
+    "source": "csv-table",
+    "target": "or/v1"
+  },
+  "description": "Property counts by flood-risk band and groundwater risk category for each postcode in England.",
+  "domain": "Risk and outcome records",
+  "expectedCounts": {},
+  "id": "defra-environment-agency-flood-risk-postcode-search",
+  "licence": {
+    "kind": "custom",
+    "name": "Open Government Licence",
+    "url": "https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/"
+  },
+  "name": "Flood risk postcode search tool data",
+  "namespace": [
+    "defra"
+  ],
+  "properties": {
+    "surveyId": "or-34"
+  },
+  "recipe": {
+    "archive": {
+      "kind": "none"
+    },
+    "parser": {
+      "delimiter": "comma",
+      "encoding": "utf-8",
+      "format": "csv-table",
+      "idColumn": null,
+      "numericColumns": [],
+      "skipLines": 0
+    },
+    "source": 1,
+    "status": "fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://environment.data.gov.uk/dataset/53cba123-71f8-417a-8441-4c7ba111e8e1"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://environment.data.gov.uk/api/file/download?fileDataSetId=fb921496-1788-4fc2-b469-7b51e2a45553&fileName=Postcodes_Risk_Assessment_All.csv"
+    }
+  ],
+  "tags": [
+    "prizeProbability",
+    "territory"
+  ]
+}

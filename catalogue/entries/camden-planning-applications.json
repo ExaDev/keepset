@@ -1,0 +1,243 @@
+{
+  "aliases": [
+    "planning-applications"
+  ],
+  "category": "or/v1",
+  "citations": [],
+  "crosswalk": {
+    "oneWay": [
+      {
+        "direction": "encode",
+        "from": "nodes[].Application_Number",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Development_Address",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Development_Description",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Decision_Type",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Valid_From_Date",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Registered_In_Last_7_Working_Days",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Registered_In_Last_28_Working_Days",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Earliest_Decision_Date",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Decision_Level",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].System_Status_Change_Date",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Applicant_Name",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Conservation_Areas",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Neighbourhood_Areas",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Case_Officer",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Case_Officer_Team",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Responsibility_Type",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Comment",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Full_Application",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Easting",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Northing",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Spatial_Accuracy",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Last_Uploaded",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Location",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Socrata_ID",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Organisation_URI",
+        "op": "drop"
+      }
+    ],
+    "rules": [
+      {
+        "from": "meta",
+        "op": "move",
+        "to": "meta"
+      },
+      {
+        "from": "nodes[].id",
+        "op": "move",
+        "to": "nodes[].id"
+      },
+      {
+        "from": "nodes[].Decision_Date",
+        "op": "move",
+        "to": "nodes[].closed"
+      },
+      {
+        "from": "nodes[].Latitude",
+        "op": "move",
+        "to": "nodes[].lat"
+      },
+      {
+        "from": "nodes[].Longitude",
+        "op": "move",
+        "to": "nodes[].lon"
+      },
+      {
+        "from": "nodes[].Registered_Date",
+        "op": "move",
+        "to": "nodes[].opened"
+      },
+      {
+        "from": "nodes[].Application_Type",
+        "op": "move",
+        "to": "nodes[].skill"
+      },
+      {
+        "from": "nodes[].System_Status",
+        "op": "move",
+        "to": "nodes[].status"
+      },
+      {
+        "from": "nodes[].Ward",
+        "op": "move",
+        "to": "nodes[].territory"
+      }
+    ],
+    "source": "csv-table",
+    "target": "or/v1"
+  },
+  "description": "Planning applications registered with Camden, with location, ward, application type, status and decision dates.",
+  "domain": "Case records",
+  "expectedCounts": {},
+  "id": "camden-planning-applications",
+  "licence": {
+    "id": "OGL-UK-3.0",
+    "kind": "spdx"
+  },
+  "name": "Planning applications (Camden)",
+  "namespace": [
+    "camden"
+  ],
+  "properties": {
+    "surveyId": "or-56"
+  },
+  "recipe": {
+    "archive": {
+      "kind": "none"
+    },
+    "parser": {
+      "delimiter": "comma",
+      "encoding": "utf-8",
+      "format": "csv-table",
+      "idColumn": "ID",
+      "numericColumns": [
+        {
+          "column": "Latitude",
+          "factor": 1
+        },
+        {
+          "column": "Longitude",
+          "factor": 1
+        }
+      ],
+      "skipLines": 0
+    },
+    "source": 1,
+    "status": "fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://opendata.camden.gov.uk/Environment/Planning-Applications/2eiu-s2cw"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://opendata.camden.gov.uk/api/views/2eiu-s2cw/rows.csv?accessType=DOWNLOAD"
+    }
+  ],
+  "tags": [
+    "deadline",
+    "location",
+    "territory",
+    "skills",
+    "lifecycle"
+  ]
+}

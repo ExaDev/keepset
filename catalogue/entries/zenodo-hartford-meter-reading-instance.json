@@ -1,0 +1,39 @@
+{
+  "aliases": [
+    "hartford-meter-reading-instance"
+  ],
+  "category": "or/v1",
+  "citations": [],
+  "crosswalk": {
+    "file": "crosswalks/or-v1/nodes.json"
+  },
+  "description": "An arc-routing meter reading instance for Hartford, Connecticut, with customer and network node coordinates in planar units.",
+  "domain": "Vehicle routing with time windows",
+  "expectedCounts": {},
+  "id": "zenodo-hartford-meter-reading-instance",
+  "licence": {
+    "id": "CC-BY-4.0",
+    "kind": "spdx"
+  },
+  "name": "Meter reading problem instance (Hartford, CT)",
+  "namespace": [
+    "zenodo"
+  ],
+  "properties": {
+    "surveyId": "or-6"
+  },
+  "recipe": {
+    "reason": "The download is a zip of plain-text arc-routing instance files (customers, network and links) described by a readme, and keepset has no parser for that format yet.",
+    "status": "not-fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://zenodo.org/records/5823834"
+    }
+  ],
+  "tags": [
+    "location"
+  ]
+}

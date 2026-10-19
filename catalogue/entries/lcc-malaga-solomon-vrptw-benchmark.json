@@ -1,0 +1,41 @@
+{
+  "aliases": [
+    "solomon-vrptw-benchmark"
+  ],
+  "category": "or/v1",
+  "citations": [],
+  "crosswalk": {
+    "file": "crosswalks/or-v1/nodes.json"
+  },
+  "description": "Solomon's 1983 vehicle routing instances with time windows (C1, C2, R1, R2, RC1, RC2), each with 100 customers.",
+  "domain": "Vehicle routing with time windows",
+  "expectedCounts": {},
+  "id": "lcc-malaga-solomon-vrptw-benchmark",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "Solomon VRPTW benchmark instances",
+  "namespace": [
+    "lcc-malaga"
+  ],
+  "properties": {
+    "surveyId": "or-5"
+  },
+  "recipe": {
+    "reason": "The download is a zip of plain-text Solomon instance files and keepset has no parser for that format yet.",
+    "status": "not-fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://neo.lcc.uma.es/vrp/vrp-instances/capacitated-vrp-with-time-windows-instances/"
+    }
+  ],
+  "tags": [
+    "deadline",
+    "location",
+    "duration",
+    "travelTime"
+  ]
+}

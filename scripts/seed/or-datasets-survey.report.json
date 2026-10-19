@@ -1,0 +1,1327 @@
+{
+  "outcomes": [
+    {
+      "flags": [
+        "The survey URL is a landing page; the verified download is the extensionless zip for the Chao TOP4 set only, and the other sets were not checked.",
+        "The page states no licence."
+      ],
+      "id": "ku-leuven-team-orienteering-chao-instances",
+      "reason": "The download is a zip of instance files in a plain text format with a small header and no column names, and keepset has no parser for it yet.",
+      "recipe": "not-fetchable",
+      "surveyId": "or-0"
+    },
+    {
+      "flags": [
+        "The survey URL is a landing page; only the righiniTOPTW1 zip was fetched, and the other sets on the page were not checked.",
+        "The page states no licence."
+      ],
+      "id": "ku-leuven-toptw-righini-instances",
+      "reason": "The download is a zip of instance files in a Solomon style text format with no column names, and keepset has no parser for it yet.",
+      "recipe": "not-fetchable",
+      "surveyId": "or-1"
+    },
+    {
+      "flags": [
+        "The page describes benchmark instances, but the file in version 1 holds solution values and run statistics, not instances."
+      ],
+      "id": "mendeley-data-dynamic-team-orienteering",
+      "reason": "The only file is an Excel workbook of results and keepset has no spreadsheet parser yet.",
+      "recipe": "not-fetchable",
+      "surveyId": "or-2"
+    },
+    {
+      "flags": [
+        "No licence statement was seen."
+      ],
+      "id": "vrp-rep-probabilistic-orienteering",
+      "reason": "The download is a zip of TSPLIB-style text files with a POP section and keepset has no parser for it yet.",
+      "recipe": "not-fetchable",
+      "surveyId": "or-3"
+    },
+    {
+      "flags": [
+        "no licence stated in the readme and the vrp-rep item page was not found",
+        "prizes belong to clusters (CONSTRAINING_SET_SECTION), not to individual nodes"
+      ],
+      "id": "vrp-rep-clustered-orienteering-problem",
+      "reason": "The download is a zip of TSPLIB-style .cop instance files plus a readme and an xlsx workbook, and keepset has no parser for that format yet.",
+      "recipe": "not-fetchable",
+      "surveyId": "or-4"
+    },
+    {
+      "flags": [
+        "no licence statement was found",
+        "the host also lists Homberger and other instance families as separate zips"
+      ],
+      "id": "lcc-malaga-solomon-vrptw-benchmark",
+      "reason": "The download is a zip of plain-text Solomon instance files and keepset has no parser for that format yet.",
+      "recipe": "not-fetchable",
+      "surveyId": "or-5"
+    },
+    {
+      "flags": [
+        "coordinates are planar x and y, not latitude and longitude",
+        "there are no time windows or service times, so it is not a VRPTW instance"
+      ],
+      "id": "zenodo-hartford-meter-reading-instance",
+      "reason": "The download is a zip of plain-text arc-routing instance files (customers, network and links) described by a readme, and keepset has no parser for that format yet.",
+      "recipe": "not-fetchable",
+      "surveyId": "or-6"
+    },
+    {
+      "flags": [
+        "the Zenodo record is CC BY 4.0 but the Data in Brief article is CC BY-NC 4.0 per Crossref",
+        "exact node locations are withheld for confidentiality, so there are no coordinates",
+        "column names come from the Zenodo description, not from the xlsx files",
+        "the survey URL is a DOI that resolves to the publisher article page"
+      ],
+      "id": "zenodo-pharmaceutical-last-mile-delivery",
+      "reason": "The download is a zip of Excel (xlsx) files holding distance and time matrices, and keepset has no spreadsheet parser yet.",
+      "recipe": "not-fetchable",
+      "surveyId": "or-7"
+    },
+    {
+      "flags": [
+        "The survey URL is a DOI that resolves to the article, not to the data.",
+        "The dataset licence is CC BY 4.0, but the article itself is CC BY-NC-ND 4.0.",
+        "No sheet names or columns were seen in the workbook, so the field mapping is unknown."
+      ],
+      "id": "mendeley-data-last-mile-delivery-route-deviations",
+      "reason": "The only file is an xlsx workbook of about 19.7 MB, and keepset has no spreadsheet parser yet.",
+      "recipe": "not-fetchable",
+      "surveyId": "or-8"
+    },
+    {
+      "flags": [
+        "GitHub reports GPL-2.0 for the repository, which covers the generator; no separate dataset licence is stated.",
+        "Each instance has a Specs file and two tab-separated matrices with no header."
+      ],
+      "id": "github-psxjpc-movrptw-real-tenerife-instances",
+      "reason": "The download is a zip of Solomon-style instance text files and tab-separated matrices, and keepset has no parser for that format yet.",
+      "recipe": "not-fetchable",
+      "surveyId": "or-9"
+    },
+    {
+      "flags": [
+        "The licence section of the readme only asks users to email the authors describing their use of the instances, so no licence is recorded.",
+        "The zip holds 60 comma separated files with a .txt extension."
+      ],
+      "id": "vrp-rep-park-and-loop-routing-cabrera-2021",
+      "reason": "The download is a zip holding many separate coordinate files plus a readme, and keepset has no zip handling for a recipe yet.",
+      "recipe": "not-fetchable",
+      "surveyId": "or-10"
+    },
+    {
+      "flags": [
+        "The dataset holds one xlsx file per instance; only the first was read.",
+        "Distances and times are stored as matrices only, with no node coordinates."
+      ],
+      "id": "mendeley-data-dwsrp-tw-sc-instances",
+      "reason": "The download is a spreadsheet (xlsx) with task, team and distance matrix sheets and no coordinates, and keepset has no spreadsheet parser yet.",
+      "recipe": "not-fetchable",
+      "surveyId": "or-11"
+    },
+    {
+      "flags": [
+        "The Socrata licence field reads See Terms of Use with no terms URL.",
+        "The sampled longitude is near -153.5, which is not Mesa, so the source coordinates can be wrong.",
+        "The cost is a work order cost, used as a proxy for prize."
+      ],
+      "id": "mesa-transportation-work-orders-public-view",
+      "recipe": "fetchable",
+      "surveyId": "or-12"
+    },
+    {
+      "flags": [
+        "Location is a street address with no coordinates.",
+        "Some sample rows carry an initiated date of 1969, an epoch default.",
+        "Socrata gives the licence only as \"See Terms of Use\", and the terms text was not read.",
+        "Names of staff and requesters are present as columns and would not be mapped."
+      ],
+      "id": "mesa-water-resources-work-orders",
+      "reason": "The table has 934800 rows of more than 100 columns, and the sample rows are about a kilobyte each, so the download is far larger than the 256 MiB a recipe can read into memory.",
+      "recipe": "not-fetchable",
+      "surveyId": "or-13"
+    },
+    {
+      "flags": [
+        "No coordinates: location is a street name and a maintenance zone.",
+        "The planned start_date and end_date columns are not mapped because they are not clearly due dates.",
+        "No licence is recorded in the Socrata metadata.",
+        "Costs are spending, not rewards."
+      ],
+      "id": "norfolk-work-orders",
+      "recipe": "fetchable",
+      "surveyId": "or-14"
+    },
+    {
+      "flags": [
+        "Several date columns are text-typed."
+      ],
+      "id": "nyc-open-data-forestry-work-orders",
+      "reason": "The table has 1561796 rows, more than a recipe can read.",
+      "recipe": "not-fetchable",
+      "surveyId": "or-15"
+    },
+    {
+      "flags": [
+        "The instances appear to be travel-time matrices and tables without coordinates."
+      ],
+      "id": "mendeley-data-hhcrsp-multi-window",
+      "reason": "The download is a RAR archive of macro-enabled Excel workbooks and keepset has no archive or spreadsheet parser yet.",
+      "recipe": "not-fetchable",
+      "surveyId": "or-16"
+    },
+    {
+      "flags": [
+        "The repository is large and carries no licence file or statement."
+      ],
+      "id": "github-afkummer-hhcrsp-curated-instances",
+      "reason": "The instances are keyword-format text files that keepset has no parser for yet, and dataset.csv only indexes the selected instances.",
+      "recipe": "not-fetchable",
+      "surveyId": "or-17"
+    },
+    {
+      "flags": [
+        "Only the Elsevier text and data mining licence for the article was found, not a dataset licence."
+      ],
+      "id": "elsevier-ev-hhcrsp-multi-period",
+      "reason": "The survey URL is a journal article DOI and no dataset download was found.",
+      "recipe": "not-fetchable",
+      "surveyId": "or-18"
+    },
+    {
+      "flags": [
+        "File names are dated and change monthly.",
+        "The page asks users to acknowledge CQC as the source.",
+        "The directory has addresses and postcodes but no coordinates."
+      ],
+      "id": "cqc-care-directory",
+      "reason": "The CSV starts with a title line and a production note before any column header, so it is not a rectangular table with the header on its first line.",
+      "recipe": "not-fetchable",
+      "surveyId": "or-19"
+    },
+    {
+      "flags": [
+        "This is a register of businesses, not jobs.",
+        "Personal data: business names, principal names and phone numbers are present and deliberately not mapped.",
+        "No coordinates: only street address, city and zip.",
+        "The licence expiry date is mapped as the deadline."
+      ],
+      "id": "washington-state-li-contractor-licences",
+      "recipe": "fetchable",
+      "surveyId": "or-20"
+    },
+    {
+      "flags": [
+        "The XML carries coordinates and skill resources but no time windows or service times.",
+        "No licence statement was seen."
+      ],
+      "id": "vrp-rep-technician-routing-pillac",
+      "reason": "The download is a zip of instance files in the VRP-REP XML format and keepset has no parser for it yet.",
+      "recipe": "not-fetchable",
+      "surveyId": "or-21"
+    },
+    {
+      "flags": [
+        "The abstract mentions 263 instances, but only three small files were listed.",
+        "The linked journal article is CC BY-NC-ND 4.0, which differs from the dataset licence."
+      ],
+      "id": "mendeley-data-concrete-delivery-problem",
+      "reason": "The downloads are MATLAB data files and keepset has no parser for them yet.",
+      "recipe": "not-fetchable",
+      "surveyId": "or-22"
+    },
+    {
+      "flags": [
+        "The article is CC BY-NC 4.0, which differs from the dataset licence.",
+        "Location columns hold building identifiers and names, not coordinates."
+      ],
+      "id": "mendeley-data-fmucd",
+      "reason": "The single CSV is about 1.44 GB, far more than the 256 MiB a recipe can read into memory.",
+      "recipe": "not-fetchable",
+      "surveyId": "or-23"
+    },
+    {
+      "flags": [
+        "A third-party student repository mirroring ORTEC instances; no licence statement."
+      ],
+      "id": "github-bascoding-verolog-2019",
+      "reason": "The instances are keyword-format text files (and semicolon-delimited copies with the same content) that keepset has no parser for yet.",
+      "recipe": "not-fetchable",
+      "surveyId": "or-24"
+    },
+    {
+      "flags": [
+        "The survey field list for this item is unverified."
+      ],
+      "id": "zenodo-tdc-technician-dispatch",
+      "reason": "Zenodo refused automated requests, so the file list and formats could not be seen and no direct download could be verified.",
+      "recipe": "not-fetchable",
+      "surveyId": "or-25"
+    },
+    {
+      "flags": [
+        "The archive zip link tried returned 404; only individual instance files are reachable.",
+        "No licence statement was seen."
+      ],
+      "id": "ortec-verolog-2016-2017-instances",
+      "reason": "The instances are keyword-format text files on a Wayback Machine snapshot and keepset has no parser for them yet.",
+      "recipe": "not-fetchable",
+      "surveyId": "or-26"
+    },
+    {
+      "flags": [
+        "Non-commercial licence (CC BY-NC 4.0)."
+      ],
+      "id": "amazon-last-mile-routing-2021",
+      "reason": "The data is large nested JSON with bare NaN tokens, the largest file is 1.8 GB, and keepset has no JSON parser for it.",
+      "recipe": "not-fetchable",
+      "surveyId": "or-27"
+    },
+    {
+      "flags": [
+        "Only the Jilin delivery file is used; the dataset has other cities and pickup files.",
+        "Timestamps are month-day and time strings without a year.",
+        "Courier ids are pseudonymous person identifiers and are deliberately not mapped.",
+        "The area type column holds numeric codes, so the skill mapping is weak."
+      ],
+      "id": "huggingface-lade-delivery-jilin",
+      "recipe": "fetchable",
+      "surveyId": "or-28"
+    },
+    {
+      "flags": [
+        "No licence file or statement in the repository.",
+        "The file has a trailing empty header cell.",
+        "Only the node file of the Jingdong case is used.",
+        "The unit of the due time is not stated."
+      ],
+      "id": "github-zhangchenhaoseu-jd-cold-chain-nodes",
+      "recipe": "fetchable",
+      "surveyId": "or-29"
+    },
+    {
+      "flags": [
+        "Non-commercial licence, and License.txt forbids passing the dataset to third parties without permission.",
+        "Coordinates are integers scaled by 1e6.",
+        "Acknowledgement of Meituan is required."
+      ],
+      "id": "github-meituan-informs-tsl-dispatch-waybill",
+      "reason": "The plain CSV probed holds only an index, date, dispatch time and order id with no mappable field, and the coordinate data sits in a zip that keepset cannot read.",
+      "recipe": "not-fetchable",
+      "surveyId": "or-30"
+    },
+    {
+      "flags": [
+        "licence is the uploader-declared Kaggle metadata value, not a statement from DoorDash",
+        "no coordinates: only store_id and market_id identify place"
+      ],
+      "id": "kaggle-doordash-eta-prediction",
+      "reason": "The download is a zip archive holding one CSV and keepset has no archive handling yet, so the table cannot be read directly from the download.",
+      "recipe": "not-fetchable",
+      "surveyId": "or-31"
+    },
+    {
+      "flags": [
+        "licence is non-commercial and share-alike, which restricts redistribution",
+        "patient-level records with patient and appointment identifiers, gender and age; no coordinates, neighbourhood is a text name"
+      ],
+      "id": "kaggle-medical-appointment-no-shows",
+      "reason": "The download is a zip archive holding one CSV and keepset has no archive handling yet, so the table cannot be read directly from the download.",
+      "recipe": "not-fetchable",
+      "surveyId": "or-32"
+    },
+    {
+      "flags": [
+        "survey URL is a landing page; the combined CSV is a daily snapshot, so contents change over time",
+        "BusinessName, address and postcode columns hold business trading names and are deliberately not mapped",
+        "the rating columns are scores, not probabilities, so no prizeProbability is mapped",
+        "RatingDate is when the current rating was awarded, mapped to opened as the nearest lifecycle date",
+        "in the first 100,000 rows sampled, about a quarter have empty Latitude and Longitude"
+      ],
+      "id": "food-standards-agency-fhrs-establishments",
+      "recipe": "fetchable",
+      "surveyId": "or-33"
+    },
+    {
+      "flags": [
+        "no coordinates: postcodes are text and keepset does not resolve them to points",
+        "the property counts per risk band are not probabilities and have no node field, so only the postcode is mapped",
+        "survey URL is a landing page; the download comes from the data.gov.uk catalogue and answers GET but not HEAD"
+      ],
+      "id": "defra-environment-agency-flood-risk-postcode-search",
+      "recipe": "fetchable",
+      "surveyId": "or-34"
+    },
+    {
+      "flags": [
+        "survey URL is the Data in Brief article DOI, not the data; the data is Mendeley Data record rmk89k4rhb",
+        "wait columns are aggregated waiting days per county, month and stop code, not per appointment"
+      ],
+      "id": "mendeley-data-va-appointment-wait-times",
+      "reason": "The county-level file is 916897688 bytes, far over the 256 MiB a recipe can read, and the other files are larger or are zip and xlsx.",
+      "recipe": "not-fetchable",
+      "surveyId": "or-35"
+    },
+    {
+      "flags": [
+        "no coordinates or locations in the table",
+        "RequestID repeats across rows, so rows are numbered",
+        "time columns are time-of-day strings without a date, and DropoffTime appears partly as a day fraction",
+        "RideDuration is taken as minutes from the survey findings, converted by 60",
+        "DriverID and VehicleID are identifiers of individuals and are deliberately not mapped",
+        "RequestedPickup and DropoffTime are not mapped to opened and closed: they are requested and actual ride times, not record creation and completion"
+      ],
+      "id": "us-dot-its4us-hirta-health-connector",
+      "recipe": "fetchable",
+      "surveyId": "or-36"
+    },
+    {
+      "flags": [
+        "licence is inconsistent: the README front matter says other and the README body says gpl, with no LICENSE file, so none is recorded",
+        "the README does not say whether the data is real or synthetic; the sequential ticket ids and the 'metadata inventory' wording suggest generated data",
+        "travel_km is a distance, not a time, so travelTime is not mapped",
+        "duration_min is read as minutes from its name"
+      ],
+      "id": "huggingface-nigerian-energy-field-technician-logs",
+      "recipe": "fetchable",
+      "surveyId": "or-37"
+    },
+    {
+      "flags": [
+        "repository has no licence file",
+        "only latitude and longitude of the points; no demands, times or cost matrix"
+      ],
+      "id": "github-oberfichtner-perm-cash-collection-sites",
+      "reason": "The only data file is an xls spreadsheet and keepset has no spreadsheet parser yet.",
+      "recipe": "not-fetchable",
+      "surveyId": "or-38"
+    },
+    {
+      "flags": [
+        "rows name individual debtors with home addresses; debtor names, addresses and the Georeference column are deliberately not mapped",
+        "Warrant ID is not unique (a count of distinct values is lower than the row count), so rows are numbered",
+        "Georeference is a single 'POINT (lon lat)' text column, so no lat or lon is mapped",
+        "the page title says beginning 7/1/2025, but rows include warrants filed earlier, and the survey title also names child support warrants, which this table does not separate out",
+        "the source metadata carries no licence field, only attribution",
+        "Warrant_expiration_date is empty in most rows"
+      ],
+      "id": "new-york-state-tax-warrants",
+      "recipe": "fetchable",
+      "surveyId": "or-39"
+    },
+    {
+      "flags": [
+        "the ArcGIS service refuses CSV export",
+        "rows include owner names",
+        "survey URL is a Hub landing page; the service URL came from the Hub item API"
+      ],
+      "id": "philadelphia-real-estate-tax-delinquencies",
+      "reason": "The source is an ArcGIS feature service that returns GeoJSON in pages of a limited number of features and keepset has no GeoJSON parser or paging yet.",
+      "recipe": "not-fetchable",
+      "surveyId": "or-40"
+    },
+    {
+      "flags": [
+        "the data includes personal names, phone numbers and email addresses",
+        "arrears amounts are text padded with spaces, not numbers",
+        "survey URL is a Hub landing page"
+      ],
+      "id": "itaukei-land-trust-board-lease-arrears",
+      "reason": "The source is an ArcGIS feature service that returns GeoJSON in pages of a limited number of features and keepset has no GeoJSON parser or paging yet.",
+      "recipe": "not-fetchable",
+      "surveyId": "or-41"
+    },
+    {
+      "flags": [
+        "no coordinates: tenant city and ZIP code are text and only County is mapped as territory",
+        "Case Number repeats across events, so rows are numbered",
+        "Event_Date and Evicted_Date are mapped to opened and closed as the nearest lifecycle dates; they can fall in different years",
+        "the Event Comment free text and tenant ZIP codes are not mapped",
+        "the source metadata carries no licence field, only attribution"
+      ],
+      "id": "maryland-district-court-eviction-case-data",
+      "recipe": "fetchable",
+      "surveyId": "or-42"
+    },
+    {
+      "flags": [
+        "this is the 87,710-row summary resource of the dataset, not the much larger current-status resource, whose dump returned HTTP 502",
+        "the first column is the CKAN row number _id, used as the row id",
+        "the table has only the parcel pin, a lien count and a total, with no location or dates",
+        "parcel identifiers are not mapped",
+        "the WPRDC datastore dump host intermittently answers 502 or drops the connection, so a fetch may need a retry"
+      ],
+      "id": "allegheny-county-tax-liens-summary",
+      "recipe": "fetchable",
+      "surveyId": "or-43"
+    },
+    {
+      "flags": [
+        "the layer has null geometry, so there are no coordinates",
+        "the layer metadata has no licence text"
+      ],
+      "id": "douglas-county-co-tax-liens",
+      "reason": "The source is an ArcGIS feature service that returns GeoJSON in pages of a limited number of features and keepset has no GeoJSON parser or paging yet.",
+      "recipe": "not-fetchable",
+      "surveyId": "or-44"
+    },
+    {
+      "flags": [
+        "rows name individuals, their addresses and occupations; those columns are deliberately not mapped",
+        "the Fine Amount values use thousands separators (for example 24,172.00) so they cannot be read as numbers and prize is not mapped",
+        "the Fine Amount header ends in a non-UTF-8 byte, shown as a replacement character in the header",
+        "one quarterly file only: part 2 has a different schema (tax, interest, penalties, county) and each quarter is a separate file",
+        "no licence statement was found on the page"
+      ],
+      "id": "revenue-commissioners-ireland-tax-defaulters-list-part-1",
+      "recipe": "fetchable",
+      "surveyId": "or-45"
+    },
+    {
+      "flags": [
+        "layer holds the 2025 sales only",
+        "the disclaimer text was only partly read, so its terms are not summarised here"
+      ],
+      "id": "dakota-county-sheriff-foreclosure-sales",
+      "reason": "The source is an ArcGIS map service that returns GeoJSON and keepset has no GeoJSON parser yet.",
+      "recipe": "not-fetchable",
+      "surveyId": "or-46"
+    },
+    {
+      "flags": [
+        "the hosted view has null geometry, so there are no coordinates",
+        "rows include owner names",
+        "use is subject to terms of use on the site's About page, which were not read in full"
+      ],
+      "id": "virginia-beach-delinquent-real-estate-taxes",
+      "reason": "The source is an ArcGIS feature service that returns GeoJSON in pages of a limited number of features and keepset has no GeoJSON parser or paging yet.",
+      "recipe": "not-fetchable",
+      "surveyId": "or-47"
+    },
+    {
+      "flags": [
+        "location_1 holds latitude and longitude together as '(lat, lon)' text, so no lat or lon is mapped",
+        "PIN repeats across sale years, so rows are numbered",
+        "Buyer_Name is deliberately not mapped",
+        "the source metadata carries no licence field, only attribution to the Cook County Treasurer"
+      ],
+      "id": "cook-county-treasurer-annual-tax-sale",
+      "recipe": "fetchable",
+      "surveyId": "or-48"
+    },
+    {
+      "flags": [
+        "no coordinates and no amounts in the table",
+        "Borough is a numeric code (1 to 5), kept as text",
+        "Month, borough, block and lot repeat across lists, so rows are numbered",
+        "the source metadata carries no licence field"
+      ],
+      "id": "nyc-open-data-tax-lien-sale-lists",
+      "recipe": "fetchable",
+      "surveyId": "or-49"
+    },
+    {
+      "flags": [
+        "survey URL is a landing page; the file URL came from the data.gov.uk catalogue",
+        "individual defendants are anonymised a year after conviction"
+      ],
+      "id": "defra-environment-agency-prosecutions",
+      "reason": "The download is an xlsx workbook with an explanation sheet and a data sheet, and keepset has no spreadsheet parser yet.",
+      "recipe": "not-fetchable",
+      "surveyId": "or-50"
+    },
+    {
+      "flags": [
+        "survey title names Lincolnshire and Camden, but the page lists only Lincolnshire files and this one is a single financial year",
+        "survey URL is a landing page; the page lists roughly one CSV per financial year",
+        "no coordinates: street, address and postcode are text, and Charge_Level is a tier band rather than an amount",
+        "the file is read as latin1",
+        "no licence text was found in the file or findings"
+      ],
+      "id": "lincolnshire-parking-penalty-charge-notices",
+      "recipe": "fetchable",
+      "surveyId": "or-51"
+    },
+    {
+      "flags": [
+        "gender and age band of offenders are recorded and are deliberately not mapped",
+        "Paid_Amount carries a pound sign, so it cannot be read as a number and prize is not mapped",
+        "the page also offers a raw-data CSV with a different schema, which is not covered",
+        "no location beyond an area name"
+      ],
+      "id": "barnet-environmental-enforcement-fixed-penalty-notices",
+      "recipe": "fetchable",
+      "surveyId": "or-52"
+    },
+    {
+      "flags": [
+        "each quarterly file has a different schema and newer ones are xlsx",
+        "no coordinates: breach location is free text"
+      ],
+      "id": "leeds-litter-fixed-penalty-notices-3gs",
+      "reason": "The CSV has a title line (FPN Detail) above the real header, so it does not have its header on the first line and is not a plain table.",
+      "recipe": "not-fetchable",
+      "surveyId": "or-53"
+    },
+    {
+      "flags": [
+        "no coordinates: the table has only a postcode sector (PC) and a ward",
+        "the payment, prosecution and cancellation columns are not mapped, so the outcome of each notice is not in the node",
+        "the survey URL is the current file; a separate Historic/FPN.csv is linked from the dataset page and was not fetched"
+      ],
+      "id": "leeds-fixed-penalty-notices",
+      "recipe": "fetchable",
+      "surveyId": "or-54"
+    },
+    {
+      "flags": [
+        "no location or territory column",
+        "Date_Paid is empty in both sampled rows, including one with status Paid",
+        "the amount paid column is not mapped because only one column can fill prize",
+        "the survey URL is a landing page; the download is the Socrata CSV export",
+        "the Disclaimer column says FPN numbers are reduced since March 2020"
+      ],
+      "id": "camden-fixed-penalty-notices",
+      "recipe": "fetchable",
+      "surveyId": "or-55"
+    },
+    {
+      "flags": [
+        "the survey title also names Dun Laoghaire-Rathdown, Ireland; only the Camden table is in this download",
+        "applicant names and case officer names are present and deliberately not mapped",
+        "Earliest_Decision_Date is not mapped as a deadline because it is the earliest date a decision may be made, not a due date"
+      ],
+      "id": "camden-planning-applications",
+      "recipe": "fetchable",
+      "surveyId": "or-56"
+    },
+    {
+      "flags": [
+        "latitude, longitude and ward columns are empty in the sampled rows, whose Spatial_Accuracy says no spatial information is available",
+        "contact telephone numbers and the responsible company are present and deliberately not mapped",
+        "the survey URL is the portal root; the dataset id came from the Socrata catalogue API",
+        "Start_Date is not mapped as opened because it is the start of the works, not the date the record was created"
+      ],
+      "id": "camden-street-works-register",
+      "recipe": "fetchable",
+      "surveyId": "or-57"
+    },
+    {
+      "flags": [
+        "duplicate of survey item or-70; the portal root URL given in the survey is a landing page"
+      ],
+      "id": "camden-hmo-licensing-register-duplicate",
+      "reason": "This survey item is the same Socrata dataset as or-70 (x43g-c2rf), whose entry carries the recipe, so it is not given a second one.",
+      "recipe": "not-fetchable",
+      "surveyId": "or-58"
+    },
+    {
+      "flags": [
+        "CKAN reports the licence as not specified",
+        "no coordinates or territory: addresses are in a separate Addresses table that is not part of this recipe",
+        "the survey title lists eight other cities; only Toronto is covered",
+        "NOTICE_OR_ORDER_DATE and EXPIRY_DATE are mostly the text N/A and NEXT_INSPECTION is mostly empty, so they are not mapped",
+        "the id column is the CKAN row number, not the investigation id"
+      ],
+      "id": "toronto-municipal-licensing-investigations",
+      "recipe": "fetchable",
+      "surveyId": "or-59"
+    },
+    {
+      "flags": [
+        "The Socrata metadata carries no licence and the NYC Open Data terms page could not be read."
+      ],
+      "id": "nyc-open-data-housing-maintenance-code-violations",
+      "reason": "The table has 11,324,217 rows, more than a recipe can read into memory.",
+      "recipe": "not-fetchable",
+      "surveyId": "or-60"
+    },
+    {
+      "flags": [
+        "the Socrata licence field says See Terms of Use and the terms were not read",
+        "latitude and longitude are empty in the sampled rows",
+        "Total_Fee is a fee charged, a weak stand-in for a prize",
+        "Code_Officer, Assigned_User and defendant fields are personal data and are deliberately not mapped",
+        "the table keeps only the latest workflow status per case"
+      ],
+      "id": "mesa-code-compliance-cases",
+      "recipe": "fetchable",
+      "surveyId": "or-61"
+    },
+    {
+      "flags": [
+        "the dataset description says only the last 30 days of violations are published",
+        "the licence points to the Open Data Platform terms of use, which were not read",
+        "the survey URL is a Hub landing page; the data is the FeatureServer query"
+      ],
+      "id": "louisville-metro-property-maintenance-violations",
+      "reason": "The source is an ArcGIS feature service that returns GeoJSON in pages of a limited number of features, and keepset has no GeoJSON parser or paging yet.",
+      "recipe": "not-fetchable",
+      "surveyId": "or-62"
+    },
+    {
+      "flags": [
+        "The Socrata metadata carries no licence and the NYC Open Data terms page could not be read.",
+        "respondent personal fields were removed from May 2026 per the dataset description, but respondent name columns remain in the header"
+      ],
+      "id": "nyc-open-data-oath-hearings-case-status",
+      "reason": "The table has 22,151,329 rows, more than a recipe can read into memory.",
+      "recipe": "not-fetchable",
+      "surveyId": "or-63"
+    },
+    {
+      "flags": [
+        "The Socrata metadata carries no licence and the NYC Open Data terms page could not be read.",
+        "latitude, longitude and borough are empty in the sampled rows",
+        "OWNER_NAME holds owner names and is deliberately not mapped",
+        "the dataset is a historical snapshot with no automated updates"
+      ],
+      "id": "nyc-open-data-fire-prevention-inspections-historical",
+      "recipe": "fetchable",
+      "surveyId": "or-64"
+    },
+    {
+      "flags": [
+        "the Socrata licence field says See Terms of Use and the terms document was not located",
+        "the file size was not reported (chunked export), so the size limit is an estimate from the probe rows",
+        "the RESPONDENTS column holds respondent names"
+      ],
+      "id": "chicago-ordinance-violations",
+      "reason": "The table has 824,653 rows and the probe's first rows, with cells already truncated, average about 330 bytes, so the export would exceed the 256 MiB a recipe can read.",
+      "recipe": "not-fetchable",
+      "surveyId": "or-65"
+    },
+    {
+      "flags": [
+        "the Socrata licence field says See Terms of Use and the terms document was not located",
+        "applicant and emergency contact names and addresses are present and deliberately not mapped",
+        "TOTALFEES is a fee charged, a weak stand-in for a prize",
+        "the view has no ward or district column",
+        "this is a filtered view of a parent dataset"
+      ],
+      "id": "chicago-transportation-department-permits",
+      "recipe": "fetchable",
+      "surveyId": "or-66"
+    },
+    {
+      "flags": [
+        "CKAN reports the licence as not specified",
+        "no coordinates: only street address parts, postal sector and GEO_ID",
+        "BUILDER_NAME holds builder names and is deliberately not mapped",
+        "the same permit number appears once per revision, so the id column is the CKAN row number",
+        "EST_CONST_COST is not mapped as prize because some cells hold thousands separators such as 400,000, which a numeric column cannot read"
+      ],
+      "id": "toronto-building-permits-active",
+      "recipe": "fetchable",
+      "surveyId": "or-67"
+    },
+    {
+      "flags": [
+        "the licence is CKAN licence id open-government-licence-toronto; the URL given is the dataset page, because no licence URL was in the metadata",
+        "no coordinates: only a street description and GEO_ID",
+        "CLIENT_NAME holds the utility or company and is not mapped",
+        "two CSV resources exist and were not compared; this is the first"
+      ],
+      "id": "toronto-utility-cut-permits",
+      "recipe": "fetchable",
+      "surveyId": "or-68"
+    },
+    {
+      "flags": [
+        "the survey title also names Calgary; only the Vancouver table is in this download",
+        "coordinates exist only as a combined text pair in geo_point_2d and as a JSON shape, so no latitude or longitude is mapped",
+        "applicant and building contractor names and addresses are present and deliberately not mapped",
+        "projectvalue is a declared project value, a weak stand-in for a prize"
+      ],
+      "id": "vancouver-issued-building-permits",
+      "recipe": "fetchable",
+      "surveyId": "or-69"
+    },
+    {
+      "flags": [
+        "the register carries a notice restricting its use for marketing",
+        "licence holder and manager names and addresses are present and deliberately not mapped",
+        "there is no ward column",
+        "most room and facility count columns are empty in the sampled rows"
+      ],
+      "id": "camden-hmo-licensing-register",
+      "recipe": "fetchable",
+      "surveyId": "or-70"
+    },
+    {
+      "flags": [
+        "no licence name was read: the page links to the city terms of use",
+        "the table covers all licence types, not only rentals",
+        "x and y are the file's geocode_x and geocode_y, which look like Pennsylvania South state-plane coordinates, not WGS84, and are empty in some rows",
+        "owner and legal names and mailing addresses are present and deliberately not mapped",
+        "the download is a Carto SQL query on the whole table, and whether the query has a row cap was not checked",
+        "the export is large and close to the size a recipe can read"
+      ],
+      "id": "philadelphia-business-licences-rental-registry",
+      "recipe": "fetchable",
+      "surveyId": "or-71"
+    },
+    {
+      "flags": [
+        "the shapefile attributes were not read, so fields are unverified",
+        "the zip is generated on request and its file name changes per request"
+      ],
+      "id": "france-sdes-sitadel-housing-permits-ile-de-france",
+      "reason": "The download is a zip of shapefile layers, and keepset has no shapefile parser yet.",
+      "recipe": "not-fetchable",
+      "surveyId": "or-72"
+    },
+    {
+      "flags": [
+        "the same case (dossiernr) is repeated once per geo point, so rows are not unique cases",
+        "coordinates exist only as a combined text pair in geo_point_2d and as a JSON shape, so no latitude or longitude is mapped",
+        "the licence is read from the data.overheid.nl catalogue page, which also contains CC-BY strings that were not attributed",
+        "the survey URL is a catalogue entry; the download is the Opendatasoft CSV export"
+      ],
+      "id": "the-hague-wabo-vergunningen",
+      "recipe": "fetchable",
+      "surveyId": "or-73"
+    },
+    {
+      "flags": [
+        "records are published notices, not structured permits",
+        "no licence statement was seen in the responses"
+      ],
+      "id": "overheid-nl-gemeenteblad-omgevingsvergunning",
+      "reason": "The source is an SRU search endpoint that returns XML notices in a query language, not a table, and keepset has no parser for it.",
+      "recipe": "not-fetchable",
+      "surveyId": "or-74"
+    },
+    {
+      "flags": [
+        "no latitude or longitude column: geometries are WKT polygons in two coordinate systems",
+        "budget columns are empty in the sampled rows",
+        "the budget is a tender budget, a weak stand-in for a prize",
+        "promotor and constructor name companies and are not mapped",
+        "quarterly snapshots and older versions exist; this is the current file",
+        "the codi column repeats across rows, so rows are numbered instead of using it as an id"
+      ],
+      "id": "barcelona-road-works-public-space",
+      "recipe": "fetchable",
+      "surveyId": "or-75"
+    },
+    {
+      "flags": [
+        "only one monthly file (May 2026) is covered; about 277 monthly resources exist and the survey's own resource link returned a stub",
+        "COORDENADA_Y cells carry trailing NUL characters, so the coordinates are deliberately not mapped; they are UTM, not WGS84",
+        "MES, ANIO and HORA are separate columns, so no date field is mapped",
+        "fields are padded with spaces in the source"
+      ],
+      "id": "madrid-traffic-fines-detail",
+      "recipe": "fetchable",
+      "surveyId": "or-76"
+    },
+    {
+      "flags": [
+        "The table has no coordinates, only address text, so there is no map location.",
+        "esito_pratica is free text that embeds a decision date and protocol number, so it is not mapped as status.",
+        "The protocol number repeats across years, so rows are numbered rather than keyed."
+      ],
+      "id": "comune-di-bologna-building-permits-issued",
+      "recipe": "fetchable",
+      "surveyId": "or-77"
+    },
+    {
+      "flags": [
+        "The survey URL is an ArcGIS Hub landing page; the data is a FeatureServer layer.",
+        "The licence is named only as Open Government Licence without a version.",
+        "The layer holds applicant names (NAME, APPNAME), which would not be mapped."
+      ],
+      "id": "north-ayrshire-council-building-warrant-applications",
+      "reason": "The data is an ArcGIS feature service that returns GeoJSON in pages of at most 2000 features, and keepset has no GeoJSON parser or paging yet.",
+      "recipe": "not-fetchable",
+      "surveyId": "or-78"
+    },
+    {
+      "flags": [
+        "The survey URL is a CKAN landing page; the CSV is on S3.",
+        "The table has no coordinates, only street and suburb text.",
+        "The CSV starts with a byte order mark and writes dates as d/mm/yyyy."
+      ],
+      "id": "adelaide-city-council-parking-expiations",
+      "reason": "The CSV is about 132 MB and holds more than a million rows (a full count gave over 1.1 million), which is more than a recipe can read into memory.",
+      "recipe": "not-fetchable",
+      "surveyId": "or-79"
+    },
+    {
+      "flags": [
+        "The survey URL is a CKAN landing page for many files, not one download.",
+        "Earlier years use a legacy schema, and the 2011-2012 file is a bare CSV rather than a zip."
+      ],
+      "id": "south-australia-expiation-notice-system-data",
+      "reason": "The download is a set of zip archives of CSV files, one per financial year and report type with differing columns, and keepset has no archive parser yet.",
+      "recipe": "not-fetchable",
+      "surveyId": "or-80"
+    },
+    {
+      "flags": [
+        "No licence is recorded in the dataset metadata.",
+        "The status column is a status reason (for example Other, OMO Completed), not a full lifecycle state.",
+        "The DateTransferDoF column is not mapped as closed because it records a transfer to Finance."
+      ],
+      "id": "nyc-open-data-hpd-handyman-work-order-charges",
+      "recipe": "fetchable",
+      "surveyId": "or-81"
+    },
+    {
+      "flags": [
+        "No licence is recorded in the dataset metadata.",
+        "The table has no coordinates, only street name text and a BBL id.",
+        "The grace period is a number of days, not a date, so it is not mapped as a deadline."
+      ],
+      "id": "nyc-open-data-dot-sidewalk-violations",
+      "recipe": "fetchable",
+      "surveyId": "or-82"
+    },
+    {
+      "flags": [
+        "No licence is recorded in the dataset metadata.",
+        "Applicant and owner name columns are present and deliberately not mapped.",
+        "The table has no coordinates, only a building identification number, and no usable open or close date, so the mapping is thin."
+      ],
+      "id": "nyc-open-data-dob-now-safety-boiler",
+      "recipe": "fetchable",
+      "surveyId": "or-83"
+    },
+    {
+      "flags": [
+        "No licence is recorded in the dataset metadata.",
+        "Engineer and owner name and address columns are present and deliberately not mapped.",
+        "The table has no coordinates; TR6_NO repeats in a few rows, so rows are numbered rather than keyed."
+      ],
+      "id": "nyc-open-data-dob-now-facade-compliance-filings",
+      "recipe": "fetchable",
+      "surveyId": "or-84"
+    },
+    {
+      "flags": [
+        "Rows are a mix of permit records and inspection records, and many permit columns are empty on inspection rows.",
+        "The Location column is a single combined geocode cell, so lat and lon are not mapped.",
+        "Permit_Number is empty in some rows, so rows are numbered rather than keyed.",
+        "In the rows sampled, the application date, finaled date and fee are filled in only a small share of rows."
+      ],
+      "id": "norfolk-permits-and-inspections",
+      "recipe": "fetchable",
+      "surveyId": "or-85"
+    },
+    {
+      "flags": [
+        "No licence is recorded in the dataset metadata.",
+        "The table includes permittee, owner and superintendent names and a phone number."
+      ],
+      "id": "nyc-open-data-dob-permit-issuance",
+      "reason": "The CSV has 3990985 rows, which is more than a recipe can read into memory.",
+      "recipe": "not-fetchable",
+      "surveyId": "or-86"
+    },
+    {
+      "flags": [
+        "No licence is recorded in the dataset metadata.",
+        "The table includes applicant and owner names."
+      ],
+      "id": "nyc-open-data-dob-job-application-filings",
+      "reason": "The CSV has 2716297 rows, which is more than a recipe can read into memory.",
+      "recipe": "not-fetchable",
+      "surveyId": "or-87"
+    },
+    {
+      "flags": [
+        "No licence is recorded in the dataset metadata.",
+        "The table includes applicant, owner and authorised representative names and addresses."
+      ],
+      "id": "nyc-open-data-dob-now-electrical-permit-applications",
+      "reason": "The table has 594449 rows of about 80 wide columns, roughly 900 bytes a row in a sampled export, so the download is well over the 256 MiB a recipe can read.",
+      "recipe": "not-fetchable",
+      "surveyId": "or-88"
+    },
+    {
+      "flags": [
+        "No licence is recorded in the dataset metadata.",
+        "Applicant, design professional and owner name and address columns are present and deliberately not mapped.",
+        "Job_Filling_Number repeats in a few rows, so rows are numbered rather than keyed."
+      ],
+      "id": "nyc-open-data-dob-now-elevator-permit-applications",
+      "recipe": "fetchable",
+      "surveyId": "or-89"
+    },
+    {
+      "flags": [
+        "The survey service needs a token; an anonymous sibling view of the same register was found and verified.",
+        "The item description limits use to information only, as is, with Dublin City Council acknowledged as the source."
+      ],
+      "id": "dublin-city-council-derelict-sites-register",
+      "reason": "The data is an ArcGIS feature service that returns GeoJSON, and keepset has no GeoJSON parser or paging yet.",
+      "recipe": "not-fetchable",
+      "surveyId": "or-90"
+    },
+    {
+      "flags": [
+        "UNIQUEID is empty in many rows, so NUMBER_KEY is the row key.",
+        "LAST_UPDATED is not mapped as closed because it is an edit date."
+      ],
+      "id": "cincinnati-vacant-foreclosed-property-registration",
+      "recipe": "fetchable",
+      "surveyId": "or-91"
+    },
+    {
+      "flags": [
+        "The layer holds property owner names and mailing addresses.",
+        "The service states no licence.",
+        "Access goes through a utility.arcgis.com proxy URL, and status is a numeric code."
+      ],
+      "id": "orange-county-ca-weed-abatement-locations",
+      "reason": "The data is an ArcGIS feature service that returns GeoJSON in pages of at most 15000 features, and keepset has no GeoJSON parser or paging yet.",
+      "recipe": "not-fetchable",
+      "surveyId": "or-92"
+    },
+    {
+      "flags": [
+        "The service states no licence; its copyright text is only the city GIS name."
+      ],
+      "id": "temecula-weed-abatement",
+      "reason": "The data is an ArcGIS feature service that returns GeoJSON in pages of at most 1000 features, and keepset has no GeoJSON parser or paging yet.",
+      "recipe": "not-fetchable",
+      "surveyId": "or-93"
+    },
+    {
+      "flags": [
+        "The layer holds owner names and mailing addresses.",
+        "The features are polygon parcels, not points, and the layer has no date fields.",
+        "The item states no licence."
+      ],
+      "id": "fairfield-ca-weed-abatement-parcels",
+      "reason": "The data is an ArcGIS feature service that returns GeoJSON of parcel polygons in pages of at most 1000 features, and keepset has no GeoJSON parser or paging yet.",
+      "recipe": "not-fetchable",
+      "surveyId": "or-94"
+    },
+    {
+      "flags": [
+        "No licence is recorded in the dataset metadata.",
+        "Vehicle identification numbers and licence plates are present and deliberately not mapped.",
+        "The table has no coordinates, only the tow location as text.",
+        "Towing_Fee holds negative values in the rows sampled, so the fee is not always a plain charge."
+      ],
+      "id": "norfolk-vehicle-towing",
+      "recipe": "fetchable",
+      "surveyId": "or-95"
+    },
+    {
+      "flags": [
+        "The layer holds vehicle identification numbers, plates, operator names, phone numbers and emails.",
+        "The service states no licence, and the layer has no status field."
+      ],
+      "id": "pembroke-park-tow-repo-log",
+      "reason": "The data is an ArcGIS feature service that returns GeoJSON in pages of at most 1000 features, and keepset has no GeoJSON parser or paging yet.",
+      "recipe": "not-fetchable",
+      "surveyId": "or-96"
+    },
+    {
+      "flags": [
+        "Licence plates are present and deliberately not mapped.",
+        "Vehicle_Year is 0 in the rows seen.",
+        "No column is unique, so rows are numbered rather than keyed."
+      ],
+      "id": "buffalo-recent-tows",
+      "recipe": "fetchable",
+      "surveyId": "or-97"
+    },
+    {
+      "flags": [
+        "No licence is recorded in the dataset metadata.",
+        "Licence plates and a facility phone number are present and deliberately not mapped.",
+        "Only the tow date can be mapped; the address is the destination lot, not the pick-up location.",
+        "Inventory_Number repeats in some rows, so rows are numbered rather than keyed."
+      ],
+      "id": "chicago-towed-vehicles",
+      "recipe": "fetchable",
+      "surveyId": "or-98"
+    },
+    {
+      "flags": [
+        "No licence is recorded in the dataset metadata.",
+        "The table has no coordinates, only masked street numbers and street names.",
+        "No column is unique, so rows are numbered rather than keyed."
+      ],
+      "id": "honolulu-abandoned-vehicles",
+      "recipe": "fetchable",
+      "surveyId": "or-99"
+    },
+    {
+      "flags": [
+        "The only coordinates are Louisiana state-plane x and y, mapped as planar x and y, not WGS84 latitude and longitude.",
+        "Hearing dates include future dates, so the table is a live listing.",
+        "The table has no column evidently unique per row, so rows are numbered.",
+        "Missing coordinates are written as -1 in the x and y columns, and the council district is empty in some rows."
+      ],
+      "id": "new-orleans-code-enforcement-all-hearings",
+      "recipe": "fetchable",
+      "surveyId": "or-100"
+    },
+    {
+      "flags": [
+        "The table holds vehicle plates, which would not be mapped.",
+        "The NYC terms page returned HTTP 403 to the survey, so no licence is recorded."
+      ],
+      "id": "nyc-open-data-dof-scofftow-case-information",
+      "reason": "The table has 1,539,045 rows, more than a recipe can read.",
+      "recipe": "not-fetchable",
+      "surveyId": "or-101"
+    },
+    {
+      "flags": [
+        "Marshal first and last names are present and deliberately not mapped.",
+        "Covers executed evictions from 2017 only.",
+        "The NYC terms page returned HTTP 403 to the survey, so no licence is recorded.",
+        "The only date is the execution date, which is not mapped to opened or closed.",
+        "The table has no column evidently unique per row, so rows are numbered."
+      ],
+      "id": "nyc-open-data-evictions",
+      "recipe": "fetchable",
+      "surveyId": "or-102"
+    },
+    {
+      "flags": [
+        "The Hub item records no licence.",
+        "The landing URL resolves to a 2024 only layer.",
+        "The layer has no probability field."
+      ],
+      "id": "uc-san-diego-sheriff-evictions-san-diego-county",
+      "reason": "The source is an ArcGIS feature service that returns Esri JSON in pages of at most 2000 features, and keepset has no ArcGIS JSON parser or paging yet.",
+      "recipe": "not-fetchable",
+      "surveyId": "or-103"
+    },
+    {
+      "flags": [
+        "There are no coordinates, only an address text and a parcel number.",
+        "The first rows are identical and give an Augusta, Georgia style address under a California label, so the sample looks like placeholder data.",
+        "The parcel number repeats, so rows are numbered.",
+        "No licence is recorded in the Socrata metadata."
+      ],
+      "id": "los-angeles-lahd-property-look-up-for-eviction-cases",
+      "recipe": "fetchable",
+      "surveyId": "or-104"
+    },
+    {
+      "flags": [
+        "The page says the data is freely available to use, analyse and build on, but names no licence.",
+        "The bulk file covers all products, not only debt collection.",
+        "The table has no coordinates and ZIP codes are partly masked."
+      ],
+      "id": "cfpb-consumer-complaints-debt-collection",
+      "reason": "The bulk download is a zip of 355,930,383 bytes covering every product, which is larger than a recipe can read, and the debt collection subset is only reachable through a search API.",
+      "recipe": "not-fetchable",
+      "surveyId": "or-105"
+    },
+    {
+      "flags": [
+        "There are no latitude and longitude columns; the location_1 column holds a multi-line address text with the coordinates inside it, so no location is mapped.",
+        "Covers fiscal year 2016 to 2017 only.",
+        "The sampled rows have every timestamp at midnight.",
+        "Officer and user identifiers are present and deliberately not mapped.",
+        "The table has no column evidently unique per row, so rows are numbered."
+      ],
+      "id": "dallas-animals-field-data-2016-2017",
+      "recipe": "fetchable",
+      "surveyId": "or-106"
+    },
+    {
+      "flags": [
+        "The NYC terms page returned HTTP 403 to the survey, so no licence is recorded.",
+        "There are no coordinates, only borough, zip and dispatch area."
+      ],
+      "id": "nyc-open-data-fdny-ems-incident-dispatch",
+      "reason": "The table has 30,389,767 rows, more than a recipe can read.",
+      "recipe": "not-fetchable",
+      "surveyId": "or-107"
+    },
+    {
+      "flags": [
+        "The URL resolves to the year to date dataset, not a full history.",
+        "The NYC terms page returned HTTP 403 to the survey, so no licence is recorded."
+      ],
+      "id": "nyc-open-data-nypd-calls-for-service",
+      "reason": "The table has 10,484,258 rows, more than a recipe can read.",
+      "recipe": "not-fetchable",
+      "surveyId": "or-108"
+    },
+    {
+      "flags": [
+        "The Socrata licence field reads See Terms of Use with no terms URL.",
+        "The geolocation text is written latitude first, the reverse of WKT order."
+      ],
+      "id": "mesa-police-dispatch-events",
+      "reason": "The table has 1,631,480 rows, more than a recipe can read.",
+      "recipe": "not-fetchable",
+      "surveyId": "or-109"
+    },
+    {
+      "flags": [
+        "The Socrata licence field reads See Terms of Use with no terms URL.",
+        "The view is redacted for medical calls, so coordinates and response times are empty in many rows, including both sampled rows.",
+        "The table has no column evidently unique per row, so rows are numbered.",
+        "The stored travel time column holds negative values in the sample, so the response time in seconds is mapped to travelTime instead."
+      ],
+      "id": "mesa-fire-and-medical-dispatch-events",
+      "recipe": "fetchable",
+      "surveyId": "or-110"
+    },
+    {
+      "flags": [
+        "The csv covers 2009 to 2017 only.",
+        "Missing values are written as the text NULL."
+      ],
+      "id": "london-fire-brigade-incident-records",
+      "reason": "The 2009 to 2017 csv is 328,582,222 bytes, over the 256 MiB a recipe can read, and the later years are published as spreadsheets (xlsx).",
+      "recipe": "not-fetchable",
+      "surveyId": "or-111"
+    },
+    {
+      "flags": [
+        "A live snapshot with no history, so the rows change on every fetch.",
+        "Covers Northern Powergrid only, although the survey item also names UK Power Networks and California feeds.",
+        "The same incident appears on several rows, one per affected postcode, so rows are numbered.",
+        "The licence text itself was not read.",
+        "The status column holds numeric codes, not words."
+      ],
+      "id": "northern-powergrid-live-power-cuts",
+      "recipe": "fetchable",
+      "surveyId": "or-112"
+    },
+    {
+      "flags": [
+        "No licence or copyright text is recorded."
+      ],
+      "id": "arlington-county-water-leak-repairs-live",
+      "reason": "The source is an ArcGIS feature service that returns Esri JSON in pages of at most 2000 features, and keepset has no ArcGIS JSON parser or paging yet.",
+      "recipe": "not-fetchable",
+      "surveyId": "or-113"
+    },
+    {
+      "flags": [
+        "The service carries only a copyright text naming Christchurch City Council, not a licence.",
+        "The layer holds polygons, not points."
+      ],
+      "id": "christchurch-city-council-water-shut-off",
+      "reason": "The source is an ArcGIS feature service that returns Esri JSON in pages of at most 2000 features, and keepset has no ArcGIS JSON parser or paging yet.",
+      "recipe": "not-fetchable",
+      "surveyId": "or-114"
+    },
+    {
+      "flags": [
+        "The location column is a single text holding latitude and longitude together, so no coordinates are mapped.",
+        "A snapshot of current bay status, not a history.",
+        "The zone number is empty in some rows.",
+        "The table has no column evidently unique per row, so rows are numbered."
+      ],
+      "id": "melbourne-on-street-parking-bay-sensors",
+      "recipe": "fetchable",
+      "surveyId": "or-115"
+    },
+    {
+      "flags": [
+        "The NYC terms page returned HTTP 403 to the survey, so no licence is recorded."
+      ],
+      "id": "nyc-open-data-311-service-requests-2020-to-present",
+      "reason": "The table has 22,844,087 rows, more than a recipe can read.",
+      "recipe": "not-fetchable",
+      "surveyId": "or-116"
+    },
+    {
+      "flags": [
+        "A static extract last modified in December 2022.",
+        "There are no coordinates, only a suburb.",
+        "The table has no column evidently unique per row, so rows are numbered."
+      ],
+      "id": "melbourne-customer-service-requests-with-resolution-time",
+      "recipe": "fetchable",
+      "surveyId": "or-117"
+    },
+    {
+      "flags": [
+        "The licence is the Socrata licence name Public Domain, with no terms link.",
+        "The first inspection date stands for the case opening, which the source does not state.",
+        "The geolocation column is a multi-line text and is not mapped.",
+        "The table has no column evidently unique per row, so rows are numbered.",
+        "Some rows have latitude and longitude of 0, which are missing values, not locations."
+      ],
+      "id": "montgomery-county-md-troubled-properties-analysis",
+      "recipe": "fetchable",
+      "surveyId": "or-118"
+    },
+    {
+      "flags": [
+        "No file, format or column was verified.",
+        "The page lists yearly zip files from 2020 to 2025."
+      ],
+      "id": "defra-event-duration-monitoring-storm-overflows",
+      "reason": "The survey URL is a landing page and no direct download could be verified, because the files sit on a host whose TLS connection failed.",
+      "recipe": "not-fetchable",
+      "surveyId": "or-119"
+    },
+    {
+      "flags": [
+        "Survey URL is a landing page and the named zip was not reachable, so its contents are unseen."
+      ],
+      "id": "defra-historic-flood-warnings",
+      "reason": "The survey URL is a landing page; the zip it names is hosted on api.agrimetrics.co.uk, whose TLS connection failed during the survey, so no direct download or table could be verified, and the page lists the format as ODS (a spreadsheet) which keepset has no parser for yet.",
+      "recipe": "not-fetchable",
+      "surveyId": "or-120"
+    },
+    {
+      "flags": [
+        "Location is a WKT geometry column in a projected coordinate system, not latitude and longitude, so no coordinates are mapped.",
+        "No licence is recorded in the Socrata metadata and the NYC Open Data terms were not checked.",
+        "No unique id column: the project location id appears to repeat across scheduled dates, so rows are numbered.",
+        "The date column is the scheduled work date, so it is mapped as the deadline."
+      ],
+      "id": "nyc-open-data-street-resurfacing-schedule",
+      "recipe": "fetchable",
+      "surveyId": "or-121"
+    },
+    {
+      "flags": [
+        "The survey dataset (v2) is deprecated and returns no rows; the live data is the v3 NfipClaims entity.",
+        "No licence was confirmed because the FEMA terms page refused automated requests."
+      ],
+      "id": "fema-nfip-redacted-claims",
+      "reason": "The data is served only as JSON pages by the OpenFEMA API (the survey page itself refuses automated requests), keepset has no JSON paging parser yet, and the successor v3 table holds 2725989 records, more than a recipe can read.",
+      "recipe": "not-fetchable",
+      "surveyId": "or-122"
+    },
+    {
+      "flags": [
+        "Only fiscal year 2020 (1034 incidents) is covered.",
+        "No coordinates or status column: location is a street address and a Mapsco grid reference.",
+        "The prize mapping is the property value, which is a loss exposure and not a reward; treat it as weak.",
+        "The mapped date is the incident date, used as the opened date.",
+        "The sampled total values reach 720000000, an outlier that looks implausible for a single building.",
+        "No licence is recorded in the Socrata metadata."
+      ],
+      "id": "dallas-building-fire-investigations",
+      "recipe": "fetchable",
+      "surveyId": "or-123"
+    },
+    {
+      "flags": [
+        "Records name individuals and deceased-estate owners, so the table is personal data.",
+        "The dataset has no location or deadline concept."
+      ],
+      "id": "queensland-government-unclaimed-monies",
+      "reason": "The CSV download answers with an AWS WAF challenge and an empty body, the CKAN datastore API is paged JSON that keepset cannot read yet, and the table has 2553652 records, more than a recipe can read.",
+      "recipe": "not-fetchable",
+      "surveyId": "or-124"
+    }
+  ],
+  "source": {
+    "probedOn": "2026-10-19",
+    "survey": "operations-research instance datasets, shape-matched for a routing-with-rewards evaluation",
+    "surveyed": "2026-07-23 to 2026-07-24"
+  }
+}

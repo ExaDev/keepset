@@ -1,0 +1,40 @@
+{
+  "aliases": [
+    "historic-flood-warnings"
+  ],
+  "category": "or/v1",
+  "citations": [],
+  "crosswalk": {
+    "file": "crosswalks/or-v1/nodes.json"
+  },
+  "domain": "Civic and environmental monitoring",
+  "expectedCounts": {},
+  "id": "defra-historic-flood-warnings",
+  "licence": {
+    "id": "OGL-UK-3.0",
+    "kind": "spdx"
+  },
+  "name": "Historic Flood Warnings (England)",
+  "namespace": [
+    "defra"
+  ],
+  "properties": {
+    "surveyId": "or-120"
+  },
+  "recipe": {
+    "reason": "The survey URL is a landing page; the zip it names is hosted on api.agrimetrics.co.uk, whose TLS connection failed during the survey, so no direct download or table could be verified, and the page lists the format as ODS (a spreadsheet) which keepset has no parser for yet.",
+    "status": "not-fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://environment.data.gov.uk/dataset/88bed270-d465-11e4-8669-f0def148f590"
+    }
+  ],
+  "tags": [
+    "prizeProbability",
+    "territory",
+    "lifecycle"
+  ]
+}

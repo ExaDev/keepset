@@ -1,0 +1,43 @@
+{
+  "aliases": [
+    "lease-arrears"
+  ],
+  "category": "or/v1",
+  "citations": [],
+  "crosswalk": {
+    "file": "crosswalks/or-v1/nodes.json"
+  },
+  "description": "Lease arrears and enforcement status for iTaukei Land Trust Board leases in Fiji.",
+  "domain": "Case records",
+  "expectedCounts": {},
+  "id": "itaukei-land-trust-board-lease-arrears",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "iTaukei Land Trust Board lease arrears (Fiji)",
+  "namespace": [
+    "itaukei-land-trust-board"
+  ],
+  "properties": {
+    "surveyId": "or-41"
+  },
+  "recipe": {
+    "reason": "The source is an ArcGIS feature service that returns GeoJSON in pages of a limited number of features and keepset has no GeoJSON parser or paging yet.",
+    "status": "not-fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://hub.arcgis.com/datasets/a963186c15d845bb93cce1c00022e380"
+    }
+  ],
+  "tags": [
+    "prize",
+    "deadline",
+    "location",
+    "territory",
+    "skills",
+    "lifecycle"
+  ]
+}

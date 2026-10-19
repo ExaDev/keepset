@@ -1,0 +1,42 @@
+{
+  "aliases": [
+    "informs-tsl-dispatch-waybill"
+  ],
+  "category": "or/v1",
+  "citations": [],
+  "crosswalk": {
+    "file": "crosswalks/or-v1/nodes.json"
+  },
+  "domain": "Last-mile logistics",
+  "expectedCounts": {},
+  "id": "github-meituan-informs-tsl-dispatch-waybill",
+  "licence": {
+    "id": "CC-BY-NC-4.0",
+    "kind": "spdx"
+  },
+  "name": "Meituan-INFORMS-TSL research challenge dataset",
+  "namespace": [
+    "github-meituan"
+  ],
+  "properties": {
+    "surveyId": "or-30"
+  },
+  "recipe": {
+    "reason": "The plain CSV probed holds only an index, date, dispatch time and order id with no mappable field, and the coordinate data sits in a zip that keepset cannot read.",
+    "status": "not-fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://github.com/meituan/Meituan-INFORMS-TSL-Research-Challenge"
+    }
+  ],
+  "tags": [
+    "location",
+    "territory",
+    "duration",
+    "lifecycle",
+    "travelTime"
+  ]
+}

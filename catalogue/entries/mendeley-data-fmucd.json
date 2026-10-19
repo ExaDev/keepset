@@ -1,0 +1,42 @@
+{
+  "aliases": [
+    "fmucd"
+  ],
+  "category": "or/v1",
+  "citations": [],
+  "crosswalk": {
+    "file": "crosswalks/or-v1/nodes.json"
+  },
+  "domain": "Technician and home-care routing",
+  "expectedCounts": {},
+  "id": "mendeley-data-fmucd",
+  "licence": {
+    "id": "CC-BY-4.0",
+    "kind": "spdx"
+  },
+  "name": "Facility Management Unified Classification Database",
+  "namespace": [
+    "mendeley-data"
+  ],
+  "properties": {
+    "surveyId": "or-23"
+  },
+  "recipe": {
+    "reason": "The single CSV is about 1.44 GB, far more than the 256 MiB a recipe can read into memory.",
+    "status": "not-fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://doi.org/10.1016/j.dib.2024.110845"
+    }
+  ],
+  "tags": [
+    "prize",
+    "location",
+    "skills",
+    "duration",
+    "lifecycle"
+  ]
+}

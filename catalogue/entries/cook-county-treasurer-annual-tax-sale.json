@@ -1,0 +1,147 @@
+{
+  "aliases": [
+    "treasurer-annual-tax-sale"
+  ],
+  "category": "or/v1",
+  "citations": [],
+  "crosswalk": {
+    "oneWay": [
+      {
+        "direction": "encode",
+        "from": "nodes[].Tax_Sale_Year",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].PIN",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Tax_Amount_Offered",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Penalty_Amount_Offered",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Cost",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Total_Amount_Paid",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Total_Amount_Forfeited",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Winning_Bid_Percent",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Buyer_Name",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].location_1",
+        "op": "drop"
+      }
+    ],
+    "rules": [
+      {
+        "from": "meta",
+        "op": "move",
+        "to": "meta"
+      },
+      {
+        "from": "nodes[].id",
+        "op": "move",
+        "to": "nodes[].id"
+      },
+      {
+        "from": "nodes[].Total_Tax_and_Penalty_Amount_Offered",
+        "op": "move",
+        "to": "nodes[].prize"
+      },
+      {
+        "from": "nodes[].Classification",
+        "op": "move",
+        "to": "nodes[].skill"
+      },
+      {
+        "from": "nodes[].Sold_at_Sale",
+        "op": "move",
+        "to": "nodes[].status"
+      },
+      {
+        "from": "nodes[].Township_Name",
+        "op": "move",
+        "to": "nodes[].territory"
+      }
+    ],
+    "source": "csv-table",
+    "target": "or/v1"
+  },
+  "description": "Properties offered at the Cook County annual tax sale with taxes and penalties offered, amounts paid and township.",
+  "domain": "Case records",
+  "expectedCounts": {},
+  "id": "cook-county-treasurer-annual-tax-sale",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "Cook County Treasurer annual tax sale",
+  "namespace": [
+    "cook-county"
+  ],
+  "properties": {
+    "surveyId": "or-48"
+  },
+  "recipe": {
+    "archive": {
+      "kind": "none"
+    },
+    "parser": {
+      "delimiter": "comma",
+      "encoding": "utf-8",
+      "format": "csv-table",
+      "idColumn": null,
+      "numericColumns": [
+        {
+          "column": "Total_Tax_and_Penalty_Amount_Offered",
+          "factor": 1
+        }
+      ],
+      "skipLines": 0
+    },
+    "source": 1,
+    "status": "fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://datacatalog.cookcountyil.gov/Property-Taxation/Treasurer-Annual-Tax-Sale/55ju-2fs9"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://datacatalog.cookcountyil.gov/api/views/55ju-2fs9/rows.csv?accessType=DOWNLOAD"
+    }
+  ],
+  "tags": [
+    "prize",
+    "location",
+    "territory",
+    "lifecycle"
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "aliases": [
+    "expiation-notice-system-data"
+  ],
+  "category": "or/v1",
+  "citations": [],
+  "crosswalk": {
+    "file": "crosswalks/or-v1/nodes.json"
+  },
+  "description": "Expiation notices issued in South Australia, published as one report per financial year and report type.",
+  "domain": "Case records",
+  "expectedCounts": {},
+  "id": "south-australia-expiation-notice-system-data",
+  "licence": {
+    "id": "CC-BY-4.0",
+    "kind": "spdx"
+  },
+  "name": "Expiation notice system data (South Australia)",
+  "namespace": [
+    "south-australia"
+  ],
+  "properties": {
+    "surveyId": "or-80"
+  },
+  "recipe": {
+    "reason": "The download is a set of zip archives of CSV files, one per financial year and report type with differing columns, and keepset has no archive parser yet.",
+    "status": "not-fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://data.sa.gov.au/data/dataset/expiation-notice-system-data"
+    }
+  ],
+  "tags": [
+    "prize",
+    "territory",
+    "lifecycle"
+  ]
+}

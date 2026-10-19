@@ -1,0 +1,42 @@
+{
+  "aliases": [
+    "sheriff-foreclosure-sales"
+  ],
+  "category": "or/v1",
+  "citations": [],
+  "crosswalk": {
+    "file": "crosswalks/or-v1/nodes.json"
+  },
+  "description": "Sheriff foreclosure sales in Dakota County, Minnesota, with sale amounts and dates for 2025.",
+  "domain": "Case records",
+  "expectedCounts": {},
+  "id": "dakota-county-sheriff-foreclosure-sales",
+  "licence": {
+    "kind": "custom",
+    "name": "Dakota County GIS Database Disclaimer",
+    "url": "https://hub.arcgis.com/datasets/297fcd81118a4d5cbf2fd07ebdee628c"
+  },
+  "name": "Sheriff foreclosure sales (Dakota County, MN)",
+  "namespace": [
+    "dakota-county"
+  ],
+  "properties": {
+    "surveyId": "or-46"
+  },
+  "recipe": {
+    "reason": "The source is an ArcGIS map service that returns GeoJSON and keepset has no GeoJSON parser yet.",
+    "status": "not-fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://hub.arcgis.com/datasets/297fcd81118a4d5cbf2fd07ebdee628c"
+    }
+  ],
+  "tags": [
+    "prize",
+    "location",
+    "territory"
+  ]
+}

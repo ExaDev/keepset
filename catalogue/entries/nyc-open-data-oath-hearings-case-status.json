@@ -1,0 +1,40 @@
+{
+  "aliases": [
+    "oath-hearings-case-status"
+  ],
+  "category": "or/v1",
+  "citations": [],
+  "crosswalk": {
+    "file": "crosswalks/or-v1/nodes.json"
+  },
+  "domain": "Case records",
+  "expectedCounts": {},
+  "id": "nyc-open-data-oath-hearings-case-status",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "OATH hearings division case status (NYC)",
+  "namespace": [
+    "nyc-open-data"
+  ],
+  "properties": {
+    "surveyId": "or-63"
+  },
+  "recipe": {
+    "reason": "The table has 22,151,329 rows, more than a recipe can read into memory.",
+    "status": "not-fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://data.cityofnewyork.us/City-Government/OATH-Hearings-Division-Case-Status/jz4z-kudi"
+    }
+  ],
+  "tags": [
+    "prize",
+    "location",
+    "territory",
+    "lifecycle"
+  ]
+}

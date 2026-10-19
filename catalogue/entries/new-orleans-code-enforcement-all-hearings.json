@@ -1,0 +1,187 @@
+{
+  "aliases": [
+    "code-enforcement-all-hearings"
+  ],
+  "category": "or/v1",
+  "citations": [],
+  "crosswalk": {
+    "oneWay": [
+      {
+        "direction": "encode",
+        "from": "nodes[].casenumber",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].propertyaddress",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].casehistory",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].hearingtime",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].judgment",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].prevhearing",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].prevhearingstat",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].inspected",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].inspectionresult",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].geoaddress",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].city",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].state",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].zip",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].geopin",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].caseid",
+        "op": "drop"
+      }
+    ],
+    "rules": [
+      {
+        "from": "meta",
+        "op": "move",
+        "to": "meta"
+      },
+      {
+        "from": "nodes[].id",
+        "op": "move",
+        "to": "nodes[].id"
+      },
+      {
+        "from": "nodes[].hearingdate",
+        "op": "move",
+        "to": "nodes[].deadline"
+      },
+      {
+        "from": "nodes[].caseestablished",
+        "op": "move",
+        "to": "nodes[].opened"
+      },
+      {
+        "from": "nodes[].o_c",
+        "op": "move",
+        "to": "nodes[].status"
+      },
+      {
+        "from": "nodes[].councildistrict",
+        "op": "move",
+        "to": "nodes[].territory"
+      },
+      {
+        "from": "nodes[].xpos",
+        "op": "move",
+        "to": "nodes[].x"
+      },
+      {
+        "from": "nodes[].ypos",
+        "op": "move",
+        "to": "nodes[].y"
+      }
+    ],
+    "source": "csv-table",
+    "target": "or/v1"
+  },
+  "description": "Code enforcement hearings in New Orleans, with the property, hearing date, case status and inspection dates.",
+  "domain": "Case records",
+  "expectedCounts": {},
+  "id": "new-orleans-code-enforcement-all-hearings",
+  "licence": {
+    "id": "CC0-1.0",
+    "kind": "spdx"
+  },
+  "name": "Code Enforcement All Hearings (New Orleans)",
+  "namespace": [
+    "new-orleans"
+  ],
+  "properties": {
+    "surveyId": "or-100"
+  },
+  "recipe": {
+    "archive": {
+      "kind": "none"
+    },
+    "parser": {
+      "delimiter": "comma",
+      "encoding": "utf-8",
+      "format": "csv-table",
+      "idColumn": null,
+      "numericColumns": [
+        {
+          "column": "xpos",
+          "factor": 1
+        },
+        {
+          "column": "ypos",
+          "factor": 1
+        }
+      ],
+      "skipLines": 0
+    },
+    "source": 1,
+    "status": "fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://data.nola.gov/Housing-Land-Use-and-Blight/Code-Enforcement-All-Hearings/44ct-56tr"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://data.nola.gov/resource/44ct-56tr.csv"
+    }
+  ],
+  "tags": [
+    "deadline",
+    "location",
+    "territory",
+    "lifecycle"
+  ]
+}

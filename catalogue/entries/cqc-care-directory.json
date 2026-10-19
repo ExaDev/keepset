@@ -1,0 +1,40 @@
+{
+  "aliases": [
+    "care-directory"
+  ],
+  "category": "or/v1",
+  "citations": [],
+  "crosswalk": {
+    "file": "crosswalks/or-v1/nodes.json"
+  },
+  "domain": "Technician and home-care routing",
+  "expectedCounts": {},
+  "id": "cqc-care-directory",
+  "licence": {
+    "id": "OGL-UK-3.0",
+    "kind": "spdx"
+  },
+  "name": "CQC care directory (England)",
+  "namespace": [
+    "cqc"
+  ],
+  "properties": {
+    "surveyId": "or-19"
+  },
+  "recipe": {
+    "reason": "The CSV starts with a title line and a production note before any column header, so it is not a rectangular table with the header on its first line.",
+    "status": "not-fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://www.cqc.org.uk/about-us/transparency/using-cqc-data"
+    }
+  ],
+  "tags": [
+    "location",
+    "territory",
+    "skills"
+  ]
+}

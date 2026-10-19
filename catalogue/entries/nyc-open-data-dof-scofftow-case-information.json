@@ -1,0 +1,44 @@
+{
+  "aliases": [
+    "dof-scofftow-case-information"
+  ],
+  "category": "or/v1",
+  "citations": [],
+  "crosswalk": {
+    "file": "crosswalks/or-v1/nodes.json"
+  },
+  "description": "Boot and tow cases for scofflaw vehicles in New York City, with judgment amounts, amounts owed and case dates.",
+  "domain": "Case records",
+  "expectedCounts": {},
+  "id": "nyc-open-data-dof-scofftow-case-information",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "DOF Scofftow Case Information (NYC)",
+  "namespace": [
+    "nyc-open-data"
+  ],
+  "properties": {
+    "surveyId": "or-101"
+  },
+  "recipe": {
+    "reason": "The table has 1,539,045 rows, more than a recipe can read.",
+    "status": "not-fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://data.cityofnewyork.us/City-Government/DOF-Scofftow-Case-Information/qmh3-uvgq"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://data.cityofnewyork.us/resource/qmh3-uvgq.csv"
+    }
+  ],
+  "tags": [
+    "prize",
+    "lifecycle"
+  ]
+}

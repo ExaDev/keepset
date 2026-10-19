@@ -1,0 +1,47 @@
+{
+  "aliases": [
+    "pharmaceutical-last-mile-delivery"
+  ],
+  "category": "or/v1",
+  "citations": [],
+  "crosswalk": {
+    "file": "crosswalks/or-v1/nodes.json"
+  },
+  "description": "Distance and time matrices, service times and time windows for a real pharmaceutical last-mile delivery operation.",
+  "domain": "Vehicle routing with time windows",
+  "expectedCounts": {},
+  "id": "zenodo-pharmaceutical-last-mile-delivery",
+  "licence": {
+    "id": "CC-BY-4.0",
+    "kind": "spdx"
+  },
+  "name": "Pharmaceutical last-mile delivery dataset (Vrani et al.)",
+  "namespace": [
+    "zenodo"
+  ],
+  "properties": {
+    "surveyId": "or-7"
+  },
+  "recipe": {
+    "reason": "The download is a zip of Excel (xlsx) files holding distance and time matrices, and keepset has no spreadsheet parser yet.",
+    "status": "not-fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://doi.org/10.1016/j.dib.2025.111762"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://zenodo.org/api/records/15310106/files/data.zip/content"
+    }
+  ],
+  "tags": [
+    "deadline",
+    "location",
+    "duration",
+    "travelTime"
+  ]
+}

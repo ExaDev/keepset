@@ -1,0 +1,42 @@
+{
+  "aliases": [
+    "dob-permit-issuance"
+  ],
+  "category": "or/v1",
+  "citations": [],
+  "crosswalk": {
+    "file": "crosswalks/or-v1/nodes.json"
+  },
+  "description": "Construction permits issued by the NYC Department of Buildings.",
+  "domain": "Case records",
+  "expectedCounts": {},
+  "id": "nyc-open-data-dob-permit-issuance",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "DOB permit issuance (NYC)",
+  "namespace": [
+    "nyc-open-data"
+  ],
+  "properties": {
+    "surveyId": "or-86"
+  },
+  "recipe": {
+    "reason": "The CSV has 3990985 rows, which is more than a recipe can read into memory.",
+    "status": "not-fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://data.cityofnewyork.us/Housing-Development/DOB-Permit-Issuance/ipu4-2q9a"
+    }
+  ],
+  "tags": [
+    "deadline",
+    "location",
+    "territory",
+    "skills",
+    "lifecycle"
+  ]
+}

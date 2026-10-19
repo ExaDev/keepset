@@ -1,0 +1,125 @@
+{
+  "aliases": [
+    "utility-cut-permits"
+  ],
+  "category": "or/v1",
+  "citations": [],
+  "crosswalk": {
+    "oneWay": [
+      {
+        "direction": "encode",
+        "from": "nodes[].PERMIT_NUMBER",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].PROPOSED_FROM_DATE",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].CLIENT_NAME",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].GEO_ID",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].DISPLAY_DESC",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].DISTRICT",
+        "op": "drop"
+      }
+    ],
+    "rules": [
+      {
+        "from": "meta",
+        "op": "move",
+        "to": "meta"
+      },
+      {
+        "from": "nodes[].id",
+        "op": "move",
+        "to": "nodes[].id"
+      },
+      {
+        "from": "nodes[].PROPOSED_TO_DATE",
+        "op": "move",
+        "to": "nodes[].deadline"
+      },
+      {
+        "from": "nodes[].INSTALLATION_TYPE_DESC",
+        "op": "move",
+        "to": "nodes[].skill"
+      },
+      {
+        "from": "nodes[].PERMIT_STATUS",
+        "op": "move",
+        "to": "nodes[].status"
+      },
+      {
+        "from": "nodes[].CITY_WARD",
+        "op": "move",
+        "to": "nodes[].territory"
+      }
+    ],
+    "source": "csv-table",
+    "target": "or/v1"
+  },
+  "description": "Permits for utility cuts in Toronto streets, with installation type, ward, district, status and proposed dates.",
+  "domain": "Case records",
+  "expectedCounts": {},
+  "id": "toronto-utility-cut-permits",
+  "licence": {
+    "kind": "custom",
+    "name": "Open Government Licence (Toronto)",
+    "url": "https://ckan0.cf.opendata.inter.prod-toronto.ca/dataset/utility-cut-permits"
+  },
+  "name": "Utility cut permits (Toronto)",
+  "namespace": [
+    "toronto"
+  ],
+  "properties": {
+    "surveyId": "or-68"
+  },
+  "recipe": {
+    "archive": {
+      "kind": "none"
+    },
+    "parser": {
+      "delimiter": "comma",
+      "encoding": "utf-8",
+      "format": "csv-table",
+      "idColumn": "column_1",
+      "numericColumns": [],
+      "skipLines": 0
+    },
+    "source": 1,
+    "status": "fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://ckan0.cf.opendata.inter.prod-toronto.ca/dataset/utility-cut-permits"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://ckan0.cf.opendata.inter.prod-toronto.ca/dataset/43cbc364-b673-49ca-b98b-8b99c5d5f6eb/resource/e2d3c583-efeb-43e7-aeb1-273f4055847d/download/utility-cut-permits.csv"
+    }
+  ],
+  "tags": [
+    "deadline",
+    "location",
+    "territory",
+    "skills",
+    "lifecycle"
+  ]
+}

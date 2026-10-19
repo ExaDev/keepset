@@ -1,0 +1,638 @@
+{
+  "aliases": [
+    "transportation-work-orders-public-view"
+  ],
+  "category": "or/v1",
+  "citations": [],
+  "crosswalk": {
+    "oneWay": [
+      {
+        "direction": "encode",
+        "from": "nodes[].description",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].project_name",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].location",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].project_start_date",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].actual_start_date",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].actual_finish_date",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].cancel",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].priority",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].number_days_before",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].date_to_be_printed",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].date_printed",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].work_order_map_extent",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].work_order_map_scale",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].source_work_order_id",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].cycle_type",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].cycle_interval_number",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].cycle_interval_unit",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].asset_group",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].cancel_reason",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].cancelled_by",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].cancelled_by_sid",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].closed_by_sid",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].account_number",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].contract_billable",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].contractor_sid",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].created_by_cycle",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].cycle_from",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].date_cancelled",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].date_submit_to",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].date_submitted_open",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].days",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].domain_id",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].expense_type",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].from_date",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].initiated_by_app",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].initiated_by_sid",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].is_reactive",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].legal_billable",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].map_page",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].project_sid",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].requested_by_sid",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].schedule_date",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].stage",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].submit_to_open_by_sid",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].submit_to_sid",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].unattached",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].units_accomplished",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].units_accomplished_description",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].units_accomplished_description_1",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].update_map",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].work_completed_by_sid",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].work_order_address",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].work_order_custom_field",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].work_order_equipment_cost",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].work_order_labor_cost",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].work_order_material_cost",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].work_order_permit_cost",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].work_order_template_id",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].supervisor_sid",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].actual_finish_month",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].actual_finish_month_date",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].actual_finish_year",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].actual_start_month",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].actual_start_month_date",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].actual_start_year",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].cancelled_month",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].cancelled_month_date",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].cancelled_year",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].from_month",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].from_month_date",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].from_year",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].printed_month",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].printed_month_date",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].printed_year",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].project_finish_month",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].project_finish_month_date",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].project_finish_year",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].project_start_month",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].project_start_month_date",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].project_start_year",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].schedule_month",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].schedule_month_date",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].schedule_year",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].submit_to_month",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].submit_to_month_date",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].submit_to_year",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].submitted_open_month",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].submitted_open_month_date",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].submitted_open_year",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].to_be_printed_month",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].to_be_printed_month_date",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].to_be_printed_year",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].work_order_closed_month",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].work_order_closed_month_date",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].work_order_closed_year",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].initiated_date_month",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].initiated_date_month_date",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].initiated_date_year",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].enumeration",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].geocoded_column",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].response_time",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].response_time_60",
+        "op": "drop"
+      }
+    ],
+    "rules": [
+      {
+        "from": "meta",
+        "op": "move",
+        "to": "meta"
+      },
+      {
+        "from": "nodes[].id",
+        "op": "move",
+        "to": "nodes[].id"
+      },
+      {
+        "from": "nodes[].date_work_order_closed",
+        "op": "move",
+        "to": "nodes[].closed"
+      },
+      {
+        "from": "nodes[].project_finish_date",
+        "op": "move",
+        "to": "nodes[].deadline"
+      },
+      {
+        "from": "nodes[].latitude",
+        "op": "move",
+        "to": "nodes[].lat"
+      },
+      {
+        "from": "nodes[].longitude",
+        "op": "move",
+        "to": "nodes[].lon"
+      },
+      {
+        "from": "nodes[].initiated_date",
+        "op": "move",
+        "to": "nodes[].opened"
+      },
+      {
+        "from": "nodes[].work_order_cost",
+        "op": "move",
+        "to": "nodes[].prize"
+      },
+      {
+        "from": "nodes[].work_order_category",
+        "op": "move",
+        "to": "nodes[].skill"
+      },
+      {
+        "from": "nodes[].status",
+        "op": "move",
+        "to": "nodes[].status"
+      }
+    ],
+    "source": "csv-table",
+    "target": "or/v1"
+  },
+  "description": "Transportation work orders raised and closed by the City of Mesa, with location, category, cost, status and dates.",
+  "domain": "Technician and home-care routing",
+  "expectedCounts": {},
+  "id": "mesa-transportation-work-orders-public-view",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "Transportation Work Orders, Public View (Mesa, AZ)",
+  "namespace": [
+    "mesa"
+  ],
+  "properties": {
+    "surveyId": "or-12"
+  },
+  "recipe": {
+    "archive": {
+      "kind": "none"
+    },
+    "parser": {
+      "delimiter": "comma",
+      "encoding": "utf-8",
+      "format": "csv-table",
+      "idColumn": "work_order_id",
+      "numericColumns": [
+        {
+          "column": "latitude",
+          "factor": 1
+        },
+        {
+          "column": "longitude",
+          "factor": 1
+        },
+        {
+          "column": "work_order_cost",
+          "factor": 1
+        }
+      ],
+      "skipLines": 0
+    },
+    "source": 1,
+    "status": "fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://citydata.mesaaz.gov/Transportation/Transportation-Work-Orders-Public-View/ay68-xuca"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://citydata.mesaaz.gov/resource/ay68-xuca.csv"
+    }
+  ],
+  "tags": [
+    "prize",
+    "prizeProbability",
+    "deadline",
+    "location",
+    "skills",
+    "duration",
+    "lifecycle"
+  ]
+}

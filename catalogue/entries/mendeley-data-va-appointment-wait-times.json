@@ -1,0 +1,43 @@
+{
+  "aliases": [
+    "va-appointment-wait-times"
+  ],
+  "category": "or/v1",
+  "citations": [],
+  "crosswalk": {
+    "file": "crosswalks/or-v1/nodes.json"
+  },
+  "description": "Aggregated appointment waiting days by county, month and clinic stop code for Veterans Health Administration and Community Care.",
+  "domain": "Risk and outcome records",
+  "expectedCounts": {},
+  "id": "mendeley-data-va-appointment-wait-times",
+  "licence": {
+    "id": "CC-BY-4.0",
+    "kind": "spdx"
+  },
+  "name": "US Veterans Health Administration appointment wait times",
+  "namespace": [
+    "mendeley-data"
+  ],
+  "properties": {
+    "surveyId": "or-35"
+  },
+  "recipe": {
+    "reason": "The county-level file is 916897688 bytes, far over the 256 MiB a recipe can read, and the other files are larger or are zip and xlsx.",
+    "status": "not-fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://doi.org/10.1016/j.dib.2021.107134"
+    }
+  ],
+  "tags": [
+    "prizeProbability",
+    "deadline",
+    "territory",
+    "skills",
+    "lifecycle"
+  ]
+}

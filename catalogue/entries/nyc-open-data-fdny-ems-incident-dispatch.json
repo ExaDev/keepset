@@ -1,0 +1,48 @@
+{
+  "aliases": [
+    "fdny-ems-incident-dispatch"
+  ],
+  "category": "or/v1",
+  "citations": [],
+  "crosswalk": {
+    "file": "crosswalks/or-v1/nodes.json"
+  },
+  "description": "Emergency medical incident dispatch records for New York City, with severity codes, response and travel seconds and areas.",
+  "domain": "Emergency dispatch",
+  "expectedCounts": {},
+  "id": "nyc-open-data-fdny-ems-incident-dispatch",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "FDNY EMS Incident Dispatch Data",
+  "namespace": [
+    "nyc-open-data"
+  ],
+  "properties": {
+    "surveyId": "or-107"
+  },
+  "recipe": {
+    "reason": "The table has 30,389,767 rows, more than a recipe can read.",
+    "status": "not-fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://data.cityofnewyork.us/Public-Safety/EMS-Incident-Dispatch-Data/76xm-jjuj"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://data.cityofnewyork.us/resource/76xm-jjuj.csv"
+    }
+  ],
+  "tags": [
+    "prizeProbability",
+    "location",
+    "territory",
+    "duration",
+    "lifecycle",
+    "travelTime"
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "aliases": [
+    "dob-now-electrical-permit-applications"
+  ],
+  "category": "or/v1",
+  "citations": [],
+  "crosswalk": {
+    "file": "crosswalks/or-v1/nodes.json"
+  },
+  "description": "Electrical permit applications filed with the NYC Department of Buildings.",
+  "domain": "Case records",
+  "expectedCounts": {},
+  "id": "nyc-open-data-dob-now-electrical-permit-applications",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "DOB NOW electrical permit applications (NYC)",
+  "namespace": [
+    "nyc-open-data"
+  ],
+  "properties": {
+    "surveyId": "or-88"
+  },
+  "recipe": {
+    "reason": "The table has 594449 rows of about 80 wide columns, roughly 900 bytes a row in a sampled export, so the download is well over the 256 MiB a recipe can read.",
+    "status": "not-fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://data.cityofnewyork.us/Housing-Development/DOB-NOW-Electrical-Permit-Applications/dm9a-ab7w"
+    }
+  ],
+  "tags": [
+    "prize",
+    "deadline",
+    "location",
+    "territory",
+    "skills",
+    "lifecycle"
+  ]
+}

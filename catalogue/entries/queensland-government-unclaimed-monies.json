@@ -1,0 +1,39 @@
+{
+  "aliases": [
+    "unclaimed-monies"
+  ],
+  "category": "or/v1",
+  "citations": [],
+  "crosswalk": {
+    "file": "crosswalks/or-v1/nodes.json"
+  },
+  "domain": "Claims and unclaimed money",
+  "expectedCounts": {},
+  "id": "queensland-government-unclaimed-monies",
+  "licence": {
+    "id": "CC-BY-4.0",
+    "kind": "spdx"
+  },
+  "name": "Unclaimed monies (Queensland)",
+  "namespace": [
+    "queensland-government"
+  ],
+  "properties": {
+    "surveyId": "or-124"
+  },
+  "recipe": {
+    "reason": "The CSV download answers with an AWS WAF challenge and an empty body, the CKAN datastore API is paged JSON that keepset cannot read yet, and the table has 2553652 records, more than a recipe can read.",
+    "status": "not-fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://www.data.qld.gov.au/dataset/unclaimed-monies"
+    }
+  ],
+  "tags": [
+    "prize",
+    "territory"
+  ]
+}

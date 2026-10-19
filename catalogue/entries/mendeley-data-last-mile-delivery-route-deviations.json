@@ -1,0 +1,46 @@
+{
+  "aliases": [
+    "last-mile-delivery-route-deviations"
+  ],
+  "category": "or/v1",
+  "citations": [],
+  "crosswalk": {
+    "file": "crosswalks/or-v1/nodes.json"
+  },
+  "description": "Planned and actual delivery routes of a logistics company in two countries, from a Data in Brief article.",
+  "domain": "Vehicle routing with time windows",
+  "expectedCounts": {},
+  "id": "mendeley-data-last-mile-delivery-route-deviations",
+  "licence": {
+    "id": "CC-BY-4.0",
+    "kind": "spdx"
+  },
+  "name": "Last-mile delivery route deviations, planned vs actual",
+  "namespace": [
+    "mendeley-data"
+  ],
+  "properties": {
+    "surveyId": "or-8"
+  },
+  "recipe": {
+    "reason": "The only file is an xlsx workbook of about 19.7 MB, and keepset has no spreadsheet parser yet.",
+    "status": "not-fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://doi.org/10.1016/j.dib.2026.112744"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://data.mendeley.com/public-files/datasets/kkwgfvmtxn/files/388ea249-0830-4906-a39e-7bcbd5ee837a/file_downloaded"
+    }
+  ],
+  "tags": [
+    "deadline",
+    "location",
+    "travelTime"
+  ]
+}

@@ -1,0 +1,125 @@
+{
+  "aliases": [
+    "jd-cold-chain-nodes"
+  ],
+  "category": "or/v1",
+  "citations": [],
+  "crosswalk": {
+    "oneWay": [
+      {
+        "direction": "encode",
+        "from": "nodes[].DEMAND1",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].DEMAND2",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].READYTIME",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].SERVICETIME",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].column_9",
+        "op": "drop"
+      }
+    ],
+    "rules": [
+      {
+        "from": "meta",
+        "op": "move",
+        "to": "meta"
+      },
+      {
+        "from": "nodes[].id",
+        "op": "move",
+        "to": "nodes[].id"
+      },
+      {
+        "from": "nodes[].DUEDATE",
+        "op": "move",
+        "to": "nodes[].deadline"
+      },
+      {
+        "from": "nodes[].YCOORD",
+        "op": "move",
+        "to": "nodes[].lat"
+      },
+      {
+        "from": "nodes[].XCOORD",
+        "op": "move",
+        "to": "nodes[].lon"
+      }
+    ],
+    "source": "csv-table",
+    "target": "or/v1"
+  },
+  "description": "Delivery nodes of a JD.com cold-chain case in Beijing with coordinates, demands and time windows.",
+  "domain": "Last-mile logistics",
+  "expectedCounts": {},
+  "id": "github-zhangchenhaoseu-jd-cold-chain-nodes",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "JD.com cold-chain delivery nodes (Beijing)",
+  "namespace": [
+    "github-zhangchenhaoseu"
+  ],
+  "properties": {
+    "surveyId": "or-29"
+  },
+  "recipe": {
+    "archive": {
+      "kind": "none"
+    },
+    "parser": {
+      "delimiter": "comma",
+      "encoding": "utf-8",
+      "format": "csv-table",
+      "idColumn": "NO",
+      "numericColumns": [
+        {
+          "column": "YCOORD",
+          "factor": 1
+        },
+        {
+          "column": "XCOORD",
+          "factor": 1
+        },
+        {
+          "column": "DUEDATE",
+          "factor": 1
+        }
+      ],
+      "skipLines": 0
+    },
+    "source": 1,
+    "status": "fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://github.com/zhangchenhaoseu/Database-for-HMCVRPTW-SD"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/zhangchenhaoseu/Database-for-HMCVRPTW-SD/main/Case%20study%20data/Jingdong%20Dataset/input/input_node.csv"
+    }
+  ],
+  "tags": [
+    "deadline",
+    "location",
+    "skills",
+    "travelTime"
+  ]
+}

@@ -1,0 +1,192 @@
+{
+  "aliases": [
+    "parking-penalty-charge-notices"
+  ],
+  "category": "or/v1",
+  "citations": [],
+  "crosswalk": {
+    "oneWay": [
+      {
+        "direction": "encode",
+        "from": "nodes[].Organisation_Name",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Organisation_Code",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Published_Date",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Latest_Data",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Duration_From",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Duration_To",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Reporting_Period_Type",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Reporting_Period",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].GeoEntity_Name",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Geo_Code",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].GeoURI",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].District_Name",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Month",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Day_Issued",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Time_Issued",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Time_Band",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Area",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Street",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Address",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Postcode",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Charge_Level",
+        "op": "drop"
+      }
+    ],
+    "rules": [
+      {
+        "from": "meta",
+        "op": "move",
+        "to": "meta"
+      },
+      {
+        "from": "nodes[].id",
+        "op": "move",
+        "to": "nodes[].id"
+      },
+      {
+        "from": "nodes[].Date_Issued",
+        "op": "move",
+        "to": "nodes[].opened"
+      },
+      {
+        "from": "nodes[].Contravention_Code",
+        "op": "move",
+        "to": "nodes[].skill"
+      },
+      {
+        "from": "nodes[].Geo_Name",
+        "op": "move",
+        "to": "nodes[].territory"
+      }
+    ],
+    "source": "csv-table",
+    "target": "or/v1"
+  },
+  "description": "Parking penalty charge notices issued in Lincolnshire in the 2019 to 2020 financial year, with ward, date, street and contravention.",
+  "domain": "Case records",
+  "expectedCounts": {},
+  "id": "lincolnshire-parking-penalty-charge-notices",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "Lincolnshire parking penalty charge notices, 2019 to 2020",
+  "namespace": [
+    "lincolnshire"
+  ],
+  "properties": {
+    "surveyId": "or-51"
+  },
+  "recipe": {
+    "archive": {
+      "kind": "none"
+    },
+    "parser": {
+      "delimiter": "comma",
+      "encoding": "latin1",
+      "format": "csv-table",
+      "idColumn": null,
+      "numericColumns": [],
+      "skipLines": 0
+    },
+    "source": 1,
+    "status": "fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://data.lincolnshire.gov.uk/@place/pcns"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://blob.datopian.com/resources/cb20cc0f-940b-49c7-a04c-cac7f480ec0e/penaltychargenotices-lwlv1g.csv"
+    }
+  ],
+  "tags": [
+    "prize",
+    "location",
+    "territory",
+    "lifecycle"
+  ]
+}

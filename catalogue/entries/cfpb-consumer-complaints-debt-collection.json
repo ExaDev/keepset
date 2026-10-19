@@ -1,0 +1,44 @@
+{
+  "aliases": [
+    "consumer-complaints-debt-collection"
+  ],
+  "category": "or/v1",
+  "citations": [],
+  "crosswalk": {
+    "file": "crosswalks/or-v1/nodes.json"
+  },
+  "description": "Consumer complaints about debt collection received by the US Consumer Financial Protection Bureau, with state, ZIP code and response dates.",
+  "domain": "Case records",
+  "expectedCounts": {},
+  "id": "cfpb-consumer-complaints-debt-collection",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "CFPB Consumer Complaint Database (Debt Collection)",
+  "namespace": [
+    "cfpb"
+  ],
+  "properties": {
+    "surveyId": "or-105"
+  },
+  "recipe": {
+    "reason": "The bulk download is a zip of 355,930,383 bytes covering every product, which is larger than a recipe can read, and the debt collection subset is only reachable through a search API.",
+    "status": "not-fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://www.consumerfinance.gov/data-research/consumer-complaints/"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://files.consumerfinance.gov/ccdb/complaints.csv.zip"
+    }
+  ],
+  "tags": [
+    "territory",
+    "lifecycle"
+  ]
+}

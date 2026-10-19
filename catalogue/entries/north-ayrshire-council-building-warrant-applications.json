@@ -1,0 +1,44 @@
+{
+  "aliases": [
+    "building-warrant-applications"
+  ],
+  "category": "or/v1",
+  "citations": [],
+  "crosswalk": {
+    "file": "crosswalks/or-v1/nodes.json"
+  },
+  "description": "Building warrant applications received by North Ayrshire Council, with location, status and decision dates.",
+  "domain": "Case records",
+  "expectedCounts": {},
+  "id": "north-ayrshire-council-building-warrant-applications",
+  "licence": {
+    "kind": "custom",
+    "name": "Open Government Licence",
+    "url": "https://www.arcgis.com/sharing/rest/content/items/596fa66b53a948e4b74fea86dbe44690?f=json"
+  },
+  "name": "Building warrant applications (North Ayrshire)",
+  "namespace": [
+    "north-ayrshire-council"
+  ],
+  "properties": {
+    "surveyId": "or-78"
+  },
+  "recipe": {
+    "reason": "The data is an ArcGIS feature service that returns GeoJSON in pages of at most 2000 features, and keepset has no GeoJSON parser or paging yet.",
+    "status": "not-fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://hub.arcgis.com/datasets/596fa66b53a948e4b74fea86dbe44690"
+    }
+  ],
+  "tags": [
+    "deadline",
+    "location",
+    "territory",
+    "skills",
+    "lifecycle"
+  ]
+}

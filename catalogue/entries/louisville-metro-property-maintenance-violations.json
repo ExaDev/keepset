@@ -1,0 +1,41 @@
+{
+  "aliases": [
+    "property-maintenance-violations"
+  ],
+  "category": "or/v1",
+  "citations": [],
+  "crosswalk": {
+    "file": "crosswalks/or-v1/nodes.json"
+  },
+  "domain": "Case records",
+  "expectedCounts": {},
+  "id": "louisville-metro-property-maintenance-violations",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "Property maintenance inspection violations (Louisville)",
+  "namespace": [
+    "louisville-metro"
+  ],
+  "properties": {
+    "surveyId": "or-62"
+  },
+  "recipe": {
+    "reason": "The source is an ArcGIS feature service that returns GeoJSON in pages of a limited number of features, and keepset has no GeoJSON parser or paging yet.",
+    "status": "not-fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://hub.arcgis.com/datasets/1fd891c3301c4c4581b86c338468fbe4"
+    }
+  ],
+  "tags": [
+    "prize",
+    "location",
+    "territory",
+    "skills",
+    "lifecycle"
+  ]
+}

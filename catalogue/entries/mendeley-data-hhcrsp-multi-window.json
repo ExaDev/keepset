@@ -1,0 +1,42 @@
+{
+  "aliases": [
+    "hhcrsp-multi-window"
+  ],
+  "category": "or/v1",
+  "citations": [],
+  "crosswalk": {
+    "file": "crosswalks/or-v1/nodes.json"
+  },
+  "domain": "Technician and home-care routing",
+  "expectedCounts": {},
+  "id": "mendeley-data-hhcrsp-multi-window",
+  "licence": {
+    "id": "CC-BY-4.0",
+    "kind": "spdx"
+  },
+  "name": "Home health care routing, multi-window variant",
+  "namespace": [
+    "mendeley-data"
+  ],
+  "properties": {
+    "surveyId": "or-16"
+  },
+  "recipe": {
+    "reason": "The download is a RAR archive of macro-enabled Excel workbooks and keepset has no archive or spreadsheet parser yet.",
+    "status": "not-fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://data.mendeley.com/datasets/hp3xftsrfx/1"
+    }
+  ],
+  "tags": [
+    "deadline",
+    "location",
+    "skills",
+    "duration",
+    "travelTime"
+  ]
+}

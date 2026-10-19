@@ -1,0 +1,175 @@
+{
+  "aliases": [
+    "fire-prevention-inspections-historical"
+  ],
+  "category": "or/v1",
+  "citations": [],
+  "crosswalk": {
+    "oneWay": [
+      {
+        "direction": "encode",
+        "from": "nodes[].ALPHA",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].ACCT_NUM",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].OWNER_NAME",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].LAST_VISIT_DT",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].LAST_FULL_INSP_DT",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].PREM_ADDR",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].BIN",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].COMMUNITY_BOARD",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].COUNCIL_DISTRICT",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].BBL",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].POSTCODE",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Number",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Street",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Census_Tract",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].NTA",
+        "op": "drop"
+      }
+    ],
+    "rules": [
+      {
+        "from": "meta",
+        "op": "move",
+        "to": "meta"
+      },
+      {
+        "from": "nodes[].id",
+        "op": "move",
+        "to": "nodes[].id"
+      },
+      {
+        "from": "nodes[].LATITUDE",
+        "op": "move",
+        "to": "nodes[].lat"
+      },
+      {
+        "from": "nodes[].LONGITUDE",
+        "op": "move",
+        "to": "nodes[].lon"
+      },
+      {
+        "from": "nodes[].LAST_INSP_STAT",
+        "op": "move",
+        "to": "nodes[].status"
+      },
+      {
+        "from": "nodes[].BOROUGH",
+        "op": "move",
+        "to": "nodes[].territory"
+      }
+    ],
+    "source": "csv-table",
+    "target": "or/v1"
+  },
+  "description": "Historical Bureau of Fire Prevention inspection records for New York City premises, with last visit and inspection status.",
+  "domain": "Case records",
+  "expectedCounts": {},
+  "id": "nyc-open-data-fire-prevention-inspections-historical",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "Bureau of Fire Prevention inspections, historical (NYC)",
+  "namespace": [
+    "nyc-open-data"
+  ],
+  "properties": {
+    "surveyId": "or-64"
+  },
+  "recipe": {
+    "archive": {
+      "kind": "none"
+    },
+    "parser": {
+      "delimiter": "comma",
+      "encoding": "utf-8",
+      "format": "csv-table",
+      "idColumn": "ACCT_ID",
+      "numericColumns": [
+        {
+          "column": "LATITUDE",
+          "factor": 1
+        },
+        {
+          "column": "LONGITUDE",
+          "factor": 1
+        }
+      ],
+      "skipLines": 0
+    },
+    "source": 1,
+    "status": "fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://data.cityofnewyork.us/Housing-Development/Bureau-of-Fire-Prevention-Inspections-Historical-/ssq6-fkht"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://data.cityofnewyork.us/api/views/ssq6-fkht/rows.csv?accessType=DOWNLOAD"
+    }
+  ],
+  "tags": [
+    "location",
+    "territory",
+    "lifecycle"
+  ]
+}

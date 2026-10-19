@@ -1,0 +1,47 @@
+{
+  "aliases": [
+    "police-dispatch-events"
+  ],
+  "category": "or/v1",
+  "citations": [],
+  "crosswalk": {
+    "file": "crosswalks/or-v1/nodes.json"
+  },
+  "description": "Police dispatch events in Mesa, Arizona from 2021, with priorities, case types and call handling and response times.",
+  "domain": "Emergency dispatch",
+  "expectedCounts": {},
+  "id": "mesa-police-dispatch-events",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "Police Dispatch Events (Mesa, AZ)",
+  "namespace": [
+    "mesa"
+  ],
+  "properties": {
+    "surveyId": "or-109"
+  },
+  "recipe": {
+    "reason": "The table has 1,631,480 rows, more than a recipe can read.",
+    "status": "not-fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://citydata.mesaaz.gov/Police/Police-Dispatch-Events-2021-Present-/izhu-764k"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://citydata.mesaaz.gov/resource/izhu-764k.csv"
+    }
+  ],
+  "tags": [
+    "location",
+    "territory",
+    "duration",
+    "lifecycle",
+    "travelTime"
+  ]
+}

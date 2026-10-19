@@ -1,0 +1,240 @@
+{
+  "aliases": [
+    "hpd-handyman-work-order-charges"
+  ],
+  "category": "or/v1",
+  "citations": [],
+  "crosswalk": {
+    "oneWay": [
+      {
+        "direction": "encode",
+        "from": "nodes[].HWONumber",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].BuildingID",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].BoroID",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].HouseNumber",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].StreetName",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Zip",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Block",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Lot",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].LifeCycle",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].IsAEP",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].IsCommercialDemolition",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].FEMAEventID",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].FEMAEvent",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].HWODescription",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].HWOApprovedAmount",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].SalesTax",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].AdminFee",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].DateTransferDoF",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Community_Board",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Council_District",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Census_Tract",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].BIN",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].BBL",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].NTA",
+        "op": "drop"
+      }
+    ],
+    "rules": [
+      {
+        "from": "meta",
+        "op": "move",
+        "to": "meta"
+      },
+      {
+        "from": "nodes[].id",
+        "op": "move",
+        "to": "nodes[].id"
+      },
+      {
+        "from": "nodes[].Latitude",
+        "op": "move",
+        "to": "nodes[].lat"
+      },
+      {
+        "from": "nodes[].Longitude",
+        "op": "move",
+        "to": "nodes[].lon"
+      },
+      {
+        "from": "nodes[].HWOCreateDate",
+        "op": "move",
+        "to": "nodes[].opened"
+      },
+      {
+        "from": "nodes[].ChargeAmount",
+        "op": "move",
+        "to": "nodes[].prize"
+      },
+      {
+        "from": "nodes[].WorkTypeGeneral",
+        "op": "move",
+        "to": "nodes[].skill"
+      },
+      {
+        "from": "nodes[].HWOStatusReason",
+        "op": "move",
+        "to": "nodes[].status"
+      },
+      {
+        "from": "nodes[].Boro",
+        "op": "move",
+        "to": "nodes[].territory"
+      }
+    ],
+    "source": "csv-table",
+    "target": "or/v1"
+  },
+  "description": "Handyman work orders raised by NYC Housing Preservation and Development, with charges, location and status.",
+  "domain": "Case records",
+  "expectedCounts": {},
+  "id": "nyc-open-data-hpd-handyman-work-order-charges",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "HPD handyman work order charges (NYC)",
+  "namespace": [
+    "nyc-open-data"
+  ],
+  "properties": {
+    "surveyId": "or-81"
+  },
+  "recipe": {
+    "archive": {
+      "kind": "none"
+    },
+    "parser": {
+      "delimiter": "comma",
+      "encoding": "utf-8",
+      "format": "csv-table",
+      "idColumn": "HWOID",
+      "numericColumns": [
+        {
+          "column": "Latitude",
+          "factor": 1
+        },
+        {
+          "column": "Longitude",
+          "factor": 1
+        },
+        {
+          "column": "ChargeAmount",
+          "factor": 1
+        }
+      ],
+      "skipLines": 0
+    },
+    "source": 1,
+    "status": "fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://data.cityofnewyork.us/Housing-Development/Handyman-Work-Order-HWO-Charges/sbnd-xujn"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://data.cityofnewyork.us/api/views/sbnd-xujn/rows.csv?accessType=DOWNLOAD"
+    }
+  ],
+  "tags": [
+    "prize",
+    "location",
+    "territory",
+    "lifecycle"
+  ]
+}

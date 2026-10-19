@@ -1,0 +1,41 @@
+{
+  "aliases": [
+    "dynamic-team-orienteering"
+  ],
+  "category": "or/v1",
+  "citations": [],
+  "crosswalk": {
+    "file": "crosswalks/or-v1/nodes.json"
+  },
+  "domain": "Orienteering",
+  "expectedCounts": {},
+  "id": "mendeley-data-dynamic-team-orienteering",
+  "licence": {
+    "id": "CC-BY-4.0",
+    "kind": "spdx"
+  },
+  "name": "Dynamic team orienteering problem",
+  "namespace": [
+    "mendeley-data"
+  ],
+  "properties": {
+    "surveyId": "or-2"
+  },
+  "recipe": {
+    "reason": "The only file is an Excel workbook of results and keepset has no spreadsheet parser yet.",
+    "status": "not-fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://data.mendeley.com/datasets/xnf6c4d5gt/1"
+    }
+  ],
+  "tags": [
+    "prize",
+    "location",
+    "lifecycle",
+    "travelTime"
+  ]
+}

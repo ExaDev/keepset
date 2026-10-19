@@ -1,0 +1,131 @@
+{
+  "aliases": [
+    "fixed-penalty-notices"
+  ],
+  "category": "or/v1",
+  "citations": [],
+  "crosswalk": {
+    "oneWay": [
+      {
+        "direction": "encode",
+        "from": "nodes[].Disclaimer",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Source",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Financial_Year",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Issue_Type",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Amount_Paid_GBP",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Last_Uploaded",
+        "op": "drop"
+      }
+    ],
+    "rules": [
+      {
+        "from": "meta",
+        "op": "move",
+        "to": "meta"
+      },
+      {
+        "from": "nodes[].id",
+        "op": "move",
+        "to": "nodes[].id"
+      },
+      {
+        "from": "nodes[].Date_Paid",
+        "op": "move",
+        "to": "nodes[].closed"
+      },
+      {
+        "from": "nodes[].Date_Issued",
+        "op": "move",
+        "to": "nodes[].opened"
+      },
+      {
+        "from": "nodes[].Amound_Fined_GBP",
+        "op": "move",
+        "to": "nodes[].prize"
+      },
+      {
+        "from": "nodes[].Offence",
+        "op": "move",
+        "to": "nodes[].skill"
+      },
+      {
+        "from": "nodes[].Status",
+        "op": "move",
+        "to": "nodes[].status"
+      }
+    ],
+    "source": "csv-table",
+    "target": "or/v1"
+  },
+  "description": "Fixed penalty notices issued by Camden's education and enforcement team, with offence, status, amount fined and dates.",
+  "domain": "Case records",
+  "expectedCounts": {},
+  "id": "camden-fixed-penalty-notices",
+  "licence": {
+    "id": "OGL-UK-3.0",
+    "kind": "spdx"
+  },
+  "name": "Fixed penalty notices (Camden)",
+  "namespace": [
+    "camden"
+  ],
+  "properties": {
+    "surveyId": "or-55"
+  },
+  "recipe": {
+    "archive": {
+      "kind": "none"
+    },
+    "parser": {
+      "delimiter": "comma",
+      "encoding": "utf-8",
+      "format": "csv-table",
+      "idColumn": null,
+      "numericColumns": [
+        {
+          "column": "Amound_Fined_GBP",
+          "factor": 1
+        }
+      ],
+      "skipLines": 0
+    },
+    "source": 1,
+    "status": "fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://opendata.camden.gov.uk/Environment/Fixed-Penalty-Notices/i6r8-r9vt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://opendata.camden.gov.uk/api/views/i6r8-r9vt/rows.csv?accessType=DOWNLOAD"
+    }
+  ],
+  "tags": [
+    "prize",
+    "lifecycle"
+  ]
+}

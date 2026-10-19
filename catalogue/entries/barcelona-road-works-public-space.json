@@ -1,0 +1,175 @@
+{
+  "aliases": [
+    "road-works-public-space"
+  ],
+  "category": "or/v1",
+  "citations": [],
+  "crosswalk": {
+    "oneWay": [
+      {
+        "direction": "encode",
+        "from": "nodes[].codi",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].ubicacio",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].codi_districte",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].codi_barri",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].nom_barri",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].pressupost_adjudicacio",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].data_inici",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].promotor",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].constructor",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].titol",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].descripcio",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].url_web_obres",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].geometria_etrs89",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].geometria_wgs84",
+        "op": "drop"
+      }
+    ],
+    "rules": [
+      {
+        "from": "meta",
+        "op": "move",
+        "to": "meta"
+      },
+      {
+        "from": "nodes[].id",
+        "op": "move",
+        "to": "nodes[].id"
+      },
+      {
+        "from": "nodes[].data_fi",
+        "op": "move",
+        "to": "nodes[].deadline"
+      },
+      {
+        "from": "nodes[].pressupost_licitacio",
+        "op": "move",
+        "to": "nodes[].prize"
+      },
+      {
+        "from": "nodes[].tipusobra",
+        "op": "move",
+        "to": "nodes[].skill"
+      },
+      {
+        "from": "nodes[].estat",
+        "op": "move",
+        "to": "nodes[].status"
+      },
+      {
+        "from": "nodes[].nom_districte",
+        "op": "move",
+        "to": "nodes[].territory"
+      }
+    ],
+    "source": "csv-table",
+    "target": "or/v1"
+  },
+  "description": "Works carried out in Barcelona's public space, with location, district, type, budget, status and end date.",
+  "domain": "Case records",
+  "expectedCounts": {},
+  "id": "barcelona-road-works-public-space",
+  "licence": {
+    "id": "CC-BY-4.0",
+    "kind": "spdx"
+  },
+  "name": "Road works in public space (Barcelona)",
+  "namespace": [
+    "barcelona"
+  ],
+  "properties": {
+    "surveyId": "or-75"
+  },
+  "recipe": {
+    "archive": {
+      "kind": "none"
+    },
+    "parser": {
+      "delimiter": "comma",
+      "encoding": "utf-8",
+      "format": "csv-table",
+      "idColumn": null,
+      "numericColumns": [
+        {
+          "column": "pressupost_licitacio",
+          "factor": 1
+        }
+      ],
+      "skipLines": 0
+    },
+    "source": 1,
+    "status": "fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://opendata-ajuntament.barcelona.cat/data/en/dataset/obres"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://opendata-ajuntament.barcelona.cat/resources/bcn/Obres/obres_espai_public.csv"
+    }
+  ],
+  "tags": [
+    "prize",
+    "deadline",
+    "location",
+    "territory",
+    "skills",
+    "lifecycle"
+  ]
+}

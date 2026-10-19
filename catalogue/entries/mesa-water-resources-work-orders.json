@@ -1,0 +1,44 @@
+{
+  "aliases": [
+    "water-resources-work-orders"
+  ],
+  "category": "or/v1",
+  "citations": [],
+  "crosswalk": {
+    "file": "crosswalks/or-v1/nodes.json"
+  },
+  "description": "Water resources maintenance work orders raised and completed by the City of Mesa, with costs, status and dates.",
+  "domain": "Technician and home-care routing",
+  "expectedCounts": {},
+  "id": "mesa-water-resources-work-orders",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "Mesa water resources work orders",
+  "namespace": [
+    "mesa"
+  ],
+  "properties": {
+    "surveyId": "or-13"
+  },
+  "recipe": {
+    "reason": "The table has 934800 rows of more than 100 columns, and the sample rows are about a kilobyte each, so the download is far larger than the 256 MiB a recipe can read into memory.",
+    "status": "not-fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://citydata.mesaaz.gov/Water-Resources/Water-Resources-Work-Orders-Public-View/7rqv-jcr4"
+    }
+  ],
+  "tags": [
+    "prize",
+    "prizeProbability",
+    "deadline",
+    "location",
+    "skills",
+    "duration",
+    "lifecycle"
+  ]
+}

@@ -1,0 +1,137 @@
+{
+  "aliases": [
+    "district-court-eviction-case-data"
+  ],
+  "category": "or/v1",
+  "citations": [],
+  "crosswalk": {
+    "oneWay": [
+      {
+        "direction": "encode",
+        "from": "nodes[].Event_Comment",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Location",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Tenant_City",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Tenant_State",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Tenant_ZIP_Code",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Case_Number",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Event_Year",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Eviction_Year",
+        "op": "drop"
+      }
+    ],
+    "rules": [
+      {
+        "from": "meta",
+        "op": "move",
+        "to": "meta"
+      },
+      {
+        "from": "nodes[].id",
+        "op": "move",
+        "to": "nodes[].id"
+      },
+      {
+        "from": "nodes[].Evicted_Date",
+        "op": "move",
+        "to": "nodes[].closed"
+      },
+      {
+        "from": "nodes[].Event_Date",
+        "op": "move",
+        "to": "nodes[].opened"
+      },
+      {
+        "from": "nodes[].Case_Type",
+        "op": "move",
+        "to": "nodes[].skill"
+      },
+      {
+        "from": "nodes[].Event_Type",
+        "op": "move",
+        "to": "nodes[].status"
+      },
+      {
+        "from": "nodes[].County",
+        "op": "move",
+        "to": "nodes[].territory"
+      }
+    ],
+    "source": "csv-table",
+    "target": "or/v1"
+  },
+  "description": "Eviction case events in the Maryland District Court with county, case type, event type and event dates.",
+  "domain": "Case records",
+  "expectedCounts": {},
+  "id": "maryland-district-court-eviction-case-data",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "District Court of Maryland eviction case data",
+  "namespace": [
+    "maryland"
+  ],
+  "properties": {
+    "surveyId": "or-42"
+  },
+  "recipe": {
+    "archive": {
+      "kind": "none"
+    },
+    "parser": {
+      "delimiter": "comma",
+      "encoding": "utf-8",
+      "format": "csv-table",
+      "idColumn": null,
+      "numericColumns": [],
+      "skipLines": 0
+    },
+    "source": 1,
+    "status": "fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://opendata.maryland.gov/Housing/District-Court-of-Maryland-Eviction-Case-Data/mvqb-b4hf"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://opendata.maryland.gov/api/views/mvqb-b4hf/rows.csv?accessType=DOWNLOAD"
+    }
+  ],
+  "tags": [
+    "deadline",
+    "location",
+    "territory",
+    "lifecycle"
+  ]
+}

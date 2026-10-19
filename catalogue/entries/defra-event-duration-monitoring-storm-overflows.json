@@ -1,0 +1,42 @@
+{
+  "aliases": [
+    "event-duration-monitoring-storm-overflows"
+  ],
+  "category": "or/v1",
+  "citations": [],
+  "crosswalk": {
+    "file": "crosswalks/or-v1/nodes.json"
+  },
+  "description": "Storm overflow event duration monitoring returns for England and Wales, published as annual zip files.",
+  "domain": "Civic and environmental monitoring",
+  "expectedCounts": {},
+  "id": "defra-event-duration-monitoring-storm-overflows",
+  "licence": {
+    "id": "OGL-UK-3.0",
+    "kind": "spdx"
+  },
+  "name": "Event Duration Monitoring, Storm Overflows (England and Wales)",
+  "namespace": [
+    "defra"
+  ],
+  "properties": {
+    "surveyId": "or-119"
+  },
+  "recipe": {
+    "reason": "The survey URL is a landing page and no direct download could be verified, because the files sit on a host whose TLS connection failed.",
+    "status": "not-fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://environment.data.gov.uk/dataset/21e15f12-0df8-4bfc-b763-45226c16a8ac"
+    }
+  ],
+  "tags": [
+    "location",
+    "territory",
+    "duration",
+    "lifecycle"
+  ]
+}

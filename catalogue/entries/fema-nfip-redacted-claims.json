@@ -1,0 +1,40 @@
+{
+  "aliases": [
+    "nfip-redacted-claims"
+  ],
+  "category": "or/v1",
+  "citations": [],
+  "crosswalk": {
+    "file": "crosswalks/or-v1/nodes.json"
+  },
+  "domain": "Claims and unclaimed money",
+  "expectedCounts": {},
+  "id": "fema-nfip-redacted-claims",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "FEMA NFIP redacted claims",
+  "namespace": [
+    "fema"
+  ],
+  "properties": {
+    "surveyId": "or-122"
+  },
+  "recipe": {
+    "reason": "The data is served only as JSON pages by the OpenFEMA API (the survey page itself refuses automated requests), keepset has no JSON paging parser yet, and the successor v3 table holds 2725989 records, more than a recipe can read.",
+    "status": "not-fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://www.fema.gov/openfema-data-page/fima-nfip-redacted-claims-v2"
+    }
+  ],
+  "tags": [
+    "prize",
+    "prizeProbability",
+    "location",
+    "territory"
+  ]
+}

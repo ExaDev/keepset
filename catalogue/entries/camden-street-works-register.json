@@ -1,0 +1,198 @@
+{
+  "aliases": [
+    "street-works-register"
+  ],
+  "category": "or/v1",
+  "citations": [],
+  "crosswalk": {
+    "oneWay": [
+      {
+        "direction": "encode",
+        "from": "nodes[].Works_Type",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Description_Of_Works",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Location_Of_Works",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Street",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Locality",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Start_Date",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Reference",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Responsible_Company",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Contact_Telephone_Number",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Emergency_Contact_Telephone_Number",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Ward_Code",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Easting",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Northing",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Location",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Spatial_Accuracy",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Last_Uploaded",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Organisation_URI",
+        "op": "drop"
+      }
+    ],
+    "rules": [
+      {
+        "from": "meta",
+        "op": "move",
+        "to": "meta"
+      },
+      {
+        "from": "nodes[].id",
+        "op": "move",
+        "to": "nodes[].id"
+      },
+      {
+        "from": "nodes[].End_Date",
+        "op": "move",
+        "to": "nodes[].deadline"
+      },
+      {
+        "from": "nodes[].Latitude",
+        "op": "move",
+        "to": "nodes[].lat"
+      },
+      {
+        "from": "nodes[].Longitude",
+        "op": "move",
+        "to": "nodes[].lon"
+      },
+      {
+        "from": "nodes[].Category_Of_Works",
+        "op": "move",
+        "to": "nodes[].skill"
+      },
+      {
+        "from": "nodes[].Works_Status",
+        "op": "move",
+        "to": "nodes[].status"
+      },
+      {
+        "from": "nodes[].Ward_Name",
+        "op": "move",
+        "to": "nodes[].territory"
+      }
+    ],
+    "source": "csv-table",
+    "target": "or/v1"
+  },
+  "description": "Street works and licences registered in Camden, with category, status, locality and start and end dates.",
+  "domain": "Case records",
+  "expectedCounts": {},
+  "id": "camden-street-works-register",
+  "licence": {
+    "id": "OGL-UK-3.0",
+    "kind": "spdx"
+  },
+  "name": "Street works register (Camden)",
+  "namespace": [
+    "camden"
+  ],
+  "properties": {
+    "surveyId": "or-57"
+  },
+  "recipe": {
+    "archive": {
+      "kind": "none"
+    },
+    "parser": {
+      "delimiter": "comma",
+      "encoding": "utf-8",
+      "format": "csv-table",
+      "idColumn": "Local_Authority_Reference",
+      "numericColumns": [
+        {
+          "column": "Latitude",
+          "factor": 1
+        },
+        {
+          "column": "Longitude",
+          "factor": 1
+        }
+      ],
+      "skipLines": 0
+    },
+    "source": 1,
+    "status": "fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://opendata.camden.gov.uk/"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://opendata.camden.gov.uk/api/views/hb3v-f3s2/rows.csv?accessType=DOWNLOAD"
+    }
+  ],
+  "tags": [
+    "deadline",
+    "location",
+    "territory",
+    "duration",
+    "lifecycle"
+  ]
+}

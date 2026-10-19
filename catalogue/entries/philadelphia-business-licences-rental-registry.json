@@ -1,0 +1,317 @@
+{
+  "aliases": [
+    "business-licences-rental-registry"
+  ],
+  "category": "or/v1",
+  "citations": [],
+  "crosswalk": {
+    "oneWay": [
+      {
+        "direction": "encode",
+        "from": "nodes[].the_geom",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].the_geom_webmercator",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].posse_jobid",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].addressobjectid",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].address",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].unit_type",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].unit_num",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].zip",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].censustract",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].parcel_id_num",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].opa_account_num",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].opa_owner",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].owneroccupied",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].addressed_license",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].licensenum",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].revenuecode",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].rentalcategory",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].mostrecentissuedate",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].inactivedate",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].numberofunits",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].legalfirstname",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].legallastname",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].legalname",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].legalentitytype",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].business_name",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].business_mailing_address",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].ownercontact1name",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].ownercontact1mailingaddress",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].ownercontact1city",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].ownercontact1state",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].ownercontact1zippostalcode",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].ownercontact2name",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].ownercontact2mailingaddress",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].ownercontact2city",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].ownercontact2state",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].ownercontact2zippostalcode",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].gdb_geomattr_data",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].ownerismanagingagentinphilly",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].cal_number",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].effectivedate",
+        "op": "drop"
+      }
+    ],
+    "rules": [
+      {
+        "from": "meta",
+        "op": "move",
+        "to": "meta"
+      },
+      {
+        "from": "nodes[].id",
+        "op": "move",
+        "to": "nodes[].id"
+      },
+      {
+        "from": "nodes[].expirationdate",
+        "op": "move",
+        "to": "nodes[].deadline"
+      },
+      {
+        "from": "nodes[].initialissuedate",
+        "op": "move",
+        "to": "nodes[].opened"
+      },
+      {
+        "from": "nodes[].licensetype",
+        "op": "move",
+        "to": "nodes[].skill"
+      },
+      {
+        "from": "nodes[].licensestatus",
+        "op": "move",
+        "to": "nodes[].status"
+      },
+      {
+        "from": "nodes[].council_district",
+        "op": "move",
+        "to": "nodes[].territory"
+      },
+      {
+        "from": "nodes[].geocode_x",
+        "op": "move",
+        "to": "nodes[].x"
+      },
+      {
+        "from": "nodes[].geocode_y",
+        "op": "move",
+        "to": "nodes[].y"
+      }
+    ],
+    "source": "csv-table",
+    "target": "or/v1"
+  },
+  "description": "Business licences issued in Philadelphia, including rental licences, with type, status, council district and dates.",
+  "domain": "Case records",
+  "expectedCounts": {},
+  "id": "philadelphia-business-licences-rental-registry",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "Business licences including the rental registry (Philadelphia)",
+  "namespace": [
+    "philadelphia"
+  ],
+  "properties": {
+    "surveyId": "or-71"
+  },
+  "recipe": {
+    "archive": {
+      "kind": "none"
+    },
+    "parser": {
+      "delimiter": "comma",
+      "encoding": "utf-8",
+      "format": "csv-table",
+      "idColumn": "objectid",
+      "numericColumns": [
+        {
+          "column": "geocode_x",
+          "factor": 1
+        },
+        {
+          "column": "geocode_y",
+          "factor": 1
+        }
+      ],
+      "skipLines": 0
+    },
+    "source": 1,
+    "status": "fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://opendataphilly.org/datasets/licenses-and-inspections-business-licenses/"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://phl.carto.com/api/v2/sql?q=SELECT+*+FROM+business_licenses&filename=business_licenses&format=csv&skipfields=cartodb_id"
+    }
+  ],
+  "tags": [
+    "deadline",
+    "location",
+    "territory",
+    "skills",
+    "lifecycle"
+  ]
+}

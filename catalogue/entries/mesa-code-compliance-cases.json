@@ -1,0 +1,407 @@
+{
+  "aliases": [
+    "code-compliance-cases"
+  ],
+  "category": "or/v1",
+  "citations": [],
+  "crosswalk": {
+    "oneWay": [
+      {
+        "direction": "encode",
+        "from": "nodes[].Permit_Number",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Permit_Type",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Module",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Reported_Date",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Assigned_Date",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Status_Date",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Update_Date",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Tracking_ID",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Application_Name",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Description",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Assigned_User",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Total_Pay",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Balance",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Booking",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Record_Class",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Reported_Channel",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Assigned_to_Department",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Created_by",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Closed_by_Department",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Defendant_Signature",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Initiated_Product",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Public_Owned",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Special_Project",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Supervisor_Review_Complete_Date",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Zoning_District",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Abatement_Comments",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Arraignment_Date",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Certified_Citations",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Certified_Deed",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Location",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Criminal_Comments",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Occupied",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].HO_Letter_Sent_Date",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Inspection_Interval",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].LFC_Complete_Date",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Notice_Served_Date",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Notify_Complainant",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Other_Source_of_Complaint",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Short_Notes",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Source_of_Complaint",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Type_of_Submittal",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Warrant_Issued_Date",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Case_Address",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Parcel_Number",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Violation_Ordinance",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Voluntary_Compliance",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Code_Officer",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].RowID",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Workflow_Status_Date",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Workflow_Status",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Geolocation",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Case_City",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Case_State",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Case_Zip",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Interactions",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Complaint_Validated",
+        "op": "drop"
+      }
+    ],
+    "rules": [
+      {
+        "from": "meta",
+        "op": "move",
+        "to": "meta"
+      },
+      {
+        "from": "nodes[].id",
+        "op": "move",
+        "to": "nodes[].id"
+      },
+      {
+        "from": "nodes[].Closed_Date",
+        "op": "move",
+        "to": "nodes[].closed"
+      },
+      {
+        "from": "nodes[].Latitude",
+        "op": "move",
+        "to": "nodes[].lat"
+      },
+      {
+        "from": "nodes[].Longitude",
+        "op": "move",
+        "to": "nodes[].lon"
+      },
+      {
+        "from": "nodes[].Opened_Date",
+        "op": "move",
+        "to": "nodes[].opened"
+      },
+      {
+        "from": "nodes[].Total_Fee",
+        "op": "move",
+        "to": "nodes[].prize"
+      },
+      {
+        "from": "nodes[].Workflow",
+        "op": "move",
+        "to": "nodes[].skill"
+      },
+      {
+        "from": "nodes[].Status",
+        "op": "move",
+        "to": "nodes[].status"
+      },
+      {
+        "from": "nodes[].Council_District",
+        "op": "move",
+        "to": "nodes[].territory"
+      }
+    ],
+    "source": "csv-table",
+    "target": "or/v1"
+  },
+  "description": "Code compliance cases handled by the City of Mesa, with location, district, workflow, status, fees and dates.",
+  "domain": "Case records",
+  "expectedCounts": {},
+  "id": "mesa-code-compliance-cases",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "Code compliance cases (Mesa)",
+  "namespace": [
+    "mesa"
+  ],
+  "properties": {
+    "surveyId": "or-61"
+  },
+  "recipe": {
+    "archive": {
+      "kind": "none"
+    },
+    "parser": {
+      "delimiter": "comma",
+      "encoding": "utf-8",
+      "format": "csv-table",
+      "idColumn": "Record_ID",
+      "numericColumns": [
+        {
+          "column": "Latitude",
+          "factor": 1
+        },
+        {
+          "column": "Longitude",
+          "factor": 1
+        },
+        {
+          "column": "Total_Fee",
+          "factor": 1
+        }
+      ],
+      "skipLines": 0
+    },
+    "source": 1,
+    "status": "fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://citydata.mesaaz.gov/Code-Compliance/Code-Compliance/hgf6-yenu"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://citydata.mesaaz.gov/api/views/hgf6-yenu/rows.csv?accessType=DOWNLOAD"
+    }
+  ],
+  "tags": [
+    "prize",
+    "deadline",
+    "location",
+    "territory",
+    "skills",
+    "lifecycle"
+  ]
+}
