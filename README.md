@@ -63,7 +63,7 @@ The catalogue itself is a manifest (`catalogue/manifest.json`: id, version, repo
 
 ## Categories and normalisation targets
 
-A category names a normalisation target: the shape every entry in that category resolves to, whatever its native shape. `graph/v1` is the first, `{ meta, nodes, edges }` with unique node ids and edges whose endpoints name nodes, seeded from 823 graph datasets surveyed from about forty upstream collections (SuiteSparse, Netzschleuder, SNAP, KONECT, OGB and others). `or/v1` is the second: `{ meta, nodes }`, an operations-research instance as the nodes it offers to visit, each flat with optional coordinates, prize, prize probability, duration, travel time, skill, territory, lifecycle status and times, and deadline, read from tabular sources by the `csv-table` parser. Its entries come from a survey of open operations-research datasets, imported with a curation that records, for each source, what its download gives and how its columns map onto the node; a dataset whose source has no usable table yet is imported without a recipe and says why. A new category starts by defining its target schema in `src/targets/` and registering it in the category registry; an entry cannot name a category that does not exist. The statically generated site renders every entry with schema.org Dataset JSON-LD, so the catalogue surfaces in the dataset discovery layers.
+A category names a normalisation target: the shape every entry in that category resolves to, whatever its native shape. `graph/v1` is `{ meta, nodes, edges }` with unique node ids and edges whose endpoints name nodes; its entries are graph datasets taken from upstream collections such as SuiteSparse, Netzschleuder, SNAP, KONECT and OGB. `or/v1` is `{ meta, nodes }`, an operations-research instance as the nodes it offers to visit, each flat with optional coordinates, prize, prize probability, duration, travel time, skill, territory, lifecycle status and times, and deadline, read from tabular sources by the `csv-table` parser. Its entries come from a survey of open operations-research datasets, imported with a curation that records, for each source, what its download gives and how its columns map onto the node; a dataset whose source has no usable table is imported without a recipe and says why. A new category starts by defining its target schema in `src/targets/` and registering it in the category registry; an entry cannot name a category that does not exist. The statically generated site renders every entry with schema.org Dataset JSON-LD, so the catalogue surfaces in the dataset discovery layers.
 
 ## Licensing
 
@@ -78,7 +78,9 @@ Node 22 or later, pnpm, ESM only. See [CONTRIBUTING.md](CONTRIBUTING.md) for add
 | `pnpm lint` / `pnpm lint:check` | ESLint, fixing and check-only |
 | `pnpm typecheck` | `tsc` over the library, CLI and site programs |
 | `pnpm test` | Vitest, tests colocated as `*.unit.test.ts` and `*.e2e.test.ts` |
-| `pnpm build` | tsdown into `dist` and `dist-cli`, then the JSON Schema generation and the site build |
+| `pnpm build` | tsdown into `dist` and `dist-cli`, after generating the bundled catalogue, then the JSON Schema generation |
+| `pnpm site` | The static site, built from the package's own catalogue |
+| `pnpm seed:check` | Checks that the committed seed entries and reports are exactly what each import produces from its committed source; `seed:import:graph` and `seed:import:or` regenerate them |
 
 `CLAUDE.md` and `AGENTS.md` are symlinks to this file.
 
