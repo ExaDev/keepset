@@ -118,11 +118,15 @@ describe("the csv-table parser", () => {
     expect(parseNative(utf8(",a,???\n0,x,y\n"), table()).nodes).toEqual([{ id: "1", column_1: "0", a: "x", column_3: "y" }]);
   });
 
-  it("refuses a header that repeats a name, and a column named id without an id column", () => {
+  it("refuses a header that repeats a name", () => {
     expect(parseError(() => parseNative(utf8("a b,a_b\n1,2\n"), table())).message).toMatch(/both become the column a_b/);
     expect(parseError(() => parseNative(utf8("column_2,\n1,2\n"), table())).message).toMatch(/both become the column column_2/);
-    expect(parseError(() => parseNative(utf8("id,x\n1,2\n"), table())).message).toMatch(/column named id/);
+  });
+
+  it("reserves id for the row's id: a column of that name is the id column or is named by its position", () => {
     expect(parseNative(utf8("id,x\n7,2\n"), table({ idColumn: "id" })).nodes).toEqual([{ id: "7", x: "2" }]);
+    expect(parseNative(utf8("id,x\n7,2\n"), table()).nodes).toEqual([{ id: "1", column_1: "7", x: "2" }]);
+    expect(parseNative(utf8("case,id\nc1,7\n"), table({ idColumn: "case" })).nodes).toEqual([{ id: "c1", column_2: "7" }]);
   });
 
   it("refuses a recipe that names a column the header lacks, and an empty id", () => {
