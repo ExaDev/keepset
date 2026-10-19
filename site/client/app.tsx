@@ -116,11 +116,16 @@ function Listing({ records }: { readonly records: readonly SearchRecord[] }): Re
           <MantineTable.Tbody>
             {table.getRowModel().rows.map((row) => (
               <MantineTable.Tr key={row.id}>
-                {row.getAllCells().map((cell) => (
-                  <MantineTable.Td key={cell.id}>
-                    <table.FlexRender cell={cell} />
-                  </MantineTable.Td>
-                ))}
+                {row.getAllCells().map((cell) => {
+                  const value = cell.getValue();
+
+                  // Cells are cut to one line with an ellipsis, so a string value is also the cell's title, which is how the full text is read.
+                  return (
+                    <MantineTable.Td key={cell.id} title={typeof value === "string" ? value : undefined}>
+                      <table.FlexRender cell={cell} />
+                    </MantineTable.Td>
+                  );
+                })}
               </MantineTable.Tr>
             ))}
           </MantineTable.Tbody>
