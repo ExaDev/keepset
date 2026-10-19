@@ -100,6 +100,33 @@ describe("buildSite on a fixture catalogue", () => {
   });
 });
 
+describe("buildSite with namespaced and aliased entries", () => {
+  const named = createCatalogue({ ...fixtureIndex, entries: [{ ...liveEntry, namespace: ["one", "inner"], aliases: ["short", "club"] }] });
+  const files = build(named.listDatasets());
+
+  it("shows the namespace and aliases on the entry page, with the fetch command still for the entry's own id", () => {
+    const text = page(files, "datasets/karate/index.html");
+    expect(text).toContain('<th scope="row">Namespace</th><td><code>one/inner</code></td>');
+    expect(text).toContain('<th scope="row">Aliases</th><td><code>short</code>, <code>club</code></td>');
+    expect(text).toContain("<code>npx keepset fetch karate</code>");
+  });
+
+  it("carries them in the search index, so the listing finds an entry by either", () => {
+    const index: unknown = JSON.parse(page(files, "search-index.json"));
+    expect(index).toEqual([expect.objectContaining({ id: "karate", namespace: "one/inner", aliases: ["short", "club"] })]);
+  });
+
+  it("names the aliases as schema.org alternate names", () => {
+    expect(DatasetJsonLdSchema.parse(jsonLdOf(page(files, "datasets/karate/index.html")))).toMatchObject({ alternateName: ["short", "club"] });
+  });
+
+  it("leaves the rows and fields out for an entry with neither", () => {
+    const plain = build(createCatalogue(fixtureIndex).listDatasets());
+    expect(page(plain, "datasets/karate/index.html")).not.toContain("Namespace");
+    expect(page(plain, "search-index.json")).not.toContain("namespace");
+  });
+});
+
 describe("buildSite on the bundled catalogue", () => {
   const datasets = listDatasets();
   const files = build(datasets);

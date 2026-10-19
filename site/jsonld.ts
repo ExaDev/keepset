@@ -17,6 +17,7 @@ export interface DatasetJsonLd {
   readonly identifier: string;
   readonly keywords: readonly string[];
   readonly license?: string;
+  readonly alternateName?: readonly string[];
   readonly citation?: readonly string[];
   readonly isPartOf: { readonly "@type": "DataCatalog"; readonly name: string; readonly url: string };
   readonly distribution: readonly DataDownload[];
@@ -57,6 +58,7 @@ export function datasetJsonLd(dataset: Dataset, pageUrl: string, catalogueUrl: s
     description: describe(dataset),
     url: pageUrl,
     identifier: entry.id,
+    ...(entry.aliases === undefined ? {} : { alternateName: entry.aliases }),
     keywords: [dataset.kind, ...(entry.domain === undefined ? [] : [entry.domain]), ...entry.tags],
     ...(license === undefined ? {} : { license }),
     ...(citation.length === 0 ? {} : { citation }),
