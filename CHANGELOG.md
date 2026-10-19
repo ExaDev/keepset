@@ -1,3 +1,17 @@
+# [0.15.0](https://github.com/Mearman/keepset/compare/v0.14.1...v0.15.0) (2026-10-19)
+
+
+### Bug Fixes
+
+* name an empty table header cell by its position ([83b14ab](https://github.com/Mearman/keepset/commit/83b14ab488df8377a8c590068f96820c41487904))
+* reserve id for the row's id in the table parser ([82f8995](https://github.com/Mearman/keepset/commit/82f8995475654340ec6deebf2e8e8d473188e285))
+
+
+### Features
+
+* **catalogue:** import the operations research dataset survey ([a7789c9](https://github.com/Mearman/keepset/commit/a7789c9783568cfc6a94c05c89b4802a35efa52e))
+* **seed:** add the operations-research survey import ([6684081](https://github.com/Mearman/keepset/commit/6684081ae960bfe0a1b1c19b2a85d5adde46b9ff))
+
 ## [0.14.1](https://github.com/Mearman/keepset/compare/v0.14.0...v0.14.1) (2026-10-19)
 
 # [0.14.0](https://github.com/Mearman/keepset/compare/v0.13.1...v0.14.0) (2026-10-19)
