@@ -1,8 +1,8 @@
 import { mkdirSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
-import { NAME_SEPARATOR, type Dataset, type Manifest } from "keepset";
+import { NAME_SEPARATOR, type Dataset, type DatasetQuery, type Manifest, type NamespaceNode } from "keepset";
 import { slug } from "./html";
-import { entryPage, groupsPage, homePage, listingPage, type PageContext } from "./pages";
+import { entryPage, groupsPage, homePage, listingPage, namespacePage, type PageContext } from "./pages";
 
 /** One row of the search index the client island loads: enough to filter and label a result without fetching its page. */
 export interface SearchRecord {
@@ -17,10 +17,16 @@ export interface SearchRecord {
   readonly fetchable: boolean;
 }
 
-/** What the generator is given: the catalogue's datasets and manifest (from the package, never a parallel copy), the package version, the published root URL and the output directory. */
-export interface SiteOptions {
-  readonly datasets: readonly Dataset[];
+/** The parts of a catalogue the generator reads: its manifest, its datasets and its tree of namespaces. A `Catalogue` has all three, and so does the package's bundled catalogue once its functions are gathered into one. */
+export interface SiteCatalogue {
   readonly manifest: Manifest;
+  readonly listDatasets: (query?: DatasetQuery) => Dataset[];
+  readonly listNamespaces: (path?: string) => NamespaceNode[];
+}
+
+/** What the generator is given: the catalogue (from the package, never a parallel copy), the package version, the published root URL and the output directory. */
+export interface SiteOptions {
+  readonly catalogue: SiteCatalogue;
   readonly packageVersion: string;
   readonly siteUrl: string;
   readonly outDir: string;
@@ -57,12 +63,36 @@ function groupBy(datasets: readonly Dataset[], labelOf: (dataset: Dataset) => st
 }
 
 /**
- * Generates the static site's pages and data: the home page, one page per entry, listing pages by domain and by kind with their indexes, the search index, the web app manifest and the service worker's precache manifest. Static assets and the client bundle are added by the caller.
+ * Lists every namespace of the catalogue's tree, outermost first, refusing two paths that differ only in letter case, since their pages would share a file on a case-insensitive file system.
+ * @param catalogue - The catalogue.
+ * @returns Every namespace.
+ */
+function allNamespaces(catalogue: SiteCatalogue): NamespaceNode[] {
+  const nodes = [...catalogue.listNamespaces()];
+  for (const node of nodes) {
+    nodes.push(...catalogue.listNamespaces(node.path));
+  }
+  const folded = new Map<string, string>();
+  for (const { path } of nodes) {
+    const clash = folded.get(path.toLowerCase());
+    if (clash !== undefined && clash !== path) {
+      throw new Error(`the namespaces ${JSON.stringify(clash)} and ${JSON.stringify(path)} differ only in letter case, so their pages would share a file`);
+    }
+    folded.set(path.toLowerCase(), path);
+  }
+
+  return nodes;
+}
+
+/**
+ * Generates the static site's pages and data: the home page, one page per entry, listing pages by domain and by kind and one for each namespace, at any depth, with their indexes, the search index, the web app manifest and the service worker's precache manifest. Static assets and the client bundle are added by the caller.
  * @param options - The catalogue, versions, URL and output directory.
  * @returns Every file written, by relative path.
  */
 export function buildSite(options: SiteOptions): SiteFiles {
-  const { datasets, manifest, packageVersion, siteUrl } = options;
+  const { catalogue, packageVersion, siteUrl } = options;
+  const { manifest } = catalogue;
+  const datasets = catalogue.listDatasets();
   const files = new Map<string, string>();
   const context = (root: string): PageContext => ({ siteUrl, manifest, packageVersion, root });
 
@@ -78,6 +108,13 @@ export function buildSite(options: SiteOptions): SiteFiles {
     for (const group of groups) {
       files.set(`${directory}/${slug(group.label)}/index.html`, listingPage(context("../../"), `${title.slice(0, -1)}: ${group.label}`, group.datasets));
     }
+  }
+
+  files.set("namespaces/index.html", namespacePage(context("../"), undefined, catalogue.listNamespaces(), []));
+  for (const { path } of allNamespaces(catalogue)) {
+    // The page sits one level below the site root for each segment of its path, and one more for the namespaces directory itself.
+    const depth = path.split(NAME_SEPARATOR).length + 1;
+    files.set(`namespaces/${path}/index.html`, namespacePage(context("../".repeat(depth)), path, catalogue.listNamespaces(path), catalogue.listDatasets({ namespace: path })));
   }
 
   const search: SearchRecord[] = datasets.map(({ entry, kind }) => ({
@@ -97,7 +134,7 @@ export function buildSite(options: SiteOptions): SiteFiles {
     JSON.stringify({ name: "keepset", short_name: "keepset", description: manifest.description, start_url: "./", scope: "./", display: "standalone", background_color: "#ffffff", theme_color: "#1f4e79", icons: [{ src: "icon.svg", sizes: "any", type: "image/svg+xml" }] }, undefined, 2),
   );
   // The service worker precaches the shell and every listing page, and caches entry pages as they are visited: the entry pages together are most of the site, too much to download on a first visit.
-  const shell = ["./", "app.css", "app.js", "icon.svg", "manifest.webmanifest", "search-index.json", ...[...files.keys()].filter((path) => path.startsWith("domains/") || path.startsWith("kinds/")).map((path) => path.replace(/index\.html$/, ""))];
+  const shell = ["./", "app.css", "app.js", "icon.svg", "manifest.webmanifest", "search-index.json", ...[...files.keys()].filter((path) => path.startsWith("domains/") || path.startsWith("kinds/") || path.startsWith("namespaces/")).map((path) => path.replace(/index\.html$/, ""))];
   files.set("precache.json", JSON.stringify({ version: `${packageVersion}+${manifest.id}@${manifest.version}`, urls: shell }));
 
   for (const [path, text] of files) {
