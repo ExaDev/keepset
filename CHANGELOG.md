@@ -1,3 +1,12 @@
+# [0.19.0](https://github.com/Mearman/keepset/compare/v0.18.0...v0.19.0) (2026-10-19)
+
+
+### Features
+
+* **catalogue:** fetch the ArcGIS operations research layers ([0c4119c](https://github.com/Mearman/keepset/commit/0c4119c18d5bf5e90928c965fcfe0b96a9a512db))
+* **parsers:** read an ArcGIS feature layer, a page at a time, as GeoJSON ([13ddf46](https://github.com/Mearman/keepset/commit/13ddf469160c5bf5ee84bbe56a4b0b78ee6adcbf))
+* **seed:** import an ArcGIS layer as an operations research recipe ([e86f6b2](https://github.com/Mearman/keepset/commit/e86f6b22907947aa9b634c43c41fc799c05a2930))
+
 # [0.18.0](https://github.com/Mearman/keepset/compare/v0.17.0...v0.18.0) (2026-10-19)
 
 
