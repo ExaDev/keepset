@@ -163,11 +163,8 @@ const root = siteRoot();
 const listing = document.querySelector<HTMLElement>("#island-root");
 if (listing !== null) {
   void mountListing(root, listing).then(() => {
-    // Only now does the interactive view take over: the static form and table it replaces are hidden and the mount shown.
+    // Only now does the interactive view take over: the live class shows the mount, and the stylesheet hides the static listing that follows it.
     listing.classList.add("island-live");
-    for (const fallback of document.querySelectorAll<HTMLElement>("form.search, table.listing")) {
-      fallback.classList.add("island-hidden");
-    }
   });
 }
 
