@@ -1,3 +1,10 @@
+# [0.16.0](https://github.com/Mearman/keepset/compare/v0.15.1...v0.16.0) (2026-10-19)
+
+
+### Features
+
+* **seed:** let or-verify fetch a whole download ([4daeaba](https://github.com/Mearman/keepset/commit/4daeabada3353025e9cdb592686a593b7b8ae67a))
+
 ## [0.15.1](https://github.com/Mearman/keepset/compare/v0.15.0...v0.15.1) (2026-10-19)
 
 
