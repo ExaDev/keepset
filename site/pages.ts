@@ -26,9 +26,9 @@ function row(dataset: Dataset, root: string): string {
   return `<tr data-id="${e(entry.id)}"><td><a href="${root}datasets/${e(entry.id)}/">${e(entry.name)}</a></td><td><code>${e(entry.id)}</code></td><td>${e(dataset.kind)}</td><td>${e(entry.domain ?? "")}</td><td>${entry.recipe.status === "fetchable" ? "fetchable" : "not fetchable yet"}</td></tr>`;
 }
 
-/** A table listing datasets. */
+/** A table listing datasets, inside the wrapper that scrolls it sideways on narrow screens; the class pairs with the stylesheet's sticky desktop header. */
 function listing(datasets: readonly Dataset[], root: string): string {
-  return `<table class="listing"><thead><tr><th>Name</th><th>Id</th><th>Kind</th><th>Domain</th><th>Recipe</th></tr></thead><tbody>${datasets.map((dataset) => row(dataset, root)).join("")}</tbody></table>`;
+  return `<div class="table-wrap listing"><table class="listing"><thead><tr><th scope="col">Name</th><th scope="col">Id</th><th scope="col">Kind</th><th scope="col">Domain</th><th scope="col">Recipe</th></tr></thead><tbody>${datasets.map((dataset) => row(dataset, root)).join("")}</tbody></table></div>`;
 }
 
 /** A two-column table of labelled values; each value is already HTML. */
@@ -120,9 +120,9 @@ export function entryPage(context: PageContext, dataset: Dataset): string {
       ["Catalogue", `<code>${e(dataset.catalogue.id)}</code> ${e(dataset.catalogue.version)}`],
     ]),
     "<h2>Sources and provenance</h2>",
-    `<table class="sources"><thead><tr><th>#</th><th>URL</th><th>Status</th><th>Retrieved</th><th>Pinned snapshot</th></tr></thead><tbody>${entry.sources
+    `<div class="table-wrap"><table class="sources"><thead><tr><th scope="col">#</th><th scope="col">URL</th><th scope="col">Status</th><th scope="col">Retrieved</th><th scope="col">Pinned snapshot</th></tr></thead><tbody>${entry.sources
       .map((source, index) => `<tr><td>${String(index)}</td><td>${link(source.url)}</td><td>${e(source.status)}</td><td>${e(source.retrieved)}</td><td>${source.snapshot === undefined ? "" : `<a href="${e(source.snapshot.url)}">${e(source.snapshot.timestamp)}</a>`}</td></tr>`)
-      .join("")}</tbody></table>`,
+      .join("")}</tbody></table></div>`,
     entry.citations.length === 0
       ? ""
       : `<h2>Citations</h2><ul class="citations">${entry.citations.map((cited) => `<li>${e(cited.text)}${cited.doi === undefined ? "" : ` <a href="https://doi.org/${e(cited.doi)}">doi:${e(cited.doi)}</a>`}${cited.url === undefined ? "" : ` ${link(cited.url)}`}</li>`).join("")}</ul>`,
@@ -137,12 +137,12 @@ export function entryPage(context: PageContext, dataset: Dataset): string {
         ]),
     "<h2>Crosswalk</h2>",
     `<p><code>${e(crosswalk.source)}</code> to <code>${e(crosswalk.target)}</code>, as a twindex crosswalk.</p>`,
-    `<table class="crosswalk"><thead><tr><th>Rule</th><th>From</th><th>To</th><th>Direction</th></tr></thead><tbody>${[
+    `<div class="table-wrap"><table class="crosswalk"><thead><tr><th scope="col">Rule</th><th scope="col">From</th><th scope="col">To</th><th scope="col">Direction</th></tr></thead><tbody>${[
       ...crosswalk.rules.map((rule) => `<tr><td>${e(rule.op)}</td><td><code>${e(rule.from)}</code></td><td><code>${e(rule.to)}</code></td><td>both</td></tr>`),
       ...crosswalk.oneWay.map((rule) =>
         rule.op === "drop" ? `<tr><td>drop</td><td><code>${e(rule.from)}</code></td><td></td><td>${e(rule.direction)}</td></tr>` : `<tr><td>default</td><td><code>${e(JSON.stringify(rule.value))}</code></td><td><code>${e(rule.to)}</code></td><td>${e(rule.direction)}</td></tr>`,
       ),
-    ].join("")}</tbody></table>`,
+    ].join("")}</tbody></table></div>`,
     Object.keys(entry.expectedCounts).length === 0 ? "" : `<h2>Expected counts</h2>${facts(Object.entries(entry.expectedCounts).map(([key, count]) => [key, e(count.toLocaleString("en-GB"))]))}`,
     Object.keys(entry.properties).length === 0 ? "" : `<h2>Properties</h2>${facts(Object.entries(entry.properties).map(([key, value]) => [key, `<code>${e(JSON.stringify(value))}</code>`]))}`,
   ];
