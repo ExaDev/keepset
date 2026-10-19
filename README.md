@@ -35,7 +35,20 @@ npx keepset validate cora
 npx keepset roundtrip cora
 ```
 
-`fetch` writes the normalised result with its provenance beside it; `validate` checks the entry against the entry schema and its crosswalk against twindex's validation without the network; `roundtrip` fetches the dataset and checks that decoding the encoded native document gives it back. Exit status is 0 for an answer, 1 for a negative one (an invalid entry, a round trip that does not hold) and 2 for no answer (bad usage, an unknown id, a recipe that failed).
+`fetch` writes the normalised result with its provenance beside it; `validate` checks the entry against the entry schema and its crosswalk against twindex's validation without the network; `roundtrip` fetches the dataset and checks that decoding the encoded native document gives it back. Exit status is 0 for an answer, 1 for a negative one (an invalid entry, a round trip that does not hold) and 2 for no answer (bad usage, an unknown or ambiguous name, a recipe that failed).
+
+## Names, aliases and namespaces
+
+An entry has one canonical id, flat and stable, and can also carry a namespace (the collection it comes from, such as `suitesparse/gset`) and aliases (other names for the same dataset). The library's `getDataset` and every CLI command that takes a dataset resolve any of these names:
+
+```sh
+npx keepset fetch ss-gset-g53
+npx keepset fetch suitesparse/gset/g53
+npx keepset fetch gset/g53
+npx keepset fetch g53
+```
+
+A qualified name joins the namespace to a name with `/`, and any leading part of the namespace may be dropped while the name still means one dataset. An entry's own id always wins; otherwise a name that more than one entry answers to is refused with the ids it could mean (`DatasetAmbiguousError` in the library, exit status 2 in the CLI), and the way out is a longer qualified name or the id. `search --namespace suitesparse` (or `listDatasets({ namespace })`) lists a namespace and everything beneath it. Everything a command writes or prints uses the entry's own id, never the name typed.
 
 ## The entry format
 
