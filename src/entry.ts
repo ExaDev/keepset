@@ -151,6 +151,8 @@ export const ParserSchema = z.discriminatedUnion("format", [
       idColumn: ColumnNameSchema.nullable(),
       numericColumns: z.array(z.object({ column: ColumnNameSchema, factor: z.number().positive() }).strict()),
       columns: z.array(ColumnNameSchema).optional(),
+      /** Cell texts, besides the empty cell, that stand for a missing value (`NA`): such a cell is null in every column, numeric or not. */
+      nullValues: z.array(z.string().min(1)).optional(),
     })
     .strict()
     .refine((parser) => new Set(parser.numericColumns.map((numeric) => numeric.column)).size === parser.numericColumns.length, { message: "a column may be declared numeric once", path: ["numericColumns"] })
@@ -172,10 +174,11 @@ export const ParserSchema = z.discriminatedUnion("format", [
 ]);
 export type Parser = z.infer<typeof ParserSchema>;
 
-/** Where a source is a paged query and not one file. An ArcGIS feature layer returns a limited number of features per request: the source URL is the layer's, the download reads every page in `orderBy` order and the parser reads the one GeoJSON collection they make. A Socrata resource endpoint (`/resource/<id>.csv`) is read `pageSize` rows at a time in the order of its row ids, each page a CSV with its own header, and the download joins them into the one CSV the parser reads, so no single response has to survive a long transfer. */
+/** Where a source is a paged query and not one file. An ArcGIS feature layer returns a limited number of features per request: the source URL is the layer's, the download reads every page in `orderBy` order and the parser reads the one GeoJSON collection they make. A Socrata resource endpoint (`/resource/<id>.csv`) is read `pageSize` rows at a time in the order of its row ids, and a CKAN datastore dump (`/datastore/dump/<id>`) `pageSize` rows at a time, each page a CSV with its own header; the download joins them into the one CSV the parser reads, so no single response has to survive a long transfer. */
 export const PagingSchema = z.discriminatedUnion("kind", [
   z.object({ kind: z.literal("arcgis-query"), orderBy: z.string().regex(/^[A-Za-z_][A-Za-z0-9_]*$/, { message: "must be a field name of the layer" }) }).strict(),
   z.object({ kind: z.literal("socrata-resource"), pageSize: z.int().min(1) }).strict(),
+  z.object({ kind: z.literal("ckan-datastore"), pageSize: z.int().min(1) }).strict(),
 ]);
 export type Paging = z.infer<typeof PagingSchema>;
 

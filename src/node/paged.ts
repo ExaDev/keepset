@@ -160,9 +160,10 @@ async function getBytes(port: FetchPort, url: string, signal: AbortSignal | unde
   return new Uint8Array(await response.arrayBuffer());
 }
 
-/** What a Socrata read needs at every page: the resource's URL, how many rows a page holds, how many rows the resource has, and how to reach it. */
+/** What a paged CSV read needs at every page: the source's name for errors, the URL of the page that starts at a row, how many rows a page holds, how many rows the source has, and how to reach it. */
 interface ResourceRead {
   readonly resource: string;
+  readonly pageUrl: (offset: number) => string;
   readonly pageSize: number;
   readonly count: number;
   readonly port: FetchPort;
@@ -170,8 +171,8 @@ interface ResourceRead {
 }
 
 /**
- * Reads a resource's pages, each starting where the rows held so far end, and checks each holds exactly the rows it should, so a response cut short is an error and not a table with rows missing.
- * @param read - The resource read.
+ * Reads a source's pages, each starting where the rows held so far end, and checks each holds exactly the rows it should, so a response cut short is an error and not a table with rows missing.
+ * @param read - The source read.
  * @param held - The pages read so far, each after the first without its header record.
  * @param offset - How many rows the pages hold.
  * @returns Every page.
@@ -183,7 +184,7 @@ async function readResourcePages(read: Readonly<ResourceRead>, held: readonly Ui
   }
   const expected = Math.min(read.pageSize, read.count - offset);
   const page = await withAttempts(async () => {
-    const bytes = await getBytes(read.port, `${read.resource}?%24order=%3Aid&%24limit=${String(read.pageSize)}&%24offset=${String(offset)}`, read.signal);
+    const bytes = await getBytes(read.port, read.pageUrl(offset), read.signal);
     const rows = recordsIn(bytes) - 1;
     if (rows !== expected) {
       throw new KeepsetError(`${read.resource} gave ${String(rows)} rows at offset ${String(offset)} where ${String(expected)} of its ${String(read.count)} were due, so a response was cut short or the table changed during the download`);
@@ -201,6 +202,21 @@ async function readResourcePages(read: Readonly<ResourceRead>, held: readonly Ui
 }
 
 /**
+ * Downloads a CSV source a page at a time and joins the pages under the first header.
+ * @param read - The source read, with its count.
+ * @returns The bytes of one CSV, which is what the parser reads and what the provenance hashes.
+ * @throws KeepsetError when the source has no rows or a page is not what it should be.
+ */
+async function downloadPages(read: Readonly<ResourceRead>): Promise<Uint8Array> {
+  const pages = await readResourcePages(read, [], 0);
+  if (pages.length === 0) {
+    throw new KeepsetError(`${read.resource} has no rows`);
+  }
+
+  return Buffer.concat(pages);
+}
+
+/**
  * Downloads a whole Socrata resource as one CSV: the row count is read first, then pages of `pageSize` rows in the order of the rows' ids, each checked to hold the rows it should, and joined under the first page's header.
  * @param resource - The resource's URL, such as `https://data.example.org/resource/abcd-1234.csv`, without a query.
  * @param pageSize - How many rows a page holds.
@@ -214,12 +230,39 @@ async function downloadSocrataResource(resource: string, pageSize: number, port:
   if (reported?.[1] === undefined) {
     throw new KeepsetError(`${resource} did not report a row count`);
   }
-  const pages = await readResourcePages({ resource, pageSize, count: Number(reported[1]), port, signal }, [], 0);
-  if (pages.length === 0) {
-    throw new KeepsetError(`${resource} has no rows`);
+
+  return downloadPages({ resource, pageUrl: (offset) => `${resource}?%24order=%3Aid&%24limit=${String(pageSize)}&%24offset=${String(offset)}`, pageSize, count: Number(reported[1]), port, signal });
+}
+
+const CountResultSchema = z.object({ result: z.object({ total: z.int().min(0) }) });
+
+/**
+ * Downloads a whole CKAN datastore table as one CSV: the row count is read from the portal's datastore API, then pages of `pageSize` rows of the table's CSV dump, each checked to hold the rows it should, and joined under the first page's header.
+ * @param dump - The dump's URL, such as `https://data.example.org/datastore/dump/<resource id>`, without a query; a portal that serves CKAN under a path prefix keeps it before `/datastore/dump/`.
+ * @param pageSize - How many rows a page holds.
+ * @param port - The network port.
+ * @param signal - Aborts the download.
+ * @returns The bytes of one CSV, which is what the parser reads and what the provenance hashes.
+ * @throws KeepsetError when the URL is not a datastore dump, the table does not report a count, or a page is not what it should be.
+ */
+async function downloadCkanDatastore(dump: string, pageSize: number, port: FetchPort, signal: AbortSignal | undefined): Promise<Uint8Array> {
+  const parsed = /^(.*)\/datastore\/dump\/([^/?#]+)$/.exec(dump);
+  if (parsed?.[1] === undefined || parsed[2] === undefined) {
+    throw new KeepsetError(`${dump} is not a CKAN datastore dump URL`);
+  }
+  const url = `${parsed[1]}/api/3/action/datastore_search?resource_id=${parsed[2]}&limit=0`;
+  let body: unknown;
+  try {
+    body = JSON.parse(new TextDecoder("utf-8").decode(await getBytes(port, url, signal)));
+  } catch (error) {
+    throw new KeepsetError(`${url} did not answer JSON (${error instanceof Error ? error.message : String(error)})`);
+  }
+  const count = CountResultSchema.safeParse(body);
+  if (!count.success) {
+    throw new KeepsetError(`${dump} did not report a row count`);
   }
 
-  return Buffer.concat(pages);
+  return downloadPages({ resource: dump, pageUrl: (offset) => `${dump}?format=csv&limit=${String(pageSize)}&offset=${String(offset)}`, pageSize, count: count.data.result.total, port, signal });
 }
 
 /**
@@ -232,5 +275,9 @@ async function downloadSocrataResource(resource: string, pageSize: number, port:
  * @throws KeepsetError when a page cannot be read or the pages do not add up to what the source reports.
  */
 export async function downloadPaged(url: string, paging: Readonly<Paging>, port: FetchPort, signal: AbortSignal | undefined): Promise<Uint8Array> {
-  return paging.kind === "arcgis-query" ? downloadArcgisLayer(url, paging.orderBy, port, signal) : downloadSocrataResource(url, paging.pageSize, port, signal);
+  if (paging.kind === "arcgis-query") {
+    return downloadArcgisLayer(url, paging.orderBy, port, signal);
+  }
+
+  return paging.kind === "socrata-resource" ? downloadSocrataResource(url, paging.pageSize, port, signal) : downloadCkanDatastore(url, paging.pageSize, port, signal);
 }
