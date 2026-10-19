@@ -1,0 +1,40 @@
+{
+  "aliases": [
+    "housing-maintenance-code-violations"
+  ],
+  "category": "or/v1",
+  "citations": [],
+  "crosswalk": {
+    "file": "crosswalks/or-v1/nodes.json"
+  },
+  "domain": "Case records",
+  "expectedCounts": {},
+  "id": "nyc-open-data-housing-maintenance-code-violations",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "Housing maintenance code violations (NYC HPD)",
+  "namespace": [
+    "nyc-open-data"
+  ],
+  "properties": {
+    "surveyId": "or-60"
+  },
+  "recipe": {
+    "reason": "The table has 11,324,217 rows, more than a recipe can read into memory.",
+    "status": "not-fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://data.cityofnewyork.us/Housing-Development/Housing-Maintenance-Code-Violations/wvxf-dwi5"
+    }
+  ],
+  "tags": [
+    "deadline",
+    "location",
+    "territory",
+    "lifecycle"
+  ]
+}

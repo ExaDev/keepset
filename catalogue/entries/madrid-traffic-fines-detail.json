@@ -1,0 +1,148 @@
+{
+  "aliases": [
+    "traffic-fines-detail"
+  ],
+  "category": "or/v1",
+  "citations": [],
+  "crosswalk": {
+    "oneWay": [
+      {
+        "direction": "encode",
+        "from": "nodes[].CALIFICACION",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].LUGAR",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].MES",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].ANIO",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].HORA",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].DESCUENTO",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].PUNTOS",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].DENUNCIANTE",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].VEL_LIMITE",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].VEL_CIRCULA",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].COORDENADA_X",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].COORDENADA_Y",
+        "op": "drop"
+      }
+    ],
+    "rules": [
+      {
+        "from": "meta",
+        "op": "move",
+        "to": "meta"
+      },
+      {
+        "from": "nodes[].id",
+        "op": "move",
+        "to": "nodes[].id"
+      },
+      {
+        "from": "nodes[].IMP_BOL",
+        "op": "move",
+        "to": "nodes[].prize"
+      },
+      {
+        "from": "nodes[].HECHO_BOL",
+        "op": "move",
+        "to": "nodes[].skill"
+      }
+    ],
+    "source": "csv-table",
+    "target": "or/v1"
+  },
+  "description": "Traffic fines issued in Madrid in one month, with offence, fine amount, discount and points.",
+  "domain": "Case records",
+  "expectedCounts": {},
+  "id": "madrid-traffic-fines-detail",
+  "licence": {
+    "id": "CC-BY-4.0",
+    "kind": "spdx"
+  },
+  "name": "Traffic fines detail (Madrid)",
+  "namespace": [
+    "madrid"
+  ],
+  "properties": {
+    "surveyId": "or-76"
+  },
+  "recipe": {
+    "archive": {
+      "kind": "none"
+    },
+    "parser": {
+      "delimiter": "semicolon",
+      "encoding": "latin1",
+      "format": "csv-table",
+      "idColumn": null,
+      "numericColumns": [
+        {
+          "column": "IMP_BOL",
+          "factor": 1
+        }
+      ],
+      "skipLines": 0
+    },
+    "source": 1,
+    "status": "fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://datos.madrid.es/dataset/210104-0-multas-circulacion-detalle"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://datos.madrid.es/dataset/210104-0-multas-circulacion-detalle/resource/210104-385-multas-circulacion-detalle/download/210104-385-multas-circulacion-detalle.csv"
+    }
+  ],
+  "tags": [
+    "prize",
+    "location",
+    "skills",
+    "lifecycle"
+  ]
+}

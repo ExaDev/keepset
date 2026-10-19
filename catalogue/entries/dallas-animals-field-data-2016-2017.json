@@ -1,0 +1,314 @@
+{
+  "aliases": [
+    "animals-field-data-2016-2017"
+  ],
+  "category": "or/v1",
+  "citations": [],
+  "crosswalk": {
+    "oneWay": [
+      {
+        "direction": "encode",
+        "from": "nodes[].activity_number",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].activity_subtype",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].activity_priority",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].service_request_number",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].street_address",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].street_number",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].street_direction",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].street_name",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].street_type",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].apartment",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].city",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].state",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].zip_code",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].census_tract",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].mapsco_page",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].animal_intake_id",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].animal_type",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].animal_description",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].tag_number",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].activity_sequence",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].activity_quantity_1",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].activity_result_1",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].activity_quantity_2",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].activity_result_2",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].activity_quantity_3",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].activity_result_3",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].activity_quantity_4",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].activity_result_4",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].activity_quantity_5",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].activity_result_5",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].final_activity_quantity",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].final_activity_result",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].activity_comment",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].officer_id",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].cancel_reason",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].radio_signal_code",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].created_date_time",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].dispatch_date_time",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].working_date_time",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].user_id",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].month",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].year",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].location_1",
+        "op": "drop"
+      }
+    ],
+    "rules": [
+      {
+        "from": "meta",
+        "op": "move",
+        "to": "meta"
+      },
+      {
+        "from": "nodes[].id",
+        "op": "move",
+        "to": "nodes[].id"
+      },
+      {
+        "from": "nodes[].completed_date_time",
+        "op": "move",
+        "to": "nodes[].closed"
+      },
+      {
+        "from": "nodes[].call_date_time",
+        "op": "move",
+        "to": "nodes[].opened"
+      },
+      {
+        "from": "nodes[].activity_type",
+        "op": "move",
+        "to": "nodes[].skill"
+      },
+      {
+        "from": "nodes[].activity_status",
+        "op": "move",
+        "to": "nodes[].status"
+      },
+      {
+        "from": "nodes[].council_district",
+        "op": "move",
+        "to": "nodes[].territory"
+      }
+    ],
+    "source": "csv-table",
+    "target": "or/v1"
+  },
+  "description": "Animal services field activities in Dallas for fiscal year 2016 to 2017, with type, priority, council district, status and dates.",
+  "domain": "Case records",
+  "expectedCounts": {},
+  "id": "dallas-animals-field-data-2016-2017",
+  "licence": {
+    "id": "ODC-By-1.0",
+    "kind": "spdx"
+  },
+  "name": "Animals Field Data (Dallas, TX)",
+  "namespace": [
+    "dallas"
+  ],
+  "properties": {
+    "surveyId": "or-106"
+  },
+  "recipe": {
+    "archive": {
+      "kind": "none"
+    },
+    "parser": {
+      "delimiter": "comma",
+      "encoding": "utf-8",
+      "format": "csv-table",
+      "idColumn": null,
+      "numericColumns": [],
+      "skipLines": 0
+    },
+    "source": 1,
+    "status": "fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://www.dallasopendata.com/City-Services/Dallas-Animals-Field-Data-Fiscal-Year-2016-2017/xy7j-y59g"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://www.dallasopendata.com/resource/xy7j-y59g.csv"
+    }
+  ],
+  "tags": [
+    "deadline",
+    "location",
+    "territory",
+    "skills",
+    "lifecycle"
+  ]
+}

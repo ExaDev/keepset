@@ -1,0 +1,40 @@
+{
+  "aliases": [
+    "tow-repo-log"
+  ],
+  "category": "or/v1",
+  "citations": [],
+  "crosswalk": {
+    "file": "crosswalks/or-v1/nodes.json"
+  },
+  "description": "Vehicle tow and repossession log of the Town of Pembroke Park, Florida.",
+  "domain": "Case records",
+  "expectedCounts": {},
+  "id": "pembroke-park-tow-repo-log",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "Tow and repo log (Pembroke Park, FL)",
+  "namespace": [
+    "pembroke-park"
+  ],
+  "properties": {
+    "surveyId": "or-96"
+  },
+  "recipe": {
+    "reason": "The data is an ArcGIS feature service that returns GeoJSON in pages of at most 1000 features, and keepset has no GeoJSON parser or paging yet.",
+    "status": "not-fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://services3.arcgis.com/vtilYbC3YeF6EBJ1/arcgis/rest/services/service_05f1e63ba1494703b42f0dd606859f0b/FeatureServer"
+    }
+  ],
+  "tags": [
+    "prize",
+    "location",
+    "lifecycle"
+  ]
+}

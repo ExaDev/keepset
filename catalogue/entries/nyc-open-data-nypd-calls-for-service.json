@@ -1,0 +1,47 @@
+{
+  "aliases": [
+    "nypd-calls-for-service"
+  ],
+  "category": "or/v1",
+  "citations": [],
+  "crosswalk": {
+    "file": "crosswalks/or-v1/nodes.json"
+  },
+  "description": "NYPD calls for service in New York City, with location, precinct and dispatch, arrival and closing timestamps.",
+  "domain": "Emergency dispatch",
+  "expectedCounts": {},
+  "id": "nyc-open-data-nypd-calls-for-service",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "NYPD Calls for Service",
+  "namespace": [
+    "nyc-open-data"
+  ],
+  "properties": {
+    "surveyId": "or-108"
+  },
+  "recipe": {
+    "reason": "The table has 10,484,258 rows, more than a recipe can read.",
+    "status": "not-fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://data.cityofnewyork.us/Public-Safety/NYPD-Calls-for-Service/n2zq-pubd"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://data.cityofnewyork.us/resource/n2zq-pubd.csv"
+    }
+  ],
+  "tags": [
+    "location",
+    "territory",
+    "duration",
+    "lifecycle",
+    "travelTime"
+  ]
+}

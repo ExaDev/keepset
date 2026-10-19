@@ -1,0 +1,272 @@
+{
+  "aliases": [
+    "permits-and-inspections"
+  ],
+  "category": "or/v1",
+  "citations": [],
+  "crosswalk": {
+    "oneWay": [
+      {
+        "direction": "encode",
+        "from": "nodes[].Permit_Number",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Permit_Address",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Permit_Issue_Date",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Permit_Type",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Permit_Use_Class",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Permit_Description",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Permit_Structure",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Permit_Building_Square_Footage",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Permit_Total_Payments",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Permit_Total_Balance",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Permit_Project_Cost",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Permit_Use_Group_Info",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Permit_Work_Items",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Inspection_Type",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Inspection_Group",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Inspection_Number",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Inspection_Status",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Inspection_Scheduled_Date",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Inspection_Completed_Date",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Permit_Next_5_Year_Inspection",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Permit_Use_Type",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Permit_Use_Group",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Permit_Narrow_Lot",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Permit_Occupancy_Required",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Permit_Application_Connection",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Permit_Parcel_Flood_Zone",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Permit_Building_Flood_Zone",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Permit_Zip_Code",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Super_Ward",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Location",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].GPIN",
+        "op": "drop"
+      }
+    ],
+    "rules": [
+      {
+        "from": "meta",
+        "op": "move",
+        "to": "meta"
+      },
+      {
+        "from": "nodes[].id",
+        "op": "move",
+        "to": "nodes[].id"
+      },
+      {
+        "from": "nodes[].Permit_Finaled_Date",
+        "op": "move",
+        "to": "nodes[].closed"
+      },
+      {
+        "from": "nodes[].Permit_Next_Annual_Inspection",
+        "op": "move",
+        "to": "nodes[].deadline"
+      },
+      {
+        "from": "nodes[].Permit_Application_Date",
+        "op": "move",
+        "to": "nodes[].opened"
+      },
+      {
+        "from": "nodes[].Permit_Total_Fee",
+        "op": "move",
+        "to": "nodes[].prize"
+      },
+      {
+        "from": "nodes[].Permit_Work_Type",
+        "op": "move",
+        "to": "nodes[].skill"
+      },
+      {
+        "from": "nodes[].Permit_Status",
+        "op": "move",
+        "to": "nodes[].status"
+      },
+      {
+        "from": "nodes[].Ward",
+        "op": "move",
+        "to": "nodes[].territory"
+      }
+    ],
+    "source": "csv-table",
+    "target": "or/v1"
+  },
+  "description": "Building permits and inspections of the City of Norfolk, Virginia, with dates, status, fees and ward.",
+  "domain": "Case records",
+  "expectedCounts": {},
+  "id": "norfolk-permits-and-inspections",
+  "licence": {
+    "kind": "custom",
+    "name": "Public Domain",
+    "url": "https://data.norfolk.gov/api/views/bnrb-u445.json"
+  },
+  "name": "Permits and inspections (Norfolk, VA)",
+  "namespace": [
+    "norfolk"
+  ],
+  "properties": {
+    "surveyId": "or-85"
+  },
+  "recipe": {
+    "archive": {
+      "kind": "none"
+    },
+    "parser": {
+      "delimiter": "comma",
+      "encoding": "utf-8",
+      "format": "csv-table",
+      "idColumn": null,
+      "numericColumns": [
+        {
+          "column": "Permit_Total_Fee",
+          "factor": 1
+        }
+      ],
+      "skipLines": 0
+    },
+    "source": 1,
+    "status": "fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://data.norfolk.gov/Permits/Permits-and-Inspections/bnrb-u445"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://data.norfolk.gov/api/views/bnrb-u445/rows.csv?accessType=DOWNLOAD"
+    }
+  ],
+  "tags": [
+    "prize",
+    "prizeProbability",
+    "deadline",
+    "location",
+    "territory",
+    "skills",
+    "lifecycle"
+  ]
+}

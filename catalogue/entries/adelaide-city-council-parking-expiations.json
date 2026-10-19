@@ -1,0 +1,46 @@
+{
+  "aliases": [
+    "parking-expiations"
+  ],
+  "category": "or/v1",
+  "citations": [],
+  "crosswalk": {
+    "file": "crosswalks/or-v1/nodes.json"
+  },
+  "description": "Parking expiation notices issued by Adelaide City Council, with offence date, street, amount and payment status.",
+  "domain": "Case records",
+  "expectedCounts": {},
+  "id": "adelaide-city-council-parking-expiations",
+  "licence": {
+    "id": "CC-BY-4.0",
+    "kind": "spdx"
+  },
+  "name": "Parking expiations (Adelaide)",
+  "namespace": [
+    "adelaide-city-council"
+  ],
+  "properties": {
+    "surveyId": "or-79"
+  },
+  "recipe": {
+    "reason": "The CSV is about 132 MB and holds more than a million rows (a full count gave over 1.1 million), which is more than a recipe can read into memory.",
+    "status": "not-fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://data.sa.gov.au/data/dataset/parking-expiations"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://s3.ap-southeast-2.amazonaws.com/dmzweb.adelaidecitycouncil.com/OpenData/Parking_Expiations/Parking_Expiations.csv"
+    }
+  ],
+  "tags": [
+    "prize",
+    "location",
+    "lifecycle"
+  ]
+}

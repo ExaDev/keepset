@@ -1,0 +1,238 @@
+{
+  "aliases": [
+    "its4us-hirta-health-connector"
+  ],
+  "category": "or/v1",
+  "citations": [],
+  "crosswalk": {
+    "oneWay": [
+      {
+        "direction": "encode",
+        "from": "nodes[].RequestID",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].DriverID",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].VehicleID",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Wheelchairs",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].RideShared",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].SharedDuration",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Passengers",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Booking",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Preference",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Month",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].RequestedPickup",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].RequestedDropoff",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].OriginalPickup",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].CancellationAhead",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].CancellationSource",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].NoShow",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].ArrivalTime",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].PickupTime",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].DropoffTime",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].RideDist",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].DirectDuration",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].LastPickup",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].LastDropoff",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].LastDuration",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Rating",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].PickupStart",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].VehiclePickup",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].VehicleDropoff",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].PickupStatus",
+        "op": "drop"
+      }
+    ],
+    "rules": [
+      {
+        "from": "meta",
+        "op": "move",
+        "to": "meta"
+      },
+      {
+        "from": "nodes[].id",
+        "op": "move",
+        "to": "nodes[].id"
+      },
+      {
+        "from": "nodes[].PickupEnd",
+        "op": "move",
+        "to": "nodes[].deadline"
+      },
+      {
+        "from": "nodes[].Status",
+        "op": "move",
+        "to": "nodes[].status"
+      },
+      {
+        "from": "nodes[].RideDuration",
+        "op": "move",
+        "to": "nodes[].travelTime"
+      }
+    ],
+    "source": "csv-table",
+    "target": "or/v1"
+  },
+  "description": "Demand-response ride requests from the HIRTA Health Connector pilot with requested and actual times, durations and outcomes.",
+  "domain": "Risk and outcome records",
+  "expectedCounts": {},
+  "id": "us-dot-its4us-hirta-health-connector",
+  "licence": {
+    "kind": "custom",
+    "name": "Public Domain",
+    "url": "https://datahub.transportation.gov/Transit/ITS4US-HIRTA-Health-Connector-Performance-Evaluati/pwxe-equ8"
+  },
+  "name": "ITS4US HIRTA Health Connector performance evaluation",
+  "namespace": [
+    "us-dot"
+  ],
+  "properties": {
+    "surveyId": "or-36"
+  },
+  "recipe": {
+    "archive": {
+      "kind": "none"
+    },
+    "parser": {
+      "delimiter": "comma",
+      "encoding": "utf-8",
+      "format": "csv-table",
+      "idColumn": null,
+      "numericColumns": [
+        {
+          "column": "RideDuration",
+          "factor": 60
+        }
+      ],
+      "skipLines": 0
+    },
+    "source": 1,
+    "status": "fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://datahub.transportation.gov/Automobiles/ITS4US-HIRTA-Health-Connector-Performance-Evaluat/pwxe-equ8"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://datahub.transportation.gov/api/views/pwxe-equ8/rows.csv?accessType=DOWNLOAD"
+    }
+  ],
+  "tags": [
+    "prizeProbability",
+    "lifecycle",
+    "travelTime"
+  ]
+}

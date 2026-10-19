@@ -1,0 +1,99 @@
+{
+  "aliases": [
+    "lahd-property-look-up-for-eviction-cases"
+  ],
+  "category": "or/v1",
+  "citations": [],
+  "crosswalk": {
+    "oneWay": [
+      {
+        "direction": "encode",
+        "from": "nodes[].apn",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].officialaddress",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].notice_date",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].notice_type",
+        "op": "drop"
+      }
+    ],
+    "rules": [
+      {
+        "from": "meta",
+        "op": "move",
+        "to": "meta"
+      },
+      {
+        "from": "nodes[].id",
+        "op": "move",
+        "to": "nodes[].id"
+      },
+      {
+        "from": "nodes[].received",
+        "op": "move",
+        "to": "nodes[].opened"
+      },
+      {
+        "from": "nodes[].eviction_category",
+        "op": "move",
+        "to": "nodes[].skill"
+      }
+    ],
+    "source": "csv-table",
+    "target": "or/v1"
+  },
+  "description": "Eviction notices filed with the Los Angeles Housing Department, with the parcel, notice category, type and dates.",
+  "domain": "Case records",
+  "expectedCounts": {},
+  "id": "los-angeles-lahd-property-look-up-for-eviction-cases",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "LAHD Property Look-Up for Eviction Cases (Los Angeles)",
+  "namespace": [
+    "los-angeles"
+  ],
+  "properties": {
+    "surveyId": "or-104"
+  },
+  "recipe": {
+    "archive": {
+      "kind": "none"
+    },
+    "parser": {
+      "delimiter": "comma",
+      "encoding": "utf-8",
+      "format": "csv-table",
+      "idColumn": null,
+      "numericColumns": [],
+      "skipLines": 0
+    },
+    "source": 1,
+    "status": "fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://data.lacity.org/Housing/LAHD-Property-Look-Up-for-Eviction-Cases/2u8b-eyuu"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://data.lacity.org/resource/2u8b-eyuu.csv"
+    }
+  ],
+  "tags": [
+    "lifecycle"
+  ]
+}

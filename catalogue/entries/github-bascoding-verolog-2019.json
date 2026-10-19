@@ -1,0 +1,40 @@
+{
+  "aliases": [
+    "verolog-2019"
+  ],
+  "category": "or/v1",
+  "citations": [],
+  "crosswalk": {
+    "file": "crosswalks/or-v1/nodes.json"
+  },
+  "domain": "Technician and home-care routing",
+  "expectedCounts": {},
+  "id": "github-bascoding-verolog-2019",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "VeRoLog 2019 machine delivery and installation instances",
+  "namespace": [
+    "github-bascoding"
+  ],
+  "properties": {
+    "surveyId": "or-24"
+  },
+  "recipe": {
+    "reason": "The instances are keyword-format text files (and semicolon-delimited copies with the same content) that keepset has no parser for yet.",
+    "status": "not-fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://github.com/BasCoding/VeRoLog-2019"
+    }
+  ],
+  "tags": [
+    "deadline",
+    "location",
+    "skills",
+    "travelTime"
+  ]
+}

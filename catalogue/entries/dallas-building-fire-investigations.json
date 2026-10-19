@@ -1,0 +1,172 @@
+{
+  "aliases": [
+    "building-fire-investigations"
+  ],
+  "category": "or/v1",
+  "citations": [],
+  "crosswalk": {
+    "oneWay": [
+      {
+        "direction": "encode",
+        "from": "nodes[].incident",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].time",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].address",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].zip",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].battalion_shift",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].mapsco",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].census_tract",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].no_of_stories",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].construction",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].cause",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].structure_loss",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].contents_loss",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].total_saved",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].sprinkler_sys",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].alarm_sys",
+        "op": "drop"
+      }
+    ],
+    "rules": [
+      {
+        "from": "meta",
+        "op": "move",
+        "to": "meta"
+      },
+      {
+        "from": "nodes[].id",
+        "op": "move",
+        "to": "nodes[].id"
+      },
+      {
+        "from": "nodes[].date",
+        "op": "move",
+        "to": "nodes[].opened"
+      },
+      {
+        "from": "nodes[].total_value",
+        "op": "move",
+        "to": "nodes[].prize"
+      },
+      {
+        "from": "nodes[].structure_type",
+        "op": "move",
+        "to": "nodes[].skill"
+      },
+      {
+        "from": "nodes[].council_district",
+        "op": "move",
+        "to": "nodes[].territory"
+      }
+    ],
+    "source": "csv-table",
+    "target": "or/v1"
+  },
+  "description": "Dallas Fire-Rescue building fire incidents for fiscal year 2020 with structure type, cause, values and losses.",
+  "domain": "Claims and unclaimed money",
+  "expectedCounts": {},
+  "id": "dallas-building-fire-investigations",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "Dallas building fire investigations",
+  "namespace": [
+    "dallas"
+  ],
+  "properties": {
+    "surveyId": "or-123"
+  },
+  "recipe": {
+    "archive": {
+      "kind": "none"
+    },
+    "parser": {
+      "delimiter": "comma",
+      "encoding": "utf-8",
+      "format": "csv-table",
+      "idColumn": "id",
+      "numericColumns": [
+        {
+          "column": "total_value",
+          "factor": 1
+        }
+      ],
+      "skipLines": 0
+    },
+    "source": 1,
+    "status": "fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://www.dallasopendata.com/Public-Safety/Building-Fire/skju-bfp8"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://www.dallasopendata.com/resource/skju-bfp8.csv"
+    }
+  ],
+  "tags": [
+    "prize",
+    "location",
+    "territory",
+    "lifecycle"
+  ]
+}

@@ -1,0 +1,177 @@
+{
+  "aliases": [
+    "dob-now-safety-boiler"
+  ],
+  "category": "or/v1",
+  "citations": [],
+  "crosswalk": {
+    "oneWay": [
+      {
+        "direction": "encode",
+        "from": "nodes[].Boiler_ID",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].ApplicantFirst_Name",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Applicant_Last_Name",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Applicant_License_Type",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Applicant_License_Number",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Owner_First_Name",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Owner_Last_Name",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Boiler_Make",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Boiler_Model",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Pressure_Type",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Inspection_Type",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Inspection_Date",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Defects_Exist",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].LFF_45_Days",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].LFF_180_Days",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Total_Amount_Paid",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Bin_Number",
+        "op": "drop"
+      }
+    ],
+    "rules": [
+      {
+        "from": "meta",
+        "op": "move",
+        "to": "meta"
+      },
+      {
+        "from": "nodes[].id",
+        "op": "move",
+        "to": "nodes[].id"
+      },
+      {
+        "from": "nodes[].Filing_Fee",
+        "op": "move",
+        "to": "nodes[].prize"
+      },
+      {
+        "from": "nodes[].Report_Type",
+        "op": "move",
+        "to": "nodes[].skill"
+      },
+      {
+        "from": "nodes[].Report_Status",
+        "op": "move",
+        "to": "nodes[].status"
+      }
+    ],
+    "source": "csv-table",
+    "target": "or/v1"
+  },
+  "description": "Boiler inspection reports filed with the NYC Department of Buildings, with report type, status and filing fee.",
+  "domain": "Case records",
+  "expectedCounts": {},
+  "id": "nyc-open-data-dob-now-safety-boiler",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "DOB NOW Safety Boiler (NYC)",
+  "namespace": [
+    "nyc-open-data"
+  ],
+  "properties": {
+    "surveyId": "or-83"
+  },
+  "recipe": {
+    "archive": {
+      "kind": "none"
+    },
+    "parser": {
+      "delimiter": "comma",
+      "encoding": "utf-8",
+      "format": "csv-table",
+      "idColumn": "Tracking_Number",
+      "numericColumns": [
+        {
+          "column": "Filing_Fee",
+          "factor": 1
+        }
+      ],
+      "skipLines": 0
+    },
+    "source": 1,
+    "status": "fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://data.cityofnewyork.us/Housing-Development/DOB-NOW-Safety-Boiler/52dp-yji6"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://data.cityofnewyork.us/api/views/52dp-yji6/rows.csv?accessType=DOWNLOAD"
+    }
+  ],
+  "tags": [
+    "prize",
+    "deadline",
+    "skills",
+    "lifecycle"
+  ]
+}

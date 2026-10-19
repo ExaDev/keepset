@@ -1,0 +1,41 @@
+{
+  "aliases": [
+    "weed-abatement-parcels"
+  ],
+  "category": "or/v1",
+  "citations": [],
+  "crosswalk": {
+    "file": "crosswalks/or-v1/nodes.json"
+  },
+  "description": "Weed abatement parcels of the City of Fairfield, California, with status and disposition.",
+  "domain": "Case records",
+  "expectedCounts": {},
+  "id": "fairfield-ca-weed-abatement-parcels",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "Weed abatement parcels (Fairfield, CA)",
+  "namespace": [
+    "fairfield-ca"
+  ],
+  "properties": {
+    "surveyId": "or-94"
+  },
+  "recipe": {
+    "reason": "The data is an ArcGIS feature service that returns GeoJSON of parcel polygons in pages of at most 1000 features, and keepset has no GeoJSON parser or paging yet.",
+    "status": "not-fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://services1.arcgis.com/A14KNJpxNyBTu19J/arcgis/rest/services/Weed_Abatement_Parcels/FeatureServer"
+    }
+  ],
+  "tags": [
+    "location",
+    "territory",
+    "skills",
+    "lifecycle"
+  ]
+}

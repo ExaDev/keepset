@@ -1,0 +1,47 @@
+{
+  "aliases": [
+    "water-leak-repairs-live"
+  ],
+  "category": "or/v1",
+  "citations": [],
+  "crosswalk": {
+    "file": "crosswalks/or-v1/nodes.json"
+  },
+  "description": "Live water leak repair work in Arlington County, Virginia, with activity, priority and estimated and actual start and stop dates.",
+  "domain": "Emergency dispatch",
+  "expectedCounts": {},
+  "id": "arlington-county-water-leak-repairs-live",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "Water Leak Repairs (Live), Arlington County, VA",
+  "namespace": [
+    "arlington-county"
+  ],
+  "properties": {
+    "surveyId": "or-113"
+  },
+  "recipe": {
+    "reason": "The source is an ArcGIS feature service that returns Esri JSON in pages of at most 2000 features, and keepset has no ArcGIS JSON parser or paging yet.",
+    "status": "not-fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://utility.arcgis.com/usrsvcs/servers/53520af18235499d9ecd9c96f624eeae/rest/services/AM/Leak_Repairs_Live/FeatureServer"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://utility.arcgis.com/usrsvcs/servers/53520af18235499d9ecd9c96f624eeae/rest/services/AM/Leak_Repairs_Live/FeatureServer/0/query?where=1%3D1&outFields=*&returnGeometry=false&f=json"
+    }
+  ],
+  "tags": [
+    "deadline",
+    "location",
+    "skills",
+    "duration",
+    "lifecycle"
+  ]
+}

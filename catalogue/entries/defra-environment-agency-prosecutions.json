@@ -1,0 +1,43 @@
+{
+  "aliases": [
+    "environment-agency-prosecutions"
+  ],
+  "category": "or/v1",
+  "citations": [],
+  "crosswalk": {
+    "file": "crosswalks/or-v1/nodes.json"
+  },
+  "description": "Environment Agency enforcement actions against defendants, with fines, costs, verdicts and incident area.",
+  "domain": "Case records",
+  "expectedCounts": {},
+  "id": "defra-environment-agency-prosecutions",
+  "licence": {
+    "id": "OGL-UK-3.0",
+    "kind": "spdx"
+  },
+  "name": "Environment Agency prosecutions",
+  "namespace": [
+    "defra"
+  ],
+  "properties": {
+    "surveyId": "or-50"
+  },
+  "recipe": {
+    "reason": "The download is an xlsx workbook with an explanation sheet and a data sheet, and keepset has no spreadsheet parser yet.",
+    "status": "not-fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://environment.data.gov.uk/dataset/9c7728fc-68e2-46e1-addb-63790b6b5313"
+    }
+  ],
+  "tags": [
+    "prize",
+    "prizeProbability",
+    "location",
+    "territory",
+    "lifecycle"
+  ]
+}

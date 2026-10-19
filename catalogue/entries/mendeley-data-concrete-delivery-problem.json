@@ -1,0 +1,43 @@
+{
+  "aliases": [
+    "concrete-delivery-problem"
+  ],
+  "category": "or/v1",
+  "citations": [],
+  "crosswalk": {
+    "file": "crosswalks/or-v1/nodes.json"
+  },
+  "domain": "Technician and home-care routing",
+  "expectedCounts": {},
+  "id": "mendeley-data-concrete-delivery-problem",
+  "licence": {
+    "id": "CC-BY-4.0",
+    "kind": "spdx"
+  },
+  "name": "Concrete delivery problem operational data",
+  "namespace": [
+    "mendeley-data"
+  ],
+  "properties": {
+    "surveyId": "or-22"
+  },
+  "recipe": {
+    "reason": "The downloads are MATLAB data files and keepset has no parser for them yet.",
+    "status": "not-fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://doi.org/10.1016/j.dib.2023.109189"
+    }
+  ],
+  "tags": [
+    "deadline",
+    "location",
+    "skills",
+    "duration",
+    "lifecycle",
+    "travelTime"
+  ]
+}

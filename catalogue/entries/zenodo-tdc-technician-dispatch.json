@@ -1,0 +1,45 @@
+{
+  "aliases": [
+    "tdc-technician-dispatch"
+  ],
+  "category": "or/v1",
+  "citations": [],
+  "crosswalk": {
+    "file": "crosswalks/or-v1/nodes.json"
+  },
+  "domain": "Technician and home-care routing",
+  "expectedCounts": {},
+  "id": "zenodo-tdc-technician-dispatch",
+  "licence": {
+    "id": "CC-BY-4.0",
+    "kind": "spdx"
+  },
+  "name": "Technician dispatch data (Mathlouthi, Gendreau and Potvin)",
+  "namespace": [
+    "zenodo"
+  ],
+  "properties": {
+    "surveyId": "or-25"
+  },
+  "recipe": {
+    "reason": "Zenodo refused automated requests, so the file list and formats could not be seen and no direct download could be verified.",
+    "status": "not-fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://zenodo.org/records/7904015"
+    }
+  ],
+  "tags": [
+    "prize",
+    "prizeProbability",
+    "deadline",
+    "location",
+    "skills",
+    "duration",
+    "lifecycle",
+    "travelTime"
+  ]
+}

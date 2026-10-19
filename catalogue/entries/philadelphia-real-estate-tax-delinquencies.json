@@ -1,0 +1,43 @@
+{
+  "aliases": [
+    "real-estate-tax-delinquencies"
+  ],
+  "category": "or/v1",
+  "citations": [],
+  "crosswalk": {
+    "file": "crosswalks/or-v1/nodes.json"
+  },
+  "description": "Philadelphia properties with delinquent real estate taxes, amounts due and enforcement status.",
+  "domain": "Case records",
+  "expectedCounts": {},
+  "id": "philadelphia-real-estate-tax-delinquencies",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "Real estate tax delinquencies (Philadelphia)",
+  "namespace": [
+    "philadelphia"
+  ],
+  "properties": {
+    "surveyId": "or-40"
+  },
+  "recipe": {
+    "reason": "The source is an ArcGIS feature service that returns GeoJSON in pages of a limited number of features and keepset has no GeoJSON parser or paging yet.",
+    "status": "not-fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://hub.arcgis.com/datasets/b8ac65c653b343739be21cb2773faace"
+    }
+  ],
+  "tags": [
+    "prize",
+    "deadline",
+    "location",
+    "territory",
+    "skills",
+    "lifecycle"
+  ]
+}

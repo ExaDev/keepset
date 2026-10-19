@@ -1,0 +1,42 @@
+{
+  "aliases": [
+    "dob-job-application-filings"
+  ],
+  "category": "or/v1",
+  "citations": [],
+  "crosswalk": {
+    "file": "crosswalks/or-v1/nodes.json"
+  },
+  "description": "Job application filings with the NYC Department of Buildings.",
+  "domain": "Case records",
+  "expectedCounts": {},
+  "id": "nyc-open-data-dob-job-application-filings",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "DOB job application filings (NYC)",
+  "namespace": [
+    "nyc-open-data"
+  ],
+  "properties": {
+    "surveyId": "or-87"
+  },
+  "recipe": {
+    "reason": "The CSV has 2716297 rows, which is more than a recipe can read into memory.",
+    "status": "not-fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://data.cityofnewyork.us/Housing-Development/DOB-Job-Application-Filings/ic3t-wcy2"
+    }
+  ],
+  "tags": [
+    "prize",
+    "location",
+    "territory",
+    "skills",
+    "lifecycle"
+  ]
+}

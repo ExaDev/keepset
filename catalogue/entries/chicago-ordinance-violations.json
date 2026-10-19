@@ -1,0 +1,40 @@
+{
+  "aliases": [
+    "ordinance-violations"
+  ],
+  "category": "or/v1",
+  "citations": [],
+  "crosswalk": {
+    "file": "crosswalks/or-v1/nodes.json"
+  },
+  "domain": "Case records",
+  "expectedCounts": {},
+  "id": "chicago-ordinance-violations",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "Ordinance violations (Chicago Department of Administrative Hearings)",
+  "namespace": [
+    "chicago"
+  ],
+  "properties": {
+    "surveyId": "or-65"
+  },
+  "recipe": {
+    "reason": "The table has 824,653 rows and the probe's first rows, with cells already truncated, average about 330 bytes, so the export would exceed the 256 MiB a recipe can read.",
+    "status": "not-fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://data.cityofchicago.org/Administration-Finance/Ordinance-Violations/6br9-quuz"
+    }
+  ],
+  "tags": [
+    "prize",
+    "location",
+    "territory",
+    "lifecycle"
+  ]
+}

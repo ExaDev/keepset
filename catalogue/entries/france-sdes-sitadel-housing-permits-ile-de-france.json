@@ -1,0 +1,46 @@
+{
+  "aliases": [
+    "sitadel-housing-permits-ile-de-france"
+  ],
+  "category": "or/v1",
+  "citations": [],
+  "crosswalk": {
+    "file": "crosswalks/or-v1/nodes.json"
+  },
+  "domain": "Case records",
+  "expectedCounts": {},
+  "id": "france-sdes-sitadel-housing-permits-ile-de-france",
+  "licence": {
+    "kind": "custom",
+    "name": "Licence Ouverte v2.0",
+    "url": "https://www.data.gouv.fr/datasets/logements-autorises-par-permis-de-construire-et-declarations-prealables-en-ile-de-france"
+  },
+  "name": "Sitadel housing permits (Ile-de-France)",
+  "namespace": [
+    "france-sdes"
+  ],
+  "properties": {
+    "surveyId": "or-72"
+  },
+  "recipe": {
+    "reason": "The download is a zip of shapefile layers, and keepset has no shapefile parser yet.",
+    "status": "not-fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://www.data.gouv.fr/datasets/logements-autorises-par-permis-de-construire-et-declarations-prealables-en-ile-de-france"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://atom.geo-ide.developpement-durable.gouv.fr/atomArchive/GetResource?id=acfcbcfe-23f8-43bf-a9cc-2ddf86c07cc4&dataType=dataset"
+    }
+  ],
+  "tags": [
+    "location",
+    "territory",
+    "lifecycle"
+  ]
+}

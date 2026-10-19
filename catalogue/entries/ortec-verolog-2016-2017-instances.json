@@ -1,0 +1,40 @@
+{
+  "aliases": [
+    "verolog-2016-2017-instances"
+  ],
+  "category": "or/v1",
+  "citations": [],
+  "crosswalk": {
+    "file": "crosswalks/or-v1/nodes.json"
+  },
+  "domain": "Technician and home-care routing",
+  "expectedCounts": {},
+  "id": "ortec-verolog-2016-2017-instances",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "VeRoLog 2016-2017 scarce-equipment pickup and delivery instances",
+  "namespace": [
+    "ortec"
+  ],
+  "properties": {
+    "surveyId": "or-26"
+  },
+  "recipe": {
+    "reason": "The instances are keyword-format text files on a Wayback Machine snapshot and keepset has no parser for them yet.",
+    "status": "not-fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "http://web.archive.org/web/20240523121816/https://verolog2017.ortec.com/instances"
+    }
+  ],
+  "tags": [
+    "deadline",
+    "location",
+    "skills",
+    "travelTime"
+  ]
+}

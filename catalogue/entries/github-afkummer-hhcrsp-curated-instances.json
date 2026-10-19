@@ -1,0 +1,41 @@
+{
+  "aliases": [
+    "hhcrsp-curated-instances"
+  ],
+  "category": "or/v1",
+  "citations": [],
+  "crosswalk": {
+    "file": "crosswalks/or-v1/nodes.json"
+  },
+  "domain": "Technician and home-care routing",
+  "expectedCounts": {},
+  "id": "github-afkummer-hhcrsp-curated-instances",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "HHCRSP curated instances (Kummer, 2021)",
+  "namespace": [
+    "github-afkummer"
+  ],
+  "properties": {
+    "surveyId": "or-17"
+  },
+  "recipe": {
+    "reason": "The instances are keyword-format text files that keepset has no parser for yet, and dataset.csv only indexes the selected instances.",
+    "status": "not-fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://github.com/afkummer/hhcrsp-dataset-2021"
+    }
+  ],
+  "tags": [
+    "deadline",
+    "location",
+    "skills",
+    "duration",
+    "travelTime"
+  ]
+}

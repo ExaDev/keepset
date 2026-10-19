@@ -1,0 +1,41 @@
+{
+  "aliases": [
+    "medical-appointment-no-shows"
+  ],
+  "category": "or/v1",
+  "citations": [],
+  "crosswalk": {
+    "file": "crosswalks/or-v1/nodes.json"
+  },
+  "description": "Scheduled medical appointments in Brazil with neighbourhood, appointment day and whether the patient attended.",
+  "domain": "Risk and outcome records",
+  "expectedCounts": {},
+  "id": "kaggle-medical-appointment-no-shows",
+  "licence": {
+    "id": "CC-BY-NC-SA-4.0",
+    "kind": "spdx"
+  },
+  "name": "Medical appointment no-shows (Brazil, 2016)",
+  "namespace": [
+    "kaggle"
+  ],
+  "properties": {
+    "surveyId": "or-32"
+  },
+  "recipe": {
+    "reason": "The download is a zip archive holding one CSV and keepset has no archive handling yet, so the table cannot be read directly from the download.",
+    "status": "not-fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://www.kaggle.com/datasets/joniarroba/noshowappointments"
+    }
+  ],
+  "tags": [
+    "prizeProbability",
+    "deadline",
+    "territory"
+  ]
+}

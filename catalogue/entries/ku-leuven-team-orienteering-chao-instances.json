@@ -1,0 +1,45 @@
+{
+  "aliases": [
+    "team-orienteering-chao-instances"
+  ],
+  "category": "or/v1",
+  "citations": [],
+  "crosswalk": {
+    "file": "crosswalks/or-v1/nodes.json"
+  },
+  "description": "Benchmark instances for the team orienteering problem, with node coordinates and scores, from the KU Leuven orienteering page.",
+  "domain": "Orienteering",
+  "expectedCounts": {},
+  "id": "ku-leuven-team-orienteering-chao-instances",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "Team Orienteering Problem instances (Chao and Tsiligirides sets)",
+  "namespace": [
+    "ku-leuven"
+  ],
+  "properties": {
+    "surveyId": "or-0"
+  },
+  "recipe": {
+    "reason": "The download is a zip of instance files in a plain text format with a small header and no column names, and keepset has no parser for it yet.",
+    "status": "not-fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://www.mech.kuleuven.be/en/mim/op"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://www.mech.kuleuven.be/en/mim/op/instances/ChaoTOP4"
+    }
+  ],
+  "tags": [
+    "prize",
+    "location",
+    "travelTime"
+  ]
+}

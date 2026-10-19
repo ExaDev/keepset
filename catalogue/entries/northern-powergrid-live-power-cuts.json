@@ -1,0 +1,278 @@
+{
+  "aliases": [
+    "live-power-cuts"
+  ],
+  "category": "or/v1",
+  "citations": [],
+  "crosswalk": {
+    "oneWay": [
+      {
+        "direction": "encode",
+        "from": "nodes[].reference",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].incidentid",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].totalconfirmedpowercut",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].powercutcategory",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].elapsedtime",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].totalpredictedpowercut",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].priority",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].type",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].customerstagesequence",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].insertdate",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].updatedate",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].reason",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].customerstagesequencemessage",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].postcode",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].isaffected",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].column_23",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].label",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].incidentsconfigid",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].custometrmessageflag",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].custometrmessage",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].custometrmessageparea",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].configstatus",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].iscustomincident",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].managecustomincidentsid",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].numberofcalls",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].etrstartrange",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].etrendrange",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].custometrendrange",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].custometrendrangepa",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].geopoint",
+        "op": "drop"
+      }
+    ],
+    "rules": [
+      {
+        "from": "meta",
+        "op": "move",
+        "to": "meta"
+      },
+      {
+        "from": "nodes[].id",
+        "op": "move",
+        "to": "nodes[].id"
+      },
+      {
+        "from": "nodes[].estimatedtimetillresolution",
+        "op": "move",
+        "to": "nodes[].deadline"
+      },
+      {
+        "from": "nodes[].duration",
+        "op": "move",
+        "to": "nodes[].duration"
+      },
+      {
+        "from": "nodes[].lat",
+        "op": "move",
+        "to": "nodes[].lat"
+      },
+      {
+        "from": "nodes[].lng",
+        "op": "move",
+        "to": "nodes[].lon"
+      },
+      {
+        "from": "nodes[].loggedtime",
+        "op": "move",
+        "to": "nodes[].opened"
+      },
+      {
+        "from": "nodes[].natureofoutage",
+        "op": "move",
+        "to": "nodes[].skill"
+      },
+      {
+        "from": "nodes[].incidentstatus",
+        "op": "move",
+        "to": "nodes[].status"
+      },
+      {
+        "from": "nodes[].area",
+        "op": "move",
+        "to": "nodes[].territory"
+      }
+    ],
+    "source": "csv-table",
+    "target": "or/v1"
+  },
+  "description": "A live snapshot of power cut incidents on the Northern Powergrid network, with coordinates, area, status and estimated restoration time.",
+  "domain": "Emergency dispatch",
+  "expectedCounts": {},
+  "id": "northern-powergrid-live-power-cuts",
+  "licence": {
+    "kind": "custom",
+    "name": "Northern Powergrid Open Data Licence v1.0",
+    "url": "https://northernpowergrid.opendatasoft.com/p/opendatalicence/"
+  },
+  "name": "Live Power Cuts (Northern Powergrid)",
+  "namespace": [
+    "northern-powergrid"
+  ],
+  "properties": {
+    "surveyId": "or-112"
+  },
+  "recipe": {
+    "archive": {
+      "kind": "none"
+    },
+    "parser": {
+      "delimiter": "semicolon",
+      "encoding": "utf-8",
+      "format": "csv-table",
+      "idColumn": null,
+      "numericColumns": [
+        {
+          "column": "lat",
+          "factor": 1
+        },
+        {
+          "column": "lng",
+          "factor": 1
+        },
+        {
+          "column": "duration",
+          "factor": 60
+        }
+      ],
+      "skipLines": 0
+    },
+    "source": 1,
+    "status": "fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://northernpowergrid.opendatasoft.com/explore/dataset/live-power-cuts-data/information/"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://northernpowergrid.opendatasoft.com/api/explore/v2.1/catalog/datasets/live-power-cuts-data/exports/csv"
+    }
+  ],
+  "tags": [
+    "deadline",
+    "location",
+    "territory",
+    "duration",
+    "lifecycle"
+  ]
+}

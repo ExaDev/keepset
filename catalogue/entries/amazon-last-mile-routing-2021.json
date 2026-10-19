@@ -1,0 +1,42 @@
+{
+  "aliases": [
+    "last-mile-routing-2021"
+  ],
+  "category": "or/v1",
+  "citations": [],
+  "crosswalk": {
+    "file": "crosswalks/or-v1/nodes.json"
+  },
+  "domain": "Last-mile logistics",
+  "expectedCounts": {},
+  "id": "amazon-last-mile-routing-2021",
+  "licence": {
+    "id": "CC-BY-NC-4.0",
+    "kind": "spdx"
+  },
+  "name": "Amazon Last Mile Routing Research Challenge 2021",
+  "namespace": [
+    "amazon"
+  ],
+  "properties": {
+    "surveyId": "or-27"
+  },
+  "recipe": {
+    "reason": "The data is large nested JSON with bare NaN tokens, the largest file is 1.8 GB, and keepset has no JSON parser for it.",
+    "status": "not-fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://registry.opendata.aws/amazon-last-mile-challenges/"
+    }
+  ],
+  "tags": [
+    "deadline",
+    "location",
+    "territory",
+    "duration",
+    "travelTime"
+  ]
+}

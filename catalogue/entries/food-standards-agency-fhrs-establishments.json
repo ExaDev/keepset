@@ -1,0 +1,193 @@
+{
+  "aliases": [
+    "fhrs-establishments"
+  ],
+  "category": "or/v1",
+  "citations": [],
+  "crosswalk": {
+    "oneWay": [
+      {
+        "direction": "encode",
+        "from": "nodes[].AddressLine1",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].AddressLine2",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].AddressLine3",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].AddressLine4",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].BusinessTypeID",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].BusinessName",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].ConfidenceInManagement",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Hygiene",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].LocalAuthorityBusinessID",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].LocalAuthorityCode",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].NewRatingPending",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].PostCode",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].RatingKey",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].RatingValue",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].RightToReply",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].SchemeType",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Structural",
+        "op": "drop"
+      }
+    ],
+    "rules": [
+      {
+        "from": "meta",
+        "op": "move",
+        "to": "meta"
+      },
+      {
+        "from": "nodes[].id",
+        "op": "move",
+        "to": "nodes[].id"
+      },
+      {
+        "from": "nodes[].Latitude",
+        "op": "move",
+        "to": "nodes[].lat"
+      },
+      {
+        "from": "nodes[].Longitude",
+        "op": "move",
+        "to": "nodes[].lon"
+      },
+      {
+        "from": "nodes[].RatingDate",
+        "op": "move",
+        "to": "nodes[].opened"
+      },
+      {
+        "from": "nodes[].BusinessType",
+        "op": "move",
+        "to": "nodes[].skill"
+      },
+      {
+        "from": "nodes[].LocalAuthorityName",
+        "op": "move",
+        "to": "nodes[].territory"
+      }
+    ],
+    "source": "csv-table",
+    "target": "or/v1"
+  },
+  "description": "Food businesses in England, Wales and Northern Ireland with their hygiene rating, local authority and coordinates.",
+  "domain": "Risk and outcome records",
+  "expectedCounts": {},
+  "id": "food-standards-agency-fhrs-establishments",
+  "licence": {
+    "kind": "custom",
+    "name": "Open Government Licence v3",
+    "url": "https://ratings.food.gov.uk/terms-and-conditions"
+  },
+  "name": "Food Hygiene Rating Scheme establishments",
+  "namespace": [
+    "food-standards-agency"
+  ],
+  "properties": {
+    "surveyId": "or-33"
+  },
+  "recipe": {
+    "archive": {
+      "kind": "none"
+    },
+    "parser": {
+      "delimiter": "comma",
+      "encoding": "utf-8",
+      "format": "csv-table",
+      "idColumn": "FHRSID",
+      "numericColumns": [
+        {
+          "column": "Latitude",
+          "factor": 1
+        },
+        {
+          "column": "Longitude",
+          "factor": 1
+        }
+      ],
+      "skipLines": 0
+    },
+    "source": 1,
+    "status": "fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://ratings.food.gov.uk/open-data"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://safhrsprodstorage.blob.core.windows.net/opendatafileblobstorage/FHRS_All_en-GB.csv"
+    }
+  ],
+  "tags": [
+    "prizeProbability",
+    "location",
+    "territory",
+    "lifecycle"
+  ]
+}

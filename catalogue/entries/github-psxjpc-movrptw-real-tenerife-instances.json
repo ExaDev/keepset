@@ -1,0 +1,47 @@
+{
+  "aliases": [
+    "movrptw-real-tenerife-instances"
+  ],
+  "category": "or/v1",
+  "citations": [],
+  "crosswalk": {
+    "file": "crosswalks/or-v1/nodes.json"
+  },
+  "description": "Multi-objective vehicle routing instances with time windows built from real distribution data in Tenerife.",
+  "domain": "Vehicle routing with time windows",
+  "expectedCounts": {},
+  "id": "github-psxjpc-movrptw-real-tenerife-instances",
+  "licence": {
+    "id": "GPL-2.0-only",
+    "kind": "spdx"
+  },
+  "name": "MOVRPTW real Tenerife distribution instances",
+  "namespace": [
+    "github-psxjpc"
+  ],
+  "properties": {
+    "surveyId": "or-9"
+  },
+  "recipe": {
+    "reason": "The download is a zip of Solomon-style instance text files and tab-separated matrices, and keepset has no parser for that format yet.",
+    "status": "not-fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://github.com/psxjpc/MOVRPTW-Generator"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/psxjpc/MOVRPTW-Generator/master/dataset/movrptw-instances.zip"
+    }
+  ],
+  "tags": [
+    "deadline",
+    "location",
+    "duration",
+    "travelTime"
+  ]
+}

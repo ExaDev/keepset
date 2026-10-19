@@ -1,0 +1,50 @@
+{
+  "aliases": [
+    "dwsrp-tw-sc-instances"
+  ],
+  "category": "or/v1",
+  "citations": [],
+  "crosswalk": {
+    "file": "crosswalks/or-v1/nodes.json"
+  },
+  "description": "Instances for dynamic workforce scheduling and routing with time windows and skills, one spreadsheet per instance.",
+  "domain": "Technician and home-care routing",
+  "expectedCounts": {},
+  "id": "mendeley-data-dwsrp-tw-sc-instances",
+  "licence": {
+    "id": "CC-BY-4.0",
+    "kind": "spdx"
+  },
+  "name": "Dynamic Workforce Scheduling and Routing with Time Windows and Skill Constraints instances",
+  "namespace": [
+    "mendeley-data"
+  ],
+  "properties": {
+    "surveyId": "or-11"
+  },
+  "recipe": {
+    "reason": "The download is a spreadsheet (xlsx) with task, team and distance matrix sheets and no coordinates, and keepset has no spreadsheet parser yet.",
+    "status": "not-fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://data.mendeley.com/datasets/dbsf73xpg5"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://data.mendeley.com/public-files/datasets/dbsf73xpg5/files/ec062606-6750-4b98-93b4-a733ff5574e7/file_downloaded"
+    }
+  ],
+  "tags": [
+    "prize",
+    "deadline",
+    "location",
+    "skills",
+    "duration",
+    "lifecycle",
+    "travelTime"
+  ]
+}

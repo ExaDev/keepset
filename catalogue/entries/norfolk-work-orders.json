@@ -1,0 +1,234 @@
+{
+  "aliases": [
+    "work-orders"
+  ],
+  "category": "or/v1",
+  "citations": [],
+  "crosswalk": {
+    "oneWay": [
+      {
+        "direction": "encode",
+        "from": "nodes[].category_code",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].problem_code",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].problem_description",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].reason",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].primary_task_code",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].primary_task_description",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].status_code",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].status_datetime",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].start_date",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].end_date",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].last_modified_datetime",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].priority",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].area",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].department",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].assigned_crew",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].inventory_type",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].actual_labor_cost",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].actual_equipment_cost",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].actual_material_cost",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].contractor_cost",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].street",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].maintenance_zone",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].superward",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].civic_league",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].planning_district",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].neighborhood_service_area",
+        "op": "drop"
+      }
+    ],
+    "rules": [
+      {
+        "from": "meta",
+        "op": "move",
+        "to": "meta"
+      },
+      {
+        "from": "nodes[].id",
+        "op": "move",
+        "to": "nodes[].id"
+      },
+      {
+        "from": "nodes[].created_datetime",
+        "op": "move",
+        "to": "nodes[].opened"
+      },
+      {
+        "from": "nodes[].total_cost",
+        "op": "move",
+        "to": "nodes[].prize"
+      },
+      {
+        "from": "nodes[].category_description",
+        "op": "move",
+        "to": "nodes[].skill"
+      },
+      {
+        "from": "nodes[].status_description",
+        "op": "move",
+        "to": "nodes[].status"
+      },
+      {
+        "from": "nodes[].ward",
+        "op": "move",
+        "to": "nodes[].territory"
+      }
+    ],
+    "source": "csv-table",
+    "target": "or/v1"
+  },
+  "description": "Public works work orders raised by the City of Norfolk, Virginia, with category, status, costs and ward.",
+  "domain": "Technician and home-care routing",
+  "expectedCounts": {},
+  "id": "norfolk-work-orders",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "City of Norfolk work orders",
+  "namespace": [
+    "norfolk"
+  ],
+  "properties": {
+    "surveyId": "or-14"
+  },
+  "recipe": {
+    "archive": {
+      "kind": "none"
+    },
+    "parser": {
+      "delimiter": "comma",
+      "encoding": "utf-8",
+      "format": "csv-table",
+      "idColumn": "work_order_number",
+      "numericColumns": [
+        {
+          "column": "total_cost",
+          "factor": 1
+        }
+      ],
+      "skipLines": 0
+    },
+    "source": 1,
+    "status": "fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://data.norfolk.gov/Government/Work-Orders/qzfe-wj25"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://data.norfolk.gov/resource/qzfe-wj25.csv"
+    }
+  ],
+  "tags": [
+    "prize",
+    "deadline",
+    "location",
+    "territory",
+    "skills",
+    "lifecycle"
+  ]
+}

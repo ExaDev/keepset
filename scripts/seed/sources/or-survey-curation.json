@@ -1,0 +1,4937 @@
+{
+  "items": [
+    {
+      "description": "Benchmark instances for the team orienteering problem, with node coordinates and scores, from the KU Leuven orienteering page.",
+      "downloadUrl": "https://www.mech.kuleuven.be/en/mim/op/instances/ChaoTOP4",
+      "flags": [
+        "The survey URL is a landing page; the verified download is the extensionless zip for the Chao TOP4 set only, and the other sets were not checked.",
+        "The page states no licence."
+      ],
+      "id": "ku-leuven-team-orienteering-chao-instances",
+      "licence": {
+        "kind": "unrecorded"
+      },
+      "name": "Team Orienteering Problem instances (Chao and Tsiligirides sets)",
+      "namespace": "ku-leuven",
+      "outcome": {
+        "reason": "The download is a zip of instance files in a plain text format with a small header and no column names, and keepset has no parser for it yet.",
+        "status": "not-fetchable"
+      },
+      "surveyId": "or-0"
+    },
+    {
+      "description": "Benchmark instances for the orienteering problem with time windows, with coordinates, service durations, scores and time windows.",
+      "downloadUrl": "https://www.mech.kuleuven.be/en/mim/op/instances/righiniTOPTW1",
+      "flags": [
+        "The survey URL is a landing page; only the righiniTOPTW1 zip was fetched, and the other sets on the page were not checked.",
+        "The page states no licence."
+      ],
+      "id": "ku-leuven-toptw-righini-instances",
+      "licence": {
+        "kind": "unrecorded"
+      },
+      "name": "Team Orienteering Problem with Time Windows instances (Righini)",
+      "namespace": "ku-leuven",
+      "outcome": {
+        "reason": "The download is a zip of instance files in a Solomon style text format with no column names, and keepset has no parser for it yet.",
+        "status": "not-fetchable"
+      },
+      "surveyId": "or-1"
+    },
+    {
+      "description": "Park-and-loop routing instances built from real client locations in France, with coordinates and service times in minutes.",
+      "downloadUrl": "https://www.vrp-rep.org/datasets/download/cabrera-et-al-2021.zip",
+      "flags": [
+        "The licence section of the readme only asks users to email the authors describing their use of the instances, so no licence is recorded.",
+        "The zip holds 60 comma separated files with a .txt extension."
+      ],
+      "id": "vrp-rep-park-and-loop-routing-cabrera-2021",
+      "licence": {
+        "kind": "unrecorded"
+      },
+      "name": "Park-and-loop routing instances (Cabrera et al., 2021)",
+      "namespace": "vrp-rep",
+      "outcome": {
+        "reason": "The download is a zip holding many separate coordinate files plus a readme, and keepset has no zip handling for a recipe yet.",
+        "status": "not-fetchable"
+      },
+      "surveyId": "or-10"
+    },
+    {
+      "description": "Code enforcement hearings in New Orleans, with the property, hearing date, case status and inspection dates.",
+      "downloadUrl": "https://data.nola.gov/resource/44ct-56tr.csv",
+      "flags": [
+        "The only coordinates are Louisiana state-plane x and y, mapped as planar x and y, not WGS84 latitude and longitude.",
+        "Hearing dates include future dates, so the table is a live listing.",
+        "The table has no column evidently unique per row, so rows are numbered.",
+        "Missing coordinates are written as -1 in the x and y columns, and the council district is empty in some rows."
+      ],
+      "id": "new-orleans-code-enforcement-all-hearings",
+      "licence": {
+        "id": "CC0-1.0",
+        "kind": "spdx"
+      },
+      "name": "Code Enforcement All Hearings (New Orleans)",
+      "namespace": "new-orleans",
+      "outcome": {
+        "delimiter": "comma",
+        "encoding": "utf-8",
+        "header": [
+          "o_c",
+          "casenumber",
+          "propertyaddress",
+          "casehistory",
+          "hearingdate",
+          "hearingtime",
+          "judgment",
+          "prevhearing",
+          "prevhearingstat",
+          "caseestablished",
+          "inspected",
+          "inspectionresult",
+          "councildistrict",
+          "geoaddress",
+          "city",
+          "state",
+          "zip",
+          "geopin",
+          "xpos",
+          "ypos",
+          "caseid"
+        ],
+        "idColumn": null,
+        "map": {
+          "deadline": "hearingdate",
+          "opened": "caseestablished",
+          "status": "o_c",
+          "territory": "councildistrict",
+          "x": "xpos",
+          "y": "ypos"
+        },
+        "numericColumns": [
+          {
+            "column": "xpos",
+            "factor": 1
+          },
+          {
+            "column": "ypos",
+            "factor": 1
+          }
+        ],
+        "rowCount": 103309,
+        "skipLines": 0,
+        "status": "fetchable"
+      },
+      "surveyId": "or-100"
+    },
+    {
+      "description": "Boot and tow cases for scofflaw vehicles in New York City, with judgment amounts, amounts owed and case dates.",
+      "downloadUrl": "https://data.cityofnewyork.us/resource/qmh3-uvgq.csv",
+      "flags": [
+        "The table holds vehicle plates, which would not be mapped.",
+        "The NYC terms page returned HTTP 403 to the survey, so no licence is recorded."
+      ],
+      "id": "nyc-open-data-dof-scofftow-case-information",
+      "licence": {
+        "kind": "unrecorded"
+      },
+      "name": "DOF Scofftow Case Information (NYC)",
+      "namespace": "nyc-open-data",
+      "outcome": {
+        "reason": "The table has 1,539,045 rows, more than a recipe can read.",
+        "status": "not-fetchable"
+      },
+      "surveyId": "or-101"
+    },
+    {
+      "description": "Executed evictions in New York City from 2017, with the address, borough and coordinates.",
+      "downloadUrl": "https://data.cityofnewyork.us/resource/6z8x-wfk4.csv",
+      "flags": [
+        "Marshal first and last names are present and deliberately not mapped.",
+        "Covers executed evictions from 2017 only.",
+        "The NYC terms page returned HTTP 403 to the survey, so no licence is recorded.",
+        "The only date is the execution date, which is not mapped to opened or closed.",
+        "The table has no column evidently unique per row, so rows are numbered."
+      ],
+      "id": "nyc-open-data-evictions",
+      "licence": {
+        "kind": "unrecorded"
+      },
+      "name": "NYC Evictions",
+      "namespace": "nyc-open-data",
+      "outcome": {
+        "delimiter": "comma",
+        "encoding": "utf-8",
+        "header": [
+          "court_index_number",
+          "docket_number",
+          "eviction_address",
+          "eviction_apt_num",
+          "executed_date",
+          "marshal_first_name",
+          "marshal_last_name",
+          "residential_commercial_ind",
+          "borough",
+          "eviction_zip",
+          "ejectment",
+          "eviction_possession",
+          "latitude",
+          "longitude",
+          "community_board",
+          "council_district",
+          "census_tract",
+          "bin",
+          "bbl",
+          "nta"
+        ],
+        "idColumn": null,
+        "map": {
+          "lat": "latitude",
+          "lon": "longitude",
+          "skill": "residential_commercial_ind",
+          "territory": "borough"
+        },
+        "numericColumns": [
+          {
+            "column": "latitude",
+            "factor": 1
+          },
+          {
+            "column": "longitude",
+            "factor": 1
+          }
+        ],
+        "rowCount": 135657,
+        "skipLines": 0,
+        "status": "fetchable"
+      },
+      "surveyId": "or-102"
+    },
+    {
+      "description": "Sheriff eviction records for San Diego County, California, from a 2024 layer attributed to the University of California San Diego.",
+      "downloadUrl": "https://services1.arcgis.com/eGSDp8lpKe5izqVc/arcgis/rest/services/2024_Sheriff_Evictions_WFL1/FeatureServer/0/query?where=1%3D1&outFields=*&f=json",
+      "flags": [
+        "The Hub item records no licence.",
+        "The landing URL resolves to a 2024 only layer.",
+        "The layer has no probability field."
+      ],
+      "id": "uc-san-diego-sheriff-evictions-san-diego-county",
+      "licence": {
+        "kind": "unrecorded"
+      },
+      "name": "Sheriff Evictions (San Diego County, CA)",
+      "namespace": "uc-san-diego",
+      "outcome": {
+        "reason": "The source is an ArcGIS feature service that returns Esri JSON in pages of at most 2000 features, and keepset has no ArcGIS JSON parser or paging yet.",
+        "status": "not-fetchable"
+      },
+      "surveyId": "or-103"
+    },
+    {
+      "description": "Eviction notices filed with the Los Angeles Housing Department, with the parcel, notice category, type and dates.",
+      "downloadUrl": "https://data.lacity.org/resource/2u8b-eyuu.csv",
+      "flags": [
+        "There are no coordinates, only an address text and a parcel number.",
+        "The first rows are identical and give an Augusta, Georgia style address under a California label, so the sample looks like placeholder data.",
+        "The parcel number repeats, so rows are numbered.",
+        "No licence is recorded in the Socrata metadata."
+      ],
+      "id": "los-angeles-lahd-property-look-up-for-eviction-cases",
+      "licence": {
+        "kind": "unrecorded"
+      },
+      "name": "LAHD Property Look-Up for Eviction Cases (Los Angeles)",
+      "namespace": "los-angeles",
+      "outcome": {
+        "delimiter": "comma",
+        "encoding": "utf-8",
+        "header": [
+          "apn",
+          "officialaddress",
+          "eviction_category",
+          "notice_date",
+          "notice_type",
+          "received"
+        ],
+        "idColumn": null,
+        "map": {
+          "opened": "received",
+          "skill": "eviction_category"
+        },
+        "numericColumns": [],
+        "rowCount": 99832,
+        "skipLines": 0,
+        "status": "fetchable"
+      },
+      "surveyId": "or-104"
+    },
+    {
+      "description": "Consumer complaints about debt collection received by the US Consumer Financial Protection Bureau, with state, ZIP code and response dates.",
+      "downloadUrl": "https://files.consumerfinance.gov/ccdb/complaints.csv.zip",
+      "flags": [
+        "The page says the data is freely available to use, analyse and build on, but names no licence.",
+        "The bulk file covers all products, not only debt collection.",
+        "The table has no coordinates and ZIP codes are partly masked."
+      ],
+      "id": "cfpb-consumer-complaints-debt-collection",
+      "licence": {
+        "kind": "unrecorded"
+      },
+      "name": "CFPB Consumer Complaint Database (Debt Collection)",
+      "namespace": "cfpb",
+      "outcome": {
+        "reason": "The bulk download is a zip of 355,930,383 bytes covering every product, which is larger than a recipe can read, and the debt collection subset is only reachable through a search API.",
+        "status": "not-fetchable"
+      },
+      "surveyId": "or-105"
+    },
+    {
+      "description": "Animal services field activities in Dallas for fiscal year 2016 to 2017, with type, priority, council district, status and dates.",
+      "downloadUrl": "https://www.dallasopendata.com/resource/xy7j-y59g.csv",
+      "flags": [
+        "There are no latitude and longitude columns; the location_1 column holds a multi-line address text with the coordinates inside it, so no location is mapped.",
+        "Covers fiscal year 2016 to 2017 only.",
+        "The sampled rows have every timestamp at midnight.",
+        "Officer and user identifiers are present and deliberately not mapped.",
+        "The table has no column evidently unique per row, so rows are numbered."
+      ],
+      "id": "dallas-animals-field-data-2016-2017",
+      "licence": {
+        "id": "ODC-By-1.0",
+        "kind": "spdx"
+      },
+      "name": "Animals Field Data (Dallas, TX)",
+      "namespace": "dallas",
+      "outcome": {
+        "delimiter": "comma",
+        "encoding": "utf-8",
+        "header": [
+          "activity_number",
+          "activity_type",
+          "activity_subtype",
+          "activity_priority",
+          "service_request_number",
+          "street_address",
+          "street_number",
+          "street_direction",
+          "street_name",
+          "street_type",
+          "apartment",
+          "city",
+          "state",
+          "zip_code",
+          "census_tract",
+          "council_district",
+          "mapsco_page",
+          "animal_intake_id",
+          "animal_type",
+          "animal_description",
+          "tag_number",
+          "activity_sequence",
+          "activity_quantity_1",
+          "activity_result_1",
+          "activity_quantity_2",
+          "activity_result_2",
+          "activity_quantity_3",
+          "activity_result_3",
+          "activity_quantity_4",
+          "activity_result_4",
+          "activity_quantity_5",
+          "activity_result_5",
+          "final_activity_quantity",
+          "final_activity_result",
+          "activity_comment",
+          "officer_id",
+          "activity_status",
+          "cancel_reason",
+          "radio_signal_code",
+          "call_date_time",
+          "created_date_time",
+          "dispatch_date_time",
+          "working_date_time",
+          "completed_date_time",
+          "user_id",
+          "month",
+          "year",
+          "location_1"
+        ],
+        "idColumn": null,
+        "map": {
+          "closed": "completed_date_time",
+          "opened": "call_date_time",
+          "skill": "activity_type",
+          "status": "activity_status",
+          "territory": "council_district"
+        },
+        "numericColumns": [],
+        "rowCount": 52363,
+        "skipLines": 0,
+        "status": "fetchable"
+      },
+      "surveyId": "or-106"
+    },
+    {
+      "description": "Emergency medical incident dispatch records for New York City, with severity codes, response and travel seconds and areas.",
+      "downloadUrl": "https://data.cityofnewyork.us/resource/76xm-jjuj.csv",
+      "flags": [
+        "The NYC terms page returned HTTP 403 to the survey, so no licence is recorded.",
+        "There are no coordinates, only borough, zip and dispatch area."
+      ],
+      "id": "nyc-open-data-fdny-ems-incident-dispatch",
+      "licence": {
+        "kind": "unrecorded"
+      },
+      "name": "FDNY EMS Incident Dispatch Data",
+      "namespace": "nyc-open-data",
+      "outcome": {
+        "reason": "The table has 30,389,767 rows, more than a recipe can read.",
+        "status": "not-fetchable"
+      },
+      "surveyId": "or-107"
+    },
+    {
+      "description": "NYPD calls for service in New York City, with location, precinct and dispatch, arrival and closing timestamps.",
+      "downloadUrl": "https://data.cityofnewyork.us/resource/n2zq-pubd.csv",
+      "flags": [
+        "The URL resolves to the year to date dataset, not a full history.",
+        "The NYC terms page returned HTTP 403 to the survey, so no licence is recorded."
+      ],
+      "id": "nyc-open-data-nypd-calls-for-service",
+      "licence": {
+        "kind": "unrecorded"
+      },
+      "name": "NYPD Calls for Service",
+      "namespace": "nyc-open-data",
+      "outcome": {
+        "reason": "The table has 10,484,258 rows, more than a recipe can read.",
+        "status": "not-fetchable"
+      },
+      "surveyId": "or-108"
+    },
+    {
+      "description": "Police dispatch events in Mesa, Arizona from 2021, with priorities, case types and call handling and response times.",
+      "downloadUrl": "https://citydata.mesaaz.gov/resource/izhu-764k.csv",
+      "flags": [
+        "The Socrata licence field reads See Terms of Use with no terms URL.",
+        "The geolocation text is written latitude first, the reverse of WKT order."
+      ],
+      "id": "mesa-police-dispatch-events",
+      "licence": {
+        "kind": "unrecorded"
+      },
+      "name": "Police Dispatch Events (Mesa, AZ)",
+      "namespace": "mesa",
+      "outcome": {
+        "reason": "The table has 1,631,480 rows, more than a recipe can read.",
+        "status": "not-fetchable"
+      },
+      "surveyId": "or-109"
+    },
+    {
+      "description": "Instances for dynamic workforce scheduling and routing with time windows and skills, one spreadsheet per instance.",
+      "downloadUrl": "https://data.mendeley.com/public-files/datasets/dbsf73xpg5/files/ec062606-6750-4b98-93b4-a733ff5574e7/file_downloaded",
+      "flags": [
+        "The dataset holds one xlsx file per instance; only the first was read.",
+        "Distances and times are stored as matrices only, with no node coordinates."
+      ],
+      "id": "mendeley-data-dwsrp-tw-sc-instances",
+      "licence": {
+        "id": "CC-BY-4.0",
+        "kind": "spdx"
+      },
+      "name": "Dynamic Workforce Scheduling and Routing with Time Windows and Skill Constraints instances",
+      "namespace": "mendeley-data",
+      "outcome": {
+        "reason": "The download is a spreadsheet (xlsx) with task, team and distance matrix sheets and no coordinates, and keepset has no spreadsheet parser yet.",
+        "status": "not-fetchable"
+      },
+      "surveyId": "or-11"
+    },
+    {
+      "description": "Fire and medical dispatch events in Mesa, Arizona, with reason, location, travel time and call and clearing timestamps.",
+      "downloadUrl": "https://citydata.mesaaz.gov/resource/3wic-ufd2.csv",
+      "flags": [
+        "The Socrata licence field reads See Terms of Use with no terms URL.",
+        "The view is redacted for medical calls, so coordinates and response times are empty in many rows, including both sampled rows.",
+        "The table has no column evidently unique per row, so rows are numbered.",
+        "The stored travel time column holds negative values in the sample, so the response time in seconds is mapped to travelTime instead."
+      ],
+      "id": "mesa-fire-and-medical-dispatch-events",
+      "licence": {
+        "kind": "unrecorded"
+      },
+      "name": "Fire and Medical Dispatch Events (Mesa, AZ)",
+      "namespace": "mesa",
+      "outcome": {
+        "delimiter": "comma",
+        "encoding": "utf-8",
+        "header": [
+          "reason_subcategory",
+          "reason_category",
+          "city",
+          "arrive_datetime",
+          "clear_datetime",
+          "latitude",
+          "longitude",
+          "incident_type",
+          "incident_type_code",
+          "incident_date",
+          "incident_calendar_year",
+          "incident_fiscal_year",
+          "incident_week",
+          "incident_month",
+          "jurisdiction",
+          "call_handling_time_in_seconds",
+          "response_time_in_seconds",
+          "valley_benchmark_cities_vbc_response_time_in_seconds",
+          "call_handling_time_in_minutes",
+          "response_time_in_minutes",
+          "travel_time_in_minutes",
+          "commit_time_in_seconds",
+          "code_3_response_times_in_minutes_by_calendar_year_at_90th_percentile",
+          "code_3_response_times_in_minutes_by_calendar_year_at_75th_percentile",
+          "code_3_response_times_in_minutes_by_calendar_year_at_50th_percentile",
+          "code_3_response_times_in_seconds_by_fiscal_year_at_50th_percentile_for_valley_benchmark_cities_reporting",
+          "response_time_45_minutes_flag",
+          "location",
+          "zip",
+          "state",
+          "call_received_datetime",
+          "notify_datetime",
+          "notify_date_month_name",
+          "roll_datetime",
+          "incident_number",
+          "street_name",
+          "street_type",
+          "first_response_unit_count",
+          "error_with_valley_benchmark_cities_time",
+          "error_with_response_time",
+          "error_with_travel_time",
+          "error_with_call_handling_time",
+          "first_response_priority_code",
+          "time_of_day",
+          "property_use",
+          "reason_code_listing_from_cad"
+        ],
+        "idColumn": null,
+        "map": {
+          "closed": "clear_datetime",
+          "lat": "latitude",
+          "lon": "longitude",
+          "opened": "call_received_datetime",
+          "skill": "reason_category",
+          "territory": "city",
+          "travelTime": "response_time_in_seconds"
+        },
+        "numericColumns": [
+          {
+            "column": "latitude",
+            "factor": 1
+          },
+          {
+            "column": "longitude",
+            "factor": 1
+          },
+          {
+            "column": "response_time_in_seconds",
+            "factor": 1
+          }
+        ],
+        "rowCount": 608545,
+        "skipLines": 0,
+        "status": "fetchable"
+      },
+      "surveyId": "or-110"
+    },
+    {
+      "description": "London Fire Brigade incident records with coordinates, borough and ward, attendance times and notional cost.",
+      "downloadUrl": "https://data.london.gov.uk/download/em8xy/73728cf4-b70e-48e2-9b97-4e4341a2110d/LFB%20Incident%20data%20from%202009%20-%202017.csv",
+      "flags": [
+        "The csv covers 2009 to 2017 only.",
+        "Missing values are written as the text NULL."
+      ],
+      "id": "london-fire-brigade-incident-records",
+      "licence": {
+        "id": "OGL-UK-2.0",
+        "kind": "spdx"
+      },
+      "name": "Incident Records (London Fire Brigade)",
+      "namespace": "london-fire-brigade",
+      "outcome": {
+        "reason": "The 2009 to 2017 csv is 328,582,222 bytes, over the 256 MiB a recipe can read, and the later years are published as spreadsheets (xlsx).",
+        "status": "not-fetchable"
+      },
+      "surveyId": "or-111"
+    },
+    {
+      "description": "A live snapshot of power cut incidents on the Northern Powergrid network, with coordinates, area, status and estimated restoration time.",
+      "downloadUrl": "https://northernpowergrid.opendatasoft.com/api/explore/v2.1/catalog/datasets/live-power-cuts-data/exports/csv",
+      "flags": [
+        "A live snapshot with no history, so the rows change on every fetch.",
+        "Covers Northern Powergrid only, although the survey item also names UK Power Networks and California feeds.",
+        "The same incident appears on several rows, one per affected postcode, so rows are numbered.",
+        "The licence text itself was not read.",
+        "The status column holds numeric codes, not words."
+      ],
+      "id": "northern-powergrid-live-power-cuts",
+      "licence": {
+        "kind": "custom",
+        "name": "Northern Powergrid Open Data Licence v1.0",
+        "url": "https://northernpowergrid.opendatasoft.com/p/opendatalicence/"
+      },
+      "name": "Live Power Cuts (Northern Powergrid)",
+      "namespace": "northern-powergrid",
+      "outcome": {
+        "delimiter": "semicolon",
+        "encoding": "utf-8",
+        "header": [
+          "reference",
+          "incidentid",
+          "totalconfirmedpowercut",
+          "powercutcategory",
+          "elapsedtime",
+          "estimatedtimetillresolution",
+          "loggedtime",
+          "natureofoutage",
+          "totalpredictedpowercut",
+          "priority",
+          "type",
+          "customerstagesequence",
+          "incidentstatus",
+          "insertdate",
+          "updatedate",
+          "reason",
+          "customerstagesequencemessage",
+          "postcode",
+          "area",
+          "lat",
+          "lng",
+          "isaffected",
+          "id",
+          "label",
+          "incidentsconfigid",
+          "custometrmessageflag",
+          "custometrmessage",
+          "custometrmessageparea",
+          "configstatus",
+          "iscustomincident",
+          "managecustomincidentsid",
+          "numberofcalls",
+          "etrstartrange",
+          "etrendrange",
+          "custometrendrange",
+          "custometrendrangepa",
+          "duration",
+          "geopoint"
+        ],
+        "idColumn": null,
+        "map": {
+          "deadline": "estimatedtimetillresolution",
+          "duration": "duration",
+          "lat": "lat",
+          "lon": "lng",
+          "opened": "loggedtime",
+          "skill": "natureofoutage",
+          "status": "incidentstatus",
+          "territory": "area"
+        },
+        "numericColumns": [
+          {
+            "column": "lat",
+            "factor": 1
+          },
+          {
+            "column": "lng",
+            "factor": 1
+          },
+          {
+            "column": "duration",
+            "factor": 60
+          }
+        ],
+        "rowCount": 473,
+        "skipLines": 0,
+        "status": "fetchable"
+      },
+      "surveyId": "or-112"
+    },
+    {
+      "description": "Live water leak repair work in Arlington County, Virginia, with activity, priority and estimated and actual start and stop dates.",
+      "downloadUrl": "https://utility.arcgis.com/usrsvcs/servers/53520af18235499d9ecd9c96f624eeae/rest/services/AM/Leak_Repairs_Live/FeatureServer/0/query?where=1%3D1&outFields=*&returnGeometry=false&f=json",
+      "flags": [
+        "No licence or copyright text is recorded."
+      ],
+      "id": "arlington-county-water-leak-repairs-live",
+      "licence": {
+        "kind": "unrecorded"
+      },
+      "name": "Water Leak Repairs (Live), Arlington County, VA",
+      "namespace": "arlington-county",
+      "outcome": {
+        "reason": "The source is an ArcGIS feature service that returns Esri JSON in pages of at most 2000 features, and keepset has no ArcGIS JSON parser or paging yet.",
+        "status": "not-fetchable"
+      },
+      "surveyId": "or-113"
+    },
+    {
+      "description": "Planned and unplanned water shut offs in Christchurch, New Zealand, with suburb, status, planned and actual times and durations.",
+      "downloadUrl": "https://gis.ccc.govt.nz/server/rest/services/OpenData/WaterSupply/FeatureServer/3/query?where=1%3D1&outFields=*&returnGeometry=false&f=json",
+      "flags": [
+        "The service carries only a copyright text naming Christchurch City Council, not a licence.",
+        "The layer holds polygons, not points."
+      ],
+      "id": "christchurch-city-council-water-shut-off",
+      "licence": {
+        "kind": "unrecorded"
+      },
+      "name": "Water Shut Off (Christchurch City Council, New Zealand)",
+      "namespace": "christchurch-city-council",
+      "outcome": {
+        "reason": "The source is an ArcGIS feature service that returns Esri JSON in pages of at most 2000 features, and keepset has no ArcGIS JSON parser or paging yet.",
+        "status": "not-fetchable"
+      },
+      "surveyId": "or-114"
+    },
+    {
+      "description": "A current-state snapshot of on-street parking bay sensors in Melbourne, with zone, status and timestamps.",
+      "downloadUrl": "https://data.melbourne.vic.gov.au/api/explore/v2.1/catalog/datasets/on-street-parking-bay-sensors/exports/csv",
+      "flags": [
+        "The location column is a single text holding latitude and longitude together, so no coordinates are mapped.",
+        "A snapshot of current bay status, not a history.",
+        "The zone number is empty in some rows.",
+        "The table has no column evidently unique per row, so rows are numbered."
+      ],
+      "id": "melbourne-on-street-parking-bay-sensors",
+      "licence": {
+        "id": "CC-BY-4.0",
+        "kind": "spdx"
+      },
+      "name": "On-street Parking Bay Sensors (City of Melbourne)",
+      "namespace": "melbourne",
+      "outcome": {
+        "delimiter": "semicolon",
+        "encoding": "utf-8",
+        "header": [
+          "lastupdated",
+          "status_timestamp",
+          "zone_number",
+          "status_description",
+          "kerbsideid",
+          "location"
+        ],
+        "idColumn": null,
+        "map": {
+          "status": "status_description",
+          "territory": "zone_number"
+        },
+        "numericColumns": [],
+        "rowCount": 6324,
+        "skipLines": 0,
+        "status": "fetchable"
+      },
+      "surveyId": "or-115"
+    },
+    {
+      "description": "New York City 311 service requests from 2020, with agency, complaint type, location, status and dates.",
+      "downloadUrl": "https://data.cityofnewyork.us/resource/erm2-nwe9.csv",
+      "flags": [
+        "The NYC terms page returned HTTP 403 to the survey, so no licence is recorded."
+      ],
+      "id": "nyc-open-data-311-service-requests-2020-to-present",
+      "licence": {
+        "kind": "unrecorded"
+      },
+      "name": "NYC 311 Service Requests from 2020 to Present",
+      "namespace": "nyc-open-data",
+      "outcome": {
+        "reason": "The table has 22,844,087 rows, more than a recipe can read.",
+        "status": "not-fetchable"
+      },
+      "surveyId": "or-116"
+    },
+    {
+      "description": "Customer service requests in Melbourne with suburb, category, received and completed dates and days to complete.",
+      "downloadUrl": "https://data.melbourne.vic.gov.au/api/explore/v2.1/catalog/datasets/customer-service-requests-with-resolution-time/exports/csv",
+      "flags": [
+        "A static extract last modified in December 2022.",
+        "There are no coordinates, only a suburb.",
+        "The table has no column evidently unique per row, so rows are numbered."
+      ],
+      "id": "melbourne-customer-service-requests-with-resolution-time",
+      "licence": {
+        "id": "CC-BY-4.0",
+        "kind": "spdx"
+      },
+      "name": "Customer Service Requests, with Resolution Time (City of Melbourne)",
+      "namespace": "melbourne",
+      "outcome": {
+        "delimiter": "semicolon",
+        "encoding": "utf-8",
+        "header": [
+          "request_status",
+          "date_received",
+          "date_completed",
+          "suburb",
+          "category",
+          "service_desc",
+          "days_to_complete"
+        ],
+        "idColumn": null,
+        "map": {
+          "closed": "date_completed",
+          "duration": "days_to_complete",
+          "opened": "date_received",
+          "skill": "category",
+          "status": "request_status",
+          "territory": "suburb"
+        },
+        "numericColumns": [
+          {
+            "column": "days_to_complete",
+            "factor": 86400
+          }
+        ],
+        "rowCount": 46479,
+        "skipLines": 0,
+        "status": "fetchable"
+      },
+      "surveyId": "or-117"
+    },
+    {
+      "description": "Rental property inspection results in Montgomery County, Maryland, with location, rating, and first and next inspection dates.",
+      "downloadUrl": "https://data.montgomerycountymd.gov/resource/bw2r-araf.csv",
+      "flags": [
+        "The licence is the Socrata licence name Public Domain, with no terms link.",
+        "The first inspection date stands for the case opening, which the source does not state.",
+        "The geolocation column is a multi-line text and is not mapped.",
+        "The table has no column evidently unique per row, so rows are numbered.",
+        "Some rows have latitude and longitude of 0, which are missing values, not locations."
+      ],
+      "id": "montgomery-county-md-troubled-properties-analysis",
+      "licence": {
+        "kind": "custom",
+        "name": "Public Domain",
+        "url": "https://data.montgomerycountymd.gov/api/views/bw2r-araf.json"
+      },
+      "name": "Troubled Properties Analysis (Montgomery County, MD)",
+      "namespace": "montgomery-county-md",
+      "outcome": {
+        "delimiter": "comma",
+        "encoding": "utf-8",
+        "header": [
+          "hlrslicensenumber",
+          "communityname",
+          "streetaddress",
+          "city",
+          "zipcode",
+          "casenumber",
+          "longitude",
+          "latitude",
+          "firstinspectiondate",
+          "nextinspectiondate",
+          "inspectionfrequency",
+          "compliantind",
+          "unitcount",
+          "unitsinspected",
+          "averageviolationsperunit",
+          "severityindex",
+          "noviolationsobserved",
+          "infestedunitspercentage",
+          "units_with_mold",
+          "rating",
+          "geolocation"
+        ],
+        "idColumn": null,
+        "map": {
+          "deadline": "nextinspectiondate",
+          "lat": "latitude",
+          "lon": "longitude",
+          "opened": "firstinspectiondate",
+          "status": "rating",
+          "territory": "city"
+        },
+        "numericColumns": [
+          {
+            "column": "latitude",
+            "factor": 1
+          },
+          {
+            "column": "longitude",
+            "factor": 1
+          }
+        ],
+        "rowCount": 690,
+        "skipLines": 0,
+        "status": "fetchable"
+      },
+      "surveyId": "or-118"
+    },
+    {
+      "description": "Storm overflow event duration monitoring returns for England and Wales, published as annual zip files.",
+      "flags": [
+        "No file, format or column was verified.",
+        "The page lists yearly zip files from 2020 to 2025."
+      ],
+      "id": "defra-event-duration-monitoring-storm-overflows",
+      "licence": {
+        "id": "OGL-UK-3.0",
+        "kind": "spdx"
+      },
+      "name": "Event Duration Monitoring, Storm Overflows (England and Wales)",
+      "namespace": "defra",
+      "outcome": {
+        "reason": "The survey URL is a landing page and no direct download could be verified, because the files sit on a host whose TLS connection failed.",
+        "status": "not-fetchable"
+      },
+      "surveyId": "or-119"
+    },
+    {
+      "description": "Transportation work orders raised and closed by the City of Mesa, with location, category, cost, status and dates.",
+      "downloadUrl": "https://citydata.mesaaz.gov/resource/ay68-xuca.csv",
+      "flags": [
+        "The Socrata licence field reads See Terms of Use with no terms URL.",
+        "The sampled longitude is near -153.5, which is not Mesa, so the source coordinates can be wrong.",
+        "The cost is a work order cost, used as a proxy for prize."
+      ],
+      "id": "mesa-transportation-work-orders-public-view",
+      "licence": {
+        "kind": "unrecorded"
+      },
+      "name": "Transportation Work Orders, Public View (Mesa, AZ)",
+      "namespace": "mesa",
+      "outcome": {
+        "delimiter": "comma",
+        "encoding": "utf-8",
+        "header": [
+          "work_order_id",
+          "description",
+          "initiated_date",
+          "project_name",
+          "location",
+          "project_start_date",
+          "project_finish_date",
+          "actual_start_date",
+          "actual_finish_date",
+          "cancel",
+          "priority",
+          "number_days_before",
+          "date_to_be_printed",
+          "date_printed",
+          "work_order_map_extent",
+          "work_order_map_scale",
+          "source_work_order_id",
+          "cycle_type",
+          "cycle_interval_number",
+          "cycle_interval_unit",
+          "asset_group",
+          "cancel_reason",
+          "cancelled_by",
+          "cancelled_by_sid",
+          "closed_by_sid",
+          "account_number",
+          "contract_billable",
+          "contractor_sid",
+          "created_by_cycle",
+          "cycle_from",
+          "date_cancelled",
+          "date_submit_to",
+          "date_submitted_open",
+          "date_work_order_closed",
+          "days",
+          "domain_id",
+          "expense_type",
+          "from_date",
+          "initiated_by_app",
+          "initiated_by_sid",
+          "is_reactive",
+          "legal_billable",
+          "map_page",
+          "project_sid",
+          "requested_by_sid",
+          "schedule_date",
+          "stage",
+          "status",
+          "submit_to_open_by_sid",
+          "submit_to_sid",
+          "unattached",
+          "units_accomplished",
+          "units_accomplished_description",
+          "units_accomplished_description_1",
+          "update_map",
+          "work_completed_by_sid",
+          "work_order_address",
+          "work_order_category",
+          "work_order_cost",
+          "work_order_custom_field",
+          "work_order_equipment_cost",
+          "work_order_labor_cost",
+          "work_order_material_cost",
+          "work_order_permit_cost",
+          "work_order_template_id",
+          "supervisor_sid",
+          "actual_finish_month",
+          "actual_finish_month_date",
+          "actual_finish_year",
+          "actual_start_month",
+          "actual_start_month_date",
+          "actual_start_year",
+          "cancelled_month",
+          "cancelled_month_date",
+          "cancelled_year",
+          "from_month",
+          "from_month_date",
+          "from_year",
+          "printed_month",
+          "printed_month_date",
+          "printed_year",
+          "project_finish_month",
+          "project_finish_month_date",
+          "project_finish_year",
+          "project_start_month",
+          "project_start_month_date",
+          "project_start_year",
+          "schedule_month",
+          "schedule_month_date",
+          "schedule_year",
+          "submit_to_month",
+          "submit_to_month_date",
+          "submit_to_year",
+          "submitted_open_month",
+          "submitted_open_month_date",
+          "submitted_open_year",
+          "to_be_printed_month",
+          "to_be_printed_month_date",
+          "to_be_printed_year",
+          "work_order_closed_month",
+          "work_order_closed_month_date",
+          "work_order_closed_year",
+          "initiated_date_month",
+          "initiated_date_month_date",
+          "initiated_date_year",
+          "enumeration",
+          "latitude",
+          "longitude",
+          "geocoded_column",
+          "response_time",
+          "response_time_60"
+        ],
+        "idColumn": "work_order_id",
+        "map": {
+          "closed": "date_work_order_closed",
+          "deadline": "project_finish_date",
+          "lat": "latitude",
+          "lon": "longitude",
+          "opened": "initiated_date",
+          "prize": "work_order_cost",
+          "skill": "work_order_category",
+          "status": "status"
+        },
+        "numericColumns": [
+          {
+            "column": "latitude",
+            "factor": 1
+          },
+          {
+            "column": "longitude",
+            "factor": 1
+          },
+          {
+            "column": "work_order_cost",
+            "factor": 1
+          }
+        ],
+        "rowCount": 214933,
+        "skipLines": 0,
+        "status": "fetchable"
+      },
+      "surveyId": "or-12"
+    },
+    {
+      "flags": [
+        "Survey URL is a landing page and the named zip was not reachable, so its contents are unseen."
+      ],
+      "id": "defra-historic-flood-warnings",
+      "licence": {
+        "id": "OGL-UK-3.0",
+        "kind": "spdx"
+      },
+      "name": "Historic Flood Warnings (England)",
+      "namespace": "defra",
+      "outcome": {
+        "reason": "The survey URL is a landing page; the zip it names is hosted on api.agrimetrics.co.uk, whose TLS connection failed during the survey, so no direct download or table could be verified, and the page lists the format as ODS (a spreadsheet) which keepset has no parser for yet.",
+        "status": "not-fetchable"
+      },
+      "surveyId": "or-120"
+    },
+    {
+      "description": "Scheduled street milling and paving work by borough, street segment and date, from NYC DOT.",
+      "downloadUrl": "https://data.cityofnewyork.us/resource/xnfm-u3k5.csv",
+      "flags": [
+        "Location is a WKT geometry column in a projected coordinate system, not latitude and longitude, so no coordinates are mapped.",
+        "No licence is recorded in the Socrata metadata and the NYC Open Data terms were not checked.",
+        "No unique id column: the project location id appears to repeat across scheduled dates, so rows are numbered.",
+        "The date column is the scheduled work date, so it is mapped as the deadline."
+      ],
+      "id": "nyc-open-data-street-resurfacing-schedule",
+      "licence": {
+        "kind": "unrecorded"
+      },
+      "name": "NYC street resurfacing schedule",
+      "namespace": "nyc-open-data",
+      "outcome": {
+        "delimiter": "comma",
+        "encoding": "utf-8",
+        "header": [
+          "workscheduleprojectlocationid",
+          "boroughname",
+          "day",
+          "date",
+          "onstreetname",
+          "fromstreetname",
+          "tostreetname",
+          "communityboard",
+          "area",
+          "worktype",
+          "crewtype",
+          "shifttype",
+          "oftcode",
+          "location_segment_id",
+          "location_wkt",
+          "location_node_id"
+        ],
+        "idColumn": null,
+        "map": {
+          "deadline": "date",
+          "skill": "worktype",
+          "territory": "boroughname"
+        },
+        "numericColumns": [],
+        "rowCount": 333263,
+        "skipLines": 0,
+        "status": "fetchable"
+      },
+      "surveyId": "or-121"
+    },
+    {
+      "flags": [
+        "The survey dataset (v2) is deprecated and returns no rows; the live data is the v3 NfipClaims entity.",
+        "No licence was confirmed because the FEMA terms page refused automated requests."
+      ],
+      "id": "fema-nfip-redacted-claims",
+      "licence": {
+        "kind": "unrecorded"
+      },
+      "name": "FEMA NFIP redacted claims",
+      "namespace": "fema",
+      "outcome": {
+        "reason": "The data is served only as JSON pages by the OpenFEMA API (the survey page itself refuses automated requests), keepset has no JSON paging parser yet, and the successor v3 table holds 2725989 records, more than a recipe can read.",
+        "status": "not-fetchable"
+      },
+      "surveyId": "or-122"
+    },
+    {
+      "description": "Dallas Fire-Rescue building fire incidents for fiscal year 2020 with structure type, cause, values and losses.",
+      "downloadUrl": "https://www.dallasopendata.com/resource/skju-bfp8.csv",
+      "flags": [
+        "Only fiscal year 2020 (1034 incidents) is covered.",
+        "No coordinates or status column: location is a street address and a Mapsco grid reference.",
+        "The prize mapping is the property value, which is a loss exposure and not a reward; treat it as weak.",
+        "The mapped date is the incident date, used as the opened date.",
+        "The sampled total values reach 720000000, an outlier that looks implausible for a single building.",
+        "No licence is recorded in the Socrata metadata."
+      ],
+      "id": "dallas-building-fire-investigations",
+      "licence": {
+        "kind": "unrecorded"
+      },
+      "name": "Dallas building fire investigations",
+      "namespace": "dallas",
+      "outcome": {
+        "delimiter": "comma",
+        "encoding": "utf-8",
+        "header": [
+          "id",
+          "incident",
+          "date",
+          "time",
+          "address",
+          "zip",
+          "battalion_shift",
+          "mapsco",
+          "council_district",
+          "census_tract",
+          "structure_type",
+          "no_of_stories",
+          "construction",
+          "cause",
+          "total_value",
+          "structure_loss",
+          "contents_loss",
+          "total_saved",
+          "sprinkler_sys",
+          "alarm_sys"
+        ],
+        "idColumn": "id",
+        "map": {
+          "opened": "date",
+          "prize": "total_value",
+          "skill": "structure_type",
+          "territory": "council_district"
+        },
+        "numericColumns": [
+          {
+            "column": "total_value",
+            "factor": 1
+          }
+        ],
+        "rowCount": 1034,
+        "skipLines": 0,
+        "status": "fetchable"
+      },
+      "surveyId": "or-123"
+    },
+    {
+      "flags": [
+        "Records name individuals and deceased-estate owners, so the table is personal data.",
+        "The dataset has no location or deadline concept."
+      ],
+      "id": "queensland-government-unclaimed-monies",
+      "licence": {
+        "id": "CC-BY-4.0",
+        "kind": "spdx"
+      },
+      "name": "Unclaimed monies (Queensland)",
+      "namespace": "queensland-government",
+      "outcome": {
+        "reason": "The CSV download answers with an AWS WAF challenge and an empty body, the CKAN datastore API is paged JSON that keepset cannot read yet, and the table has 2553652 records, more than a recipe can read.",
+        "status": "not-fetchable"
+      },
+      "surveyId": "or-124"
+    },
+    {
+      "description": "Water resources maintenance work orders raised and completed by the City of Mesa, with costs, status and dates.",
+      "flags": [
+        "Location is a street address with no coordinates.",
+        "Some sample rows carry an initiated date of 1969, an epoch default.",
+        "Socrata gives the licence only as \"See Terms of Use\", and the terms text was not read.",
+        "Names of staff and requesters are present as columns and would not be mapped."
+      ],
+      "id": "mesa-water-resources-work-orders",
+      "licence": {
+        "kind": "unrecorded"
+      },
+      "name": "Mesa water resources work orders",
+      "namespace": "mesa",
+      "outcome": {
+        "reason": "The table has 934800 rows of more than 100 columns, and the sample rows are about a kilobyte each, so the download is far larger than the 256 MiB a recipe can read into memory.",
+        "status": "not-fetchable"
+      },
+      "surveyId": "or-13"
+    },
+    {
+      "description": "Public works work orders raised by the City of Norfolk, Virginia, with category, status, costs and ward.",
+      "downloadUrl": "https://data.norfolk.gov/resource/qzfe-wj25.csv",
+      "flags": [
+        "No coordinates: location is a street name and a maintenance zone.",
+        "The planned start_date and end_date columns are not mapped because they are not clearly due dates.",
+        "No licence is recorded in the Socrata metadata.",
+        "Costs are spending, not rewards."
+      ],
+      "id": "norfolk-work-orders",
+      "licence": {
+        "kind": "unrecorded"
+      },
+      "name": "City of Norfolk work orders",
+      "namespace": "norfolk",
+      "outcome": {
+        "delimiter": "comma",
+        "encoding": "utf-8",
+        "header": [
+          "work_order_number",
+          "category_code",
+          "category_description",
+          "problem_code",
+          "problem_description",
+          "reason",
+          "primary_task_code",
+          "primary_task_description",
+          "status_code",
+          "status_description",
+          "status_datetime",
+          "created_datetime",
+          "start_date",
+          "end_date",
+          "last_modified_datetime",
+          "priority",
+          "area",
+          "department",
+          "assigned_crew",
+          "inventory_type",
+          "actual_labor_cost",
+          "actual_equipment_cost",
+          "actual_material_cost",
+          "contractor_cost",
+          "total_cost",
+          "street",
+          "maintenance_zone",
+          "ward",
+          "superward",
+          "civic_league",
+          "planning_district",
+          "neighborhood_service_area"
+        ],
+        "idColumn": "work_order_number",
+        "map": {
+          "opened": "created_datetime",
+          "prize": "total_cost",
+          "skill": "category_description",
+          "status": "status_description",
+          "territory": "ward"
+        },
+        "numericColumns": [
+          {
+            "column": "total_cost",
+            "factor": 1
+          }
+        ],
+        "rowCount": 114632,
+        "skipLines": 0,
+        "status": "fetchable"
+      },
+      "surveyId": "or-14"
+    },
+    {
+      "description": "Tree removal and pruning work orders from NYC Parks with status, dates and coordinates.",
+      "flags": [
+        "Several date columns are text-typed."
+      ],
+      "id": "nyc-open-data-forestry-work-orders",
+      "licence": {
+        "kind": "unrecorded"
+      },
+      "name": "NYC Parks forestry work orders",
+      "namespace": "nyc-open-data",
+      "outcome": {
+        "reason": "The table has 1561796 rows, more than a recipe can read.",
+        "status": "not-fetchable"
+      },
+      "surveyId": "or-15"
+    },
+    {
+      "flags": [
+        "The instances appear to be travel-time matrices and tables without coordinates."
+      ],
+      "id": "mendeley-data-hhcrsp-multi-window",
+      "licence": {
+        "id": "CC-BY-4.0",
+        "kind": "spdx"
+      },
+      "name": "Home health care routing, multi-window variant",
+      "namespace": "mendeley-data",
+      "outcome": {
+        "reason": "The download is a RAR archive of macro-enabled Excel workbooks and keepset has no archive or spreadsheet parser yet.",
+        "status": "not-fetchable"
+      },
+      "surveyId": "or-16"
+    },
+    {
+      "flags": [
+        "The repository is large and carries no licence file or statement."
+      ],
+      "id": "github-afkummer-hhcrsp-curated-instances",
+      "licence": {
+        "kind": "unrecorded"
+      },
+      "name": "HHCRSP curated instances (Kummer, 2021)",
+      "namespace": "github-afkummer",
+      "outcome": {
+        "reason": "The instances are keyword-format text files that keepset has no parser for yet, and dataset.csv only indexes the selected instances.",
+        "status": "not-fetchable"
+      },
+      "surveyId": "or-17"
+    },
+    {
+      "flags": [
+        "Only the Elsevier text and data mining licence for the article was found, not a dataset licence."
+      ],
+      "id": "elsevier-ev-hhcrsp-multi-period",
+      "licence": {
+        "kind": "unrecorded"
+      },
+      "name": "EV home health care routing, multi-period variant",
+      "namespace": "elsevier",
+      "outcome": {
+        "reason": "The survey URL is a journal article DOI and no dataset download was found.",
+        "status": "not-fetchable"
+      },
+      "surveyId": "or-18"
+    },
+    {
+      "flags": [
+        "File names are dated and change monthly.",
+        "The page asks users to acknowledge CQC as the source.",
+        "The directory has addresses and postcodes but no coordinates."
+      ],
+      "id": "cqc-care-directory",
+      "licence": {
+        "id": "OGL-UK-3.0",
+        "kind": "spdx"
+      },
+      "name": "CQC care directory (England)",
+      "namespace": "cqc",
+      "outcome": {
+        "reason": "The CSV starts with a title line and a production note before any column header, so it is not a rectangular table with the header on its first line.",
+        "status": "not-fetchable"
+      },
+      "surveyId": "or-19"
+    },
+    {
+      "flags": [
+        "The page describes benchmark instances, but the file in version 1 holds solution values and run statistics, not instances."
+      ],
+      "id": "mendeley-data-dynamic-team-orienteering",
+      "licence": {
+        "id": "CC-BY-4.0",
+        "kind": "spdx"
+      },
+      "name": "Dynamic team orienteering problem",
+      "namespace": "mendeley-data",
+      "outcome": {
+        "reason": "The only file is an Excel workbook of results and keepset has no spreadsheet parser yet.",
+        "status": "not-fetchable"
+      },
+      "surveyId": "or-2"
+    },
+    {
+      "description": "Register of licensed contractors in Washington State with specialty, status and licence effective and expiry dates.",
+      "downloadUrl": "https://data.wa.gov/resource/m8qx-ubtq.csv",
+      "flags": [
+        "This is a register of businesses, not jobs.",
+        "Personal data: business names, principal names and phone numbers are present and deliberately not mapped.",
+        "No coordinates: only street address, city and zip.",
+        "The licence expiry date is mapped as the deadline."
+      ],
+      "id": "washington-state-li-contractor-licences",
+      "licence": {
+        "id": "PDDL-1.0",
+        "kind": "spdx"
+      },
+      "name": "Washington L&I contractor licences",
+      "namespace": "washington-state",
+      "outcome": {
+        "delimiter": "comma",
+        "encoding": "utf-8",
+        "header": [
+          "businessname",
+          "contractorlicensenumber",
+          "contractorlicensetypecode",
+          "contractorlicensetypecodedesc",
+          "address1",
+          "address2",
+          "city",
+          "state",
+          "zip",
+          "phonenumber",
+          "licenseeffectivedate",
+          "licenseexpirationdate",
+          "businesstypecode",
+          "businesstypecodedesc",
+          "specialtycode1",
+          "specialtycode1desc",
+          "specialtycode2",
+          "specialtycode2desc",
+          "ubi",
+          "primaryprincipalname",
+          "statuscode",
+          "contractorlicensestatus",
+          "contractorlicensesuspenddate"
+        ],
+        "idColumn": "contractorlicensenumber",
+        "map": {
+          "deadline": "licenseexpirationdate",
+          "opened": "licenseeffectivedate",
+          "skill": "specialtycode1desc",
+          "status": "contractorlicensestatus",
+          "territory": "city"
+        },
+        "numericColumns": [],
+        "rowCount": 161635,
+        "skipLines": 0,
+        "status": "fetchable"
+      },
+      "surveyId": "or-20"
+    },
+    {
+      "flags": [
+        "The XML carries coordinates and skill resources but no time windows or service times.",
+        "No licence statement was seen."
+      ],
+      "id": "vrp-rep-technician-routing-pillac",
+      "licence": {
+        "kind": "unrecorded"
+      },
+      "name": "Technician routing and scheduling problem (Pillac et al.)",
+      "namespace": "vrp-rep",
+      "outcome": {
+        "reason": "The download is a zip of instance files in the VRP-REP XML format and keepset has no parser for it yet.",
+        "status": "not-fetchable"
+      },
+      "surveyId": "or-21"
+    },
+    {
+      "flags": [
+        "The abstract mentions 263 instances, but only three small files were listed.",
+        "The linked journal article is CC BY-NC-ND 4.0, which differs from the dataset licence."
+      ],
+      "id": "mendeley-data-concrete-delivery-problem",
+      "licence": {
+        "id": "CC-BY-4.0",
+        "kind": "spdx"
+      },
+      "name": "Concrete delivery problem operational data",
+      "namespace": "mendeley-data",
+      "outcome": {
+        "reason": "The downloads are MATLAB data files and keepset has no parser for them yet.",
+        "status": "not-fetchable"
+      },
+      "surveyId": "or-22"
+    },
+    {
+      "flags": [
+        "The article is CC BY-NC 4.0, which differs from the dataset licence.",
+        "Location columns hold building identifiers and names, not coordinates."
+      ],
+      "id": "mendeley-data-fmucd",
+      "licence": {
+        "id": "CC-BY-4.0",
+        "kind": "spdx"
+      },
+      "name": "Facility Management Unified Classification Database",
+      "namespace": "mendeley-data",
+      "outcome": {
+        "reason": "The single CSV is about 1.44 GB, far more than the 256 MiB a recipe can read into memory.",
+        "status": "not-fetchable"
+      },
+      "surveyId": "or-23"
+    },
+    {
+      "flags": [
+        "A third-party student repository mirroring ORTEC instances; no licence statement."
+      ],
+      "id": "github-bascoding-verolog-2019",
+      "licence": {
+        "kind": "unrecorded"
+      },
+      "name": "VeRoLog 2019 machine delivery and installation instances",
+      "namespace": "github-bascoding",
+      "outcome": {
+        "reason": "The instances are keyword-format text files (and semicolon-delimited copies with the same content) that keepset has no parser for yet.",
+        "status": "not-fetchable"
+      },
+      "surveyId": "or-24"
+    },
+    {
+      "flags": [
+        "The survey field list for this item is unverified."
+      ],
+      "id": "zenodo-tdc-technician-dispatch",
+      "licence": {
+        "id": "CC-BY-4.0",
+        "kind": "spdx"
+      },
+      "name": "Technician dispatch data (Mathlouthi, Gendreau and Potvin)",
+      "namespace": "zenodo",
+      "outcome": {
+        "reason": "Zenodo refused automated requests, so the file list and formats could not be seen and no direct download could be verified.",
+        "status": "not-fetchable"
+      },
+      "surveyId": "or-25"
+    },
+    {
+      "flags": [
+        "The archive zip link tried returned 404; only individual instance files are reachable.",
+        "No licence statement was seen."
+      ],
+      "id": "ortec-verolog-2016-2017-instances",
+      "licence": {
+        "kind": "unrecorded"
+      },
+      "name": "VeRoLog 2016-2017 scarce-equipment pickup and delivery instances",
+      "namespace": "ortec",
+      "outcome": {
+        "reason": "The instances are keyword-format text files on a Wayback Machine snapshot and keepset has no parser for them yet.",
+        "status": "not-fetchable"
+      },
+      "surveyId": "or-26"
+    },
+    {
+      "flags": [
+        "Non-commercial licence (CC BY-NC 4.0)."
+      ],
+      "id": "amazon-last-mile-routing-2021",
+      "licence": {
+        "id": "CC-BY-NC-4.0",
+        "kind": "spdx"
+      },
+      "name": "Amazon Last Mile Routing Research Challenge 2021",
+      "namespace": "amazon",
+      "outcome": {
+        "reason": "The data is large nested JSON with bare NaN tokens, the largest file is 1.8 GB, and keepset has no JSON parser for it.",
+        "status": "not-fetchable"
+      },
+      "surveyId": "or-27"
+    },
+    {
+      "description": "Last-mile delivery orders from Cainiao couriers in Jilin, with location, area type, acceptance and delivery times.",
+      "downloadUrl": "https://huggingface.co/datasets/Cainiao-AI/LaDe/resolve/main/delivery/delivery_jl.csv",
+      "flags": [
+        "Only the Jilin delivery file is used; the dataset has other cities and pickup files.",
+        "Timestamps are month-day and time strings without a year.",
+        "Courier ids are pseudonymous person identifiers and are deliberately not mapped.",
+        "The area type column holds numeric codes, so the skill mapping is weak."
+      ],
+      "id": "huggingface-lade-delivery-jilin",
+      "licence": {
+        "id": "Apache-2.0",
+        "kind": "spdx"
+      },
+      "name": "LaDe last-mile delivery orders, Jilin",
+      "namespace": "huggingface",
+      "outcome": {
+        "delimiter": "comma",
+        "encoding": "utf-8",
+        "header": [
+          "order_id",
+          "region_id",
+          "city",
+          "courier_id",
+          "lng",
+          "lat",
+          "aoi_id",
+          "aoi_type",
+          "accept_time",
+          "accept_gps_time",
+          "accept_gps_lng",
+          "accept_gps_lat",
+          "delivery_time",
+          "delivery_gps_time",
+          "delivery_gps_lng",
+          "delivery_gps_lat",
+          "ds"
+        ],
+        "idColumn": "order_id",
+        "map": {
+          "closed": "delivery_time",
+          "lat": "lat",
+          "lon": "lng",
+          "opened": "accept_time",
+          "skill": "aoi_type",
+          "territory": "region_id"
+        },
+        "numericColumns": [
+          {
+            "column": "lat",
+            "factor": 1
+          },
+          {
+            "column": "lng",
+            "factor": 1
+          }
+        ],
+        "skipLines": 0,
+        "status": "fetchable"
+      },
+      "surveyId": "or-28"
+    },
+    {
+      "description": "Delivery nodes of a JD.com cold-chain case in Beijing with coordinates, demands and time windows.",
+      "downloadUrl": "https://raw.githubusercontent.com/zhangchenhaoseu/Database-for-HMCVRPTW-SD/main/Case%20study%20data/Jingdong%20Dataset/input/input_node.csv",
+      "flags": [
+        "No licence file or statement in the repository.",
+        "The file has a trailing empty header cell.",
+        "Only the node file of the Jingdong case is used.",
+        "The unit of the due time is not stated."
+      ],
+      "id": "github-zhangchenhaoseu-jd-cold-chain-nodes",
+      "licence": {
+        "kind": "unrecorded"
+      },
+      "name": "JD.com cold-chain delivery nodes (Beijing)",
+      "namespace": "github-zhangchenhaoseu",
+      "outcome": {
+        "delimiter": "comma",
+        "encoding": "utf-8",
+        "header": [
+          "NO.",
+          "XCOORD.",
+          "YCOORD.",
+          "DEMAND1",
+          "DEMAND2",
+          "READYTIME",
+          "DUEDATE",
+          "SERVICETIME",
+          ""
+        ],
+        "idColumn": "NO",
+        "map": {
+          "deadline": "DUEDATE",
+          "lat": "YCOORD",
+          "lon": "XCOORD"
+        },
+        "numericColumns": [
+          {
+            "column": "YCOORD",
+            "factor": 1
+          },
+          {
+            "column": "XCOORD",
+            "factor": 1
+          },
+          {
+            "column": "DUEDATE",
+            "factor": 1
+          }
+        ],
+        "skipLines": 0,
+        "status": "fetchable"
+      },
+      "surveyId": "or-29"
+    },
+    {
+      "flags": [
+        "No licence statement was seen."
+      ],
+      "id": "vrp-rep-probabilistic-orienteering",
+      "licence": {
+        "kind": "unrecorded"
+      },
+      "name": "Probabilistic orienteering problem",
+      "namespace": "vrp-rep",
+      "outcome": {
+        "reason": "The download is a zip of TSPLIB-style text files with a POP section and keepset has no parser for it yet.",
+        "status": "not-fetchable"
+      },
+      "surveyId": "or-3"
+    },
+    {
+      "flags": [
+        "Non-commercial licence, and License.txt forbids passing the dataset to third parties without permission.",
+        "Coordinates are integers scaled by 1e6.",
+        "Acknowledgement of Meituan is required."
+      ],
+      "id": "github-meituan-informs-tsl-dispatch-waybill",
+      "licence": {
+        "id": "CC-BY-NC-4.0",
+        "kind": "spdx"
+      },
+      "name": "Meituan-INFORMS-TSL research challenge dataset",
+      "namespace": "github-meituan",
+      "outcome": {
+        "reason": "The plain CSV probed holds only an index, date, dispatch time and order id with no mappable field, and the coordinate data sits in a zip that keepset cannot read.",
+        "status": "not-fetchable"
+      },
+      "surveyId": "or-30"
+    },
+    {
+      "description": "Historical DoorDash delivery orders with store category, item counts, dasher supply and estimated durations; no coordinates.",
+      "flags": [
+        "licence is the uploader-declared Kaggle metadata value, not a statement from DoorDash",
+        "no coordinates: only store_id and market_id identify place"
+      ],
+      "id": "kaggle-doordash-eta-prediction",
+      "licence": {
+        "id": "MIT",
+        "kind": "spdx"
+      },
+      "name": "DoorDash delivery ETA prediction orders",
+      "namespace": "kaggle",
+      "outcome": {
+        "reason": "The download is a zip archive holding one CSV and keepset has no archive handling yet, so the table cannot be read directly from the download.",
+        "status": "not-fetchable"
+      },
+      "surveyId": "or-31"
+    },
+    {
+      "description": "Scheduled medical appointments in Brazil with neighbourhood, appointment day and whether the patient attended.",
+      "flags": [
+        "licence is non-commercial and share-alike, which restricts redistribution",
+        "patient-level records with patient and appointment identifiers, gender and age; no coordinates, neighbourhood is a text name"
+      ],
+      "id": "kaggle-medical-appointment-no-shows",
+      "licence": {
+        "id": "CC-BY-NC-SA-4.0",
+        "kind": "spdx"
+      },
+      "name": "Medical appointment no-shows (Brazil, 2016)",
+      "namespace": "kaggle",
+      "outcome": {
+        "reason": "The download is a zip archive holding one CSV and keepset has no archive handling yet, so the table cannot be read directly from the download.",
+        "status": "not-fetchable"
+      },
+      "surveyId": "or-32"
+    },
+    {
+      "description": "Food businesses in England, Wales and Northern Ireland with their hygiene rating, local authority and coordinates.",
+      "downloadUrl": "https://safhrsprodstorage.blob.core.windows.net/opendatafileblobstorage/FHRS_All_en-GB.csv",
+      "flags": [
+        "survey URL is a landing page; the combined CSV is a daily snapshot, so contents change over time",
+        "BusinessName, address and postcode columns hold business trading names and are deliberately not mapped",
+        "the rating columns are scores, not probabilities, so no prizeProbability is mapped",
+        "RatingDate is when the current rating was awarded, mapped to opened as the nearest lifecycle date",
+        "in the first 100,000 rows sampled, about a quarter have empty Latitude and Longitude"
+      ],
+      "id": "food-standards-agency-fhrs-establishments",
+      "licence": {
+        "kind": "custom",
+        "name": "Open Government Licence v3",
+        "url": "https://ratings.food.gov.uk/terms-and-conditions"
+      },
+      "name": "Food Hygiene Rating Scheme establishments",
+      "namespace": "food-standards-agency",
+      "outcome": {
+        "delimiter": "comma",
+        "encoding": "utf-8",
+        "header": [
+          "AddressLine1",
+          "AddressLine2",
+          "AddressLine3",
+          "AddressLine4",
+          "BusinessTypeID",
+          "FHRSID",
+          "BusinessName",
+          "BusinessType",
+          "ConfidenceInManagement",
+          "Hygiene",
+          "Latitude",
+          "LocalAuthorityBusinessID",
+          "LocalAuthorityCode",
+          "LocalAuthorityName",
+          "Longitude",
+          "NewRatingPending",
+          "PostCode",
+          "RatingDate",
+          "RatingKey",
+          "RatingValue",
+          "RightToReply",
+          "SchemeType",
+          "Structural"
+        ],
+        "idColumn": "FHRSID",
+        "map": {
+          "lat": "Latitude",
+          "lon": "Longitude",
+          "opened": "RatingDate",
+          "skill": "BusinessType",
+          "territory": "LocalAuthorityName"
+        },
+        "numericColumns": [
+          {
+            "column": "Latitude",
+            "factor": 1
+          },
+          {
+            "column": "Longitude",
+            "factor": 1
+          }
+        ],
+        "skipLines": 0,
+        "status": "fetchable"
+      },
+      "surveyId": "or-33"
+    },
+    {
+      "description": "Property counts by flood-risk band and groundwater risk category for each postcode in England.",
+      "downloadUrl": "https://environment.data.gov.uk/api/file/download?fileDataSetId=fb921496-1788-4fc2-b469-7b51e2a45553&fileName=Postcodes_Risk_Assessment_All.csv",
+      "flags": [
+        "no coordinates: postcodes are text and keepset does not resolve them to points",
+        "the property counts per risk band are not probabilities and have no node field, so only the postcode is mapped",
+        "survey URL is a landing page; the download comes from the data.gov.uk catalogue and answers GET but not HEAD"
+      ],
+      "id": "defra-environment-agency-flood-risk-postcode-search",
+      "licence": {
+        "kind": "custom",
+        "name": "Open Government Licence",
+        "url": "https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/"
+      },
+      "name": "Flood risk postcode search tool data",
+      "namespace": "defra",
+      "outcome": {
+        "delimiter": "comma",
+        "encoding": "utf-8",
+        "header": [
+          "Postcode",
+          "HIGH_CNT",
+          "MED_CNT",
+          "LOW_CNT",
+          "GWTR_RISK"
+        ],
+        "idColumn": null,
+        "map": {
+          "territory": "Postcode"
+        },
+        "numericColumns": [],
+        "skipLines": 0,
+        "status": "fetchable"
+      },
+      "surveyId": "or-34"
+    },
+    {
+      "description": "Aggregated appointment waiting days by county, month and clinic stop code for Veterans Health Administration and Community Care.",
+      "flags": [
+        "survey URL is the Data in Brief article DOI, not the data; the data is Mendeley Data record rmk89k4rhb",
+        "wait columns are aggregated waiting days per county, month and stop code, not per appointment"
+      ],
+      "id": "mendeley-data-va-appointment-wait-times",
+      "licence": {
+        "id": "CC-BY-4.0",
+        "kind": "spdx"
+      },
+      "name": "US Veterans Health Administration appointment wait times",
+      "namespace": "mendeley-data",
+      "outcome": {
+        "reason": "The county-level file is 916897688 bytes, far over the 256 MiB a recipe can read, and the other files are larger or are zip and xlsx.",
+        "status": "not-fetchable"
+      },
+      "surveyId": "or-35"
+    },
+    {
+      "description": "Demand-response ride requests from the HIRTA Health Connector pilot with requested and actual times, durations and outcomes.",
+      "downloadUrl": "https://datahub.transportation.gov/api/views/pwxe-equ8/rows.csv?accessType=DOWNLOAD",
+      "flags": [
+        "no coordinates or locations in the table",
+        "RequestID repeats across rows, so rows are numbered",
+        "time columns are time-of-day strings without a date, and DropoffTime appears partly as a day fraction",
+        "RideDuration is taken as minutes from the survey findings, converted by 60",
+        "DriverID and VehicleID are identifiers of individuals and are deliberately not mapped",
+        "RequestedPickup and DropoffTime are not mapped to opened and closed: they are requested and actual ride times, not record creation and completion"
+      ],
+      "id": "us-dot-its4us-hirta-health-connector",
+      "licence": {
+        "kind": "custom",
+        "name": "Public Domain",
+        "url": "https://datahub.transportation.gov/Transit/ITS4US-HIRTA-Health-Connector-Performance-Evaluati/pwxe-equ8"
+      },
+      "name": "ITS4US HIRTA Health Connector performance evaluation",
+      "namespace": "us-dot",
+      "outcome": {
+        "delimiter": "comma",
+        "encoding": "utf-8",
+        "header": [
+          "RequestID",
+          "Status",
+          "DriverID",
+          "VehicleID",
+          "Wheelchairs",
+          "RideShared",
+          "SharedDuration",
+          "Passengers",
+          "Booking",
+          "Preference",
+          "Month",
+          "RequestedPickup",
+          "RequestedDropoff",
+          "OriginalPickup",
+          "CancellationAhead",
+          "CancellationSource",
+          "NoShow",
+          "ArrivalTime",
+          "PickupTime",
+          "DropoffTime",
+          "RideDist",
+          "RideDuration",
+          "DirectDuration",
+          "LastPickup",
+          "LastDropoff",
+          "LastDuration",
+          "Rating",
+          "PickupStart",
+          "PickupEnd",
+          "VehiclePickup",
+          "VehicleDropoff",
+          "PickupStatus"
+        ],
+        "idColumn": null,
+        "map": {
+          "deadline": "PickupEnd",
+          "status": "Status",
+          "travelTime": "RideDuration"
+        },
+        "numericColumns": [
+          {
+            "column": "RideDuration",
+            "factor": 60
+          }
+        ],
+        "rowCount": 3760,
+        "skipLines": 0,
+        "status": "fetchable"
+      },
+      "surveyId": "or-36"
+    },
+    {
+      "description": "Field technician job tickets for Nigerian electricity distribution companies with job type, start and end times, duration and coordinates.",
+      "downloadUrl": "https://huggingface.co/datasets/electricsheepafrica/nigerian_energy_and_utilities_field_technician_logs/resolve/main/nigerian_energy_and_utilities_field_technician_logs.csv",
+      "flags": [
+        "licence is inconsistent: the README front matter says other and the README body says gpl, with no LICENSE file, so none is recorded",
+        "the README does not say whether the data is real or synthetic; the sequential ticket ids and the 'metadata inventory' wording suggest generated data",
+        "travel_km is a distance, not a time, so travelTime is not mapped",
+        "duration_min is read as minutes from its name"
+      ],
+      "id": "huggingface-nigerian-energy-field-technician-logs",
+      "licence": {
+        "kind": "unrecorded"
+      },
+      "name": "Nigerian energy and utilities field technician logs",
+      "namespace": "huggingface",
+      "outcome": {
+        "delimiter": "comma",
+        "encoding": "utf-8",
+        "header": [
+          "ticket_id",
+          "disco",
+          "team_id",
+          "job_type",
+          "start_time",
+          "end_time",
+          "duration_min",
+          "outcome",
+          "materials_used",
+          "travel_km",
+          "lat",
+          "lon"
+        ],
+        "idColumn": "ticket_id",
+        "map": {
+          "closed": "end_time",
+          "duration": "duration_min",
+          "lat": "lat",
+          "lon": "lon",
+          "opened": "start_time",
+          "skill": "job_type",
+          "status": "outcome",
+          "territory": "disco"
+        },
+        "numericColumns": [
+          {
+            "column": "lat",
+            "factor": 1
+          },
+          {
+            "column": "lon",
+            "factor": 1
+          },
+          {
+            "column": "duration_min",
+            "factor": 60
+          }
+        ],
+        "skipLines": 0,
+        "status": "fetchable"
+      },
+      "surveyId": "or-37"
+    },
+    {
+      "description": "Coordinates of ATM and point-of-sale cash-collection sites around Perm, Russia, used for clustering and TSP routing examples.",
+      "flags": [
+        "repository has no licence file",
+        "only latitude and longitude of the points; no demands, times or cost matrix"
+      ],
+      "id": "github-oberfichtner-perm-cash-collection-sites",
+      "licence": {
+        "kind": "unrecorded"
+      },
+      "name": "Perm cash-collection sites (ATM and POS points)",
+      "namespace": "github-oberfichtner",
+      "outcome": {
+        "reason": "The only data file is an xls spreadsheet and keepset has no spreadsheet parser yet.",
+        "status": "not-fetchable"
+      },
+      "surveyId": "or-38"
+    },
+    {
+      "description": "Tax warrants filed by the New York State Department of Taxation and Finance, with amount, status, dates and county.",
+      "downloadUrl": "https://data.ny.gov/api/views/v7ua-z23v/rows.csv?accessType=DOWNLOAD",
+      "flags": [
+        "rows name individual debtors with home addresses; debtor names, addresses and the Georeference column are deliberately not mapped",
+        "Warrant ID is not unique (a count of distinct values is lower than the row count), so rows are numbered",
+        "Georeference is a single 'POINT (lon lat)' text column, so no lat or lon is mapped",
+        "the page title says beginning 7/1/2025, but rows include warrants filed earlier, and the survey title also names child support warrants, which this table does not separate out",
+        "the source metadata carries no licence field, only attribution",
+        "Warrant_expiration_date is empty in most rows"
+      ],
+      "id": "new-york-state-tax-warrants",
+      "licence": {
+        "kind": "unrecorded"
+      },
+      "name": "New York State tax warrants",
+      "namespace": "new-york-state",
+      "outcome": {
+        "delimiter": "comma",
+        "encoding": "utf-8",
+        "header": [
+          "Warrant ID",
+          "Status Code (A/C/U)",
+          "Debtor Name 1",
+          "Debtor Name 2",
+          "Debtor Name 3",
+          "Debtor Name 4",
+          "Debtor Address 1",
+          "Debtor Address 2",
+          "City",
+          "State",
+          "Zip code",
+          "County Code",
+          "Country Code",
+          "Warrant filed amount",
+          "Warrant filed date",
+          "Warrant satisfaction date",
+          "Warrant vacate date",
+          "Warrant amend date",
+          "Warrant expiration date",
+          "Filed timestamp",
+          "URL",
+          "Georeference"
+        ],
+        "idColumn": null,
+        "map": {
+          "closed": "Warrant_satisfaction_date",
+          "deadline": "Warrant_expiration_date",
+          "opened": "Warrant_filed_date",
+          "prize": "Warrant_filed_amount",
+          "status": "Status_Code_A_C_U",
+          "territory": "County_Code"
+        },
+        "numericColumns": [
+          {
+            "column": "Warrant_filed_amount",
+            "factor": 1
+          }
+        ],
+        "rowCount": 691127,
+        "skipLines": 0,
+        "status": "fetchable"
+      },
+      "surveyId": "or-39"
+    },
+    {
+      "description": "Clustered orienteering problem benchmark instances with node coordinates, cluster prizes and a travel budget.",
+      "flags": [
+        "no licence stated in the readme and the vrp-rep item page was not found",
+        "prizes belong to clusters (CONSTRAINING_SET_SECTION), not to individual nodes"
+      ],
+      "id": "vrp-rep-clustered-orienteering-problem",
+      "licence": {
+        "kind": "unrecorded"
+      },
+      "name": "Clustered orienteering problem instances (Angelelli et al. 2014)",
+      "namespace": "vrp-rep",
+      "outcome": {
+        "reason": "The download is a zip of TSPLIB-style .cop instance files plus a readme and an xlsx workbook, and keepset has no parser for that format yet.",
+        "status": "not-fetchable"
+      },
+      "surveyId": "or-4"
+    },
+    {
+      "description": "Philadelphia properties with delinquent real estate taxes, amounts due and enforcement status.",
+      "flags": [
+        "the ArcGIS service refuses CSV export",
+        "rows include owner names",
+        "survey URL is a Hub landing page; the service URL came from the Hub item API"
+      ],
+      "id": "philadelphia-real-estate-tax-delinquencies",
+      "licence": {
+        "kind": "unrecorded"
+      },
+      "name": "Real estate tax delinquencies (Philadelphia)",
+      "namespace": "philadelphia",
+      "outcome": {
+        "reason": "The source is an ArcGIS feature service that returns GeoJSON in pages of a limited number of features and keepset has no GeoJSON parser or paging yet.",
+        "status": "not-fetchable"
+      },
+      "surveyId": "or-40"
+    },
+    {
+      "description": "Lease arrears and enforcement status for iTaukei Land Trust Board leases in Fiji.",
+      "flags": [
+        "the data includes personal names, phone numbers and email addresses",
+        "arrears amounts are text padded with spaces, not numbers",
+        "survey URL is a Hub landing page"
+      ],
+      "id": "itaukei-land-trust-board-lease-arrears",
+      "licence": {
+        "kind": "unrecorded"
+      },
+      "name": "iTaukei Land Trust Board lease arrears (Fiji)",
+      "namespace": "itaukei-land-trust-board",
+      "outcome": {
+        "reason": "The source is an ArcGIS feature service that returns GeoJSON in pages of a limited number of features and keepset has no GeoJSON parser or paging yet.",
+        "status": "not-fetchable"
+      },
+      "surveyId": "or-41"
+    },
+    {
+      "description": "Eviction case events in the Maryland District Court with county, case type, event type and event dates.",
+      "downloadUrl": "https://opendata.maryland.gov/api/views/mvqb-b4hf/rows.csv?accessType=DOWNLOAD",
+      "flags": [
+        "no coordinates: tenant city and ZIP code are text and only County is mapped as territory",
+        "Case Number repeats across events, so rows are numbered",
+        "Event_Date and Evicted_Date are mapped to opened and closed as the nearest lifecycle dates; they can fall in different years",
+        "the Event Comment free text and tenant ZIP codes are not mapped",
+        "the source metadata carries no licence field, only attribution"
+      ],
+      "id": "maryland-district-court-eviction-case-data",
+      "licence": {
+        "kind": "unrecorded"
+      },
+      "name": "District Court of Maryland eviction case data",
+      "namespace": "maryland",
+      "outcome": {
+        "delimiter": "comma",
+        "encoding": "utf-8",
+        "header": [
+          "Event Date",
+          "Event Type",
+          "Event Comment",
+          "County",
+          "Location",
+          "Tenant City",
+          "Tenant State",
+          "Tenant ZIP Code",
+          "Case Type",
+          "Case Number",
+          "Evicted Date",
+          "Event Year",
+          "Eviction Year"
+        ],
+        "idColumn": null,
+        "map": {
+          "closed": "Evicted_Date",
+          "opened": "Event_Date",
+          "skill": "Case_Type",
+          "status": "Event_Type",
+          "territory": "County"
+        },
+        "numericColumns": [],
+        "skipLines": 0,
+        "status": "fetchable"
+      },
+      "surveyId": "or-42"
+    },
+    {
+      "description": "Total tax lien amount and lien count for each Allegheny County parcel.",
+      "downloadUrl": "https://data.wprdc.org/datastore/dump/d1e80180-5b2e-4dab-8ec3-be621628649e",
+      "flags": [
+        "this is the 87,710-row summary resource of the dataset, not the much larger current-status resource, whose dump returned HTTP 502",
+        "the first column is the CKAN row number _id, used as the row id",
+        "the table has only the parcel pin, a lien count and a total, with no location or dates",
+        "parcel identifiers are not mapped",
+        "the WPRDC datastore dump host intermittently answers 502 or drops the connection, so a fetch may need a retry"
+      ],
+      "id": "allegheny-county-tax-liens-summary",
+      "licence": {
+        "id": "CC0-1.0",
+        "kind": "spdx"
+      },
+      "name": "Allegheny County tax liens, summary by parcel",
+      "namespace": "allegheny-county",
+      "outcome": {
+        "delimiter": "comma",
+        "encoding": "utf-8",
+        "header": [
+          "_id",
+          "pin",
+          "number",
+          "total_amount"
+        ],
+        "idColumn": "column_1",
+        "map": {
+          "prize": "total_amount"
+        },
+        "numericColumns": [
+          {
+            "column": "total_amount",
+            "factor": 1
+          }
+        ],
+        "rowCount": 87710,
+        "skipLines": 0,
+        "status": "fetchable"
+      },
+      "surveyId": "or-43"
+    },
+    {
+      "description": "Tax liens in Douglas County, Colorado, with lien balances and sale dates.",
+      "flags": [
+        "the layer has null geometry, so there are no coordinates",
+        "the layer metadata has no licence text"
+      ],
+      "id": "douglas-county-co-tax-liens",
+      "licence": {
+        "kind": "unrecorded"
+      },
+      "name": "Tax liens (Douglas County, CO)",
+      "namespace": "douglas-county-co",
+      "outcome": {
+        "reason": "The source is an ArcGIS feature service that returns GeoJSON in pages of a limited number of features and keepset has no GeoJSON parser or paging yet.",
+        "status": "not-fetchable"
+      },
+      "surveyId": "or-44"
+    },
+    {
+      "description": "Court-determined penalties and other tax offences published by the Irish Revenue Commissioners, as listed in one quarterly file.",
+      "downloadUrl": "https://www.revenue.ie/en/corporate/press-office/list-of-defaulters/2026/defaulters-list-part-1-june-2026.csv",
+      "flags": [
+        "rows name individuals, their addresses and occupations; those columns are deliberately not mapped",
+        "the Fine Amount values use thousands separators (for example 24,172.00) so they cannot be read as numbers and prize is not mapped",
+        "the Fine Amount header ends in a non-UTF-8 byte, shown as a replacement character in the header",
+        "one quarterly file only: part 2 has a different schema (tax, interest, penalties, county) and each quarter is a separate file",
+        "no licence statement was found on the page"
+      ],
+      "id": "revenue-commissioners-ireland-tax-defaulters-list-part-1",
+      "licence": {
+        "kind": "unrecorded"
+      },
+      "name": "Revenue list of tax defaulters, part 1 (June 2026)",
+      "namespace": "revenue-commissioners-ireland",
+      "outcome": {
+        "delimiter": "comma",
+        "encoding": "utf-8",
+        "header": [
+          "Issue Type",
+          "Name",
+          "Address",
+          "Occupation",
+          "Fine Amount     �",
+          "Sentence Imposed",
+          "No. of Charges"
+        ],
+        "idColumn": null,
+        "map": {
+          "skill": "Issue_Type"
+        },
+        "numericColumns": [],
+        "skipLines": 0,
+        "status": "fetchable"
+      },
+      "surveyId": "or-45"
+    },
+    {
+      "description": "Sheriff foreclosure sales in Dakota County, Minnesota, with sale amounts and dates for 2025.",
+      "flags": [
+        "layer holds the 2025 sales only",
+        "the disclaimer text was only partly read, so its terms are not summarised here"
+      ],
+      "id": "dakota-county-sheriff-foreclosure-sales",
+      "licence": {
+        "kind": "custom",
+        "name": "Dakota County GIS Database Disclaimer",
+        "url": "https://hub.arcgis.com/datasets/297fcd81118a4d5cbf2fd07ebdee628c"
+      },
+      "name": "Sheriff foreclosure sales (Dakota County, MN)",
+      "namespace": "dakota-county",
+      "outcome": {
+        "reason": "The source is an ArcGIS map service that returns GeoJSON and keepset has no GeoJSON parser yet.",
+        "status": "not-fetchable"
+      },
+      "surveyId": "or-46"
+    },
+    {
+      "description": "Delinquent real estate tax amounts by property in Virginia Beach, Virginia.",
+      "flags": [
+        "the hosted view has null geometry, so there are no coordinates",
+        "rows include owner names",
+        "use is subject to terms of use on the site's About page, which were not read in full"
+      ],
+      "id": "virginia-beach-delinquent-real-estate-taxes",
+      "licence": {
+        "kind": "custom",
+        "name": "Virginia Beach open data terms of use",
+        "url": "https://hub.arcgis.com/datasets/1b2d03addfaa41bb83c17f9237e1504c"
+      },
+      "name": "Delinquent real estate taxes (Virginia Beach)",
+      "namespace": "virginia-beach",
+      "outcome": {
+        "reason": "The source is an ArcGIS feature service that returns GeoJSON in pages of a limited number of features and keepset has no GeoJSON parser or paging yet.",
+        "status": "not-fetchable"
+      },
+      "surveyId": "or-47"
+    },
+    {
+      "description": "Properties offered at the Cook County annual tax sale with taxes and penalties offered, amounts paid and township.",
+      "downloadUrl": "https://datacatalog.cookcountyil.gov/api/views/55ju-2fs9/rows.csv?accessType=DOWNLOAD",
+      "flags": [
+        "location_1 holds latitude and longitude together as '(lat, lon)' text, so no lat or lon is mapped",
+        "PIN repeats across sale years, so rows are numbered",
+        "Buyer_Name is deliberately not mapped",
+        "the source metadata carries no licence field, only attribution to the Cook County Treasurer"
+      ],
+      "id": "cook-county-treasurer-annual-tax-sale",
+      "licence": {
+        "kind": "unrecorded"
+      },
+      "name": "Cook County Treasurer annual tax sale",
+      "namespace": "cook-county",
+      "outcome": {
+        "delimiter": "comma",
+        "encoding": "utf-8",
+        "header": [
+          "Tax Sale Year",
+          "PIN",
+          "Classification",
+          "Township Name",
+          "Sold at Sale",
+          "Tax Amount Offered",
+          "Penalty Amount Offered",
+          "Total Tax and Penalty Amount Offered",
+          "Cost",
+          "Total Amount Paid",
+          "Total Amount Forfeited",
+          "Winning Bid Percent",
+          "Buyer Name",
+          "location_1"
+        ],
+        "idColumn": null,
+        "map": {
+          "prize": "Total_Tax_and_Penalty_Amount_Offered",
+          "skill": "Classification",
+          "status": "Sold_at_Sale",
+          "territory": "Township_Name"
+        },
+        "numericColumns": [
+          {
+            "column": "Total_Tax_and_Penalty_Amount_Offered",
+            "factor": 1
+          }
+        ],
+        "rowCount": 200915,
+        "skipLines": 0,
+        "status": "fetchable"
+      },
+      "surveyId": "or-48"
+    },
+    {
+      "description": "Properties on New York City tax lien sale lists by month and notice cycle, with borough, block, lot and address.",
+      "downloadUrl": "https://data.cityofnewyork.us/api/views/9rz4-mjek/rows.csv?accessType=DOWNLOAD",
+      "flags": [
+        "no coordinates and no amounts in the table",
+        "Borough is a numeric code (1 to 5), kept as text",
+        "Month, borough, block and lot repeat across lists, so rows are numbered",
+        "the source metadata carries no licence field"
+      ],
+      "id": "nyc-open-data-tax-lien-sale-lists",
+      "licence": {
+        "kind": "unrecorded"
+      },
+      "name": "NYC tax lien sale lists",
+      "namespace": "nyc-open-data",
+      "outcome": {
+        "delimiter": "comma",
+        "encoding": "utf-8",
+        "header": [
+          "Month",
+          "Cycle",
+          "Borough",
+          "Block ",
+          "Lot",
+          "Tax Class Code",
+          "Building Class",
+          "Community Board",
+          "Council District",
+          "House Number",
+          "Street Name",
+          "Zip Code",
+          "Water Debt Only"
+        ],
+        "idColumn": null,
+        "map": {
+          "status": "Cycle",
+          "territory": "Borough"
+        },
+        "numericColumns": [],
+        "rowCount": 264142,
+        "skipLines": 0,
+        "status": "fetchable"
+      },
+      "surveyId": "or-49"
+    },
+    {
+      "description": "Solomon's 1983 vehicle routing instances with time windows (C1, C2, R1, R2, RC1, RC2), each with 100 customers.",
+      "flags": [
+        "no licence statement was found",
+        "the host also lists Homberger and other instance families as separate zips"
+      ],
+      "id": "lcc-malaga-solomon-vrptw-benchmark",
+      "licence": {
+        "kind": "unrecorded"
+      },
+      "name": "Solomon VRPTW benchmark instances",
+      "namespace": "lcc-malaga",
+      "outcome": {
+        "reason": "The download is a zip of plain-text Solomon instance files and keepset has no parser for that format yet.",
+        "status": "not-fetchable"
+      },
+      "surveyId": "or-5"
+    },
+    {
+      "description": "Environment Agency enforcement actions against defendants, with fines, costs, verdicts and incident area.",
+      "flags": [
+        "survey URL is a landing page; the file URL came from the data.gov.uk catalogue",
+        "individual defendants are anonymised a year after conviction"
+      ],
+      "id": "defra-environment-agency-prosecutions",
+      "licence": {
+        "id": "OGL-UK-3.0",
+        "kind": "spdx"
+      },
+      "name": "Environment Agency prosecutions",
+      "namespace": "defra",
+      "outcome": {
+        "reason": "The download is an xlsx workbook with an explanation sheet and a data sheet, and keepset has no spreadsheet parser yet.",
+        "status": "not-fetchable"
+      },
+      "surveyId": "or-50"
+    },
+    {
+      "description": "Parking penalty charge notices issued in Lincolnshire in the 2019 to 2020 financial year, with ward, date, street and contravention.",
+      "downloadUrl": "https://blob.datopian.com/resources/cb20cc0f-940b-49c7-a04c-cac7f480ec0e/penaltychargenotices-lwlv1g.csv",
+      "flags": [
+        "survey title names Lincolnshire and Camden, but the page lists only Lincolnshire files and this one is a single financial year",
+        "survey URL is a landing page; the page lists roughly one CSV per financial year",
+        "no coordinates: street, address and postcode are text, and Charge_Level is a tier band rather than an amount",
+        "the file is read as latin1",
+        "no licence text was found in the file or findings"
+      ],
+      "id": "lincolnshire-parking-penalty-charge-notices",
+      "licence": {
+        "kind": "unrecorded"
+      },
+      "name": "Lincolnshire parking penalty charge notices, 2019 to 2020",
+      "namespace": "lincolnshire",
+      "outcome": {
+        "delimiter": "comma",
+        "encoding": "latin1",
+        "header": [
+          "Organisation_Name",
+          "Organisation_Code",
+          "Published_Date",
+          "Latest_Data",
+          "Duration_From",
+          "Duration_To",
+          "Reporting_Period_Type",
+          "Reporting_Period",
+          "GeoEntity_Name",
+          "Geo_Code",
+          "Geo_Name",
+          "GeoURI",
+          "District_Name",
+          "Month",
+          "Date_Issued",
+          "Day_Issued",
+          "Time_Issued",
+          "Time_Band",
+          "Contravention_Code",
+          "Area",
+          "Street",
+          "Address",
+          "Postcode",
+          "Charge_Level"
+        ],
+        "idColumn": null,
+        "map": {
+          "opened": "Date_Issued",
+          "skill": "Contravention_Code",
+          "territory": "Geo_Name"
+        },
+        "numericColumns": [],
+        "skipLines": 0,
+        "status": "fetchable"
+      },
+      "surveyId": "or-51"
+    },
+    {
+      "description": "Fixed penalty notices issued for environmental offences in the London Borough of Barnet from February 2019, with area, offence and payment.",
+      "downloadUrl": "https://open.barnet.gov.uk/download/2n1ne/mpn/FPNs%20to%20date%20Feb%202019%20to%20date.csv",
+      "flags": [
+        "gender and age band of offenders are recorded and are deliberately not mapped",
+        "Paid_Amount carries a pound sign, so it cannot be read as a number and prize is not mapped",
+        "the page also offers a raw-data CSV with a different schema, which is not covered",
+        "no location beyond an area name"
+      ],
+      "id": "barnet-environmental-enforcement-fixed-penalty-notices",
+      "licence": {
+        "id": "OGL-UK-3.0",
+        "kind": "spdx"
+      },
+      "name": "Barnet environmental enforcement fixed penalty notices",
+      "namespace": "barnet",
+      "outcome": {
+        "delimiter": "comma",
+        "encoding": "utf-8",
+        "header": [
+          "Offense Date",
+          "Offence",
+          "Area",
+          "Gender",
+          "Age",
+          "Paid ",
+          "Paid Amount"
+        ],
+        "idColumn": null,
+        "map": {
+          "opened": "Offense_Date",
+          "skill": "Offence",
+          "status": "Paid",
+          "territory": "Area"
+        },
+        "numericColumns": [],
+        "skipLines": 0,
+        "status": "fetchable"
+      },
+      "surveyId": "or-52"
+    },
+    {
+      "description": "Litter fixed penalty notices issued for Leeds City Council by 3GS, published as quarterly files.",
+      "flags": [
+        "each quarterly file has a different schema and newer ones are xlsx",
+        "no coordinates: breach location is free text"
+      ],
+      "id": "leeds-litter-fixed-penalty-notices-3gs",
+      "licence": {
+        "id": "OGL-UK-3.0",
+        "kind": "spdx"
+      },
+      "name": "Litter fixed penalty notices issued by 3GS (Leeds)",
+      "namespace": "leeds",
+      "outcome": {
+        "reason": "The CSV has a title line (FPN Detail) above the real header, so it does not have its header on the first line and is not a plain table.",
+        "status": "not-fetchable"
+      },
+      "surveyId": "or-53"
+    },
+    {
+      "description": "Fixed penalty notices served by Leeds City Council officers, with the fine, payment outcome, ward and dates.",
+      "flags": [
+        "no coordinates: the table has only a postcode sector (PC) and a ward",
+        "the payment, prosecution and cancellation columns are not mapped, so the outcome of each notice is not in the node",
+        "the survey URL is the current file; a separate Historic/FPN.csv is linked from the dataset page and was not fetched"
+      ],
+      "id": "leeds-fixed-penalty-notices",
+      "licence": {
+        "id": "OGL-UK-3.0",
+        "kind": "spdx"
+      },
+      "name": "Fixed penalty notices (Leeds City Council)",
+      "namespace": "leeds",
+      "outcome": {
+        "delimiter": "comma",
+        "encoding": "utf-8",
+        "header": [
+          "FPN_SERVED_DATE",
+          "SRRECTYPE",
+          "SR_TYPE_DESC",
+          "FPN_TYPE",
+          "FPN_TYPE_DESC",
+          "PC",
+          "WARD",
+          "FINE_DUE",
+          "FPN_PAID",
+          "FPN_PAID_DATE",
+          "PROSECUTION",
+          "FPN_CANCELLED"
+        ],
+        "idColumn": null,
+        "map": {
+          "opened": "FPN_SERVED_DATE",
+          "prize": "FINE_DUE",
+          "skill": "SR_TYPE_DESC",
+          "territory": "WARD"
+        },
+        "numericColumns": [
+          {
+            "column": "FINE_DUE",
+            "factor": 1
+          }
+        ],
+        "skipLines": 0,
+        "status": "fetchable"
+      },
+      "surveyId": "or-54"
+    },
+    {
+      "description": "Fixed penalty notices issued by Camden's education and enforcement team, with offence, status, amount fined and dates.",
+      "downloadUrl": "https://opendata.camden.gov.uk/api/views/i6r8-r9vt/rows.csv?accessType=DOWNLOAD",
+      "flags": [
+        "no location or territory column",
+        "Date_Paid is empty in both sampled rows, including one with status Paid",
+        "the amount paid column is not mapped because only one column can fill prize",
+        "the survey URL is a landing page; the download is the Socrata CSV export",
+        "the Disclaimer column says FPN numbers are reduced since March 2020"
+      ],
+      "id": "camden-fixed-penalty-notices",
+      "licence": {
+        "id": "OGL-UK-3.0",
+        "kind": "spdx"
+      },
+      "name": "Fixed penalty notices (Camden)",
+      "namespace": "camden",
+      "outcome": {
+        "delimiter": "comma",
+        "encoding": "utf-8",
+        "header": [
+          "Disclaimer",
+          "Source",
+          "Date Issued",
+          "Financial Year",
+          "Issue Type",
+          "Offence",
+          "Status",
+          "Date Paid",
+          "Amound Fined GBP",
+          "Amount Paid GBP",
+          "Last Uploaded"
+        ],
+        "idColumn": null,
+        "map": {
+          "closed": "Date_Paid",
+          "opened": "Date_Issued",
+          "prize": "Amound_Fined_GBP",
+          "skill": "Offence",
+          "status": "Status"
+        },
+        "numericColumns": [
+          {
+            "column": "Amound_Fined_GBP",
+            "factor": 1
+          }
+        ],
+        "rowCount": 15456,
+        "skipLines": 0,
+        "status": "fetchable"
+      },
+      "surveyId": "or-55"
+    },
+    {
+      "description": "Planning applications registered with Camden, with location, ward, application type, status and decision dates.",
+      "downloadUrl": "https://opendata.camden.gov.uk/api/views/2eiu-s2cw/rows.csv?accessType=DOWNLOAD",
+      "flags": [
+        "the survey title also names Dun Laoghaire-Rathdown, Ireland; only the Camden table is in this download",
+        "applicant names and case officer names are present and deliberately not mapped",
+        "Earliest_Decision_Date is not mapped as a deadline because it is the earliest date a decision may be made, not a due date"
+      ],
+      "id": "camden-planning-applications",
+      "licence": {
+        "id": "OGL-UK-3.0",
+        "kind": "spdx"
+      },
+      "name": "Planning applications (Camden)",
+      "namespace": "camden",
+      "outcome": {
+        "delimiter": "comma",
+        "encoding": "utf-8",
+        "header": [
+          "ID",
+          "Application Number",
+          "Development Address",
+          "Development Description",
+          "Decision Type",
+          "Valid From Date",
+          "Registered Date",
+          "Registered In Last 7 Working Days",
+          "Registered In Last 28 Working Days",
+          "Earliest Decision Date",
+          "Decision Date",
+          "Decision Level",
+          "System Status",
+          "System Status Change Date",
+          "Applicant Name",
+          "Ward",
+          "Conservation Areas",
+          "Neighbourhood Areas",
+          "Case Officer",
+          "Case Officer Team",
+          "Responsibility Type",
+          "Comment",
+          "Full Application",
+          "Application Type",
+          "Easting",
+          "Northing",
+          "Longitude",
+          "Latitude",
+          "Spatial Accuracy",
+          "Last Uploaded",
+          "Location",
+          "Socrata ID",
+          "Organisation URI"
+        ],
+        "idColumn": "ID",
+        "map": {
+          "closed": "Decision_Date",
+          "lat": "Latitude",
+          "lon": "Longitude",
+          "opened": "Registered_Date",
+          "skill": "Application_Type",
+          "status": "System_Status",
+          "territory": "Ward"
+        },
+        "numericColumns": [
+          {
+            "column": "Latitude",
+            "factor": 1
+          },
+          {
+            "column": "Longitude",
+            "factor": 1
+          }
+        ],
+        "rowCount": 82762,
+        "skipLines": 0,
+        "status": "fetchable"
+      },
+      "surveyId": "or-56"
+    },
+    {
+      "description": "Street works and licences registered in Camden, with category, status, locality and start and end dates.",
+      "downloadUrl": "https://opendata.camden.gov.uk/api/views/hb3v-f3s2/rows.csv?accessType=DOWNLOAD",
+      "flags": [
+        "latitude, longitude and ward columns are empty in the sampled rows, whose Spatial_Accuracy says no spatial information is available",
+        "contact telephone numbers and the responsible company are present and deliberately not mapped",
+        "the survey URL is the portal root; the dataset id came from the Socrata catalogue API",
+        "Start_Date is not mapped as opened because it is the start of the works, not the date the record was created"
+      ],
+      "id": "camden-street-works-register",
+      "licence": {
+        "id": "OGL-UK-3.0",
+        "kind": "spdx"
+      },
+      "name": "Street works register (Camden)",
+      "namespace": "camden",
+      "outcome": {
+        "delimiter": "comma",
+        "encoding": "utf-8",
+        "header": [
+          "Local Authority Reference",
+          "Works Status",
+          "Works Type",
+          "Category Of Works",
+          "Description Of Works",
+          "Location Of Works",
+          "Street",
+          "Locality",
+          "Start Date",
+          "End Date",
+          "Reference",
+          "Responsible Company",
+          "Contact Telephone Number",
+          "Emergency Contact Telephone Number",
+          "Ward Code",
+          "Ward Name",
+          "Easting",
+          "Northing",
+          "Longitude",
+          "Latitude",
+          "Location",
+          "Spatial Accuracy",
+          "Last Uploaded",
+          "Organisation URI"
+        ],
+        "idColumn": "Local_Authority_Reference",
+        "map": {
+          "deadline": "End_Date",
+          "lat": "Latitude",
+          "lon": "Longitude",
+          "skill": "Category_Of_Works",
+          "status": "Works_Status",
+          "territory": "Ward_Name"
+        },
+        "numericColumns": [
+          {
+            "column": "Latitude",
+            "factor": 1
+          },
+          {
+            "column": "Longitude",
+            "factor": 1
+          }
+        ],
+        "rowCount": 934,
+        "skipLines": 0,
+        "status": "fetchable"
+      },
+      "surveyId": "or-57"
+    },
+    {
+      "flags": [
+        "duplicate of survey item or-70; the portal root URL given in the survey is a landing page"
+      ],
+      "id": "camden-hmo-licensing-register-duplicate",
+      "licence": {
+        "id": "OGL-UK-3.0",
+        "kind": "spdx"
+      },
+      "name": "HMO licensing register (Camden, duplicate entry)",
+      "namespace": "camden",
+      "outcome": {
+        "reason": "This survey item is the same Socrata dataset as or-70 (x43g-c2rf), whose entry carries the recipe, so it is not given a second one.",
+        "status": "not-fetchable"
+      },
+      "surveyId": "or-58"
+    },
+    {
+      "description": "Investigations by Toronto Municipal Licensing and Standards, with type, received date and current status.",
+      "downloadUrl": "https://ckan0.cf.opendata.inter.prod-toronto.ca/dataset/5da2e2e8-659e-4850-ae43-47b7f7ad6b62/resource/05994276-0021-47e1-afa0-ca874733b98f/download/investigations.csv",
+      "flags": [
+        "CKAN reports the licence as not specified",
+        "no coordinates or territory: addresses are in a separate Addresses table that is not part of this recipe",
+        "the survey title lists eight other cities; only Toronto is covered",
+        "NOTICE_OR_ORDER_DATE and EXPIRY_DATE are mostly the text N/A and NEXT_INSPECTION is mostly empty, so they are not mapped",
+        "the id column is the CKAN row number, not the investigation id"
+      ],
+      "id": "toronto-municipal-licensing-investigations",
+      "licence": {
+        "kind": "unrecorded"
+      },
+      "name": "Municipal licensing and standards investigations (Toronto)",
+      "namespace": "toronto",
+      "outcome": {
+        "delimiter": "comma",
+        "encoding": "utf-8",
+        "header": [
+          "_id",
+          "INVESTIGATION_ID",
+          "INVESTIGATION#",
+          "INVESTIGATION_TYPE",
+          "IN_DATE",
+          "NOTICE_OR_ORDER_DATE",
+          "NEXT_INSPECTION",
+          "EXPIRY_DATE",
+          "ISSUE",
+          "CURRENT_STATUS"
+        ],
+        "idColumn": "column_1",
+        "map": {
+          "opened": "IN_DATE",
+          "skill": "INVESTIGATION_TYPE",
+          "status": "CURRENT_STATUS"
+        },
+        "numericColumns": [],
+        "skipLines": 0,
+        "status": "fetchable"
+      },
+      "surveyId": "or-59"
+    },
+    {
+      "description": "An arc-routing meter reading instance for Hartford, Connecticut, with customer and network node coordinates in planar units.",
+      "flags": [
+        "coordinates are planar x and y, not latitude and longitude",
+        "there are no time windows or service times, so it is not a VRPTW instance"
+      ],
+      "id": "zenodo-hartford-meter-reading-instance",
+      "licence": {
+        "id": "CC-BY-4.0",
+        "kind": "spdx"
+      },
+      "name": "Meter reading problem instance (Hartford, CT)",
+      "namespace": "zenodo",
+      "outcome": {
+        "reason": "The download is a zip of plain-text arc-routing instance files (customers, network and links) described by a readme, and keepset has no parser for that format yet.",
+        "status": "not-fetchable"
+      },
+      "surveyId": "or-6"
+    },
+    {
+      "flags": [
+        "The Socrata metadata carries no licence and the NYC Open Data terms page could not be read."
+      ],
+      "id": "nyc-open-data-housing-maintenance-code-violations",
+      "licence": {
+        "kind": "unrecorded"
+      },
+      "name": "Housing maintenance code violations (NYC HPD)",
+      "namespace": "nyc-open-data",
+      "outcome": {
+        "reason": "The table has 11,324,217 rows, more than a recipe can read into memory.",
+        "status": "not-fetchable"
+      },
+      "surveyId": "or-60"
+    },
+    {
+      "description": "Code compliance cases handled by the City of Mesa, with location, district, workflow, status, fees and dates.",
+      "downloadUrl": "https://citydata.mesaaz.gov/api/views/hgf6-yenu/rows.csv?accessType=DOWNLOAD",
+      "flags": [
+        "the Socrata licence field says See Terms of Use and the terms were not read",
+        "latitude and longitude are empty in the sampled rows",
+        "Total_Fee is a fee charged, a weak stand-in for a prize",
+        "Code_Officer, Assigned_User and defendant fields are personal data and are deliberately not mapped",
+        "the table keeps only the latest workflow status per case"
+      ],
+      "id": "mesa-code-compliance-cases",
+      "licence": {
+        "kind": "unrecorded"
+      },
+      "name": "Code compliance cases (Mesa)",
+      "namespace": "mesa",
+      "outcome": {
+        "delimiter": "comma",
+        "encoding": "utf-8",
+        "header": [
+          "Record ID",
+          "Permit Number",
+          "Permit Type",
+          "Module",
+          "Opened Date",
+          "Reported Date",
+          "Assigned Date",
+          "Status Date",
+          "Status",
+          "Update Date",
+          "Tracking ID",
+          "Application Name",
+          "Description",
+          "Assigned User",
+          "Total Fee",
+          "Total Pay",
+          "Balance",
+          "Booking",
+          "Record Class",
+          "Reported Channel",
+          "Assigned to Department",
+          "Created by",
+          "Closed by Department",
+          "Closed Date",
+          "Defendant Signature",
+          "Initiated Product",
+          "Public Owned",
+          "Special Project?",
+          "Supervisor Review Complete Date",
+          "Zoning District",
+          "Abatement Comments",
+          "Arraignment Date",
+          "Certified Citations?",
+          "Certified Deed?",
+          "Location",
+          "Criminal Comments",
+          "Occupied?",
+          "HO Letter Sent Date",
+          "Inspection Interval",
+          "LFC Complete Date",
+          "Notice Served Date",
+          "Notify Complainant",
+          "Other Source of Complaint",
+          "Short Notes",
+          "Source of Complaint",
+          "Type of Submittal",
+          "Warrant Issued Date",
+          "Case Address",
+          "Council District",
+          "Parcel Number",
+          "Violation Ordinance",
+          "Voluntary Compliance",
+          "Code Officer",
+          "RowID",
+          "Workflow Status Date",
+          "Workflow",
+          "Workflow Status",
+          "Latitude",
+          "Longitude",
+          "Geolocation",
+          "Case City",
+          "Case State",
+          "Case Zip",
+          "Interactions",
+          "Complaint Validated"
+        ],
+        "idColumn": "Record_ID",
+        "map": {
+          "closed": "Closed_Date",
+          "lat": "Latitude",
+          "lon": "Longitude",
+          "opened": "Opened_Date",
+          "prize": "Total_Fee",
+          "skill": "Workflow",
+          "status": "Status",
+          "territory": "Council_District"
+        },
+        "numericColumns": [
+          {
+            "column": "Latitude",
+            "factor": 1
+          },
+          {
+            "column": "Longitude",
+            "factor": 1
+          },
+          {
+            "column": "Total_Fee",
+            "factor": 1
+          }
+        ],
+        "rowCount": 82360,
+        "skipLines": 0,
+        "status": "fetchable"
+      },
+      "surveyId": "or-61"
+    },
+    {
+      "flags": [
+        "the dataset description says only the last 30 days of violations are published",
+        "the licence points to the Open Data Platform terms of use, which were not read",
+        "the survey URL is a Hub landing page; the data is the FeatureServer query"
+      ],
+      "id": "louisville-metro-property-maintenance-violations",
+      "licence": {
+        "kind": "unrecorded"
+      },
+      "name": "Property maintenance inspection violations (Louisville)",
+      "namespace": "louisville-metro",
+      "outcome": {
+        "reason": "The source is an ArcGIS feature service that returns GeoJSON in pages of a limited number of features, and keepset has no GeoJSON parser or paging yet.",
+        "status": "not-fetchable"
+      },
+      "surveyId": "or-62"
+    },
+    {
+      "flags": [
+        "The Socrata metadata carries no licence and the NYC Open Data terms page could not be read.",
+        "respondent personal fields were removed from May 2026 per the dataset description, but respondent name columns remain in the header"
+      ],
+      "id": "nyc-open-data-oath-hearings-case-status",
+      "licence": {
+        "kind": "unrecorded"
+      },
+      "name": "OATH hearings division case status (NYC)",
+      "namespace": "nyc-open-data",
+      "outcome": {
+        "reason": "The table has 22,151,329 rows, more than a recipe can read into memory.",
+        "status": "not-fetchable"
+      },
+      "surveyId": "or-63"
+    },
+    {
+      "description": "Historical Bureau of Fire Prevention inspection records for New York City premises, with last visit and inspection status.",
+      "downloadUrl": "https://data.cityofnewyork.us/api/views/ssq6-fkht/rows.csv?accessType=DOWNLOAD",
+      "flags": [
+        "The Socrata metadata carries no licence and the NYC Open Data terms page could not be read.",
+        "latitude, longitude and borough are empty in the sampled rows",
+        "OWNER_NAME holds owner names and is deliberately not mapped",
+        "the dataset is a historical snapshot with no automated updates"
+      ],
+      "id": "nyc-open-data-fire-prevention-inspections-historical",
+      "licence": {
+        "kind": "unrecorded"
+      },
+      "name": "Bureau of Fire Prevention inspections, historical (NYC)",
+      "namespace": "nyc-open-data",
+      "outcome": {
+        "delimiter": "comma",
+        "encoding": "utf-8",
+        "header": [
+          "ACCT_ID",
+          "ALPHA",
+          "ACCT_NUM",
+          "OWNER_NAME",
+          "LAST_VISIT_DT",
+          "LAST_FULL_INSP_DT",
+          "LAST_INSP_STAT",
+          "PREM_ADDR",
+          "BIN",
+          "COMMUNITY BOARD",
+          "COUNCIL DISTRICT",
+          "BBL",
+          "LATITUDE",
+          "LONGITUDE",
+          "POSTCODE",
+          "BOROUGH",
+          "Number",
+          "Street",
+          "Census Tract",
+          "NTA"
+        ],
+        "idColumn": "ACCT_ID",
+        "map": {
+          "lat": "LATITUDE",
+          "lon": "LONGITUDE",
+          "status": "LAST_INSP_STAT",
+          "territory": "BOROUGH"
+        },
+        "numericColumns": [
+          {
+            "column": "LATITUDE",
+            "factor": 1
+          },
+          {
+            "column": "LONGITUDE",
+            "factor": 1
+          }
+        ],
+        "rowCount": 400618,
+        "skipLines": 0,
+        "status": "fetchable"
+      },
+      "surveyId": "or-64"
+    },
+    {
+      "flags": [
+        "the Socrata licence field says See Terms of Use and the terms document was not located",
+        "the file size was not reported (chunked export), so the size limit is an estimate from the probe rows",
+        "the RESPONDENTS column holds respondent names"
+      ],
+      "id": "chicago-ordinance-violations",
+      "licence": {
+        "kind": "unrecorded"
+      },
+      "name": "Ordinance violations (Chicago Department of Administrative Hearings)",
+      "namespace": "chicago",
+      "outcome": {
+        "reason": "The table has 824,653 rows and the probe's first rows, with cells already truncated, average about 330 bytes, so the export would exceed the 256 MiB a recipe can read.",
+        "status": "not-fetchable"
+      },
+      "surveyId": "or-65"
+    },
+    {
+      "description": "Chicago Department of Transportation permit applications, with location, work type, status, fees and dates.",
+      "downloadUrl": "https://data.cityofchicago.org/api/views/hr8i-6s6s/rows.csv?accessType=DOWNLOAD",
+      "flags": [
+        "the Socrata licence field says See Terms of Use and the terms document was not located",
+        "applicant and emergency contact names and addresses are present and deliberately not mapped",
+        "TOTALFEES is a fee charged, a weak stand-in for a prize",
+        "the view has no ward or district column",
+        "this is a filtered view of a parent dataset"
+      ],
+      "id": "chicago-transportation-department-permits",
+      "licence": {
+        "kind": "unrecorded"
+      },
+      "name": "Transportation Department permits, current and future (Chicago)",
+      "namespace": "chicago",
+      "outcome": {
+        "delimiter": "comma",
+        "encoding": "utf-8",
+        "header": [
+          "UNIQUEKEY",
+          "APPLICATIONNUMBER",
+          "APPLICATIONTYPE",
+          "APPLICATIONDESCRIPTION",
+          "WORKTYPE",
+          "WORKTYPEDESCRIPTION",
+          "APPLICATIONSTATUS",
+          "CURRENTMILESTONE",
+          "APPLICATIONSTARTDATE",
+          "APPLICATIONENDDATE",
+          "APPLICATIONPROCESSEDDATE",
+          "APPLICATIONISSUEDDATE",
+          "APPLICATIONFINALIZEDDATE",
+          "APPLICATIONEXPIREDATE",
+          "APPLICATIONNAME",
+          "COMMENTS",
+          "TOTALFEES",
+          "WAIVEDFEES",
+          "PRIMARYCONTACTLAST",
+          "PRIMARYCONTACTFIRST",
+          "PRIMARYCONTACTMIDDLE",
+          "PRIMARYCONTACTSTREET",
+          "PRIMARYCONTACTSTREET2",
+          "PRIMARYCONTACTCITY",
+          "PRIMARYCONTACTSTATE",
+          "PRIMARYCONTACTZIP",
+          "EMERGENCYCONTACTNAME",
+          "LASTINSPECTIONNUMBER",
+          "LASTINSPECTIONTYPE",
+          "LASTINSPTYPEDESCR",
+          "LASTINSPECTIONDATE",
+          "LASTINSPECTIONRESULT",
+          "STREETNUMBERFROM",
+          "STREETNUMBERTO",
+          "DIRECTION",
+          "STREETNAME",
+          "SUFFIX",
+          "PLACEMENT",
+          "STREETCLOSURE",
+          "DETAIL",
+          "PARKINGMETERPOSTINGORBAGGING",
+          "XCOORDINATE",
+          "YCOORDINATE",
+          "LATITUDE",
+          "LONGITUDE",
+          "LOCATION"
+        ],
+        "idColumn": "UNIQUEKEY",
+        "map": {
+          "closed": "APPLICATIONFINALIZEDDATE",
+          "deadline": "APPLICATIONEXPIREDATE",
+          "lat": "LATITUDE",
+          "lon": "LONGITUDE",
+          "prize": "TOTALFEES",
+          "skill": "WORKTYPEDESCRIPTION",
+          "status": "APPLICATIONSTATUS"
+        },
+        "numericColumns": [
+          {
+            "column": "LATITUDE",
+            "factor": 1
+          },
+          {
+            "column": "LONGITUDE",
+            "factor": 1
+          },
+          {
+            "column": "TOTALFEES",
+            "factor": 1
+          }
+        ],
+        "rowCount": 51778,
+        "skipLines": 0,
+        "status": "fetchable"
+      },
+      "surveyId": "or-66"
+    },
+    {
+      "description": "Active building permits in Toronto, with permit type, ward grid, status and dates.",
+      "downloadUrl": "https://ckan0.cf.opendata.inter.prod-toronto.ca/dataset/108c2bd1-6945-46f6-af92-02f5658ee7f7/resource/dfce3b7b-4f17-4a9d-9155-5e390a5ffa97/download/building-permits-active-permits.csv",
+      "flags": [
+        "CKAN reports the licence as not specified",
+        "no coordinates: only street address parts, postal sector and GEO_ID",
+        "BUILDER_NAME holds builder names and is deliberately not mapped",
+        "the same permit number appears once per revision, so the id column is the CKAN row number",
+        "EST_CONST_COST is not mapped as prize because some cells hold thousands separators such as 400,000, which a numeric column cannot read"
+      ],
+      "id": "toronto-building-permits-active",
+      "licence": {
+        "kind": "unrecorded"
+      },
+      "name": "Building permits, active (Toronto)",
+      "namespace": "toronto",
+      "outcome": {
+        "delimiter": "comma",
+        "encoding": "utf-8",
+        "header": [
+          "_id",
+          "PERMIT_NUM",
+          "REVISION_NUM",
+          "PERMIT_TYPE",
+          "STRUCTURE_TYPE",
+          "WORK",
+          "STREET_NUM",
+          "STREET_NAME",
+          "STREET_TYPE",
+          "STREET_DIRECTION",
+          "POSTAL",
+          "GEO_ID",
+          "WARD_GRID",
+          "APPLICATION_DATE",
+          "ISSUED_DATE",
+          "COMPLETED_DATE",
+          "STATUS",
+          "DESCRIPTION",
+          "CURRENT_USE",
+          "PROPOSED_USE",
+          "DWELLING_UNITS_CREATED",
+          "DWELLING_UNITS_LOST",
+          "EST_CONST_COST",
+          "ASSEMBLY",
+          "INSTITUTIONAL",
+          "RESIDENTIAL",
+          "BUSINESS_AND_PERSONAL_SERVICES",
+          "MERCANTILE",
+          "INDUSTRIAL",
+          "INTERIOR_ALTERATIONS",
+          "DEMOLITION",
+          "BUILDER_NAME"
+        ],
+        "idColumn": "column_1",
+        "map": {
+          "closed": "COMPLETED_DATE",
+          "opened": "APPLICATION_DATE",
+          "skill": "PERMIT_TYPE",
+          "status": "STATUS",
+          "territory": "WARD_GRID"
+        },
+        "numericColumns": [],
+        "skipLines": 0,
+        "status": "fetchable"
+      },
+      "surveyId": "or-67"
+    },
+    {
+      "description": "Permits for utility cuts in Toronto streets, with installation type, ward, district, status and proposed dates.",
+      "downloadUrl": "https://ckan0.cf.opendata.inter.prod-toronto.ca/dataset/43cbc364-b673-49ca-b98b-8b99c5d5f6eb/resource/e2d3c583-efeb-43e7-aeb1-273f4055847d/download/utility-cut-permits.csv",
+      "flags": [
+        "the licence is CKAN licence id open-government-licence-toronto; the URL given is the dataset page, because no licence URL was in the metadata",
+        "no coordinates: only a street description and GEO_ID",
+        "CLIENT_NAME holds the utility or company and is not mapped",
+        "two CSV resources exist and were not compared; this is the first"
+      ],
+      "id": "toronto-utility-cut-permits",
+      "licence": {
+        "kind": "custom",
+        "name": "Open Government Licence (Toronto)",
+        "url": "https://ckan0.cf.opendata.inter.prod-toronto.ca/dataset/utility-cut-permits"
+      },
+      "name": "Utility cut permits (Toronto)",
+      "namespace": "toronto",
+      "outcome": {
+        "delimiter": "comma",
+        "encoding": "utf-8",
+        "header": [
+          "_id",
+          "PERMIT_NUMBER",
+          "PROPOSED_FROM_DATE",
+          "PROPOSED_TO_DATE",
+          "CLIENT_NAME",
+          "GEO_ID",
+          "DISPLAY_DESC",
+          "PERMIT_STATUS",
+          "INSTALLATION_TYPE_DESC",
+          "CITY_WARD",
+          "DISTRICT"
+        ],
+        "idColumn": "column_1",
+        "map": {
+          "deadline": "PROPOSED_TO_DATE",
+          "skill": "INSTALLATION_TYPE_DESC",
+          "status": "PERMIT_STATUS",
+          "territory": "CITY_WARD"
+        },
+        "numericColumns": [],
+        "skipLines": 0,
+        "status": "fetchable"
+      },
+      "surveyId": "or-68"
+    },
+    {
+      "description": "Building permits issued in Vancouver, with project value, type of work, local area and the days taken to issue.",
+      "downloadUrl": "https://opendata.vancouver.ca/api/explore/v2.1/catalog/datasets/issued-building-permits/exports/csv",
+      "flags": [
+        "the survey title also names Calgary; only the Vancouver table is in this download",
+        "coordinates exist only as a combined text pair in geo_point_2d and as a JSON shape, so no latitude or longitude is mapped",
+        "applicant and building contractor names and addresses are present and deliberately not mapped",
+        "projectvalue is a declared project value, a weak stand-in for a prize"
+      ],
+      "id": "vancouver-issued-building-permits",
+      "licence": {
+        "kind": "custom",
+        "name": "Open Government Licence (Vancouver)",
+        "url": "https://opendata.vancouver.ca/pages/licence/"
+      },
+      "name": "Issued building permits (Vancouver)",
+      "namespace": "vancouver",
+      "outcome": {
+        "delimiter": "semicolon",
+        "encoding": "utf-8",
+        "header": [
+          "permitnumber",
+          "permitnumbercreateddate",
+          "issuedate",
+          "permitelapseddays",
+          "projectvalue",
+          "typeofwork",
+          "address",
+          "projectdescription",
+          "permitcategory",
+          "applicant",
+          "applicantaddress",
+          "propertyuse",
+          "specificusecategory",
+          "buildingcontractor",
+          "buildingcontractoraddress",
+          "issueyear",
+          "geolocalarea",
+          "geom",
+          "yearmonth",
+          "geo_point_2d"
+        ],
+        "idColumn": "permitnumber",
+        "map": {
+          "duration": "permitelapseddays",
+          "opened": "permitnumbercreateddate",
+          "prize": "projectvalue",
+          "skill": "typeofwork",
+          "territory": "geolocalarea"
+        },
+        "numericColumns": [
+          {
+            "column": "projectvalue",
+            "factor": 1
+          },
+          {
+            "column": "permitelapseddays",
+            "factor": 86400
+          }
+        ],
+        "rowCount": 52419,
+        "skipLines": 0,
+        "status": "fetchable"
+      },
+      "surveyId": "or-69"
+    },
+    {
+      "description": "Distance and time matrices, service times and time windows for a real pharmaceutical last-mile delivery operation.",
+      "downloadUrl": "https://zenodo.org/api/records/15310106/files/data.zip/content",
+      "flags": [
+        "the Zenodo record is CC BY 4.0 but the Data in Brief article is CC BY-NC 4.0 per Crossref",
+        "exact node locations are withheld for confidentiality, so there are no coordinates",
+        "column names come from the Zenodo description, not from the xlsx files",
+        "the survey URL is a DOI that resolves to the publisher article page"
+      ],
+      "id": "zenodo-pharmaceutical-last-mile-delivery",
+      "licence": {
+        "id": "CC-BY-4.0",
+        "kind": "spdx"
+      },
+      "name": "Pharmaceutical last-mile delivery dataset (Vrani et al.)",
+      "namespace": "zenodo",
+      "outcome": {
+        "reason": "The download is a zip of Excel (xlsx) files holding distance and time matrices, and keepset has no spreadsheet parser yet.",
+        "status": "not-fetchable"
+      },
+      "surveyId": "or-7"
+    },
+    {
+      "description": "Licences for houses in multiple occupation in Camden, with location, licence type, status and licence start and end dates.",
+      "downloadUrl": "https://opendata.camden.gov.uk/api/views/x43g-c2rf/rows.csv?accessType=DOWNLOAD",
+      "flags": [
+        "the register carries a notice restricting its use for marketing",
+        "licence holder and manager names and addresses are present and deliberately not mapped",
+        "there is no ward column",
+        "most room and facility count columns are empty in the sampled rows"
+      ],
+      "id": "camden-hmo-licensing-register",
+      "licence": {
+        "id": "OGL-UK-3.0",
+        "kind": "spdx"
+      },
+      "name": "HMO licensing register (Camden)",
+      "namespace": "camden",
+      "outcome": {
+        "delimiter": "comma",
+        "encoding": "utf-8",
+        "header": [
+          "Notice",
+          "Licence Number",
+          "Type Of Licence",
+          "Status",
+          "Property Address",
+          "Name Of Licence Holder",
+          "Address Of Licence Holder",
+          "Name Of Person Managing",
+          "Address Of Manager",
+          "Maximum Number Of Persons",
+          "Commencement Date",
+          "End Date",
+          "Duration In Years",
+          "Storeys Of HMO",
+          "Number Of Rooms",
+          "Number Of Living Rooms",
+          "Number Of Bedrooms",
+          "Number Of Kitchens",
+          "Number Of Self-contained Flats",
+          "Number Of Non Self-contained Flats",
+          "Number Of Shared Sinks",
+          "Number Of Shared WHBs",
+          "Number Of Shared Showers",
+          "Number Of Shared WCs",
+          "Number Of Shared Baths",
+          "Easting",
+          "Northing",
+          "Longitude",
+          "Latitude",
+          "Location",
+          "Spatial Accuracy",
+          "Last Uploaded",
+          "Organisation URI"
+        ],
+        "idColumn": "Licence_Number",
+        "map": {
+          "deadline": "End_Date",
+          "lat": "Latitude",
+          "lon": "Longitude",
+          "opened": "Commencement_Date",
+          "skill": "Type_Of_Licence",
+          "status": "Status"
+        },
+        "numericColumns": [
+          {
+            "column": "Latitude",
+            "factor": 1
+          },
+          {
+            "column": "Longitude",
+            "factor": 1
+          }
+        ],
+        "rowCount": 3443,
+        "skipLines": 0,
+        "status": "fetchable"
+      },
+      "surveyId": "or-70"
+    },
+    {
+      "description": "Business licences issued in Philadelphia, including rental licences, with type, status, council district and dates.",
+      "downloadUrl": "https://phl.carto.com/api/v2/sql?q=SELECT+*+FROM+business_licenses&filename=business_licenses&format=csv&skipfields=cartodb_id",
+      "flags": [
+        "no licence name was read: the page links to the city terms of use",
+        "the table covers all licence types, not only rentals",
+        "x and y are the file's geocode_x and geocode_y, which look like Pennsylvania South state-plane coordinates, not WGS84, and are empty in some rows",
+        "owner and legal names and mailing addresses are present and deliberately not mapped",
+        "the download is a Carto SQL query on the whole table, and whether the query has a row cap was not checked",
+        "the export is large and close to the size a recipe can read"
+      ],
+      "id": "philadelphia-business-licences-rental-registry",
+      "licence": {
+        "kind": "unrecorded"
+      },
+      "name": "Business licences including the rental registry (Philadelphia)",
+      "namespace": "philadelphia",
+      "outcome": {
+        "delimiter": "comma",
+        "encoding": "utf-8",
+        "header": [
+          "the_geom",
+          "the_geom_webmercator",
+          "objectid",
+          "posse_jobid",
+          "addressobjectid",
+          "council_district",
+          "address",
+          "unit_type",
+          "unit_num",
+          "zip",
+          "censustract",
+          "parcel_id_num",
+          "opa_account_num",
+          "opa_owner",
+          "owneroccupied",
+          "addressed_license",
+          "licensenum",
+          "revenuecode",
+          "licensetype",
+          "rentalcategory",
+          "initialissuedate",
+          "mostrecentissuedate",
+          "expirationdate",
+          "inactivedate",
+          "licensestatus",
+          "numberofunits",
+          "legalfirstname",
+          "legallastname",
+          "legalname",
+          "legalentitytype",
+          "business_name",
+          "business_mailing_address",
+          "ownercontact1name",
+          "ownercontact1mailingaddress",
+          "ownercontact1city",
+          "ownercontact1state",
+          "ownercontact1zippostalcode",
+          "ownercontact2name",
+          "ownercontact2mailingaddress",
+          "ownercontact2city",
+          "ownercontact2state",
+          "ownercontact2zippostalcode",
+          "geocode_x",
+          "geocode_y",
+          "gdb_geomattr_data",
+          "ownerismanagingagentinphilly",
+          "cal_number",
+          "effectivedate"
+        ],
+        "idColumn": "objectid",
+        "map": {
+          "deadline": "expirationdate",
+          "opened": "initialissuedate",
+          "skill": "licensetype",
+          "status": "licensestatus",
+          "territory": "council_district",
+          "x": "geocode_x",
+          "y": "geocode_y"
+        },
+        "numericColumns": [
+          {
+            "column": "geocode_x",
+            "factor": 1
+          },
+          {
+            "column": "geocode_y",
+            "factor": 1
+          }
+        ],
+        "skipLines": 0,
+        "status": "fetchable"
+      },
+      "surveyId": "or-71"
+    },
+    {
+      "downloadUrl": "https://atom.geo-ide.developpement-durable.gouv.fr/atomArchive/GetResource?id=acfcbcfe-23f8-43bf-a9cc-2ddf86c07cc4&dataType=dataset",
+      "flags": [
+        "the shapefile attributes were not read, so fields are unverified",
+        "the zip is generated on request and its file name changes per request"
+      ],
+      "id": "france-sdes-sitadel-housing-permits-ile-de-france",
+      "licence": {
+        "kind": "custom",
+        "name": "Licence Ouverte v2.0",
+        "url": "https://www.data.gouv.fr/datasets/logements-autorises-par-permis-de-construire-et-declarations-prealables-en-ile-de-france"
+      },
+      "name": "Sitadel housing permits (Ile-de-France)",
+      "namespace": "france-sdes",
+      "outcome": {
+        "reason": "The download is a zip of shapefile layers, and keepset has no shapefile parser yet.",
+        "status": "not-fetchable"
+      },
+      "surveyId": "or-72"
+    },
+    {
+      "description": "Environmental and building permit cases in The Hague, with type, status, neighbourhood and filing and decision dates.",
+      "downloadUrl": "https://den-haag-opendata.opendatasoft.com/api/explore/v2.1/catalog/datasets/wabovergunningen/exports/csv",
+      "flags": [
+        "the same case (dossiernr) is repeated once per geo point, so rows are not unique cases",
+        "coordinates exist only as a combined text pair in geo_point_2d and as a JSON shape, so no latitude or longitude is mapped",
+        "the licence is read from the data.overheid.nl catalogue page, which also contains CC-BY strings that were not attributed",
+        "the survey URL is a catalogue entry; the download is the Opendatasoft CSV export"
+      ],
+      "id": "the-hague-wabo-vergunningen",
+      "licence": {
+        "id": "CC0-1.0",
+        "kind": "spdx"
+      },
+      "name": "Wabo permits (The Hague)",
+      "namespace": "the-hague",
+      "outcome": {
+        "delimiter": "semicolon",
+        "encoding": "utf-8",
+        "header": [
+          "geo_point_2d",
+          "geo_shape",
+          "dossiernr",
+          "registr_oms",
+          "type_oms",
+          "lokatieaand",
+          "status_oms",
+          "ddindiening",
+          "dd_afgehandeld",
+          "dd_beschikking_verleend",
+          "dd_geweigerd",
+          "dd_tijdelijke_vergunning",
+          "dd_buiten_behandeling",
+          "dd_ingetrokken",
+          "dd_rechtswege",
+          "dd_niet_vergunningplichtig",
+          "dd_overig_onbepaald",
+          "buurt",
+          "wijk",
+          "stadsdeel"
+        ],
+        "idColumn": null,
+        "map": {
+          "closed": "dd_afgehandeld",
+          "opened": "ddindiening",
+          "skill": "type_oms",
+          "status": "status_oms",
+          "territory": "wijk"
+        },
+        "numericColumns": [],
+        "rowCount": 88805,
+        "skipLines": 0,
+        "status": "fetchable"
+      },
+      "surveyId": "or-73"
+    },
+    {
+      "flags": [
+        "records are published notices, not structured permits",
+        "no licence statement was seen in the responses"
+      ],
+      "id": "overheid-nl-gemeenteblad-omgevingsvergunning",
+      "licence": {
+        "kind": "unrecorded"
+      },
+      "name": "Official publications of environmental permit notices (Netherlands)",
+      "namespace": "overheid-nl",
+      "outcome": {
+        "reason": "The source is an SRU search endpoint that returns XML notices in a query language, not a table, and keepset has no parser for it.",
+        "status": "not-fetchable"
+      },
+      "surveyId": "or-74"
+    },
+    {
+      "description": "Works carried out in Barcelona's public space, with location, district, type, budget, status and end date.",
+      "downloadUrl": "https://opendata-ajuntament.barcelona.cat/resources/bcn/Obres/obres_espai_public.csv",
+      "flags": [
+        "no latitude or longitude column: geometries are WKT polygons in two coordinate systems",
+        "budget columns are empty in the sampled rows",
+        "the budget is a tender budget, a weak stand-in for a prize",
+        "promotor and constructor name companies and are not mapped",
+        "quarterly snapshots and older versions exist; this is the current file",
+        "the codi column repeats across rows, so rows are numbered instead of using it as an id"
+      ],
+      "id": "barcelona-road-works-public-space",
+      "licence": {
+        "id": "CC-BY-4.0",
+        "kind": "spdx"
+      },
+      "name": "Road works in public space (Barcelona)",
+      "namespace": "barcelona",
+      "outcome": {
+        "delimiter": "comma",
+        "encoding": "utf-8",
+        "header": [
+          "codi",
+          "ubicacio",
+          "codi_districte",
+          "nom_districte",
+          "codi_barri",
+          "nom_barri",
+          "tipusobra",
+          "pressupost_licitacio",
+          "pressupost_adjudicacio",
+          "data_inici",
+          "data_fi",
+          "promotor",
+          "constructor",
+          "estat",
+          "titol",
+          "descripcio",
+          "url_web_obres",
+          "geometria_etrs89",
+          "geometria_wgs84"
+        ],
+        "idColumn": null,
+        "map": {
+          "deadline": "data_fi",
+          "prize": "pressupost_licitacio",
+          "skill": "tipusobra",
+          "status": "estat",
+          "territory": "nom_districte"
+        },
+        "numericColumns": [
+          {
+            "column": "pressupost_licitacio",
+            "factor": 1
+          }
+        ],
+        "skipLines": 0,
+        "status": "fetchable"
+      },
+      "surveyId": "or-75"
+    },
+    {
+      "description": "Traffic fines issued in Madrid in one month, with offence, fine amount, discount and points.",
+      "downloadUrl": "https://datos.madrid.es/dataset/210104-0-multas-circulacion-detalle/resource/210104-385-multas-circulacion-detalle/download/210104-385-multas-circulacion-detalle.csv",
+      "flags": [
+        "only one monthly file (May 2026) is covered; about 277 monthly resources exist and the survey's own resource link returned a stub",
+        "COORDENADA_Y cells carry trailing NUL characters, so the coordinates are deliberately not mapped; they are UTM, not WGS84",
+        "MES, ANIO and HORA are separate columns, so no date field is mapped",
+        "fields are padded with spaces in the source"
+      ],
+      "id": "madrid-traffic-fines-detail",
+      "licence": {
+        "id": "CC-BY-4.0",
+        "kind": "spdx"
+      },
+      "name": "Traffic fines detail (Madrid)",
+      "namespace": "madrid",
+      "outcome": {
+        "delimiter": "semicolon",
+        "encoding": "latin1",
+        "header": [
+          "CALIFICACION",
+          "LUGAR",
+          "MES",
+          "ANIO",
+          "HORA",
+          "IMP_BOL",
+          "DESCUENTO",
+          " PUNTOS",
+          "DENUNCIANTE",
+          "HECHO-BOL",
+          "VEL_LIMITE",
+          "VEL_CIRCULA ",
+          "COORDENADA-X",
+          "COORDENADA-Y                                                                                                                                          \u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000"
+        ],
+        "idColumn": null,
+        "map": {
+          "prize": "IMP_BOL",
+          "skill": "HECHO_BOL"
+        },
+        "numericColumns": [
+          {
+            "column": "IMP_BOL",
+            "factor": 1
+          }
+        ],
+        "skipLines": 0,
+        "status": "fetchable"
+      },
+      "surveyId": "or-76"
+    },
+    {
+      "description": "Building permits issued by the City of Bologna, with the procedure type and the application and closure dates.",
+      "downloadUrl": "https://opendata.comune.bologna.it/api/explore/v2.1/catalog/datasets/permessi-di-costruire-rilasciati/exports/csv",
+      "flags": [
+        "The table has no coordinates, only address text, so there is no map location.",
+        "esito_pratica is free text that embeds a decision date and protocol number, so it is not mapped as status.",
+        "The protocol number repeats across years, so rows are numbered rather than keyed."
+      ],
+      "id": "comune-di-bologna-building-permits-issued",
+      "licence": {
+        "id": "CC-BY-4.0",
+        "kind": "spdx"
+      },
+      "name": "Building permits issued (Bologna)",
+      "namespace": "comune-di-bologna",
+      "outcome": {
+        "delimiter": "semicolon",
+        "encoding": "utf-8",
+        "header": [
+          "richiesta_ndeg_prot",
+          "richiesta_anno_prot",
+          "richiesta_data",
+          "procedimento",
+          "esito_pratica",
+          "chiusura_pratica_data",
+          "codvia",
+          "civico",
+          "esponenteciv",
+          "localizzazioni_lista"
+        ],
+        "idColumn": null,
+        "map": {
+          "closed": "chiusura_pratica_data",
+          "opened": "richiesta_data",
+          "skill": "procedimento"
+        },
+        "numericColumns": [],
+        "rowCount": 1759,
+        "skipLines": 0,
+        "status": "fetchable"
+      },
+      "surveyId": "or-77"
+    },
+    {
+      "description": "Building warrant applications received by North Ayrshire Council, with location, status and decision dates.",
+      "flags": [
+        "The survey URL is an ArcGIS Hub landing page; the data is a FeatureServer layer.",
+        "The licence is named only as Open Government Licence without a version.",
+        "The layer holds applicant names (NAME, APPNAME), which would not be mapped."
+      ],
+      "id": "north-ayrshire-council-building-warrant-applications",
+      "licence": {
+        "kind": "custom",
+        "name": "Open Government Licence",
+        "url": "https://www.arcgis.com/sharing/rest/content/items/596fa66b53a948e4b74fea86dbe44690?f=json"
+      },
+      "name": "Building warrant applications (North Ayrshire)",
+      "namespace": "north-ayrshire-council",
+      "outcome": {
+        "reason": "The data is an ArcGIS feature service that returns GeoJSON in pages of at most 2000 features, and keepset has no GeoJSON parser or paging yet.",
+        "status": "not-fetchable"
+      },
+      "surveyId": "or-78"
+    },
+    {
+      "description": "Parking expiation notices issued by Adelaide City Council, with offence date, street, amount and payment status.",
+      "downloadUrl": "https://s3.ap-southeast-2.amazonaws.com/dmzweb.adelaidecitycouncil.com/OpenData/Parking_Expiations/Parking_Expiations.csv",
+      "flags": [
+        "The survey URL is a CKAN landing page; the CSV is on S3.",
+        "The table has no coordinates, only street and suburb text.",
+        "The CSV starts with a byte order mark and writes dates as d/mm/yyyy."
+      ],
+      "id": "adelaide-city-council-parking-expiations",
+      "licence": {
+        "id": "CC-BY-4.0",
+        "kind": "spdx"
+      },
+      "name": "Parking expiations (Adelaide)",
+      "namespace": "adelaide-city-council",
+      "outcome": {
+        "reason": "The CSV is about 132 MB and holds more than a million rows (a full count gave over 1.1 million), which is more than a recipe can read into memory.",
+        "status": "not-fetchable"
+      },
+      "surveyId": "or-79"
+    },
+    {
+      "description": "Planned and actual delivery routes of a logistics company in two countries, from a Data in Brief article.",
+      "downloadUrl": "https://data.mendeley.com/public-files/datasets/kkwgfvmtxn/files/388ea249-0830-4906-a39e-7bcbd5ee837a/file_downloaded",
+      "flags": [
+        "The survey URL is a DOI that resolves to the article, not to the data.",
+        "The dataset licence is CC BY 4.0, but the article itself is CC BY-NC-ND 4.0.",
+        "No sheet names or columns were seen in the workbook, so the field mapping is unknown."
+      ],
+      "id": "mendeley-data-last-mile-delivery-route-deviations",
+      "licence": {
+        "id": "CC-BY-4.0",
+        "kind": "spdx"
+      },
+      "name": "Last-mile delivery route deviations, planned vs actual",
+      "namespace": "mendeley-data",
+      "outcome": {
+        "reason": "The only file is an xlsx workbook of about 19.7 MB, and keepset has no spreadsheet parser yet.",
+        "status": "not-fetchable"
+      },
+      "surveyId": "or-8"
+    },
+    {
+      "description": "Expiation notices issued in South Australia, published as one report per financial year and report type.",
+      "flags": [
+        "The survey URL is a CKAN landing page for many files, not one download.",
+        "Earlier years use a legacy schema, and the 2011-2012 file is a bare CSV rather than a zip."
+      ],
+      "id": "south-australia-expiation-notice-system-data",
+      "licence": {
+        "id": "CC-BY-4.0",
+        "kind": "spdx"
+      },
+      "name": "Expiation notice system data (South Australia)",
+      "namespace": "south-australia",
+      "outcome": {
+        "reason": "The download is a set of zip archives of CSV files, one per financial year and report type with differing columns, and keepset has no archive parser yet.",
+        "status": "not-fetchable"
+      },
+      "surveyId": "or-80"
+    },
+    {
+      "description": "Handyman work orders raised by NYC Housing Preservation and Development, with charges, location and status.",
+      "downloadUrl": "https://data.cityofnewyork.us/api/views/sbnd-xujn/rows.csv?accessType=DOWNLOAD",
+      "flags": [
+        "No licence is recorded in the dataset metadata.",
+        "The status column is a status reason (for example Other, OMO Completed), not a full lifecycle state.",
+        "The DateTransferDoF column is not mapped as closed because it records a transfer to Finance."
+      ],
+      "id": "nyc-open-data-hpd-handyman-work-order-charges",
+      "licence": {
+        "kind": "unrecorded"
+      },
+      "name": "HPD handyman work order charges (NYC)",
+      "namespace": "nyc-open-data",
+      "outcome": {
+        "delimiter": "comma",
+        "encoding": "utf-8",
+        "header": [
+          "HWOID",
+          "HWONumber",
+          "BuildingID",
+          "BoroID",
+          "Boro",
+          "HouseNumber",
+          "StreetName",
+          "Zip",
+          "Block",
+          "Lot",
+          "LifeCycle",
+          "WorkTypeGeneral",
+          "HWOStatusReason",
+          "HWOCreateDate",
+          "IsAEP",
+          "IsCommercialDemolition",
+          "FEMAEventID",
+          "FEMAEvent",
+          "HWODescription",
+          "HWOApprovedAmount",
+          "SalesTax",
+          "AdminFee",
+          "ChargeAmount",
+          "DateTransferDoF",
+          "Latitude",
+          "Longitude",
+          "Community Board",
+          "Council District",
+          "Census Tract",
+          "BIN",
+          "BBL",
+          "NTA"
+        ],
+        "idColumn": "HWOID",
+        "map": {
+          "lat": "Latitude",
+          "lon": "Longitude",
+          "opened": "HWOCreateDate",
+          "prize": "ChargeAmount",
+          "skill": "WorkTypeGeneral",
+          "status": "HWOStatusReason",
+          "territory": "Boro"
+        },
+        "numericColumns": [
+          {
+            "column": "Latitude",
+            "factor": 1
+          },
+          {
+            "column": "Longitude",
+            "factor": 1
+          },
+          {
+            "column": "ChargeAmount",
+            "factor": 1
+          }
+        ],
+        "rowCount": 99800,
+        "skipLines": 0,
+        "status": "fetchable"
+      },
+      "surveyId": "or-81"
+    },
+    {
+      "description": "Sidewalk violations issued by NYC DOT, with issue and dismissal dates and the community board.",
+      "downloadUrl": "https://data.cityofnewyork.us/api/views/6kbp-uz6m/rows.csv?accessType=DOWNLOAD",
+      "flags": [
+        "No licence is recorded in the dataset metadata.",
+        "The table has no coordinates, only street name text and a BBL id.",
+        "The grace period is a number of days, not a date, so it is not mapped as a deadline."
+      ],
+      "id": "nyc-open-data-dot-sidewalk-violations",
+      "licence": {
+        "kind": "unrecorded"
+      },
+      "name": "Sidewalk management database violations (NYC DOT)",
+      "namespace": "nyc-open-data",
+      "outcome": {
+        "delimiter": "comma",
+        "encoding": "utf-8",
+        "header": [
+          "BROKEN",
+          "CB",
+          "CERTI_DATE",
+          "CONTRACT",
+          "EntryDate",
+          "FLAG",
+          "FRSTNAME",
+          "GRACE_PD",
+          "HARDWARE",
+          "HOUSE_NUM",
+          "INTEGRITY",
+          "ONFRTOCODE",
+          "ONSTNAME",
+          "OTHER_DEF",
+          "PATCHWORK",
+          "POST_DATE",
+          "SLOPE",
+          "SQ_FEET",
+          "SW_MISSING",
+          "SWV_Number",
+          "TOSTNAME",
+          "TRIP_HAZ",
+          "UNDERMINED",
+          "VDismissDate",
+          "ViolationID",
+          "VIssueDate",
+          "BBLID"
+        ],
+        "idColumn": "ViolationID",
+        "map": {
+          "closed": "VDismissDate",
+          "opened": "VIssueDate",
+          "territory": "CB"
+        },
+        "numericColumns": [],
+        "rowCount": 314606,
+        "skipLines": 0,
+        "status": "fetchable"
+      },
+      "surveyId": "or-82"
+    },
+    {
+      "description": "Boiler inspection reports filed with the NYC Department of Buildings, with report type, status and filing fee.",
+      "downloadUrl": "https://data.cityofnewyork.us/api/views/52dp-yji6/rows.csv?accessType=DOWNLOAD",
+      "flags": [
+        "No licence is recorded in the dataset metadata.",
+        "Applicant and owner name columns are present and deliberately not mapped.",
+        "The table has no coordinates, only a building identification number, and no usable open or close date, so the mapping is thin."
+      ],
+      "id": "nyc-open-data-dob-now-safety-boiler",
+      "licence": {
+        "kind": "unrecorded"
+      },
+      "name": "DOB NOW Safety Boiler (NYC)",
+      "namespace": "nyc-open-data",
+      "outcome": {
+        "delimiter": "comma",
+        "encoding": "utf-8",
+        "header": [
+          "Tracking Number",
+          "Boiler ID",
+          "Report Type",
+          "ApplicantFirst Name",
+          "Applicant Last Name",
+          "Applicant License Type",
+          "Applicant License Number",
+          "Owner First Name",
+          "Owner Last Name",
+          "Boiler Make",
+          "Boiler Model",
+          "Pressure Type",
+          "Inspection Type",
+          "Inspection Date",
+          "Defects Exist",
+          "LFF (45 Days)",
+          "LFF (180 Days)",
+          "Filing Fee",
+          "Total Amount Paid",
+          "Report Status",
+          "Bin Number"
+        ],
+        "idColumn": "Tracking_Number",
+        "map": {
+          "prize": "Filing_Fee",
+          "skill": "Report_Type",
+          "status": "Report_Status"
+        },
+        "numericColumns": [
+          {
+            "column": "Filing_Fee",
+            "factor": 1
+          }
+        ],
+        "rowCount": 893218,
+        "skipLines": 0,
+        "status": "fetchable"
+      },
+      "surveyId": "or-83"
+    },
+    {
+      "description": "Facade inspection compliance filings with the NYC Department of Buildings, with filing type, status and late filing amount.",
+      "downloadUrl": "https://data.cityofnewyork.us/api/views/xubg-57si/rows.csv?accessType=DOWNLOAD",
+      "flags": [
+        "No licence is recorded in the dataset metadata.",
+        "Engineer and owner name and address columns are present and deliberately not mapped.",
+        "The table has no coordinates; TR6_NO repeats in a few rows, so rows are numbered rather than keyed."
+      ],
+      "id": "nyc-open-data-dob-now-facade-compliance-filings",
+      "licence": {
+        "kind": "unrecorded"
+      },
+      "name": "DOB NOW Safety Facades compliance filings (NYC)",
+      "namespace": "nyc-open-data",
+      "outcome": {
+        "delimiter": "comma",
+        "encoding": "utf-8",
+        "header": [
+          "TR6_NO",
+          "CONTROL_NO",
+          "FILING_TYPE",
+          "CYCLE",
+          "BIN",
+          "HOUSE_NO",
+          "STREET_NAME",
+          "BOROUGH",
+          "BLOCK",
+          "LOT",
+          "SEQUENCE_NO",
+          "SUBMITTED_ON",
+          "CURRENT_STATUS",
+          "QEWI_NAME",
+          "QEWI_BUS_NAME",
+          "QEWI_BUS_STREET_NAME",
+          "QEWI_CITY",
+          "QEWI_STATE",
+          "QEWI_ZIP",
+          "QEWI_NYS_LIC_NO",
+          "OWNER_NAME",
+          "OWNER_BUS_NAME",
+          "OWNER_BUS_STREET_NAME",
+          "OWNER_CITY",
+          "OWNER_ZIP",
+          "OWNER_STATE",
+          "FILING_DATE",
+          "FILING_STATUS",
+          "PRIOR_CYCLE_FILING_DATE",
+          "PRIOR_STATUS",
+          "FIELD_INSPECTION_COMPLETED_DATE",
+          "QEWI_SIGNED_DATE",
+          "LATE_FILING_AMT",
+          "FAILURE_TO_FILE_AMT",
+          "FAILURE_TO_CORRECT_AMT",
+          "COMMENTS",
+          "Exterior Wall Type(s)",
+          "Exterior Wall Type Other Description",
+          "Exterior Wall Material(s)",
+          "Exterior Wall Material Other Description"
+        ],
+        "idColumn": null,
+        "map": {
+          "opened": "SUBMITTED_ON",
+          "prize": "LATE_FILING_AMT",
+          "skill": "FILING_TYPE",
+          "status": "CURRENT_STATUS",
+          "territory": "BOROUGH"
+        },
+        "numericColumns": [
+          {
+            "column": "LATE_FILING_AMT",
+            "factor": 1
+          }
+        ],
+        "rowCount": 87455,
+        "skipLines": 0,
+        "status": "fetchable"
+      },
+      "surveyId": "or-84"
+    },
+    {
+      "description": "Building permits and inspections of the City of Norfolk, Virginia, with dates, status, fees and ward.",
+      "downloadUrl": "https://data.norfolk.gov/api/views/bnrb-u445/rows.csv?accessType=DOWNLOAD",
+      "flags": [
+        "Rows are a mix of permit records and inspection records, and many permit columns are empty on inspection rows.",
+        "The Location column is a single combined geocode cell, so lat and lon are not mapped.",
+        "Permit_Number is empty in some rows, so rows are numbered rather than keyed.",
+        "In the rows sampled, the application date, finaled date and fee are filled in only a small share of rows."
+      ],
+      "id": "norfolk-permits-and-inspections",
+      "licence": {
+        "kind": "custom",
+        "name": "Public Domain",
+        "url": "https://data.norfolk.gov/api/views/bnrb-u445.json"
+      },
+      "name": "Permits and inspections (Norfolk, VA)",
+      "namespace": "norfolk",
+      "outcome": {
+        "delimiter": "comma",
+        "encoding": "utf-8",
+        "header": [
+          "Permit Number",
+          "Permit Address",
+          "Permit Application Date",
+          "Permit Issue Date",
+          "Permit Type",
+          "Permit Status",
+          "Permit Use Class",
+          "Permit Work Type",
+          "Permit Description",
+          "Permit Structure",
+          "Permit Building Square Footage",
+          "Permit Total Fee",
+          "Permit Total Payments",
+          "Permit Total Balance",
+          "Permit Project Cost",
+          "Permit Use Group Info",
+          "Permit Work Items",
+          "Inspection Type",
+          "Inspection Group",
+          "Inspection Number",
+          "Inspection Status",
+          "Inspection Scheduled Date",
+          "Inspection Completed Date",
+          "Permit Next 5 Year Inspection",
+          "Permit Next Annual Inspection",
+          "Permit Finaled Date",
+          "Permit Use Type",
+          "Permit Use Group",
+          "Permit Narrow Lot",
+          "Permit Occupancy Required",
+          "Permit Application Connection",
+          "Permit Parcel Flood Zone",
+          "Permit Building Flood Zone",
+          "Permit Zip Code",
+          "Ward",
+          "Super Ward",
+          "Location",
+          "GPIN"
+        ],
+        "idColumn": null,
+        "map": {
+          "closed": "Permit_Finaled_Date",
+          "deadline": "Permit_Next_Annual_Inspection",
+          "opened": "Permit_Application_Date",
+          "prize": "Permit_Total_Fee",
+          "skill": "Permit_Work_Type",
+          "status": "Permit_Status",
+          "territory": "Ward"
+        },
+        "numericColumns": [
+          {
+            "column": "Permit_Total_Fee",
+            "factor": 1
+          }
+        ],
+        "rowCount": 583840,
+        "skipLines": 0,
+        "status": "fetchable"
+      },
+      "surveyId": "or-85"
+    },
+    {
+      "description": "Construction permits issued by the NYC Department of Buildings.",
+      "flags": [
+        "No licence is recorded in the dataset metadata.",
+        "The table includes permittee, owner and superintendent names and a phone number."
+      ],
+      "id": "nyc-open-data-dob-permit-issuance",
+      "licence": {
+        "kind": "unrecorded"
+      },
+      "name": "DOB permit issuance (NYC)",
+      "namespace": "nyc-open-data",
+      "outcome": {
+        "reason": "The CSV has 3990985 rows, which is more than a recipe can read into memory.",
+        "status": "not-fetchable"
+      },
+      "surveyId": "or-86"
+    },
+    {
+      "description": "Job application filings with the NYC Department of Buildings.",
+      "flags": [
+        "No licence is recorded in the dataset metadata.",
+        "The table includes applicant and owner names."
+      ],
+      "id": "nyc-open-data-dob-job-application-filings",
+      "licence": {
+        "kind": "unrecorded"
+      },
+      "name": "DOB job application filings (NYC)",
+      "namespace": "nyc-open-data",
+      "outcome": {
+        "reason": "The CSV has 2716297 rows, which is more than a recipe can read into memory.",
+        "status": "not-fetchable"
+      },
+      "surveyId": "or-87"
+    },
+    {
+      "description": "Electrical permit applications filed with the NYC Department of Buildings.",
+      "flags": [
+        "No licence is recorded in the dataset metadata.",
+        "The table includes applicant, owner and authorised representative names and addresses."
+      ],
+      "id": "nyc-open-data-dob-now-electrical-permit-applications",
+      "licence": {
+        "kind": "unrecorded"
+      },
+      "name": "DOB NOW electrical permit applications (NYC)",
+      "namespace": "nyc-open-data",
+      "outcome": {
+        "reason": "The table has 594449 rows of about 80 wide columns, roughly 900 bytes a row in a sampled export, so the download is well over the 256 MiB a recipe can read.",
+        "status": "not-fetchable"
+      },
+      "surveyId": "or-88"
+    },
+    {
+      "description": "Elevator permit applications filed with the NYC Department of Buildings, with device type, status, cost and dates.",
+      "downloadUrl": "https://data.cityofnewyork.us/api/views/kfp4-dz4h/rows.csv?accessType=DOWNLOAD",
+      "flags": [
+        "No licence is recorded in the dataset metadata.",
+        "Applicant, design professional and owner name and address columns are present and deliberately not mapped.",
+        "Job_Filling_Number repeats in a few rows, so rows are numbered rather than keyed."
+      ],
+      "id": "nyc-open-data-dob-now-elevator-permit-applications",
+      "licence": {
+        "kind": "unrecorded"
+      },
+      "name": "DOB NOW Build elevator permit applications (NYC)",
+      "namespace": "nyc-open-data",
+      "outcome": {
+        "delimiter": "comma",
+        "encoding": "utf-8",
+        "header": [
+          "Job Filling Number",
+          "Job Number",
+          "Filing Number",
+          "Filing Date",
+          "Filing Type",
+          "Elevator Device Type",
+          "Filing Status",
+          "Filing Status or Filing Includes",
+          "Building Code",
+          "Electrical Permit Number",
+          "BIN",
+          "House Number",
+          "Street Name",
+          "ZIP",
+          "Borough",
+          "Block",
+          "Lot",
+          "BuildingType",
+          "Building Stories",
+          "Is In Conjunction",
+          "Associated BIS Job Number",
+          "Total Construction Floor Area",
+          "Plan Examiner Assigned Date",
+          "Incomplete Date",
+          "Last Incomplete Submission Date",
+          "1st Objection Date",
+          "Last Objection Date",
+          "Resubmission Date",
+          "Permit Entire Date",
+          "Signed Off Date",
+          "Applicant First Name",
+          "Applicant Last Name",
+          "Applicant Business Name",
+          "Applicant Address",
+          "Applicant City",
+          "Applicant State",
+          "Applicant Zip",
+          "Applicant License Number",
+          "Design Professional First Name",
+          "Design Professional Last Name",
+          "Design Professional Business Name",
+          "Design Professional Address",
+          "Design Professional City",
+          "Design Professional State",
+          "Design Professional  Zip",
+          "Design Professional License Number",
+          "Owner First Name",
+          "Owner Last Name",
+          "Owner Title",
+          "Owner Business Name",
+          "Owner Address",
+          "Owner City",
+          "Owner State",
+          "Owner Zip",
+          "Owner Type",
+          "Asbestos Abatement Complaince",
+          "DEP ACP-5 Control No",
+          "Scope of Work",
+          "General Liability",
+          "GL Certificate Policy No",
+          "GL Expiration Date",
+          "Workers Compensation",
+          "WC Certificate Policy No",
+          "WC Expiration Date",
+          "Disability",
+          "Disability Certificate Policy No",
+          "Disability Expiration Date",
+          "Estimated Cost",
+          "Filing Fee",
+          "No Good Check",
+          "Total Fee",
+          "Amount Paid",
+          "Amount Due",
+          "Review Type (PPN)",
+          "Permit Expiration Date",
+          "LATITUDE",
+          "LONGITUDE",
+          "COMMUNITY_DISTRICT_NUMBER",
+          "CITY_COUNCIL_DISTRICT",
+          "CENSUS_TRACT",
+          "BBL",
+          "NTA_NAME"
+        ],
+        "idColumn": null,
+        "map": {
+          "closed": "Signed_Off_Date",
+          "deadline": "Permit_Expiration_Date",
+          "lat": "LATITUDE",
+          "lon": "LONGITUDE",
+          "opened": "Filing_Date",
+          "prize": "Estimated_Cost",
+          "skill": "Elevator_Device_Type",
+          "status": "Filing_Status",
+          "territory": "Borough"
+        },
+        "numericColumns": [
+          {
+            "column": "LATITUDE",
+            "factor": 1
+          },
+          {
+            "column": "LONGITUDE",
+            "factor": 1
+          },
+          {
+            "column": "Estimated_Cost",
+            "factor": 1
+          }
+        ],
+        "rowCount": 71669,
+        "skipLines": 0,
+        "status": "fetchable"
+      },
+      "surveyId": "or-89"
+    },
+    {
+      "description": "Multi-objective vehicle routing instances with time windows built from real distribution data in Tenerife.",
+      "downloadUrl": "https://raw.githubusercontent.com/psxjpc/MOVRPTW-Generator/master/dataset/movrptw-instances.zip",
+      "flags": [
+        "GitHub reports GPL-2.0 for the repository, which covers the generator; no separate dataset licence is stated.",
+        "Each instance has a Specs file and two tab-separated matrices with no header."
+      ],
+      "id": "github-psxjpc-movrptw-real-tenerife-instances",
+      "licence": {
+        "id": "GPL-2.0-only",
+        "kind": "spdx"
+      },
+      "name": "MOVRPTW real Tenerife distribution instances",
+      "namespace": "github-psxjpc",
+      "outcome": {
+        "reason": "The download is a zip of Solomon-style instance text files and tab-separated matrices, and keepset has no parser for that format yet.",
+        "status": "not-fetchable"
+      },
+      "surveyId": "or-9"
+    },
+    {
+      "description": "Sites on the Dublin City Council derelict sites register, with location, status and dates.",
+      "downloadUrl": "https://services-eu1.arcgis.com/PyGgzM45TvWtSBsM/arcgis/rest/services/DCC_Derelict_Sites_Register_Public_points_view/FeatureServer/0/query?where=1%3D1&outFields=*&f=geojson",
+      "flags": [
+        "The survey service needs a token; an anonymous sibling view of the same register was found and verified.",
+        "The item description limits use to information only, as is, with Dublin City Council acknowledged as the source."
+      ],
+      "id": "dublin-city-council-derelict-sites-register",
+      "licence": {
+        "kind": "unrecorded"
+      },
+      "name": "Derelict sites register (Dublin City Council)",
+      "namespace": "dublin-city-council",
+      "outcome": {
+        "reason": "The data is an ArcGIS feature service that returns GeoJSON, and keepset has no GeoJSON parser or paging yet.",
+        "status": "not-fetchable"
+      },
+      "surveyId": "or-90"
+    },
+    {
+      "description": "Vacant and foreclosed property registrations in Cincinnati, Ohio, with location, case status and neighbourhood.",
+      "downloadUrl": "https://data.cincinnati-oh.gov/api/views/w3jp-dfxy/rows.csv?accessType=DOWNLOAD",
+      "flags": [
+        "UNIQUEID is empty in many rows, so NUMBER_KEY is the row key.",
+        "LAST_UPDATED is not mapped as closed because it is an edit date."
+      ],
+      "id": "cincinnati-vacant-foreclosed-property-registration",
+      "licence": {
+        "kind": "custom",
+        "name": "Public Domain",
+        "url": "https://data.cincinnati-oh.gov/api/views/w3jp-dfxy.json"
+      },
+      "name": "Vacant and foreclosed property registration (Cincinnati)",
+      "namespace": "cincinnati",
+      "outcome": {
+        "delimiter": "comma",
+        "encoding": "utf-8",
+        "header": [
+          "UNIQUEID",
+          "WORK_TYPE",
+          "DISPLAY_AGENCY",
+          "NUMBER_KEY",
+          "COMP_TYPE",
+          "COMP_TYPE_DESC",
+          "SUB_TYPE",
+          "SUB_TYPE_DESC",
+          "ENTERED_DATE",
+          "DATA_STATUS",
+          "DATA_STATUS_DISPLAY",
+          "STATUS_CLASS",
+          "CITY_ID",
+          "X_COORD",
+          "Y_COORD",
+          "URL",
+          "LAST_UPDATED",
+          "YN_ACTIVITY_REPORT",
+          "LATITUDE",
+          "LONGITUDE",
+          "NEIGHBORHOOD",
+          "FULL_ADDRESS",
+          "CITY_COUNTY"
+        ],
+        "idColumn": "NUMBER_KEY",
+        "map": {
+          "lat": "LATITUDE",
+          "lon": "LONGITUDE",
+          "opened": "ENTERED_DATE",
+          "skill": "SUB_TYPE_DESC",
+          "status": "DATA_STATUS_DISPLAY",
+          "territory": "NEIGHBORHOOD"
+        },
+        "numericColumns": [
+          {
+            "column": "LATITUDE",
+            "factor": 1
+          },
+          {
+            "column": "LONGITUDE",
+            "factor": 1
+          }
+        ],
+        "rowCount": 7198,
+        "skipLines": 0,
+        "status": "fetchable"
+      },
+      "surveyId": "or-91"
+    },
+    {
+      "description": "Weed abatement parcels of Orange County, California, with district, status and cost of dumped material.",
+      "flags": [
+        "The layer holds property owner names and mailing addresses.",
+        "The service states no licence.",
+        "Access goes through a utility.arcgis.com proxy URL, and status is a numeric code."
+      ],
+      "id": "orange-county-ca-weed-abatement-locations",
+      "licence": {
+        "kind": "unrecorded"
+      },
+      "name": "Weed abatement locations (Orange County, CA)",
+      "namespace": "orange-county-ca",
+      "outcome": {
+        "reason": "The data is an ArcGIS feature service that returns GeoJSON in pages of at most 15000 features, and keepset has no GeoJSON parser or paging yet.",
+        "status": "not-fetchable"
+      },
+      "surveyId": "or-92"
+    },
+    {
+      "description": "Weed abatement cases of the City of Temecula, California, with location and completion fields.",
+      "flags": [
+        "The service states no licence; its copyright text is only the city GIS name."
+      ],
+      "id": "temecula-weed-abatement",
+      "licence": {
+        "kind": "unrecorded"
+      },
+      "name": "Weed abatement (Temecula)",
+      "namespace": "temecula",
+      "outcome": {
+        "reason": "The data is an ArcGIS feature service that returns GeoJSON in pages of at most 1000 features, and keepset has no GeoJSON parser or paging yet.",
+        "status": "not-fetchable"
+      },
+      "surveyId": "or-93"
+    },
+    {
+      "description": "Weed abatement parcels of the City of Fairfield, California, with status and disposition.",
+      "flags": [
+        "The layer holds owner names and mailing addresses.",
+        "The features are polygon parcels, not points, and the layer has no date fields.",
+        "The item states no licence."
+      ],
+      "id": "fairfield-ca-weed-abatement-parcels",
+      "licence": {
+        "kind": "unrecorded"
+      },
+      "name": "Weed abatement parcels (Fairfield, CA)",
+      "namespace": "fairfield-ca",
+      "outcome": {
+        "reason": "The data is an ArcGIS feature service that returns GeoJSON of parcel polygons in pages of at most 1000 features, and keepset has no GeoJSON parser or paging yet.",
+        "status": "not-fetchable"
+      },
+      "surveyId": "or-94"
+    },
+    {
+      "description": "Vehicles towed in the City of Norfolk, Virginia, with tow type, release status, fees and dates.",
+      "downloadUrl": "https://data.norfolk.gov/api/views/4dwc-v3t8/rows.csv?accessType=DOWNLOAD",
+      "flags": [
+        "No licence is recorded in the dataset metadata.",
+        "Vehicle identification numbers and licence plates are present and deliberately not mapped.",
+        "The table has no coordinates, only the tow location as text.",
+        "Towing_Fee holds negative values in the rows sampled, so the fee is not always a plain charge."
+      ],
+      "id": "norfolk-vehicle-towing",
+      "licence": {
+        "kind": "unrecorded"
+      },
+      "name": "Vehicle towing (Norfolk, VA)",
+      "namespace": "norfolk",
+      "outcome": {
+        "delimiter": "comma",
+        "encoding": "utf-8",
+        "header": [
+          "Trip Ticket Number",
+          "VIN Number",
+          "License Plate",
+          "Gate Arrived Date",
+          "Vehicle Type",
+          "Vehicle Make",
+          "Vehicle Model",
+          "Vehicle Year",
+          "Vehicle Color",
+          "Towed From",
+          "Storage Lot",
+          "Tow Type",
+          "Extended Hold",
+          "Auction Date",
+          "Towing Fee",
+          "Towed Miles Fee",
+          "Winch Fee",
+          "Storage Fee",
+          "Admin Fee",
+          "Adjust Fee",
+          "Key Fee",
+          "Dealer Key Fee",
+          "Delinquent Owed",
+          "Delinquent Paid",
+          "Parking Tickets Owed",
+          "Parking Tickets Paid",
+          "Amount Paid1",
+          "Amount Paid2",
+          "Amount Paid3",
+          "Additional Storage Owed",
+          "Additional Storage Paid",
+          "Sold For",
+          "Auction Cash Amount",
+          "Auction VISA Amount",
+          "Auction Master Card Amount",
+          "Auction Amer Expr Amount",
+          "Auction Check Amount",
+          "Auction MO Amount",
+          "Auction Telecheck Amount",
+          "Crusher Pay Amount",
+          "Date/Time Released",
+          "Release Status"
+        ],
+        "idColumn": "Trip_Ticket_Number",
+        "map": {
+          "closed": "Date_Time_Released",
+          "opened": "Gate_Arrived_Date",
+          "prize": "Towing_Fee",
+          "skill": "Tow_Type",
+          "status": "Release_Status"
+        },
+        "numericColumns": [
+          {
+            "column": "Towing_Fee",
+            "factor": 1
+          }
+        ],
+        "rowCount": 45907,
+        "skipLines": 0,
+        "status": "fetchable"
+      },
+      "surveyId": "or-95"
+    },
+    {
+      "description": "Vehicle tow and repossession log of the Town of Pembroke Park, Florida.",
+      "flags": [
+        "The layer holds vehicle identification numbers, plates, operator names, phone numbers and emails.",
+        "The service states no licence, and the layer has no status field."
+      ],
+      "id": "pembroke-park-tow-repo-log",
+      "licence": {
+        "kind": "unrecorded"
+      },
+      "name": "Tow and repo log (Pembroke Park, FL)",
+      "namespace": "pembroke-park",
+      "outcome": {
+        "reason": "The data is an ArcGIS feature service that returns GeoJSON in pages of at most 1000 features, and keepset has no GeoJSON parser or paging yet.",
+        "status": "not-fetchable"
+      },
+      "surveyId": "or-96"
+    },
+    {
+      "description": "Vehicles towed in the City of Buffalo, New York, with tow date, description and location.",
+      "downloadUrl": "https://data.buffalony.gov/api/views/pamv-gash/rows.csv?accessType=DOWNLOAD",
+      "flags": [
+        "Licence plates are present and deliberately not mapped.",
+        "Vehicle_Year is 0 in the rows seen.",
+        "No column is unique, so rows are numbered rather than keyed."
+      ],
+      "id": "buffalo-recent-tows",
+      "licence": {
+        "kind": "custom",
+        "name": "Public Domain U.S. Government",
+        "url": "https://data.buffalony.gov/api/views/pamv-gash.json"
+      },
+      "name": "Recent tows (Buffalo, NY)",
+      "namespace": "buffalo",
+      "outcome": {
+        "delimiter": "comma",
+        "encoding": "utf-8",
+        "header": [
+          "Tow Date",
+          "Vehicle Year",
+          "Vehicle Make",
+          "License Plate",
+          "License State",
+          "Tow Location",
+          "Tow Description",
+          "Location",
+          "Latitude",
+          "Longitude"
+        ],
+        "idColumn": null,
+        "map": {
+          "lat": "Latitude",
+          "lon": "Longitude",
+          "opened": "Tow_Date",
+          "skill": "Tow_Description"
+        },
+        "numericColumns": [
+          {
+            "column": "Latitude",
+            "factor": 1
+          },
+          {
+            "column": "Longitude",
+            "factor": 1
+          }
+        ],
+        "rowCount": 139389,
+        "skipLines": 0,
+        "status": "fetchable"
+      },
+      "surveyId": "or-97"
+    },
+    {
+      "description": "Vehicles towed in Chicago and held at city lots, with the tow date and destination lot.",
+      "downloadUrl": "https://data.cityofchicago.org/api/views/ygr5-vcbg/rows.csv?accessType=DOWNLOAD",
+      "flags": [
+        "No licence is recorded in the dataset metadata.",
+        "Licence plates and a facility phone number are present and deliberately not mapped.",
+        "Only the tow date can be mapped; the address is the destination lot, not the pick-up location.",
+        "Inventory_Number repeats in some rows, so rows are numbered rather than keyed."
+      ],
+      "id": "chicago-towed-vehicles",
+      "licence": {
+        "kind": "unrecorded"
+      },
+      "name": "Towed vehicles (Chicago)",
+      "namespace": "chicago",
+      "outcome": {
+        "delimiter": "comma",
+        "encoding": "utf-8",
+        "header": [
+          "Tow Date",
+          "Make",
+          "Style",
+          "Model",
+          "Color",
+          "Plate",
+          "State",
+          "Towed to Address",
+          "Tow Facility Phone",
+          "Inventory Number"
+        ],
+        "idColumn": null,
+        "map": {
+          "opened": "Tow_Date"
+        },
+        "numericColumns": [],
+        "rowCount": 7119,
+        "skipLines": 0,
+        "status": "fetchable"
+      },
+      "surveyId": "or-98"
+    },
+    {
+      "description": "Abandoned vehicle reports in Honolulu, with entry and close dates, status and close reason.",
+      "downloadUrl": "https://data.honolulu.gov/api/views/7mwf-c3z3/rows.csv?accessType=DOWNLOAD",
+      "flags": [
+        "No licence is recorded in the dataset metadata.",
+        "The table has no coordinates, only masked street numbers and street names.",
+        "No column is unique, so rows are numbered rather than keyed."
+      ],
+      "id": "honolulu-abandoned-vehicles",
+      "licence": {
+        "kind": "unrecorded"
+      },
+      "name": "Abandoned vehicles (Honolulu, HI)",
+      "namespace": "honolulu",
+      "outcome": {
+        "delimiter": "comma",
+        "encoding": "utf-8",
+        "header": [
+          "StreetNumber",
+          "StreetName",
+          "VehicleMake",
+          "VehicleType",
+          "EntryDate",
+          "CloseDate",
+          "Status",
+          "CloseReason"
+        ],
+        "idColumn": null,
+        "map": {
+          "closed": "CloseDate",
+          "opened": "EntryDate",
+          "status": "Status"
+        },
+        "numericColumns": [],
+        "rowCount": 202032,
+        "skipLines": 0,
+        "status": "fetchable"
+      },
+      "surveyId": "or-99"
+    }
+  ],
+  "probedOn": "2026-10-19"
+}

@@ -1,0 +1,117 @@
+{
+  "aliases": [
+    "towed-vehicles"
+  ],
+  "category": "or/v1",
+  "citations": [],
+  "crosswalk": {
+    "oneWay": [
+      {
+        "direction": "encode",
+        "from": "nodes[].Make",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Style",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Model",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Color",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Plate",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].State",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Towed_to_Address",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Tow_Facility_Phone",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Inventory_Number",
+        "op": "drop"
+      }
+    ],
+    "rules": [
+      {
+        "from": "meta",
+        "op": "move",
+        "to": "meta"
+      },
+      {
+        "from": "nodes[].id",
+        "op": "move",
+        "to": "nodes[].id"
+      },
+      {
+        "from": "nodes[].Tow_Date",
+        "op": "move",
+        "to": "nodes[].opened"
+      }
+    ],
+    "source": "csv-table",
+    "target": "or/v1"
+  },
+  "description": "Vehicles towed in Chicago and held at city lots, with the tow date and destination lot.",
+  "domain": "Case records",
+  "expectedCounts": {},
+  "id": "chicago-towed-vehicles",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "Towed vehicles (Chicago)",
+  "namespace": [
+    "chicago"
+  ],
+  "properties": {
+    "surveyId": "or-98"
+  },
+  "recipe": {
+    "archive": {
+      "kind": "none"
+    },
+    "parser": {
+      "delimiter": "comma",
+      "encoding": "utf-8",
+      "format": "csv-table",
+      "idColumn": null,
+      "numericColumns": [],
+      "skipLines": 0
+    },
+    "source": 1,
+    "status": "fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://data.cityofchicago.org/Transportation/Towed-Vehicles/ygr5-vcbg"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://data.cityofchicago.org/api/views/ygr5-vcbg/rows.csv?accessType=DOWNLOAD"
+    }
+  ],
+  "tags": []
+}

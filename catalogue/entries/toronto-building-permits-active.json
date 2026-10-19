@@ -1,0 +1,228 @@
+{
+  "aliases": [
+    "building-permits-active"
+  ],
+  "category": "or/v1",
+  "citations": [],
+  "crosswalk": {
+    "oneWay": [
+      {
+        "direction": "encode",
+        "from": "nodes[].PERMIT_NUM",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].REVISION_NUM",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].STRUCTURE_TYPE",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].WORK",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].STREET_NUM",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].STREET_NAME",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].STREET_TYPE",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].STREET_DIRECTION",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].POSTAL",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].GEO_ID",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].ISSUED_DATE",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].DESCRIPTION",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].CURRENT_USE",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].PROPOSED_USE",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].DWELLING_UNITS_CREATED",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].DWELLING_UNITS_LOST",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].EST_CONST_COST",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].ASSEMBLY",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].INSTITUTIONAL",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].RESIDENTIAL",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].BUSINESS_AND_PERSONAL_SERVICES",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].MERCANTILE",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].INDUSTRIAL",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].INTERIOR_ALTERATIONS",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].DEMOLITION",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].BUILDER_NAME",
+        "op": "drop"
+      }
+    ],
+    "rules": [
+      {
+        "from": "meta",
+        "op": "move",
+        "to": "meta"
+      },
+      {
+        "from": "nodes[].id",
+        "op": "move",
+        "to": "nodes[].id"
+      },
+      {
+        "from": "nodes[].COMPLETED_DATE",
+        "op": "move",
+        "to": "nodes[].closed"
+      },
+      {
+        "from": "nodes[].APPLICATION_DATE",
+        "op": "move",
+        "to": "nodes[].opened"
+      },
+      {
+        "from": "nodes[].PERMIT_TYPE",
+        "op": "move",
+        "to": "nodes[].skill"
+      },
+      {
+        "from": "nodes[].STATUS",
+        "op": "move",
+        "to": "nodes[].status"
+      },
+      {
+        "from": "nodes[].WARD_GRID",
+        "op": "move",
+        "to": "nodes[].territory"
+      }
+    ],
+    "source": "csv-table",
+    "target": "or/v1"
+  },
+  "description": "Active building permits in Toronto, with permit type, ward grid, status and dates.",
+  "domain": "Case records",
+  "expectedCounts": {},
+  "id": "toronto-building-permits-active",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "Building permits, active (Toronto)",
+  "namespace": [
+    "toronto"
+  ],
+  "properties": {
+    "surveyId": "or-67"
+  },
+  "recipe": {
+    "archive": {
+      "kind": "none"
+    },
+    "parser": {
+      "delimiter": "comma",
+      "encoding": "utf-8",
+      "format": "csv-table",
+      "idColumn": "column_1",
+      "numericColumns": [],
+      "skipLines": 0
+    },
+    "source": 1,
+    "status": "fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://ckan0.cf.opendata.inter.prod-toronto.ca/dataset/building-permits-active-permits"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://ckan0.cf.opendata.inter.prod-toronto.ca/dataset/108c2bd1-6945-46f6-af92-02f5658ee7f7/resource/dfce3b7b-4f17-4a9d-9155-5e390a5ffa97/download/building-permits-active-permits.csv"
+    }
+  ],
+  "tags": [
+    "prize",
+    "location",
+    "territory",
+    "skills",
+    "lifecycle"
+  ]
+}

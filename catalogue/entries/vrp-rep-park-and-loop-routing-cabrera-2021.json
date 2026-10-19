@@ -1,0 +1,44 @@
+{
+  "aliases": [
+    "park-and-loop-routing-cabrera-2021"
+  ],
+  "category": "or/v1",
+  "citations": [],
+  "crosswalk": {
+    "file": "crosswalks/or-v1/nodes.json"
+  },
+  "description": "Park-and-loop routing instances built from real client locations in France, with coordinates and service times in minutes.",
+  "domain": "Vehicle routing with time windows",
+  "expectedCounts": {},
+  "id": "vrp-rep-park-and-loop-routing-cabrera-2021",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "Park-and-loop routing instances (Cabrera et al., 2021)",
+  "namespace": [
+    "vrp-rep"
+  ],
+  "properties": {
+    "surveyId": "or-10"
+  },
+  "recipe": {
+    "reason": "The download is a zip holding many separate coordinate files plus a readme, and keepset has no zip handling for a recipe yet.",
+    "status": "not-fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "http://www.vrp-rep.org/datasets/download/cabrera-et-al-2021.zip"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://www.vrp-rep.org/datasets/download/cabrera-et-al-2021.zip"
+    }
+  ],
+  "tags": [
+    "location",
+    "duration"
+  ]
+}

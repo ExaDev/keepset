@@ -1,0 +1,45 @@
+{
+  "aliases": [
+    "derelict-sites-register"
+  ],
+  "category": "or/v1",
+  "citations": [],
+  "crosswalk": {
+    "file": "crosswalks/or-v1/nodes.json"
+  },
+  "description": "Sites on the Dublin City Council derelict sites register, with location, status and dates.",
+  "domain": "Case records",
+  "expectedCounts": {},
+  "id": "dublin-city-council-derelict-sites-register",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "Derelict sites register (Dublin City Council)",
+  "namespace": [
+    "dublin-city-council"
+  ],
+  "properties": {
+    "surveyId": "or-90"
+  },
+  "recipe": {
+    "reason": "The data is an ArcGIS feature service that returns GeoJSON, and keepset has no GeoJSON parser or paging yet.",
+    "status": "not-fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://services-eu1.arcgis.com/PyGgzM45TvWtSBsM/arcgis/rest/services/DCC_Derelict_Sites_Register_Public_points/FeatureServer"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://services-eu1.arcgis.com/PyGgzM45TvWtSBsM/arcgis/rest/services/DCC_Derelict_Sites_Register_Public_points_view/FeatureServer/0/query?where=1%3D1&outFields=*&f=geojson"
+    }
+  ],
+  "tags": [
+    "location",
+    "territory",
+    "lifecycle"
+  ]
+}

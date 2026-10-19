@@ -1,0 +1,40 @@
+{
+  "aliases": [
+    "probabilistic-orienteering"
+  ],
+  "category": "or/v1",
+  "citations": [],
+  "crosswalk": {
+    "file": "crosswalks/or-v1/nodes.json"
+  },
+  "domain": "Orienteering",
+  "expectedCounts": {},
+  "id": "vrp-rep-probabilistic-orienteering",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "Probabilistic orienteering problem",
+  "namespace": [
+    "vrp-rep"
+  ],
+  "properties": {
+    "surveyId": "or-3"
+  },
+  "recipe": {
+    "reason": "The download is a zip of TSPLIB-style text files with a POP section and keepset has no parser for it yet.",
+    "status": "not-fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "http://www.vrp-rep.org/datasets/download/angelelli-et-al-2017.zip"
+    }
+  ],
+  "tags": [
+    "prize",
+    "prizeProbability",
+    "location",
+    "travelTime"
+  ]
+}

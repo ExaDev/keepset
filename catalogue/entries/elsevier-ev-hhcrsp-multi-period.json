@@ -1,0 +1,41 @@
+{
+  "aliases": [
+    "ev-hhcrsp-multi-period"
+  ],
+  "category": "or/v1",
+  "citations": [],
+  "crosswalk": {
+    "file": "crosswalks/or-v1/nodes.json"
+  },
+  "domain": "Technician and home-care routing",
+  "expectedCounts": {},
+  "id": "elsevier-ev-hhcrsp-multi-period",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "EV home health care routing, multi-period variant",
+  "namespace": [
+    "elsevier"
+  ],
+  "properties": {
+    "surveyId": "or-18"
+  },
+  "recipe": {
+    "reason": "The survey URL is a journal article DOI and no dataset download was found.",
+    "status": "not-fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://doi.org/10.1016/j.omega.2026.103587"
+    }
+  ],
+  "tags": [
+    "deadline",
+    "location",
+    "skills",
+    "duration",
+    "travelTime"
+  ]
+}

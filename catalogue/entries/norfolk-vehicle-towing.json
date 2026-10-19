@@ -1,0 +1,282 @@
+{
+  "aliases": [
+    "vehicle-towing"
+  ],
+  "category": "or/v1",
+  "citations": [],
+  "crosswalk": {
+    "oneWay": [
+      {
+        "direction": "encode",
+        "from": "nodes[].VIN_Number",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].License_Plate",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Vehicle_Type",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Vehicle_Make",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Vehicle_Model",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Vehicle_Year",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Vehicle_Color",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Towed_From",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Storage_Lot",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Extended_Hold",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Auction_Date",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Towed_Miles_Fee",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Winch_Fee",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Storage_Fee",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Admin_Fee",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Adjust_Fee",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Key_Fee",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Dealer_Key_Fee",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Delinquent_Owed",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Delinquent_Paid",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Parking_Tickets_Owed",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Parking_Tickets_Paid",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Amount_Paid1",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Amount_Paid2",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Amount_Paid3",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Additional_Storage_Owed",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Additional_Storage_Paid",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Sold_For",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Auction_Cash_Amount",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Auction_VISA_Amount",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Auction_Master_Card_Amount",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Auction_Amer_Expr_Amount",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Auction_Check_Amount",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Auction_MO_Amount",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Auction_Telecheck_Amount",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Crusher_Pay_Amount",
+        "op": "drop"
+      }
+    ],
+    "rules": [
+      {
+        "from": "meta",
+        "op": "move",
+        "to": "meta"
+      },
+      {
+        "from": "nodes[].id",
+        "op": "move",
+        "to": "nodes[].id"
+      },
+      {
+        "from": "nodes[].Date_Time_Released",
+        "op": "move",
+        "to": "nodes[].closed"
+      },
+      {
+        "from": "nodes[].Gate_Arrived_Date",
+        "op": "move",
+        "to": "nodes[].opened"
+      },
+      {
+        "from": "nodes[].Towing_Fee",
+        "op": "move",
+        "to": "nodes[].prize"
+      },
+      {
+        "from": "nodes[].Tow_Type",
+        "op": "move",
+        "to": "nodes[].skill"
+      },
+      {
+        "from": "nodes[].Release_Status",
+        "op": "move",
+        "to": "nodes[].status"
+      }
+    ],
+    "source": "csv-table",
+    "target": "or/v1"
+  },
+  "description": "Vehicles towed in the City of Norfolk, Virginia, with tow type, release status, fees and dates.",
+  "domain": "Case records",
+  "expectedCounts": {},
+  "id": "norfolk-vehicle-towing",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "Vehicle towing (Norfolk, VA)",
+  "namespace": [
+    "norfolk"
+  ],
+  "properties": {
+    "surveyId": "or-95"
+  },
+  "recipe": {
+    "archive": {
+      "kind": "none"
+    },
+    "parser": {
+      "delimiter": "comma",
+      "encoding": "utf-8",
+      "format": "csv-table",
+      "idColumn": "Trip_Ticket_Number",
+      "numericColumns": [
+        {
+          "column": "Towing_Fee",
+          "factor": 1
+        }
+      ],
+      "skipLines": 0
+    },
+    "source": 1,
+    "status": "fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://data.norfolk.gov/Government/Towing/4dwc-v3t8"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://data.norfolk.gov/api/views/4dwc-v3t8/rows.csv?accessType=DOWNLOAD"
+    }
+  ],
+  "tags": [
+    "prize",
+    "deadline",
+    "location",
+    "lifecycle"
+  ]
+}

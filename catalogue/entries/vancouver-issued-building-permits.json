@@ -1,0 +1,179 @@
+{
+  "aliases": [
+    "issued-building-permits"
+  ],
+  "category": "or/v1",
+  "citations": [],
+  "crosswalk": {
+    "oneWay": [
+      {
+        "direction": "encode",
+        "from": "nodes[].issuedate",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].address",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].projectdescription",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].permitcategory",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].applicant",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].applicantaddress",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].propertyuse",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].specificusecategory",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].buildingcontractor",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].buildingcontractoraddress",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].issueyear",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].geom",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].yearmonth",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].geo_point_2d",
+        "op": "drop"
+      }
+    ],
+    "rules": [
+      {
+        "from": "meta",
+        "op": "move",
+        "to": "meta"
+      },
+      {
+        "from": "nodes[].id",
+        "op": "move",
+        "to": "nodes[].id"
+      },
+      {
+        "from": "nodes[].permitelapseddays",
+        "op": "move",
+        "to": "nodes[].duration"
+      },
+      {
+        "from": "nodes[].permitnumbercreateddate",
+        "op": "move",
+        "to": "nodes[].opened"
+      },
+      {
+        "from": "nodes[].projectvalue",
+        "op": "move",
+        "to": "nodes[].prize"
+      },
+      {
+        "from": "nodes[].typeofwork",
+        "op": "move",
+        "to": "nodes[].skill"
+      },
+      {
+        "from": "nodes[].geolocalarea",
+        "op": "move",
+        "to": "nodes[].territory"
+      }
+    ],
+    "source": "csv-table",
+    "target": "or/v1"
+  },
+  "description": "Building permits issued in Vancouver, with project value, type of work, local area and the days taken to issue.",
+  "domain": "Case records",
+  "expectedCounts": {},
+  "id": "vancouver-issued-building-permits",
+  "licence": {
+    "kind": "custom",
+    "name": "Open Government Licence (Vancouver)",
+    "url": "https://opendata.vancouver.ca/pages/licence/"
+  },
+  "name": "Issued building permits (Vancouver)",
+  "namespace": [
+    "vancouver"
+  ],
+  "properties": {
+    "surveyId": "or-69"
+  },
+  "recipe": {
+    "archive": {
+      "kind": "none"
+    },
+    "parser": {
+      "delimiter": "semicolon",
+      "encoding": "utf-8",
+      "format": "csv-table",
+      "idColumn": "permitnumber",
+      "numericColumns": [
+        {
+          "column": "projectvalue",
+          "factor": 1
+        },
+        {
+          "column": "permitelapseddays",
+          "factor": 86400
+        }
+      ],
+      "skipLines": 0
+    },
+    "source": 1,
+    "status": "fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://opendata.vancouver.ca/explore/dataset/issued-building-permits/information/"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://opendata.vancouver.ca/api/explore/v2.1/catalog/datasets/issued-building-permits/exports/csv"
+    }
+  ],
+  "tags": [
+    "prize",
+    "location",
+    "territory",
+    "skills",
+    "lifecycle"
+  ]
+}

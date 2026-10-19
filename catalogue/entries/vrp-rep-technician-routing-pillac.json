@@ -1,0 +1,41 @@
+{
+  "aliases": [
+    "technician-routing-pillac"
+  ],
+  "category": "or/v1",
+  "citations": [],
+  "crosswalk": {
+    "file": "crosswalks/or-v1/nodes.json"
+  },
+  "domain": "Technician and home-care routing",
+  "expectedCounts": {},
+  "id": "vrp-rep-technician-routing-pillac",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "Technician routing and scheduling problem (Pillac et al.)",
+  "namespace": [
+    "vrp-rep"
+  ],
+  "properties": {
+    "surveyId": "or-21"
+  },
+  "recipe": {
+    "reason": "The download is a zip of instance files in the VRP-REP XML format and keepset has no parser for it yet.",
+    "status": "not-fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "http://www.vrp-rep.org/datasets/download/pillac-et-al-2013.zip"
+    }
+  ],
+  "tags": [
+    "deadline",
+    "location",
+    "skills",
+    "duration",
+    "travelTime"
+  ]
+}

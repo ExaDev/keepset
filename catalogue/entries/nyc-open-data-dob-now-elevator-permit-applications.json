@@ -1,0 +1,497 @@
+{
+  "aliases": [
+    "dob-now-elevator-permit-applications"
+  ],
+  "category": "or/v1",
+  "citations": [],
+  "crosswalk": {
+    "oneWay": [
+      {
+        "direction": "encode",
+        "from": "nodes[].Job_Filling_Number",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Job_Number",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Filing_Number",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Filing_Type",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Filing_Status_or_Filing_Includes",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Building_Code",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Electrical_Permit_Number",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].BIN",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].House_Number",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Street_Name",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].ZIP",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Block",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Lot",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].BuildingType",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Building_Stories",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Is_In_Conjunction",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Associated_BIS_Job_Number",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Total_Construction_Floor_Area",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Plan_Examiner_Assigned_Date",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Incomplete_Date",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Last_Incomplete_Submission_Date",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].c_1st_Objection_Date",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Last_Objection_Date",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Resubmission_Date",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Permit_Entire_Date",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Applicant_First_Name",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Applicant_Last_Name",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Applicant_Business_Name",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Applicant_Address",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Applicant_City",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Applicant_State",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Applicant_Zip",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Applicant_License_Number",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Design_Professional_First_Name",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Design_Professional_Last_Name",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Design_Professional_Business_Name",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Design_Professional_Address",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Design_Professional_City",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Design_Professional_State",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Design_Professional_Zip",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Design_Professional_License_Number",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Owner_First_Name",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Owner_Last_Name",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Owner_Title",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Owner_Business_Name",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Owner_Address",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Owner_City",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Owner_State",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Owner_Zip",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Owner_Type",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Asbestos_Abatement_Complaince",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].DEP_ACP_5_Control_No",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Scope_of_Work",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].General_Liability",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].GL_Certificate_Policy_No",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].GL_Expiration_Date",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Workers_Compensation",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].WC_Certificate_Policy_No",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].WC_Expiration_Date",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Disability",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Disability_Certificate_Policy_No",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Disability_Expiration_Date",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Filing_Fee",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].No_Good_Check",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Total_Fee",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Amount_Paid",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Amount_Due",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Review_Type_PPN",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].COMMUNITY_DISTRICT_NUMBER",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].CITY_COUNCIL_DISTRICT",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].CENSUS_TRACT",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].BBL",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].NTA_NAME",
+        "op": "drop"
+      }
+    ],
+    "rules": [
+      {
+        "from": "meta",
+        "op": "move",
+        "to": "meta"
+      },
+      {
+        "from": "nodes[].id",
+        "op": "move",
+        "to": "nodes[].id"
+      },
+      {
+        "from": "nodes[].Signed_Off_Date",
+        "op": "move",
+        "to": "nodes[].closed"
+      },
+      {
+        "from": "nodes[].Permit_Expiration_Date",
+        "op": "move",
+        "to": "nodes[].deadline"
+      },
+      {
+        "from": "nodes[].LATITUDE",
+        "op": "move",
+        "to": "nodes[].lat"
+      },
+      {
+        "from": "nodes[].LONGITUDE",
+        "op": "move",
+        "to": "nodes[].lon"
+      },
+      {
+        "from": "nodes[].Filing_Date",
+        "op": "move",
+        "to": "nodes[].opened"
+      },
+      {
+        "from": "nodes[].Estimated_Cost",
+        "op": "move",
+        "to": "nodes[].prize"
+      },
+      {
+        "from": "nodes[].Elevator_Device_Type",
+        "op": "move",
+        "to": "nodes[].skill"
+      },
+      {
+        "from": "nodes[].Filing_Status",
+        "op": "move",
+        "to": "nodes[].status"
+      },
+      {
+        "from": "nodes[].Borough",
+        "op": "move",
+        "to": "nodes[].territory"
+      }
+    ],
+    "source": "csv-table",
+    "target": "or/v1"
+  },
+  "description": "Elevator permit applications filed with the NYC Department of Buildings, with device type, status, cost and dates.",
+  "domain": "Case records",
+  "expectedCounts": {},
+  "id": "nyc-open-data-dob-now-elevator-permit-applications",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "DOB NOW Build elevator permit applications (NYC)",
+  "namespace": [
+    "nyc-open-data"
+  ],
+  "properties": {
+    "surveyId": "or-89"
+  },
+  "recipe": {
+    "archive": {
+      "kind": "none"
+    },
+    "parser": {
+      "delimiter": "comma",
+      "encoding": "utf-8",
+      "format": "csv-table",
+      "idColumn": null,
+      "numericColumns": [
+        {
+          "column": "LATITUDE",
+          "factor": 1
+        },
+        {
+          "column": "LONGITUDE",
+          "factor": 1
+        },
+        {
+          "column": "Estimated_Cost",
+          "factor": 1
+        }
+      ],
+      "skipLines": 0
+    },
+    "source": 1,
+    "status": "fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://data.cityofnewyork.us/Housing-Development/DOB-NOW-Build-Elevator-Permit-Applications/kfp4-dz4h"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://data.cityofnewyork.us/api/views/kfp4-dz4h/rows.csv?accessType=DOWNLOAD"
+    }
+  ],
+  "tags": [
+    "prize",
+    "deadline",
+    "location",
+    "territory",
+    "skills",
+    "lifecycle"
+  ]
+}

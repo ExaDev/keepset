@@ -1,0 +1,94 @@
+{
+  "aliases": [
+    "tax-liens-summary"
+  ],
+  "category": "or/v1",
+  "citations": [],
+  "crosswalk": {
+    "oneWay": [
+      {
+        "direction": "encode",
+        "from": "nodes[].pin",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].number",
+        "op": "drop"
+      }
+    ],
+    "rules": [
+      {
+        "from": "meta",
+        "op": "move",
+        "to": "meta"
+      },
+      {
+        "from": "nodes[].id",
+        "op": "move",
+        "to": "nodes[].id"
+      },
+      {
+        "from": "nodes[].total_amount",
+        "op": "move",
+        "to": "nodes[].prize"
+      }
+    ],
+    "source": "csv-table",
+    "target": "or/v1"
+  },
+  "description": "Total tax lien amount and lien count for each Allegheny County parcel.",
+  "domain": "Case records",
+  "expectedCounts": {},
+  "id": "allegheny-county-tax-liens-summary",
+  "licence": {
+    "id": "CC0-1.0",
+    "kind": "spdx"
+  },
+  "name": "Allegheny County tax liens, summary by parcel",
+  "namespace": [
+    "allegheny-county"
+  ],
+  "properties": {
+    "surveyId": "or-43"
+  },
+  "recipe": {
+    "archive": {
+      "kind": "none"
+    },
+    "parser": {
+      "delimiter": "comma",
+      "encoding": "utf-8",
+      "format": "csv-table",
+      "idColumn": "column_1",
+      "numericColumns": [
+        {
+          "column": "total_amount",
+          "factor": 1
+        }
+      ],
+      "skipLines": 0
+    },
+    "source": 1,
+    "status": "fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://data.wprdc.org/dataset/allegheny-county-tax-liens-filed-and-satisfied"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://data.wprdc.org/datastore/dump/d1e80180-5b2e-4dab-8ec3-be621628649e"
+    }
+  ],
+  "tags": [
+    "prize",
+    "deadline",
+    "location",
+    "territory",
+    "lifecycle"
+  ]
+}

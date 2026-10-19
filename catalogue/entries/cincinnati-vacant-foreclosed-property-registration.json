@@ -1,0 +1,192 @@
+{
+  "aliases": [
+    "vacant-foreclosed-property-registration"
+  ],
+  "category": "or/v1",
+  "citations": [],
+  "crosswalk": {
+    "oneWay": [
+      {
+        "direction": "encode",
+        "from": "nodes[].UNIQUEID",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].WORK_TYPE",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].DISPLAY_AGENCY",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].COMP_TYPE",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].COMP_TYPE_DESC",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].SUB_TYPE",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].DATA_STATUS",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].STATUS_CLASS",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].CITY_ID",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].X_COORD",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].Y_COORD",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].URL",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].LAST_UPDATED",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].YN_ACTIVITY_REPORT",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].FULL_ADDRESS",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].CITY_COUNTY",
+        "op": "drop"
+      }
+    ],
+    "rules": [
+      {
+        "from": "meta",
+        "op": "move",
+        "to": "meta"
+      },
+      {
+        "from": "nodes[].id",
+        "op": "move",
+        "to": "nodes[].id"
+      },
+      {
+        "from": "nodes[].LATITUDE",
+        "op": "move",
+        "to": "nodes[].lat"
+      },
+      {
+        "from": "nodes[].LONGITUDE",
+        "op": "move",
+        "to": "nodes[].lon"
+      },
+      {
+        "from": "nodes[].ENTERED_DATE",
+        "op": "move",
+        "to": "nodes[].opened"
+      },
+      {
+        "from": "nodes[].SUB_TYPE_DESC",
+        "op": "move",
+        "to": "nodes[].skill"
+      },
+      {
+        "from": "nodes[].DATA_STATUS_DISPLAY",
+        "op": "move",
+        "to": "nodes[].status"
+      },
+      {
+        "from": "nodes[].NEIGHBORHOOD",
+        "op": "move",
+        "to": "nodes[].territory"
+      }
+    ],
+    "source": "csv-table",
+    "target": "or/v1"
+  },
+  "description": "Vacant and foreclosed property registrations in Cincinnati, Ohio, with location, case status and neighbourhood.",
+  "domain": "Case records",
+  "expectedCounts": {},
+  "id": "cincinnati-vacant-foreclosed-property-registration",
+  "licence": {
+    "kind": "custom",
+    "name": "Public Domain",
+    "url": "https://data.cincinnati-oh.gov/api/views/w3jp-dfxy.json"
+  },
+  "name": "Vacant and foreclosed property registration (Cincinnati)",
+  "namespace": [
+    "cincinnati"
+  ],
+  "properties": {
+    "surveyId": "or-91"
+  },
+  "recipe": {
+    "archive": {
+      "kind": "none"
+    },
+    "parser": {
+      "delimiter": "comma",
+      "encoding": "utf-8",
+      "format": "csv-table",
+      "idColumn": "NUMBER_KEY",
+      "numericColumns": [
+        {
+          "column": "LATITUDE",
+          "factor": 1
+        },
+        {
+          "column": "LONGITUDE",
+          "factor": 1
+        }
+      ],
+      "skipLines": 0
+    },
+    "source": 1,
+    "status": "fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://data.cincinnati-oh.gov/Thriving-Neighborhoods/Vacant-Foreclosed-Property-Registration/w3jp-dfxy"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://data.cincinnati-oh.gov/api/views/w3jp-dfxy/rows.csv?accessType=DOWNLOAD"
+    }
+  ],
+  "tags": [
+    "location",
+    "territory",
+    "lifecycle"
+  ]
+}

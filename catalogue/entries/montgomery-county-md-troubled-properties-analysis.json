@@ -1,0 +1,189 @@
+{
+  "aliases": [
+    "troubled-properties-analysis"
+  ],
+  "category": "or/v1",
+  "citations": [],
+  "crosswalk": {
+    "oneWay": [
+      {
+        "direction": "encode",
+        "from": "nodes[].hlrslicensenumber",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].communityname",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].streetaddress",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].zipcode",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].casenumber",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].inspectionfrequency",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].compliantind",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].unitcount",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].unitsinspected",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].averageviolationsperunit",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].severityindex",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].noviolationsobserved",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].infestedunitspercentage",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].units_with_mold",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].geolocation",
+        "op": "drop"
+      }
+    ],
+    "rules": [
+      {
+        "from": "meta",
+        "op": "move",
+        "to": "meta"
+      },
+      {
+        "from": "nodes[].id",
+        "op": "move",
+        "to": "nodes[].id"
+      },
+      {
+        "from": "nodes[].nextinspectiondate",
+        "op": "move",
+        "to": "nodes[].deadline"
+      },
+      {
+        "from": "nodes[].latitude",
+        "op": "move",
+        "to": "nodes[].lat"
+      },
+      {
+        "from": "nodes[].longitude",
+        "op": "move",
+        "to": "nodes[].lon"
+      },
+      {
+        "from": "nodes[].firstinspectiondate",
+        "op": "move",
+        "to": "nodes[].opened"
+      },
+      {
+        "from": "nodes[].rating",
+        "op": "move",
+        "to": "nodes[].status"
+      },
+      {
+        "from": "nodes[].city",
+        "op": "move",
+        "to": "nodes[].territory"
+      }
+    ],
+    "source": "csv-table",
+    "target": "or/v1"
+  },
+  "description": "Rental property inspection results in Montgomery County, Maryland, with location, rating, and first and next inspection dates.",
+  "domain": "Civic and environmental monitoring",
+  "expectedCounts": {},
+  "id": "montgomery-county-md-troubled-properties-analysis",
+  "licence": {
+    "kind": "custom",
+    "name": "Public Domain",
+    "url": "https://data.montgomerycountymd.gov/api/views/bw2r-araf.json"
+  },
+  "name": "Troubled Properties Analysis (Montgomery County, MD)",
+  "namespace": [
+    "montgomery-county-md"
+  ],
+  "properties": {
+    "surveyId": "or-118"
+  },
+  "recipe": {
+    "archive": {
+      "kind": "none"
+    },
+    "parser": {
+      "delimiter": "comma",
+      "encoding": "utf-8",
+      "format": "csv-table",
+      "idColumn": null,
+      "numericColumns": [
+        {
+          "column": "latitude",
+          "factor": 1
+        },
+        {
+          "column": "longitude",
+          "factor": 1
+        }
+      ],
+      "skipLines": 0
+    },
+    "source": 1,
+    "status": "fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://data.montgomerycountymd.gov/Housing/Troubled-Properties-Analysis/bw2r-araf"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://data.montgomerycountymd.gov/resource/bw2r-araf.csv"
+    }
+  ],
+  "tags": [
+    "prizeProbability",
+    "deadline",
+    "location",
+    "territory",
+    "lifecycle"
+  ]
+}

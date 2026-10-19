@@ -1,0 +1,39 @@
+{
+  "aliases": [
+    "gemeenteblad-omgevingsvergunning"
+  ],
+  "category": "or/v1",
+  "citations": [],
+  "crosswalk": {
+    "file": "crosswalks/or-v1/nodes.json"
+  },
+  "domain": "Case records",
+  "expectedCounts": {},
+  "id": "overheid-nl-gemeenteblad-omgevingsvergunning",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "Official publications of environmental permit notices (Netherlands)",
+  "namespace": [
+    "overheid-nl"
+  ],
+  "properties": {
+    "surveyId": "or-74"
+  },
+  "recipe": {
+    "reason": "The source is an SRU search endpoint that returns XML notices in a query language, not a table, and keepset has no parser for it.",
+    "status": "not-fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://repository.overheid.nl/sru"
+    }
+  ],
+  "tags": [
+    "location",
+    "territory",
+    "lifecycle"
+  ]
+}

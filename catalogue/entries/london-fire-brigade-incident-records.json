@@ -1,0 +1,49 @@
+{
+  "aliases": [
+    "incident-records"
+  ],
+  "category": "or/v1",
+  "citations": [],
+  "crosswalk": {
+    "file": "crosswalks/or-v1/nodes.json"
+  },
+  "description": "London Fire Brigade incident records with coordinates, borough and ward, attendance times and notional cost.",
+  "domain": "Emergency dispatch",
+  "expectedCounts": {},
+  "id": "london-fire-brigade-incident-records",
+  "licence": {
+    "id": "OGL-UK-2.0",
+    "kind": "spdx"
+  },
+  "name": "Incident Records (London Fire Brigade)",
+  "namespace": [
+    "london-fire-brigade"
+  ],
+  "properties": {
+    "surveyId": "or-111"
+  },
+  "recipe": {
+    "reason": "The 2009 to 2017 csv is 328,582,222 bytes, over the 256 MiB a recipe can read, and the later years are published as spreadsheets (xlsx).",
+    "status": "not-fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://data.london.gov.uk/dataset/london-fire-brigade-incident-records"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://data.london.gov.uk/download/em8xy/73728cf4-b70e-48e2-9b97-4e4341a2110d/LFB%20Incident%20data%20from%202009%20-%202017.csv"
+    }
+  ],
+  "tags": [
+    "prize",
+    "location",
+    "territory",
+    "duration",
+    "lifecycle",
+    "travelTime"
+  ]
+}

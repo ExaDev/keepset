@@ -1,0 +1,42 @@
+{
+  "aliases": [
+    "litter-fixed-penalty-notices-3gs"
+  ],
+  "category": "or/v1",
+  "citations": [],
+  "crosswalk": {
+    "file": "crosswalks/or-v1/nodes.json"
+  },
+  "description": "Litter fixed penalty notices issued for Leeds City Council by 3GS, published as quarterly files.",
+  "domain": "Case records",
+  "expectedCounts": {},
+  "id": "leeds-litter-fixed-penalty-notices-3gs",
+  "licence": {
+    "id": "OGL-UK-3.0",
+    "kind": "spdx"
+  },
+  "name": "Litter fixed penalty notices issued by 3GS (Leeds)",
+  "namespace": [
+    "leeds"
+  ],
+  "properties": {
+    "surveyId": "or-53"
+  },
+  "recipe": {
+    "reason": "The CSV has a title line (FPN Detail) above the real header, so it does not have its header on the first line and is not a plain table.",
+    "status": "not-fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://datamillnorth.org/dataset/litter-fines-issued-by-3gs"
+    }
+  ],
+  "tags": [
+    "prize",
+    "prizeProbability",
+    "location",
+    "lifecycle"
+  ]
+}

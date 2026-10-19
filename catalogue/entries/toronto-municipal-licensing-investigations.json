@@ -1,0 +1,118 @@
+{
+  "aliases": [
+    "municipal-licensing-investigations"
+  ],
+  "category": "or/v1",
+  "citations": [],
+  "crosswalk": {
+    "oneWay": [
+      {
+        "direction": "encode",
+        "from": "nodes[].INVESTIGATION_ID",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].INVESTIGATION",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].NOTICE_OR_ORDER_DATE",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].NEXT_INSPECTION",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].EXPIRY_DATE",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].ISSUE",
+        "op": "drop"
+      }
+    ],
+    "rules": [
+      {
+        "from": "meta",
+        "op": "move",
+        "to": "meta"
+      },
+      {
+        "from": "nodes[].id",
+        "op": "move",
+        "to": "nodes[].id"
+      },
+      {
+        "from": "nodes[].IN_DATE",
+        "op": "move",
+        "to": "nodes[].opened"
+      },
+      {
+        "from": "nodes[].INVESTIGATION_TYPE",
+        "op": "move",
+        "to": "nodes[].skill"
+      },
+      {
+        "from": "nodes[].CURRENT_STATUS",
+        "op": "move",
+        "to": "nodes[].status"
+      }
+    ],
+    "source": "csv-table",
+    "target": "or/v1"
+  },
+  "description": "Investigations by Toronto Municipal Licensing and Standards, with type, received date and current status.",
+  "domain": "Case records",
+  "expectedCounts": {},
+  "id": "toronto-municipal-licensing-investigations",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "Municipal licensing and standards investigations (Toronto)",
+  "namespace": [
+    "toronto"
+  ],
+  "properties": {
+    "surveyId": "or-59"
+  },
+  "recipe": {
+    "archive": {
+      "kind": "none"
+    },
+    "parser": {
+      "delimiter": "comma",
+      "encoding": "utf-8",
+      "format": "csv-table",
+      "idColumn": "column_1",
+      "numericColumns": [],
+      "skipLines": 0
+    },
+    "source": 1,
+    "status": "fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://open.toronto.ca/dataset/municipal-licensing-and-standards-investigation-activity/"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://ckan0.cf.opendata.inter.prod-toronto.ca/dataset/5da2e2e8-659e-4850-ae43-47b7f7ad6b62/resource/05994276-0021-47e1-afa0-ca874733b98f/download/investigations.csv"
+    }
+  ],
+  "tags": [
+    "deadline",
+    "location",
+    "territory",
+    "skills",
+    "lifecycle"
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "aliases": [
+    "toptw-righini-instances"
+  ],
+  "category": "or/v1",
+  "citations": [],
+  "crosswalk": {
+    "file": "crosswalks/or-v1/nodes.json"
+  },
+  "description": "Benchmark instances for the orienteering problem with time windows, with coordinates, service durations, scores and time windows.",
+  "domain": "Orienteering",
+  "expectedCounts": {},
+  "id": "ku-leuven-toptw-righini-instances",
+  "licence": {
+    "kind": "unrecorded"
+  },
+  "name": "Team Orienteering Problem with Time Windows instances (Righini)",
+  "namespace": [
+    "ku-leuven"
+  ],
+  "properties": {
+    "surveyId": "or-1"
+  },
+  "recipe": {
+    "reason": "The download is a zip of instance files in a Solomon style text format with no column names, and keepset has no parser for it yet.",
+    "status": "not-fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://www.mech.kuleuven.be/en/mim/op"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://www.mech.kuleuven.be/en/mim/op/instances/righiniTOPTW1"
+    }
+  ],
+  "tags": [
+    "prize",
+    "deadline",
+    "location",
+    "duration",
+    "travelTime"
+  ]
+}

@@ -1,0 +1,121 @@
+{
+  "aliases": [
+    "building-permits-issued"
+  ],
+  "category": "or/v1",
+  "citations": [],
+  "crosswalk": {
+    "oneWay": [
+      {
+        "direction": "encode",
+        "from": "nodes[].richiesta_ndeg_prot",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].richiesta_anno_prot",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].esito_pratica",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].codvia",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].civico",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].esponenteciv",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
+        "from": "nodes[].localizzazioni_lista",
+        "op": "drop"
+      }
+    ],
+    "rules": [
+      {
+        "from": "meta",
+        "op": "move",
+        "to": "meta"
+      },
+      {
+        "from": "nodes[].id",
+        "op": "move",
+        "to": "nodes[].id"
+      },
+      {
+        "from": "nodes[].chiusura_pratica_data",
+        "op": "move",
+        "to": "nodes[].closed"
+      },
+      {
+        "from": "nodes[].richiesta_data",
+        "op": "move",
+        "to": "nodes[].opened"
+      },
+      {
+        "from": "nodes[].procedimento",
+        "op": "move",
+        "to": "nodes[].skill"
+      }
+    ],
+    "source": "csv-table",
+    "target": "or/v1"
+  },
+  "description": "Building permits issued by the City of Bologna, with the procedure type and the application and closure dates.",
+  "domain": "Case records",
+  "expectedCounts": {},
+  "id": "comune-di-bologna-building-permits-issued",
+  "licence": {
+    "id": "CC-BY-4.0",
+    "kind": "spdx"
+  },
+  "name": "Building permits issued (Bologna)",
+  "namespace": [
+    "comune-di-bologna"
+  ],
+  "properties": {
+    "surveyId": "or-77"
+  },
+  "recipe": {
+    "archive": {
+      "kind": "none"
+    },
+    "parser": {
+      "delimiter": "semicolon",
+      "encoding": "utf-8",
+      "format": "csv-table",
+      "idColumn": null,
+      "numericColumns": [],
+      "skipLines": 0
+    },
+    "source": 1,
+    "status": "fetchable"
+  },
+  "sources": [
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://opendata.comune.bologna.it/explore/dataset/permessi-di-costruire-rilasciati/"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://opendata.comune.bologna.it/api/explore/v2.1/catalog/datasets/permessi-di-costruire-rilasciati/exports/csv"
+    }
+  ],
+  "tags": [
+    "location",
+    "lifecycle"
+  ]
+}
