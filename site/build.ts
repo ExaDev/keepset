@@ -9,6 +9,7 @@ import { build } from "esbuild";
 import { vanillaExtractPlugin } from "@vanilla-extract/esbuild-plugin";
 import { getManifest, listDatasets } from "keepset";
 import { buildSite } from "./build-site";
+import { finalisePrecache } from "./precache";
 
 /** Where GitHub Pages publishes the site: the project site of Mearman/keepset. Absolute URLs (canonical links, JSON-LD) are built from it; every link between pages is relative. */
 export const SITE_URL = "https://mearman.github.io/keepset/";
@@ -39,4 +40,6 @@ await build({
   plugins: [vanillaExtractPlugin()],
   loader: { ".svg": "dataurl" },
 });
+// After the bundle, so the digest the service worker's cache is named for covers app.js and app.css too.
+finalisePrecache(outDir);
 console.log(`Wrote ${String(files.size)} generated files and the client bundle to site-dist/`);
