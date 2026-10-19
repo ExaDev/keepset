@@ -5,7 +5,7 @@ import { describe, expect, it } from "vitest";
 import { createCatalogue } from "../../src/catalogue";
 import { fetchEntry, roundTripEntry } from "../../src/node/fetch-dataset";
 import { fixtureManifest } from "../../src/test-support/entries";
-import { convertItem, convertSurvey, MAX_CELLS, SOCRATA_PAGE_ROWS, socrataPaging } from "./convert-or";
+import { convertItem, convertSurvey, MAX_CELLS, PAGE_ROWS, pagingOf } from "./convert-or";
 import { CurationItemSchema, SurveySourceSchema, TARGET_FIELD_NAMES, TARGET_FIELDS } from "./or-survey";
 
 const survey = SurveySourceSchema.parse({
@@ -204,14 +204,16 @@ describe("the survey's themes and the target fields", () => {
   });
 });
 
-describe("socrataPaging", () => {
-  it("pages a Socrata resource endpoint with no query", () => {
-    expect(socrataPaging("https://data.example.org/resource/abcd-1234.csv")).toEqual({ kind: "socrata-resource", pageSize: SOCRATA_PAGE_ROWS });
+describe("pagingOf", () => {
+  it("pages a Socrata resource endpoint, and a CKAN datastore dump on a portal with or without a path prefix, when the URL has no query", () => {
+    expect(pagingOf("https://data.example.org/resource/abcd-1234.csv")).toEqual({ kind: "socrata-resource", pageSize: PAGE_ROWS });
+    expect(pagingOf("https://data.example.org/datastore/dump/0a1b2c3d-1111-2222-3333-444455556666")).toEqual({ kind: "ckan-datastore", pageSize: PAGE_ROWS });
+    expect(pagingOf("https://data.example.org/data/datastore/dump/0a1b2c3d-1111-2222-3333-444455556666")).toEqual({ kind: "ckan-datastore", pageSize: PAGE_ROWS });
   });
 
   it("leaves every other URL as one file", () => {
-    for (const url of ["https://data.example.org/resource/abcd-1234.csv?$limit=50", "https://data.example.org/api/views/abcd-1234/rows.csv?accessType=DOWNLOAD", "https://data.example.org/dataset/x/resource/0a1b2c3d/download/x.csv", "https://data.example.org/resource/abcd-1234.json"]) {
-      expect(socrataPaging(url)).toBeUndefined();
+    for (const url of ["https://data.example.org/resource/abcd-1234.csv?$limit=50", "https://data.example.org/datastore/dump/0a1b2c3d-1111-2222-3333-444455556666?format=csv", "https://data.example.org/datastore/dump/not-a-uuid", "https://data.example.org/api/views/abcd-1234/rows.csv?accessType=DOWNLOAD", "https://data.example.org/dataset/x/resource/0a1b2c3d/download/x.csv", "https://data.example.org/resource/abcd-1234.json"]) {
+      expect(pagingOf(url)).toBeUndefined();
     }
   });
 
@@ -220,7 +222,7 @@ describe("socrataPaging", () => {
     const curated = CurationItemSchema.parse({ ...curation.items[0], downloadUrl: "https://data.example.org/resource/abcd-1234.csv" });
     const { entry } = convertItem(item ?? expect.unreachable("the fixture survey has an item"), curated, "2026-10-19");
     expect(entry.sources.map((source) => source.url)).toEqual(["https://example.org/requests", "https://data.example.org/resource/abcd-1234.csv"]);
-    expect(entry.recipe).toMatchObject({ status: "fetchable", source: 1, paging: { kind: "socrata-resource", pageSize: SOCRATA_PAGE_ROWS } });
+    expect(entry.recipe).toMatchObject({ status: "fetchable", source: 1, paging: { kind: "socrata-resource", pageSize: PAGE_ROWS } });
   });
 });
 
