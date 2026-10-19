@@ -226,7 +226,7 @@ function recipeOf(outcome: CurationItem["outcome"], source: number): unknown {
   return {
     status: "fetchable",
     source,
-    archive: { kind: "none" },
+    archive: outcome.sheet === undefined ? { kind: "none" } : { kind: "xlsx", sheet: outcome.sheet },
     parser: { format: "csv-table", encoding: outcome.encoding, delimiter: outcome.delimiter, skipLines: outcome.skipLines, idColumn: outcome.idColumn, numericColumns: outcome.numericColumns, columns: keptColumns(outcome) },
   };
 }

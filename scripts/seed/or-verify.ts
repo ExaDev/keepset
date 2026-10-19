@@ -2,7 +2,7 @@
 
    pnpm exec tsx scripts/seed/or-verify.ts <curation.json> [or-1,or-7] [--whole]
 
-   With `--whole` the flow runs on the entire download instead of a sample (an ArcGIS layer is always read whole, page by page), which is the only way to meet a fault that lies further into the file than the sample (an id that repeats or is empty, a malformed row, a table too large to hold in memory) or a source that returns only part of a table; each line then also gives the row count the curation recorded. A whole run downloads every table, so it is slow and is best given a list of items.
+   With `--whole` the flow runs on the entire download instead of a sample (an ArcGIS layer and a workbook sheet are always read whole), which is the only way to meet a fault that lies further into the file than the sample (an id that repeats or is empty, a malformed row, a table too large to hold in memory) or a source that returns only part of a table; each line then also gives the row count the curation recorded. A whole run downloads every table, so it is slow and is best given a list of items.
 
    Per item it prints the rows read and, for each mapped field, how many of them have a value, with the range of a number field, so a mapping that picked the wrong column shows as an empty or implausible field. A download that is not a plain table (an archive, a page, an error) fails with the reason. */
 
@@ -128,7 +128,7 @@ async function verifyOne(curated: CurationItem): Promise<string> {
   if (dataset === undefined || entry.recipe.status !== "fetchable") {
     throw new Error("the entry did not build");
   }
-  const entire = whole || outcome.status === "fetchable-arcgis";
+  const entire = whole || outcome.status === "fetchable-arcgis" || ("sheet" in outcome && outcome.sheet !== undefined);
   const sample = entire ? new Uint8Array() : await startOf(entry.sources[entry.recipe.source]?.url ?? "");
   const attempt = async (back: number): Promise<Awaited<ReturnType<typeof fetchEntry>>> => {
     try {

@@ -77,6 +77,8 @@ export const FetchableOutcomeSchema = z
     encoding: z.enum(["utf-8", "latin1"]),
     delimiter: z.enum(["comma", "tab", "semicolon"]),
     skipLines: z.int().min(0),
+    /** The sheet of an xlsx workbook the download is, read as a table: `skipLines` then counts the sheet's rows above the header, and `encoding` and `delimiter` describe the CSV the workbook is turned into (utf-8, comma). */
+    sheet: z.string().min(1).optional(),
     idColumn: ColumnNameSchema.nullable(),
     numericColumns: z.array(z.object({ column: ColumnNameSchema, factor: z.number().positive() }).strict()),
     header: z.array(z.string()).min(1),

@@ -128,7 +128,7 @@ function pathOf(url: string): string {
  * @param url - The download URL (the original URL for a snapshot).
  * @returns The archive kind, or the reason no keepset unpacker reads it.
  */
-function archiveKindOf(url: string): Archive["kind"] | { readonly unsupported: string } {
+function archiveKindOf(url: string): Exclude<Archive["kind"], "xlsx"> | { readonly unsupported: string } {
   const path = pathOf(url);
   for (const [extension, name] of [
     [".bz2", "bzip2"],
