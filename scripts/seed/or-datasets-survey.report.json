@@ -526,11 +526,17 @@
     {
       "flags": [
         "survey URL is a landing page; the file URL came from the data.gov.uk catalogue",
-        "individual defendants are anonymised a year after conviction"
+        "individual defendants are anonymised a year after conviction",
+        "the workbook has an explanation sheet and the data sheet, and the data sheet is read",
+        "defendant names are present, individuals being anonymised a year after conviction, and are deliberately not mapped",
+        "each row is a separate charge, and the workbook is replaced in place each quarter with a cumulative update",
+        "the download URL is built from the data set and file ids the catalogue page records, and was not a link on the page",
+        "no column is unique in every row, so rows are numbered",
+        "the fine is mapped as the prize, a penalty rather than a reward, and the date of action as the closing date",
+        "trailing spaces in some text cells are trimmed by the parser"
       ],
       "id": "defra-environment-agency-prosecutions",
-      "reason": "The download is an xlsx workbook with an explanation sheet and a data sheet, and keepset has no spreadsheet parser yet.",
-      "recipe": "not-fetchable",
+      "recipe": "fetchable",
       "surveyId": "or-50"
     },
     {
