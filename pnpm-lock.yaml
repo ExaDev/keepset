@@ -188,11 +188,11 @@ importers:
         specifier: 19.3.0
         version: 19.3.0(react@19.3.0)
       twindex:
-        specifier: 0.1.1
-        version: 0.1.1
+        specifier: 0.1.4
+        version: 0.1.4
       zod:
-        specifier: 4.6.5
-        version: 4.6.5
+        specifier: 4.6.6
+        version: 4.6.6
     devDependencies:
       '@arethetypeswrong/cli':
         specifier: 0.18.5
@@ -3137,8 +3137,8 @@ packages:
     resolution: {integrity: sha512-1h/Lnq9yajKY2PEbBadPXj3VxsDDu844OnaAo52UVmIzIvwwtBPIuNvkjuzBlTWpfJyUbG3ez0KSBibQkj4ojg==}
     engines: {node: '>=0.6.11 <=0.7.0 || >=0.7.3'}
 
-  twindex@0.1.1:
-    resolution: {integrity: sha512-AUrX/Vlkl1KVZvVWOUr8h4wtOnOymF2FzYHfnOf8quSRhc4ecAxw4I7ZJQMrHh1dugGvETAeslO2NPCkfZ5BnQ==}
+  twindex@0.1.4:
+    resolution: {integrity: sha512-g5+W+ZUJKR0gLMGFPf49rnYsTaF2Oso95XyjDg8mb662vSU+YeUMEI5CfHMpzyCnNoxNeGOuwgwqP2q08RBhAg==}
     engines: {node: '>=22'}
 
   type-check@0.4.0:
@@ -3452,8 +3452,8 @@ packages:
     resolution: {integrity: sha512-t5pANCF6k9rgJre7jk8DMAU4lEoI1oWWZgXk0fcvmCYQquFVWv0rf6Awwt56nnPiHb0E24dhtrpfgf9ChTCbrQ==}
     engines: {node: '>=14.18.0'}
 
-  zod@4.6.5:
-    resolution: {integrity: sha512-v5l/aFXZQeai4awLbOpSoHecE9UiMrnfx75tEXLjNonXVARxQ5mOeipTjROUchszUNCqnE+hqAMujRsRHsut2Q==}
+  zod@4.6.6:
+    resolution: {integrity: sha512-4UmzQUF5fxvfcYHlbjBmejU+w+hbDnWFx4aS8kBx7nPBHcO2SqPbpAG8snbdg+Xse4pRefR98hgjFgIMCI/UhA==}
 
 snapshots:
 
@@ -6179,7 +6179,7 @@ snapshots:
   trilean@1.9.0:
     dependencies:
       trilean-regex: 1.0.13
-      zod: 4.6.5
+      zod: 4.6.6
 
   ts-api-utils@2.5.0(typescript@6.0.3):
     dependencies:
@@ -6223,10 +6223,10 @@ snapshots:
 
   tunnel@0.0.6: {}
 
-  twindex@0.1.1:
+  twindex@0.1.4:
     dependencies:
       trilean: 1.9.0
-      zod: 4.6.5
+      zod: 4.6.6
 
   type-check@0.4.0:
     dependencies:
@@ -6459,4 +6459,4 @@ snapshots:
       '@yuku-toolchain/types': 0.18.1
       yuku-core: 0.18.1
 
-  zod@4.6.5: {}
+  zod@4.6.6: {}
