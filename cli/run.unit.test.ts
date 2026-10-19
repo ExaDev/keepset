@@ -2,7 +2,7 @@ import { createCatalogue, DatasetNotFoundError, RecipeError, type Dataset, type 
 import type { FetchedDataset, RoundTripReport } from "keepset/node";
 import { describe, expect, it } from "vitest";
 import { fixtureIndex } from "../src/test-support/entries";
-import { EXIT_FAILED, EXIT_NO, EXIT_OK, formatSearch, formatShow, provenancePath, run, type CliIo, type CliLibrary } from "./run";
+import { EXIT_FAILED, EXIT_NO, EXIT_OK, formatNamespaces, formatSearch, formatShow, provenancePath, run, type CliIo, type CliLibrary } from "./run";
 
 const catalogue = createCatalogue(fixtureIndex);
 const karate = catalogue.getDataset("karate");
@@ -40,6 +40,11 @@ function harness(overrides: Partial<CliLibrary> = {}) {
       calls.push(["getDataset", id]);
 
       return catalogue.getDataset(id);
+    },
+    listNamespaces: (path?: string) => {
+      calls.push(["listNamespaces", path]);
+
+      return catalogue.listNamespaces(path);
     },
     validateDataset: () => [],
     fetchDataset: async (id) => {
@@ -238,7 +243,7 @@ describe("namespaces and aliases", () => {
       { ...fixtureIndex.entries[0], id: "two-shared", namespace: ["two"], aliases: ["shared"] },
     ],
   });
-  const nestedLibrary = (): ReturnType<typeof harness> => harness({ getDataset: (name) => nested.getDataset(name), listDatasets: (query) => nested.listDatasets(query) });
+  const nestedLibrary = (): ReturnType<typeof harness> => harness({ getDataset: (name) => nested.getDataset(name), listDatasets: (query) => nested.listDatasets(query), listNamespaces: (path) => nested.listNamespaces(path) });
 
   it("resolves a qualified name for fetch and writes under the entry's own id, never the typed name", async () => {
     const { library, io, out, calls } = nestedLibrary();
@@ -271,5 +276,53 @@ describe("namespaces and aliases", () => {
 
   it("prints the namespace and aliases in show", () => {
     expect(formatShow(nested.getDataset("one-shared"))).toContain("namespace: one/inner\naliases: shared\n");
+  });
+});
+
+describe("namespaces", () => {
+  const nested = createCatalogue({
+    ...fixtureIndex,
+    entries: [
+      { ...fixtureIndex.entries[0], id: "one-shared", namespace: ["one", "inner"], aliases: ["two/shared"] },
+      { ...fixtureIndex.entries[0], id: "other", namespace: ["one"] },
+    ],
+  });
+  const nestedLibrary = (): ReturnType<typeof harness> => harness({ listDatasets: (query) => nested.listDatasets(query), listNamespaces: (path) => nested.listNamespaces(path) });
+
+  it("lists the outermost namespaces with their counts, tab-separated", async () => {
+    const { library, io, out } = nestedLibrary();
+    expect(await run(["namespaces"], library, io)).toBe(EXIT_OK);
+    expect(out.stdout).toBe("one\t2\ntwo\t1\n");
+    expect(formatNamespaces(nested.listNamespaces())).toBe(out.stdout);
+  });
+
+  it("lists the namespaces directly beneath a path", async () => {
+    const { library, io, out } = nestedLibrary();
+    expect(await run(["namespaces", "one"], library, io)).toBe(EXIT_OK);
+    expect(out.stdout).toBe("one/inner\t1\n");
+  });
+
+  it("prints the namespaces as JSON", async () => {
+    const { library, io, out } = nestedLibrary();
+    expect(await run(["namespaces", "--json"], library, io)).toBe(EXIT_OK);
+    expect(JSON.parse(out.stdout)).toEqual([
+      { path: "one", name: "one", count: 2 },
+      { path: "two", name: "two", count: 1 },
+    ]);
+  });
+
+  it("prints nothing and succeeds for a namespace with none beneath it", async () => {
+    const { library, io, out } = nestedLibrary();
+    expect(await run(["namespaces", "one/inner"], library, io)).toBe(EXIT_OK);
+    expect(out.stdout).toBe("");
+  });
+
+  it("turns a path no entry sits in into exit status 2 naming it, and too many arguments into usage", async () => {
+    const { library, io, out } = nestedLibrary();
+    expect(await run(["namespaces", "nope"], library, io)).toBe(EXIT_FAILED);
+    expect(out.stderr).toBe('no namespace "nope" in the catalogue\n');
+    const second = nestedLibrary();
+    expect(await run(["namespaces", "a", "b"], second.library, second.io)).toBe(EXIT_FAILED);
+    expect(second.out.stderr).toMatch(/namespaces takes at most one path/);
   });
 });

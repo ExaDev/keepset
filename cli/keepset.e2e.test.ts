@@ -21,6 +21,18 @@ describe("the keepset command", () => {
     expect(readFileSync(binPath, "utf8").startsWith("#!/usr/bin/env node\n")).toBe(true);
   });
 
+  it("browses the bundled catalogue's namespaces, resolving a segment alias", () => {
+    const roots = keepset(["namespaces"]);
+    expect(roots.status).toBe(EXIT_OK);
+    expect(roots.stdout).toMatch(/^suitesparse\t\d+$/m);
+    const groups = keepset(["namespaces", "ss"]);
+    expect(groups.status).toBe(EXIT_OK);
+    expect(groups.stdout).toMatch(/^suitesparse\/gset\t\d+$/m);
+    const missing = keepset(["namespaces", "nope"]);
+    expect(missing.status).toBe(EXIT_FAILED);
+    expect(missing.stderr).toContain('no namespace "nope"');
+  });
+
   it("searches and shows the bundled catalogue", () => {
     const search = keepset(["search", "karate"]);
     expect(search.status).toBe(EXIT_OK);
