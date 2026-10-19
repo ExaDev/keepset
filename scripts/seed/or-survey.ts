@@ -70,7 +70,7 @@ export type FieldMap = z.infer<typeof FieldMapSchema>;
 /** Prose in the catalogue follows the house style, which has no dash used as a punctuation mark. */
 const prose = (): z.ZodString => z.string().min(1).refine((text) => !/ -- |—|–/.test(text), { message: "must not use a dash as punctuation" });
 
-/** A dataset whose download has a recipe: how to read the table, every column it has, and which of them fill the node's fields. Every column not mapped is dropped by a one-way rule, so what an entry leaves out is written down. */
+/** A dataset whose download has a recipe: how to read the table, the file's header cells exactly as it writes them, and which of its columns fill the node's fields. The parser's column names follow from the header cells and the id column, and every column not mapped is dropped by a one-way rule, so what an entry leaves out is written down. Column names in the map, the numeric columns and the id column are the parser's names (`columnNames`), not the raw cells. */
 export const FetchableOutcomeSchema = z
   .object({
     status: z.literal("fetchable"),
@@ -79,7 +79,7 @@ export const FetchableOutcomeSchema = z
     skipLines: z.int().min(0),
     idColumn: ColumnNameSchema.nullable(),
     numericColumns: z.array(z.object({ column: ColumnNameSchema, factor: z.number().positive() }).strict()),
-    columns: z.array(ColumnNameSchema).min(1),
+    header: z.array(z.string()).min(1),
     rowCount: z.int().min(0).optional(),
     map: FieldMapSchema,
   })

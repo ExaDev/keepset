@@ -31,6 +31,29 @@ export function columnName(header: string, position: number): string {
   return /^\d/.test(name) ? `c_${name}` : name;
 }
 
+/**
+ * The names the parser gives a header row's cells, one per cell in order: each cell's `columnName`, except that `id` is the row's id, so a cell of that name which is not the id column is named by its position, as an unnamed one is. The id column is among them; it is only left out of a row's other columns.
+ * @param cells - The header cells.
+ * @param idColumn - The recipe's id column, or null for the row number.
+ * @param line - The 1-based line of the header, for the error.
+ * @returns The names.
+ * @throws NativeParseError when two cells get the same name.
+ */
+export function columnNames(cells: readonly string[], idColumn: string | null, line: number): string[] {
+  const names: string[] = [];
+  for (const [position, cell] of cells.entries()) {
+    const named = columnName(cell, position + 1);
+    const name = named === "id" && idColumn !== "id" ? `column_${String(position + 1)}` : named;
+    const clash = names.indexOf(name);
+    if (clash !== -1) {
+      throw new NativeParseError("csv-table", line, `header cells ${String(clash + 1)} and ${String(position + 1)} both become the column ${name}`);
+    }
+    names.push(name);
+  }
+
+  return names;
+}
+
 /** One record of the file: its fields and the 1-based line it starts on. */
 interface CsvRecord {
   readonly line: number;
@@ -146,6 +169,35 @@ function numeric(cell: string, factor: number, column: string, line: number): nu
 }
 
 /**
+ * The records of a table file after the lines the recipe skips and without its blank lines: the header first, then the rows.
+ * @param text - The file text, which may begin with a byte order mark.
+ * @param options - The recipe's table parser, of which the delimiter and the lines to skip are read.
+ * @returns The records.
+ * @throws NativeParseError when a quote is never closed or opens inside an unquoted field, or the file has fewer lines than the recipe skips.
+ */
+function tableRecords(text: string, options: Readonly<Pick<CsvTableParser, "delimiter" | "skipLines">>): CsvRecord[] {
+  const body = afterLines(text.startsWith(BYTE_ORDER_MARK) ? text.slice(BYTE_ORDER_MARK.length) : text, options.skipLines);
+
+  return records(body, DELIMITERS[options.delimiter], options.skipLines + 1).filter((record) => record.fields.length > 1 || record.fields[0]?.trim() !== "");
+}
+
+/**
+ * The cells of a table's header row exactly as the file writes them, which is what a curation records so the parser's column names can be derived from it.
+ * @param text - The file text, or the start of it cut at a line break.
+ * @param options - The recipe's table parser, of which the delimiter and the lines to skip are read.
+ * @returns The header cells, trimmed of nothing.
+ * @throws NativeParseError when the text has no header row or a quote is malformed.
+ */
+export function headerCells(text: string, options: Readonly<Pick<CsvTableParser, "delimiter" | "skipLines">>): readonly string[] {
+  const [header] = tableRecords(text, options);
+  if (header === undefined) {
+    throw new NativeParseError("csv-table", options.skipLines + 1, "the file has no header row");
+  }
+
+  return header.fields;
+}
+
+/**
  * Parses a delimited table into rows: the first record after `skipLines` lines is the header, each later record is a row, and every row carries every column but the id column, an empty cell being null. Cells are trimmed. A column the recipe declares numeric is read as a decimal number times its factor and any other column stays a string. `id` is the row's id, so a column of that name which is not the id column is named by its position. A row's id is the cell of the recipe's id column, which is then not also a column, or its 1-based row number when the recipe names none. Blank lines are skipped; a row with a different number of fields than the header, two columns with the same name, and an id cell that is empty are errors.
  * @param text - The file text.
  * @param options - The recipe's table parser.
@@ -153,22 +205,11 @@ function numeric(cell: string, factor: number, column: string, line: number): nu
  * @throws NativeParseError naming the line of the first problem.
  */
 export function parseCsvTable(text: string, options: CsvTableParser): NativeTable {
-  const body = afterLines(text.startsWith(BYTE_ORDER_MARK) ? text.slice(BYTE_ORDER_MARK.length) : text, options.skipLines);
-  const [header, ...rows] = records(body, DELIMITERS[options.delimiter], options.skipLines + 1).filter((record) => record.fields.length > 1 || record.fields[0]?.trim() !== "");
+  const [header, ...rows] = tableRecords(text, options);
   if (header === undefined) {
     throw new NativeParseError("csv-table", options.skipLines + 1, "the file has no header row");
   }
-  const names: string[] = [];
-  for (const [position, cell] of header.fields.entries()) {
-    // `id` is the row's id, so a header cell of that name that is not the id column is named by its position, as an unnamed one is, and is not shadowed by the row id.
-    const named = columnName(cell, position + 1);
-    const name = named === "id" && options.idColumn !== "id" ? `column_${String(position + 1)}` : named;
-    const clash = names.indexOf(name);
-    if (clash !== -1) {
-      throw new NativeParseError("csv-table", header.line, `header cells ${String(clash + 1)} and ${String(position + 1)} both become the column ${name}`);
-    }
-    names.push(name);
-  }
+  const names = columnNames(header.fields, options.idColumn, header.line);
   const { idColumn, numericColumns } = options;
   for (const wanted of [...(idColumn === null ? [] : [idColumn]), ...numericColumns.map((entry) => entry.column)]) {
     if (!names.includes(wanted)) {
