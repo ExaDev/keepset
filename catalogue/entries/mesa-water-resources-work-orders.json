@@ -5,7 +5,51 @@
   "category": "or/v1",
   "citations": [],
   "crosswalk": {
-    "file": "crosswalks/or-v1/nodes.json"
+    "oneWay": [],
+    "rules": [
+      {
+        "from": "meta",
+        "op": "move",
+        "to": "meta"
+      },
+      {
+        "from": "nodes[].id",
+        "op": "move",
+        "to": "nodes[].id"
+      },
+      {
+        "from": "nodes[].work_order_close_date",
+        "op": "move",
+        "to": "nodes[].closed"
+      },
+      {
+        "from": "nodes[].projected_finish_date",
+        "op": "move",
+        "to": "nodes[].deadline"
+      },
+      {
+        "from": "nodes[].initiated_date",
+        "op": "move",
+        "to": "nodes[].opened"
+      },
+      {
+        "from": "nodes[].work_order_cost",
+        "op": "move",
+        "to": "nodes[].prize"
+      },
+      {
+        "from": "nodes[].work_order_category",
+        "op": "move",
+        "to": "nodes[].skill"
+      },
+      {
+        "from": "nodes[].status",
+        "op": "move",
+        "to": "nodes[].status"
+      }
+    ],
+    "source": "csv-table",
+    "target": "or/v1"
   },
   "description": "Water resources maintenance work orders raised and completed by the City of Mesa, with costs, status and dates.",
   "domain": "Technician and home-care routing",
@@ -22,14 +66,47 @@
     "surveyId": "or-13"
   },
   "recipe": {
-    "reason": "The table has 934800 rows of more than 100 columns, and the sample rows are about a kilobyte each, so the download is far larger than the 256 MiB a recipe can read into memory.",
-    "status": "not-fetchable"
+    "archive": {
+      "kind": "none"
+    },
+    "paging": {
+      "kind": "socrata-resource",
+      "pageSize": 50000
+    },
+    "parser": {
+      "columns": [
+        "work_order_close_date",
+        "projected_finish_date",
+        "initiated_date",
+        "work_order_cost",
+        "work_order_category",
+        "status"
+      ],
+      "delimiter": "comma",
+      "encoding": "utf-8",
+      "format": "csv-table",
+      "idColumn": null,
+      "numericColumns": [
+        {
+          "column": "work_order_cost",
+          "factor": 1
+        }
+      ],
+      "skipLines": 0
+    },
+    "source": 1,
+    "status": "fetchable"
   },
   "sources": [
     {
       "retrieved": "2026-10-19",
       "status": "live",
       "url": "https://citydata.mesaaz.gov/Water-Resources/Water-Resources-Work-Orders-Public-View/7rqv-jcr4"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://citydata.mesaaz.gov/resource/7rqv-jcr4.csv"
     }
   ],
   "tags": [

@@ -22,7 +22,7 @@
     "surveyId": "or-87"
   },
   "recipe": {
-    "reason": "The CSV has 2716297 rows, which is more than a recipe can read into memory.",
+    "reason": "The table has 2,716,297 rows, so a mapping of more than three columns plus the id holds more cells than a fetch can hold in memory, and three columns would carry too little of what the table offers.",
     "status": "not-fetchable"
   },
   "sources": [

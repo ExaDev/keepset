@@ -133,14 +133,16 @@
     },
     {
       "flags": [
-        "Location is a street address with no coordinates.",
         "Some sample rows carry an initiated date of 1969, an epoch default.",
         "Socrata gives the licence only as \"See Terms of Use\", and the terms text was not read.",
-        "Names of staff and requesters are present as columns and would not be mapped."
+        "staff names are present as columns and are deliberately not mapped",
+        "some rows carry an initiated date of 1969, an epoch default",
+        "the location is a street address with no coordinates, so none is mapped",
+        "no column is unique in every row, so rows are numbered",
+        "the cost is mapped as the prize, a monetary amount rather than a reward"
       ],
       "id": "mesa-water-resources-work-orders",
-      "reason": "The table has 934800 rows of more than 100 columns, and the sample rows are about a kilobyte each, so the download is far larger than the 256 MiB a recipe can read into memory.",
-      "recipe": "not-fetchable",
+      "recipe": "fetchable",
       "surveyId": "or-13"
     },
     {
@@ -156,11 +158,12 @@
     },
     {
       "flags": [
-        "Several date columns are text-typed."
+        "Several date columns are text-typed.",
+        "latitude and longitude are empty in many rows",
+        "the table has more columns than a fetch can hold at this many rows, so only the location, work type, status and two dates are mapped; the borough and the work order priority are left out for that reason"
       ],
       "id": "nyc-open-data-forestry-work-orders",
-      "reason": "The table has 1561796 rows, more than a recipe can read.",
-      "recipe": "not-fetchable",
+      "recipe": "fetchable",
       "surveyId": "or-15"
     },
     {
@@ -238,7 +241,7 @@
         "Location columns hold building identifiers and names, not coordinates."
       ],
       "id": "mendeley-data-fmucd",
-      "reason": "The single CSV is about 1.44 GB, far more than the 256 MiB a recipe can read into memory.",
+      "reason": "The single CSV is about 1.44 GB and was not fetched whole, so its rows are not counted and no recipe is given.",
       "recipe": "not-fetchable",
       "surveyId": "or-23"
     },
@@ -360,7 +363,7 @@
         "wait columns are aggregated waiting days per county, month and stop code, not per appointment"
       ],
       "id": "mendeley-data-va-appointment-wait-times",
-      "reason": "The county-level file is 916897688 bytes, far over the 256 MiB a recipe can read, and the other files are larger or are zip and xlsx.",
+      "reason": "The county-level file is 916,897,688 bytes and was not fetched whole, so its rows are not counted and no recipe is given, and the other files are larger or are zip and xlsx.",
       "recipe": "not-fetchable",
       "surveyId": "or-35"
     },
@@ -642,7 +645,7 @@
         "The Socrata metadata carries no licence and the NYC Open Data terms page could not be read."
       ],
       "id": "nyc-open-data-housing-maintenance-code-violations",
-      "reason": "The table has 11,324,217 rows, more than a recipe can read into memory.",
+      "reason": "The table has 11,324,217 rows, so a mapping of even one column and the id holds more cells than a fetch can hold in memory.",
       "recipe": "not-fetchable",
       "surveyId": "or-60"
     },
@@ -677,7 +680,7 @@
         "respondent personal fields were removed from May 2026 per the dataset description, but respondent name columns remain in the header"
       ],
       "id": "nyc-open-data-oath-hearings-case-status",
-      "reason": "The table has 22,151,329 rows, more than a recipe can read into memory.",
+      "reason": "The table has 22,151,329 rows, so even one mapped column and the id hold more cells than a fetch can hold in memory.",
       "recipe": "not-fetchable",
       "surveyId": "or-63"
     },
@@ -696,11 +699,12 @@
       "flags": [
         "the Socrata licence field says See Terms of Use and the terms document was not located",
         "the file size was not reported (chunked export), so the size limit is an estimate from the probe rows",
-        "the RESPONDENTS column holds respondent names"
+        "the RESPONDENTS column holds respondent names",
+        "the respondents column holds the names of individuals and businesses and is deliberately not mapped",
+        "the fine is mapped as the prize, a monetary amount rather than a reward"
       ],
       "id": "chicago-ordinance-violations",
-      "reason": "The table has 824,653 rows and the probe's first rows, with cells already truncated, average about 330 bytes, so the export would exceed the 256 MiB a recipe can read.",
-      "recipe": "not-fetchable",
+      "recipe": "fetchable",
       "surveyId": "or-65"
     },
     {
@@ -854,11 +858,13 @@
       "flags": [
         "The survey URL is a CKAN landing page; the CSV is on S3.",
         "The table has no coordinates, only street and suburb text.",
-        "The CSV starts with a byte order mark and writes dates as d/mm/yyyy."
+        "The CSV starts with a byte order mark and writes dates as d/mm/yyyy.",
+        "the table covers expiations from 2018 onwards only",
+        "the offence location is a street name, not coordinates, so no location is mapped",
+        "the expiation amount is mapped as the prize, a fine rather than a reward"
       ],
       "id": "adelaide-city-council-parking-expiations",
-      "reason": "The CSV is about 132 MB and holds more than a million rows (a full count gave over 1.1 million), which is more than a recipe can read into memory.",
-      "recipe": "not-fetchable",
+      "recipe": "fetchable",
       "surveyId": "or-79"
     },
     {
@@ -928,7 +934,7 @@
         "The table includes permittee, owner and superintendent names and a phone number."
       ],
       "id": "nyc-open-data-dob-permit-issuance",
-      "reason": "The CSV has 3990985 rows, which is more than a recipe can read into memory.",
+      "reason": "The table has 3,990,985 rows, so a mapping of more than two columns plus the id holds more cells than a fetch can hold in memory, and two columns would carry too little of what the table offers.",
       "recipe": "not-fetchable",
       "surveyId": "or-86"
     },
@@ -938,18 +944,19 @@
         "The table includes applicant and owner names."
       ],
       "id": "nyc-open-data-dob-job-application-filings",
-      "reason": "The CSV has 2716297 rows, which is more than a recipe can read into memory.",
+      "reason": "The table has 2,716,297 rows, so a mapping of more than three columns plus the id holds more cells than a fetch can hold in memory, and three columns would carry too little of what the table offers.",
       "recipe": "not-fetchable",
       "surveyId": "or-87"
     },
     {
       "flags": [
         "No licence is recorded in the dataset metadata.",
-        "The table includes applicant, owner and authorised representative names and addresses."
+        "The table includes applicant, owner and authorised representative names and addresses.",
+        "applicant, owner, authorised representative and firm names and addresses are present and deliberately not mapped",
+        "the table has no coordinates, so no location is mapped"
       ],
       "id": "nyc-open-data-dob-now-electrical-permit-applications",
-      "reason": "The table has 594449 rows of about 80 wide columns, roughly 900 bytes a row in a sampled export, so the download is well over the 256 MiB a recipe can read.",
-      "recipe": "not-fetchable",
+      "recipe": "fetchable",
       "surveyId": "or-88"
     },
     {
@@ -1079,11 +1086,13 @@
     {
       "flags": [
         "The table holds vehicle plates, which would not be mapped.",
-        "The NYC terms page returned HTTP 403 to the survey, so no licence is recorded."
+        "The NYC terms page returned HTTP 403 to the survey, so no licence is recorded.",
+        "the plate column holds vehicle registration numbers and is deliberately not mapped",
+        "the table has no coordinates, so no location is mapped",
+        "the case number repeats in the full table, so rows are numbered"
       ],
       "id": "nyc-open-data-dof-scofftow-case-information",
-      "reason": "The table has 1,539,045 rows, more than a recipe can read.",
-      "recipe": "not-fetchable",
+      "recipe": "fetchable",
       "surveyId": "or-101"
     },
     {
@@ -1149,7 +1158,7 @@
         "There are no coordinates, only borough, zip and dispatch area."
       ],
       "id": "nyc-open-data-fdny-ems-incident-dispatch",
-      "reason": "The table has 30,389,767 rows, more than a recipe can read.",
+      "reason": "The table has 30,389,767 rows, so even one mapped column and the id hold more cells than a fetch can hold in memory.",
       "recipe": "not-fetchable",
       "surveyId": "or-107"
     },
@@ -1159,18 +1168,19 @@
         "The NYC terms page returned HTTP 403 to the survey, so no licence is recorded."
       ],
       "id": "nyc-open-data-nypd-calls-for-service",
-      "reason": "The table has 10,484,258 rows, more than a recipe can read.",
+      "reason": "The table has 10,484,258 rows, so a mapping of even two columns and the id holds more cells than a fetch can hold in memory.",
       "recipe": "not-fetchable",
       "surveyId": "or-108"
     },
     {
       "flags": [
         "The Socrata licence field reads See Terms of Use with no terms URL.",
-        "The geolocation text is written latitude first, the reverse of WKT order."
+        "The geolocation text is written latitude first, the reverse of WKT order.",
+        "the location is a street address and a WKT point with the latitude first, so no coordinates are mapped",
+        "response and on scene times are stored in seconds"
       ],
       "id": "mesa-police-dispatch-events",
-      "reason": "The table has 1,631,480 rows, more than a recipe can read.",
-      "recipe": "not-fetchable",
+      "recipe": "fetchable",
       "surveyId": "or-109"
     },
     {
@@ -1187,11 +1197,13 @@
     {
       "flags": [
         "The csv covers 2009 to 2017 only.",
-        "Missing values are written as the text NULL."
+        "Missing values are written as the text NULL.",
+        "this download covers incidents from 2009 to 2017 only; later years are published as separate files",
+        "coordinates are not mapped because the latitude and longitude cells hold the text NULL when unknown",
+        "the notional cost is mapped as the prize, a cost rather than a reward"
       ],
       "id": "london-fire-brigade-incident-records",
-      "reason": "The 2009 to 2017 csv is 328,582,222 bytes, over the 256 MiB a recipe can read, and the later years are published as spreadsheets (xlsx).",
-      "recipe": "not-fetchable",
+      "recipe": "fetchable",
       "surveyId": "or-111"
     },
     {
@@ -1244,7 +1256,7 @@
         "The NYC terms page returned HTTP 403 to the survey, so no licence is recorded."
       ],
       "id": "nyc-open-data-311-service-requests-2020-to-present",
-      "reason": "The table has 22,844,087 rows, more than a recipe can read.",
+      "reason": "The table has 22,844,087 rows, so even one mapped column and the id hold more cells than a fetch can hold in memory.",
       "recipe": "not-fetchable",
       "surveyId": "or-116"
     },

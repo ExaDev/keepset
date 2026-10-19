@@ -23,7 +23,7 @@
     "surveyId": "or-35"
   },
   "recipe": {
-    "reason": "The county-level file is 916897688 bytes, far over the 256 MiB a recipe can read, and the other files are larger or are zip and xlsx.",
+    "reason": "The county-level file is 916,897,688 bytes and was not fetched whole, so its rows are not counted and no recipe is given, and the other files are larger or are zip and xlsx.",
     "status": "not-fetchable"
   },
   "sources": [

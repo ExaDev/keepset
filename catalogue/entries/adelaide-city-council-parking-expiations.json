@@ -5,7 +5,46 @@
   "category": "or/v1",
   "citations": [],
   "crosswalk": {
-    "file": "crosswalks/or-v1/nodes.json"
+    "oneWay": [],
+    "rules": [
+      {
+        "from": "meta",
+        "op": "move",
+        "to": "meta"
+      },
+      {
+        "from": "nodes[].id",
+        "op": "move",
+        "to": "nodes[].id"
+      },
+      {
+        "from": "nodes[].PaidDate",
+        "op": "move",
+        "to": "nodes[].closed"
+      },
+      {
+        "from": "nodes[].OffenceDate",
+        "op": "move",
+        "to": "nodes[].opened"
+      },
+      {
+        "from": "nodes[].ExpiationAmount",
+        "op": "move",
+        "to": "nodes[].prize"
+      },
+      {
+        "from": "nodes[].OffenceType",
+        "op": "move",
+        "to": "nodes[].skill"
+      },
+      {
+        "from": "nodes[].Status",
+        "op": "move",
+        "to": "nodes[].status"
+      }
+    ],
+    "source": "csv-table",
+    "target": "or/v1"
   },
   "description": "Parking expiation notices issued by Adelaide City Council, with offence date, street, amount and payment status.",
   "domain": "Case records",
@@ -23,8 +62,31 @@
     "surveyId": "or-79"
   },
   "recipe": {
-    "reason": "The CSV is about 132 MB and holds more than a million rows (a full count gave over 1.1 million), which is more than a recipe can read into memory.",
-    "status": "not-fetchable"
+    "archive": {
+      "kind": "none"
+    },
+    "parser": {
+      "columns": [
+        "PaidDate",
+        "OffenceDate",
+        "ExpiationAmount",
+        "OffenceType",
+        "Status"
+      ],
+      "delimiter": "comma",
+      "encoding": "utf-8",
+      "format": "csv-table",
+      "idColumn": null,
+      "numericColumns": [
+        {
+          "column": "ExpiationAmount",
+          "factor": 1
+        }
+      ],
+      "skipLines": 0
+    },
+    "source": 1,
+    "status": "fetchable"
   },
   "sources": [
     {

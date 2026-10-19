@@ -59,6 +59,10 @@
     "archive": {
       "kind": "none"
     },
+    "paging": {
+      "kind": "socrata-resource",
+      "pageSize": 50000
+    },
     "parser": {
       "columns": [
         "date",
@@ -90,7 +94,7 @@
     {
       "retrieved": "2026-10-19",
       "status": "live",
-      "url": "https://www.dallasopendata.com/resource/skju-bfp8.csv?%24limit=1000000"
+      "url": "https://www.dallasopendata.com/resource/skju-bfp8.csv"
     }
   ],
   "tags": [

@@ -5,7 +5,46 @@
   "category": "or/v1",
   "citations": [],
   "crosswalk": {
-    "file": "crosswalks/or-v1/nodes.json"
+    "oneWay": [],
+    "rules": [
+      {
+        "from": "meta",
+        "op": "move",
+        "to": "meta"
+      },
+      {
+        "from": "nodes[].id",
+        "op": "move",
+        "to": "nodes[].id"
+      },
+      {
+        "from": "nodes[].PumpMinutesRounded",
+        "op": "move",
+        "to": "nodes[].duration"
+      },
+      {
+        "from": "nodes[].DateOfCall",
+        "op": "move",
+        "to": "nodes[].opened"
+      },
+      {
+        "from": "nodes[].Notional_Cost",
+        "op": "move",
+        "to": "nodes[].prize"
+      },
+      {
+        "from": "nodes[].IncidentGroup",
+        "op": "move",
+        "to": "nodes[].skill"
+      },
+      {
+        "from": "nodes[].IncGeo_BoroughName",
+        "op": "move",
+        "to": "nodes[].territory"
+      }
+    ],
+    "source": "csv-table",
+    "target": "or/v1"
   },
   "description": "London Fire Brigade incident records with coordinates, borough and ward, attendance times and notional cost.",
   "domain": "Emergency dispatch",
@@ -23,8 +62,35 @@
     "surveyId": "or-111"
   },
   "recipe": {
-    "reason": "The 2009 to 2017 csv is 328,582,222 bytes, over the 256 MiB a recipe can read, and the later years are published as spreadsheets (xlsx).",
-    "status": "not-fetchable"
+    "archive": {
+      "kind": "none"
+    },
+    "parser": {
+      "columns": [
+        "PumpMinutesRounded",
+        "DateOfCall",
+        "Notional_Cost",
+        "IncidentGroup",
+        "IncGeo_BoroughName"
+      ],
+      "delimiter": "comma",
+      "encoding": "utf-8",
+      "format": "csv-table",
+      "idColumn": "IncidentNumber",
+      "numericColumns": [
+        {
+          "column": "Notional_Cost",
+          "factor": 1
+        },
+        {
+          "column": "PumpMinutesRounded",
+          "factor": 60
+        }
+      ],
+      "skipLines": 0
+    },
+    "source": 1,
+    "status": "fetchable"
   },
   "sources": [
     {

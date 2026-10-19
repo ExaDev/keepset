@@ -21,7 +21,7 @@
     "surveyId": "or-60"
   },
   "recipe": {
-    "reason": "The table has 11,324,217 rows, more than a recipe can read into memory.",
+    "reason": "The table has 11,324,217 rows, so a mapping of even one column and the id holds more cells than a fetch can hold in memory.",
     "status": "not-fetchable"
   },
   "sources": [

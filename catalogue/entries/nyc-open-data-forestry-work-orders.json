@@ -5,7 +5,51 @@
   "category": "or/v1",
   "citations": [],
   "crosswalk": {
-    "file": "crosswalks/or-v1/nodes.json"
+    "oneWay": [],
+    "rules": [
+      {
+        "from": "meta",
+        "op": "move",
+        "to": "meta"
+      },
+      {
+        "from": "nodes[].id",
+        "op": "move",
+        "to": "nodes[].id"
+      },
+      {
+        "from": "nodes[].closeddate",
+        "op": "move",
+        "to": "nodes[].closed"
+      },
+      {
+        "from": "nodes[].latitude",
+        "op": "move",
+        "to": "nodes[].lat"
+      },
+      {
+        "from": "nodes[].longitude",
+        "op": "move",
+        "to": "nodes[].lon"
+      },
+      {
+        "from": "nodes[].createddate",
+        "op": "move",
+        "to": "nodes[].opened"
+      },
+      {
+        "from": "nodes[].wotype",
+        "op": "move",
+        "to": "nodes[].skill"
+      },
+      {
+        "from": "nodes[].wostatus",
+        "op": "move",
+        "to": "nodes[].status"
+      }
+    ],
+    "source": "csv-table",
+    "target": "or/v1"
   },
   "description": "Tree removal and pruning work orders from NYC Parks with status, dates and coordinates.",
   "domain": "Technician and home-care routing",
@@ -22,14 +66,51 @@
     "surveyId": "or-15"
   },
   "recipe": {
-    "reason": "The table has 1561796 rows, more than a recipe can read.",
-    "status": "not-fetchable"
+    "archive": {
+      "kind": "none"
+    },
+    "paging": {
+      "kind": "socrata-resource",
+      "pageSize": 50000
+    },
+    "parser": {
+      "columns": [
+        "closeddate",
+        "latitude",
+        "longitude",
+        "createddate",
+        "wotype",
+        "wostatus"
+      ],
+      "delimiter": "comma",
+      "encoding": "utf-8",
+      "format": "csv-table",
+      "idColumn": "objectid",
+      "numericColumns": [
+        {
+          "column": "latitude",
+          "factor": 1
+        },
+        {
+          "column": "longitude",
+          "factor": 1
+        }
+      ],
+      "skipLines": 0
+    },
+    "source": 1,
+    "status": "fetchable"
   },
   "sources": [
     {
       "retrieved": "2026-10-19",
       "status": "live",
       "url": "https://data.cityofnewyork.us/Environment/Forestry-Work-Orders/bdjm-n7q4"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://data.cityofnewyork.us/resource/bdjm-n7q4.csv"
     }
   ],
   "tags": [
