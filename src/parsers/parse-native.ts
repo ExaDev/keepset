@@ -3,7 +3,8 @@ import { NativeParseError } from "../errors";
 import { parseEdgeList } from "./edge-list";
 import { parseGml } from "./gml";
 import { parseMatrixMarket } from "./matrix-market";
-import type { NativeGraph } from "./native";
+import { parseCsvTable } from "./csv-table";
+import type { NativeDocument, NativeGraph, NativeTable } from "./native";
 import { parsePajek } from "./pajek";
 
 /** Bytes converted per String.fromCharCode call: spreading a whole file would exceed the engine's argument-count limit, and this many stays well inside every engine's. */
@@ -33,14 +34,19 @@ export function decode(bytes: Uint8Array, parser: Parser): string {
   }
 }
 
+type TableParser = Extract<Parser, { format: "csv-table" }>;
+
 /**
- * Reads a file into the native graph shape with the recipe's parser.
+ * Reads a file into the native shape of the recipe's parser: a graph for the graph formats, a table of rows for the table formats.
  * @param bytes - The unpacked file.
  * @param parser - The recipe's parser.
- * @returns The native graph.
+ * @returns The native document.
  * @throws NativeParseError when the bytes are not valid in the stated encoding or the text is not in the stated format.
  */
-export function parseNative(bytes: Uint8Array, parser: Parser): NativeGraph {
+export function parseNative(bytes: Uint8Array, parser: TableParser): NativeTable;
+export function parseNative(bytes: Uint8Array, parser: Exclude<Parser, TableParser>): NativeGraph;
+export function parseNative(bytes: Uint8Array, parser: Parser): NativeDocument;
+export function parseNative(bytes: Uint8Array, parser: Parser): NativeDocument {
   const text = decode(bytes, parser);
   if (parser.format === "edge-list") {
     return parseEdgeList(text, parser);
@@ -50,6 +56,9 @@ export function parseNative(bytes: Uint8Array, parser: Parser): NativeGraph {
   }
   if (parser.format === "gml") {
     return parseGml(text);
+  }
+  if (parser.format === "csv-table") {
+    return parseCsvTable(text, parser);
   }
 
   return parsePajek(text);

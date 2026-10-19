@@ -3,7 +3,7 @@ import { describe, expect, it } from "vitest";
 import { createCatalogue, type Dataset } from "../catalogue";
 import { DatasetNotFoundError, KeepsetError, RecipeError, type RecipeStep } from "../errors";
 import { gzip, tar, zip } from "../test-support/archives";
-import { deadEntry, fixtureIndex, liveEntry, notFetchableEntry } from "../test-support/entries";
+import { deadEntry, fixtureIndex, liveEntry, notFetchableEntry, orEntry } from "../test-support/entries";
 import { downloadUrl, fetchDataset, fetchEntry, roundTripDataset, roundTripEntry, type FetchPort } from "./fetch-dataset";
 
 const karateText = "% karate excerpt\n1 2\n2 3\n3 1\n";
@@ -78,7 +78,7 @@ describe("fetchEntry", () => {
     const { fetch, requested } = servedBy({ [archived]: zipped });
     const result = await fetchEntry(datasetWith(deadEntry), { fetch, now });
     expect(requested).toEqual([archived]);
-    expect(result.data.edges).toEqual([{ source: "1", target: "2" }]);
+    expect("edges" in result.data && result.data.edges).toEqual([{ source: "1", target: "2" }]);
     expect(result.provenance).toMatchObject({ fetchedUrl: archived, member: "data/celegans_metabolic.net", source: { status: "dead", snapshot: { timestamp: "20230601" } } });
   });
 
@@ -174,5 +174,43 @@ describe("roundTripEntry", () => {
 
   it("resolves ids against the bundled catalogue", async () => {
     await expect(roundTripDataset("no-such-entry")).rejects.toThrow(DatasetNotFoundError);
+  });
+});
+
+describe("an or/v1 entry", () => {
+  const csv = 'request_id,latitude,longitude,minutes,status,borough,private_note\na1,51.5,-0.1,2,Open,Camden,not shared\na2,,,3,Closed,,\n"a,3",52,-1.5,,Open,"Isle ""of"" Dogs",\n';
+  const { fetch: port } = servedBy({ "https://example.org/data/requests.csv": csv });
+  const dataset = datasetWith(orEntry);
+
+  it("downloads a table, parses it, applies the crosswalk and resolves or/v1 with only the mapped fields", async () => {
+    const fetched = await fetchEntry(dataset, { fetch: port, now });
+    expect(fetched.warnings).toEqual([]);
+    expect(fetched.data).toEqual({
+      meta: { id: "service-requests", name: "Service requests", durationUnit: "seconds" },
+      nodes: [
+        { id: "a1", lat: 51.5, lon: -0.1, duration: 120, status: "Open", territory: "Camden" },
+        { id: "a2", lat: null, lon: null, duration: 180, status: "Closed", territory: null },
+        { id: "a,3", lat: 52, lon: -1.5, duration: null, status: "Open", territory: 'Isle "of" Dogs' },
+      ],
+    });
+    expect(JSON.stringify(fetched.data)).not.toContain("not shared");
+  });
+
+  it("holds the round trip over the paths the crosswalk maps", async () => {
+    expect(await roundTripEntry(dataset, { fetch: port, now })).toMatchObject({ holds: true });
+  });
+
+  it("fails at the validate step when a value is outside the target's range", async () => {
+    const bad = servedBy({ "https://example.org/data/requests.csv": "request_id,latitude,longitude,minutes,status,borough\nx,95,0,1,Open,A\n" });
+    const error = await failure(fetchEntry(dataset, { fetch: bad.fetch, now }));
+    expect(error.step).toBe("validate");
+    expect(error.message).toMatch(/lat/);
+  });
+
+  it("fails at the parse step, naming the line, when the table is malformed", async () => {
+    const bad = servedBy({ "https://example.org/data/requests.csv": "request_id,latitude,longitude,minutes,status,borough\nx,1,0,notanumber,Open,A\n" });
+    const error = await failure(fetchEntry(dataset, { fetch: bad.fetch, now }));
+    expect(error.step).toBe("parse");
+    expect(error.message).toMatch(/line 2/);
   });
 });

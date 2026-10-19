@@ -8,7 +8,7 @@ const utf8 = (text: string): Uint8Array => new TextEncoder().encode(text);
 /** One byte per character, for files whose bytes are not utf-8: each character's code point below 256 is the byte. */
 const bytesOf = (text: string): Uint8Array => Uint8Array.from(text, (char) => char.charCodeAt(0));
 
-const edgeList = (options: Partial<Extract<Parser, { format: "edge-list" }>> = {}): Parser => ({
+const edgeList = (options: Partial<Extract<Parser, { format: "edge-list" }>> = {}): Extract<Parser, { format: "edge-list" }> => ({
   format: "edge-list",
   encoding: "utf-8",
   delimiter: "whitespace",
@@ -97,7 +97,7 @@ describe("the Matrix Market parser", () => {
   });
 
   it("rejects the array layout, an unknown field, a wrong token count, an out-of-range entry and a short file", () => {
-    const parser: Parser = { format: "matrix-market", encoding: "utf-8" };
+    const parser: Extract<Parser, { format: "matrix-market" }> = { format: "matrix-market", encoding: "utf-8" };
     // mm() writes the header, a comment and the size line, so the first entry is line 4.
     const firstEntryLine = 4;
     expect(parseError(() => parseNative(utf8("%%MatrixMarket matrix array real general\n2 2\n1\n2\n3\n4\n"), parser)).line).toBe(1);
@@ -110,7 +110,7 @@ describe("the Matrix Market parser", () => {
 });
 
 describe("the GML parser", () => {
-  const gml: Parser = { format: "gml", encoding: "utf-8" };
+  const gml: Extract<Parser, { format: "gml" }> = { format: "gml", encoding: "utf-8" };
 
   it("reads nodes by id and edges by source and target, ignoring other keys and comments", () => {
     const text = `Creator "a test"
@@ -136,7 +136,7 @@ spans lines" ]
 });
 
 describe("the Pajek parser", () => {
-  const pajek: Parser = { format: "pajek", encoding: "utf-8" };
+  const pajek: Extract<Parser, { format: "pajek" }> = { format: "pajek", encoding: "utf-8" };
 
   it("reads vertices 1 to n, arcs, edges and adjacency lists, skipping labels and weights", () => {
     const text = `*Network demo

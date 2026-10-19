@@ -15,6 +15,20 @@ export interface NativeGraph {
   readonly edges: readonly NativeEdge[];
 }
 
+/** A row of a table as the table parser emits it: an id and every column of the file, each a string, a number where the recipe declares the column numeric, or null for an empty cell. Every row carries every column, because a twindex rule fails on a path absent from any element. */
+export interface NativeRow {
+  readonly id: string;
+  readonly [column: string]: string | number | null;
+}
+
+/** The native shape the table parsers emit: a table's rows as nodes, in file order. */
+export interface NativeTable {
+  readonly nodes: readonly NativeRow[];
+}
+
+/** What a parser emits: the native shape of its category family, to which the fetch flow adds `meta`. */
+export type NativeDocument = NativeGraph | NativeTable;
+
 /**
  * Collects node ids in order of first appearance, so a parser that learns its nodes from its edges emits them deterministically.
  */
