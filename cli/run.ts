@@ -1,6 +1,6 @@
 import { parseArgs } from "node:util";
 // Through the package's own name, as cli/keepset.ts imports the library: an `instanceof` check needs the very class the library throws, not a second copy bundled into the command.
-import { KeepsetError, type Dataset, type DatasetQuery, type SyntaxIssue } from "keepset";
+import { KeepsetError, NAME_SEPARATOR, type Dataset, type DatasetQuery, type SyntaxIssue } from "keepset";
 import type { FetchedDataset, RoundTripReport } from "keepset/node";
 
 /** The library calls the command delegates to: every command is one of these plus argument parsing and output formatting, injected so the command's own layer is tested alone. */
@@ -25,24 +25,33 @@ export interface CliIo {
 export const EXIT_OK = 0;
 /** The command ran and its answer is no: an entry is invalid, or a round trip does not hold. */
 export const EXIT_NO = 1;
-/** No answer: bad usage, an unknown dataset, or a recipe that failed. */
+/** No answer: bad usage, an unknown or ambiguous dataset, or a recipe that failed. */
 export const EXIT_FAILED = 2;
 
 const usage = `Usage: keepset <command> [options]
 
 Commands:
-  search [text] [--kind <kind>] [--domain <domain>] [--category <id>] [--json]
-                      list the datasets whose id, name, description, domain or
-                      tags contain the text, filtered by kind, domain or category
-  show <id> [--json]  print a dataset's metadata, recipe and crosswalk
-  fetch <id> [--out <file>]
+  search [text] [--kind <kind>] [--domain <domain>] [--namespace <path>]
+         [--category <id>] [--json]
+                      list the datasets whose id, alias, namespace, name,
+                      description, domain or tags contain the text, filtered by
+                      kind, domain, namespace (and everything beneath it) or
+                      category
+  show <dataset> [--json]
+                      print a dataset's metadata, recipe and crosswalk
+  fetch <dataset> [--out <file>]
                       run the dataset's recipe and write the normalised result
                       to <file> (default <id>.json), with its provenance beside
                       it in <file without .json>.provenance.json
-  validate <id>       check the entry against the entry schema and its
+  validate <dataset>  check the entry against the entry schema and its
                       crosswalk against twindex's validation
-  roundtrip <id>      fetch the dataset and check that decoding the encoded
+  roundtrip <dataset> fetch the dataset and check that decoding the encoded
                       native document gives it back
+
+A <dataset> is an entry id, an alias, or a qualified name such as
+suitesparse/gset/g53, written with / between the namespace and the name. Any
+leading part of the namespace may be dropped (gset/g53, g53) while the name
+still means one dataset; an entry's own id always means that entry.
 
 Options:
   --help, -h          print this help
@@ -50,12 +59,12 @@ Options:
 
 Exit status: 0 for a result, a valid entry or a round trip that holds; 1 for an
 invalid entry or a round trip that does not hold; 2 when there is no answer:
-bad usage, an unknown dataset or a recipe that failed.
+bad usage, an unknown or ambiguous dataset or a recipe that failed.
 `;
 
 /** The parsed command line. */
 interface CommandLine {
-  readonly values: { readonly kind?: string; readonly domain?: string; readonly category?: string; readonly json?: boolean; readonly out?: string; readonly help?: boolean; readonly version?: boolean };
+  readonly values: { readonly kind?: string; readonly domain?: string; readonly namespace?: string; readonly category?: string; readonly json?: boolean; readonly out?: string; readonly help?: boolean; readonly version?: boolean };
   readonly positionals: readonly string[];
 }
 
@@ -67,6 +76,7 @@ function parseCommandLine(args: readonly string[]): CommandLine {
     options: {
       kind: { type: "string" },
       domain: { type: "string" },
+      namespace: { type: "string" },
       category: { type: "string" },
       json: { type: "boolean" },
       out: { type: "string" },
@@ -106,6 +116,12 @@ export function formatShow(dataset: Dataset): string {
     lines.push("", entry.description);
   }
   lines.push("", `category: ${entry.category} (kind ${dataset.kind})`, `catalogue: ${dataset.catalogue.id} ${dataset.catalogue.version}`);
+  if (entry.namespace !== undefined) {
+    lines.push(`namespace: ${entry.namespace.join(NAME_SEPARATOR)}`);
+  }
+  if (entry.aliases !== undefined) {
+    lines.push(`aliases: ${entry.aliases.join(", ")}`);
+  }
   if (entry.domain !== undefined) {
     lines.push(`domain: ${entry.domain}`);
   }
@@ -217,6 +233,7 @@ export async function run(args: readonly string[], library: CliLibrary, io: CliI
         ...(text === undefined ? {} : { text }),
         ...(values.kind === undefined ? {} : { kind: values.kind }),
         ...(values.domain === undefined ? {} : { domain: values.domain }),
+        ...(values.namespace === undefined ? {} : { namespace: values.namespace }),
         ...(values.category === undefined ? {} : { category: values.category }),
       };
       const datasets = library.listDatasets(query);
@@ -224,24 +241,26 @@ export async function run(args: readonly string[], library: CliLibrary, io: CliI
 
       return EXIT_OK;
     }
-    const [id, ...extra] = rest;
+    const [name, ...extra] = rest;
     if (command === undefined) {
       return reject("expected a command");
     }
     if (!["show", "fetch", "validate", "roundtrip"].includes(command)) {
       return reject(`unknown command ${command}`);
     }
-    if (id === undefined || extra.length > 0) {
-      return reject(`${command} takes exactly one dataset id`);
+    if (name === undefined || extra.length > 0) {
+      return reject(`${command} takes exactly one dataset`);
     }
+    // The name typed may be an alias or a qualified name; everything the command prints or writes uses the entry's own id, so a name containing / never becomes part of a file path.
+    const dataset = library.getDataset(name);
+    const { id } = dataset.entry;
     if (command === "show") {
-      const dataset = library.getDataset(id);
       io.writeStdout(values.json === true ? json(dataset) : formatShow(dataset));
 
       return EXIT_OK;
     }
     if (command === "validate") {
-      const issues = library.validateDataset(library.getDataset(id));
+      const issues = library.validateDataset(dataset);
       if (issues.length > 0) {
         io.writeStdout(formatIssues(issues));
 
