@@ -1,3 +1,11 @@
+# [0.17.0](https://github.com/Mearman/keepset/compare/v0.16.1...v0.17.0) (2026-10-19)
+
+
+### Features
+
+* **catalogue:** record expected counts for the fixed operations research sources ([bb11828](https://github.com/Mearman/keepset/commit/bb118288131846d260607205bd345b728d5b9372))
+* **seed:** record a fixed source's node count as the entry's expected count ([16e9efb](https://github.com/Mearman/keepset/commit/16e9efb0d4683da41c9ec0733271ab8cf5a15254))
+
 ## [0.16.1](https://github.com/Mearman/keepset/compare/v0.16.0...v0.16.1) (2026-10-19)
 
 # [0.16.0](https://github.com/Mearman/keepset/compare/v0.15.1...v0.16.0) (2026-10-19)
