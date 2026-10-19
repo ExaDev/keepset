@@ -1,4 +1,7 @@
 {
+  "aliases": [
+    "g59"
+  ],
   "category": "graph/v1",
   "citations": [
     {
@@ -18,6 +21,10 @@
     "kind": "unrecorded"
   },
   "name": "Gset/G59",
+  "namespace": [
+    "suitesparse",
+    "gset"
+  ],
   "properties": {
     "components": 1,
     "connected": true,

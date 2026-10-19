@@ -1,4 +1,7 @@
 {
+  "aliases": [
+    "southern-women-2"
+  ],
   "category": "graph/v1",
   "citations": [
     {
@@ -18,6 +21,9 @@
     "kind": "unrecorded"
   },
   "name": "Southern Women Event Attendance (Bipartite)",
+  "namespace": [
+    "ucinet"
+  ],
   "properties": {
     "directed": false,
     "heterogeneous": true,

@@ -1,4 +1,7 @@
 {
+  "aliases": [
+    "usroads"
+  ],
   "category": "graph/v1",
   "citations": [
     {
@@ -18,6 +21,10 @@
     "kind": "unrecorded"
   },
   "name": "Gleich/usroads",
+  "namespace": [
+    "suitesparse",
+    "gleich"
+  ],
   "properties": {
     "components": 56,
     "connected": false,

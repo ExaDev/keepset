@@ -1,4 +1,7 @@
 {
+  "aliases": [
+    "smallw"
+  ],
   "category": "graph/v1",
   "citations": [
     {
@@ -18,6 +21,9 @@
     "kind": "unrecorded"
   },
   "name": "Small World Citations",
+  "namespace": [
+    "pajek"
+  ],
   "properties": {
     "components": 164,
     "connected": false,

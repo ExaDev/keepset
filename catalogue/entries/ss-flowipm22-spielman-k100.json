@@ -1,4 +1,7 @@
 {
+  "aliases": [
+    "spielman-k100"
+  ],
   "category": "graph/v1",
   "citations": [
     {
@@ -18,6 +21,10 @@
     "kind": "unrecorded"
   },
   "name": "FlowIPM22/Spielman_k100",
+  "namespace": [
+    "suitesparse",
+    "flowipm22"
+  ],
   "properties": {
     "components": 1,
     "connected": true,

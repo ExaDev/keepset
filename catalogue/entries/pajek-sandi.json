@@ -1,4 +1,7 @@
 {
+  "aliases": [
+    "sandi"
+  ],
   "category": "graph/v1",
   "citations": [
     {
@@ -18,6 +21,9 @@
     "kind": "unrecorded"
   },
   "name": "Graph Products Collaboration",
+  "namespace": [
+    "pajek"
+  ],
   "properties": {
     "components": 3,
     "connected": false,

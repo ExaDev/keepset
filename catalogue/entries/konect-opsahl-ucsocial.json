@@ -1,4 +1,7 @@
 {
+  "aliases": [
+    "opsahl-ucsocial"
+  ],
   "category": "graph/v1",
   "citations": [
     {
@@ -19,6 +22,9 @@
     "kind": "unrecorded"
   },
   "name": "Opsahl UC Social Network",
+  "namespace": [
+    "konect"
+  ],
   "properties": {
     "directed": true,
     "heterogeneous": false,

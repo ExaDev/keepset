@@ -1,4 +1,7 @@
 {
+  "aliases": [
+    "roadnet-ca"
+  ],
   "category": "graph/v1",
   "citations": [
     {
@@ -18,6 +21,10 @@
     "kind": "unrecorded"
   },
   "name": "SNAP/roadNet-CA",
+  "namespace": [
+    "suitesparse",
+    "snap"
+  ],
   "properties": {
     "components": 8713,
     "connected": false,

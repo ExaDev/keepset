@@ -1,4 +1,7 @@
 {
+  "aliases": [
+    "hardesty3"
+  ],
   "category": "graph/v1",
   "citations": [
     {
@@ -18,6 +21,10 @@
     "kind": "unrecorded"
   },
   "name": "Hardesty/Hardesty3",
+  "namespace": [
+    "suitesparse",
+    "hardesty"
+  ],
   "properties": {
     "components": 1,
     "connected": true,

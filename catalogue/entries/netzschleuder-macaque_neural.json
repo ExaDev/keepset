@@ -1,4 +1,7 @@
 {
+  "aliases": [
+    "macaque_neural"
+  ],
   "category": "graph/v1",
   "citations": [
     {
@@ -19,6 +22,9 @@
     "kind": "unrecorded"
   },
   "name": "Macaque cortical connectivity (Young)",
+  "namespace": [
+    "netzschleuder"
+  ],
   "properties": {
     "directed": false,
     "heterogeneous": false,

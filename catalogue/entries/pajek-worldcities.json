@@ -1,4 +1,7 @@
 {
+  "aliases": [
+    "worldcities"
+  ],
   "category": "graph/v1",
   "citations": [
     {
@@ -18,6 +21,9 @@
     "kind": "unrecorded"
   },
   "name": "Two-mode network of world cities and their attributes",
+  "namespace": [
+    "pajek"
+  ],
   "properties": {
     "components": 1,
     "connected": true,

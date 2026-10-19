@@ -1,4 +1,7 @@
 {
+  "aliases": [
+    "wiki_science"
+  ],
   "category": "graph/v1",
   "citations": [
     {
@@ -19,6 +22,9 @@
     "kind": "unrecorded"
   },
   "name": "Wikipedia Map of Science (2020)",
+  "namespace": [
+    "netzschleuder"
+  ],
   "properties": {
     "directed": false,
     "heterogeneous": true,

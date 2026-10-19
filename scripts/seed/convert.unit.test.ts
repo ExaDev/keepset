@@ -1,7 +1,7 @@
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { describe, expect, it } from "vitest";
-import { convertCatalogue, netzschleuderCsv, parseWayback, type Outcome } from "./convert";
+import { convertCatalogue, namespaceOf, netzschleuderCsv, parseWayback, type Outcome } from "./convert";
 import { GraphboxCatalogueSchema, SourceCatalogueSchema } from "./source";
 
 /* A small committed slice of the pipeline catalogue, one dataset per classification path, and of the graphbox catalogue for the overlap section. */
@@ -139,5 +139,29 @@ describe("the URL helpers", () => {
   it("derives Netzschleuder's CSV archive", () => {
     expect(netzschleuderCsv("https://networks.skewed.de/net/copenhagen/files/bt.gt.zst")).toBe("https://networks.skewed.de/net/copenhagen/files/bt.csv.zip");
     expect(netzschleuderCsv("https://networks.skewed.de/net/moreno_sheep/")).toBe("https://networks.skewed.de/net/moreno_sheep/files/moreno_sheep.csv.zip");
+  });
+});
+
+describe("namespaceOf", () => {
+  it("files a SuiteSparse id under the collection and its group, with the rest of the id as its name", () => {
+    expect(namespaceOf("ss-gset-g53")).toEqual({ namespace: ["suitesparse", "gset"], alias: "g53" });
+    expect(namespaceOf("ss-dimacs10-channel-500x100x100-b050")).toEqual({ namespace: ["suitesparse", "dimacs10"], alias: "channel-500x100x100-b050" });
+  });
+
+  it("files an id with a collection prefix under that collection", () => {
+    expect(namespaceOf("pajek-hep-th")).toEqual({ namespace: ["pajek"], alias: "hep-th" });
+    expect(namespaceOf("nr-eco-everglades")).toEqual({ namespace: ["networkrepository"], alias: "eco-everglades" });
+  });
+
+  it("leaves an id whose prefix is part of an upstream dataset's name without a namespace", () => {
+    expect(namespaceOf("ca-astroph")).toBeUndefined();
+    expect(namespaceOf("p2p-gnutella09")).toBeUndefined();
+    expect(namespaceOf("cora")).toBeUndefined();
+  });
+
+  it("names nothing for an id that is only a prefix or a prefix and a group", () => {
+    expect(namespaceOf("pajek")).toBeUndefined();
+    expect(namespaceOf("ss-gset")).toBeUndefined();
+    expect(namespaceOf("ss")).toBeUndefined();
   });
 });

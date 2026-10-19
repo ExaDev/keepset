@@ -1,4 +1,7 @@
 {
+  "aliases": [
+    "harvard500"
+  ],
   "category": "graph/v1",
   "citations": [
     {
@@ -18,6 +21,10 @@
     "kind": "unrecorded"
   },
   "name": "MathWorks/Harvard500",
+  "namespace": [
+    "suitesparse",
+    "mathworks"
+  ],
   "properties": {
     "components": 1,
     "connected": true,

@@ -1,4 +1,7 @@
 {
+  "aliases": [
+    "com-dblp"
+  ],
   "category": "graph/v1",
   "citations": [
     {
@@ -18,6 +21,10 @@
     "kind": "unrecorded"
   },
   "name": "SNAP/com-DBLP",
+  "namespace": [
+    "suitesparse",
+    "snap"
+  ],
   "properties": {
     "components": 1,
     "connected": true,

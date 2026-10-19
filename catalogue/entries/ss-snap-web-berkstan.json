@@ -1,4 +1,7 @@
 {
+  "aliases": [
+    "web-berkstan"
+  ],
   "category": "graph/v1",
   "citations": [
     {
@@ -18,6 +21,10 @@
     "kind": "unrecorded"
   },
   "name": "SNAP/web-BerkStan",
+  "namespace": [
+    "suitesparse",
+    "snap"
+  ],
   "properties": {
     "components": 676,
     "connected": false,

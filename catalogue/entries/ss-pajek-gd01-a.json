@@ -1,4 +1,7 @@
 {
+  "aliases": [
+    "gd01-a"
+  ],
   "category": "graph/v1",
   "citations": [
     {
@@ -18,6 +21,10 @@
     "kind": "unrecorded"
   },
   "name": "Graph Drawing Contest 2001, graph A",
+  "namespace": [
+    "suitesparse",
+    "pajek"
+  ],
   "properties": {
     "components": 6,
     "connected": false,

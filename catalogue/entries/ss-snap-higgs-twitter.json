@@ -1,4 +1,7 @@
 {
+  "aliases": [
+    "higgs-twitter"
+  ],
   "category": "graph/v1",
   "citations": [
     {
@@ -18,6 +21,10 @@
     "kind": "unrecorded"
   },
   "name": "SNAP/higgs-twitter",
+  "namespace": [
+    "suitesparse",
+    "snap"
+  ],
   "properties": {
     "components": 156,
     "connected": false,

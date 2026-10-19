@@ -1,4 +1,7 @@
 {
+  "aliases": [
+    "eat-sr"
+  ],
   "category": "graph/v1",
   "citations": [
     {
@@ -18,6 +21,10 @@
     "kind": "unrecorded"
   },
   "name": "Edinburgh Associative Thesaurus, response-stimulus direction",
+  "namespace": [
+    "suitesparse",
+    "pajek"
+  ],
   "properties": {
     "components": 1,
     "connected": true,

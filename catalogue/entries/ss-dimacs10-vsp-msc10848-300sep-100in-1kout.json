@@ -1,4 +1,7 @@
 {
+  "aliases": [
+    "vsp-msc10848-300sep-100in-1kout"
+  ],
   "category": "graph/v1",
   "citations": [
     {
@@ -18,6 +21,10 @@
     "kind": "unrecorded"
   },
   "name": "DIMACS10/vsp_msc10848_300sep_100in_1Kout",
+  "namespace": [
+    "suitesparse",
+    "dimacs10"
+  ],
   "properties": {
     "components": 1,
     "connected": true,

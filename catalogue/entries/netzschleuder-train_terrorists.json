@@ -1,4 +1,7 @@
 {
+  "aliases": [
+    "train_terrorists"
+  ],
   "category": "graph/v1",
   "citations": [
     {
@@ -19,6 +22,9 @@
     "kind": "unrecorded"
   },
   "name": "Madrid train bombing terrorists (2004)",
+  "namespace": [
+    "netzschleuder"
+  ],
   "properties": {
     "directed": false,
     "heterogeneous": false,

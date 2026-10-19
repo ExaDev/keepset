@@ -1,4 +1,7 @@
 {
+  "aliases": [
+    "eris1176"
+  ],
   "category": "graph/v1",
   "citations": [
     {
@@ -18,6 +21,10 @@
     "kind": "unrecorded"
   },
   "name": "HB/eris1176",
+  "namespace": [
+    "suitesparse",
+    "hb"
+  ],
   "properties": {
     "components": 2,
     "connected": false,

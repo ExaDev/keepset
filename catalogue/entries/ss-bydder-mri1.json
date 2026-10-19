@@ -1,4 +1,7 @@
 {
+  "aliases": [
+    "mri1"
+  ],
   "category": "graph/v1",
   "citations": [
     {
@@ -18,6 +21,10 @@
     "kind": "unrecorded"
   },
   "name": "Bydder/mri1",
+  "namespace": [
+    "suitesparse",
+    "bydder"
+  ],
   "properties": {
     "components": 1,
     "connected": true,

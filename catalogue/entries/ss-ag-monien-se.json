@@ -1,4 +1,7 @@
 {
+  "aliases": [
+    "monien-se"
+  ],
   "category": "graph/v1",
   "citations": [
     {
@@ -18,6 +21,10 @@
     "kind": "unrecorded"
   },
   "name": "AG-Monien/se",
+  "namespace": [
+    "suitesparse",
+    "ag"
+  ],
   "properties": {
     "components": 1,
     "connected": true,

@@ -1,4 +1,7 @@
 {
+  "aliases": [
+    "foldoc"
+  ],
   "category": "graph/v1",
   "citations": [
     {
@@ -18,6 +21,9 @@
     "kind": "unrecorded"
   },
   "name": "FOLDOC Dictionary",
+  "namespace": [
+    "pajek"
+  ],
   "properties": {
     "components": 1,
     "connected": true,

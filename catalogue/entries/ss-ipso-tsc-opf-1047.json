@@ -1,4 +1,7 @@
 {
+  "aliases": [
+    "tsc-opf-1047"
+  ],
   "category": "graph/v1",
   "citations": [
     {
@@ -18,6 +21,10 @@
     "kind": "unrecorded"
   },
   "name": "IPSO/TSC_OPF_1047",
+  "namespace": [
+    "suitesparse",
+    "ipso"
+  ],
   "properties": {
     "components": 2,
     "connected": false,

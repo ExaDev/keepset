@@ -1,4 +1,7 @@
 {
+  "aliases": [
+    "vsp-model1-crew1-cr42-south31"
+  ],
   "category": "graph/v1",
   "citations": [
     {
@@ -18,6 +21,10 @@
     "kind": "unrecorded"
   },
   "name": "DIMACS10/vsp_model1_crew1_cr42_south31",
+  "namespace": [
+    "suitesparse",
+    "dimacs10"
+  ],
   "properties": {
     "components": 1,
     "connected": true,

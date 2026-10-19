@@ -1,4 +1,7 @@
 {
+  "aliases": [
+    "legresley-2508"
+  ],
   "category": "graph/v1",
   "citations": [
     {
@@ -18,6 +21,10 @@
     "kind": "unrecorded"
   },
   "name": "LeGresley/LeGresley_2508",
+  "namespace": [
+    "suitesparse",
+    "legresley"
+  ],
   "properties": {
     "components": 4,
     "connected": false,

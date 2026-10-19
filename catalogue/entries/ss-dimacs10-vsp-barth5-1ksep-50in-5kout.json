@@ -1,4 +1,7 @@
 {
+  "aliases": [
+    "vsp-barth5-1ksep-50in-5kout"
+  ],
   "category": "graph/v1",
   "citations": [
     {
@@ -18,6 +21,10 @@
     "kind": "unrecorded"
   },
   "name": "DIMACS10/vsp_barth5_1Ksep_50in_5Kout",
+  "namespace": [
+    "suitesparse",
+    "dimacs10"
+  ],
   "properties": {
     "components": 1,
     "connected": true,

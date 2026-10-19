@@ -1,4 +1,7 @@
 {
+  "aliases": [
+    "kemelmacher"
+  ],
   "category": "graph/v1",
   "citations": [
     {
@@ -18,6 +21,10 @@
     "kind": "unrecorded"
   },
   "name": "Kemelmacher/Kemelmacher",
+  "namespace": [
+    "suitesparse",
+    "kemelmacher"
+  ],
   "properties": {
     "components": 1,
     "connected": true,

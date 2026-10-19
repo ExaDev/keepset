@@ -1,4 +1,7 @@
 {
+  "aliases": [
+    "odlis"
+  ],
   "category": "graph/v1",
   "citations": [
     {
@@ -18,6 +21,10 @@
     "kind": "unrecorded"
   },
   "name": "Online Dictionary for Library and Information Science hyperlink network",
+  "namespace": [
+    "suitesparse",
+    "pajek"
+  ],
   "properties": {
     "components": 2,
     "connected": false,

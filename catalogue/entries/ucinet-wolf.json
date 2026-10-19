@@ -1,4 +1,7 @@
 {
+  "aliases": [
+    "wolf"
+  ],
   "category": "graph/v1",
   "citations": [
     {
@@ -18,6 +21,9 @@
     "kind": "unrecorded"
   },
   "name": "Wolfe Primates",
+  "namespace": [
+    "ucinet"
+  ],
   "properties": {
     "components": 2,
     "connected": false,

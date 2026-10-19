@@ -1,4 +1,7 @@
 {
+  "aliases": [
+    "notredame-actors"
+  ],
   "category": "graph/v1",
   "citations": [
     {
@@ -18,6 +21,10 @@
     "kind": "unrecorded"
   },
   "name": "Barabasi/NotreDame_actors",
+  "namespace": [
+    "suitesparse",
+    "barabasi"
+  ],
   "properties": {
     "components": 47,
     "connected": false,

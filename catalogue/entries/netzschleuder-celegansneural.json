@@ -1,4 +1,7 @@
 {
+  "aliases": [
+    "celegansneural"
+  ],
   "category": "graph/v1",
   "citations": [
     {
@@ -23,6 +26,9 @@
     "kind": "unrecorded"
   },
   "name": "C. elegans neurons (1986)",
+  "namespace": [
+    "netzschleuder"
+  ],
   "properties": {
     "directed": true,
     "heterogeneous": false,

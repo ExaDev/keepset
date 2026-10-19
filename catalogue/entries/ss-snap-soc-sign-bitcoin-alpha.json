@@ -1,4 +1,7 @@
 {
+  "aliases": [
+    "soc-sign-bitcoin-alpha"
+  ],
   "category": "graph/v1",
   "citations": [
     {
@@ -18,6 +21,10 @@
     "kind": "unrecorded"
   },
   "name": "SNAP/soc-sign-bitcoin-alpha",
+  "namespace": [
+    "suitesparse",
+    "snap"
+  ],
   "properties": {
     "components": 5,
     "connected": false,

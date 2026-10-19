@@ -1,4 +1,7 @@
 {
+  "aliases": [
+    "erdos-992"
+  ],
   "category": "graph/v1",
   "citations": [
     {
@@ -18,6 +21,9 @@
     "kind": "unrecorded"
   },
   "name": "Erdos Collaboration 1999 (Extended)",
+  "namespace": [
+    "pajek"
+  ],
   "properties": {
     "components": 17,
     "connected": false,

@@ -1,4 +1,7 @@
 {
+  "aliases": [
+    "patents"
+  ],
   "category": "graph/v1",
   "citations": [
     {
@@ -18,6 +21,10 @@
     "kind": "unrecorded"
   },
   "name": "Pajek/patents",
+  "namespace": [
+    "suitesparse",
+    "pajek"
+  ],
   "properties": {
     "components": 27718,
     "connected": false,

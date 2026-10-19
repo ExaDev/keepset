@@ -1,4 +1,7 @@
 {
+  "aliases": [
+    "kmer-v1r"
+  ],
   "category": "graph/v1",
   "citations": [
     {
@@ -18,6 +21,10 @@
     "kind": "unrecorded"
   },
   "name": "GenBank/kmer_V1r",
+  "namespace": [
+    "suitesparse",
+    "genbank"
+  ],
   "properties": {
     "components": 9,
     "connected": false,

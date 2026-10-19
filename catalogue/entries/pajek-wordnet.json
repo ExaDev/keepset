@@ -1,4 +1,7 @@
 {
+  "aliases": [
+    "wordnet"
+  ],
   "category": "graph/v1",
   "citations": [
     {
@@ -18,6 +21,9 @@
     "kind": "unrecorded"
   },
   "name": "WordNet",
+  "namespace": [
+    "pajek"
+  ],
   "properties": {
     "components": 413,
     "connected": false,

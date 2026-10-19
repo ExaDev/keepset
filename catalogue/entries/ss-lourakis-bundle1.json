@@ -1,4 +1,7 @@
 {
+  "aliases": [
+    "bundle1"
+  ],
   "category": "graph/v1",
   "citations": [
     {
@@ -18,6 +21,10 @@
     "kind": "unrecorded"
   },
   "name": "Lourakis/bundle1",
+  "namespace": [
+    "suitesparse",
+    "lourakis"
+  ],
   "properties": {
     "components": 1,
     "connected": true,

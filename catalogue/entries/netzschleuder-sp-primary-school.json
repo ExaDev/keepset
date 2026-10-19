@@ -1,4 +1,7 @@
 {
+  "aliases": [
+    "sp-primary-school"
+  ],
   "category": "graph/v1",
   "citations": [
     {
@@ -19,6 +22,9 @@
     "kind": "unrecorded"
   },
   "name": "SocioPatterns Primary School",
+  "namespace": [
+    "netzschleuder"
+  ],
   "properties": {
     "directed": false,
     "heterogeneous": true,

@@ -1,4 +1,7 @@
 {
+  "aliases": [
+    "cage10"
+  ],
   "category": "graph/v1",
   "citations": [
     {
@@ -18,6 +21,10 @@
     "kind": "unrecorded"
   },
   "name": "vanHeukelum/cage10",
+  "namespace": [
+    "suitesparse",
+    "vanheukelum"
+  ],
   "properties": {
     "components": 1,
     "connected": true,

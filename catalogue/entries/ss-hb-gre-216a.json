@@ -1,4 +1,7 @@
 {
+  "aliases": [
+    "gre-216a"
+  ],
   "category": "graph/v1",
   "citations": [
     {
@@ -18,6 +21,10 @@
     "kind": "unrecorded"
   },
   "name": "HB/gre_216a",
+  "namespace": [
+    "suitesparse",
+    "hb"
+  ],
   "properties": {
     "components": 1,
     "connected": true,

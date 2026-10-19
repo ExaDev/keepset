@@ -1,4 +1,7 @@
 {
+  "aliases": [
+    "dutch-elite"
+  ],
   "category": "graph/v1",
   "citations": [
     {
@@ -18,6 +21,9 @@
     "kind": "unrecorded"
   },
   "name": "Dutch Elite Network",
+  "namespace": [
+    "pajek"
+  ],
   "properties": {
     "components": 216,
     "connected": false,

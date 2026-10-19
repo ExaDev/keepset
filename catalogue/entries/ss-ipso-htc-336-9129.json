@@ -1,4 +1,7 @@
 {
+  "aliases": [
+    "htc-336-9129"
+  ],
   "category": "graph/v1",
   "citations": [
     {
@@ -18,6 +21,10 @@
     "kind": "unrecorded"
   },
   "name": "IPSO/HTC_336_9129",
+  "namespace": [
+    "suitesparse",
+    "ipso"
+  ],
   "properties": {
     "components": 14796,
     "connected": false,

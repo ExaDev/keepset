@@ -1,4 +1,7 @@
 {
+  "aliases": [
+    "gap-twitter"
+  ],
   "category": "graph/v1",
   "citations": [
     {
@@ -18,6 +21,10 @@
     "kind": "unrecorded"
   },
   "name": "GAP/GAP-twitter",
+  "namespace": [
+    "suitesparse",
+    "gap"
+  ],
   "properties": {
     "components": 19926186,
     "connected": false,

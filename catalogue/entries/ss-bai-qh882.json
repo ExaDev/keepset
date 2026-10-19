@@ -1,4 +1,7 @@
 {
+  "aliases": [
+    "qh882"
+  ],
   "category": "graph/v1",
   "citations": [
     {
@@ -18,6 +21,10 @@
     "kind": "unrecorded"
   },
   "name": "Bai/qh882",
+  "namespace": [
+    "suitesparse",
+    "bai"
+  ],
   "properties": {
     "components": 1,
     "connected": true,

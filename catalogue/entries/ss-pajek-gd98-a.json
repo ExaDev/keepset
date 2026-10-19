@@ -1,4 +1,7 @@
 {
+  "aliases": [
+    "gd98-a"
+  ],
   "category": "graph/v1",
   "citations": [
     {
@@ -18,6 +21,10 @@
     "kind": "unrecorded"
   },
   "name": "Graph Drawing Contest 1998, graph A",
+  "namespace": [
+    "suitesparse",
+    "pajek"
+  ],
   "properties": {
     "components": 4,
     "connected": false,

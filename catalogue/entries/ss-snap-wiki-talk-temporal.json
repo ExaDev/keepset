@@ -1,4 +1,7 @@
 {
+  "aliases": [
+    "wiki-talk-temporal"
+  ],
   "category": "graph/v1",
   "citations": [
     {
@@ -18,6 +21,10 @@
     "kind": "unrecorded"
   },
   "name": "SNAP/wiki-talk-temporal",
+  "namespace": [
+    "suitesparse",
+    "snap"
+  ],
   "properties": {
     "components": 47207,
     "connected": false,

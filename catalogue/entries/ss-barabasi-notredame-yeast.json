@@ -1,4 +1,7 @@
 {
+  "aliases": [
+    "notredame-yeast"
+  ],
   "category": "graph/v1",
   "citations": [
     {
@@ -18,6 +21,10 @@
     "kind": "unrecorded"
   },
   "name": "Barabasi/NotreDame_yeast",
+  "namespace": [
+    "suitesparse",
+    "barabasi"
+  ],
   "properties": {
     "components": 173,
     "connected": false,

@@ -1,4 +1,7 @@
 {
+  "aliases": [
+    "in-2004"
+  ],
   "category": "graph/v1",
   "citations": [
     {
@@ -18,6 +21,10 @@
     "kind": "unrecorded"
   },
   "name": "LAW/in-2004",
+  "namespace": [
+    "suitesparse",
+    "law"
+  ],
   "properties": {
     "components": 134,
     "connected": false,

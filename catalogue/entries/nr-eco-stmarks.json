@@ -1,4 +1,7 @@
 {
+  "aliases": [
+    "eco-stmarks"
+  ],
   "category": "graph/v1",
   "citations": [
     {
@@ -19,6 +22,9 @@
     "kind": "unrecorded"
   },
   "name": "St. Marks Food Web",
+  "namespace": [
+    "networkrepository"
+  ],
   "properties": {
     "directed": true,
     "heterogeneous": true,

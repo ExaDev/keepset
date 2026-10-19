@@ -1,4 +1,7 @@
 {
+  "aliases": [
+    "indochina-2004"
+  ],
   "category": "graph/v1",
   "citations": [
     {
@@ -18,6 +21,10 @@
     "kind": "unrecorded"
   },
   "name": "LAW/indochina-2004",
+  "namespace": [
+    "suitesparse",
+    "law"
+  ],
   "properties": {
     "components": 295,
     "connected": false,
