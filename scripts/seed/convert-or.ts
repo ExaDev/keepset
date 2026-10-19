@@ -223,7 +223,7 @@ export function convertItem(item: SurveyEntry, curation: CurationItem, probedOn:
           }
         : { status: "not-fetchable", reason: outcome.reason },
     crosswalk: outcome.status === "fetchable" ? crosswalkOf(outcome) : { file: OR_NODES_CROSSWALK },
-    expectedCounts: {},
+    expectedCounts: outcome.status === "fetchable" && outcome.expectedNodes !== undefined ? { nodes: outcome.expectedNodes } : {},
     properties: { surveyId: item.id },
   });
 

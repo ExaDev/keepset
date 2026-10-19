@@ -87,6 +87,12 @@ describe("convertSurvey", () => {
     });
   });
 
+  it("records a source's own node count as the entry's expected count, and none when the curation gives none", () => {
+    const counted = convertSurvey(survey, withFirst({ expectedNodes: 7 }), none).entries.find((entry) => entry.id === "example-service-requests");
+    expect(counted?.expectedCounts).toEqual({ nodes: 7 });
+    expect(requests?.expectedCounts).toEqual({});
+  });
+
   it("builds a crosswalk that moves meta, ids and each mapped column, and drops every other column one way", () => {
     expect(requests?.crosswalk).toEqual({
       source: "csv-table",

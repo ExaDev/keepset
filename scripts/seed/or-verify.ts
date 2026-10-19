@@ -151,7 +151,9 @@ async function verifyOne(curated: CurationItem): Promise<string> {
 
   const recorded = whole && outcome.rowCount !== undefined ? ` (the curation recorded ${String(outcome.rowCount)})` : "";
 
-  return `${curated.surveyId} ${curated.id}: ${String(nodes.length)} rows${recorded}; ${fields.join("; ")}`;
+  const warned = result.warnings.length > 0 ? ` WARNING ${result.warnings.join("; ")}` : "";
+
+  return `${curated.surveyId} ${curated.id}: ${String(nodes.length)} rows${recorded}; ${fields.join("; ")}${warned}`;
 }
 
 /**
