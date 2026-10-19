@@ -104,18 +104,23 @@ describe("the csv-table parser", () => {
   });
 
   it("names columns by their header with other characters replaced by one underscore", () => {
-    expect(columnName("Date received")).toBe("Date_received");
-    expect(columnName("Timely response?")).toBe("Timely_response");
-    expect(columnName("  Zip / Postal  code ")).toBe("Zip_Postal_code");
-    expect(columnName("2024 total")).toBe("c_2024_total");
-    expect(columnName("G6A_G6_COMPL_DD")).toBe("G6A_G6_COMPL_DD");
-    expect(columnName("???")).toBeUndefined();
+    expect(columnName("Date received", 1)).toBe("Date_received");
+    expect(columnName("Timely response?", 1)).toBe("Timely_response");
+    expect(columnName("  Zip / Postal  code ", 1)).toBe("Zip_Postal_code");
+    expect(columnName("2024 total", 1)).toBe("c_2024_total");
+    expect(columnName("G6A_G6_COMPL_DD", 1)).toBe("G6A_G6_COMPL_DD");
+    expect(columnName("???", THIRD_LINE)).toBe("column_3");
+    expect(columnName("", 1)).toBe("column_1");
     expect(parseNative(utf8("Date received,Timely response?\nx,y\n"), table()).nodes).toEqual([{ id: "1", Date_received: "x", Timely_response: "y" }]);
   });
 
-  it("refuses a header that has no usable name, repeats a name, or has a column named id without an id column", () => {
-    expect(parseError(() => parseNative(utf8("a,???\n1,2\n"), table())).message).toMatch(/header cell 2/);
+  it("names a header cell with nothing left by its position, so an unnamed index column is a column", () => {
+    expect(parseNative(utf8(",a,???\n0,x,y\n"), table()).nodes).toEqual([{ id: "1", column_1: "0", a: "x", column_3: "y" }]);
+  });
+
+  it("refuses a header that repeats a name, and a column named id without an id column", () => {
     expect(parseError(() => parseNative(utf8("a b,a_b\n1,2\n"), table())).message).toMatch(/both become the column a_b/);
+    expect(parseError(() => parseNative(utf8("column_2,\n1,2\n"), table())).message).toMatch(/both become the column column_2/);
     expect(parseError(() => parseNative(utf8("id,x\n1,2\n"), table())).message).toMatch(/column named id/);
     expect(parseNative(utf8("id,x\n7,2\n"), table({ idColumn: "id" })).nodes).toEqual([{ id: "7", x: "2" }]);
   });
