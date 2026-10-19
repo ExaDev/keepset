@@ -122,7 +122,7 @@ const ColumnSchema = z.int().min(0);
 const EncodingSchema = z.enum(["utf-8", "latin1"]);
 
 /** A column of a table as the table parser names it: the header with every run of characters outside letters, digits and underscore replaced by one underscore, so it is a valid segment of a twindex path. */
-const ColumnNameSchema = z.string().regex(/^[A-Za-z](?:[A-Za-z0-9_]*[A-Za-z0-9])?$/, { message: "must be a column name as the parser spells it: letters, digits and underscores, starting with a letter and not ending with an underscore" });
+export const ColumnNameSchema = z.string().regex(/^[A-Za-z](?:[A-Za-z0-9_]*[A-Za-z0-9])?$/, { message: "must be a column name as the parser spells it: letters, digits and underscores, starting with a letter and not ending with an underscore" });
 
 /** The parser that reads the unpacked file into the dataset's native JSON shape, with the options that format needs. Every option is stated in the entry, so a recipe reads the same way wherever it runs. */
 export const ParserSchema = z.discriminatedUnion("format", [
