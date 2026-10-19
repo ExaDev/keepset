@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import { writeFileSync } from "node:fs";
-import { countTarget, getDataset, listDatasets, validateDataset } from "keepset";
+import { countTarget, getDataset, listDatasets, listNamespaces, validateDataset } from "keepset";
 import { fetchDataset, roundTripDataset } from "keepset/node";
 import packageJson from "../package.json" with { type: "json" };
 import { run } from "./run";
@@ -15,6 +15,7 @@ process.exitCode = await run(
   {
     listDatasets,
     getDataset,
+    listNamespaces,
     validateDataset,
     fetchDataset: async (id) => fetchDataset(id),
     roundTripDataset: async (id) => roundTripDataset(id),

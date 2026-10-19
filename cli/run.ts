@@ -1,12 +1,13 @@
 import { parseArgs } from "node:util";
 // Through the package's own name, as cli/keepset.ts imports the library: an `instanceof` check needs the very class the library throws, not a second copy bundled into the command.
-import { KeepsetError, NAME_SEPARATOR, type Dataset, type DatasetQuery, type SyntaxIssue } from "keepset";
+import { KeepsetError, NAME_SEPARATOR, type Dataset, type DatasetQuery, type NamespaceNode, type SyntaxIssue } from "keepset";
 import type { FetchedDataset, RoundTripReport } from "keepset/node";
 
 /** The library calls the command delegates to: every command is one of these plus argument parsing and output formatting, injected so the command's own layer is tested alone. */
 export interface CliLibrary {
   readonly listDatasets: (query: DatasetQuery) => readonly Dataset[];
   readonly getDataset: (id: string) => Dataset;
+  readonly listNamespaces: (path?: string) => readonly NamespaceNode[];
   readonly validateDataset: (dataset: Dataset) => readonly SyntaxIssue[];
   readonly fetchDataset: (id: string) => Promise<FetchedDataset>;
   readonly roundTripDataset: (id: string) => Promise<RoundTripReport>;
@@ -37,6 +38,10 @@ Commands:
                       description, domain or tags contain the text, filtered by
                       kind, domain, namespace (and every namespace beneath it,
                       segment aliases allowed) or category
+  namespaces [path] [--json]
+                      list the namespaces directly beneath a path, or the
+                      outermost ones, each with how many datasets it holds,
+                      tab-separated
   show <dataset> [--json]
                       print a dataset's metadata, recipe and crosswalk
   fetch <dataset> [--out <file>]
@@ -59,7 +64,7 @@ Options:
 
 Exit status: 0 for a result, a valid entry or a round trip that holds; 1 for an
 invalid entry or a round trip that does not hold; 2 when there is no answer:
-bad usage, an unknown or ambiguous dataset or a recipe that failed.
+bad usage, an unknown or ambiguous dataset or namespace or a recipe that failed.
 `;
 
 /** The parsed command line. */
@@ -102,6 +107,15 @@ function json(value: unknown): string {
  */
 export function formatSearch(datasets: readonly Dataset[]): string {
   return datasets.map(({ entry }) => `${entry.id}\t${entry.name}\t${entry.category}\t${entry.recipe.status}\n`).join("");
+}
+
+/**
+ * One line per namespace for `namespaces`: path and the number of datasets it holds, tab-separated so the output pipes into other tools.
+ * @param nodes - The namespaces.
+ * @returns The text.
+ */
+export function formatNamespaces(nodes: readonly NamespaceNode[]): string {
+  return nodes.map((node) => `${node.path}\t${String(node.count)}\n`).join("");
 }
 
 /**
@@ -238,6 +252,21 @@ export async function run(args: readonly string[], library: CliLibrary, io: CliI
       };
       const datasets = library.listDatasets(query);
       io.writeStdout(values.json === true ? json(datasets.map((dataset) => dataset.entry)) : formatSearch(datasets));
+
+      return EXIT_OK;
+    }
+    if (command === "namespaces") {
+      if (rest.length > 1) {
+        return reject("namespaces takes at most one path");
+      }
+      const [path] = rest;
+      if (path !== undefined && library.listDatasets({ namespace: path }).length === 0) {
+        io.writeStderr(`no namespace ${JSON.stringify(path)} in the catalogue\n`);
+
+        return EXIT_FAILED;
+      }
+      const nodes = library.listNamespaces(path);
+      io.writeStdout(values.json === true ? json(nodes) : formatNamespaces(nodes));
 
       return EXIT_OK;
     }
