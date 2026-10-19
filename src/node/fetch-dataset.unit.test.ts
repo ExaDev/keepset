@@ -3,7 +3,7 @@ import { describe, expect, it } from "vitest";
 import { createCatalogue, type Dataset } from "../catalogue";
 import { DatasetNotFoundError, KeepsetError, RecipeError, type RecipeStep } from "../errors";
 import { gzip, tar, zip } from "../test-support/archives";
-import { arcgisEntry, deadEntry, fixtureIndex, liveEntry, notFetchableEntry, orEntry, socrataEntry } from "../test-support/entries";
+import { arcgisEntry, ckanEntry, deadEntry, fixtureIndex, liveEntry, notFetchableEntry, orEntry, socrataEntry } from "../test-support/entries";
 import { downloadUrl, fetchDataset, fetchEntry, roundTripDataset, roundTripEntry, type FetchPort } from "./fetch-dataset";
 
 const karateText = "% karate excerpt\n1 2\n2 3\n3 1\n";
@@ -369,5 +369,50 @@ describe("an or/v1 entry whose source is a Socrata resource read in pages", () =
     expect((await failure(fetchEntry(dataset, { fetch: changed.fetch, now }))).message).toMatch(/different header at offset 2/);
     expect((await failure(fetchEntry(dataset, { fetch: resourceServing([]).fetch, now }))).message).toMatch(/has no rows/);
     expect((await failure(fetchEntry(dataset, { fetch: resourceServing(rows, { count: "unrelated" }).fetch, now }))).message).toMatch(/did not report a row count/);
+  });
+});
+
+describe("an or/v1 entry whose source is a CKAN datastore dump read in pages", () => {
+  const dump = "https://data.example.org/data/datastore/dump/0a1b2c3d-1111-2222-3333-444455556666";
+  const header = "_id,status,borough,note\n";
+  const rows = ["1,Open,Camden,x\n", "2,Closed,Hackney,y\n", "3,Open,Islington,z\n"];
+  const dataset = datasetWith(ckanEntry);
+
+  /** A stand-in portal that answers the datastore count and the dump's pages by offset, and records every request. */
+  function portalServing(all: readonly string[], count: string = JSON.stringify({ success: true, result: { total: all.length } })): { fetch: FetchPort; requested: string[] } {
+    const requested: string[] = [];
+    const fetch: FetchPort = async (url) => {
+      requested.push(url);
+      if (url.includes("datastore_search")) {
+        return Promise.resolve(new Response(count));
+      }
+      const offset = Number(/offset=(\d+)/.exec(url)?.[1]);
+      const limit = Number(/limit=(\d+)/.exec(url)?.[1]);
+
+      return Promise.resolve(new Response(header + all.slice(offset, offset + limit).join("")));
+    };
+
+    return { fetch, requested };
+  }
+
+  it("reads the count from the portal's own datastore API, then the dump's pages, and joins them", async () => {
+    const served = portalServing(rows);
+    const fetched = await fetchEntry(dataset, { fetch: served.fetch, now });
+    expect(fetched.data).toEqual({
+      meta: { id: "datastore-cases", name: "Datastore cases" },
+      nodes: [
+        { id: "1", status: "Open", territory: "Camden" },
+        { id: "2", status: "Closed", territory: "Hackney" },
+        { id: "3", status: "Open", territory: "Islington" },
+      ],
+    });
+    expect(served.requested).toEqual(["https://data.example.org/data/api/3/action/datastore_search?resource_id=0a1b2c3d-1111-2222-3333-444455556666&limit=0", `${dump}?format=csv&limit=2&offset=0`, `${dump}?format=csv&limit=2&offset=2`]);
+  });
+
+  it("fails at the download step when the count is missing or a page is short", async () => {
+    expect((await failure(fetchEntry(dataset, { fetch: portalServing(rows, '{"success":false}').fetch, now }))).message).toMatch(/did not report a row count/);
+    const wrongTotal = portalServing(rows, JSON.stringify({ success: true, result: { total: 5 } }));
+    expect((await failure(fetchEntry(dataset, { fetch: wrongTotal.fetch, now }))).message).toMatch(/gave 1 rows at offset 2 where 2 of its 5 were due/);
+    expect((await failure(fetchEntry(dataset, { fetch: portalServing(rows, "not json").fetch, now }))).message).toMatch(/did not answer JSON/);
   });
 });

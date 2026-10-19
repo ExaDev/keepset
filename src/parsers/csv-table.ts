@@ -297,7 +297,7 @@ export function headerCells(text: string, options: Readonly<Pick<CsvTableParser,
 }
 
 /**
- * Parses a delimited table into rows: the first record after `skipLines` lines is the header, each later record is a row, and every row carries every column but the id column (or, when the recipe lists `columns`, exactly those, so a wide table is not held cell for cell), an empty cell being null. Cells are trimmed. A column the recipe declares numeric is read as a decimal number times its factor and any other column stays a string. `id` is the row's id, so a column of that name which is not the id column is named by its position. A row's id is the cell of the recipe's id column, which is then not also a column, or its 1-based row number when the recipe names none. Blank lines are skipped; a row with a different number of fields than the header, two columns with the same name, and an id cell that is empty are errors.
+ * Parses a delimited table into rows (a cell whose text is one of the recipe's `nullValues` is empty, so null): the first record after `skipLines` lines is the header, each later record is a row, and every row carries every column but the id column (or, when the recipe lists `columns`, exactly those, so a wide table is not held cell for cell), an empty cell being null. Cells are trimmed. A column the recipe declares numeric is read as a decimal number times its factor and any other column stays a string. `id` is the row's id, so a column of that name which is not the id column is named by its position. A row's id is the cell of the recipe's id column, which is then not also a column, or its 1-based row number when the recipe names none. Blank lines are skipped; a row with a different number of fields than the header, two columns with the same name, and an id cell that is empty are errors.
  * @param text - The file text, or its pieces in order.
  * @param options - The recipe's table parser.
  * @returns The rows, in file order.
@@ -326,6 +326,7 @@ export function parseCsvTable(text: string | Iterable<string>, options: CsvTable
     }
   }
   const factors = new Map(numericColumns.map((entry) => [entry.column, entry.factor]));
+  const missing: ReadonlySet<string> = new Set(options.nullValues ?? []);
   const idPosition = idColumn === null ? -1 : names.indexOf(idColumn);
   const kept = names.flatMap((name, position) => (name !== idColumn && wanted.has(name) ? [{ name, position, factor: factors.get(name) }] : []));
 
@@ -339,7 +340,8 @@ export function parseCsvTable(text: string | Iterable<string>, options: CsvTable
       throw new NativeParseError("csv-table", record.line, `the id column ${idColumn ?? ""} is empty`);
     }
     const cells = kept.map(({ name, position, factor }): [string, string | number | null] => {
-      const cell = (record.fields[position] ?? "").trim();
+      const trimmed = (record.fields[position] ?? "").trim();
+      const cell = missing.has(trimmed) ? "" : trimmed;
 
       return [name, factor === undefined ? (cell === "" ? null : cell) : numeric(cell, factor, name, record.line)];
     });

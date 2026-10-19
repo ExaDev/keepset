@@ -196,11 +196,20 @@ export const socrataEntry = {
   properties: {},
 };
 
+/** A fetchable or/v1 entry whose source is a CKAN datastore dump read two rows at a time, on a portal that serves CKAN under the path prefix `/data`. */
+export const ckanEntry = {
+  ...socrataEntry,
+  id: "datastore-cases",
+  name: "Datastore cases",
+  sources: [{ url: "https://data.example.org/data/datastore/dump/0a1b2c3d-1111-2222-3333-444455556666", retrieved: "2026-10-19", status: "live" }],
+  recipe: { ...socrataEntry.recipe, paging: { kind: "ckan-datastore", pageSize: 2 }, parser: { ...socrataEntry.recipe.parser, idColumn: "id", columns: ["status", "borough"] } },
+};
+
 /** One of each entry shape, for round-trip and schema-agreement tests. */
 export const representativeEntries = [liveEntry, deadEntry, notFetchableEntry];
 
 /** Every entry shape, one entry of each category as well: for the tests that check the entry schema, its generated JSON Schema and serialisation, which the catalogue fixtures (graph entries only) do not need to carry. */
-export const everyEntryShape = [...representativeEntries, orEntry, arcgisEntry, socrataEntry];
+export const everyEntryShape = [...representativeEntries, orEntry, arcgisEntry, socrataEntry, ckanEntry];
 
 /** A catalogue manifest for fixture catalogues. */
 export const fixtureManifest = {

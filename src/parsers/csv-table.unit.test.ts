@@ -149,6 +149,16 @@ describe("the csv-table parser", () => {
     expect(parseError(() => parseNative(utf8("k,a,b,c\nx,1,2\n"), parser)).line).toBe(2);
   });
 
+  it("reads a cell the recipe lists as a missing value as null in a text or a numeric column, and nothing else that looks like it", () => {
+    const parser = table({ nullValues: ["NA", "n/a"], numericColumns: [{ column: "n", factor: 2 }] });
+    expect(parseNative(utf8("t,n\nNA,NA\nn/a, 4 \nNAME,3\n"), parser).nodes).toEqual([
+      { id: "1", t: null, n: null },
+      { id: "2", t: null, n: 8 },
+      { id: "3", t: "NAME", n: 6 },
+    ]);
+    expect(parseError(() => parseNative(utf8("n\nNA\n"), table({ numericColumns: [{ column: "n", factor: 1 }] }))).message).toMatch(/declared numeric but holds "NA"/);
+  });
+
   it("refuses a listed column the header lacks, the id column among the columns, and a numeric column that is not kept", () => {
     expect(parseError(() => parseNative(utf8("a,b\n1,2\n"), table({ columns: ["missing"] }))).message).toMatch(/names the column missing/);
     expect(parseError(() => parseNative(utf8("k,a\nx,1\n"), table({ idColumn: "k", columns: ["k", "a"] }))).message).toMatch(/is the row's id/);
