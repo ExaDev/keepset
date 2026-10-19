@@ -1,6 +1,6 @@
 /* The seed import: converts the thesis pipeline's graph dataset catalogue into keepset entries, giving graph/v1 its seed corpus.
 
-   pnpm run seed:import --pipeline <catalog.json> --graphbox <catalog.json> [--snapshot] [--check]
+   pnpm run seed:import:graph --pipeline <catalog.json> --graphbox <catalog.json> [--snapshot] [--check]
 
    --pipeline names the pipeline catalogue (a checkout's experiments/pipeline/graphs/catalog.json, or the committed copy in scripts/seed/sources/) and --graphbox the graphbox catalogue, read only for the report's overlap section. Both are read and never written: every path this script writes is inside this repository, and it refuses to run when an input directory contains the repository, so no output can land in a source checkout.
 
@@ -10,12 +10,13 @@
 
    --check writes nothing and exits non-zero when the committed entries or report differ from what the inputs produce. */
 
-import { existsSync, readFileSync, realpathSync, rmSync, writeFileSync } from "node:fs";
+import { existsSync, readFileSync, realpathSync } from "node:fs";
 import { dirname, join, relative, sep } from "node:path";
 import { fileURLToPath } from "node:url";
 import { parseArgs } from "node:util";
-import { canonicalJson, serialise } from "../../src/serialise";
+import { canonicalJson } from "../../src/serialise";
 import { convertCatalogue } from "./convert";
+import { apply, entryWrites, reportedIds, staleEntries } from "./emit";
 import { GraphboxCatalogueSchema, SourceCatalogueSchema } from "./source";
 
 const here = dirname(fileURLToPath(import.meta.url));
@@ -60,51 +61,20 @@ const pipeline = SourceCatalogueSchema.parse(JSON.parse(pipelineText));
 const graphbox = GraphboxCatalogueSchema.parse(JSON.parse(graphboxText));
 const { entries, report } = convertCatalogue(pipeline, graphbox);
 
-/**
- * The entry ids a report records as converted.
- * @param text - A report file's text.
- * @returns The ids.
- */
-function convertedIds(text: string): Set<string> {
-  const doc: unknown = JSON.parse(text);
-  if (typeof doc !== "object" || doc === null || !("outcomes" in doc) || !Array.isArray(doc.outcomes)) {
-    throw new Error(`${relative(repoRoot, reportPath)} has no outcomes list`);
-  }
-  const ids = new Set<string>();
-  const outcomes: readonly unknown[] = doc.outcomes;
-  for (const outcome of outcomes) {
-    if (typeof outcome === "object" && outcome !== null && "id" in outcome && typeof outcome.id === "string" && "outcome" in outcome && outcome.outcome !== "not-converted") {
-      ids.add(outcome.id);
-    }
-  }
-
-  return ids;
-}
-
-const writes = new Map<string, string>(entries.map((entry) => [join(entriesDir, `${entry.id}.json`), serialise(entry)]));
+const writes = entryWrites(entries, entriesDir);
 writes.set(reportPath, canonicalJson(report));
 if (values.snapshot === true) {
   const withheld = (text: string): string => `${JSON.stringify(JSON.parse(text, (_key, value: unknown) => (typeof value === "string" && value.startsWith("file:") ? "file:(local path withheld)" : value)), undefined, 2)}\n`;
   writes.set(join(sourcesDir, "pipeline-catalog.json"), withheld(pipelineText));
   writes.set(join(sourcesDir, "graphbox-catalog.json"), withheld(graphboxText));
 }
-const produced = new Set(entries.map((entry) => entry.id));
-const stale = existsSync(reportPath) ? [...convertedIds(readFileSync(reportPath, "utf8"))].filter((id) => !produced.has(id)).map((id) => join(entriesDir, `${id}.json`)) : [];
+const previous = existsSync(reportPath) ? reportedIds(readFileSync(reportPath, "utf8"), relative(repoRoot, reportPath), (outcome) => outcome["outcome"] !== "not-converted") : undefined;
+const stale = staleEntries(entriesDir, previous, new Set(entries.map((entry) => entry.id)));
 
+apply({ writes, stale }, repoRoot, values.check === true);
 if (values.check === true) {
-  const differing = [...writes].filter(([path, text]) => !existsSync(path) || readFileSync(path, "utf8") !== text).map(([path]) => relative(repoRoot, path));
-  const lingering = stale.filter((path) => existsSync(path)).map((path) => relative(repoRoot, path));
-  if (differing.length > 0 || lingering.length > 0) {
-    throw new Error(`the committed import output differs from what the inputs produce: ${[...differing, ...lingering.map((path) => `${path} (stale)`)].join(", ")}`);
-  }
   console.log(`The committed import output matches: ${String(entries.length)} entries and the report.`);
 } else {
-  for (const [path, text] of writes) {
-    writeFileSync(path, text, "utf8");
-  }
-  for (const path of stale) {
-    rmSync(path, { force: true });
-  }
   const counts = new Map<string, number>();
   for (const outcome of report.outcomes) {
     counts.set(outcome.outcome, (counts.get(outcome.outcome) ?? 0) + 1);
