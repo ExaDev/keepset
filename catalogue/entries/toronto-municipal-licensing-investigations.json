@@ -5,38 +5,7 @@
   "category": "or/v1",
   "citations": [],
   "crosswalk": {
-    "oneWay": [
-      {
-        "direction": "encode",
-        "from": "nodes[].INVESTIGATION_ID",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].INVESTIGATION",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].NOTICE_OR_ORDER_DATE",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].NEXT_INSPECTION",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].EXPIRY_DATE",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].ISSUE",
-        "op": "drop"
-      }
-    ],
+    "oneWay": [],
     "rules": [
       {
         "from": "meta",
@@ -86,6 +55,11 @@
       "kind": "none"
     },
     "parser": {
+      "columns": [
+        "IN_DATE",
+        "INVESTIGATION_TYPE",
+        "CURRENT_STATUS"
+      ],
       "delimiter": "comma",
       "encoding": "utf-8",
       "format": "csv-table",

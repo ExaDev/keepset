@@ -5,48 +5,7 @@
   "category": "or/v1",
   "citations": [],
   "crosswalk": {
-    "oneWay": [
-      {
-        "direction": "encode",
-        "from": "nodes[].Event_Comment",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Location",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Tenant_City",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Tenant_State",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Tenant_ZIP_Code",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Case_Number",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Event_Year",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Eviction_Year",
-        "op": "drop"
-      }
-    ],
+    "oneWay": [],
     "rules": [
       {
         "from": "meta",
@@ -106,6 +65,13 @@
       "kind": "none"
     },
     "parser": {
+      "columns": [
+        "Evicted_Date",
+        "Event_Date",
+        "Case_Type",
+        "Event_Type",
+        "County"
+      ],
       "delimiter": "comma",
       "encoding": "utf-8",
       "format": "csv-table",

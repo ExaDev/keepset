@@ -5,83 +5,7 @@
   "category": "or/v1",
   "citations": [],
   "crosswalk": {
-    "oneWay": [
-      {
-        "direction": "encode",
-        "from": "nodes[].ALPHA",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].ACCT_NUM",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].OWNER_NAME",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].LAST_VISIT_DT",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].LAST_FULL_INSP_DT",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].PREM_ADDR",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].BIN",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].COMMUNITY_BOARD",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].COUNCIL_DISTRICT",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].BBL",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].POSTCODE",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Number",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Street",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Census_Tract",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].NTA",
-        "op": "drop"
-      }
-    ],
+    "oneWay": [],
     "rules": [
       {
         "from": "meta",
@@ -136,6 +60,12 @@
       "kind": "none"
     },
     "parser": {
+      "columns": [
+        "LATITUDE",
+        "LONGITUDE",
+        "LAST_INSP_STAT",
+        "BOROUGH"
+      ],
       "delimiter": "comma",
       "encoding": "utf-8",
       "format": "csv-table",

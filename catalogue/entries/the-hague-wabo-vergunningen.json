@@ -5,83 +5,7 @@
   "category": "or/v1",
   "citations": [],
   "crosswalk": {
-    "oneWay": [
-      {
-        "direction": "encode",
-        "from": "nodes[].geo_point_2d",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].geo_shape",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].dossiernr",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].registr_oms",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].lokatieaand",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].dd_beschikking_verleend",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].dd_geweigerd",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].dd_tijdelijke_vergunning",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].dd_buiten_behandeling",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].dd_ingetrokken",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].dd_rechtswege",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].dd_niet_vergunningplichtig",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].dd_overig_onbepaald",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].buurt",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].stadsdeel",
-        "op": "drop"
-      }
-    ],
+    "oneWay": [],
     "rules": [
       {
         "from": "meta",
@@ -142,6 +66,13 @@
       "kind": "none"
     },
     "parser": {
+      "columns": [
+        "dd_afgehandeld",
+        "ddindiening",
+        "type_oms",
+        "status_oms",
+        "wijk"
+      ],
       "delimiter": "semicolon",
       "encoding": "utf-8",
       "format": "csv-table",

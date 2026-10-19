@@ -5,113 +5,7 @@
   "category": "or/v1",
   "citations": [],
   "crosswalk": {
-    "oneWay": [
-      {
-        "direction": "encode",
-        "from": "nodes[].Organisation_Name",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Organisation_Code",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Published_Date",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Latest_Data",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Duration_From",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Duration_To",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Reporting_Period_Type",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Reporting_Period",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].GeoEntity_Name",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Geo_Code",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].GeoURI",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].District_Name",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Month",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Day_Issued",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Time_Issued",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Time_Band",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Area",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Street",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Address",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Postcode",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Charge_Level",
-        "op": "drop"
-      }
-    ],
+    "oneWay": [],
     "rules": [
       {
         "from": "meta",
@@ -161,6 +55,11 @@
       "kind": "none"
     },
     "parser": {
+      "columns": [
+        "Date_Issued",
+        "Contravention_Code",
+        "Geo_Name"
+      ],
       "delimiter": "comma",
       "encoding": "latin1",
       "format": "csv-table",

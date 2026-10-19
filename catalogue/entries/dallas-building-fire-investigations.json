@@ -5,88 +5,7 @@
   "category": "or/v1",
   "citations": [],
   "crosswalk": {
-    "oneWay": [
-      {
-        "direction": "encode",
-        "from": "nodes[].column_1",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].incident",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].time",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].address",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].zip",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].battalion_shift",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].mapsco",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].census_tract",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].no_of_stories",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].construction",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].cause",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].structure_loss",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].contents_loss",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].total_saved",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].sprinkler_sys",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].alarm_sys",
-        "op": "drop"
-      }
-    ],
+    "oneWay": [],
     "rules": [
       {
         "from": "meta",
@@ -141,6 +60,12 @@
       "kind": "none"
     },
     "parser": {
+      "columns": [
+        "date",
+        "total_value",
+        "structure_type",
+        "council_district"
+      ],
       "delimiter": "comma",
       "encoding": "utf-8",
       "format": "csv-table",

@@ -5,93 +5,7 @@
   "category": "or/v1",
   "citations": [],
   "crosswalk": {
-    "oneWay": [
-      {
-        "direction": "encode",
-        "from": "nodes[].AddressLine1",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].AddressLine2",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].AddressLine3",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].AddressLine4",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].BusinessTypeID",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].BusinessName",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].ConfidenceInManagement",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Hygiene",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].LocalAuthorityBusinessID",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].LocalAuthorityCode",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].NewRatingPending",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].PostCode",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].RatingKey",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].RatingValue",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].RightToReply",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].SchemeType",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Structural",
-        "op": "drop"
-      }
-    ],
+    "oneWay": [],
     "rules": [
       {
         "from": "meta",
@@ -153,6 +67,13 @@
       "kind": "none"
     },
     "parser": {
+      "columns": [
+        "Latitude",
+        "Longitude",
+        "RatingDate",
+        "BusinessType",
+        "LocalAuthorityName"
+      ],
       "delimiter": "comma",
       "encoding": "utf-8",
       "format": "csv-table",

@@ -5,163 +5,7 @@
   "category": "or/v1",
   "citations": [],
   "crosswalk": {
-    "oneWay": [
-      {
-        "direction": "encode",
-        "from": "nodes[].Permit_Number",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Permit_Address",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Permit_Issue_Date",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Permit_Type",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Permit_Use_Class",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Permit_Description",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Permit_Structure",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Permit_Building_Square_Footage",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Permit_Total_Payments",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Permit_Total_Balance",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Permit_Project_Cost",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Permit_Use_Group_Info",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Permit_Work_Items",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Inspection_Type",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Inspection_Group",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Inspection_Number",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Inspection_Status",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Inspection_Scheduled_Date",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Inspection_Completed_Date",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Permit_Next_5_Year_Inspection",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Permit_Use_Type",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Permit_Use_Group",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Permit_Narrow_Lot",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Permit_Occupancy_Required",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Permit_Application_Connection",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Permit_Parcel_Flood_Zone",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Permit_Building_Flood_Zone",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Permit_Zip_Code",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Super_Ward",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Location",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].GPIN",
-        "op": "drop"
-      }
-    ],
+    "oneWay": [],
     "rules": [
       {
         "from": "meta",
@@ -233,6 +77,15 @@
       "kind": "none"
     },
     "parser": {
+      "columns": [
+        "Permit_Finaled_Date",
+        "Permit_Next_Annual_Inspection",
+        "Permit_Application_Date",
+        "Permit_Total_Fee",
+        "Permit_Work_Type",
+        "Permit_Status",
+        "Ward"
+      ],
       "delimiter": "comma",
       "encoding": "utf-8",
       "format": "csv-table",

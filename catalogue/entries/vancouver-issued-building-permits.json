@@ -5,78 +5,7 @@
   "category": "or/v1",
   "citations": [],
   "crosswalk": {
-    "oneWay": [
-      {
-        "direction": "encode",
-        "from": "nodes[].issuedate",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].address",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].projectdescription",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].permitcategory",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].applicant",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].applicantaddress",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].propertyuse",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].specificusecategory",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].buildingcontractor",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].buildingcontractoraddress",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].issueyear",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].geom",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].yearmonth",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].geo_point_2d",
-        "op": "drop"
-      }
-    ],
+    "oneWay": [],
     "rules": [
       {
         "from": "meta",
@@ -138,6 +67,13 @@
       "kind": "none"
     },
     "parser": {
+      "columns": [
+        "permitelapseddays",
+        "permitnumbercreateddate",
+        "projectvalue",
+        "typeofwork",
+        "geolocalarea"
+      ],
       "delimiter": "semicolon",
       "encoding": "utf-8",
       "format": "csv-table",

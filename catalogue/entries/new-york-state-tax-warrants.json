@@ -5,88 +5,7 @@
   "category": "or/v1",
   "citations": [],
   "crosswalk": {
-    "oneWay": [
-      {
-        "direction": "encode",
-        "from": "nodes[].Warrant_ID",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Debtor_Name_1",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Debtor_Name_2",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Debtor_Name_3",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Debtor_Name_4",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Debtor_Address_1",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Debtor_Address_2",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].City",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].State",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Zip_code",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Country_Code",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Warrant_vacate_date",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Warrant_amend_date",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Filed_timestamp",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].URL",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Georeference",
-        "op": "drop"
-      }
-    ],
+    "oneWay": [],
     "rules": [
       {
         "from": "meta",
@@ -151,6 +70,14 @@
       "kind": "none"
     },
     "parser": {
+      "columns": [
+        "Warrant_satisfaction_date",
+        "Warrant_expiration_date",
+        "Warrant_filed_date",
+        "Warrant_filed_amount",
+        "Status_Code_A_C_U",
+        "County_Code"
+      ],
       "delimiter": "comma",
       "encoding": "utf-8",
       "format": "csv-table",

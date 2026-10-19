@@ -5,83 +5,7 @@
   "category": "or/v1",
   "citations": [],
   "crosswalk": {
-    "oneWay": [
-      {
-        "direction": "encode",
-        "from": "nodes[].hlrslicensenumber",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].communityname",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].streetaddress",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].zipcode",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].casenumber",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].inspectionfrequency",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].compliantind",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].unitcount",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].unitsinspected",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].averageviolationsperunit",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].severityindex",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].noviolationsobserved",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].infestedunitspercentage",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].units_with_mold",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].geolocation",
-        "op": "drop"
-      }
-    ],
+    "oneWay": [],
     "rules": [
       {
         "from": "meta",
@@ -148,6 +72,14 @@
       "kind": "none"
     },
     "parser": {
+      "columns": [
+        "nextinspectiondate",
+        "latitude",
+        "longitude",
+        "firstinspectiondate",
+        "rating",
+        "city"
+      ],
       "delimiter": "comma",
       "encoding": "utf-8",
       "format": "csv-table",

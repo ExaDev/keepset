@@ -5,63 +5,7 @@
   "category": "or/v1",
   "citations": [],
   "crosswalk": {
-    "oneWay": [
-      {
-        "direction": "encode",
-        "from": "nodes[].Month",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Block",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Lot",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Tax_Class_Code",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Building_Class",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Community_Board",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Council_District",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].House_Number",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Street_Name",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Zip_Code",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Water_Debt_Only",
-        "op": "drop"
-      }
-    ],
+    "oneWay": [],
     "rules": [
       {
         "from": "meta",
@@ -106,6 +50,10 @@
       "kind": "none"
     },
     "parser": {
+      "columns": [
+        "Cycle",
+        "Borough"
+      ],
       "delimiter": "comma",
       "encoding": "utf-8",
       "format": "csv-table",

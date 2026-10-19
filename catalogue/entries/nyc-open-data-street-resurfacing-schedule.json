@@ -5,73 +5,7 @@
   "category": "or/v1",
   "citations": [],
   "crosswalk": {
-    "oneWay": [
-      {
-        "direction": "encode",
-        "from": "nodes[].workscheduleprojectlocationid",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].day",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].onstreetname",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].fromstreetname",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].tostreetname",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].communityboard",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].area",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].crewtype",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].shifttype",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].oftcode",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].location_segment_id",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].location_wkt",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].location_node_id",
-        "op": "drop"
-      }
-    ],
+    "oneWay": [],
     "rules": [
       {
         "from": "meta",
@@ -121,6 +55,11 @@
       "kind": "none"
     },
     "parser": {
+      "columns": [
+        "date",
+        "worktype",
+        "boroughname"
+      ],
       "delimiter": "comma",
       "encoding": "utf-8",
       "format": "csv-table",

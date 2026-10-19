@@ -5,33 +5,7 @@
   "category": "or/v1",
   "citations": [],
   "crosswalk": {
-    "oneWay": [
-      {
-        "direction": "encode",
-        "from": "nodes[].DEMAND1",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].DEMAND2",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].READYTIME",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].SERVICETIME",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].column_9",
-        "op": "drop"
-      }
-    ],
+    "oneWay": [],
     "rules": [
       {
         "from": "meta",
@@ -83,6 +57,11 @@
       "kind": "none"
     },
     "parser": {
+      "columns": [
+        "DUEDATE",
+        "YCOORD",
+        "XCOORD"
+      ],
       "delimiter": "comma",
       "encoding": "utf-8",
       "format": "csv-table",

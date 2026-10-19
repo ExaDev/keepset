@@ -5,78 +5,7 @@
   "category": "or/v1",
   "citations": [],
   "crosswalk": {
-    "oneWay": [
-      {
-        "direction": "encode",
-        "from": "nodes[].codi",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].ubicacio",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].codi_districte",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].codi_barri",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].nom_barri",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].pressupost_adjudicacio",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].data_inici",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].promotor",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].constructor",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].titol",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].descripcio",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].url_web_obres",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].geometria_etrs89",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].geometria_wgs84",
-        "op": "drop"
-      }
-    ],
+    "oneWay": [],
     "rules": [
       {
         "from": "meta",
@@ -137,6 +66,13 @@
       "kind": "none"
     },
     "parser": {
+      "columns": [
+        "data_fi",
+        "pressupost_licitacio",
+        "tipusobra",
+        "estat",
+        "nom_districte"
+      ],
       "delimiter": "comma",
       "encoding": "utf-8",
       "format": "csv-table",

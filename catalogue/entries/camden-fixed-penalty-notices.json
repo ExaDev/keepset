@@ -5,38 +5,7 @@
   "category": "or/v1",
   "citations": [],
   "crosswalk": {
-    "oneWay": [
-      {
-        "direction": "encode",
-        "from": "nodes[].Disclaimer",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Source",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Financial_Year",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Issue_Type",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Amount_Paid_GBP",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Last_Uploaded",
-        "op": "drop"
-      }
-    ],
+    "oneWay": [],
     "rules": [
       {
         "from": "meta",
@@ -97,6 +66,13 @@
       "kind": "none"
     },
     "parser": {
+      "columns": [
+        "Date_Paid",
+        "Date_Issued",
+        "Amound_Fined_GBP",
+        "Offence",
+        "Status"
+      ],
       "delimiter": "comma",
       "encoding": "utf-8",
       "format": "csv-table",

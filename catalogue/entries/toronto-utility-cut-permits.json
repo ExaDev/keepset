@@ -5,38 +5,7 @@
   "category": "or/v1",
   "citations": [],
   "crosswalk": {
-    "oneWay": [
-      {
-        "direction": "encode",
-        "from": "nodes[].PERMIT_NUMBER",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].PROPOSED_FROM_DATE",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].CLIENT_NAME",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].GEO_ID",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].DISPLAY_DESC",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].DISTRICT",
-        "op": "drop"
-      }
-    ],
+    "oneWay": [],
     "rules": [
       {
         "from": "meta",
@@ -93,6 +62,12 @@
       "kind": "none"
     },
     "parser": {
+      "columns": [
+        "PROPOSED_TO_DATE",
+        "INSTALLATION_TYPE_DESC",
+        "PERMIT_STATUS",
+        "CITY_WARD"
+      ],
       "delimiter": "comma",
       "encoding": "utf-8",
       "format": "csv-table",

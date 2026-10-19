@@ -5,53 +5,7 @@
   "category": "or/v1",
   "citations": [],
   "crosswalk": {
-    "oneWay": [
-      {
-        "direction": "encode",
-        "from": "nodes[].Make",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Style",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Model",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Color",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Plate",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].State",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Towed_to_Address",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Tow_Facility_Phone",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Inventory_Number",
-        "op": "drop"
-      }
-    ],
+    "oneWay": [],
     "rules": [
       {
         "from": "meta",
@@ -91,6 +45,9 @@
       "kind": "none"
     },
     "parser": {
+      "columns": [
+        "Tow_Date"
+      ],
       "delimiter": "comma",
       "encoding": "utf-8",
       "format": "csv-table",

@@ -5,58 +5,7 @@
   "category": "or/v1",
   "citations": [],
   "crosswalk": {
-    "oneWay": [
-      {
-        "direction": "encode",
-        "from": "nodes[].city",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].courier_id",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].aoi_id",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].accept_gps_time",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].accept_gps_lng",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].accept_gps_lat",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].delivery_gps_time",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].delivery_gps_lng",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].delivery_gps_lat",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].ds",
-        "op": "drop"
-      }
-    ],
+    "oneWay": [],
     "rules": [
       {
         "from": "meta",
@@ -124,6 +73,14 @@
       "kind": "none"
     },
     "parser": {
+      "columns": [
+        "delivery_time",
+        "lat",
+        "lng",
+        "accept_time",
+        "aoi_type",
+        "region_id"
+      ],
       "delimiter": "comma",
       "encoding": "utf-8",
       "format": "csv-table",

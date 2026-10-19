@@ -5,138 +5,7 @@
   "category": "or/v1",
   "citations": [],
   "crosswalk": {
-    "oneWay": [
-      {
-        "direction": "encode",
-        "from": "nodes[].category_code",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].problem_code",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].problem_description",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].reason",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].primary_task_code",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].primary_task_description",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].status_code",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].status_datetime",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].start_date",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].end_date",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].last_modified_datetime",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].priority",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].area",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].department",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].assigned_crew",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].inventory_type",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].actual_labor_cost",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].actual_equipment_cost",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].actual_material_cost",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].contractor_cost",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].street",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].maintenance_zone",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].superward",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].civic_league",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].planning_district",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].neighborhood_service_area",
-        "op": "drop"
-      }
-    ],
+    "oneWay": [],
     "rules": [
       {
         "from": "meta",
@@ -196,6 +65,13 @@
       "kind": "none"
     },
     "parser": {
+      "columns": [
+        "created_datetime",
+        "total_cost",
+        "category_description",
+        "status_description",
+        "ward"
+      ],
       "delimiter": "comma",
       "encoding": "utf-8",
       "format": "csv-table",

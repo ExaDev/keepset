@@ -5,128 +5,7 @@
   "category": "or/v1",
   "citations": [],
   "crosswalk": {
-    "oneWay": [
-      {
-        "direction": "encode",
-        "from": "nodes[].HWONumber",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].BuildingID",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].BoroID",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].HouseNumber",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].StreetName",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Zip",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Block",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Lot",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].LifeCycle",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].IsAEP",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].IsCommercialDemolition",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].FEMAEventID",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].FEMAEvent",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].HWODescription",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].HWOApprovedAmount",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].SalesTax",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].AdminFee",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].DateTransferDoF",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Community_Board",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Council_District",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Census_Tract",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].BIN",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].BBL",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].NTA",
-        "op": "drop"
-      }
-    ],
+    "oneWay": [],
     "rules": [
       {
         "from": "meta",
@@ -196,6 +75,15 @@
       "kind": "none"
     },
     "parser": {
+      "columns": [
+        "Latitude",
+        "Longitude",
+        "HWOCreateDate",
+        "ChargeAmount",
+        "WorkTypeGeneral",
+        "HWOStatusReason",
+        "Boro"
+      ],
       "delimiter": "comma",
       "encoding": "utf-8",
       "format": "csv-table",

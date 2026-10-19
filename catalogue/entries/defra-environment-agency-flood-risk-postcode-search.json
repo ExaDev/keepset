@@ -5,28 +5,7 @@
   "category": "or/v1",
   "citations": [],
   "crosswalk": {
-    "oneWay": [
-      {
-        "direction": "encode",
-        "from": "nodes[].HIGH_CNT",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].MED_CNT",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].LOW_CNT",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].GWTR_RISK",
-        "op": "drop"
-      }
-    ],
+    "oneWay": [],
     "rules": [
       {
         "from": "meta",
@@ -68,6 +47,9 @@
       "kind": "none"
     },
     "parser": {
+      "columns": [
+        "Postcode"
+      ],
       "delimiter": "comma",
       "encoding": "utf-8",
       "format": "csv-table",
