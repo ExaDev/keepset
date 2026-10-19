@@ -1,9 +1,10 @@
-export { getDataset, getManifest, listDatasets } from "./bundled";
+export { getDataset, getManifest, listDatasets, listNamespaces } from "./bundled";
 export { CatalogueIndexSchema, createCatalogue } from "./catalogue";
-export type { Catalogue, CatalogueIndex, Dataset, DatasetQuery } from "./catalogue";
+export type { Catalogue, CatalogueIndex, Dataset, DatasetQuery, NamespaceNode } from "./catalogue";
 export { CategoryIdSchema, countTarget, getCategory, getTarget, kindOf, listCategories } from "./categories";
 export type { Category, CategoryId, CategoryTarget, CategoryTargets, CountedKey } from "./categories";
 export {
+  AliasSchema,
   ArchiveMemberSchema,
   ArchiveSchema,
   CitationSchema,
@@ -26,8 +27,8 @@ export {
 export type { Archive, ArchiveMember, Citation, CrosswalkReference, Entry, Licence, Namespace, Parser, Recipe, Snapshot, Source } from "./entry";
 export { ArchiveError, CatalogueSyntaxError, DatasetAmbiguousError, DatasetNotFoundError, KeepsetError, NativeParseError, RecipeError, UnknownCategoryError } from "./errors";
 export type { RecipeStep, SyntaxIssue } from "./errors";
-export { NAME_SEPARATOR, namesOf } from "./names";
-export type { EntryNames } from "./names";
+export { groupsOf, NAME_SEPARATOR, namesOf } from "./names";
+export type { EntryNames, SegmentAliases } from "./names";
 export { LineageSchema, ManifestSchema, parseManifest, SemVerSchema } from "./manifest";
 export type { Lineage, Manifest } from "./manifest";
 export { serialise } from "./serialise";

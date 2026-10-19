@@ -1,4 +1,4 @@
-import { createCatalogue, type Catalogue, type Dataset, type DatasetQuery } from "./catalogue";
+import { createCatalogue, type Catalogue, type Dataset, type DatasetQuery, type NamespaceNode } from "./catalogue";
 import data from "./generated/catalogue.json" with { type: "json" };
 import type { Manifest } from "./manifest";
 
@@ -28,6 +28,15 @@ export function listDatasets(query?: DatasetQuery): Dataset[] {
  */
 export function getDataset(id: string): Dataset {
   return catalogue().getDataset(id);
+}
+
+/**
+ * Lists the namespaces directly beneath a path of the bundled catalogue, or the outermost ones, with how many entries each holds. Browser-safe.
+ * @param path - A group path whose children to list; absent for the outermost namespaces.
+ * @returns The child namespaces in path order.
+ */
+export function listNamespaces(path?: string): NamespaceNode[] {
+  return catalogue().listNamespaces(path);
 }
 
 /** @returns The bundled catalogue's manifest: its id, version and repository. */
