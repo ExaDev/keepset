@@ -1,3 +1,17 @@
+# [0.18.0](https://github.com/Mearman/keepset/compare/v0.17.0...v0.18.0) (2026-10-19)
+
+
+### Bug Fixes
+
+* **seed:** take the range of a column without spreading it into a call ([4f3fc53](https://github.com/Mearman/keepset/commit/4f3fc53d4f364c2d3483c977ca177478388d241b))
+
+
+### Features
+
+* **catalogue:** read only the mapped columns of each operations research table ([f55eb68](https://github.com/Mearman/keepset/commit/f55eb68ebe1eed3b33f1377064e82405d044f7ef))
+* **parsers:** keep only the listed columns and read a table a piece at a time ([18eb4dc](https://github.com/Mearman/keepset/commit/18eb4dc61802ddd277b0af4c43aaa1a67a7dfdfe))
+* **seed:** import each operations research recipe with the columns it maps ([e08d1e8](https://github.com/Mearman/keepset/commit/e08d1e8c253da8a8a7f2edc22a1b548bb206959d))
+
 # [0.17.0](https://github.com/Mearman/keepset/compare/v0.16.1...v0.17.0) (2026-10-19)
 
 
