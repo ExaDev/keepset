@@ -165,11 +165,42 @@ export const arcgisEntry = {
   properties: {},
 };
 
+/** A fetchable or/v1 entry whose source is a Socrata resource read two rows at a time: the table's status and borough fill node fields and every other column is left out by the parser. */
+export const socrataEntry = {
+  id: "resource-cases",
+  name: "Resource cases",
+  tags: [],
+  category: "or/v1",
+  sources: [{ url: "https://data.example.org/resource/abcd-1234.csv", retrieved: "2026-10-19", status: "live" }],
+  licence: { kind: "unrecorded" },
+  citations: [],
+  recipe: {
+    status: "fetchable",
+    source: 0,
+    paging: { kind: "socrata-resource", pageSize: 2 },
+    archive: { kind: "none" },
+    parser: { format: "csv-table", encoding: "utf-8", delimiter: "comma", skipLines: 0, idColumn: "case_id", numericColumns: [], columns: ["status", "borough"] },
+  },
+  crosswalk: {
+    source: "csv-table",
+    target: "or/v1",
+    rules: [
+      { op: "move", from: "meta", to: "meta" },
+      { op: "move", from: "nodes[].id", to: "nodes[].id" },
+      { op: "move", from: "nodes[].status", to: "nodes[].status" },
+      { op: "move", from: "nodes[].borough", to: "nodes[].territory" },
+    ],
+    oneWay: [],
+  },
+  expectedCounts: {},
+  properties: {},
+};
+
 /** One of each entry shape, for round-trip and schema-agreement tests. */
 export const representativeEntries = [liveEntry, deadEntry, notFetchableEntry];
 
 /** Every entry shape, one entry of each category as well: for the tests that check the entry schema, its generated JSON Schema and serialisation, which the catalogue fixtures (graph entries only) do not need to carry. */
-export const everyEntryShape = [...representativeEntries, orEntry, arcgisEntry];
+export const everyEntryShape = [...representativeEntries, orEntry, arcgisEntry, socrataEntry];
 
 /** A catalogue manifest for fixture catalogues. */
 export const fixtureManifest = {
