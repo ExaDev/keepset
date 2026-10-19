@@ -146,7 +146,7 @@ function numeric(cell: string, factor: number, column: string, line: number): nu
 }
 
 /**
- * Parses a delimited table into rows: the first record after `skipLines` lines is the header, each later record is a row, and every row carries every column but the id column, an empty cell being null. Cells are trimmed. A column the recipe declares numeric is read as a decimal number times its factor and any other column stays a string. A row's id is the cell of the recipe's id column, which is then not also a column, or its 1-based row number when the recipe names none. Blank lines are skipped; a row with a different number of fields than the header, two columns with the same name, and an id cell that is empty are errors.
+ * Parses a delimited table into rows: the first record after `skipLines` lines is the header, each later record is a row, and every row carries every column but the id column, an empty cell being null. Cells are trimmed. A column the recipe declares numeric is read as a decimal number times its factor and any other column stays a string. `id` is the row's id, so a column of that name which is not the id column is named by its position. A row's id is the cell of the recipe's id column, which is then not also a column, or its 1-based row number when the recipe names none. Blank lines are skipped; a row with a different number of fields than the header, two columns with the same name, and an id cell that is empty are errors.
  * @param text - The file text.
  * @param options - The recipe's table parser.
  * @returns The rows, in file order.
@@ -160,7 +160,9 @@ export function parseCsvTable(text: string, options: CsvTableParser): NativeTabl
   }
   const names: string[] = [];
   for (const [position, cell] of header.fields.entries()) {
-    const name = columnName(cell, position + 1);
+    // `id` is the row's id, so a header cell of that name that is not the id column is named by its position, as an unnamed one is, and is not shadowed by the row id.
+    const named = columnName(cell, position + 1);
+    const name = named === "id" && options.idColumn !== "id" ? `column_${String(position + 1)}` : named;
     const clash = names.indexOf(name);
     if (clash !== -1) {
       throw new NativeParseError("csv-table", header.line, `header cells ${String(clash + 1)} and ${String(position + 1)} both become the column ${name}`);
@@ -172,9 +174,6 @@ export function parseCsvTable(text: string, options: CsvTableParser): NativeTabl
     if (!names.includes(wanted)) {
       throw new NativeParseError("csv-table", header.line, `the recipe names the column ${wanted}, which the header does not have`);
     }
-  }
-  if (idColumn === null && names.includes("id")) {
-    throw new NativeParseError("csv-table", header.line, "the file has a column named id, which would be shadowed by the row number; the recipe names it as its idColumn");
   }
   const factors = new Map(numericColumns.map((entry) => [entry.column, entry.factor]));
 
