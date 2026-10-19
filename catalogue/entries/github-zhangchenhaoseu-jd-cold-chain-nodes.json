@@ -64,7 +64,9 @@
   },
   "description": "Delivery nodes of a JD.com cold-chain case in Beijing with coordinates, demands and time windows.",
   "domain": "Last-mile logistics",
-  "expectedCounts": {},
+  "expectedCounts": {
+    "nodes": 60
+  },
   "id": "github-zhangchenhaoseu-jd-cold-chain-nodes",
   "licence": {
     "kind": "unrecorded"

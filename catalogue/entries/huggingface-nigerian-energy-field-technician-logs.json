@@ -79,7 +79,9 @@
   },
   "description": "Field technician job tickets for Nigerian electricity distribution companies with job type, start and end times, duration and coordinates.",
   "domain": "Synthetic logs",
-  "expectedCounts": {},
+  "expectedCounts": {
+    "nodes": 100000
+  },
   "id": "huggingface-nigerian-energy-field-technician-logs",
   "licence": {
     "kind": "unrecorded"

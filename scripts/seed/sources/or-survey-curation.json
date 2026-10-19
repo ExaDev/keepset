@@ -1526,6 +1526,7 @@
       "outcome": {
         "delimiter": "comma",
         "encoding": "utf-8",
+        "expectedNodes": 31415,
         "header": [
           "order_id",
           "region_id",
@@ -1587,6 +1588,7 @@
       "outcome": {
         "delimiter": "comma",
         "encoding": "utf-8",
+        "expectedNodes": 60,
         "header": [
           "NO.",
           "XCOORD.",
@@ -1912,6 +1914,7 @@
       "outcome": {
         "delimiter": "comma",
         "encoding": "utf-8",
+        "expectedNodes": 100000,
         "header": [
           "ticket_id",
           "disco",

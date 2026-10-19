@@ -104,7 +104,9 @@
   },
   "description": "Last-mile delivery orders from Cainiao couriers in Jilin, with location, area type, acceptance and delivery times.",
   "domain": "Last-mile logistics",
-  "expectedCounts": {},
+  "expectedCounts": {
+    "nodes": 31415
+  },
   "id": "huggingface-lade-delivery-jilin",
   "licence": {
     "id": "Apache-2.0",
