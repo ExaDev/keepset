@@ -93,7 +93,7 @@ describe("convertSurvey", () => {
     expect(requests?.expectedCounts).toEqual({});
   });
 
-  it("builds a crosswalk that moves meta, ids and each mapped column, and drops every other column one way", () => {
+  it("builds a crosswalk that moves meta, ids and each mapped column, and a parser that keeps only the mapped columns", () => {
     expect(requests?.crosswalk).toEqual({
       source: "csv-table",
       target: "or/v1",
@@ -106,11 +106,9 @@ describe("convertSurvey", () => {
         { op: "move", from: "nodes[].status", to: "nodes[].status" },
         { op: "move", from: "nodes[].district", to: "nodes[].territory" },
       ],
-      oneWay: [
-        { op: "drop", from: "nodes[].Private_note", direction: "encode" },
-        { op: "drop", from: "nodes[].column_8", direction: "encode" },
-      ],
+      oneWay: [],
     });
+    expect(requests?.recipe).toMatchObject({ parser: { columns: ["minutes", "latitude", "longitude", "status", "district"] } });
   });
 
   it("gives an item with no recipe the not-fetchable reason, one source and the shared nodes crosswalk, and no alias when its id does not start with its namespace", () => {
