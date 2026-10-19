@@ -463,83 +463,8 @@
       "name": "Fire and Medical Dispatch Events (Mesa, AZ)",
       "namespace": "mesa",
       "outcome": {
-        "delimiter": "comma",
-        "encoding": "utf-8",
-        "header": [
-          "reason_subcategory",
-          "reason_category",
-          "city",
-          "arrive_datetime",
-          "clear_datetime",
-          "latitude",
-          "longitude",
-          "incident_type",
-          "incident_type_code",
-          "incident_date",
-          "incident_calendar_year",
-          "incident_fiscal_year",
-          "incident_week",
-          "incident_month",
-          "jurisdiction",
-          "call_handling_time_in_seconds",
-          "response_time_in_seconds",
-          "valley_benchmark_cities_vbc_response_time_in_seconds",
-          "call_handling_time_in_minutes",
-          "response_time_in_minutes",
-          "travel_time_in_minutes",
-          "commit_time_in_seconds",
-          "code_3_response_times_in_minutes_by_calendar_year_at_90th_percentile",
-          "code_3_response_times_in_minutes_by_calendar_year_at_75th_percentile",
-          "code_3_response_times_in_minutes_by_calendar_year_at_50th_percentile",
-          "code_3_response_times_in_seconds_by_fiscal_year_at_50th_percentile_for_valley_benchmark_cities_reporting",
-          "response_time_45_minutes_flag",
-          "location",
-          "zip",
-          "state",
-          "call_received_datetime",
-          "notify_datetime",
-          "notify_date_month_name",
-          "roll_datetime",
-          "incident_number",
-          "street_name",
-          "street_type",
-          "first_response_unit_count",
-          "error_with_valley_benchmark_cities_time",
-          "error_with_response_time",
-          "error_with_travel_time",
-          "error_with_call_handling_time",
-          "first_response_priority_code",
-          "time_of_day",
-          "property_use",
-          "reason_code_listing_from_cad"
-        ],
-        "idColumn": null,
-        "map": {
-          "closed": "clear_datetime",
-          "lat": "latitude",
-          "lon": "longitude",
-          "opened": "call_received_datetime",
-          "skill": "reason_category",
-          "territory": "city",
-          "travelTime": "response_time_in_seconds"
-        },
-        "numericColumns": [
-          {
-            "column": "latitude",
-            "factor": 1
-          },
-          {
-            "column": "longitude",
-            "factor": 1
-          },
-          {
-            "column": "response_time_in_seconds",
-            "factor": 1
-          }
-        ],
-        "rowCount": 608545,
-        "skipLines": 0,
-        "status": "fetchable"
+        "reason": "Reading the whole table into memory exhausts Node's default heap: it has several hundred thousand rows of dozens of columns, and a fetch of it was killed out of memory.",
+        "status": "not-fetchable"
       },
       "surveyId": "or-110"
     },
@@ -1138,7 +1063,8 @@
         "The prize mapping is the property value, which is a loss exposure and not a reward; treat it as weak.",
         "The mapped date is the incident date, used as the opened date.",
         "The sampled total values reach 720000000, an outlier that looks implausible for a single building.",
-        "No licence is recorded in the Socrata metadata."
+        "No licence is recorded in the Socrata metadata.",
+        "the id column is empty in some rows of the full table, so rows are numbered instead"
       ],
       "id": "dallas-building-fire-investigations",
       "licence": {
@@ -1171,7 +1097,7 @@
           "sprinkler_sys",
           "alarm_sys"
         ],
-        "idColumn": "id",
+        "idColumn": null,
         "map": {
           "opened": "date",
           "prize": "total_value",
@@ -2716,7 +2642,8 @@
       "flags": [
         "the survey title also names Dun Laoghaire-Rathdown, Ireland; only the Camden table is in this download",
         "applicant names and case officer names are present and deliberately not mapped",
-        "Earliest_Decision_Date is not mapped as a deadline because it is the earliest date a decision may be made, not a due date"
+        "Earliest_Decision_Date is not mapped as a deadline because it is the earliest date a decision may be made, not a due date",
+        "the ID column repeats in the full table, so rows are numbered instead"
       ],
       "id": "camden-planning-applications",
       "licence": {
@@ -2763,7 +2690,7 @@
           "Socrata ID",
           "Organisation URI"
         ],
-        "idColumn": "ID",
+        "idColumn": null,
         "map": {
           "closed": "Decision_Date",
           "lat": "Latitude",
@@ -2962,7 +2889,8 @@
         "latitude and longitude are empty in the sampled rows",
         "Total_Fee is a fee charged, a weak stand-in for a prize",
         "Code_Officer, Assigned_User and defendant fields are personal data and are deliberately not mapped",
-        "the table keeps only the latest workflow status per case"
+        "the table keeps only the latest workflow status per case",
+        "the Record_ID column repeats in the full table, so rows are numbered instead"
       ],
       "id": "mesa-code-compliance-cases",
       "licence": {
@@ -3040,7 +2968,7 @@
           "Interactions",
           "Complaint Validated"
         ],
-        "idColumn": "Record_ID",
+        "idColumn": null,
         "map": {
           "closed": "Closed_Date",
           "lat": "Latitude",
@@ -3820,7 +3748,8 @@
         "only one monthly file (May 2026) is covered; about 277 monthly resources exist and the survey's own resource link returned a stub",
         "COORDENADA_Y cells carry trailing NUL characters, so the coordinates are deliberately not mapped; they are UTM, not WGS84",
         "MES, ANIO and HORA are separate columns, so no date field is mapped",
-        "fields are padded with spaces in the source"
+        "fields are padded with spaces in the source",
+        "the probe read only the start of the file, which parses; the fault appears further in"
       ],
       "id": "madrid-traffic-fines-detail",
       "licence": {
@@ -3830,37 +3759,8 @@
       "name": "Traffic fines detail (Madrid)",
       "namespace": "madrid",
       "outcome": {
-        "delimiter": "semicolon",
-        "encoding": "latin1",
-        "header": [
-          "CALIFICACION",
-          "LUGAR",
-          "MES",
-          "ANIO",
-          "HORA",
-          "IMP_BOL",
-          "DESCUENTO",
-          " PUNTOS",
-          "DENUNCIANTE",
-          "HECHO-BOL",
-          "VEL_LIMITE",
-          "VEL_CIRCULA ",
-          "COORDENADA-X",
-          "COORDENADA-Y                                                                                                                                          \u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000"
-        ],
-        "idColumn": null,
-        "map": {
-          "prize": "IMP_BOL",
-          "skill": "HECHO_BOL"
-        },
-        "numericColumns": [
-          {
-            "column": "IMP_BOL",
-            "factor": 1
-          }
-        ],
-        "skipLines": 0,
-        "status": "fetchable"
+        "reason": "The CSV is not valid RFC 4180: a quote opens inside an unquoted field (first at line 183433), so the csv-table parser refuses the file.",
+        "status": "not-fetchable"
       },
       "surveyId": "or-76"
     },

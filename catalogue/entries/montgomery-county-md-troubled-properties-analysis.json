@@ -176,7 +176,7 @@
     {
       "retrieved": "2026-10-19",
       "status": "live",
-      "url": "https://data.montgomerycountymd.gov/resource/bw2r-araf.csv"
+      "url": "https://data.montgomerycountymd.gov/resource/bw2r-araf.csv?%24limit=1000000"
     }
   ],
   "tags": [

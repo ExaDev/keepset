@@ -140,7 +140,7 @@
     {
       "retrieved": "2026-10-19",
       "status": "live",
-      "url": "https://data.cityofnewyork.us/resource/xnfm-u3k5.csv"
+      "url": "https://data.cityofnewyork.us/resource/xnfm-u3k5.csv?%24limit=1000000"
     }
   ],
   "tags": [

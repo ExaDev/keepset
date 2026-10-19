@@ -220,7 +220,7 @@
     {
       "retrieved": "2026-10-19",
       "status": "live",
-      "url": "https://data.norfolk.gov/resource/qzfe-wj25.csv"
+      "url": "https://data.norfolk.gov/resource/qzfe-wj25.csv?%24limit=1000000"
     }
   ],
   "tags": [

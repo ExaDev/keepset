@@ -591,7 +591,8 @@
       "flags": [
         "the survey title also names Dun Laoghaire-Rathdown, Ireland; only the Camden table is in this download",
         "applicant names and case officer names are present and deliberately not mapped",
-        "Earliest_Decision_Date is not mapped as a deadline because it is the earliest date a decision may be made, not a due date"
+        "Earliest_Decision_Date is not mapped as a deadline because it is the earliest date a decision may be made, not a due date",
+        "the ID column repeats in the full table, so rows are numbered instead"
       ],
       "id": "camden-planning-applications",
       "recipe": "fetchable",
@@ -644,7 +645,8 @@
         "latitude and longitude are empty in the sampled rows",
         "Total_Fee is a fee charged, a weak stand-in for a prize",
         "Code_Officer, Assigned_User and defendant fields are personal data and are deliberately not mapped",
-        "the table keeps only the latest workflow status per case"
+        "the table keeps only the latest workflow status per case",
+        "the Record_ID column repeats in the full table, so rows are numbered instead"
       ],
       "id": "mesa-code-compliance-cases",
       "recipe": "fetchable",
@@ -812,10 +814,12 @@
         "only one monthly file (May 2026) is covered; about 277 monthly resources exist and the survey's own resource link returned a stub",
         "COORDENADA_Y cells carry trailing NUL characters, so the coordinates are deliberately not mapped; they are UTM, not WGS84",
         "MES, ANIO and HORA are separate columns, so no date field is mapped",
-        "fields are padded with spaces in the source"
+        "fields are padded with spaces in the source",
+        "the probe read only the start of the file, which parses; the fault appears further in"
       ],
       "id": "madrid-traffic-fines-detail",
-      "recipe": "fetchable",
+      "reason": "The CSV is not valid RFC 4180: a quote opens inside an unquoted field (first at line 183433), so the csv-table parser refuses the file.",
+      "recipe": "not-fetchable",
       "surveyId": "or-76"
     },
     {
@@ -1169,7 +1173,8 @@
         "The stored travel time column holds negative values in the sample, so the response time in seconds is mapped to travelTime instead."
       ],
       "id": "mesa-fire-and-medical-dispatch-events",
-      "recipe": "fetchable",
+      "reason": "Reading the whole table into memory exhausts Node's default heap: it has several hundred thousand rows of dozens of columns, and a fetch of it was killed out of memory.",
+      "recipe": "not-fetchable",
       "surveyId": "or-110"
     },
     {
@@ -1302,7 +1307,8 @@
         "The prize mapping is the property value, which is a loss exposure and not a reward; treat it as weak.",
         "The mapped date is the incident date, used as the opened date.",
         "The sampled total values reach 720000000, an outlier that looks implausible for a single building.",
-        "No licence is recorded in the Socrata metadata."
+        "No licence is recorded in the Socrata metadata.",
+        "the id column is empty in some rows of the full table, so rows are numbered instead"
       ],
       "id": "dallas-building-fire-investigations",
       "recipe": "fetchable",

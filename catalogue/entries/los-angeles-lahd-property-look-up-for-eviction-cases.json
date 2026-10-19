@@ -90,7 +90,7 @@
     {
       "retrieved": "2026-10-19",
       "status": "live",
-      "url": "https://data.lacity.org/resource/2u8b-eyuu.csv"
+      "url": "https://data.lacity.org/resource/2u8b-eyuu.csv?%24limit=1000000"
     }
   ],
   "tags": [

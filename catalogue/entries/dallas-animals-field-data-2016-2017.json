@@ -301,7 +301,7 @@
     {
       "retrieved": "2026-10-19",
       "status": "live",
-      "url": "https://www.dallasopendata.com/resource/xy7j-y59g.csv"
+      "url": "https://www.dallasopendata.com/resource/xy7j-y59g.csv?%24limit=1000000"
     }
   ],
   "tags": [

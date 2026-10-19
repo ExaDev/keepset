@@ -5,92 +5,7 @@
   "category": "or/v1",
   "citations": [],
   "crosswalk": {
-    "oneWay": [
-      {
-        "direction": "encode",
-        "from": "nodes[].CALIFICACION",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].LUGAR",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].MES",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].ANIO",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].HORA",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].DESCUENTO",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].PUNTOS",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].DENUNCIANTE",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].VEL_LIMITE",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].VEL_CIRCULA",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].COORDENADA_X",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].COORDENADA_Y",
-        "op": "drop"
-      }
-    ],
-    "rules": [
-      {
-        "from": "meta",
-        "op": "move",
-        "to": "meta"
-      },
-      {
-        "from": "nodes[].id",
-        "op": "move",
-        "to": "nodes[].id"
-      },
-      {
-        "from": "nodes[].IMP_BOL",
-        "op": "move",
-        "to": "nodes[].prize"
-      },
-      {
-        "from": "nodes[].HECHO_BOL",
-        "op": "move",
-        "to": "nodes[].skill"
-      }
-    ],
-    "source": "csv-table",
-    "target": "or/v1"
+    "file": "crosswalks/or-v1/nodes.json"
   },
   "description": "Traffic fines issued in Madrid in one month, with offence, fine amount, discount and points.",
   "domain": "Case records",
@@ -108,24 +23,8 @@
     "surveyId": "or-76"
   },
   "recipe": {
-    "archive": {
-      "kind": "none"
-    },
-    "parser": {
-      "delimiter": "semicolon",
-      "encoding": "latin1",
-      "format": "csv-table",
-      "idColumn": null,
-      "numericColumns": [
-        {
-          "column": "IMP_BOL",
-          "factor": 1
-        }
-      ],
-      "skipLines": 0
-    },
-    "source": 1,
-    "status": "fetchable"
+    "reason": "The CSV is not valid RFC 4180: a quote opens inside an unquoted field (first at line 183433), so the csv-table parser refuses the file.",
+    "status": "not-fetchable"
   },
   "sources": [
     {
