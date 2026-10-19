@@ -1,3 +1,11 @@
+# [0.14.0](https://github.com/Mearman/keepset/compare/v0.13.1...v0.14.0) (2026-10-19)
+
+
+### Features
+
+* add the or/v1 category for operations-research instances ([69b2f9a](https://github.com/Mearman/keepset/commit/69b2f9add70124f3ea539c1b34d67787d5ca83ab))
+* read delimited tables with a csv-table parser ([9b42a5f](https://github.com/Mearman/keepset/commit/9b42a5ff284f12aa6e90718302d4bc0744c9bb5c))
+
 ## [0.13.1](https://github.com/Mearman/keepset/compare/v0.13.0...v0.13.1) (2026-10-19)
 
 
