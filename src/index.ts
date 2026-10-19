@@ -12,6 +12,7 @@ export {
   HttpUrlSchema,
   IdSchema,
   LicenceSchema,
+  NamespaceSchema,
   parseEntry,
   ParserSchema,
   RecipeSchema,
@@ -22,9 +23,11 @@ export {
   WaybackTimestampSchema,
   waybackUrl,
 } from "./entry";
-export type { Archive, ArchiveMember, Citation, CrosswalkReference, Entry, Licence, Parser, Recipe, Snapshot, Source } from "./entry";
-export { ArchiveError, CatalogueSyntaxError, DatasetNotFoundError, KeepsetError, NativeParseError, RecipeError, UnknownCategoryError } from "./errors";
+export type { Archive, ArchiveMember, Citation, CrosswalkReference, Entry, Licence, Namespace, Parser, Recipe, Snapshot, Source } from "./entry";
+export { ArchiveError, CatalogueSyntaxError, DatasetAmbiguousError, DatasetNotFoundError, KeepsetError, NativeParseError, RecipeError, UnknownCategoryError } from "./errors";
 export type { RecipeStep, SyntaxIssue } from "./errors";
+export { NAME_SEPARATOR, namesOf } from "./names";
+export type { EntryNames } from "./names";
 export { LineageSchema, ManifestSchema, parseManifest, SemVerSchema } from "./manifest";
 export type { Lineage, Manifest } from "./manifest";
 export { serialise } from "./serialise";

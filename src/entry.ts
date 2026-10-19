@@ -12,6 +12,10 @@ export const IdSchema = z.string().regex(/^[A-Za-z0-9][A-Za-z0-9._-]*$/, {
 });
 
 /** A key of an entry's `properties` or `expectedCounts` record: an identifier that starts with a letter, so it can never be `__proto__` or another name Object.prototype reacts to on assignment. */
+/** The path a dataset sits under in a collection, outermost segment first, such as `["suitesparse", "gset"]`. Each segment is an id, so a segment can never contain the `/` that joins a namespace to a name. */
+export const NamespaceSchema = z.array(IdSchema).min(1);
+export type Namespace = z.infer<typeof NamespaceSchema>;
+
 const RecordKeySchema = z.string().regex(/^[A-Za-z][A-Za-z0-9]*$/, { message: "must be a letter followed by letters or digits" });
 
 /** A calendar date, `YYYY-MM-DD`. */
@@ -146,12 +150,14 @@ export type CrosswalkReference = z.infer<typeof CrosswalkReferenceSchema>;
 export const RESERVED_META_KEYS = ["id", "name"] as const;
 
 /**
- * One catalogue entry: the descriptor (id, name, description, domain, tags), the category whose target the entry resolves to, where the bytes come from, the licence and citations, the recipe, the crosswalk, the counts a fetched result is expected to have and the dataset's recorded properties. The kind of data is the category's (`kindOf(category)`), never a second field that could disagree with it.
+ * One catalogue entry: the descriptor (id, optional namespace and aliases, name, description, domain, tags), the category whose target the entry resolves to, where the bytes come from, the licence and citations, the recipe, the crosswalk, the counts a fetched result is expected to have and the dataset's recorded properties. The kind of data is the category's (`kindOf(category)`), never a second field that could disagree with it.
  */
 export const EntrySchema = define(
   z
     .object({
       id: IdSchema,
+      namespace: NamespaceSchema.optional(),
+      aliases: z.array(IdSchema).min(1).optional(),
       name: z.string().min(1),
       description: z.string().min(1).optional(),
       domain: z.string().min(1).optional(),
@@ -167,6 +173,10 @@ export const EntrySchema = define(
     })
     .strict()
     .superRefine((entry, ctx) => {
+      const { aliases = [] } = entry;
+      if (new Set(aliases).size !== aliases.length || aliases.includes(entry.id)) {
+        ctx.addIssue({ code: "custom", path: ["aliases"], message: "aliases must be unique and differ from the entry's own id" });
+      }
       if (entry.recipe.status === "fetchable" && entry.recipe.source >= entry.sources.length) {
         ctx.addIssue({ code: "custom", path: ["recipe", "source"], message: `names source ${String(entry.recipe.source)} but the entry has ${String(entry.sources.length)}` });
       }

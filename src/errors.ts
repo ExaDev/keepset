@@ -54,13 +54,26 @@ export class NativeParseError extends KeepsetError {
 /** Thrown when an archive does not hold exactly one member the recipe's member selector matches, or is not a well-formed archive of its stated kind. */
 export class ArchiveError extends KeepsetError {}
 
-/** Thrown when no entry in the catalogue has the requested id. */
+/** Thrown when no entry in the catalogue answers to the requested id, alias or qualified name. */
 export class DatasetNotFoundError extends KeepsetError {
   readonly datasetId: string;
 
   constructor(datasetId: string) {
     super(`no dataset ${JSON.stringify(datasetId)} in the catalogue`);
     this.datasetId = datasetId;
+  }
+}
+
+/** Thrown when a name that is not an entry's own id is a valid way to address more than one entry. Carries the ids of the entries it could mean, so the message says how to be specific. */
+export class DatasetAmbiguousError extends KeepsetError {
+  readonly requested: string;
+
+  readonly candidateIds: readonly string[];
+
+  constructor(name: string, candidateIds: readonly string[]) {
+    super(`${JSON.stringify(name)} could mean more than one dataset: ${candidateIds.join(", ")}; use an id or a longer qualified name`);
+    this.requested = name;
+    this.candidateIds = candidateIds;
   }
 }
 

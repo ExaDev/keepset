@@ -103,3 +103,27 @@ describe("a source's snapshot", () => {
     expect(SourceSchema.safeParse({ url, retrieved: "2026-04-19", status: "dead", snapshot: { url: waybackUrl("2023-06-01", url), timestamp: "2023-06-01" } }).success).toBe(false);
   });
 });
+
+describe("an entry's namespace and aliases", () => {
+  it("accepts a namespace and aliases, and round-trips them through parse and serialise", () => {
+    const doc = { ...liveEntry, namespace: ["suitesparse", "gset"], aliases: ["g53"] };
+    expect(parseEntry(JSON.parse(serialise(parseEntry(doc))))).toEqual(parseEntry(doc));
+  });
+
+  it("refuses a namespace segment or an alias that is not an id, so none can contain the separator", () => {
+    for (const bad of ["a/b", "", "_x", "has space"]) {
+      expect(EntrySchema.is({ ...liveEntry, namespace: [bad] })).toBe(false);
+      expect(EntrySchema.is({ ...liveEntry, aliases: [bad] })).toBe(false);
+    }
+  });
+
+  it("refuses an empty namespace and an empty alias list, so absence has one form", () => {
+    expect(EntrySchema.is({ ...liveEntry, namespace: [] })).toBe(false);
+    expect(EntrySchema.is({ ...liveEntry, aliases: [] })).toBe(false);
+  });
+
+  it("refuses a repeated alias and an alias equal to the entry's own id", () => {
+    expect(EntrySchema.is({ ...liveEntry, aliases: ["short", "short"] })).toBe(false);
+    expect(EntrySchema.is({ ...liveEntry, aliases: [liveEntry.id] })).toBe(false);
+  });
+});
