@@ -1,3 +1,10 @@
+## [0.9.1](https://github.com/Mearman/keepset/compare/v0.9.0...v0.9.1) (2026-10-19)
+
+
+### Bug Fixes
+
+* **site:** make static tables share the island's scale and fix light-mode tokens ([1c5663d](https://github.com/Mearman/keepset/commit/1c5663d0ed10fbde5d12ab973dc1e8fec4e3edaf))
+
 # [0.9.0](https://github.com/Mearman/keepset/compare/v0.8.0...v0.9.0) (2026-10-19)
 
 
