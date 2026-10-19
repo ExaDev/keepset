@@ -1,3 +1,10 @@
+## [0.9.2](https://github.com/Mearman/keepset/compare/v0.9.1...v0.9.2) (2026-10-19)
+
+
+### Bug Fixes
+
+* **site:** name the service worker cache for the precached bytes ([2628f4a](https://github.com/Mearman/keepset/commit/2628f4a783123d0b626d8a0597f06a551433425c))
+
 ## [0.9.1](https://github.com/Mearman/keepset/compare/v0.9.0...v0.9.1) (2026-10-19)
 
 
