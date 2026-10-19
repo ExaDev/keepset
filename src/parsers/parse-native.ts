@@ -4,6 +4,7 @@ import { parseEdgeList } from "./edge-list";
 import { parseGml } from "./gml";
 import { parseMatrixMarket } from "./matrix-market";
 import { parseCsvTable } from "./csv-table";
+import { parseGeojson } from "./geojson";
 import type { NativeDocument, NativeGraph, NativeTable } from "./native";
 import { parsePajek } from "./pajek";
 
@@ -69,7 +70,7 @@ export function* decodePieces(bytes: Uint8Array, parser: Parser, pieceBytes: num
   }
 }
 
-type TableParser = Extract<Parser, { format: "csv-table" }>;
+type TableParser = Extract<Parser, { format: "csv-table" | "geojson" }>;
 
 /**
  * Reads a file into the native shape of the recipe's parser: a graph for the graph formats, a table of rows for the table formats.
@@ -86,6 +87,9 @@ export function parseNative(bytes: Uint8Array, parser: Parser): NativeDocument {
     return parseCsvTable(decodePieces(bytes, parser), parser);
   }
   const text = decode(bytes, parser);
+  if (parser.format === "geojson") {
+    return parseGeojson(text, parser);
+  }
   if (parser.format === "edge-list") {
     return parseEdgeList(text, parser);
   }

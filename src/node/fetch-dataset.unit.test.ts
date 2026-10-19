@@ -3,7 +3,7 @@ import { describe, expect, it } from "vitest";
 import { createCatalogue, type Dataset } from "../catalogue";
 import { DatasetNotFoundError, KeepsetError, RecipeError, type RecipeStep } from "../errors";
 import { gzip, tar, zip } from "../test-support/archives";
-import { deadEntry, fixtureIndex, liveEntry, notFetchableEntry, orEntry } from "../test-support/entries";
+import { arcgisEntry, deadEntry, fixtureIndex, liveEntry, notFetchableEntry, orEntry } from "../test-support/entries";
 import { downloadUrl, fetchDataset, fetchEntry, roundTripDataset, roundTripEntry, type FetchPort } from "./fetch-dataset";
 
 const karateText = "% karate excerpt\n1 2\n2 3\n3 1\n";
@@ -20,6 +20,14 @@ function servedBy(files: Readonly<Record<string, Uint8Array | string>>): { fetch
 
   return { fetch, requested };
 }
+
+/** An epoch-millisecond date of the paged layer's features, which the parser writes as ISO 8601 text. */
+const EPOCH_MILLISECONDS = 1_700_000_000_000;
+/** What the paged layer's three features are: their fines, their positions (longitude first, as the file writes it) and the number of features. */
+const FINES = { first: 50, third: 75.5 } as const;
+const HERE = { longitude: -0.1, latitude: 51.5 } as const;
+const THERE = { longitude: -1.5, latitude: 52 } as const;
+const FEATURES = 3;
 
 const now = (): Date => new Date("2026-10-18T12:00:00.000Z");
 
@@ -212,5 +220,75 @@ describe("an or/v1 entry", () => {
     const error = await failure(fetchEntry(dataset, { fetch: bad.fetch, now }));
     expect(error.step).toBe("parse");
     expect(error.message).toMatch(/line 2/);
+  });
+});
+
+describe("an or/v1 entry whose source is a paged ArcGIS layer", () => {
+  const layer = "https://example.org/arcgis/rest/services/Violations/FeatureServer/0";
+  const feature = (id: number, fine: number | null, kind: string | null, point: { readonly longitude: number; readonly latitude: number } | null): unknown => ({
+    type: "Feature",
+    id,
+    geometry: point === null ? null : { type: "Point", coordinates: [point.longitude, point.latitude] },
+    properties: { OBJECTID: id, FINE: fine, OPENED: EPOCH_MILLISECONDS + id, KIND: kind, PRIVATE: "not kept" },
+  });
+  const features = [feature(1, FINES.first, "Weeds", HERE), feature(2, null, "Parking", null), feature(FEATURES, FINES.third, null, THERE)];
+  const dataset = datasetWith(arcgisEntry);
+
+  /** A stand-in layer that answers its count and pages of `size` features by offset, the way a feature server does, and records every request. */
+  function layerServing(all: readonly unknown[], size: number, overrides: Readonly<Record<string, Response>> = {}): { fetch: FetchPort; requested: string[] } {
+    const requested: string[] = [];
+    const fetch: FetchPort = async (url) => {
+      requested.push(url);
+      const override = Object.entries(overrides).find(([part]) => url.includes(part));
+      if (override !== undefined) {
+        return Promise.resolve(override[1].clone());
+      }
+      if (url.includes("returnCountOnly=true")) {
+        return Promise.resolve(Response.json({ count: all.length }));
+      }
+      const offset = Number(/resultOffset=(\d+)/.exec(url)?.[1]);
+
+      return Promise.resolve(Response.json({ type: "FeatureCollection", features: all.slice(offset, offset + size) }));
+    };
+
+    return { fetch, requested };
+  }
+
+  it("reads every page in order of the order-by field and resolves or/v1 from the one collection", async () => {
+    const served = layerServing(features, 2);
+    const fetched = await fetchEntry(dataset, { fetch: served.fetch, now });
+    expect(fetched.warnings).toEqual([]);
+    expect(fetched.data).toEqual({
+      meta: { id: "layer-violations", name: "Layer violations" },
+      nodes: [
+        { id: "1", lat: HERE.latitude, lon: HERE.longitude, prize: FINES.first, opened: "2023-11-14T22:13:20.001Z", skill: "Weeds" },
+        { id: "2", lat: null, lon: null, prize: null, opened: "2023-11-14T22:13:20.002Z", skill: "Parking" },
+        { id: "3", lat: THERE.latitude, lon: THERE.longitude, prize: FINES.third, opened: "2023-11-14T22:13:20.003Z", skill: null },
+      ],
+    });
+    expect(JSON.stringify(fetched.data)).not.toContain("not kept");
+    expect(served.requested).toHaveLength(FEATURES);
+    expect(served.requested[1]).toContain("orderByFields=OBJECTID&resultOffset=0&f=geojson");
+    expect(served.requested[2]).toContain("resultOffset=2");
+    expect(fetched.provenance.fetchedUrl).toBe(layer);
+    expect(fetched.provenance.byteLength).toBeGreaterThan(0);
+  });
+
+  it("holds the round trip over the paths the crosswalk maps", async () => {
+    expect(await roundTripEntry(dataset, { fetch: layerServing(features, 2).fetch, now })).toMatchObject({ holds: true });
+  });
+
+  it("fails at the download step, and does not loop, when the layer ignores the offset", async () => {
+    const stuck = layerServing(features, 2, { "resultOffset=2": Response.json({ type: "FeatureCollection", features: [] }) });
+    const error = await failure(fetchEntry(dataset, { fetch: stuck.fetch, now }));
+    expect(error.step).toBe("download");
+    expect(error.message).toMatch(/gave no features at offset 2, before the 3 it reports/);
+  });
+
+  it("fails at the download step when the server answers an error in a 200 response, or reports no count", async () => {
+    const refused = layerServing(features, 2, { returnCountOnly: Response.json({ error: { code: 499, message: "Token Required" } }) });
+    expect((await failure(fetchEntry(dataset, { fetch: refused.fetch, now }))).message).toMatch(/Token Required/);
+    const noCount = layerServing(features, 2, { returnCountOnly: Response.json({ unrelated: true }) });
+    expect((await failure(fetchEntry(dataset, { fetch: noCount.fetch, now }))).message).toMatch(/did not report a feature count/);
   });
 });

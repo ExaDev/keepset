@@ -154,12 +154,30 @@ export const ParserSchema = z.discriminatedUnion("format", [
     .strict()
     .refine((parser) => new Set(parser.numericColumns.map((numeric) => numeric.column)).size === parser.numericColumns.length, { message: "a column may be declared numeric once", path: ["numericColumns"] })
     .refine((parser) => parser.columns === undefined || new Set(parser.columns).size === parser.columns.length, { message: "a column may be listed once", path: ["columns"] }),
+  z
+    .object({
+      format: z.literal("geojson"),
+      encoding: z.literal("utf-8"),
+      idColumn: ColumnNameSchema.nullable(),
+      numericColumns: z.array(z.object({ column: ColumnNameSchema, factor: z.number().positive() }).strict()),
+      dateColumns: z.array(ColumnNameSchema),
+      columns: z.array(ColumnNameSchema).min(1),
+    })
+    .strict()
+    .refine((parser) => new Set(parser.columns).size === parser.columns.length, { message: "a column may be listed once", path: ["columns"] })
+    .refine((parser) => parser.idColumn === null || !parser.columns.includes(parser.idColumn), { message: "the id column is the row's id, so it is not listed among the columns", path: ["columns"] })
+    .refine((parser) => parser.numericColumns.every((numeric) => parser.columns.includes(numeric.column)) && parser.dateColumns.every((date) => parser.columns.includes(date)), { message: "a numeric or date column must be among the columns kept", path: ["columns"] })
+    .refine((parser) => new Set([...parser.numericColumns.map((numeric) => numeric.column), ...parser.dateColumns]).size === parser.numericColumns.length + parser.dateColumns.length, { message: "a column may be numeric or a date, not both, and once", path: ["dateColumns"] }),
 ]);
 export type Parser = z.infer<typeof ParserSchema>;
 
+/** Where a source is a paged query and not one file: an ArcGIS feature layer, whose query endpoint returns a limited number of features per request. The source URL is the layer's, the download reads every page in `orderBy` order and the parser reads the one GeoJSON collection they make. */
+export const PagingSchema = z.discriminatedUnion("kind", [z.object({ kind: z.literal("arcgis-query"), orderBy: z.string().regex(/^[A-Za-z_][A-Za-z0-9_]*$/, { message: "must be a field name of the layer" }) }).strict()]);
+export type Paging = z.infer<typeof PagingSchema>;
+
 /** How to obtain the dataset: a fetchable recipe naming the source (by index into `sources`), the archive layout and the parser, or a statement that no declarative recipe exists yet and why. */
 export const RecipeSchema = z.discriminatedUnion("status", [
-  z.object({ status: z.literal("fetchable"), source: z.int().min(0), archive: ArchiveSchema, parser: ParserSchema }).strict(),
+  z.object({ status: z.literal("fetchable"), source: z.int().min(0), paging: PagingSchema.optional(), archive: ArchiveSchema, parser: ParserSchema }).strict(),
   z.object({ status: z.literal("not-fetchable"), reason: z.string().min(1) }).strict(),
 ]);
 export type Recipe = z.infer<typeof RecipeSchema>;

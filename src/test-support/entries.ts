@@ -120,11 +120,56 @@ export const orEntry = {
   properties: { durationUnit: "seconds" },
 };
 
+/** A fetchable or/v1 entry whose source is a paged ArcGIS feature layer: the point's position and three properties fill node fields, an epoch-millisecond date is written as text, and a property the crosswalk does not map is not kept. */
+export const arcgisEntry = {
+  id: "layer-violations",
+  name: "Layer violations",
+  tags: [],
+  category: "or/v1",
+  sources: [{ url: "https://example.org/arcgis/rest/services/Violations/FeatureServer/0", retrieved: "2026-10-19", status: "live" }],
+  licence: { kind: "unrecorded" },
+  citations: [],
+  recipe: {
+    status: "fetchable",
+    source: 0,
+    paging: { kind: "arcgis-query", orderBy: "OBJECTID" },
+    archive: { kind: "none" },
+    parser: {
+      format: "geojson",
+      encoding: "utf-8",
+      idColumn: "OBJECTID",
+      numericColumns: [
+        { column: "geometry_latitude", factor: 1 },
+        { column: "geometry_longitude", factor: 1 },
+        { column: "FINE", factor: 1 },
+      ],
+      dateColumns: ["OPENED"],
+      columns: ["geometry_latitude", "geometry_longitude", "FINE", "OPENED", "KIND"],
+    },
+  },
+  crosswalk: {
+    source: "geojson",
+    target: "or/v1",
+    rules: [
+      { op: "move", from: "meta", to: "meta" },
+      { op: "move", from: "nodes[].id", to: "nodes[].id" },
+      { op: "move", from: "nodes[].geometry_latitude", to: "nodes[].lat" },
+      { op: "move", from: "nodes[].geometry_longitude", to: "nodes[].lon" },
+      { op: "move", from: "nodes[].FINE", to: "nodes[].prize" },
+      { op: "move", from: "nodes[].OPENED", to: "nodes[].opened" },
+      { op: "move", from: "nodes[].KIND", to: "nodes[].skill" },
+    ],
+    oneWay: [],
+  },
+  expectedCounts: { nodes: 3 },
+  properties: {},
+};
+
 /** One of each entry shape, for round-trip and schema-agreement tests. */
 export const representativeEntries = [liveEntry, deadEntry, notFetchableEntry];
 
 /** Every entry shape, one entry of each category as well: for the tests that check the entry schema, its generated JSON Schema and serialisation, which the catalogue fixtures (graph entries only) do not need to carry. */
-export const everyEntryShape = [...representativeEntries, orEntry];
+export const everyEntryShape = [...representativeEntries, orEntry, arcgisEntry];
 
 /** A catalogue manifest for fixture catalogues. */
 export const fixtureManifest = {
