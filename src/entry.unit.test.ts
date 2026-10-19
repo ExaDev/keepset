@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import { EntrySchema, parseEntry, SourceSchema, waybackUrl } from "./entry";
 import { CatalogueSyntaxError } from "./errors";
 import { serialise } from "./serialise";
-import { deadEntry, liveEntry, representativeEntries } from "./test-support/entries";
+import { deadEntry, everyEntryShape, liveEntry } from "./test-support/entries";
 
 const requiredFields = ["id", "name", "tags", "category", "sources", "licence", "citations", "recipe", "crosswalk", "expectedCounts", "properties"] as const;
 
@@ -12,7 +12,7 @@ function without(doc: Readonly<Record<string, unknown>>, field: string): Record<
 
 describe("the entry format", () => {
   it("round-trips representative entries through parse and serialise", () => {
-    for (const doc of representativeEntries) {
+    for (const doc of everyEntryShape) {
       const text = serialise(parseEntry(doc));
       const parsed = parseEntry(JSON.parse(text));
       expect(parsed).toEqual(doc);

@@ -1,5 +1,5 @@
 import { parseEntry, waybackUrl, type Archive, type Citation, type Entry, type Parser, type Recipe, type Source } from "../../src/entry";
-import type { JsonScalar } from "../../src/targets/graph-v1";
+import type { JsonScalar } from "../../src/targets/json-scalar";
 import type { GraphboxCatalogue, SourceCatalogue, SourceDataset, SourceDownload, SourceEntry, StructuredCitation } from "./source";
 
 /** The shared crosswalk every converted entry uses: all keepset parsers emit the same native topology. */
@@ -163,7 +163,10 @@ function archiveKindOf(url: string): Archive["kind"] | { readonly unsupported: s
 }
 
 /** The keepset parser each catalogue format reads with, by the pipeline's own dispatch (`_fetch_content_for_format`): formats whose pipeline parser is the generic edge list, GML, Pajek or Matrix Market reader. */
-const PARSERS: ReadonlyMap<string, Parser["format"] | "linqs"> = new Map([
+/** The parser formats that read a graph, which are the ones the graph import maps a source's format to. */
+type GraphFormat = Exclude<Parser["format"], "csv-table">;
+
+const PARSERS: ReadonlyMap<string, GraphFormat | "linqs"> = new Map([
   ["matrix-market", "matrix-market"],
   ["gml", "gml"],
   ["pajek", "pajek"],
@@ -178,7 +181,7 @@ const PARSERS: ReadonlyMap<string, Parser["format"] | "linqs"> = new Map([
 ]);
 
 /** The file extensions each parser's member carries, for an archive whose member the catalogue does not name. */
-const MEMBER_EXTENSIONS: Readonly<Record<Parser["format"] | "linqs", readonly string[]>> = {
+const MEMBER_EXTENSIONS: Readonly<Record<GraphFormat | "linqs", readonly string[]>> = {
   "matrix-market": [".mtx"],
   gml: [".gml"],
   pajek: [".net", ".paj"],
@@ -187,7 +190,7 @@ const MEMBER_EXTENSIONS: Readonly<Record<Parser["format"] | "linqs", readonly st
 };
 
 /** Inner-path extensions the pipeline resolves a `various` download by (`get_parser_format`); anything else is its default edge list. */
-const VARIOUS_BY_EXTENSION: ReadonlyMap<string, Parser["format"]> = new Map([
+const VARIOUS_BY_EXTENSION: ReadonlyMap<string, GraphFormat> = new Map([
   [".net", "pajek"],
   [".paj", "pajek"],
   [".gml", "gml"],

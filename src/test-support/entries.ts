@@ -76,8 +76,55 @@ export const notFetchableEntry = {
   recipe: { status: "not-fetchable", reason: "the source requires an account to download" },
 };
 
+/** A fetchable or/v1 entry: a CSV table of cases whose columns an inline crosswalk maps onto the target's node fields, with minutes scaled to seconds by the parser. */
+export const orEntry = {
+  id: "service-requests",
+  name: "Service requests",
+  tags: [],
+  category: "or/v1",
+  sources: [{ url: "https://example.org/data/requests.csv", retrieved: "2026-10-19", status: "live" }],
+  licence: { kind: "unrecorded" },
+  citations: [],
+  recipe: {
+    status: "fetchable",
+    source: 0,
+    archive: { kind: "none" },
+    parser: {
+      format: "csv-table",
+      encoding: "utf-8",
+      delimiter: "comma",
+      skipLines: 0,
+      idColumn: "request_id",
+      numericColumns: [
+        { column: "latitude", factor: 1 },
+        { column: "longitude", factor: 1 },
+        { column: "minutes", factor: 60 },
+      ],
+    },
+  },
+  crosswalk: {
+    source: "csv-table",
+    target: "or/v1",
+    rules: [
+      { op: "move", from: "meta", to: "meta" },
+      { op: "move", from: "nodes[].id", to: "nodes[].id" },
+      { op: "move", from: "nodes[].latitude", to: "nodes[].lat" },
+      { op: "move", from: "nodes[].longitude", to: "nodes[].lon" },
+      { op: "move", from: "nodes[].minutes", to: "nodes[].duration" },
+      { op: "move", from: "nodes[].status", to: "nodes[].status" },
+      { op: "move", from: "nodes[].borough", to: "nodes[].territory" },
+    ],
+    oneWay: [{ op: "drop", from: "nodes[].private_note", direction: "encode" }],
+  },
+  expectedCounts: { nodes: 3 },
+  properties: { durationUnit: "seconds" },
+};
+
 /** One of each entry shape, for round-trip and schema-agreement tests. */
 export const representativeEntries = [liveEntry, deadEntry, notFetchableEntry];
+
+/** Every entry shape, one entry of each category as well: for the tests that check the entry schema, its generated JSON Schema and serialisation, which the catalogue fixtures (graph entries only) do not need to carry. */
+export const everyEntryShape = [...representativeEntries, orEntry];
 
 /** A catalogue manifest for fixture catalogues. */
 export const fixtureManifest = {
