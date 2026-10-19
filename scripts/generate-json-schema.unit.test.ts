@@ -6,7 +6,7 @@ import canonicalize from "canonicalize";
 import { describe, expect, it } from "vitest";
 import { EntrySchema } from "../src/entry";
 import { ManifestSchema } from "../src/manifest";
-import { deadEntry, liveEntry, notFetchableEntry, representativeEntries } from "../src/test-support/entries";
+import { deadEntry, everyEntryShape, liveEntry, notFetchableEntry } from "../src/test-support/entries";
 
 const repoRoot = join(import.meta.dirname, "..");
 
@@ -70,7 +70,7 @@ describe("the generated JSON Schemas", () => {
 
   it("agrees with the Zod entry schema on representative entries and rejections", () => {
     const validate = validatorFor("entry.schema.json");
-    for (const doc of representativeEntries) {
+    for (const doc of everyEntryShape) {
       expect(validate(doc)).toBe(true);
       expect(EntrySchema.is(doc)).toBe(true);
     }
