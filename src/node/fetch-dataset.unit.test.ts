@@ -3,7 +3,7 @@ import { describe, expect, it } from "vitest";
 import { createCatalogue, type Dataset } from "../catalogue";
 import { DatasetNotFoundError, KeepsetError, RecipeError, type RecipeStep } from "../errors";
 import { gzip, tar, zip } from "../test-support/archives";
-import { arcgisEntry, deadEntry, fixtureIndex, liveEntry, notFetchableEntry, orEntry } from "../test-support/entries";
+import { arcgisEntry, deadEntry, fixtureIndex, liveEntry, notFetchableEntry, orEntry, socrataEntry } from "../test-support/entries";
 import { downloadUrl, fetchDataset, fetchEntry, roundTripDataset, roundTripEntry, type FetchPort } from "./fetch-dataset";
 
 const karateText = "% karate excerpt\n1 2\n2 3\n3 1\n";
@@ -290,5 +290,64 @@ describe("an or/v1 entry whose source is a paged ArcGIS layer", () => {
     expect((await failure(fetchEntry(dataset, { fetch: refused.fetch, now }))).message).toMatch(/Token Required/);
     const noCount = layerServing(features, 2, { returnCountOnly: Response.json({ unrelated: true }) });
     expect((await failure(fetchEntry(dataset, { fetch: noCount.fetch, now }))).message).toMatch(/did not report a feature count/);
+  });
+});
+
+describe("an or/v1 entry whose source is a Socrata resource read in pages", () => {
+  const resource = "https://data.example.org/resource/abcd-1234.csv";
+  const header = "case_id,status,borough,note\n";
+  const rows = ["a1,Open,Camden,x\n", 'a2,Closed,"Isle ""of"" Dogs","two\nlines"\n', "a3,Open,Hackney,\n"];
+  const dataset = datasetWith(socrataEntry);
+
+  /** A stand-in resource that answers its count and pages by offset, the way Socrata does, and records every request; `page` overrides what a page of a given offset says. */
+  function resourceServing(all: readonly string[], overrides: { readonly page?: (offset: number, honest: string) => string; readonly count?: string } = {}): { fetch: FetchPort; requested: string[] } {
+    const { page = (_offset: number, honest: string): string => honest, count = `"count"\n"${String(all.length)}"\n` } = overrides;
+    const requested: string[] = [];
+    const fetch: FetchPort = async (url) => {
+      requested.push(url);
+      if (url.includes("select=count")) {
+        return Promise.resolve(new Response(count));
+      }
+      const offset = Number(/offset=(\d+)/.exec(url)?.[1]);
+      const limit = Number(/limit=(\d+)/.exec(url)?.[1]);
+
+      return Promise.resolve(new Response(page(offset, header + all.slice(offset, offset + limit).join(""))));
+    };
+
+    return { fetch, requested };
+  }
+
+  it("reads each page in order of the row ids and joins them under one header", async () => {
+    const served = resourceServing(rows);
+    const fetched = await fetchEntry(dataset, { fetch: served.fetch, now });
+    expect(fetched.data).toEqual({
+      meta: { id: "resource-cases", name: "Resource cases" },
+      nodes: [
+        { id: "a1", status: "Open", territory: "Camden" },
+        { id: "a2", status: "Closed", territory: 'Isle "of" Dogs' },
+        { id: "a3", status: "Open", territory: "Hackney" },
+      ],
+    });
+    expect(served.requested).toEqual([`${resource}?%24select=count(*)`, `${resource}?%24order=%3Aid&%24limit=2&%24offset=0`, `${resource}?%24order=%3Aid&%24limit=2&%24offset=2`]);
+    expect(fetched.provenance.fetchedUrl).toBe(resource);
+    expect(fetched.provenance.byteLength).toBe(new TextEncoder().encode(header + rows.join("")).length);
+  });
+
+  it("holds the round trip over the paths the crosswalk maps", async () => {
+    expect(await roundTripEntry(dataset, { fetch: resourceServing(rows).fetch, now })).toMatchObject({ holds: true });
+  });
+
+  it("fails at the download step when a page holds fewer rows than it should, as a response cut short does", async () => {
+    const cut = resourceServing(rows, { page: (offset, honest) => (offset === 2 ? header : honest) });
+    const error = await failure(fetchEntry(dataset, { fetch: cut.fetch, now }));
+    expect(error.step).toBe("download");
+    expect(error.message).toMatch(/gave 0 rows at offset 2 where 1 of its 3 were due/);
+  });
+
+  it("fails at the download step when a later page has a different header, or the resource reports no rows or no count", async () => {
+    const changed = resourceServing(rows, { page: (offset, honest) => (offset === 2 ? honest.replace("status", "state") : honest) });
+    expect((await failure(fetchEntry(dataset, { fetch: changed.fetch, now }))).message).toMatch(/different header at offset 2/);
+    expect((await failure(fetchEntry(dataset, { fetch: resourceServing([]).fetch, now }))).message).toMatch(/has no rows/);
+    expect((await failure(fetchEntry(dataset, { fetch: resourceServing(rows, { count: "unrelated" }).fetch, now }))).message).toMatch(/did not report a row count/);
   });
 });
