@@ -1,3 +1,10 @@
+# [0.10.0](https://github.com/Mearman/keepset/compare/v0.9.2...v0.10.0) (2026-10-19)
+
+
+### Features
+
+* **site:** keep home listing rows on one line ([9a1de89](https://github.com/Mearman/keepset/commit/9a1de898229c1ae487f13548bf10d803c14c223b))
+
 ## [0.9.2](https://github.com/Mearman/keepset/compare/v0.9.1...v0.9.2) (2026-10-19)
 
 
