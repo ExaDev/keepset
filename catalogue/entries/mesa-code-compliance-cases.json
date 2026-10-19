@@ -8,6 +8,11 @@
     "oneWay": [
       {
         "direction": "encode",
+        "from": "nodes[].Record_ID",
+        "op": "drop"
+      },
+      {
+        "direction": "encode",
         "from": "nodes[].Permit_Number",
         "op": "drop"
       },
@@ -364,7 +369,7 @@
       "delimiter": "comma",
       "encoding": "utf-8",
       "format": "csv-table",
-      "idColumn": "Record_ID",
+      "idColumn": null,
       "numericColumns": [
         {
           "column": "Latitude",

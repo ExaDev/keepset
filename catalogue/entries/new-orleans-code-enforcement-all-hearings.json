@@ -175,7 +175,7 @@
     {
       "retrieved": "2026-10-19",
       "status": "live",
-      "url": "https://data.nola.gov/resource/44ct-56tr.csv"
+      "url": "https://data.nola.gov/resource/44ct-56tr.csv?%24limit=1000000"
     }
   ],
   "tags": [
