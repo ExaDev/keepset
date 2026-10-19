@@ -7,25 +7,24 @@ import { CurationSchema, TARGET_FIELD_NAMES, TARGET_FIELDS, type Curation, type 
 /** The shared crosswalk of an entry with no recipe yet: the document's meta and node ids, all that is known of a dataset whose columns have not been read into a mapping. */
 export const OR_NODES_CROSSWALK = "crosswalks/or-v1/nodes.json";
 
-/** The most rows a table may have to be given a recipe. A recipe reads the whole download into memory and builds an object per row, so a table of tens of millions of rows is not read by one fetch; such a dataset is imported without a recipe and says so. */
-export const MAX_ROWS = 1_000_000;
+/** The most cells (rows times the cells each row keeps, its id included) a table may have to be given a recipe. A fetch holds every kept cell of the table at once, in the parsed rows, the crosswalk's result and the validated document, so memory grows with the cells and not with the file's size; a table of tens of millions of cells is not read by one fetch and is imported without a recipe, saying so. Measured on whole fetches: a table of about five million cells needed a heap of between 512 and 768 MiB, and one of about eleven million cells between 1 and 1.5 GiB, so this stays within Node's usual default heap. */
+export const MAX_CELLS = 12_000_000;
+
+/** How many rows a page of a Socrata resource holds. A response is a CSV of every column, so a page is a few tens of megabytes for a table of up to a kilobyte a row, short enough that a response is not cut off in transit and long enough that a table of millions of rows is a few dozen requests. */
+export const SOCRATA_PAGE_ROWS = 50_000;
 
 /** The path of a Socrata resource endpoint: a four-by-four dataset id and an output format. */
 const SOCRATA_RESOURCE_CSV = /^\/resource\/[a-z0-9]{4}-[a-z0-9]{4}\.csv$/;
 
 /**
- * The URL a recipe downloads a table from. A Socrata resource endpoint returns a fixed small number of rows unless it is given a limit, so a table read from one is asked for as many rows as a recipe may read; every other URL is already the whole table.
+ * How a recipe pages a source URL. A Socrata resource endpoint returns a small fixed number of rows unless it is given a limit, and one response of a large table can be cut short in transit, so it is read a page at a time; every other URL is one file.
  * @param url - The URL the survey or the curation gives for the table.
- * @returns The same URL, with the row limit set on a Socrata resource endpoint that has none.
+ * @returns The paging of a Socrata resource endpoint with no query, and undefined for any other URL.
  */
-export function wholeTableUrl(url: string): string {
+export function socrataPaging(url: string): { readonly kind: "socrata-resource"; readonly pageSize: number } | undefined {
   const parsed = new URL(url);
-  if (!SOCRATA_RESOURCE_CSV.test(parsed.pathname) || parsed.searchParams.has("$limit")) {
-    return url;
-  }
-  parsed.searchParams.set("$limit", String(MAX_ROWS));
 
-  return parsed.href;
+  return SOCRATA_RESOURCE_CSV.test(parsed.pathname) && parsed.search === "" ? { kind: "socrata-resource", pageSize: SOCRATA_PAGE_ROWS } : undefined;
 }
 
 /** The short label each survey theme is filed under as the entry's domain, matched against the theme text because the survey's own wording is long and uses dashes. Every theme the survey uses must match exactly one. */
@@ -107,9 +106,6 @@ function checkFetchable(id: string, outcome: TableOutcome): void {
   const fail = (message: string): never => {
     throw new Error(`${id}: ${message}`);
   };
-  if (outcome.rowCount !== undefined && outcome.rowCount > MAX_ROWS) {
-    fail(`the table has ${String(outcome.rowCount)} rows, more than ${String(MAX_ROWS)}, so it has no recipe`);
-  }
   const named = columnsOf(id, outcome);
   if (outcome.idColumn !== null && !named.names.includes(outcome.idColumn)) {
     fail(`the id column ${outcome.idColumn} is not one of the parser's column names for this header`);
@@ -124,6 +120,10 @@ function checkFetchable(id: string, outcome: TableOutcome): void {
   });
   if (mapped.length === 0) {
     fail("the map fills no field, so a fetch would carry nothing beyond ids");
+  }
+  const cells = (outcome.rowCount ?? 0) * (mapped.length + 1);
+  if (cells > MAX_CELLS) {
+    fail(`the table has ${String(outcome.rowCount)} rows of ${String(mapped.length + 1)} kept cells, ${String(cells)} cells, more than ${String(MAX_CELLS)}, so it has no recipe`);
   }
   if (outcome.status === "fetchable-arcgis") {
     for (const column of outcome.dateColumns) {
@@ -205,9 +205,10 @@ const keptColumns = (outcome: TableOutcome): string[] => TARGET_FIELD_NAMES.flat
  * The recipe of an outcome.
  * @param outcome - The outcome.
  * @param source - The index of the entry's source the recipe reads.
+ * @param url - The URL of that source.
  * @returns The recipe, fetchable or not.
  */
-function recipeOf(outcome: CurationItem["outcome"], source: number): unknown {
+function recipeOf(outcome: CurationItem["outcome"], source: number, url: string): unknown {
   if (outcome.status === "not-fetchable") {
     return { status: "not-fetchable", reason: outcome.reason };
   }
@@ -223,9 +224,12 @@ function recipeOf(outcome: CurationItem["outcome"], source: number): unknown {
     };
   }
 
+  const paging = socrataPaging(url);
+
   return {
     status: "fetchable",
     source,
+    ...(paging === undefined ? {} : { paging }),
     archive: outcome.sheet === undefined ? { kind: "none" } : { kind: "xlsx", sheet: outcome.sheet },
     parser: { format: "csv-table", encoding: outcome.encoding, delimiter: outcome.delimiter, skipLines: outcome.skipLines, idColumn: outcome.idColumn, numericColumns: outcome.numericColumns, columns: keptColumns(outcome) },
   };
@@ -245,8 +249,7 @@ export function convertItem(item: SurveyEntry, curation: CurationItem, probedOn:
   if (outcome.status === "fetchable-arcgis" && curation.downloadUrl === undefined) {
     throw new Error(`${item.id}: an ArcGIS recipe needs the layer's URL as the downloadUrl`);
   }
-  const tableUrl = outcome.status === "fetchable" ? wholeTableUrl(givenUrl) : givenUrl;
-  const dataUrl = tableUrl === item.url ? undefined : tableUrl;
+  const dataUrl = givenUrl === item.url ? undefined : givenUrl;
   const sources = [item.url, ...(dataUrl === undefined ? [] : [dataUrl])].map((url) => ({ url, retrieved: probedOn, status: "live" }));
   const prefix = `${curation.namespace}-`;
   const alias = curation.id.startsWith(prefix) ? curation.id.slice(prefix.length) : "";
@@ -265,7 +268,7 @@ export function convertItem(item: SurveyEntry, curation: CurationItem, probedOn:
     sources,
     licence: curation.licence,
     citations: [],
-    recipe: recipeOf(outcome, dataUrl === undefined ? 0 : 1),
+    recipe: recipeOf(outcome, dataUrl === undefined ? 0 : 1, givenUrl),
     crosswalk: outcome.status === "not-fetchable" ? { file: OR_NODES_CROSSWALK } : crosswalkOf(outcome),
     expectedCounts: outcome.status !== "not-fetchable" && outcome.expectedNodes !== undefined ? { nodes: outcome.expectedNodes } : {},
     properties: { surveyId: item.id },

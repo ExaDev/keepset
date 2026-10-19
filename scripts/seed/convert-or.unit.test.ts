@@ -5,7 +5,7 @@ import { describe, expect, it } from "vitest";
 import { createCatalogue } from "../../src/catalogue";
 import { fetchEntry, roundTripEntry } from "../../src/node/fetch-dataset";
 import { fixtureManifest } from "../../src/test-support/entries";
-import { convertItem, convertSurvey, MAX_ROWS, wholeTableUrl } from "./convert-or";
+import { convertItem, convertSurvey, MAX_CELLS, SOCRATA_PAGE_ROWS, socrataPaging } from "./convert-or";
 import { CurationItemSchema, SurveySourceSchema, TARGET_FIELD_NAMES, TARGET_FIELDS } from "./or-survey";
 
 const survey = SurveySourceSchema.parse({
@@ -40,6 +40,9 @@ const curation = {
     { surveyId: "or-2", id: "classic-instances", namespace: "example", name: "Classic instances", licence: { kind: "unrecorded" }, flags: [], outcome: { status: "not-fetchable", reason: "the instances are in a text format with no parser yet" } },
   ],
 };
+
+/** The cells each row of the fixture table keeps: its five mapped columns and its id. */
+const CELLS_PER_ROW = 6;
 
 const none: ReadonlySet<string> = new Set();
 
@@ -155,9 +158,10 @@ describe("convertSurvey refuses an inconsistent curation", () => {
     expect(() => convertSurvey(odd, { probedOn: "2026-10-19", items: [instances] }, none)).toThrow(/matches 0 domain labels/);
   });
 
-  it("a table too long to read, and one exactly at the limit", () => {
-    expect(problem(withFirst({ rowCount: MAX_ROWS + 1 }))).toMatch(new RegExp(`${String(MAX_ROWS + 1)} rows, more than ${String(MAX_ROWS)}`));
-    expect(() => convertSurvey(survey, withFirst({ rowCount: MAX_ROWS }), none)).not.toThrow();
+  it("a table with more cells than a fetch holds, and one exactly at the limit", () => {
+    const longest = Math.floor(MAX_CELLS / CELLS_PER_ROW);
+    expect(problem(withFirst({ rowCount: longest + 1 }))).toMatch(new RegExp(`${String(longest + 1)} rows of ${String(CELLS_PER_ROW)} kept cells`));
+    expect(() => convertSurvey(survey, withFirst({ rowCount: longest }), none)).not.toThrow();
   });
 
   it("a header whose cells get the same name, an id column the header does not have, a mapping to a missing column, one column filling two fields, and an empty map", () => {
@@ -200,20 +204,23 @@ describe("the survey's themes and the target fields", () => {
   });
 });
 
-describe("wholeTableUrl", () => {
-  it("asks a Socrata resource endpoint for as many rows as a recipe may read", () => {
-    expect(wholeTableUrl("https://data.example.org/resource/abcd-1234.csv")).toBe(`https://data.example.org/resource/abcd-1234.csv?%24limit=${String(MAX_ROWS)}`);
+describe("socrataPaging", () => {
+  it("pages a Socrata resource endpoint with no query", () => {
+    expect(socrataPaging("https://data.example.org/resource/abcd-1234.csv")).toEqual({ kind: "socrata-resource", pageSize: SOCRATA_PAGE_ROWS });
   });
 
-  it("keeps a limit the URL already sets", () => {
-    const url = "https://data.example.org/resource/abcd-1234.csv?$limit=50";
-    expect(wholeTableUrl(url)).toBe(url);
-  });
-
-  it("leaves every other URL as it is", () => {
-    for (const url of ["https://data.example.org/api/views/abcd-1234/rows.csv?accessType=DOWNLOAD", "https://data.example.org/dataset/x/resource/0a1b2c3d/download/x.csv", "https://data.example.org/resource/abcd-1234.json"]) {
-      expect(wholeTableUrl(url)).toBe(url);
+  it("leaves every other URL as one file", () => {
+    for (const url of ["https://data.example.org/resource/abcd-1234.csv?$limit=50", "https://data.example.org/api/views/abcd-1234/rows.csv?accessType=DOWNLOAD", "https://data.example.org/dataset/x/resource/0a1b2c3d/download/x.csv", "https://data.example.org/resource/abcd-1234.json"]) {
+      expect(socrataPaging(url)).toBeUndefined();
     }
+  });
+
+  it("makes a paged recipe, at the resource's own URL, for a table read from a Socrata resource", () => {
+    const [item] = survey.entries;
+    const curated = CurationItemSchema.parse({ ...curation.items[0], downloadUrl: "https://data.example.org/resource/abcd-1234.csv" });
+    const { entry } = convertItem(item ?? expect.unreachable("the fixture survey has an item"), curated, "2026-10-19");
+    expect(entry.sources.map((source) => source.url)).toEqual(["https://example.org/requests", "https://data.example.org/resource/abcd-1234.csv"]);
+    expect(entry.recipe).toMatchObject({ status: "fetchable", source: 1, paging: { kind: "socrata-resource", pageSize: SOCRATA_PAGE_ROWS } });
   });
 });
 
