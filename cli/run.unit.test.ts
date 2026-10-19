@@ -89,8 +89,8 @@ describe("command parsing", () => {
   it.each([
     [[], /expected a command/],
     [["teleport", "x"], /unknown command teleport/],
-    [["show"], /show takes exactly one dataset id/],
-    [["fetch", "a", "b"], /fetch takes exactly one dataset id/],
+    [["show"], /show takes exactly one dataset/],
+    [["fetch", "a", "b"], /fetch takes exactly one dataset/],
     [["search", "a", "b"], /at most one text argument/],
     [["search", "--nope"], /Unknown option '--nope'/],
     [["fetch", "karate", "--out"], /argument missing/],
@@ -172,7 +172,7 @@ describe("fetch", () => {
   it("writes the result and its provenance, prints the counts and the warnings", async () => {
     const { library, io, out, calls } = harness();
     expect(await run(["fetch", "karate"], library, io)).toBe(EXIT_OK);
-    expect(calls).toEqual([["fetchDataset", "karate"]]);
+    expect(calls).toEqual([["getDataset", "karate"], ["fetchDataset", "karate"]]);
     expect(JSON.parse(out.files.get("karate.json") ?? "null")).toEqual(fetched.data);
     expect(JSON.parse(out.files.get("karate.provenance.json") ?? "null")).toEqual(fetched.provenance);
     expect(out.stdout).toBe("wrote karate.json (nodes 2, edges 1) and karate.provenance.json\n");
@@ -219,7 +219,7 @@ describe("roundtrip", () => {
   it("reports a round trip that holds", async () => {
     const { library, io, out, calls } = harness();
     expect(await run(["roundtrip", "karate"], library, io)).toBe(EXIT_OK);
-    expect(calls).toEqual([["roundTripDataset", "karate"]]);
+    expect(calls).toEqual([["getDataset", "karate"], ["roundTripDataset", "karate"]]);
     expect(out.stdout).toBe("karate: the round trip holds\n");
   });
 
@@ -227,5 +227,49 @@ describe("roundtrip", () => {
     const { library, io, out } = harness({ roundTripDataset: async () => Promise.resolve({ holds: false, path: "", message: "records differ in keys", provenance: fetched.provenance }) });
     expect(await run(["roundtrip", "karate"], library, io)).toBe(EXIT_NO);
     expect(out.stdout).toBe("karate: the round trip does not hold at (root): records differ in keys\n");
+  });
+});
+
+describe("namespaces and aliases", () => {
+  const nested = createCatalogue({
+    ...fixtureIndex,
+    entries: [
+      { ...fixtureIndex.entries[0], id: "one-shared", namespace: ["one", "inner"], aliases: ["shared"] },
+      { ...fixtureIndex.entries[0], id: "two-shared", namespace: ["two"], aliases: ["shared"] },
+    ],
+  });
+  const nestedLibrary = (): ReturnType<typeof harness> => harness({ getDataset: (name) => nested.getDataset(name), listDatasets: (query) => nested.listDatasets(query) });
+
+  it("resolves a qualified name for fetch and writes under the entry's own id, never the typed name", async () => {
+    const { library, io, out, calls } = nestedLibrary();
+    expect(await run(["fetch", "one/inner/shared"], library, io)).toBe(EXIT_OK);
+    expect(calls).toContainEqual(["fetchDataset", "one-shared"]);
+    expect([...out.files.keys()]).toEqual(["one-shared.json", "one-shared.provenance.json"]);
+  });
+
+  it("reports the entry's own id for validate and roundtrip of an alias", async () => {
+    const { library, io, out } = nestedLibrary();
+    expect(await run(["validate", "inner/shared"], library, io)).toBe(EXIT_OK);
+    expect(out.stdout).toBe("one-shared is valid\n");
+    const second = nestedLibrary();
+    expect(await run(["roundtrip", "two/shared"], second.library, second.io)).toBe(EXIT_OK);
+    expect(second.out.stdout).toBe("two-shared: the round trip holds\n");
+  });
+
+  it("turns an ambiguous name into exit status 2 naming the entries it could mean", async () => {
+    const { library, io, out } = nestedLibrary();
+    expect(await run(["show", "shared"], library, io)).toBe(EXIT_FAILED);
+    expect(out.stderr).toBe('"shared" could mean more than one dataset: one-shared, two-shared; use an id or a longer qualified name\n');
+  });
+
+  it("filters the search by --namespace", async () => {
+    const { library, io, out } = nestedLibrary();
+    expect(await run(["search", "--namespace", "one"], library, io)).toBe(EXIT_OK);
+    expect(out.stdout).toContain("one-shared");
+    expect(out.stdout).not.toContain("two-shared");
+  });
+
+  it("prints the namespace and aliases in show", () => {
+    expect(formatShow(nested.getDataset("one-shared"))).toContain("namespace: one/inner\naliases: shared\n");
   });
 });
