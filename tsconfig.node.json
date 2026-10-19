@@ -1,9 +1,11 @@
 {
   "compilerOptions": {
+    // The node program also compiles the site generator, whose page templates are JSX rendered with react-dom/server; skipLibCheck keeps @types/react's own DOM references unchecked, and the templates themselves use no DOM globals, so no DOM lib is needed here.
+    "jsx": "react-jsx",
     "lib": ["ES2024"],
     "types": ["node"]
   },
   "exclude": [],
   "extends": "./tsconfig.json",
-  "include": ["site/*.ts", "cli/**/*.ts", "src/node/**/*.ts", "src/**/*.test.ts", "src/test-support/**/*.ts", "scripts/**/*.ts", "*.config.ts"]
+  "include": ["site/*.ts", "site/*.tsx", "cli/**/*.ts", "src/node/**/*.ts", "src/**/*.test.ts", "src/test-support/**/*.ts", "scripts/**/*.ts", "*.config.ts"]
 }

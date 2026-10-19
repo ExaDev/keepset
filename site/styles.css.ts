@@ -260,10 +260,12 @@ globalStyle("#island-root", {
   display: "none",
 });
 
+
 globalStyle("#island-root.island-live", {
   display: "block",
 });
 
-globalStyle(".island-hidden", {
+/* The static listing is the island mount's next sibling on the home page, so the live class itself retires it; no script has to find and hide it. */
+globalStyle("#island-root.island-live ~ .table-wrap.listing", {
   display: "none",
 });
