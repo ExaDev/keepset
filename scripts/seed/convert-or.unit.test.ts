@@ -5,7 +5,7 @@ import { describe, expect, it } from "vitest";
 import { createCatalogue } from "../../src/catalogue";
 import { fetchEntry, roundTripEntry } from "../../src/node/fetch-dataset";
 import { fixtureManifest } from "../../src/test-support/entries";
-import { convertSurvey, MAX_ROWS } from "./convert-or";
+import { convertSurvey, MAX_ROWS, wholeTableUrl } from "./convert-or";
 import { SurveySourceSchema, TARGET_FIELD_NAMES, TARGET_FIELDS } from "./or-survey";
 
 const survey = SurveySourceSchema.parse({
@@ -193,5 +193,22 @@ describe("the survey's themes and the target fields", () => {
   it("lists the target fields in code-unit order, with a kind for each", () => {
     expect([...TARGET_FIELD_NAMES]).toEqual([...TARGET_FIELD_NAMES].sort());
     expect(Object.keys(TARGET_FIELDS).sort()).toEqual([...TARGET_FIELD_NAMES]);
+  });
+});
+
+describe("wholeTableUrl", () => {
+  it("asks a Socrata resource endpoint for as many rows as a recipe may read", () => {
+    expect(wholeTableUrl("https://data.example.org/resource/abcd-1234.csv")).toBe(`https://data.example.org/resource/abcd-1234.csv?%24limit=${String(MAX_ROWS)}`);
+  });
+
+  it("keeps a limit the URL already sets", () => {
+    const url = "https://data.example.org/resource/abcd-1234.csv?$limit=50";
+    expect(wholeTableUrl(url)).toBe(url);
+  });
+
+  it("leaves every other URL as it is", () => {
+    for (const url of ["https://data.example.org/api/views/abcd-1234/rows.csv?accessType=DOWNLOAD", "https://data.example.org/dataset/x/resource/0a1b2c3d/download/x.csv", "https://data.example.org/resource/abcd-1234.json"]) {
+      expect(wholeTableUrl(url)).toBe(url);
+    }
   });
 });

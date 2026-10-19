@@ -9,6 +9,24 @@ export const OR_NODES_CROSSWALK = "crosswalks/or-v1/nodes.json";
 /** The most rows a table may have to be given a recipe. A recipe reads the whole download into memory and builds an object per row, so a table of tens of millions of rows is not read by one fetch; such a dataset is imported without a recipe and says so. */
 export const MAX_ROWS = 1_000_000;
 
+/** The path of a Socrata resource endpoint: a four-by-four dataset id and an output format. */
+const SOCRATA_RESOURCE_CSV = /^\/resource\/[a-z0-9]{4}-[a-z0-9]{4}\.csv$/;
+
+/**
+ * The URL a recipe downloads a table from. A Socrata resource endpoint returns a fixed small number of rows unless it is given a limit, so a table read from one is asked for as many rows as a recipe may read; every other URL is already the whole table.
+ * @param url - The URL the survey or the curation gives for the table.
+ * @returns The same URL, with the row limit set on a Socrata resource endpoint that has none.
+ */
+export function wholeTableUrl(url: string): string {
+  const parsed = new URL(url);
+  if (!SOCRATA_RESOURCE_CSV.test(parsed.pathname) || parsed.searchParams.has("$limit")) {
+    return url;
+  }
+  parsed.searchParams.set("$limit", String(MAX_ROWS));
+
+  return parsed.href;
+}
+
 /** The short label each survey theme is filed under as the entry's domain, matched against the theme text because the survey's own wording is long and uses dashes. Every theme the survey uses must match exactly one. */
 const THEMES: readonly (readonly [RegExp, string])[] = [
   [/permits, inspections, prosecutions/, "Case records"],
@@ -174,7 +192,9 @@ function crosswalkOf(outcome: FetchableOutcome): Crosswalk {
  */
 export function convertItem(item: SurveyEntry, curation: CurationItem, probedOn: string): { readonly entry: Entry; readonly outcome: OrOutcome } {
   const { outcome } = curation;
-  const dataUrl = curation.downloadUrl !== undefined && curation.downloadUrl !== item.url ? curation.downloadUrl : undefined;
+  const givenUrl = curation.downloadUrl ?? item.url;
+  const tableUrl = outcome.status === "fetchable" ? wholeTableUrl(givenUrl) : givenUrl;
+  const dataUrl = tableUrl === item.url ? undefined : tableUrl;
   const sources = [item.url, ...(dataUrl === undefined ? [] : [dataUrl])].map((url) => ({ url, retrieved: probedOn, status: "live" }));
   const prefix = `${curation.namespace}-`;
   const alias = curation.id.startsWith(prefix) ? curation.id.slice(prefix.length) : "";
