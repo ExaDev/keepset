@@ -14,17 +14,18 @@ const DECIMAL = /^[+-]?(?:\d+\.?\d*|\.\d+)(?:[eE][+-]?\d+)?$/;
 const BYTE_ORDER_MARK = "﻿";
 
 /**
- * The name the parser gives a column: the header with every run of characters outside letters, digits and underscore replaced by one underscore, leading and trailing underscores dropped, and a name starting with a digit prefixed with `c_`. The rule depends on the header alone, so a crosswalk written against a file's headers reads the same wherever it runs.
+ * The name the parser gives a column: the header with every run of characters outside letters, digits and underscore replaced by one underscore, leading and trailing underscores dropped, and a name starting with a digit prefixed with `c_`. A header with nothing left (an empty cell, as in a table exported with an unnamed index column) is `column_` and its 1-based position. The rule depends on the header and its position alone, so a crosswalk written against a file's headers reads the same wherever it runs.
  * @param header - A header cell.
- * @returns The column name, or undefined when nothing of the header is left.
+ * @param position - The cell's 1-based position among the header cells.
+ * @returns The column name.
  */
-export function columnName(header: string): string | undefined {
+export function columnName(header: string, position: number): string {
   const name = header
     .trim()
     .replaceAll(/[^A-Za-z0-9_]+/g, "_")
     .replaceAll(/^_+|_+$/g, "");
   if (name === "") {
-    return undefined;
+    return `column_${String(position)}`;
   }
 
   return /^\d/.test(name) ? `c_${name}` : name;
@@ -145,7 +146,7 @@ function numeric(cell: string, factor: number, column: string, line: number): nu
 }
 
 /**
- * Parses a delimited table into rows: the first record after `skipLines` lines is the header, each later record is a row, and every row carries every column but the id column, an empty cell being null. Cells are trimmed. A column the recipe declares numeric is read as a decimal number times its factor and any other column stays a string. A row's id is the cell of the recipe's id column, which is then not also a column, or its 1-based row number when the recipe names none. Blank lines are skipped; a row with a different number of fields than the header, a header cell with no name, two columns with the same name, and an id cell that is empty are errors.
+ * Parses a delimited table into rows: the first record after `skipLines` lines is the header, each later record is a row, and every row carries every column but the id column, an empty cell being null. Cells are trimmed. A column the recipe declares numeric is read as a decimal number times its factor and any other column stays a string. A row's id is the cell of the recipe's id column, which is then not also a column, or its 1-based row number when the recipe names none. Blank lines are skipped; a row with a different number of fields than the header, two columns with the same name, and an id cell that is empty are errors.
  * @param text - The file text.
  * @param options - The recipe's table parser.
  * @returns The rows, in file order.
@@ -159,10 +160,7 @@ export function parseCsvTable(text: string, options: CsvTableParser): NativeTabl
   }
   const names: string[] = [];
   for (const [position, cell] of header.fields.entries()) {
-    const name = columnName(cell);
-    if (name === undefined) {
-      throw new NativeParseError("csv-table", header.line, `header cell ${String(position + 1)} (${JSON.stringify(cell)}) has no name left once its characters other than letters, digits and underscores are removed`);
-    }
+    const name = columnName(cell, position + 1);
     const clash = names.indexOf(name);
     if (clash !== -1) {
       throw new NativeParseError("csv-table", header.line, `header cells ${String(clash + 1)} and ${String(position + 1)} both become the column ${name}`);
