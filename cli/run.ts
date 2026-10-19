@@ -35,8 +35,8 @@ Commands:
          [--category <id>] [--json]
                       list the datasets whose id, alias, namespace, name,
                       description, domain or tags contain the text, filtered by
-                      kind, domain, namespace (and everything beneath it) or
-                      category
+                      kind, domain, namespace (and every namespace beneath it,
+                      segment aliases allowed) or category
   show <dataset> [--json]
                       print a dataset's metadata, recipe and crosswalk
   fetch <dataset> [--out <file>]
