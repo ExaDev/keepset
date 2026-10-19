@@ -32,6 +32,10 @@ beforeAll(async () => {
       response.end(request.headers["user-agent"]);
     } else if (path === "/slow") {
       // Never answers, so only an abort ends the request.
+    } else if (path === "/stalls-mid-body") {
+      // Answers, sends the start of a body and then goes silent, as a dead connection does in the middle of a large download.
+      response.writeHead(STATUS.ok, { "content-length": "100" });
+      response.write("partial");
     } else {
       response.writeHead(STATUS.notFound, "Not Found");
       response.end("missing");
@@ -71,6 +75,12 @@ describe("downloadRaw", () => {
 
   it("refuses a redirect without a location", async () => {
     await expect(downloadRaw(`${base}/nowhere`, {})).rejects.toThrow(KeepsetError);
+  });
+
+  it("gives up a connection that sends nothing, before the answer and in the middle of a body", async () => {
+    const stallMilliseconds = 50;
+    await expect(downloadRaw(`${base}/slow`, { stallMilliseconds })).rejects.toThrow(/sent nothing for 50 milliseconds/);
+    await expect(downloadRaw(`${base}/stalls-mid-body`, { stallMilliseconds })).rejects.toThrow(/sent nothing for 50 milliseconds/);
   });
 
   it("passes a failing status through for the recipe to report", async () => {

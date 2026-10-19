@@ -13,22 +13,41 @@ const REDIRECTS: ReadonlySet<number> = new Set(Object.values(REDIRECT_STATUS));
 /** What the downloader says it is, so a server operator can tell where the traffic comes from. */
 const USER_AGENT = "keepset (+https://github.com/Mearman/keepset)";
 
-/** Options for one download: the signal that aborts it. */
+/** How long a connection may send nothing, at any point of a download, before it is given up as dead. A healthy server of the open data portals recipes read sends something every few seconds even while it prepares a large page, and a socket that has gone silent otherwise holds the download for ever, as one did in the middle of a table of millions of rows. */
+export const STALL_MILLISECONDS = 120_000;
+
+/** Options for one download: the signal that aborts it, and how long a silent connection is waited on (`STALL_MILLISECONDS` unless a test shortens it). */
 export interface DownloadInit {
   readonly signal?: AbortSignal;
+  readonly stallMilliseconds?: number;
 }
 
 /**
  * Sends one GET and resolves with the response head, its body still unread.
  * @param url - The URL.
  * @param signal - Aborts the request.
+ * @param stall - How many milliseconds the connection may send nothing, in the head or the body that follows.
  * @returns The response.
+ * @throws KeepsetError when the connection stalls.
  */
-async function get(url: URL, signal: AbortSignal | undefined): Promise<IncomingMessage> {
+async function get(url: URL, signal: AbortSignal | undefined, stall: number): Promise<IncomingMessage> {
   const send = url.protocol === "https:" ? httpsRequest : httpRequest;
 
   return new Promise((resolve, reject) => {
-    const request = send(url, { method: "GET", headers: { "user-agent": USER_AGENT }, ...(signal === undefined ? {} : { signal }) }, resolve);
+    let answered: IncomingMessage | undefined;
+    const request = send(
+      url,
+      { method: "GET", headers: { "user-agent": USER_AGENT }, ...(signal === undefined ? {} : { signal }) },
+      (response) => {
+        answered = response;
+        resolve(response);
+      },
+    );
+    request.setTimeout(stall, () => {
+      const dead = new KeepsetError(`${url.href} sent nothing for ${String(stall)} milliseconds, so the connection was given up as dead`);
+      // Once the head has arrived the failure belongs to the body being read, which the response reports; before it, to the request.
+      (answered ?? request).destroy(dead);
+    });
     request.on("error", reject);
     request.end();
   });
@@ -54,15 +73,15 @@ async function readBody(response: IncomingMessage): Promise<Uint8Array> {
 /**
  * Requests one URL, following its redirects by recursion.
  * @param url - The URL to request.
- * @param signal - Aborts the request.
+ * @param init - The request options.
  * @param redirects - How many redirects led here.
  * @returns The final response.
  */
-async function follow(url: URL, signal: AbortSignal | undefined, redirects: number): Promise<Response> {
+async function follow(url: URL, init: DownloadInit, redirects: number): Promise<Response> {
   if (url.protocol !== "http:" && url.protocol !== "https:") {
     throw new KeepsetError(`${url.href} is not an http or https URL`);
   }
-  const response = await get(url, signal);
+  const response = await get(url, init.signal, init.stallMilliseconds ?? STALL_MILLISECONDS);
   const { statusCode: status, statusMessage } = response;
   // Node sets both on every response a client request receives; the types are optional only because IncomingMessage also models server-side requests.
   if (status === undefined || statusMessage === undefined) {
@@ -80,7 +99,7 @@ async function follow(url: URL, signal: AbortSignal | undefined, redirects: numb
     throw new KeepsetError(`${url.href} redirected more than ${String(MAX_REDIRECTS)} times`);
   }
 
-  return follow(new URL(location, url), signal, redirects + 1);
+  return follow(new URL(location, url), init, redirects + 1);
 }
 
 /**
@@ -88,8 +107,8 @@ async function follow(url: URL, signal: AbortSignal | undefined, redirects: numb
  * @param url - An http or https URL.
  * @param init - The request options.
  * @returns A Response holding the raw bytes, with the final status.
- * @throws KeepsetError when a redirect has no location, leaves http and https, or passes the redirect limit.
+ * @throws KeepsetError when a redirect has no location, leaves http and https, or passes the redirect limit, or the connection sends nothing for longer than the stall time.
  */
 export async function downloadRaw(url: string, init: DownloadInit): Promise<Response> {
-  return follow(new URL(url), init.signal, 0);
+  return follow(new URL(url), init, 0);
 }
