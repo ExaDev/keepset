@@ -5,9 +5,9 @@ import { countTarget, getTarget, type CategoryTarget } from "../categories";
 import type { Dataset } from "../catalogue";
 import type { Entry, Snapshot, Source } from "../entry";
 import { KeepsetError, RecipeError, type RecipeStep } from "../errors";
-import type { NativeEdge, NativeNode } from "../parsers/native";
+import type { NativeDocument } from "../parsers/native";
 import { parseNative } from "../parsers/parse-native";
-import type { JsonScalar } from "../targets/graph-v1";
+import type { JsonScalar } from "../targets/json-scalar";
 import { unpack, type Unpacked } from "./archive";
 import { downloadRaw } from "./download";
 
@@ -89,7 +89,7 @@ function metaOf(entry: Entry): Record<string, JsonScalar> {
 
 /** A recipe run up to the native document, before the crosswalk: what both a fetch and a round-trip check start from. */
 interface NativeRun {
-  readonly native: { readonly meta: Record<string, JsonScalar>; readonly nodes: readonly NativeNode[]; readonly edges: readonly NativeEdge[] };
+  readonly native: NativeDocument & { readonly meta: Record<string, JsonScalar> };
   readonly provenance: Provenance;
 }
 
@@ -125,7 +125,7 @@ async function runToNative(dataset: Dataset, options: FetchOptions): Promise<Nat
   const parsed = await step(entry.id, "parse", () => parseNative(unpacked.bytes, recipe.parser));
 
   return {
-    native: { meta: metaOf(entry), nodes: parsed.nodes, edges: parsed.edges },
+    native: { meta: metaOf(entry), ...parsed },
     provenance: {
       entryId: entry.id,
       catalogue: dataset.catalogue,
