@@ -1,4 +1,7 @@
 {
+  "aliases": [
+    "szcig"
+  ],
   "category": "graph/v1",
   "citations": [
     {
@@ -18,6 +21,9 @@
     "kind": "unrecorded"
   },
   "name": "Stokman-Ziegler German Interlocks",
+  "namespace": [
+    "ucinet"
+  ],
   "properties": {
     "components": 1,
     "connected": true,

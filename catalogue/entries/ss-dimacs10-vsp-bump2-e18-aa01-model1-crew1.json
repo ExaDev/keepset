@@ -1,4 +1,7 @@
 {
+  "aliases": [
+    "vsp-bump2-e18-aa01-model1-crew1"
+  ],
   "category": "graph/v1",
   "citations": [
     {
@@ -18,6 +21,10 @@
     "kind": "unrecorded"
   },
   "name": "DIMACS10/vsp_bump2_e18_aa01_model1_crew1",
+  "namespace": [
+    "suitesparse",
+    "dimacs10"
+  ],
   "properties": {
     "components": 1,
     "connected": true,

@@ -42,6 +42,38 @@ export const OMITTED_FIELDS: readonly { readonly field: string; readonly reason:
   { field: "properties sync-back", reason: "the pipeline writes detected structural properties back into its catalogue; keepset entries are not rewritten by fetching, and a fetch reports count drift as a warning instead" },
 ];
 
+/** The id prefixes that name a collection, each with the namespace its datasets are filed under. The pipeline catalogue mints ids, and only these prefixes mean "from this collection": others (`ca-`, `p2p-`, `amazon-`) are part of an upstream dataset's own name, and are left without a namespace. SuiteSparse ids are `ss-<group>-<name>` and are handled by `namespaceOf`, since the group is a second namespace segment. */
+const COLLECTION_NAMESPACES: ReadonlyMap<string, string> = new Map([
+  ["arenas", "arenas"],
+  ["konect", "konect"],
+  ["netzschleuder", "netzschleuder"],
+  ["nr", "networkrepository"],
+  ["pajek", "pajek"],
+  ["snap", "snap"],
+  ["ucinet", "ucinet"],
+  ["wormwiring", "wormwiring"],
+]);
+
+/** The id prefix of the SuiteSparse Matrix Collection, whose ids carry the collection's group as their second part. */
+const SUITESPARSE_PREFIX = "ss";
+
+/**
+ * Where an id sits in a collection, when its prefix says so: the namespace the entry is filed under and the name it has inside it, so a dataset the catalogue calls `ss-gset-g53` is `g53` in `suitesparse/gset`.
+ * @param id - A pipeline catalogue dataset id.
+ * @returns The namespace and the name within it, or undefined when the id names no collection or has no name left after its prefix.
+ */
+export function namespaceOf(id: string): { readonly namespace: readonly string[]; readonly alias: string } | undefined {
+  const [prefix = "", ...parts] = id.split("-");
+  if (prefix === SUITESPARSE_PREFIX) {
+    const [group, ...rest] = parts;
+
+    return group === undefined || rest.length === 0 ? undefined : { namespace: ["suitesparse", group], alias: rest.join("-") };
+  }
+  const collection = COLLECTION_NAMESPACES.get(prefix);
+
+  return collection === undefined || parts.length === 0 ? undefined : { namespace: [collection], alias: parts.join("-") };
+}
+
 /** Hosts whose downloads need an account: the import drops them, and a dataset left with none is not converted. */
 const AUTH_WALLED_HOSTS = new Set(["www.kaggle.com", "kaggle.com"]);
 
@@ -464,8 +496,10 @@ export function convertDataset(dataset: SourceDataset): { readonly entry?: Entry
     recipe = { status: "fetchable", source: urls.indexOf(chosen.url), archive: chosen.archive, parser: chosen.parser };
   }
 
+  const named = namespaceOf(id);
   const entry = parseEntry({
     id,
+    ...(named === undefined ? {} : { namespace: named.namespace, aliases: [named.alias] }),
     name: dataset.name,
     ...(dataset.description === undefined || dataset.description === "" ? {} : { description: dataset.description }),
     ...(dataset.domain === undefined ? {} : { domain: dataset.domain }),

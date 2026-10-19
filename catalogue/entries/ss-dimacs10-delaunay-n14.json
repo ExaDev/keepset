@@ -1,4 +1,7 @@
 {
+  "aliases": [
+    "delaunay-n14"
+  ],
   "category": "graph/v1",
   "citations": [
     {
@@ -18,6 +21,10 @@
     "kind": "unrecorded"
   },
   "name": "DIMACS10/delaunay_n14",
+  "namespace": [
+    "suitesparse",
+    "dimacs10"
+  ],
   "properties": {
     "components": 1,
     "connected": true,

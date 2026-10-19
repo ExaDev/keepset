@@ -1,4 +1,7 @@
 {
+  "aliases": [
+    "moliere-2016"
+  ],
   "category": "graph/v1",
   "citations": [
     {
@@ -18,6 +21,10 @@
     "kind": "unrecorded"
   },
   "name": "Sybrandt/MOLIERE_2016",
+  "namespace": [
+    "suitesparse",
+    "sybrandt"
+  ],
   "properties": {
     "components": 25026,
     "connected": false,

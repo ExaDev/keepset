@@ -1,4 +1,7 @@
 {
+  "aliases": [
+    "polblogs"
+  ],
   "category": "graph/v1",
   "citations": [
     {
@@ -19,6 +22,9 @@
     "kind": "unrecorded"
   },
   "name": "Political Blogs (Netzschleuder)",
+  "namespace": [
+    "netzschleuder"
+  ],
   "properties": {
     "directed": true,
     "heterogeneous": true,

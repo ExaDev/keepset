@@ -1,4 +1,7 @@
 {
+  "aliases": [
+    "smagri"
+  ],
   "category": "graph/v1",
   "citations": [
     {
@@ -18,6 +21,10 @@
     "kind": "unrecorded"
   },
   "name": "Small graph drawing contest network",
+  "namespace": [
+    "suitesparse",
+    "pajek"
+  ],
   "properties": {
     "components": 1,
     "connected": true,

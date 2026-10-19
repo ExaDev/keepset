@@ -1,4 +1,7 @@
 {
+  "aliases": [
+    "graph-dataset16mfeatkarhunen-10nn"
+  ],
   "category": "graph/v1",
   "citations": [
     {
@@ -18,6 +21,10 @@
     "kind": "unrecorded"
   },
   "name": "ML_Graph/dataset16mfeatkarhunen_10NN",
+  "namespace": [
+    "suitesparse",
+    "ml"
+  ],
   "properties": {
     "components": 1,
     "connected": true,

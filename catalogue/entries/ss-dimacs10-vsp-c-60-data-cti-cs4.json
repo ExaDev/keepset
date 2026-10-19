@@ -1,4 +1,7 @@
 {
+  "aliases": [
+    "vsp-c-60-data-cti-cs4"
+  ],
   "category": "graph/v1",
   "citations": [
     {
@@ -18,6 +21,10 @@
     "kind": "unrecorded"
   },
   "name": "DIMACS10/vsp_c-60_data_cti_cs4",
+  "namespace": [
+    "suitesparse",
+    "dimacs10"
+  ],
   "properties": {
     "components": 4,
     "connected": false,

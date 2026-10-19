@@ -1,4 +1,7 @@
 {
+  "aliases": [
+    "linux-call-graph"
+  ],
   "category": "graph/v1",
   "citations": [
     {
@@ -18,6 +21,10 @@
     "kind": "unrecorded"
   },
   "name": "Sorensen/Linux_call_graph",
+  "namespace": [
+    "suitesparse",
+    "sorensen"
+  ],
   "properties": {
     "components": 600,
     "connected": false,

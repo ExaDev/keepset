@@ -1,4 +1,7 @@
 {
+  "aliases": [
+    "hvdc1"
+  ],
   "category": "graph/v1",
   "citations": [
     {
@@ -18,6 +21,10 @@
     "kind": "unrecorded"
   },
   "name": "HVDC/hvdc1",
+  "namespace": [
+    "suitesparse",
+    "hvdc"
+  ],
   "properties": {
     "components": 1,
     "connected": true,

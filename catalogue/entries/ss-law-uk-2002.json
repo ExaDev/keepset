@@ -1,4 +1,7 @@
 {
+  "aliases": [
+    "uk-2002"
+  ],
   "category": "graph/v1",
   "citations": [
     {
@@ -18,6 +21,10 @@
     "kind": "unrecorded"
   },
   "name": "LAW/uk-2002",
+  "namespace": [
+    "suitesparse",
+    "law"
+  ],
   "properties": {
     "components": 38359,
     "connected": false,

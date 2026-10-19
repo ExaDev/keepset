@@ -1,4 +1,7 @@
 {
+  "aliases": [
+    "smallw"
+  ],
   "category": "graph/v1",
   "citations": [
     {
@@ -18,6 +21,10 @@
     "kind": "unrecorded"
   },
   "name": "Small-world network dataset",
+  "namespace": [
+    "suitesparse",
+    "pajek"
+  ],
   "properties": {
     "components": 1,
     "connected": true,

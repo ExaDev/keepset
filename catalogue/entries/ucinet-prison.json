@@ -1,4 +1,7 @@
 {
+  "aliases": [
+    "prison"
+  ],
   "category": "graph/v1",
   "citations": [
     {
@@ -18,6 +21,9 @@
     "kind": "unrecorded"
   },
   "name": "Gagnon Prison",
+  "namespace": [
+    "ucinet"
+  ],
   "properties": {
     "components": 1,
     "connected": true,

@@ -1,4 +1,7 @@
 {
+  "aliases": [
+    "soc-sign-slashdot081106"
+  ],
   "category": "graph/v1",
   "citations": [
     {
@@ -18,6 +21,10 @@
     "kind": "unrecorded"
   },
   "name": "SNAP/soc-sign-Slashdot081106",
+  "namespace": [
+    "suitesparse",
+    "snap"
+  ],
   "properties": {
     "components": 1,
     "connected": true,

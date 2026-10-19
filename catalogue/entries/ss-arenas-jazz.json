@@ -1,4 +1,7 @@
 {
+  "aliases": [
+    "jazz"
+  ],
   "category": "graph/v1",
   "citations": [
     {
@@ -18,6 +21,10 @@
     "kind": "unrecorded"
   },
   "name": "Arenas/jazz",
+  "namespace": [
+    "suitesparse",
+    "arenas"
+  ],
   "properties": {
     "components": 1,
     "connected": true,

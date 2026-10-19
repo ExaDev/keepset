@@ -1,4 +1,7 @@
 {
+  "aliases": [
+    "law-firm"
+  ],
   "category": "graph/v1",
   "citations": [
     {
@@ -19,6 +22,9 @@
     "kind": "unrecorded"
   },
   "name": "Lazega Law Firm",
+  "namespace": [
+    "netzschleuder"
+  ],
   "properties": {
     "directed": true,
     "heterogeneous": true,

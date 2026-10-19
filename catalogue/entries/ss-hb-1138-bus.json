@@ -1,4 +1,7 @@
 {
+  "aliases": [
+    "1138-bus"
+  ],
   "category": "graph/v1",
   "citations": [
     {
@@ -18,6 +21,10 @@
     "kind": "unrecorded"
   },
   "name": "HB/1138_bus",
+  "namespace": [
+    "suitesparse",
+    "hb"
+  ],
   "properties": {
     "components": 1,
     "connected": true,

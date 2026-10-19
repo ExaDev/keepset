@@ -1,4 +1,7 @@
 {
+  "aliases": [
+    "stranke94"
+  ],
   "category": "graph/v1",
   "citations": [
     {
@@ -18,6 +21,10 @@
     "kind": "unrecorded"
   },
   "name": "Social network from Stranke's 1994 study",
+  "namespace": [
+    "suitesparse",
+    "pajek"
+  ],
   "properties": {
     "components": 1,
     "connected": true,

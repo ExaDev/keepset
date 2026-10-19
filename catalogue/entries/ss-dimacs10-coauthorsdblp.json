@@ -1,4 +1,7 @@
 {
+  "aliases": [
+    "coauthorsdblp"
+  ],
   "category": "graph/v1",
   "citations": [
     {
@@ -18,6 +21,10 @@
     "kind": "unrecorded"
   },
   "name": "DIMACS10/coAuthorsDBLP",
+  "namespace": [
+    "suitesparse",
+    "dimacs10"
+  ],
   "properties": {
     "components": 1,
     "connected": true,

@@ -1,4 +1,7 @@
 {
+  "aliases": [
+    "smartgridcenter-activsg2000"
+  ],
   "category": "graph/v1",
   "citations": [
     {
@@ -18,6 +21,10 @@
     "kind": "unrecorded"
   },
   "name": "TAMU_SmartGridCenter/ACTIVSg2000",
+  "namespace": [
+    "suitesparse",
+    "tamu"
+  ],
   "properties": {
     "components": 1,
     "connected": true,

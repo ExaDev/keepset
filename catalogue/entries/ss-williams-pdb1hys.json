@@ -1,4 +1,7 @@
 {
+  "aliases": [
+    "pdb1hys"
+  ],
   "category": "graph/v1",
   "citations": [
     {
@@ -18,6 +21,10 @@
     "kind": "unrecorded"
   },
   "name": "Williams/pdb1HYS",
+  "namespace": [
+    "suitesparse",
+    "williams"
+  ],
   "properties": {
     "components": 1,
     "connected": true,

@@ -1,4 +1,7 @@
 {
+  "aliases": [
+    "dblp-2010"
+  ],
   "category": "graph/v1",
   "citations": [
     {
@@ -18,6 +21,10 @@
     "kind": "unrecorded"
   },
   "name": "LAW/dblp-2010",
+  "namespace": [
+    "suitesparse",
+    "law"
+  ],
   "properties": {
     "components": 22954,
     "connected": false,

@@ -1,4 +1,7 @@
 {
+  "aliases": [
+    "soc-sign-bitcoin-otc"
+  ],
   "category": "graph/v1",
   "citations": [
     {
@@ -18,6 +21,10 @@
     "kind": "unrecorded"
   },
   "name": "SNAP/soc-sign-bitcoin-otc",
+  "namespace": [
+    "suitesparse",
+    "snap"
+  ],
   "properties": {
     "components": 4,
     "connected": false,

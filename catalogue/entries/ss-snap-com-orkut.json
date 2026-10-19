@@ -1,4 +1,7 @@
 {
+  "aliases": [
+    "com-orkut"
+  ],
   "category": "graph/v1",
   "citations": [
     {
@@ -18,6 +21,10 @@
     "kind": "unrecorded"
   },
   "name": "SNAP/com-Orkut",
+  "namespace": [
+    "suitesparse",
+    "snap"
+  ],
   "properties": {
     "components": 2838220,
     "connected": false,

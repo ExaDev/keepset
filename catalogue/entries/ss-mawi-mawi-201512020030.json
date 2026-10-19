@@ -1,4 +1,7 @@
 {
+  "aliases": [
+    "mawi-201512020030"
+  ],
   "category": "graph/v1",
   "citations": [
     {
@@ -18,6 +21,10 @@
     "kind": "unrecorded"
   },
   "name": "MAWI/mawi_201512020030",
+  "namespace": [
+    "suitesparse",
+    "mawi"
+  ],
   "properties": {
     "components": 1284884,
     "connected": false,

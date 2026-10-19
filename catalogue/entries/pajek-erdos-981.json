@@ -1,4 +1,7 @@
 {
+  "aliases": [
+    "erdos-981"
+  ],
   "category": "graph/v1",
   "citations": [
     {
@@ -18,6 +21,9 @@
     "kind": "unrecorded"
   },
   "name": "Erdos Collaboration 1998 (Core)",
+  "namespace": [
+    "pajek"
+  ],
   "properties": {
     "components": 4,
     "connected": false,

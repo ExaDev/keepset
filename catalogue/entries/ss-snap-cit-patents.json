@@ -1,4 +1,7 @@
 {
+  "aliases": [
+    "cit-patents"
+  ],
   "category": "graph/v1",
   "citations": [
     {
@@ -18,6 +21,10 @@
     "kind": "unrecorded"
   },
   "name": "SNAP/cit-Patents",
+  "namespace": [
+    "suitesparse",
+    "snap"
+  ],
   "properties": {
     "components": 3627,
     "connected": false,

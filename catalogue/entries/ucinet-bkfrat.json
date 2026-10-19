@@ -1,4 +1,7 @@
 {
+  "aliases": [
+    "bkfrat"
+  ],
   "category": "graph/v1",
   "citations": [
     {
@@ -18,6 +21,9 @@
     "kind": "unrecorded"
   },
   "name": "Bernard & Killworth Fraternity",
+  "namespace": [
+    "ucinet"
+  ],
   "properties": {
     "components": 1,
     "connected": true,

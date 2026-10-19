@@ -1,4 +1,7 @@
 {
+  "aliases": [
+    "email-eu-core"
+  ],
   "category": "graph/v1",
   "citations": [
     {
@@ -18,6 +21,10 @@
     "kind": "unrecorded"
   },
   "name": "SNAP/email-Eu-core",
+  "namespace": [
+    "suitesparse",
+    "snap"
+  ],
   "properties": {
     "components": 20,
     "connected": false,

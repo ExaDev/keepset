@@ -1,4 +1,7 @@
 {
+  "aliases": [
+    "enron"
+  ],
   "category": "graph/v1",
   "citations": [
     {
@@ -18,6 +21,10 @@
     "kind": "unrecorded"
   },
   "name": "LAW/enron",
+  "namespace": [
+    "suitesparse",
+    "law"
+  ],
   "properties": {
     "components": 781,
     "connected": false,

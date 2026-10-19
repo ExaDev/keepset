@@ -1,4 +1,7 @@
 {
+  "aliases": [
+    "sx-stackoverflow"
+  ],
   "category": "graph/v1",
   "citations": [
     {
@@ -18,6 +21,10 @@
     "kind": "unrecorded"
   },
   "name": "SNAP/sx-stackoverflow",
+  "namespace": [
+    "suitesparse",
+    "snap"
+  ],
   "properties": {
     "components": 23580,
     "connected": false,

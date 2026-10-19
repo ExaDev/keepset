@@ -1,4 +1,7 @@
 {
+  "aliases": [
+    "wb-cs-stanford"
+  ],
   "category": "graph/v1",
   "citations": [
     {
@@ -18,6 +21,10 @@
     "kind": "unrecorded"
   },
   "name": "Gleich/wb-cs-stanford",
+  "namespace": [
+    "suitesparse",
+    "gleich"
+  ],
   "properties": {
     "components": 43,
     "connected": false,

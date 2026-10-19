@@ -1,4 +1,7 @@
 {
+  "aliases": [
+    "power197k"
+  ],
   "category": "graph/v1",
   "citations": [
     {
@@ -18,6 +21,10 @@
     "kind": "unrecorded"
   },
   "name": "PowerSystem/power197k",
+  "namespace": [
+    "suitesparse",
+    "powersystem"
+  ],
   "properties": {
     "components": 588,
     "connected": false,

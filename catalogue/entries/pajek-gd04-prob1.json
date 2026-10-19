@@ -1,4 +1,7 @@
 {
+  "aliases": [
+    "gd04-prob1"
+  ],
   "category": "graph/v1",
   "citations": [
     {
@@ -18,6 +21,9 @@
     "kind": "unrecorded"
   },
   "name": "GD04 Contest Problem 1",
+  "namespace": [
+    "pajek"
+  ],
   "properties": {
     "components": 1,
     "connected": true,

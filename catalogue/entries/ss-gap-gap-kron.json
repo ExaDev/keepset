@@ -1,4 +1,7 @@
 {
+  "aliases": [
+    "gap-kron"
+  ],
   "category": "graph/v1",
   "citations": [
     {
@@ -18,6 +21,10 @@
     "kind": "unrecorded"
   },
   "name": "GAP/GAP-kron",
+  "namespace": [
+    "suitesparse",
+    "gap"
+  ],
   "properties": {
     "components": 130997571,
     "connected": false,

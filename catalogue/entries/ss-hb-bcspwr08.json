@@ -1,4 +1,7 @@
 {
+  "aliases": [
+    "bcspwr08"
+  ],
   "category": "graph/v1",
   "citations": [
     {
@@ -18,6 +21,10 @@
     "kind": "unrecorded"
   },
   "name": "HB/bcspwr08",
+  "namespace": [
+    "suitesparse",
+    "hb"
+  ],
   "properties": {
     "components": 1,
     "connected": true,

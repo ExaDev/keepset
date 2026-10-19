@@ -1,4 +1,7 @@
 {
+  "aliases": [
+    "tsopf-rs-b678-c1"
+  ],
   "category": "graph/v1",
   "citations": [
     {
@@ -18,6 +21,10 @@
     "kind": "unrecorded"
   },
   "name": "TSOPF/TSOPF_RS_b678_c1",
+  "namespace": [
+    "suitesparse",
+    "tsopf"
+  ],
   "properties": {
     "components": 1,
     "connected": true,

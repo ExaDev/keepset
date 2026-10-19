@@ -1,4 +1,7 @@
 {
+  "aliases": [
+    "sx-mathoverflow"
+  ],
   "category": "graph/v1",
   "citations": [
     {
@@ -18,6 +21,10 @@
     "kind": "unrecorded"
   },
   "name": "SNAP/sx-mathoverflow",
+  "namespace": [
+    "suitesparse",
+    "snap"
+  ],
   "properties": {
     "components": 104,
     "connected": false,

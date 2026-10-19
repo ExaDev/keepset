@@ -1,4 +1,7 @@
 {
+  "aliases": [
+    "kaptail"
+  ],
   "category": "graph/v1",
   "citations": [
     {
@@ -18,6 +21,9 @@
     "kind": "unrecorded"
   },
   "name": "Kapferer Tailor Shop",
+  "namespace": [
+    "ucinet"
+  ],
   "properties": {
     "components": 1,
     "connected": true,

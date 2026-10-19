@@ -1,4 +1,7 @@
 {
+  "aliases": [
+    "stranke94"
+  ],
   "category": "graph/v1",
   "citations": [
     {
@@ -18,6 +21,9 @@
     "kind": "unrecorded"
   },
   "name": "Slovene Political Parties 1994",
+  "namespace": [
+    "pajek"
+  ],
   "properties": {
     "components": 1,
     "connected": true,

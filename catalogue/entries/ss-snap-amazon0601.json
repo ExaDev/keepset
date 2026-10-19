@@ -1,4 +1,7 @@
 {
+  "aliases": [
+    "amazon0601"
+  ],
   "category": "graph/v1",
   "citations": [
     {
@@ -18,6 +21,10 @@
     "kind": "unrecorded"
   },
   "name": "SNAP/amazon0601",
+  "namespace": [
+    "suitesparse",
+    "snap"
+  ],
   "properties": {
     "components": 7,
     "connected": false,

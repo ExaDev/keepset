@@ -1,4 +1,7 @@
 {
+  "aliases": [
+    "email"
+  ],
   "category": "graph/v1",
   "citations": [
     {
@@ -18,6 +21,9 @@
     "kind": "unrecorded"
   },
   "name": "Email Network URV",
+  "namespace": [
+    "arenas"
+  ],
   "properties": {
     "components": 1,
     "connected": true,

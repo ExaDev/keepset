@@ -1,4 +1,7 @@
 {
+  "aliases": [
+    "wikipedia-20051105"
+  ],
   "category": "graph/v1",
   "citations": [
     {
@@ -18,6 +21,10 @@
     "kind": "unrecorded"
   },
   "name": "Gleich/wikipedia-20051105",
+  "namespace": [
+    "suitesparse",
+    "gleich"
+  ],
   "properties": {
     "components": 37150,
     "connected": false,

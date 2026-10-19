@@ -1,4 +1,7 @@
 {
+  "aliases": [
+    "witvliet-L1-1-chemical"
+  ],
   "category": "graph/v1",
   "citations": [
     {
@@ -19,6 +22,9 @@
     "kind": "unrecorded"
   },
   "name": "C. elegans L1 Larval Chemical Connectome (Witvliet 2020, Specimen 1)",
+  "namespace": [
+    "wormwiring"
+  ],
   "properties": {
     "directed": true,
     "heterogeneous": false,

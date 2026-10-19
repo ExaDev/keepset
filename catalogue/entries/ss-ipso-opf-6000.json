@@ -1,4 +1,7 @@
 {
+  "aliases": [
+    "opf-6000"
+  ],
   "category": "graph/v1",
   "citations": [
     {
@@ -18,6 +21,10 @@
     "kind": "unrecorded"
   },
   "name": "IPSO/OPF_6000",
+  "namespace": [
+    "suitesparse",
+    "ipso"
+  ],
   "properties": {
     "components": 1,
     "connected": true,

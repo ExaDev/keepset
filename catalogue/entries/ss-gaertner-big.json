@@ -1,4 +1,7 @@
 {
+  "aliases": [
+    "big"
+  ],
   "category": "graph/v1",
   "citations": [
     {
@@ -18,6 +21,10 @@
     "kind": "unrecorded"
   },
   "name": "Gaertner/big",
+  "namespace": [
+    "suitesparse",
+    "gaertner"
+  ],
   "properties": {
     "components": 1,
     "connected": true,

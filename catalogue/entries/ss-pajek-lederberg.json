@@ -1,4 +1,7 @@
 {
+  "aliases": [
+    "lederberg"
+  ],
   "category": "graph/v1",
   "citations": [
     {
@@ -18,6 +21,10 @@
     "kind": "unrecorded"
   },
   "name": "Citation network from Lederberg's Roget thesaurus analysis",
+  "namespace": [
+    "suitesparse",
+    "pajek"
+  ],
   "properties": {
     "components": 35,
     "connected": false,

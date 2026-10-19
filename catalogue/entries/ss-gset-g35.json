@@ -1,4 +1,7 @@
 {
+  "aliases": [
+    "g35"
+  ],
   "category": "graph/v1",
   "citations": [
     {
@@ -18,6 +21,10 @@
     "kind": "unrecorded"
   },
   "name": "Gset/G35",
+  "namespace": [
+    "suitesparse",
+    "gset"
+  ],
   "properties": {
     "components": 1,
     "connected": true,

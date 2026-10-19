@@ -1,4 +1,7 @@
 {
+  "aliases": [
+    "rhesus_monkey"
+  ],
   "category": "graph/v1",
   "citations": [
     {
@@ -19,6 +22,9 @@
     "kind": "unrecorded"
   },
   "name": "Rhesus monkey grooming (1963)",
+  "namespace": [
+    "netzschleuder"
+  ],
   "properties": {
     "directed": true,
     "heterogeneous": false,

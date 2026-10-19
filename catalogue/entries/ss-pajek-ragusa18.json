@@ -1,4 +1,7 @@
 {
+  "aliases": [
+    "ragusa18"
+  ],
   "category": "graph/v1",
   "citations": [
     {
@@ -18,6 +21,10 @@
     "kind": "unrecorded"
   },
   "name": "Social network from Ragusa study with 18 individuals",
+  "namespace": [
+    "suitesparse",
+    "pajek"
+  ],
   "properties": {
     "components": 1,
     "connected": true,

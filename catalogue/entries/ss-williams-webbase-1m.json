@@ -1,4 +1,7 @@
 {
+  "aliases": [
+    "webbase-1m"
+  ],
   "category": "graph/v1",
   "citations": [
     {
@@ -18,6 +21,10 @@
     "kind": "unrecorded"
   },
   "name": "Williams/webbase-1M",
+  "namespace": [
+    "suitesparse",
+    "williams"
+  ],
   "properties": {
     "components": 2771,
     "connected": false,

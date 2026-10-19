@@ -1,4 +1,7 @@
 {
+  "aliases": [
+    "contact"
+  ],
   "category": "graph/v1",
   "citations": [
     {
@@ -19,6 +22,9 @@
     "kind": "unrecorded"
   },
   "name": "Haggle human proximity network (2006)",
+  "namespace": [
+    "netzschleuder"
+  ],
   "properties": {
     "directed": false,
     "heterogeneous": false,

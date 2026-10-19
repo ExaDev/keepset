@@ -1,4 +1,7 @@
 {
+  "aliases": [
+    "football_tsevans"
+  ],
   "category": "graph/v1",
   "citations": [
     {
@@ -23,6 +26,9 @@
     "kind": "unrecorded"
   },
   "name": "NCAA college football 2000 (corrected metadata)",
+  "namespace": [
+    "netzschleuder"
+  ],
   "properties": {
     "directed": false,
     "heterogeneous": false,

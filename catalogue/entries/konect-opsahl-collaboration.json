@@ -1,4 +1,7 @@
 {
+  "aliases": [
+    "opsahl-collaboration"
+  ],
   "category": "graph/v1",
   "citations": [
     {
@@ -18,6 +21,9 @@
     "kind": "unrecorded"
   },
   "name": "Opsahl Collaboration Network",
+  "namespace": [
+    "konect"
+  ],
   "properties": {
     "components": 1,
     "connected": true,

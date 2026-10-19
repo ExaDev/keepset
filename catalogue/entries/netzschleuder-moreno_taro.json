@@ -1,4 +1,7 @@
 {
+  "aliases": [
+    "moreno_taro"
+  ],
   "category": "graph/v1",
   "citations": [
     {
@@ -19,6 +22,9 @@
     "kind": "unrecorded"
   },
   "name": "Papuan gift-giving (1970)",
+  "namespace": [
+    "netzschleuder"
+  ],
   "properties": {
     "directed": true,
     "heterogeneous": false,

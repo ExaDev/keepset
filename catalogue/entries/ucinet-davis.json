@@ -1,4 +1,7 @@
 {
+  "aliases": [
+    "davis"
+  ],
   "category": "graph/v1",
   "citations": [
     {
@@ -18,6 +21,9 @@
     "kind": "unrecorded"
   },
   "name": "Davis Southern Club Women",
+  "namespace": [
+    "ucinet"
+  ],
   "properties": {
     "components": 1,
     "connected": true,

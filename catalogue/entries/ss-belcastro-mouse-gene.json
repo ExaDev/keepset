@@ -1,4 +1,7 @@
 {
+  "aliases": [
+    "mouse-gene"
+  ],
   "category": "graph/v1",
   "citations": [
     {
@@ -18,6 +21,10 @@
     "kind": "unrecorded"
   },
   "name": "Belcastro/mouse_gene",
+  "namespace": [
+    "suitesparse",
+    "belcastro"
+  ],
   "properties": {
     "components": 2072,
     "connected": false,

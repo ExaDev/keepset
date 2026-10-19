@@ -1,4 +1,7 @@
 {
+  "aliases": [
+    "misknowledgemap"
+  ],
   "category": "graph/v1",
   "citations": [
     {
@@ -18,6 +21,10 @@
     "kind": "unrecorded"
   },
   "name": "Moqri/MISKnowledgeMap",
+  "namespace": [
+    "suitesparse",
+    "moqri"
+  ],
   "properties": {
     "components": 1,
     "connected": true,

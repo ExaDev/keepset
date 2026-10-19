@@ -1,4 +1,7 @@
 {
+  "aliases": [
+    "graph-iris-dataset-30nn"
+  ],
   "category": "graph/v1",
   "citations": [
     {
@@ -18,6 +21,10 @@
     "kind": "unrecorded"
   },
   "name": "ML_Graph/iris_dataset_30NN",
+  "namespace": [
+    "suitesparse",
+    "ml"
+  ],
   "properties": {
     "components": 1,
     "connected": true,

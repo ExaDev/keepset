@@ -1,4 +1,7 @@
 {
+  "aliases": [
+    "tina-discal"
+  ],
   "category": "graph/v1",
   "citations": [
     {
@@ -18,6 +21,10 @@
     "kind": "unrecorded"
   },
   "name": "Tina's network: discuss/calendar interactions",
+  "namespace": [
+    "suitesparse",
+    "pajek"
+  ],
   "properties": {
     "components": 1,
     "connected": true,

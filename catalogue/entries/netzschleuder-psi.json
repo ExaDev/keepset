@@ -1,4 +1,7 @@
 {
+  "aliases": [
+    "psi"
+  ],
   "category": "graph/v1",
   "citations": [
     {
@@ -19,6 +22,9 @@
     "kind": "unrecorded"
   },
   "name": "Plant Photosystem I excitation energy transfer network (2020)",
+  "namespace": [
+    "netzschleuder"
+  ],
   "properties": {
     "directed": true,
     "heterogeneous": false,

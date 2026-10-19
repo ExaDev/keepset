@@ -1,4 +1,7 @@
 {
+  "aliases": [
+    "graph-spectro-10nn"
+  ],
   "category": "graph/v1",
   "citations": [
     {
@@ -18,6 +21,10 @@
     "kind": "unrecorded"
   },
   "name": "ML_Graph/Spectro_10NN",
+  "namespace": [
+    "suitesparse",
+    "ml"
+  ],
   "properties": {
     "components": 1,
     "connected": true,

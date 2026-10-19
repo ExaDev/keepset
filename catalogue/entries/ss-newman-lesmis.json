@@ -1,4 +1,7 @@
 {
+  "aliases": [
+    "lesmis"
+  ],
   "category": "graph/v1",
   "citations": [
     {
@@ -18,6 +21,10 @@
     "kind": "unrecorded"
   },
   "name": "Newman/lesmis",
+  "namespace": [
+    "suitesparse",
+    "newman"
+  ],
   "properties": {
     "components": 1,
     "connected": true,

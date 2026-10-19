@@ -1,4 +1,7 @@
 {
+  "aliases": [
+    "road-network-ca"
+  ],
   "category": "graph/v1",
   "citations": [
     {
@@ -18,6 +21,9 @@
     "kind": "unrecorded"
   },
   "name": "California Road Network",
+  "namespace": [
+    "snap"
+  ],
   "properties": {
     "components": 2638,
     "connected": false,

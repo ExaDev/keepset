@@ -1,4 +1,7 @@
 {
+  "aliases": [
+    "gd06-java"
+  ],
   "category": "graph/v1",
   "citations": [
     {
@@ -18,6 +21,10 @@
     "kind": "unrecorded"
   },
   "name": "Graph Drawing Contest 2006, Java class dependency graph",
+  "namespace": [
+    "suitesparse",
+    "pajek"
+  ],
   "properties": {
     "components": 1,
     "connected": true,

@@ -1,4 +1,7 @@
 {
+  "aliases": [
+    "language"
+  ],
   "category": "graph/v1",
   "citations": [
     {
@@ -18,6 +21,10 @@
     "kind": "unrecorded"
   },
   "name": "Tromble/language",
+  "namespace": [
+    "suitesparse",
+    "tromble"
+  ],
   "properties": {
     "components": 1,
     "connected": true,

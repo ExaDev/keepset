@@ -1,4 +1,7 @@
 {
+  "aliases": [
+    "gd97-c"
+  ],
   "category": "graph/v1",
   "citations": [
     {
@@ -18,6 +21,10 @@
     "kind": "unrecorded"
   },
   "name": "Graph Drawing Contest 1997, graph C",
+  "namespace": [
+    "suitesparse",
+    "pajek"
+  ],
   "properties": {
     "components": 3,
     "connected": false,

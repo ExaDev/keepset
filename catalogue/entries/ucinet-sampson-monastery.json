@@ -1,4 +1,7 @@
 {
+  "aliases": [
+    "sampson-monastery"
+  ],
   "category": "graph/v1",
   "citations": [
     {
@@ -18,6 +21,9 @@
     "kind": "unrecorded"
   },
   "name": "Sampson's Monastery (Undirected)",
+  "namespace": [
+    "ucinet"
+  ],
   "properties": {
     "directed": false,
     "heterogeneous": false,

@@ -1,4 +1,7 @@
 {
+  "aliases": [
+    "human-gene1"
+  ],
   "category": "graph/v1",
   "citations": [
     {
@@ -18,6 +21,10 @@
     "kind": "unrecorded"
   },
   "name": "Belcastro/human_gene1",
+  "namespace": [
+    "suitesparse",
+    "belcastro"
+  ],
   "properties": {
     "components": 410,
     "connected": false,

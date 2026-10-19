@@ -1,4 +1,7 @@
 {
+  "aliases": [
+    "epinions-signed"
+  ],
   "category": "graph/v1",
   "citations": [
     {
@@ -18,6 +21,9 @@
     "kind": "unrecorded"
   },
   "name": "Epinions Signed Trust Network",
+  "namespace": [
+    "snap"
+  ],
   "properties": {
     "components": 5816,
     "connected": false,
