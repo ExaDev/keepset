@@ -152,13 +152,12 @@ function checkFetchable(id: string, outcome: FetchableOutcome): void {
 }
 
 /**
- * The crosswalk of a fetchable outcome: the document's meta and node ids, each mapped column onto its field, and a one-way drop for every other column, so what the entry leaves out is written down and the round trip holds.
+ * The crosswalk of a fetchable outcome: the document's meta and node ids and each mapped column onto its field. The recipe's parser keeps only the mapped columns, so there is nothing left to drop and the round trip holds.
  * @param outcome - The outcome.
  * @returns The crosswalk document.
  * @throws Error when twindex finds the crosswalk structurally invalid.
  */
 function crosswalkOf(outcome: FetchableOutcome): Crosswalk {
-  const mapped = new Set(Object.values(outcome.map));
   const crosswalk = {
     source: "csv-table",
     target: "or/v1",
@@ -171,7 +170,6 @@ function crosswalkOf(outcome: FetchableOutcome): Crosswalk {
         return column === undefined ? [] : [{ op: "move", from: `nodes[].${column}`, to: `nodes[].${field}` }];
       }),
     ],
-    oneWay: columnsOf("crosswalk", outcome).columns.filter((column) => !mapped.has(column)).map((column) => ({ op: "drop", from: `nodes[].${column}`, direction: "encode" })),
   };
   const parsed = CrosswalkSchema.parse(crosswalk);
   const issues = validateCrosswalk(parsed);
@@ -219,7 +217,7 @@ export function convertItem(item: SurveyEntry, curation: CurationItem, probedOn:
             status: "fetchable",
             source: dataUrl === undefined ? 0 : 1,
             archive: { kind: "none" },
-            parser: { format: "csv-table", encoding: outcome.encoding, delimiter: outcome.delimiter, skipLines: outcome.skipLines, idColumn: outcome.idColumn, numericColumns: outcome.numericColumns },
+            parser: { format: "csv-table", encoding: outcome.encoding, delimiter: outcome.delimiter, skipLines: outcome.skipLines, idColumn: outcome.idColumn, numericColumns: outcome.numericColumns, columns: TARGET_FIELD_NAMES.flatMap((field) => outcome.map[field] ?? []) },
           }
         : { status: "not-fetchable", reason: outcome.reason },
     crosswalk: outcome.status === "fetchable" ? crosswalkOf(outcome) : { file: OR_NODES_CROSSWALK },
