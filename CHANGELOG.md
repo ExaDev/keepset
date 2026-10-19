@@ -1,3 +1,10 @@
+## [0.13.1](https://github.com/Mearman/keepset/compare/v0.13.0...v0.13.1) (2026-10-19)
+
+
+### Bug Fixes
+
+* **deps:** bump zod and twindex together ([df88ea7](https://github.com/Mearman/keepset/commit/df88ea7ec993d4b7f9ce661272f48b10c8d66e71))
+
 # [0.13.0](https://github.com/Mearman/keepset/compare/v0.12.0...v0.13.0) (2026-10-19)
 
 
