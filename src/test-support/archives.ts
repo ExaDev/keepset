@@ -86,3 +86,37 @@ export function zip(files: readonly ArchiveFile[]): Uint8Array {
 export function gzip(data: string | Uint8Array): Uint8Array {
   return gzipSync(typeof data === "string" ? new TextEncoder().encode(data) : data);
 }
+
+/** The parts of a minimal workbook, as the files a spreadsheet application writes them. */
+export interface WorkbookParts {
+  /** The sheets by name: the worksheet XML of each, as a string. */
+  readonly sheets: Readonly<Record<string, string>>;
+  readonly sharedStrings?: readonly string[];
+  /** The `cellXfs` number format ids by style index, and any custom formats by id. */
+  readonly styles?: { readonly cellFormats: readonly number[]; readonly custom?: Readonly<Record<number, string>> };
+  readonly date1904?: boolean;
+}
+
+/**
+ * Writes an xlsx workbook: a zip of the parts a reader needs, with a relationship for each sheet.
+ * @param parts - The sheets, shared strings and styles.
+ * @returns The workbook bytes.
+ */
+export function workbook(parts: WorkbookParts): Uint8Array {
+  const names = Object.keys(parts.sheets);
+  const files: ArchiveFile[] = [
+    { path: "[Content_Types].xml", text: "<Types/>" },
+    { path: "xl/workbook.xml", text: `<workbook xmlns:r="r"><workbookPr${parts.date1904 === true ? ' date1904="1"' : ""}/><sheets>${names.map((name, index) => `<sheet name="${name}" sheetId="${String(index + 1)}" r:id="rId${String(index + 1)}"/>`).join("")}</sheets></workbook>` },
+    { path: "xl/_rels/workbook.xml.rels", text: `<Relationships>${names.map((_name, index) => `<Relationship Id="rId${String(index + 1)}" Target="worksheets/sheet${String(index + 1)}.xml"/>`).join("")}</Relationships>` },
+    ...names.map((name, index) => ({ path: `xl/worksheets/sheet${String(index + 1)}.xml`, text: `<worksheet><sheetData>${parts.sheets[name] ?? ""}</sheetData></worksheet>` })),
+  ];
+  if (parts.sharedStrings !== undefined) {
+    files.push({ path: "xl/sharedStrings.xml", text: `<sst>${parts.sharedStrings.map((text) => (text.startsWith("<") ? `<si>${text}</si>` : `<si><t>${text}</t></si>`)).join("")}</sst>` });
+  }
+  if (parts.styles !== undefined) {
+    const custom = Object.entries(parts.styles.custom ?? {}).map(([id, code]) => `<numFmt numFmtId="${id}" formatCode="${code.replaceAll('"', "&quot;")}"/>`).join("");
+    files.push({ path: "xl/styles.xml", text: `<styleSheet><numFmts>${custom}</numFmts><cellXfs>${parts.styles.cellFormats.map((id) => `<xf numFmtId="${String(id)}"/>`).join("")}</cellXfs></styleSheet>` });
+  }
+
+  return zip(files);
+}

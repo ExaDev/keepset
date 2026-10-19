@@ -4,6 +4,7 @@ import type { Archive, ArchiveMember } from "../entry";
 import { ArchiveError } from "../errors";
 import { getOwn } from "../own";
 import { readTar } from "./tar";
+import { sheetToCsv } from "./xlsx";
 
 /** The file a recipe's archive step yields: its bytes, and the member path it came from when the archive holds several. */
 export interface Unpacked {
@@ -68,6 +69,9 @@ export function unpack(bytes: Uint8Array, archive: Archive): Unpacked {
   }
   if (archive.kind === "gzip") {
     return { bytes: gunzip(bytes) };
+  }
+  if (archive.kind === "xlsx") {
+    return { bytes: sheetToCsv(bytes, archive.sheet), member: archive.sheet };
   }
   if (archive.kind === "zip") {
     const names: string[] = [];

@@ -106,13 +106,14 @@ export const ArchiveMemberSchema = z.union([
 ]);
 export type ArchiveMember = z.infer<typeof ArchiveMemberSchema>;
 
-/** How the downloaded bytes unpack into the one file the parser reads. */
+/** How the downloaded bytes unpack into the one file the parser reads. A workbook (`xlsx`) is read as the CSV of its named sheet, with dates as ISO 8601 text, for the `csv-table` parser. */
 export const ArchiveSchema = z.discriminatedUnion("kind", [
   z.object({ kind: z.literal("none") }).strict(),
   z.object({ kind: z.literal("gzip") }).strict(),
   z.object({ kind: z.literal("zip"), member: ArchiveMemberSchema }).strict(),
   z.object({ kind: z.literal("tar"), member: ArchiveMemberSchema }).strict(),
   z.object({ kind: z.literal("tar.gz"), member: ArchiveMemberSchema }).strict(),
+  z.object({ kind: z.literal("xlsx"), sheet: z.string().min(1) }).strict(),
 ]);
 export type Archive = z.infer<typeof ArchiveSchema>;
 
