@@ -5,28 +5,7 @@
   "category": "or/v1",
   "citations": [],
   "crosswalk": {
-    "oneWay": [
-      {
-        "direction": "encode",
-        "from": "nodes[].apn",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].officialaddress",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].notice_date",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].notice_type",
-        "op": "drop"
-      }
-    ],
+    "oneWay": [],
     "rules": [
       {
         "from": "meta",
@@ -71,6 +50,10 @@
       "kind": "none"
     },
     "parser": {
+      "columns": [
+        "received",
+        "eviction_category"
+      ],
       "delimiter": "comma",
       "encoding": "utf-8",
       "format": "csv-table",

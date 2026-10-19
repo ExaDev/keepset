@@ -5,198 +5,7 @@
   "category": "or/v1",
   "citations": [],
   "crosswalk": {
-    "oneWay": [
-      {
-        "direction": "encode",
-        "from": "nodes[].APPLICATIONNUMBER",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].APPLICATIONTYPE",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].APPLICATIONDESCRIPTION",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].WORKTYPE",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].CURRENTMILESTONE",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].APPLICATIONSTARTDATE",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].APPLICATIONENDDATE",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].APPLICATIONPROCESSEDDATE",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].APPLICATIONISSUEDDATE",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].APPLICATIONNAME",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].COMMENTS",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].WAIVEDFEES",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].PRIMARYCONTACTLAST",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].PRIMARYCONTACTFIRST",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].PRIMARYCONTACTMIDDLE",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].PRIMARYCONTACTSTREET",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].PRIMARYCONTACTSTREET2",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].PRIMARYCONTACTCITY",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].PRIMARYCONTACTSTATE",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].PRIMARYCONTACTZIP",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].EMERGENCYCONTACTNAME",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].LASTINSPECTIONNUMBER",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].LASTINSPECTIONTYPE",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].LASTINSPTYPEDESCR",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].LASTINSPECTIONDATE",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].LASTINSPECTIONRESULT",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].STREETNUMBERFROM",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].STREETNUMBERTO",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].DIRECTION",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].STREETNAME",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].SUFFIX",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].PLACEMENT",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].STREETCLOSURE",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].DETAIL",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].PARKINGMETERPOSTINGORBAGGING",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].XCOORDINATE",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].YCOORDINATE",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].LOCATION",
-        "op": "drop"
-      }
-    ],
+    "oneWay": [],
     "rules": [
       {
         "from": "meta",
@@ -266,6 +75,15 @@
       "kind": "none"
     },
     "parser": {
+      "columns": [
+        "APPLICATIONFINALIZEDDATE",
+        "APPLICATIONEXPIREDATE",
+        "LATITUDE",
+        "LONGITUDE",
+        "TOTALFEES",
+        "WORKTYPEDESCRIPTION",
+        "APPLICATIONSTATUS"
+      ],
       "delimiter": "comma",
       "encoding": "utf-8",
       "format": "csv-table",

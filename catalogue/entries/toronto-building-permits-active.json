@@ -5,138 +5,7 @@
   "category": "or/v1",
   "citations": [],
   "crosswalk": {
-    "oneWay": [
-      {
-        "direction": "encode",
-        "from": "nodes[].PERMIT_NUM",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].REVISION_NUM",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].STRUCTURE_TYPE",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].WORK",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].STREET_NUM",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].STREET_NAME",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].STREET_TYPE",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].STREET_DIRECTION",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].POSTAL",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].GEO_ID",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].ISSUED_DATE",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].DESCRIPTION",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].CURRENT_USE",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].PROPOSED_USE",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].DWELLING_UNITS_CREATED",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].DWELLING_UNITS_LOST",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].EST_CONST_COST",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].ASSEMBLY",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].INSTITUTIONAL",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].RESIDENTIAL",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].BUSINESS_AND_PERSONAL_SERVICES",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].MERCANTILE",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].INDUSTRIAL",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].INTERIOR_ALTERATIONS",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].DEMOLITION",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].BUILDER_NAME",
-        "op": "drop"
-      }
-    ],
+    "oneWay": [],
     "rules": [
       {
         "from": "meta",
@@ -196,6 +65,13 @@
       "kind": "none"
     },
     "parser": {
+      "columns": [
+        "COMPLETED_DATE",
+        "APPLICATION_DATE",
+        "PERMIT_TYPE",
+        "STATUS",
+        "WARD_GRID"
+      ],
       "delimiter": "comma",
       "encoding": "utf-8",
       "format": "csv-table",

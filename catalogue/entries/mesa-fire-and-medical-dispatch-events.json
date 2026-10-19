@@ -5,7 +5,56 @@
   "category": "or/v1",
   "citations": [],
   "crosswalk": {
-    "file": "crosswalks/or-v1/nodes.json"
+    "oneWay": [],
+    "rules": [
+      {
+        "from": "meta",
+        "op": "move",
+        "to": "meta"
+      },
+      {
+        "from": "nodes[].id",
+        "op": "move",
+        "to": "nodes[].id"
+      },
+      {
+        "from": "nodes[].clear_datetime",
+        "op": "move",
+        "to": "nodes[].closed"
+      },
+      {
+        "from": "nodes[].latitude",
+        "op": "move",
+        "to": "nodes[].lat"
+      },
+      {
+        "from": "nodes[].longitude",
+        "op": "move",
+        "to": "nodes[].lon"
+      },
+      {
+        "from": "nodes[].call_received_datetime",
+        "op": "move",
+        "to": "nodes[].opened"
+      },
+      {
+        "from": "nodes[].reason_category",
+        "op": "move",
+        "to": "nodes[].skill"
+      },
+      {
+        "from": "nodes[].city",
+        "op": "move",
+        "to": "nodes[].territory"
+      },
+      {
+        "from": "nodes[].response_time_in_seconds",
+        "op": "move",
+        "to": "nodes[].travelTime"
+      }
+    ],
+    "source": "csv-table",
+    "target": "or/v1"
   },
   "description": "Fire and medical dispatch events in Mesa, Arizona, with reason, location, travel time and call and clearing timestamps.",
   "domain": "Emergency dispatch",
@@ -22,8 +71,41 @@
     "surveyId": "or-110"
   },
   "recipe": {
-    "reason": "Reading the whole table into memory exhausts Node's default heap: it has several hundred thousand rows of dozens of columns, and a fetch of it was killed out of memory.",
-    "status": "not-fetchable"
+    "archive": {
+      "kind": "none"
+    },
+    "parser": {
+      "columns": [
+        "clear_datetime",
+        "latitude",
+        "longitude",
+        "call_received_datetime",
+        "reason_category",
+        "city",
+        "response_time_in_seconds"
+      ],
+      "delimiter": "comma",
+      "encoding": "utf-8",
+      "format": "csv-table",
+      "idColumn": null,
+      "numericColumns": [
+        {
+          "column": "latitude",
+          "factor": 1
+        },
+        {
+          "column": "longitude",
+          "factor": 1
+        },
+        {
+          "column": "response_time_in_seconds",
+          "factor": 1
+        }
+      ],
+      "skipLines": 0
+    },
+    "source": 1,
+    "status": "fetchable"
   },
   "sources": [
     {
@@ -34,7 +116,7 @@
     {
       "retrieved": "2026-10-19",
       "status": "live",
-      "url": "https://citydata.mesaaz.gov/resource/3wic-ufd2.csv"
+      "url": "https://citydata.mesaaz.gov/resource/3wic-ufd2.csv?%24limit=1000000"
     }
   ],
   "tags": [

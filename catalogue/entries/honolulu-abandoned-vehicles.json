@@ -5,33 +5,7 @@
   "category": "or/v1",
   "citations": [],
   "crosswalk": {
-    "oneWay": [
-      {
-        "direction": "encode",
-        "from": "nodes[].StreetNumber",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].StreetName",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].VehicleMake",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].VehicleType",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].CloseReason",
-        "op": "drop"
-      }
-    ],
+    "oneWay": [],
     "rules": [
       {
         "from": "meta",
@@ -81,6 +55,11 @@
       "kind": "none"
     },
     "parser": {
+      "columns": [
+        "CloseDate",
+        "EntryDate",
+        "Status"
+      ],
       "delimiter": "comma",
       "encoding": "utf-8",
       "format": "csv-table",

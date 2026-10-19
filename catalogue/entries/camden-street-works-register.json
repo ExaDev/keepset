@@ -5,93 +5,7 @@
   "category": "or/v1",
   "citations": [],
   "crosswalk": {
-    "oneWay": [
-      {
-        "direction": "encode",
-        "from": "nodes[].Works_Type",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Description_Of_Works",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Location_Of_Works",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Street",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Locality",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Start_Date",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Reference",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Responsible_Company",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Contact_Telephone_Number",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Emergency_Contact_Telephone_Number",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Ward_Code",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Easting",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Northing",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Location",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Spatial_Accuracy",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Last_Uploaded",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Organisation_URI",
-        "op": "drop"
-      }
-    ],
+    "oneWay": [],
     "rules": [
       {
         "from": "meta",
@@ -157,6 +71,14 @@
       "kind": "none"
     },
     "parser": {
+      "columns": [
+        "End_Date",
+        "Latitude",
+        "Longitude",
+        "Category_Of_Works",
+        "Works_Status",
+        "Ward_Name"
+      ],
       "delimiter": "comma",
       "encoding": "utf-8",
       "format": "csv-table",

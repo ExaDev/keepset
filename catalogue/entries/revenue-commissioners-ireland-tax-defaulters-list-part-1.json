@@ -5,38 +5,7 @@
   "category": "or/v1",
   "citations": [],
   "crosswalk": {
-    "oneWay": [
-      {
-        "direction": "encode",
-        "from": "nodes[].Name",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Address",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Occupation",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Fine_Amount",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Sentence_Imposed",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].No_of_Charges",
-        "op": "drop"
-      }
-    ],
+    "oneWay": [],
     "rules": [
       {
         "from": "meta",
@@ -76,6 +45,9 @@
       "kind": "none"
     },
     "parser": {
+      "columns": [
+        "Issue_Type"
+      ],
       "delimiter": "comma",
       "encoding": "utf-8",
       "format": "csv-table",

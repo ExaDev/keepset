@@ -5,158 +5,7 @@
   "category": "or/v1",
   "citations": [],
   "crosswalk": {
-    "oneWay": [
-      {
-        "direction": "encode",
-        "from": "nodes[].reference",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].incidentid",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].totalconfirmedpowercut",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].powercutcategory",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].elapsedtime",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].totalpredictedpowercut",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].priority",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].type",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].customerstagesequence",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].insertdate",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].updatedate",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].reason",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].customerstagesequencemessage",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].postcode",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].isaffected",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].column_23",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].label",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].incidentsconfigid",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].custometrmessageflag",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].custometrmessage",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].custometrmessageparea",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].configstatus",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].iscustomincident",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].managecustomincidentsid",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].numberofcalls",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].etrstartrange",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].etrendrange",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].custometrendrange",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].custometrendrangepa",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].geopoint",
-        "op": "drop"
-      }
-    ],
+    "oneWay": [],
     "rules": [
       {
         "from": "meta",
@@ -233,6 +82,16 @@
       "kind": "none"
     },
     "parser": {
+      "columns": [
+        "estimatedtimetillresolution",
+        "duration",
+        "lat",
+        "lng",
+        "loggedtime",
+        "natureofoutage",
+        "incidentstatus",
+        "area"
+      ],
       "delimiter": "semicolon",
       "encoding": "utf-8",
       "format": "csv-table",

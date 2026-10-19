@@ -5,88 +5,7 @@
   "category": "or/v1",
   "citations": [],
   "crosswalk": {
-    "oneWay": [
-      {
-        "direction": "encode",
-        "from": "nodes[].UNIQUEID",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].WORK_TYPE",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].DISPLAY_AGENCY",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].COMP_TYPE",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].COMP_TYPE_DESC",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].SUB_TYPE",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].DATA_STATUS",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].STATUS_CLASS",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].CITY_ID",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].X_COORD",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Y_COORD",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].URL",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].LAST_UPDATED",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].YN_ACTIVITY_REPORT",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].FULL_ADDRESS",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].CITY_COUNTY",
-        "op": "drop"
-      }
-    ],
+    "oneWay": [],
     "rules": [
       {
         "from": "meta",
@@ -153,6 +72,14 @@
       "kind": "none"
     },
     "parser": {
+      "columns": [
+        "LATITUDE",
+        "LONGITUDE",
+        "ENTERED_DATE",
+        "SUB_TYPE_DESC",
+        "DATA_STATUS_DISPLAY",
+        "NEIGHBORHOOD"
+      ],
       "delimiter": "comma",
       "encoding": "utf-8",
       "format": "csv-table",

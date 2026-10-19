@@ -5,153 +5,7 @@
   "category": "or/v1",
   "citations": [],
   "crosswalk": {
-    "oneWay": [
-      {
-        "direction": "encode",
-        "from": "nodes[].RequestID",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].DriverID",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].VehicleID",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Wheelchairs",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].RideShared",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].SharedDuration",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Passengers",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Booking",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Preference",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Month",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].RequestedPickup",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].RequestedDropoff",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].OriginalPickup",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].CancellationAhead",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].CancellationSource",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].NoShow",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].ArrivalTime",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].PickupTime",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].DropoffTime",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].RideDist",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].DirectDuration",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].LastPickup",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].LastDropoff",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].LastDuration",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Rating",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].PickupStart",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].VehiclePickup",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].VehicleDropoff",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].PickupStatus",
-        "op": "drop"
-      }
-    ],
+    "oneWay": [],
     "rules": [
       {
         "from": "meta",
@@ -203,6 +57,11 @@
       "kind": "none"
     },
     "parser": {
+      "columns": [
+        "PickupEnd",
+        "Status",
+        "RideDuration"
+      ],
       "delimiter": "comma",
       "encoding": "utf-8",
       "format": "csv-table",

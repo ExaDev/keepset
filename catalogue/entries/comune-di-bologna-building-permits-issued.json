@@ -5,43 +5,7 @@
   "category": "or/v1",
   "citations": [],
   "crosswalk": {
-    "oneWay": [
-      {
-        "direction": "encode",
-        "from": "nodes[].richiesta_ndeg_prot",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].richiesta_anno_prot",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].esito_pratica",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].codvia",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].civico",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].esponenteciv",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].localizzazioni_lista",
-        "op": "drop"
-      }
-    ],
+    "oneWay": [],
     "rules": [
       {
         "from": "meta",
@@ -92,6 +56,11 @@
       "kind": "none"
     },
     "parser": {
+      "columns": [
+        "chiusura_pratica_data",
+        "richiesta_data",
+        "procedimento"
+      ],
       "delimiter": "semicolon",
       "encoding": "utf-8",
       "format": "csv-table",

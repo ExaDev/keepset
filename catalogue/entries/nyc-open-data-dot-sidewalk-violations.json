@@ -5,123 +5,7 @@
   "category": "or/v1",
   "citations": [],
   "crosswalk": {
-    "oneWay": [
-      {
-        "direction": "encode",
-        "from": "nodes[].BROKEN",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].CERTI_DATE",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].CONTRACT",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].EntryDate",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].FLAG",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].FRSTNAME",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].GRACE_PD",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].HARDWARE",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].HOUSE_NUM",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].INTEGRITY",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].ONFRTOCODE",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].ONSTNAME",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].OTHER_DEF",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].PATCHWORK",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].POST_DATE",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].SLOPE",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].SQ_FEET",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].SW_MISSING",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].SWV_Number",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].TOSTNAME",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].TRIP_HAZ",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].UNDERMINED",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].BBLID",
-        "op": "drop"
-      }
-    ],
+    "oneWay": [],
     "rules": [
       {
         "from": "meta",
@@ -171,6 +55,11 @@
       "kind": "none"
     },
     "parser": {
+      "columns": [
+        "VDismissDate",
+        "VIssueDate",
+        "CB"
+      ],
       "delimiter": "comma",
       "encoding": "utf-8",
       "format": "csv-table",

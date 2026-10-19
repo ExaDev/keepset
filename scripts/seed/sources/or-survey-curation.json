@@ -463,8 +463,83 @@
       "name": "Fire and Medical Dispatch Events (Mesa, AZ)",
       "namespace": "mesa",
       "outcome": {
-        "reason": "Reading the whole table into memory exhausts Node's default heap: it has several hundred thousand rows of dozens of columns, and a fetch of it was killed out of memory.",
-        "status": "not-fetchable"
+        "delimiter": "comma",
+        "encoding": "utf-8",
+        "header": [
+          "reason_subcategory",
+          "reason_category",
+          "city",
+          "arrive_datetime",
+          "clear_datetime",
+          "latitude",
+          "longitude",
+          "incident_type",
+          "incident_type_code",
+          "incident_date",
+          "incident_calendar_year",
+          "incident_fiscal_year",
+          "incident_week",
+          "incident_month",
+          "jurisdiction",
+          "call_handling_time_in_seconds",
+          "response_time_in_seconds",
+          "valley_benchmark_cities_vbc_response_time_in_seconds",
+          "call_handling_time_in_minutes",
+          "response_time_in_minutes",
+          "travel_time_in_minutes",
+          "commit_time_in_seconds",
+          "code_3_response_times_in_minutes_by_calendar_year_at_90th_percentile",
+          "code_3_response_times_in_minutes_by_calendar_year_at_75th_percentile",
+          "code_3_response_times_in_minutes_by_calendar_year_at_50th_percentile",
+          "code_3_response_times_in_seconds_by_fiscal_year_at_50th_percentile_for_valley_benchmark_cities_reporting",
+          "response_time_45_minutes_flag",
+          "location",
+          "zip",
+          "state",
+          "call_received_datetime",
+          "notify_datetime",
+          "notify_date_month_name",
+          "roll_datetime",
+          "incident_number",
+          "street_name",
+          "street_type",
+          "first_response_unit_count",
+          "error_with_valley_benchmark_cities_time",
+          "error_with_response_time",
+          "error_with_travel_time",
+          "error_with_call_handling_time",
+          "first_response_priority_code",
+          "time_of_day",
+          "property_use",
+          "reason_code_listing_from_cad"
+        ],
+        "idColumn": null,
+        "map": {
+          "closed": "clear_datetime",
+          "lat": "latitude",
+          "lon": "longitude",
+          "opened": "call_received_datetime",
+          "skill": "reason_category",
+          "territory": "city",
+          "travelTime": "response_time_in_seconds"
+        },
+        "numericColumns": [
+          {
+            "column": "latitude",
+            "factor": 1
+          },
+          {
+            "column": "longitude",
+            "factor": 1
+          },
+          {
+            "column": "response_time_in_seconds",
+            "factor": 1
+          }
+        ],
+        "rowCount": 608545,
+        "skipLines": 0,
+        "status": "fetchable"
       },
       "surveyId": "or-110"
     },

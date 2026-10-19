@@ -5,88 +5,7 @@
   "category": "or/v1",
   "citations": [],
   "crosswalk": {
-    "oneWay": [
-      {
-        "direction": "encode",
-        "from": "nodes[].court_index_number",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].docket_number",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].eviction_address",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].eviction_apt_num",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].executed_date",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].marshal_first_name",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].marshal_last_name",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].eviction_zip",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].ejectment",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].eviction_possession",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].community_board",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].council_district",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].census_tract",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].bin",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].bbl",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].nta",
-        "op": "drop"
-      }
-    ],
+    "oneWay": [],
     "rules": [
       {
         "from": "meta",
@@ -141,6 +60,12 @@
       "kind": "none"
     },
     "parser": {
+      "columns": [
+        "latitude",
+        "longitude",
+        "residential_commercial_ind",
+        "borough"
+      ],
       "delimiter": "comma",
       "encoding": "utf-8",
       "format": "csv-table",

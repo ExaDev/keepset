@@ -5,83 +5,7 @@
   "category": "or/v1",
   "citations": [],
   "crosswalk": {
-    "oneWay": [
-      {
-        "direction": "encode",
-        "from": "nodes[].casenumber",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].propertyaddress",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].casehistory",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].hearingtime",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].judgment",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].prevhearing",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].prevhearingstat",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].inspected",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].inspectionresult",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].geoaddress",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].city",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].state",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].zip",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].geopin",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].caseid",
-        "op": "drop"
-      }
-    ],
+    "oneWay": [],
     "rules": [
       {
         "from": "meta",
@@ -147,6 +71,14 @@
       "kind": "none"
     },
     "parser": {
+      "columns": [
+        "hearingdate",
+        "caseestablished",
+        "o_c",
+        "councildistrict",
+        "xpos",
+        "ypos"
+      ],
       "delimiter": "comma",
       "encoding": "utf-8",
       "format": "csv-table",

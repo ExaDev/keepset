@@ -5,38 +5,7 @@
   "category": "or/v1",
   "citations": [],
   "crosswalk": {
-    "oneWay": [
-      {
-        "direction": "encode",
-        "from": "nodes[].Vehicle_Year",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Vehicle_Make",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].License_Plate",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].License_State",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Tow_Location",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Location",
-        "op": "drop"
-      }
-    ],
+    "oneWay": [],
     "rules": [
       {
         "from": "meta",
@@ -93,6 +62,12 @@
       "kind": "none"
     },
     "parser": {
+      "columns": [
+        "Latitude",
+        "Longitude",
+        "Tow_Date",
+        "Tow_Description"
+      ],
       "delimiter": "comma",
       "encoding": "utf-8",
       "format": "csv-table",

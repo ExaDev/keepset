@@ -5,93 +5,7 @@
   "category": "or/v1",
   "citations": [],
   "crosswalk": {
-    "oneWay": [
-      {
-        "direction": "encode",
-        "from": "nodes[].Boiler_ID",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].ApplicantFirst_Name",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Applicant_Last_Name",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Applicant_License_Type",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Applicant_License_Number",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Owner_First_Name",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Owner_Last_Name",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Boiler_Make",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Boiler_Model",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Pressure_Type",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Inspection_Type",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Inspection_Date",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Defects_Exist",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].LFF_45_Days",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].LFF_180_Days",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Total_Amount_Paid",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "nodes[].Bin_Number",
-        "op": "drop"
-      }
-    ],
+    "oneWay": [],
     "rules": [
       {
         "from": "meta",
@@ -141,6 +55,11 @@
       "kind": "none"
     },
     "parser": {
+      "columns": [
+        "Filing_Fee",
+        "Report_Type",
+        "Report_Status"
+      ],
       "delimiter": "comma",
       "encoding": "utf-8",
       "format": "csv-table",

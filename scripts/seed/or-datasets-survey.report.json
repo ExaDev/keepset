@@ -1173,8 +1173,7 @@
         "The stored travel time column holds negative values in the sample, so the response time in seconds is mapped to travelTime instead."
       ],
       "id": "mesa-fire-and-medical-dispatch-events",
-      "reason": "Reading the whole table into memory exhausts Node's default heap: it has several hundred thousand rows of dozens of columns, and a fetch of it was killed out of memory.",
-      "recipe": "not-fetchable",
+      "recipe": "fetchable",
       "surveyId": "or-110"
     },
     {
