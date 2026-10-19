@@ -3,7 +3,7 @@
 
 import { Fragment, type ReactNode } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
-import { NAME_SEPARATOR, type Dataset, type Manifest } from "keepset";
+import { groupsOf, NAME_SEPARATOR, type Dataset, type Manifest, type NamespaceNode } from "keepset";
 import { scriptJson, slug } from "./html";
 import { datasetJsonLd, describe } from "./jsonld";
 
@@ -52,6 +52,20 @@ function Link({ url }: { readonly url: string }): ReactNode {
   return <a href={url}>{url}</a>;
 }
 
+/** A namespace path written out with each segment linking to the page of the path up to it. */
+function GroupPath({ segments, root }: { readonly segments: readonly string[]; readonly root: string }): ReactNode {
+  return (
+    <>
+      {segments.map((segment, index) => (
+        <Fragment key={segments.slice(0, index + 1).join(NAME_SEPARATOR)}>
+          {index === 0 ? "" : NAME_SEPARATOR}
+          <a href={`${root}namespaces/${segments.slice(0, index + 1).join(NAME_SEPARATOR)}/`}>{segment}</a>
+        </Fragment>
+      ))}
+    </>
+  );
+}
+
 /**
  * Wraps page content in the shared layout: head with the web app manifest and styles, the site header, and the client island's script.
  * @param context - The page context.
@@ -64,7 +78,7 @@ function Layout(context: PageContext, page: PageContent): string {
 
   return `<!doctype html>
 ${renderToStaticMarkup(
-  <html lang="en-GB"><head><meta charSet="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" /><title>{title}</title><meta name="description" content={description} /><link rel="manifest" href={`${root}manifest.webmanifest`} /><link rel="icon" href={`${root}icon.svg`} type="image/svg+xml" /><link rel="stylesheet" href={`${root}app.css`} /><meta name="theme-color" content="#1f4e79" />{head}</head><body data-root={root}><header><a className="home" href={root}>keepset</a><nav><a href={root}>All datasets</a><a href={`${root}domains/`}>Domains</a><a href={`${root}kinds/`}>Kinds</a><a href="https://github.com/Mearman/keepset">Source</a></nav></header><main>{body}</main><footer>Catalogue <code>{manifest.id}</code> {manifest.version}, built by keepset {context.packageVersion}.</footer><script type="module" src={`${root}app.js`} /></body></html>,
+  <html lang="en-GB"><head><meta charSet="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" /><title>{title}</title><meta name="description" content={description} /><link rel="manifest" href={`${root}manifest.webmanifest`} /><link rel="icon" href={`${root}icon.svg`} type="image/svg+xml" /><link rel="stylesheet" href={`${root}app.css`} /><meta name="theme-color" content="#1f4e79" />{head}</head><body data-root={root}><header><a className="home" href={root}>keepset</a><nav><a href={root}>All datasets</a><a href={`${root}domains/`}>Domains</a><a href={`${root}kinds/`}>Kinds</a><a href={`${root}namespaces/`}>Namespaces</a><a href="https://github.com/Mearman/keepset">Source</a></nav></header><main>{body}</main><footer>Catalogue <code>{manifest.id}</code> {manifest.version}, built by keepset {context.packageVersion}.</footer><script type="module" src={`${root}app.js`} /></body></html>,
 )}
 `;
 }
@@ -95,6 +109,9 @@ export function entryPage(context: PageContext, dataset: Dataset): string {
   const jsonLd = datasetJsonLd(dataset, pageUrl, context.siteUrl);
   const command = `npx keepset fetch ${entry.id}`;
   const { licence, recipe } = entry;
+  // The namespace is where the entry comes from; every other group is one a path alias files it in.
+  const home = (entry.namespace ?? []).join(NAME_SEPARATOR);
+  const otherGroups = groupsOf(entry).filter((group) => group.join(NAME_SEPARATOR) !== home);
   const licenceNode: ReactNode = licence.kind === "spdx" ? <a href={`https://spdx.org/licenses/${licence.id}.html`}>{licence.id}</a> : licence.kind === "custom" ? <a href={licence.url}>{licence.name}</a> : "not recorded by the source";
 
   const sections: ReactNode[] = [
@@ -105,7 +122,8 @@ export function entryPage(context: PageContext, dataset: Dataset): string {
     <h2 key="overview">Overview</h2>,
     <Facts key="overview" rows={[
       ["Id", <code key="id">{entry.id}</code>],
-      ...(entry.namespace === undefined ? [] : [["Namespace", <code key="namespace">{entry.namespace.join(NAME_SEPARATOR)}</code>] as const]),
+      ...(entry.namespace === undefined ? [] : [["Namespace", <code key="namespace"><GroupPath segments={entry.namespace} root={context.root} /></code>] as const]),
+      ...(otherGroups.length === 0 ? [] : [["Also in", otherGroups.map((group) => <code key={group.join(NAME_SEPARATOR)}><GroupPath segments={group} root={context.root} /></code>).flatMap((group, index) => (index === 0 ? [group] : [", ", group]))] as const]),
       ...(entry.aliases === undefined ? [] : [["Aliases", entry.aliases.map((alias) => <code key={alias}>{alias}</code>).flatMap((alias, index) => (index === 0 ? [alias] : [", ", alias]))] as const]),
       ["Category", <code key="category">{entry.category}</code>],
       ["Kind", <a key="kind" href={`../../kinds/${slug(dataset.kind)}/`}>{dataset.kind}</a>],
@@ -173,4 +191,26 @@ export function listingPage(context: PageContext, title: string, datasets: reado
  */
 export function groupsPage(context: PageContext, title: string, groups: readonly { readonly label: string; readonly count: number }[]): string {
   return Layout(context, { title: `${title}: keepset`, description: `${title} of the datasets in the keepset catalogue.`, body: <Fragment><h1>{title}</h1><ul className="groups">{groups.map((group) => <li key={group.label}><a href={`${slug(group.label)}/`}>{group.label}</a> ({group.count})</li>)}</ul></Fragment> });
+}
+
+/**
+ * A namespace page: the namespaces directly beneath it with how many entries each holds, and every entry at or beneath it. The index of all namespaces is the same page without a path and without entries.
+ * @param context - The page context (`root` is one level up for the index, and one more for each segment of the path).
+ * @param path - The namespace's path, or undefined for the index of the outermost namespaces.
+ * @param children - The namespaces directly beneath it.
+ * @param datasets - The entries at or beneath it; none for the index.
+ * @returns The document.
+ */
+export function namespacePage(context: PageContext, path: string | undefined, children: readonly NamespaceNode[], datasets: readonly Dataset[]): string {
+  const title = path === undefined ? "Namespaces" : `Namespace: ${path}`;
+  const body = (
+    <Fragment>
+      <h1>{title}</h1>
+      {path === undefined ? null : <p>Entries in this namespace and in every namespace beneath it.</p>}
+      {children.length === 0 ? null : <ul className="groups">{children.map((child) => <li key={child.path}><a href={`${child.name}/`}>{child.name}</a> ({child.count})</li>)}</ul>}
+      {path === undefined ? null : <Listing datasets={datasets} root={context.root} />}
+    </Fragment>
+  );
+
+  return Layout(context, { title: `${title}: keepset`, description: path === undefined ? "The namespaces of the datasets in the keepset catalogue." : `${title}: datasets in the keepset catalogue.`, body });
 }

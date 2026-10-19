@@ -7,7 +7,7 @@ import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { build } from "esbuild";
 import { vanillaExtractPlugin } from "@vanilla-extract/esbuild-plugin";
-import { getManifest, listDatasets } from "keepset";
+import { getManifest, listDatasets, listNamespaces } from "keepset";
 import { buildSite } from "./build-site";
 import { finalisePrecache } from "./precache";
 
@@ -25,7 +25,7 @@ if (typeof packageJson !== "object" || packageJson === null || !("version" in pa
 
 rmSync(outDir, { recursive: true, force: true });
 mkdirSync(outDir, { recursive: true });
-const files = buildSite({ datasets: listDatasets(), manifest: getManifest(), packageVersion: packageJson.version, siteUrl: SITE_URL, outDir });
+const files = buildSite({ catalogue: { manifest: getManifest(), listDatasets, listNamespaces }, packageVersion: packageJson.version, siteUrl: SITE_URL, outDir });
 copyFileSync(join(here, "static", "icon.svg"), join(outDir, "icon.svg"));
 await build({
   entryPoints: { app: join(here, "client/app.tsx"), sw: join(here, "client/sw.ts") },

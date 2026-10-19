@@ -1,11 +1,11 @@
 import { mkdtempSync, rmSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
-import { createCatalogue, getManifest, listDatasets, type Dataset } from "keepset";
+import { createCatalogue, getManifest, listDatasets, listNamespaces } from "keepset";
 import { afterAll, describe, expect, it } from "vitest";
 import { z } from "zod";
 import { fixtureIndex, liveEntry } from "../src/test-support/entries";
-import { buildSite, type SiteFiles } from "./build-site";
+import { buildSite, type SiteCatalogue, type SiteFiles } from "./build-site";
 
 const SITE_URL = "https://example.org/keepset/";
 
@@ -31,11 +31,11 @@ afterAll(() => {
   }
 });
 
-function build(datasets: readonly Dataset[]): SiteFiles {
+function build(catalogue: SiteCatalogue): SiteFiles {
   const outDir = mkdtempSync(join(tmpdir(), "keepset-site-"));
   directories.push(outDir);
 
-  return buildSite({ datasets, manifest: getManifest(), packageVersion: "9.9.9", siteUrl: SITE_URL, outDir });
+  return buildSite({ catalogue, packageVersion: "9.9.9", siteUrl: SITE_URL, outDir });
 }
 
 function jsonLdOf(html: string): unknown {
@@ -58,7 +58,7 @@ function page(files: SiteFiles, path: string): string {
 
 describe("buildSite on a fixture catalogue", () => {
   const catalogue = createCatalogue(fixtureIndex);
-  const files = build(catalogue.listDatasets());
+  const files = build(catalogue);
 
   it("writes one entry page per dataset and the listing pages by domain and kind", () => {
     expect([...files.keys()].filter((path) => path.startsWith("datasets/")).sort()).toEqual(["datasets/auth-walled/index.html", "datasets/celegans-metabolic/index.html", "datasets/karate/index.html"]);
@@ -92,7 +92,7 @@ describe("buildSite on a fixture catalogue", () => {
 
   it("escapes catalogue text, so data never becomes markup", () => {
     const hostile = createCatalogue({ ...fixtureIndex, entries: [{ ...liveEntry, name: '<script>alert("x")</script>', description: "a </script> in prose" }] });
-    const hostileFiles = build(hostile.listDatasets());
+    const hostileFiles = build(hostile);
     const text = page(hostileFiles, "datasets/karate/index.html");
     expect(text).not.toContain("<script>alert");
     expect(text).toContain("&lt;script&gt;alert(&quot;x&quot;)&lt;/script&gt;");
@@ -102,11 +102,11 @@ describe("buildSite on a fixture catalogue", () => {
 
 describe("buildSite with namespaced and aliased entries", () => {
   const named = createCatalogue({ ...fixtureIndex, entries: [{ ...liveEntry, namespace: ["one", "inner"], aliases: ["short", "club"] }] });
-  const files = build(named.listDatasets());
+  const files = build(named);
 
   it("shows the namespace and aliases on the entry page, with the fetch command still for the entry's own id", () => {
     const text = page(files, "datasets/karate/index.html");
-    expect(text).toContain('<th scope="row">Namespace</th><td><code>one/inner</code></td>');
+    expect(text).toContain('<th scope="row">Namespace</th><td><code><a href="../../namespaces/one/">one</a>/<a href="../../namespaces/one/inner/">inner</a></code></td>');
     expect(text).toContain('<th scope="row">Aliases</th><td><code>short</code>, <code>club</code></td>');
     expect(text).toContain("<code>npx keepset fetch karate</code>");
   });
@@ -121,15 +121,79 @@ describe("buildSite with namespaced and aliased entries", () => {
   });
 
   it("leaves the rows and fields out for an entry with neither", () => {
-    const plain = build(createCatalogue(fixtureIndex).listDatasets());
-    expect(page(plain, "datasets/karate/index.html")).not.toContain("Namespace");
+    const plain = build(createCatalogue(fixtureIndex));
+    expect(page(plain, "datasets/karate/index.html")).not.toContain('<th scope="row">Namespace</th>');
     expect(page(plain, "search-index.json")).not.toContain("namespace");
+  });
+});
+
+describe("the namespace pages", () => {
+  const bar = { ...liveEntry, id: "bar", namespace: ["home", "deep"], aliases: ["foo/graphs/bar", "one/bar"] };
+  const baz = { ...liveEntry, id: "baz", namespace: ["foo", "graphs"] };
+  const grouped = createCatalogue({ ...fixtureIndex, entries: [bar, baz] });
+  const files = build(grouped);
+
+  it("writes an index and a page for every namespace at any depth, and none for a name", () => {
+    const namespacePages = [...files.keys()].filter((path) => path.startsWith("namespaces/")).sort();
+    expect(namespacePages).toEqual(["namespaces/foo/graphs/index.html", "namespaces/foo/index.html", "namespaces/home/deep/index.html", "namespaces/home/index.html", "namespaces/index.html", "namespaces/one/index.html"]);
+  });
+
+  it("lists the outermost namespaces on the index, each with its count and a link to its page", () => {
+    const text = page(files, "namespaces/index.html");
+    expect(text).toContain('<ul class="groups"><li><a href="foo/">foo</a> (2)</li><li><a href="home/">home</a> (1)</li><li><a href="one/">one</a> (1)</li></ul>');
+    expect(text).not.toContain("<table");
+  });
+
+  it("lists the child namespaces and every entry at or beneath a namespace, with links relative to its depth", () => {
+    const text = page(files, "namespaces/foo/index.html");
+    expect(text).toContain('<ul class="groups"><li><a href="graphs/">graphs</a> (2)</li></ul>');
+    expect(text).toContain('<tr data-id="bar">');
+    expect(text).toContain('<tr data-id="baz">');
+    expect(text).toContain('href="../../datasets/bar/"');
+    const deep = page(files, "namespaces/foo/graphs/index.html");
+    expect(deep).toContain('<link rel="stylesheet" href="../../../app.css"/>');
+    expect(deep).toContain('href="../../../datasets/bar/"');
+    expect(deep).not.toContain('<ul class="groups">');
+  });
+
+  it("files an entry under each group a path alias names, and not under a group it is not in", () => {
+    expect(page(files, "namespaces/one/index.html")).toContain('<tr data-id="bar">');
+    expect(page(files, "namespaces/one/index.html")).not.toContain('<tr data-id="baz">');
+    expect(page(files, "namespaces/home/deep/index.html")).not.toContain('<tr data-id="baz">');
+  });
+
+  it("links the namespace through its path on the entry page, and lists the groups its path aliases file it in", () => {
+    const text = page(files, "datasets/bar/index.html");
+    expect(text).toContain('<th scope="row">Namespace</th><td><code><a href="../../namespaces/home/">home</a>/<a href="../../namespaces/home/deep/">deep</a></code></td>');
+    expect(text).toContain('<th scope="row">Also in</th><td><code><a href="../../namespaces/foo/">foo</a>/<a href="../../namespaces/foo/graphs/">graphs</a></code>, <code><a href="../../namespaces/one/">one</a></code></td>');
+  });
+
+  it("links the namespaces from the header of every page, relative to the page's depth", () => {
+    expect(page(files, "index.html")).toContain('<a href="namespaces/">Namespaces</a>');
+    expect(page(files, "datasets/bar/index.html")).toContain('<a href="../../namespaces/">Namespaces</a>');
+    expect(page(files, "namespaces/foo/graphs/index.html")).toContain('<a href="../../../namespaces/">Namespaces</a>');
+  });
+
+  it("precaches the namespace pages with the other listing pages", () => {
+    const { urls } = z.object({ urls: z.array(z.string()) }).parse(JSON.parse(page(files, "precache.json")));
+    expect(urls).toEqual(expect.arrayContaining(["namespaces/", "namespaces/foo/", "namespaces/foo/graphs/", "namespaces/home/deep/", "namespaces/one/"]));
+  });
+
+  it("writes an index with no list for a catalogue with no namespaces", () => {
+    const text = page(build(createCatalogue(fixtureIndex)), "namespaces/index.html");
+    expect(text).toContain("<h1>Namespaces</h1>");
+    expect(text).not.toContain('<ul class="groups">');
+  });
+
+  it("refuses two namespaces that differ only in letter case, since their pages would share a file", () => {
+    const clash = createCatalogue({ ...fixtureIndex, entries: [{ ...liveEntry, id: "a", namespace: ["Foo"] }, { ...liveEntry, id: "b", namespace: ["foo"] }] });
+    expect(() => build(clash)).toThrow(/differ only in letter case/);
   });
 });
 
 describe("buildSite on the bundled catalogue", () => {
   const datasets = listDatasets();
-  const files = build(datasets);
+  const files = build({ manifest: getManifest(), listDatasets, listNamespaces });
 
   it("writes a page per entry whose JSON-LD validates, and a search index with exactly the catalogue's ids", () => {
     const ids = datasets.map((dataset) => dataset.entry.id);
