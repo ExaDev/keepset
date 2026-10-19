@@ -28,6 +28,8 @@ const FINES = { first: 50, third: 75.5 } as const;
 const HERE = { longitude: -0.1, latitude: 51.5 } as const;
 const THERE = { longitude: -1.5, latitude: 52 } as const;
 const FEATURES = 3;
+/** How many times the downloader requests a page before it gives up. */
+const PAGE_ATTEMPTS = 3;
 
 const now = (): Date => new Date("2026-10-18T12:00:00.000Z");
 
@@ -342,6 +344,24 @@ describe("an or/v1 entry whose source is a Socrata resource read in pages", () =
     const error = await failure(fetchEntry(dataset, { fetch: cut.fetch, now }));
     expect(error.step).toBe("download");
     expect(error.message).toMatch(/gave 0 rows at offset 2 where 1 of its 3 were due/);
+  });
+
+  it("asks a page again when one response is cut short or fails, and fails only when it keeps failing", async () => {
+    const attempts = new Map<number, number>();
+    const flaky = resourceServing(rows, {
+      page: (offset, honest) => {
+        const seen = (attempts.get(offset) ?? 0) + 1;
+        attempts.set(offset, seen);
+
+        return offset === 2 && seen < PAGE_ATTEMPTS ? header : honest;
+      },
+    });
+    const fetched = await fetchEntry(dataset, { fetch: flaky.fetch, now });
+    expect(fetched.data).toMatchObject({ nodes: [{ id: "a1" }, { id: "a2" }, { id: "a3" }] });
+    expect(attempts.get(2)).toBe(PAGE_ATTEMPTS);
+    const hopeless = resourceServing(rows, { page: (offset, honest) => (offset === 2 ? header : honest) });
+    expect((await failure(fetchEntry(dataset, { fetch: hopeless.fetch, now }))).message).toMatch(/gave 0 rows at offset 2/);
+    expect(hopeless.requested.filter((url) => url.includes("offset=2"))).toHaveLength(PAGE_ATTEMPTS);
   });
 
   it("fails at the download step when a later page has a different header, or the resource reports no rows or no count", async () => {
