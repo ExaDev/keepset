@@ -29,7 +29,7 @@ function Row({ dataset, root }: { readonly dataset: Dataset; readonly root: stri
   const { entry } = dataset;
 
   return (
-    <tr data-id={entry.id}><td><a href={`${root}datasets/${entry.id}/`}>{entry.name}</a></td><td><code>{entry.id}</code></td><td>{dataset.kind}</td><td>{entry.domain ?? ""}</td><td>{entry.recipe.status === "fetchable" ? "fetchable" : "not fetchable yet"}</td></tr>
+    <tr data-id={entry.id}><td title={entry.name}><a href={`${root}datasets/${entry.id}/`}>{entry.name}</a></td><td title={entry.id}><code>{entry.id}</code></td><td>{dataset.kind}</td><td title={entry.domain}>{entry.domain ?? ""}</td><td>{entry.recipe.status === "fetchable" ? "fetchable" : "not fetchable yet"}</td></tr>
   );
 }
 

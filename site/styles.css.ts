@@ -156,6 +156,33 @@ globalStyle(".listing thead th", {
   },
 });
 
+/* Every listing row stays on one line: a fixed layout gives each column a set share of the width, and text that does not fit is cut with an ellipsis instead of wrapping (the full value is each cell's title and the entry page's own). The static table and the island's Mantine table share the wrapper's classes, so both get this. */
+globalStyle(".table-wrap.listing table", {
+  tableLayout: "fixed",
+});
+
+globalStyle(".table-wrap.listing th, .table-wrap.listing td", {
+  whiteSpace: "nowrap",
+  overflow: "hidden",
+  textOverflow: "ellipsis",
+  overflowWrap: "normal",
+});
+
+/* Column shares of the width as percentages, in column order; the last column is Recipe on the static table and Tags in the island. The name and id carry the long text in the catalogue, the kind is a short word, and the shares sum to the whole width. */
+const LISTING_COLUMN_SHARES = { name: 32, id: 27, kind: 8, domain: 20, last: 13 };
+Object.values(LISTING_COLUMN_SHARES).forEach((share, index) => {
+  globalStyle(`.table-wrap.listing th:nth-child(${String(index + 1)})`, { width: `${String(share)}%` });
+});
+
+/* Below desktop width the shares would leave columns too narrow to read, so the table keeps a floor width and the wrapper scrolls sideways instead. */
+globalStyle(".table-wrap.listing table", {
+  "@media": {
+    "(max-width: 47.99em)": {
+      minWidth: "46rem",
+    },
+  },
+});
+
 globalStyle("table.facts th", {
   "@media": {
     "(min-width: 48em)": {
