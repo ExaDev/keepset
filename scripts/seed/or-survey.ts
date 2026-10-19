@@ -88,6 +88,26 @@ export const FetchableOutcomeSchema = z
   .strict();
 export type FetchableOutcome = z.infer<typeof FetchableOutcomeSchema>;
 
+/** A dataset whose source is a paged ArcGIS feature layer: the layer's URL is the curation's `downloadUrl`, its feature properties are named in `header` verbatim (each already a valid column name), a point layer also has the position columns `geometry_latitude` and `geometry_longitude`, and the epoch-millisecond date properties that fill a text field are `dateColumns`. Everything else is as for a table. */
+export const ArcgisOutcomeSchema = z
+  .object({
+    status: z.literal("fetchable-arcgis"),
+    orderBy: z.string().regex(/^[A-Za-z_][A-Za-z0-9_]*$/, { message: "must be a field name of the layer" }),
+    point: z.boolean(),
+    idColumn: ColumnNameSchema.nullable(),
+    numericColumns: z.array(z.object({ column: ColumnNameSchema, factor: z.number().positive() }).strict()),
+    dateColumns: z.array(ColumnNameSchema),
+    header: z.array(ColumnNameSchema).min(1),
+    rowCount: z.int().min(0).optional(),
+    expectedNodes: z.int().min(0).optional(),
+    map: FieldMapSchema,
+  })
+  .strict();
+export type ArcgisOutcome = z.infer<typeof ArcgisOutcomeSchema>;
+
+/** An outcome with a recipe: a table in one file, or a paged ArcGIS layer. */
+export type TableOutcome = FetchableOutcome | ArcgisOutcome;
+
 /** A dataset with no recipe yet, and why. */
 export const NotFetchableOutcomeSchema = z.object({ status: z.literal("not-fetchable"), reason: prose() }).strict();
 
@@ -102,7 +122,7 @@ export const CurationItemSchema = z
     licence: LicenceSchema,
     downloadUrl: HttpUrlSchema.optional(),
     flags: z.array(prose()),
-    outcome: z.discriminatedUnion("status", [FetchableOutcomeSchema, NotFetchableOutcomeSchema]),
+    outcome: z.discriminatedUnion("status", [FetchableOutcomeSchema, ArcgisOutcomeSchema, NotFetchableOutcomeSchema]),
   })
   .strict();
 export type CurationItem = z.infer<typeof CurationItemSchema>;

@@ -5,8 +5,8 @@ import { describe, expect, it } from "vitest";
 import { createCatalogue } from "../../src/catalogue";
 import { fetchEntry, roundTripEntry } from "../../src/node/fetch-dataset";
 import { fixtureManifest } from "../../src/test-support/entries";
-import { convertSurvey, MAX_ROWS, wholeTableUrl } from "./convert-or";
-import { SurveySourceSchema, TARGET_FIELD_NAMES, TARGET_FIELDS } from "./or-survey";
+import { convertItem, convertSurvey, MAX_ROWS, wholeTableUrl } from "./convert-or";
+import { CurationItemSchema, SurveySourceSchema, TARGET_FIELD_NAMES, TARGET_FIELDS } from "./or-survey";
 
 const survey = SurveySourceSchema.parse({
   survey: "a survey",
@@ -214,5 +214,61 @@ describe("wholeTableUrl", () => {
     for (const url of ["https://data.example.org/api/views/abcd-1234/rows.csv?accessType=DOWNLOAD", "https://data.example.org/dataset/x/resource/0a1b2c3d/download/x.csv", "https://data.example.org/resource/abcd-1234.json"]) {
       expect(wholeTableUrl(url)).toBe(url);
     }
+  });
+});
+
+describe("convertItem for a paged ArcGIS layer", () => {
+  const [item] = survey.entries;
+  const layer = "https://example.org/arcgis/rest/services/Violations/FeatureServer/0";
+  const arcgis = {
+    status: "fetchable-arcgis",
+    orderBy: "OBJECTID",
+    point: true,
+    idColumn: "OBJECTID",
+    numericColumns: [
+      { column: "geometry_latitude", factor: 1 },
+      { column: "geometry_longitude", factor: 1 },
+      { column: "FINE", factor: 1 },
+    ],
+    dateColumns: ["OPENED", "UNMAPPED_DATE"],
+    header: ["OBJECTID", "FINE", "OPENED", "UNMAPPED_DATE", "KIND", "OWNER"],
+    map: { lat: "geometry_latitude", lon: "geometry_longitude", prize: "FINE", opened: "OPENED", skill: "KIND" },
+  };
+  const curated = (outcome: Record<string, unknown>, downloadUrl: string | null = layer): Parameters<typeof convertItem>[1] =>
+    CurationItemSchema.parse({ surveyId: "or-10", id: "example-violations", namespace: "example", name: "Violations", licence: { kind: "unrecorded" }, ...(downloadUrl === null ? {} : { downloadUrl }), flags: [], outcome });
+  const failure = (outcome: Record<string, unknown>, downloadUrl: string | null = layer): string => {
+    try {
+      convertItem(item ?? expect.unreachable("the fixture survey has an item"), curated(outcome, downloadUrl), "2026-10-19");
+    } catch (error) {
+      return error instanceof Error ? error.message : String(error);
+    }
+    throw new Error("expected the conversion to fail");
+  };
+
+  it("makes a paged geojson recipe that keeps only the mapped columns, and a crosswalk that moves each onto its field", () => {
+    const { entry } = convertItem(item ?? expect.unreachable("the fixture survey has an item"), curated(arcgis), "2026-10-19");
+    expect(entry.sources.map((source) => source.url)).toEqual(["https://example.org/requests", layer]);
+    expect(entry.recipe).toEqual({
+      status: "fetchable",
+      source: 1,
+      paging: { kind: "arcgis-query", orderBy: "OBJECTID" },
+      archive: { kind: "none" },
+      parser: {
+        format: "geojson",
+        encoding: "utf-8",
+        idColumn: "OBJECTID",
+        numericColumns: arcgis.numericColumns,
+        dateColumns: ["OPENED"],
+        columns: ["geometry_latitude", "geometry_longitude", "OPENED", "FINE", "KIND"],
+      },
+    });
+    expect(entry.crosswalk).toMatchObject({ source: "geojson", target: "or/v1", oneWay: [] });
+  });
+
+  it("refuses a layer with no URL, a date written onto a number field, a date column the layer lacks, and a property named like a point column", () => {
+    expect(failure(arcgis, null)).toMatch(/needs the layer's URL as the downloadUrl/);
+    expect(failure({ ...arcgis, map: { lat: "geometry_latitude", lon: "geometry_longitude", skill: "KIND", prize: "OPENED" }, numericColumns: arcgis.numericColumns.filter((numeric) => numeric.column !== "FINE") })).toMatch(/prize is a number but OPENED is a date/);
+    expect(failure({ ...arcgis, dateColumns: ["MISSING"] })).toMatch(/dateColumns names MISSING/);
+    expect(failure({ ...arcgis, header: [...arcgis.header, "geometry_latitude"] })).toMatch(/two columns have the same name/);
   });
 });
