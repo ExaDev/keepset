@@ -1,3 +1,11 @@
+# [0.30.0](https://github.com/Mearman/keepset/compare/v0.29.3...v0.30.0) (2026-10-20)
+
+
+### Features
+
+* **catalogue:** describe and cite the tasks entries ([5d05ad2](https://github.com/Mearman/keepset/commit/5d05ad20e766df38f38ae2981af9f04a39de882a)), closes [#106](https://github.com/Mearman/keepset/issues/106) [#107](https://github.com/Mearman/keepset/issues/107)
+* **catalogue:** refuse entries whose names a listing cannot tell apart ([517cb99](https://github.com/Mearman/keepset/commit/517cb99056fced3b86d352cf0ef40276bc45c5ae)), closes [#108](https://github.com/Mearman/keepset/issues/108)
+
 ## [0.29.3](https://github.com/Mearman/keepset/compare/v0.29.2...v0.29.3) (2026-10-20)
 
 
