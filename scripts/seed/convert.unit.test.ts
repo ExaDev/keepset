@@ -204,8 +204,16 @@ describe("the seed import's classification", () => {
 
   it("skips a download that is a web page and reads the next one", () => {
     const arxiv = entry("arxiv-citations");
-    expect(arxiv.sources.map((source) => source.url)).toEqual(["https://snap.stanford.edu/data/cit-HepPh.html", "https://snap.stanford.edu/data/cit-HepPh.txt.gz"]);
+    expect(arxiv.sources.map((source) => source.url)).toEqual(["https://snap.stanford.edu/data/cit-HepPh.html", "https://snap.stanford.edu/data/cit-HepPh.txt.gz", "https://snap.stanford.edu/data/index.html"]);
     expect(arxiv.recipe).toMatchObject({ status: "fetchable", source: 1, archive: { kind: "gzip" } });
+  });
+
+  it("reads a landing page recorded as a homepage like a bare landing-page URL, and the endpoint columns and header lines a download records", () => {
+    const arxiv = entry("arxiv-citations");
+    expect(arxiv.recipe).toMatchObject({ status: "fetchable", source: 1 });
+    expect(arxiv.sources.map((source) => source.url)).toContain("https://snap.stanford.edu/data/index.html");
+    expect(outcome("triple-table").flags).toEqual(expect.arrayContaining(["catalogue: skip 1 header line", "catalogue: edge endpoints in columns 0 and 2"]));
+    expect(entry("triple-table").recipe).toMatchObject({ status: "fetchable", parser: { format: "edge-list", skipLines: 1, sourceColumn: 0, targetColumn: 2 } });
   });
 
   it("does not convert datasets with nothing to fetch or no retrieval date, saying why", () => {

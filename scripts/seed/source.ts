@@ -2,17 +2,19 @@ import { z } from "zod";
 
 /* The shape of the thesis pipeline's graph dataset catalogue (Mearman/Thesis, experiments/pipeline/graphs/catalog.json, with its own catalog.schema.json beside it), as far as the seed import reads it. The upstream schema leaves `citation` and `sources` open, so each of their recorded variants is spelled out here: a variant the import has never seen fails the parse loudly rather than converting into something unchecked. The graphbox catalogue (Mearman/graphbox, src/data/catalog.json) has the same outer shape and is read only for the overlap report. */
 
-/** One download of a dataset: a URL in a stated format, optionally naming the archive member to read, or a generator description for a synthetic dataset. */
+/** One download of a dataset: a URL in a stated format, optionally naming the archive member to read and, for a delimited table, the columns holding an edge's endpoints and the header lines to skip, or a generator description for a synthetic dataset. */
 export const SourceDownloadSchema = z.looseObject({
   format: z.string().optional(),
   url: z.string().optional(),
   innerPath: z.string().optional(),
+  columns: z.tuple([z.int().min(0), z.int().min(0)]).optional(),
+  skipLines: z.int().min(0).optional(),
   generator: z.string().optional(),
 });
 export type SourceDownload = z.infer<typeof SourceDownloadSchema>;
 
-/** One source of a dataset: a bare landing-page URL (the catalogue's legacy form), a named source with downloads, or a cached-JSON record listing URLs. The two object forms list only the keys the import reads, so the union narrows on `downloads`. */
-export const SourceEntrySchema = z.union([z.string(), z.object({ source: z.string().optional(), downloads: z.array(SourceDownloadSchema) }), z.object({ format: z.string(), urls: z.array(z.string()) })]);
+/** One source of a dataset: a landing page (a bare URL, the catalogue's legacy form, or a record whose `homepage` names it), a named source with downloads, or a cached-JSON record listing URLs. The object forms list only the keys the import reads, so the union narrows on `downloads`, `homepage` and `urls`. */
+export const SourceEntrySchema = z.union([z.string(), z.object({ source: z.string().optional(), downloads: z.array(SourceDownloadSchema) }), z.object({ homepage: z.string() }), z.object({ format: z.string(), urls: z.array(z.string()) })]);
 export type SourceEntry = z.infer<typeof SourceEntrySchema>;
 
 /** A structured citation as the catalogue records most of them. */

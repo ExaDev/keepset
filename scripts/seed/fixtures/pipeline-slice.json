@@ -82,7 +82,7 @@
       "url": "http://vlado.fmf.uni-lj.si/pub/networks/data/UciNet/UciData.htm"
     }
   },
-  "datasetCount": 39,
+  "datasetCount": 40,
   "datasets": {
     "7th_graders": {
       "category": "heterogeneous",
@@ -510,6 +510,10 @@
               "url": "https://snap.stanford.edu/data/cit-HepPh.txt.gz"
             }
           ],
+          "source": "snap"
+        },
+        {
+          "homepage": "https://snap.stanford.edu/data/index.html",
           "source": "snap"
         }
       ]
@@ -1757,6 +1761,54 @@
         {
           "format": "json-cache",
           "urls": []
+        }
+      ]
+    },
+    "triple-table": {
+      "citation": {
+        "authors": [
+          "Leskovec et al."
+        ],
+        "title": "Signed networks in social media",
+        "type": "conference",
+        "year": 2010
+      },
+      "description": "Directed acyclic graph of paper citations from arXiv high-energy physics preprints. Papers can only cite papers published before them. Medium-sized DAG with clear temporal ordering. Useful for benchmarking DAG algorithms on realistic citation networks and temporal graph analysis.",
+      "edgeCount": 2332014,
+      "id": "triple-table",
+      "name": "Triple table",
+      "nodeCount": 178569,
+      "preferredFormat": "edge-list",
+      "properties": {
+        "density": 0.0007054197642773696,
+        "edge_type_count": 1,
+        "has_self_loops": false,
+        "is_connected": false,
+        "is_cyclic": true,
+        "is_directed": true,
+        "is_heterogeneous": false,
+        "is_multigraph": false,
+        "is_weighted": false,
+        "n_components": 61,
+        "node_type_count": 1
+      },
+      "rawBytes": 0,
+      "retrieved": "2026-03-26",
+      "sources": [
+        {
+          "downloads": [
+            {
+              "columns": [
+                0,
+                2
+              ],
+              "description": "A header row, then source, relation, target",
+              "format": "edge-list",
+              "skipLines": 1,
+              "url": "https://snap.stanford.edu/data/triples.tsv.gz"
+            }
+          ],
+          "source": "snap"
         }
       ]
     },

@@ -152,6 +152,10 @@ interface Download {
   readonly url: string;
   readonly format: string | undefined;
   readonly innerPath: string | undefined;
+  /** The zero-based columns holding an edge's source and target, where the catalogue records them. */
+  readonly columns: readonly [number, number] | undefined;
+  /** The header lines the catalogue records for the download. */
+  readonly skipLines: number | undefined;
 }
 
 const WAYBACK = /^https?:\/\/web\.archive\.org\/web\/(\d{8}(?:\d{6})?)(?:id_)?\/(https?:\/\/.+)$/;
@@ -404,12 +408,21 @@ function recipeFor(download: Download, datasetId: string): Chosen | { readonly u
     flags.push("LINQS .cites column order: edges run from the citing paper (second column) to the cited one");
   } else if (mapped === "edge-list") {
     const override = PIPELINE_PARSER_OVERRIDES.get(datasetId);
-    parser = edgeList({ ...(override?.delimiter === undefined ? {} : { delimiter: override.delimiter }), ...(override?.skipLines === undefined ? {} : { skipLines: override.skipLines }) });
+    // The catalogue's own record of a download's header lines and endpoint columns is the pipeline's input for it, so it decides before the pipeline's code-side override does.
+    const skipLines = download.skipLines ?? override?.skipLines;
+    parser = edgeList({
+      ...(override?.delimiter === undefined ? {} : { delimiter: override.delimiter }),
+      ...(skipLines === undefined ? {} : { skipLines }),
+      ...(download.columns === undefined ? {} : { sourceColumn: download.columns[0], targetColumn: download.columns[1] }),
+    });
     if (override?.delimiter !== undefined) {
       flags.push(`pipeline parser override: delimiter ${override.delimiter}`);
     }
-    if (override?.skipLines !== undefined) {
-      flags.push(`pipeline parser override: skip ${String(override.skipLines)} header line`);
+    if (skipLines !== undefined) {
+      flags.push(`${download.skipLines === undefined ? "pipeline parser override" : "catalogue"}: skip ${String(skipLines)} header line`);
+    }
+    if (download.columns !== undefined) {
+      flags.push(`catalogue: edge endpoints in columns ${String(download.columns[0])} and ${String(download.columns[1])}`);
     }
   } else if (mapped === "ucinet-dl") {
     parser = { format: mapped, encoding: "utf-8", matrix: 1 };
@@ -551,7 +564,7 @@ function propertiesOf(dataset: SourceDataset): Record<string, JsonScalar> {
 }
 
 /**
- * Lists a dataset's downloads in catalogue order, flattening the source variants: a bare string is a landing page, and a cached-JSON record contributes its URLs.
+ * Lists a dataset's downloads in catalogue order, flattening the source variants: a bare string or a `homepage` record is a landing page, and a cached-JSON record contributes its URLs.
  * @param sources - The catalogue's sources.
  * @returns Every download, synthetic ones included.
  */
@@ -562,6 +575,9 @@ function downloadsOf(sources: readonly SourceEntry[]): SourceDownload[] {
     }
     if ("downloads" in source) {
       return source.downloads;
+    }
+    if ("homepage" in source) {
+      return [{ url: source.homepage, format: "landing-page" }];
     }
 
     return source.urls.map((url) => ({ url, format: source.format }));
@@ -632,7 +648,7 @@ export function convertDataset(dataset: SourceDataset, licences: Readonly<GraphL
       flags.push(`dropped an auth-walled download at ${new URL(url).hostname}`);
       continue;
     }
-    downloads.push({ url, format: download.format, innerPath: download.innerPath });
+    downloads.push({ url, format: download.format, innerPath: download.innerPath, columns: download.columns, skipLines: download.skipLines });
   }
   if (downloads.length === 0) {
     return notConverted("no public download remains: every download is auth-walled or a local file");
