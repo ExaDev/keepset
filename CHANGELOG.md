@@ -1,3 +1,12 @@
+# [0.24.0](https://github.com/Mearman/keepset/compare/v0.23.0...v0.24.0) (2026-10-20)
+
+
+### Features
+
+* **catalogue:** fetch the Solomon and Tenerife vehicle routing collections ([3d6db11](https://github.com/Mearman/keepset/commit/3d6db11b6e744a63ef970b20e9d3b7ee506fa731))
+* **categories:** read a collection of instance files as or-set/v1 ([8880ac8](https://github.com/Mearman/keepset/commit/8880ac8fa122b65a95b5d785761eb8f403f032d5))
+* **seed:** import a collection of instance files from the or survey ([cf2aca6](https://github.com/Mearman/keepset/commit/cf2aca67113119281a4038134bad1fb660a7c8d6))
+
 # [0.23.0](https://github.com/Mearman/keepset/compare/v0.22.1...v0.23.0) (2026-10-20)
 
 
