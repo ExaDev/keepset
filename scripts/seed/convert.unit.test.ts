@@ -35,6 +35,9 @@ const licences = GraphLicencesSchema.parse({
 const resolver = () => graphLicenceResolver(licences);
 const { entries, report } = convertCatalogue(pipeline, graphbox, resolver(), new Map());
 
+/** What the source catalogue records for the collaboration network's nodes, which the import corrects without editing it. */
+const CATALOGUE_COLLABORATION_NODES = 22015;
+
 function outcome(id: string): Outcome {
   const found = report.outcomes.find((candidate) => candidate.id === id);
   if (found === undefined) {
@@ -117,14 +120,62 @@ describe("the seed import's classification", () => {
   });
 
   it("marks an entry not fetchable when no download has a declarative form, saying why", () => {
-    expect(outcome("lesmis")).toMatchObject({ outcome: "converted-with-flags", recipe: "not-fetchable" });
-    expect(entry("lesmis").recipe).toEqual({ status: "not-fetchable", reason: "no download is in a form keepset reads yet (konect-tarbz2: format konect-tarbz2 has a pipeline-specific parser with no declarative keepset form yet)" });
     expect(entry("ieee-cis-g").recipe).toMatchObject({ status: "not-fetchable" });
   });
 
   it("reads a bzip2 download as a bare bzip2 file when its name says so", () => {
     expect(entry("bz2-edges").recipe).toMatchObject({ status: "fetchable", archive: { kind: "bzip2" }, parser: { format: "edge-list" } });
     expect(entry("bz2-edges").crosswalk).toEqual({ file: "crosswalks/graph-v1/topology.json" });
+  });
+
+  it("reads an Amazon ratings file as comma-separated ratings with no header, rated by the shared ratings crosswalk", () => {
+    for (const id of ["amazon-musical-instruments", "amazon-movies-tv"]) {
+      expect(entry(id).recipe).toMatchObject({ status: "fetchable", archive: { kind: "none" }, parser: { format: "user-item-ratings", delimiter: "comma", skipLines: 0, itemType: "product", maxRating: 5 } });
+      expect(entry(id).crosswalk).toEqual({ file: "crosswalks/graph-v1/rated.json" });
+      expect(outcome(id).flags).toContain("ratings layout read from the downloaded file: user, product, rating and time separated by commas, with no header");
+    }
+  });
+
+  it("reads each MovieLens release in the layout that release has, naming the member", () => {
+    expect(entry("movielens-100k").recipe).toMatchObject({ archive: { kind: "zip", member: { path: "u.data" } }, parser: { format: "user-item-ratings", delimiter: "tab", skipLines: 0, itemType: "movie", maxRating: 5 } });
+    expect(entry("movielens-1m").recipe).toMatchObject({ archive: { kind: "zip", member: { path: "ratings.dat" } }, parser: { delimiter: "double-colon", skipLines: 0 } });
+    expect(entry("movielens-25m").recipe).toMatchObject({ archive: { kind: "zip", member: { path: "ratings.csv" } }, parser: { delimiter: "comma", skipLines: 1 } });
+    expect(entry("movielens-25m").crosswalk).toEqual({ file: "crosswalks/graph-v1/rated.json" });
+    expect(outcome("movielens-25m").flags).toContain("ratings layout of ml-25m read from the release: ratings.csv, delimiter comma, 1 header lines");
+  });
+
+  it("does not guess the layout of a MovieLens release it has not read", () => {
+    expect(entry("movielens-unread").recipe).toEqual({ status: "not-fetchable", reason: "no download is in a form keepset reads yet (movielens: a MovieLens release whose ratings layout the import has not read)" });
+  });
+
+  it("reads each KONECT archive with the columns its file has, choosing the crosswalk that carries them", () => {
+    const member = { pattern: "(?:[^/]+/)?out\\.[^/]+" };
+    expect(entry("lesmis").recipe).toMatchObject({ status: "fetchable", archive: { kind: "tar.bz2", member }, parser: { format: "konect", weighted: true, timestamped: false } });
+    expect(entry("lesmis").crosswalk).toEqual({ file: "crosswalks/graph-v1/weighted.json" });
+    expect(entry("konect-opsahl-ucsocial").recipe).toMatchObject({ parser: { format: "konect", weighted: false, timestamped: true } });
+    expect(entry("konect-opsahl-ucsocial").crosswalk).toEqual({ file: "crosswalks/graph-v1/timestamped.json" });
+    // The catalogue calls this download `tsv`, and the bipartite and plain pair files read with the topology crosswalk.
+    expect(entry("konect-wikispeedia").recipe).toMatchObject({ archive: { kind: "tar.bz2" }, parser: { format: "konect", weighted: false, timestamped: false } });
+    expect(entry("konect-opsahl-collaboration").crosswalk).toEqual({ file: "crosswalks/graph-v1/topology.json" });
+    expect(outcome("lesmis").flags).toContain("KONECT edge columns read from the downloaded file: the catalogue records only the download");
+  });
+
+  it("corrects what a downloaded file contradicts in the catalogue's record, saying so in the report", () => {
+    const collaboration = entry("konect-opsahl-collaboration");
+    expect(collaboration.expectedCounts).toEqual({ nodes: 38741, edges: 58595 });
+    expect(collaboration.properties).toMatchObject({ weighted: false, multigraph: false, selfLoops: false, connected: false, components: 1188, directed: false });
+    expect(collaboration.description).toMatch(/^Bipartite authorship network/);
+    expect(outcome("konect-opsahl-collaboration").flags.some((flag) => flag.startsWith("corrected against the downloaded file: the file is a bipartite authorship network"))).toBe(true);
+    expect(entry("movielens-25m").description).toContain("59,047 movies");
+    expect(entry("amazon-movies-tv").description).toMatch(/^Undirected bipartite/);
+    // The source catalogue is read, never written, and an entry with no correction keeps its record.
+    expect(pipeline.datasets["konect-opsahl-collaboration"]?.nodeCount).toBe(CATALOGUE_COLLABORATION_NODES);
+    expect(entry("konect-opsahl-ucsocial").expectedCounts).toEqual({ nodes: 1899, edges: 59835 });
+    expect(outcome("konect-opsahl-ucsocial").flags.some((flag) => flag.startsWith("corrected"))).toBe(false);
+  });
+
+  it("does not guess the columns of a KONECT archive it has not read", () => {
+    expect(entry("konect-unread").recipe).toEqual({ status: "not-fetchable", reason: "no download is in a form keepset reads yet (tsv: a KONECT archive whose edge columns the import has not read)" });
   });
 
   it("resolves a snapshot of a snapshot to the innermost capture and skips a directory listing", () => {

@@ -6,7 +6,7 @@
     }
   ],
   "crosswalk": {
-    "file": "crosswalks/graph-v1/topology.json"
+    "file": "crosswalks/graph-v1/rated.json"
   },
   "description": "Directed bipartite user-product review network for Musical Instruments on Amazon. Users are linked to products they reviewed; edge weights are normalised star ratings.",
   "expectedCounts": {
@@ -33,8 +33,19 @@
     "weighted": true
   },
   "recipe": {
-    "reason": "no download is in a form keepset reads yet (amazon-ratings: format amazon-ratings has a pipeline-specific parser with no declarative keepset form yet)",
-    "status": "not-fetchable"
+    "archive": {
+      "kind": "none"
+    },
+    "parser": {
+      "delimiter": "comma",
+      "encoding": "utf-8",
+      "format": "user-item-ratings",
+      "itemType": "product",
+      "maxRating": 5,
+      "skipLines": 0
+    },
+    "source": 0,
+    "status": "fetchable"
   },
   "sources": [
     {

@@ -11,10 +11,10 @@
   "crosswalk": {
     "file": "crosswalks/graph-v1/topology.json"
   },
-  "description": "Undirected weighted co-authorship network from the arXiv. Edge weights represent the number of papers co-authored by each pair of researchers, making it genuinely weighted.",
+  "description": "Bipartite authorship network of the arXiv condensed matter section (cond-mat) from 1995 to 1999: an edge joins an author, a left node, and a paper they wrote, a right node. The network is unweighted and has no repeated pairs.",
   "expectedCounts": {
     "edges": 58595,
-    "nodes": 22015
+    "nodes": 38741
   },
   "id": "konect-opsahl-collaboration",
   "licence": {
@@ -25,22 +25,34 @@
     "konect"
   ],
   "properties": {
-    "components": 1,
-    "connected": true,
+    "components": 1188,
+    "connected": false,
     "cyclic": true,
-    "density": 0.00024177210459736553,
+    "density": 0.00007808365090394136,
     "directed": false,
     "edgeTypes": 1,
     "heterogeneous": false,
-    "multigraph": true,
+    "multigraph": false,
     "nodeTypes": 1,
     "rawBytes": 0,
-    "selfLoops": true,
-    "weighted": true
+    "selfLoops": false,
+    "weighted": false
   },
   "recipe": {
-    "reason": "no download is in a form keepset reads yet (konect-tarbz2: bzip2 compression has no keepset unpacker yet)",
-    "status": "not-fetchable"
+    "archive": {
+      "kind": "tar.bz2",
+      "member": {
+        "pattern": "(?:[^/]+/)?out\\.[^/]+"
+      }
+    },
+    "parser": {
+      "encoding": "utf-8",
+      "format": "konect",
+      "timestamped": false,
+      "weighted": false
+    },
+    "source": 0,
+    "status": "fetchable"
   },
   "sources": [
     {

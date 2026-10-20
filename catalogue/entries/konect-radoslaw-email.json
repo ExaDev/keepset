@@ -9,7 +9,7 @@
     }
   ],
   "crosswalk": {
-    "file": "crosswalks/graph-v1/topology.json"
+    "file": "crosswalks/graph-v1/timestamped.json"
   },
   "description": "Internal email communication network between employees of a mid-sized manufacturing company. Directed edges represent individual emails (sender to recipient). Same employee pairs communicate multiple times (multigraph with up to 1,458 emails between one pair). Edges carry timestamps (Unix epoch) as attributes. All weights are 1 (functionally unweighted). Contains self-loops (employees emailing themselves).",
   "domain": "Communication network",
@@ -33,8 +33,20 @@
     "weighted": false
   },
   "recipe": {
-    "reason": "no download is in a form keepset reads yet (tsv: bzip2 compression has no keepset unpacker yet)",
-    "status": "not-fetchable"
+    "archive": {
+      "kind": "tar.bz2",
+      "member": {
+        "pattern": "(?:[^/]+/)?out\\.[^/]+"
+      }
+    },
+    "parser": {
+      "encoding": "utf-8",
+      "format": "konect",
+      "timestamped": true,
+      "weighted": false
+    },
+    "source": 0,
+    "status": "fetchable"
   },
   "sources": [
     {

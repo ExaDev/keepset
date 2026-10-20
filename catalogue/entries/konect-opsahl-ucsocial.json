@@ -9,7 +9,7 @@
     }
   ],
   "crosswalk": {
-    "file": "crosswalks/graph-v1/topology.json"
+    "file": "crosswalks/graph-v1/timestamped.json"
   },
   "description": "Directed temporal multigraph of private messages sent on an online social network at UC Irvine. Each edge represents a message from one user to another; multiple messages between the same pair create multi-edges. No self-loops.",
   "domain": "Communication network",
@@ -34,8 +34,20 @@
     "weighted": false
   },
   "recipe": {
-    "reason": "no download is in a form keepset reads yet (konect-tarbz2: bzip2 compression has no keepset unpacker yet)",
-    "status": "not-fetchable"
+    "archive": {
+      "kind": "tar.bz2",
+      "member": {
+        "pattern": "(?:[^/]+/)?out\\.[^/]+"
+      }
+    },
+    "parser": {
+      "encoding": "utf-8",
+      "format": "konect",
+      "timestamped": true,
+      "weighted": false
+    },
+    "source": 0,
+    "status": "fetchable"
   },
   "sources": [
     {

@@ -6,9 +6,9 @@
     }
   ],
   "crosswalk": {
-    "file": "crosswalks/graph-v1/topology.json"
+    "file": "crosswalks/graph-v1/rated.json"
   },
-  "description": "Bipartite user-movie rating network from the GroupLens research group. 10,000,054 ratings from 71,567 users on 10,681 movies. Edge weights are ratings normalised to [0, 1].",
+  "description": "Bipartite user-movie rating network from the GroupLens research group. 10,000,054 ratings from 69,878 users on 10,677 movies. Edge weights are ratings normalised to [0, 1].",
   "expectedCounts": {
     "edges": 10000054,
     "nodes": 80555
@@ -35,8 +35,22 @@
     "weighted": true
   },
   "recipe": {
-    "reason": "no download is in a form keepset reads yet (movielens: format movielens has a pipeline-specific parser with no declarative keepset form yet)",
-    "status": "not-fetchable"
+    "archive": {
+      "kind": "zip",
+      "member": {
+        "path": "ratings.dat"
+      }
+    },
+    "parser": {
+      "delimiter": "double-colon",
+      "encoding": "utf-8",
+      "format": "user-item-ratings",
+      "itemType": "movie",
+      "maxRating": 5,
+      "skipLines": 0
+    },
+    "source": 0,
+    "status": "fetchable"
   },
   "sources": [
     {
