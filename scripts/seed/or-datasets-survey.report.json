@@ -1317,12 +1317,14 @@
     },
     {
       "flags": [
-        "The survey dataset (v2) is deprecated and returns no rows; the live data is the v3 NfipClaims entity.",
-        "No licence was confirmed because the FEMA terms page refused automated requests."
+        "the survey dataset (v2) is deprecated and frozen, so the recipe reads the live v3 NfipClaims entity through the OpenFEMA API, which pages anonymously; the bulk files answer an access denied page to automated requests",
+        "the terms of use limit the data to statistical research or a reporting record, forbid reidentifying the individuals it aggregates and ask for an attribution statement, so they travel with the entry as its licence",
+        "locations are rounded to a tenth of a degree by the publisher, so many claims share a point",
+        "the amount paid on the building claim is mapped as the prize, a payment rather than a reward",
+        "only four columns are selected, which is as many as a fetch of this many rows holds"
       ],
       "id": "fema-nfip-redacted-claims",
-      "reason": "The OpenFEMA v3 API pages claims anonymously as CSV, but the table has millions of rows whose locations are rounded to a tenth of a degree, the terms of use limit it to statistical use without reidentification, and keepset has no recipe paging for this API.",
-      "recipe": "not-fetchable",
+      "recipe": "fetchable",
       "surveyId": "or-122"
     },
     {
