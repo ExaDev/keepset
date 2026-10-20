@@ -1,7 +1,7 @@
 import { createHash } from "node:crypto";
 import { assertRoundTrip, encode, RoundTripMismatchError } from "twindex";
 import { getDataset } from "../bundled";
-import { countTarget, getTarget, type CategoryTarget } from "../categories";
+import { countTarget, getCollectionTarget, getTarget, type CategoryTarget, type CollectionTarget } from "../categories";
 import type { Dataset } from "../catalogue";
 import type { Entry, Snapshot, Source } from "../entry";
 import { KeepsetError, RecipeError, type RecipeStep } from "../errors";
@@ -38,10 +38,10 @@ export interface Provenance {
   readonly members?: readonly string[];
 }
 
-/** A fetched dataset: the resolved category target, the provenance of the bytes it came from, and any warnings, such as a count that differs from the one the entry records. */
+/** A fetched dataset: the resolved category target (one document, or for a recipe that selects archive members a collection of them), the provenance of the bytes it came from, and any warnings, such as a count that differs from the one the entry records. */
 export interface FetchedDataset {
   readonly dataset: Dataset;
-  readonly data: CategoryTarget;
+  readonly data: CategoryTarget | CollectionTarget;
   readonly provenance: Provenance;
   readonly warnings: readonly string[];
 }
@@ -91,17 +91,31 @@ function metaOf(entry: Entry): Record<string, JsonScalar> {
   return { id: entry.id, name: entry.name, ...entry.properties };
 }
 
-/** A recipe run up to the native document, before the crosswalk: what both a fetch and a round-trip check start from. For a document it is the parser's output with the entry's `meta`; for a collection it is `{ meta, members }`, each member the parser's output under the member's path as `id`, with an empty `meta` a parser may fill with the member's own header. */
+/** A native document with the `meta` the crosswalk receives. */
+type NativeWithMeta = NativeDocument & { readonly meta: Record<string, JsonScalar> };
+
+/** A recipe run up to the native documents, before the crosswalk: what both a fetch and a round-trip check start from. A document recipe has one, the parser's output with the entry's `meta` over the parser's own header values; a collection recipe has one per archive member, named by the member's path, each the parser's output with only its own header values as `meta`, because the entry's metadata belongs to the collection and not to each instance. */
 interface NativeRun {
-  readonly native: { readonly meta: Record<string, JsonScalar> } & (NativeDocument | { readonly members: readonly ({ readonly id: string; readonly meta: Record<string, JsonScalar> } & NativeDocument)[] });
+  readonly collection: boolean;
+  readonly documents: readonly { readonly id: string | undefined; readonly native: NativeWithMeta }[];
   readonly provenance: Provenance;
 }
 
 /**
- * Runs a recipe's download, extract and parse steps, and builds the native document the crosswalk receives: the parser's output with `meta` built from the entry.
+ * Puts an instance's id beside the fields of its encoded document. A document that is not an object is left as it is, for the collection schema to refuse.
+ * @param document - The crosswalk's output for one member.
+ * @param id - The member's path.
+ * @returns The instance.
+ */
+function withId(document: unknown, id: string | undefined): unknown {
+  return typeof document === "object" && document !== null && !Array.isArray(document) ? { ...document, id } : document;
+}
+
+/**
+ * Runs a recipe's download, extract and parse steps, and builds the native documents the crosswalk receives.
  * @param dataset - The dataset.
  * @param options - The network port, abort signal and clock.
- * @returns The native document and the provenance of its bytes.
+ * @returns The native documents and the provenance of their bytes.
  */
 async function runToNative(dataset: Dataset, options: FetchOptions): Promise<NativeRun> {
   const { entry } = dataset;
@@ -142,22 +156,25 @@ async function runToNative(dataset: Dataset, options: FetchOptions): Promise<Nat
   const { archive } = recipe;
   if ("members" in archive) {
     const files = await step(entry.id, "extract", () => unpackMembers(bytes, archive));
-    const members = await step(entry.id, "parse", () =>
+    const documents = await step(entry.id, "parse", () =>
       files.map((file) => {
         try {
-          return { id: file.path, meta: {}, ...parseNative(file.bytes, recipe.parser) };
+          const parsed = parseNative(file.bytes, recipe.parser);
+
+          return { id: file.path, native: { ...parsed, meta: "meta" in parsed ? parsed.meta : {} } };
         } catch (error) {
           throw new KeepsetError(`member ${file.path}: ${error instanceof Error ? error.message : String(error)}`, { cause: error });
         }
       }),
     );
 
-    return { native: { meta: metaOf(entry), members }, provenance: provenanceOf({ members: files.map((file) => file.path) }) };
+    return { collection: true, documents, provenance: provenanceOf({ members: files.map((file) => file.path) }) };
   }
   const unpacked: Unpacked = await step(entry.id, "extract", () => unpack(bytes, archive));
   const parsed = await step(entry.id, "parse", () => parseNative(unpacked.bytes, recipe.parser));
+  const native = { ...parsed, meta: { ...("meta" in parsed ? parsed.meta : {}), ...metaOf(entry) } };
 
-  return { native: { ...parsed, meta: { ...("meta" in parsed ? parsed.meta : {}), ...metaOf(entry) } }, provenance: provenanceOf(unpacked.member === undefined ? {} : { member: unpacked.member }) };
+  return { collection: false, documents: [{ id: undefined, native }], provenance: provenanceOf(unpacked.member === undefined ? {} : { member: unpacked.member }) };
 }
 
 /**
@@ -169,12 +186,22 @@ async function runToNative(dataset: Dataset, options: FetchOptions): Promise<Nat
  */
 export async function fetchEntry(dataset: Dataset, options: FetchOptions = {}): Promise<FetchedDataset> {
   const { entry, crosswalk } = dataset;
-  const { native, provenance } = await runToNative(dataset, options);
-  const encoded = await step(entry.id, "crosswalk", () => encode(crosswalk, native));
+  const { collection, documents, provenance } = await runToNative(dataset, options);
+  const encoded = await step(entry.id, "crosswalk", () =>
+    documents.map(({ id, native }) => {
+      try {
+        return encode(crosswalk, native);
+      } catch (error) {
+        throw new KeepsetError(`${id === undefined ? "" : `member ${id}: `}${error instanceof Error ? error.message : String(error)}`, { cause: error });
+      }
+    }),
+  );
   const data = await step(entry.id, "validate", () => {
-    const result = getTarget(entry.category).safeParse(encoded);
+    const [only] = encoded;
+    const whole = collection ? { meta: metaOf(entry), instances: encoded.map((document, index) => withId(document, documents[index]?.id)) } : only;
+    const result = (collection ? getCollectionTarget(entry.category) : getTarget(entry.category)).safeParse(whole);
     if (!result.success) {
-      throw new KeepsetError(`the result is not ${entry.category}: ${result.error.issues.map((issue) => `${issue.path.map(String).join(".") || "(root)"}: ${issue.message}`).join("; ")}`);
+      throw new KeepsetError(`the result is not ${collection ? "a collection of " : ""}${entry.category}: ${result.error.issues.map((issue) => `${issue.path.map(String).join(".") || "(root)"}: ${issue.message}`).join("; ")}`);
     }
 
     return result.data;
@@ -210,9 +237,12 @@ export type RoundTripReport = { readonly holds: true; readonly provenance: Prove
  * @throws RecipeError naming the entry and the failing step when the recipe fails before the comparison, or when the crosswalk cannot run.
  */
 export async function roundTripEntry(dataset: Dataset, options: FetchOptions = {}): Promise<RoundTripReport> {
-  const { native, provenance } = await runToNative(dataset, options);
+  const { documents, provenance } = await runToNative(dataset, options);
   try {
-    assertRoundTrip(dataset.crosswalk, [native]);
+    assertRoundTrip(
+      dataset.crosswalk,
+      documents.map(({ native }) => native),
+    );
   } catch (error) {
     // A mismatch is the answer this check exists to give, so it becomes the report; any other failure is the crosswalk failing to run.
     if (error instanceof RoundTripMismatchError) {

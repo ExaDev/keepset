@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import { EntrySchema, parseEntry, SourceSchema, waybackUrl } from "./entry";
 import { CatalogueSyntaxError } from "./errors";
 import { serialise } from "./serialise";
-import { arcgisEntry, deadEntry, everyEntryShape, liveEntry, orEntry, orSetEntry } from "./test-support/entries";
+import { arcgisEntry, deadEntry, everyEntryShape, graphCollectionEntry, liveEntry, orCollectionEntry, orEntry } from "./test-support/entries";
 
 const requiredFields = ["id", "name", "tags", "category", "sources", "licence", "citations", "recipe", "crosswalk", "expectedCounts", "properties"] as const;
 
@@ -158,7 +158,7 @@ describe("an entry's namespace and aliases", () => {
 });
 
 describe("an archive that selects one file or every file", () => {
-  const withArchive = (base: typeof orEntry | typeof orSetEntry, archive: unknown): unknown => ({ ...base, recipe: { ...base.recipe, archive } });
+  const withArchive = (base: typeof orEntry | typeof orCollectionEntry, archive: unknown): unknown => ({ ...base, recipe: { ...base.recipe, archive } });
   const issues = (doc: unknown): string => {
     try {
       parseEntry(doc);
@@ -169,28 +169,27 @@ describe("an archive that selects one file or every file", () => {
     return "";
   };
 
-  it("accepts a collection that selects its members and a document that selects its member", () => {
-    expect(issues(orSetEntry)).toBe("");
+  it("accepts a recipe that selects one member and a recipe that selects its members, for any category", () => {
     expect(issues(withArchive(orEntry, { kind: "zip", member: { extensions: [".csv"] } }))).toBe("");
+    expect(issues(orCollectionEntry)).toBe("");
+    expect(issues(graphCollectionEntry)).toBe("");
+    expect(issues({ ...withArchive(orEntry, { kind: "zip", members: { extensions: [".csv"] } }) as object, expectedCounts: {} })).toBe("");
   });
 
-  it("rejects a collection whose archive selects one member, or none", () => {
-    expect(issues(withArchive(orSetEntry, { kind: "zip", member: { extensions: [".csv"] } }))).toMatch(/or-set\/v1 is a collection, so the archive must select its members with `members`/);
-    expect(issues(withArchive(orSetEntry, { kind: "none" }))).toMatch(/is a collection/);
-  });
-
-  it("rejects a document whose archive selects members", () => {
-    expect(issues(withArchive(orEntry, { kind: "zip", members: { extensions: [".csv"] } }))).toMatch(/or\/v1 is one document, so the archive selects one file with `member`/);
+  it("limits the counts a collection records to its instances and a document's to its own arrays", () => {
+    expect(issues({ ...orCollectionEntry, expectedCounts: { nodes: 3 } })).toMatch(/or\/v1 collections count only instances/);
+    expect(issues({ ...orEntry, expectedCounts: { instances: 3 } })).toMatch(/or\/v1 counts only nodes/);
+    expect(issues({ ...graphCollectionEntry, expectedCounts: { instances: 4 } })).toBe("");
   });
 
   it("accepts a pattern selector and refuses one that is not a regular expression", () => {
-    expect(issues(withArchive(orSetEntry, { kind: "zip", members: { pattern: "suite/data_\\d+\\.txt" } }))).toBe("");
-    expect(issues(withArchive(orSetEntry, { kind: "zip", members: { pattern: "suite/(data" } }))).toMatch(/must be a valid regular expression/);
-    expect(issues(withArchive(orSetEntry, { kind: "zip", members: { pattern: "" } }))).not.toBe("");
+    expect(issues(withArchive(orCollectionEntry, { kind: "zip", members: { pattern: "suite/data_\\d+\\.txt" } }))).toBe("");
+    expect(issues(withArchive(orCollectionEntry, { kind: "zip", members: { pattern: "suite/(data" } }))).toMatch(/must be a valid regular expression/);
+    expect(issues(withArchive(orCollectionEntry, { kind: "zip", members: { pattern: "" } }))).not.toBe("");
   });
 
   it("rejects an archive that names both a member and members, or an unknown kind", () => {
-    expect(issues(withArchive(orSetEntry, { kind: "zip", member: { extensions: [".csv"] }, members: { extensions: [".csv"] } }))).not.toBe("");
-    expect(issues(withArchive(orSetEntry, { kind: "rar", members: { extensions: [".csv"] } }))).not.toBe("");
+    expect(issues(withArchive(orCollectionEntry, { kind: "zip", member: { extensions: [".csv"] }, members: { extensions: [".csv"] } }))).not.toBe("");
+    expect(issues(withArchive(orCollectionEntry, { kind: "rar", members: { extensions: [".csv"] } }))).not.toBe("");
   });
 });
