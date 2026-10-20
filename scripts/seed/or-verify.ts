@@ -152,7 +152,7 @@ async function verifyOne(curated: CurationItem): Promise<string> {
   });
 
   const recorded = entire && "rowCount" in outcome && outcome.rowCount !== undefined ? ` (the curation recorded ${String(outcome.rowCount)})` : "";
-  const shape = outcome.status === "fetchable-collection" || outcome.status === "fetchable-table-collection" ? `${String(instances.length)} instances, ${String(nodes.length)} nodes` : `${String(nodes.length)} rows`;
+  const shape = "instances" in result.data ? `${String(instances.length)} instances, ${String(nodes.length)} nodes` : `${String(nodes.length)} rows`;
 
   const warned = result.warnings.length > 0 ? ` WARNING ${result.warnings.join("; ")}` : "";
 

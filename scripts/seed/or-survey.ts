@@ -132,20 +132,21 @@ export type TableCollectionOutcome = z.infer<typeof TableCollectionOutcomeSchema
 /** An outcome with a recipe that reads a table: one file, a paged ArcGIS layer, or every table file of an archive. */
 export type TableOutcome = FetchableOutcome | ArcgisOutcome | TableCollectionOutcome;
 
-/** A dataset that is a collection of instance files in an archive: the members it reads, the instance file parser that reads each, which of the parser's node columns fill the or/v1 node's fields (`map`), which pass through under their own names (`keep`) and which of the file's header values the instance's `meta` carries. A node column in neither is dropped by a one-way rule, so what an entry leaves out is written down. `timeUnit` says what the source's time quantities are measured in, since the or/v1 `duration` is seconds, and is left out for a source that has none. */
-export const CollectionOutcomeSchema = z
+/** A dataset whose download is made of instance files read by an instance file parser: either one file (`archive` selects it with `member`, or the download is the file itself, and the entry is an or/v1 document), or every file of an archive that a `members` selector matches (an or-set/v1 collection, one instance per file). `map` says which of the parser's node columns fill the or/v1 node's fields, `keep` which pass through under their own names, and a node column in neither is dropped by a one-way rule, so what an entry leaves out is written down. A collection's `meta` lists the file header values each instance's meta carries (at least one, since an instance has a meta record); a document's header values are all carried in the entry's meta, so its `meta` is empty. `timeUnit` says what the source's time quantities are measured in, since the or/v1 `duration` is seconds, and is left out for a source that has none. */
+export const InstanceFilesOutcomeSchema = z
   .object({
-    status: z.literal("fetchable-collection"),
-    archive: CollectionArchiveSchema,
+    status: z.literal("fetchable-instance-files"),
+    archive: ArchiveSchema,
     parser: ParserSchema.refine(isInstanceParser, { message: "must be an instance file parser" }),
     map: FieldMapSchema,
     keep: z.array(ColumnNameSchema),
-    meta: z.array(z.string().min(1)).min(1),
+    meta: z.array(z.string().min(1)),
     timeUnit: z.enum(["seconds", "abstract units"]).optional(),
     expectedInstances: z.int().min(0).optional(),
+    expectedNodes: z.int().min(0).optional(),
   })
   .strict();
-export type CollectionOutcome = z.infer<typeof CollectionOutcomeSchema>;
+export type InstanceFilesOutcome = z.infer<typeof InstanceFilesOutcomeSchema>;
 
 /** A dataset with no recipe yet, and why. */
 export const NotFetchableOutcomeSchema = z.object({ status: z.literal("not-fetchable"), reason: prose() }).strict();
@@ -161,7 +162,7 @@ export const CurationItemSchema = z
     licence: LicenceSchema,
     downloadUrl: HttpUrlSchema.optional(),
     flags: z.array(prose()),
-    outcome: z.discriminatedUnion("status", [FetchableOutcomeSchema, ArcgisOutcomeSchema, TableCollectionOutcomeSchema, CollectionOutcomeSchema, NotFetchableOutcomeSchema]),
+    outcome: z.discriminatedUnion("status", [FetchableOutcomeSchema, ArcgisOutcomeSchema, TableCollectionOutcomeSchema, InstanceFilesOutcomeSchema, NotFetchableOutcomeSchema]),
   })
   .strict();
 export type CurationItem = z.infer<typeof CurationItemSchema>;
