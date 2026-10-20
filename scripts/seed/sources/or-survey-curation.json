@@ -16,7 +16,7 @@
       "name": "Team Orienteering Problem instances (Chao and Tsiligirides sets)",
       "namespace": "ku-leuven",
       "outcome": {
-        "status": "fetchable-collection",
+        "status": "fetchable-instance-files",
         "archive": {
           "kind": "zip",
           "members": {
@@ -62,7 +62,7 @@
       "name": "Team Orienteering Problem with Time Windows instances (Righini)",
       "namespace": "ku-leuven",
       "outcome": {
-        "status": "fetchable-collection",
+        "status": "fetchable-instance-files",
         "archive": {
           "kind": "zip",
           "members": {
@@ -2148,7 +2148,7 @@
       "name": "Technician routing and scheduling problem (Pillac et al.)",
       "namespace": "vrp-rep",
       "outcome": {
-        "status": "fetchable-collection",
+        "status": "fetchable-instance-files",
         "archive": {
           "kind": "zip",
           "members": {
@@ -2231,7 +2231,7 @@
       "name": "VeRoLog 2019 machine delivery and installation instances",
       "namespace": "github-bascoding",
       "outcome": {
-        "status": "fetchable-collection",
+        "status": "fetchable-instance-files",
         "archive": {
           "kind": "zip",
           "members": {
@@ -2456,7 +2456,7 @@
       "name": "Probabilistic orienteering problem",
       "namespace": "vrp-rep",
       "outcome": {
-        "status": "fetchable-collection",
+        "status": "fetchable-instance-files",
         "archive": {
           "kind": "zip",
           "members": {
@@ -2961,7 +2961,7 @@
       "name": "Clustered orienteering problem instances (Angelelli et al. 2014)",
       "namespace": "vrp-rep",
       "outcome": {
-        "status": "fetchable-collection",
+        "status": "fetchable-instance-files",
         "archive": {
           "kind": "zip",
           "members": {
@@ -3627,7 +3627,7 @@
       "name": "Solomon VRPTW benchmark instances",
       "namespace": "lcc-malaga",
       "outcome": {
-        "status": "fetchable-collection",
+        "status": "fetchable-instance-files",
         "archive": {
           "kind": "zip",
           "members": {
@@ -4159,7 +4159,9 @@
       "description": "An arc-routing meter reading instance for Hartford, Connecticut, with customer and network node coordinates in planar units.",
       "flags": [
         "coordinates are planar x and y, not latitude and longitude",
-        "there are no time windows or service times, so it is not a VRPTW instance"
+        "there are no time windows or service times, so it is not a VRPTW instance",
+        "the download holds the customers and the road network of one arc routing instance; the customers are read as nodes and the network's nodes and links, which or/v1 has no arcs for, are not read",
+        "several customers share a position"
       ],
       "id": "zenodo-hartford-meter-reading-instance",
       "licence": {
@@ -4169,10 +4171,27 @@
       "name": "Meter reading problem instance (Hartford, CT)",
       "namespace": "zenodo",
       "outcome": {
-        "reason": "The download is one arc routing instance in two tab separated text files with no column names, holding only planar coordinates of customers and a road network, so there is no field of the or/v1 node beyond a position and no table the parser reads.",
-        "status": "not-fetchable"
+        "status": "fetchable-instance-files",
+        "archive": {
+          "kind": "zip",
+          "member": {
+            "path": "customers.txt"
+          }
+        },
+        "parser": {
+          "format": "customer-points",
+          "encoding": "utf-8"
+        },
+        "map": {
+          "x": "x",
+          "y": "y"
+        },
+        "keep": [],
+        "meta": [],
+        "expectedNodes": 6067
       },
-      "surveyId": "or-6"
+      "surveyId": "or-6",
+      "downloadUrl": "https://zenodo.org/records/5823834/files/MeterReading_Instance.zip?download=1"
     },
     {
       "flags": [
@@ -6052,7 +6071,7 @@
       "name": "MOVRPTW real Tenerife distribution instances",
       "namespace": "github-psxjpc",
       "outcome": {
-        "status": "fetchable-collection",
+        "status": "fetchable-instance-files",
         "archive": {
           "kind": "zip",
           "members": {

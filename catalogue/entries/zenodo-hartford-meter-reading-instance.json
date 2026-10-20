@@ -5,11 +5,37 @@
   "category": "or/v1",
   "citations": [],
   "crosswalk": {
-    "file": "crosswalks/or-v1/nodes.json"
+    "oneWay": [],
+    "rules": [
+      {
+        "from": "meta",
+        "op": "move",
+        "to": "meta"
+      },
+      {
+        "from": "nodes[].id",
+        "op": "move",
+        "to": "nodes[].id"
+      },
+      {
+        "from": "nodes[].x",
+        "op": "move",
+        "to": "nodes[].x"
+      },
+      {
+        "from": "nodes[].y",
+        "op": "move",
+        "to": "nodes[].y"
+      }
+    ],
+    "source": "customer-points",
+    "target": "or/v1"
   },
   "description": "An arc-routing meter reading instance for Hartford, Connecticut, with customer and network node coordinates in planar units.",
   "domain": "Vehicle routing with time windows",
-  "expectedCounts": {},
+  "expectedCounts": {
+    "nodes": 6067
+  },
   "id": "zenodo-hartford-meter-reading-instance",
   "licence": {
     "id": "CC-BY-4.0",
@@ -23,14 +49,29 @@
     "surveyId": "or-6"
   },
   "recipe": {
-    "reason": "The download is one arc routing instance in two tab separated text files with no column names, holding only planar coordinates of customers and a road network, so there is no field of the or/v1 node beyond a position and no table the parser reads.",
-    "status": "not-fetchable"
+    "archive": {
+      "kind": "zip",
+      "member": {
+        "path": "customers.txt"
+      }
+    },
+    "parser": {
+      "encoding": "utf-8",
+      "format": "customer-points"
+    },
+    "source": 1,
+    "status": "fetchable"
   },
   "sources": [
     {
       "retrieved": "2026-10-19",
       "status": "live",
       "url": "https://zenodo.org/records/5823834"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://zenodo.org/records/5823834/files/MeterReading_Instance.zip?download=1"
     }
   ],
   "tags": [
