@@ -1,3 +1,13 @@
+# [0.32.0](https://github.com/Mearman/keepset/compare/v0.31.0...v0.32.0) (2026-10-20)
+
+
+### Features
+
+* **archive:** unpack a member that is itself an archive ([1f34637](https://github.com/Mearman/keepset/commit/1f34637695207bd4dec115323c87cb782e501df6))
+* **catalogue:** fetch the UCINet and GD 2004 graph entries ([7a3e0b2](https://github.com/Mearman/keepset/commit/7a3e0b2712a52ba6db7dfd93313aa9dee96d5e2a))
+* **parsers:** read Graph Drawing contest files ([8c34d01](https://github.com/Mearman/keepset/commit/8c34d01a9500884eb8f5315b68474817661507d4))
+* **parsers:** read UCINet DL full matrices ([b13df0d](https://github.com/Mearman/keepset/commit/b13df0d12e066bc394894c2d23660ec3db06317d))
+
 # [0.31.0](https://github.com/Mearman/keepset/compare/v0.30.0...v0.31.0) (2026-10-20)
 
 
