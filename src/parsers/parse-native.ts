@@ -5,8 +5,9 @@ import { parseGml } from "./gml";
 import { parseMatrixMarket } from "./matrix-market";
 import { parseCsvTable } from "./csv-table";
 import { parseGeojson } from "./geojson";
-import type { NativeDocument, NativeGraph, NativeTable } from "./native";
+import type { NativeDocument, NativeGraph, NativeInstance, NativeTable } from "./native";
 import { parsePajek } from "./pajek";
+import { parseSolomon } from "./solomon";
 
 /** Bytes converted per String.fromCharCode call: spreading a whole file would exceed the engine's argument-count limit, and this many stays well inside every engine's. */
 const LATIN1_CHUNK = 0x8000;
@@ -71,6 +72,7 @@ export function* decodePieces(bytes: Uint8Array, parser: Parser, pieceBytes: num
 }
 
 type TableParser = Extract<Parser, { format: "csv-table" | "geojson" }>;
+type InstanceParser = Extract<Parser, { format: "solomon" }>;
 
 /**
  * Reads a file into the native shape of the recipe's parser: a graph for the graph formats, a table of rows for the table formats.
@@ -80,7 +82,8 @@ type TableParser = Extract<Parser, { format: "csv-table" | "geojson" }>;
  * @throws NativeParseError when the bytes are not valid in the stated encoding or the text is not in the stated format.
  */
 export function parseNative(bytes: Uint8Array, parser: TableParser): NativeTable;
-export function parseNative(bytes: Uint8Array, parser: Exclude<Parser, TableParser>): NativeGraph;
+export function parseNative(bytes: Uint8Array, parser: Readonly<InstanceParser>): NativeInstance;
+export function parseNative(bytes: Uint8Array, parser: Exclude<Parser, TableParser | InstanceParser>): NativeGraph;
 export function parseNative(bytes: Uint8Array, parser: Parser): NativeDocument;
 export function parseNative(bytes: Uint8Array, parser: Parser): NativeDocument {
   if (parser.format === "csv-table") {
@@ -98,6 +101,9 @@ export function parseNative(bytes: Uint8Array, parser: Parser): NativeDocument {
   }
   if (parser.format === "gml") {
     return parseGml(text);
+  }
+  if (parser.format === "solomon") {
+    return parseSolomon(text);
   }
 
   return parsePajek(text);

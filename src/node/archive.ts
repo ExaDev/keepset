@@ -1,6 +1,6 @@
 import { gunzipSync } from "node:zlib";
 import { unzipSync, type UnzipFileFilter } from "fflate";
-import type { Archive, ArchiveMember } from "../entry";
+import type { CollectionArchive, DocumentArchive, ArchiveMember } from "../entry";
 import { ArchiveError } from "../errors";
 import { getOwn } from "../own";
 import { readTar } from "./tar";
@@ -39,6 +39,22 @@ function selects(path: string, member: ArchiveMember): boolean {
 }
 
 /**
+ * Picks every member a selector matches, in path order, so a collection reads in the same order wherever it is unpacked.
+ * @param paths - Every member path.
+ * @param member - The recipe's selector.
+ * @returns The matching paths, sorted, at least one.
+ * @throws ArchiveError when no member matches, listing the members.
+ */
+function pickAll(paths: readonly string[], member: ArchiveMember): string[] {
+  const matched = paths.filter((path) => selects(path, member)).sort((left, right) => (left < right ? -1 : left > right ? 1 : 0));
+  if (matched.length === 0) {
+    throw new ArchiveError(`expected at least one ${"path" in member ? `member ${member.path}` : `member ending ${member.extensions.join(" or ")}`}, found none among: ${paths.join(", ")}`);
+  }
+
+  return matched;
+}
+
+/**
  * Picks the one member a selector matches.
  * @param paths - Every member path.
  * @param member - The recipe's selector.
@@ -63,7 +79,7 @@ function pick(paths: readonly string[], member: ArchiveMember): string {
  * @returns The file's bytes, and its member path for a multi-file archive.
  * @throws ArchiveError when the bytes are not a well-formed archive of the stated kind or the selector does not match exactly one member.
  */
-export function unpack(bytes: Uint8Array, archive: Archive): Unpacked {
+export function unpack(bytes: Uint8Array, archive: DocumentArchive): Unpacked {
   if (archive.kind === "none") {
     return { bytes };
   }
@@ -103,6 +119,55 @@ export function unpack(bytes: Uint8Array, archive: Archive): Unpacked {
   }
 
   return { bytes: found.data, member: path };
+}
+
+/** One file of a collection: its path in the archive and its bytes. */
+export interface Member {
+  readonly path: string;
+  readonly bytes: Uint8Array;
+}
+
+/**
+ * Unpacks downloaded bytes into every file a collection's selector matches.
+ * @param bytes - The downloaded bytes.
+ * @param archive - The recipe's archive layout, which selects members with `members`.
+ * @returns Each matching file, in path order.
+ * @throws ArchiveError when the bytes are not a well-formed archive of the stated kind or the selector matches no member.
+ */
+export function unpackMembers(bytes: Uint8Array, archive: CollectionArchive): Member[] {
+  if (archive.kind === "zip") {
+    const names: string[] = [];
+    unzip(bytes, (file) => {
+      names.push(file.name);
+
+      return false;
+    });
+    const paths = pickAll(names, archive.members);
+    const chosen = new Set(paths);
+    const files = unzip(bytes, (candidate) => chosen.has(candidate.name));
+
+    return paths.map((path) => {
+      const file = getOwn(files, path);
+      if (file === undefined) {
+        throw new ArchiveError(`zip member ${path} could not be read`);
+      }
+
+      return { path, bytes: file };
+    });
+  }
+  const members = readTar(archive.kind === "tar" ? bytes : gunzip(bytes));
+
+  return pickAll(
+    members.map((member) => member.path),
+    archive.members,
+  ).map((path) => {
+    const found = members.find((member) => member.path === path);
+    if (found === undefined) {
+      throw new ArchiveError(`tar member ${path} could not be read`);
+    }
+
+    return { path, bytes: found.data };
+  });
 }
 
 /**

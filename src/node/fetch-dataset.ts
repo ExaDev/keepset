@@ -8,7 +8,7 @@ import { KeepsetError, RecipeError, type RecipeStep } from "../errors";
 import type { NativeDocument } from "../parsers/native";
 import { parseNative } from "../parsers/parse-native";
 import type { JsonScalar } from "../targets/json-scalar";
-import { unpack, type Unpacked } from "./archive";
+import { unpack, unpackMembers, type Unpacked } from "./archive";
 import { downloadRaw } from "./download";
 import { downloadPaged } from "./paged";
 
@@ -32,7 +32,10 @@ export interface Provenance {
   readonly retrievedAt: string;
   readonly sha256: string;
   readonly byteLength: number;
+  /** The archive member a document was read from. */
   readonly member?: string;
+  /** The archive members a collection was read from, in the order they were read. */
+  readonly members?: readonly string[];
 }
 
 /** A fetched dataset: the resolved category target, the provenance of the bytes it came from, and any warnings, such as a count that differs from the one the entry records. */
@@ -88,9 +91,9 @@ function metaOf(entry: Entry): Record<string, JsonScalar> {
   return { id: entry.id, name: entry.name, ...entry.properties };
 }
 
-/** A recipe run up to the native document, before the crosswalk: what both a fetch and a round-trip check start from. */
+/** A recipe run up to the native document, before the crosswalk: what both a fetch and a round-trip check start from. For a document it is the parser's output with the entry's `meta`; for a collection it is `{ meta, members }`, each member the parser's output under the member's path as `id`, with an empty `meta` a parser may fill with the member's own header. */
 interface NativeRun {
-  readonly native: NativeDocument & { readonly meta: Record<string, JsonScalar> };
+  readonly native: { readonly meta: Record<string, JsonScalar> } & (NativeDocument | { readonly members: readonly ({ readonly id: string; readonly meta: Record<string, JsonScalar> } & NativeDocument)[] });
   readonly provenance: Provenance;
 }
 
@@ -125,23 +128,36 @@ async function runToNative(dataset: Dataset, options: FetchOptions): Promise<Nat
 
     return new Uint8Array(await response.arrayBuffer());
   });
-  const unpacked: Unpacked = await step(entry.id, "extract", () => unpack(bytes, recipe.archive));
+  const provenanceOf = (extra: Pick<Provenance, "member" | "members">): Provenance => ({
+    entryId: entry.id,
+    catalogue: dataset.catalogue,
+    category: entry.category,
+    source: { url: source.url, status: source.status, ...(source.snapshot === undefined ? {} : { snapshot: source.snapshot }) },
+    fetchedUrl,
+    retrievedAt,
+    sha256: createHash("sha256").update(bytes).digest("hex"),
+    byteLength: bytes.byteLength,
+    ...extra,
+  });
+  const { archive } = recipe;
+  if ("members" in archive) {
+    const files = await step(entry.id, "extract", () => unpackMembers(bytes, archive));
+    const members = await step(entry.id, "parse", () =>
+      files.map((file) => {
+        try {
+          return { id: file.path, meta: {}, ...parseNative(file.bytes, recipe.parser) };
+        } catch (error) {
+          throw new KeepsetError(`member ${file.path}: ${error instanceof Error ? error.message : String(error)}`, { cause: error });
+        }
+      }),
+    );
+
+    return { native: { meta: metaOf(entry), members }, provenance: provenanceOf({ members: files.map((file) => file.path) }) };
+  }
+  const unpacked: Unpacked = await step(entry.id, "extract", () => unpack(bytes, archive));
   const parsed = await step(entry.id, "parse", () => parseNative(unpacked.bytes, recipe.parser));
 
-  return {
-    native: { meta: metaOf(entry), ...parsed },
-    provenance: {
-      entryId: entry.id,
-      catalogue: dataset.catalogue,
-      category: entry.category,
-      source: { url: source.url, status: source.status, ...(source.snapshot === undefined ? {} : { snapshot: source.snapshot }) },
-      fetchedUrl,
-      retrievedAt,
-      sha256: createHash("sha256").update(bytes).digest("hex"),
-      byteLength: bytes.byteLength,
-      ...(unpacked.member === undefined ? {} : { member: unpacked.member }),
-    },
-  };
+  return { native: { ...parsed, meta: { ...("meta" in parsed ? parsed.meta : {}), ...metaOf(entry) } }, provenance: provenanceOf(unpacked.member === undefined ? {} : { member: unpacked.member }) };
 }
 
 /**

@@ -3,7 +3,7 @@
 
 import { Fragment, type ReactNode } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
-import { groupsOf, NAME_SEPARATOR, type Dataset, type Manifest, type NamespaceNode } from "keepset";
+import { groupsOf, NAME_SEPARATOR, type ArchiveMember, type Dataset, type Manifest, type NamespaceNode } from "keepset";
 import { scriptJson, slug } from "./html";
 import { datasetJsonLd, describe } from "./jsonld";
 
@@ -38,6 +38,16 @@ function Listing({ datasets, root }: { readonly datasets: readonly Dataset[]; re
   return (
     <div className="table-wrap listing"><table className="listing"><thead><tr><th scope="col">Name</th><th scope="col">Id</th><th scope="col">Kind</th><th scope="col">Domain</th><th scope="col">Recipe</th></tr></thead><tbody>{datasets.map((dataset) => <Row key={dataset.entry.id} dataset={dataset} root={root} />)}</tbody></table></div>
   );
+}
+
+/**
+ * The facts row that names the archive file or files a recipe reads: a member path, or the extensions a member's name ends with.
+ * @param label - The row's label.
+ * @param selector - The recipe's member selector.
+ * @returns The row.
+ */
+function selectorRow(label: string, selector: ArchiveMember): readonly [string, ReactNode] {
+  return [label, "path" in selector ? <code key="path">{selector.path}</code> : <Fragment key="extensions">ending {selector.extensions.flatMap((extension, index) => (index === 0 ? [<code key={extension}>{extension}</code>] : [" or ", <code key={extension}>{extension}</code>]))}</Fragment>];
 }
 
 /** A two-column table of labelled values. */
@@ -147,7 +157,7 @@ export function entryPage(context: PageContext, dataset: Dataset): string {
       <Facts key="recipe-facts" rows={[
         ["Source", `#${String(recipe.source)}`],
         ["Archive", recipe.archive.kind],
-        ...("member" in recipe.archive ? [["Member", "path" in recipe.archive.member ? <code key="member-path">{recipe.archive.member.path}</code> : <Fragment key="member-extensions">ending {recipe.archive.member.extensions.flatMap((extension, index) => index === 0 ? [<code key={extension}>{extension}</code>] : [" or ", <code key={extension}>{extension}</code>])}</Fragment>] as const] : []),
+        ...("member" in recipe.archive ? [selectorRow("Member", recipe.archive.member)] : "members" in recipe.archive ? [selectorRow("Members", recipe.archive.members)] : []),
         ...Object.entries(recipe.parser).map(([option, value]) => [`Parser ${option}`, <code key={option}>{JSON.stringify(value)}</code>] as const),
       ]} />
     ),

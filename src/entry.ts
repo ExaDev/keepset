@@ -106,16 +106,25 @@ export const ArchiveMemberSchema = z.union([
 ]);
 export type ArchiveMember = z.infer<typeof ArchiveMemberSchema>;
 
-/** How the downloaded bytes unpack into the one file the parser reads. A workbook (`xlsx`) is read as the CSV of its named sheet, with dates as ISO 8601 text, for the `csv-table` parser. */
-export const ArchiveSchema = z.discriminatedUnion("kind", [
+/** The archive kinds that hold several files, from which a recipe selects one (`member`) or every one a selector matches (`members`). */
+const FileArchiveKindSchema = z.enum(["zip", "tar", "tar.gz"]);
+
+/** An archive a collection is read from: every file a selector matches, at least one. */
+export const CollectionArchiveSchema = z.object({ kind: FileArchiveKindSchema, members: ArchiveMemberSchema }).strict();
+
+/** How the downloaded bytes unpack into the file the parser reads, or for a collection the files it reads one by one. A `members` selector gives every member it matches, at least one, in path order. A workbook (`xlsx`) is read as the CSV of its named sheet, with dates as ISO 8601 text, for the `csv-table` parser. */
+export const ArchiveSchema = z.union([
   z.object({ kind: z.literal("none") }).strict(),
   z.object({ kind: z.literal("gzip") }).strict(),
-  z.object({ kind: z.literal("zip"), member: ArchiveMemberSchema }).strict(),
-  z.object({ kind: z.literal("tar"), member: ArchiveMemberSchema }).strict(),
-  z.object({ kind: z.literal("tar.gz"), member: ArchiveMemberSchema }).strict(),
+  z.object({ kind: FileArchiveKindSchema, member: ArchiveMemberSchema }).strict(),
+  CollectionArchiveSchema,
   z.object({ kind: z.literal("xlsx"), sheet: z.string().min(1) }).strict(),
 ]);
 export type Archive = z.infer<typeof ArchiveSchema>;
+/** An archive that gives the one file a document is read from. */
+export type DocumentArchive = Exclude<Archive, { readonly members: ArchiveMember }>;
+/** An archive that gives every file a collection is read from. */
+export type CollectionArchive = z.infer<typeof CollectionArchiveSchema>;
 
 const ColumnSchema = z.int().min(0);
 
@@ -142,6 +151,7 @@ export const ParserSchema = z.discriminatedUnion("format", [
   z.object({ format: z.literal("matrix-market"), encoding: EncodingSchema }).strict(),
   z.object({ format: z.literal("gml"), encoding: EncodingSchema }).strict(),
   z.object({ format: z.literal("pajek"), encoding: EncodingSchema }).strict(),
+  z.object({ format: z.literal("solomon"), encoding: EncodingSchema }).strict(),
   z
     .object({
       format: z.literal("csv-table"),
@@ -231,6 +241,16 @@ export const EntrySchema = define(
       }
       if (entry.recipe.status === "fetchable" && entry.recipe.source >= entry.sources.length) {
         ctx.addIssue({ code: "custom", path: ["recipe", "source"], message: `names source ${String(entry.recipe.source)} but the entry has ${String(entry.sources.length)}` });
+      }
+      if (entry.recipe.status === "fetchable") {
+        const selectsMembers = "members" in entry.recipe.archive;
+        const { shape } = getCategory(entry.category);
+        if (shape === "collection" && !selectsMembers) {
+          ctx.addIssue({ code: "custom", path: ["recipe", "archive"], message: `${entry.category} is a collection, so the archive must select its members with \`members\`` });
+        }
+        if (shape === "document" && selectsMembers) {
+          ctx.addIssue({ code: "custom", path: ["recipe", "archive", "members"], message: `${entry.category} is one document, so the archive selects one file with \`member\`` });
+        }
       }
       if ("target" in entry.crosswalk && entry.crosswalk.target !== entry.category) {
         ctx.addIssue({ code: "custom", path: ["crosswalk", "target"], message: `must be the entry's category, ${entry.category}` });
