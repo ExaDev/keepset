@@ -110,8 +110,27 @@ export const ArcgisOutcomeSchema = z
   .strict();
 export type ArcgisOutcome = z.infer<typeof ArcgisOutcomeSchema>;
 
-/** An outcome with a recipe: a table in one file, or a paged ArcGIS layer. */
-export type TableOutcome = FetchableOutcome | ArcgisOutcome;
+/** A dataset that is a collection of tables in an archive, one table file per instance: every member the archive selector matches is read as a table with the same header and options, as for a single table, and becomes an instance of the set. `timeUnit` says what the source's time quantities are measured in, since the or/v1 `duration` is seconds (a column in minutes is scaled by a factor of sixty), and is left out for a source that has none. */
+export const TableCollectionOutcomeSchema = z
+  .object({
+    status: z.literal("fetchable-table-collection"),
+    archive: CollectionArchiveSchema,
+    encoding: z.enum(["utf-8", "latin1"]),
+    delimiter: z.enum(["comma", "tab", "semicolon"]),
+    skipLines: z.int().min(0),
+    nullValues: z.array(z.string().min(1)).optional(),
+    idColumn: ColumnNameSchema.nullable(),
+    numericColumns: z.array(z.object({ column: ColumnNameSchema, factor: z.number().positive() }).strict()),
+    header: z.array(z.string()).min(1),
+    map: FieldMapSchema,
+    timeUnit: z.enum(["seconds", "abstract units"]).optional(),
+    expectedInstances: z.int().min(0).optional(),
+  })
+  .strict();
+export type TableCollectionOutcome = z.infer<typeof TableCollectionOutcomeSchema>;
+
+/** An outcome with a recipe that reads a table: one file, a paged ArcGIS layer, or every table file of an archive. */
+export type TableOutcome = FetchableOutcome | ArcgisOutcome | TableCollectionOutcome;
 
 /** A dataset that is a collection of instance files in an archive: the members it reads, the instance file parser that reads each, which of the parser's node columns fill the or/v1 node's fields (`map`), which pass through under their own names (`keep`) and which of the file's header values the instance's `meta` carries. A node column in neither is dropped by a one-way rule, so what an entry leaves out is written down. `timeUnit` says what the source's time quantities are measured in, since the or/v1 `duration` is seconds, and is left out for a source that has none. */
 export const CollectionOutcomeSchema = z
@@ -142,7 +161,7 @@ export const CurationItemSchema = z
     licence: LicenceSchema,
     downloadUrl: HttpUrlSchema.optional(),
     flags: z.array(prose()),
-    outcome: z.discriminatedUnion("status", [FetchableOutcomeSchema, ArcgisOutcomeSchema, CollectionOutcomeSchema, NotFetchableOutcomeSchema]),
+    outcome: z.discriminatedUnion("status", [FetchableOutcomeSchema, ArcgisOutcomeSchema, TableCollectionOutcomeSchema, CollectionOutcomeSchema, NotFetchableOutcomeSchema]),
   })
   .strict();
 export type CurationItem = z.infer<typeof CurationItemSchema>;
