@@ -2,7 +2,7 @@
   "aliases": [
     "towed-vehicles"
   ],
-  "category": "or/v1",
+  "category": "tasks/v1",
   "citations": [],
   "crosswalk": {
     "oneWay": [],
@@ -24,7 +24,7 @@
       }
     ],
     "source": "csv-table",
-    "target": "or/v1"
+    "target": "tasks/v1"
   },
   "description": "Vehicles towed in Chicago and held at city lots, with the tow date and destination lot.",
   "domain": "Case records",

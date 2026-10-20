@@ -2,7 +2,7 @@
   "aliases": [
     "incident-records"
   ],
-  "category": "or/v1",
+  "category": "tasks/v1",
   "citations": [],
   "crosswalk": {
     "oneWay": [],
@@ -44,7 +44,7 @@
       }
     ],
     "source": "csv-table",
-    "target": "or/v1"
+    "target": "tasks/v1"
   },
   "description": "London Fire Brigade incident records with coordinates, borough and ward, attendance times and notional cost.",
   "domain": "Emergency dispatch",

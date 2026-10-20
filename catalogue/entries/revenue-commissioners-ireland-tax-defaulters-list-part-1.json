@@ -2,7 +2,7 @@
   "aliases": [
     "tax-defaulters-list-part-1"
   ],
-  "category": "or/v1",
+  "category": "tasks/v1",
   "citations": [],
   "crosswalk": {
     "oneWay": [],
@@ -24,7 +24,7 @@
       }
     ],
     "source": "csv-table",
-    "target": "or/v1"
+    "target": "tasks/v1"
   },
   "description": "Court-determined penalties and other tax offences published by the Irish Revenue Commissioners, as listed in one quarterly file.",
   "domain": "Case records",

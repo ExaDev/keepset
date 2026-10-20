@@ -69,7 +69,7 @@
       "flags": [
         "coordinates are planar x and y, not latitude and longitude",
         "there are no time windows or service times, so it is not a VRPTW instance",
-        "the download holds the customers and the road network of one arc routing instance; the customers are read as nodes and the network's nodes and links, which or/v1 has no arcs for, are not read",
+        "the download holds the customers and the road network of one arc routing instance; the customers are read as nodes and the network's nodes and links, which tasks/v1 has no arcs for, are not read",
         "several customers share a position"
       ],
       "id": "zenodo-hartford-meter-reading-instance",
@@ -102,7 +102,7 @@
     {
       "flags": [
         "GitHub reports GPL-2.0 for the repository, which covers the generator; no separate dataset licence is stated.",
-        "only the Specs files are read: each instance's distance and time matrices are separate files that or/v1 has no place for",
+        "only the Specs files are read: each instance's distance and time matrices are separate files that tasks/v1 has no place for",
         "the first column of a Specs file is latitude and the second longitude, with ids that index a location list the archive does not hold"
       ],
       "id": "github-psxjpc-movrptw-real-tenerife-instances",
@@ -229,7 +229,7 @@
         "The XML carries coordinates and skill resources but no time windows or service times.",
         "No licence statement was seen.",
         "the instances have coordinates and skills but no times, so the nodes carry no duration or window",
-        "the fleet's costs and tool and spare part stocks have no place in an or/v1 node and are not read",
+        "the fleet's costs and tool and spare part stocks have no place in a tasks/v1 node and are not read",
         "a node's type is kept as the file writes it; the file does not say what the types mean"
       ],
       "id": "vrp-rep-technician-routing-pillac",
@@ -275,7 +275,7 @@
         "The survey field list for this item is unverified."
       ],
       "id": "zenodo-tdc-technician-dispatch",
-      "reason": "The instances are a custom sectioned text format whose tasks have no positions, and the collection is hundreds of megabytes compressed, almost all of it a pairwise travel time matrix that or/v1 has no arcs to hold, so reading it would hold gigabytes in memory to keep a few fields per task.",
+      "reason": "The instances are a custom sectioned text format whose tasks have no positions, and the collection is hundreds of megabytes compressed, almost all of it a pairwise travel time matrix that tasks/v1 has no arcs to hold, so reading it would hold gigabytes in memory to keep a few fields per task.",
       "recipe": "not-fetchable",
       "surveyId": "or-25"
     },

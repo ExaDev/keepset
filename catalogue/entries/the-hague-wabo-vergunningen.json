@@ -2,7 +2,7 @@
   "aliases": [
     "wabo-vergunningen"
   ],
-  "category": "or/v1",
+  "category": "tasks/v1",
   "citations": [],
   "crosswalk": {
     "oneWay": [],
@@ -44,7 +44,7 @@
       }
     ],
     "source": "csv-table",
-    "target": "or/v1"
+    "target": "tasks/v1"
   },
   "description": "Environmental and building permit cases in The Hague, with type, status, neighbourhood and filing and decision dates.",
   "domain": "Case records",

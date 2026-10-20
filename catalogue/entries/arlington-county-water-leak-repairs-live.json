@@ -2,7 +2,7 @@
   "aliases": [
     "water-leak-repairs-live"
   ],
-  "category": "or/v1",
+  "category": "tasks/v1",
   "citations": [],
   "crosswalk": {
     "oneWay": [],
@@ -54,7 +54,7 @@
       }
     ],
     "source": "geojson",
-    "target": "or/v1"
+    "target": "tasks/v1"
   },
   "description": "Live water leak repair work in Arlington County, Virginia, with activity, priority and estimated and actual start and stop dates.",
   "domain": "Emergency dispatch",

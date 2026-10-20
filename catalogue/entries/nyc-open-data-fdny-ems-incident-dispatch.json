@@ -2,10 +2,10 @@
   "aliases": [
     "fdny-ems-incident-dispatch"
   ],
-  "category": "or/v1",
+  "category": "tasks/v1",
   "citations": [],
   "crosswalk": {
-    "file": "crosswalks/or-v1/nodes.json"
+    "file": "crosswalks/tasks-v1/nodes.json"
   },
   "description": "Emergency medical incident dispatch records for New York City, with severity codes, response and travel seconds and areas.",
   "domain": "Emergency dispatch",

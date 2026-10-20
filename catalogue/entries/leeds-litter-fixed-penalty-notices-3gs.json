@@ -2,10 +2,10 @@
   "aliases": [
     "litter-fixed-penalty-notices-3gs"
   ],
-  "category": "or/v1",
+  "category": "tasks/v1",
   "citations": [],
   "crosswalk": {
-    "file": "crosswalks/or-v1/nodes.json"
+    "file": "crosswalks/tasks-v1/nodes.json"
   },
   "description": "Litter fixed penalty notices issued for Leeds City Council by 3GS, published as quarterly files.",
   "domain": "Case records",

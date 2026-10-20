@@ -2,7 +2,7 @@
   "aliases": [
     "jd-cold-chain-nodes"
   ],
-  "category": "or/v1",
+  "category": "tasks/v1",
   "citations": [],
   "crosswalk": {
     "oneWay": [],
@@ -34,7 +34,7 @@
       }
     ],
     "source": "csv-table",
-    "target": "or/v1"
+    "target": "tasks/v1"
   },
   "description": "Delivery nodes of a JD.com cold-chain case in Beijing with coordinates, demands and time windows.",
   "domain": "Last-mile logistics",

@@ -2,7 +2,7 @@
   "aliases": [
     "police-dispatch-events"
   ],
-  "category": "or/v1",
+  "category": "tasks/v1",
   "citations": [],
   "crosswalk": {
     "oneWay": [],
@@ -49,7 +49,7 @@
       }
     ],
     "source": "csv-table",
-    "target": "or/v1"
+    "target": "tasks/v1"
   },
   "description": "Police dispatch events in Mesa, Arizona from 2021, with priorities, case types and call handling and response times.",
   "domain": "Emergency dispatch",

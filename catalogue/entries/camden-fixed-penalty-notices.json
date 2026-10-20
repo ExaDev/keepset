@@ -2,7 +2,7 @@
   "aliases": [
     "fixed-penalty-notices"
   ],
-  "category": "or/v1",
+  "category": "tasks/v1",
   "citations": [],
   "crosswalk": {
     "oneWay": [],
@@ -44,7 +44,7 @@
       }
     ],
     "source": "csv-table",
-    "target": "or/v1"
+    "target": "tasks/v1"
   },
   "description": "Fixed penalty notices issued by Camden's education and enforcement team, with offence, status, amount fined and dates.",
   "domain": "Case records",

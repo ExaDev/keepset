@@ -2,7 +2,7 @@
   "aliases": [
     "weed-abatement-locations"
   ],
-  "category": "or/v1",
+  "category": "tasks/v1",
   "citations": [],
   "crosswalk": {
     "oneWay": [],
@@ -44,7 +44,7 @@
       }
     ],
     "source": "geojson",
-    "target": "or/v1"
+    "target": "tasks/v1"
   },
   "description": "Weed abatement parcels of Orange County, California, with district, status and cost of dumped material.",
   "domain": "Case records",

@@ -2,7 +2,7 @@
   "aliases": [
     "hmo-licensing-register"
   ],
-  "category": "or/v1",
+  "category": "tasks/v1",
   "citations": [],
   "crosswalk": {
     "oneWay": [],
@@ -49,7 +49,7 @@
       }
     ],
     "source": "csv-table",
-    "target": "or/v1"
+    "target": "tasks/v1"
   },
   "description": "Licences for houses in multiple occupation in Camden, with location, licence type, status and licence start and end dates.",
   "domain": "Case records",

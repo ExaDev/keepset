@@ -2,7 +2,7 @@
   "aliases": [
     "tax-liens-summary"
   ],
-  "category": "or/v1",
+  "category": "tasks/v1",
   "citations": [],
   "crosswalk": {
     "oneWay": [],
@@ -24,7 +24,7 @@
       }
     ],
     "source": "csv-table",
-    "target": "or/v1"
+    "target": "tasks/v1"
   },
   "description": "Total tax lien amount and lien count for each Allegheny County parcel.",
   "domain": "Case records",

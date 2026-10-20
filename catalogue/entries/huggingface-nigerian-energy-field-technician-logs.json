@@ -2,7 +2,7 @@
   "aliases": [
     "nigerian-energy-field-technician-logs"
   ],
-  "category": "or/v1",
+  "category": "tasks/v1",
   "citations": [],
   "crosswalk": {
     "oneWay": [],
@@ -59,7 +59,7 @@
       }
     ],
     "source": "csv-table",
-    "target": "or/v1"
+    "target": "tasks/v1"
   },
   "description": "Field technician job tickets for Nigerian electricity distribution companies with job type, start and end times, duration and coordinates.",
   "domain": "Synthetic logs",

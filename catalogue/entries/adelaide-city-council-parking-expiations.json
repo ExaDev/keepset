@@ -2,7 +2,7 @@
   "aliases": [
     "parking-expiations"
   ],
-  "category": "or/v1",
+  "category": "tasks/v1",
   "citations": [],
   "crosswalk": {
     "oneWay": [],
@@ -44,7 +44,7 @@
       }
     ],
     "source": "csv-table",
-    "target": "or/v1"
+    "target": "tasks/v1"
   },
   "description": "Parking expiation notices issued by Adelaide City Council, with offence date, street, amount and payment status.",
   "domain": "Case records",

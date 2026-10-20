@@ -2,7 +2,7 @@
   "aliases": [
     "building-fire-investigations"
   ],
-  "category": "or/v1",
+  "category": "tasks/v1",
   "citations": [],
   "crosswalk": {
     "oneWay": [],
@@ -39,7 +39,7 @@
       }
     ],
     "source": "csv-table",
-    "target": "or/v1"
+    "target": "tasks/v1"
   },
   "description": "Dallas Fire-Rescue building fire incidents for fiscal year 2020 with structure type, cause, values and losses.",
   "domain": "Claims and unclaimed money",

@@ -2,7 +2,7 @@
   "aliases": [
     "animals-field-data-2016-2017"
   ],
-  "category": "or/v1",
+  "category": "tasks/v1",
   "citations": [],
   "crosswalk": {
     "oneWay": [],
@@ -44,7 +44,7 @@
       }
     ],
     "source": "csv-table",
-    "target": "or/v1"
+    "target": "tasks/v1"
   },
   "description": "Animal services field activities in Dallas for fiscal year 2016 to 2017, with type, priority, council district, status and dates.",
   "domain": "Case records",

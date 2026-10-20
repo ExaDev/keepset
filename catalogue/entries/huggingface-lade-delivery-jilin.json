@@ -2,7 +2,7 @@
   "aliases": [
     "lade-delivery-jilin"
   ],
-  "category": "or/v1",
+  "category": "tasks/v1",
   "citations": [],
   "crosswalk": {
     "oneWay": [],
@@ -49,7 +49,7 @@
       }
     ],
     "source": "csv-table",
-    "target": "or/v1"
+    "target": "tasks/v1"
   },
   "description": "Last-mile delivery orders from Cainiao couriers in Jilin, with location, area type, acceptance and delivery times.",
   "domain": "Last-mile logistics",

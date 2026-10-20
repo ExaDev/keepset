@@ -2,10 +2,10 @@
   "aliases": [
     "dwsrp-tw-sc-instances"
   ],
-  "category": "or/v1",
+  "category": "tasks/v1",
   "citations": [],
   "crosswalk": {
-    "file": "crosswalks/or-v1/nodes.json"
+    "file": "crosswalks/tasks-v1/nodes.json"
   },
   "description": "Instances for dynamic workforce scheduling and routing with time windows and skills, one spreadsheet per instance.",
   "domain": "Technician and home-care routing",

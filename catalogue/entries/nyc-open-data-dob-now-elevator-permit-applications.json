@@ -2,7 +2,7 @@
   "aliases": [
     "dob-now-elevator-permit-applications"
   ],
-  "category": "or/v1",
+  "category": "tasks/v1",
   "citations": [],
   "crosswalk": {
     "oneWay": [],
@@ -64,7 +64,7 @@
       }
     ],
     "source": "csv-table",
-    "target": "or/v1"
+    "target": "tasks/v1"
   },
   "description": "Elevator permit applications filed with the NYC Department of Buildings, with device type, status, cost and dates.",
   "domain": "Case records",

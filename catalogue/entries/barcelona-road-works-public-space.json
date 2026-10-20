@@ -2,7 +2,7 @@
   "aliases": [
     "road-works-public-space"
   ],
-  "category": "or/v1",
+  "category": "tasks/v1",
   "citations": [],
   "crosswalk": {
     "oneWay": [],
@@ -44,7 +44,7 @@
       }
     ],
     "source": "csv-table",
-    "target": "or/v1"
+    "target": "tasks/v1"
   },
   "description": "Works carried out in Barcelona's public space, with location, district, type, budget, status and end date.",
   "domain": "Case records",

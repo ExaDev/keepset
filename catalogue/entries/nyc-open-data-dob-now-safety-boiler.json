@@ -2,7 +2,7 @@
   "aliases": [
     "dob-now-safety-boiler"
   ],
-  "category": "or/v1",
+  "category": "tasks/v1",
   "citations": [],
   "crosswalk": {
     "oneWay": [],
@@ -34,7 +34,7 @@
       }
     ],
     "source": "csv-table",
-    "target": "or/v1"
+    "target": "tasks/v1"
   },
   "description": "Boiler inspection reports filed with the NYC Department of Buildings, with report type, status and filing fee.",
   "domain": "Case records",

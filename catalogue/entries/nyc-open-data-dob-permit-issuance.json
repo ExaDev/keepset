@@ -2,10 +2,10 @@
   "aliases": [
     "dob-permit-issuance"
   ],
-  "category": "or/v1",
+  "category": "tasks/v1",
   "citations": [],
   "crosswalk": {
-    "file": "crosswalks/or-v1/nodes.json"
+    "file": "crosswalks/tasks-v1/nodes.json"
   },
   "description": "Construction permits issued by the NYC Department of Buildings.",
   "domain": "Case records",

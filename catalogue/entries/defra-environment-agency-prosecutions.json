@@ -2,7 +2,7 @@
   "aliases": [
     "environment-agency-prosecutions"
   ],
-  "category": "or/v1",
+  "category": "tasks/v1",
   "citations": [],
   "crosswalk": {
     "oneWay": [],
@@ -44,7 +44,7 @@
       }
     ],
     "source": "csv-table",
-    "target": "or/v1"
+    "target": "tasks/v1"
   },
   "description": "Environment Agency enforcement actions against defendants, with fines, costs, verdicts and incident area.",
   "domain": "Case records",

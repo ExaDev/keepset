@@ -2,7 +2,7 @@
   "aliases": [
     "fire-and-medical-dispatch-events"
   ],
-  "category": "or/v1",
+  "category": "tasks/v1",
   "citations": [],
   "crosswalk": {
     "oneWay": [],
@@ -54,7 +54,7 @@
       }
     ],
     "source": "csv-table",
-    "target": "or/v1"
+    "target": "tasks/v1"
   },
   "description": "Fire and medical dispatch events in Mesa, Arizona, with reason, location, travel time and call and clearing timestamps.",
   "domain": "Emergency dispatch",

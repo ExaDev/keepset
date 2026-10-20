@@ -2,10 +2,10 @@
   "aliases": [
     "tdc-technician-dispatch"
   ],
-  "category": "or/v1",
+  "category": "tasks/v1",
   "citations": [],
   "crosswalk": {
-    "file": "crosswalks/or-v1/nodes.json"
+    "file": "crosswalks/tasks-v1/nodes.json"
   },
   "domain": "Technician and home-care routing",
   "expectedCounts": {},
@@ -22,7 +22,7 @@
     "surveyId": "or-25"
   },
   "recipe": {
-    "reason": "The instances are a custom sectioned text format whose tasks have no positions, and the collection is hundreds of megabytes compressed, almost all of it a pairwise travel time matrix that or/v1 has no arcs to hold, so reading it would hold gigabytes in memory to keep a few fields per task.",
+    "reason": "The instances are a custom sectioned text format whose tasks have no positions, and the collection is hundreds of megabytes compressed, almost all of it a pairwise travel time matrix that tasks/v1 has no arcs to hold, so reading it would hold gigabytes in memory to keep a few fields per task.",
     "status": "not-fetchable"
   },
   "sources": [

@@ -2,7 +2,7 @@
   "aliases": [
     "weed-abatement-parcels"
   ],
-  "category": "or/v1",
+  "category": "tasks/v1",
   "citations": [],
   "crosswalk": {
     "oneWay": [],
@@ -34,7 +34,7 @@
       }
     ],
     "source": "geojson",
-    "target": "or/v1"
+    "target": "tasks/v1"
   },
   "description": "Weed abatement parcels of the City of Fairfield, California, with status and disposition.",
   "domain": "Case records",

@@ -2,10 +2,10 @@
   "aliases": [
     "last-mile-routing-2021"
   ],
-  "category": "or/v1",
+  "category": "tasks/v1",
   "citations": [],
   "crosswalk": {
-    "file": "crosswalks/or-v1/nodes.json"
+    "file": "crosswalks/tasks-v1/nodes.json"
   },
   "domain": "Last-mile logistics",
   "expectedCounts": {},

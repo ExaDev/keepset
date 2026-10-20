@@ -2,7 +2,7 @@
   "aliases": [
     "tax-liens"
   ],
-  "category": "or/v1",
+  "category": "tasks/v1",
   "citations": [],
   "crosswalk": {
     "oneWay": [],
@@ -34,7 +34,7 @@
       }
     ],
     "source": "geojson",
-    "target": "or/v1"
+    "target": "tasks/v1"
   },
   "description": "Tax liens in Douglas County, Colorado, with lien balances and sale dates.",
   "domain": "Case records",

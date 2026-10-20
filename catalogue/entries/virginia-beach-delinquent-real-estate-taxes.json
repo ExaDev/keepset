@@ -2,7 +2,7 @@
   "aliases": [
     "delinquent-real-estate-taxes"
   ],
-  "category": "or/v1",
+  "category": "tasks/v1",
   "citations": [],
   "crosswalk": {
     "oneWay": [],
@@ -29,7 +29,7 @@
       }
     ],
     "source": "geojson",
-    "target": "or/v1"
+    "target": "tasks/v1"
   },
   "description": "Delinquent real estate tax amounts by property in Virginia Beach, Virginia.",
   "domain": "Case records",

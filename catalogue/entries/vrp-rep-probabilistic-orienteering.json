@@ -2,7 +2,7 @@
   "aliases": [
     "probabilistic-orienteering"
   ],
-  "category": "or/v1",
+  "category": "tasks/v1",
   "citations": [],
   "crosswalk": {
     "oneWay": [
@@ -55,7 +55,7 @@
       }
     ],
     "source": "tsplib",
-    "target": "or/v1"
+    "target": "tasks/v1"
   },
   "domain": "Orienteering",
   "expectedCounts": {

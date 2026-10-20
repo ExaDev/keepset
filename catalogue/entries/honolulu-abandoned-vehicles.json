@@ -2,7 +2,7 @@
   "aliases": [
     "abandoned-vehicles"
   ],
-  "category": "or/v1",
+  "category": "tasks/v1",
   "citations": [],
   "crosswalk": {
     "oneWay": [],
@@ -34,7 +34,7 @@
       }
     ],
     "source": "csv-table",
-    "target": "or/v1"
+    "target": "tasks/v1"
   },
   "description": "Abandoned vehicle reports in Honolulu, with entry and close dates, status and close reason.",
   "domain": "Case records",

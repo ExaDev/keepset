@@ -2,7 +2,7 @@
   "aliases": [
     "building-warrant-applications"
   ],
-  "category": "or/v1",
+  "category": "tasks/v1",
   "citations": [],
   "crosswalk": {
     "oneWay": [],
@@ -49,7 +49,7 @@
       }
     ],
     "source": "geojson",
-    "target": "or/v1"
+    "target": "tasks/v1"
   },
   "description": "Building warrant applications received by North Ayrshire Council, with location, status and decision dates.",
   "domain": "Case records",

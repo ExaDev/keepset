@@ -2,7 +2,7 @@
   "aliases": [
     "issued-building-permits"
   ],
-  "category": "or/v1",
+  "category": "tasks/v1",
   "citations": [],
   "crosswalk": {
     "oneWay": [],
@@ -44,7 +44,7 @@
       }
     ],
     "source": "csv-table",
-    "target": "or/v1"
+    "target": "tasks/v1"
   },
   "description": "Building permits issued in Vancouver, with project value, type of work, local area and the days taken to issue.",
   "domain": "Case records",

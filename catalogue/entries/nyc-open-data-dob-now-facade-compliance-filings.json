@@ -2,7 +2,7 @@
   "aliases": [
     "dob-now-facade-compliance-filings"
   ],
-  "category": "or/v1",
+  "category": "tasks/v1",
   "citations": [],
   "crosswalk": {
     "oneWay": [],
@@ -44,7 +44,7 @@
       }
     ],
     "source": "csv-table",
-    "target": "or/v1"
+    "target": "tasks/v1"
   },
   "description": "Facade inspection compliance filings with the NYC Department of Buildings, with filing type, status and late filing amount.",
   "domain": "Case records",

@@ -2,7 +2,7 @@
   "aliases": [
     "hpd-handyman-work-order-charges"
   ],
-  "category": "or/v1",
+  "category": "tasks/v1",
   "citations": [],
   "crosswalk": {
     "oneWay": [],
@@ -54,7 +54,7 @@
       }
     ],
     "source": "csv-table",
-    "target": "or/v1"
+    "target": "tasks/v1"
   },
   "description": "Handyman work orders raised by NYC Housing Preservation and Development, with charges, location and status.",
   "domain": "Case records",

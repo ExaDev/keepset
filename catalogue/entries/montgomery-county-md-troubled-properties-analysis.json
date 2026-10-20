@@ -2,7 +2,7 @@
   "aliases": [
     "troubled-properties-analysis"
   ],
-  "category": "or/v1",
+  "category": "tasks/v1",
   "citations": [],
   "crosswalk": {
     "oneWay": [],
@@ -49,7 +49,7 @@
       }
     ],
     "source": "csv-table",
-    "target": "or/v1"
+    "target": "tasks/v1"
   },
   "description": "Rental property inspection results in Montgomery County, Maryland, with location, rating, and first and next inspection dates.",
   "domain": "Civic and environmental monitoring",

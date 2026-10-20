@@ -2,7 +2,7 @@
   "aliases": [
     "building-permits-active"
   ],
-  "category": "or/v1",
+  "category": "tasks/v1",
   "citations": [],
   "crosswalk": {
     "oneWay": [],
@@ -44,7 +44,7 @@
       }
     ],
     "source": "csv-table",
-    "target": "or/v1"
+    "target": "tasks/v1"
   },
   "description": "Active building permits in Toronto, with permit type, ward grid, status and dates.",
   "domain": "Case records",

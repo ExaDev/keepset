@@ -2,7 +2,7 @@
   "aliases": [
     "evictions"
   ],
-  "category": "or/v1",
+  "category": "tasks/v1",
   "citations": [],
   "crosswalk": {
     "oneWay": [],
@@ -39,7 +39,7 @@
       }
     ],
     "source": "csv-table",
-    "target": "or/v1"
+    "target": "tasks/v1"
   },
   "description": "Executed evictions in New York City from 2017, with the address, borough and coordinates.",
   "domain": "Case records",

@@ -2,7 +2,7 @@
   "aliases": [
     "permits-and-inspections"
   ],
-  "category": "or/v1",
+  "category": "tasks/v1",
   "citations": [],
   "crosswalk": {
     "oneWay": [],
@@ -54,7 +54,7 @@
       }
     ],
     "source": "csv-table",
-    "target": "or/v1"
+    "target": "tasks/v1"
   },
   "description": "Building permits and inspections of the City of Norfolk, Virginia, with dates, status, fees and ward.",
   "domain": "Case records",
