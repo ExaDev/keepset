@@ -515,3 +515,27 @@ describe("the verolog-2019 parser", () => {
     expect(parseError(() => parseNative(utf8(text.replace("1\t1\t400\t6\t1\t0", "1\t1\t400\t6\t1")), verolog)).message).toMatch(/expected 6 fields in a TECHNICIANS row, found 5/);
   });
 });
+
+describe("the customer-points parser", () => {
+  const points: Parser = { format: "customer-points", encoding: "utf-8" };
+  const text = "customers 3\r\n\r\n0\t15.1234\t33.987\r\n1\t41.5\t18.0\r\n2\t41.5\t18.0\r\n";
+
+  it("reads the announced customers with their planar positions, skipping blank lines", () => {
+    expect(parseNative(utf8(text), points)).toEqual({
+      meta: { customers: 3 },
+      nodes: [
+        { id: "0", x: 15.1234, y: 33.987 },
+        { id: "1", x: 41.5, y: 18 },
+        { id: "2", x: 41.5, y: 18 },
+      ],
+    });
+  });
+
+  it("rejects a first line that is not the count, a malformed row, a repeated id and a count that does not match", () => {
+    expect(parseError(() => parseNative(utf8(text.replace("customers 3", "nodes 3")), points)).message).toMatch(/line 1: expected "customers <count>", found "nodes 3"/);
+    expect(parseError(() => parseNative(utf8(""), points)).message).toMatch(/expected "customers <count>"/);
+    expect(parseError(() => parseNative(utf8(text.replace("41.5\t18.0\r\n2", "41.5\r\n2")), points)).message).toMatch(/line 4: expected a customer id and two numbers/);
+    expect(parseError(() => parseNative(utf8(text.replace("2\t41.5", "1\t41.5")), points)).message).toMatch(/customer 1 appears twice/);
+    expect(parseError(() => parseNative(utf8(text.replace("customers 3", "customers 4")), points)).message).toMatch(/announces 4 customers, found 3/);
+  });
+});

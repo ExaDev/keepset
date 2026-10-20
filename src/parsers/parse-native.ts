@@ -7,6 +7,7 @@ import { parseCsvTable } from "./csv-table";
 import { parseGeojson } from "./geojson";
 import type { NativeDocument, NativeGraph, NativeInstance, NativeTable } from "./native";
 import { parsePajek } from "./pajek";
+import { parseCustomerPoints } from "./customer-points";
 import { parseSolomon } from "./solomon";
 import { parseTop } from "./top";
 import { parseToptw } from "./toptw";
@@ -106,6 +107,9 @@ export function parseNative(bytes: Uint8Array, parser: Parser): NativeDocument {
   }
   if (parser.format === "gml") {
     return parseGml(text);
+  }
+  if (parser.format === "customer-points") {
+    return parseCustomerPoints(text);
   }
   if (parser.format === "solomon") {
     return parseSolomon(text);

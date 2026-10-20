@@ -1,4 +1,5 @@
 import type { Parser } from "../entry";
+import { CUSTOMER_POINTS_COLUMNS, CUSTOMER_POINTS_META, CUSTOMER_POINTS_TEXT_COLUMNS } from "./customer-points";
 import { SOLOMON_COLUMNS, SOLOMON_META, SOLOMON_TEXT_COLUMNS } from "./solomon";
 import { TOP_COLUMNS, TOP_META, TOP_TEXT_COLUMNS } from "./top";
 import { TSPLIB_COLUMNS, TSPLIB_META, TSPLIB_TEXT_COLUMNS } from "./tsplib";
@@ -8,6 +9,7 @@ import { TOPTW_COLUMNS, TOPTW_META, TOPTW_TEXT_COLUMNS } from "./toptw";
 
 /** What each instance file parser emits, by its format name: the columns of a node (besides its `id`), which of them hold text and not numbers, and the keys of the instance's own `meta`. A recipe's crosswalk maps these, and the seed import checks a curation against them. */
 export const INSTANCE_SHAPES = {
+  "customer-points": { columns: CUSTOMER_POINTS_COLUMNS, text: CUSTOMER_POINTS_TEXT_COLUMNS, meta: CUSTOMER_POINTS_META },
   solomon: { columns: SOLOMON_COLUMNS, text: SOLOMON_TEXT_COLUMNS, meta: SOLOMON_META },
   top: { columns: TOP_COLUMNS, text: TOP_TEXT_COLUMNS, meta: TOP_META },
   "verolog-2019": { columns: VEROLOG_2019_COLUMNS, text: VEROLOG_2019_TEXT_COLUMNS, meta: VEROLOG_2019_META },
