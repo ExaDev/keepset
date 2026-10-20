@@ -3386,7 +3386,9 @@
       "description": "Solomon's 1983 vehicle routing instances with time windows (C1, C2, R1, R2, RC1, RC2), each with 100 customers.",
       "flags": [
         "no licence statement was found",
-        "the host also lists Homberger and other instance families as separate zips"
+        "the 25 and 50 customer archives are prefixes of the 100 customer instances, so only the 100 customer archive is read",
+        "the Homberger instances with more customers are separate archives and not read",
+        "time quantities are in the unit of the coordinate grid, which the host does not name"
       ],
       "id": "lcc-malaga-solomon-vrptw-benchmark",
       "licence": {
@@ -3395,10 +3397,39 @@
       "name": "Solomon VRPTW benchmark instances",
       "namespace": "lcc-malaga",
       "outcome": {
-        "reason": "The download is a collection of Solomon instance files (planar coordinates, demands, service times and windows in abstract units, not seconds), and a collection is more than one or/v1 document, so no recipe reads it.",
-        "status": "not-fetchable"
+        "status": "fetchable-collection",
+        "archive": {
+          "kind": "zip",
+          "members": {
+            "extensions": [
+              ".txt"
+            ]
+          }
+        },
+        "parser": {
+          "format": "solomon",
+          "encoding": "utf-8"
+        },
+        "map": {
+          "x": "x",
+          "y": "y",
+          "deadline": "due"
+        },
+        "keep": [
+          "demand",
+          "ready",
+          "service"
+        ],
+        "meta": [
+          "name",
+          "vehicles",
+          "capacity"
+        ],
+        "timeUnit": "abstract units",
+        "expectedInstances": 56
       },
-      "surveyId": "or-5"
+      "surveyId": "or-5",
+      "downloadUrl": "https://neo.lcc.uma.es/vrp/wp-content/data/instances/solomon/solomon_100.zip"
     },
     {
       "description": "Environment Agency enforcement actions against defendants, with fines, costs, verdicts and incident area.",
@@ -5780,7 +5811,8 @@
       "downloadUrl": "https://raw.githubusercontent.com/psxjpc/MOVRPTW-Generator/master/dataset/movrptw-instances.zip",
       "flags": [
         "GitHub reports GPL-2.0 for the repository, which covers the generator; no separate dataset licence is stated.",
-        "Each instance has a Specs file and two tab-separated matrices with no header."
+        "only the Specs files are read: each instance's distance and time matrices are separate files that or/v1 has no place for",
+        "the first column of a Specs file is latitude and the second longitude, with ids that index a location list the archive does not hold"
       ],
       "id": "github-psxjpc-movrptw-real-tenerife-instances",
       "licence": {
@@ -5790,8 +5822,40 @@
       "name": "MOVRPTW real Tenerife distribution instances",
       "namespace": "github-psxjpc",
       "outcome": {
-        "reason": "The download is a collection of Solomon style instance files and distance matrices, and a collection is more than one or/v1 document, so no recipe reads it.",
-        "status": "not-fetchable"
+        "status": "fetchable-collection",
+        "archive": {
+          "kind": "zip",
+          "members": {
+            "extensions": [
+              ".tw0Specs.dat",
+              ".tw1Specs.dat",
+              ".tw2Specs.dat",
+              ".tw3Specs.dat",
+              ".tw4Specs.dat"
+            ]
+          }
+        },
+        "parser": {
+          "format": "solomon",
+          "encoding": "utf-8"
+        },
+        "map": {
+          "lat": "x",
+          "lon": "y",
+          "duration": "service",
+          "deadline": "due"
+        },
+        "keep": [
+          "demand",
+          "ready"
+        ],
+        "meta": [
+          "name",
+          "vehicles",
+          "capacity"
+        ],
+        "timeUnit": "seconds",
+        "expectedInstances": 45
       },
       "surveyId": "or-9"
     },
