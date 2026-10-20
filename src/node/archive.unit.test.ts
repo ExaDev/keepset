@@ -123,6 +123,21 @@ describe("unpackMembers", () => {
     expect(names(unpackMembers(gzip(archive), { kind: "tar.gz", members: { extensions: [".txt"] } }))).toEqual(["suite/a.txt", "suite/b.txt", "suite/other/c.txt"]);
   });
 
+  it("takes a pattern selector as every member whose whole path matches it, so a readme and a solution beside the instances are left out", () => {
+    const suite = zip([
+      { path: "suite/Coordinates_2.txt", text: "two" },
+      { path: "suite/Coordinates_10.txt", text: "ten" },
+      { path: "suite/readme.txt", text: "readme" },
+      { path: "suite/Coordinates_10.txt.bak", text: "backup" },
+    ]);
+    const members = { pattern: "suite/Coordinates_\\d+\\.txt" };
+    expect(names(unpackMembers(suite, { kind: "zip", members }))).toEqual(["suite/Coordinates_10.txt", "suite/Coordinates_2.txt"]);
+    expect(names(unpackMembers(tar([{ path: "a/x1.txt", text: "1" }, { path: "a/x2.md", text: "2" }]), { kind: "tar", members: { pattern: ".*\\.txt" } }))).toEqual(["a/x1.txt"]);
+    expect(() => unpackMembers(suite, { kind: "zip", members: { pattern: "suite/Coordinates" } })).toThrow(/at least one member matching suite\/Coordinates, found none/);
+    expect(unpack(suite, { kind: "zip", member: { pattern: "suite/readme\\.txt" } }).member).toBe("suite/readme.txt");
+    expect(() => unpack(suite, { kind: "zip", member: { pattern: "suite/Coordinates_.*" } })).toThrow(/expected one member matching suite\/Coordinates_\.\*, found 3/);
+  });
+
   it("takes a path selector as one member, matched by its trailing segments", () => {
     expect(names(unpackMembers(zip(files), { kind: "zip", members: { path: "b.txt" } }))).toEqual(["suite/b.txt"]);
   });

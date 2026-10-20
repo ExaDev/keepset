@@ -41,13 +41,20 @@ function Listing({ datasets, root }: { readonly datasets: readonly Dataset[]; re
 }
 
 /**
- * The facts row that names the archive file or files a recipe reads: a member path, or the extensions a member's name ends with.
+ * The facts row that names the archive file or files a recipe reads: a member path, the extensions a member's name ends with, or the pattern its path matches.
  * @param label - The row's label.
  * @param selector - The recipe's member selector.
  * @returns The row.
  */
 function selectorRow(label: string, selector: ArchiveMember): readonly [string, ReactNode] {
-  return [label, "path" in selector ? <code key="path">{selector.path}</code> : <Fragment key="extensions">ending {selector.extensions.flatMap((extension, index) => (index === 0 ? [<code key={extension}>{extension}</code>] : [" or ", <code key={extension}>{extension}</code>]))}</Fragment>];
+  if ("path" in selector) {
+    return [label, <code key="path">{selector.path}</code>];
+  }
+  if ("pattern" in selector) {
+    return [label, <Fragment key="pattern">matching <code>{selector.pattern}</code></Fragment>];
+  }
+
+  return [label, <Fragment key="extensions">ending {selector.extensions.flatMap((extension, index) => (index === 0 ? [<code key={extension}>{extension}</code>] : [" or ", <code key={extension}>{extension}</code>]))}</Fragment>];
 }
 
 /** A two-column table of labelled values. */

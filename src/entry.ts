@@ -99,10 +99,25 @@ export const RelativePathSchema = z.string().refine((path) => path.split("/").ev
   message: "must be a relative path of non-empty segments with no '.' or '..'",
 });
 
-/** Which file of an archive to read: a member path, matched against a member's whole path or its trailing segments (so `net.gml` finds `net/net.gml`), or the member whose name ends with one of a list of extensions (a format can have several, such as Pajek's `.net` and `.paj`). Either must match exactly one member when the recipe runs; macOS resource-fork members (`__MACOSX/` and `._` files) never match. */
+/** A regular expression a member path must match in full, in JavaScript syntax; it must compile, so a recipe with a malformed pattern is refused when the entry is parsed and not when it runs. */
+const MemberPatternSchema = z.string().min(1).refine(
+  (pattern) => {
+    try {
+      new RegExp(`^(?:${pattern})$`, "u");
+
+      return true;
+    } catch {
+      return false;
+    }
+  },
+  { message: "must be a valid regular expression" },
+);
+
+/** Which file of an archive to read: a member path, matched against a member's whole path or its trailing segments (so `net.gml` finds `net/net.gml`), the member whose name ends with one of a list of extensions (a format can have several, such as Pajek's `.net` and `.paj`), or the member whose whole path matches a regular expression (for an archive whose instance files cannot be told from its readmes and solutions by extension). A `member` selector must match exactly one member when the recipe runs, a `members` selector at least one; macOS resource-fork members (`__MACOSX/` and `._` files) never match. */
 export const ArchiveMemberSchema = z.union([
   z.object({ path: RelativePathSchema }).strict(),
   z.object({ extensions: z.array(z.string().regex(/^\.[A-Za-z0-9][A-Za-z0-9.]*$/, { message: "must be a file extension such as .mtx" })).min(1) }).strict(),
+  z.object({ pattern: MemberPatternSchema }).strict(),
 ]);
 export type ArchiveMember = z.infer<typeof ArchiveMemberSchema>;
 
