@@ -125,7 +125,7 @@ export const ArchiveMemberSchema = z.union([
 export type ArchiveMember = z.infer<typeof ArchiveMemberSchema>;
 
 /** The archive kinds that hold several files, from which a recipe selects one (`member`) or every one a selector matches (`members`). */
-const FileArchiveKindSchema = z.enum(["zip", "tar", "tar.gz"]);
+const FileArchiveKindSchema = z.enum(["zip", "tar", "tar.gz", "tar.bz2"]);
 
 /** An archive a collection is read from: every file a selector matches, at least one. */
 export const CollectionArchiveSchema = z.object({ kind: FileArchiveKindSchema, members: ArchiveMemberSchema }).strict();
@@ -134,10 +134,11 @@ export const CollectionArchiveSchema = z.object({ kind: FileArchiveKindSchema, m
 export const InnerArchiveSchema = z.union([z.object({ kind: z.literal("gzip") }).strict(), z.object({ kind: FileArchiveKindSchema, member: ArchiveMemberSchema }).strict()]);
 export type InnerArchive = z.infer<typeof InnerArchiveSchema>;
 
-/** How the downloaded bytes unpack into the file the parser reads, or for a collection the files it reads one by one. A `members` selector gives every member it matches, at least one, in path order. A member that is an archive in its turn (a contest bundle that ships its problems as a zip inside the zip) is unpacked by `inner`. A workbook (`xlsx`) is read as the CSV of its named sheet, with dates as ISO 8601 text, for the `csv-table` parser. */
+/** How the downloaded bytes unpack into the file the parser reads, or for a collection the files it reads one by one. A `members` selector gives every member it matches, at least one, in path order. `gzip` and `bzip2` are one compressed file, and `tar.gz` and `tar.bz2` a tar archive compressed with them. A member that is an archive in its turn (a contest bundle that ships its problems as a zip inside the zip) is unpacked by `inner`. A workbook (`xlsx`) is read as the CSV of its named sheet, with dates as ISO 8601 text, for the `csv-table` parser. */
 export const ArchiveSchema = z.union([
   z.object({ kind: z.literal("none") }).strict(),
   z.object({ kind: z.literal("gzip") }).strict(),
+  z.object({ kind: z.literal("bzip2") }).strict(),
   z.object({ kind: FileArchiveKindSchema, member: ArchiveMemberSchema, inner: InnerArchiveSchema.optional() }).strict(),
   CollectionArchiveSchema,
   z.object({ kind: z.literal("xlsx"), sheet: z.string().min(1) }).strict(),

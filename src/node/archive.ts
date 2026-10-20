@@ -3,6 +3,7 @@ import { unzipSync, type UnzipFileFilter } from "fflate";
 import type { CollectionArchive, DocumentArchive, ArchiveMember, InnerArchive } from "../entry";
 import { ArchiveError } from "../errors";
 import { getOwn } from "../own";
+import { bunzip2 } from "./bzip2";
 import { readTar } from "./tar";
 import { sheetToCsv } from "./xlsx";
 
@@ -102,6 +103,9 @@ export function unpack(bytes: Uint8Array, archive: DocumentArchive): Unpacked {
   if (archive.kind === "gzip") {
     return { bytes: gunzip(bytes) };
   }
+  if (archive.kind === "bzip2") {
+    return { bytes: bunzip2(bytes) };
+  }
   if (archive.kind === "xlsx") {
     return { bytes: sheetToCsv(bytes, archive.sheet), member: archive.sheet };
   }
@@ -144,7 +148,7 @@ function selectMember(bytes: Uint8Array, archive: Exclude<InnerArchive, { readon
 
     return { bytes: file, member: path };
   }
-  const members = readTar(archive.kind === "tar" ? bytes : gunzip(bytes));
+  const members = readTar(untarred(bytes, archive.kind));
   const path = pick(
     members.map((member) => member.path),
     archive.member,
@@ -191,7 +195,7 @@ export function unpackMembers(bytes: Uint8Array, archive: CollectionArchive): Me
       return { path, bytes: file };
     });
   }
-  const members = readTar(archive.kind === "tar" ? bytes : gunzip(bytes));
+  const members = readTar(untarred(bytes, archive.kind));
 
   return pickAll(
     members.map((member) => member.path),
@@ -204,6 +208,20 @@ export function unpackMembers(bytes: Uint8Array, archive: CollectionArchive): Me
 
     return { path, bytes: found.data };
   });
+}
+
+/**
+ * Removes the compression a tar archive kind states, leaving the tar bytes.
+ * @param bytes - The downloaded bytes.
+ * @param kind - The tar archive kind: `tar` is uncompressed, `tar.gz` is gzip and `tar.bz2` is bzip2.
+ * @returns The tar archive.
+ */
+function untarred(bytes: Uint8Array, kind: "tar" | "tar.gz" | "tar.bz2"): Uint8Array {
+  if (kind === "tar") {
+    return bytes;
+  }
+
+  return kind === "tar.gz" ? gunzip(bytes) : bunzip2(bytes);
 }
 
 /**

@@ -1,3 +1,4 @@
+import { execFileSync } from "node:child_process";
 import { gzipSync } from "node:zlib";
 import { zipSync } from "fflate";
 import { BLOCK, CHECKSUM_FILL, HEADER } from "../node/tar";
@@ -119,4 +120,13 @@ export function workbook(parts: WorkbookParts): Uint8Array {
   }
 
   return zip(files);
+}
+
+/**
+ * Compresses bytes with the system `bzip2`, the reference implementation, since Node has no bzip2 encoder. Compressing as separate calls and concatenating the results gives a multi-stream file, which `bzip2 -d` reads as one.
+ * @param data - The text or bytes to compress.
+ * @returns A single bzip2 stream.
+ */
+export function bzip2(data: string | Uint8Array): Uint8Array {
+  return execFileSync("bzip2", ["-c"], { input: typeof data === "string" ? new TextEncoder().encode(data) : data, maxBuffer: Number.MAX_SAFE_INTEGER });
 }

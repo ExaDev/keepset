@@ -82,7 +82,7 @@
       "url": "http://vlado.fmf.uni-lj.si/pub/networks/data/UciNet/UciData.htm"
     }
   },
-  "datasetCount": 23,
+  "datasetCount": 24,
   "datasets": {
     "7th_graders": {
       "category": "heterogeneous",
@@ -519,6 +519,54 @@
           "source": "netzschleuder"
         }
       ]
+    },
+    "bz2-edges": {
+      "category": "social",
+      "citation": {
+        "authors": [
+          "J. Leskovec",
+          "D. Huttenlocher",
+          "J. Kleinberg"
+        ],
+        "journal": "WWW",
+        "title": "Predicting Positive and Negative Links in Online Social Networks",
+        "type": "article",
+        "year": 2010
+      },
+      "citeKey": "leskovec2010signed",
+      "description": "Wikipedia who-votes-on-whom network for adminship elections.",
+      "domain": "Wikipedia voting network",
+      "edgeCount": 103689,
+      "id": "bz2-edges",
+      "name": "A bzip2 edge list",
+      "nodeCount": 7115,
+      "properties": {
+        "density": 0.003981420144693063,
+        "edge_type_count": 1,
+        "has_self_loops": false,
+        "is_connected": false,
+        "is_cyclic": true,
+        "is_directed": true,
+        "is_heterogeneous": false,
+        "is_multigraph": false,
+        "is_weighted": false,
+        "n_components": 24,
+        "node_type_count": 1
+      },
+      "rawBytes": 5316066,
+      "retrieved": "2026-01-17",
+      "sources": [
+        {
+          "downloads": [
+            {
+              "format": "edge-list",
+              "url": "https://example.org/data/net.txt.bz2"
+            }
+          ],
+          "source": "example"
+        }
+      ],
+      "preferredFormat": "edge-list"
     },
     "celegans-metabolic-undir": {
       "description": "Graph from benchmark analysis (celegans-metabolic-undir)",

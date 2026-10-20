@@ -136,7 +136,6 @@ function pathOf(url: string): string {
 function archiveKindOf(url: string): Exclude<Archive["kind"], "xlsx"> | { readonly unsupported: string } {
   const path = pathOf(url);
   for (const [extension, name] of [
-    [".bz2", "bzip2"],
     [".zst", "zstd"],
     [".7z", "7z"],
     [".xz", "xz"],
@@ -147,6 +146,12 @@ function archiveKindOf(url: string): Exclude<Archive["kind"], "xlsx"> | { readon
   }
   if (path.endsWith(".tar.gz") || path.endsWith(".tgz")) {
     return "tar.gz";
+  }
+  if (path.endsWith(".tar.bz2") || path.endsWith(".tbz2") || path.endsWith(".tbz")) {
+    return "tar.bz2";
+  }
+  if (path.endsWith(".bz2")) {
+    return "bzip2";
   }
   if (path.endsWith(".tar")) {
     return "tar";
@@ -277,7 +282,7 @@ function recipeFor(download: Download, datasetId: string): Chosen | { readonly u
     parser = { format: mapped, encoding: "utf-8" };
   }
 
-  if (kind === "none" || kind === "gzip") {
+  if (kind === "none" || kind === "gzip" || kind === "bzip2") {
     return { url: download.url, archive: { kind }, parser, flags };
   }
   // SuiteSparse serves each matrix as /MM/<group>/<name>.tar.gz holding <name>/<name>.mtx.
