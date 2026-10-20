@@ -8,7 +8,7 @@ import { DOWNLOAD_ATTEMPTS, downloadRaw } from "./download";
 
 const gzipped = gzipSync("1 2\n");
 
-const STATUS = { ok: 200, movedPermanently: 301, found: 302, notFound: 404 } as const;
+const STATUS = { ok: 200, movedPermanently: 301, found: 302, notFound: 404, notAcceptable: 406 } as const;
 
 /** A local server standing in for the hosts recipes download from: no test touches the network. */
 let server: Server;
@@ -31,6 +31,14 @@ beforeAll(async () => {
       response.end();
     } else if (path === "/agent") {
       response.end(request.headers["user-agent"]);
+    } else if (path === "/negotiated") {
+      // A host that content-negotiates a download and refuses a request that states no preference, as the VRP-REP host does.
+      if (request.headers.accept === undefined) {
+        response.writeHead(STATUS.notAcceptable);
+        response.end();
+      } else {
+        response.end("negotiated");
+      }
     } else if (path === "/slow") {
       // Never answers, so only an abort ends the request.
     } else if (path.startsWith("/drops/")) {
@@ -115,6 +123,10 @@ describe("downloadRaw", () => {
 
   it("names itself to the server", async () => {
     expect(await (await downloadRaw(`${base}/agent`, {})).text()).toMatch(/^keepset /);
+  });
+
+  it("states that it accepts any media type, which a host that content-negotiates a download requires", async () => {
+    expect(await (await downloadRaw(`${base}/negotiated`, {})).text()).toBe("negotiated");
   });
 
   it("stops when the signal aborts", async () => {
