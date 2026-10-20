@@ -1,3 +1,19 @@
+# [0.21.0](https://github.com/Mearman/keepset/compare/v0.20.0...v0.21.0) (2026-10-20)
+
+
+### Bug Fixes
+
+* **node:** give up a download whose connection sends nothing ([688e314](https://github.com/Mearman/keepset/commit/688e314590aefa7bd4164c9f3ae63fa934f30dab))
+
+
+### Features
+
+* **catalogue:** fetch the large operations research tables a page at a time ([5997b36](https://github.com/Mearman/keepset/commit/5997b36c069251db4af0a6aded306b2359fdbd08))
+* **node:** try a download again when its connection fails ([8beef2b](https://github.com/Mearman/keepset/commit/8beef2b24978c71f548b2483743231f8104259e2))
+* **parsers:** ask a page of a paged download again when it fails ([c151a62](https://github.com/Mearman/keepset/commit/c151a627d5f6c7bfb45642cecb5fcb756eb89199))
+* **parsers:** read a Socrata resource a page at a time and check each page ([8d158f1](https://github.com/Mearman/keepset/commit/8d158f1d3b64c2f2f99513ff6d74d4e2a33348ae))
+* **seed:** bound a table by its kept cells and page a Socrata resource ([bf13cf5](https://github.com/Mearman/keepset/commit/bf13cf5b4fd4eb3613f6763bae0a40f3f169fe03))
+
 # [0.20.0](https://github.com/Mearman/keepset/compare/v0.19.0...v0.20.0) (2026-10-19)
 
 
