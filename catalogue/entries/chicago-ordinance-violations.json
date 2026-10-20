@@ -66,7 +66,9 @@
   "expectedCounts": {},
   "id": "chicago-ordinance-violations",
   "licence": {
-    "kind": "unrecorded"
+    "kind": "custom",
+    "name": "City of Chicago Data Terms of Use",
+    "url": "https://www.chicago.gov/city/en/narr/foia/data_disclaimer.html"
   },
   "name": "Ordinance violations (Chicago Department of Administrative Hearings)",
   "namespace": [

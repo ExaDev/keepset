@@ -94,6 +94,7 @@
     "lint:check": "eslint . --cache --max-warnings 0",
     "prepare": "husky",
     "prepublishOnly": "pnpm run lint:check && pnpm run build && pnpm run typecheck && pnpm run test && publint && attw --pack --profile esm-only",
+    "seed:audit:licences": "tsx scripts/seed/licence-audit.ts",
     "seed:check": "pnpm run seed:check:graph && pnpm run seed:check:or",
     "seed:check:graph": "tsx scripts/seed/import-phd-catalogue.ts --pipeline scripts/seed/sources/pipeline-catalog.json --graphbox scripts/seed/sources/graphbox-catalog.json --check",
     "seed:check:or": "tsx scripts/seed/import-or-survey.ts --check",

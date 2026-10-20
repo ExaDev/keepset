@@ -56,7 +56,8 @@
   "expectedCounts": {},
   "id": "louisville-metro-property-maintenance-violations",
   "licence": {
-    "kind": "unrecorded"
+    "id": "PDDL-1.0",
+    "kind": "spdx"
   },
   "name": "Property maintenance inspection violations (Louisville)",
   "namespace": [

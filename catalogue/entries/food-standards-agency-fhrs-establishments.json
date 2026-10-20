@@ -51,9 +51,8 @@
   "expectedCounts": {},
   "id": "food-standards-agency-fhrs-establishments",
   "licence": {
-    "kind": "custom",
-    "name": "Open Government Licence v3",
-    "url": "https://ratings.food.gov.uk/terms-and-conditions"
+    "id": "OGL-UK-3.0",
+    "kind": "spdx"
   },
   "name": "Food Hygiene Rating Scheme establishments",
   "namespace": [

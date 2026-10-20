@@ -56,7 +56,9 @@
   "expectedCounts": {},
   "id": "mesa-police-dispatch-events",
   "licence": {
-    "kind": "unrecorded"
+    "kind": "custom",
+    "name": "City of Mesa Open Data Terms of Use License Agreement",
+    "url": "https://data.mesaaz.gov/stories/s/2dcd-j2nx/"
   },
   "name": "Police Dispatch Events (Mesa, AZ)",
   "namespace": [

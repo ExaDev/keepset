@@ -56,7 +56,9 @@
   "expectedCounts": {},
   "id": "mesa-water-resources-work-orders",
   "licence": {
-    "kind": "unrecorded"
+    "kind": "custom",
+    "name": "City of Mesa Open Data Terms of Use License Agreement",
+    "url": "https://data.mesaaz.gov/stories/s/2dcd-j2nx/"
   },
   "name": "Mesa water resources work orders",
   "namespace": [

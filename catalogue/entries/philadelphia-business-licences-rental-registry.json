@@ -61,7 +61,9 @@
   "expectedCounts": {},
   "id": "philadelphia-business-licences-rental-registry",
   "licence": {
-    "kind": "unrecorded"
+    "kind": "custom",
+    "name": "City of Philadelphia open data terms of use (rights reserved, data as is)",
+    "url": "https://opendataphilly.org/datasets/licenses-and-inspections-business-licenses/"
   },
   "name": "Business licences including the rental registry (Philadelphia)",
   "namespace": [

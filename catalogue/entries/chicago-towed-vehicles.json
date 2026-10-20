@@ -31,7 +31,9 @@
   "expectedCounts": {},
   "id": "chicago-towed-vehicles",
   "licence": {
-    "kind": "unrecorded"
+    "kind": "custom",
+    "name": "City of Chicago Data Terms of Use",
+    "url": "https://www.chicago.gov/city/en/narr/foia/data_disclaimer.html"
   },
   "name": "Towed vehicles (Chicago)",
   "namespace": [

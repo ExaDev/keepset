@@ -3,6 +3,7 @@ import { parseEntry, type Entry } from "../../src/entry";
 import { columnNames } from "../../src/parsers/csv-table";
 import { POINT_COLUMNS } from "../../src/parsers/geojson";
 import { INSTANCE_SHAPES } from "../../src/parsers/instance-shapes";
+import { assertMachineReadableRead, licenceOf } from "./licence";
 import { CurationSchema, TARGET_FIELD_NAMES, TARGET_FIELDS, type InstanceFilesOutcome, type Curation, type CurationItem, type SurveyEntry, type SurveySource, type TableOutcome, type TargetField } from "./or-survey";
 
 /** The shared crosswalk of an entry with no recipe yet: the document's meta and node ids, all that is known of a dataset whose columns have not been read into a mapping. */
@@ -397,6 +398,7 @@ export function convertItem(item: SurveyEntry, curation: CurationItem, probedOn:
   } else if (outcome.status !== "not-fetchable") {
     checkFetchable(item.id, outcome);
   }
+  assertMachineReadableRead(curation.id, item.url, curation.licence);
   const entry = parseEntry({
     id: curation.id,
     namespace: [curation.namespace],
@@ -408,7 +410,7 @@ export function convertItem(item: SurveyEntry, curation: CurationItem, probedOn:
     tags: [...new Set(item.fields)],
     category: "tasks/v1",
     sources,
-    licence: curation.licence,
+    licence: licenceOf(curation.licence),
     citations: curation.citations ?? [],
     recipe: recipeOf(outcome, dataUrl === undefined ? 0 : 1, givenUrl),
     crosswalk: outcome.status === "not-fetchable" ? { file: OR_NODES_CROSSWALK } : outcome.status === "fetchable-instance-files" ? instanceFilesCrosswalkOf(outcome) : crosswalkOf(outcome),

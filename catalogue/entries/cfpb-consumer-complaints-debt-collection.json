@@ -12,7 +12,9 @@
   "expectedCounts": {},
   "id": "cfpb-consumer-complaints-debt-collection",
   "licence": {
-    "kind": "unrecorded"
+    "kind": "custom",
+    "name": "Freely available to use, analyze and build on (no licence named)",
+    "url": "https://www.consumerfinance.gov/data-research/consumer-complaints/"
   },
   "name": "CFPB Consumer Complaint Database (Debt Collection)",
   "namespace": [
