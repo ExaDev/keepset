@@ -4,6 +4,7 @@ import { parseCrosswalk } from "twindex";
 import { describe, expect, it } from "vitest";
 import { createCatalogue } from "../../src/catalogue";
 import { fetchEntry, roundTripEntry } from "../../src/node/fetch-dataset";
+import { zip } from "../../src/test-support/archives";
 import { fixtureManifest } from "../../src/test-support/entries";
 import { convertItem, convertSurvey, MAX_CELLS, PAGE_ROWS, pagingOf } from "./convert-or";
 import { CurationItemSchema, SurveySourceSchema, TARGET_FIELD_NAMES, TARGET_FIELDS } from "./or-survey";
@@ -280,5 +281,99 @@ describe("convertItem for a paged ArcGIS layer", () => {
     expect(failure({ ...arcgis, map: { lat: "geometry_latitude", lon: "geometry_longitude", skill: "KIND", prize: "OPENED" }, numericColumns: arcgis.numericColumns.filter((numeric) => numeric.column !== "FINE") })).toMatch(/prize is a number but OPENED is a date/);
     expect(failure({ ...arcgis, dateColumns: ["MISSING"] })).toMatch(/dateColumns names MISSING/);
     expect(failure({ ...arcgis, header: [...arcgis.header, "geometry_latitude"] })).toMatch(/two columns have the same name/);
+  });
+});
+
+describe("convertItem for a collection of instance files", () => {
+  const item = survey.entries[0];
+  const collection = {
+    status: "fetchable-collection",
+    archive: { kind: "zip", members: { extensions: [".txt"] } },
+    parser: { format: "solomon", encoding: "utf-8" },
+    map: { x: "x", y: "y", deadline: "due" },
+    keep: ["demand", "service"],
+    meta: ["name", "capacity"],
+    timeUnit: "abstract units",
+    expectedInstances: 2,
+  };
+  const curated = (outcome: Record<string, unknown>): Parameters<typeof convertItem>[1] => CurationItemSchema.parse({ surveyId: "or-10", id: "example-suite", namespace: "example", name: "Suite", licence: { kind: "unrecorded" }, flags: [], outcome });
+  const failure = (outcome: Record<string, unknown>): string => {
+    try {
+      convertItem(item ?? expect.unreachable("the fixture survey has an item"), curated(outcome), "2026-10-19");
+    } catch (error) {
+      return error instanceof Error ? error.message : String(error);
+    }
+    throw new Error("expected the conversion to fail");
+  };
+  const text = (name: string, rows: readonly string[]): string => `${name}\r\n\r\nVEHICLE\r\nNUMBER     CAPACITY\r\n 3  100\r\n\r\nCUSTOMER\r\nCUST NO.  XCOORD.\r\n\r\n${rows.join("\r\n")}\r\n \r\n`;
+  const archive = zip([
+    { path: "suite/B1.txt", text: text("B1", ["0 1 2 0 0 90 0", "1 3 4 5 10 20 7"]) },
+    { path: "suite/A1.txt", text: text("A1", ["0 5 6 0 0 90 0"]) },
+    { path: "suite/notes.md", text: "not an instance" },
+  ]);
+
+  it("makes an or-set/v1 entry whose recipe selects the members, with the fixed count and the time unit recorded", () => {
+    const { entry, outcome } = convertItem(item ?? expect.unreachable("the fixture survey has an item"), curated(collection), "2026-10-19");
+    expect(entry.category).toBe("or-set/v1");
+    expect(entry.recipe).toEqual({ status: "fetchable", source: 0, archive: collection.archive, parser: collection.parser });
+    expect(entry.expectedCounts).toEqual({ instances: 2 });
+    expect(entry.properties).toEqual({ surveyId: "or-10", timeUnit: "abstract units" });
+    expect(outcome.recipe).toBe("fetchable");
+  });
+
+  it("maps, keeps and drops every column of the parser so the crosswalk says what the entry leaves out", () => {
+    const { entry } = convertItem(item ?? expect.unreachable("the fixture survey has an item"), curated(collection), "2026-10-19");
+    expect(entry.crosswalk).toMatchObject({
+      source: "solomon",
+      target: "or-set/v1",
+      oneWay: [
+        { op: "drop", from: "members[].meta.vehicles", direction: "encode" },
+        { op: "drop", from: "members[].nodes[].ready", direction: "encode" },
+      ],
+    });
+    const { crosswalk } = entry;
+    const rules = "rules" in crosswalk ? crosswalk.rules : expect.unreachable("the entry carries its crosswalk inline");
+    expect(rules).toContainEqual({ op: "move", from: "members[].nodes[].due", to: "instances[].nodes[].deadline" });
+    expect(rules).toContainEqual({ op: "move", from: "members[].nodes[].demand", to: "instances[].nodes[].demand" });
+  });
+
+  it("fetches the members as instances and holds the round trip", async () => {
+    const { entry } = convertItem(item ?? expect.unreachable("the fixture survey has an item"), curated(collection), "2026-10-19");
+    const dataset = createCatalogue({ manifest: fixtureManifest, crosswalks: {}, entries: [entry] }).listDatasets()[0] ?? expect.unreachable("the catalogue lists its entry");
+    const fetch = async (): Promise<Response> => Promise.resolve(new Response(archive));
+    const fetched = await fetchEntry(dataset, { fetch });
+    expect(fetched.warnings).toEqual([]);
+    expect(fetched.data).toEqual({
+      meta: { id: "example-suite", name: "Suite", surveyId: "or-10", timeUnit: "abstract units" },
+      instances: [
+        { id: "suite/A1.txt", meta: { name: "A1", capacity: 100 }, nodes: [{ id: "0", x: 5, y: 6, deadline: 90, demand: 0, service: 0 }] },
+        {
+          id: "suite/B1.txt",
+          meta: { name: "B1", capacity: 100 },
+          nodes: [
+            { id: "0", x: 1, y: 2, deadline: 90, demand: 0, service: 0 },
+            { id: "1", x: 3, y: 4, deadline: 20, demand: 5, service: 7 },
+          ],
+        },
+      ],
+    });
+    expect(await roundTripEntry(dataset, { fetch })).toMatchObject({ holds: true });
+  });
+
+  it("refuses a column the parser does not emit, a text field, a column used twice, a field-named kept column, no column at all and a bad meta key", () => {
+    expect(failure({ ...collection, map: { x: "x", y: "latitude" } })).toMatch(/y maps the column latitude, which the solomon parser does not emit \(it emits x, y, demand, ready, due, service\)/);
+    expect(failure({ ...collection, map: { x: "x", status: "due" } })).toMatch(/status is text but due is a number/);
+    expect(failure({ ...collection, keep: ["x"], map: { y: "y" } })).toMatch(/keep names x, which is an or\/v1 field: map it instead/);
+    expect(failure({ ...collection, keep: ["demand", "demand"] })).toMatch(/demand is mapped or kept more than once/);
+    expect(failure({ ...collection, map: { x: "x", y: "x" } })).toMatch(/the column x fills more than one field/);
+    expect(failure({ ...collection, map: {}, keep: [] })).toMatch(/maps and keeps no column/);
+    expect(failure({ ...collection, keep: ["weight"] })).toMatch(/keep names weight, which the solomon parser does not emit/);
+    expect(failure({ ...collection, meta: ["name", "colour"] })).toMatch(/meta names colour/);
+    expect(failure({ ...collection, meta: ["name", "name"] })).toMatch(/meta lists a key more than once/);
+  });
+
+  it("refuses a parser that is not an instance file parser, and an archive that selects one member", () => {
+    expect(() => curated({ ...collection, parser: { format: "gml", encoding: "utf-8" } })).toThrow(/must be an instance file parser/);
+    expect(() => curated({ ...collection, archive: { kind: "zip", member: { extensions: [".txt"] } } })).toThrow();
   });
 });

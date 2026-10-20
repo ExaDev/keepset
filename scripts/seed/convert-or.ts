@@ -2,7 +2,8 @@ import { CrosswalkSchema, validateCrosswalk, type Crosswalk } from "twindex";
 import { parseEntry, type Entry } from "../../src/entry";
 import { columnNames } from "../../src/parsers/csv-table";
 import { POINT_COLUMNS } from "../../src/parsers/geojson";
-import { CurationSchema, TARGET_FIELD_NAMES, TARGET_FIELDS, type Curation, type CurationItem, type SurveyEntry, type SurveySource, type TableOutcome, type TargetField } from "./or-survey";
+import { INSTANCE_SHAPES } from "../../src/parsers/instance-shapes";
+import { CurationSchema, TARGET_FIELD_NAMES, TARGET_FIELDS, type CollectionOutcome, type Curation, type CurationItem, type SurveyEntry, type SurveySource, type TableOutcome, type TargetField } from "./or-survey";
 
 /** The shared crosswalk of an entry with no recipe yet: the document's meta and node ids, all that is known of a dataset whose columns have not been read into a mapping. */
 export const OR_NODES_CROSSWALK = "crosswalks/or-v1/nodes.json";
@@ -213,6 +214,100 @@ function crosswalkOf(outcome: TableOutcome): Crosswalk {
   return parsed;
 }
 
+/**
+ * Checks a collection outcome against the rules that keep a recipe sound: the columns and header keys it names are ones its parser emits, a column is mapped or kept at most once, a kept column does not take the name of an or/v1 node field (a column that fills a field of its own name is mapped, so what fills each field is written in one place), every column of an instance file is a number so none fills a text field, and the instance's meta carries at least one header key, since an instance has a meta record to carry.
+ * @param id - The surveyed item's id, for errors.
+ * @param outcome - The outcome.
+ * @throws Error naming the item and the rule it breaks.
+ */
+function checkCollection(id: string, outcome: CollectionOutcome): void {
+  const fail = (message: string): never => {
+    throw new Error(`${id}: ${message}`);
+  };
+  const shape = INSTANCE_SHAPES[outcome.parser.format];
+  const columns: readonly string[] = shape.columns;
+  const used = new Set<string>();
+  const mapped = TARGET_FIELD_NAMES.flatMap((field) => {
+    const column = outcome.map[field];
+
+    return column === undefined ? [] : [[field, column] as const];
+  });
+  for (const [field, column] of mapped) {
+    if (!columns.includes(column)) {
+      fail(`${field} maps the column ${column}, which the ${outcome.parser.format} parser does not emit (it emits ${columns.join(", ")})`);
+    }
+    if (TARGET_FIELDS[field] === "text") {
+      fail(`${field} is text but ${column} is a number`);
+    }
+    if (used.has(column)) {
+      fail(`the column ${column} fills more than one field`);
+    }
+    used.add(column);
+  }
+  for (const column of outcome.keep) {
+    if (!columns.includes(column)) {
+      fail(`keep names ${column}, which the ${outcome.parser.format} parser does not emit (it emits ${columns.join(", ")})`);
+    }
+    if (TARGET_FIELD_NAMES.some((field) => field === column)) {
+      fail(`keep names ${column}, which is an or/v1 field: map it instead`);
+    }
+    if (used.has(column)) {
+      fail(`the column ${column} is mapped or kept more than once`);
+    }
+    used.add(column);
+  }
+  if (used.size === 0) {
+    fail("the outcome maps and keeps no column, so a fetch would carry nothing beyond ids");
+  }
+  const keys: readonly string[] = shape.meta;
+  for (const key of outcome.meta) {
+    if (!keys.includes(key)) {
+      fail(`meta names ${key}, which the ${outcome.parser.format} parser does not emit (it emits ${keys.join(", ")})`);
+    }
+  }
+  if (new Set(outcome.meta).size !== outcome.meta.length) {
+    fail("meta lists a key more than once");
+  }
+}
+
+/**
+ * The crosswalk of a collection outcome: each member becomes an instance, its id and the header keys the outcome carries move across, and each node column is mapped onto its field, kept under its own name or dropped by a one-way rule, so the round trip holds.
+ * @param outcome - The outcome.
+ * @returns The crosswalk document.
+ * @throws Error when twindex finds the crosswalk structurally invalid.
+ */
+function collectionCrosswalkOf(outcome: CollectionOutcome): Crosswalk {
+  const shape = INSTANCE_SHAPES[outcome.parser.format];
+  const mapped = new Map(TARGET_FIELD_NAMES.flatMap((field) => (outcome.map[field] === undefined ? [] : [[outcome.map[field], field] as const])));
+  const crosswalk = {
+    source: outcome.parser.format,
+    target: "or-set/v1",
+    rules: [
+      { op: "move", from: "meta", to: "meta" },
+      { op: "move", from: "members[].id", to: "instances[].id" },
+      ...outcome.meta.map((key) => ({ op: "move", from: `members[].meta.${key}`, to: `instances[].meta.${key}` })),
+      { op: "move", from: "members[].nodes[].id", to: "instances[].nodes[].id" },
+      ...TARGET_FIELD_NAMES.flatMap((field) => {
+        const column = outcome.map[field];
+
+        return column === undefined ? [] : [{ op: "move", from: `members[].nodes[].${column}`, to: `instances[].nodes[].${field}` }];
+      }),
+      ...outcome.keep.map((column) => ({ op: "move", from: `members[].nodes[].${column}`, to: `instances[].nodes[].${column}` })),
+    ],
+    oneWay: [
+      ...shape.meta.filter((key) => !outcome.meta.includes(key)).map((key) => ({ op: "drop", from: `members[].meta.${key}`, direction: "encode" })),
+      ...shape.columns.filter((column) => !mapped.has(column) && !outcome.keep.includes(column)).map((column) => ({ op: "drop", from: `members[].nodes[].${column}`, direction: "encode" })),
+    ],
+  };
+  const parsed = CrosswalkSchema.parse(crosswalk);
+  const issues = validateCrosswalk(parsed);
+  if (issues.length > 0) {
+    throw new Error(`the crosswalk is invalid: ${issues.map((issue) => issue.message).join("; ")}`);
+  }
+
+  return parsed;
+}
+
 /** The columns a recipe's parser keeps: those a field is mapped from, in the order of the fields. */
 const keptColumns = (outcome: TableOutcome): string[] => TARGET_FIELD_NAMES.flatMap((field) => outcome.map[field] ?? []);
 
@@ -226,6 +321,9 @@ const keptColumns = (outcome: TableOutcome): string[] => TARGET_FIELD_NAMES.flat
 function recipeOf(outcome: CurationItem["outcome"], source: number, url: string): unknown {
   if (outcome.status === "not-fetchable") {
     return { status: "not-fetchable", reason: outcome.reason };
+  }
+  if (outcome.status === "fetchable-collection") {
+    return { status: "fetchable", source, archive: outcome.archive, parser: outcome.parser };
   }
   if (outcome.status === "fetchable-arcgis") {
     const kept = new Set(keptColumns(outcome));
@@ -251,6 +349,22 @@ function recipeOf(outcome: CurationItem["outcome"], source: number, url: string)
 }
 
 /**
+ * The counts an entry expects of a fetched result: the nodes of a table or the instances of a collection whose source does not change, and none otherwise.
+ * @param outcome - The outcome.
+ * @returns The expected counts.
+ */
+function expectedCountsOf(outcome: CurationItem["outcome"]): Record<string, number> {
+  if (outcome.status === "fetchable-collection") {
+    return outcome.expectedInstances === undefined ? {} : { instances: outcome.expectedInstances };
+  }
+  if (outcome.status === "not-fetchable" || outcome.expectedNodes === undefined) {
+    return {};
+  }
+
+  return { nodes: outcome.expectedNodes };
+}
+
+/**
  * Builds the entry and the outcome for one surveyed dataset.
  * @param item - The surveyed item.
  * @param curation - Its curation.
@@ -268,7 +382,9 @@ export function convertItem(item: SurveyEntry, curation: CurationItem, probedOn:
   const sources = [item.url, ...(dataUrl === undefined ? [] : [dataUrl])].map((url) => ({ url, retrieved: probedOn, status: "live" }));
   const prefix = `${curation.namespace}-`;
   const alias = curation.id.startsWith(prefix) ? curation.id.slice(prefix.length) : "";
-  if (outcome.status !== "not-fetchable") {
+  if (outcome.status === "fetchable-collection") {
+    checkCollection(item.id, outcome);
+  } else if (outcome.status !== "not-fetchable") {
     checkFetchable(item.id, outcome);
   }
   const entry = parseEntry({
@@ -279,14 +395,14 @@ export function convertItem(item: SurveyEntry, curation: CurationItem, probedOn:
     ...(curation.description === undefined ? {} : { description: curation.description }),
     domain: domainOf(item),
     tags: [...new Set(item.fields)],
-    category: "or/v1",
+    category: outcome.status === "fetchable-collection" ? "or-set/v1" : "or/v1",
     sources,
     licence: curation.licence,
     citations: [],
     recipe: recipeOf(outcome, dataUrl === undefined ? 0 : 1, givenUrl),
-    crosswalk: outcome.status === "not-fetchable" ? { file: OR_NODES_CROSSWALK } : crosswalkOf(outcome),
-    expectedCounts: outcome.status !== "not-fetchable" && outcome.expectedNodes !== undefined ? { nodes: outcome.expectedNodes } : {},
-    properties: { surveyId: item.id },
+    crosswalk: outcome.status === "not-fetchable" ? { file: OR_NODES_CROSSWALK } : outcome.status === "fetchable-collection" ? collectionCrosswalkOf(outcome) : crosswalkOf(outcome),
+    expectedCounts: expectedCountsOf(outcome),
+    properties: { surveyId: item.id, ...(outcome.status === "fetchable-collection" ? { timeUnit: outcome.timeUnit } : {}) },
   });
 
   return {
