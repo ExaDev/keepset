@@ -5,13 +5,49 @@
   "category": "or/v1",
   "citations": [],
   "crosswalk": {
-    "file": "crosswalks/or-v1/nodes.json"
+    "oneWay": [],
+    "rules": [
+      {
+        "from": "meta",
+        "op": "move",
+        "to": "meta"
+      },
+      {
+        "from": "nodes[].id",
+        "op": "move",
+        "to": "nodes[].id"
+      },
+      {
+        "from": "nodes[].latitude",
+        "op": "move",
+        "to": "nodes[].lat"
+      },
+      {
+        "from": "nodes[].longitude",
+        "op": "move",
+        "to": "nodes[].lon"
+      },
+      {
+        "from": "nodes[].openDate",
+        "op": "move",
+        "to": "nodes[].opened"
+      },
+      {
+        "from": "nodes[].amountPaidOnBuildingClaim",
+        "op": "move",
+        "to": "nodes[].prize"
+      }
+    ],
+    "source": "csv-table",
+    "target": "or/v1"
   },
   "domain": "Claims and unclaimed money",
   "expectedCounts": {},
   "id": "fema-nfip-redacted-claims",
   "licence": {
-    "kind": "unrecorded"
+    "kind": "custom",
+    "name": "OpenFEMA Terms and Conditions",
+    "url": "https://www.fema.gov/about/openfema/terms-conditions"
   },
   "name": "FEMA NFIP redacted claims",
   "namespace": [
@@ -21,14 +57,53 @@
     "surveyId": "or-122"
   },
   "recipe": {
-    "reason": "The OpenFEMA v3 API pages claims anonymously as CSV, but the table has millions of rows whose locations are rounded to a tenth of a degree, the terms of use limit it to statistical use without reidentification, and keepset has no recipe paging for this API.",
-    "status": "not-fetchable"
+    "archive": {
+      "kind": "none"
+    },
+    "paging": {
+      "kind": "openfema",
+      "pageSize": 50000
+    },
+    "parser": {
+      "columns": [
+        "latitude",
+        "longitude",
+        "openDate",
+        "amountPaidOnBuildingClaim"
+      ],
+      "delimiter": "comma",
+      "encoding": "utf-8",
+      "format": "csv-table",
+      "idColumn": "id",
+      "numericColumns": [
+        {
+          "column": "latitude",
+          "factor": 1
+        },
+        {
+          "column": "longitude",
+          "factor": 1
+        },
+        {
+          "column": "amountPaidOnBuildingClaim",
+          "factor": 1
+        }
+      ],
+      "skipLines": 0
+    },
+    "source": 1,
+    "status": "fetchable"
   },
   "sources": [
     {
       "retrieved": "2026-10-19",
       "status": "live",
       "url": "https://www.fema.gov/openfema-data-page/fima-nfip-redacted-claims-v2"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://www.fema.gov/api/open/v3/NfipClaims?$select=id,openDate,latitude,longitude,amountPaidOnBuildingClaim"
     }
   ],
   "tags": [
