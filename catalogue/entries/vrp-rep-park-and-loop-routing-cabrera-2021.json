@@ -2,7 +2,7 @@
   "aliases": [
     "park-and-loop-routing-cabrera-2021"
   ],
-  "category": "or-set/v1",
+  "category": "or/v1",
   "citations": [],
   "crosswalk": {
     "oneWay": [],
@@ -13,38 +13,28 @@
         "to": "meta"
       },
       {
-        "from": "members[].id",
+        "from": "nodes[].id",
         "op": "move",
-        "to": "instances[].id"
+        "to": "nodes[].id"
       },
       {
-        "from": "members[].meta",
+        "from": "nodes[].ServiceTime_min",
         "op": "move",
-        "to": "instances[].meta"
+        "to": "nodes[].duration"
       },
       {
-        "from": "members[].nodes[].id",
+        "from": "nodes[].Latitude",
         "op": "move",
-        "to": "instances[].nodes[].id"
+        "to": "nodes[].lat"
       },
       {
-        "from": "members[].nodes[].ServiceTime_min",
+        "from": "nodes[].Longitude",
         "op": "move",
-        "to": "instances[].nodes[].duration"
-      },
-      {
-        "from": "members[].nodes[].Latitude",
-        "op": "move",
-        "to": "instances[].nodes[].lat"
-      },
-      {
-        "from": "members[].nodes[].Longitude",
-        "op": "move",
-        "to": "instances[].nodes[].lon"
+        "to": "nodes[].lon"
       }
     ],
     "source": "csv-table",
-    "target": "or-set/v1"
+    "target": "or/v1"
   },
   "description": "Park-and-loop routing instances built from real client locations in France, with coordinates and service times in minutes.",
   "domain": "Vehicle routing with time windows",

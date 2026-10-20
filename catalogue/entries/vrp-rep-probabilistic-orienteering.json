@@ -2,18 +2,13 @@
   "aliases": [
     "probabilistic-orienteering"
   ],
-  "category": "or-set/v1",
+  "category": "or/v1",
   "citations": [],
   "crosswalk": {
     "oneWay": [
       {
         "direction": "encode",
-        "from": "members[].meta.setPrizes",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "members[].nodes[].clusters",
+        "from": "nodes[].clusters",
         "op": "drop"
       }
     ],
@@ -24,73 +19,43 @@
         "to": "meta"
       },
       {
-        "from": "members[].id",
+        "from": "nodes[].id",
         "op": "move",
-        "to": "instances[].id"
+        "to": "nodes[].id"
       },
       {
-        "from": "members[].meta.name",
+        "from": "nodes[].lat",
         "op": "move",
-        "to": "instances[].meta.name"
+        "to": "nodes[].lat"
       },
       {
-        "from": "members[].meta.type",
+        "from": "nodes[].lon",
         "op": "move",
-        "to": "instances[].meta.type"
+        "to": "nodes[].lon"
       },
       {
-        "from": "members[].meta.budget",
+        "from": "nodes[].prize",
         "op": "move",
-        "to": "instances[].meta.budget"
+        "to": "nodes[].prize"
       },
       {
-        "from": "members[].meta.edgeWeightType",
+        "from": "nodes[].probability",
         "op": "move",
-        "to": "instances[].meta.edgeWeightType"
+        "to": "nodes[].prizeProbability"
       },
       {
-        "from": "members[].meta.totalPrize",
+        "from": "nodes[].x",
         "op": "move",
-        "to": "instances[].meta.totalPrize"
+        "to": "nodes[].x"
       },
       {
-        "from": "members[].nodes[].id",
+        "from": "nodes[].y",
         "op": "move",
-        "to": "instances[].nodes[].id"
-      },
-      {
-        "from": "members[].nodes[].lat",
-        "op": "move",
-        "to": "instances[].nodes[].lat"
-      },
-      {
-        "from": "members[].nodes[].lon",
-        "op": "move",
-        "to": "instances[].nodes[].lon"
-      },
-      {
-        "from": "members[].nodes[].prize",
-        "op": "move",
-        "to": "instances[].nodes[].prize"
-      },
-      {
-        "from": "members[].nodes[].probability",
-        "op": "move",
-        "to": "instances[].nodes[].prizeProbability"
-      },
-      {
-        "from": "members[].nodes[].x",
-        "op": "move",
-        "to": "instances[].nodes[].x"
-      },
-      {
-        "from": "members[].nodes[].y",
-        "op": "move",
-        "to": "instances[].nodes[].y"
+        "to": "nodes[].y"
       }
     ],
     "source": "tsplib",
-    "target": "or-set/v1"
+    "target": "or/v1"
   },
   "domain": "Orienteering",
   "expectedCounts": {

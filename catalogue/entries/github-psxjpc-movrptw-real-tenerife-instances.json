@@ -2,7 +2,7 @@
   "aliases": [
     "movrptw-real-tenerife-instances"
   ],
-  "category": "or-set/v1",
+  "category": "or/v1",
   "citations": [],
   "crosswalk": {
     "oneWay": [],
@@ -13,63 +13,43 @@
         "to": "meta"
       },
       {
-        "from": "members[].id",
+        "from": "nodes[].id",
         "op": "move",
-        "to": "instances[].id"
+        "to": "nodes[].id"
       },
       {
-        "from": "members[].meta.name",
+        "from": "nodes[].due",
         "op": "move",
-        "to": "instances[].meta.name"
+        "to": "nodes[].deadline"
       },
       {
-        "from": "members[].meta.vehicles",
+        "from": "nodes[].service",
         "op": "move",
-        "to": "instances[].meta.vehicles"
+        "to": "nodes[].duration"
       },
       {
-        "from": "members[].meta.capacity",
+        "from": "nodes[].x",
         "op": "move",
-        "to": "instances[].meta.capacity"
+        "to": "nodes[].lat"
       },
       {
-        "from": "members[].nodes[].id",
+        "from": "nodes[].y",
         "op": "move",
-        "to": "instances[].nodes[].id"
+        "to": "nodes[].lon"
       },
       {
-        "from": "members[].nodes[].due",
+        "from": "nodes[].demand",
         "op": "move",
-        "to": "instances[].nodes[].deadline"
+        "to": "nodes[].demand"
       },
       {
-        "from": "members[].nodes[].service",
+        "from": "nodes[].ready",
         "op": "move",
-        "to": "instances[].nodes[].duration"
-      },
-      {
-        "from": "members[].nodes[].x",
-        "op": "move",
-        "to": "instances[].nodes[].lat"
-      },
-      {
-        "from": "members[].nodes[].y",
-        "op": "move",
-        "to": "instances[].nodes[].lon"
-      },
-      {
-        "from": "members[].nodes[].demand",
-        "op": "move",
-        "to": "instances[].nodes[].demand"
-      },
-      {
-        "from": "members[].nodes[].ready",
-        "op": "move",
-        "to": "instances[].nodes[].ready"
+        "to": "nodes[].ready"
       }
     ],
     "source": "solomon",
-    "target": "or-set/v1"
+    "target": "or/v1"
   },
   "description": "Multi-objective vehicle routing instances with time windows built from real distribution data in Tenerife.",
   "domain": "Vehicle routing with time windows",

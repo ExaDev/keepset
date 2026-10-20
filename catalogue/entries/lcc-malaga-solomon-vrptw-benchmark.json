@@ -2,7 +2,7 @@
   "aliases": [
     "solomon-vrptw-benchmark"
   ],
-  "category": "or-set/v1",
+  "category": "or/v1",
   "citations": [],
   "crosswalk": {
     "oneWay": [],
@@ -13,63 +13,43 @@
         "to": "meta"
       },
       {
-        "from": "members[].id",
+        "from": "nodes[].id",
         "op": "move",
-        "to": "instances[].id"
+        "to": "nodes[].id"
       },
       {
-        "from": "members[].meta.name",
+        "from": "nodes[].due",
         "op": "move",
-        "to": "instances[].meta.name"
+        "to": "nodes[].deadline"
       },
       {
-        "from": "members[].meta.vehicles",
+        "from": "nodes[].x",
         "op": "move",
-        "to": "instances[].meta.vehicles"
+        "to": "nodes[].x"
       },
       {
-        "from": "members[].meta.capacity",
+        "from": "nodes[].y",
         "op": "move",
-        "to": "instances[].meta.capacity"
+        "to": "nodes[].y"
       },
       {
-        "from": "members[].nodes[].id",
+        "from": "nodes[].demand",
         "op": "move",
-        "to": "instances[].nodes[].id"
+        "to": "nodes[].demand"
       },
       {
-        "from": "members[].nodes[].due",
+        "from": "nodes[].ready",
         "op": "move",
-        "to": "instances[].nodes[].deadline"
+        "to": "nodes[].ready"
       },
       {
-        "from": "members[].nodes[].x",
+        "from": "nodes[].service",
         "op": "move",
-        "to": "instances[].nodes[].x"
-      },
-      {
-        "from": "members[].nodes[].y",
-        "op": "move",
-        "to": "instances[].nodes[].y"
-      },
-      {
-        "from": "members[].nodes[].demand",
-        "op": "move",
-        "to": "instances[].nodes[].demand"
-      },
-      {
-        "from": "members[].nodes[].ready",
-        "op": "move",
-        "to": "instances[].nodes[].ready"
-      },
-      {
-        "from": "members[].nodes[].service",
-        "op": "move",
-        "to": "instances[].nodes[].service"
+        "to": "nodes[].service"
       }
     ],
     "source": "solomon",
-    "target": "or-set/v1"
+    "target": "or/v1"
   },
   "description": "Solomon's 1983 vehicle routing instances with time windows (C1, C2, R1, R2, RC1, RC2), each with 100 customers.",
   "domain": "Vehicle routing with time windows",

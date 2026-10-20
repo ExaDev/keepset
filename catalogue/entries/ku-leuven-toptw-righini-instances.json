@@ -2,7 +2,7 @@
   "aliases": [
     "toptw-righini-instances"
   ],
-  "category": "or-set/v1",
+  "category": "or/v1",
   "citations": [],
   "crosswalk": {
     "oneWay": [],
@@ -13,63 +13,43 @@
         "to": "meta"
       },
       {
-        "from": "members[].id",
+        "from": "nodes[].id",
         "op": "move",
-        "to": "instances[].id"
+        "to": "nodes[].id"
       },
       {
-        "from": "members[].meta.paths",
+        "from": "nodes[].close",
         "op": "move",
-        "to": "instances[].meta.paths"
+        "to": "nodes[].deadline"
       },
       {
-        "from": "members[].meta.customers",
+        "from": "nodes[].profit",
         "op": "move",
-        "to": "instances[].meta.customers"
+        "to": "nodes[].prize"
       },
       {
-        "from": "members[].meta.capacity",
+        "from": "nodes[].x",
         "op": "move",
-        "to": "instances[].meta.capacity"
+        "to": "nodes[].x"
       },
       {
-        "from": "members[].nodes[].id",
+        "from": "nodes[].y",
         "op": "move",
-        "to": "instances[].nodes[].id"
+        "to": "nodes[].y"
       },
       {
-        "from": "members[].nodes[].close",
+        "from": "nodes[].service",
         "op": "move",
-        "to": "instances[].nodes[].deadline"
+        "to": "nodes[].service"
       },
       {
-        "from": "members[].nodes[].profit",
+        "from": "nodes[].open",
         "op": "move",
-        "to": "instances[].nodes[].prize"
-      },
-      {
-        "from": "members[].nodes[].x",
-        "op": "move",
-        "to": "instances[].nodes[].x"
-      },
-      {
-        "from": "members[].nodes[].y",
-        "op": "move",
-        "to": "instances[].nodes[].y"
-      },
-      {
-        "from": "members[].nodes[].service",
-        "op": "move",
-        "to": "instances[].nodes[].service"
-      },
-      {
-        "from": "members[].nodes[].open",
-        "op": "move",
-        "to": "instances[].nodes[].open"
+        "to": "nodes[].open"
       }
     ],
     "source": "toptw",
-    "target": "or-set/v1"
+    "target": "or/v1"
   },
   "description": "Benchmark instances for the orienteering problem with time windows, with coordinates, service durations, scores and time windows.",
   "domain": "Orienteering",
