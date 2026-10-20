@@ -173,6 +173,14 @@ export const ParserSchema = z.discriminatedUnion("format", [
   z.object({ format: z.literal("matrix-market"), encoding: EncodingSchema }).strict(),
   z.object({ format: z.literal("gml"), encoding: EncodingSchema }).strict(),
   z.object({ format: z.literal("pajek"), encoding: EncodingSchema }).strict(),
+  z
+    .object({
+      format: z.literal("ucinet-dl"),
+      encoding: EncodingSchema,
+      /** Which of the file's `NM` matrices is the graph, by its 1-based position: a DL file often holds several relations over the same actors, and the recipe reads one. */
+      matrix: z.int().min(1),
+    })
+    .strict(),
   z.object({ format: z.literal("customer-points"), encoding: EncodingSchema }).strict(),
   z.object({ format: z.literal("solomon"), encoding: EncodingSchema }).strict(),
   z.object({ format: z.literal("top"), encoding: EncodingSchema }).strict(),
