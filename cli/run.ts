@@ -62,7 +62,7 @@ Commands:
                       to <file> (default <id>.json), with its provenance beside
                       it in <file without .json>.provenance.json
   validate <dataset>  check the entry against the entry schema and its
-                      crosswalk against twindex's validation
+                      crosswalk against crossmap's validation
   roundtrip <dataset> fetch the dataset and check that decoding the encoded
                       native document gives it back
 

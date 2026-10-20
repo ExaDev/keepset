@@ -1,6 +1,6 @@
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
-import { parseCrosswalk } from "twindex";
+import { parseCrosswalk } from "crossmap";
 import { describe, expect, it } from "vitest";
 import { createCatalogue } from "../../src/catalogue";
 import { fetchEntry, roundTripEntry } from "../../src/node/fetch-dataset";

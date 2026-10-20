@@ -170,7 +170,7 @@ export function entryPage(context: PageContext, dataset: Dataset): string {
       ]} />
     ),
     <h2 key="crosswalk">Crosswalk</h2>,
-    <p key="crosswalk-note"><code>{crosswalk.source}</code> to <code>{crosswalk.target}</code>, as a twindex crosswalk.</p>,
+    <p key="crosswalk-note"><code>{crosswalk.source}</code> to <code>{crosswalk.target}</code>, as a crossmap crosswalk.</p>,
     <div className="table-wrap" key="crosswalk"><table className="crosswalk"><thead><tr><th scope="col">Rule</th><th scope="col">From</th><th scope="col">To</th><th scope="col">Direction</th></tr></thead><tbody>{[
       ...crosswalk.rules.map((rule) => <tr key={`${rule.op}-${rule.from}-${rule.to}`}><td>{rule.op}</td><td><code>{rule.from}</code></td><td><code>{rule.to}</code></td><td>both</td></tr>),
       ...crosswalk.oneWay.map((rule, index) => rule.op === "drop" ? <tr key={`drop-${String(index)}`}><td>drop</td><td><code>{rule.from}</code></td><td /><td>{rule.direction}</td></tr> : <tr key={`default-${String(index)}`}><td>default</td><td><code>{JSON.stringify(rule.value)}</code></td><td><code>{rule.to}</code></td><td>{rule.direction}</td></tr>),

@@ -9,7 +9,7 @@
 import { readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
-import { parseCrosswalk } from "twindex";
+import { parseCrosswalk } from "crossmap";
 import { createCatalogue } from "../../src/catalogue";
 import { fetchEntry } from "../../src/node/fetch-dataset";
 import { convertItem } from "./convert-or";

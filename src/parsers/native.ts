@@ -15,7 +15,7 @@ export interface NativeGraph {
   readonly edges: readonly NativeEdge[];
 }
 
-/** A row of a table as the table parser emits it: an id and every column of the file, each a string, a number where the recipe declares the column numeric, or null for an empty cell. Every row carries every column, because a twindex rule fails on a path absent from any element. */
+/** A row of a table as the table parser emits it: an id and every column of the file, each a string, a number where the recipe declares the column numeric, or null for an empty cell. Every row carries every column, because a crossmap rule fails on a path absent from any element. */
 export interface NativeRow {
   readonly id: string;
   readonly [column: string]: string | number | null;

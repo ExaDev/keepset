@@ -1,4 +1,4 @@
-import type { Crosswalk } from "twindex";
+import type { Crosswalk } from "crossmap";
 import type { Entry } from "./entry";
 import type { Manifest } from "./manifest";
 

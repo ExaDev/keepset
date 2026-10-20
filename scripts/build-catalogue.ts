@@ -7,7 +7,7 @@
 import { mkdirSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join, relative, sep } from "node:path";
 import { fileURLToPath } from "node:url";
-import { parseCrosswalk, type Crosswalk } from "twindex";
+import { parseCrosswalk, type Crosswalk } from "crossmap";
 import { createCatalogue } from "../src/catalogue";
 import { parseEntry, type Entry } from "../src/entry";
 import { parseManifest } from "../src/manifest";

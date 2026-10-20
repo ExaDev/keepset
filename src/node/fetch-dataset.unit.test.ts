@@ -172,7 +172,7 @@ describe("roundTripEntry", () => {
     const { fetch } = servedBy({ "https://example.org/data/karate.txt": karateText });
     const withoutMeta = { ...liveEntry, crosswalk: { ...liveEntry.crosswalk, rules: liveEntry.crosswalk.rules.filter((rule) => rule.from !== "meta") } };
     const report = await roundTripEntry(datasetWith(withoutMeta), { fetch, now });
-    // twindex names the record whose keys differ, here the document root.
+    // crossmap names the record whose keys differ, here the document root.
     expect(report).toMatchObject({ holds: false, path: "" });
     expect(report.holds ? "" : report.message).toMatch(/records differ in keys: edges,meta,nodes against edges,nodes/);
   });

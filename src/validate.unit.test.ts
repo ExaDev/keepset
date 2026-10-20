@@ -1,4 +1,4 @@
-import { parseCrosswalk } from "twindex";
+import { parseCrosswalk } from "crossmap";
 import { describe, expect, it } from "vitest";
 import { createCatalogue } from "./catalogue";
 import { liveEntry, fixtureIndex, topologyCrosswalk } from "./test-support/entries";
@@ -15,7 +15,7 @@ describe("validateDataset", () => {
     expect(validateDataset({ ...dataset, entry: { ...dataset.entry, name: "" } })).toEqual([{ path: "entry.name", message: expect.any(String) as string }]);
   });
 
-  it("reports a crosswalk that fails twindex's structural validation or targets another category", () => {
+  it("reports a crosswalk that fails crossmap's structural validation or targets another category", () => {
     const duplicate = parseCrosswalk({ ...topologyCrosswalk, rules: [...liveEntry.crosswalk.rules, { op: "move", from: "extra", to: "meta" }] });
     expect(validateDataset({ ...dataset, crosswalk: duplicate })).toEqual([{ path: "crosswalk", message: "two rules write the same to path: meta" }]);
     const wildcardMismatch = parseCrosswalk({ ...topologyCrosswalk, rules: [{ op: "move", from: "nodes[].id", to: "ids" }] });
