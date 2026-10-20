@@ -8,6 +8,9 @@ import { parseGeojson } from "./geojson";
 import type { NativeDocument, NativeGraph, NativeInstance, NativeTable } from "./native";
 import { parsePajek } from "./pajek";
 import { parseSolomon } from "./solomon";
+import { parseTop } from "./top";
+import { parseToptw } from "./toptw";
+import type { InstanceParser } from "./instance-shapes";
 
 /** Bytes converted per String.fromCharCode call: spreading a whole file would exceed the engine's argument-count limit, and this many stays well inside every engine's. */
 const LATIN1_CHUNK = 0x8000;
@@ -72,7 +75,6 @@ export function* decodePieces(bytes: Uint8Array, parser: Parser, pieceBytes: num
 }
 
 type TableParser = Extract<Parser, { format: "csv-table" | "geojson" }>;
-type InstanceParser = Extract<Parser, { format: "solomon" }>;
 
 /**
  * Reads a file into the native shape of the recipe's parser: a graph for the graph formats, a table of rows for the table formats.
@@ -104,6 +106,12 @@ export function parseNative(bytes: Uint8Array, parser: Parser): NativeDocument {
   }
   if (parser.format === "solomon") {
     return parseSolomon(text);
+  }
+  if (parser.format === "top") {
+    return parseTop(text);
+  }
+  if (parser.format === "toptw") {
+    return parseToptw(text);
   }
 
   return parsePajek(text);
