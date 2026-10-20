@@ -10,6 +10,7 @@ import { parsePajek } from "./pajek";
 import { parseSolomon } from "./solomon";
 import { parseTop } from "./top";
 import { parseToptw } from "./toptw";
+import { parseTsplib } from "./tsplib";
 import type { InstanceParser } from "./instance-shapes";
 
 /** Bytes converted per String.fromCharCode call: spreading a whole file would exceed the engine's argument-count limit, and this many stays well inside every engine's. */
@@ -112,6 +113,9 @@ export function parseNative(bytes: Uint8Array, parser: Parser): NativeDocument {
   }
   if (parser.format === "toptw") {
     return parseToptw(text);
+  }
+  if (parser.format === "tsplib") {
+    return parseTsplib(text);
   }
 
   return parsePajek(text);

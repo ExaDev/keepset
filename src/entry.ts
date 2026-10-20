@@ -154,6 +154,7 @@ export const ParserSchema = z.discriminatedUnion("format", [
   z.object({ format: z.literal("solomon"), encoding: EncodingSchema }).strict(),
   z.object({ format: z.literal("top"), encoding: EncodingSchema }).strict(),
   z.object({ format: z.literal("toptw"), encoding: EncodingSchema }).strict(),
+  z.object({ format: z.literal("tsplib"), encoding: EncodingSchema }).strict(),
   z
     .object({
       format: z.literal("csv-table"),
