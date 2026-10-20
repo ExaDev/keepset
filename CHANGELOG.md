@@ -1,3 +1,10 @@
+# [0.28.0](https://github.com/Mearman/keepset/compare/v0.27.1...v0.28.0) (2026-10-20)
+
+
+### Features
+
+* **catalogue:** fetch the facility work orders and name the VA obstacle ([87a3cdd](https://github.com/Mearman/keepset/commit/87a3cddc6b5312d9f85f3156c3cc310ab458ecf6))
+
 ## [0.27.1](https://github.com/Mearman/keepset/compare/v0.27.0...v0.27.1) (2026-10-20)
 
 
