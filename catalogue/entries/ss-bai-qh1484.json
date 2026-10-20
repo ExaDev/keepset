@@ -18,7 +18,8 @@
   },
   "id": "ss-bai-qh1484",
   "licence": {
-    "kind": "unrecorded"
+    "id": "CC-BY-4.0",
+    "kind": "spdx"
   },
   "name": "Bai/qh1484",
   "namespace": [

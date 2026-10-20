@@ -18,7 +18,8 @@
   },
   "id": "ss-ml-graph-dermatology-5nn",
   "licence": {
-    "kind": "unrecorded"
+    "id": "CC-BY-4.0",
+    "kind": "spdx"
   },
   "name": "ML_Graph/dermatology_5NN",
   "namespace": [

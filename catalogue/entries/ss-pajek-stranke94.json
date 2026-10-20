@@ -18,7 +18,8 @@
   },
   "id": "ss-pajek-stranke94",
   "licence": {
-    "kind": "unrecorded"
+    "id": "CC-BY-4.0",
+    "kind": "spdx"
   },
   "name": "Social network from Stranke's 1994 study",
   "namespace": [

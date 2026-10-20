@@ -18,7 +18,8 @@
   },
   "id": "ss-pajek-sandi-authors",
   "licence": {
-    "kind": "unrecorded"
+    "id": "CC-BY-4.0",
+    "kind": "spdx"
   },
   "name": "Collaboration network among Sandi conference authors",
   "namespace": [

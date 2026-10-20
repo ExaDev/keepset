@@ -18,7 +18,8 @@
   },
   "id": "ss-law-enron",
   "licence": {
-    "kind": "unrecorded"
+    "id": "CC-BY-4.0",
+    "kind": "spdx"
   },
   "name": "LAW/enron",
   "namespace": [

@@ -18,7 +18,8 @@
   },
   "id": "pajek-gd04-prob5",
   "licence": {
-    "kind": "unrecorded"
+    "id": "CC-BY-NC-SA-2.5",
+    "kind": "spdx"
   },
   "name": "GD04 Contest Problem 5",
   "namespace": [

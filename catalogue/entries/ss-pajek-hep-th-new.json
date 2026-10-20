@@ -18,7 +18,8 @@
   },
   "id": "ss-pajek-hep-th-new",
   "licence": {
-    "kind": "unrecorded"
+    "id": "CC-BY-4.0",
+    "kind": "spdx"
   },
   "name": "Updated citation network from high-energy physics theory papers on arXiv",
   "namespace": [

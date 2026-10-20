@@ -15,7 +15,9 @@
   },
   "id": "advogato",
   "licence": {
-    "kind": "unrecorded"
+    "kind": "custom",
+    "name": "Creative Commons Attribution-ShareAlike (version not stated)",
+    "url": "https://networkrepository.com/policy.php"
   },
   "name": "Advogato Trust Network",
   "properties": {

@@ -18,7 +18,8 @@
   },
   "id": "ss-arenas-celegans-metabolic",
   "licence": {
-    "kind": "unrecorded"
+    "id": "CC-BY-4.0",
+    "kind": "spdx"
   },
   "name": "Arenas/celegans_metabolic",
   "namespace": [

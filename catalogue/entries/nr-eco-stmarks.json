@@ -19,7 +19,9 @@
   },
   "id": "nr-eco-stmarks",
   "licence": {
-    "kind": "unrecorded"
+    "kind": "custom",
+    "name": "Creative Commons Attribution-ShareAlike (version not stated)",
+    "url": "https://networkrepository.com/policy.php"
   },
   "name": "St. Marks Food Web",
   "namespace": [

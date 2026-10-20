@@ -18,7 +18,8 @@
   },
   "id": "ss-sumner-graphics",
   "licence": {
-    "kind": "unrecorded"
+    "id": "CC-BY-4.0",
+    "kind": "spdx"
   },
   "name": "Sumner/graphics",
   "namespace": [

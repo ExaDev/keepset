@@ -17,7 +17,8 @@
   },
   "id": "openalex-citations",
   "licence": {
-    "kind": "unrecorded"
+    "id": "CC0-1.0",
+    "kind": "spdx"
   },
   "name": "OpenAlex Citation Graph",
   "properties": {

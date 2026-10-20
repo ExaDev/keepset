@@ -18,7 +18,8 @@
   },
   "id": "ss-mathworks-tomography",
   "licence": {
-    "kind": "unrecorded"
+    "id": "CC-BY-4.0",
+    "kind": "spdx"
   },
   "name": "MathWorks/tomography",
   "namespace": [

@@ -18,7 +18,8 @@
   },
   "id": "ss-snap-p2p-gnutella04",
   "licence": {
-    "kind": "unrecorded"
+    "id": "CC-BY-4.0",
+    "kind": "spdx"
   },
   "name": "SNAP/p2p-Gnutella04",
   "namespace": [

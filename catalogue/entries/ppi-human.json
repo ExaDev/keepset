@@ -15,7 +15,8 @@
   },
   "id": "ppi-human",
   "licence": {
-    "kind": "unrecorded"
+    "id": "MIT",
+    "kind": "spdx"
   },
   "name": "Human Protein-Protein Interaction Network",
   "properties": {

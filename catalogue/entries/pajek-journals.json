@@ -18,7 +18,8 @@
   },
   "id": "pajek-journals",
   "licence": {
-    "kind": "unrecorded"
+    "id": "CC-BY-NC-SA-2.5",
+    "kind": "spdx"
   },
   "name": "Citation network between 124 computational journals",
   "namespace": [

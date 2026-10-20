@@ -18,7 +18,8 @@
   },
   "id": "ucinet-wolf",
   "licence": {
-    "kind": "unrecorded"
+    "id": "CC-BY-NC-SA-2.5",
+    "kind": "spdx"
   },
   "name": "Wolfe Primates",
   "namespace": [

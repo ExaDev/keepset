@@ -18,7 +18,8 @@
   },
   "id": "ss-ml-graph-plantstexture-10nn",
   "licence": {
-    "kind": "unrecorded"
+    "id": "CC-BY-4.0",
+    "kind": "spdx"
   },
   "name": "ML_Graph/plantstexture_10NN",
   "namespace": [

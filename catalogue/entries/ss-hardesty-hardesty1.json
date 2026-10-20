@@ -18,7 +18,8 @@
   },
   "id": "ss-hardesty-hardesty1",
   "licence": {
-    "kind": "unrecorded"
+    "id": "CC-BY-4.0",
+    "kind": "spdx"
   },
   "name": "Hardesty/Hardesty1",
   "namespace": [

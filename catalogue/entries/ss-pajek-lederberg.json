@@ -18,7 +18,8 @@
   },
   "id": "ss-pajek-lederberg",
   "licence": {
-    "kind": "unrecorded"
+    "id": "CC-BY-4.0",
+    "kind": "spdx"
   },
   "name": "Citation network from Lederberg's Roget thesaurus analysis",
   "namespace": [

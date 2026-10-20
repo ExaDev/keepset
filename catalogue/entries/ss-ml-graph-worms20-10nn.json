@@ -18,7 +18,8 @@
   },
   "id": "ss-ml-graph-worms20-10nn",
   "licence": {
-    "kind": "unrecorded"
+    "id": "CC-BY-4.0",
+    "kind": "spdx"
   },
   "name": "ML_Graph/worms20_10NN",
   "namespace": [

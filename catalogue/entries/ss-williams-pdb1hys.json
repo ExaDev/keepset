@@ -18,7 +18,8 @@
   },
   "id": "ss-williams-pdb1hys",
   "licence": {
-    "kind": "unrecorded"
+    "id": "CC-BY-4.0",
+    "kind": "spdx"
   },
   "name": "Williams/pdb1HYS",
   "namespace": [

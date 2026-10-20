@@ -18,7 +18,8 @@
   },
   "id": "ss-pajek-ragusa18",
   "licence": {
-    "kind": "unrecorded"
+    "id": "CC-BY-4.0",
+    "kind": "spdx"
   },
   "name": "Social network from Ragusa study with 18 individuals",
   "namespace": [

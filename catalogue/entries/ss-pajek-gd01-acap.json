@@ -18,7 +18,8 @@
   },
   "id": "ss-pajek-gd01-acap",
   "licence": {
-    "kind": "unrecorded"
+    "id": "CC-BY-4.0",
+    "kind": "spdx"
   },
   "name": "Graph Drawing Contest 2001, graph A capacities",
   "namespace": [

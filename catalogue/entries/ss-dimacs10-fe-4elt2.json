@@ -18,7 +18,8 @@
   },
   "id": "ss-dimacs10-fe-4elt2",
   "licence": {
-    "kind": "unrecorded"
+    "id": "CC-BY-4.0",
+    "kind": "spdx"
   },
   "name": "DIMACS10/fe_4elt2",
   "namespace": [

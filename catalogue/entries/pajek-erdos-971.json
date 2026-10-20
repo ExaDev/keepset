@@ -18,7 +18,8 @@
   },
   "id": "pajek-erdos-971",
   "licence": {
-    "kind": "unrecorded"
+    "id": "CC-BY-NC-SA-2.5",
+    "kind": "spdx"
   },
   "name": "Erdos Collaboration 1997 (Core)",
   "namespace": [

@@ -18,7 +18,8 @@
   },
   "id": "ss-mathworks-harvard500",
   "licence": {
-    "kind": "unrecorded"
+    "id": "CC-BY-4.0",
+    "kind": "spdx"
   },
   "name": "MathWorks/Harvard500",
   "namespace": [

@@ -18,7 +18,8 @@
   },
   "id": "ss-pajek-dictionary28",
   "licence": {
-    "kind": "unrecorded"
+    "id": "CC-BY-4.0",
+    "kind": "spdx"
   },
   "name": "Word adjacency network from a dictionary",
   "namespace": [

@@ -18,7 +18,8 @@
   },
   "id": "ss-dimacs10-vsp-befref-fxm-2-4-air02",
   "licence": {
-    "kind": "unrecorded"
+    "id": "CC-BY-4.0",
+    "kind": "spdx"
   },
   "name": "DIMACS10/vsp_befref_fxm_2_4_air02",
   "namespace": [

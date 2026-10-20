@@ -18,7 +18,8 @@
   },
   "id": "ss-hb-bcspwr08",
   "licence": {
-    "kind": "unrecorded"
+    "id": "CC-BY-4.0",
+    "kind": "spdx"
   },
   "name": "HB/bcspwr08",
   "namespace": [

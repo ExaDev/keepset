@@ -18,7 +18,8 @@
   },
   "id": "ss-ml-graph-glass-10nn",
   "licence": {
-    "kind": "unrecorded"
+    "id": "CC-BY-4.0",
+    "kind": "spdx"
   },
   "name": "ML_Graph/Glass_10NN",
   "namespace": [

@@ -18,7 +18,8 @@
   },
   "id": "pajek-freeassoc",
   "licence": {
-    "kind": "unrecorded"
+    "id": "CC-BY-NC-SA-2.5",
+    "kind": "spdx"
   },
   "name": "USF Free Association Norms",
   "namespace": [

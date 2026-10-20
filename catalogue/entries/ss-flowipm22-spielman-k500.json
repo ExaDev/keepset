@@ -18,7 +18,8 @@
   },
   "id": "ss-flowipm22-spielman-k500",
   "licence": {
-    "kind": "unrecorded"
+    "id": "CC-BY-4.0",
+    "kind": "spdx"
   },
   "name": "FlowIPM22/Spielman_k500",
   "namespace": [

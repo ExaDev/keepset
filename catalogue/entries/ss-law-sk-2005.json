@@ -18,7 +18,8 @@
   },
   "id": "ss-law-sk-2005",
   "licence": {
-    "kind": "unrecorded"
+    "id": "CC-BY-4.0",
+    "kind": "spdx"
   },
   "name": "LAW/sk-2005",
   "namespace": [

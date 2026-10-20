@@ -18,7 +18,8 @@
   },
   "id": "ss-dimacs10-rgg-n-2-16-s0",
   "licence": {
-    "kind": "unrecorded"
+    "id": "CC-BY-4.0",
+    "kind": "spdx"
   },
   "name": "DIMACS10/rgg_n_2_16_s0",
   "namespace": [

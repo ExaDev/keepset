@@ -18,7 +18,8 @@
   },
   "id": "ucinet-sampson-monastery",
   "licence": {
-    "kind": "unrecorded"
+    "id": "CC-BY-NC-SA-2.5",
+    "kind": "spdx"
   },
   "name": "Sampson's Monastery (Undirected)",
   "namespace": [

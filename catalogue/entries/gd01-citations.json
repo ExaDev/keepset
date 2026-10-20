@@ -15,7 +15,8 @@
   },
   "id": "gd01-citations",
   "licence": {
-    "kind": "unrecorded"
+    "id": "CC-BY-NC-SA-2.5",
+    "kind": "spdx"
   },
   "name": "GD01 Graph Drawing Citations",
   "properties": {

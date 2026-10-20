@@ -18,7 +18,8 @@
   },
   "id": "pajek-worldcities",
   "licence": {
-    "kind": "unrecorded"
+    "id": "CC-BY-4.0",
+    "kind": "spdx"
   },
   "name": "Two-mode network of world cities and their attributes",
   "namespace": [

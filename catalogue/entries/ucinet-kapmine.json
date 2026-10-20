@@ -18,7 +18,8 @@
   },
   "id": "ucinet-kapmine",
   "licence": {
-    "kind": "unrecorded"
+    "id": "CC-BY-NC-SA-2.5",
+    "kind": "spdx"
   },
   "name": "Kapferer Mine",
   "namespace": [

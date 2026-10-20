@@ -2,13 +2,38 @@ import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { describe, expect, it } from "vitest";
 import { convertCatalogue, convertDataset, NAME_OVERRIDES, namespaceOf, netzschleuderCsv, parseWayback, type Outcome } from "./convert";
+import { GraphLicencesSchema, graphLicenceResolver } from "./licence";
 import { GraphboxCatalogueSchema, SourceCatalogueSchema } from "./source";
 
 /* A small committed slice of the pipeline catalogue, one dataset per classification path, and of the graphbox catalogue for the overlap section. */
 const pipeline = SourceCatalogueSchema.parse(JSON.parse(readFileSync(join(import.meta.dirname, "fixtures/pipeline-slice.json"), "utf8")));
 const graphbox = GraphboxCatalogueSchema.parse(JSON.parse(readFileSync(join(import.meta.dirname, "fixtures/graphbox-slice.json"), "utf8")));
-/* The slice holds none of the datasets NAME_OVERRIDES renames, so it converts with no overrides; the overrides are tested against the committed full catalogue below. */
-const { entries, report } = convertCatalogue(pipeline, graphbox, new Map());
+
+const stated = (id: string, name: string, prefixes: readonly string[]) => ({ id, name, prefixes, terms: { licence: { kind: "spdx", id: "CC-BY-4.0" }, statedAt: `https://${id}.example/terms`, statement: `${name} states CC-BY-4.0` } });
+const unstated = (id: string, name: string, prefixes: readonly string[]) => ({ id, name, prefixes, terms: { readAt: [`https://${id}.example/about`], reason: `${name} states no terms` } });
+/* A licence curation covering exactly the hosts the slice's recipes read from: Pajek states one licence for everything it hosts, the others state none, and the Hugging Face dataset states its own. */
+const licences = GraphLicencesSchema.parse({
+  readOn: "2026-10-20",
+  publishers: [
+    unstated("netzschleuder", "Netzschleuder", ["https://networks.skewed.de/"]),
+    unstated("newman", "Newman", ["https://websites.umich.edu/"]),
+    unstated("nrvis", "Network Repository", ["http://nrvis.com/", "http://networkrepository.com/"]),
+    unstated("snap", "SNAP", ["https://snap.stanford.edu/"]),
+    stated("pajek", "Pajek", ["http://vlado.fmf.uni-lj.si/"]),
+    unstated("linqs", "LINQS", ["https://linqs-data.soe.ucsc.edu/"]),
+    unstated("conve", "ConvE", ["https://github.com/TimDettmers/ConvE/"]),
+    unstated("konect", "KONECT", ["http://konect.cc/"]),
+    unstated("openke", "OpenKE", ["https://raw.githubusercontent.com/thunlp/OpenKE/"]),
+    { id: "huggingface", name: "Hugging Face", prefixes: ["https://huggingface.co/"], perDataset: true },
+  ],
+  datasets: {
+    "ieee-cis-g": { licence: { kind: "spdx", id: "MIT" }, statedAt: "https://huggingface.co/api/datasets/example/data", statement: "The card's licence field is mit." },
+    "oag-eng": { readAt: ["https://huggingface.co/api/datasets/example/data"], reason: "The card has no licence field." },
+  },
+});
+/* A resolver is single use: it remembers which curation records a conversion used. The slice holds none of the datasets NAME_OVERRIDES renames, so it converts with no overrides; the overrides are tested against the committed full catalogue below. */
+const resolver = () => graphLicenceResolver(licences);
+const { entries, report } = convertCatalogue(pipeline, graphbox, resolver(), new Map());
 
 function outcome(id: string): Outcome {
   const found = report.outcomes.find((candidate) => candidate.id === id);
@@ -134,6 +159,23 @@ describe("the seed import's classification", () => {
     expect(seventh.crosswalk).toEqual({ file: "crosswalks/graph-v1/topology.json" });
   });
 
+  it("takes each entry's licence from the curation of the source its recipe fetches, a dataset record winning over its publisher", () => {
+    expect(entry("cities").licence).toEqual({ kind: "spdx", id: "CC-BY-4.0" });
+    expect(entry("ieee-cis-g").licence).toEqual({ kind: "spdx", id: "MIT" });
+    expect(entry("oag-eng").licence).toEqual({ kind: "unrecorded" });
+    // The recipe reads the Network Repository copy, so that publisher's curation decides, not the Wayback-pinned Arenas page the first source points at.
+    expect(entry("arenas-pgp").sources.map((source) => source.url)).toContain("http://networkrepository.com/datasets/pgp.tar.gz");
+    expect(entry("arenas-pgp").licence).toEqual({ kind: "unrecorded" });
+  });
+
+  it("refuses a dataset no licence curation covers, and curation that serves no dataset", () => {
+    const only = (publishers: readonly unknown[], datasets: Record<string, unknown> = {}) => graphLicenceResolver(GraphLicencesSchema.parse({ readOn: "2026-10-20", publishers, datasets }));
+    expect(() => convertCatalogue(pipeline, graphbox, only([]), new Map())).toThrow(/no licence curation covers/);
+    const everything = licences.publishers.map((publisher) => ({ ...publisher }));
+    expect(() => convertCatalogue(pipeline, graphbox, only([...everything, unstated("unused", "Unused", ["https://unused.example/"])], licences.datasets), new Map())).toThrow(/no dataset's source falls under: unused/);
+    expect(() => convertCatalogue(pipeline, graphbox, only(everything, { ...licences.datasets, "not-a-dataset": { readAt: ["https://example.org/"], reason: "x" } }), new Map())).toThrow(/not-a-dataset/);
+  });
+
   it("names the judgement-call removals, the omitted fields and the graphbox overlap without merging", () => {
     expect(report.judgementCallRemovals.map((removal) => removal.id)).toEqual(["yelp-hin", "foursquare", "douban"]);
     expect(report.omittedFields.map((omitted) => omitted.field)).toContain("citeKey");
@@ -146,22 +188,23 @@ describe("the seed import's classification", () => {
 
 describe("name overrides", () => {
   it("replaces the name of a listed dataset and leaves every other name as the catalogue gives it", () => {
-    const renamed = convertCatalogue(pipeline, graphbox, new Map([["wiki-vote", "Wikipedia votes (a source)"]])).entries;
+    const renamed = convertCatalogue(pipeline, graphbox, resolver(), new Map([["wiki-vote", "Wikipedia votes (a source)"]])).entries;
     expect(renamed.find((candidate) => candidate.id === "wiki-vote")?.name).toBe("Wikipedia votes (a source)");
     expect(renamed.find((candidate) => candidate.id === "amazon0302")?.name).toBe(entry("amazon0302").name);
   });
 
   it("refuses an override for a dataset the catalogue lacks, or one that repeats the catalogue's name", () => {
-    expect(() => convertCatalogue(pipeline, graphbox, new Map([["absent", "Anything"]]))).toThrow("the name override for absent names no dataset of the catalogue");
-    expect(() => convertCatalogue(pipeline, graphbox, new Map([["wiki-vote", entry("wiki-vote").name]]))).toThrow("the name override for wiki-vote repeats the name the catalogue already gives it");
+    expect(() => convertCatalogue(pipeline, graphbox, resolver(), new Map([["absent", "Anything"]]))).toThrow("the name override for absent names no dataset of the catalogue");
+    expect(() => convertCatalogue(pipeline, graphbox, resolver(), new Map([["wiki-vote", entry("wiki-vote").name]]))).toThrow("the name override for wiki-vote repeats the name the catalogue already gives it");
   });
 
   it("renames, in the committed full catalogue, every dataset it lists to the name it gives", () => {
     const full = SourceCatalogueSchema.parse(JSON.parse(readFileSync(join(import.meta.dirname, "sources/pipeline-catalog.json"), "utf8")));
+    const fullLicences = graphLicenceResolver(GraphLicencesSchema.parse(JSON.parse(readFileSync(join(import.meta.dirname, "sources/graph-licences.json"), "utf8"))));
     for (const [id, name] of NAME_OVERRIDES) {
       const dataset = Object.values(full.datasets).find((candidate) => candidate.id === id);
       expect(dataset, id).toBeDefined();
-      expect(dataset === undefined ? undefined : convertDataset(dataset).entry?.name, id).toBe(name);
+      expect(dataset === undefined ? undefined : convertDataset(dataset, fullLicences).entry?.name, id).toBe(name);
     }
   });
 

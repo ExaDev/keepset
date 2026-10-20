@@ -1,0 +1,598 @@
+{
+  "readOn": "2026-10-20",
+  "publishers": [
+    {
+      "id": "suitesparse",
+      "name": "SuiteSparse Matrix Collection",
+      "prefixes": [
+        "https://sparse.tamu.edu/"
+      ],
+      "terms": {
+        "licence": {
+          "kind": "spdx",
+          "id": "CC-BY-4.0"
+        },
+        "statedAt": "https://sparse.tamu.edu/about",
+        "statement": "The matrices themselves are under the CC-BY 4.0 License"
+      }
+    },
+    {
+      "id": "pajek",
+      "name": "Pajek datasets (Batagelj and Mrvar)",
+      "prefixes": [
+        "http://vlado.fmf.uni-lj.si/pub/networks/data/"
+      ],
+      "terms": {
+        "licence": {
+          "kind": "spdx",
+          "id": "CC-BY-NC-SA-2.5"
+        },
+        "statedAt": "https://web.archive.org/web/20240928120234/http://vlado.fmf.uni-lj.si/pub/networks/data/",
+        "statement": "If the source of the data set is not specified otherwise, these data sets are licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 2.5 License."
+      }
+    },
+    {
+      "id": "netzschleuder",
+      "name": "Netzschleuder",
+      "prefixes": [
+        "https://networks.skewed.de/"
+      ],
+      "terms": {
+        "readAt": [
+          "https://networks.skewed.de/about",
+          "https://networks.skewed.de/net/polbooks",
+          "https://networks.skewed.de/api/net/polbooks"
+        ],
+        "reason": "The about page asks users to cite the upstream authors and says the data are processed versions of upstream sources made available in the belief that this is permitted, and names no licence. No network record in the JSON API has a licence field, and the descriptions state no terms."
+      }
+    },
+    {
+      "id": "snap",
+      "name": "Stanford Large Network Dataset Collection (SNAP)",
+      "prefixes": [
+        "https://snap.stanford.edu/"
+      ],
+      "terms": {
+        "readAt": [
+          "https://snap.stanford.edu/data/",
+          "https://snap.stanford.edu/data/cit-HepPh.html",
+          "https://snap.stanford.edu/data/soc-sign-bitcoinotc.html",
+          "https://snap.stanford.edu/data/roadNet-CA.html",
+          "https://snap.stanford.edu/data/email-Enron.html",
+          "https://snap.stanford.edu/data/wiki-topcats.html"
+        ],
+        "reason": "The collection page and the dataset pages read give citation requests and no terms of use."
+      }
+    },
+    {
+      "id": "newman",
+      "name": "Mark Newman's network data",
+      "prefixes": [
+        "https://websites.umich.edu/~mejn/netdata/"
+      ],
+      "terms": {
+        "licence": {
+          "kind": "custom",
+          "name": "Free for scientific use, to the best of the compiler's knowledge",
+          "url": "https://websites.umich.edu/~mejn/netdata/"
+        },
+        "statedAt": "https://websites.umich.edu/~mejn/netdata/",
+        "statement": "All of these are free for scientific use to the best of my knowledge, meaning that the original authors have already made the data freely available, or that I have consulted the authors and received permission to the post the data here, or that the data are mine."
+      }
+    },
+    {
+      "id": "network-repository",
+      "name": "Network Repository",
+      "prefixes": [
+        "http://nrvis.com/",
+        "https://nrvis.com/",
+        "http://networkrepository.com/",
+        "https://networkrepository.com/"
+      ],
+      "terms": {
+        "licence": {
+          "kind": "custom",
+          "name": "Creative Commons Attribution-ShareAlike (version not stated)",
+          "url": "https://networkrepository.com/policy.php"
+        },
+        "statedAt": "https://networkrepository.com/policy.php",
+        "statement": "All data are licensed under a Creative Commons Attribution-ShareAlike License."
+      }
+    },
+    {
+      "id": "konect",
+      "name": "KONECT",
+      "prefixes": [
+        "http://konect.cc/"
+      ],
+      "terms": {
+        "readAt": [
+          "http://konect.cc/about/",
+          "http://konect.cc/networks/moreno_lesmis/"
+        ],
+        "reason": "The site, its about page and the dataset page read state no terms for the networks; the only licence stated is the GNU General Public License version 3 for KONECT's own source code."
+      }
+    },
+    {
+      "id": "arenas",
+      "name": "Alex Arenas's network data",
+      "prefixes": [
+        "http://deim.urv.cat/",
+        "https://deim.urv.cat/"
+      ],
+      "terms": {
+        "readAt": [
+          "http://deim.urv.cat/~alexandre.arenas/data/welcome.htm"
+        ],
+        "reason": "The data page lists the networks with their references and states no terms."
+      }
+    },
+    {
+      "id": "notre-dame",
+      "name": "Notre Dame networks database",
+      "prefixes": [
+        "http://www.nd.edu/~networks/"
+      ],
+      "terms": {
+        "licence": {
+          "kind": "custom",
+          "name": "Free to use in research",
+          "url": "https://web.archive.org/web/20161130010139/http://www3.nd.edu/~networks/resources.htm"
+        },
+        "statedAt": "https://web.archive.org/web/20161130010139/http://www3.nd.edu/~networks/resources.htm",
+        "statement": "Feel free to use these data in your research."
+      }
+    },
+    {
+      "id": "linqs",
+      "name": "LINQS datasets",
+      "prefixes": [
+        "https://linqs-data.soe.ucsc.edu/"
+      ],
+      "terms": {
+        "readAt": [
+          "https://linqs.org/datasets/"
+        ],
+        "reason": "The datasets page states citation requests and no terms; the licence link on the site covers the website itself."
+      }
+    },
+    {
+      "id": "wormatlas",
+      "name": "WormAtlas",
+      "prefixes": [
+        "https://www.wormatlas.org/"
+      ],
+      "terms": {
+        "readAt": [
+          "https://www.wormatlas.org/neuronalwiring.html"
+        ],
+        "reason": "The neuronal wiring page offers the connectivity files with their references and states no terms for them."
+      }
+    },
+    {
+      "id": "wormwiring",
+      "name": "WormWiring",
+      "prefixes": [
+        "https://www.wormwiring.org/"
+      ],
+      "terms": {
+        "readAt": [
+          "https://wormwiring.org/"
+        ],
+        "reason": "The site's front page states no terms for the data."
+      }
+    },
+    {
+      "id": "witvliet-nature2021",
+      "name": "Witvliet et al. 2021 connectome repository",
+      "prefixes": [
+        "https://raw.githubusercontent.com/dwitvliet/nature2021/"
+      ],
+      "terms": {
+        "readAt": [
+          "https://github.com/dwitvliet/nature2021",
+          "https://api.github.com/repos/dwitvliet/nature2021/license"
+        ],
+        "reason": "The repository has no licence file (the licence endpoint reports none) and its README states no terms."
+      }
+    },
+    {
+      "id": "openflights",
+      "name": "OpenFlights",
+      "prefixes": [
+        "https://raw.githubusercontent.com/jpatokal/openflights/"
+      ],
+      "terms": {
+        "licence": {
+          "kind": "spdx",
+          "id": "ODbL-1.0"
+        },
+        "statedAt": "https://openflights.org/data.php",
+        "statement": "The OpenFlights Airport, Airline, Plane and Route Databases are made available under the Open Database License."
+      }
+    },
+    {
+      "id": "openke",
+      "name": "OpenKE benchmarks",
+      "prefixes": [
+        "https://raw.githubusercontent.com/thunlp/OpenKE/"
+      ],
+      "terms": {
+        "readAt": [
+          "https://github.com/thunlp/OpenKE",
+          "https://api.github.com/repos/thunlp/OpenKE/license"
+        ],
+        "reason": "The repository has no licence file, and the only licence its README states (MIT) is for the pre-trained embeddings, not the benchmarks."
+      }
+    },
+    {
+      "id": "hetionet",
+      "name": "Hetionet",
+      "prefixes": [
+        "https://media.githubusercontent.com/media/hetio/hetionet/"
+      ],
+      "terms": {
+        "licence": {
+          "kind": "custom",
+          "name": "CC0 1.0 for original content, with each integrated source under its own licence",
+          "url": "https://github.com/hetio/hetionet#license"
+        },
+        "statedAt": "https://github.com/hetio/hetionet#license",
+        "statement": "All original content in this repository is released as CC0. However, the hetnet integrates data from many resources and users should consider the licensing of each source."
+      }
+    },
+    {
+      "id": "codex",
+      "name": "CoDEx",
+      "prefixes": [
+        "https://github.com/tsafavi/codex/"
+      ],
+      "terms": {
+        "licence": {
+          "kind": "spdx",
+          "id": "MIT"
+        },
+        "statedAt": "https://github.com/tsafavi/codex/blob/master/LICENSE",
+        "statement": "This project is licensed under the terms of the MIT license."
+      }
+    },
+    {
+      "id": "conve",
+      "name": "ConvE",
+      "prefixes": [
+        "https://github.com/TimDettmers/ConvE/"
+      ],
+      "terms": {
+        "licence": {
+          "kind": "spdx",
+          "id": "MIT"
+        },
+        "statedAt": "https://github.com/TimDettmers/ConvE/blob/master/LICENSE",
+        "statement": "The repository's licence file is the MIT licence."
+      }
+    },
+    {
+      "id": "grouplens",
+      "name": "GroupLens datasets",
+      "prefixes": [
+        "https://files.grouplens.org/datasets/"
+      ],
+      "perDataset": true
+    },
+    {
+      "id": "amazon-ratings",
+      "name": "Amazon product data (McAuley)",
+      "prefixes": [
+        "http://jmcauley.ucsd.edu/"
+      ],
+      "terms": {
+        "readAt": [
+          "http://jmcauley.ucsd.edu/data/amazon/",
+          "http://jmcauley.ucsd.edu/data/amazon/links.html"
+        ],
+        "reason": "The data page and its download page state no terms."
+      }
+    },
+    {
+      "id": "hgb-drive",
+      "name": "Heterogeneous Graph Benchmark (Google Drive)",
+      "prefixes": [
+        "https://drive.google.com/uc"
+      ],
+      "terms": {
+        "readAt": [
+          "https://github.com/THUDM/HGB",
+          "https://api.github.com/repos/THUDM/HGB/license"
+        ],
+        "reason": "The benchmark's repository has no licence file and states no terms for the datasets it points to."
+      }
+    },
+    {
+      "id": "kge-datasets-mannheim",
+      "name": "Knowledge graph embedding datasets (University of Mannheim)",
+      "prefixes": [
+        "https://web.informatik.uni-mannheim.de/pi1/kge-datasets/"
+      ],
+      "terms": {
+        "readAt": [
+          "https://web.informatik.uni-mannheim.de/pi1/kge-datasets/"
+        ],
+        "reason": "The page lists the datasets and states no terms."
+      }
+    },
+    {
+      "id": "yago",
+      "name": "YAGO",
+      "prefixes": [
+        "https://www.yago-knowledge.org/"
+      ],
+      "terms": {
+        "licence": {
+          "kind": "spdx",
+          "id": "CC-BY-3.0"
+        },
+        "statedAt": "https://yago-knowledge.org/downloads/yago-3",
+        "statement": "YAGO 3 is licensed under a Creative Commons Attribution 3.0 License by the YAGO team of the Max-Planck Institute for Informatics."
+      }
+    },
+    {
+      "id": "string",
+      "name": "STRING",
+      "prefixes": [
+        "https://stringdb-downloads.org/",
+        "https://version-12-0.string-db.org/"
+      ],
+      "terms": {
+        "licence": {
+          "kind": "spdx",
+          "id": "CC-BY-4.0"
+        },
+        "statedAt": "https://string-db.org/cgi/access",
+        "statement": "All data and download files in STRING are freely available under a 'Creative Commons BY 4.0' license."
+      }
+    },
+    {
+      "id": "biogrid",
+      "name": "BioGRID",
+      "prefixes": [
+        "https://downloads.thebiogrid.org/"
+      ],
+      "terms": {
+        "licence": {
+          "kind": "spdx",
+          "id": "MIT"
+        },
+        "statedAt": "https://wiki.thebiogrid.org/doku.php/terms_and_conditions",
+        "statement": "Terms and Conditions: Copyright 2021 Mike Tyers. Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction."
+      }
+    },
+    {
+      "id": "wikidata5m",
+      "name": "Wikidata5M",
+      "prefixes": [
+        "https://www.dropbox.com/scl/fi/04itkl1lnxev587n3xkap/"
+      ],
+      "terms": {
+        "readAt": [
+          "https://deepgraphlearning.github.io/project/wikidata5m"
+        ],
+        "reason": "The project page describes the dataset and gives its publications and states no terms."
+      }
+    },
+    {
+      "id": "aminer",
+      "name": "AMiner citation data",
+      "prefixes": [
+        "https://lfs.aminer.cn/"
+      ],
+      "terms": {
+        "readAt": [
+          "https://www.aminer.org/citation",
+          "https://www.aminer.cn/citation"
+        ],
+        "reason": "The dataset's page is not served (both addresses answer 404), so no terms can be read."
+      }
+    },
+    {
+      "id": "ogb",
+      "name": "Open Graph Benchmark",
+      "prefixes": [
+        "https://ogb.stanford.edu/",
+        "https://data.dgl.ai/"
+      ],
+      "perDataset": true
+    },
+    {
+      "id": "huggingface",
+      "name": "Hugging Face dataset repositories",
+      "prefixes": [
+        "https://huggingface.co/"
+      ],
+      "perDataset": true
+    }
+  ],
+  "datasets": {
+    "ieee-cis-g": {
+      "readAt": [
+        "https://huggingface.co/api/datasets/junhongmit/H2GB",
+        "https://huggingface.co/datasets/junhongmit/H2GB"
+      ],
+      "reason": "The dataset card has no licence field, and the README's MIT badge links to the licence of the code repository, not the data."
+    },
+    "lastfm-hgb": {
+      "licence": {
+        "kind": "custom",
+        "name": "Last.fm HetRec 2011 data (non-commercial use)",
+        "url": "https://files.grouplens.org/datasets/hetrec2011/hetrec2011-lastfm-readme.txt"
+      },
+      "statedAt": "https://files.grouplens.org/datasets/hetrec2011/hetrec2011-lastfm-readme.txt",
+      "statement": "The data contained in hetrec2011-lastfm-2k.zip is made available for non-commercial use."
+    },
+    "movielens-100k": {
+      "licence": {
+        "kind": "custom",
+        "name": "MovieLens usage license (research use, no redistribution, no commercial use without permission)",
+        "url": "https://files.grouplens.org/datasets/movielens/ml-100k-README.txt"
+      },
+      "statedAt": "https://files.grouplens.org/datasets/movielens/ml-100k-README.txt",
+      "statement": "The data set may be used for any research purposes under the following conditions: the user may not redistribute the data without separate permission, and may not use this information for any commercial or revenue-bearing purposes without first obtaining permission."
+    },
+    "movielens-10m": {
+      "licence": {
+        "kind": "custom",
+        "name": "MovieLens usage license (research use, no redistribution, no commercial use without permission)",
+        "url": "https://files.grouplens.org/datasets/movielens/ml-10m-README.html"
+      },
+      "statedAt": "https://files.grouplens.org/datasets/movielens/ml-10m-README.html",
+      "statement": "The data set may be used for any research purposes under the following conditions: the user may not redistribute the data without separate permission, and may not use this information for any commercial or revenue-bearing purposes without first obtaining permission."
+    },
+    "movielens-1m": {
+      "licence": {
+        "kind": "custom",
+        "name": "MovieLens usage license (research use, no redistribution, no commercial use without permission)",
+        "url": "https://files.grouplens.org/datasets/movielens/ml-1m-README.txt"
+      },
+      "statedAt": "https://files.grouplens.org/datasets/movielens/ml-1m-README.txt",
+      "statement": "The data set may be used for any research purposes under the following conditions: the user may not redistribute the data without separate permission, and may not use this information for any commercial or revenue-bearing purposes without first obtaining permission."
+    },
+    "movielens-25m": {
+      "licence": {
+        "kind": "custom",
+        "name": "MovieLens usage license (research use, no redistribution, no commercial use without permission)",
+        "url": "https://files.grouplens.org/datasets/movielens/ml-25m-README.html"
+      },
+      "statedAt": "https://files.grouplens.org/datasets/movielens/ml-25m-README.html",
+      "statement": "The data set may be used for any research purposes under the following conditions: the user may not redistribute the data without separate permission, and may not use this information for any commercial or revenue-bearing purposes without first obtaining permission."
+    },
+    "oag-eng": {
+      "readAt": [
+        "https://huggingface.co/api/datasets/junhongmit/H2GB",
+        "https://huggingface.co/datasets/junhongmit/H2GB"
+      ],
+      "reason": "The dataset card has no licence field, and the README's MIT badge links to the licence of the code repository, not the data."
+    },
+    "ogbl-biokg": {
+      "licence": {
+        "kind": "spdx",
+        "id": "CC0-1.0"
+      },
+      "statedAt": "https://ogb.stanford.edu/docs/linkprop/",
+      "statement": "Dataset ogbl-biokg, License: CC-0"
+    },
+    "ogbl-citation2": {
+      "licence": {
+        "kind": "spdx",
+        "id": "ODC-By-1.0"
+      },
+      "statedAt": "https://ogb.stanford.edu/docs/linkprop/",
+      "statement": "Dataset ogbl-citation2, License: ODC-BY"
+    },
+    "ogbl-wikikg2": {
+      "licence": {
+        "kind": "spdx",
+        "id": "CC0-1.0"
+      },
+      "statedAt": "https://ogb.stanford.edu/docs/linkprop/",
+      "statement": "Dataset ogbl-wikikg2, License: CC-0"
+    },
+    "ogbn-mag": {
+      "licence": {
+        "kind": "spdx",
+        "id": "ODC-By-1.0"
+      },
+      "statedAt": "https://ogb.stanford.edu/docs/nodeprop/",
+      "statement": "Dataset ogbn-mag, License: ODC-BY"
+    },
+    "openalex-citations": {
+      "licence": {
+        "kind": "spdx",
+        "id": "CC0-1.0"
+      },
+      "statedAt": "https://huggingface.co/api/datasets/Mearman/OpenAlex",
+      "statement": "The dataset card's licence field is cc0-1.0."
+    },
+    "pajek-dutch-elite": {
+      "licence": {
+        "kind": "custom",
+        "name": "Use as you will, no need to credit",
+        "url": "https://web.archive.org/web/20240928120234/http://vlado.fmf.uni-lj.si/pub/networks/data/2mode/DutchElite.htm"
+      },
+      "statedAt": "https://web.archive.org/web/20240928120234/http://vlado.fmf.uni-lj.si/pub/networks/data/2mode/DutchElite.htm",
+      "statement": "Copyright: Use it as you will, no need to credit us, though we wouldn't object!"
+    },
+    "pajek-eva": {
+      "readAt": [
+        "https://web.archive.org/web/20240928120234/http://vlado.fmf.uni-lj.si/pub/networks/data/econ/Eva/Eva.htm"
+      ],
+      "reason": "The page carries a copyright notice of the Denali Project and a citation request and states no licence, so the collection's default is not assumed to apply."
+    },
+    "pajek-foldoc": {
+      "licence": {
+        "kind": "spdx",
+        "id": "GFDL-1.1-or-later"
+      },
+      "statedAt": "https://web.archive.org/web/20240928120234/http://vlado.fmf.uni-lj.si/pub/networks/data/dic/foldoc/foldoc.htm",
+      "statement": "Permission is granted to copy, distribute and/or modify the FOLDOC dictionary under the terms of the GNU Free Documentation License, Version 1.1 or any later version published by the Free Software Foundation."
+    },
+    "pajek-kohonen": {
+      "readAt": [
+        "https://web.archive.org/web/20240928120234/http://vlado.fmf.uni-lj.si/pub/networks/data/cite/default.htm"
+      ],
+      "reason": "The page says these networks are used with the permission of ISI of Philadelphia and asks for acknowledgement, and states no licence, so the collection's default is not assumed to apply."
+    },
+    "pajek-lederberg": {
+      "readAt": [
+        "https://web.archive.org/web/20240928120234/http://vlado.fmf.uni-lj.si/pub/networks/data/cite/default.htm"
+      ],
+      "reason": "The page says these networks are used with the permission of ISI of Philadelphia and asks for acknowledgement, and states no licence, so the collection's default is not assumed to apply."
+    },
+    "pajek-nd-actors": {
+      "licence": {
+        "kind": "custom",
+        "name": "Free to use in research",
+        "url": "https://web.archive.org/web/20161130010139/http://www3.nd.edu/~networks/resources.htm"
+      },
+      "statedAt": "https://web.archive.org/web/20161130010139/http://www3.nd.edu/~networks/resources.htm",
+      "statement": "Feel free to use these data in your research."
+    },
+    "pajek-nd-www": {
+      "licence": {
+        "kind": "custom",
+        "name": "Free to use in research",
+        "url": "https://web.archive.org/web/20161130010139/http://www3.nd.edu/~networks/resources.htm"
+      },
+      "statedAt": "https://web.archive.org/web/20161130010139/http://www3.nd.edu/~networks/resources.htm",
+      "statement": "Feel free to use these data in your research."
+    },
+    "pajek-odlis": {
+      "readAt": [
+        "https://web.archive.org/web/20240928120234/http://vlado.fmf.uni-lj.si/pub/networks/data/dic/odlis/Odlis.htm"
+      ],
+      "reason": "The page says the glossary is copyrighted by its author and states no licence, so the collection's default is not assumed to apply."
+    },
+    "pajek-scimet": {
+      "readAt": [
+        "https://web.archive.org/web/20240928120234/http://vlado.fmf.uni-lj.si/pub/networks/data/cite/default.htm"
+      ],
+      "reason": "The page says these networks are used with the permission of ISI of Philadelphia and asks for acknowledgement, and states no licence, so the collection's default is not assumed to apply."
+    },
+    "pajek-smagri": {
+      "readAt": [
+        "https://web.archive.org/web/20240928120234/http://vlado.fmf.uni-lj.si/pub/networks/data/cite/default.htm"
+      ],
+      "reason": "The page says these networks are used with the permission of ISI of Philadelphia and asks for acknowledgement, and states no licence, so the collection's default is not assumed to apply."
+    },
+    "pajek-smallw": {
+      "readAt": [
+        "https://web.archive.org/web/20240928120234/http://vlado.fmf.uni-lj.si/pub/networks/data/cite/default.htm"
+      ],
+      "reason": "The page says these networks are used with the permission of ISI of Philadelphia and asks for acknowledgement, and states no licence, so the collection's default is not assumed to apply."
+    },
+    "pajek-zewail": {
+      "readAt": [
+        "https://web.archive.org/web/20240928120234/http://vlado.fmf.uni-lj.si/pub/networks/data/cite/default.htm"
+      ],
+      "reason": "The page says these networks are used with the permission of ISI of Philadelphia and asks for acknowledgement, and states no licence, so the collection's default is not assumed to apply."
+    }
+  }
+}

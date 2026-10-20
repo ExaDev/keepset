@@ -18,7 +18,8 @@
   },
   "id": "ss-law-indochina-2004",
   "licence": {
-    "kind": "unrecorded"
+    "id": "CC-BY-4.0",
+    "kind": "spdx"
   },
   "name": "LAW/indochina-2004",
   "namespace": [

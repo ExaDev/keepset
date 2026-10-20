@@ -15,7 +15,8 @@
   },
   "id": "ogbn-mag",
   "licence": {
-    "kind": "unrecorded"
+    "id": "ODC-By-1.0",
+    "kind": "spdx"
   },
   "name": "Open Graph Benchmark - MAG (Academic Graph)",
   "properties": {

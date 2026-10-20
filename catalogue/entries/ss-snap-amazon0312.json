@@ -18,7 +18,8 @@
   },
   "id": "ss-snap-amazon0312",
   "licence": {
-    "kind": "unrecorded"
+    "id": "CC-BY-4.0",
+    "kind": "spdx"
   },
   "name": "SNAP/amazon0312",
   "namespace": [

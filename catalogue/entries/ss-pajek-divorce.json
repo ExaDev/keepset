@@ -18,7 +18,8 @@
   },
   "id": "ss-pajek-divorce",
   "licence": {
-    "kind": "unrecorded"
+    "id": "CC-BY-4.0",
+    "kind": "spdx"
   },
   "name": "Two-mode network of 50 divorce cases and 9 predictor variables",
   "namespace": [

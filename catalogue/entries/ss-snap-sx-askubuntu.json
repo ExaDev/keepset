@@ -18,7 +18,8 @@
   },
   "id": "ss-snap-sx-askubuntu",
   "licence": {
-    "kind": "unrecorded"
+    "id": "CC-BY-4.0",
+    "kind": "spdx"
   },
   "name": "SNAP/sx-askubuntu",
   "namespace": [

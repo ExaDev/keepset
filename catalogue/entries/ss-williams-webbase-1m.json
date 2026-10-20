@@ -18,7 +18,8 @@
   },
   "id": "ss-williams-webbase-1m",
   "licence": {
-    "kind": "unrecorded"
+    "id": "CC-BY-4.0",
+    "kind": "spdx"
   },
   "name": "Williams/webbase-1M",
   "namespace": [

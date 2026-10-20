@@ -16,7 +16,8 @@
   },
   "id": "kg-umls",
   "licence": {
-    "kind": "unrecorded"
+    "id": "MIT",
+    "kind": "spdx"
   },
   "name": "UMLS Knowledge Graph",
   "properties": {

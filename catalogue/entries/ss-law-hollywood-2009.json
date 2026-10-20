@@ -18,7 +18,8 @@
   },
   "id": "ss-law-hollywood-2009",
   "licence": {
-    "kind": "unrecorded"
+    "id": "CC-BY-4.0",
+    "kind": "spdx"
   },
   "name": "LAW/hollywood-2009",
   "namespace": [

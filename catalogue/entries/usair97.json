@@ -15,7 +15,8 @@
   },
   "id": "usair97",
   "licence": {
-    "kind": "unrecorded"
+    "id": "CC-BY-NC-SA-2.5",
+    "kind": "spdx"
   },
   "name": "US Airlines 1997",
   "properties": {

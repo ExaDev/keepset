@@ -15,7 +15,9 @@
   },
   "id": "barabasi-www",
   "licence": {
-    "kind": "unrecorded"
+    "kind": "custom",
+    "name": "Free to use in research",
+    "url": "https://web.archive.org/web/20161130010139/http://www3.nd.edu/~networks/resources.htm"
   },
   "name": "World-Wide-Web",
   "properties": {

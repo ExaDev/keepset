@@ -15,7 +15,8 @@
   },
   "id": "geom",
   "licence": {
-    "kind": "unrecorded"
+    "id": "CC-BY-NC-SA-2.5",
+    "kind": "spdx"
   },
   "name": "Computational Geometry Collaboration",
   "properties": {

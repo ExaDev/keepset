@@ -18,7 +18,8 @@
   },
   "id": "ss-qy-case9",
   "licence": {
-    "kind": "unrecorded"
+    "id": "CC-BY-4.0",
+    "kind": "spdx"
   },
   "name": "QY/case9",
   "namespace": [

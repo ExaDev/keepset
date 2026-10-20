@@ -18,7 +18,8 @@
   },
   "id": "ss-ml-graph-spectro-10nn",
   "licence": {
-    "kind": "unrecorded"
+    "id": "CC-BY-4.0",
+    "kind": "spdx"
   },
   "name": "ML_Graph/Spectro_10NN",
   "namespace": [

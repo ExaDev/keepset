@@ -18,7 +18,8 @@
   },
   "id": "pajek-football",
   "licence": {
-    "kind": "unrecorded"
+    "id": "CC-BY-NC-SA-2.5",
+    "kind": "spdx"
   },
   "name": "World Soccer 1998",
   "namespace": [

@@ -18,7 +18,8 @@
   },
   "id": "ss-gap-gap-road",
   "licence": {
-    "kind": "unrecorded"
+    "id": "CC-BY-4.0",
+    "kind": "spdx"
   },
   "name": "GAP/GAP-road",
   "namespace": [

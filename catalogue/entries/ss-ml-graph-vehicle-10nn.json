@@ -18,7 +18,8 @@
   },
   "id": "ss-ml-graph-vehicle-10nn",
   "licence": {
-    "kind": "unrecorded"
+    "id": "CC-BY-4.0",
+    "kind": "spdx"
   },
   "name": "ML_Graph/Vehicle_10NN",
   "namespace": [

@@ -15,7 +15,9 @@
   },
   "id": "polblogs",
   "licence": {
-    "kind": "unrecorded"
+    "kind": "custom",
+    "name": "Free for scientific use, to the best of the compiler's knowledge",
+    "url": "https://websites.umich.edu/~mejn/netdata/"
   },
   "name": "Political Blogs",
   "properties": {

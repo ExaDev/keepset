@@ -18,7 +18,8 @@
   },
   "id": "ss-luong-photogrammetry2",
   "licence": {
-    "kind": "unrecorded"
+    "id": "CC-BY-4.0",
+    "kind": "spdx"
   },
   "name": "Luong/photogrammetry2",
   "namespace": [

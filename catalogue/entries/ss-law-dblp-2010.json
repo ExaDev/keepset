@@ -18,7 +18,8 @@
   },
   "id": "ss-law-dblp-2010",
   "licence": {
-    "kind": "unrecorded"
+    "id": "CC-BY-4.0",
+    "kind": "spdx"
   },
   "name": "LAW/dblp-2010",
   "namespace": [

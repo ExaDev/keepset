@@ -18,7 +18,8 @@
   },
   "id": "pajek-gd06",
   "licence": {
-    "kind": "unrecorded"
+    "id": "CC-BY-NC-SA-2.5",
+    "kind": "spdx"
   },
   "name": "GD06 World Cup Network",
   "namespace": [

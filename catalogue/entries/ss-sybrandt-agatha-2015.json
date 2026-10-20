@@ -18,7 +18,8 @@
   },
   "id": "ss-sybrandt-agatha-2015",
   "licence": {
-    "kind": "unrecorded"
+    "id": "CC-BY-4.0",
+    "kind": "spdx"
   },
   "name": "Sybrandt/AGATHA_2015",
   "namespace": [

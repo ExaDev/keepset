@@ -1,6 +1,7 @@
 import { parseEntry, waybackUrl, type Archive, type Citation, type Entry, type Parser, type Recipe, type Source } from "../../src/entry";
 import type { InstanceFormat } from "../../src/parsers/instance-shapes";
 import type { JsonScalar } from "../../src/targets/json-scalar";
+import type { GraphLicenceResolver } from "./licence";
 import type { GraphboxCatalogue, SourceCatalogue, SourceDataset, SourceDownload, SourceEntry, StructuredCitation } from "./source";
 
 /** The shared crosswalk every converted entry uses: all keepset parsers emit the same native topology. */
@@ -451,10 +452,11 @@ export const NAME_OVERRIDES: ReadonlyMap<string, string> = new Map([
 /**
  * Converts one dataset.
  * @param dataset - The catalogue's dataset.
+ * @param licences - Where each dataset's licence was read: the entry's licence is the one its curation records for the source its recipe fetches (its first source when it has no recipe).
  * @param nameOverrides - Replacement names by dataset id; a dataset not listed keeps the name the catalogue gives it.
  * @returns The entry, when the dataset converts, and its outcome for the report.
  */
-export function convertDataset(dataset: SourceDataset, nameOverrides: ReadonlyMap<string, string> = NAME_OVERRIDES): { readonly entry?: Entry; readonly outcome: Outcome } {
+export function convertDataset(dataset: SourceDataset, licences: Readonly<GraphLicenceResolver>, nameOverrides: ReadonlyMap<string, string> = NAME_OVERRIDES): { readonly entry?: Entry; readonly outcome: Outcome } {
   const { id } = dataset;
   const flags: string[] = [];
   const notConverted = (reason: string): { outcome: Outcome } => ({ outcome: { id, outcome: "not-converted", reason, flags } });
@@ -533,6 +535,10 @@ export function convertDataset(dataset: SourceDataset, nameOverrides: ReadonlyMa
     recipe = { status: "fetchable", source: urls.indexOf(chosen.url), archive: chosen.archive, parser: chosen.parser };
   }
 
+  const licenceSource = sources[recipe.status === "fetchable" ? recipe.source : 0];
+  if (licenceSource === undefined) {
+    throw new Error(`${id} has no source to read a licence from`);
+  }
   const named = namespaceOf(id);
   const entry = parseEntry({
     id,
@@ -543,7 +549,7 @@ export function convertDataset(dataset: SourceDataset, nameOverrides: ReadonlyMa
     tags: dataset.category === undefined ? [] : [dataset.category],
     category: "graph/v1",
     sources,
-    licence: { kind: "unrecorded" },
+    licence: licences.resolve(id, licenceSource.url),
     citations: citationsOf(dataset.citation),
     recipe,
     crosswalk: { file: TOPOLOGY_CROSSWALK },
@@ -603,11 +609,12 @@ export interface Report {
  * Converts a whole catalogue.
  * @param pipeline - The pipeline catalogue.
  * @param graphbox - The graphbox catalogue, for the overlap section.
+ * @param licences - The licence curation's resolver, checked for unused records once every dataset has converted.
  * @param nameOverrides - Replacement names by dataset id.
  * @returns The entries in id order and the report.
  * @throws Error when an override names a dataset the catalogue lacks or gives the name the dataset already has.
  */
-export function convertCatalogue(pipeline: SourceCatalogue, graphbox: GraphboxCatalogue, nameOverrides: ReadonlyMap<string, string> = NAME_OVERRIDES): { readonly entries: readonly Entry[]; readonly report: Report } {
+export function convertCatalogue(pipeline: SourceCatalogue, graphbox: GraphboxCatalogue, licences: Readonly<GraphLicenceResolver>, nameOverrides: ReadonlyMap<string, string> = NAME_OVERRIDES): { readonly entries: readonly Entry[]; readonly report: Report } {
   for (const [id, name] of nameOverrides) {
     const dataset = Object.values(pipeline.datasets).find((candidate) => candidate.id === id);
     if (dataset === undefined) {
@@ -620,12 +627,14 @@ export function convertCatalogue(pipeline: SourceCatalogue, graphbox: GraphboxCa
   const entries: Entry[] = [];
   const outcomes: Outcome[] = [];
   for (const dataset of Object.values(pipeline.datasets).sort((left, right) => (left.id < right.id ? -1 : 1))) {
-    const converted = convertDataset(dataset, nameOverrides);
+    const converted = convertDataset(dataset, licences, nameOverrides);
     if (converted.entry !== undefined) {
       entries.push(converted.entry);
     }
     outcomes.push(converted.outcome);
   }
+
+  licences.assertAllUsed();
 
   return {
     entries,

@@ -15,7 +15,8 @@
   },
   "id": "yago3-10",
   "licence": {
-    "kind": "unrecorded"
+    "id": "CC-BY-3.0",
+    "kind": "spdx"
   },
   "name": "YAGO 3.10 Knowledge Graph",
   "properties": {

@@ -15,7 +15,8 @@
   },
   "id": "erdos02",
   "licence": {
-    "kind": "unrecorded"
+    "id": "CC-BY-NC-SA-2.5",
+    "kind": "spdx"
   },
   "name": "Erdos Collaboration 2002",
   "properties": {

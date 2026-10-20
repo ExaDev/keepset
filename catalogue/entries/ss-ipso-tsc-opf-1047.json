@@ -18,7 +18,8 @@
   },
   "id": "ss-ipso-tsc-opf-1047",
   "licence": {
-    "kind": "unrecorded"
+    "id": "CC-BY-4.0",
+    "kind": "spdx"
   },
   "name": "IPSO/TSC_OPF_1047",
   "namespace": [

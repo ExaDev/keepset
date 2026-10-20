@@ -18,7 +18,8 @@
   },
   "id": "pajek-gd03",
   "licence": {
-    "kind": "unrecorded"
+    "id": "CC-BY-NC-SA-2.5",
+    "kind": "spdx"
   },
   "name": "GD03 Contest Graph A",
   "namespace": [

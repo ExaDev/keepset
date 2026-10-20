@@ -18,7 +18,8 @@
   },
   "id": "ss-snap-email-eu-core",
   "licence": {
-    "kind": "unrecorded"
+    "id": "CC-BY-4.0",
+    "kind": "spdx"
   },
   "name": "SNAP/email-Eu-core",
   "namespace": [

@@ -18,7 +18,8 @@
   },
   "id": "ss-tamu-smartgridcenter-activsg70k",
   "licence": {
-    "kind": "unrecorded"
+    "id": "CC-BY-4.0",
+    "kind": "spdx"
   },
   "name": "TAMU_SmartGridCenter/ACTIVSg70K",
   "namespace": [

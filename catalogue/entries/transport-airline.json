@@ -15,7 +15,8 @@
   },
   "id": "transport-airline",
   "licence": {
-    "kind": "unrecorded"
+    "id": "ODbL-1.0",
+    "kind": "spdx"
   },
   "name": "Worldwide Airline Network",
   "properties": {

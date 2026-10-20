@@ -15,7 +15,8 @@
   },
   "id": "gd99-linden",
   "licence": {
-    "kind": "unrecorded"
+    "id": "CC-BY-NC-SA-2.5",
+    "kind": "spdx"
   },
   "name": "GD99 Lindenstrasse",
   "properties": {
