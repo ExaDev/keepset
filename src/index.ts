@@ -1,8 +1,8 @@
 export { getDataset, getManifest, listDatasets, listNamespaces } from "./bundled";
 export { CatalogueIndexSchema, createCatalogue } from "./catalogue";
 export type { Catalogue, CatalogueIndex, Dataset, DatasetQuery, NamespaceNode } from "./catalogue";
-export { CategoryIdSchema, countTarget, getCategory, getTarget, kindOf, listCategories } from "./categories";
-export type { Category, CategoryId, CategoryShape, CategoryTarget, CategoryTargets, CountedKey } from "./categories";
+export { CategoryIdSchema, countedKeys, countTarget, getCategory, getCollectionTarget, getTarget, kindOf, listCategories } from "./categories";
+export type { Category, CategoryId, CategoryTarget, CategoryTargets, CollectionTarget, CountedKey } from "./categories";
 export {
   AliasSchema,
   ArchiveMemberSchema,
@@ -40,6 +40,6 @@ export { JsonScalarSchema } from "./targets/json-scalar";
 export type { JsonScalar } from "./targets/json-scalar";
 export { OrNodeSchema, OrV1Schema } from "./targets/or-v1";
 export type { OrNode, OrV1 } from "./targets/or-v1";
-export { OrInstanceSchema, OrSetV1Schema } from "./targets/or-set-v1";
-export type { OrInstance, OrSetV1 } from "./targets/or-set-v1";
+export { collectionOf } from "./targets/collection";
+export type { Collection, Instance } from "./targets/collection";
 export { validateDataset } from "./validate";

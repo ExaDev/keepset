@@ -218,12 +218,12 @@ export const openFemaEntry = {
 /** One of each entry shape, for round-trip and schema-agreement tests. */
 export const representativeEntries = [liveEntry, deadEntry, notFetchableEntry];
 
-/** A fetchable or-set/v1 entry: a zip of CSV files, one instance each, read through the `csv-table` parser and mapped onto the set's instances; the archive's other files are not read. */
-export const orSetEntry = {
+/** A fetchable or/v1 entry that is a collection: a zip of CSV files, one instance each, read through the `csv-table` parser. The crosswalk is the one a single table of the same columns would have, applied to each member; the archive's other files are not read. */
+export const orCollectionEntry = {
   id: "route-suite",
   name: "Route suite",
   tags: [],
-  category: "or-set/v1",
+  category: "or/v1",
   sources: [{ url: "https://example.org/data/suite.zip", retrieved: "2026-10-20", status: "live" }],
   licence: { kind: "unrecorded" },
   citations: [],
@@ -246,15 +246,13 @@ export const orSetEntry = {
   },
   crosswalk: {
     source: "csv-table",
-    target: "or-set/v1",
+    target: "or/v1",
     rules: [
       { op: "move", from: "meta", to: "meta" },
-      { op: "move", from: "members[].id", to: "instances[].id" },
-      { op: "move", from: "members[].meta", to: "instances[].meta" },
-      { op: "move", from: "members[].nodes[].id", to: "instances[].nodes[].id" },
-      { op: "move", from: "members[].nodes[].x", to: "instances[].nodes[].x" },
-      { op: "move", from: "members[].nodes[].y", to: "instances[].nodes[].y" },
-      { op: "move", from: "members[].nodes[].prize", to: "instances[].nodes[].prize" },
+      { op: "move", from: "nodes[].id", to: "nodes[].id" },
+      { op: "move", from: "nodes[].x", to: "nodes[].x" },
+      { op: "move", from: "nodes[].y", to: "nodes[].y" },
+      { op: "move", from: "nodes[].prize", to: "nodes[].prize" },
     ],
     oneWay: [],
   },
@@ -262,8 +260,28 @@ export const orSetEntry = {
   properties: {},
 } as const;
 
+/** A fetchable graph/v1 entry that is a collection: a tar of edge lists, one graph each. It shows a collection needs nothing of its category. */
+export const graphCollectionEntry = {
+  id: "graph-suite",
+  name: "Graph suite",
+  tags: [],
+  category: "graph/v1",
+  sources: [{ url: "https://example.org/data/graphs.tar", retrieved: "2026-10-20", status: "live" }],
+  licence: { kind: "unrecorded" },
+  citations: [],
+  recipe: {
+    status: "fetchable",
+    source: 0,
+    archive: { kind: "tar", members: { extensions: [".edges"] } },
+    parser: { format: "edge-list", encoding: "utf-8", delimiter: "whitespace", skipLines: 0, commentPrefixes: ["#"], sourceColumn: 0, targetColumn: 1 },
+  },
+  crosswalk: { file: "crosswalks/graph-v1/topology.json" },
+  expectedCounts: {},
+  properties: {},
+} as const;
+
 /** Every entry shape, one entry of each category as well: for the tests that check the entry schema, its generated JSON Schema and serialisation, which the catalogue fixtures (graph entries only) do not need to carry. */
-export const everyEntryShape = [...representativeEntries, orEntry, orSetEntry, arcgisEntry, socrataEntry, ckanEntry, openFemaEntry];
+export const everyEntryShape = [...representativeEntries, orEntry, orCollectionEntry, graphCollectionEntry, arcgisEntry, socrataEntry, ckanEntry, openFemaEntry];
 
 /** A catalogue manifest for fixture catalogues. */
 export const fixtureManifest = {

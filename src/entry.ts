@@ -1,6 +1,6 @@
 import { CrosswalkSchema } from "twindex";
 import { z } from "zod";
-import { CategoryIdSchema, getCategory } from "./categories";
+import { CategoryIdSchema, countedKeys } from "./categories";
 import { define } from "./define";
 import { namesOf } from "./names";
 import { CatalogueSyntaxError, type SyntaxIssue } from "./errors";
@@ -263,23 +263,13 @@ export const EntrySchema = define(
       if (entry.recipe.status === "fetchable" && entry.recipe.source >= entry.sources.length) {
         ctx.addIssue({ code: "custom", path: ["recipe", "source"], message: `names source ${String(entry.recipe.source)} but the entry has ${String(entry.sources.length)}` });
       }
-      if (entry.recipe.status === "fetchable") {
-        const selectsMembers = "members" in entry.recipe.archive;
-        const { shape } = getCategory(entry.category);
-        if (shape === "collection" && !selectsMembers) {
-          ctx.addIssue({ code: "custom", path: ["recipe", "archive"], message: `${entry.category} is a collection, so the archive must select its members with \`members\`` });
-        }
-        if (shape === "document" && selectsMembers) {
-          ctx.addIssue({ code: "custom", path: ["recipe", "archive", "members"], message: `${entry.category} is one document, so the archive selects one file with \`member\`` });
-        }
-      }
       if ("target" in entry.crosswalk && entry.crosswalk.target !== entry.category) {
         ctx.addIssue({ code: "custom", path: ["crosswalk", "target"], message: `must be the entry's category, ${entry.category}` });
       }
-      const counted: readonly string[] = getCategory(entry.category).counted;
+      const counted = countedKeys(entry.category, entry.recipe.status === "fetchable" && "members" in entry.recipe.archive);
       for (const key of Object.keys(entry.expectedCounts)) {
         if (!counted.includes(key)) {
-          ctx.addIssue({ code: "custom", path: ["expectedCounts", key], message: `${entry.category} counts only ${counted.join(", ")}` });
+          ctx.addIssue({ code: "custom", path: ["expectedCounts", key], message: `${entry.category} ${entry.recipe.status === "fetchable" && "members" in entry.recipe.archive ? "collections count" : "counts"} only ${counted.join(", ")}` });
         }
       }
       for (const key of RESERVED_META_KEYS) {

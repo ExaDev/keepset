@@ -3,7 +3,7 @@ import { describe, expect, it } from "vitest";
 import { createCatalogue, type Dataset } from "../catalogue";
 import { DatasetNotFoundError, KeepsetError, RecipeError, type RecipeStep } from "../errors";
 import { gzip, tar, zip } from "../test-support/archives";
-import { arcgisEntry, ckanEntry, deadEntry, fixtureIndex, liveEntry, notFetchableEntry, openFemaEntry, orEntry, orSetEntry, socrataEntry } from "../test-support/entries";
+import { arcgisEntry, ckanEntry, deadEntry, fixtureIndex, liveEntry, notFetchableEntry, openFemaEntry, orCollectionEntry, orEntry, graphCollectionEntry, socrataEntry } from "../test-support/entries";
 import { downloadUrl, fetchDataset, fetchEntry, roundTripDataset, roundTripEntry, type FetchPort } from "./fetch-dataset";
 
 const karateText = "% karate excerpt\n1 2\n2 3\n3 1\n";
@@ -225,14 +225,14 @@ describe("an or/v1 entry", () => {
   });
 });
 
-describe("an or-set/v1 entry", () => {
+describe("an or/v1 entry that is a collection", () => {
   const suite = (files: readonly { readonly path: string; readonly text: string }[]): ReturnType<typeof servedBy> => servedBy({ "https://example.org/data/suite.zip": zip(files) });
   const members = [
     { path: "suite/b.csv", text: "customer,x,y,prize\n1,0,0,0\n" },
     { path: "suite/a.csv", text: "customer,x,y,prize\n1,4,5,0\n2,6,7,3\n" },
     { path: "suite/readme.txt", text: "not an instance" },
   ];
-  const dataset = datasetWith(orSetEntry);
+  const dataset = datasetWith(orCollectionEntry);
 
   it("reads every matching member as an instance, in path order, each numbering its own nodes", async () => {
     const fetched = await fetchEntry(dataset, { fetch: suite(members).fetch, now });
@@ -280,10 +280,43 @@ describe("an or-set/v1 entry", () => {
     expect(error.message).toMatch(/member suite\/z\.csv: .*line 2/);
   });
 
+  it("fails at the crosswalk step naming the member the crosswalk cannot be applied to", async () => {
+    const dropped = { ...orCollectionEntry, crosswalk: { ...orCollectionEntry.crosswalk, rules: [...orCollectionEntry.crosswalk.rules, { op: "move", from: "nodes[].absent", to: "nodes[].prize" }] } };
+    const error = await failure(fetchEntry(datasetWith({ ...dropped, crosswalk: { ...dropped.crosswalk, rules: dropped.crosswalk.rules.filter((rule) => rule.to !== "nodes[].prize" || rule.from === "nodes[].absent") } }), { fetch: suite(members).fetch, now }));
+    expect(error.step).toBe("crosswalk");
+    expect(error.message).toMatch(/member suite\/a\.csv/);
+  });
+
   it("fails at the validate step naming the instance whose node ids repeat", async () => {
     const error = await failure(fetchEntry(dataset, { fetch: suite([{ path: "suite/a.csv", text: "customer,x,y,prize\n1,4,5,0\n1,6,7,3\n" }]).fetch, now }));
     expect(error.step).toBe("validate");
     expect(error.message).toMatch(/instances\.0\.nodes\.1\.id/);
+  });
+});
+
+describe("a graph/v1 entry that is a collection", () => {
+  const graphs = [
+    { path: "graphs/b.edges", text: "1 2\n" },
+    { path: "graphs/a.edges", text: "# a triangle\n1 2\n2 3\n3 1\n" },
+    { path: "graphs/readme.txt", text: "not a graph" },
+  ];
+  const served = servedBy({ "https://example.org/data/graphs.tar": tar(graphs) });
+  const dataset = datasetWith(graphCollectionEntry);
+
+  it("resolves a collection of graphs through the same path as a collection of tasks, with no category of its own", async () => {
+    const fetched = await fetchEntry(dataset, { fetch: served.fetch, now });
+    expect(fetched.warnings).toEqual([]);
+    expect(fetched.data).toMatchObject({
+      meta: { id: "graph-suite", name: "Graph suite" },
+      instances: [
+        { id: "graphs/a.edges", meta: {}, nodes: [{ id: "1" }, { id: "2" }, { id: "3" }], edges: [{ source: "1", target: "2" }, { source: "2", target: "3" }, { source: "3", target: "1" }] },
+        { id: "graphs/b.edges", nodes: [{ id: "1" }, { id: "2" }], edges: [{ source: "1", target: "2" }] },
+      ],
+    });
+  });
+
+  it("holds the round trip for every member", async () => {
+    expect(await roundTripEntry(dataset, { fetch: served.fetch, now })).toMatchObject({ holds: true });
   });
 });
 
