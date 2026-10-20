@@ -4,8 +4,15 @@ import type { JsonScalar } from "../../src/targets/json-scalar";
 import type { GraphLicenceResolver } from "./licence";
 import type { GraphboxCatalogue, SourceCatalogue, SourceDataset, SourceDownload, SourceEntry, StructuredCitation } from "./source";
 
-/** The shared crosswalk every converted entry uses: all keepset parsers emit the same native topology. */
-export const TOPOLOGY_CROSSWALK = "crosswalks/graph-v1/topology.json";
+/** The crosswalk files of graph/v1, each for the fields of the native graph a parser emits: the topology every parser emits, and with it the edge weight, the edge time, both, or (for the ratings parser) node and edge types as well. */
+export const CROSSWALKS = {
+  topology: "crosswalks/graph-v1/topology.json",
+  weighted: "crosswalks/graph-v1/weighted.json",
+  timestamped: "crosswalks/graph-v1/timestamped.json",
+  weightedTimestamped: "crosswalks/graph-v1/weighted-timestamped.json",
+  rated: "crosswalks/graph-v1/rated.json",
+} as const;
+export type CrosswalkFile = (typeof CROSSWALKS)[keyof typeof CROSSWALKS];
 
 /**
  * Per-dataset parser options the thesis pipeline sets in Python rather than in its catalogue (`BENCHMARK_DATASETS` and `HETEROGENEOUS_DATASETS` in experiments/shared/infrastructure/benchmark_data.py of Mearman/Thesis). The import carries them into the recipe as stated options and flags each one in the report.
@@ -46,6 +53,49 @@ export const OMITTED_FIELDS: readonly { readonly field: string; readonly reason:
   { field: "preferredFormat", reason: "used only to choose which download the recipe reads" },
   { field: "properties sync-back", reason: "the pipeline writes detected structural properties back into its catalogue; keepset entries are not rewritten by fetching, and a fetch reports count drift as a warning instead" },
 ];
+
+/** What a downloaded file shows the catalogue's record of a dataset to get wrong, found by reading the whole file when a recipe was written for it: the replacement description, expected node count and structural properties, with the reason. A correction is applied over the catalogue's record and flagged in the report; the source catalogue itself is never edited. */
+export interface Correction {
+  readonly description?: string;
+  readonly expectedNodes?: number;
+  readonly properties?: Readonly<Record<string, JsonScalar>>;
+  readonly reason: string;
+}
+
+/** The movies a MovieLens ratings file rates are fewer than the movies its release lists, and the users who rate are fewer than the release's total in the older ones; a description counting them from the release page misstates the graph the file gives. */
+const MOVIELENS_COUNT_REASON = "the description counts users and movies from the release's own statement, while the ratings file the recipe reads rates fewer movies (or has fewer users), and the graph has the nodes of the ratings file";
+
+export const CORRECTIONS: ReadonlyMap<string, Correction> = new Map([
+  [
+    "konect-opsahl-collaboration",
+    {
+      description: "Bipartite authorship network of the arXiv condensed matter section (cond-mat) from 1995 to 1999: an edge joins an author, a left node, and a paper they wrote, a right node. The network is unweighted and has no repeated pairs.",
+      expectedNodes: 38741,
+      properties: { components: 1188, connected: false, cyclic: true, density: 7.808365090394136e-5, multigraph: false, selfLoops: false, weighted: false },
+      reason:
+        "the file is a bipartite authorship network (KONECT `% bip unweighted`) whose two node sets are numbered independently from 1, so its nodes are those of both sets, and it has no weights, no repeated pairs and no self loops; the catalogue's description, node count and structural properties describe a weighted co-authorship network with one node set",
+    },
+  ],
+  [
+    "movielens-1m",
+    { description: "Bipartite user-movie rating network from the GroupLens research group. 1,000,209 ratings from 6,040 users on 3,706 movies. Edge weights are ratings normalised to [0, 1].", reason: MOVIELENS_COUNT_REASON },
+  ],
+  [
+    "movielens-10m",
+    { description: "Bipartite user-movie rating network from the GroupLens research group. 10,000,054 ratings from 69,878 users on 10,677 movies. Edge weights are ratings normalised to [0, 1].", reason: MOVIELENS_COUNT_REASON },
+  ],
+  [
+    "movielens-25m",
+    { description: "Bipartite user-movie rating network from the GroupLens research group. 25,000,095 ratings from 162,541 users on 59,047 movies. Edge weights are ratings normalised to [0, 1].", reason: MOVIELENS_COUNT_REASON },
+  ],
+  [
+    "amazon-movies-tv",
+    {
+      description: "Undirected bipartite user-product review network for Movies and TV on Amazon. Users are linked to products they reviewed; edge weights are normalised star ratings.",
+      reason: "the catalogue records this download as undirected (format amazon-ratings-undirected, property directed false), while its description calls the network directed",
+    },
+  ],
+]);
 
 /** The id prefixes that name a collection, each with the namespace its datasets are filed under. The pipeline catalogue mints ids, and only these prefixes mean "from this collection": others (`ca-`, `p2p-`, `amazon-`) are part of an upstream dataset's own name, and are left without a namespace. SuiteSparse ids are `ss-<group>-<name>` and are handled by `namespaceOf`, since the group is a second namespace segment. */
 const COLLECTION_NAMESPACES: ReadonlyMap<string, string> = new Map([
@@ -93,6 +143,7 @@ interface Chosen {
   readonly url: string;
   readonly archive: Archive;
   readonly parser: Parser;
+  readonly crosswalk: CrosswalkFile;
   readonly flags: readonly string[];
 }
 
@@ -222,6 +273,83 @@ function edgeList(options: Partial<Extract<Parser, { format: "edge-list" }>> = {
   return { format: "edge-list", encoding: "utf-8", delimiter: "detect", skipLines: 0, commentPrefixes: ["#", "%"], sourceColumn: 0, targetColumn: 1, ...options };
 }
 
+/** The layout of each MovieLens release's ratings file, read from the release (the layouts differ between releases), keyed by the release's archive name: the delimiter, the header lines before the first rating, and the member that holds the ratings. A rating is out of 5 in every release (the later ones add half stars). */
+const MOVIELENS_RELEASES: ReadonlyMap<string, { readonly delimiter: "comma" | "tab" | "double-colon"; readonly skipLines: number; readonly member: string }> = new Map([
+  ["ml-100k", { delimiter: "tab", skipLines: 0, member: "u.data" }],
+  ["ml-1m", { delimiter: "double-colon", skipLines: 0, member: "ratings.dat" }],
+  ["ml-10m", { delimiter: "double-colon", skipLines: 0, member: "ratings.dat" }],
+  ["ml-25m", { delimiter: "comma", skipLines: 1, member: "ratings.csv" }],
+]);
+
+/** The top of the rating scale of the ratings the catalogue lists: five stars in an Amazon file and in every MovieLens release. */
+const MAX_RATING = 5;
+
+/** What a KONECT `out.*` file holds beyond the two node columns, read from the file because the catalogue records only the download: whether its third column is an edge weight and whether it has a time column. Keyed by the catalogue's dataset id. */
+const KONECT_LAYOUTS: ReadonlyMap<string, { readonly weighted: boolean; readonly timestamped: boolean }> = new Map([
+  ["konect-opsahl-collaboration", { weighted: false, timestamped: false }],
+  ["konect-opsahl-ucsocial", { weighted: false, timestamped: true }],
+  ["konect-radoslaw-email", { weighted: false, timestamped: true }],
+  ["konect-wikispeedia", { weighted: false, timestamped: false }],
+  ["lesmis", { weighted: true, timestamped: false }],
+]);
+
+/** The member of a KONECT archive that holds the edges: `out.<network>`, in the directory the archive unpacks to. */
+const KONECT_EDGE_FILE = "(?:[^/]+/)?out\\.[^/]+";
+
+/**
+ * The recipe for a KONECT download, which is a bzip2-compressed tar archive of `out.<network>` (the edges), `meta.<network>` and a readme.
+ * @param download - The download.
+ * @param datasetId - The dataset.
+ * @returns The recipe, or the reason there is none.
+ */
+function konectRecipe(download: Download, datasetId: string): Chosen | { readonly unsupported: string } {
+  const layout = KONECT_LAYOUTS.get(datasetId);
+  if (layout === undefined) {
+    return { unsupported: "a KONECT archive whose edge columns the import has not read" };
+  }
+  const crosswalk = layout.weighted ? (layout.timestamped ? CROSSWALKS.weightedTimestamped : CROSSWALKS.weighted) : layout.timestamped ? CROSSWALKS.timestamped : CROSSWALKS.topology;
+
+  return {
+    url: download.url,
+    archive: { kind: "tar.bz2", member: { pattern: KONECT_EDGE_FILE } },
+    parser: { format: "konect", encoding: "utf-8", weighted: layout.weighted, timestamped: layout.timestamped },
+    crosswalk,
+    flags: ["KONECT edge columns read from the downloaded file: the catalogue records only the download"],
+  };
+}
+
+/**
+ * The recipe for a ratings download: an Amazon ratings file, or a MovieLens release's archive.
+ * @param download - The download.
+ * @param format - The catalogue's format.
+ * @returns The recipe, or the reason there is none.
+ */
+function ratingsRecipe(download: Download, format: "amazon-ratings" | "amazon-ratings-undirected" | "movielens"): Chosen | { readonly unsupported: string } {
+  const original = parseWayback(download.url)?.original ?? download.url;
+  if (format !== "movielens") {
+    return {
+      url: download.url,
+      archive: { kind: "none" },
+      parser: { format: "user-item-ratings", encoding: "utf-8", delimiter: "comma", skipLines: 0, itemType: "product", maxRating: MAX_RATING },
+      crosswalk: CROSSWALKS.rated,
+      flags: ["ratings layout read from the downloaded file: user, product, rating and time separated by commas, with no header"],
+    };
+  }
+  const release = /\/([^/]+)\.zip$/.exec(pathOf(original))?.[1];
+  const layout = release === undefined ? undefined : MOVIELENS_RELEASES.get(release);
+  if (release === undefined || layout === undefined) {
+    return { unsupported: "a MovieLens release whose ratings layout the import has not read" };
+  }
+
+  return {
+    url: download.url,
+    archive: { kind: "zip", member: { path: layout.member } },
+    parser: { format: "user-item-ratings", encoding: "utf-8", delimiter: layout.delimiter, skipLines: layout.skipLines, itemType: "movie", maxRating: MAX_RATING },
+    crosswalk: CROSSWALKS.rated,
+    flags: [`ratings layout of ${release} read from the release: ${layout.member}, delimiter ${layout.delimiter}, ${String(layout.skipLines)} header lines`],
+  };
+}
+
 /**
  * Chooses a recipe for one download.
  * @param download - The download.
@@ -244,6 +372,13 @@ function recipeFor(download: Download, datasetId: string): Chosen | { readonly u
   }
   if (format === "landing-page") {
     return { unsupported: "a landing page, not a download" };
+  }
+  if (format === "amazon-ratings" || format === "amazon-ratings-undirected" || format === "movielens") {
+    return ratingsRecipe(download, format);
+  }
+  // The catalogue calls a KONECT archive `konect-tarbz2`, or `tsv` for the tab-separated files inside it.
+  if ((format === "konect-tarbz2" || format === "tsv") && new URL(original).hostname === "konect.cc" && kind === "tar.bz2") {
+    return konectRecipe(download, datasetId);
   }
   // Knowledge-graph triple files: which columns hold the head and the tail varies by benchmark and is not recorded, so only one the pipeline itself fixes (an entry in PIPELINE_PARSER_OVERRIDES) reads as an edge list.
   if ((format === "tsv" || format === "txt") && !PIPELINE_PARSER_OVERRIDES.has(datasetId)) {
@@ -283,7 +418,7 @@ function recipeFor(download: Download, datasetId: string): Chosen | { readonly u
   }
 
   if (kind === "none" || kind === "gzip" || kind === "bzip2") {
-    return { url: download.url, archive: { kind }, parser, flags };
+    return { url: download.url, archive: { kind }, parser, crosswalk: CROSSWALKS.topology, flags };
   }
   // SuiteSparse serves each matrix as /MM/<group>/<name>.tar.gz holding <name>/<name>.mtx.
   const suiteSparse = new URL(original).hostname === "sparse.tamu.edu" ? /^\/MM\/[^/]+\/([^/]+)\.tar\.gz$/.exec(new URL(original).pathname) : null;
@@ -294,18 +429,18 @@ function recipeFor(download: Download, datasetId: string): Chosen | { readonly u
     return { url: download.url, archive: { kind, member: { extensions: [".zip"] }, inner: { kind: "zip", member: { path: download.innerPath } } }, parser, flags };
   }
   if (download.innerPath !== undefined) {
-    return { url: download.url, archive: { kind, member: { path: download.innerPath } }, parser, flags };
+    return { url: download.url, archive: { kind, member: { path: download.innerPath } }, parser, crosswalk: CROSSWALKS.topology, flags };
   }
   if (mapped === "matrix-market" && kind === "tar.gz" && suiteSparse?.[1] !== undefined) {
     const name = suiteSparse[1];
     flags.push("archive member derived from the SuiteSparse archive layout, <name>/<name>.mtx");
 
-    return { url: download.url, archive: { kind, member: { path: `${name}/${name}.mtx` } }, parser, flags };
+    return { url: download.url, archive: { kind, member: { path: `${name}/${name}.mtx` } }, parser, crosswalk: CROSSWALKS.topology, flags };
   }
   const extensions = format === "edges" || new URL(original).hostname === "nrvis.com" ? [".edges"] : MEMBER_EXTENSIONS[mapped];
   flags.push(`archive member chosen by extension ${extensions.join(" or ")}, which the source catalogue does not record`);
 
-  return { url: download.url, archive: { kind, member: { extensions: [...extensions] } }, parser, flags };
+  return { url: download.url, archive: { kind, member: { extensions: [...extensions] } }, parser, crosswalk: CROSSWALKS.topology, flags };
 }
 
 /**
@@ -511,6 +646,7 @@ export function convertDataset(dataset: SourceDataset, licences: Readonly<GraphL
       url: netzschleuderCsv(netzschleuder.url),
       archive: { kind: "zip", member: { path: "edges.csv" } },
       parser: edgeList({ delimiter: "comma", commentPrefixes: ["#"] }),
+      crosswalk: CROSSWALKS.topology,
       flags: ["Netzschleuder: the pipeline reads every Netzschleuder download with its graph-tool parser; the recipe reads the CSV archive derived from the catalogue's URL"],
     };
   } else {
@@ -545,11 +681,16 @@ export function convertDataset(dataset: SourceDataset, licences: Readonly<GraphL
     throw new Error(`${id} has no source to read a licence from`);
   }
   const named = namespaceOf(id);
+  const correction = CORRECTIONS.get(id);
+  if (correction !== undefined) {
+    flags.push(`corrected against the downloaded file: ${correction.reason}`);
+  }
+  const description = correction?.description ?? dataset.description;
   const entry = parseEntry({
     id,
     ...(named === undefined ? {} : { namespace: named.namespace, aliases: [named.alias] }),
     name: nameOverrides.get(id) ?? dataset.name,
-    ...(dataset.description === undefined || dataset.description === "" ? {} : { description: dataset.description }),
+    ...(description === undefined || description === "" ? {} : { description }),
     ...(dataset.domain === undefined ? {} : { domain: dataset.domain }),
     tags: dataset.category === undefined ? [] : [dataset.category],
     category: "graph/v1",
@@ -557,9 +698,9 @@ export function convertDataset(dataset: SourceDataset, licences: Readonly<GraphL
     licence: licences.resolve(id, licenceSource.url),
     citations: citationsOf(dataset.citation),
     recipe,
-    crosswalk: { file: TOPOLOGY_CROSSWALK },
-    expectedCounts: { nodes: dataset.nodeCount, edges: dataset.edgeCount },
-    properties: propertiesOf(dataset),
+    crosswalk: { file: chosen?.crosswalk ?? CROSSWALKS.topology },
+    expectedCounts: { nodes: correction?.expectedNodes ?? dataset.nodeCount, edges: dataset.edgeCount },
+    properties: { ...propertiesOf(dataset), ...correction?.properties },
   });
 
   return { entry, outcome: { id, outcome: flags.length === 0 ? "converted" : "converted-with-flags", recipe: recipe.status, flags } };

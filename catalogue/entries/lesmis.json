@@ -6,7 +6,7 @@
     }
   ],
   "crosswalk": {
-    "file": "crosswalks/graph-v1/topology.json"
+    "file": "crosswalks/graph-v1/weighted.json"
   },
   "description": "Character co-appearance network from Les Misérables by Victor Hugo.",
   "domain": "Fictional network",
@@ -34,8 +34,20 @@
     "weighted": true
   },
   "recipe": {
-    "reason": "no download is in a form keepset reads yet (konect-tarbz2: bzip2 compression has no keepset unpacker yet)",
-    "status": "not-fetchable"
+    "archive": {
+      "kind": "tar.bz2",
+      "member": {
+        "pattern": "(?:[^/]+/)?out\\.[^/]+"
+      }
+    },
+    "parser": {
+      "encoding": "utf-8",
+      "format": "konect",
+      "timestamped": false,
+      "weighted": true
+    },
+    "source": 0,
+    "status": "fetchable"
   },
   "sources": [
     {

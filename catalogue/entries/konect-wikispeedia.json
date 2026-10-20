@@ -33,8 +33,20 @@
     "weighted": false
   },
   "recipe": {
-    "reason": "no download is in a form keepset reads yet (tsv: bzip2 compression has no keepset unpacker yet)",
-    "status": "not-fetchable"
+    "archive": {
+      "kind": "tar.bz2",
+      "member": {
+        "pattern": "(?:[^/]+/)?out\\.[^/]+"
+      }
+    },
+    "parser": {
+      "encoding": "utf-8",
+      "format": "konect",
+      "timestamped": false,
+      "weighted": false
+    },
+    "source": 0,
+    "status": "fetchable"
   },
   "sources": [
     {

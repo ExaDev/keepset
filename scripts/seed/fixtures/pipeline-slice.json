@@ -82,7 +82,7 @@
       "url": "http://vlado.fmf.uni-lj.si/pub/networks/data/UciNet/UciData.htm"
     }
   },
-  "datasetCount": 24,
+  "datasetCount": 35,
   "datasets": {
     "7th_graders": {
       "category": "heterogeneous",
@@ -245,6 +245,98 @@
             }
           ],
           "source": "networkrepository"
+        }
+      ]
+    },
+    "amazon-movies-tv": {
+      "citation": {
+        "authors": [
+          "McAuley, Julian",
+          "Targett, Christopher",
+          "Shi, Qinfeng",
+          "van den Hengel, Anton"
+        ],
+        "publisher": "Proceedings of the 38th International ACM SIGIR Conference on Research and Development in Information Retrieval",
+        "title": "Image-Based Recommendations on Styles and Substitutes",
+        "type": "conference",
+        "year": 2015
+      },
+      "description": "Directed bipartite user-product review network for Movies and TV on Amazon. Users are linked to products they reviewed; edge weights are normalised star ratings.",
+      "edgeCount": 4607047,
+      "id": "amazon-movies-tv",
+      "name": "Amazon Movies and TV Reviews",
+      "nodeCount": 2289561,
+      "preferredFormat": "amazon-ratings-undirected",
+      "properties": {
+        "density": 1.7577147235987306e-06,
+        "edge_type_count": 1,
+        "has_self_loops": false,
+        "is_connected": false,
+        "is_cyclic": true,
+        "is_directed": false,
+        "is_heterogeneous": true,
+        "is_multigraph": false,
+        "is_weighted": true,
+        "n_components": 19678,
+        "node_type_count": 2
+      },
+      "rawBytes": 0,
+      "retrieved": "2026-03-27",
+      "sources": [
+        {
+          "downloads": [
+            {
+              "format": "amazon-ratings-undirected",
+              "url": "http://jmcauley.ucsd.edu/data/amazon/categoryFiles/ratings_Movies_and_TV.csv"
+            }
+          ],
+          "source": "mcauley-ucsd"
+        }
+      ]
+    },
+    "amazon-musical-instruments": {
+      "citation": {
+        "authors": [
+          "McAuley, Julian",
+          "Targett, Christopher",
+          "Shi, Qinfeng",
+          "van den Hengel, Anton"
+        ],
+        "publisher": "Proceedings of the 38th International ACM SIGIR Conference on Research and Development in Information Retrieval",
+        "title": "Image-Based Recommendations on Styles and Substitutes",
+        "type": "conference",
+        "year": 2015
+      },
+      "description": "Directed bipartite user-product review network for Musical Instruments on Amazon. Users are linked to products they reviewed; edge weights are normalised star ratings.",
+      "edgeCount": 500176,
+      "id": "amazon-musical-instruments",
+      "name": "Amazon Musical Instruments Reviews",
+      "nodeCount": 422277,
+      "preferredFormat": "amazon-ratings",
+      "properties": {
+        "density": 5.609950357320079e-06,
+        "edge_type_count": 1,
+        "has_self_loops": false,
+        "is_connected": false,
+        "is_cyclic": true,
+        "is_directed": true,
+        "is_heterogeneous": true,
+        "is_multigraph": false,
+        "is_weighted": true,
+        "n_components": 23753,
+        "node_type_count": 2
+      },
+      "rawBytes": 0,
+      "retrieved": "2026-03-27",
+      "sources": [
+        {
+          "downloads": [
+            {
+              "format": "amazon-ratings",
+              "url": "http://jmcauley.ucsd.edu/data/amazon/categoryFiles/ratings_Musical_Instruments.csv"
+            }
+          ],
+          "source": "mcauley-ucsd"
         }
       ]
     },
@@ -910,6 +1002,210 @@
         }
       ]
     },
+    "konect-opsahl-collaboration": {
+      "citation": {
+        "authors": [
+          "Opsahl, Tore"
+        ],
+        "publisher": "Social Networks",
+        "title": "Triadic closure in two-mode networks: Redefining the global and local clustering coefficients",
+        "type": "journal",
+        "year": 2013
+      },
+      "description": "Undirected weighted co-authorship network from the arXiv. Edge weights represent the number of papers co-authored by each pair of researchers, making it genuinely weighted.",
+      "edgeCount": 58595,
+      "id": "konect-opsahl-collaboration",
+      "name": "Opsahl Collaboration Network",
+      "nodeCount": 22015,
+      "preferredFormat": "konect-tarbz2",
+      "properties": {
+        "density": 0.00024177210459736553,
+        "edge_type_count": 1,
+        "has_self_loops": true,
+        "is_connected": true,
+        "is_cyclic": true,
+        "is_directed": false,
+        "is_heterogeneous": false,
+        "is_multigraph": true,
+        "is_weighted": true,
+        "n_components": 1,
+        "node_type_count": 1
+      },
+      "rawBytes": 0,
+      "retrieved": "2026-03-27",
+      "sources": [
+        {
+          "downloads": [
+            {
+              "format": "konect-tarbz2",
+              "url": "http://konect.cc/files/download.tsv.opsahl-collaboration.tar.bz2"
+            }
+          ],
+          "source": "konect"
+        }
+      ]
+    },
+    "konect-opsahl-ucsocial": {
+      "category": "unweighted",
+      "citation": {
+        "authors": [
+          "Panzarasa, Pietro",
+          "Opsahl, Tore",
+          "Carley, Kathleen M."
+        ],
+        "journal": "Journal of the American Society for Information Science and Technology",
+        "number": 5,
+        "pages": "911-932",
+        "title": "Patterns and dynamics of users' behavior and interaction: Network analysis of an online community",
+        "type": "article",
+        "volume": 60,
+        "year": 2009
+      },
+      "description": "Directed temporal multigraph of private messages sent on an online social network at UC Irvine. Each edge represents a message from one user to another; multiple messages between the same pair create multi-edges. No self-loops.",
+      "domain": "Communication network",
+      "edgeCount": 59835,
+      "id": "konect-opsahl-ucsocial",
+      "name": "Opsahl UC Social Network",
+      "nodeCount": 1899,
+      "preferredFormat": "konect-tarbz2",
+      "properties": {
+        "has_self_loops": false,
+        "is_directed": true,
+        "is_heterogeneous": false,
+        "is_multigraph": true,
+        "is_weighted": false
+      },
+      "rawBytes": 0,
+      "retrieved": "2026-04-20",
+      "sources": [
+        {
+          "downloads": [
+            {
+              "format": "konect-tarbz2",
+              "url": "http://konect.cc/files/download.tsv.opsahl-ucsocial.tar.bz2"
+            }
+          ],
+          "source": "konect"
+        }
+      ]
+    },
+    "konect-radoslaw-email": {
+      "category": "communication",
+      "citation": {
+        "authors": [
+          "M. Michalski"
+        ],
+        "title": "Manufacturing Company Emails",
+        "type": "dataset",
+        "year": 2010
+      },
+      "description": "Internal email communication network between employees of a mid-sized manufacturing company. Directed edges represent individual emails (sender to recipient). Same employee pairs communicate multiple times (multigraph with up to 1,458 emails between one pair). Edges carry timestamps (Unix epoch) as attributes. All weights are 1 (functionally unweighted). Contains self-loops (employees emailing themselves).",
+      "domain": "Communication network",
+      "edgeCount": 82927,
+      "id": "konect-radoslaw-email",
+      "name": "Manufacturing Emails",
+      "nodeCount": 167,
+      "preferredFormat": "tsv",
+      "properties": {
+        "has_self_loops": true,
+        "is_directed": true,
+        "is_heterogeneous": false,
+        "is_multigraph": true,
+        "is_weighted": false
+      },
+      "retrieved": "2026-04-19",
+      "sources": [
+        {
+          "downloads": [
+            {
+              "format": "tsv",
+              "url": "http://konect.cc/files/download.tsv.radoslaw_email.tar.bz2"
+            }
+          ],
+          "source": "konect"
+        }
+      ]
+    },
+    "konect-unread": {
+      "category": "unweighted",
+      "citation": {
+        "authors": [
+          "R. West",
+          "J. Leskovec"
+        ],
+        "journal": "Proceedings of the 21st International Conference on World Wide Web",
+        "pages": "619-628",
+        "title": "Human Wayfinding in Information Networks",
+        "type": "conference",
+        "year": 2012
+      },
+      "description": "Directed network of user navigation paths in the Wikispeedia game, where users navigate between Wikipedia articles by clicking links. Nodes are articles and edges represent clicks. Duplicate edges occur when multiple users click the same link during different paths. No weights or metadata beyond source-target pairs.",
+      "domain": "Hyperlink network",
+      "edgeCount": 343950,
+      "id": "konect-unread",
+      "name": "A KONECT archive the import has not read",
+      "nodeCount": 4179,
+      "preferredFormat": "tsv",
+      "properties": {
+        "has_self_loops": false,
+        "is_directed": true,
+        "is_heterogeneous": false,
+        "is_multigraph": true,
+        "is_weighted": false
+      },
+      "retrieved": "2026-04-19",
+      "sources": [
+        {
+          "downloads": [
+            {
+              "format": "tsv",
+              "url": "http://konect.cc/files/download.tsv.wikispeedia.tar.bz2"
+            }
+          ],
+          "source": "konect"
+        }
+      ]
+    },
+    "konect-wikispeedia": {
+      "category": "unweighted",
+      "citation": {
+        "authors": [
+          "R. West",
+          "J. Leskovec"
+        ],
+        "journal": "Proceedings of the 21st International Conference on World Wide Web",
+        "pages": "619-628",
+        "title": "Human Wayfinding in Information Networks",
+        "type": "conference",
+        "year": 2012
+      },
+      "description": "Directed network of user navigation paths in the Wikispeedia game, where users navigate between Wikipedia articles by clicking links. Nodes are articles and edges represent clicks. Duplicate edges occur when multiple users click the same link during different paths. No weights or metadata beyond source-target pairs.",
+      "domain": "Hyperlink network",
+      "edgeCount": 343950,
+      "id": "konect-wikispeedia",
+      "name": "Wikispeedia",
+      "nodeCount": 4179,
+      "preferredFormat": "tsv",
+      "properties": {
+        "has_self_loops": false,
+        "is_directed": true,
+        "is_heterogeneous": false,
+        "is_multigraph": true,
+        "is_weighted": false
+      },
+      "retrieved": "2026-04-19",
+      "sources": [
+        {
+          "downloads": [
+            {
+              "format": "tsv",
+              "url": "http://konect.cc/files/download.tsv.wikispeedia.tar.bz2"
+            }
+          ],
+          "source": "konect"
+        }
+      ]
+    },
     "lesmis": {
       "category": "small",
       "citation": {
@@ -954,6 +1250,185 @@
             }
           ],
           "source": "konect"
+        }
+      ]
+    },
+    "movielens-100k": {
+      "category": "heterogeneous",
+      "citation": {
+        "authors": [
+          "F. Maxwell Harper",
+          "Joseph A. Konstan"
+        ],
+        "publisher": "ACM Transactions on Interactive Intelligent Systems",
+        "title": "The MovieLens Datasets: History and Context",
+        "type": "journal",
+        "year": 2016
+      },
+      "citeKey": "harper2016movielens",
+      "description": "Bipartite user-movie rating network from the GroupLens research group. 100,000 ratings (1–5 stars) from 943 users on 1,682 movies. Edge weights are ratings normalised to [0, 1].",
+      "domain": "Movie recommendation network",
+      "edgeCount": 100000,
+      "id": "movielens-100k",
+      "name": "MovieLens 100K User-Movie Ratings",
+      "nodeCount": 2625,
+      "preferredFormat": "movielens",
+      "properties": {
+        "density": 0.029036004645760744,
+        "edge_type_count": 1,
+        "has_self_loops": false,
+        "is_connected": true,
+        "is_cyclic": true,
+        "is_directed": false,
+        "is_heterogeneous": true,
+        "is_multigraph": false,
+        "is_weighted": true,
+        "n_components": 1,
+        "node_type_count": 2
+      },
+      "rawBytes": 0,
+      "retrieved": "2026-03-27",
+      "sources": [
+        {
+          "downloads": [
+            {
+              "format": "movielens",
+              "url": "https://files.grouplens.org/datasets/movielens/ml-100k.zip"
+            }
+          ],
+          "source": "grouplens"
+        }
+      ]
+    },
+    "movielens-1m": {
+      "citation": {
+        "authors": [
+          "Harper, F. Maxwell",
+          "Konstan, Joseph A."
+        ],
+        "publisher": "ACM Transactions on Interactive Intelligent Systems",
+        "title": "The MovieLens Datasets: History and Context",
+        "type": "journal",
+        "year": 2016
+      },
+      "description": "Bipartite user-movie rating network from the GroupLens research group. 1,000,209 ratings from 6,040 users on 3,900 movies. Edge weights are ratings normalised to [0, 1].",
+      "edgeCount": 1000209,
+      "id": "movielens-1m",
+      "name": "MovieLens 1M User-Movie Ratings",
+      "nodeCount": 9746,
+      "preferredFormat": "movielens",
+      "properties": {
+        "density": 0.021062625368821634,
+        "edge_type_count": 1,
+        "has_self_loops": false,
+        "is_connected": true,
+        "is_cyclic": true,
+        "is_directed": false,
+        "is_heterogeneous": true,
+        "is_multigraph": false,
+        "is_weighted": true,
+        "n_components": 1,
+        "node_type_count": 2
+      },
+      "rawBytes": 0,
+      "retrieved": "2026-03-27",
+      "sources": [
+        {
+          "downloads": [
+            {
+              "format": "movielens",
+              "url": "https://files.grouplens.org/datasets/movielens/ml-1m.zip"
+            }
+          ],
+          "source": "grouplens"
+        }
+      ]
+    },
+    "movielens-25m": {
+      "citation": {
+        "authors": [
+          "Harper, F. Maxwell",
+          "Konstan, Joseph A."
+        ],
+        "publisher": "ACM Transactions on Interactive Intelligent Systems",
+        "title": "The MovieLens Datasets: History and Context",
+        "type": "journal",
+        "year": 2016
+      },
+      "description": "Bipartite user-movie rating network from the GroupLens research group. 25,000,095 ratings from 162,541 users on 62,423 movies. Edge weights are ratings normalised to [0, 1].",
+      "edgeCount": 25000095,
+      "id": "movielens-25m",
+      "name": "MovieLens 25M User-Movie Ratings",
+      "nodeCount": 221588,
+      "preferredFormat": "movielens",
+      "properties": {
+        "density": 0.0010183126509621027,
+        "edge_type_count": 1,
+        "has_self_loops": false,
+        "is_connected": true,
+        "is_cyclic": true,
+        "is_directed": false,
+        "is_heterogeneous": true,
+        "is_multigraph": false,
+        "is_weighted": true,
+        "n_components": 1,
+        "node_type_count": 2
+      },
+      "rawBytes": 0,
+      "retrieved": "2026-03-27",
+      "sources": [
+        {
+          "downloads": [
+            {
+              "format": "movielens",
+              "url": "https://files.grouplens.org/datasets/movielens/ml-25m.zip"
+            }
+          ],
+          "source": "grouplens"
+        }
+      ]
+    },
+    "movielens-unread": {
+      "citation": {
+        "authors": [
+          "Harper, F. Maxwell",
+          "Konstan, Joseph A."
+        ],
+        "publisher": "ACM Transactions on Interactive Intelligent Systems",
+        "title": "The MovieLens Datasets: History and Context",
+        "type": "journal",
+        "year": 2016
+      },
+      "description": "Bipartite user-movie rating network from the GroupLens research group. 25,000,095 ratings from 162,541 users on 62,423 movies. Edge weights are ratings normalised to [0, 1].",
+      "edgeCount": 25000095,
+      "id": "movielens-unread",
+      "name": "A MovieLens release the import has not read",
+      "nodeCount": 221588,
+      "preferredFormat": "movielens",
+      "properties": {
+        "density": 0.0010183126509621027,
+        "edge_type_count": 1,
+        "has_self_loops": false,
+        "is_connected": true,
+        "is_cyclic": true,
+        "is_directed": false,
+        "is_heterogeneous": true,
+        "is_multigraph": false,
+        "is_weighted": true,
+        "n_components": 1,
+        "node_type_count": 2
+      },
+      "rawBytes": 0,
+      "retrieved": "2026-03-27",
+      "sources": [
+        {
+          "downloads": [
+            {
+              "format": "movielens",
+              "url": "https://files.grouplens.org/datasets/movielens/ml-latest-small.zip"
+            }
+          ],
+          "source": "grouplens"
         }
       ]
     },

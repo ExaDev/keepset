@@ -3516,43 +3516,44 @@
     },
     {
       "flags": [
-        "not fetchable yet: no declarative recipe exists for any download"
+        "ratings layout read from the downloaded file: user, product, rating and time separated by commas, with no header"
       ],
       "id": "amazon-beauty",
       "outcome": "converted-with-flags",
-      "recipe": "not-fetchable"
+      "recipe": "fetchable"
     },
     {
       "flags": [
-        "not fetchable yet: no declarative recipe exists for any download"
+        "ratings layout read from the downloaded file: user, product, rating and time separated by commas, with no header"
       ],
       "id": "amazon-digital-music",
       "outcome": "converted-with-flags",
-      "recipe": "not-fetchable"
+      "recipe": "fetchable"
     },
     {
       "flags": [
-        "not fetchable yet: no declarative recipe exists for any download"
+        "ratings layout read from the downloaded file: user, product, rating and time separated by commas, with no header",
+        "corrected against the downloaded file: the catalogue records this download as undirected (format amazon-ratings-undirected, property directed false), while its description calls the network directed"
       ],
       "id": "amazon-movies-tv",
       "outcome": "converted-with-flags",
-      "recipe": "not-fetchable"
+      "recipe": "fetchable"
     },
     {
       "flags": [
-        "not fetchable yet: no declarative recipe exists for any download"
+        "ratings layout read from the downloaded file: user, product, rating and time separated by commas, with no header"
       ],
       "id": "amazon-musical-instruments",
       "outcome": "converted-with-flags",
-      "recipe": "not-fetchable"
+      "recipe": "fetchable"
     },
     {
       "flags": [
-        "not fetchable yet: no declarative recipe exists for any download"
+        "ratings layout read from the downloaded file: user, product, rating and time separated by commas, with no header"
       ],
       "id": "amazon-video-games",
       "outcome": "converted-with-flags",
-      "recipe": "not-fetchable"
+      "recipe": "fetchable"
     },
     {
       "flags": [],
@@ -4095,35 +4096,36 @@
     },
     {
       "flags": [
-        "not fetchable yet: no declarative recipe exists for any download"
+        "KONECT edge columns read from the downloaded file: the catalogue records only the download",
+        "corrected against the downloaded file: the file is a bipartite authorship network (KONECT `% bip unweighted`) whose two node sets are numbered independently from 1, so its nodes are those of both sets, and it has no weights, no repeated pairs and no self loops; the catalogue's description, node count and structural properties describe a weighted co-authorship network with one node set"
       ],
       "id": "konect-opsahl-collaboration",
       "outcome": "converted-with-flags",
-      "recipe": "not-fetchable"
+      "recipe": "fetchable"
     },
     {
       "flags": [
-        "not fetchable yet: no declarative recipe exists for any download"
+        "KONECT edge columns read from the downloaded file: the catalogue records only the download"
       ],
       "id": "konect-opsahl-ucsocial",
       "outcome": "converted-with-flags",
-      "recipe": "not-fetchable"
+      "recipe": "fetchable"
     },
     {
       "flags": [
-        "not fetchable yet: no declarative recipe exists for any download"
+        "KONECT edge columns read from the downloaded file: the catalogue records only the download"
       ],
       "id": "konect-radoslaw-email",
       "outcome": "converted-with-flags",
-      "recipe": "not-fetchable"
+      "recipe": "fetchable"
     },
     {
       "flags": [
-        "not fetchable yet: no declarative recipe exists for any download"
+        "KONECT edge columns read from the downloaded file: the catalogue records only the download"
       ],
       "id": "konect-wikispeedia",
       "outcome": "converted-with-flags",
-      "recipe": "not-fetchable"
+      "recipe": "fetchable"
     },
     {
       "flags": [
@@ -4135,11 +4137,11 @@
     },
     {
       "flags": [
-        "not fetchable yet: no declarative recipe exists for any download"
+        "KONECT edge columns read from the downloaded file: the catalogue records only the download"
       ],
       "id": "lesmis",
       "outcome": "converted-with-flags",
-      "recipe": "not-fetchable"
+      "recipe": "fetchable"
     },
     {
       "flags": [],
@@ -4183,35 +4185,38 @@
     },
     {
       "flags": [
-        "not fetchable yet: no declarative recipe exists for any download"
+        "ratings layout of ml-100k read from the release: u.data, delimiter tab, 0 header lines"
       ],
       "id": "movielens-100k",
       "outcome": "converted-with-flags",
-      "recipe": "not-fetchable"
+      "recipe": "fetchable"
     },
     {
       "flags": [
-        "not fetchable yet: no declarative recipe exists for any download"
+        "ratings layout of ml-10m read from the release: ratings.dat, delimiter double-colon, 0 header lines",
+        "corrected against the downloaded file: the description counts users and movies from the release's own statement, while the ratings file the recipe reads rates fewer movies (or has fewer users), and the graph has the nodes of the ratings file"
       ],
       "id": "movielens-10m",
       "outcome": "converted-with-flags",
-      "recipe": "not-fetchable"
+      "recipe": "fetchable"
     },
     {
       "flags": [
-        "not fetchable yet: no declarative recipe exists for any download"
+        "ratings layout of ml-1m read from the release: ratings.dat, delimiter double-colon, 0 header lines",
+        "corrected against the downloaded file: the description counts users and movies from the release's own statement, while the ratings file the recipe reads rates fewer movies (or has fewer users), and the graph has the nodes of the ratings file"
       ],
       "id": "movielens-1m",
       "outcome": "converted-with-flags",
-      "recipe": "not-fetchable"
+      "recipe": "fetchable"
     },
     {
       "flags": [
-        "not fetchable yet: no declarative recipe exists for any download"
+        "ratings layout of ml-25m read from the release: ratings.csv, delimiter comma, 1 header lines",
+        "corrected against the downloaded file: the description counts users and movies from the release's own statement, while the ratings file the recipe reads rates fewer movies (or has fewer users), and the graph has the nodes of the ratings file"
       ],
       "id": "movielens-25m",
       "outcome": "converted-with-flags",
-      "recipe": "not-fetchable"
+      "recipe": "fetchable"
     },
     {
       "flags": [
