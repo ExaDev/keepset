@@ -2,14 +2,55 @@
   "aliases": [
     "park-and-loop-routing-cabrera-2021"
   ],
-  "category": "or/v1",
+  "category": "or-set/v1",
   "citations": [],
   "crosswalk": {
-    "file": "crosswalks/or-v1/nodes.json"
+    "oneWay": [],
+    "rules": [
+      {
+        "from": "meta",
+        "op": "move",
+        "to": "meta"
+      },
+      {
+        "from": "members[].id",
+        "op": "move",
+        "to": "instances[].id"
+      },
+      {
+        "from": "members[].meta",
+        "op": "move",
+        "to": "instances[].meta"
+      },
+      {
+        "from": "members[].nodes[].id",
+        "op": "move",
+        "to": "instances[].nodes[].id"
+      },
+      {
+        "from": "members[].nodes[].ServiceTime_min",
+        "op": "move",
+        "to": "instances[].nodes[].duration"
+      },
+      {
+        "from": "members[].nodes[].Latitude",
+        "op": "move",
+        "to": "instances[].nodes[].lat"
+      },
+      {
+        "from": "members[].nodes[].Longitude",
+        "op": "move",
+        "to": "instances[].nodes[].lon"
+      }
+    ],
+    "source": "csv-table",
+    "target": "or-set/v1"
   },
   "description": "Park-and-loop routing instances built from real client locations in France, with coordinates and service times in minutes.",
   "domain": "Vehicle routing with time windows",
-  "expectedCounts": {},
+  "expectedCounts": {
+    "instances": 60
+  },
   "id": "vrp-rep-park-and-loop-routing-cabrera-2021",
   "licence": {
     "kind": "unrecorded"
@@ -19,11 +60,44 @@
     "vrp-rep"
   ],
   "properties": {
-    "surveyId": "or-10"
+    "surveyId": "or-10",
+    "timeUnit": "seconds"
   },
   "recipe": {
-    "reason": "The download is a collection of separate coordinate files plus a readme, and a collection is more than one or/v1 document, so no recipe reads it.",
-    "status": "not-fetchable"
+    "archive": {
+      "kind": "zip",
+      "members": {
+        "pattern": "Coordinates_\\d+\\.txt"
+      }
+    },
+    "parser": {
+      "columns": [
+        "ServiceTime_min",
+        "Latitude",
+        "Longitude"
+      ],
+      "delimiter": "comma",
+      "encoding": "utf-8",
+      "format": "csv-table",
+      "idColumn": "ID",
+      "numericColumns": [
+        {
+          "column": "Longitude",
+          "factor": 1
+        },
+        {
+          "column": "Latitude",
+          "factor": 1
+        },
+        {
+          "column": "ServiceTime_min",
+          "factor": 60
+        }
+      ],
+      "skipLines": 0
+    },
+    "source": 1,
+    "status": "fetchable"
   },
   "sources": [
     {

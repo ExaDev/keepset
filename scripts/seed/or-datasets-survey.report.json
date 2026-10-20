@@ -111,11 +111,12 @@
     {
       "flags": [
         "The licence section of the readme only asks users to email the authors describing their use of the instances, so no licence is recorded.",
-        "The zip holds 60 comma separated files with a .txt extension."
+        "the zip holds 60 comma separated files with a .txt extension and a readme, so the members are selected by name",
+        "ids run across the files and do not restart in each, and a few rows sit at latitude 0 and longitude 0, which the source gives and the entry keeps",
+        "service times are written in minutes and scaled to seconds"
       ],
       "id": "vrp-rep-park-and-loop-routing-cabrera-2021",
-      "reason": "The download is a collection of separate coordinate files plus a readme, and a collection is more than one or/v1 document, so no recipe reads it.",
-      "recipe": "not-fetchable",
+      "recipe": "fetchable",
       "surveyId": "or-10"
     },
     {
