@@ -181,6 +181,7 @@ export const ParserSchema = z.discriminatedUnion("format", [
       matrix: z.int().min(1),
     })
     .strict(),
+  z.object({ format: z.literal("gd-contest"), encoding: EncodingSchema }).strict(),
   z.object({ format: z.literal("customer-points"), encoding: EncodingSchema }).strict(),
   z.object({ format: z.literal("solomon"), encoding: EncodingSchema }).strict(),
   z.object({ format: z.literal("top"), encoding: EncodingSchema }).strict(),
