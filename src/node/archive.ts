@@ -22,7 +22,7 @@ function isResourceFork(path: string): boolean {
 }
 
 /**
- * Whether a member path matches a selector: a path selector matches the whole member path or its trailing segments, an extensions selector the end of the member's name, ignoring case.
+ * Whether a member path matches a selector: a path selector matches the whole member path or its trailing segments, an extensions selector the end of the member's name (ignoring case), a pattern selector the whole path.
  * @param path - The member path.
  * @param member - The recipe's selector.
  * @returns True on a match.
@@ -34,8 +34,25 @@ function selects(path: string, member: ArchiveMember): boolean {
   if ("path" in member) {
     return path === member.path || path.endsWith(`/${member.path}`);
   }
+  if ("pattern" in member) {
+    return new RegExp(`^(?:${member.pattern})$`, "u").test(path);
+  }
 
   return member.extensions.some((extension) => path.toLowerCase().endsWith(extension.toLowerCase()));
+}
+
+/**
+ * Describes what a selector asks for, for an error message.
+ * @param member - The selector.
+ * @param noun - How to name the member or members.
+ * @returns The member path, extensions or pattern it names.
+ */
+function describeSelector(member: ArchiveMember, noun: string): string {
+  if ("path" in member) {
+    return `${noun === "one member" ? "member" : noun} ${member.path}`;
+  }
+
+  return "pattern" in member ? `${noun} matching ${member.pattern}` : `${noun} ending ${member.extensions.join(" or ")}`;
 }
 
 /**
@@ -48,7 +65,7 @@ function selects(path: string, member: ArchiveMember): boolean {
 function pickAll(paths: readonly string[], member: ArchiveMember): string[] {
   const matched = paths.filter((path) => selects(path, member)).sort((left, right) => (left < right ? -1 : left > right ? 1 : 0));
   if (matched.length === 0) {
-    throw new ArchiveError(`expected at least one ${"path" in member ? `member ${member.path}` : `member ending ${member.extensions.join(" or ")}`}, found none among: ${paths.join(", ")}`);
+    throw new ArchiveError(`expected at least one ${describeSelector(member, "member")}, found none among: ${paths.join(", ")}`);
   }
 
   return matched;
@@ -65,8 +82,7 @@ function pick(paths: readonly string[], member: ArchiveMember): string {
   const matched = paths.filter((path) => selects(path, member));
   const [only] = matched;
   if (matched.length !== 1 || only === undefined) {
-    const wanted = "path" in member ? `member ${member.path}` : `one member ending ${member.extensions.join(" or ")}`;
-    throw new ArchiveError(`expected ${wanted}, found ${String(matched.length)} among: ${paths.join(", ")}`);
+    throw new ArchiveError(`expected ${describeSelector(member, "one member")}, found ${String(matched.length)} among: ${paths.join(", ")}`);
   }
 
   return only;

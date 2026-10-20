@@ -1,7 +1,20 @@
 import { parseArgs } from "node:util";
 // Through the package's own name, as cli/keepset.ts imports the library: an `instanceof` check needs the very class the library throws, not a second copy bundled into the command.
-import { KeepsetError, NAME_SEPARATOR, type Dataset, type DatasetQuery, type NamespaceNode, type SyntaxIssue } from "keepset";
+import { KeepsetError, NAME_SEPARATOR, type ArchiveMember, type Dataset, type DatasetQuery, type NamespaceNode, type SyntaxIssue } from "keepset";
 import type { FetchedDataset, RoundTripReport } from "keepset/node";
+
+/**
+ * Says which archive file or files a recipe reads, for the `info` output.
+ * @param selector - The recipe's member selector.
+ * @returns The path, the extensions a name ends with, or the pattern a path matches.
+ */
+function selectorText(selector: ArchiveMember): string {
+  if ("path" in selector) {
+    return selector.path;
+  }
+
+  return "pattern" in selector ? `matching ${selector.pattern}` : `ending ${selector.extensions.join(" or ")}`;
+}
 
 /** The library calls the command delegates to: every command is one of these plus argument parsing and output formatting, injected so the command's own layer is tested alone. */
 export interface CliLibrary {
@@ -161,8 +174,7 @@ export function formatShow(dataset: Dataset): string {
   if (recipe.status === "not-fetchable") {
     lines.push(`  not fetchable: ${recipe.reason}`);
   } else {
-    const { member } = "member" in recipe.archive ? recipe.archive : { member: undefined };
-    const memberText = member === undefined ? "" : "path" in member ? `, member ${member.path}` : `, member ending ${member.extensions.join(" or ")}`;
+    const memberText = "member" in recipe.archive ? `, member ${selectorText(recipe.archive.member)}` : "members" in recipe.archive ? `, members ${selectorText(recipe.archive.members)}` : "";
     const { format, ...options } = recipe.parser;
     lines.push(`  source: [${String(recipe.source)}]`, `  archive: ${recipe.archive.kind}${memberText}`, `  parser: ${format} ${JSON.stringify(options)}`);
   }

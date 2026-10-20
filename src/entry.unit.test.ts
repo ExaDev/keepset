@@ -183,6 +183,12 @@ describe("an archive that selects one file or every file", () => {
     expect(issues(withArchive(orEntry, { kind: "zip", members: { extensions: [".csv"] } }))).toMatch(/or\/v1 is one document, so the archive selects one file with `member`/);
   });
 
+  it("accepts a pattern selector and refuses one that is not a regular expression", () => {
+    expect(issues(withArchive(orSetEntry, { kind: "zip", members: { pattern: "suite/data_\\d+\\.txt" } }))).toBe("");
+    expect(issues(withArchive(orSetEntry, { kind: "zip", members: { pattern: "suite/(data" } }))).toMatch(/must be a valid regular expression/);
+    expect(issues(withArchive(orSetEntry, { kind: "zip", members: { pattern: "" } }))).not.toBe("");
+  });
+
   it("rejects an archive that names both a member and members, or an unknown kind", () => {
     expect(issues(withArchive(orSetEntry, { kind: "zip", member: { extensions: [".csv"] }, members: { extensions: [".csv"] } }))).not.toBe("");
     expect(issues(withArchive(orSetEntry, { kind: "rar", members: { extensions: [".csv"] } }))).not.toBe("");
