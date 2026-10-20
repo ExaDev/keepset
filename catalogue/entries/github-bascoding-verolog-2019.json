@@ -2,13 +2,134 @@
   "aliases": [
     "verolog-2019"
   ],
-  "category": "or/v1",
+  "category": "or-set/v1",
   "citations": [],
   "crosswalk": {
-    "file": "crosswalks/or-v1/nodes.json"
+    "oneWay": [],
+    "rules": [
+      {
+        "from": "meta",
+        "op": "move",
+        "to": "meta"
+      },
+      {
+        "from": "members[].id",
+        "op": "move",
+        "to": "instances[].id"
+      },
+      {
+        "from": "members[].meta.dataset",
+        "op": "move",
+        "to": "instances[].meta.dataset"
+      },
+      {
+        "from": "members[].meta.name",
+        "op": "move",
+        "to": "instances[].meta.name"
+      },
+      {
+        "from": "members[].meta.days",
+        "op": "move",
+        "to": "instances[].meta.days"
+      },
+      {
+        "from": "members[].meta.truckCapacity",
+        "op": "move",
+        "to": "instances[].meta.truckCapacity"
+      },
+      {
+        "from": "members[].meta.truckMaxDistance",
+        "op": "move",
+        "to": "instances[].meta.truckMaxDistance"
+      },
+      {
+        "from": "members[].meta.truckDistanceCost",
+        "op": "move",
+        "to": "instances[].meta.truckDistanceCost"
+      },
+      {
+        "from": "members[].meta.truckDayCost",
+        "op": "move",
+        "to": "instances[].meta.truckDayCost"
+      },
+      {
+        "from": "members[].meta.truckCost",
+        "op": "move",
+        "to": "instances[].meta.truckCost"
+      },
+      {
+        "from": "members[].meta.technicianDistanceCost",
+        "op": "move",
+        "to": "instances[].meta.technicianDistanceCost"
+      },
+      {
+        "from": "members[].meta.technicianDayCost",
+        "op": "move",
+        "to": "instances[].meta.technicianDayCost"
+      },
+      {
+        "from": "members[].meta.technicianCost",
+        "op": "move",
+        "to": "instances[].meta.technicianCost"
+      },
+      {
+        "from": "members[].meta.technicians",
+        "op": "move",
+        "to": "instances[].meta.technicians"
+      },
+      {
+        "from": "members[].nodes[].id",
+        "op": "move",
+        "to": "instances[].nodes[].id"
+      },
+      {
+        "from": "members[].nodes[].machine",
+        "op": "move",
+        "to": "instances[].nodes[].skill"
+      },
+      {
+        "from": "members[].nodes[].x",
+        "op": "move",
+        "to": "instances[].nodes[].x"
+      },
+      {
+        "from": "members[].nodes[].y",
+        "op": "move",
+        "to": "instances[].nodes[].y"
+      },
+      {
+        "from": "members[].nodes[].kind",
+        "op": "move",
+        "to": "instances[].nodes[].kind"
+      },
+      {
+        "from": "members[].nodes[].location",
+        "op": "move",
+        "to": "instances[].nodes[].location"
+      },
+      {
+        "from": "members[].nodes[].fromDay",
+        "op": "move",
+        "to": "instances[].nodes[].fromDay"
+      },
+      {
+        "from": "members[].nodes[].toDay",
+        "op": "move",
+        "to": "instances[].nodes[].toDay"
+      },
+      {
+        "from": "members[].nodes[].amount",
+        "op": "move",
+        "to": "instances[].nodes[].amount"
+      }
+    ],
+    "source": "verolog-2019",
+    "target": "or-set/v1"
   },
   "domain": "Technician and home-care routing",
-  "expectedCounts": {},
+  "expectedCounts": {
+    "instances": 27
+  },
   "id": "github-bascoding-verolog-2019",
   "licence": {
     "kind": "unrecorded"
@@ -21,14 +142,29 @@
     "surveyId": "or-24"
   },
   "recipe": {
-    "reason": "The instances are keyword format text files in a collection mirrored by a student without a licence statement, and a collection is more than one or/v1 document, so no recipe reads it.",
-    "status": "not-fetchable"
+    "archive": {
+      "kind": "zip",
+      "members": {
+        "pattern": "VeRoLog-2019-main/All Instances/VSC2019_(?:EX\\d\\d|ORTEC_early_\\d\\d)\\.txt"
+      }
+    },
+    "parser": {
+      "encoding": "utf-8",
+      "format": "verolog-2019"
+    },
+    "source": 1,
+    "status": "fetchable"
   },
   "sources": [
     {
       "retrieved": "2026-10-19",
       "status": "live",
       "url": "https://github.com/BasCoding/VeRoLog-2019"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://codeload.github.com/BasCoding/VeRoLog-2019/zip/refs/heads/main"
     }
   ],
   "tags": [

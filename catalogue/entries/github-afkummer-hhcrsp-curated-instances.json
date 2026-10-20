@@ -21,7 +21,7 @@
     "surveyId": "or-17"
   },
   "recipe": {
-    "reason": "The instances are keyword format text files of matrices (a collection of many, indexed by dataset.csv), and a collection is more than one or/v1 document, so no recipe reads it.",
+    "reason": "The instances are keyword format text files with node positions, time windows, service durations and a travel time matrix, but the repository holds them as a very large number of separate files in size directories and publishes no archive of the curated selection, so a recipe has no single download to read; the repository's own archive holds every instance and is several gigabytes.",
     "status": "not-fetchable"
   },
   "sources": [

@@ -22,7 +22,7 @@
     "surveyId": "or-25"
   },
   "recipe": {
-    "reason": "The Zenodo files are a custom sectioned text format (technicians, tasks and a travel time matrix of millions of lines) and not a table, and two of them are collections of instance files.",
+    "reason": "The instances are a custom sectioned text format whose tasks have no positions, and the collection is hundreds of megabytes compressed, almost all of it a pairwise travel time matrix that or/v1 has no arcs to hold, so reading it would hold gigabytes in memory to keep a few fields per task.",
     "status": "not-fetchable"
   },
   "sources": [

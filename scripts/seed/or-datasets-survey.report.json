@@ -188,7 +188,7 @@
         "The repository is large and carries no licence file or statement."
       ],
       "id": "github-afkummer-hhcrsp-curated-instances",
-      "reason": "The instances are keyword format text files of matrices (a collection of many, indexed by dataset.csv), and a collection is more than one or/v1 document, so no recipe reads it.",
+      "reason": "The instances are keyword format text files with node positions, time windows, service durations and a travel time matrix, but the repository holds them as a very large number of separate files in size directories and publishes no archive of the curated selection, so a recipe has no single download to read; the repository's own archive holds every instance and is several gigabytes.",
       "recipe": "not-fetchable",
       "surveyId": "or-17"
     },
@@ -226,11 +226,13 @@
     {
       "flags": [
         "The XML carries coordinates and skill resources but no time windows or service times.",
-        "No licence statement was seen."
+        "No licence statement was seen.",
+        "the instances have coordinates and skills but no times, so the nodes carry no duration or window",
+        "the fleet's costs and tool and spare part stocks have no place in an or/v1 node and are not read",
+        "a node's type is kept as the file writes it; the file does not say what the types mean"
       ],
       "id": "vrp-rep-technician-routing-pillac",
-      "reason": "The download is a collection of VRP-REP XML instance files holding coordinates and skills but no times, and a collection is more than one or/v1 document, so no recipe reads it.",
-      "recipe": "not-fetchable",
+      "recipe": "fetchable",
       "surveyId": "or-21"
     },
     {
@@ -255,11 +257,14 @@
     },
     {
       "flags": [
-        "A third-party student repository mirroring ORTEC instances; no licence statement."
+        "A third-party student repository mirroring ORTEC instances; no licence statement.",
+        "the mirror holds each instance as a .txt and again as a .csv, and a solution file beside the instances, so the instances are selected by name",
+        "the instances come in three whitespace layouts (padded spaces, tabs and semicolons) that the parser reads alike",
+        "requests have a window of delivery days and no time of day or service duration, so the nodes carry the days as fromDay and toDay and no duration or deadline",
+        "the trucks, machines and technicians are not nodes and are not read beyond the technician count"
       ],
       "id": "github-bascoding-verolog-2019",
-      "reason": "The instances are keyword format text files in a collection mirrored by a student without a licence statement, and a collection is more than one or/v1 document, so no recipe reads it.",
-      "recipe": "not-fetchable",
+      "recipe": "fetchable",
       "surveyId": "or-24"
     },
     {
@@ -267,7 +272,7 @@
         "The survey field list for this item is unverified."
       ],
       "id": "zenodo-tdc-technician-dispatch",
-      "reason": "The Zenodo files are a custom sectioned text format (technicians, tasks and a travel time matrix of millions of lines) and not a table, and two of them are collections of instance files.",
+      "reason": "The instances are a custom sectioned text format whose tasks have no positions, and the collection is hundreds of megabytes compressed, almost all of it a pairwise travel time matrix that or/v1 has no arcs to hold, so reading it would hold gigabytes in memory to keep a few fields per task.",
       "recipe": "not-fetchable",
       "surveyId": "or-25"
     },
@@ -277,7 +282,7 @@
         "No licence statement was seen."
       ],
       "id": "ortec-verolog-2016-2017-instances",
-      "reason": "The instances are keyword format text files on a Wayback Machine snapshot, a collection of separate files, and a collection is more than one or/v1 document, so no recipe reads it.",
+      "reason": "The instances are keyword format text files that the Wayback Machine serves one at a time, as the archive zips of each set were not captured, and a recipe reads one download, so no recipe reaches the collection.",
       "recipe": "not-fetchable",
       "surveyId": "or-26"
     },
