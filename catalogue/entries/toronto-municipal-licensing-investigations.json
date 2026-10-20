@@ -82,6 +82,9 @@
       "url": "https://ckan0.cf.opendata.inter.prod-toronto.ca/dataset/5da2e2e8-659e-4850-ae43-47b7f7ad6b62/resource/05994276-0021-47e1-afa0-ca874733b98f/download/investigations.csv"
     }
   ],
+  "subjects": [
+    "operations-research"
+  ],
   "tags": [
     "deadline",
     "location",

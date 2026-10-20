@@ -32,6 +32,9 @@
       "url": "https://github.com/Oberfichtner/Clustering_and_TSP_with_R"
     }
   ],
+  "subjects": [
+    "operations-research"
+  ],
   "tags": [
     "location",
     "territory",

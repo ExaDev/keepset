@@ -91,6 +91,9 @@
       "url": "https://services3.arcgis.com/UYCjD74OfK5zL9b8/arcgis/rest/services/Arrears_2025/FeatureServer/0"
     }
   ],
+  "subjects": [
+    "operations-research"
+  ],
   "tags": [
     "prize",
     "deadline",

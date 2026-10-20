@@ -86,6 +86,9 @@
       "url": "https://data.cityofnewyork.us/resource/xnfm-u3k5.csv"
     }
   ],
+  "subjects": [
+    "operations-research"
+  ],
   "tags": [
     "deadline",
     "location",

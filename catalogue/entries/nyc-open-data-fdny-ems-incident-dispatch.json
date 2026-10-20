@@ -37,6 +37,9 @@
       "url": "https://data.cityofnewyork.us/resource/76xm-jjuj.csv"
     }
   ],
+  "subjects": [
+    "operations-research"
+  ],
   "tags": [
     "prizeProbability",
     "location",

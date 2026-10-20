@@ -32,6 +32,9 @@
       "url": "https://zenodo.org/records/7904015"
     }
   ],
+  "subjects": [
+    "operations-research"
+  ],
   "tags": [
     "prize",
     "prizeProbability",

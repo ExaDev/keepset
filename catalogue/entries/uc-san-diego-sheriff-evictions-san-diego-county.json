@@ -100,6 +100,9 @@
       "url": "https://services1.arcgis.com/eGSDp8lpKe5izqVc/arcgis/rest/services/2024_Sheriff_Evictions_WFL1/FeatureServer/0"
     }
   ],
+  "subjects": [
+    "operations-research"
+  ],
   "tags": [
     "prizeProbability",
     "location",

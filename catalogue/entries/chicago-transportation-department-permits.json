@@ -119,6 +119,9 @@
       "url": "https://data.cityofchicago.org/api/views/hr8i-6s6s/rows.csv?accessType=DOWNLOAD"
     }
   ],
+  "subjects": [
+    "operations-research"
+  ],
   "tags": [
     "prize",
     "deadline",

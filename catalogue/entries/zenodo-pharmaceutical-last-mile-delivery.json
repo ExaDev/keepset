@@ -38,6 +38,9 @@
       "url": "https://zenodo.org/api/records/15310106/files/data.zip/content"
     }
   ],
+  "subjects": [
+    "operations-research"
+  ],
   "tags": [
     "deadline",
     "location",

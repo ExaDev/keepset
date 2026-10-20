@@ -115,6 +115,9 @@
       "url": "https://data.montgomerycountymd.gov/resource/bw2r-araf.csv"
     }
   ],
+  "subjects": [
+    "operations-research"
+  ],
   "tags": [
     "prizeProbability",
     "deadline",

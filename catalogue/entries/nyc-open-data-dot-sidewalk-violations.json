@@ -82,6 +82,9 @@
       "url": "https://data.cityofnewyork.us/api/views/6kbp-uz6m/rows.csv?accessType=DOWNLOAD"
     }
   ],
+  "subjects": [
+    "operations-research"
+  ],
   "tags": [
     "deadline",
     "location",

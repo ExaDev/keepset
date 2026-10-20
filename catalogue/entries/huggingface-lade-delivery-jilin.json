@@ -112,6 +112,9 @@
       "url": "https://huggingface.co/datasets/Cainiao-AI/LaDe/resolve/main/delivery/delivery_jl.csv"
     }
   ],
+  "subjects": [
+    "operations-research"
+  ],
   "tags": [
     "deadline",
     "location",

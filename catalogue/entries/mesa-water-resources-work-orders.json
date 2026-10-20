@@ -109,6 +109,9 @@
       "url": "https://citydata.mesaaz.gov/resource/7rqv-jcr4.csv"
     }
   ],
+  "subjects": [
+    "operations-research"
+  ],
   "tags": [
     "prize",
     "prizeProbability",

@@ -38,6 +38,9 @@
       "url": "https://atom.geo-ide.developpement-durable.gouv.fr/atomArchive/GetResource?id=acfcbcfe-23f8-43bf-a9cc-2ddf86c07cc4&dataType=dataset"
     }
   ],
+  "subjects": [
+    "operations-research"
+  ],
   "tags": [
     "location",
     "territory",

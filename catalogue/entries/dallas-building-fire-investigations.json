@@ -97,6 +97,9 @@
       "url": "https://www.dallasopendata.com/resource/skju-bfp8.csv"
     }
   ],
+  "subjects": [
+    "operations-research"
+  ],
   "tags": [
     "prize",
     "location",

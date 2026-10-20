@@ -32,6 +32,9 @@
       "url": "https://github.com/meituan/Meituan-INFORMS-TSL-Research-Challenge"
     }
   ],
+  "subjects": [
+    "operations-research"
+  ],
   "tags": [
     "location",
     "territory",

@@ -98,6 +98,9 @@
       "url": "https://data.cityofnewyork.us/resource/dm9a-ab7w.csv"
     }
   ],
+  "subjects": [
+    "operations-research"
+  ],
   "tags": [
     "prize",
     "deadline",

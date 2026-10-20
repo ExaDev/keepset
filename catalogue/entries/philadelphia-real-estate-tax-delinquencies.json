@@ -110,6 +110,9 @@
       "url": "https://services.arcgis.com/fLeGjb7u4uXqeF9q/arcgis/rest/services/REAL_ESTATE_TAX_DELINQUENCIES/FeatureServer/0"
     }
   ],
+  "subjects": [
+    "operations-research"
+  ],
   "tags": [
     "prize",
     "deadline",

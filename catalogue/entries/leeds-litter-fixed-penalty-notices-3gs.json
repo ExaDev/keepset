@@ -33,6 +33,9 @@
       "url": "https://datamillnorth.org/dataset/litter-fines-issued-by-3gs"
     }
   ],
+  "subjects": [
+    "operations-research"
+  ],
   "tags": [
     "prize",
     "prizeProbability",

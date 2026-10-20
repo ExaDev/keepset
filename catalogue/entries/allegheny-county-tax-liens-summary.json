@@ -80,6 +80,9 @@
       "url": "https://data.wprdc.org/datastore/dump/d1e80180-5b2e-4dab-8ec3-be621628649e"
     }
   ],
+  "subjects": [
+    "operations-research"
+  ],
   "tags": [
     "prize",
     "deadline",

@@ -89,6 +89,9 @@
       "url": "https://datahub.transportation.gov/api/views/pwxe-equ8/rows.csv?accessType=DOWNLOAD"
     }
   ],
+  "subjects": [
+    "operations-research"
+  ],
   "tags": [
     "prizeProbability",
     "lifecycle",

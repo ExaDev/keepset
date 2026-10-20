@@ -82,6 +82,9 @@
       "url": "https://data.honolulu.gov/api/views/7mwf-c3z3/rows.csv?accessType=DOWNLOAD"
     }
   ],
+  "subjects": [
+    "operations-research"
+  ],
   "tags": [
     "prizeProbability",
     "location",

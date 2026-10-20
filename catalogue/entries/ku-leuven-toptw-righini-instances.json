@@ -96,6 +96,9 @@
       "url": "https://www.mech.kuleuven.be/en/mim/op/instances/righiniTOPTW1"
     }
   ],
+  "subjects": [
+    "operations-research"
+  ],
   "tags": [
     "prize",
     "deadline",

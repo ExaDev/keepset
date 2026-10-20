@@ -95,6 +95,9 @@
       "url": "https://den-haag-opendata.opendatasoft.com/api/explore/v2.1/catalog/datasets/wabovergunningen/exports/csv"
     }
   ],
+  "subjects": [
+    "operations-research"
+  ],
   "tags": [
     "location",
     "territory",

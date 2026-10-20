@@ -101,6 +101,9 @@
       "url": "https://raw.githubusercontent.com/psxjpc/MOVRPTW-Generator/master/dataset/movrptw-instances.zip"
     }
   ],
+  "subjects": [
+    "operations-research"
+  ],
   "tags": [
     "deadline",
     "location",

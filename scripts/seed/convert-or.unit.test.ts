@@ -6,7 +6,7 @@ import { createCatalogue } from "../../src/catalogue";
 import { fetchEntry, roundTripEntry } from "../../src/node/fetch-dataset";
 import { zip } from "../../src/test-support/archives";
 import { fixtureManifest } from "../../src/test-support/entries";
-import { convertItem, convertSurvey, MAX_CELLS, PAGE_ROWS, pagingOf } from "./convert-or";
+import { convertItem, convertSurvey, MAX_CELLS, PAGE_ROWS, pagingOf, SUBJECT } from "./convert-or";
 import { CurationItemSchema, SurveySourceSchema, TARGET_FIELD_NAMES, TARGET_FIELDS } from "./or-survey";
 
 const survey = SurveySourceSchema.parse({
@@ -66,6 +66,10 @@ describe("convertSurvey", () => {
   const { entries, report } = convertSurvey(survey, curation, none);
   const requests = entries.find((entry) => entry.id === "example-service-requests");
   const instances = entries.find((entry) => entry.id === "classic-instances");
+
+  it("files every entry under the operations-research subject, whichever theme its item sits in", () => {
+    expect(entries.map((entry) => entry.subjects)).toEqual([[SUBJECT], [SUBJECT]]);
+  });
 
   it("makes an entry for every surveyed item, in id order, and reports each once in survey order", () => {
     expect(entries.map((entry) => entry.id)).toEqual(["classic-instances", "example-service-requests"]);

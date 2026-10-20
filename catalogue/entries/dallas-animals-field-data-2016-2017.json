@@ -99,6 +99,9 @@
       "url": "https://www.dallasopendata.com/resource/xy7j-y59g.csv"
     }
   ],
+  "subjects": [
+    "operations-research"
+  ],
   "tags": [
     "deadline",
     "location",

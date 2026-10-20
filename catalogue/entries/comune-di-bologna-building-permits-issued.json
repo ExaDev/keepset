@@ -83,6 +83,9 @@
       "url": "https://opendata.comune.bologna.it/api/explore/v2.1/catalog/datasets/permessi-di-costruire-rilasciati/exports/csv"
     }
   ],
+  "subjects": [
+    "operations-research"
+  ],
   "tags": [
     "location",
     "lifecycle"

@@ -102,6 +102,9 @@
       "url": "https://services3.arcgis.com/IgR6ay8jzuIj7VSF/arcgis/rest/services/Weed_Abatement_2017/FeatureServer/0"
     }
   ],
+  "subjects": [
+    "operations-research"
+  ],
   "tags": [
     "location",
     "skills",

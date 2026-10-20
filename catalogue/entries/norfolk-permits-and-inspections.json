@@ -113,6 +113,9 @@
       "url": "https://data.norfolk.gov/api/views/bnrb-u445/rows.csv?accessType=DOWNLOAD"
     }
   ],
+  "subjects": [
+    "operations-research"
+  ],
   "tags": [
     "prize",
     "prizeProbability",

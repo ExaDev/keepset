@@ -90,6 +90,9 @@
       "url": "https://ckan0.cf.opendata.inter.prod-toronto.ca/dataset/43cbc364-b673-49ca-b98b-8b99c5d5f6eb/resource/e2d3c583-efeb-43e7-aeb1-273f4055847d/download/utility-cut-permits.csv"
     }
   ],
+  "subjects": [
+    "operations-research"
+  ],
   "tags": [
     "deadline",
     "location",

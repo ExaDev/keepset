@@ -101,6 +101,9 @@
       "url": "https://data.cityofnewyork.us/resource/6z8x-wfk4.csv"
     }
   ],
+  "subjects": [
+    "operations-research"
+  ],
   "tags": [
     "location",
     "territory",

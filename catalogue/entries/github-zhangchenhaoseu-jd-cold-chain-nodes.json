@@ -97,6 +97,9 @@
       "url": "https://raw.githubusercontent.com/zhangchenhaoseu/Database-for-HMCVRPTW-SD/main/Case%20study%20data/Jingdong%20Dataset/input/input_node.csv"
     }
   ],
+  "subjects": [
+    "operations-research"
+  ],
   "tags": [
     "deadline",
     "location",

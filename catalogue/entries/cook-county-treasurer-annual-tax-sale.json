@@ -93,6 +93,9 @@
       "url": "https://datacatalog.cookcountyil.gov/api/views/55ju-2fs9/rows.csv?accessType=DOWNLOAD"
     }
   ],
+  "subjects": [
+    "operations-research"
+  ],
   "tags": [
     "prize",
     "location",

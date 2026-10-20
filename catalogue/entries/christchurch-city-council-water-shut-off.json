@@ -95,6 +95,9 @@
       "url": "https://gis.ccc.govt.nz/server/rest/services/OpenData/WaterSupply/FeatureServer/3"
     }
   ],
+  "subjects": [
+    "operations-research"
+  ],
   "tags": [
     "prizeProbability",
     "deadline",

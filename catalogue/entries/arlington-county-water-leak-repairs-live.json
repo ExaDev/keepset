@@ -122,6 +122,9 @@
       "url": "https://utility.arcgis.com/usrsvcs/servers/53520af18235499d9ecd9c96f624eeae/rest/services/AM/Leak_Repairs_Live/FeatureServer/0"
     }
   ],
+  "subjects": [
+    "operations-research"
+  ],
   "tags": [
     "deadline",
     "location",

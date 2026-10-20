@@ -108,6 +108,9 @@
       "url": "https://utility.arcgis.com/usrsvcs/servers/931a175b8eaa4abebf1379743e6d71c1/rest/services/Environmental_Resources/Weed_Abatement/FeatureServer/0"
     }
   ],
+  "subjects": [
+    "operations-research"
+  ],
   "tags": [
     "location",
     "territory",

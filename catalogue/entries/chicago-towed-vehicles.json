@@ -70,5 +70,8 @@
       "url": "https://data.cityofchicago.org/api/views/ygr5-vcbg/rows.csv?accessType=DOWNLOAD"
     }
   ],
+  "subjects": [
+    "operations-research"
+  ],
   "tags": []
 }

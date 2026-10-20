@@ -119,6 +119,9 @@
       "url": "https://data.cityofnewyork.us/api/views/sbnd-xujn/rows.csv?accessType=DOWNLOAD"
     }
   ],
+  "subjects": [
+    "operations-research"
+  ],
   "tags": [
     "prize",
     "location",
