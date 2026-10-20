@@ -132,7 +132,7 @@ describe("search", () => {
   });
 
   it("formats every dataset in the order given", () => {
-    expect(formatSearch([walled, karate])).toBe("auth-walled\tC. elegans metabolic network\tgraph/v1\tnot-fetchable\nkarate\tZachary Karate Club\tgraph/v1\tfetchable\n");
+    expect(formatSearch([walled, karate])).toBe("auth-walled\tC. elegans metabolic network behind a login\tgraph/v1\tnot-fetchable\nkarate\tZachary Karate Club\tgraph/v1\tfetchable\n");
   });
 });
 
@@ -246,8 +246,8 @@ describe("namespaces and aliases", () => {
   const nested = createCatalogue({
     ...fixtureIndex,
     entries: [
-      { ...fixtureIndex.entries[0], id: "one-shared", namespace: ["one", "inner"], aliases: ["shared"] },
-      { ...fixtureIndex.entries[0], id: "two-shared", namespace: ["two"], aliases: ["shared"] },
+      { ...fixtureIndex.entries[0], id: "one-shared", name: "Entry one-shared", namespace: ["one", "inner"], aliases: ["shared"] },
+      { ...fixtureIndex.entries[0], id: "two-shared", name: "Entry two-shared", namespace: ["two"], aliases: ["shared"] },
     ],
   });
   const nestedLibrary = (): ReturnType<typeof harness> => harness({ getDataset: (name) => nested.getDataset(name), listDatasets: (query) => nested.listDatasets(query), listNamespaces: (path) => nested.listNamespaces(path) });
@@ -290,8 +290,8 @@ describe("namespaces", () => {
   const nested = createCatalogue({
     ...fixtureIndex,
     entries: [
-      { ...fixtureIndex.entries[0], id: "one-shared", namespace: ["one", "inner"], aliases: ["two/shared"] },
-      { ...fixtureIndex.entries[0], id: "other", namespace: ["one"] },
+      { ...fixtureIndex.entries[0], id: "one-shared", name: "Entry one-shared", namespace: ["one", "inner"], aliases: ["two/shared"] },
+      { ...fixtureIndex.entries[0], id: "other", name: "Entry other", namespace: ["one"] },
     ],
   });
   const nestedLibrary = (): ReturnType<typeof harness> => harness({ listDatasets: (query) => nested.listDatasets(query), listNamespaces: (path) => nested.listNamespaces(path) });

@@ -146,8 +146,8 @@ describe("buildSite with namespaced and aliased entries", () => {
 });
 
 describe("the namespace pages", () => {
-  const bar = { ...liveEntry, id: "bar", namespace: ["home", "deep"], aliases: ["foo/graphs/bar", "one/bar"] };
-  const baz = { ...liveEntry, id: "baz", namespace: ["foo", "graphs"] };
+  const bar = { ...liveEntry, id: "bar", name: "Entry bar", namespace: ["home", "deep"], aliases: ["foo/graphs/bar", "one/bar"] };
+  const baz = { ...liveEntry, id: "baz", name: "Entry baz", namespace: ["foo", "graphs"] };
   const grouped = createCatalogue({ ...fixtureIndex, entries: [bar, baz] });
   const files = build(grouped);
 
@@ -204,7 +204,7 @@ describe("the namespace pages", () => {
   });
 
   it("refuses two namespaces that differ only in letter case, since their pages would share a file", () => {
-    const clash = createCatalogue({ ...fixtureIndex, entries: [{ ...liveEntry, id: "a", namespace: ["Foo"] }, { ...liveEntry, id: "b", namespace: ["foo"] }] });
+    const clash = createCatalogue({ ...fixtureIndex, entries: [{ ...liveEntry, id: "a", name: "Entry a", namespace: ["Foo"] }, { ...liveEntry, id: "b", name: "Entry b", namespace: ["foo"] }] });
     expect(() => build(clash)).toThrow(/differ only in letter case/);
   });
 });

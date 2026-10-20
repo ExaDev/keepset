@@ -72,6 +72,7 @@ export const deadEntry = {
 export const notFetchableEntry = {
   ...deadEntry,
   id: "auth-walled",
+  name: "C. elegans metabolic network behind a login",
   sources: [{ url: "https://example.com/datasets/walled", retrieved: "2026-04-19", status: "live" }],
   licence: { kind: "custom", name: "Example data licence", url: "https://example.com/licence" },
   recipe: { status: "not-fetchable", reason: "the source requires an account to download" },

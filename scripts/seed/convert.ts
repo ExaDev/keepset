@@ -417,11 +417,22 @@ function sourceFor(url: string, retrieved: string): Source {
 }
 
 /**
+ * Names the pipeline catalogue gives two datasets alike, so a listing would show two identical rows. Each is replaced by the name followed by the collection it comes from in parentheses, the form the wormwiring entries already take. The pipeline catalogue is a read-only copy of an upstream file, so the replacement is made here and the import refuses one whose dataset is absent or already has that name.
+ */
+export const NAME_OVERRIDES: ReadonlyMap<string, string> = new Map([
+  ["arenas-celegans-metabolic", "C. elegans Metabolic Network (Arenas)"],
+  ["netzschleuder-celegans-metabolic", "C. elegans Metabolic Network (Netzschleuder)"],
+  ["netzschleuder-florentine_families", "Padgett Florentine Families (Netzschleuder)"],
+  ["ucinet-padgett", "Padgett Florentine Families (UCINET)"],
+]);
+
+/**
  * Converts one dataset.
  * @param dataset - The catalogue's dataset.
+ * @param nameOverrides - Replacement names by dataset id; a dataset not listed keeps the name the catalogue gives it.
  * @returns The entry, when the dataset converts, and its outcome for the report.
  */
-export function convertDataset(dataset: SourceDataset): { readonly entry?: Entry; readonly outcome: Outcome } {
+export function convertDataset(dataset: SourceDataset, nameOverrides: ReadonlyMap<string, string> = NAME_OVERRIDES): { readonly entry?: Entry; readonly outcome: Outcome } {
   const { id } = dataset;
   const flags: string[] = [];
   const notConverted = (reason: string): { outcome: Outcome } => ({ outcome: { id, outcome: "not-converted", reason, flags } });
@@ -504,7 +515,7 @@ export function convertDataset(dataset: SourceDataset): { readonly entry?: Entry
   const entry = parseEntry({
     id,
     ...(named === undefined ? {} : { namespace: named.namespace, aliases: [named.alias] }),
-    name: dataset.name,
+    name: nameOverrides.get(id) ?? dataset.name,
     ...(dataset.description === undefined || dataset.description === "" ? {} : { description: dataset.description }),
     ...(dataset.domain === undefined ? {} : { domain: dataset.domain }),
     tags: dataset.category === undefined ? [] : [dataset.category],
@@ -570,13 +581,24 @@ export interface Report {
  * Converts a whole catalogue.
  * @param pipeline - The pipeline catalogue.
  * @param graphbox - The graphbox catalogue, for the overlap section.
+ * @param nameOverrides - Replacement names by dataset id.
  * @returns The entries in id order and the report.
+ * @throws Error when an override names a dataset the catalogue lacks or gives the name the dataset already has.
  */
-export function convertCatalogue(pipeline: SourceCatalogue, graphbox: GraphboxCatalogue): { readonly entries: readonly Entry[]; readonly report: Report } {
+export function convertCatalogue(pipeline: SourceCatalogue, graphbox: GraphboxCatalogue, nameOverrides: ReadonlyMap<string, string> = NAME_OVERRIDES): { readonly entries: readonly Entry[]; readonly report: Report } {
+  for (const [id, name] of nameOverrides) {
+    const dataset = Object.values(pipeline.datasets).find((candidate) => candidate.id === id);
+    if (dataset === undefined) {
+      throw new Error(`the name override for ${id} names no dataset of the catalogue`);
+    }
+    if (dataset.name === name) {
+      throw new Error(`the name override for ${id} repeats the name the catalogue already gives it`);
+    }
+  }
   const entries: Entry[] = [];
   const outcomes: Outcome[] = [];
   for (const dataset of Object.values(pipeline.datasets).sort((left, right) => (left.id < right.id ? -1 : 1))) {
-    const converted = convertDataset(dataset);
+    const converted = convertDataset(dataset, nameOverrides);
     if (converted.entry !== undefined) {
       entries.push(converted.entry);
     }

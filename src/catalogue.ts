@@ -10,7 +10,7 @@ import { getOwn } from "./own";
 import { recordOf } from "./record";
 
 /**
- * A catalogue index: the manifest, every entry, and every crosswalk file of the catalogue, keyed by its catalogue-relative path. The build assembles it from a catalogue directory; a consumer holding its own catalogue (a fork, say) can pass one to `createCatalogue`. Entry ids are unique, every fully qualified name (the whole path of an id or alias) identifies one entry and is not another entry's id, every namespace segment the manifest gives aliases to is some entry's segment and no alias is itself one, every crosswalk passes crossmap's structural validation, every crosswalk file reference resolves, and every crosswalk's target is the category of each entry that uses it.
+ * A catalogue index: the manifest, every entry, and every crosswalk file of the catalogue, keyed by its catalogue-relative path. The build assembles it from a catalogue directory; a consumer holding its own catalogue (a fork, say) can pass one to `createCatalogue`. Entry ids are unique, no two entries have the same name once case and surrounding or repeated spaces are ignored (a listing would show two rows a reader cannot tell apart), every fully qualified name (the whole path of an id or alias) identifies one entry and is not another entry's id, every namespace segment the manifest gives aliases to is some entry's segment and no alias is itself one, every crosswalk passes crossmap's structural validation, every crosswalk file reference resolves, and every crosswalk's target is the category of each entry that uses it.
  */
 export const CatalogueIndexSchema = define(
   z
@@ -38,7 +38,15 @@ export const CatalogueIndexSchema = define(
       const seen = new Set<string>();
       const ids = new Set(index.entries.map((entry) => entry.id));
       const owners = new Map<string, string>();
+      const namers = new Map<string, string>();
       for (const [position, entry] of index.entries.entries()) {
+        const listed = entry.name.trim().replace(/\s+/g, " ").toLowerCase();
+        const namer = namers.get(listed);
+        if (namer === undefined) {
+          namers.set(listed, entry.id);
+        } else if (namer !== entry.id) {
+          ctx.addIssue({ code: "custom", path: ["entries", position, "name"], message: `${entry.name} is also the name of entry ${namer}, so a listing would show the two alike; name the source or variant that tells them apart` });
+        }
         if (seen.has(entry.id)) {
           ctx.addIssue({ code: "custom", path: ["entries", position, "id"], message: `duplicate entry id ${entry.id}` });
         }

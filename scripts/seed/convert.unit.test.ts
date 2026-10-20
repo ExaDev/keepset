@@ -1,13 +1,14 @@
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { describe, expect, it } from "vitest";
-import { convertCatalogue, namespaceOf, netzschleuderCsv, parseWayback, type Outcome } from "./convert";
+import { convertCatalogue, convertDataset, NAME_OVERRIDES, namespaceOf, netzschleuderCsv, parseWayback, type Outcome } from "./convert";
 import { GraphboxCatalogueSchema, SourceCatalogueSchema } from "./source";
 
 /* A small committed slice of the pipeline catalogue, one dataset per classification path, and of the graphbox catalogue for the overlap section. */
 const pipeline = SourceCatalogueSchema.parse(JSON.parse(readFileSync(join(import.meta.dirname, "fixtures/pipeline-slice.json"), "utf8")));
 const graphbox = GraphboxCatalogueSchema.parse(JSON.parse(readFileSync(join(import.meta.dirname, "fixtures/graphbox-slice.json"), "utf8")));
-const { entries, report } = convertCatalogue(pipeline, graphbox);
+/* The slice holds none of the datasets NAME_OVERRIDES renames, so it converts with no overrides; the overrides are tested against the committed full catalogue below. */
+const { entries, report } = convertCatalogue(pipeline, graphbox, new Map());
 
 function outcome(id: string): Outcome {
   const found = report.outcomes.find((candidate) => candidate.id === id);
@@ -126,6 +127,33 @@ describe("the seed import's classification", () => {
       { pipelineId: "adjnoun", graphboxId: "adjnoun", matchedBy: "id" },
       { pipelineId: "arxiv-citations", graphboxId: "cit-hepph", matchedBy: "download URL" },
     ]);
+  });
+});
+
+describe("name overrides", () => {
+  it("replaces the name of a listed dataset and leaves every other name as the catalogue gives it", () => {
+    const renamed = convertCatalogue(pipeline, graphbox, new Map([["wiki-vote", "Wikipedia votes (a source)"]])).entries;
+    expect(renamed.find((candidate) => candidate.id === "wiki-vote")?.name).toBe("Wikipedia votes (a source)");
+    expect(renamed.find((candidate) => candidate.id === "amazon0302")?.name).toBe(entry("amazon0302").name);
+  });
+
+  it("refuses an override for a dataset the catalogue lacks, or one that repeats the catalogue's name", () => {
+    expect(() => convertCatalogue(pipeline, graphbox, new Map([["absent", "Anything"]]))).toThrow("the name override for absent names no dataset of the catalogue");
+    expect(() => convertCatalogue(pipeline, graphbox, new Map([["wiki-vote", entry("wiki-vote").name]]))).toThrow("the name override for wiki-vote repeats the name the catalogue already gives it");
+  });
+
+  it("renames, in the committed full catalogue, every dataset it lists to the name it gives", () => {
+    const full = SourceCatalogueSchema.parse(JSON.parse(readFileSync(join(import.meta.dirname, "sources/pipeline-catalog.json"), "utf8")));
+    for (const [id, name] of NAME_OVERRIDES) {
+      const dataset = Object.values(full.datasets).find((candidate) => candidate.id === id);
+      expect(dataset, id).toBeDefined();
+      expect(dataset === undefined ? undefined : convertDataset(dataset).entry?.name, id).toBe(name);
+    }
+  });
+
+  it("gives each override a name that no other override shares, ignoring case", () => {
+    const names = [...NAME_OVERRIDES.values()].map((name) => name.toLowerCase());
+    expect(new Set(names).size).toBe(names.length);
   });
 });
 
