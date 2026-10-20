@@ -2,7 +2,7 @@
   "aliases": [
     "technician-routing-pillac"
   ],
-  "category": "or-set/v1",
+  "category": "or/v1",
   "citations": [],
   "crosswalk": {
     "oneWay": [],
@@ -13,58 +13,43 @@
         "to": "meta"
       },
       {
-        "from": "members[].id",
+        "from": "nodes[].id",
         "op": "move",
-        "to": "instances[].id"
+        "to": "nodes[].id"
       },
       {
-        "from": "members[].meta.dataset",
+        "from": "nodes[].skill",
         "op": "move",
-        "to": "instances[].meta.dataset"
+        "to": "nodes[].skill"
       },
       {
-        "from": "members[].meta.name",
+        "from": "nodes[].x",
         "op": "move",
-        "to": "instances[].meta.name"
+        "to": "nodes[].x"
       },
       {
-        "from": "members[].nodes[].id",
+        "from": "nodes[].y",
         "op": "move",
-        "to": "instances[].nodes[].id"
+        "to": "nodes[].y"
       },
       {
-        "from": "members[].nodes[].skill",
+        "from": "nodes[].type",
         "op": "move",
-        "to": "instances[].nodes[].skill"
+        "to": "nodes[].type"
       },
       {
-        "from": "members[].nodes[].x",
+        "from": "nodes[].skills",
         "op": "move",
-        "to": "instances[].nodes[].x"
+        "to": "nodes[].skills"
       },
       {
-        "from": "members[].nodes[].y",
+        "from": "nodes[].resources",
         "op": "move",
-        "to": "instances[].nodes[].y"
-      },
-      {
-        "from": "members[].nodes[].type",
-        "op": "move",
-        "to": "instances[].nodes[].type"
-      },
-      {
-        "from": "members[].nodes[].skills",
-        "op": "move",
-        "to": "instances[].nodes[].skills"
-      },
-      {
-        "from": "members[].nodes[].resources",
-        "op": "move",
-        "to": "instances[].nodes[].resources"
+        "to": "nodes[].resources"
       }
     ],
     "source": "vrp-rep",
-    "target": "or-set/v1"
+    "target": "or/v1"
   },
   "domain": "Technician and home-care routing",
   "expectedCounts": {

@@ -2,7 +2,7 @@
   "aliases": [
     "team-orienteering-chao-instances"
   ],
-  "category": "or-set/v1",
+  "category": "or/v1",
   "citations": [],
   "crosswalk": {
     "oneWay": [],
@@ -13,53 +13,33 @@
         "to": "meta"
       },
       {
-        "from": "members[].id",
+        "from": "nodes[].id",
         "op": "move",
-        "to": "instances[].id"
+        "to": "nodes[].id"
       },
       {
-        "from": "members[].meta.points",
+        "from": "nodes[].score",
         "op": "move",
-        "to": "instances[].meta.points"
+        "to": "nodes[].prize"
       },
       {
-        "from": "members[].meta.paths",
+        "from": "nodes[].x",
         "op": "move",
-        "to": "instances[].meta.paths"
+        "to": "nodes[].x"
       },
       {
-        "from": "members[].meta.budget",
+        "from": "nodes[].y",
         "op": "move",
-        "to": "instances[].meta.budget"
+        "to": "nodes[].y"
       },
       {
-        "from": "members[].nodes[].id",
+        "from": "nodes[].role",
         "op": "move",
-        "to": "instances[].nodes[].id"
-      },
-      {
-        "from": "members[].nodes[].score",
-        "op": "move",
-        "to": "instances[].nodes[].prize"
-      },
-      {
-        "from": "members[].nodes[].x",
-        "op": "move",
-        "to": "instances[].nodes[].x"
-      },
-      {
-        "from": "members[].nodes[].y",
-        "op": "move",
-        "to": "instances[].nodes[].y"
-      },
-      {
-        "from": "members[].nodes[].role",
-        "op": "move",
-        "to": "instances[].nodes[].role"
+        "to": "nodes[].role"
       }
     ],
     "source": "top",
-    "target": "or-set/v1"
+    "target": "or/v1"
   },
   "description": "Benchmark instances for the team orienteering problem, with node coordinates and scores, from the KU Leuven orienteering page.",
   "domain": "Orienteering",

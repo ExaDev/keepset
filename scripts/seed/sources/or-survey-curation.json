@@ -37,11 +37,6 @@
         "keep": [
           "role"
         ],
-        "meta": [
-          "points",
-          "paths",
-          "budget"
-        ],
         "expectedInstances": 60
       },
       "surveyId": "or-0"
@@ -84,11 +79,6 @@
         "keep": [
           "service",
           "open"
-        ],
-        "meta": [
-          "paths",
-          "customers",
-          "capacity"
         ],
         "timeUnit": "abstract units",
         "expectedInstances": 29
@@ -2171,10 +2161,6 @@
           "skills",
           "resources"
         ],
-        "meta": [
-          "dataset",
-          "name"
-        ],
         "expectedInstances": 57
       },
       "surveyId": "or-21",
@@ -2306,20 +2292,6 @@
           "fromDay",
           "toDay",
           "amount"
-        ],
-        "meta": [
-          "dataset",
-          "name",
-          "days",
-          "truckCapacity",
-          "truckMaxDistance",
-          "truckDistanceCost",
-          "truckDayCost",
-          "truckCost",
-          "technicianDistanceCost",
-          "technicianDayCost",
-          "technicianCost",
-          "technicians"
         ],
         "expectedInstances": 27
       },
@@ -2531,13 +2503,6 @@
           "prizeProbability": "probability"
         },
         "keep": [],
-        "meta": [
-          "name",
-          "type",
-          "budget",
-          "edgeWeightType",
-          "totalPrize"
-        ],
         "expectedInstances": 264
       },
       "surveyId": "or-3",
@@ -3036,13 +3001,6 @@
         },
         "keep": [
           "clusters"
-        ],
-        "meta": [
-          "name",
-          "type",
-          "budget",
-          "edgeWeightType",
-          "setPrizes"
         ],
         "expectedInstances": 924
       },
@@ -3704,11 +3662,6 @@
           "ready",
           "service"
         ],
-        "meta": [
-          "name",
-          "vehicles",
-          "capacity"
-        ],
         "timeUnit": "abstract units",
         "expectedInstances": 56
       },
@@ -4241,7 +4194,6 @@
           "y": "y"
         },
         "keep": [],
-        "meta": [],
         "expectedNodes": 6067
       },
       "surveyId": "or-6",
@@ -6151,11 +6103,6 @@
         "keep": [
           "demand",
           "ready"
-        ],
-        "meta": [
-          "name",
-          "vehicles",
-          "capacity"
         ],
         "timeUnit": "seconds",
         "expectedInstances": 45

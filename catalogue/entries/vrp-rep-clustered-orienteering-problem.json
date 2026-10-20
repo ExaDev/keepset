@@ -2,23 +2,18 @@
   "aliases": [
     "clustered-orienteering-problem"
   ],
-  "category": "or-set/v1",
+  "category": "or/v1",
   "citations": [],
   "crosswalk": {
     "oneWay": [
       {
         "direction": "encode",
-        "from": "members[].meta.totalPrize",
+        "from": "nodes[].prize",
         "op": "drop"
       },
       {
         "direction": "encode",
-        "from": "members[].nodes[].prize",
-        "op": "drop"
-      },
-      {
-        "direction": "encode",
-        "from": "members[].nodes[].probability",
+        "from": "nodes[].probability",
         "op": "drop"
       }
     ],
@@ -29,68 +24,38 @@
         "to": "meta"
       },
       {
-        "from": "members[].id",
+        "from": "nodes[].id",
         "op": "move",
-        "to": "instances[].id"
+        "to": "nodes[].id"
       },
       {
-        "from": "members[].meta.name",
+        "from": "nodes[].lat",
         "op": "move",
-        "to": "instances[].meta.name"
+        "to": "nodes[].lat"
       },
       {
-        "from": "members[].meta.type",
+        "from": "nodes[].lon",
         "op": "move",
-        "to": "instances[].meta.type"
+        "to": "nodes[].lon"
       },
       {
-        "from": "members[].meta.budget",
+        "from": "nodes[].x",
         "op": "move",
-        "to": "instances[].meta.budget"
+        "to": "nodes[].x"
       },
       {
-        "from": "members[].meta.edgeWeightType",
+        "from": "nodes[].y",
         "op": "move",
-        "to": "instances[].meta.edgeWeightType"
+        "to": "nodes[].y"
       },
       {
-        "from": "members[].meta.setPrizes",
+        "from": "nodes[].clusters",
         "op": "move",
-        "to": "instances[].meta.setPrizes"
-      },
-      {
-        "from": "members[].nodes[].id",
-        "op": "move",
-        "to": "instances[].nodes[].id"
-      },
-      {
-        "from": "members[].nodes[].lat",
-        "op": "move",
-        "to": "instances[].nodes[].lat"
-      },
-      {
-        "from": "members[].nodes[].lon",
-        "op": "move",
-        "to": "instances[].nodes[].lon"
-      },
-      {
-        "from": "members[].nodes[].x",
-        "op": "move",
-        "to": "instances[].nodes[].x"
-      },
-      {
-        "from": "members[].nodes[].y",
-        "op": "move",
-        "to": "instances[].nodes[].y"
-      },
-      {
-        "from": "members[].nodes[].clusters",
-        "op": "move",
-        "to": "instances[].nodes[].clusters"
+        "to": "nodes[].clusters"
       }
     ],
     "source": "tsplib",
-    "target": "or-set/v1"
+    "target": "or/v1"
   },
   "description": "Clustered orienteering problem benchmark instances with node coordinates, cluster prizes and a travel budget.",
   "domain": "Orienteering",

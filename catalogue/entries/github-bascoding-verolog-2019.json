@@ -2,7 +2,7 @@
   "aliases": [
     "verolog-2019"
   ],
-  "category": "or-set/v1",
+  "category": "or/v1",
   "citations": [],
   "crosswalk": {
     "oneWay": [],
@@ -13,118 +13,53 @@
         "to": "meta"
       },
       {
-        "from": "members[].id",
+        "from": "nodes[].id",
         "op": "move",
-        "to": "instances[].id"
+        "to": "nodes[].id"
       },
       {
-        "from": "members[].meta.dataset",
+        "from": "nodes[].machine",
         "op": "move",
-        "to": "instances[].meta.dataset"
+        "to": "nodes[].skill"
       },
       {
-        "from": "members[].meta.name",
+        "from": "nodes[].x",
         "op": "move",
-        "to": "instances[].meta.name"
+        "to": "nodes[].x"
       },
       {
-        "from": "members[].meta.days",
+        "from": "nodes[].y",
         "op": "move",
-        "to": "instances[].meta.days"
+        "to": "nodes[].y"
       },
       {
-        "from": "members[].meta.truckCapacity",
+        "from": "nodes[].kind",
         "op": "move",
-        "to": "instances[].meta.truckCapacity"
+        "to": "nodes[].kind"
       },
       {
-        "from": "members[].meta.truckMaxDistance",
+        "from": "nodes[].location",
         "op": "move",
-        "to": "instances[].meta.truckMaxDistance"
+        "to": "nodes[].location"
       },
       {
-        "from": "members[].meta.truckDistanceCost",
+        "from": "nodes[].fromDay",
         "op": "move",
-        "to": "instances[].meta.truckDistanceCost"
+        "to": "nodes[].fromDay"
       },
       {
-        "from": "members[].meta.truckDayCost",
+        "from": "nodes[].toDay",
         "op": "move",
-        "to": "instances[].meta.truckDayCost"
+        "to": "nodes[].toDay"
       },
       {
-        "from": "members[].meta.truckCost",
+        "from": "nodes[].amount",
         "op": "move",
-        "to": "instances[].meta.truckCost"
-      },
-      {
-        "from": "members[].meta.technicianDistanceCost",
-        "op": "move",
-        "to": "instances[].meta.technicianDistanceCost"
-      },
-      {
-        "from": "members[].meta.technicianDayCost",
-        "op": "move",
-        "to": "instances[].meta.technicianDayCost"
-      },
-      {
-        "from": "members[].meta.technicianCost",
-        "op": "move",
-        "to": "instances[].meta.technicianCost"
-      },
-      {
-        "from": "members[].meta.technicians",
-        "op": "move",
-        "to": "instances[].meta.technicians"
-      },
-      {
-        "from": "members[].nodes[].id",
-        "op": "move",
-        "to": "instances[].nodes[].id"
-      },
-      {
-        "from": "members[].nodes[].machine",
-        "op": "move",
-        "to": "instances[].nodes[].skill"
-      },
-      {
-        "from": "members[].nodes[].x",
-        "op": "move",
-        "to": "instances[].nodes[].x"
-      },
-      {
-        "from": "members[].nodes[].y",
-        "op": "move",
-        "to": "instances[].nodes[].y"
-      },
-      {
-        "from": "members[].nodes[].kind",
-        "op": "move",
-        "to": "instances[].nodes[].kind"
-      },
-      {
-        "from": "members[].nodes[].location",
-        "op": "move",
-        "to": "instances[].nodes[].location"
-      },
-      {
-        "from": "members[].nodes[].fromDay",
-        "op": "move",
-        "to": "instances[].nodes[].fromDay"
-      },
-      {
-        "from": "members[].nodes[].toDay",
-        "op": "move",
-        "to": "instances[].nodes[].toDay"
-      },
-      {
-        "from": "members[].nodes[].amount",
-        "op": "move",
-        "to": "instances[].nodes[].amount"
+        "to": "nodes[].amount"
       }
     ],
     "source": "verolog-2019",
-    "target": "or-set/v1"
+    "target": "or/v1"
   },
   "domain": "Technician and home-care routing",
   "expectedCounts": {
