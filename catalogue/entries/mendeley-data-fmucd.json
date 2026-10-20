@@ -5,7 +5,31 @@
   "category": "or/v1",
   "citations": [],
   "crosswalk": {
-    "file": "crosswalks/or-v1/nodes.json"
+    "oneWay": [],
+    "rules": [
+      {
+        "from": "meta",
+        "op": "move",
+        "to": "meta"
+      },
+      {
+        "from": "nodes[].id",
+        "op": "move",
+        "to": "nodes[].id"
+      },
+      {
+        "from": "nodes[].WOStartDate",
+        "op": "move",
+        "to": "nodes[].opened"
+      },
+      {
+        "from": "nodes[].SystemDescription",
+        "op": "move",
+        "to": "nodes[].skill"
+      }
+    ],
+    "source": "csv-table",
+    "target": "or/v1"
   },
   "domain": "Technician and home-care routing",
   "expectedCounts": {},
@@ -22,14 +46,34 @@
     "surveyId": "or-23"
   },
   "recipe": {
-    "reason": "The single CSV is about 1.44 GB and was not fetched whole, so its rows are not counted and no recipe is given.",
-    "status": "not-fetchable"
+    "archive": {
+      "kind": "none"
+    },
+    "parser": {
+      "columns": [
+        "WOStartDate",
+        "SystemDescription"
+      ],
+      "delimiter": "comma",
+      "encoding": "utf-8",
+      "format": "csv-table",
+      "idColumn": null,
+      "numericColumns": [],
+      "skipLines": 0
+    },
+    "source": 1,
+    "status": "fetchable"
   },
   "sources": [
     {
       "retrieved": "2026-10-19",
       "status": "live",
       "url": "https://doi.org/10.1016/j.dib.2024.110845"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://data.mendeley.com/public-files/datasets/cb8d2nsjss/files/4c6c74f2-8bac-423c-a0c9-143130e1eea2/file_downloaded"
     }
   ],
   "tags": [

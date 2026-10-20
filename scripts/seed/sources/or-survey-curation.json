@@ -2201,7 +2201,10 @@
     {
       "flags": [
         "The article is CC BY-NC 4.0, which differs from the dataset licence.",
-        "Location columns hold building identifiers and names, not coordinates."
+        "Location columns hold building identifiers and names, not coordinates.",
+        "the rows are work orders joined to a building, a system and the weather, and the work order id repeats and is sometimes empty, so rows are numbered",
+        "only the work order's start and its system are mapped: the table has millions of rows and a fetch holds every mapped cell, so a third column would pass the importer's cell limit",
+        "the elapsed days of a work order are not a service time, so no duration is mapped"
       ],
       "id": "mendeley-data-fmucd",
       "licence": {
@@ -2211,10 +2214,60 @@
       "name": "Facility Management Unified Classification Database",
       "namespace": "mendeley-data",
       "outcome": {
-        "reason": "The single CSV is about 1.44 GB and was not fetched whole, so its rows are not counted and no recipe is given.",
-        "status": "not-fetchable"
+        "status": "fetchable",
+        "encoding": "utf-8",
+        "delimiter": "comma",
+        "skipLines": 0,
+        "idColumn": null,
+        "numericColumns": [],
+        "header": [
+          "UniversityID",
+          "Country",
+          "State/Province",
+          "BuildingID",
+          "BuildingName",
+          "Size",
+          "Type",
+          "BuiltYear",
+          "FCI (facility condition index)",
+          "CRV (current replacement value)",
+          "DMC (deferred maintenance cost)",
+          "SystemCode",
+          "SystemDescription",
+          "SubsystemCode",
+          "SubsystemDescription",
+          "DescriptiveCode",
+          "ComponentDescription",
+          "WOID",
+          "WODescription",
+          "WOPriority",
+          "WOStartDate",
+          "WOEndDate",
+          "WODuration",
+          "PPM/UPM",
+          "LaborCost",
+          "MaterialCost",
+          "OtherCost",
+          "TotalCost",
+          "LaborHours",
+          "MinTemp.(°C)",
+          "MaxTemp.(°C)",
+          "Atmospheric pressure(hPa)",
+          "Humidity(%)",
+          "WindSpeed(m/s)",
+          "WindDegree",
+          "Precipitation(mm)",
+          "Snow(mm)",
+          "Cloudness(%)"
+        ],
+        "rowCount": 3731442,
+        "map": {
+          "opened": "WOStartDate",
+          "skill": "SystemDescription"
+        }
       },
-      "surveyId": "or-23"
+      "surveyId": "or-23",
+      "downloadUrl": "https://data.mendeley.com/public-files/datasets/cb8d2nsjss/files/4c6c74f2-8bac-423c-a0c9-143130e1eea2/file_downloaded"
     },
     {
       "flags": [
@@ -2710,7 +2763,8 @@
       "description": "Aggregated appointment waiting days by county, month and clinic stop code for Veterans Health Administration and Community Care.",
       "flags": [
         "survey URL is the Data in Brief article DOI, not the data; the data is Mendeley Data record rmk89k4rhb",
-        "wait columns are aggregated waiting days per county, month and stop code, not per appointment"
+        "wait columns are aggregated waiting days per county, month and stop code, not per appointment",
+        "the record's station level file is a separate table of about 1.4 million rows that this entry does not read"
       ],
       "id": "mendeley-data-va-appointment-wait-times",
       "licence": {
@@ -2720,7 +2774,7 @@
       "name": "US Veterans Health Administration appointment wait times",
       "namespace": "mendeley-data",
       "outcome": {
-        "reason": "The county-level file is 916,897,688 bytes and was not fetched whole, so its rows are not counted and no recipe is given, and the other files are larger or are zip and xlsx.",
+        "reason": "The county-level file has 14,365,643 rows, so even the id alone passes the importer's cell limit (a mapped column would hold twice that many cells), and 8,264 of its rows have unquoted commas in the state and county names of the armed forces entries, which the csv-table parser refuses at line 1892.",
         "status": "not-fetchable"
       },
       "surveyId": "or-35"
