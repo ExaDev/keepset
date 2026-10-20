@@ -2,14 +2,80 @@
   "aliases": [
     "solomon-vrptw-benchmark"
   ],
-  "category": "or/v1",
+  "category": "or-set/v1",
   "citations": [],
   "crosswalk": {
-    "file": "crosswalks/or-v1/nodes.json"
+    "oneWay": [],
+    "rules": [
+      {
+        "from": "meta",
+        "op": "move",
+        "to": "meta"
+      },
+      {
+        "from": "members[].id",
+        "op": "move",
+        "to": "instances[].id"
+      },
+      {
+        "from": "members[].meta.name",
+        "op": "move",
+        "to": "instances[].meta.name"
+      },
+      {
+        "from": "members[].meta.vehicles",
+        "op": "move",
+        "to": "instances[].meta.vehicles"
+      },
+      {
+        "from": "members[].meta.capacity",
+        "op": "move",
+        "to": "instances[].meta.capacity"
+      },
+      {
+        "from": "members[].nodes[].id",
+        "op": "move",
+        "to": "instances[].nodes[].id"
+      },
+      {
+        "from": "members[].nodes[].due",
+        "op": "move",
+        "to": "instances[].nodes[].deadline"
+      },
+      {
+        "from": "members[].nodes[].x",
+        "op": "move",
+        "to": "instances[].nodes[].x"
+      },
+      {
+        "from": "members[].nodes[].y",
+        "op": "move",
+        "to": "instances[].nodes[].y"
+      },
+      {
+        "from": "members[].nodes[].demand",
+        "op": "move",
+        "to": "instances[].nodes[].demand"
+      },
+      {
+        "from": "members[].nodes[].ready",
+        "op": "move",
+        "to": "instances[].nodes[].ready"
+      },
+      {
+        "from": "members[].nodes[].service",
+        "op": "move",
+        "to": "instances[].nodes[].service"
+      }
+    ],
+    "source": "solomon",
+    "target": "or-set/v1"
   },
   "description": "Solomon's 1983 vehicle routing instances with time windows (C1, C2, R1, R2, RC1, RC2), each with 100 customers.",
   "domain": "Vehicle routing with time windows",
-  "expectedCounts": {},
+  "expectedCounts": {
+    "instances": 56
+  },
   "id": "lcc-malaga-solomon-vrptw-benchmark",
   "licence": {
     "kind": "unrecorded"
@@ -19,17 +85,35 @@
     "lcc-malaga"
   ],
   "properties": {
-    "surveyId": "or-5"
+    "surveyId": "or-5",
+    "timeUnit": "abstract units"
   },
   "recipe": {
-    "reason": "The download is a collection of Solomon instance files (planar coordinates, demands, service times and windows in abstract units, not seconds), and a collection is more than one or/v1 document, so no recipe reads it.",
-    "status": "not-fetchable"
+    "archive": {
+      "kind": "zip",
+      "members": {
+        "extensions": [
+          ".txt"
+        ]
+      }
+    },
+    "parser": {
+      "encoding": "utf-8",
+      "format": "solomon"
+    },
+    "source": 1,
+    "status": "fetchable"
   },
   "sources": [
     {
       "retrieved": "2026-10-19",
       "status": "live",
       "url": "https://neo.lcc.uma.es/vrp/vrp-instances/capacitated-vrp-with-time-windows-instances/"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://neo.lcc.uma.es/vrp/wp-content/data/instances/solomon/solomon_100.zip"
     }
   ],
   "tags": [

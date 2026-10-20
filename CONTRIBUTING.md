@@ -32,7 +32,7 @@ The operations-research curation (`or-survey-curation.json`) holds one item per 
 
 ## Adding a category
 
-A category names a normalisation target. Define the target as a Zod schema in `src/targets/`, register it in the category registry with its id (`<kind>/v<n>`), and give `countTarget` a counting of the target's work. The category lands with at least one entry that resolves to it, and the site's listing pages pick it up on the next build.
+A category names a normalisation target. Define the target as a Zod schema in `src/targets/`, register it in the category registry with its id (`<kind>/v<n>`), say whether an entry is one `document` or a `collection` of documents, and name the target's arrays an entry may record counts for. A collection's recipe selects every matching archive member with `members` (where a document's recipe selects one file with `member`); the entry schema refuses the wrong one for the category. Members are read in path order, every one is parsed with the recipe's parser, each becomes an element of the native document's `members` array under its path as `id`, and the crosswalk maps that array onto the target's. The category lands with at least one entry that resolves to it, and the site's listing pages pick it up on the next build.
 
 ## Constraints a change must preserve
 

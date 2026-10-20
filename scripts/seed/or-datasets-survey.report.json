@@ -51,11 +51,12 @@
     {
       "flags": [
         "no licence statement was found",
-        "the host also lists Homberger and other instance families as separate zips"
+        "the 25 and 50 customer archives are prefixes of the 100 customer instances, so only the 100 customer archive is read",
+        "the Homberger instances with more customers are separate archives and not read",
+        "time quantities are in the unit of the coordinate grid, which the host does not name"
       ],
       "id": "lcc-malaga-solomon-vrptw-benchmark",
-      "reason": "The download is a collection of Solomon instance files (planar coordinates, demands, service times and windows in abstract units, not seconds), and a collection is more than one or/v1 document, so no recipe reads it.",
-      "recipe": "not-fetchable",
+      "recipe": "fetchable",
       "surveyId": "or-5"
     },
     {
@@ -94,11 +95,11 @@
     {
       "flags": [
         "GitHub reports GPL-2.0 for the repository, which covers the generator; no separate dataset licence is stated.",
-        "Each instance has a Specs file and two tab-separated matrices with no header."
+        "only the Specs files are read: each instance's distance and time matrices are separate files that or/v1 has no place for",
+        "the first column of a Specs file is latitude and the second longitude, with ids that index a location list the archive does not hold"
       ],
       "id": "github-psxjpc-movrptw-real-tenerife-instances",
-      "reason": "The download is a collection of Solomon style instance files and distance matrices, and a collection is more than one or/v1 document, so no recipe reads it.",
-      "recipe": "not-fetchable",
+      "recipe": "fetchable",
       "surveyId": "or-9"
     },
     {
