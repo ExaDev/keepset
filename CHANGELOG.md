@@ -1,3 +1,12 @@
+# [0.29.0](https://github.com/Mearman/keepset/compare/v0.28.1...v0.29.0) (2026-10-20)
+
+
+### Features
+
+* **catalogue:** file the operations research survey under its subject ([55e76f3](https://github.com/Mearman/keepset/commit/55e76f3d6adf217262c7be82ec900479c053d7d7))
+* **entry:** add the subjects an entry is relevant to ([2e2f7d1](https://github.com/Mearman/keepset/commit/2e2f7d11d54f738c446f29c8c1a7e14833d8fd21))
+* **site:** list datasets by subject ([4641c1b](https://github.com/Mearman/keepset/commit/4641c1b20048f84332f07241004554f913fd6433))
+
 ## [0.28.1](https://github.com/Mearman/keepset/compare/v0.28.0...v0.28.1) (2026-10-20)
 
 # [0.28.0](https://github.com/Mearman/keepset/compare/v0.27.1...v0.28.0) (2026-10-20)
