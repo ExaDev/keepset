@@ -5070,83 +5070,93 @@
     },
     {
       "flags": [
-        "not fetchable yet: no declarative recipe exists for any download"
+        "GD contest bundle: the problem is read from the bundle's one inner .zip member, which the source catalogue does not record",
+        "the source is dead and the recipe fetches its pinned Wayback snapshot"
       ],
       "id": "pajek-gd04-prob1",
       "outcome": "converted-with-flags",
-      "recipe": "not-fetchable"
+      "recipe": "fetchable"
     },
     {
       "flags": [
-        "not fetchable yet: no declarative recipe exists for any download"
+        "GD contest bundle: the problem is read from the bundle's one inner .zip member, which the source catalogue does not record",
+        "the source is dead and the recipe fetches its pinned Wayback snapshot"
       ],
       "id": "pajek-gd04-prob10",
       "outcome": "converted-with-flags",
-      "recipe": "not-fetchable"
+      "recipe": "fetchable"
     },
     {
       "flags": [
-        "not fetchable yet: no declarative recipe exists for any download"
+        "GD contest bundle: the problem is read from the bundle's one inner .zip member, which the source catalogue does not record",
+        "the source is dead and the recipe fetches its pinned Wayback snapshot"
       ],
       "id": "pajek-gd04-prob2",
       "outcome": "converted-with-flags",
-      "recipe": "not-fetchable"
+      "recipe": "fetchable"
     },
     {
       "flags": [
-        "not fetchable yet: no declarative recipe exists for any download"
+        "GD contest bundle: the problem is read from the bundle's one inner .zip member, which the source catalogue does not record",
+        "the source is dead and the recipe fetches its pinned Wayback snapshot"
       ],
       "id": "pajek-gd04-prob3",
       "outcome": "converted-with-flags",
-      "recipe": "not-fetchable"
+      "recipe": "fetchable"
     },
     {
       "flags": [
-        "not fetchable yet: no declarative recipe exists for any download"
+        "GD contest bundle: the problem is read from the bundle's one inner .zip member, which the source catalogue does not record",
+        "the source is dead and the recipe fetches its pinned Wayback snapshot"
       ],
       "id": "pajek-gd04-prob4",
       "outcome": "converted-with-flags",
-      "recipe": "not-fetchable"
+      "recipe": "fetchable"
     },
     {
       "flags": [
-        "not fetchable yet: no declarative recipe exists for any download"
+        "GD contest bundle: the problem is read from the bundle's one inner .zip member, which the source catalogue does not record",
+        "the source is dead and the recipe fetches its pinned Wayback snapshot"
       ],
       "id": "pajek-gd04-prob5",
       "outcome": "converted-with-flags",
-      "recipe": "not-fetchable"
+      "recipe": "fetchable"
     },
     {
       "flags": [
-        "not fetchable yet: no declarative recipe exists for any download"
+        "GD contest bundle: the problem is read from the bundle's one inner .zip member, which the source catalogue does not record",
+        "the source is dead and the recipe fetches its pinned Wayback snapshot"
       ],
       "id": "pajek-gd04-prob6",
       "outcome": "converted-with-flags",
-      "recipe": "not-fetchable"
+      "recipe": "fetchable"
     },
     {
       "flags": [
-        "not fetchable yet: no declarative recipe exists for any download"
+        "GD contest bundle: the problem is read from the bundle's one inner .zip member, which the source catalogue does not record",
+        "the source is dead and the recipe fetches its pinned Wayback snapshot"
       ],
       "id": "pajek-gd04-prob7",
       "outcome": "converted-with-flags",
-      "recipe": "not-fetchable"
+      "recipe": "fetchable"
     },
     {
       "flags": [
-        "not fetchable yet: no declarative recipe exists for any download"
+        "GD contest bundle: the problem is read from the bundle's one inner .zip member, which the source catalogue does not record",
+        "the source is dead and the recipe fetches its pinned Wayback snapshot"
       ],
       "id": "pajek-gd04-prob8",
       "outcome": "converted-with-flags",
-      "recipe": "not-fetchable"
+      "recipe": "fetchable"
     },
     {
       "flags": [
-        "not fetchable yet: no declarative recipe exists for any download"
+        "GD contest bundle: the problem is read from the bundle's one inner .zip member, which the source catalogue does not record",
+        "the source is dead and the recipe fetches its pinned Wayback snapshot"
       ],
       "id": "pajek-gd04-prob9",
       "outcome": "converted-with-flags",
-      "recipe": "not-fetchable"
+      "recipe": "fetchable"
     },
     {
       "flags": [
@@ -9850,67 +9860,75 @@
     },
     {
       "flags": [
-        "not fetchable yet: no declarative recipe exists for any download"
+        "UCINet DL: the recipe reads the file's first matrix, the one the pipeline reads",
+        "the source is dead and the recipe fetches its pinned Wayback snapshot"
       ],
       "id": "ucinet-bkfrat",
       "outcome": "converted-with-flags",
-      "recipe": "not-fetchable"
+      "recipe": "fetchable"
     },
     {
       "flags": [
-        "not fetchable yet: no declarative recipe exists for any download"
+        "UCINet DL: the recipe reads the file's first matrix, the one the pipeline reads",
+        "the source is dead and the recipe fetches its pinned Wayback snapshot"
       ],
       "id": "ucinet-bkham",
       "outcome": "converted-with-flags",
-      "recipe": "not-fetchable"
+      "recipe": "fetchable"
     },
     {
       "flags": [
-        "not fetchable yet: no declarative recipe exists for any download"
+        "UCINet DL: the recipe reads the file's first matrix, the one the pipeline reads",
+        "the source is dead and the recipe fetches its pinned Wayback snapshot"
       ],
       "id": "ucinet-bkoff",
       "outcome": "converted-with-flags",
-      "recipe": "not-fetchable"
+      "recipe": "fetchable"
     },
     {
       "flags": [
-        "not fetchable yet: no declarative recipe exists for any download"
+        "UCINet DL: the recipe reads the file's first matrix, the one the pipeline reads",
+        "the source is dead and the recipe fetches its pinned Wayback snapshot"
       ],
       "id": "ucinet-bktec",
       "outcome": "converted-with-flags",
-      "recipe": "not-fetchable"
+      "recipe": "fetchable"
     },
     {
       "flags": [
-        "not fetchable yet: no declarative recipe exists for any download"
+        "UCINet DL: the recipe reads the file's first matrix, the one the pipeline reads",
+        "the source is dead and the recipe fetches its pinned Wayback snapshot"
       ],
       "id": "ucinet-davis",
       "outcome": "converted-with-flags",
-      "recipe": "not-fetchable"
+      "recipe": "fetchable"
     },
     {
       "flags": [
-        "not fetchable yet: no declarative recipe exists for any download"
+        "UCINet DL: the recipe reads the file's first matrix, the one the pipeline reads",
+        "the source is dead and the recipe fetches its pinned Wayback snapshot"
       ],
       "id": "ucinet-gama",
       "outcome": "converted-with-flags",
-      "recipe": "not-fetchable"
+      "recipe": "fetchable"
     },
     {
       "flags": [
-        "not fetchable yet: no declarative recipe exists for any download"
+        "UCINet DL: the recipe reads the file's first matrix, the one the pipeline reads",
+        "the source is dead and the recipe fetches its pinned Wayback snapshot"
       ],
       "id": "ucinet-kapmine",
       "outcome": "converted-with-flags",
-      "recipe": "not-fetchable"
+      "recipe": "fetchable"
     },
     {
       "flags": [
-        "not fetchable yet: no declarative recipe exists for any download"
+        "UCINet DL: the recipe reads the file's first matrix, the one the pipeline reads",
+        "the source is dead and the recipe fetches its pinned Wayback snapshot"
       ],
       "id": "ucinet-kaptail",
       "outcome": "converted-with-flags",
-      "recipe": "not-fetchable"
+      "recipe": "fetchable"
     },
     {
       "flags": [
@@ -9922,123 +9940,138 @@
     },
     {
       "flags": [
-        "not fetchable yet: no declarative recipe exists for any download"
+        "UCINet DL: the recipe reads the file's first matrix, the one the pipeline reads",
+        "the source is dead and the recipe fetches its pinned Wayback snapshot"
       ],
       "id": "ucinet-krackad",
       "outcome": "converted-with-flags",
-      "recipe": "not-fetchable"
+      "recipe": "fetchable"
     },
     {
       "flags": [
-        "not fetchable yet: no declarative recipe exists for any download"
+        "UCINet DL: the recipe reads the file's first matrix, the one the pipeline reads",
+        "the source is dead and the recipe fetches its pinned Wayback snapshot"
       ],
       "id": "ucinet-krackfr",
       "outcome": "converted-with-flags",
-      "recipe": "not-fetchable"
+      "recipe": "fetchable"
     },
     {
       "flags": [
-        "not fetchable yet: no declarative recipe exists for any download"
+        "UCINet DL: the recipe reads the file's first matrix, the one the pipeline reads",
+        "the source is dead and the recipe fetches its pinned Wayback snapshot"
       ],
       "id": "ucinet-newfrat",
       "outcome": "converted-with-flags",
-      "recipe": "not-fetchable"
+      "recipe": "fetchable"
     },
     {
       "flags": [
-        "not fetchable yet: no declarative recipe exists for any download"
+        "UCINet DL: the recipe reads the file's first matrix, the one the pipeline reads",
+        "the source is dead and the recipe fetches its pinned Wayback snapshot"
       ],
       "id": "ucinet-padgett",
       "outcome": "converted-with-flags",
-      "recipe": "not-fetchable"
+      "recipe": "fetchable"
     },
     {
       "flags": [
-        "not fetchable yet: no declarative recipe exists for any download"
+        "UCINet DL: the recipe reads the file's first matrix, the one the pipeline reads",
+        "the source is dead and the recipe fetches its pinned Wayback snapshot"
       ],
       "id": "ucinet-prison",
       "outcome": "converted-with-flags",
-      "recipe": "not-fetchable"
+      "recipe": "fetchable"
     },
     {
       "flags": [
-        "not fetchable yet: no declarative recipe exists for any download"
+        "UCINet DL: the recipe reads the file's first matrix, the one the pipeline reads",
+        "the source is dead and the recipe fetches its pinned Wayback snapshot"
       ],
       "id": "ucinet-sampson",
       "outcome": "converted-with-flags",
-      "recipe": "not-fetchable"
+      "recipe": "fetchable"
     },
     {
       "flags": [
-        "not fetchable yet: no declarative recipe exists for any download"
+        "UCINet DL: the recipe reads the file's first matrix, the one the pipeline reads",
+        "the source is dead and the recipe fetches its pinned Wayback snapshot"
       ],
       "id": "ucinet-sampson-monastery",
       "outcome": "converted-with-flags",
-      "recipe": "not-fetchable"
+      "recipe": "fetchable"
     },
     {
       "flags": [
-        "not fetchable yet: no declarative recipe exists for any download"
+        "UCINet DL: the recipe reads the file's first matrix, the one the pipeline reads",
+        "the source is dead and the recipe fetches its pinned Wayback snapshot"
       ],
       "id": "ucinet-southern-women-2",
       "outcome": "converted-with-flags",
-      "recipe": "not-fetchable"
+      "recipe": "fetchable"
     },
     {
       "flags": [
-        "not fetchable yet: no declarative recipe exists for any download"
+        "UCINet DL: the recipe reads the file's first matrix, the one the pipeline reads",
+        "the source is dead and the recipe fetches its pinned Wayback snapshot"
       ],
       "id": "ucinet-szcid",
       "outcome": "converted-with-flags",
-      "recipe": "not-fetchable"
+      "recipe": "fetchable"
     },
     {
       "flags": [
-        "not fetchable yet: no declarative recipe exists for any download"
+        "UCINet DL: the recipe reads the file's first matrix, the one the pipeline reads",
+        "the source is dead and the recipe fetches its pinned Wayback snapshot"
       ],
       "id": "ucinet-szcig",
       "outcome": "converted-with-flags",
-      "recipe": "not-fetchable"
+      "recipe": "fetchable"
     },
     {
       "flags": [
-        "not fetchable yet: no declarative recipe exists for any download"
+        "UCINet DL: the recipe reads the file's first matrix, the one the pipeline reads",
+        "the source is dead and the recipe fetches its pinned Wayback snapshot"
       ],
       "id": "ucinet-taro",
       "outcome": "converted-with-flags",
-      "recipe": "not-fetchable"
+      "recipe": "fetchable"
     },
     {
       "flags": [
-        "not fetchable yet: no declarative recipe exists for any download"
+        "UCINet DL: the recipe reads the file's first matrix, the one the pipeline reads",
+        "the source is dead and the recipe fetches its pinned Wayback snapshot"
       ],
       "id": "ucinet-thuroff",
       "outcome": "converted-with-flags",
-      "recipe": "not-fetchable"
+      "recipe": "fetchable"
     },
     {
       "flags": [
-        "not fetchable yet: no declarative recipe exists for any download"
+        "UCINet DL: the recipe reads the file's first matrix, the one the pipeline reads",
+        "the source is dead and the recipe fetches its pinned Wayback snapshot"
       ],
       "id": "ucinet-wiring",
       "outcome": "converted-with-flags",
-      "recipe": "not-fetchable"
+      "recipe": "fetchable"
     },
     {
       "flags": [
-        "not fetchable yet: no declarative recipe exists for any download"
+        "UCINet DL: the recipe reads the file's first matrix, the one the pipeline reads",
+        "the source is dead and the recipe fetches its pinned Wayback snapshot"
       ],
       "id": "ucinet-wolf",
       "outcome": "converted-with-flags",
-      "recipe": "not-fetchable"
+      "recipe": "fetchable"
     },
     {
       "flags": [
-        "not fetchable yet: no declarative recipe exists for any download"
+        "UCINet DL: the recipe reads the file's first matrix, the one the pipeline reads",
+        "the source is dead and the recipe fetches its pinned Wayback snapshot"
       ],
       "id": "ucinet-zachary",
       "outcome": "converted-with-flags",
-      "recipe": "not-fetchable"
+      "recipe": "fetchable"
     },
     {
       "flags": [
