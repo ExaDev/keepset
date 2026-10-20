@@ -25,7 +25,10 @@
       ],
       "id": "ku-leuven-team-orienteering-chao-instances",
       "licence": {
-        "kind": "unrecorded"
+        "readAt": [
+          "https://www.mech.kuleuven.be/en/mim/op"
+        ],
+        "reason": "The instances page states no licence."
       },
       "name": "Team Orienteering Problem instances (Chao and Tsiligirides sets)",
       "namespace": "ku-leuven",
@@ -75,7 +78,10 @@
       ],
       "id": "ku-leuven-toptw-righini-instances",
       "licence": {
-        "kind": "unrecorded"
+        "readAt": [
+          "https://www.mech.kuleuven.be/en/mim/op"
+        ],
+        "reason": "The instances page states no licence."
       },
       "name": "Team Orienteering Problem with Time Windows instances (Righini)",
       "namespace": "ku-leuven",
@@ -125,7 +131,10 @@
       ],
       "id": "vrp-rep-park-and-loop-routing-cabrera-2021",
       "licence": {
-        "kind": "unrecorded"
+        "readAt": [
+          "https://www.vrp-rep.org/datasets/download/cabrera-et-al-2021.zip"
+        ],
+        "reason": "The archive's readme has a Usage and License section that only asks users to email the authors describing their use, so it names no licence."
       },
       "name": "Park-and-loop routing instances (Cabrera et al., 2021)",
       "namespace": "vrp-rep",
@@ -182,8 +191,12 @@
       ],
       "id": "new-orleans-code-enforcement-all-hearings",
       "licence": {
-        "id": "CC0-1.0",
-        "kind": "spdx"
+        "licence": {
+          "id": "CC0-1.0",
+          "kind": "spdx"
+        },
+        "statedAt": "https://data.nola.gov/api/views/44ct-56tr.json",
+        "statement": "The Socrata record gives the licence as Creative Commons 1.0 Universal (Public Domain Dedication) (http://creativecommons.org/publicdomain/zero/1.0/legalcode)."
       },
       "name": "Code Enforcement All Hearings (New Orleans)",
       "namespace": "new-orleans",
@@ -250,7 +263,11 @@
       ],
       "id": "nyc-open-data-dof-scofftow-case-information",
       "licence": {
-        "kind": "unrecorded"
+        "readAt": [
+          "https://data.cityofnewyork.us/api/views/qmh3-uvgq.json",
+          "https://web.archive.org/web/20250401004630/https://www.nyc.gov/html/data/terms.html"
+        ],
+        "reason": "The Socrata record's licence field is empty, and the portal's terms of use are a disclaimer and a pointer to the nyc.gov terms that grant no licence."
       },
       "name": "DOF Scofftow Case Information (NYC)",
       "namespace": "nyc-open-data",
@@ -307,7 +324,11 @@
       ],
       "id": "nyc-open-data-evictions",
       "licence": {
-        "kind": "unrecorded"
+        "readAt": [
+          "https://data.cityofnewyork.us/api/views/6z8x-wfk4.json",
+          "https://web.archive.org/web/20250401004630/https://www.nyc.gov/html/data/terms.html"
+        ],
+        "reason": "The Socrata record's licence field is empty, and the portal's terms of use are a disclaimer and a pointer to the nyc.gov terms that grant no licence."
       },
       "name": "NYC Evictions",
       "namespace": "nyc-open-data",
@@ -370,7 +391,10 @@
       ],
       "id": "uc-san-diego-sheriff-evictions-san-diego-county",
       "licence": {
-        "kind": "unrecorded"
+        "readAt": [
+          "https://www.arcgis.com/sharing/rest/content/items/bf8254d2e7bd4ecaa17a03cdc37f90ee?f=json"
+        ],
+        "reason": "The ArcGIS record names no licence."
       },
       "name": "Sheriff Evictions (San Diego County, CA)",
       "namespace": "uc-san-diego",
@@ -418,7 +442,10 @@
       ],
       "id": "los-angeles-lahd-property-look-up-for-eviction-cases",
       "licence": {
-        "kind": "unrecorded"
+        "readAt": [
+          "https://data.lacity.org/api/views/2u8b-eyuu.json"
+        ],
+        "reason": "The Socrata record names no licence."
       },
       "name": "LAHD Property Look-Up for Eviction Cases (Los Angeles)",
       "namespace": "los-angeles",
@@ -455,7 +482,13 @@
       ],
       "id": "cfpb-consumer-complaints-debt-collection",
       "licence": {
-        "kind": "unrecorded"
+        "licence": {
+          "kind": "custom",
+          "name": "Freely available to use, analyze and build on (no licence named)",
+          "url": "https://www.consumerfinance.gov/data-research/consumer-complaints/"
+        },
+        "statedAt": "https://www.consumerfinance.gov/data-research/consumer-complaints/",
+        "statement": "All complaint data we publish is freely available for anyone to use, analyze, and build on."
       },
       "name": "CFPB Consumer Complaint Database (Debt Collection)",
       "namespace": "cfpb",
@@ -477,8 +510,12 @@
       ],
       "id": "dallas-animals-field-data-2016-2017",
       "licence": {
-        "id": "ODC-By-1.0",
-        "kind": "spdx"
+        "licence": {
+          "id": "ODC-By-1.0",
+          "kind": "spdx"
+        },
+        "statedAt": "https://www.dallasopendata.com/api/views/xy7j-y59g.json",
+        "statement": "The Socrata record gives the licence as Open Data Commons Attribution License (http://opendatacommons.org/licenses/by/1.0/)."
       },
       "name": "Animals Field Data (Dallas, TX)",
       "namespace": "dallas",
@@ -559,7 +596,11 @@
       ],
       "id": "nyc-open-data-fdny-ems-incident-dispatch",
       "licence": {
-        "kind": "unrecorded"
+        "readAt": [
+          "https://data.cityofnewyork.us/api/views/76xm-jjuj.json",
+          "https://web.archive.org/web/20250401004630/https://www.nyc.gov/html/data/terms.html"
+        ],
+        "reason": "The Socrata record's licence field is empty, and the portal's terms of use are a disclaimer and a pointer to the nyc.gov terms that grant no licence."
       },
       "name": "FDNY EMS Incident Dispatch Data",
       "namespace": "nyc-open-data",
@@ -578,7 +619,11 @@
       ],
       "id": "nyc-open-data-nypd-calls-for-service",
       "licence": {
-        "kind": "unrecorded"
+        "readAt": [
+          "https://data.cityofnewyork.us/api/views/n2zq-pubd.json",
+          "https://web.archive.org/web/20250401004630/https://www.nyc.gov/html/data/terms.html"
+        ],
+        "reason": "The Socrata record's licence field is empty, and the portal's terms of use are a disclaimer and a pointer to the nyc.gov terms that grant no licence."
       },
       "name": "NYPD Calls for Service",
       "namespace": "nyc-open-data",
@@ -599,7 +644,13 @@
       ],
       "id": "mesa-police-dispatch-events",
       "licence": {
-        "kind": "unrecorded"
+        "licence": {
+          "kind": "custom",
+          "name": "City of Mesa Open Data Terms of Use License Agreement",
+          "url": "https://data.mesaaz.gov/stories/s/2dcd-j2nx/"
+        },
+        "statedAt": "https://data.mesaaz.gov/stories/s/2dcd-j2nx/",
+        "statement": "The dataset record gives the licence as See Terms of Use, which links the City of Mesa Open Data Terms of Use License Agreement: a non-exclusive licence to use the data, with no restrictions on copying, publishing, distributing, modifying or using it, on condition that the City is credited as the source."
       },
       "name": "Police Dispatch Events (Mesa, AZ)",
       "namespace": "mesa",
@@ -678,8 +729,12 @@
       ],
       "id": "mendeley-data-dwsrp-tw-sc-instances",
       "licence": {
-        "id": "CC-BY-4.0",
-        "kind": "spdx"
+        "licence": {
+          "kind": "spdx",
+          "id": "CC-BY-4.0"
+        },
+        "statedAt": "https://data.mendeley.com/public-api/datasets/dbsf73xpg5",
+        "statement": "The Mendeley Data record gives the licence as CC BY 4.0 (Creative Commons Attribution 4.0 International)."
       },
       "name": "Dynamic Workforce Scheduling and Routing with Time Windows and Skill Constraints instances",
       "namespace": "mendeley-data",
@@ -700,7 +755,13 @@
       ],
       "id": "mesa-fire-and-medical-dispatch-events",
       "licence": {
-        "kind": "unrecorded"
+        "licence": {
+          "kind": "custom",
+          "name": "City of Mesa Open Data Terms of Use License Agreement",
+          "url": "https://data.mesaaz.gov/stories/s/2dcd-j2nx/"
+        },
+        "statedAt": "https://data.mesaaz.gov/stories/s/2dcd-j2nx/",
+        "statement": "The dataset record gives the licence as See Terms of Use, which links the City of Mesa Open Data Terms of Use License Agreement: a non-exclusive licence to use the data, with no restrictions on copying, publishing, distributing, modifying or using it, on condition that the City is credited as the source."
       },
       "name": "Fire and Medical Dispatch Events (Mesa, AZ)",
       "namespace": "mesa",
@@ -797,8 +858,12 @@
       ],
       "id": "london-fire-brigade-incident-records",
       "licence": {
-        "id": "OGL-UK-2.0",
-        "kind": "spdx"
+        "licence": {
+          "kind": "spdx",
+          "id": "OGL-UK-2.0"
+        },
+        "statedAt": "https://data.london.gov.uk/dataset/london-fire-brigade-incident-records",
+        "statement": "The dataset page lists the licence as Open Government Licence v2."
       },
       "name": "Incident Records (London Fire Brigade)",
       "namespace": "london-fire-brigade",
@@ -882,9 +947,13 @@
       ],
       "id": "northern-powergrid-live-power-cuts",
       "licence": {
-        "kind": "custom",
-        "name": "Northern Powergrid Open Data Licence v1.0",
-        "url": "https://northernpowergrid.opendatasoft.com/p/opendatalicence/"
+        "licence": {
+          "kind": "custom",
+          "name": "Northern Powergrid Open Data Licence v1.0",
+          "url": "https://northernpowergrid.opendatasoft.com/p/opendatalicence/"
+        },
+        "statedAt": "https://northernpowergrid.opendatasoft.com/api/explore/v2.1/catalog/datasets/live-power-cuts-data",
+        "statement": "The dataset metadata gives the licence as Northern Powergrid Open Data Licence v1.0, with the licence URL https://northernpowergrid.opendatasoft.com/p/opendatalicence/."
       },
       "name": "Live Power Cuts (Northern Powergrid)",
       "namespace": "northern-powergrid",
@@ -972,7 +1041,10 @@
       ],
       "id": "arlington-county-water-leak-repairs-live",
       "licence": {
-        "kind": "unrecorded"
+        "readAt": [
+          "https://utility.arcgis.com/usrsvcs/servers/53520af18235499d9ecd9c96f624eeae/rest/services/AM/Leak_Repairs_Live/FeatureServer?f=json"
+        ],
+        "reason": "The service states no licence or copyright text."
       },
       "name": "Water Leak Repairs (Live), Arlington County, VA",
       "namespace": "arlington-county",
@@ -1049,7 +1121,10 @@
       ],
       "id": "christchurch-city-council-water-shut-off",
       "licence": {
-        "kind": "unrecorded"
+        "readAt": [
+          "https://gis.ccc.govt.nz/server/rest/services/OpenData/WaterSupply/FeatureServer/3?f=json"
+        ],
+        "reason": "The service carries only a copyright text naming Christchurch City Council, not a licence."
       },
       "name": "Water Shut Off (Christchurch City Council, New Zealand)",
       "namespace": "christchurch-city-council",
@@ -1109,8 +1184,12 @@
       ],
       "id": "melbourne-on-street-parking-bay-sensors",
       "licence": {
-        "id": "CC-BY-4.0",
-        "kind": "spdx"
+        "licence": {
+          "kind": "spdx",
+          "id": "CC-BY-4.0"
+        },
+        "statedAt": "https://data.melbourne.vic.gov.au/api/explore/v2.1/catalog/datasets/on-street-parking-bay-sensors",
+        "statement": "The dataset metadata gives the licence as CC BY, with the licence URL https://creativecommons.org/licenses/by/4.0/legalcode."
       },
       "name": "On-street Parking Bay Sensors (City of Melbourne)",
       "namespace": "melbourne",
@@ -1145,7 +1224,11 @@
       ],
       "id": "nyc-open-data-311-service-requests-2020-to-present",
       "licence": {
-        "kind": "unrecorded"
+        "readAt": [
+          "https://data.cityofnewyork.us/api/views/erm2-nwe9.json",
+          "https://web.archive.org/web/20250401004630/https://www.nyc.gov/html/data/terms.html"
+        ],
+        "reason": "The Socrata record's licence field is empty, and the portal's terms of use are a disclaimer and a pointer to the nyc.gov terms that grant no licence."
       },
       "name": "NYC 311 Service Requests from 2020 to Present",
       "namespace": "nyc-open-data",
@@ -1165,8 +1248,12 @@
       ],
       "id": "melbourne-customer-service-requests-with-resolution-time",
       "licence": {
-        "id": "CC-BY-4.0",
-        "kind": "spdx"
+        "licence": {
+          "kind": "spdx",
+          "id": "CC-BY-4.0"
+        },
+        "statedAt": "https://data.melbourne.vic.gov.au/api/explore/v2.1/catalog/datasets/customer-service-requests-with-resolution-time",
+        "statement": "The dataset metadata gives the licence as CC BY, with the licence URL https://creativecommons.org/licenses/by/4.0/legalcode."
       },
       "name": "Customer Service Requests, with Resolution Time (City of Melbourne)",
       "namespace": "melbourne",
@@ -1215,9 +1302,13 @@
       ],
       "id": "montgomery-county-md-troubled-properties-analysis",
       "licence": {
-        "kind": "custom",
-        "name": "Public Domain",
-        "url": "https://data.montgomerycountymd.gov/api/views/bw2r-araf.json"
+        "licence": {
+          "kind": "custom",
+          "name": "Public Domain",
+          "url": "https://data.montgomerycountymd.gov/api/views/bw2r-araf.json"
+        },
+        "statedAt": "https://data.montgomerycountymd.gov/api/views/bw2r-araf.json",
+        "statement": "The Socrata record gives the licence as Public Domain."
       },
       "name": "Troubled Properties Analysis (Montgomery County, MD)",
       "namespace": "montgomery-county-md",
@@ -1280,8 +1371,12 @@
       ],
       "id": "defra-event-duration-monitoring-storm-overflows",
       "licence": {
-        "id": "OGL-UK-3.0",
-        "kind": "spdx"
+        "licence": {
+          "kind": "spdx",
+          "id": "OGL-UK-3.0"
+        },
+        "statedAt": "https://environment.data.gov.uk/dataset/21e15f12-0df8-4bfc-b763-45226c16a8ac",
+        "statement": "The dataset page gives the licence as Open Government Licence, linking https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/."
       },
       "name": "Event Duration Monitoring, Storm Overflows (England and Wales)",
       "namespace": "defra",
@@ -1301,7 +1396,13 @@
       ],
       "id": "mesa-transportation-work-orders-public-view",
       "licence": {
-        "kind": "unrecorded"
+        "licence": {
+          "kind": "custom",
+          "name": "City of Mesa Open Data Terms of Use License Agreement",
+          "url": "https://data.mesaaz.gov/stories/s/2dcd-j2nx/"
+        },
+        "statedAt": "https://data.mesaaz.gov/stories/s/2dcd-j2nx/",
+        "statement": "The dataset record gives the licence as See Terms of Use, which links the City of Mesa Open Data Terms of Use License Agreement: a non-exclusive licence to use the data, with no restrictions on copying, publishing, distributing, modifying or using it, on condition that the City is credited as the source."
       },
       "name": "Transportation Work Orders, Public View (Mesa, AZ)",
       "namespace": "mesa",
@@ -1459,8 +1560,12 @@
       ],
       "id": "defra-historic-flood-warnings",
       "licence": {
-        "id": "OGL-UK-3.0",
-        "kind": "spdx"
+        "licence": {
+          "kind": "spdx",
+          "id": "OGL-UK-3.0"
+        },
+        "statedAt": "https://environment.data.gov.uk/dataset/88bed270-d465-11e4-8669-f0def148f590",
+        "statement": "The dataset page gives the licence as Open Government Licence, linking https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/."
       },
       "name": "Historic Flood Warnings (England)",
       "namespace": "defra",
@@ -1481,7 +1586,11 @@
       ],
       "id": "nyc-open-data-street-resurfacing-schedule",
       "licence": {
-        "kind": "unrecorded"
+        "readAt": [
+          "https://data.cityofnewyork.us/api/views/xnfm-u3k5.json",
+          "https://web.archive.org/web/20250401004630/https://www.nyc.gov/html/data/terms.html"
+        ],
+        "reason": "The Socrata record's licence field is empty, and the portal's terms of use are a disclaimer and a pointer to the nyc.gov terms that grant no licence."
       },
       "name": "NYC street resurfacing schedule",
       "namespace": "nyc-open-data",
@@ -1531,9 +1640,13 @@
       ],
       "id": "fema-nfip-redacted-claims",
       "licence": {
-        "kind": "custom",
-        "name": "OpenFEMA Terms and Conditions",
-        "url": "https://www.fema.gov/about/openfema/terms-conditions"
+        "licence": {
+          "kind": "custom",
+          "name": "OpenFEMA Terms and Conditions",
+          "url": "https://www.fema.gov/about/openfema/terms-conditions"
+        },
+        "statedAt": "https://www.fema.gov/about/openfema/terms-conditions",
+        "statement": "The OpenFEMA Terms and Conditions govern the API and its content and ask users not to reidentify the individuals whose data may be aggregated."
       },
       "name": "FEMA NFIP redacted claims",
       "namespace": "fema",
@@ -1588,7 +1701,10 @@
       ],
       "id": "dallas-building-fire-investigations",
       "licence": {
-        "kind": "unrecorded"
+        "readAt": [
+          "https://www.dallasopendata.com/api/views/skju-bfp8.json"
+        ],
+        "reason": "The Socrata record names no licence."
       },
       "name": "Dallas building fire investigations",
       "namespace": "dallas",
@@ -1648,8 +1764,12 @@
       ],
       "id": "queensland-government-unclaimed-monies",
       "licence": {
-        "id": "CC-BY-4.0",
-        "kind": "spdx"
+        "licence": {
+          "kind": "spdx",
+          "id": "CC-BY-4.0"
+        },
+        "statedAt": "https://www.data.qld.gov.au/api/3/action/package_show?id=unclaimed-monies",
+        "statement": "The CKAN record gives license_id CC-BY-4.0 (Creative Commons Attribution 4.0)."
       },
       "name": "Unclaimed monies (Queensland)",
       "namespace": "queensland-government",
@@ -1697,7 +1817,13 @@
       ],
       "id": "mesa-water-resources-work-orders",
       "licence": {
-        "kind": "unrecorded"
+        "licence": {
+          "kind": "custom",
+          "name": "City of Mesa Open Data Terms of Use License Agreement",
+          "url": "https://data.mesaaz.gov/stories/s/2dcd-j2nx/"
+        },
+        "statedAt": "https://data.mesaaz.gov/stories/s/2dcd-j2nx/",
+        "statement": "The dataset record gives the licence as See Terms of Use, which links the City of Mesa Open Data Terms of Use License Agreement: a non-exclusive licence to use the data, with no restrictions on copying, publishing, distributing, modifying or using it, on condition that the City is credited as the source."
       },
       "name": "Mesa water resources work orders",
       "namespace": "mesa",
@@ -1861,7 +1987,10 @@
       ],
       "id": "norfolk-work-orders",
       "licence": {
-        "kind": "unrecorded"
+        "readAt": [
+          "https://data.norfolk.gov/api/views/qzfe-wj25.json"
+        ],
+        "reason": "The Socrata record names no licence."
       },
       "name": "City of Norfolk work orders",
       "namespace": "norfolk",
@@ -1932,7 +2061,11 @@
       ],
       "id": "nyc-open-data-forestry-work-orders",
       "licence": {
-        "kind": "unrecorded"
+        "readAt": [
+          "https://data.cityofnewyork.us/api/views/bdjm-n7q4.json",
+          "https://web.archive.org/web/20250401004630/https://www.nyc.gov/html/data/terms.html"
+        ],
+        "reason": "The Socrata record's licence field is empty, and the portal's terms of use are a disclaimer and a pointer to the nyc.gov terms that grant no licence."
       },
       "name": "NYC Parks forestry work orders",
       "namespace": "nyc-open-data",
@@ -2034,8 +2167,12 @@
       ],
       "id": "mendeley-data-hhcrsp-multi-window",
       "licence": {
-        "id": "CC-BY-4.0",
-        "kind": "spdx"
+        "licence": {
+          "kind": "spdx",
+          "id": "CC-BY-4.0"
+        },
+        "statedAt": "https://data.mendeley.com/public-api/datasets/hp3xftsrfx",
+        "statement": "The Mendeley Data record gives the licence as CC BY 4.0 (Creative Commons Attribution 4.0 International)."
       },
       "name": "Home health care routing, multi-window variant",
       "namespace": "mendeley-data",
@@ -2062,7 +2199,10 @@
       ],
       "id": "github-afkummer-hhcrsp-curated-instances",
       "licence": {
-        "kind": "unrecorded"
+        "readAt": [
+          "https://api.github.com/repos/afkummer/hhcrsp-dataset-2021/license"
+        ],
+        "reason": "The GitHub record names no licence."
       },
       "name": "HHCRSP curated instances (Kummer, 2021)",
       "namespace": "github-afkummer",
@@ -2085,7 +2225,10 @@
       ],
       "id": "elsevier-ev-hhcrsp-multi-period",
       "licence": {
-        "kind": "unrecorded"
+        "readAt": [
+          "https://doi.org/10.1016/j.omega.2026.103587"
+        ],
+        "reason": "Only the Elsevier text and data mining licence for the article was found, not a licence for the dataset; the article page was not re-read because the publisher bot wall blocks automated access."
       },
       "name": "EV home health care routing, multi-period variant",
       "namespace": "elsevier",
@@ -2104,8 +2247,12 @@
       ],
       "id": "cqc-care-directory",
       "licence": {
-        "id": "OGL-UK-3.0",
-        "kind": "spdx"
+        "licence": {
+          "kind": "spdx",
+          "id": "OGL-UK-3.0"
+        },
+        "statedAt": "https://www.cqc.org.uk/about-us/transparency/using-cqc-data",
+        "statement": "Our data is made available under the Open Government Licence (linking version 3)."
       },
       "name": "CQC care directory (England)",
       "namespace": "cqc",
@@ -2132,8 +2279,12 @@
       ],
       "id": "mendeley-data-dynamic-team-orienteering",
       "licence": {
-        "id": "CC-BY-4.0",
-        "kind": "spdx"
+        "licence": {
+          "kind": "spdx",
+          "id": "CC-BY-4.0"
+        },
+        "statedAt": "https://data.mendeley.com/public-api/datasets/xnf6c4d5gt",
+        "statement": "The Mendeley Data record gives the licence as CC BY 4.0 (Creative Commons Attribution 4.0 International)."
       },
       "name": "Dynamic team orienteering problem",
       "namespace": "mendeley-data",
@@ -2154,8 +2305,12 @@
       ],
       "id": "washington-state-li-contractor-licences",
       "licence": {
-        "id": "PDDL-1.0",
-        "kind": "spdx"
+        "licence": {
+          "id": "PDDL-1.0",
+          "kind": "spdx"
+        },
+        "statedAt": "https://data.wa.gov/api/views/m8qx-ubtq.json",
+        "statement": "The Socrata record gives the licence as Open Data Commons Public Domain Dedication and License (http://opendatacommons.org/licenses/pddl/1.0/)."
       },
       "name": "Washington L&I contractor licences",
       "namespace": "washington-state",
@@ -2220,7 +2375,10 @@
       ],
       "id": "vrp-rep-technician-routing-pillac",
       "licence": {
-        "kind": "unrecorded"
+        "readAt": [
+          "https://www.vrp-rep.org/datasets/download/pillac-et-al-2013.zip"
+        ],
+        "reason": "The archive's readme describes the instances and states no licence."
       },
       "name": "Technician routing and scheduling problem (Pillac et al.)",
       "namespace": "vrp-rep",
@@ -2266,8 +2424,12 @@
       ],
       "id": "mendeley-data-concrete-delivery-problem",
       "licence": {
-        "id": "CC-BY-4.0",
-        "kind": "spdx"
+        "licence": {
+          "kind": "spdx",
+          "id": "CC-BY-4.0"
+        },
+        "statedAt": "https://doi.org/10.1016/j.dib.2023.109189",
+        "statement": "The article links its Mendeley Data record, whose licence is CC BY 4.0 (the article itself is CC BY-NC-ND 4.0); the record was not re-read because its identifier is behind the publisher bot wall."
       },
       "name": "Concrete delivery problem operational data",
       "namespace": "mendeley-data",
@@ -2295,8 +2457,12 @@
       ],
       "id": "mendeley-data-fmucd",
       "licence": {
-        "id": "CC-BY-4.0",
-        "kind": "spdx"
+        "licence": {
+          "kind": "spdx",
+          "id": "CC-BY-4.0"
+        },
+        "statedAt": "https://data.mendeley.com/public-api/datasets/cb8d2nsjss",
+        "statement": "The Mendeley Data record gives the licence as CC BY 4.0 (Creative Commons Attribution 4.0 International)."
       },
       "name": "Facility Management Unified Classification Database",
       "namespace": "mendeley-data",
@@ -2367,7 +2533,10 @@
       ],
       "id": "github-bascoding-verolog-2019",
       "licence": {
-        "kind": "unrecorded"
+        "readAt": [
+          "https://api.github.com/repos/BasCoding/VeRoLog-2019/license"
+        ],
+        "reason": "The GitHub record names no licence."
       },
       "name": "VeRoLog 2019 machine delivery and installation instances",
       "namespace": "github-bascoding",
@@ -2412,8 +2581,12 @@
       ],
       "id": "zenodo-tdc-technician-dispatch",
       "licence": {
-        "id": "CC-BY-4.0",
-        "kind": "spdx"
+        "licence": {
+          "id": "CC-BY-4.0",
+          "kind": "spdx"
+        },
+        "statedAt": "https://zenodo.org/api/records/7904015",
+        "statement": "The Zenodo record gives the licence as cc-by-4.0."
       },
       "name": "Technician dispatch data (Mathlouthi, Gendreau and Potvin)",
       "namespace": "zenodo",
@@ -2437,7 +2610,10 @@
       ],
       "id": "ortec-verolog-2016-2017-instances",
       "licence": {
-        "kind": "unrecorded"
+        "readAt": [
+          "http://web.archive.org/web/20240523121816/https://verolog2017.ortec.com/instances"
+        ],
+        "reason": "The archived instances page states no licence."
       },
       "name": "VeRoLog 2016-2017 scarce-equipment pickup and delivery instances",
       "namespace": "ortec",
@@ -2460,8 +2636,12 @@
       ],
       "id": "amazon-last-mile-routing-2021",
       "licence": {
-        "id": "CC-BY-NC-4.0",
-        "kind": "spdx"
+        "licence": {
+          "kind": "spdx",
+          "id": "CC-BY-NC-4.0"
+        },
+        "statedAt": "https://registry.opendata.aws/amazon-last-mile-challenges/",
+        "statement": "The material is provided under a Creative Commons Attribution-NonCommercial 4.0 International Public License."
       },
       "name": "Amazon Last Mile Routing Research Challenge 2021",
       "namespace": "amazon",
@@ -2489,8 +2669,12 @@
       ],
       "id": "huggingface-lade-delivery-jilin",
       "licence": {
-        "id": "Apache-2.0",
-        "kind": "spdx"
+        "licence": {
+          "id": "Apache-2.0",
+          "kind": "spdx"
+        },
+        "statedAt": "https://huggingface.co/api/datasets/Cainiao-AI/LaDe",
+        "statement": "The Hugging Face record gives the licence as apache-2.0."
       },
       "name": "LaDe last-mile delivery orders, Jilin",
       "namespace": "huggingface",
@@ -2552,7 +2736,10 @@
       ],
       "id": "github-zhangchenhaoseu-jd-cold-chain-nodes",
       "licence": {
-        "kind": "unrecorded"
+        "readAt": [
+          "https://api.github.com/repos/zhangchenhaoseu/Database-for-HMCVRPTW-SD/license"
+        ],
+        "reason": "The GitHub record names no licence."
       },
       "name": "JD.com cold-chain delivery nodes (Beijing)",
       "namespace": "github-zhangchenhaoseu",
@@ -2613,7 +2800,10 @@
       ],
       "id": "vrp-rep-probabilistic-orienteering",
       "licence": {
-        "kind": "unrecorded"
+        "readAt": [
+          "https://www.vrp-rep.org/datasets/download/angelelli-et-al-2017.zip"
+        ],
+        "reason": "The archive's readme describes the instances and states no licence."
       },
       "name": "Probabilistic orienteering problem",
       "namespace": "vrp-rep",
@@ -2659,8 +2849,12 @@
       ],
       "id": "github-meituan-informs-tsl-dispatch-waybill",
       "licence": {
-        "id": "CC-BY-NC-4.0",
-        "kind": "spdx"
+        "licence": {
+          "kind": "spdx",
+          "id": "CC-BY-NC-4.0"
+        },
+        "statedAt": "https://raw.githubusercontent.com/meituan/Meituan-INFORMS-TSL-Research-Challenge/main/License.txt",
+        "statement": "License.txt says the dataset is provided under the Creative Commons Attribution-NonCommercial 4.0 International licence (CC BY-NC 4.0)."
       },
       "name": "Meituan-INFORMS-TSL research challenge dataset",
       "namespace": "github-meituan",
@@ -2683,8 +2877,12 @@
       ],
       "id": "kaggle-doordash-eta-prediction",
       "licence": {
-        "id": "MIT",
-        "kind": "spdx"
+        "licence": {
+          "kind": "spdx",
+          "id": "MIT"
+        },
+        "statedAt": "https://www.kaggle.com/datasets/dharun4772/doordash-eta-prediction",
+        "statement": "The dataset page lists License MIT (a value the uploader declared)."
       },
       "name": "DoorDash delivery ETA prediction orders",
       "namespace": "kaggle",
@@ -2751,8 +2949,12 @@
       ],
       "id": "kaggle-medical-appointment-no-shows",
       "licence": {
-        "id": "CC-BY-NC-SA-4.0",
-        "kind": "spdx"
+        "licence": {
+          "kind": "spdx",
+          "id": "CC-BY-NC-SA-4.0"
+        },
+        "statedAt": "https://www.kaggle.com/datasets/joniarroba/noshowappointments",
+        "statement": "The dataset page lists License CC BY-NC-SA 4.0 (a value the uploader declared)."
       },
       "name": "Medical appointment no-shows (Brazil, 2016)",
       "namespace": "kaggle",
@@ -2774,9 +2976,12 @@
       ],
       "id": "food-standards-agency-fhrs-establishments",
       "licence": {
-        "kind": "custom",
-        "name": "Open Government Licence v3",
-        "url": "https://ratings.food.gov.uk/terms-and-conditions"
+        "licence": {
+          "kind": "spdx",
+          "id": "OGL-UK-3.0"
+        },
+        "statedAt": "https://ratings.food.gov.uk/terms-and-conditions",
+        "statement": "Use of proprietary food hygiene ratings information and services is subject to the terms of the Open Government Licence (linking version 3)."
       },
       "name": "Food Hygiene Rating Scheme establishments",
       "namespace": "food-standards-agency",
@@ -2841,9 +3046,12 @@
       ],
       "id": "defra-environment-agency-flood-risk-postcode-search",
       "licence": {
-        "kind": "custom",
-        "name": "Open Government Licence",
-        "url": "https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/"
+        "licence": {
+          "kind": "spdx",
+          "id": "OGL-UK-3.0"
+        },
+        "statedAt": "https://environment.data.gov.uk/dataset/53cba123-71f8-417a-8441-4c7ba111e8e1",
+        "statement": "The dataset page gives the licence as Open Government Licence, linking https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/."
       },
       "name": "Flood risk postcode search tool data",
       "namespace": "defra",
@@ -2882,8 +3090,12 @@
       ],
       "id": "mendeley-data-va-appointment-wait-times",
       "licence": {
-        "id": "CC-BY-4.0",
-        "kind": "spdx"
+        "licence": {
+          "kind": "spdx",
+          "id": "CC-BY-4.0"
+        },
+        "statedAt": "https://data.mendeley.com/public-api/datasets/rmk89k4rhb",
+        "statement": "The Mendeley Data record gives the licence as CC BY 4.0 (Creative Commons Attribution 4.0 International)."
       },
       "name": "US Veterans Health Administration appointment wait times",
       "namespace": "mendeley-data",
@@ -2906,9 +3118,13 @@
       ],
       "id": "us-dot-its4us-hirta-health-connector",
       "licence": {
-        "kind": "custom",
-        "name": "Public Domain",
-        "url": "https://datahub.transportation.gov/Transit/ITS4US-HIRTA-Health-Connector-Performance-Evaluati/pwxe-equ8"
+        "licence": {
+          "kind": "custom",
+          "name": "Public Domain",
+          "url": "https://datahub.transportation.gov/Transit/ITS4US-HIRTA-Health-Connector-Performance-Evaluati/pwxe-equ8"
+        },
+        "statedAt": "https://datahub.transportation.gov/api/views/pwxe-equ8.json",
+        "statement": "The Socrata record gives the licence as Public Domain."
       },
       "name": "ITS4US HIRTA Health Connector performance evaluation",
       "namespace": "us-dot",
@@ -2978,7 +3194,10 @@
       ],
       "id": "huggingface-nigerian-energy-field-technician-logs",
       "licence": {
-        "kind": "unrecorded"
+        "readAt": [
+          "https://huggingface.co/api/datasets/electricsheepafrica/nigerian_energy_and_utilities_field_technician_logs"
+        ],
+        "reason": "The Hugging Face record names no licence. The card front matter says other and the README body says gpl, with no LICENSE file, so no single licence is stated."
       },
       "name": "Nigerian energy and utilities field technician logs",
       "namespace": "huggingface",
@@ -3044,7 +3263,10 @@
       ],
       "id": "github-oberfichtner-perm-cash-collection-sites",
       "licence": {
-        "kind": "unrecorded"
+        "readAt": [
+          "https://api.github.com/repos/Oberfichtner/Clustering_and_TSP_with_R/license"
+        ],
+        "reason": "The GitHub record names no licence."
       },
       "name": "Perm cash-collection sites (ATM and POS points)",
       "namespace": "github-oberfichtner",
@@ -3067,7 +3289,10 @@
       ],
       "id": "new-york-state-tax-warrants",
       "licence": {
-        "kind": "unrecorded"
+        "readAt": [
+          "https://data.ny.gov/api/views/v7ua-z23v.json"
+        ],
+        "reason": "The Socrata record names no licence. The record carries attribution only."
       },
       "name": "New York State tax warrants",
       "namespace": "new-york-state",
@@ -3137,7 +3362,10 @@
       ],
       "id": "vrp-rep-clustered-orienteering-problem",
       "licence": {
-        "kind": "unrecorded"
+        "readAt": [
+          "https://www.vrp-rep.org/datasets/download/angelelli-et-al-2014.zip"
+        ],
+        "reason": "The archive's readme describes the instances and states no licence."
       },
       "name": "Clustered orienteering problem instances (Angelelli et al. 2014)",
       "namespace": "vrp-rep",
@@ -3179,7 +3407,10 @@
       ],
       "id": "philadelphia-real-estate-tax-delinquencies",
       "licence": {
-        "kind": "unrecorded"
+        "readAt": [
+          "https://www.arcgis.com/sharing/rest/content/items/b8ac65c653b343739be21cb2773faace?f=json"
+        ],
+        "reason": "The ArcGIS record names no licence."
       },
       "name": "Real estate tax delinquencies (Philadelphia)",
       "namespace": "philadelphia",
@@ -3283,7 +3514,10 @@
       ],
       "id": "itaukei-land-trust-board-lease-arrears",
       "licence": {
-        "kind": "unrecorded"
+        "readAt": [
+          "https://www.arcgis.com/sharing/rest/content/items/a963186c15d845bb93cce1c00022e380?f=json"
+        ],
+        "reason": "The ArcGIS record names no licence."
       },
       "name": "iTaukei Land Trust Board lease arrears (Fiji)",
       "namespace": "itaukei-land-trust-board",
@@ -3364,7 +3598,10 @@
       ],
       "id": "maryland-district-court-eviction-case-data",
       "licence": {
-        "kind": "unrecorded"
+        "readAt": [
+          "https://opendata.maryland.gov/api/views/mvqb-b4hf.json"
+        ],
+        "reason": "The Socrata record names no licence. The record carries attribution only."
       },
       "name": "District Court of Maryland eviction case data",
       "namespace": "maryland",
@@ -3412,8 +3649,12 @@
       ],
       "id": "allegheny-county-tax-liens-summary",
       "licence": {
-        "id": "CC0-1.0",
-        "kind": "spdx"
+        "licence": {
+          "kind": "spdx",
+          "id": "CC0-1.0"
+        },
+        "statedAt": "https://data.wprdc.org/api/3/action/package_show?id=allegheny-county-tax-liens-filed-and-satisfied",
+        "statement": "The CKAN record gives license_id cc-zero (Creative Commons CCZero)."
       },
       "name": "Allegheny County tax liens, summary by parcel",
       "namespace": "allegheny-county",
@@ -3452,7 +3693,10 @@
       ],
       "id": "douglas-county-co-tax-liens",
       "licence": {
-        "kind": "unrecorded"
+        "readAt": [
+          "https://services.arcgis.com/seTexOicoRXDvRsJ/arcgis/rest/services/OpenData/FeatureServer/2?f=json"
+        ],
+        "reason": "The layer metadata has no licence text."
       },
       "name": "Tax liens (Douglas County, CO)",
       "namespace": "douglas-county-co",
@@ -3544,7 +3788,10 @@
       ],
       "id": "revenue-commissioners-ireland-tax-defaulters-list-part-1",
       "licence": {
-        "kind": "unrecorded"
+        "readAt": [
+          "https://www.revenue.ie/en/corporate/press-office/list-of-defaulters/index.aspx"
+        ],
+        "reason": "The list of defaulters page states no licence."
       },
       "name": "Revenue list of tax defaulters, part 1 (June 2026)",
       "namespace": "revenue-commissioners-ireland",
@@ -3580,9 +3827,13 @@
       ],
       "id": "dakota-county-sheriff-foreclosure-sales",
       "licence": {
-        "kind": "custom",
-        "name": "Dakota County GIS Database Disclaimer",
-        "url": "https://hub.arcgis.com/datasets/297fcd81118a4d5cbf2fd07ebdee628c"
+        "licence": {
+          "kind": "custom",
+          "name": "Dakota County GIS Database Disclaimer",
+          "url": "https://hub.arcgis.com/datasets/297fcd81118a4d5cbf2fd07ebdee628c"
+        },
+        "statedAt": "https://www.arcgis.com/sharing/rest/content/items/297fcd81118a4d5cbf2fd07ebdee628c?f=json",
+        "statement": "The ArcGIS record gives the licence information: Dakota County GIS Database Disclaimer NOTICE: Dakota County Geographic Information System (GIS) Data are made available pursuant to the Minnesota Government Data Practices Act (Minnesota Statutes Chapter 13) THE GIS DATA ARE PROVIDED TO YOU AS IS AND WITHOUT ANY WARRANTY AS TO THEIR PERFORMANCE, MER..."
       },
       "name": "Sheriff foreclosure sales (Dakota County, MN)",
       "namespace": "dakota-county",
@@ -3643,9 +3894,13 @@
       ],
       "id": "virginia-beach-delinquent-real-estate-taxes",
       "licence": {
-        "kind": "custom",
-        "name": "Virginia Beach open data terms of use",
-        "url": "https://hub.arcgis.com/datasets/1b2d03addfaa41bb83c17f9237e1504c"
+        "licence": {
+          "kind": "custom",
+          "name": "Virginia Beach open data terms of use",
+          "url": "https://hub.arcgis.com/datasets/1b2d03addfaa41bb83c17f9237e1504c"
+        },
+        "statedAt": "https://www.arcgis.com/sharing/rest/content/items/1b2d03addfaa41bb83c17f9237e1504c?f=json",
+        "statement": "The ArcGIS record gives the licence information: Access constraints The data is publicly available and accessible. Use constraints By using data made available through this site, the user agrees to all the conditions stated in the following paragraphs, as well as the terms and conditions described in the “Terms of Use” on the “About this Site” pag..."
       },
       "name": "Delinquent real estate taxes (Virginia Beach)",
       "namespace": "virginia-beach",
@@ -3698,7 +3953,10 @@
       ],
       "id": "cook-county-treasurer-annual-tax-sale",
       "licence": {
-        "kind": "unrecorded"
+        "readAt": [
+          "https://datacatalog.cookcountyil.gov/api/views/55ju-2fs9.json"
+        ],
+        "reason": "The Socrata record names no licence. The record carries attribution only."
       },
       "name": "Cook County Treasurer annual tax sale",
       "namespace": "cook-county",
@@ -3751,7 +4009,11 @@
       ],
       "id": "nyc-open-data-tax-lien-sale-lists",
       "licence": {
-        "kind": "unrecorded"
+        "readAt": [
+          "https://data.cityofnewyork.us/api/views/9rz4-mjek.json",
+          "https://web.archive.org/web/20250401004630/https://www.nyc.gov/html/data/terms.html"
+        ],
+        "reason": "The Socrata record's licence field is empty, and the portal's terms of use are a disclaimer and a pointer to the nyc.gov terms that grant no licence."
       },
       "name": "NYC tax lien sale lists",
       "namespace": "nyc-open-data",
@@ -3802,7 +4064,10 @@
       ],
       "id": "lcc-malaga-solomon-vrptw-benchmark",
       "licence": {
-        "kind": "unrecorded"
+        "readAt": [
+          "https://neo.lcc.uma.es/vrp/vrp-instances/capacitated-vrp-with-time-windows-instances/"
+        ],
+        "reason": "The instances page states no licence."
       },
       "name": "Solomon VRPTW benchmark instances",
       "namespace": "lcc-malaga",
@@ -3851,8 +4116,12 @@
       ],
       "id": "defra-environment-agency-prosecutions",
       "licence": {
-        "id": "OGL-UK-3.0",
-        "kind": "spdx"
+        "licence": {
+          "kind": "spdx",
+          "id": "OGL-UK-3.0"
+        },
+        "statedAt": "https://environment.data.gov.uk/dataset/9c7728fc-68e2-46e1-addb-63790b6b5313",
+        "statement": "The dataset page gives the licence as Open Government Licence, linking https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/."
       },
       "name": "Environment Agency prosecutions",
       "namespace": "defra",
@@ -3912,7 +4181,10 @@
       ],
       "id": "lincolnshire-parking-penalty-charge-notices",
       "licence": {
-        "kind": "unrecorded"
+        "readAt": [
+          "https://data.lincolnshire.gov.uk/@place/pcns"
+        ],
+        "reason": "The dataset page and file carry no licence text."
       },
       "name": "Lincolnshire parking penalty charge notices, 2019 to 2020",
       "namespace": "lincolnshire",
@@ -3968,8 +4240,12 @@
       ],
       "id": "barnet-environmental-enforcement-fixed-penalty-notices",
       "licence": {
-        "id": "OGL-UK-3.0",
-        "kind": "spdx"
+        "licence": {
+          "kind": "spdx",
+          "id": "OGL-UK-3.0"
+        },
+        "statedAt": "https://open.barnet.gov.uk/dataset/environmental-enforcement-fixed-penalty-notices-2n1ne",
+        "statement": "The dataset page lists the licence as Open Government Licence v3."
       },
       "name": "Barnet environmental enforcement fixed penalty notices",
       "namespace": "barnet",
@@ -4006,8 +4282,12 @@
       ],
       "id": "leeds-litter-fixed-penalty-notices-3gs",
       "licence": {
-        "id": "OGL-UK-3.0",
-        "kind": "spdx"
+        "licence": {
+          "kind": "spdx",
+          "id": "OGL-UK-3.0"
+        },
+        "statedAt": "https://datamillnorth.org/dataset/litter-fines-issued-by-3gs",
+        "statement": "The dataset page lists the licence as Open Government Licence v3."
       },
       "name": "Litter fixed penalty notices issued by 3GS (Leeds)",
       "namespace": "leeds",
@@ -4026,8 +4306,12 @@
       ],
       "id": "leeds-fixed-penalty-notices",
       "licence": {
-        "id": "OGL-UK-3.0",
-        "kind": "spdx"
+        "licence": {
+          "kind": "spdx",
+          "id": "OGL-UK-3.0"
+        },
+        "statedAt": "https://datamillnorth.org/dataset/fixed-penalty-notices",
+        "statement": "The dataset page, which links the FPN.csv file, lists the licence as Open Government Licence v3."
       },
       "name": "Fixed penalty notices (Leeds City Council)",
       "namespace": "leeds",
@@ -4078,8 +4362,12 @@
       ],
       "id": "camden-fixed-penalty-notices",
       "licence": {
-        "id": "OGL-UK-3.0",
-        "kind": "spdx"
+        "licence": {
+          "id": "OGL-UK-3.0",
+          "kind": "spdx"
+        },
+        "statedAt": "https://opendata.camden.gov.uk/api/views/i6r8-r9vt.json",
+        "statement": "The Socrata record gives the licence as UK Open Government Licence v3 (http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/)."
       },
       "name": "Fixed penalty notices (Camden)",
       "namespace": "camden",
@@ -4130,8 +4418,12 @@
       ],
       "id": "camden-planning-applications",
       "licence": {
-        "id": "OGL-UK-3.0",
-        "kind": "spdx"
+        "licence": {
+          "id": "OGL-UK-3.0",
+          "kind": "spdx"
+        },
+        "statedAt": "https://opendata.camden.gov.uk/api/views/2eiu-s2cw.json",
+        "statement": "The Socrata record gives the licence as UK Open Government Licence v3 (http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/)."
       },
       "name": "Planning applications (Camden)",
       "namespace": "camden",
@@ -4210,8 +4502,12 @@
       ],
       "id": "camden-street-works-register",
       "licence": {
-        "id": "OGL-UK-3.0",
-        "kind": "spdx"
+        "licence": {
+          "kind": "spdx",
+          "id": "OGL-UK-3.0"
+        },
+        "statedAt": "https://opendata.camden.gov.uk/",
+        "statement": "All data may be viewed, re-used and downloaded under an OGL Licence."
       },
       "name": "Street works register (Camden)",
       "namespace": "camden",
@@ -4276,8 +4572,12 @@
       ],
       "id": "camden-hmo-licensing-register-duplicate",
       "licence": {
-        "id": "OGL-UK-3.0",
-        "kind": "spdx"
+        "licence": {
+          "kind": "spdx",
+          "id": "OGL-UK-3.0"
+        },
+        "statedAt": "https://opendata.camden.gov.uk/",
+        "statement": "All data may be viewed, re-used and downloaded under an OGL Licence."
       },
       "name": "HMO licensing register (Camden, duplicate entry)",
       "namespace": "camden",
@@ -4299,7 +4599,10 @@
       ],
       "id": "toronto-municipal-licensing-investigations",
       "licence": {
-        "kind": "unrecorded"
+        "readAt": [
+          "https://ckan0.cf.opendata.inter.prod-toronto.ca/api/3/action/package_show?id=municipal-licensing-and-standards-investigation-activity"
+        ],
+        "reason": "The CKAN record's licence_id is notspecified (License not specified)."
       },
       "name": "Municipal licensing and standards investigations (Toronto)",
       "namespace": "toronto",
@@ -4347,8 +4650,12 @@
       ],
       "id": "zenodo-hartford-meter-reading-instance",
       "licence": {
-        "id": "CC-BY-4.0",
-        "kind": "spdx"
+        "licence": {
+          "id": "CC-BY-4.0",
+          "kind": "spdx"
+        },
+        "statedAt": "https://zenodo.org/api/records/5823834",
+        "statement": "The Zenodo record gives the licence as cc-by-4.0."
       },
       "name": "Meter reading problem instance (Hartford, CT)",
       "namespace": "zenodo",
@@ -4380,7 +4687,11 @@
       ],
       "id": "nyc-open-data-housing-maintenance-code-violations",
       "licence": {
-        "kind": "unrecorded"
+        "readAt": [
+          "https://data.cityofnewyork.us/api/views/wvxf-dwi5.json",
+          "https://web.archive.org/web/20250401004630/https://www.nyc.gov/html/data/terms.html"
+        ],
+        "reason": "The Socrata record's licence field is empty, and the portal's terms of use are a disclaimer and a pointer to the nyc.gov terms that grant no licence."
       },
       "name": "Housing maintenance code violations (NYC HPD)",
       "namespace": "nyc-open-data",
@@ -4403,7 +4714,13 @@
       ],
       "id": "mesa-code-compliance-cases",
       "licence": {
-        "kind": "unrecorded"
+        "licence": {
+          "kind": "custom",
+          "name": "City of Mesa Open Data Terms of Use License Agreement",
+          "url": "https://data.mesaaz.gov/stories/s/2dcd-j2nx/"
+        },
+        "statedAt": "https://data.mesaaz.gov/stories/s/2dcd-j2nx/",
+        "statement": "The dataset record gives the licence as See Terms of Use, which links the City of Mesa Open Data Terms of Use License Agreement: a non-exclusive licence to use the data, with no restrictions on copying, publishing, distributing, modifying or using it, on condition that the City is credited as the source."
       },
       "name": "Code compliance cases (Mesa)",
       "namespace": "mesa",
@@ -4520,7 +4837,12 @@
       ],
       "id": "louisville-metro-property-maintenance-violations",
       "licence": {
-        "kind": "unrecorded"
+        "licence": {
+          "kind": "spdx",
+          "id": "PDDL-1.0"
+        },
+        "statedAt": "https://louisville-metro-opendata-lojic.hub.arcgis.com/pages/terms-of-use-and-license",
+        "statement": "The item's licence information links the Open Data Platform terms of use, which say Louisville Metro's open datasets are published with the Open Data Commons Public Domain Dedication and License (PDDL)."
       },
       "name": "Property maintenance inspection violations (Louisville)",
       "namespace": "louisville-metro",
@@ -4596,7 +4918,11 @@
       ],
       "id": "nyc-open-data-oath-hearings-case-status",
       "licence": {
-        "kind": "unrecorded"
+        "readAt": [
+          "https://data.cityofnewyork.us/api/views/jz4z-kudi.json",
+          "https://web.archive.org/web/20250401004630/https://www.nyc.gov/html/data/terms.html"
+        ],
+        "reason": "The Socrata record's licence field is empty, and the portal's terms of use are a disclaimer and a pointer to the nyc.gov terms that grant no licence."
       },
       "name": "OATH hearings division case status (NYC)",
       "namespace": "nyc-open-data",
@@ -4617,7 +4943,11 @@
       ],
       "id": "nyc-open-data-fire-prevention-inspections-historical",
       "licence": {
-        "kind": "unrecorded"
+        "readAt": [
+          "https://data.cityofnewyork.us/api/views/ssq6-fkht.json",
+          "https://web.archive.org/web/20250401004630/https://www.nyc.gov/html/data/terms.html"
+        ],
+        "reason": "The Socrata record's licence field is empty, and the portal's terms of use are a disclaimer and a pointer to the nyc.gov terms that grant no licence."
       },
       "name": "Bureau of Fire Prevention inspections, historical (NYC)",
       "namespace": "nyc-open-data",
@@ -4681,7 +5011,13 @@
       ],
       "id": "chicago-ordinance-violations",
       "licence": {
-        "kind": "unrecorded"
+        "licence": {
+          "kind": "custom",
+          "name": "City of Chicago Data Terms of Use",
+          "url": "https://www.chicago.gov/city/en/narr/foia/data_disclaimer.html"
+        },
+        "statedAt": "https://www.chicago.gov/city/en/narr/foia/data_disclaimer.html",
+        "statement": "The dataset record gives the licence as See Terms of Use. The Data Terms of Use disclaim liability, require a stated disclaimer on any application built from the data and reserve the City's rights, and name no licence."
       },
       "name": "Ordinance violations (Chicago Department of Administrative Hearings)",
       "namespace": "chicago",
@@ -4755,7 +5091,13 @@
       ],
       "id": "chicago-transportation-department-permits",
       "licence": {
-        "kind": "unrecorded"
+        "licence": {
+          "kind": "custom",
+          "name": "City of Chicago Data Terms of Use",
+          "url": "https://www.chicago.gov/city/en/narr/foia/data_disclaimer.html"
+        },
+        "statedAt": "https://www.chicago.gov/city/en/narr/foia/data_disclaimer.html",
+        "statement": "The dataset record gives the licence as See Terms of Use. The Data Terms of Use disclaim liability, require a stated disclaimer on any application built from the data and reserve the City's rights, and name no licence."
       },
       "name": "Transportation Department permits, current and future (Chicago)",
       "namespace": "chicago",
@@ -4852,7 +5194,10 @@
       ],
       "id": "toronto-building-permits-active",
       "licence": {
-        "kind": "unrecorded"
+        "readAt": [
+          "https://ckan0.cf.opendata.inter.prod-toronto.ca/api/3/action/package_show?id=building-permits-active-permits"
+        ],
+        "reason": "The CKAN record names no licence. The record's licence is not specified."
       },
       "name": "Building permits, active (Toronto)",
       "namespace": "toronto",
@@ -4918,9 +5263,13 @@
       ],
       "id": "toronto-utility-cut-permits",
       "licence": {
-        "kind": "custom",
-        "name": "Open Government Licence (Toronto)",
-        "url": "https://ckan0.cf.opendata.inter.prod-toronto.ca/dataset/utility-cut-permits"
+        "licence": {
+          "kind": "custom",
+          "name": "Open Government Licence (Toronto)",
+          "url": "https://ckan0.cf.opendata.inter.prod-toronto.ca/dataset/utility-cut-permits"
+        },
+        "statedAt": "https://ckan0.cf.opendata.inter.prod-toronto.ca/api/3/action/package_show?id=utility-cut-permits",
+        "statement": "The CKAN record gives the licence as open-government-licence-toronto (open-government-licence-toronto)."
       },
       "name": "Utility cut permits (Toronto)",
       "namespace": "toronto",
@@ -4964,9 +5313,13 @@
       ],
       "id": "vancouver-issued-building-permits",
       "licence": {
-        "kind": "custom",
-        "name": "Open Government Licence (Vancouver)",
-        "url": "https://opendata.vancouver.ca/pages/licence/"
+        "licence": {
+          "kind": "custom",
+          "name": "Open Government Licence (Vancouver)",
+          "url": "https://opendata.vancouver.ca/pages/licence/"
+        },
+        "statedAt": "https://opendata.vancouver.ca/api/explore/v2.1/catalog/datasets/issued-building-permits",
+        "statement": "The dataset metadata gives the licence as Open Government Licence - Vancouver, with the licence URL https://opendata.vancouver.ca/pages/licence/."
       },
       "name": "Issued building permits (Vancouver)",
       "namespace": "vancouver",
@@ -5036,8 +5389,12 @@
       ],
       "id": "zenodo-pharmaceutical-last-mile-delivery",
       "licence": {
-        "id": "CC-BY-4.0",
-        "kind": "spdx"
+        "licence": {
+          "kind": "spdx",
+          "id": "CC-BY-4.0"
+        },
+        "statedAt": "https://zenodo.org/records/15310106",
+        "statement": "The Zenodo record lists the licence as Creative Commons Attribution 4.0 International."
       },
       "name": "Pharmaceutical last-mile delivery dataset (Vrani et al.)",
       "namespace": "zenodo",
@@ -5058,8 +5415,12 @@
       ],
       "id": "camden-hmo-licensing-register",
       "licence": {
-        "id": "OGL-UK-3.0",
-        "kind": "spdx"
+        "licence": {
+          "id": "OGL-UK-3.0",
+          "kind": "spdx"
+        },
+        "statedAt": "https://opendata.camden.gov.uk/api/views/x43g-c2rf.json",
+        "statement": "The Socrata record gives the licence as UK Open Government Licence v3 (http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/)."
       },
       "name": "HMO licensing register (Camden)",
       "namespace": "camden",
@@ -5139,7 +5500,13 @@
       ],
       "id": "philadelphia-business-licences-rental-registry",
       "licence": {
-        "kind": "unrecorded"
+        "licence": {
+          "kind": "custom",
+          "name": "City of Philadelphia open data terms of use (rights reserved, data as is)",
+          "url": "https://opendataphilly.org/datasets/licenses-and-inspections-business-licenses/"
+        },
+        "statedAt": "https://opendataphilly.org/datasets/licenses-and-inspections-business-licenses/",
+        "statement": "Browsing City data on this site constitutes acceptance of the license, the City's terms of use and your agreement to be bound by them; the City reserves all rights in the database and provides the data as is."
       },
       "name": "Business licences including the rental registry (Philadelphia)",
       "namespace": "philadelphia",
@@ -5230,9 +5597,13 @@
       ],
       "id": "france-sdes-sitadel-housing-permits-ile-de-france",
       "licence": {
-        "kind": "custom",
-        "name": "Licence Ouverte v2.0",
-        "url": "https://www.data.gouv.fr/datasets/logements-autorises-par-permis-de-construire-et-declarations-prealables-en-ile-de-france"
+        "licence": {
+          "kind": "custom",
+          "name": "Licence Ouverte v2.0",
+          "url": "https://www.data.gouv.fr/datasets/logements-autorises-par-permis-de-construire-et-declarations-prealables-en-ile-de-france"
+        },
+        "statedAt": "https://www.data.gouv.fr/api/1/datasets/logements-autorises-par-permis-de-construire-et-declarations-prealables-en-ile-de-france/",
+        "statement": "The dataset record gives the licence as lov2, which data.gouv.fr names Licence Ouverte / Open Licence version 2.0."
       },
       "name": "Sitadel housing permits (Ile-de-France)",
       "namespace": "france-sdes",
@@ -5253,8 +5624,12 @@
       ],
       "id": "the-hague-wabo-vergunningen",
       "licence": {
-        "id": "CC0-1.0",
-        "kind": "spdx"
+        "licence": {
+          "kind": "spdx",
+          "id": "CC0-1.0"
+        },
+        "statedAt": "https://data.overheid.nl/en/dataset/wabovergunningen",
+        "statement": "The dataset page lists the licence as CC-0 (1.0)."
       },
       "name": "Wabo permits (The Hague)",
       "namespace": "the-hague",
@@ -5306,7 +5681,10 @@
       ],
       "id": "overheid-nl-gemeenteblad-omgevingsvergunning",
       "licence": {
-        "kind": "unrecorded"
+        "readAt": [
+          "https://repository.overheid.nl/sru"
+        ],
+        "reason": "The SRU responses carry no licence statement."
       },
       "name": "Official publications of environmental permit notices (Netherlands)",
       "namespace": "overheid-nl",
@@ -5329,8 +5707,12 @@
       ],
       "id": "barcelona-road-works-public-space",
       "licence": {
-        "id": "CC-BY-4.0",
-        "kind": "spdx"
+        "licence": {
+          "kind": "spdx",
+          "id": "CC-BY-4.0"
+        },
+        "statedAt": "https://opendata-ajuntament.barcelona.cat/data/en/dataset/obres",
+        "statement": "The dataset page lists the licence as Creative Commons Attribution 4.0."
       },
       "name": "Road works in public space (Barcelona)",
       "namespace": "barcelona",
@@ -5389,8 +5771,12 @@
       ],
       "id": "madrid-traffic-fines-detail",
       "licence": {
-        "id": "CC-BY-4.0",
-        "kind": "spdx"
+        "licence": {
+          "kind": "spdx",
+          "id": "CC-BY-4.0"
+        },
+        "statedAt": "https://datos.madrid.es/dataset/210104-0-multas-circulacion-detalle",
+        "statement": "The dataset page lists the licence as Creative Commons Attribution 4.0 International (CC BY 4.0)."
       },
       "name": "Traffic fines detail (Madrid)",
       "namespace": "madrid",
@@ -5410,8 +5796,12 @@
       ],
       "id": "comune-di-bologna-building-permits-issued",
       "licence": {
-        "id": "CC-BY-4.0",
-        "kind": "spdx"
+        "licence": {
+          "kind": "spdx",
+          "id": "CC-BY-4.0"
+        },
+        "statedAt": "https://opendata.comune.bologna.it/api/explore/v2.1/catalog/datasets/permessi-di-costruire-rilasciati",
+        "statement": "The dataset metadata gives the licence as CC BY 4.0, with the licence URL https://creativecommons.org/licenses/by/4.0/."
       },
       "name": "Building permits issued (Bologna)",
       "namespace": "comune-di-bologna",
@@ -5453,9 +5843,13 @@
       ],
       "id": "north-ayrshire-council-building-warrant-applications",
       "licence": {
-        "kind": "custom",
-        "name": "Open Government Licence",
-        "url": "https://www.arcgis.com/sharing/rest/content/items/596fa66b53a948e4b74fea86dbe44690?f=json"
+        "licence": {
+          "kind": "custom",
+          "name": "Open Government Licence",
+          "url": "https://www.arcgis.com/sharing/rest/content/items/596fa66b53a948e4b74fea86dbe44690?f=json"
+        },
+        "statedAt": "https://www.arcgis.com/sharing/rest/content/items/596fa66b53a948e4b74fea86dbe44690?f=json",
+        "statement": "The ArcGIS record gives the licence as Open Government Licence."
       },
       "name": "Building warrant applications (North Ayrshire)",
       "namespace": "north-ayrshire-council",
@@ -5520,8 +5914,12 @@
       ],
       "id": "adelaide-city-council-parking-expiations",
       "licence": {
-        "id": "CC-BY-4.0",
-        "kind": "spdx"
+        "licence": {
+          "kind": "spdx",
+          "id": "CC-BY-4.0"
+        },
+        "statedAt": "https://data.sa.gov.au/data/api/3/action/package_show?id=parking-expiations",
+        "statement": "The CKAN record gives license_id cc-by (Creative Commons Attribution) with the licence URL http://creativecommons.org/licenses/by/4.0."
       },
       "name": "Parking expiations (Adelaide)",
       "namespace": "adelaide-city-council",
@@ -5577,8 +5975,12 @@
       ],
       "id": "mendeley-data-last-mile-delivery-route-deviations",
       "licence": {
-        "id": "CC-BY-4.0",
-        "kind": "spdx"
+        "licence": {
+          "kind": "spdx",
+          "id": "CC-BY-4.0"
+        },
+        "statedAt": "https://data.mendeley.com/public-api/datasets/kkwgfvmtxn",
+        "statement": "The Mendeley Data record gives the licence as CC BY 4.0 (Creative Commons Attribution 4.0 International)."
       },
       "name": "Last-mile delivery route deviations, planned vs actual",
       "namespace": "mendeley-data",
@@ -5596,8 +5998,12 @@
       ],
       "id": "south-australia-expiation-notice-system-data",
       "licence": {
-        "id": "CC-BY-4.0",
-        "kind": "spdx"
+        "licence": {
+          "kind": "spdx",
+          "id": "CC-BY-4.0"
+        },
+        "statedAt": "https://data.sa.gov.au/data/api/3/action/package_show?id=expiation-notice-system-data",
+        "statement": "The CKAN record gives license_id cc-by (Creative Commons Attribution) with the licence URL http://creativecommons.org/licenses/by/4.0."
       },
       "name": "Expiation notice system data (South Australia)",
       "namespace": "south-australia",
@@ -5617,7 +6023,11 @@
       ],
       "id": "nyc-open-data-hpd-handyman-work-order-charges",
       "licence": {
-        "kind": "unrecorded"
+        "readAt": [
+          "https://data.cityofnewyork.us/api/views/sbnd-xujn.json",
+          "https://web.archive.org/web/20250401004630/https://www.nyc.gov/html/data/terms.html"
+        ],
+        "reason": "The Socrata record's licence field is empty, and the portal's terms of use are a disclaimer and a pointer to the nyc.gov terms that grant no licence."
       },
       "name": "HPD handyman work order charges (NYC)",
       "namespace": "nyc-open-data",
@@ -5698,7 +6108,11 @@
       ],
       "id": "nyc-open-data-dot-sidewalk-violations",
       "licence": {
-        "kind": "unrecorded"
+        "readAt": [
+          "https://data.cityofnewyork.us/api/views/6kbp-uz6m.json",
+          "https://web.archive.org/web/20250401004630/https://www.nyc.gov/html/data/terms.html"
+        ],
+        "reason": "The Socrata record's licence field is empty, and the portal's terms of use are a disclaimer and a pointer to the nyc.gov terms that grant no licence."
       },
       "name": "Sidewalk management database violations (NYC DOT)",
       "namespace": "nyc-open-data",
@@ -5757,7 +6171,11 @@
       ],
       "id": "nyc-open-data-dob-now-safety-boiler",
       "licence": {
-        "kind": "unrecorded"
+        "readAt": [
+          "https://data.cityofnewyork.us/api/views/52dp-yji6.json",
+          "https://web.archive.org/web/20250401004630/https://www.nyc.gov/html/data/terms.html"
+        ],
+        "reason": "The Socrata record's licence field is empty, and the portal's terms of use are a disclaimer and a pointer to the nyc.gov terms that grant no licence."
       },
       "name": "DOB NOW Safety Boiler (NYC)",
       "namespace": "nyc-open-data",
@@ -5815,7 +6233,11 @@
       ],
       "id": "nyc-open-data-dob-now-facade-compliance-filings",
       "licence": {
-        "kind": "unrecorded"
+        "readAt": [
+          "https://data.cityofnewyork.us/api/views/xubg-57si.json",
+          "https://web.archive.org/web/20250401004630/https://www.nyc.gov/html/data/terms.html"
+        ],
+        "reason": "The Socrata record's licence field is empty, and the portal's terms of use are a disclaimer and a pointer to the nyc.gov terms that grant no licence."
       },
       "name": "DOB NOW Safety Facades compliance filings (NYC)",
       "namespace": "nyc-open-data",
@@ -5895,9 +6317,13 @@
       ],
       "id": "norfolk-permits-and-inspections",
       "licence": {
-        "kind": "custom",
-        "name": "Public Domain",
-        "url": "https://data.norfolk.gov/api/views/bnrb-u445.json"
+        "licence": {
+          "kind": "custom",
+          "name": "Public Domain",
+          "url": "https://data.norfolk.gov/api/views/bnrb-u445.json"
+        },
+        "statedAt": "https://data.norfolk.gov/api/views/bnrb-u445.json",
+        "statement": "The Socrata record gives the licence as Public Domain."
       },
       "name": "Permits and inspections (Norfolk, VA)",
       "namespace": "norfolk",
@@ -5974,7 +6400,11 @@
       ],
       "id": "nyc-open-data-dob-permit-issuance",
       "licence": {
-        "kind": "unrecorded"
+        "readAt": [
+          "https://data.cityofnewyork.us/api/views/ipu4-2q9a.json",
+          "https://web.archive.org/web/20250401004630/https://www.nyc.gov/html/data/terms.html"
+        ],
+        "reason": "The Socrata record's licence field is empty, and the portal's terms of use are a disclaimer and a pointer to the nyc.gov terms that grant no licence."
       },
       "name": "DOB permit issuance (NYC)",
       "namespace": "nyc-open-data",
@@ -5992,7 +6422,11 @@
       ],
       "id": "nyc-open-data-dob-job-application-filings",
       "licence": {
-        "kind": "unrecorded"
+        "readAt": [
+          "https://data.cityofnewyork.us/api/views/ic3t-wcy2.json",
+          "https://web.archive.org/web/20250401004630/https://www.nyc.gov/html/data/terms.html"
+        ],
+        "reason": "The Socrata record's licence field is empty, and the portal's terms of use are a disclaimer and a pointer to the nyc.gov terms that grant no licence."
       },
       "name": "DOB job application filings (NYC)",
       "namespace": "nyc-open-data",
@@ -6013,7 +6447,11 @@
       ],
       "id": "nyc-open-data-dob-now-electrical-permit-applications",
       "licence": {
-        "kind": "unrecorded"
+        "readAt": [
+          "https://data.cityofnewyork.us/api/views/dm9a-ab7w.json",
+          "https://web.archive.org/web/20250401004630/https://www.nyc.gov/html/data/terms.html"
+        ],
+        "reason": "The Socrata record's licence field is empty, and the portal's terms of use are a disclaimer and a pointer to the nyc.gov terms that grant no licence."
       },
       "name": "DOB NOW electrical permit applications (NYC)",
       "namespace": "nyc-open-data",
@@ -6130,7 +6568,11 @@
       ],
       "id": "nyc-open-data-dob-now-elevator-permit-applications",
       "licence": {
-        "kind": "unrecorded"
+        "readAt": [
+          "https://data.cityofnewyork.us/api/views/kfp4-dz4h.json",
+          "https://web.archive.org/web/20250401004630/https://www.nyc.gov/html/data/terms.html"
+        ],
+        "reason": "The Socrata record's licence field is empty, and the portal's terms of use are a disclaimer and a pointer to the nyc.gov terms that grant no licence."
       },
       "name": "DOB NOW Build elevator permit applications (NYC)",
       "namespace": "nyc-open-data",
@@ -6269,8 +6711,12 @@
       ],
       "id": "github-psxjpc-movrptw-real-tenerife-instances",
       "licence": {
-        "id": "GPL-2.0-only",
-        "kind": "spdx"
+        "licence": {
+          "id": "GPL-2.0-only",
+          "kind": "spdx"
+        },
+        "statedAt": "https://api.github.com/repos/psxjpc/MOVRPTW-Generator/license",
+        "statement": "The GitHub record gives the licence as GPL-2.0."
       },
       "name": "MOVRPTW real Tenerife distribution instances",
       "namespace": "github-psxjpc",
@@ -6316,7 +6762,13 @@
       ],
       "id": "dublin-city-council-derelict-sites-register",
       "licence": {
-        "kind": "unrecorded"
+        "licence": {
+          "kind": "custom",
+          "name": "Dublin City Council derelict sites register terms (informational use, acknowledge the council as source)",
+          "url": "https://www.arcgis.com/home/item.html?id=233748c4b61a41d38e5b96426a25e9ea"
+        },
+        "statedAt": "https://www.arcgis.com/home/item.html?id=233748c4b61a41d38e5b96426a25e9ea",
+        "statement": "The item's licence information says the data is provided as is for informational purposes and that users should acknowledge Dublin City Council as the source."
       },
       "name": "Derelict sites register (Dublin City Council)",
       "namespace": "dublin-city-council",
@@ -6376,9 +6828,13 @@
       ],
       "id": "cincinnati-vacant-foreclosed-property-registration",
       "licence": {
-        "kind": "custom",
-        "name": "Public Domain",
-        "url": "https://data.cincinnati-oh.gov/api/views/w3jp-dfxy.json"
+        "licence": {
+          "kind": "custom",
+          "name": "Public Domain",
+          "url": "https://data.cincinnati-oh.gov/api/views/w3jp-dfxy.json"
+        },
+        "statedAt": "https://data.cincinnati-oh.gov/api/views/w3jp-dfxy.json",
+        "statement": "The Socrata record gives the licence as Public Domain."
       },
       "name": "Vacant and foreclosed property registration (Cincinnati)",
       "namespace": "cincinnati",
@@ -6446,7 +6902,10 @@
       ],
       "id": "orange-county-ca-weed-abatement-locations",
       "licence": {
-        "kind": "unrecorded"
+        "readAt": [
+          "https://utility.arcgis.com/usrsvcs/servers/931a175b8eaa4abebf1379743e6d71c1/rest/services/Environmental_Resources/Weed_Abatement/FeatureServer?f=json"
+        ],
+        "reason": "The service states no licence."
       },
       "name": "Weed abatement locations (Orange County, CA)",
       "namespace": "orange-county-ca",
@@ -6524,7 +6983,10 @@
       ],
       "id": "temecula-weed-abatement",
       "licence": {
-        "kind": "unrecorded"
+        "readAt": [
+          "https://services3.arcgis.com/IgR6ay8jzuIj7VSF/arcgis/rest/services/Weed_Abatement_2017/FeatureServer?f=json"
+        ],
+        "reason": "The service states no licence; its copyright text is only the city GIS name."
       },
       "name": "Weed abatement (Temecula)",
       "namespace": "temecula",
@@ -6584,7 +7046,10 @@
       ],
       "id": "fairfield-ca-weed-abatement-parcels",
       "licence": {
-        "kind": "unrecorded"
+        "readAt": [
+          "https://services1.arcgis.com/A14KNJpxNyBTu19J/arcgis/rest/services/Weed_Abatement_Parcels/FeatureServer?f=json"
+        ],
+        "reason": "The item states no licence."
       },
       "name": "Weed abatement parcels (Fairfield, CA)",
       "namespace": "fairfield-ca",
@@ -6634,7 +7099,10 @@
       ],
       "id": "norfolk-vehicle-towing",
       "licence": {
-        "kind": "unrecorded"
+        "readAt": [
+          "https://data.norfolk.gov/api/views/4dwc-v3t8.json"
+        ],
+        "reason": "The Socrata record names no licence."
       },
       "name": "Vehicle towing (Norfolk, VA)",
       "namespace": "norfolk",
@@ -6715,7 +7183,10 @@
       ],
       "id": "pembroke-park-tow-repo-log",
       "licence": {
-        "kind": "unrecorded"
+        "readAt": [
+          "https://services3.arcgis.com/vtilYbC3YeF6EBJ1/arcgis/rest/services/service_05f1e63ba1494703b42f0dd606859f0b/FeatureServer?f=json"
+        ],
+        "reason": "The service states no licence."
       },
       "name": "Tow and repo log (Pembroke Park, FL)",
       "namespace": "pembroke-park",
@@ -6811,9 +7282,13 @@
       ],
       "id": "buffalo-recent-tows",
       "licence": {
-        "kind": "custom",
-        "name": "Public Domain U.S. Government",
-        "url": "https://data.buffalony.gov/api/views/pamv-gash.json"
+        "licence": {
+          "kind": "custom",
+          "name": "Public Domain U.S. Government",
+          "url": "https://data.buffalony.gov/api/views/pamv-gash.json"
+        },
+        "statedAt": "https://data.buffalony.gov/api/views/pamv-gash.json",
+        "statement": "The Socrata record gives the licence as Public Domain U.S. Government (https://www.usa.gov/government-works)."
       },
       "name": "Recent tows (Buffalo, NY)",
       "namespace": "buffalo",
@@ -6866,7 +7341,13 @@
       ],
       "id": "chicago-towed-vehicles",
       "licence": {
-        "kind": "unrecorded"
+        "licence": {
+          "kind": "custom",
+          "name": "City of Chicago Data Terms of Use",
+          "url": "https://www.chicago.gov/city/en/narr/foia/data_disclaimer.html"
+        },
+        "statedAt": "https://www.chicago.gov/city/en/narr/foia/data_disclaimer.html",
+        "statement": "The dataset record has no licence field. The Data Terms of Use apply to all data on the portal: they disclaim liability, require a stated disclaimer on any application built from the data and reserve the City's rights, and name no licence."
       },
       "name": "Towed vehicles (Chicago)",
       "namespace": "chicago",
@@ -6906,7 +7387,10 @@
       ],
       "id": "honolulu-abandoned-vehicles",
       "licence": {
-        "kind": "unrecorded"
+        "readAt": [
+          "https://data.honolulu.gov/api/views/7mwf-c3z3.json"
+        ],
+        "reason": "The Socrata record names no licence."
       },
       "name": "Abandoned vehicles (Honolulu, HI)",
       "namespace": "honolulu",

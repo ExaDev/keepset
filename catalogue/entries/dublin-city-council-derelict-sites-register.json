@@ -51,7 +51,9 @@
   "expectedCounts": {},
   "id": "dublin-city-council-derelict-sites-register",
   "licence": {
-    "kind": "unrecorded"
+    "kind": "custom",
+    "name": "Dublin City Council derelict sites register terms (informational use, acknowledge the council as source)",
+    "url": "https://www.arcgis.com/home/item.html?id=233748c4b61a41d38e5b96426a25e9ea"
   },
   "name": "Derelict sites register (Dublin City Council)",
   "namespace": [

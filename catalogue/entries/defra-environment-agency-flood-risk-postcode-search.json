@@ -31,9 +31,8 @@
   "expectedCounts": {},
   "id": "defra-environment-agency-flood-risk-postcode-search",
   "licence": {
-    "kind": "custom",
-    "name": "Open Government Licence",
-    "url": "https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/"
+    "id": "OGL-UK-3.0",
+    "kind": "spdx"
   },
   "name": "Flood risk postcode search tool data",
   "namespace": [

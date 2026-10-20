@@ -7,7 +7,11 @@ import { fetchEntry, roundTripEntry } from "../../src/node/fetch-dataset";
 import { zip } from "../../src/test-support/archives";
 import { fixtureManifest } from "../../src/test-support/entries";
 import { convertItem, convertSurvey, MAX_CELLS, PAGE_ROWS, pagingOf, SUBJECT } from "./convert-or";
+import { licenceMetadata } from "./licence";
 import { CurationItemSchema, SurveySourceSchema, TARGET_FIELD_NAMES, TARGET_FIELDS } from "./or-survey";
+
+const STATED = { licence: { kind: "spdx", id: "CC-BY-4.0" }, statedAt: "https://example.org/requests", statement: "The page says the data are licensed under CC BY 4.0." };
+const UNSTATED = { readAt: ["https://example.org/about"], reason: "The page states no licence." };
 
 const survey = SurveySourceSchema.parse({
   survey: "a survey",
@@ -37,8 +41,8 @@ const fetchable = {
 const curation = {
   probedOn: "2026-10-19",
   items: [
-    { surveyId: "or-10", id: "example-service-requests", namespace: "example", name: "Service requests", description: "Requests raised with a city.", licence: { kind: "spdx", id: "CC-BY-4.0" }, downloadUrl: "https://example.org/requests.csv", flags: ["personal data in one column, not mapped"], outcome: fetchable },
-    { surveyId: "or-2", id: "classic-instances", namespace: "example", name: "Classic instances", description: "Benchmark instances from a classic paper.", citations: [{ text: "A. Author (1990). Classic instances. Journal of Examples 1." }], licence: { kind: "unrecorded" }, flags: [], outcome: { status: "not-fetchable", reason: "the instances are in a text format with no parser yet" } },
+    { surveyId: "or-10", id: "example-service-requests", namespace: "example", name: "Service requests", description: "Requests raised with a city.", licence: STATED, downloadUrl: "https://example.org/requests.csv", flags: ["personal data in one column, not mapped"], outcome: fetchable },
+    { surveyId: "or-2", id: "classic-instances", namespace: "example", name: "Classic instances", description: "Benchmark instances from a classic paper.", citations: [{ text: "A. Author (1990). Classic instances. Journal of Examples 1." }], licence: UNSTATED, flags: [], outcome: { status: "not-fetchable", reason: "the instances are in a text format with no parser yet" } },
   ],
 };
 
@@ -211,7 +215,7 @@ describe("the survey's themes and the target fields", () => {
 
   it("every theme of the committed survey files under exactly one domain label", () => {
     for (const item of real.entries) {
-      const only = { probedOn: "2026-10-19", items: [{ surveyId: item.id, id: "x", namespace: "x", name: "x", description: "A fixture dataset.", licence: { kind: "unrecorded" }, flags: [], outcome: { status: "not-fetchable", reason: "x" } }] };
+      const only = { probedOn: "2026-10-19", items: [{ surveyId: item.id, id: "x", namespace: "x", name: "x", description: "A fixture dataset.", licence: { readAt: [licenceMetadata(item.url)?.url ?? "https://example.org/about"], reason: "x" }, flags: [], outcome: { status: "not-fetchable", reason: "x" } }] };
       expect(() => convertSurvey({ ...real, entries: [item] }, only, none), item.id).not.toThrow();
     }
   });
@@ -263,7 +267,7 @@ describe("convertItem for a paged ArcGIS layer", () => {
     map: { lat: "geometry_latitude", lon: "geometry_longitude", prize: "FINE", opened: "OPENED", skill: "KIND" },
   };
   const curated = (outcome: Record<string, unknown>, downloadUrl: string | null = layer): Parameters<typeof convertItem>[1] =>
-    CurationItemSchema.parse({ surveyId: "or-10", id: "example-violations", namespace: "example", name: "Violations", description: "A fixture dataset.", licence: { kind: "unrecorded" }, ...(downloadUrl === null ? {} : { downloadUrl }), flags: [], outcome });
+    CurationItemSchema.parse({ surveyId: "or-10", id: "example-violations", namespace: "example", name: "Violations", description: "A fixture dataset.", licence: UNSTATED, ...(downloadUrl === null ? {} : { downloadUrl }), flags: [], outcome });
   const failure = (outcome: Record<string, unknown>, downloadUrl: string | null = layer): string => {
     try {
       convertItem(item ?? expect.unreachable("the fixture survey has an item"), curated(outcome, downloadUrl), "2026-10-19");
@@ -312,7 +316,7 @@ describe("convertItem for a collection of instance files", () => {
     timeUnit: "abstract units",
     expectedInstances: 2,
   };
-  const curated = (outcome: Record<string, unknown>): Parameters<typeof convertItem>[1] => CurationItemSchema.parse({ surveyId: "or-10", id: "example-suite", namespace: "example", name: "Suite", description: "A fixture dataset.", licence: { kind: "unrecorded" }, flags: [], outcome });
+  const curated = (outcome: Record<string, unknown>): Parameters<typeof convertItem>[1] => CurationItemSchema.parse({ surveyId: "or-10", id: "example-suite", namespace: "example", name: "Suite", description: "A fixture dataset.", licence: UNSTATED, flags: [], outcome });
   const failure = (outcome: Record<string, unknown>): string => {
     try {
       convertItem(item ?? expect.unreachable("the fixture survey has an item"), curated(outcome), "2026-10-19");
@@ -415,7 +419,7 @@ describe("convertItem for a collection of table files", () => {
     timeUnit: "seconds",
     expectedInstances: 2,
   };
-  const curated = (outcome: Record<string, unknown>): Parameters<typeof convertItem>[1] => CurationItemSchema.parse({ surveyId: "or-10", id: "example-coordinates", namespace: "example", name: "Coordinates", description: "A fixture dataset.", licence: { kind: "unrecorded" }, flags: [], outcome });
+  const curated = (outcome: Record<string, unknown>): Parameters<typeof convertItem>[1] => CurationItemSchema.parse({ surveyId: "or-10", id: "example-coordinates", namespace: "example", name: "Coordinates", description: "A fixture dataset.", licence: UNSTATED, flags: [], outcome });
   const entryOf = (outcome: Record<string, unknown>): ReturnType<typeof convertItem>["entry"] => convertItem(item ?? expect.unreachable("the fixture survey has an item"), curated(outcome), "2026-10-19").entry;
   const csv = (rows: readonly string[]): string => `"ID","Longitude","Latitude","ServiceTime (min)"\r\n${rows.join("\r\n")}\r\n`;
   const archive = zip([
@@ -471,7 +475,7 @@ describe("convertItem for one instance file", () => {
     keep: [],
     expectedNodes: 2,
   };
-  const curated = (outcome: Record<string, unknown>): Parameters<typeof convertItem>[1] => CurationItemSchema.parse({ surveyId: "or-10", id: "example-customers", namespace: "example", name: "Customers", description: "A fixture dataset.", licence: { kind: "unrecorded" }, flags: [], outcome });
+  const curated = (outcome: Record<string, unknown>): Parameters<typeof convertItem>[1] => CurationItemSchema.parse({ surveyId: "or-10", id: "example-customers", namespace: "example", name: "Customers", description: "A fixture dataset.", licence: UNSTATED, flags: [], outcome });
   const entryOf = (outcome: Record<string, unknown>): ReturnType<typeof convertItem>["entry"] => convertItem(item ?? expect.unreachable("the fixture survey has an item"), curated(outcome), "2026-10-19").entry;
   const failure = (outcome: Record<string, unknown>): string => {
     try {
@@ -505,5 +509,27 @@ describe("convertItem for one instance file", () => {
   it("refuses instance counts on a single file and node counts on a collection", () => {
     expect(failure({ ...single, expectedInstances: 1 })).toMatch(/a single file is one instance and has no expectedInstances/);
     expect(failure({ ...single, archive: { kind: "zip", members: { extensions: [".txt"] } } })).toMatch(/a collection counts instances, not nodes/);
+  });
+});
+
+describe("the licence an item's curation records", () => {
+  const socrata = SurveySourceSchema.parse({ survey: "s", surveyed: "2026-07-23", entries: [{ id: "or-1", title: "Evictions", url: "https://data.example.gov/Housing/Evictions/abcd-1234", theme: "case lifecycle records: permits, inspections, prosecutions & enforcement", fields: ["lifecycle"] }] }).entries[0];
+  if (socrata === undefined) {
+    throw new Error("the fixture has one item");
+  }
+  const curatedWith = (licence: unknown): Parameters<typeof convertItem>[1] => CurationItemSchema.parse({ surveyId: "or-1", id: "example-evictions", namespace: "example", name: "Evictions", description: "A fixture dataset.", licence, flags: [], outcome: { status: "not-fetchable", reason: "x" } });
+
+  it("carries the licence of stated terms into the entry and unrecorded for a source that states none", () => {
+    expect(convertItem(socrata, curatedWith(STATED), "2026-10-19").entry.licence).toEqual({ kind: "spdx", id: "CC-BY-4.0" });
+    const record = { readAt: ["https://data.example.gov/api/views/abcd-1234.json"], reason: "The record's licence field is empty." };
+    expect(convertItem(socrata, curatedWith(record), "2026-10-19").entry.licence).toEqual({ kind: "unrecorded" });
+  });
+
+  it("refuses an item on a platform that keeps each dataset's licence in a record, recorded as stating none without the record having been read", () => {
+    expect(() => convertItem(socrata, curatedWith(UNSTATED), "2026-10-19")).toThrow(/example-evictions.*socrata keeps each dataset's licence.*abcd-1234\.json/);
+  });
+
+  it("requires every curated item to say where its licence, or the lack of one, was read", () => {
+    expect(CurationItemSchema.safeParse({ surveyId: "or-1", id: "example-evictions", namespace: "example", name: "Evictions", description: "A fixture dataset.", licence: { kind: "unrecorded" }, flags: [], outcome: { status: "not-fetchable", reason: "x" } }).success).toBe(false);
   });
 });
