@@ -1,3 +1,11 @@
+# [0.33.0](https://github.com/Mearman/keepset/compare/v0.32.0...v0.33.0) (2026-10-20)
+
+
+### Features
+
+* **seed:** record where each graph dataset's licence was read ([cbee33a](https://github.com/Mearman/keepset/commit/cbee33a71295889b317bf4717ce05585918c919d))
+* **seed:** record where each operations-research item's licence was read ([174a331](https://github.com/Mearman/keepset/commit/174a33179c213ebf37bb838c2cb161b42cd85497))
+
 # [0.32.0](https://github.com/Mearman/keepset/compare/v0.31.0...v0.32.0) (2026-10-20)
 
 
