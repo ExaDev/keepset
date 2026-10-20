@@ -9,6 +9,18 @@ export interface NativeEdge {
   readonly target: string;
 }
 
+/** A node of a bipartite graph whose two sets are told apart by a type, as the ratings parser emits it. */
+export interface NativeTypedNode extends NativeNode {
+  readonly type: string;
+}
+
+/** An edge that is one rating: the user it runs from, the item it runs to, its weight (the rating over the scale's maximum) and when it was given, in the source's own unit. */
+export interface NativeRating extends NativeEdge {
+  readonly type: string;
+  readonly weight: number;
+  readonly timestamp: number;
+}
+
 /** The native shape every parser in this version emits: the graph's topology, nodes in a deterministic order (each parser documents which) and edges in file order. */
 export interface NativeGraph {
   readonly nodes: readonly NativeNode[];
@@ -67,4 +79,32 @@ export class NodeOrder {
  */
 export function lines(text: string): string[] {
   return text.split(/\r?\n/);
+}
+
+const CARRIAGE_RETURN = 0x0d;
+
+/**
+ * Visits the lines of a file read in pieces, accepting both LF and CRLF endings, holding only the unfinished end of a piece between pieces so a file larger than one string can be read.
+ * @param pieces - The file's text, in order, split anywhere (even between a carriage return and its line feed).
+ * @param visit - Called with each line, without its terminator, and its 1-based number. A final line without a terminator is visited; the empty text after a final terminator is not a line.
+ */
+export function forEachLine(pieces: Readonly<Iterable<string>>, visit: (line: string, number: number) => void): void {
+  let carry = "";
+  let number = 0;
+  const emit = (text: string, start: number, end: number): void => {
+    number += 1;
+    visit(end > start && text.charCodeAt(end - 1) === CARRIAGE_RETURN ? text.slice(start, end - 1) : text.slice(start, end), number);
+  };
+  for (const piece of pieces) {
+    const text = carry + piece;
+    let start = 0;
+    for (let end = text.indexOf("\n", start); end !== -1; end = text.indexOf("\n", start)) {
+      emit(text, start, end);
+      start = end + 1;
+    }
+    carry = text.slice(start);
+  }
+  if (carry !== "") {
+    emit(carry, 0, carry.length);
+  }
 }

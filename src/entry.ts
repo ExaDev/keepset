@@ -172,6 +172,20 @@ export const ParserSchema = z.discriminatedUnion("format", [
     .strict()
     .refine((parser) => parser.sourceColumn !== parser.targetColumn, { message: "sourceColumn and targetColumn must differ", path: ["targetColumn"] }),
   z.object({ format: z.literal("matrix-market"), encoding: EncodingSchema }).strict(),
+  z
+    .object({
+      format: z.literal("user-item-ratings"),
+      encoding: z.literal("utf-8"),
+      /** What separates the fields of a line: a comma, a tab, or the two colons of MovieLens's `ratings.dat`. */
+      delimiter: z.enum(["comma", "tab", "double-colon"]),
+      /** The header lines before the first rating, counted as the file's lines. */
+      skipLines: z.int().min(0),
+      /** What the rated items are, which is their node type and fixes the prefix of their ids. */
+      itemType: z.enum(["movie", "product"]),
+      /** The top of the rating scale: a rating is divided by it to give the edge's weight, and a rating above it is refused. */
+      maxRating: z.number().positive(),
+    })
+    .strict(),
   z.object({ format: z.literal("gml"), encoding: EncodingSchema }).strict(),
   z.object({ format: z.literal("pajek"), encoding: EncodingSchema }).strict(),
   z
