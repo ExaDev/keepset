@@ -179,79 +179,105 @@ class RecordScanner {
   }
 }
 
+/** The options a record reader takes from the recipe's table parser: how fields are delimited and how many physical lines come before the header. */
+type RecordOptions = Readonly<Pick<CsvTableParser, "delimiter" | "skipLines">>;
+
 /**
- * Splits text into records and fields by RFC 4180 as the text arrives in pieces, one piece's records at a time, so neither the whole file nor every cell is held at once: a field may be quoted, a quoted field may hold the delimiter, line breaks and doubled quotes, and a record ends at an unquoted LF, CRLF or CR. A piece may end anywhere, even between the two quotes of a doubled quote or between a CR and its LF.
- * @param pieces - The file text in order, after the lines the recipe skips.
- * @param delimiter - The field delimiter.
- * @param firstLine - The 1-based line of the file the text starts on.
- * @returns The records in order, blank lines included as a record of one empty field.
- * @throws NativeParseError when a quoted field is never closed or a quote opens inside an unquoted field.
+ * Reads a table file's records as its text arrives in pieces, so neither the whole file nor every cell is held at once: a leading byte order mark is removed, the physical lines the recipe skips are dropped, and the rest is split into records and fields by RFC 4180 (a field may be quoted, a quoted field may hold the delimiter, line breaks and doubled quotes, and a record ends at an unquoted LF, CRLF or CR). Blank lines are not records. A piece may end anywhere, even between the two quotes of a doubled quote or between a CR and its LF.
  */
-function* records(pieces: Readonly<Iterable<string>>, delimiter: string, firstLine: number): Generator<CsvRecord, void, undefined> {
-  const scanner = new RecordScanner(delimiter.charCodeAt(0), firstLine);
-  let carry = "";
-  for (const piece of pieces) {
-    const scanned = scanner.scan(carry + piece, false);
-    carry = scanned.carry;
-    yield* scanned.completed;
+class RecordReader {
+  private readonly scanner: RecordScanner;
+
+  private carry = "";
+
+  private first = true;
+
+  private toSkip: number;
+
+  public constructor(private readonly options: RecordOptions) {
+    this.scanner = new RecordScanner(DELIMITERS[options.delimiter].charCodeAt(0), options.skipLines + 1);
+    this.toSkip = options.skipLines;
   }
-  yield* scanner.scan(carry, true).completed;
-  const last = scanner.finish();
-  if (last !== undefined) {
-    yield last;
+
+  /**
+   * Reads the next piece of the file's text.
+   * @param piece - The text, which follows the pieces read before it.
+   * @returns The records the piece completes, in order.
+   * @throws NativeParseError when a quote opens inside an unquoted field.
+   */
+  public push(piece: string): CsvRecord[] {
+    let rest = this.first && piece.startsWith(BYTE_ORDER_MARK) ? piece.slice(BYTE_ORDER_MARK.length) : piece;
+    this.first = false;
+    while (this.toSkip > 0) {
+      const next = rest.indexOf("\n");
+      if (next === -1) {
+        return [];
+      }
+      rest = rest.slice(next + 1);
+      this.toSkip -= 1;
+    }
+    if (rest === "") {
+      return [];
+    }
+    const scanned = this.scanner.scan(this.carry + rest, false);
+    this.carry = scanned.carry;
+
+    return scanned.completed.filter(isNotBlank);
+  }
+
+  /**
+   * Ends the file.
+   * @returns The records left when the text ends, in order.
+   * @throws NativeParseError when a quoted field is never closed, a quote opens inside an unquoted field, or the file has fewer lines than the recipe skips.
+   */
+  public end(): CsvRecord[] {
+    if (this.toSkip > 0) {
+      throw new NativeParseError("csv-table", this.options.skipLines - this.toSkip + 1, `the file has fewer than ${String(this.options.skipLines)} lines to skip before the header`);
+    }
+    const completed = this.scanner.scan(this.carry, true).completed;
+    this.carry = "";
+    const last = this.scanner.finish();
+
+    return [...completed, ...(last === undefined ? [] : [last])].filter(isNotBlank);
   }
 }
 
 /**
- * Splits comma-separated text into its records' fields by RFC 4180, as `records` does, keeping every record (blank lines included) at its position: the grid a workbook sheet's CSV makes, for a parser that reads a layout of blocks and not one table.
+ * Splits comma-separated text into its records' fields by RFC 4180, as the record reader does, keeping every record (blank lines included) at its position: the grid a workbook sheet's CSV makes, for a parser that reads a layout of blocks and not one table.
  * @param text - The text.
  * @returns Each record's fields, in order.
  * @throws NativeParseError when a quoted field is never closed or a quote opens inside an unquoted field.
  */
 export function csvGrid(text: string): (readonly string[])[] {
-  return [...records([text], ",", 1)].map((record) => record.fields);
+  const scanner = new RecordScanner(DELIMITERS.comma.charCodeAt(0), 1);
+  const { completed } = scanner.scan(text, true);
+  const last = scanner.finish();
+
+  return [...completed, ...(last === undefined ? [] : [last])].map((record) => record.fields);
 }
 
 /**
- * Drops the first physical lines of a file given in pieces.
- * @param pieces - The file text in order.
- * @param count - How many physical lines to drop.
- * @returns The rest of the text, in pieces.
- * @throws NativeParseError when the file has fewer lines than that.
+ * Whether a record holds anything: a blank line is a record of one empty field.
+ * @param record - The record.
+ * @returns False for a blank line.
  */
-function* afterLines(pieces: Readonly<Iterable<string>>, count: number): Generator<string, void, undefined> {
-  let remaining = count;
-  for (const piece of pieces) {
-    let rest = piece;
-    while (remaining > 0) {
-      const next = rest.indexOf("\n");
-      if (next === -1) {
-        rest = "";
-        break;
-      }
-      rest = rest.slice(next + 1);
-      remaining -= 1;
-    }
-    if (remaining === 0 && rest !== "") {
-      yield rest;
-    }
-  }
-  if (remaining > 0) {
-    throw new NativeParseError("csv-table", count - remaining + 1, `the file has fewer than ${String(count)} lines to skip before the header`);
-  }
+function isNotBlank(record: CsvRecord): boolean {
+  return record.fields.length > 1 || record.fields[0]?.trim() !== "";
 }
 
 /**
- * The text of a file as its pieces, with a leading byte order mark removed.
- * @param text - The file text, or its pieces in order.
- * @returns The pieces.
+ * The records of a table file after the lines the recipe skips and without its blank lines: the header first, then the rows, one at a time.
+ * @param text - The file text, or its pieces in order, which may begin with a byte order mark.
+ * @param options - The recipe's table parser, of which the delimiter and the lines to skip are read.
+ * @returns Each record.
+ * @throws NativeParseError when a quote is never closed or opens inside an unquoted field, or the file has fewer lines than the recipe skips.
  */
-function* withoutByteOrderMark(text: string | Iterable<string>): Generator<string, void, undefined> {
-  let first = true;
+function* tableRecords(text: string | Iterable<string>, options: RecordOptions): Generator<CsvRecord, void, undefined> {
+  const reader = new RecordReader(options);
   for (const piece of typeof text === "string" ? [text] : text) {
-    yield first && piece.startsWith(BYTE_ORDER_MARK) ? piece.slice(BYTE_ORDER_MARK.length) : piece;
-    first = false;
+    yield* reader.push(piece);
   }
+  yield* reader.end();
 }
 
 /**
@@ -275,29 +301,13 @@ function numeric(cell: string, factor: number, column: string, line: number): nu
 }
 
 /**
- * The records of a table file after the lines the recipe skips and without its blank lines: the header first, then the rows, one at a time.
- * @param text - The file text, or its pieces in order, which may begin with a byte order mark.
- * @param options - The recipe's table parser, of which the delimiter and the lines to skip are read.
- * @returns Each record.
- * @throws NativeParseError when a quote is never closed or opens inside an unquoted field, or the file has fewer lines than the recipe skips.
- */
-function* tableRecords(text: string | Iterable<string>, options: Readonly<Pick<CsvTableParser, "delimiter" | "skipLines">>): Generator<CsvRecord, void, undefined> {
-  const body = afterLines(withoutByteOrderMark(text), options.skipLines);
-  for (const record of records(body, DELIMITERS[options.delimiter], options.skipLines + 1)) {
-    if (record.fields.length > 1 || record.fields[0]?.trim() !== "") {
-      yield record;
-    }
-  }
-}
-
-/**
  * The cells of a table's header row exactly as the file writes them, which is what a curation records so the parser's column names can be derived from it.
  * @param text - The file text, or the start of it cut at a line break.
  * @param options - The recipe's table parser, of which the delimiter and the lines to skip are read.
  * @returns The header cells, trimmed of nothing.
  * @throws NativeParseError when the text has no header row or a quote is malformed.
  */
-export function headerCells(text: string, options: Readonly<Pick<CsvTableParser, "delimiter" | "skipLines">>): readonly string[] {
+export function headerCells(text: string, options: RecordOptions): readonly string[] {
   const { value: header } = tableRecords(text, options).next();
   if (header === undefined) {
     throw new NativeParseError("csv-table", options.skipLines + 1, "the file has no header row");
@@ -306,19 +316,108 @@ export function headerCells(text: string, options: Readonly<Pick<CsvTableParser,
   return header.fields;
 }
 
+/** How the rows of a table are built once its header is read: the header's width, where the id is, and each kept column's name, position and numeric factor. */
+interface RowLayout {
+  readonly width: number;
+  readonly idPosition: number;
+  readonly kept: readonly { readonly name: string; readonly position: number; readonly factor: number | undefined }[];
+}
+
 /**
- * Parses a delimited table into rows (a cell whose text is one of the recipe's `nullValues` is empty, so null): the first record after `skipLines` lines is the header, each later record is a row, and every row carries every column but the id column (or, when the recipe lists `columns`, exactly those, so a wide table is not held cell for cell), an empty cell being null. Cells are trimmed. A column the recipe declares numeric is read as a decimal number times its factor and any other column stays a string. `id` is the row's id, so a column of that name which is not the id column is named by its position. A row's id is the cell of the recipe's id column, which is then not also a column, or its 1-based row number when the recipe names none. Blank lines are skipped; a row with a different number of fields than the header, two columns with the same name, and an id cell that is empty are errors.
- * @param text - The file text, or its pieces in order.
- * @param options - The recipe's table parser.
- * @returns The rows, in file order.
- * @throws NativeParseError naming the line of the first problem, including a listed or numeric column the header lacks or a numeric column that is not listed.
+ * Reads a delimited table into rows as its text arrives in pieces, holding only the record in progress between pieces, so a caller that hands each row on as it is returned holds no more of the table than that. The rows are exactly those `parseCsvTable` gives, in order, with the same errors on the same lines however the text is cut.
  */
-export function parseCsvTable(text: string | Iterable<string>, options: CsvTableParser): NativeTable {
-  const table = tableRecords(text, options);
-  const { value: header } = table.next();
-  if (header === undefined) {
-    throw new NativeParseError("csv-table", options.skipLines + 1, "the file has no header row");
+export class TableReader {
+  private readonly records: RecordReader;
+
+  private layout: RowLayout | undefined;
+
+  private rows = 0;
+
+  private readonly missing: ReadonlySet<string>;
+
+  public constructor(private readonly options: CsvTableParser) {
+    this.records = new RecordReader(options);
+    this.missing = new Set(options.nullValues ?? []);
   }
+
+  /**
+   * Reads the next piece of the file's text.
+   * @param piece - The text, which follows the pieces read before it.
+   * @returns The rows the piece completes, in file order.
+   * @throws NativeParseError as `parseCsvTable` does, naming the line of the problem.
+   */
+  public push(piece: string): NativeRow[] {
+    return this.rowsOf(this.records.push(piece));
+  }
+
+  /**
+   * Ends the file.
+   * @returns The rows left when the text ends, in file order.
+   * @throws NativeParseError as `parseCsvTable` does, including for a file with no header row.
+   */
+  public end(): NativeRow[] {
+    const rows = this.rowsOf(this.records.end());
+    if (this.layout === undefined) {
+      throw new NativeParseError("csv-table", this.options.skipLines + 1, "the file has no header row");
+    }
+
+    return rows;
+  }
+
+  /**
+   * Builds the rows of records, the first record of the file being its header.
+   * @param records - Records in file order.
+   * @returns The rows among them.
+   */
+  private rowsOf(records: readonly CsvRecord[]): NativeRow[] {
+    const rows: NativeRow[] = [];
+    for (const record of records) {
+      if (this.layout === undefined) {
+        this.layout = layoutOf(record, this.options);
+      } else {
+        rows.push(this.rowOf(record, this.layout));
+      }
+    }
+
+    return rows;
+  }
+
+  /**
+   * Builds one row.
+   * @param record - A record after the header.
+   * @param layout - The header's layout.
+   * @returns The row.
+   * @throws NativeParseError when the record's width differs from the header's, its id is empty or a numeric cell is not a number.
+   */
+  private rowOf(record: CsvRecord, layout: RowLayout): NativeRow {
+    const { idColumn } = this.options;
+    if (record.fields.length !== layout.width) {
+      throw new NativeParseError("csv-table", record.line, `the row has ${String(record.fields.length)} fields, the header has ${String(layout.width)}`);
+    }
+    this.rows += 1;
+    const id = idColumn === null ? String(this.rows) : (record.fields[layout.idPosition] ?? "").trim();
+    if (id === "") {
+      throw new NativeParseError("csv-table", record.line, `the id column ${idColumn ?? ""} is empty`);
+    }
+    const cells = layout.kept.map(({ name, position, factor }): [string, string | number | null] => {
+      const trimmed = (record.fields[position] ?? "").trim();
+      const cell = this.missing.has(trimmed) ? "" : trimmed;
+
+      return [name, factor === undefined ? (cell === "" ? null : cell) : numeric(cell, factor, name, record.line)];
+    });
+
+    return { ...Object.fromEntries(cells), id };
+  }
+}
+
+/**
+ * Reads a table's header into the layout its rows are built by, checking the recipe against it.
+ * @param header - The header record.
+ * @param options - The recipe's table parser.
+ * @returns The layout.
+ * @throws NativeParseError when two header cells get the same name, the recipe names a column the header lacks, lists the id column among the columns, or declares numeric a column it does not keep.
+ */
+function layoutOf(header: CsvRecord, options: CsvTableParser): RowLayout {
   const names = columnNames(header.fields, options.idColumn, header.line);
   const { idColumn, numericColumns, columns } = options;
   const wanted = new Set(columns ?? names.filter((name) => name !== idColumn));
@@ -336,26 +435,31 @@ export function parseCsvTable(text: string | Iterable<string>, options: CsvTable
     }
   }
   const factors = new Map(numericColumns.map((entry) => [entry.column, entry.factor]));
-  const missing: ReadonlySet<string> = new Set(options.nullValues ?? []);
-  const idPosition = idColumn === null ? -1 : names.indexOf(idColumn);
-  const kept = names.flatMap((name, position) => (name !== idColumn && wanted.has(name) ? [{ name, position, factor: factors.get(name) }] : []));
 
+  return {
+    width: names.length,
+    idPosition: idColumn === null ? -1 : names.indexOf(idColumn),
+    kept: names.flatMap((name, position) => (name !== idColumn && wanted.has(name) ? [{ name, position, factor: factors.get(name) }] : [])),
+  };
+}
+
+/**
+ * Parses a delimited table into rows (a cell whose text is one of the recipe's `nullValues` is empty, so null): the first record after `skipLines` lines is the header, each later record is a row, and every row carries every column but the id column (or, when the recipe lists `columns`, exactly those, so a wide table is not held cell for cell), an empty cell being null. Cells are trimmed. A column the recipe declares numeric is read as a decimal number times its factor and any other column stays a string. `id` is the row's id, so a column of that name which is not the id column is named by its position. A row's id is the cell of the recipe's id column, which is then not also a column, or its 1-based row number when the recipe names none. Blank lines are skipped; a row with a different number of fields than the header, two columns with the same name, and an id cell that is empty are errors.
+ * @param text - The file text, or its pieces in order.
+ * @param options - The recipe's table parser.
+ * @returns The rows, in file order.
+ * @throws NativeParseError naming the line of the first problem, including a listed or numeric column the header lacks or a numeric column that is not listed.
+ */
+export function parseCsvTable(text: string | Iterable<string>, options: CsvTableParser): NativeTable {
+  const reader = new TableReader(options);
   const nodes: NativeRow[] = [];
-  for (const record of table) {
-    if (record.fields.length !== names.length) {
-      throw new NativeParseError("csv-table", record.line, `the row has ${String(record.fields.length)} fields, the header has ${String(names.length)}`);
+  for (const piece of typeof text === "string" ? [text] : text) {
+    for (const row of reader.push(piece)) {
+      nodes.push(row);
     }
-    const id = idColumn === null ? String(nodes.length + 1) : (record.fields[idPosition] ?? "").trim();
-    if (id === "") {
-      throw new NativeParseError("csv-table", record.line, `the id column ${idColumn ?? ""} is empty`);
-    }
-    const cells = kept.map(({ name, position, factor }): [string, string | number | null] => {
-      const trimmed = (record.fields[position] ?? "").trim();
-      const cell = missing.has(trimmed) ? "" : trimmed;
-
-      return [name, factor === undefined ? (cell === "" ? null : cell) : numeric(cell, factor, name, record.line)];
-    });
-    nodes.push({ ...Object.fromEntries(cells), id });
+  }
+  for (const row of reader.end()) {
+    nodes.push(row);
   }
 
   return { nodes };
