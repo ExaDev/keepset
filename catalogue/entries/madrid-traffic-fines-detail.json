@@ -38,6 +38,9 @@
       "url": "https://datos.madrid.es/dataset/210104-0-multas-circulacion-detalle/resource/210104-385-multas-circulacion-detalle/download/210104-385-multas-circulacion-detalle.csv"
     }
   ],
+  "subjects": [
+    "operations-research"
+  ],
   "tags": [
     "prize",
     "location",

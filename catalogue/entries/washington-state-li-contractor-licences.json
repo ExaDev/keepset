@@ -99,6 +99,9 @@
       "url": "https://data.wa.gov/resource/m8qx-ubtq.csv"
     }
   ],
+  "subjects": [
+    "operations-research"
+  ],
   "tags": [
     "deadline",
     "location",

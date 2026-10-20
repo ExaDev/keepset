@@ -31,6 +31,9 @@
       "url": "https://github.com/afkummer/hhcrsp-dataset-2021"
     }
   ],
+  "subjects": [
+    "operations-research"
+  ],
   "tags": [
     "deadline",
     "location",

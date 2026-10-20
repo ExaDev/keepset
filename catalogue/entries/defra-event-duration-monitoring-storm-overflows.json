@@ -33,6 +33,9 @@
       "url": "https://environment.data.gov.uk/dataset/21e15f12-0df8-4bfc-b763-45226c16a8ac"
     }
   ],
+  "subjects": [
+    "operations-research"
+  ],
   "tags": [
     "location",
     "territory",

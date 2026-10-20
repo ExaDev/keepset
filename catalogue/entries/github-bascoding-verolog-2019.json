@@ -102,6 +102,9 @@
       "url": "https://codeload.github.com/BasCoding/VeRoLog-2019/zip/refs/heads/main"
     }
   ],
+  "subjects": [
+    "operations-research"
+  ],
   "tags": [
     "deadline",
     "location",

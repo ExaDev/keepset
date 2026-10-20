@@ -96,6 +96,9 @@
       "url": "https://neo.lcc.uma.es/vrp/wp-content/data/instances/solomon/solomon_100.zip"
     }
   ],
+  "subjects": [
+    "operations-research"
+  ],
   "tags": [
     "deadline",
     "location",

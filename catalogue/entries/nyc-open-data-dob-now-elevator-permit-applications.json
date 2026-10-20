@@ -131,6 +131,9 @@
       "url": "https://data.cityofnewyork.us/api/views/kfp4-dz4h/rows.csv?accessType=DOWNLOAD"
     }
   ],
+  "subjects": [
+    "operations-research"
+  ],
   "tags": [
     "prize",
     "deadline",

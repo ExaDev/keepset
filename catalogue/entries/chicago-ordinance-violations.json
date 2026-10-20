@@ -128,6 +128,9 @@
       "url": "https://data.cityofchicago.org/resource/6br9-quuz.csv"
     }
   ],
+  "subjects": [
+    "operations-research"
+  ],
   "tags": [
     "prize",
     "location",

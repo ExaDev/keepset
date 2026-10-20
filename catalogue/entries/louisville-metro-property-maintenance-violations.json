@@ -117,6 +117,9 @@
       "url": "https://services1.arcgis.com/79kfd2K6fskCAkyg/arcgis/rest/services/PM_SiteVisit_Violations/FeatureServer/0"
     }
   ],
+  "subjects": [
+    "operations-research"
+  ],
   "tags": [
     "prize",
     "location",

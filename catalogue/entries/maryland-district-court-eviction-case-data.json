@@ -94,6 +94,9 @@
       "url": "https://opendata.maryland.gov/api/views/mvqb-b4hf/rows.csv?accessType=DOWNLOAD"
     }
   ],
+  "subjects": [
+    "operations-research"
+  ],
   "tags": [
     "deadline",
     "location",

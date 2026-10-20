@@ -113,6 +113,9 @@
       "url": "https://citydata.mesaaz.gov/resource/izhu-764k.csv"
     }
   ],
+  "subjects": [
+    "operations-research"
+  ],
   "tags": [
     "location",
     "territory",

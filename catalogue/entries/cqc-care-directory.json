@@ -32,6 +32,9 @@
       "url": "https://www.cqc.org.uk/about-us/transparency/using-cqc-data"
     }
   ],
+  "subjects": [
+    "operations-research"
+  ],
   "tags": [
     "location",
     "territory",

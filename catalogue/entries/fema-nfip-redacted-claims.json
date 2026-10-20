@@ -106,6 +106,9 @@
       "url": "https://www.fema.gov/api/open/v3/NfipClaims?$select=id,openDate,latitude,longitude,amountPaidOnBuildingClaim"
     }
   ],
+  "subjects": [
+    "operations-research"
+  ],
   "tags": [
     "prize",
     "prizeProbability",

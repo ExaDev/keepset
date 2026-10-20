@@ -82,6 +82,9 @@
       "url": "https://blob.datopian.com/resources/cb20cc0f-940b-49c7-a04c-cac7f480ec0e/penaltychargenotices-lwlv1g.csv"
     }
   ],
+  "subjects": [
+    "operations-research"
+  ],
   "tags": [
     "prize",
     "location",

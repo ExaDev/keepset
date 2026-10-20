@@ -101,6 +101,9 @@
       "url": "https://environment.data.gov.uk/api/file/download?fileDataSetId=e06036f5-7f41-46a3-93ff-fbd0fa1a83cc&fileName=Environment_Agency_Prosecutions.xlsx"
     }
   ],
+  "subjects": [
+    "operations-research"
+  ],
   "tags": [
     "prize",
     "prizeProbability",

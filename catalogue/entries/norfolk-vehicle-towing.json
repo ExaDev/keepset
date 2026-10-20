@@ -99,6 +99,9 @@
       "url": "https://data.norfolk.gov/api/views/4dwc-v3t8/rows.csv?accessType=DOWNLOAD"
     }
   ],
+  "subjects": [
+    "operations-research"
+  ],
   "tags": [
     "prize",
     "deadline",

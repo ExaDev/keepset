@@ -74,6 +74,9 @@
       "url": "https://zenodo.org/records/5823834/files/MeterReading_Instance.zip?download=1"
     }
   ],
+  "subjects": [
+    "operations-research"
+  ],
   "tags": [
     "location"
   ]

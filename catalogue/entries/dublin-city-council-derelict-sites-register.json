@@ -106,6 +106,9 @@
       "url": "https://services-eu1.arcgis.com/PyGgzM45TvWtSBsM/arcgis/rest/services/DCC_Derelict_Sites_Register_Public_points_view/FeatureServer/0"
     }
   ],
+  "subjects": [
+    "operations-research"
+  ],
   "tags": [
     "location",
     "territory",

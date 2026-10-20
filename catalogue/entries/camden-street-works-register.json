@@ -110,6 +110,9 @@
       "url": "https://opendata.camden.gov.uk/api/views/hb3v-f3s2/rows.csv?accessType=DOWNLOAD"
     }
   ],
+  "subjects": [
+    "operations-research"
+  ],
   "tags": [
     "deadline",
     "location",

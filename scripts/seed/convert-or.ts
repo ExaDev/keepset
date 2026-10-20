@@ -43,6 +43,9 @@ export function pagingOf(url: string): { readonly kind: "socrata-resource" | "ck
   return CKAN_DATASTORE_DUMP.test(parsed.pathname) ? { kind: "ckan-datastore", pageSize: PAGE_ROWS } : undefined;
 }
 
+/** The subject every entry of the survey is filed under: the survey is of operations research datasets, whichever theme an item sits in. */
+export const SUBJECT = "operations-research";
+
 /** The short label each survey theme is filed under as the entry's domain, matched against the theme text because the survey's own wording is long and uses dashes. Every theme the survey uses must match exactly one. */
 const THEMES: readonly (readonly [RegExp, string])[] = [
   [/permits, inspections, prosecutions/, "Case records"],
@@ -401,6 +404,7 @@ export function convertItem(item: SurveyEntry, curation: CurationItem, probedOn:
     name: curation.name,
     ...(curation.description === undefined ? {} : { description: curation.description }),
     domain: domainOf(item),
+    subjects: [SUBJECT],
     tags: [...new Set(item.fields)],
     category: "or/v1",
     sources,

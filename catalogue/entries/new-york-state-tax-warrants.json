@@ -105,6 +105,9 @@
       "url": "https://data.ny.gov/api/views/v7ua-z23v/rows.csv?accessType=DOWNLOAD"
     }
   ],
+  "subjects": [
+    "operations-research"
+  ],
   "tags": [
     "prize",
     "deadline",

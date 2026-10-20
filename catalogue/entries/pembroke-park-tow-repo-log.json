@@ -108,6 +108,9 @@
       "url": "https://services3.arcgis.com/vtilYbC3YeF6EBJ1/arcgis/rest/services/service_05f1e63ba1494703b42f0dd606859f0b/FeatureServer/0"
     }
   ],
+  "subjects": [
+    "operations-research"
+  ],
   "tags": [
     "prize",
     "location",

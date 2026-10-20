@@ -129,6 +129,9 @@
       "url": "https://citydata.mesaaz.gov/resource/ay68-xuca.csv"
     }
   ],
+  "subjects": [
+    "operations-research"
+  ],
   "tags": [
     "prize",
     "prizeProbability",

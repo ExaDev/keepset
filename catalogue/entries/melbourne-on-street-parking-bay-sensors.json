@@ -77,6 +77,9 @@
       "url": "https://data.melbourne.vic.gov.au/api/explore/v2.1/catalog/datasets/on-street-parking-bay-sensors/exports/csv"
     }
   ],
+  "subjects": [
+    "operations-research"
+  ],
   "tags": [
     "location",
     "territory",

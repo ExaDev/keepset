@@ -72,6 +72,9 @@
       "url": "https://environment.data.gov.uk/api/file/download?fileDataSetId=fb921496-1788-4fc2-b469-7b51e2a45553&fileName=Postcodes_Risk_Assessment_All.csv"
     }
   ],
+  "subjects": [
+    "operations-research"
+  ],
   "tags": [
     "prizeProbability",
     "territory"

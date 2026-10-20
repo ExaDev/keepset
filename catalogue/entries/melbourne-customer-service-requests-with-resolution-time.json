@@ -106,6 +106,9 @@
       "url": "https://data.melbourne.vic.gov.au/api/explore/v2.1/catalog/datasets/customer-service-requests-with-resolution-time/exports/csv"
     }
   ],
+  "subjects": [
+    "operations-research"
+  ],
   "tags": [
     "duration",
     "lifecycle"

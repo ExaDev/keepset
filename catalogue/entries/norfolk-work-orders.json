@@ -103,6 +103,9 @@
       "url": "https://data.norfolk.gov/resource/qzfe-wj25.csv"
     }
   ],
+  "subjects": [
+    "operations-research"
+  ],
   "tags": [
     "prize",
     "deadline",

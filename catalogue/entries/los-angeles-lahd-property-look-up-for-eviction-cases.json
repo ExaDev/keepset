@@ -80,6 +80,9 @@
       "url": "https://data.lacity.org/resource/2u8b-eyuu.csv"
     }
   ],
+  "subjects": [
+    "operations-research"
+  ],
   "tags": [
     "lifecycle"
   ]

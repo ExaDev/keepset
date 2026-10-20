@@ -89,6 +89,9 @@
       "url": "https://open.barnet.gov.uk/download/2n1ne/mpn/FPNs%20to%20date%20Feb%202019%20to%20date.csv"
     }
   ],
+  "subjects": [
+    "operations-research"
+  ],
   "tags": [
     "prize",
     "territory",

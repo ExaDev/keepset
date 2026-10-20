@@ -91,6 +91,9 @@
       "url": "https://www.data.qld.gov.au/datastore/dump/872065ae-ddfd-4b5f-ad15-e1935dadd883"
     }
   ],
+  "subjects": [
+    "operations-research"
+  ],
   "tags": [
     "prize",
     "territory"

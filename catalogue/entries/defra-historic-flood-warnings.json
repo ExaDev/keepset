@@ -32,6 +32,9 @@
       "url": "https://environment.data.gov.uk/dataset/88bed270-d465-11e4-8669-f0def148f590"
     }
   ],
+  "subjects": [
+    "operations-research"
+  ],
   "tags": [
     "prizeProbability",
     "territory",

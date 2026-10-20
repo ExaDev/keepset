@@ -33,6 +33,9 @@
       "url": "https://www.kaggle.com/datasets/joniarroba/noshowappointments"
     }
   ],
+  "subjects": [
+    "operations-research"
+  ],
   "tags": [
     "prizeProbability",
     "deadline",

@@ -117,6 +117,9 @@
       "url": "https://www.maps.north-ayrshire.gov.uk/arcgis/rest/services/AGOL/Building_Warrant_Applications_Weekly/FeatureServer/2"
     }
   ],
+  "subjects": [
+    "operations-research"
+  ],
   "tags": [
     "deadline",
     "location",

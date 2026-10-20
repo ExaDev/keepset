@@ -99,6 +99,9 @@
       "url": "https://data.buffalony.gov/api/views/pamv-gash/rows.csv?accessType=DOWNLOAD"
     }
   ],
+  "subjects": [
+    "operations-research"
+  ],
   "tags": [
     "location",
     "lifecycle"

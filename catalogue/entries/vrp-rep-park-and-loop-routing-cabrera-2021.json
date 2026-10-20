@@ -101,6 +101,9 @@
       "url": "https://www.vrp-rep.org/datasets/download/cabrera-et-al-2021.zip"
     }
   ],
+  "subjects": [
+    "operations-research"
+  ],
   "tags": [
     "location",
     "duration"

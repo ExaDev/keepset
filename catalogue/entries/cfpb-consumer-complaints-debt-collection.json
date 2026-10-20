@@ -37,6 +37,9 @@
       "url": "https://files.consumerfinance.gov/ccdb/complaints.csv.zip"
     }
   ],
+  "subjects": [
+    "operations-research"
+  ],
   "tags": [
     "territory",
     "lifecycle"

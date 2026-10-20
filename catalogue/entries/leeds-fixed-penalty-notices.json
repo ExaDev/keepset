@@ -89,6 +89,9 @@
       "url": "https://opendata.leeds.gov.uk/downloads/EAS/FPNs/FPN.csv"
     }
   ],
+  "subjects": [
+    "operations-research"
+  ],
   "tags": [
     "prize",
     "prizeProbability",

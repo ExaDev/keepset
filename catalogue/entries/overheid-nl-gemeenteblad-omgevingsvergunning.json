@@ -31,6 +31,9 @@
       "url": "https://repository.overheid.nl/sru"
     }
   ],
+  "subjects": [
+    "operations-research"
+  ],
   "tags": [
     "location",
     "territory",

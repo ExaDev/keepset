@@ -33,6 +33,9 @@
       "url": "https://data.sa.gov.au/data/dataset/expiation-notice-system-data"
     }
   ],
+  "subjects": [
+    "operations-research"
+  ],
   "tags": [
     "prize",
     "territory",

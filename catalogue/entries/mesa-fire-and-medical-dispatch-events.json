@@ -123,6 +123,9 @@
       "url": "https://citydata.mesaaz.gov/resource/3wic-ufd2.csv"
     }
   ],
+  "subjects": [
+    "operations-research"
+  ],
   "tags": [
     "location",
     "territory",

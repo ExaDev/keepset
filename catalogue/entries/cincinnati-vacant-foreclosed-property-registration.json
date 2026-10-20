@@ -111,6 +111,9 @@
       "url": "https://data.cincinnati-oh.gov/api/views/w3jp-dfxy/rows.csv?accessType=DOWNLOAD"
     }
   ],
+  "subjects": [
+    "operations-research"
+  ],
   "tags": [
     "location",
     "territory",

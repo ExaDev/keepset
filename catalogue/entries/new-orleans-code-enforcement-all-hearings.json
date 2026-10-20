@@ -114,6 +114,9 @@
       "url": "https://data.nola.gov/resource/44ct-56tr.csv"
     }
   ],
+  "subjects": [
+    "operations-research"
+  ],
   "tags": [
     "deadline",
     "location",

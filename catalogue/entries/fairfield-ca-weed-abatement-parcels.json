@@ -85,6 +85,9 @@
       "url": "https://services1.arcgis.com/A14KNJpxNyBTu19J/arcgis/rest/services/Weed_Abatement_Parcels/FeatureServer/0"
     }
   ],
+  "subjects": [
+    "operations-research"
+  ],
   "tags": [
     "location",
     "territory",

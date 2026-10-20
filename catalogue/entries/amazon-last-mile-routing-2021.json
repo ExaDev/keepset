@@ -32,6 +32,9 @@
       "url": "https://registry.opendata.aws/amazon-last-mile-challenges/"
     }
   ],
+  "subjects": [
+    "operations-research"
+  ],
   "tags": [
     "deadline",
     "location",

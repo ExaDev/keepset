@@ -37,6 +37,9 @@
       "url": "https://data.cityofnewyork.us/resource/n2zq-pubd.csv"
     }
   ],
+  "subjects": [
+    "operations-research"
+  ],
   "tags": [
     "location",
     "territory",
