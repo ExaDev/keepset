@@ -7,6 +7,7 @@
   "crosswalk": {
     "file": "crosswalks/tasks-v1/nodes.json"
   },
+  "description": "The Camden houses in multiple occupation licensing register, listed a second time by the survey under the portal's root URL. The entry for the register itself holds the recipe.",
   "domain": "Case records",
   "expectedCounts": {},
   "id": "camden-hmo-licensing-register-duplicate",

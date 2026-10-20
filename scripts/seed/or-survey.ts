@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { ArchiveSchema, CollectionArchiveSchema, ColumnNameSchema, HttpUrlSchema, IdSchema, LicenceSchema, ParserSchema } from "../../src/entry";
+import { ArchiveSchema, CitationSchema, CollectionArchiveSchema, ColumnNameSchema, HttpUrlSchema, IdSchema, LicenceSchema, ParserSchema } from "../../src/entry";
 import { isInstanceParser } from "../../src/parsers/instance-shapes";
 
 /* The operations-research survey the seed import reads (scripts/seed/sources/or-datasets-survey.json) and the curation that turns each surveyed item into a catalogue entry. The survey says what each item is and which fields of the routing-with-rewards node model it carries; the curation records, per item, what a download actually gives and how its columns map onto the tasks/v1 node, because that takes reading each source and is a judgement the survey cannot make. */
@@ -150,15 +150,19 @@ export type InstanceFilesOutcome = z.infer<typeof InstanceFilesOutcomeSchema>;
 /** A dataset with no recipe yet, and why. */
 export const NotFetchableOutcomeSchema = z.object({ status: z.literal("not-fetchable"), reason: prose() }).strict();
 
-/** The curation of one surveyed item. */
+/** The prose that says what a dataset is: the same text as other prose in the catalogue, and not blank, since an entry with nothing to read in a listing cannot be told from its neighbours. */
+const description = (): z.ZodString => prose().refine((text) => text.trim() !== "", { message: "must not be blank" });
+
+/** The curation of one surveyed item. A description is required: the importer refuses an item without one, so a new entry cannot be added undescribed. `citations` lists the works the dataset's source names for it (a paper, a data descriptor, the deposit itself), and is absent where the source names none. */
 export const CurationItemSchema = z
   .object({
     surveyId: z.string().regex(/^or-\d+$/, { message: "must be or- and a number" }),
     id: IdSchema,
     namespace: IdSchema,
     name: prose(),
-    description: prose().optional(),
+    description: description(),
     licence: LicenceSchema,
+    citations: z.array(CitationSchema).min(1).optional(),
     downloadUrl: HttpUrlSchema.optional(),
     flags: z.array(prose()),
     outcome: z.discriminatedUnion("status", [FetchableOutcomeSchema, ArcgisOutcomeSchema, TableCollectionOutcomeSchema, InstanceFilesOutcomeSchema, NotFetchableOutcomeSchema]),

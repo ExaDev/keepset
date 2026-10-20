@@ -3,10 +3,16 @@
     "last-mile-routing-2021"
   ],
   "category": "tasks/v1",
-  "citations": [],
+  "citations": [
+    {
+      "doi": "10.1287/trsc.2022.1173",
+      "text": "D. Merchan, J. Arora, J. Pachon, K. Konduri, M. Winkenbach, S. Parks, J. Noszek (2024). 2021 Amazon Last Mile Routing Research Challenge: Data set. Transportation Science 58(1), 8-11."
+    }
+  ],
   "crosswalk": {
     "file": "crosswalks/tasks-v1/nodes.json"
   },
+  "description": "Historical routes driven by Amazon delivery drivers in five US metropolitan areas, with route, stop and package level features and the sequence each driver actually followed. Released for the 2021 Amazon Last Mile Routing Research Challenge with identifiers regenerated and locations obfuscated.",
   "domain": "Last-mile logistics",
   "expectedCounts": {},
   "id": "amazon-last-mile-routing-2021",

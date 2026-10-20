@@ -3,7 +3,20 @@
     "team-orienteering-chao-instances"
   ],
   "category": "tasks/v1",
-  "citations": [],
+  "citations": [
+    {
+      "doi": "10.1057/jors.1984.162",
+      "text": "T. Tsiligirides (1984). Heuristic methods applied to orienteering. Journal of the Operational Research Society 35(9), 797-809."
+    },
+    {
+      "doi": "10.1016/0377-2217(94)00289-4",
+      "text": "I.-M. Chao, B. L. Golden, E. A. Wasil (1996). The team orienteering problem. European Journal of Operational Research 88(3), 464-474."
+    },
+    {
+      "doi": "10.1016/0377-2217(95)00035-6",
+      "text": "I.-M. Chao, B. L. Golden, E. A. Wasil (1996). A fast and effective heuristic for the orienteering problem. European Journal of Operational Research 88(3), 475-489."
+    }
+  ],
   "crosswalk": {
     "oneWay": [],
     "rules": [

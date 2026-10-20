@@ -3,7 +3,12 @@
     "clustered-orienteering-problem"
   ],
   "category": "tasks/v1",
-  "citations": [],
+  "citations": [
+    {
+      "doi": "10.1016/j.ejor.2014.04.006",
+      "text": "E. Angelelli, C. Archetti, M. Vindigni (2014). The clustered orienteering problem. European Journal of Operational Research 238(2), 404-414."
+    }
+  ],
   "crosswalk": {
     "oneWay": [
       {

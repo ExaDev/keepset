@@ -51,6 +51,7 @@
     "source": "geojson",
     "target": "tasks/v1"
   },
+  "description": "Property maintenance site visits in Louisville Metro with the violations cited, published by Codes and Regulations as a feature layer that covers the last 30 days and is updated daily.",
   "domain": "Case records",
   "expectedCounts": {},
   "id": "louisville-metro-property-maintenance-violations",

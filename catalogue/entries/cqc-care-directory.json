@@ -7,6 +7,7 @@
   "crosswalk": {
     "file": "crosswalks/tasks-v1/nodes.json"
   },
+  "description": "The Care Quality Commission's list of the places in England where care is regulated, covering hospitals, care homes, GPs, dentists and home care agencies, with their addresses and postcodes. It is published as a spreadsheet that the commission updates regularly.",
   "domain": "Technician and home-care routing",
   "expectedCounts": {},
   "id": "cqc-care-directory",

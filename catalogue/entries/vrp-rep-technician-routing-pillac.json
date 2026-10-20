@@ -3,7 +3,12 @@
     "technician-routing-pillac"
   ],
   "category": "tasks/v1",
-  "citations": [],
+  "citations": [
+    {
+      "doi": "10.1007/s11590-012-0567-4",
+      "text": "V. Pillac, C. Gueret, A. L. Medaglia (2013). A parallel matheuristic for the technician routing and scheduling problem. Optimization Letters 7(7), 1525-1535."
+    }
+  ],
   "crosswalk": {
     "oneWay": [],
     "rules": [
@@ -51,6 +56,7 @@
     "source": "vrp-rep",
     "target": "tasks/v1"
   },
+  "description": "Technician routing and scheduling instances from Pillac, Gueret and Medaglia, with node coordinates and the skills a technician must cover, distributed through VRP-REP.",
   "domain": "Technician and home-care routing",
   "expectedCounts": {
     "instances": 57

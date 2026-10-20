@@ -3,10 +3,16 @@
     "tdc-technician-dispatch"
   ],
   "category": "tasks/v1",
-  "citations": [],
+  "citations": [
+    {
+      "doi": "10.1002/net.22188",
+      "text": "M. Gamst, D. Pisinger (2024). Decision support for the technician routing and scheduling problem. Networks 83(1), 169-196."
+    }
+  ],
   "crosswalk": {
     "file": "crosswalks/tasks-v1/nodes.json"
   },
+  "description": "Instance sets and raw results for the technician routing and scheduling problem of Gamst and Pisinger, including the instances of Mathlouthi, Gendreau and Potvin and a further technician dispatch set called TDCData.",
   "domain": "Technician and home-care routing",
   "expectedCounts": {},
   "id": "zenodo-tdc-technician-dispatch",

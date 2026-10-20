@@ -3,7 +3,12 @@
     "movrptw-real-tenerife-instances"
   ],
   "category": "tasks/v1",
-  "citations": [],
+  "citations": [
+    {
+      "doi": "10.1109/ICSMC.2011.6083675",
+      "text": "J. Castro-Gutierrez, D. Landa-Silva, J. Moreno Perez (2011). Nature of real-world multi-objective vehicle routing with evolutionary algorithms. 2011 IEEE International Conference on Systems, Man, and Cybernetics, 257-264."
+    }
+  ],
   "crosswalk": {
     "oneWay": [],
     "rules": [

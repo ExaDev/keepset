@@ -3,7 +3,12 @@
     "hartford-meter-reading-instance"
   ],
   "category": "tasks/v1",
-  "citations": [],
+  "citations": [
+    {
+      "doi": "10.1016/j.cor.2022.105844",
+      "text": "D. Sinha Roy, C. Defryn, B. Golden, E. Wasil (2022). Data-driven optimization and statistical modeling to improve meter reading for utility companies. Computers & Operations Research 145, 105844."
+    }
+  ],
   "crosswalk": {
     "oneWay": [],
     "rules": [

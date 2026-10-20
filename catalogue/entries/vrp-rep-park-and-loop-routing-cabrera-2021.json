@@ -3,7 +3,12 @@
     "park-and-loop-routing-cabrera-2021"
   ],
   "category": "tasks/v1",
-  "citations": [],
+  "citations": [
+    {
+      "doi": "10.1016/j.cor.2022.105761",
+      "text": "N. Cabrera, J.-F. Cordeau, J. E. Mendoza (2022). The doubly open park-and-loop routing problem. Computers & Operations Research 143, 105761."
+    }
+  ],
   "crosswalk": {
     "oneWay": [],
     "rules": [

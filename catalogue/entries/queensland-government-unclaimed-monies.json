@@ -36,6 +36,7 @@
     "source": "csv-table",
     "target": "tasks/v1"
   },
+  "description": "The Public Trustee of Queensland's register of unclaimed money from deceased estates and from other sources, with the owner, the amount and the postcode.",
   "domain": "Claims and unclaimed money",
   "expectedCounts": {},
   "id": "queensland-government-unclaimed-monies",

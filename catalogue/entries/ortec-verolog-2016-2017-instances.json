@@ -3,10 +3,16 @@
     "verolog-2016-2017-instances"
   ],
   "category": "tasks/v1",
-  "citations": [],
+  "citations": [
+    {
+      "doi": "10.1007/s13676-019-00143-8",
+      "text": "A. Kheiri, A. G. Dragomir, D. Mueller, J. Gromicho, C. Jagtenberg, J. J. van Hoorn (2019). Tackling a VRP challenge to redistribute scarce equipment within time windows using metaheuristic algorithms. EURO Journal on Transportation and Logistics 8(5), 561-595."
+    }
+  ],
   "crosswalk": {
     "file": "crosswalks/tasks-v1/nodes.json"
   },
+  "description": "Instances for the ORTEC VeRoLog Solver Challenge of 2016 to 2017, a routing problem that redistributes scarce equipment between customers within time windows, released in sets from the early test instances to the hidden ones.",
   "domain": "Technician and home-care routing",
   "expectedCounts": {},
   "id": "ortec-verolog-2016-2017-instances",

@@ -7,6 +7,7 @@
   "crosswalk": {
     "file": "crosswalks/tasks-v1/nodes.json"
   },
+  "description": "Every severe flood warning, flood warning and flood alert the Environment Agency has issued for flooding from rivers, the sea and some groundwater sites since the warning system began in January 2006.",
   "domain": "Civic and environmental monitoring",
   "expectedCounts": {},
   "id": "defra-historic-flood-warnings",

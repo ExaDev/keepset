@@ -38,7 +38,7 @@ const curation = {
   probedOn: "2026-10-19",
   items: [
     { surveyId: "or-10", id: "example-service-requests", namespace: "example", name: "Service requests", description: "Requests raised with a city.", licence: { kind: "spdx", id: "CC-BY-4.0" }, downloadUrl: "https://example.org/requests.csv", flags: ["personal data in one column, not mapped"], outcome: fetchable },
-    { surveyId: "or-2", id: "classic-instances", namespace: "example", name: "Classic instances", licence: { kind: "unrecorded" }, flags: [], outcome: { status: "not-fetchable", reason: "the instances are in a text format with no parser yet" } },
+    { surveyId: "or-2", id: "classic-instances", namespace: "example", name: "Classic instances", description: "Benchmark instances from a classic paper.", citations: [{ text: "A. Author (1990). Classic instances. Journal of Examples 1." }], licence: { kind: "unrecorded" }, flags: [], outcome: { status: "not-fetchable", reason: "the instances are in a text format with no parser yet" } },
   ],
 };
 
@@ -69,6 +69,19 @@ describe("convertSurvey", () => {
 
   it("files every entry under the operations-research subject, whichever theme its item sits in", () => {
     expect(entries.map((entry) => entry.subjects)).toEqual([[SUBJECT], [SUBJECT]]);
+  });
+
+  it("carries a curation's description and citations into the entry, and no citations where the source names none", () => {
+    expect(requests?.description).toBe("Requests raised with a city.");
+    expect(requests?.citations).toEqual([]);
+    expect(instances?.description).toBe("Benchmark instances from a classic paper.");
+    expect(instances?.citations).toEqual([{ text: "A. Author (1990). Classic instances. Journal of Examples 1." }]);
+  });
+
+  it("refuses an item without a description, or with a blank one", () => {
+    const undescribed = Object.fromEntries(Object.entries(curation.items[0] ?? {}).filter(([key]) => key !== "description"));
+    expect(problem({ ...curation, items: [undescribed, curation.items[1]] })).toMatch(/"description"[^]*expected string, received undefined/);
+    expect(problem({ ...curation, items: [{ ...curation.items[0], description: "  " }, curation.items[1]] })).toMatch(/must not be blank/);
   });
 
   it("makes an entry for every surveyed item, in id order, and reports each once in survey order", () => {
@@ -198,7 +211,7 @@ describe("the survey's themes and the target fields", () => {
 
   it("every theme of the committed survey files under exactly one domain label", () => {
     for (const item of real.entries) {
-      const only = { probedOn: "2026-10-19", items: [{ surveyId: item.id, id: "x", namespace: "x", name: "x", licence: { kind: "unrecorded" }, flags: [], outcome: { status: "not-fetchable", reason: "x" } }] };
+      const only = { probedOn: "2026-10-19", items: [{ surveyId: item.id, id: "x", namespace: "x", name: "x", description: "A fixture dataset.", licence: { kind: "unrecorded" }, flags: [], outcome: { status: "not-fetchable", reason: "x" } }] };
       expect(() => convertSurvey({ ...real, entries: [item] }, only, none), item.id).not.toThrow();
     }
   });
@@ -250,7 +263,7 @@ describe("convertItem for a paged ArcGIS layer", () => {
     map: { lat: "geometry_latitude", lon: "geometry_longitude", prize: "FINE", opened: "OPENED", skill: "KIND" },
   };
   const curated = (outcome: Record<string, unknown>, downloadUrl: string | null = layer): Parameters<typeof convertItem>[1] =>
-    CurationItemSchema.parse({ surveyId: "or-10", id: "example-violations", namespace: "example", name: "Violations", licence: { kind: "unrecorded" }, ...(downloadUrl === null ? {} : { downloadUrl }), flags: [], outcome });
+    CurationItemSchema.parse({ surveyId: "or-10", id: "example-violations", namespace: "example", name: "Violations", description: "A fixture dataset.", licence: { kind: "unrecorded" }, ...(downloadUrl === null ? {} : { downloadUrl }), flags: [], outcome });
   const failure = (outcome: Record<string, unknown>, downloadUrl: string | null = layer): string => {
     try {
       convertItem(item ?? expect.unreachable("the fixture survey has an item"), curated(outcome, downloadUrl), "2026-10-19");
@@ -299,7 +312,7 @@ describe("convertItem for a collection of instance files", () => {
     timeUnit: "abstract units",
     expectedInstances: 2,
   };
-  const curated = (outcome: Record<string, unknown>): Parameters<typeof convertItem>[1] => CurationItemSchema.parse({ surveyId: "or-10", id: "example-suite", namespace: "example", name: "Suite", licence: { kind: "unrecorded" }, flags: [], outcome });
+  const curated = (outcome: Record<string, unknown>): Parameters<typeof convertItem>[1] => CurationItemSchema.parse({ surveyId: "or-10", id: "example-suite", namespace: "example", name: "Suite", description: "A fixture dataset.", licence: { kind: "unrecorded" }, flags: [], outcome });
   const failure = (outcome: Record<string, unknown>): string => {
     try {
       convertItem(item ?? expect.unreachable("the fixture survey has an item"), curated(outcome), "2026-10-19");
@@ -402,7 +415,7 @@ describe("convertItem for a collection of table files", () => {
     timeUnit: "seconds",
     expectedInstances: 2,
   };
-  const curated = (outcome: Record<string, unknown>): Parameters<typeof convertItem>[1] => CurationItemSchema.parse({ surveyId: "or-10", id: "example-coordinates", namespace: "example", name: "Coordinates", licence: { kind: "unrecorded" }, flags: [], outcome });
+  const curated = (outcome: Record<string, unknown>): Parameters<typeof convertItem>[1] => CurationItemSchema.parse({ surveyId: "or-10", id: "example-coordinates", namespace: "example", name: "Coordinates", description: "A fixture dataset.", licence: { kind: "unrecorded" }, flags: [], outcome });
   const entryOf = (outcome: Record<string, unknown>): ReturnType<typeof convertItem>["entry"] => convertItem(item ?? expect.unreachable("the fixture survey has an item"), curated(outcome), "2026-10-19").entry;
   const csv = (rows: readonly string[]): string => `"ID","Longitude","Latitude","ServiceTime (min)"\r\n${rows.join("\r\n")}\r\n`;
   const archive = zip([
@@ -458,7 +471,7 @@ describe("convertItem for one instance file", () => {
     keep: [],
     expectedNodes: 2,
   };
-  const curated = (outcome: Record<string, unknown>): Parameters<typeof convertItem>[1] => CurationItemSchema.parse({ surveyId: "or-10", id: "example-customers", namespace: "example", name: "Customers", licence: { kind: "unrecorded" }, flags: [], outcome });
+  const curated = (outcome: Record<string, unknown>): Parameters<typeof convertItem>[1] => CurationItemSchema.parse({ surveyId: "or-10", id: "example-customers", namespace: "example", name: "Customers", description: "A fixture dataset.", licence: { kind: "unrecorded" }, flags: [], outcome });
   const entryOf = (outcome: Record<string, unknown>): ReturnType<typeof convertItem>["entry"] => convertItem(item ?? expect.unreachable("the fixture survey has an item"), curated(outcome), "2026-10-19").entry;
   const failure = (outcome: Record<string, unknown>): string => {
     try {

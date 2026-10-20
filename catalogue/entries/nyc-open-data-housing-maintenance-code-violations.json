@@ -7,6 +7,7 @@
   "crosswalk": {
     "file": "crosswalks/tasks-v1/nodes.json"
   },
+  "description": "Violations the New York City Department of Housing Preservation and Development has issued against rental dwellings and buildings under the Housing Maintenance Code and the Multiple Dwelling Law, one row per violation, in four classes of hazard.",
   "domain": "Case records",
   "expectedCounts": {},
   "id": "nyc-open-data-housing-maintenance-code-violations",

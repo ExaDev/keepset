@@ -3,7 +3,12 @@
     "solomon-vrptw-benchmark"
   ],
   "category": "tasks/v1",
-  "citations": [],
+  "citations": [
+    {
+      "doi": "10.1287/opre.35.2.254",
+      "text": "M. M. Solomon (1987). Algorithms for the vehicle routing and scheduling problems with time window constraints. Operations Research 35(2), 254-265."
+    }
+  ],
   "crosswalk": {
     "oneWay": [],
     "rules": [

@@ -3,7 +3,13 @@
     "lade-delivery-jilin"
   ],
   "category": "tasks/v1",
-  "citations": [],
+  "citations": [
+    {
+      "doi": "10.48550/arXiv.2306.10675",
+      "text": "L. Wu et al. (2023). LaDe: The first comprehensive last-mile delivery dataset from industry. arXiv:2306.10675.",
+      "url": "https://arxiv.org/abs/2306.10675"
+    }
+  ],
   "crosswalk": {
     "oneWay": [],
     "rules": [

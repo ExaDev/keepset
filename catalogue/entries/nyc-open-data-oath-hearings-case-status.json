@@ -7,6 +7,7 @@
   "crosswalk": {
     "file": "crosswalks/tasks-v1/nodes.json"
   },
+  "description": "Summonses for public safety and quality of life violations filed and adjudicated at New York City's Office of Administrative Trials and Hearings, with the infraction charged, the decision, payments and amounts.",
   "domain": "Case records",
   "expectedCounts": {},
   "id": "nyc-open-data-oath-hearings-case-status",

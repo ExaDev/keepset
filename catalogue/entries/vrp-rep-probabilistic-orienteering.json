@@ -3,7 +3,12 @@
     "probabilistic-orienteering"
   ],
   "category": "tasks/v1",
-  "citations": [],
+  "citations": [
+    {
+      "doi": "10.1016/j.cor.2016.12.025",
+      "text": "E. Angelelli, C. Archetti, C. Filippi, M. Vindigni (2017). The probabilistic orienteering problem. Computers & Operations Research 81, 269-281."
+    }
+  ],
   "crosswalk": {
     "oneWay": [
       {
@@ -57,6 +62,7 @@
     "source": "tsplib",
     "target": "tasks/v1"
   },
+  "description": "Instances for the probabilistic orienteering problem, in which each customer is present only with a given probability, from Angelelli, Archetti, Filippi and Vindigni, distributed through VRP-REP.",
   "domain": "Orienteering",
   "expectedCounts": {
     "instances": 264
