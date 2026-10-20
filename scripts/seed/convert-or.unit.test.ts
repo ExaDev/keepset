@@ -209,10 +209,11 @@ describe("pagingOf", () => {
     expect(pagingOf("https://data.example.org/resource/abcd-1234.csv")).toEqual({ kind: "socrata-resource", pageSize: PAGE_ROWS });
     expect(pagingOf("https://data.example.org/datastore/dump/0a1b2c3d-1111-2222-3333-444455556666")).toEqual({ kind: "ckan-datastore", pageSize: PAGE_ROWS });
     expect(pagingOf("https://data.example.org/data/datastore/dump/0a1b2c3d-1111-2222-3333-444455556666")).toEqual({ kind: "ckan-datastore", pageSize: PAGE_ROWS });
+    expect(pagingOf("https://www.fema.gov/api/open/v3/NfipClaims?$select=id,state")).toEqual({ kind: "openfema", pageSize: PAGE_ROWS });
   });
 
   it("leaves every other URL as one file", () => {
-    for (const url of ["https://data.example.org/resource/abcd-1234.csv?$limit=50", "https://data.example.org/datastore/dump/0a1b2c3d-1111-2222-3333-444455556666?format=csv", "https://data.example.org/datastore/dump/not-a-uuid", "https://data.example.org/api/views/abcd-1234/rows.csv?accessType=DOWNLOAD", "https://data.example.org/dataset/x/resource/0a1b2c3d/download/x.csv", "https://data.example.org/resource/abcd-1234.json"]) {
+    for (const url of ["https://data.example.org/resource/abcd-1234.csv?$limit=50", "https://data.example.org/datastore/dump/0a1b2c3d-1111-2222-3333-444455556666?format=csv", "https://data.example.org/datastore/dump/not-a-uuid", "https://data.example.org/api/views/abcd-1234/rows.csv?accessType=DOWNLOAD", "https://data.example.org/dataset/x/resource/0a1b2c3d/download/x.csv", "https://data.example.org/resource/abcd-1234.json", "https://www.fema.gov/about/openfema/terms-conditions", "https://other.example.org/api/open/v3/NfipClaims"]) {
       expect(pagingOf(url)).toBeUndefined();
     }
   });

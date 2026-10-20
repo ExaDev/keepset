@@ -7,8 +7,8 @@ import { CurationSchema, TARGET_FIELD_NAMES, TARGET_FIELDS, type Curation, type 
 /** The shared crosswalk of an entry with no recipe yet: the document's meta and node ids, all that is known of a dataset whose columns have not been read into a mapping. */
 export const OR_NODES_CROSSWALK = "crosswalks/or-v1/nodes.json";
 
-/** The most cells (rows times the cells each row keeps, its id included) a table may have to be given a recipe. A fetch holds every kept cell of the table at once, in the parsed rows, the crosswalk's result and the validated document, so memory grows with the cells and not with the file's size; a table of tens of millions of cells is not read by one fetch and is imported without a recipe, saying so. Measured on whole fetches: a table of about five million cells needed a heap of between 512 and 768 MiB, and one of about eleven million cells between 1 and 1.5 GiB, so this stays within Node's usual default heap. */
-export const MAX_CELLS = 12_000_000;
+/** The most cells (rows times the cells each row keeps, its id included) a table may have to be given a recipe. A fetch holds every kept cell of the table at once, in the parsed rows, the crosswalk's result and the validated document, so memory grows with the cells and not with the file's size; a table of tens of millions of cells is not read by one fetch and is imported without a recipe, saying so. Measured on whole fetches: a table of about five million cells needed a heap of between 512 and 768 MiB, one of about eleven million cells (1.6 million rows) between 1 and 1.5 GiB, and one of about fourteen million cells (2.7 million rows) between 2 and 3 GiB, so this stays within Node's default heap of 4 GiB on a machine with the memory for it. */
+export const MAX_CELLS = 14_000_000;
 
 /** How many rows a page of a paged CSV source holds. A response is a CSV of every column, so a page is a few tens of megabytes for a table of up to a kilobyte a row, short enough that a response is not cut off in transit and long enough that a table of millions of rows is a few dozen requests. */
 export const PAGE_ROWS = 50_000;
@@ -16,16 +16,22 @@ export const PAGE_ROWS = 50_000;
 /** The path of a Socrata resource endpoint: a four-by-four dataset id and an output format. */
 const SOCRATA_RESOURCE_CSV = /^\/resource\/[a-z0-9]{4}-[a-z0-9]{4}\.csv$/;
 
+/** The path of an OpenFEMA entity: `/api/open/v<n>/<Entity>`. */
+const OPENFEMA_ENTITY = /^\/api\/open\/v\d+\/[A-Za-z]+$/;
+
 /** The path of a CKAN datastore dump: the resource's UUID after `/datastore/dump/`, on a portal that may serve CKAN under a prefix. */
 const CKAN_DATASTORE_DUMP = /\/datastore\/dump\/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/;
 
 /**
  * How a recipe pages a source URL. A Socrata resource endpoint returns a small fixed number of rows unless it is given a limit, and a long download of a large CKAN datastore dump or Socrata table can be cut short in transit, so each is read a page at a time; every other URL is one file.
  * @param url - The URL the survey or the curation gives for the table.
- * @returns The paging of a Socrata resource endpoint or a CKAN datastore dump with no query, and undefined for any other URL.
+ * @returns The paging of a Socrata resource endpoint or a CKAN datastore dump with no query, or of an OpenFEMA entity (whose `$select` stays in the URL), and undefined for any other URL.
  */
-export function pagingOf(url: string): { readonly kind: "socrata-resource" | "ckan-datastore"; readonly pageSize: number } | undefined {
+export function pagingOf(url: string): { readonly kind: "socrata-resource" | "ckan-datastore" | "openfema"; readonly pageSize: number } | undefined {
   const parsed = new URL(url);
+  if (parsed.hostname === "www.fema.gov" && OPENFEMA_ENTITY.test(parsed.pathname)) {
+    return { kind: "openfema", pageSize: PAGE_ROWS };
+  }
   if (parsed.search !== "") {
     return undefined;
   }
