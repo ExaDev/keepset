@@ -2,7 +2,7 @@
   "aliases": [
     "forestry-work-orders"
   ],
-  "category": "or/v1",
+  "category": "tasks/v1",
   "citations": [],
   "crosswalk": {
     "oneWay": [],
@@ -49,7 +49,7 @@
       }
     ],
     "source": "csv-table",
-    "target": "or/v1"
+    "target": "tasks/v1"
   },
   "description": "Tree removal and pruning work orders from NYC Parks with status, dates and coordinates.",
   "domain": "Technician and home-care routing",

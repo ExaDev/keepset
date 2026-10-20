@@ -2,10 +2,10 @@
   "aliases": [
     "last-mile-delivery-route-deviations"
   ],
-  "category": "or/v1",
+  "category": "tasks/v1",
   "citations": [],
   "crosswalk": {
-    "file": "crosswalks/or-v1/nodes.json"
+    "file": "crosswalks/tasks-v1/nodes.json"
   },
   "description": "Planned and actual delivery routes of a logistics company in two countries, from a Data in Brief article.",
   "domain": "Vehicle routing with time windows",

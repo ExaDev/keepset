@@ -2,7 +2,7 @@
   "aliases": [
     "water-resources-work-orders"
   ],
-  "category": "or/v1",
+  "category": "tasks/v1",
   "citations": [],
   "crosswalk": {
     "oneWay": [],
@@ -49,7 +49,7 @@
       }
     ],
     "source": "csv-table",
-    "target": "or/v1"
+    "target": "tasks/v1"
   },
   "description": "Water resources maintenance work orders raised and completed by the City of Mesa, with costs, status and dates.",
   "domain": "Technician and home-care routing",

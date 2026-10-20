@@ -2,7 +2,7 @@
   "aliases": [
     "verolog-2019"
   ],
-  "category": "or/v1",
+  "category": "tasks/v1",
   "citations": [],
   "crosswalk": {
     "oneWay": [],
@@ -59,7 +59,7 @@
       }
     ],
     "source": "verolog-2019",
-    "target": "or/v1"
+    "target": "tasks/v1"
   },
   "domain": "Technician and home-care routing",
   "expectedCounts": {

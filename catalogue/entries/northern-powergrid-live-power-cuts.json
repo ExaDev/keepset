@@ -2,7 +2,7 @@
   "aliases": [
     "live-power-cuts"
   ],
-  "category": "or/v1",
+  "category": "tasks/v1",
   "citations": [],
   "crosswalk": {
     "oneWay": [],
@@ -59,7 +59,7 @@
       }
     ],
     "source": "csv-table",
-    "target": "or/v1"
+    "target": "tasks/v1"
   },
   "description": "A live snapshot of power cut incidents on the Northern Powergrid network, with coordinates, area, status and estimated restoration time.",
   "domain": "Emergency dispatch",

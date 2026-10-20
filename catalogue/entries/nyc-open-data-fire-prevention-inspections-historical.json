@@ -2,7 +2,7 @@
   "aliases": [
     "fire-prevention-inspections-historical"
   ],
-  "category": "or/v1",
+  "category": "tasks/v1",
   "citations": [],
   "crosswalk": {
     "oneWay": [],
@@ -39,7 +39,7 @@
       }
     ],
     "source": "csv-table",
-    "target": "or/v1"
+    "target": "tasks/v1"
   },
   "description": "Historical Bureau of Fire Prevention inspection records for New York City premises, with last visit and inspection status.",
   "domain": "Case records",

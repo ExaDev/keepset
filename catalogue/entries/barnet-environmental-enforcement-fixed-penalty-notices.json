@@ -2,7 +2,7 @@
   "aliases": [
     "environmental-enforcement-fixed-penalty-notices"
   ],
-  "category": "or/v1",
+  "category": "tasks/v1",
   "citations": [],
   "crosswalk": {
     "oneWay": [],
@@ -39,7 +39,7 @@
       }
     ],
     "source": "csv-table",
-    "target": "or/v1"
+    "target": "tasks/v1"
   },
   "description": "Fixed penalty notices issued for environmental offences in the London Borough of Barnet from February 2019, with area, offence and payment.",
   "domain": "Case records",

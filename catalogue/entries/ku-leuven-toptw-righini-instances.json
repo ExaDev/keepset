@@ -2,7 +2,7 @@
   "aliases": [
     "toptw-righini-instances"
   ],
-  "category": "or/v1",
+  "category": "tasks/v1",
   "citations": [],
   "crosswalk": {
     "oneWay": [],
@@ -49,7 +49,7 @@
       }
     ],
     "source": "toptw",
-    "target": "or/v1"
+    "target": "tasks/v1"
   },
   "description": "Benchmark instances for the orienteering problem with time windows, with coordinates, service durations, scores and time windows.",
   "domain": "Orienteering",

@@ -2,10 +2,10 @@
   "aliases": [
     "nypd-calls-for-service"
   ],
-  "category": "or/v1",
+  "category": "tasks/v1",
   "citations": [],
   "crosswalk": {
-    "file": "crosswalks/or-v1/nodes.json"
+    "file": "crosswalks/tasks-v1/nodes.json"
   },
   "description": "NYPD calls for service in New York City, with location, precinct and dispatch, arrival and closing timestamps.",
   "domain": "Emergency dispatch",

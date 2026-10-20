@@ -2,7 +2,7 @@
   "aliases": [
     "weed-abatement"
   ],
-  "category": "or/v1",
+  "category": "tasks/v1",
   "citations": [],
   "crosswalk": {
     "oneWay": [],
@@ -39,7 +39,7 @@
       }
     ],
     "source": "geojson",
-    "target": "or/v1"
+    "target": "tasks/v1"
   },
   "description": "Weed abatement cases of the City of Temecula, California, with location and completion fields.",
   "domain": "Case records",

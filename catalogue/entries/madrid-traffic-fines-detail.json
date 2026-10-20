@@ -2,10 +2,10 @@
   "aliases": [
     "traffic-fines-detail"
   ],
-  "category": "or/v1",
+  "category": "tasks/v1",
   "citations": [],
   "crosswalk": {
-    "file": "crosswalks/or-v1/nodes.json"
+    "file": "crosswalks/tasks-v1/nodes.json"
   },
   "description": "Traffic fines issued in Madrid in one month, with offence, fine amount, discount and points.",
   "domain": "Case records",

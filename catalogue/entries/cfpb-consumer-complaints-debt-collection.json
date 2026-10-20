@@ -2,10 +2,10 @@
   "aliases": [
     "consumer-complaints-debt-collection"
   ],
-  "category": "or/v1",
+  "category": "tasks/v1",
   "citations": [],
   "crosswalk": {
-    "file": "crosswalks/or-v1/nodes.json"
+    "file": "crosswalks/tasks-v1/nodes.json"
   },
   "description": "Consumer complaints about debt collection received by the US Consumer Financial Protection Bureau, with state, ZIP code and response dates.",
   "domain": "Case records",

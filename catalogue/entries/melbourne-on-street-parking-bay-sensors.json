@@ -2,7 +2,7 @@
   "aliases": [
     "on-street-parking-bay-sensors"
   ],
-  "category": "or/v1",
+  "category": "tasks/v1",
   "citations": [],
   "crosswalk": {
     "oneWay": [],
@@ -29,7 +29,7 @@
       }
     ],
     "source": "csv-table",
-    "target": "or/v1"
+    "target": "tasks/v1"
   },
   "description": "A current-state snapshot of on-street parking bay sensors in Melbourne, with zone, status and timestamps.",
   "domain": "Emergency dispatch",

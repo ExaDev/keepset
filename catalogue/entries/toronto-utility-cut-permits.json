@@ -2,7 +2,7 @@
   "aliases": [
     "utility-cut-permits"
   ],
-  "category": "or/v1",
+  "category": "tasks/v1",
   "citations": [],
   "crosswalk": {
     "oneWay": [],
@@ -39,7 +39,7 @@
       }
     ],
     "source": "csv-table",
-    "target": "or/v1"
+    "target": "tasks/v1"
   },
   "description": "Permits for utility cuts in Toronto streets, with installation type, ward, district, status and proposed dates.",
   "domain": "Case records",

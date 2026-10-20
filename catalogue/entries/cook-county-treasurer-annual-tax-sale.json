@@ -2,7 +2,7 @@
   "aliases": [
     "treasurer-annual-tax-sale"
   ],
-  "category": "or/v1",
+  "category": "tasks/v1",
   "citations": [],
   "crosswalk": {
     "oneWay": [],
@@ -39,7 +39,7 @@
       }
     ],
     "source": "csv-table",
-    "target": "or/v1"
+    "target": "tasks/v1"
   },
   "description": "Properties offered at the Cook County annual tax sale with taxes and penalties offered, amounts paid and township.",
   "domain": "Case records",

@@ -2,7 +2,7 @@
   "aliases": [
     "li-contractor-licences"
   ],
-  "category": "or/v1",
+  "category": "tasks/v1",
   "citations": [],
   "crosswalk": {
     "oneWay": [],
@@ -44,7 +44,7 @@
       }
     ],
     "source": "csv-table",
-    "target": "or/v1"
+    "target": "tasks/v1"
   },
   "description": "Register of licensed contractors in Washington State with specialty, status and licence effective and expiry dates.",
   "domain": "Technician and home-care routing",

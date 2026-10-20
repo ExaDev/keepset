@@ -2,7 +2,7 @@
   "aliases": [
     "building-permits-issued"
   ],
-  "category": "or/v1",
+  "category": "tasks/v1",
   "citations": [],
   "crosswalk": {
     "oneWay": [],
@@ -34,7 +34,7 @@
       }
     ],
     "source": "csv-table",
-    "target": "or/v1"
+    "target": "tasks/v1"
   },
   "description": "Building permits issued by the City of Bologna, with the procedure type and the application and closure dates.",
   "domain": "Case records",

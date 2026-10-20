@@ -2,7 +2,7 @@
   "aliases": [
     "lease-arrears"
   ],
-  "category": "or/v1",
+  "category": "tasks/v1",
   "citations": [],
   "crosswalk": {
     "oneWay": [],
@@ -39,7 +39,7 @@
       }
     ],
     "source": "geojson",
-    "target": "or/v1"
+    "target": "tasks/v1"
   },
   "description": "Lease arrears and enforcement status for iTaukei Land Trust Board leases in Fiji.",
   "domain": "Case records",

@@ -2,7 +2,7 @@
   "aliases": [
     "team-orienteering-chao-instances"
   ],
-  "category": "or/v1",
+  "category": "tasks/v1",
   "citations": [],
   "crosswalk": {
     "oneWay": [],
@@ -39,7 +39,7 @@
       }
     ],
     "source": "top",
-    "target": "or/v1"
+    "target": "tasks/v1"
   },
   "description": "Benchmark instances for the team orienteering problem, with node coordinates and scores, from the KU Leuven orienteering page.",
   "domain": "Orienteering",

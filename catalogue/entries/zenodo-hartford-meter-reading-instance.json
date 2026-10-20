@@ -2,7 +2,7 @@
   "aliases": [
     "hartford-meter-reading-instance"
   ],
-  "category": "or/v1",
+  "category": "tasks/v1",
   "citations": [],
   "crosswalk": {
     "oneWay": [],
@@ -29,7 +29,7 @@
       }
     ],
     "source": "customer-points",
-    "target": "or/v1"
+    "target": "tasks/v1"
   },
   "description": "An arc-routing meter reading instance for Hartford, Connecticut, with customer and network node coordinates in planar units.",
   "domain": "Vehicle routing with time windows",

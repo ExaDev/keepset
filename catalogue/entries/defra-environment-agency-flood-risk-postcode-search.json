@@ -2,7 +2,7 @@
   "aliases": [
     "environment-agency-flood-risk-postcode-search"
   ],
-  "category": "or/v1",
+  "category": "tasks/v1",
   "citations": [],
   "crosswalk": {
     "oneWay": [],
@@ -24,7 +24,7 @@
       }
     ],
     "source": "csv-table",
-    "target": "or/v1"
+    "target": "tasks/v1"
   },
   "description": "Property counts by flood-risk band and groundwater risk category for each postcode in England.",
   "domain": "Risk and outcome records",

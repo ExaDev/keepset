@@ -2,7 +2,7 @@
   "aliases": [
     "street-resurfacing-schedule"
   ],
-  "category": "or/v1",
+  "category": "tasks/v1",
   "citations": [],
   "crosswalk": {
     "oneWay": [],
@@ -34,7 +34,7 @@
       }
     ],
     "source": "csv-table",
-    "target": "or/v1"
+    "target": "tasks/v1"
   },
   "description": "Scheduled street milling and paving work by borough, street segment and date, from NYC DOT.",
   "domain": "Civic and environmental monitoring",

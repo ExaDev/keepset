@@ -2,10 +2,10 @@
   "aliases": [
     "event-duration-monitoring-storm-overflows"
   ],
-  "category": "or/v1",
+  "category": "tasks/v1",
   "citations": [],
   "crosswalk": {
-    "file": "crosswalks/or-v1/nodes.json"
+    "file": "crosswalks/tasks-v1/nodes.json"
   },
   "description": "Storm overflow event duration monitoring returns for England and Wales, published as annual zip files.",
   "domain": "Civic and environmental monitoring",

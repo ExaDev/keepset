@@ -2,7 +2,7 @@
   "aliases": [
     "tax-lien-sale-lists"
   ],
-  "category": "or/v1",
+  "category": "tasks/v1",
   "citations": [],
   "crosswalk": {
     "oneWay": [],
@@ -29,7 +29,7 @@
       }
     ],
     "source": "csv-table",
-    "target": "or/v1"
+    "target": "tasks/v1"
   },
   "description": "Properties on New York City tax lien sale lists by month and notice cycle, with borough, block, lot and address.",
   "domain": "Case records",

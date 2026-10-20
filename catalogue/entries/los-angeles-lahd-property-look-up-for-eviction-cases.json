@@ -2,7 +2,7 @@
   "aliases": [
     "lahd-property-look-up-for-eviction-cases"
   ],
-  "category": "or/v1",
+  "category": "tasks/v1",
   "citations": [],
   "crosswalk": {
     "oneWay": [],
@@ -29,7 +29,7 @@
       }
     ],
     "source": "csv-table",
-    "target": "or/v1"
+    "target": "tasks/v1"
   },
   "description": "Eviction notices filed with the Los Angeles Housing Department, with the parcel, notice category, type and dates.",
   "domain": "Case records",

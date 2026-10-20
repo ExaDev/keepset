@@ -2,7 +2,7 @@
   "aliases": [
     "municipal-licensing-investigations"
   ],
-  "category": "or/v1",
+  "category": "tasks/v1",
   "citations": [],
   "crosswalk": {
     "oneWay": [],
@@ -34,7 +34,7 @@
       }
     ],
     "source": "csv-table",
-    "target": "or/v1"
+    "target": "tasks/v1"
   },
   "description": "Investigations by Toronto Municipal Licensing and Standards, with type, received date and current status.",
   "domain": "Case records",

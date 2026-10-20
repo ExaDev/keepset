@@ -2,7 +2,7 @@
   "aliases": [
     "dof-scofftow-case-information"
   ],
-  "category": "or/v1",
+  "category": "tasks/v1",
   "citations": [],
   "crosswalk": {
     "oneWay": [],
@@ -44,7 +44,7 @@
       }
     ],
     "source": "csv-table",
-    "target": "or/v1"
+    "target": "tasks/v1"
   },
   "description": "Boot and tow cases for scofflaw vehicles in New York City, with judgment amounts, amounts owed and case dates.",
   "domain": "Case records",

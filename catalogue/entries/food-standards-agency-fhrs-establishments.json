@@ -2,7 +2,7 @@
   "aliases": [
     "fhrs-establishments"
   ],
-  "category": "or/v1",
+  "category": "tasks/v1",
   "citations": [],
   "crosswalk": {
     "oneWay": [],
@@ -44,7 +44,7 @@
       }
     ],
     "source": "csv-table",
-    "target": "or/v1"
+    "target": "tasks/v1"
   },
   "description": "Food businesses in England, Wales and Northern Ireland with their hygiene rating, local authority and coordinates.",
   "domain": "Risk and outcome records",

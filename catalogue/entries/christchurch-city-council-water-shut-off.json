@@ -2,7 +2,7 @@
   "aliases": [
     "water-shut-off"
   ],
-  "category": "or/v1",
+  "category": "tasks/v1",
   "citations": [],
   "crosswalk": {
     "oneWay": [],
@@ -44,7 +44,7 @@
       }
     ],
     "source": "geojson",
-    "target": "or/v1"
+    "target": "tasks/v1"
   },
   "description": "Planned and unplanned water shut offs in Christchurch, New Zealand, with suburb, status, planned and actual times and durations.",
   "domain": "Emergency dispatch",

@@ -2,7 +2,7 @@
   "aliases": [
     "work-orders"
   ],
-  "category": "or/v1",
+  "category": "tasks/v1",
   "citations": [],
   "crosswalk": {
     "oneWay": [],
@@ -44,7 +44,7 @@
       }
     ],
     "source": "csv-table",
-    "target": "or/v1"
+    "target": "tasks/v1"
   },
   "description": "Public works work orders raised by the City of Norfolk, Virginia, with category, status, costs and ward.",
   "domain": "Technician and home-care routing",

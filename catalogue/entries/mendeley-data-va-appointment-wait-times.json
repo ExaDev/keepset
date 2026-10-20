@@ -2,10 +2,10 @@
   "aliases": [
     "va-appointment-wait-times"
   ],
-  "category": "or/v1",
+  "category": "tasks/v1",
   "citations": [],
   "crosswalk": {
-    "file": "crosswalks/or-v1/nodes.json"
+    "file": "crosswalks/tasks-v1/nodes.json"
   },
   "description": "Aggregated appointment waiting days by county, month and clinic stop code for Veterans Health Administration and Community Care.",
   "domain": "Risk and outcome records",

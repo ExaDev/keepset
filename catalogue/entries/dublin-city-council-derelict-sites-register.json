@@ -2,7 +2,7 @@
   "aliases": [
     "derelict-sites-register"
   ],
-  "category": "or/v1",
+  "category": "tasks/v1",
   "citations": [],
   "crosswalk": {
     "oneWay": [],
@@ -44,7 +44,7 @@
       }
     ],
     "source": "geojson",
-    "target": "or/v1"
+    "target": "tasks/v1"
   },
   "description": "Sites on the Dublin City Council derelict sites register, with location, status and dates.",
   "domain": "Case records",

@@ -2,7 +2,7 @@
   "aliases": [
     "its4us-hirta-health-connector"
   ],
-  "category": "or/v1",
+  "category": "tasks/v1",
   "citations": [],
   "crosswalk": {
     "oneWay": [],
@@ -34,7 +34,7 @@
       }
     ],
     "source": "csv-table",
-    "target": "or/v1"
+    "target": "tasks/v1"
   },
   "description": "Demand-response ride requests from the HIRTA Health Connector pilot with requested and actual times, durations and outcomes.",
   "domain": "Risk and outcome records",

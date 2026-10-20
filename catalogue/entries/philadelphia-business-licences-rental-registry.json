@@ -2,7 +2,7 @@
   "aliases": [
     "business-licences-rental-registry"
   ],
-  "category": "or/v1",
+  "category": "tasks/v1",
   "citations": [],
   "crosswalk": {
     "oneWay": [],
@@ -54,7 +54,7 @@
       }
     ],
     "source": "csv-table",
-    "target": "or/v1"
+    "target": "tasks/v1"
   },
   "description": "Business licences issued in Philadelphia, including rental licences, with type, status, council district and dates.",
   "domain": "Case records",

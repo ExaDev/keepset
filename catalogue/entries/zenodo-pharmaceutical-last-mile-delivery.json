@@ -2,10 +2,10 @@
   "aliases": [
     "pharmaceutical-last-mile-delivery"
   ],
-  "category": "or/v1",
+  "category": "tasks/v1",
   "citations": [],
   "crosswalk": {
-    "file": "crosswalks/or-v1/nodes.json"
+    "file": "crosswalks/tasks-v1/nodes.json"
   },
   "description": "Distance and time matrices, service times and time windows for a real pharmaceutical last-mile delivery operation.",
   "domain": "Vehicle routing with time windows",

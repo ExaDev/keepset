@@ -2,7 +2,7 @@
   "aliases": [
     "sheriff-foreclosure-sales"
   ],
-  "category": "or/v1",
+  "category": "tasks/v1",
   "citations": [],
   "crosswalk": {
     "oneWay": [],
@@ -44,7 +44,7 @@
       }
     ],
     "source": "geojson",
-    "target": "or/v1"
+    "target": "tasks/v1"
   },
   "description": "Sheriff foreclosure sales in Dakota County, Minnesota, with sale amounts and dates for 2025.",
   "domain": "Case records",

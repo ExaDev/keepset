@@ -2,7 +2,7 @@
   "aliases": [
     "park-and-loop-routing-cabrera-2021"
   ],
-  "category": "or/v1",
+  "category": "tasks/v1",
   "citations": [],
   "crosswalk": {
     "oneWay": [],
@@ -34,7 +34,7 @@
       }
     ],
     "source": "csv-table",
-    "target": "or/v1"
+    "target": "tasks/v1"
   },
   "description": "Park-and-loop routing instances built from real client locations in France, with coordinates and service times in minutes.",
   "domain": "Vehicle routing with time windows",

@@ -2,7 +2,7 @@
   "aliases": [
     "vacant-foreclosed-property-registration"
   ],
-  "category": "or/v1",
+  "category": "tasks/v1",
   "citations": [],
   "crosswalk": {
     "oneWay": [],
@@ -49,7 +49,7 @@
       }
     ],
     "source": "csv-table",
-    "target": "or/v1"
+    "target": "tasks/v1"
   },
   "description": "Vacant and foreclosed property registrations in Cincinnati, Ohio, with location, case status and neighbourhood.",
   "domain": "Case records",

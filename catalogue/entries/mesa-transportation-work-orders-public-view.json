@@ -2,7 +2,7 @@
   "aliases": [
     "transportation-work-orders-public-view"
   ],
-  "category": "or/v1",
+  "category": "tasks/v1",
   "citations": [],
   "crosswalk": {
     "oneWay": [],
@@ -59,7 +59,7 @@
       }
     ],
     "source": "csv-table",
-    "target": "or/v1"
+    "target": "tasks/v1"
   },
   "description": "Transportation work orders raised and closed by the City of Mesa, with location, category, cost, status and dates.",
   "domain": "Technician and home-care routing",

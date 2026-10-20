@@ -2,7 +2,7 @@
   "aliases": [
     "vehicle-towing"
   ],
-  "category": "or/v1",
+  "category": "tasks/v1",
   "citations": [],
   "crosswalk": {
     "oneWay": [],
@@ -44,7 +44,7 @@
       }
     ],
     "source": "csv-table",
-    "target": "or/v1"
+    "target": "tasks/v1"
   },
   "description": "Vehicles towed in the City of Norfolk, Virginia, with tow type, release status, fees and dates.",
   "domain": "Case records",

@@ -2,10 +2,10 @@
   "aliases": [
     "expiation-notice-system-data"
   ],
-  "category": "or/v1",
+  "category": "tasks/v1",
   "citations": [],
   "crosswalk": {
-    "file": "crosswalks/or-v1/nodes.json"
+    "file": "crosswalks/tasks-v1/nodes.json"
   },
   "description": "Expiation notices issued in South Australia, published as one report per financial year and report type.",
   "domain": "Case records",

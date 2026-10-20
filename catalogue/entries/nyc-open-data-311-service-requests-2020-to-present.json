@@ -2,10 +2,10 @@
   "aliases": [
     "311-service-requests-2020-to-present"
   ],
-  "category": "or/v1",
+  "category": "tasks/v1",
   "citations": [],
   "crosswalk": {
-    "file": "crosswalks/or-v1/nodes.json"
+    "file": "crosswalks/tasks-v1/nodes.json"
   },
   "description": "New York City 311 service requests from 2020, with agency, complaint type, location, status and dates.",
   "domain": "Civic and environmental monitoring",

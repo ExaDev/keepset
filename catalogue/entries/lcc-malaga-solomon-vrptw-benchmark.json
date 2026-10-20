@@ -2,7 +2,7 @@
   "aliases": [
     "solomon-vrptw-benchmark"
   ],
-  "category": "or/v1",
+  "category": "tasks/v1",
   "citations": [],
   "crosswalk": {
     "oneWay": [],
@@ -49,7 +49,7 @@
       }
     ],
     "source": "solomon",
-    "target": "or/v1"
+    "target": "tasks/v1"
   },
   "description": "Solomon's 1983 vehicle routing instances with time windows (C1, C2, R1, R2, RC1, RC2), each with 100 customers.",
   "domain": "Vehicle routing with time windows",

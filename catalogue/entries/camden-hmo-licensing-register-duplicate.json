@@ -2,10 +2,10 @@
   "aliases": [
     "hmo-licensing-register-duplicate"
   ],
-  "category": "or/v1",
+  "category": "tasks/v1",
   "citations": [],
   "crosswalk": {
-    "file": "crosswalks/or-v1/nodes.json"
+    "file": "crosswalks/tasks-v1/nodes.json"
   },
   "domain": "Case records",
   "expectedCounts": {},

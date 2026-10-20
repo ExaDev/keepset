@@ -2,7 +2,7 @@
   "aliases": [
     "sheriff-evictions-san-diego-county"
   ],
-  "category": "or/v1",
+  "category": "tasks/v1",
   "citations": [],
   "crosswalk": {
     "oneWay": [],
@@ -39,7 +39,7 @@
       }
     ],
     "source": "geojson",
-    "target": "or/v1"
+    "target": "tasks/v1"
   },
   "description": "Sheriff eviction records for San Diego County, California, from a 2024 layer attributed to the University of California San Diego.",
   "domain": "Case records",

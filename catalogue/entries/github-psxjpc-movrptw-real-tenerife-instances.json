@@ -2,7 +2,7 @@
   "aliases": [
     "movrptw-real-tenerife-instances"
   ],
-  "category": "or/v1",
+  "category": "tasks/v1",
   "citations": [],
   "crosswalk": {
     "oneWay": [],
@@ -49,7 +49,7 @@
       }
     ],
     "source": "solomon",
-    "target": "or/v1"
+    "target": "tasks/v1"
   },
   "description": "Multi-objective vehicle routing instances with time windows built from real distribution data in Tenerife.",
   "domain": "Vehicle routing with time windows",
