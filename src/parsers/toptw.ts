@@ -4,6 +4,9 @@ import { lines, type NativeInstance, type NativeRow } from "./native";
 /** The columns of a node of a TOPTW file, as the parser names them: the position, the service duration, the profit, and the opening and closing of the time window. */
 export const TOPTW_COLUMNS = ["x", "y", "service", "profit", "open", "close"] as const;
 
+/** The columns whose values are text; the others are numbers. Every column of a TOPTW file is a number. */
+export const TOPTW_TEXT_COLUMNS = [] as const;
+
 /** The metadata keys the parser reads: the number of paths the tour is split into, the number of customers and the vehicle capacity. */
 export const TOPTW_META = ["paths", "customers", "capacity"] as const;
 

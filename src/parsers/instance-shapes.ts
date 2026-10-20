@@ -1,15 +1,19 @@
 import type { Parser } from "../entry";
-import { SOLOMON_COLUMNS, SOLOMON_META } from "./solomon";
-import { TOP_COLUMNS, TOP_META } from "./top";
-import { TSPLIB_COLUMNS, TSPLIB_META } from "./tsplib";
-import { TOPTW_COLUMNS, TOPTW_META } from "./toptw";
+import { SOLOMON_COLUMNS, SOLOMON_META, SOLOMON_TEXT_COLUMNS } from "./solomon";
+import { TOP_COLUMNS, TOP_META, TOP_TEXT_COLUMNS } from "./top";
+import { TSPLIB_COLUMNS, TSPLIB_META, TSPLIB_TEXT_COLUMNS } from "./tsplib";
+import { VEROLOG_2019_COLUMNS, VEROLOG_2019_META, VEROLOG_2019_TEXT_COLUMNS } from "./verolog-2019";
+import { VRP_REP_COLUMNS, VRP_REP_META, VRP_REP_TEXT_COLUMNS } from "./vrp-rep";
+import { TOPTW_COLUMNS, TOPTW_META, TOPTW_TEXT_COLUMNS } from "./toptw";
 
-/** What each instance file parser emits, by its format name: the columns of a node (besides its `id`) and the keys of the instance's own `meta`. A recipe's crosswalk maps these, and the seed import checks a curation against them. */
+/** What each instance file parser emits, by its format name: the columns of a node (besides its `id`), which of them hold text and not numbers, and the keys of the instance's own `meta`. A recipe's crosswalk maps these, and the seed import checks a curation against them. */
 export const INSTANCE_SHAPES = {
-  solomon: { columns: SOLOMON_COLUMNS, meta: SOLOMON_META },
-  top: { columns: TOP_COLUMNS, meta: TOP_META },
-  tsplib: { columns: TSPLIB_COLUMNS, meta: TSPLIB_META },
-  toptw: { columns: TOPTW_COLUMNS, meta: TOPTW_META },
+  solomon: { columns: SOLOMON_COLUMNS, text: SOLOMON_TEXT_COLUMNS, meta: SOLOMON_META },
+  top: { columns: TOP_COLUMNS, text: TOP_TEXT_COLUMNS, meta: TOP_META },
+  "verolog-2019": { columns: VEROLOG_2019_COLUMNS, text: VEROLOG_2019_TEXT_COLUMNS, meta: VEROLOG_2019_META },
+  "vrp-rep": { columns: VRP_REP_COLUMNS, text: VRP_REP_TEXT_COLUMNS, meta: VRP_REP_META },
+  tsplib: { columns: TSPLIB_COLUMNS, text: TSPLIB_TEXT_COLUMNS, meta: TSPLIB_META },
+  toptw: { columns: TOPTW_COLUMNS, text: TOPTW_TEXT_COLUMNS, meta: TOPTW_META },
 } as const;
 
 /** The format names of the instance file parsers. */

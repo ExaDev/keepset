@@ -4,6 +4,9 @@ import { lines, type NativeInstance, type NativeRow } from "./native";
 /** The columns of a node of a TSPLIB orienteering file, as the parser names them. `x` and `y` are planar coordinates (`CEIL_2D`, `EUC_2D`, `ATT`), `lat` and `lon` decimal degrees (`GEO`), `prize` and `probability` the node's prize and the chance it is collected (a probabilistic orienteering file), and `clusters` the ids of the sets the node belongs to, comma separated (a clustered orienteering file). A column a file has no data for is null in every row, so every row has every column. */
 export const TSPLIB_COLUMNS = ["x", "y", "lat", "lon", "prize", "probability", "clusters"] as const;
 
+/** The columns whose values are text; the others are numbers. */
+export const TSPLIB_TEXT_COLUMNS = ["clusters"] as const;
+
 /** The metadata keys the parser reads: the instance's name and type, its travel budget, the weight type its coordinates are in, the sum of its prizes (probabilistic files) and its sets with their prizes as `id:prize` pairs (clustered files). A key a file does not have is null. */
 export const TSPLIB_META = ["name", "type", "budget", "edgeWeightType", "totalPrize", "setPrizes"] as const;
 
