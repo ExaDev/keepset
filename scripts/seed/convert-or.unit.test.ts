@@ -292,7 +292,6 @@ describe("convertItem for a collection of instance files", () => {
     parser: { format: "solomon", encoding: "utf-8" },
     map: { x: "x", y: "y", deadline: "due" },
     keep: ["demand", "service"],
-    meta: ["name", "capacity"],
     timeUnit: "abstract units",
     expectedInstances: 2,
   };
@@ -312,9 +311,9 @@ describe("convertItem for a collection of instance files", () => {
     { path: "suite/notes.md", text: "not an instance" },
   ]);
 
-  it("makes an or-set/v1 entry whose recipe selects the members, with the fixed count and the time unit recorded", () => {
+  it("makes an or/v1 entry whose recipe selects the members, with the fixed count and the time unit recorded", () => {
     const { entry, outcome } = convertItem(item ?? expect.unreachable("the fixture survey has an item"), curated(collection), "2026-10-19");
-    expect(entry.category).toBe("or-set/v1");
+    expect(entry.category).toBe("or/v1");
     expect(entry.recipe).toEqual({ status: "fetchable", source: 0, archive: collection.archive, parser: collection.parser });
     expect(entry.expectedCounts).toEqual({ instances: 2 });
     expect(entry.properties).toEqual({ surveyId: "or-10", timeUnit: "abstract units" });
@@ -331,16 +330,13 @@ describe("convertItem for a collection of instance files", () => {
     const { entry } = convertItem(item ?? expect.unreachable("the fixture survey has an item"), curated(collection), "2026-10-19");
     expect(entry.crosswalk).toMatchObject({
       source: "solomon",
-      target: "or-set/v1",
-      oneWay: [
-        { op: "drop", from: "members[].meta.vehicles", direction: "encode" },
-        { op: "drop", from: "members[].nodes[].ready", direction: "encode" },
-      ],
+      target: "or/v1",
+      oneWay: [{ op: "drop", from: "nodes[].ready", direction: "encode" }],
     });
     const { crosswalk } = entry;
     const rules = "rules" in crosswalk ? crosswalk.rules : expect.unreachable("the entry carries its crosswalk inline");
-    expect(rules).toContainEqual({ op: "move", from: "members[].nodes[].due", to: "instances[].nodes[].deadline" });
-    expect(rules).toContainEqual({ op: "move", from: "members[].nodes[].demand", to: "instances[].nodes[].demand" });
+    expect(rules).toContainEqual({ op: "move", from: "nodes[].due", to: "nodes[].deadline" });
+    expect(rules).toContainEqual({ op: "move", from: "nodes[].demand", to: "nodes[].demand" });
   });
 
   it("fetches the members as instances and holds the round trip", async () => {
@@ -352,10 +348,10 @@ describe("convertItem for a collection of instance files", () => {
     expect(fetched.data).toEqual({
       meta: { id: "example-suite", name: "Suite", surveyId: "or-10", timeUnit: "abstract units" },
       instances: [
-        { id: "suite/A1.txt", meta: { name: "A1", capacity: 100 }, nodes: [{ id: "0", x: 5, y: 6, deadline: 90, demand: 0, service: 0 }] },
+        { id: "suite/A1.txt", meta: { name: "A1", vehicles: 3, capacity: 100 }, nodes: [{ id: "0", x: 5, y: 6, deadline: 90, demand: 0, service: 0 }] },
         {
           id: "suite/B1.txt",
-          meta: { name: "B1", capacity: 100 },
+          meta: { name: "B1", vehicles: 3, capacity: 100 },
           nodes: [
             { id: "0", x: 1, y: 2, deadline: 90, demand: 0, service: 0 },
             { id: "1", x: 3, y: 4, deadline: 20, demand: 5, service: 7 },
@@ -366,22 +362,20 @@ describe("convertItem for a collection of instance files", () => {
     expect(await roundTripEntry(dataset, { fetch })).toMatchObject({ holds: true });
   });
 
-  it("refuses a column the parser does not emit, a text field, a column used twice, a field-named kept column, no column at all and a bad meta key", () => {
+  it("refuses a column the parser does not emit, a text field, a column used twice, a field-named kept column and no column at all", () => {
     expect(failure({ ...collection, map: { x: "x", y: "latitude" } })).toMatch(/y maps the column latitude, which the solomon parser does not emit \(it emits x, y, demand, ready, due, service\)/);
     expect(failure({ ...collection, map: { x: "x", status: "due" } })).toMatch(/status is text but due is a number/);
-    expect(failure({ ...collection, parser: { format: "tsplib", encoding: "utf-8" }, map: { x: "x", prize: "clusters" }, keep: [], meta: ["name"] })).toMatch(/prize is a number but clusters is text/);
+    expect(failure({ ...collection, parser: { format: "tsplib", encoding: "utf-8" }, map: { x: "x", prize: "clusters" }, keep: [] })).toMatch(/prize is a number but clusters is text/);
     expect(failure({ ...collection, keep: ["x"], map: { y: "y" } })).toMatch(/keep names x, which is an or\/v1 field: map it instead/);
     expect(failure({ ...collection, keep: ["demand", "demand"] })).toMatch(/demand is mapped or kept more than once/);
     expect(failure({ ...collection, map: { x: "x", y: "x" } })).toMatch(/the column x fills more than one field/);
     expect(failure({ ...collection, map: {}, keep: [] })).toMatch(/maps and keeps no column/);
     expect(failure({ ...collection, keep: ["weight"] })).toMatch(/keep names weight, which the solomon parser does not emit/);
-    expect(failure({ ...collection, meta: ["name", "colour"] })).toMatch(/meta names colour/);
-    expect(failure({ ...collection, meta: ["name", "name"] })).toMatch(/meta lists a key more than once/);
   });
 
-  it("refuses a parser that is not an instance file parser, and header keys on an archive that selects one member", () => {
+  it("refuses a parser that is not an instance file parser, and a meta list, which the header values no longer need", () => {
     expect(() => curated({ ...collection, parser: { format: "gml", encoding: "utf-8" } })).toThrow(/must be an instance file parser/);
-    expect(failure({ ...collection, archive: { kind: "zip", member: { extensions: [".txt"] } } })).toMatch(/a single file's header values are all carried in the entry's meta/);
+    expect(() => curated({ ...collection, meta: ["name"] })).toThrow(/unrecognized/i);
   });
 });
 
@@ -413,13 +407,13 @@ describe("convertItem for a collection of table files", () => {
     { path: "readme.txt", text: "not a table" },
   ]);
 
-  it("makes an or-set/v1 entry that reads each matching file as a table and moves each instance's columns onto the node fields", () => {
+  it("makes an or/v1 entry that reads each matching file as a table and moves each member's columns onto the node fields", () => {
     const entry = entryOf(tables);
-    expect(entry.category).toBe("or-set/v1");
+    expect(entry.category).toBe("or/v1");
     expect(entry.recipe).toMatchObject({ status: "fetchable", archive: tables.archive, parser: { format: "csv-table", idColumn: "ID", columns: ["ServiceTime_min", "Latitude", "Longitude"] } });
     expect(entry.expectedCounts).toEqual({ instances: 2 });
     expect(entry.properties).toEqual({ surveyId: "or-10", timeUnit: "seconds" });
-    expect(entry.crosswalk).toMatchObject({ source: "csv-table", target: "or-set/v1", oneWay: [] });
+    expect(entry.crosswalk).toMatchObject({ source: "csv-table", target: "or/v1", oneWay: [] });
   });
 
   it("fetches the files as instances in path order, scales minutes to seconds and holds the round trip", async () => {
@@ -458,7 +452,6 @@ describe("convertItem for one instance file", () => {
     parser: { format: "customer-points", encoding: "utf-8" },
     map: { x: "x", y: "y" },
     keep: [],
-    meta: [],
     expectedNodes: 2,
   };
   const curated = (outcome: Record<string, unknown>): Parameters<typeof convertItem>[1] => CurationItemSchema.parse({ surveyId: "or-10", id: "example-customers", namespace: "example", name: "Customers", licence: { kind: "unrecorded" }, flags: [], outcome });
@@ -492,11 +485,8 @@ describe("convertItem for one instance file", () => {
     expect(await roundTripEntry(dataset, { fetch })).toMatchObject({ holds: true });
   });
 
-  it("refuses header keys listed for a single file, instance counts on it, node counts on a collection and a collection with no header key", () => {
-    expect(failure({ ...single, meta: ["customers"] })).toMatch(/a single file's header values are all carried in the entry's meta, so its meta list is empty/);
+  it("refuses instance counts on a single file and node counts on a collection", () => {
     expect(failure({ ...single, expectedInstances: 1 })).toMatch(/a single file is one instance and has no expectedInstances/);
-    const collection = { ...single, archive: { kind: "zip", members: { extensions: [".txt"] } }, meta: ["customers"] };
-    expect(failure({ ...collection, expectedNodes: 2 })).toMatch(/a collection counts instances, not nodes/);
-    expect(failure({ ...collection, meta: [] })).toMatch(/a collection's meta carries at least one header key/);
+    expect(failure({ ...single, archive: { kind: "zip", members: { extensions: [".txt"] } } })).toMatch(/a collection counts instances, not nodes/);
   });
 });

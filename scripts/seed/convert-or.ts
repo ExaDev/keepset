@@ -193,25 +193,16 @@ function checkFetchable(id: string, outcome: TableOutcome): void {
  * @throws Error when twindex finds the crosswalk structurally invalid.
  */
 function crosswalkOf(outcome: TableOutcome): Crosswalk {
-  const collection = outcome.status === "fetchable-table-collection";
-  const from = collection ? "members[].nodes[]" : "nodes[]";
-  const to = collection ? "instances[].nodes[]" : "nodes[]";
   const crosswalk = {
     source: outcome.status === "fetchable-arcgis" ? "geojson" : "csv-table",
-    target: collection ? "or-set/v1" : "or/v1",
+    target: "or/v1",
     rules: [
       { op: "move", from: "meta", to: "meta" },
-      ...(collection
-        ? [
-            { op: "move", from: "members[].id", to: "instances[].id" },
-            { op: "move", from: "members[].meta", to: "instances[].meta" },
-          ]
-        : []),
-      { op: "move", from: `${from}.id`, to: `${to}.id` },
+      { op: "move", from: "nodes[].id", to: "nodes[].id" },
       ...TARGET_FIELD_NAMES.flatMap((field) => {
         const column = outcome.map[field];
 
-        return column === undefined ? [] : [{ op: "move", from: `${from}.${column}`, to: `${to}.${field}` }];
+        return column === undefined ? [] : [{ op: "move", from: `nodes[].${column}`, to: `nodes[].${field}` }];
       }),
     ],
   };
@@ -225,14 +216,14 @@ function crosswalkOf(outcome: TableOutcome): Crosswalk {
 }
 
 /**
- * Whether an instance files outcome reads a collection of files (an or-set/v1 entry) and not one file.
+ * Whether an instance files outcome reads a collection of files (its archive selects `members`) and not one file.
  * @param outcome - The outcome.
  * @returns True when its archive selects members.
  */
 const readsCollection = (outcome: InstanceFilesOutcome): boolean => "members" in outcome.archive;
 
 /**
- * Checks an instance files outcome against the rules that keep a recipe sound: the columns and header keys it names are ones its parser emits, a column is mapped or kept at most once, a kept column does not take the name of an or/v1 node field (a column that fills a field of its own name is mapped, so what fills each field is written in one place), every column of an instance file is a number so none fills a text field, and a collection's instance meta carries at least one header key while a single file's carries none (all its header values go in the entry's meta).
+ * Checks an instance files outcome against the rules that keep a recipe sound: the columns and header keys it names are ones its parser emits, a column is mapped or kept at most once, a kept column does not take the name of an or/v1 node field (a column that fills a field of its own name is mapped, so what fills each field is written in one place), every column of an instance file is a number so none fills a text field, and the counts it records fit its shape (instances for a collection, nodes for a single file).
  * @param id - The surveyed item's id, for errors.
  * @param outcome - The outcome.
  * @throws Error naming the item and the rule it breaks.
@@ -280,59 +271,37 @@ function checkInstanceFiles(id: string, outcome: InstanceFilesOutcome): void {
   if (used.size === 0) {
     fail("the outcome maps and keeps no column, so a fetch would carry nothing beyond ids");
   }
-  const keys: readonly string[] = shape.meta;
-  if (readsCollection(outcome) && outcome.meta.length === 0) {
-    fail("a collection's meta carries at least one header key, since an instance has a meta record");
-  }
-  if (!readsCollection(outcome) && outcome.meta.length > 0) {
-    fail("a single file's header values are all carried in the entry's meta, so its meta list is empty");
-  }
   if (!readsCollection(outcome) && outcome.expectedInstances !== undefined) {
     fail("a single file is one instance and has no expectedInstances");
   }
   if (readsCollection(outcome) && outcome.expectedNodes !== undefined) {
     fail("a collection counts instances, not nodes");
   }
-  for (const key of outcome.meta) {
-    if (!keys.includes(key)) {
-      fail(`meta names ${key}, which the ${outcome.parser.format} parser does not emit (it emits ${keys.join(", ")})`);
-    }
-  }
-  if (new Set(outcome.meta).size !== outcome.meta.length) {
-    fail("meta lists a key more than once");
-  }
 }
 
 /**
- * The crosswalk of an instance files outcome: for a collection each member becomes an instance, its id and the header keys the outcome carries move across; for a single file the entry's meta moves whole; and each node column is mapped onto its field, kept under its own name or dropped by a one-way rule, so the round trip holds.
+ * The crosswalk of an instance files outcome, which is the same for a single file and for each member of a collection: the document's meta (the file's header values and, for a single file, the entry's) moves whole, and each node column is mapped onto its field, kept under its own name or dropped by a one-way rule, so the round trip holds.
  * @param outcome - The outcome.
  * @returns The crosswalk document.
  * @throws Error when twindex finds the crosswalk structurally invalid.
  */
 function instanceFilesCrosswalkOf(outcome: InstanceFilesOutcome): Crosswalk {
   const shape = INSTANCE_SHAPES[outcome.parser.format];
-  const collection = readsCollection(outcome);
-  const from = collection ? "members[].nodes[]" : "nodes[]";
-  const to = collection ? "instances[].nodes[]" : "nodes[]";
   const mapped = new Map(TARGET_FIELD_NAMES.flatMap((field) => (outcome.map[field] === undefined ? [] : [[outcome.map[field], field] as const])));
   const crosswalk = {
     source: outcome.parser.format,
-    target: collection ? "or-set/v1" : "or/v1",
+    target: "or/v1",
     rules: [
       { op: "move", from: "meta", to: "meta" },
-      ...(collection ? [{ op: "move", from: "members[].id", to: "instances[].id" }, ...outcome.meta.map((key) => ({ op: "move", from: `members[].meta.${key}`, to: `instances[].meta.${key}` }))] : []),
-      { op: "move", from: `${from}.id`, to: `${to}.id` },
+      { op: "move", from: "nodes[].id", to: "nodes[].id" },
       ...TARGET_FIELD_NAMES.flatMap((field) => {
         const column = outcome.map[field];
 
-        return column === undefined ? [] : [{ op: "move", from: `${from}.${column}`, to: `${to}.${field}` }];
+        return column === undefined ? [] : [{ op: "move", from: `nodes[].${column}`, to: `nodes[].${field}` }];
       }),
-      ...outcome.keep.map((column) => ({ op: "move", from: `${from}.${column}`, to: `${to}.${column}` })),
+      ...outcome.keep.map((column) => ({ op: "move", from: `nodes[].${column}`, to: `nodes[].${column}` })),
     ],
-    oneWay: [
-      ...(collection ? shape.meta.filter((key) => !outcome.meta.includes(key)).map((key) => ({ op: "drop", from: `members[].meta.${key}`, direction: "encode" })) : []),
-      ...shape.columns.filter((column) => !mapped.has(column) && !outcome.keep.includes(column)).map((column) => ({ op: "drop", from: `${from}.${column}`, direction: "encode" })),
-    ],
+    oneWay: shape.columns.filter((column) => !mapped.has(column) && !outcome.keep.includes(column)).map((column) => ({ op: "drop", from: `nodes[].${column}`, direction: "encode" })),
   };
   const parsed = CrosswalkSchema.parse(crosswalk);
   const issues = validateCrosswalk(parsed);
@@ -433,7 +402,7 @@ export function convertItem(item: SurveyEntry, curation: CurationItem, probedOn:
     ...(curation.description === undefined ? {} : { description: curation.description }),
     domain: domainOf(item),
     tags: [...new Set(item.fields)],
-    category: (outcome.status === "fetchable-instance-files" && readsCollection(outcome)) || outcome.status === "fetchable-table-collection" ? "or-set/v1" : "or/v1",
+    category: "or/v1",
     sources,
     licence: curation.licence,
     citations: [],
