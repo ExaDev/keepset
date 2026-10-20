@@ -1,3 +1,10 @@
+## [0.27.1](https://github.com/Mearman/keepset/compare/v0.27.0...v0.27.1) (2026-10-20)
+
+
+### Bug Fixes
+
+* **exports:** export the or-set/v1 target and the collection types ([8af8616](https://github.com/Mearman/keepset/commit/8af861626ca9e382be9e58f206074f6b55f5bded))
+
 # [0.27.0](https://github.com/Mearman/keepset/compare/v0.26.0...v0.27.0) (2026-10-20)
 
 
