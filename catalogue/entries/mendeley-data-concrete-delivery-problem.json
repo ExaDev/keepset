@@ -3,10 +3,16 @@
     "concrete-delivery-problem"
   ],
   "category": "tasks/v1",
-  "citations": [],
+  "citations": [
+    {
+      "doi": "10.1016/j.dib.2023.109189",
+      "text": "A. Tzanetos, M. Blondin (2023). Real operational data for the concrete delivery problem. Data in Brief 48, 109189."
+    }
+  ],
   "crosswalk": {
     "file": "crosswalks/tasks-v1/nodes.json"
   },
+  "description": "Daily concrete orders from construction sites in Quebec, supplied by a concrete producer and processed into instances for the concrete delivery problem, with client and site information anonymised.",
   "domain": "Technician and home-care routing",
   "expectedCounts": {},
   "id": "mendeley-data-concrete-delivery-problem",

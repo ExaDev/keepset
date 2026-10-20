@@ -3,10 +3,16 @@
     "informs-tsl-dispatch-waybill"
   ],
   "category": "tasks/v1",
-  "citations": [],
+  "citations": [
+    {
+      "text": "H. Wang, L. Zhao, K. Yan, X. Wang, Y. Liang, J. Hao (2025). Meituan: Operational-level on-demand food delivery data for the 2025 INFORMS TSL Data-Driven Research Challenge.",
+      "url": "https://github.com/meituan/Meituan-INFORMS-TSL-Research-Challenge"
+    }
+  ],
   "crosswalk": {
     "file": "crosswalks/tasks-v1/nodes.json"
   },
+  "description": "Operational data from Meituan's on-demand food delivery platform for the 2025 INFORMS TSL Data-Driven Research Challenge, covering orders, couriers and merchants, with the waybill and wave records of how orders were dispatched.",
   "domain": "Last-mile logistics",
   "expectedCounts": {},
   "id": "github-meituan-informs-tsl-dispatch-waybill",

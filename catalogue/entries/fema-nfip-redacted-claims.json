@@ -41,6 +41,7 @@
     "source": "csv-table",
     "target": "tasks/v1"
   },
+  "description": "Flood insurance claim transactions of the National Flood Insurance Program, redacted to protect policyholders' personal information, with claim dates, rounded locations and amounts paid. FEMA publishes it through the OpenFEMA API.",
   "domain": "Claims and unclaimed money",
   "expectedCounts": {},
   "id": "fema-nfip-redacted-claims",

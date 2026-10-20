@@ -3,7 +3,15 @@
     "toptw-righini-instances"
   ],
   "category": "tasks/v1",
-  "citations": [],
+  "citations": [
+    {
+      "text": "G. Righini, M. Salani (2006). Dynamic programming for the orienteering problem with time windows. Technical Report 91, Dipartimento di Tecnologie dell'Informazione, Universita degli Studi di Milano, Crema."
+    },
+    {
+      "doi": "10.1002/net.20212",
+      "text": "G. Righini, M. Salani (2008). New dynamic programming algorithms for the resource constrained elementary shortest path problem. Networks 51(3), 155-170."
+    }
+  ],
   "crosswalk": {
     "oneWay": [],
     "rules": [

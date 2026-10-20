@@ -61,6 +61,7 @@
     "source": "verolog-2019",
     "target": "tasks/v1"
   },
+  "description": "A student repository holding the instances ORTEC published for the VeRoLog Solver Challenge 2019, in which trucks deliver machines to customers and technicians then install them within a window of days.",
   "domain": "Technician and home-care routing",
   "expectedCounts": {
     "instances": 27

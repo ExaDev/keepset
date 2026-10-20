@@ -3,7 +3,12 @@
     "pharmaceutical-last-mile-delivery"
   ],
   "category": "tasks/v1",
-  "citations": [],
+  "citations": [
+    {
+      "doi": "10.1016/j.dib.2025.111762",
+      "text": "A. Vrani, S. D. Apostolidis, A. C. Kapoutsis, E. B. Kosmatopoulos (2025). Delivering data: A real-world dataset for last-mile delivery optimization. Data in Brief 61, 111762."
+    }
+  ],
   "crosswalk": {
     "file": "crosswalks/tasks-v1/nodes.json"
   },

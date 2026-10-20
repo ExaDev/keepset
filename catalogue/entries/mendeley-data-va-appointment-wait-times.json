@@ -3,7 +3,12 @@
     "va-appointment-wait-times"
   ],
   "category": "tasks/v1",
-  "citations": [],
+  "citations": [
+    {
+      "doi": "10.1016/j.dib.2021.107134",
+      "text": "Y. Feyman, A. Legler, K. N. Griffith (2021). Appointment wait time data for primary & specialty care in Veterans Health Administration facilities vs. community medical centers. Data in Brief 36, 107134."
+    }
+  ],
   "crosswalk": {
     "file": "crosswalks/tasks-v1/nodes.json"
   },

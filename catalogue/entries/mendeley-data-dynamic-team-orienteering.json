@@ -3,10 +3,20 @@
     "dynamic-team-orienteering"
   ],
   "category": "tasks/v1",
-  "citations": [],
+  "citations": [
+    {
+      "doi": "10.1016/j.ejor.2025.01.009",
+      "text": "E. Kirac, A. B. Milburn, R. Gedik (2025). The dynamic team orienteering problem. European Journal of Operational Research 324(1), 22-39."
+    },
+    {
+      "doi": "10.17632/xnf6c4d5gt.1",
+      "text": "E. Kirac (2025). Dynamic Team Orienteering Problem (DTOP) Benchmark Instances. Mendeley Data, V1."
+    }
+  ],
   "crosswalk": {
     "file": "crosswalks/tasks-v1/nodes.json"
   },
+  "description": "Mendeley Data deposit for the dynamic team orienteering problem of Kirac, Milburn and Gedik, described as benchmark instances adapted from the Chao et al. team orienteering instances at weak, moderate and high dynamism.",
   "domain": "Orienteering",
   "expectedCounts": {},
   "id": "mendeley-data-dynamic-team-orienteering",

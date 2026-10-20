@@ -1,6 +1,20 @@
 {
   "items": [
     {
+      "citations": [
+        {
+          "text": "T. Tsiligirides (1984). Heuristic methods applied to orienteering. Journal of the Operational Research Society 35(9), 797-809.",
+          "doi": "10.1057/jors.1984.162"
+        },
+        {
+          "text": "I.-M. Chao, B. L. Golden, E. A. Wasil (1996). The team orienteering problem. European Journal of Operational Research 88(3), 464-474.",
+          "doi": "10.1016/0377-2217(94)00289-4"
+        },
+        {
+          "text": "I.-M. Chao, B. L. Golden, E. A. Wasil (1996). A fast and effective heuristic for the orienteering problem. European Journal of Operational Research 88(3), 475-489.",
+          "doi": "10.1016/0377-2217(95)00035-6"
+        }
+      ],
       "description": "Benchmark instances for the team orienteering problem, with node coordinates and scores, from the KU Leuven orienteering page.",
       "downloadUrl": "https://www.mech.kuleuven.be/en/mim/op/instances/ChaoTOP4",
       "flags": [
@@ -42,6 +56,15 @@
       "surveyId": "or-0"
     },
     {
+      "citations": [
+        {
+          "text": "G. Righini, M. Salani (2006). Dynamic programming for the orienteering problem with time windows. Technical Report 91, Dipartimento di Tecnologie dell'Informazione, Universita degli Studi di Milano, Crema."
+        },
+        {
+          "text": "G. Righini, M. Salani (2008). New dynamic programming algorithms for the resource constrained elementary shortest path problem. Networks 51(3), 155-170.",
+          "doi": "10.1002/net.20212"
+        }
+      ],
       "description": "Benchmark instances for the orienteering problem with time windows, with coordinates, service durations, scores and time windows.",
       "downloadUrl": "https://www.mech.kuleuven.be/en/mim/op/instances/righiniTOPTW1",
       "flags": [
@@ -86,6 +109,12 @@
       "surveyId": "or-1"
     },
     {
+      "citations": [
+        {
+          "text": "N. Cabrera, J.-F. Cordeau, J. E. Mendoza (2022). The doubly open park-and-loop routing problem. Computers & Operations Research 143, 105761.",
+          "doi": "10.1016/j.cor.2022.105761"
+        }
+      ],
       "description": "Park-and-loop routing instances built from real client locations in France, with coordinates and service times in minutes.",
       "downloadUrl": "https://www.vrp-rep.org/datasets/download/cabrera-et-al-2021.zip",
       "flags": [
@@ -635,6 +664,12 @@
       "surveyId": "or-109"
     },
     {
+      "citations": [
+        {
+          "text": "O. Demiray, E. Yucel, D. Tolga (2026). DWSRP-TW-SC Datasets. Mendeley Data, V1.",
+          "doi": "10.17632/dbsf73xpg5.1"
+        }
+      ],
       "description": "Instances for dynamic workforce scheduling and routing with time windows and skills, one spreadsheet per instance.",
       "downloadUrl": "https://data.mendeley.com/public-files/datasets/dbsf73xpg5/files/ec062606-6750-4b98-93b4-a733ff5574e7/file_downloaded",
       "flags": [
@@ -1418,6 +1453,7 @@
       "surveyId": "or-12"
     },
     {
+      "description": "Every severe flood warning, flood warning and flood alert the Environment Agency has issued for flooding from rivers, the sea and some groundwater sites since the warning system began in January 2006.",
       "flags": [
         "Survey URL is a landing page and the named zip was not reachable, so its contents are unseen."
       ],
@@ -1484,6 +1520,8 @@
       "surveyId": "or-121"
     },
     {
+      "description": "Flood insurance claim transactions of the National Flood Insurance Program, redacted to protect policyholders' personal information, with claim dates, rounded locations and amounts paid. FEMA publishes it through the OpenFEMA API.",
+      "downloadUrl": "https://www.fema.gov/api/open/v3/NfipClaims?$select=id,openDate,latitude,longitude,amountPaidOnBuildingClaim",
       "flags": [
         "the survey dataset (v2) is deprecated and frozen, so the recipe reads the live v3 NfipClaims entity through the OpenFEMA API, which pages anonymously; the bulk files answer an access denied page to automated requests",
         "the terms of use limit the data to statistical research or a reporting record, forbid reidentifying the individuals it aggregates and ask for an attribution statement, so they travel with the entry as its licence",
@@ -1534,8 +1572,7 @@
           "opened": "openDate"
         }
       },
-      "surveyId": "or-122",
-      "downloadUrl": "https://www.fema.gov/api/open/v3/NfipClaims?$select=id,openDate,latitude,longitude,amountPaidOnBuildingClaim"
+      "surveyId": "or-122"
     },
     {
       "description": "Dallas Fire-Rescue building fire incidents for fiscal year 2020 with structure type, cause, values and losses.",
@@ -1600,6 +1637,7 @@
       "surveyId": "or-123"
     },
     {
+      "description": "The Public Trustee of Queensland's register of unclaimed money from deceased estates and from other sources, with the owner, the amount and the postcode.",
       "downloadUrl": "https://www.data.qld.gov.au/datastore/dump/872065ae-ddfd-4b5f-ad15-e1935dadd883",
       "flags": [
         "Records name individuals and deceased-estate owners, so the table is personal data.",
@@ -1980,6 +2018,17 @@
       "surveyId": "or-15"
     },
     {
+      "citations": [
+        {
+          "text": "M. Bazirha (2020). Data for: Home health care routing and scheduling problem with multiple time windows and multiple synchronized services. Mendeley Data, V1.",
+          "doi": "10.17632/hp3xftsrfx.1"
+        },
+        {
+          "text": "D. S. Mankowska, F. Meisel, C. Bierwirth (2014). The home health care routing and scheduling problem with interdependent services. Health Care Management Science 17(1), 15-30.",
+          "doi": "10.1007/s10729-013-9243-1"
+        }
+      ],
+      "description": "Random instances for the home health care routing and scheduling problem with multiple time windows and multiple synchronised services, generated from the benchmark instances of Mankowska et al.",
       "flags": [
         "The instances appear to be travel-time matrices and tables without coordinates."
       ],
@@ -1997,6 +2046,17 @@
       "surveyId": "or-16"
     },
     {
+      "citations": [
+        {
+          "text": "D. S. Mankowska, F. Meisel, C. Bierwirth (2014). The home health care routing and scheduling problem with interdependent services. Health Care Management Science 17(1), 15-30.",
+          "doi": "10.1007/s10729-013-9243-1"
+        },
+        {
+          "text": "C. S. Sartori, L. S. Buriol (2020). OVIG, the instance generator the dataset's instances were generated with.",
+          "url": "https://github.com/cssartori/ovig"
+        }
+      ],
+      "description": "Instances for the daily home health care routing and scheduling problem with several service types, multiple visits and route interdependence, generated on OpenAddresses data for Porto Alegre, with lower and upper bounds and a curated selection of hard and random instances for each size.",
       "flags": [
         "The repository is large and carries no licence file or statement."
       ],
@@ -2013,6 +2073,13 @@
       "surveyId": "or-17"
     },
     {
+      "citations": [
+        {
+          "text": "Y. Yin, X. Liu, L. Qing, H. Qiu, X. Wei (2026). An exact solution approach for the multi-period EV home health care routing and scheduling problem with uncertain travel times and service durations. Omega 144, 103587.",
+          "doi": "10.1016/j.omega.2026.103587"
+        }
+      ],
+      "description": "Instances for the multi-period electric vehicle home health care routing and scheduling problem with uncertain travel times and service durations, from Yin et al. in Omega. The publisher's page refuses automated requests, so this rests on the survey item and the article's metadata.",
       "flags": [
         "Only the Elsevier text and data mining licence for the article was found, not a dataset licence."
       ],
@@ -2029,6 +2096,7 @@
       "surveyId": "or-18"
     },
     {
+      "description": "The Care Quality Commission's list of the places in England where care is regulated, covering hospitals, care homes, GPs, dentists and home care agencies, with their addresses and postcodes. It is published as a spreadsheet that the commission updates regularly.",
       "flags": [
         "File names are dated and change monthly.",
         "The page asks users to acknowledge CQC as the source.",
@@ -2048,6 +2116,17 @@
       "surveyId": "or-19"
     },
     {
+      "citations": [
+        {
+          "text": "E. Kirac, A. B. Milburn, R. Gedik (2025). The dynamic team orienteering problem. European Journal of Operational Research 324(1), 22-39.",
+          "doi": "10.1016/j.ejor.2025.01.009"
+        },
+        {
+          "text": "E. Kirac (2025). Dynamic Team Orienteering Problem (DTOP) Benchmark Instances. Mendeley Data, V1.",
+          "doi": "10.17632/xnf6c4d5gt.1"
+        }
+      ],
+      "description": "Mendeley Data deposit for the dynamic team orienteering problem of Kirac, Milburn and Gedik, described as benchmark instances adapted from the Chao et al. team orienteering instances at weak, moderate and high dynamism.",
       "flags": [
         "The page describes benchmark instances, but the file in version 1 holds solution values and run statistics, not instances."
       ],
@@ -2124,6 +2203,14 @@
       "surveyId": "or-20"
     },
     {
+      "citations": [
+        {
+          "text": "V. Pillac, C. Gueret, A. L. Medaglia (2013). A parallel matheuristic for the technician routing and scheduling problem. Optimization Letters 7(7), 1525-1535.",
+          "doi": "10.1007/s11590-012-0567-4"
+        }
+      ],
+      "description": "Technician routing and scheduling instances from Pillac, Gueret and Medaglia, with node coordinates and the skills a technician must cover, distributed through VRP-REP.",
+      "downloadUrl": "https://www.vrp-rep.org/datasets/download/pillac-et-al-2013.zip",
       "flags": [
         "The XML carries coordinates and skill resources but no time windows or service times.",
         "No licence statement was seen.",
@@ -2163,10 +2250,16 @@
         ],
         "expectedInstances": 57
       },
-      "surveyId": "or-21",
-      "downloadUrl": "https://www.vrp-rep.org/datasets/download/pillac-et-al-2013.zip"
+      "surveyId": "or-21"
     },
     {
+      "citations": [
+        {
+          "text": "A. Tzanetos, M. Blondin (2023). Real operational data for the concrete delivery problem. Data in Brief 48, 109189.",
+          "doi": "10.1016/j.dib.2023.109189"
+        }
+      ],
+      "description": "Daily concrete orders from construction sites in Quebec, supplied by a concrete producer and processed into instances for the concrete delivery problem, with client and site information anonymised.",
       "flags": [
         "The abstract mentions 263 instances, but only three small files were listed.",
         "The linked journal article is CC BY-NC-ND 4.0, which differs from the dataset licence."
@@ -2185,6 +2278,14 @@
       "surveyId": "or-22"
     },
     {
+      "citations": [
+        {
+          "text": "A. K. Pampana, J. Jeon, S. Yoon, T. J. Weidner (2024). Comprehensive maintenance dataset of building facilities for planned preventive and unplanned maintenance in North American universities. Data in Brief 57, 110845.",
+          "doi": "10.1016/j.dib.2024.110845"
+        }
+      ],
+      "description": "Building maintenance work orders from twelve North American universities, classified by the Facility Management Unified Classification Code and joined to the building, its systems and the weather, for planned preventive and unplanned maintenance.",
+      "downloadUrl": "https://data.mendeley.com/public-files/datasets/cb8d2nsjss/files/4c6c74f2-8bac-423c-a0c9-143130e1eea2/file_downloaded",
       "flags": [
         "The article is CC BY-NC 4.0, which differs from the dataset licence.",
         "Location columns hold building identifiers and names, not coordinates.",
@@ -2252,10 +2353,11 @@
           "skill": "SystemDescription"
         }
       },
-      "surveyId": "or-23",
-      "downloadUrl": "https://data.mendeley.com/public-files/datasets/cb8d2nsjss/files/4c6c74f2-8bac-423c-a0c9-143130e1eea2/file_downloaded"
+      "surveyId": "or-23"
     },
     {
+      "description": "A student repository holding the instances ORTEC published for the VeRoLog Solver Challenge 2019, in which trucks deliver machines to customers and technicians then install them within a window of days.",
+      "downloadUrl": "https://codeload.github.com/BasCoding/VeRoLog-2019/zip/refs/heads/main",
       "flags": [
         "A third-party student repository mirroring ORTEC instances; no licence statement.",
         "the mirror holds each instance as a .txt and again as a .csv, and a solution file beside the instances, so the instances are selected by name",
@@ -2295,10 +2397,16 @@
         ],
         "expectedInstances": 27
       },
-      "surveyId": "or-24",
-      "downloadUrl": "https://codeload.github.com/BasCoding/VeRoLog-2019/zip/refs/heads/main"
+      "surveyId": "or-24"
     },
     {
+      "citations": [
+        {
+          "text": "M. Gamst, D. Pisinger (2024). Decision support for the technician routing and scheduling problem. Networks 83(1), 169-196.",
+          "doi": "10.1002/net.22188"
+        }
+      ],
+      "description": "Instance sets and raw results for the technician routing and scheduling problem of Gamst and Pisinger, including the instances of Mathlouthi, Gendreau and Potvin and a further technician dispatch set called TDCData.",
       "flags": [
         "The survey field list for this item is unverified."
       ],
@@ -2316,6 +2424,13 @@
       "surveyId": "or-25"
     },
     {
+      "citations": [
+        {
+          "text": "A. Kheiri, A. G. Dragomir, D. Mueller, J. Gromicho, C. Jagtenberg, J. J. van Hoorn (2019). Tackling a VRP challenge to redistribute scarce equipment within time windows using metaheuristic algorithms. EURO Journal on Transportation and Logistics 8(5), 561-595.",
+          "doi": "10.1007/s13676-019-00143-8"
+        }
+      ],
+      "description": "Instances for the ORTEC VeRoLog Solver Challenge of 2016 to 2017, a routing problem that redistributes scarce equipment between customers within time windows, released in sets from the early test instances to the hidden ones.",
       "flags": [
         "The archive zip link tried returned 404; only individual instance files are reachable.",
         "No licence statement was seen."
@@ -2333,6 +2448,13 @@
       "surveyId": "or-26"
     },
     {
+      "citations": [
+        {
+          "text": "D. Merchan, J. Arora, J. Pachon, K. Konduri, M. Winkenbach, S. Parks, J. Noszek (2024). 2021 Amazon Last Mile Routing Research Challenge: Data set. Transportation Science 58(1), 8-11.",
+          "doi": "10.1287/trsc.2022.1173"
+        }
+      ],
+      "description": "Historical routes driven by Amazon delivery drivers in five US metropolitan areas, with route, stop and package level features and the sequence each driver actually followed. Released for the 2021 Amazon Last Mile Routing Research Challenge with identifiers regenerated and locations obfuscated.",
       "flags": [
         "Non-commercial licence (CC BY-NC 4.0)."
       ],
@@ -2350,6 +2472,13 @@
       "surveyId": "or-27"
     },
     {
+      "citations": [
+        {
+          "text": "L. Wu et al. (2023). LaDe: The first comprehensive last-mile delivery dataset from industry. arXiv:2306.10675.",
+          "doi": "10.48550/arXiv.2306.10675",
+          "url": "https://arxiv.org/abs/2306.10675"
+        }
+      ],
       "description": "Last-mile delivery orders from Cainiao couriers in Jilin, with location, area type, acceptance and delivery times.",
       "downloadUrl": "https://huggingface.co/datasets/Cainiao-AI/LaDe/resolve/main/delivery/delivery_jl.csv",
       "flags": [
@@ -2468,6 +2597,14 @@
       "surveyId": "or-29"
     },
     {
+      "citations": [
+        {
+          "text": "E. Angelelli, C. Archetti, C. Filippi, M. Vindigni (2017). The probabilistic orienteering problem. Computers & Operations Research 81, 269-281.",
+          "doi": "10.1016/j.cor.2016.12.025"
+        }
+      ],
+      "description": "Instances for the probabilistic orienteering problem, in which each customer is present only with a given probability, from Angelelli, Archetti, Filippi and Vindigni, distributed through VRP-REP.",
+      "downloadUrl": "https://www.vrp-rep.org/datasets/download/angelelli-et-al-2017.zip",
       "flags": [
         "No licence statement was seen.",
         "half of the instances give only a weight matrix and no coordinates, so their nodes carry a prize and probability and no position",
@@ -2505,10 +2642,16 @@
         "keep": [],
         "expectedInstances": 264
       },
-      "surveyId": "or-3",
-      "downloadUrl": "https://www.vrp-rep.org/datasets/download/angelelli-et-al-2017.zip"
+      "surveyId": "or-3"
     },
     {
+      "citations": [
+        {
+          "text": "H. Wang, L. Zhao, K. Yan, X. Wang, Y. Liang, J. Hao (2025). Meituan: Operational-level on-demand food delivery data for the 2025 INFORMS TSL Data-Driven Research Challenge.",
+          "url": "https://github.com/meituan/Meituan-INFORMS-TSL-Research-Challenge"
+        }
+      ],
+      "description": "Operational data from Meituan's on-demand food delivery platform for the 2025 INFORMS TSL Data-Driven Research Challenge, covering orders, couriers and merchants, with the waybill and wave records of how orders were dispatched.",
       "flags": [
         "Non-commercial licence, and License.txt forbids passing the dataset to third parties without permission.",
         "Coordinates are integers scaled by 1e6.",
@@ -2725,6 +2868,12 @@
       "surveyId": "or-34"
     },
     {
+      "citations": [
+        {
+          "text": "Y. Feyman, A. Legler, K. N. Griffith (2021). Appointment wait time data for primary & specialty care in Veterans Health Administration facilities vs. community medical centers. Data in Brief 36, 107134.",
+          "doi": "10.1016/j.dib.2021.107134"
+        }
+      ],
       "description": "Aggregated appointment waiting days by county, month and clinic stop code for Veterans Health Administration and Community Care.",
       "flags": [
         "survey URL is the Data in Brief article DOI, not the data; the data is Mendeley Data record rmk89k4rhb",
@@ -2882,6 +3031,12 @@
       "surveyId": "or-37"
     },
     {
+      "citations": [
+        {
+          "text": "B. Singh, L. Oberfichtner, S. Ivliev (2023). Heuristics for a cash-collection routing problem with a cluster-first route-second approach. Annals of Operations Research 322(1), 413-440.",
+          "doi": "10.1007/s10479-022-04883-1"
+        }
+      ],
       "description": "Coordinates of ATM and point-of-sale cash-collection sites around Perm, Russia, used for clustering and TSP routing examples.",
       "flags": [
         "repository has no licence file",
@@ -2965,7 +3120,14 @@
       "surveyId": "or-39"
     },
     {
+      "citations": [
+        {
+          "text": "E. Angelelli, C. Archetti, M. Vindigni (2014). The clustered orienteering problem. European Journal of Operational Research 238(2), 404-414.",
+          "doi": "10.1016/j.ejor.2014.04.006"
+        }
+      ],
       "description": "Clustered orienteering problem benchmark instances with node coordinates, cluster prizes and a travel budget.",
+      "downloadUrl": "https://www.vrp-rep.org/datasets/download/angelelli-et-al-2014.zip",
       "flags": [
         "no licence stated in the readme and the vrp-rep item page was not found",
         "prizes belong to clusters (CONSTRAINING_SET_SECTION), not to individual nodes",
@@ -3004,8 +3166,7 @@
         ],
         "expectedInstances": 924
       },
-      "surveyId": "or-4",
-      "downloadUrl": "https://www.vrp-rep.org/datasets/download/angelelli-et-al-2014.zip"
+      "surveyId": "or-4"
     },
     {
       "description": "Philadelphia properties with delinquent real estate taxes, amounts due and enforcement status.",
@@ -3625,7 +3786,14 @@
       "surveyId": "or-49"
     },
     {
+      "citations": [
+        {
+          "text": "M. M. Solomon (1987). Algorithms for the vehicle routing and scheduling problems with time window constraints. Operations Research 35(2), 254-265.",
+          "doi": "10.1287/opre.35.2.254"
+        }
+      ],
       "description": "Solomon's 1983 vehicle routing instances with time windows (C1, C2, R1, R2, RC1, RC2), each with 100 customers.",
+      "downloadUrl": "https://neo.lcc.uma.es/vrp/wp-content/data/instances/solomon/solomon_100.zip",
       "flags": [
         "no licence statement was found",
         "the 25 and 50 customer archives are prefixes of the 100 customer instances, so only the 100 customer archive is read",
@@ -3665,8 +3833,7 @@
         "timeUnit": "abstract units",
         "expectedInstances": 56
       },
-      "surveyId": "or-5",
-      "downloadUrl": "https://neo.lcc.uma.es/vrp/wp-content/data/instances/solomon/solomon_100.zip"
+      "surveyId": "or-5"
     },
     {
       "description": "Environment Agency enforcement actions against defendants, with fines, costs, verdicts and incident area.",
@@ -4103,6 +4270,7 @@
       "surveyId": "or-57"
     },
     {
+      "description": "The Camden houses in multiple occupation licensing register, listed a second time by the survey under the portal's root URL. The entry for the register itself holds the recipe.",
       "flags": [
         "duplicate of survey item or-70; the portal root URL given in the survey is a landing page"
       ],
@@ -4163,7 +4331,14 @@
       "surveyId": "or-59"
     },
     {
+      "citations": [
+        {
+          "text": "D. Sinha Roy, C. Defryn, B. Golden, E. Wasil (2022). Data-driven optimization and statistical modeling to improve meter reading for utility companies. Computers & Operations Research 145, 105844.",
+          "doi": "10.1016/j.cor.2022.105844"
+        }
+      ],
       "description": "An arc-routing meter reading instance for Hartford, Connecticut, with customer and network node coordinates in planar units.",
+      "downloadUrl": "https://zenodo.org/records/5823834/files/MeterReading_Instance.zip?download=1",
       "flags": [
         "coordinates are planar x and y, not latitude and longitude",
         "there are no time windows or service times, so it is not a VRPTW instance",
@@ -4196,10 +4371,10 @@
         "keep": [],
         "expectedNodes": 6067
       },
-      "surveyId": "or-6",
-      "downloadUrl": "https://zenodo.org/records/5823834/files/MeterReading_Instance.zip?download=1"
+      "surveyId": "or-6"
     },
     {
+      "description": "Violations the New York City Department of Housing Preservation and Development has issued against rental dwellings and buildings under the Housing Maintenance Code and the Multiple Dwelling Law, one row per violation, in four classes of hazard.",
       "flags": [
         "The Socrata metadata carries no licence and the NYC Open Data terms page could not be read."
       ],
@@ -4334,6 +4509,7 @@
       "surveyId": "or-61"
     },
     {
+      "description": "Property maintenance site visits in Louisville Metro with the violations cited, published by Codes and Regulations as a feature layer that covers the last 30 days and is updated daily.",
       "downloadUrl": "https://services1.arcgis.com/79kfd2K6fskCAkyg/arcgis/rest/services/PM_SiteVisit_Violations/FeatureServer/0",
       "flags": [
         "the dataset description says only the last 30 days of violations are published",
@@ -4413,6 +4589,7 @@
       "surveyId": "or-62"
     },
     {
+      "description": "Summonses for public safety and quality of life violations filed and adjudicated at New York City's Office of Administrative Trials and Hearings, with the infraction charged, the decision, payments and amounts.",
       "flags": [
         "The Socrata metadata carries no licence and the NYC Open Data terms page could not be read.",
         "respondent personal fields were removed from May 2026 per the dataset description, but respondent name columns remain in the header"
@@ -4493,6 +4670,7 @@
       "surveyId": "or-64"
     },
     {
+      "description": "Ordinance violations brought before the Chicago Department of Administrative Hearings, one row per violation, with the most recent hearing date and the case disposition. Violations heard by the Circuit Court of Cook County are not included.",
       "downloadUrl": "https://data.cityofchicago.org/resource/6br9-quuz.csv",
       "flags": [
         "the Socrata licence field says See Terms of Use and the terms document was not located",
@@ -4842,6 +5020,12 @@
       "surveyId": "or-69"
     },
     {
+      "citations": [
+        {
+          "text": "A. Vrani, S. D. Apostolidis, A. C. Kapoutsis, E. B. Kosmatopoulos (2025). Delivering data: A real-world dataset for last-mile delivery optimization. Data in Brief 61, 111762.",
+          "doi": "10.1016/j.dib.2025.111762"
+        }
+      ],
       "description": "Distance and time matrices, service times and time windows for a real pharmaceutical last-mile delivery operation.",
       "downloadUrl": "https://zenodo.org/api/records/15310106/files/data.zip/content",
       "flags": [
@@ -5038,6 +5222,7 @@
       "surveyId": "or-71"
     },
     {
+      "description": "Building permits and prior declarations from the national Sitadel database that create, transform or demolish dwellings in Ile-de-France, published by the regional environment and transport directorate as a point shapefile.",
       "downloadUrl": "https://atom.geo-ide.developpement-durable.gouv.fr/atomArchive/GetResource?id=acfcbcfe-23f8-43bf-a9cc-2ddf86c07cc4&dataType=dataset",
       "flags": [
         "the shapefile attributes were not read, so fields are unverified",
@@ -5114,6 +5299,7 @@
       "surveyId": "or-73"
     },
     {
+      "description": "Notices about environmental permits that Dutch municipalities publish in their Gemeenteblad, served as XML records by the SRU search interface of the government's official publications repository.",
       "flags": [
         "records are published notices, not structured permits",
         "no licence statement was seen in the responses"
@@ -5376,6 +5562,12 @@
       "surveyId": "or-79"
     },
     {
+      "citations": [
+        {
+          "text": "A. Konovalenko, L. M. Hvattum, K. A. H. Iversen (2026). Data describing planned routes and driven routes from a last-mile delivery vehicle routing problem. Data in Brief 66, 112744.",
+          "doi": "10.1016/j.dib.2026.112744"
+        }
+      ],
       "description": "Planned and actual delivery routes of a logistics company in two countries, from a Data in Brief article.",
       "downloadUrl": "https://data.mendeley.com/public-files/datasets/kkwgfvmtxn/files/388ea249-0830-4906-a39e-7bcbd5ee837a/file_downloaded",
       "flags": [
@@ -6062,6 +6254,12 @@
       "surveyId": "or-89"
     },
     {
+      "citations": [
+        {
+          "text": "J. Castro-Gutierrez, D. Landa-Silva, J. Moreno Perez (2011). Nature of real-world multi-objective vehicle routing with evolutionary algorithms. 2011 IEEE International Conference on Systems, Man, and Cybernetics, 257-264.",
+          "doi": "10.1109/ICSMC.2011.6083675"
+        }
+      ],
       "description": "Multi-objective vehicle routing instances with time windows built from real distribution data in Tenerife.",
       "downloadUrl": "https://raw.githubusercontent.com/psxjpc/MOVRPTW-Generator/master/dataset/movrptw-instances.zip",
       "flags": [

@@ -3,10 +3,16 @@
     "ev-hhcrsp-multi-period"
   ],
   "category": "tasks/v1",
-  "citations": [],
+  "citations": [
+    {
+      "doi": "10.1016/j.omega.2026.103587",
+      "text": "Y. Yin, X. Liu, L. Qing, H. Qiu, X. Wei (2026). An exact solution approach for the multi-period EV home health care routing and scheduling problem with uncertain travel times and service durations. Omega 144, 103587."
+    }
+  ],
   "crosswalk": {
     "file": "crosswalks/tasks-v1/nodes.json"
   },
+  "description": "Instances for the multi-period electric vehicle home health care routing and scheduling problem with uncertain travel times and service durations, from Yin et al. in Omega. The publisher's page refuses automated requests, so this rests on the survey item and the article's metadata.",
   "domain": "Technician and home-care routing",
   "expectedCounts": {},
   "id": "elsevier-ev-hhcrsp-multi-period",

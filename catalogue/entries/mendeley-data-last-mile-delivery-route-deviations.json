@@ -3,7 +3,12 @@
     "last-mile-delivery-route-deviations"
   ],
   "category": "tasks/v1",
-  "citations": [],
+  "citations": [
+    {
+      "doi": "10.1016/j.dib.2026.112744",
+      "text": "A. Konovalenko, L. M. Hvattum, K. A. H. Iversen (2026). Data describing planned routes and driven routes from a last-mile delivery vehicle routing problem. Data in Brief 66, 112744."
+    }
+  ],
   "crosswalk": {
     "file": "crosswalks/tasks-v1/nodes.json"
   },

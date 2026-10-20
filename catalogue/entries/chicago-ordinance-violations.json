@@ -61,6 +61,7 @@
     "source": "csv-table",
     "target": "tasks/v1"
   },
+  "description": "Ordinance violations brought before the Chicago Department of Administrative Hearings, one row per violation, with the most recent hearing date and the case disposition. Violations heard by the Circuit Court of Cook County are not included.",
   "domain": "Case records",
   "expectedCounts": {},
   "id": "chicago-ordinance-violations",

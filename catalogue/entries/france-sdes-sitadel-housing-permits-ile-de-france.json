@@ -7,6 +7,7 @@
   "crosswalk": {
     "file": "crosswalks/tasks-v1/nodes.json"
   },
+  "description": "Building permits and prior declarations from the national Sitadel database that create, transform or demolish dwellings in Ile-de-France, published by the regional environment and transport directorate as a point shapefile.",
   "domain": "Case records",
   "expectedCounts": {},
   "id": "france-sdes-sitadel-housing-permits-ile-de-france",

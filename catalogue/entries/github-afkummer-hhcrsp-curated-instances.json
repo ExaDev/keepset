@@ -3,10 +3,20 @@
     "hhcrsp-curated-instances"
   ],
   "category": "tasks/v1",
-  "citations": [],
+  "citations": [
+    {
+      "doi": "10.1007/s10729-013-9243-1",
+      "text": "D. S. Mankowska, F. Meisel, C. Bierwirth (2014). The home health care routing and scheduling problem with interdependent services. Health Care Management Science 17(1), 15-30."
+    },
+    {
+      "text": "C. S. Sartori, L. S. Buriol (2020). OVIG, the instance generator the dataset's instances were generated with.",
+      "url": "https://github.com/cssartori/ovig"
+    }
+  ],
   "crosswalk": {
     "file": "crosswalks/tasks-v1/nodes.json"
   },
+  "description": "Instances for the daily home health care routing and scheduling problem with several service types, multiple visits and route interdependence, generated on OpenAddresses data for Porto Alegre, with lower and upper bounds and a curated selection of hard and random instances for each size.",
   "domain": "Technician and home-care routing",
   "expectedCounts": {},
   "id": "github-afkummer-hhcrsp-curated-instances",

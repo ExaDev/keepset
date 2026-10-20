@@ -3,7 +3,12 @@
     "perm-cash-collection-sites"
   ],
   "category": "tasks/v1",
-  "citations": [],
+  "citations": [
+    {
+      "doi": "10.1007/s10479-022-04883-1",
+      "text": "B. Singh, L. Oberfichtner, S. Ivliev (2023). Heuristics for a cash-collection routing problem with a cluster-first route-second approach. Annals of Operations Research 322(1), 413-440."
+    }
+  ],
   "crosswalk": {
     "file": "crosswalks/tasks-v1/nodes.json"
   },

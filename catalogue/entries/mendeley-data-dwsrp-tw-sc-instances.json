@@ -3,7 +3,12 @@
     "dwsrp-tw-sc-instances"
   ],
   "category": "tasks/v1",
-  "citations": [],
+  "citations": [
+    {
+      "doi": "10.17632/dbsf73xpg5.1",
+      "text": "O. Demiray, E. Yucel, D. Tolga (2026). DWSRP-TW-SC Datasets. Mendeley Data, V1."
+    }
+  ],
   "crosswalk": {
     "file": "crosswalks/tasks-v1/nodes.json"
   },

@@ -3,7 +3,12 @@
     "fmucd"
   ],
   "category": "tasks/v1",
-  "citations": [],
+  "citations": [
+    {
+      "doi": "10.1016/j.dib.2024.110845",
+      "text": "A. K. Pampana, J. Jeon, S. Yoon, T. J. Weidner (2024). Comprehensive maintenance dataset of building facilities for planned preventive and unplanned maintenance in North American universities. Data in Brief 57, 110845."
+    }
+  ],
   "crosswalk": {
     "oneWay": [],
     "rules": [
@@ -31,6 +36,7 @@
     "source": "csv-table",
     "target": "tasks/v1"
   },
+  "description": "Building maintenance work orders from twelve North American universities, classified by the Facility Management Unified Classification Code and joined to the building, its systems and the weather, for planned preventive and unplanned maintenance.",
   "domain": "Technician and home-care routing",
   "expectedCounts": {},
   "id": "mendeley-data-fmucd",
