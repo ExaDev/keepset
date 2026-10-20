@@ -13,7 +13,7 @@ describe("createCatalogue", () => {
     expect(catalogue.listDatasets({ subject: "network" })).toEqual([]);
     expect(catalogue.listDatasets({ subject: "operations-research" })).toEqual([]);
     expect(catalogue.listDatasets({ text: "social-science" }).map((dataset) => dataset.entry.id)).toEqual(["karate"]);
-    expect(catalogue.listDatasets({ subject: "network-science", kind: "or" })).toEqual([]);
+    expect(catalogue.listDatasets({ subject: "network-science", kind: "tasks" })).toEqual([]);
   });
 
   it("lists every dataset in entry id order when no filter is given", () => {

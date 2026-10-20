@@ -2,7 +2,7 @@ import { z } from "zod";
 import { ArchiveSchema, CollectionArchiveSchema, ColumnNameSchema, HttpUrlSchema, IdSchema, LicenceSchema, ParserSchema } from "../../src/entry";
 import { isInstanceParser } from "../../src/parsers/instance-shapes";
 
-/* The operations-research survey the seed import reads (scripts/seed/sources/or-datasets-survey.json) and the curation that turns each surveyed item into a catalogue entry. The survey says what each item is and which fields of the routing-with-rewards node model it carries; the curation records, per item, what a download actually gives and how its columns map onto the or/v1 node, because that takes reading each source and is a judgement the survey cannot make. */
+/* The operations-research survey the seed import reads (scripts/seed/sources/or-datasets-survey.json) and the curation that turns each surveyed item into a catalogue entry. The survey says what each item is and which fields of the routing-with-rewards node model it carries; the curation records, per item, what a download actually gives and how its columns map onto the tasks/v1 node, because that takes reading each source and is a judgement the survey cannot make. */
 
 /** One surveyed dataset: an id, a title, the URL the survey recorded, the theme it was filed under and the node-model fields it carries. */
 export const SurveyEntrySchema = z.looseObject({
@@ -25,7 +25,7 @@ export type SurveySource = z.infer<typeof SurveySourceSchema>;
 /** How a target field's values read in a table: a number, text, or either (a deadline is a time of day as a number in a routing instance and a date as text in a case record). */
 export type FieldKind = "number" | "text" | "either";
 
-/** The or/v1 node fields a column can map onto, in the order a crosswalk lists them, so its rules do not depend on key order. */
+/** The tasks/v1 node fields a column can map onto, in the order a crosswalk lists them, so its rules do not depend on key order. */
 export const TARGET_FIELD_NAMES = ["closed", "deadline", "duration", "lat", "lon", "opened", "prize", "prizeProbability", "skill", "status", "territory", "travelTime", "x", "y"] as const;
 export type TargetField = (typeof TARGET_FIELD_NAMES)[number];
 
@@ -110,7 +110,7 @@ export const ArcgisOutcomeSchema = z
   .strict();
 export type ArcgisOutcome = z.infer<typeof ArcgisOutcomeSchema>;
 
-/** A dataset that is a collection of tables in an archive, one table file per instance: every member the archive selector matches is read as a table with the same header and options, as for a single table, and becomes an instance of the set. `timeUnit` says what the source's time quantities are measured in, since the or/v1 `duration` is seconds (a column in minutes is scaled by a factor of sixty), and is left out for a source that has none. */
+/** A dataset that is a collection of tables in an archive, one table file per instance: every member the archive selector matches is read as a table with the same header and options, as for a single table, and becomes an instance of the set. `timeUnit` says what the source's time quantities are measured in, since the tasks/v1 `duration` is seconds (a column in minutes is scaled by a factor of sixty), and is left out for a source that has none. */
 export const TableCollectionOutcomeSchema = z
   .object({
     status: z.literal("fetchable-table-collection"),
@@ -132,7 +132,7 @@ export type TableCollectionOutcome = z.infer<typeof TableCollectionOutcomeSchema
 /** An outcome with a recipe that reads a table: one file, a paged ArcGIS layer, or every table file of an archive. */
 export type TableOutcome = FetchableOutcome | ArcgisOutcome | TableCollectionOutcome;
 
-/** A dataset whose download is made of instance files read by an instance file parser: either one file (`archive` selects it with `member`, or the download is the file itself, and the entry is an or/v1 document), or every file of an archive that a `members` selector matches (an or-set/v1 collection, one instance per file). `map` says which of the parser's node columns fill the or/v1 node's fields, `keep` which pass through under their own names, and a node column in neither is dropped by a one-way rule, so what an entry leaves out is written down. The file's header values are all carried in the document's meta (for a collection, in each instance's). `timeUnit` says what the source's time quantities are measured in, since the or/v1 `duration` is seconds, and is left out for a source that has none. */
+/** A dataset whose download is made of instance files read by an instance file parser: either one file (`archive` selects it with `member`, or the download is the file itself, and the entry is a tasks/v1 document), or every file of an archive that a `members` selector matches (a collection, one instance per file). `map` says which of the parser's node columns fill the tasks/v1 node's fields, `keep` which pass through under their own names, and a node column in neither is dropped by a one-way rule, so what an entry leaves out is written down. The file's header values are all carried in the document's meta (for a collection, in each instance's). `timeUnit` says what the source's time quantities are measured in, since the tasks/v1 `duration` is seconds, and is left out for a source that has none. */
 export const InstanceFilesOutcomeSchema = z
   .object({
     status: z.literal("fetchable-instance-files"),

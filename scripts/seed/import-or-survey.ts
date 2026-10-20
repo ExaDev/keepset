@@ -1,8 +1,8 @@
-/* The seed import for the operations-research category: converts the committed survey and its curation into keepset entries for or/v1.
+/* The seed import for the operations-research category: converts the committed survey and its curation into keepset entries for tasks/v1.
 
    pnpm run seed:import:or [--check]
 
-   It reads scripts/seed/sources/or-datasets-survey.json (the survey, read only, like every upstream source) and scripts/seed/sources/or-survey-curation.json (what each surveyed dataset's download gives and how its columns map onto the or/v1 node), and writes catalogue/entries/<id>.json for every surveyed dataset and the report beside this script. Every surveyed dataset gets an entry: one with a recipe is fetchable, one without says why in its not-fetchable reason, and the report lists each once. An entry an earlier import wrote that this one does not produce is deleted, and entries from other imports are never touched, an id they hold being refused.
+   It reads scripts/seed/sources/or-datasets-survey.json (the survey, read only, like every upstream source) and scripts/seed/sources/or-survey-curation.json (what each surveyed dataset's download gives and how its columns map onto the tasks/v1 node), and writes catalogue/entries/<id>.json for every surveyed dataset and the report beside this script. Every surveyed dataset gets an entry: one with a recipe is fetchable, one without says why in its not-fetchable reason, and the report lists each once. An entry an earlier import wrote that this one does not produce is deleted, and entries from other imports are never touched, an id they hold being refused.
 
    --check writes nothing and exits non-zero when the committed entries or report differ from what the inputs produce. */
 

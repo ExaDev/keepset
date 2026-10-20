@@ -2,16 +2,16 @@ import { z } from "zod";
 import { UnknownCategoryError } from "./errors";
 import { GraphV1Schema, type GraphV1 } from "./targets/graph-v1";
 import { COLLECTION_COUNTED, collectionOf, type Collection } from "./targets/collection";
-import { OrV1Schema, type OrV1 } from "./targets/or-v1";
+import { TasksV1Schema, type TasksV1 } from "./targets/tasks-v1";
 
 /** Every category id the registry knows. A category id is `<kind>/v<version>`: the kind of data, and the version of its normalisation target, so a breaking change to a target is a new category rather than an edit to an old one. */
-export const CategoryIdSchema = z.enum(["graph/v1", "or/v1"]);
+export const CategoryIdSchema = z.enum(["graph/v1", "tasks/v1"]);
 export type CategoryId = z.infer<typeof CategoryIdSchema>;
 
 /** The normalisation target each category resolves to, keyed by category id. */
 export interface CategoryTargets {
   readonly "graph/v1": GraphV1;
-  readonly "or/v1": OrV1;
+  readonly "tasks/v1": TasksV1;
 }
 
 /** The normalised shape of any category: what `fetchDataset` can resolve to. */
@@ -44,11 +44,11 @@ const registry: { readonly [Id in CategoryId]: CategoryOf<Id> } = {
     collection: collectionOf(GraphV1Schema),
     counted: ["nodes", "edges"],
   },
-  "or/v1": {
-    id: "or/v1",
-    description: "An operations-research instance as { meta, nodes }: a flat record of scalar metadata and nodes carrying at least an id, with optional coordinates, prize, prize probability, duration, travel time, skill, territory, lifecycle status and times, and deadline.",
-    target: OrV1Schema,
-    collection: collectionOf(OrV1Schema),
+  "tasks/v1": {
+    id: "tasks/v1",
+    description: "A set of tasks (places or cases to visit or serve) as { meta, nodes }: a flat record of scalar metadata and nodes carrying at least an id, with optional coordinates, prize, prize probability, duration, travel time, skill, territory, lifecycle status and times, and deadline.",
+    target: TasksV1Schema,
+    collection: collectionOf(TasksV1Schema),
     counted: ["nodes"],
   },
 };

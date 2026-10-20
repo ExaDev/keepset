@@ -13,5 +13,5 @@
     }
   ],
   "source": "keepset/nodes",
-  "target": "or/v1"
+  "target": "tasks/v1"
 }

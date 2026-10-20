@@ -3,7 +3,7 @@ import { describe, expect, it } from "vitest";
 import { createCatalogue, type Dataset } from "../catalogue";
 import { DatasetNotFoundError, KeepsetError, RecipeError, type RecipeStep } from "../errors";
 import { gzip, tar, zip } from "../test-support/archives";
-import { arcgisEntry, ckanEntry, deadEntry, fixtureIndex, liveEntry, notFetchableEntry, openFemaEntry, orCollectionEntry, orEntry, graphCollectionEntry, socrataEntry } from "../test-support/entries";
+import { arcgisEntry, ckanEntry, deadEntry, fixtureIndex, liveEntry, notFetchableEntry, openFemaEntry, taskCollectionEntry, taskEntry, graphCollectionEntry, socrataEntry } from "../test-support/entries";
 import { downloadUrl, fetchDataset, fetchEntry, roundTripDataset, roundTripEntry, type FetchPort } from "./fetch-dataset";
 
 const karateText = "% karate excerpt\n1 2\n2 3\n3 1\n";
@@ -187,12 +187,12 @@ describe("roundTripEntry", () => {
   });
 });
 
-describe("an or/v1 entry", () => {
+describe("a tasks/v1 entry", () => {
   const csv = 'request_id,latitude,longitude,minutes,status,borough,private_note\na1,51.5,-0.1,2,Open,Camden,not shared\na2,,,3,Closed,,\n"a,3",52,-1.5,,Open,"Isle ""of"" Dogs",\n';
   const { fetch: port } = servedBy({ "https://example.org/data/requests.csv": csv });
-  const dataset = datasetWith(orEntry);
+  const dataset = datasetWith(taskEntry);
 
-  it("downloads a table, parses it, applies the crosswalk and resolves or/v1 with only the mapped fields", async () => {
+  it("downloads a table, parses it, applies the crosswalk and resolves tasks/v1 with only the mapped fields", async () => {
     const fetched = await fetchEntry(dataset, { fetch: port, now });
     expect(fetched.warnings).toEqual([]);
     expect(fetched.data).toEqual({
@@ -225,14 +225,14 @@ describe("an or/v1 entry", () => {
   });
 });
 
-describe("an or/v1 entry that is a collection", () => {
+describe("a tasks/v1 entry that is a collection", () => {
   const suite = (files: readonly { readonly path: string; readonly text: string }[]): ReturnType<typeof servedBy> => servedBy({ "https://example.org/data/suite.zip": zip(files) });
   const members = [
     { path: "suite/b.csv", text: "customer,x,y,prize\n1,0,0,0\n" },
     { path: "suite/a.csv", text: "customer,x,y,prize\n1,4,5,0\n2,6,7,3\n" },
     { path: "suite/readme.txt", text: "not an instance" },
   ];
-  const dataset = datasetWith(orCollectionEntry);
+  const dataset = datasetWith(taskCollectionEntry);
 
   it("reads every matching member as an instance, in path order, each numbering its own nodes", async () => {
     const fetched = await fetchEntry(dataset, { fetch: suite(members).fetch, now });
@@ -281,7 +281,7 @@ describe("an or/v1 entry that is a collection", () => {
   });
 
   it("fails at the crosswalk step naming the member the crosswalk cannot be applied to", async () => {
-    const dropped = { ...orCollectionEntry, crosswalk: { ...orCollectionEntry.crosswalk, rules: [...orCollectionEntry.crosswalk.rules, { op: "move", from: "nodes[].absent", to: "nodes[].prize" }] } };
+    const dropped = { ...taskCollectionEntry, crosswalk: { ...taskCollectionEntry.crosswalk, rules: [...taskCollectionEntry.crosswalk.rules, { op: "move", from: "nodes[].absent", to: "nodes[].prize" }] } };
     const error = await failure(fetchEntry(datasetWith({ ...dropped, crosswalk: { ...dropped.crosswalk, rules: dropped.crosswalk.rules.filter((rule) => rule.to !== "nodes[].prize" || rule.from === "nodes[].absent") } }), { fetch: suite(members).fetch, now }));
     expect(error.step).toBe("crosswalk");
     expect(error.message).toMatch(/member suite\/a\.csv/);
@@ -320,7 +320,7 @@ describe("a graph/v1 entry that is a collection", () => {
   });
 });
 
-describe("an or/v1 entry whose source is a paged ArcGIS layer", () => {
+describe("a tasks/v1 entry whose source is a paged ArcGIS layer", () => {
   const layer = "https://example.org/arcgis/rest/services/Violations/FeatureServer/0";
   const feature = (id: number, fine: number | null, kind: string | null, point: { readonly longitude: number; readonly latitude: number } | null): unknown => ({
     type: "Feature",
@@ -351,7 +351,7 @@ describe("an or/v1 entry whose source is a paged ArcGIS layer", () => {
     return { fetch, requested };
   }
 
-  it("reads every page in order of the order-by field and resolves or/v1 from the one collection", async () => {
+  it("reads every page in order of the order-by field and resolves tasks/v1 from the one collection", async () => {
     const served = layerServing(features, 2);
     const fetched = await fetchEntry(dataset, { fetch: served.fetch, now });
     expect(fetched.warnings).toEqual([]);
@@ -390,7 +390,7 @@ describe("an or/v1 entry whose source is a paged ArcGIS layer", () => {
   });
 });
 
-describe("an or/v1 entry whose source is a Socrata resource read in pages", () => {
+describe("a tasks/v1 entry whose source is a Socrata resource read in pages", () => {
   const resource = "https://data.example.org/resource/abcd-1234.csv";
   const header = "case_id,status,borough,note\n";
   const rows = ["a1,Open,Camden,x\n", 'a2,Closed,"Isle ""of"" Dogs","two\nlines"\n', "a3,Open,Hackney,\n"];
@@ -467,7 +467,7 @@ describe("an or/v1 entry whose source is a Socrata resource read in pages", () =
   });
 });
 
-describe("an or/v1 entry whose source is a CKAN datastore dump read in pages", () => {
+describe("a tasks/v1 entry whose source is a CKAN datastore dump read in pages", () => {
   const dump = "https://data.example.org/data/datastore/dump/0a1b2c3d-1111-2222-3333-444455556666";
   const header = "_id,status,borough,note\n";
   const rows = ["1,Open,Camden,x\n", "2,Closed,Hackney,y\n", "3,Open,Islington,z\n"];
@@ -512,7 +512,7 @@ describe("an or/v1 entry whose source is a CKAN datastore dump read in pages", (
   });
 });
 
-describe("an or/v1 entry whose source is an OpenFEMA entity read in pages", () => {
+describe("a tasks/v1 entry whose source is an OpenFEMA entity read in pages", () => {
   const header = "id,state,county\n";
   const rows = ["1,WA,King\n", "2,OR,Lane\n", "3,WA,Pierce\n"];
   const dataset = datasetWith(openFemaEntry);
