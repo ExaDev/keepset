@@ -304,3 +304,85 @@ describe("the top parser", () => {
     expect(parseError(() => parseNative(utf8(""), top)).message).toMatch(/expected "n <number>"/);
   });
 });
+
+describe("the tsplib parser", () => {
+  const tsplib: Parser = { format: "tsplib", encoding: "utf-8" };
+  const pop = (weights: string, body: string, probabilities = "1 0 1.0\n2 45 0.31\n3 45 0.62\n"): string =>
+    `NAME : demo\nCOMMENT : three towns    POP::[bound(TSP):400]\nTYPE : POP\nDIMENSION : 3\nTMAX : 100\nTPRIZE : 90\nORIGIN : 1\nDESTINATION : 1\n${weights}\n${body}NODE_PRIZE_PROBABILITY_SECTION\n${probabilities}`;
+  const planar = pop("EDGE_WEIGHT_TYPE : CEIL_2D", "NODE_COORD_SECTION\n1 10 20\n2 30 25.5\n3 12 40\n");
+  const geo = pop("EDGE_WEIGHT_TYPE : GEO\nDISPLAY_DATA_TYPE : COORD_DISPLAY", "NODE_COORD_SECTION\n1 48.23 10.53\n2 41.23 9.1\n3 -33.5 -5.21\n");
+  const explicit = pop("EDGE_WEIGHT_TYPE : EXPLICIT\nEDGE_WEIGHT_FORMAT : LOWER_DIAG_ROW\nDISPLAY_DATA_TYPE : TWOD_DISPLAY", "EDGE_WEIGHT_SECTION\n0 \n7 0 \n9 11 0 \n");
+  const cop = "NAME : demo4\nCOMMENT : COP::[overlap:10]\nTYPE : COP\nDIMENSION : 4\nTMAX : 40\nSETS : 2\nEDGE_WEIGHT_TYPE : EUC_2D\nNODE_COORD_SECTION\n1 0 0\n2 5 5\n3 9 1\n4 3.25 7.5\nCONSTRAINING_SET_SECTION : set_id set_prize id-vertex-list\n1 2 2 3\n2 87 3 4\nEOF\n";
+  const unset = { x: null, y: null, lat: null, lon: null, prize: null, probability: null, clusters: null };
+
+  it("reads a planar probabilistic file: positions as x and y, prizes and probabilities, the depot first", () => {
+    expect(parseNative(utf8(planar), tsplib)).toEqual({
+      meta: { name: "demo", type: "POP", budget: 100, edgeWeightType: "CEIL_2D", totalPrize: 90, setPrizes: null },
+      nodes: [
+        { ...unset, id: "1", x: 10, y: 20, prize: 0, probability: 1 },
+        { ...unset, id: "2", x: 30, y: 25.5, prize: 45, probability: 0.31 },
+        { ...unset, id: "3", x: 12, y: 40, prize: 45, probability: 0.62 },
+      ],
+    });
+  });
+
+  it("converts GEO coordinates from DDD.MM to decimal degrees, truncating degrees and reading a one digit fraction as tens of minutes", () => {
+    /** Whole degrees and minutes of the file's coordinates, so the expected degrees are computed the way the format defines them. */
+    const MINUTES = 60;
+    const augsburg = { lat: { degrees: 48, minutes: 23 }, lon: { degrees: 10, minutes: 53 } } as const;
+    const southWest = { lat: { degrees: 33, minutes: 50 }, lon: { degrees: 5, minutes: 21 } } as const;
+    const tenMinutes = { lat: { degrees: 41, minutes: 23 }, lon: { degrees: 9, minutes: 10 } } as const;
+    const decimal = (angle: { readonly degrees: number; readonly minutes: number }): number => angle.degrees + angle.minutes / MINUTES;
+    const { nodes } = parseNative(utf8(geo), tsplib);
+    const [first, second, third] = nodes;
+    expect(first).toMatchObject({ lat: decimal(augsburg.lat), lon: decimal(augsburg.lon), x: null, y: null });
+    expect(second).toMatchObject({ lat: decimal(tenMinutes.lat), lon: decimal(tenMinutes.lon) });
+    expect(third).toMatchObject({ lat: -decimal(southWest.lat), lon: -decimal(southWest.lon) });
+  });
+
+  it("gives an EXPLICIT file's nodes only their prize data, skipping the weight matrix", () => {
+    expect(parseNative(utf8(explicit), tsplib).nodes).toEqual([
+      { ...unset, id: "1", prize: 0, probability: 1 },
+      { ...unset, id: "2", prize: 45, probability: 0.31 },
+      { ...unset, id: "3", prize: 45, probability: 0.62 },
+    ]);
+  });
+
+  it("reads a clustered file with the sets as per node memberships and the set prizes as meta, inventing no node prize", () => {
+    expect(parseNative(utf8(cop), tsplib)).toEqual({
+      meta: { name: "demo4", type: "COP", budget: 40, edgeWeightType: "EUC_2D", totalPrize: null, setPrizes: "1:2,2:87" },
+      nodes: [
+        { ...unset, id: "1", x: 0, y: 0 },
+        { ...unset, id: "2", x: 5, y: 5, clusters: "1" },
+        { ...unset, id: "3", x: 9, y: 1, clusters: "1,2" },
+        { ...unset, id: "4", x: 3.25, y: 7.5, clusters: "2" },
+      ],
+    });
+  });
+
+  it("rejects a GEO coordinate whose minutes are not whole or reach sixty", () => {
+    expect(parseError(() => parseNative(utf8(geo.replace("48.23 10.53", "48.235 10.53")), tsplib)).message).toMatch(/tsplib line 12: expected a DDD.MM coordinate/);
+    expect(parseError(() => parseNative(utf8(geo.replace("48.23 10.53", "48.60 10.53")), tsplib)).message).toMatch(/whole minutes below 60, found 48.6/);
+  });
+
+  it("rejects an unsupported type or weight type, and a missing or repeated key", () => {
+    expect(parseError(() => parseNative(utf8(planar.replace("TYPE : POP", "TYPE : TSP")), tsplib)).message).toMatch(/expected TYPE POP or COP/);
+    expect(parseError(() => parseNative(utf8(planar.replace("CEIL_2D", "MAX_2D")), tsplib)).message).toMatch(/expected EDGE_WEIGHT_TYPE/);
+    expect(parseError(() => parseNative(utf8(planar.replace("TMAX : 100\n", "")), tsplib)).message).toMatch(/expected a TMAX line/);
+    expect(parseError(() => parseNative(utf8(planar.replace("TMAX : 100", "TMAX : 100\nTMAX : 100")), tsplib)).message).toMatch(/TMAX appears twice/);
+  });
+
+  it("rejects a section that does not cover every node, a node outside the dimension and a stray row", () => {
+    expect(parseError(() => parseNative(utf8(pop("EDGE_WEIGHT_TYPE : CEIL_2D", "NODE_COORD_SECTION\n1 10 20\n2 30 25\n3 12 40\n", "1 0 1.0\n2 45 0.31\n")), tsplib)).message).toMatch(/expected 3 prize rows, found 2/);
+    expect(parseError(() => parseNative(utf8(planar.replace("3 12 40", "4 12 40")), tsplib)).message).toMatch(/node 4 is outside 1 to 3/);
+    expect(parseError(() => parseNative(utf8(planar.replace("1 10 20\n", "1 10 20\n1 11 21\n")), tsplib)).message).toMatch(/node 1 has two coordinate rows/);
+    expect(parseError(() => parseNative(utf8(`stray\n${planar}`), tsplib)).message).toMatch(/line 1: expected a KEY : value line or a section/);
+    expect(parseError(() => parseNative(utf8(explicit.replace("EDGE_WEIGHT_SECTION", "NODE_COORD_SECTION\n1 1 1\nEDGE_WEIGHT_SECTION")), tsplib)).message).toMatch(/an EXPLICIT file has no NODE_COORD_SECTION/);
+  });
+
+  it("rejects a clustered file whose set count or members disagree with its header", () => {
+    expect(parseError(() => parseNative(utf8(cop.replace("SETS : 2", "SETS : 3")), tsplib)).message).toMatch(/expected 3 sets, found 2/);
+    expect(parseError(() => parseNative(utf8(cop.replace("2 87 3 4", "2 87 3 9")), tsplib)).message).toMatch(/node 9 is outside 1 to 4/);
+    expect(parseError(() => parseNative(utf8(cop.replace("2 87 3 4", "1 87 3 4")), tsplib)).message).toMatch(/set 1 appears twice/);
+  });
+});
