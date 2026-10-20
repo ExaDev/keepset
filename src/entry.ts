@@ -186,6 +186,16 @@ export const ParserSchema = z.discriminatedUnion("format", [
       maxRating: z.number().positive(),
     })
     .strict(),
+  z
+    .object({
+      format: z.literal("konect"),
+      encoding: z.literal("utf-8"),
+      /** Whether the third column is read as the edge's weight; the file's own weight type must agree. */
+      weighted: z.boolean(),
+      /** Whether the fourth column is read as the edge's time. */
+      timestamped: z.boolean(),
+    })
+    .strict(),
   z.object({ format: z.literal("gml"), encoding: EncodingSchema }).strict(),
   z.object({ format: z.literal("pajek"), encoding: EncodingSchema }).strict(),
   z

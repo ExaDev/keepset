@@ -3,6 +3,7 @@ import { NativeParseError } from "../errors";
 import { parseEdgeList } from "./edge-list";
 import { parseGdContest } from "./gd-contest";
 import { parseGml } from "./gml";
+import { parseKonect } from "./konect";
 import { parseMatrixMarket } from "./matrix-market";
 import { parseCsvTable } from "./csv-table";
 import { parseGeojson } from "./geojson";
@@ -101,6 +102,9 @@ export function parseNative(bytes: Uint8Array, parser: Parser): NativeDocument {
   // The graph formats read a piece of text at a time, so a file of tens of millions of lines is not one string.
   if (parser.format === "user-item-ratings") {
     return parseUserItemRatings(decodePieces(bytes, parser), parser);
+  }
+  if (parser.format === "konect") {
+    return parseKonect(decodePieces(bytes, parser), parser);
   }
   const text = decode(bytes, parser);
   if (parser.format === "geojson") {
