@@ -383,3 +383,68 @@ describe("convertItem for a collection of instance files", () => {
     expect(() => curated({ ...collection, archive: { kind: "zip", member: { extensions: [".txt"] } } })).toThrow();
   });
 });
+
+describe("convertItem for a collection of table files", () => {
+  const item = survey.entries[0];
+  const tables = {
+    status: "fetchable-table-collection",
+    archive: { kind: "zip", members: { pattern: "Coordinates_\\d+\\.txt" } },
+    encoding: "utf-8",
+    delimiter: "comma",
+    skipLines: 0,
+    idColumn: "ID",
+    numericColumns: [
+      { column: "Longitude", factor: 1 },
+      { column: "Latitude", factor: 1 },
+      { column: "ServiceTime_min", factor: 60 },
+    ],
+    header: ["ID", "Longitude", "Latitude", "ServiceTime (min)"],
+    map: { lon: "Longitude", lat: "Latitude", duration: "ServiceTime_min" },
+    timeUnit: "seconds",
+    expectedInstances: 2,
+  };
+  const curated = (outcome: Record<string, unknown>): Parameters<typeof convertItem>[1] => CurationItemSchema.parse({ surveyId: "or-10", id: "example-coordinates", namespace: "example", name: "Coordinates", licence: { kind: "unrecorded" }, flags: [], outcome });
+  const entryOf = (outcome: Record<string, unknown>): ReturnType<typeof convertItem>["entry"] => convertItem(item ?? expect.unreachable("the fixture survey has an item"), curated(outcome), "2026-10-19").entry;
+  const csv = (rows: readonly string[]): string => `"ID","Longitude","Latitude","ServiceTime (min)"\r\n${rows.join("\r\n")}\r\n`;
+  const archive = zip([
+    { path: "Coordinates_2.txt", text: csv(["0,4.5,49.8,2"]) },
+    { path: "Coordinates_10.txt", text: csv(["7,4.6,49.9,2", "8,0,0,3"]) },
+    { path: "readme.txt", text: "not a table" },
+  ]);
+
+  it("makes an or-set/v1 entry that reads each matching file as a table and moves each instance's columns onto the node fields", () => {
+    const entry = entryOf(tables);
+    expect(entry.category).toBe("or-set/v1");
+    expect(entry.recipe).toMatchObject({ status: "fetchable", archive: tables.archive, parser: { format: "csv-table", idColumn: "ID", columns: ["ServiceTime_min", "Latitude", "Longitude"] } });
+    expect(entry.expectedCounts).toEqual({ instances: 2 });
+    expect(entry.properties).toEqual({ surveyId: "or-10", timeUnit: "seconds" });
+    expect(entry.crosswalk).toMatchObject({ source: "csv-table", target: "or-set/v1", oneWay: [] });
+  });
+
+  it("fetches the files as instances in path order, scales minutes to seconds and holds the round trip", async () => {
+    const dataset = createCatalogue({ manifest: fixtureManifest, crosswalks: {}, entries: [entryOf(tables)] }).listDatasets()[0] ?? expect.unreachable("the catalogue lists its entry");
+    const fetch = async (): Promise<Response> => Promise.resolve(new Response(archive));
+    const fetched = await fetchEntry(dataset, { fetch });
+    expect(fetched.warnings).toEqual([]);
+    expect(fetched.data).toMatchObject({
+      instances: [
+        { id: "Coordinates_10.txt", meta: {}, nodes: [{ id: "7", lon: 4.6, lat: 49.9, duration: 120 }, { id: "8", lon: 0, lat: 0, duration: 180 }] },
+        { id: "Coordinates_2.txt", meta: {}, nodes: [{ id: "0", lon: 4.5, lat: 49.8, duration: 120 }] },
+      ],
+    });
+    expect(await roundTripEntry(dataset, { fetch })).toMatchObject({ holds: true });
+  });
+
+  it("applies the table checks: a mapped column the header lacks and a number field filled from a column not declared numeric", () => {
+    const failure = (outcome: Record<string, unknown>): string => {
+      try {
+        entryOf(outcome);
+      } catch (error) {
+        return error instanceof Error ? error.message : String(error);
+      }
+      throw new Error("expected the conversion to fail");
+    };
+    expect(failure({ ...tables, map: { lon: "Longitude", lat: "Elevation" } })).toMatch(/lat maps the column Elevation, which the table does not have/);
+    expect(failure({ ...tables, numericColumns: [{ column: "Longitude", factor: 1 }, { column: "Latitude", factor: 1 }] })).toMatch(/duration is a number but ServiceTime_min is not declared numeric/);
+  });
+});

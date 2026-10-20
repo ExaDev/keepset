@@ -101,7 +101,7 @@ function domainOf(item: SurveyEntry): string {
  */
 function columnsOf(id: string, outcome: TableOutcome): { readonly names: readonly string[]; readonly columns: readonly string[] } {
   try {
-    const names = outcome.status === "fetchable" ? columnNames(outcome.header, outcome.idColumn, 1) : [...outcome.header, ...(outcome.point ? [POINT_COLUMNS.latitude, POINT_COLUMNS.longitude] : [])];
+    const names = outcome.status !== "fetchable-arcgis" ? columnNames(outcome.header, outcome.idColumn, 1) : [...outcome.header, ...(outcome.point ? [POINT_COLUMNS.latitude, POINT_COLUMNS.longitude] : [])];
     if (new Set(names).size !== names.length) {
       throw new Error("two columns have the same name");
     }
@@ -137,9 +137,10 @@ function checkFetchable(id: string, outcome: TableOutcome): void {
   if (mapped.length === 0) {
     fail("the map fills no field, so a fetch would carry nothing beyond ids");
   }
-  const cells = (outcome.rowCount ?? 0) * (mapped.length + 1);
+  const rowCount = outcome.status === "fetchable-table-collection" ? undefined : outcome.rowCount;
+  const cells = (rowCount ?? 0) * (mapped.length + 1);
   if (cells > MAX_CELLS) {
-    fail(`the table has ${String(outcome.rowCount)} rows of ${String(mapped.length + 1)} kept cells, ${String(cells)} cells, more than ${String(MAX_CELLS)}, so it has no recipe`);
+    fail(`the table has ${String(rowCount)} rows of ${String(mapped.length + 1)} kept cells, ${String(cells)} cells, more than ${String(MAX_CELLS)}, so it has no recipe`);
   }
   if (outcome.status === "fetchable-arcgis") {
     for (const column of outcome.dateColumns) {
@@ -192,16 +193,25 @@ function checkFetchable(id: string, outcome: TableOutcome): void {
  * @throws Error when twindex finds the crosswalk structurally invalid.
  */
 function crosswalkOf(outcome: TableOutcome): Crosswalk {
+  const collection = outcome.status === "fetchable-table-collection";
+  const from = collection ? "members[].nodes[]" : "nodes[]";
+  const to = collection ? "instances[].nodes[]" : "nodes[]";
   const crosswalk = {
-    source: outcome.status === "fetchable" ? "csv-table" : "geojson",
-    target: "or/v1",
+    source: outcome.status === "fetchable-arcgis" ? "geojson" : "csv-table",
+    target: collection ? "or-set/v1" : "or/v1",
     rules: [
       { op: "move", from: "meta", to: "meta" },
-      { op: "move", from: "nodes[].id", to: "nodes[].id" },
+      ...(collection
+        ? [
+            { op: "move", from: "members[].id", to: "instances[].id" },
+            { op: "move", from: "members[].meta", to: "instances[].meta" },
+          ]
+        : []),
+      { op: "move", from: `${from}.id`, to: `${to}.id` },
       ...TARGET_FIELD_NAMES.flatMap((field) => {
         const column = outcome.map[field];
 
-        return column === undefined ? [] : [{ op: "move", from: `nodes[].${column}`, to: `nodes[].${field}` }];
+        return column === undefined ? [] : [{ op: "move", from: `${from}.${column}`, to: `${to}.${field}` }];
       }),
     ],
   };
@@ -354,7 +364,7 @@ function recipeOf(outcome: CurationItem["outcome"], source: number, url: string)
  * @returns The expected counts.
  */
 function expectedCountsOf(outcome: CurationItem["outcome"]): Record<string, number> {
-  if (outcome.status === "fetchable-collection") {
+  if (outcome.status === "fetchable-collection" || outcome.status === "fetchable-table-collection") {
     return outcome.expectedInstances === undefined ? {} : { instances: outcome.expectedInstances };
   }
   if (outcome.status === "not-fetchable" || outcome.expectedNodes === undefined) {
@@ -395,14 +405,14 @@ export function convertItem(item: SurveyEntry, curation: CurationItem, probedOn:
     ...(curation.description === undefined ? {} : { description: curation.description }),
     domain: domainOf(item),
     tags: [...new Set(item.fields)],
-    category: outcome.status === "fetchable-collection" ? "or-set/v1" : "or/v1",
+    category: outcome.status === "fetchable-collection" || outcome.status === "fetchable-table-collection" ? "or-set/v1" : "or/v1",
     sources,
     licence: curation.licence,
     citations: [],
     recipe: recipeOf(outcome, dataUrl === undefined ? 0 : 1, givenUrl),
     crosswalk: outcome.status === "not-fetchable" ? { file: OR_NODES_CROSSWALK } : outcome.status === "fetchable-collection" ? collectionCrosswalkOf(outcome) : crosswalkOf(outcome),
     expectedCounts: expectedCountsOf(outcome),
-    properties: { surveyId: item.id, ...(outcome.status === "fetchable-collection" && outcome.timeUnit !== undefined ? { timeUnit: outcome.timeUnit } : {}) },
+    properties: { surveyId: item.id, ...((outcome.status === "fetchable-collection" || outcome.status === "fetchable-table-collection") && outcome.timeUnit !== undefined ? { timeUnit: outcome.timeUnit } : {}) },
   });
 
   return {
