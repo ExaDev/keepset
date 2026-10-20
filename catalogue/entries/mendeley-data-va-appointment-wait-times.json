@@ -23,7 +23,7 @@
     "surveyId": "or-35"
   },
   "recipe": {
-    "reason": "The county-level file is 916,897,688 bytes and was not fetched whole, so its rows are not counted and no recipe is given, and the other files are larger or are zip and xlsx.",
+    "reason": "The county-level file has 14,365,643 rows, so even the id alone passes the importer's cell limit (a mapped column would hold twice that many cells), and 8,264 of its rows have unquoted commas in the state and county names of the armed forces entries, which the csv-table parser refuses at line 1892.",
     "status": "not-fetchable"
   },
   "sources": [
