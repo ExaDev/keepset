@@ -15,6 +15,7 @@ import { parseToptw } from "./toptw";
 import { parseTsplib } from "./tsplib";
 import { parseUcinetDl } from "./ucinet-dl";
 import { parseVerolog2019 } from "./verolog-2019";
+import { parseUserItemRatings } from "./user-item-ratings";
 import { parseVrpRep } from "./vrp-rep";
 import type { InstanceParser } from "./instance-shapes";
 
@@ -96,6 +97,10 @@ export function parseNative(bytes: Uint8Array, parser: Parser): NativeDocument;
 export function parseNative(bytes: Uint8Array, parser: Parser): NativeDocument {
   if (parser.format === "csv-table") {
     return parseCsvTable(decodePieces(bytes, parser), parser);
+  }
+  // The graph formats read a piece of text at a time, so a file of tens of millions of lines is not one string.
+  if (parser.format === "user-item-ratings") {
+    return parseUserItemRatings(decodePieces(bytes, parser), parser);
   }
   const text = decode(bytes, parser);
   if (parser.format === "geojson") {
