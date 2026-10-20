@@ -2,14 +2,70 @@
   "aliases": [
     "team-orienteering-chao-instances"
   ],
-  "category": "or/v1",
+  "category": "or-set/v1",
   "citations": [],
   "crosswalk": {
-    "file": "crosswalks/or-v1/nodes.json"
+    "oneWay": [],
+    "rules": [
+      {
+        "from": "meta",
+        "op": "move",
+        "to": "meta"
+      },
+      {
+        "from": "members[].id",
+        "op": "move",
+        "to": "instances[].id"
+      },
+      {
+        "from": "members[].meta.points",
+        "op": "move",
+        "to": "instances[].meta.points"
+      },
+      {
+        "from": "members[].meta.paths",
+        "op": "move",
+        "to": "instances[].meta.paths"
+      },
+      {
+        "from": "members[].meta.budget",
+        "op": "move",
+        "to": "instances[].meta.budget"
+      },
+      {
+        "from": "members[].nodes[].id",
+        "op": "move",
+        "to": "instances[].nodes[].id"
+      },
+      {
+        "from": "members[].nodes[].score",
+        "op": "move",
+        "to": "instances[].nodes[].prize"
+      },
+      {
+        "from": "members[].nodes[].x",
+        "op": "move",
+        "to": "instances[].nodes[].x"
+      },
+      {
+        "from": "members[].nodes[].y",
+        "op": "move",
+        "to": "instances[].nodes[].y"
+      },
+      {
+        "from": "members[].nodes[].role",
+        "op": "move",
+        "to": "instances[].nodes[].role"
+      }
+    ],
+    "source": "top",
+    "target": "or-set/v1"
   },
   "description": "Benchmark instances for the team orienteering problem, with node coordinates and scores, from the KU Leuven orienteering page.",
   "domain": "Orienteering",
-  "expectedCounts": {},
+  "expectedCounts": {
+    "instances": 60
+  },
   "id": "ku-leuven-team-orienteering-chao-instances",
   "licence": {
     "kind": "unrecorded"
@@ -22,8 +78,20 @@
     "surveyId": "or-0"
   },
   "recipe": {
-    "reason": "The download is a collection of 60 text instance files of one 100 node point set under different budgets (planar coordinates and a prize, with no time quantities), and a collection is more than one or/v1 document, so no recipe reads it.",
-    "status": "not-fetchable"
+    "archive": {
+      "kind": "zip",
+      "members": {
+        "extensions": [
+          ".txt"
+        ]
+      }
+    },
+    "parser": {
+      "encoding": "utf-8",
+      "format": "top"
+    },
+    "source": 1,
+    "status": "fetchable"
   },
   "sources": [
     {

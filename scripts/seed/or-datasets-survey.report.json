@@ -2,22 +2,24 @@
   "outcomes": [
     {
       "flags": [
-        "The survey URL is a landing page; the verified download is the extensionless zip for the Chao TOP4 set only, and the other sets were not checked.",
-        "The page states no licence."
+        "The survey URL is the extensionless zip download for the Chao TOP4 set.",
+        "The page states no licence.",
+        "only the instances of this archive are read: the host serves further sets of the same format as separate archives",
+        "the file has no node ids, so a node's id is its row number, and the first and last rows are where the paths start and end"
       ],
       "id": "ku-leuven-team-orienteering-chao-instances",
-      "reason": "The download is a collection of 60 text instance files of one 100 node point set under different budgets (planar coordinates and a prize, with no time quantities), and a collection is more than one or/v1 document, so no recipe reads it.",
-      "recipe": "not-fetchable",
+      "recipe": "fetchable",
       "surveyId": "or-0"
     },
     {
       "flags": [
-        "The survey URL is a landing page; only the righiniTOPTW1 zip was fetched, and the other sets on the page were not checked.",
-        "The page states no licence."
+        "The survey URL is the zip download for the righiniTOPTW1 set.",
+        "The page states no licence.",
+        "only the instances of this archive are read: the host serves further sets of the same format as separate archives",
+        "time quantities are in the unit of the coordinate grid, which the host does not name"
       ],
       "id": "ku-leuven-toptw-righini-instances",
-      "reason": "The download is a collection of Solomon style time window instance files (planar coordinates, service durations, prizes and windows in abstract units, not seconds), and a collection is more than one or/v1 document, so no recipe reads it.",
-      "recipe": "not-fetchable",
+      "recipe": "fetchable",
       "surveyId": "or-1"
     },
     {

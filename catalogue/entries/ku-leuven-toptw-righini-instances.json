@@ -2,14 +2,80 @@
   "aliases": [
     "toptw-righini-instances"
   ],
-  "category": "or/v1",
+  "category": "or-set/v1",
   "citations": [],
   "crosswalk": {
-    "file": "crosswalks/or-v1/nodes.json"
+    "oneWay": [],
+    "rules": [
+      {
+        "from": "meta",
+        "op": "move",
+        "to": "meta"
+      },
+      {
+        "from": "members[].id",
+        "op": "move",
+        "to": "instances[].id"
+      },
+      {
+        "from": "members[].meta.paths",
+        "op": "move",
+        "to": "instances[].meta.paths"
+      },
+      {
+        "from": "members[].meta.customers",
+        "op": "move",
+        "to": "instances[].meta.customers"
+      },
+      {
+        "from": "members[].meta.capacity",
+        "op": "move",
+        "to": "instances[].meta.capacity"
+      },
+      {
+        "from": "members[].nodes[].id",
+        "op": "move",
+        "to": "instances[].nodes[].id"
+      },
+      {
+        "from": "members[].nodes[].close",
+        "op": "move",
+        "to": "instances[].nodes[].deadline"
+      },
+      {
+        "from": "members[].nodes[].profit",
+        "op": "move",
+        "to": "instances[].nodes[].prize"
+      },
+      {
+        "from": "members[].nodes[].x",
+        "op": "move",
+        "to": "instances[].nodes[].x"
+      },
+      {
+        "from": "members[].nodes[].y",
+        "op": "move",
+        "to": "instances[].nodes[].y"
+      },
+      {
+        "from": "members[].nodes[].service",
+        "op": "move",
+        "to": "instances[].nodes[].service"
+      },
+      {
+        "from": "members[].nodes[].open",
+        "op": "move",
+        "to": "instances[].nodes[].open"
+      }
+    ],
+    "source": "toptw",
+    "target": "or-set/v1"
   },
   "description": "Benchmark instances for the orienteering problem with time windows, with coordinates, service durations, scores and time windows.",
   "domain": "Orienteering",
-  "expectedCounts": {},
+  "expectedCounts": {
+    "instances": 29
+  },
   "id": "ku-leuven-toptw-righini-instances",
   "licence": {
     "kind": "unrecorded"
@@ -19,11 +85,24 @@
     "ku-leuven"
   ],
   "properties": {
-    "surveyId": "or-1"
+    "surveyId": "or-1",
+    "timeUnit": "abstract units"
   },
   "recipe": {
-    "reason": "The download is a collection of Solomon style time window instance files (planar coordinates, service durations, prizes and windows in abstract units, not seconds), and a collection is more than one or/v1 document, so no recipe reads it.",
-    "status": "not-fetchable"
+    "archive": {
+      "kind": "zip",
+      "members": {
+        "extensions": [
+          ".txt"
+        ]
+      }
+    },
+    "parser": {
+      "encoding": "utf-8",
+      "format": "toptw"
+    },
+    "source": 1,
+    "status": "fetchable"
   },
   "sources": [
     {
