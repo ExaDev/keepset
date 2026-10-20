@@ -67,9 +67,27 @@ describe("buildSite on a fixture catalogue", () => {
     }
   });
 
+  it("writes a listing page per subject, an entry in each of its subjects, and none for an entry without one", () => {
+    expect(files.has("subjects/index.html")).toBe(true);
+    expect(files.get("subjects/index.html")).toContain("network-science");
+    expect(files.get("subjects/network-science/index.html")).toContain("Zachary Karate Club");
+    expect(files.get("subjects/social-science/index.html")).toContain("Zachary Karate Club");
+    expect(files.get("subjects/network-science/index.html")).not.toContain("C. elegans");
+    expect([...files.keys()].filter((path) => path.startsWith("subjects/") && path.endsWith("/index.html")).sort()).toEqual(["subjects/index.html", "subjects/network-science/index.html", "subjects/social-science/index.html"]);
+  });
+
+  it("links an entry to its subjects, links the subjects from every header and carries them in the search index and the precache", () => {
+    const entry = files.get("datasets/karate/index.html") ?? "";
+    expect(entry).toContain('<a href="../../subjects/network-science/">network-science</a>, <a href="../../subjects/social-science/">social-science</a>');
+    expect(files.get("index.html")).toContain('<a href="subjects/">Subjects</a>');
+    expect(entry).toContain('<a href="../../subjects/">Subjects</a>');
+    expect(JSON.parse(files.get("search-index.json") ?? "[]")).toContainEqual(expect.objectContaining({ id: "karate", subjects: ["network-science", "social-science"] }));
+    expect(files.get("precache.json")).toContain("subjects/network-science/");
+  });
+
   it("gives every entry page schema.org Dataset JSON-LD, pointing a dead source at its snapshot", () => {
     const karate = DatasetJsonLdSchema.parse(jsonLdOf(page(files, "datasets/karate/index.html")));
-    expect(karate).toMatchObject({ name: "Zachary Karate Club", url: `${SITE_URL}datasets/karate/`, keywords: ["graph", "Social network", "social", "small"], citation: [expect.stringContaining("https://doi.org/10.1086/jar.33.4.3629752") as string] });
+    expect(karate).toMatchObject({ name: "Zachary Karate Club", url: `${SITE_URL}datasets/karate/`, keywords: ["graph", "Social network", "network-science", "social-science", "social", "small"], citation: [expect.stringContaining("https://doi.org/10.1086/jar.33.4.3629752") as string] });
     const dead = DatasetJsonLdSchema.parse(jsonLdOf(page(files, "datasets/celegans-metabolic/index.html")));
     expect(dead.license).toBe("https://spdx.org/licenses/CC-BY-4.0.html");
     expect(dead.distribution).toEqual([{ "@type": "DataDownload", contentUrl: "https://web.archive.org/web/20230601/http://example.edu/~lab/data/celegans_metabolic.zip", archivedAt: "https://web.archive.org/web/20230601/http://example.edu/~lab/data/celegans_metabolic.zip" }]);

@@ -95,7 +95,7 @@ function Layout(context: PageContext, page: PageContent): string {
 
   return `<!doctype html>
 ${renderToStaticMarkup(
-  <html lang="en-GB"><head><meta charSet="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" /><title>{title}</title><meta name="description" content={description} /><link rel="manifest" href={`${root}manifest.webmanifest`} /><link rel="icon" href={`${root}icon.svg`} type="image/svg+xml" /><link rel="stylesheet" href={`${root}app.css`} /><meta name="theme-color" content="#1f4e79" />{head}</head><body data-root={root}><header><a className="home" href={root}>keepset</a><nav><a href={root}>All datasets</a><a href={`${root}domains/`}>Domains</a><a href={`${root}kinds/`}>Kinds</a><a href={`${root}namespaces/`}>Namespaces</a><a href="https://github.com/Mearman/keepset">Source</a></nav></header><main>{body}</main><footer>Catalogue <code>{manifest.id}</code> {manifest.version}, built by keepset {context.packageVersion}.</footer><script type="module" src={`${root}app.js`} /></body></html>,
+  <html lang="en-GB"><head><meta charSet="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" /><title>{title}</title><meta name="description" content={description} /><link rel="manifest" href={`${root}manifest.webmanifest`} /><link rel="icon" href={`${root}icon.svg`} type="image/svg+xml" /><link rel="stylesheet" href={`${root}app.css`} /><meta name="theme-color" content="#1f4e79" />{head}</head><body data-root={root}><header><a className="home" href={root}>keepset</a><nav><a href={root}>All datasets</a><a href={`${root}domains/`}>Domains</a><a href={`${root}subjects/`}>Subjects</a><a href={`${root}kinds/`}>Kinds</a><a href={`${root}namespaces/`}>Namespaces</a><a href="https://github.com/Mearman/keepset">Source</a></nav></header><main>{body}</main><footer>Catalogue <code>{manifest.id}</code> {manifest.version}, built by keepset {context.packageVersion}.</footer><script type="module" src={`${root}app.js`} /></body></html>,
 )}
 `;
 }
@@ -145,6 +145,7 @@ export function entryPage(context: PageContext, dataset: Dataset): string {
       ["Category", <code key="category">{entry.category}</code>],
       ["Kind", <a key="kind" href={`../../kinds/${slug(dataset.kind)}/`}>{dataset.kind}</a>],
       ...(entry.domain === undefined ? [] : [["Domain", <a key="domain" href={`../../domains/${slug(entry.domain)}/`}>{entry.domain}</a>] as const]),
+      ...(entry.subjects === undefined ? [] : [["Subjects", entry.subjects.map((subject) => <a key={subject} href={`../../subjects/${slug(subject)}/`}>{subject}</a>).flatMap((link, index) => (index === 0 ? [link] : [", ", link]))] as const]),
       ...(entry.tags.length === 0 ? [] : [["Tags", entry.tags.join(", ")] as const]),
       ["Licence", licenceNode],
       ["Catalogue", <Fragment key="catalogue"><code>{dataset.catalogue.id}</code> {dataset.catalogue.version}</Fragment>],
@@ -189,9 +190,9 @@ export function entryPage(context: PageContext, dataset: Dataset): string {
 }
 
 /**
- * A listing page: the datasets of one domain or one kind.
+ * A listing page: the datasets of one domain, subject or kind.
  * @param context - The page context (`root` is two levels up).
- * @param title - What the datasets share, such as "Domain: Social network".
+ * @param title - What the datasets share, such as "Domain: Social network" or "Subject: operations-research".
  * @param datasets - The datasets.
  * @returns The document.
  */
@@ -200,9 +201,9 @@ export function listingPage(context: PageContext, title: string, datasets: reado
 }
 
 /**
- * An index of listing pages: every domain or kind, with how many datasets each holds.
+ * An index of listing pages: every domain, subject or kind, with how many datasets each holds.
  * @param context - The page context (`root` is one level up).
- * @param title - "Domains" or "Kinds".
+ * @param title - "Domains", "Subjects" or "Kinds".
  * @param groups - Each group's label and datasets.
  * @returns The document.
  */
