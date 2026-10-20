@@ -2,6 +2,7 @@ import { execFileSync } from "node:child_process";
 import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
+import { zipSync } from "fflate";
 import { describe, expect, it } from "vitest";
 import { ArchiveError } from "../errors";
 import { gzip, tar, zip } from "../test-support/archives";
@@ -66,6 +67,24 @@ describe("unpack", () => {
   it("passes plain bytes through and gunzips gzip", () => {
     expect(text(unpack(new TextEncoder().encode("plain"), { kind: "none" }).bytes)).toBe("plain");
     expect(text(unpack(gzip("zipped"), { kind: "gzip" }).bytes)).toBe("zipped");
+  });
+
+  it("unpacks a member that is an archive in its turn, naming the file by both paths (the GD 2004 contest bundle's GD04/challenge.zip)", () => {
+    const bundle = zipSync({
+      "GD04/challenge.zip": zip([
+        { path: "challenge/prob1.gd4", text: "prob1" },
+        { path: "challenge/prob10.gd4", text: "prob10" },
+      ]),
+      "GD04/sample1.gd4": new TextEncoder().encode("sample"),
+      "GD04/gz/net.txt.gz": gzip("gunzipped"),
+    });
+    const inner = unpack(bundle, { kind: "zip", member: { extensions: [".zip"] }, inner: { kind: "zip", member: { path: "challenge/prob1.gd4" } } });
+    expect(inner.member).toBe("GD04/challenge.zip/challenge/prob1.gd4");
+    expect(text(inner.bytes)).toBe("prob1");
+    const gunzipped = unpack(bundle, { kind: "zip", member: { extensions: [".gz"] }, inner: { kind: "gzip" } });
+    expect([gunzipped.member, text(gunzipped.bytes)]).toEqual(["GD04/gz/net.txt.gz", "gunzipped"]);
+    expect(() => unpack(bundle, { kind: "zip", member: { extensions: [".gd4"] }, inner: { kind: "zip", member: { path: "prob1.gd4" } } })).toThrow(ArchiveError);
+    expect(() => unpack(bundle, { kind: "zip", member: { extensions: [".zip"] }, inner: { kind: "zip", member: { path: "challenge/prob2.gd4" } } })).toThrow(/found 0/);
   });
 
   it("selects a zip member by path, by trailing segments and by extension, ignoring resource forks", () => {

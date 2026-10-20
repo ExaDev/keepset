@@ -188,6 +188,16 @@ describe("an archive that selects one file or every file", () => {
     expect(issues(withArchive(taskCollectionEntry, { kind: "zip", members: { pattern: "" } }))).not.toBe("");
   });
 
+  it("accepts one member unpacked by an inner archive, and refuses an inner archive anywhere else or nested deeper", () => {
+    const inner = { kind: "zip", member: { path: "challenge/prob1.gd4" } };
+    expect(issues(withArchive(taskEntry, { kind: "zip", member: { extensions: [".zip"] }, inner }))).toBe("");
+    expect(issues(withArchive(taskEntry, { kind: "tar.gz", member: { path: "net.txt.gz" }, inner: { kind: "gzip" } }))).toBe("");
+    expect(issues(withArchive(taskCollectionEntry, { kind: "zip", members: { extensions: [".zip"] }, inner }))).not.toBe("");
+    expect(issues(withArchive(taskEntry, { kind: "gzip", inner }))).not.toBe("");
+    expect(issues(withArchive(taskEntry, { kind: "zip", member: { extensions: [".zip"] }, inner: { ...inner, inner } }))).not.toBe("");
+    expect(issues(withArchive(taskEntry, { kind: "zip", member: { extensions: [".zip"] }, inner: { kind: "none" } }))).not.toBe("");
+  });
+
   it("rejects an archive that names both a member and members, or an unknown kind", () => {
     expect(issues(withArchive(taskCollectionEntry, { kind: "zip", member: { extensions: [".csv"] }, members: { extensions: [".csv"] } }))).not.toBe("");
     expect(issues(withArchive(taskCollectionEntry, { kind: "rar", members: { extensions: [".csv"] } }))).not.toBe("");

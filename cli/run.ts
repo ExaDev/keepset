@@ -178,9 +178,11 @@ export function formatShow(dataset: Dataset): string {
   if (recipe.status === "not-fetchable") {
     lines.push(`  not fetchable: ${recipe.reason}`);
   } else {
-    const memberText = "member" in recipe.archive ? `, member ${selectorText(recipe.archive.member)}` : "members" in recipe.archive ? `, members ${selectorText(recipe.archive.members)}` : "";
+    const { archive } = recipe;
+    const innerText = "inner" in archive && archive.inner !== undefined ? `, inner ${archive.inner.kind}${"member" in archive.inner ? `, member ${selectorText(archive.inner.member)}` : ""}` : "";
+    const memberText = "member" in archive ? `, member ${selectorText(archive.member)}${innerText}` : "members" in archive ? `, members ${selectorText(archive.members)}` : "";
     const { format, ...options } = recipe.parser;
-    lines.push(`  source: [${String(recipe.source)}]`, `  archive: ${recipe.archive.kind}${memberText}`, `  parser: ${format} ${JSON.stringify(options)}`);
+    lines.push(`  source: [${String(recipe.source)}]`, `  archive: ${archive.kind}${memberText}`, `  parser: ${format} ${JSON.stringify(options)}`);
   }
   lines.push("", `crosswalk: ${crosswalk.source} -> ${crosswalk.target}`);
   for (const rule of crosswalk.rules) {

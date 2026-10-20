@@ -1,6 +1,6 @@
 import { gunzipSync } from "node:zlib";
 import { unzipSync, type UnzipFileFilter } from "fflate";
-import type { CollectionArchive, DocumentArchive, ArchiveMember } from "../entry";
+import type { CollectionArchive, DocumentArchive, ArchiveMember, InnerArchive } from "../entry";
 import { ArchiveError } from "../errors";
 import { getOwn } from "../own";
 import { readTar } from "./tar";
@@ -89,11 +89,11 @@ function pick(paths: readonly string[], member: ArchiveMember): string {
 }
 
 /**
- * Unpacks downloaded bytes into the one file the parser reads.
+ * Unpacks downloaded bytes into the one file the parser reads. A member with an `inner` archive is unpacked again by that layout, and the path reported is the outer member's, joined by `/` to the inner member's when the inner layout selects one, as though the inner archive were a directory.
  * @param bytes - The downloaded bytes.
  * @param archive - The recipe's archive layout.
  * @returns The file's bytes, and its member path for a multi-file archive.
- * @throws ArchiveError when the bytes are not a well-formed archive of the stated kind or the selector does not match exactly one member.
+ * @throws ArchiveError when the bytes, or a member's bytes that an `inner` layout reads, are not a well-formed archive of the stated kind or a selector does not match exactly one member.
  */
 export function unpack(bytes: Uint8Array, archive: DocumentArchive): Unpacked {
   if (archive.kind === "none") {
@@ -105,6 +105,26 @@ export function unpack(bytes: Uint8Array, archive: DocumentArchive): Unpacked {
   if (archive.kind === "xlsx") {
     return { bytes: sheetToCsv(bytes, archive.sheet), member: archive.sheet };
   }
+  const outer = selectMember(bytes, archive);
+  if (archive.inner === undefined) {
+    return outer;
+  }
+  if (archive.inner.kind === "gzip") {
+    return { bytes: gunzip(outer.bytes), member: outer.member };
+  }
+  const inner = selectMember(outer.bytes, archive.inner);
+
+  return { bytes: inner.bytes, member: `${outer.member}/${inner.member}` };
+}
+
+/**
+ * Unpacks the one member a file archive's selector matches.
+ * @param bytes - The archive's bytes.
+ * @param archive - A file archive layout and its selector.
+ * @returns The member's bytes and path.
+ * @throws ArchiveError when the bytes are not a well-formed archive of the stated kind or the selector does not match exactly one member.
+ */
+function selectMember(bytes: Uint8Array, archive: Exclude<InnerArchive, { readonly kind: "gzip" }>): { readonly bytes: Uint8Array; readonly member: string } {
   if (archive.kind === "zip") {
     const names: string[] = [];
     // fflate's filter sees every entry's name before inflating, so listing the names decompresses nothing and only the chosen member is ever inflated.

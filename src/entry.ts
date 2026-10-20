@@ -130,11 +130,15 @@ const FileArchiveKindSchema = z.enum(["zip", "tar", "tar.gz"]);
 /** An archive a collection is read from: every file a selector matches, at least one. */
 export const CollectionArchiveSchema = z.object({ kind: FileArchiveKindSchema, members: ArchiveMemberSchema }).strict();
 
-/** How the downloaded bytes unpack into the file the parser reads, or for a collection the files it reads one by one. A `members` selector gives every member it matches, at least one, in path order. A workbook (`xlsx`) is read as the CSV of its named sheet, with dates as ISO 8601 text, for the `csv-table` parser. */
+/** How a member that is itself an archive unpacks into the file the parser reads: gunzipped, or one member of it selected. It nests one level, which is as deep as any source in the catalogue goes. */
+export const InnerArchiveSchema = z.union([z.object({ kind: z.literal("gzip") }).strict(), z.object({ kind: FileArchiveKindSchema, member: ArchiveMemberSchema }).strict()]);
+export type InnerArchive = z.infer<typeof InnerArchiveSchema>;
+
+/** How the downloaded bytes unpack into the file the parser reads, or for a collection the files it reads one by one. A `members` selector gives every member it matches, at least one, in path order. A member that is an archive in its turn (a contest bundle that ships its problems as a zip inside the zip) is unpacked by `inner`. A workbook (`xlsx`) is read as the CSV of its named sheet, with dates as ISO 8601 text, for the `csv-table` parser. */
 export const ArchiveSchema = z.union([
   z.object({ kind: z.literal("none") }).strict(),
   z.object({ kind: z.literal("gzip") }).strict(),
-  z.object({ kind: FileArchiveKindSchema, member: ArchiveMemberSchema }).strict(),
+  z.object({ kind: FileArchiveKindSchema, member: ArchiveMemberSchema, inner: InnerArchiveSchema.optional() }).strict(),
   CollectionArchiveSchema,
   z.object({ kind: z.literal("xlsx"), sheet: z.string().min(1) }).strict(),
 ]);
