@@ -10,8 +10,8 @@
   },
   "description": "Undirected, weighted network of human protein interactions. Nodes represent proteins, edges represent confirmed physical interactions. Edge weights represent confidence scores (0-1) from interaction prediction methods and experimental evidence aggregation. Heavily connected biological network useful for studying scale-free properties in real biological systems.",
   "expectedCounts": {
-    "edges": 186481,
-    "nodes": 20194
+    "edges": 987845,
+    "nodes": 20744
   },
   "id": "ppi-human",
   "licence": {
@@ -30,7 +30,7 @@
     "multigraph": false,
     "nodeTypes": 1,
     "rawBytes": 0,
-    "selfLoops": false,
+    "selfLoops": true,
     "weighted": true
   },
   "recipe": {
@@ -41,7 +41,7 @@
     {
       "retrieved": "2026-03-26",
       "status": "live",
-      "url": "https://downloads.thebiogrid.org/Download/BioGRID/Latest-Release/BIOGRID-ORGANISM-LATEST.tab3.zip"
+      "url": "https://downloads.thebiogrid.org/Download/BioGRID/Release-Archive/BIOGRID-5.0.262/BIOGRID-ORGANISM-5.0.262.tab3.zip"
     }
   ],
   "tags": []

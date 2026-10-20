@@ -10,8 +10,8 @@
   },
   "description": "Undirected, unweighted network representing the topology of the Western States Power Grid of the United States. Nodes represent generators, transformers, and substations.",
   "expectedCounts": {
-    "edges": 0,
-    "nodes": 0
+    "edges": 6594,
+    "nodes": 4941
   },
   "id": "power",
   "licence": {

@@ -14,7 +14,7 @@
   "description": "computer graphics/vision problem (8,217,820 nodes, 40,451,632 non-zeros)",
   "expectedCounts": {
     "edges": 40451632,
-    "nodes": 8217820
+    "nodes": 15809384
   },
   "id": "ss-hardesty-hardesty3",
   "licence": {
@@ -35,7 +35,7 @@
     "edgeTypes": 1,
     "heterogeneous": false,
     "multigraph": false,
-    "nodeTypes": 1,
+    "nodeTypes": 2,
     "rawBytes": 0,
     "selfLoops": false,
     "weighted": true

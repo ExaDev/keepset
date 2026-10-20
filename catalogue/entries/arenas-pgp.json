@@ -13,14 +13,12 @@
   },
   "description": "Giant component of the network of users of the Pretty-Good-Privacy algorithm for secure information interchange.",
   "expectedCounts": {
-    "edges": 35021,
-    "nodes": 21361
+    "edges": 24340,
+    "nodes": 10680
   },
   "id": "arenas-pgp",
   "licence": {
-    "kind": "custom",
-    "name": "Creative Commons Attribution-ShareAlike (version not stated)",
-    "url": "https://networkrepository.com/policy.php"
+    "kind": "unrecorded"
   },
   "name": "PGP Network",
   "namespace": [
@@ -34,7 +32,7 @@
     "directed": false,
     "edgeTypes": 1,
     "heterogeneous": false,
-    "multigraph": false,
+    "multigraph": true,
     "nodeTypes": 1,
     "rawBytes": 2998684,
     "selfLoops": false,
@@ -42,18 +40,19 @@
   },
   "recipe": {
     "archive": {
-      "kind": "tar.gz",
+      "kind": "zip",
       "member": {
         "extensions": [
-          ".gml"
+          ".net",
+          ".paj"
         ]
       }
     },
     "parser": {
-      "encoding": "utf-8",
-      "format": "gml"
+      "encoding": "latin1",
+      "format": "pajek"
     },
-    "source": 1,
+    "source": 0,
     "status": "fetchable"
   },
   "sources": [

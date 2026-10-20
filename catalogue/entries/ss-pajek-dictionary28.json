@@ -13,8 +13,8 @@
   },
   "description": "Word adjacency network from a dictionary. Edges connect words differing by one letter.",
   "expectedCounts": {
-    "edges": 178076,
-    "nodes": 52652
+    "edges": 89038,
+    "nodes": 39327
   },
   "id": "ss-pajek-dictionary28",
   "licence": {

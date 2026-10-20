@@ -10,8 +10,8 @@
   },
   "description": "Collaboration network centered on Paul Erdos. Nodes are mathematicians who collaborated with Erdos or his collaborators.",
   "expectedCounts": {
-    "edges": 0,
-    "nodes": 0
+    "edges": 11850,
+    "nodes": 6927
   },
   "id": "erdos02",
   "licence": {

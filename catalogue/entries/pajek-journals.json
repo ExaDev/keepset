@@ -33,10 +33,10 @@
     "directed": false,
     "edgeTypes": 1,
     "heterogeneous": false,
-    "multigraph": true,
+    "multigraph": false,
     "nodeTypes": 1,
     "rawBytes": 739353,
-    "selfLoops": false,
+    "selfLoops": true,
     "weighted": true
   },
   "recipe": {
@@ -53,19 +53,10 @@
       "encoding": "latin1",
       "format": "pajek"
     },
-    "source": 1,
+    "source": 0,
     "status": "fetchable"
   },
   "sources": [
-    {
-      "retrieved": "2026-02-16",
-      "snapshot": {
-        "timestamp": "20230601",
-        "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/"
-      },
-      "status": "dead",
-      "url": "http://vlado.fmf.uni-lj.si/pub/networks/data/"
-    },
     {
       "retrieved": "2026-02-16",
       "snapshot": {

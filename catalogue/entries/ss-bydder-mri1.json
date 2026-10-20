@@ -14,7 +14,7 @@
   "description": "computer graphics/vision problem (65,536 nodes, 589,824 non-zeros)",
   "expectedCounts": {
     "edges": 589824,
-    "nodes": 65536
+    "nodes": 212992
   },
   "id": "ss-bydder-mri1",
   "licence": {

@@ -10,8 +10,8 @@
   },
   "description": "Weighted network of coauthorships between scientists posting preprints on the High-Energy Theory E-Print Archive between Jan 1, 1995 and December 31, 1999.",
   "expectedCounts": {
-    "edges": 0,
-    "nodes": 0
+    "edges": 15751,
+    "nodes": 8361
   },
   "id": "hep-th",
   "licence": {

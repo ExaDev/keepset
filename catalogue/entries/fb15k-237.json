@@ -10,7 +10,7 @@
   },
   "description": "Heterogeneous knowledge graph from Freebase with 237 relation types. A subset of FB15k created by removing inverse relations to prevent test leakage. Contains entities from multiple domains (people, locations, music, film) with directed relation edges. Standard benchmark for knowledge graph completion and link prediction.",
   "expectedCounts": {
-    "edges": 116,
+    "edges": 283869,
     "nodes": 14543
   },
   "id": "fb15k-237",
@@ -29,11 +29,11 @@
     "multigraph": false,
     "nodeTypes": 1,
     "rawBytes": 0,
-    "selfLoops": false,
+    "selfLoops": true,
     "weighted": false
   },
   "recipe": {
-    "reason": "no download is in a form keepset reads yet (kge-triples-tar: format kge-triples-tar has a pipeline-specific parser with no declarative keepset form yet; pykeen: format pykeen has a pipeline-specific parser with no declarative keepset form yet; txt: the download is a web page, not a data file)",
+    "reason": "no download is in a form keepset reads yet (kge-triples-tar: format kge-triples-tar has a pipeline-specific parser with no declarative keepset form yet; landing-page: a landing page, not a download; landing-page: the download is a web page, not a data file)",
     "status": "not-fetchable"
   },
   "sources": [

@@ -10,8 +10,8 @@
   },
   "description": "Network of cross-references in Roget's Thesaurus.",
   "expectedCounts": {
-    "edges": 0,
-    "nodes": 0
+    "edges": 5075,
+    "nodes": 1022
   },
   "id": "roget",
   "licence": {
@@ -30,7 +30,7 @@
     "multigraph": false,
     "nodeTypes": 1,
     "rawBytes": 113272,
-    "selfLoops": false,
+    "selfLoops": true,
     "weighted": true
   },
   "recipe": {

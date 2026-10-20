@@ -131,11 +131,6 @@
       "pipelineId": "dolphins"
     },
     {
-      "graphboxId": "ego-facebook",
-      "matchedBy": "id",
-      "pipelineId": "ego-facebook"
-    },
-    {
       "graphboxId": "ego-twitter",
       "matchedBy": "id",
       "pipelineId": "ego-twitter"
@@ -3595,7 +3590,8 @@
     },
     {
       "flags": [
-        "archive member chosen by extension .gml, which the source catalogue does not record"
+        "archive member chosen by extension .net or .paj, which the source catalogue does not record",
+        "the source is dead and the recipe fetches its pinned Wayback snapshot"
       ],
       "id": "arenas-pgp",
       "outcome": "converted-with-flags",
@@ -3649,7 +3645,7 @@
       "flags": [],
       "id": "bitcoin-blockchain",
       "outcome": "not-converted",
-      "reason": "the source catalogue records no sources"
+      "reason": "the source catalogue records no retrieval date, which every keepset source carries"
     },
     {
       "flags": [
@@ -3716,12 +3712,6 @@
     {
       "flags": [],
       "id": "celegans-interactome-lci-undirected",
-      "outcome": "not-converted",
-      "reason": "the source catalogue records no retrieval date, which every keepset source carries"
-    },
-    {
-      "flags": [],
-      "id": "celegans-metabolic-undir",
       "outcome": "not-converted",
       "reason": "the source catalogue records no retrieval date, which every keepset source carries"
     },
@@ -3881,12 +3871,6 @@
     },
     {
       "flags": [],
-      "id": "ego-facebook",
-      "outcome": "converted",
-      "recipe": "fetchable"
-    },
-    {
-      "flags": [],
       "id": "ego-twitter",
       "outcome": "converted",
       "recipe": "fetchable"
@@ -4008,9 +3992,12 @@
       "recipe": "fetchable"
     },
     {
-      "flags": [],
+      "flags": [
+        "catalogue: skip 1 header line",
+        "catalogue: edge endpoints in columns 0 and 2"
+      ],
       "id": "hetionet",
-      "outcome": "converted",
+      "outcome": "converted-with-flags",
       "recipe": "fetchable"
     },
     {
@@ -4064,11 +4051,11 @@
     },
     {
       "flags": [
-        "not fetchable yet: no declarative recipe exists for any download"
+        "catalogue: edge endpoints in columns 0 and 2"
       ],
       "id": "kg-codex-s",
       "outcome": "converted-with-flags",
-      "recipe": "not-fetchable"
+      "recipe": "fetchable"
     },
     {
       "flags": [
@@ -4419,14 +4406,6 @@
       "recipe": "fetchable"
     },
     {
-      "flags": [
-        "Netzschleuder: the pipeline reads every Netzschleuder download with its graph-tool parser; the recipe reads the CSV archive derived from the catalogue's URL"
-      ],
-      "id": "netzschleuder-interactome_pdz",
-      "outcome": "converted-with-flags",
-      "recipe": "fetchable"
-    },
-    {
       "flags": [],
       "id": "netzschleuder-internet-top-pop-eenet",
       "outcome": "not-converted",
@@ -4461,14 +4440,6 @@
         "Netzschleuder: the pipeline reads every Netzschleuder download with its graph-tool parser; the recipe reads the CSV archive derived from the catalogue's URL"
       ],
       "id": "netzschleuder-law-firm",
-      "outcome": "converted-with-flags",
-      "recipe": "fetchable"
-    },
-    {
-      "flags": [
-        "Netzschleuder: the pipeline reads every Netzschleuder download with its graph-tool parser; the recipe reads the CSV archive derived from the catalogue's URL"
-      ],
-      "id": "netzschleuder-law_firm",
       "outcome": "converted-with-flags",
       "recipe": "fetchable"
     },
@@ -4547,14 +4518,6 @@
         "Netzschleuder: the pipeline reads every Netzschleuder download with its graph-tool parser; the recipe reads the CSV archive derived from the catalogue's URL"
       ],
       "id": "netzschleuder-physician_trust",
-      "outcome": "converted-with-flags",
-      "recipe": "fetchable"
-    },
-    {
-      "flags": [
-        "Netzschleuder: the pipeline reads every Netzschleuder download with its graph-tool parser; the recipe reads the CSV archive derived from the catalogue's URL"
-      ],
-      "id": "netzschleuder-plant_pol_kato",
       "outcome": "converted-with-flags",
       "recipe": "fetchable"
     },
@@ -4679,12 +4642,6 @@
     {
       "flags": [],
       "id": "netzschleuder-sp-hypertext-contacts",
-      "outcome": "not-converted",
-      "reason": "the source catalogue records no retrieval date, which every keepset source carries"
-    },
-    {
-      "flags": [],
-      "id": "netzschleuder-sp-hypertext-contacts-weighted",
       "outcome": "not-converted",
       "reason": "the source catalogue records no retrieval date, which every keepset source carries"
     },
@@ -4837,7 +4794,6 @@
     {
       "flags": [
         "dropped a download that is a local file path, not a public source",
-        "dropped an auth-walled download at www.kaggle.com",
         "not fetchable yet: no declarative recipe exists for any download"
       ],
       "id": "oag-eng",
@@ -5421,12 +5377,6 @@
       "id": "ppi-human",
       "outcome": "converted-with-flags",
       "recipe": "not-fetchable"
-    },
-    {
-      "flags": [],
-      "id": "radoslaw-email-multigraph",
-      "outcome": "not-converted",
-      "reason": "the source catalogue records no retrieval date, which every keepset source carries"
     },
     {
       "flags": [],
@@ -9994,15 +9944,6 @@
         "the source is dead and the recipe fetches its pinned Wayback snapshot"
       ],
       "id": "ucinet-sampson",
-      "outcome": "converted-with-flags",
-      "recipe": "fetchable"
-    },
-    {
-      "flags": [
-        "UCINet DL: the recipe reads the file's first matrix, the one the pipeline reads",
-        "the source is dead and the recipe fetches its pinned Wayback snapshot"
-      ],
-      "id": "ucinet-sampson-monastery",
       "outcome": "converted-with-flags",
       "recipe": "fetchable"
     },

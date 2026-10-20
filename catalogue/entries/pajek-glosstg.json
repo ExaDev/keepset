@@ -33,7 +33,7 @@
     "directed": true,
     "edgeTypes": 1,
     "heterogeneous": false,
-    "multigraph": true,
+    "multigraph": false,
     "nodeTypes": 1,
     "rawBytes": 9601,
     "selfLoops": false,
@@ -50,19 +50,10 @@
       "encoding": "utf-8",
       "format": "matrix-market"
     },
-    "source": 2,
+    "source": 1,
     "status": "fetchable"
   },
   "sources": [
-    {
-      "retrieved": "2026-02-16",
-      "snapshot": {
-        "timestamp": "20230601",
-        "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/"
-      },
-      "status": "dead",
-      "url": "http://vlado.fmf.uni-lj.si/pub/networks/data/"
-    },
     {
       "retrieved": "2026-02-16",
       "snapshot": {

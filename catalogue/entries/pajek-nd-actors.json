@@ -13,8 +13,8 @@
   },
   "description": "Two-mode network of actors and films. 392,400 actors, 127,823 films, 1,470,418 appearances.",
   "expectedCounts": {
-    "edges": 127823,
-    "nodes": 520223
+    "edges": 1470404,
+    "nodes": 511463
   },
   "id": "pajek-nd-actors",
   "licence": {

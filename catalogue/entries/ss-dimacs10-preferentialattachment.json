@@ -13,7 +13,7 @@
   },
   "description": "random undirected graph (100,000 nodes, 999,970 non-zeros)",
   "expectedCounts": {
-    "edges": 499986,
+    "edges": 499985,
     "nodes": 100000
   },
   "id": "ss-dimacs10-preferentialattachment",
@@ -37,7 +37,7 @@
     "multigraph": false,
     "nodeTypes": 1,
     "rawBytes": 0,
-    "selfLoops": true,
+    "selfLoops": false,
     "weighted": false
   },
   "recipe": {

@@ -13,7 +13,7 @@
   },
   "description": "Core Erdos collaboration network, 1997 version. Direct collaborators only.",
   "expectedCounts": {
-    "edges": 337,
+    "edges": 1314,
     "nodes": 472
   },
   "id": "pajek-erdos-971",
@@ -33,7 +33,7 @@
     "directed": false,
     "edgeTypes": 1,
     "heterogeneous": false,
-    "multigraph": true,
+    "multigraph": false,
     "nodeTypes": 1,
     "rawBytes": 47357,
     "selfLoops": false,

@@ -14,7 +14,7 @@
   "description": "computer graphics/vision problem (240,000 nodes, 711,683 non-zeros)",
   "expectedCounts": {
     "edges": 711683,
-    "nodes": 240000
+    "nodes": 360000
   },
   "id": "ss-yoshiyasu-image-interp",
   "licence": {

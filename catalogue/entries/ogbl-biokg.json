@@ -34,15 +34,10 @@
     "weighted": false
   },
   "recipe": {
-    "reason": "no download is in a form keepset reads yet (ogb-zip: the download is a directory listing, not a data file; ogb-zip: format ogb-zip has a pipeline-specific parser with no declarative keepset form yet)",
+    "reason": "no download is in a form keepset reads yet (ogb-zip: format ogb-zip has a pipeline-specific parser with no declarative keepset form yet)",
     "status": "not-fetchable"
   },
   "sources": [
-    {
-      "retrieved": "2026-03-26",
-      "status": "live",
-      "url": "https://ogb.stanford.edu/docs/linkprop/#ogbl-biokg"
-    },
     {
       "retrieved": "2026-03-26",
       "status": "live",

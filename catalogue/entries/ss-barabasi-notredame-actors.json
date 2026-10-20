@@ -14,7 +14,7 @@
   "description": "bipartite graph (392,400 nodes, 1,470,404 non-zeros)",
   "expectedCounts": {
     "edges": 1470404,
-    "nodes": 392400
+    "nodes": 520223
   },
   "id": "ss-barabasi-notredame-actors",
   "licence": {

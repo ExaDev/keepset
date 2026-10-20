@@ -321,21 +321,6 @@
       }
     },
     {
-      "id": "yago",
-      "name": "YAGO",
-      "prefixes": [
-        "https://www.yago-knowledge.org/"
-      ],
-      "terms": {
-        "licence": {
-          "kind": "spdx",
-          "id": "CC-BY-3.0"
-        },
-        "statedAt": "https://yago-knowledge.org/downloads/yago-3",
-        "statement": "YAGO 3 is licensed under a Creative Commons Attribution 3.0 License by the YAGO team of the Max-Planck Institute for Informatics."
-      }
-    },
-    {
       "id": "string",
       "name": "STRING",
       "prefixes": [

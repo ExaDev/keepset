@@ -13,8 +13,8 @@
   },
   "description": "Citation network from Scientometrics literature.",
   "expectedCounts": {
-    "edges": 0,
-    "nodes": 0
+    "edges": 4922,
+    "nodes": 1059
   },
   "id": "pajek-smagri",
   "licence": {

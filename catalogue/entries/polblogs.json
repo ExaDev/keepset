@@ -10,8 +10,8 @@
   },
   "description": "Directed network of hyperlinks between weblogs on US politics, recorded in 2005. The 'value' property indicates political leaning: 0 for left/liberal, 1 for right/conservative.",
   "expectedCounts": {
-    "edges": 0,
-    "nodes": 0
+    "edges": 19090,
+    "nodes": 1490
   },
   "id": "polblogs",
   "licence": {
@@ -28,10 +28,10 @@
     "directed": true,
     "edgeTypes": 1,
     "heterogeneous": false,
-    "multigraph": false,
+    "multigraph": true,
     "nodeTypes": 1,
     "rawBytes": 1705487,
-    "selfLoops": false,
+    "selfLoops": true,
     "weighted": false
   },
   "recipe": {

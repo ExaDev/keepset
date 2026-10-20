@@ -13,7 +13,7 @@
   },
   "description": "undirected bipartite graph (512 nodes, 1,127,525 non-zeros)",
   "expectedCounts": {
-    "edges": 1,
+    "edges": 1127525,
     "nodes": 395304
   },
   "id": "ss-buss-connectus",

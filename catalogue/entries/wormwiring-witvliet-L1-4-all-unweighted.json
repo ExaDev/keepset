@@ -14,8 +14,8 @@
   "description": "Directed unweighted multigraph of all synaptic connections in the L1 larval C. elegans (specimen 4). Each synapse is a separate edge. Contains autapses. Homogeneous (no connection-type distinction).",
   "domain": "Neural connectome",
   "expectedCounts": {
-    "edges": 0,
-    "nodes": 0
+    "edges": 3197,
+    "nodes": 206
   },
   "id": "wormwiring-witvliet-L1-4-all-unweighted",
   "licence": {
@@ -30,7 +30,7 @@
     "heterogeneous": false,
     "multigraph": true,
     "rawBytes": 0,
-    "selfLoops": false,
+    "selfLoops": true,
     "weighted": false
   },
   "recipe": {

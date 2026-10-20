@@ -14,7 +14,7 @@
   "description": "computer graphics/vision problem (73,159 nodes, 647,495 non-zeros)",
   "expectedCounts": {
     "edges": 647495,
-    "nodes": 73159
+    "nodes": 132657
   },
   "id": "ss-clark-tomographic1",
   "licence": {

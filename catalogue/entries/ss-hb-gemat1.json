@@ -13,8 +13,8 @@
   },
   "description": "power network problem (4,929 nodes, 46,591 non-zeros)",
   "expectedCounts": {
-    "edges": 47370,
-    "nodes": 10595
+    "edges": 47369,
+    "nodes": 15524
   },
   "id": "ss-hb-gemat1",
   "licence": {

@@ -10,8 +10,8 @@
   },
   "description": "Protein-protein interaction network in yeast (Saccharomyces cerevisiae).",
   "expectedCounts": {
-    "edges": 0,
-    "nodes": 0
+    "edges": 7182,
+    "nodes": 2361
   },
   "id": "yeast",
   "licence": {
@@ -30,7 +30,7 @@
     "multigraph": false,
     "nodeTypes": 1,
     "rawBytes": 462602,
-    "selfLoops": false,
+    "selfLoops": true,
     "weighted": false
   },
   "recipe": {

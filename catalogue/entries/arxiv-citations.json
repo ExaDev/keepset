@@ -10,8 +10,8 @@
   },
   "description": "Directed acyclic graph of paper citations from arXiv high-energy physics preprints. Papers can only cite papers published before them. Medium-sized DAG with clear temporal ordering. Useful for benchmarking DAG algorithms on realistic citation networks and temporal graph analysis.",
   "expectedCounts": {
-    "edges": 2332014,
-    "nodes": 178569
+    "edges": 421578,
+    "nodes": 34546
   },
   "id": "arxiv-citations",
   "licence": {
@@ -29,7 +29,7 @@
     "multigraph": false,
     "nodeTypes": 1,
     "rawBytes": 0,
-    "selfLoops": false,
+    "selfLoops": true,
     "weighted": false
   },
   "recipe": {
@@ -48,15 +48,10 @@
       "sourceColumn": 0,
       "targetColumn": 1
     },
-    "source": 1,
+    "source": 0,
     "status": "fetchable"
   },
   "sources": [
-    {
-      "retrieved": "2026-03-26",
-      "status": "live",
-      "url": "https://snap.stanford.edu/data/cit-HepPh.html"
-    },
     {
       "retrieved": "2026-03-26",
       "status": "live",

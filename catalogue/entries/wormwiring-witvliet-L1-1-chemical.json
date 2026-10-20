@@ -14,8 +14,8 @@
   "description": "Directed multigraph of chemical synapses in the L1 larval stage C. elegans. Each synapse is a separate unweighted edge. Multiple synapses between the same neuron pair create multi-edges. Gap junctions excluded. No autapses.",
   "domain": "Neural connectome",
   "expectedCounts": {
-    "edges": 0,
-    "nodes": 0
+    "edges": 1297,
+    "nodes": 188
   },
   "id": "wormwiring-witvliet-L1-1-chemical",
   "licence": {

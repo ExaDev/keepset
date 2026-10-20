@@ -10,8 +10,8 @@
   },
   "description": "Collaboration network of computational geometry researchers.",
   "expectedCounts": {
-    "edges": 0,
-    "nodes": 0
+    "edges": 11898,
+    "nodes": 7343
   },
   "id": "geom",
   "licence": {

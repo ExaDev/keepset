@@ -14,7 +14,7 @@
   "description": "directed graph (9,914 nodes, 36,854 non-zeros)",
   "expectedCounts": {
     "edges": 36854,
-    "nodes": 9914
+    "nodes": 9435
   },
   "id": "ss-gleich-wb-cs-stanford",
   "licence": {
@@ -37,7 +37,7 @@
     "multigraph": false,
     "nodeTypes": 1,
     "rawBytes": 0,
-    "selfLoops": false,
+    "selfLoops": true,
     "weighted": false
   },
   "recipe": {

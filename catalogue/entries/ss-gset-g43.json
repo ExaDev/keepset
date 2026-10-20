@@ -13,7 +13,7 @@
   },
   "description": "undirected random graph (1,000 nodes, 19,980 non-zeros)",
   "expectedCounts": {
-    "edges": 9991,
+    "edges": 9990,
     "nodes": 1000
   },
   "id": "ss-gset-g43",
@@ -37,7 +37,7 @@
     "multigraph": false,
     "nodeTypes": 1,
     "rawBytes": 0,
-    "selfLoops": true,
+    "selfLoops": false,
     "weighted": false
   },
   "recipe": {

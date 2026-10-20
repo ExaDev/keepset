@@ -13,8 +13,8 @@
   },
   "description": "Extended Erdos collaboration network, 1999 version.",
   "expectedCounts": {
-    "edges": 0,
-    "nodes": 0
+    "edges": 9939,
+    "nodes": 6100
   },
   "id": "pajek-erdos-992",
   "licence": {

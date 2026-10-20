@@ -13,7 +13,7 @@
   },
   "description": "undirected weighted random graph (10,000 nodes, 40,000 non-zeros)",
   "expectedCounts": {
-    "edges": 20001,
+    "edges": 20000,
     "nodes": 10000
   },
   "id": "ss-gset-g67",

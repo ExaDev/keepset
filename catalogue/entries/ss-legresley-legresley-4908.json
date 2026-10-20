@@ -13,7 +13,7 @@
   },
   "description": "power network problem (4,908 nodes, 30,482 non-zeros)",
   "expectedCounts": {
-    "edges": 30483,
+    "edges": 30482,
     "nodes": 4908
   },
   "id": "ss-legresley-legresley-4908",

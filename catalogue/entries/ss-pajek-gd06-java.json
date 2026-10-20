@@ -13,8 +13,8 @@
   },
   "description": "Graph Drawing Contest 2006, Java class dependency graph.",
   "expectedCounts": {
-    "edges": 0,
-    "nodes": 0
+    "edges": 8032,
+    "nodes": 1538
   },
   "id": "ss-pajek-gd06-java",
   "licence": {

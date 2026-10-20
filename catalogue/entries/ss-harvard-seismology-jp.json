@@ -14,7 +14,7 @@
   "description": "tomography problem (87,616 nodes, 13,734,559 non-zeros)",
   "expectedCounts": {
     "edges": 13734559,
-    "nodes": 87616
+    "nodes": 154936
   },
   "id": "ss-harvard-seismology-jp",
   "licence": {

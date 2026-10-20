@@ -13,8 +13,8 @@
   },
   "description": "Citation network from EVA (Electronic Visualisation and the Arts) conference proceedings.",
   "expectedCounts": {
-    "edges": 0,
-    "nodes": 0
+    "edges": 6726,
+    "nodes": 7253
   },
   "id": "ss-pajek-eva",
   "licence": {
@@ -37,7 +37,7 @@
     "multigraph": false,
     "nodeTypes": 1,
     "rawBytes": 835825,
-    "selfLoops": false,
+    "selfLoops": true,
     "weighted": false
   },
   "recipe": {

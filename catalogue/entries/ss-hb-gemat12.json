@@ -13,7 +13,7 @@
   },
   "description": "subsequent power network problem (4,929 nodes, 33,044 non-zeros)",
   "expectedCounts": {
-    "edges": 33112,
+    "edges": 33111,
     "nodes": 4929
   },
   "id": "ss-hb-gemat12",

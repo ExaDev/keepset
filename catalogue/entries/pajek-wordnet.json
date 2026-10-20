@@ -13,7 +13,7 @@
   },
   "description": "Lexical reference network from Princeton WordNet. 82,670 synsets, 133,445 relations.",
   "expectedCounts": {
-    "edges": 98678,
+    "edges": 133445,
     "nodes": 82670
   },
   "id": "pajek-wordnet",
@@ -36,7 +36,7 @@
     "multigraph": false,
     "nodeTypes": 1,
     "rawBytes": 9736311,
-    "selfLoops": false,
+    "selfLoops": true,
     "weighted": true
   },
   "recipe": {

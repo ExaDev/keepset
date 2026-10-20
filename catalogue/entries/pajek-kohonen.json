@@ -13,8 +13,8 @@
   },
   "description": "Citation network around self-organising maps research (Teuvo Kohonen).",
   "expectedCounts": {
-    "edges": 0,
-    "nodes": 0
+    "edges": 12731,
+    "nodes": 4470
   },
   "id": "pajek-kohonen",
   "licence": {
@@ -35,7 +35,7 @@
     "multigraph": false,
     "nodeTypes": 1,
     "rawBytes": 334949,
-    "selfLoops": false,
+    "selfLoops": true,
     "weighted": true
   },
   "recipe": {

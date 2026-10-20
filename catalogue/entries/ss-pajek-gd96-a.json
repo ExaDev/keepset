@@ -13,8 +13,8 @@
   },
   "description": "Graph Drawing Contest 1996, graph A.",
   "expectedCounts": {
-    "edges": 0,
-    "nodes": 0
+    "edges": 1677,
+    "nodes": 1096
   },
   "id": "ss-pajek-gd96-a",
   "licence": {

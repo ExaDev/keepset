@@ -14,7 +14,7 @@
   "description": "undirected bipartite graph (12,471 nodes, 22,624,727 non-zeros)",
   "expectedCounts": {
     "edges": 22624727,
-    "nodes": 12471
+    "nodes": 885093
   },
   "id": "ss-buss-12month1",
   "licence": {

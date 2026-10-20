@@ -13,8 +13,8 @@
   },
   "description": "Web pages from the US Environmental Protection Agency site.",
   "expectedCounts": {
-    "edges": 0,
-    "nodes": 0
+    "edges": 8965,
+    "nodes": 4271
   },
   "id": "pajek-epa",
   "licence": {

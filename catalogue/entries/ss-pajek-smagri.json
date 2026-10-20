@@ -13,8 +13,8 @@
   },
   "description": "Small graph drawing contest network.",
   "expectedCounts": {
-    "edges": 0,
-    "nodes": 0
+    "edges": 4919,
+    "nodes": 1024
   },
   "id": "ss-pajek-smagri",
   "licence": {
@@ -37,7 +37,7 @@
     "multigraph": false,
     "nodeTypes": 1,
     "rawBytes": 286765,
-    "selfLoops": false,
+    "selfLoops": true,
     "weighted": true
   },
   "recipe": {

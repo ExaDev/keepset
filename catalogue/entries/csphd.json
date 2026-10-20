@@ -10,8 +10,8 @@
   },
   "description": "Computer Science PhD advisor-student relationships.",
   "expectedCounts": {
-    "edges": 0,
-    "nodes": 0
+    "edges": 1740,
+    "nodes": 1882
   },
   "id": "csphd",
   "licence": {

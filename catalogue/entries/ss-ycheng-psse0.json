@@ -14,7 +14,7 @@
   "description": "power network problem (26,722 nodes, 102,432 non-zeros)",
   "expectedCounts": {
     "edges": 102432,
-    "nodes": 26722
+    "nodes": 37750
   },
   "id": "ss-ycheng-psse0",
   "licence": {

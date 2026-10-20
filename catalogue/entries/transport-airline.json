@@ -10,8 +10,8 @@
   },
   "description": "Undirected, weighted transportation network of airline routes between world airports. Nodes are major airports globally, edges represent direct flight routes. Edge weights represent the number of direct flights (or airline routes) between airports. Scale-free small-world network demonstrating weight heterogeneity in real transportation systems.",
   "expectedCounts": {
-    "edges": 0,
-    "nodes": 0
+    "edges": 67663,
+    "nodes": 3425
   },
   "id": "transport-airline",
   "licence": {
@@ -27,10 +27,10 @@
     "directed": false,
     "edgeTypes": 1,
     "heterogeneous": false,
-    "multigraph": false,
+    "multigraph": true,
     "nodeTypes": 1,
     "rawBytes": 0,
-    "selfLoops": false,
+    "selfLoops": true,
     "weighted": true
   },
   "recipe": {

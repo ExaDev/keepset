@@ -13,7 +13,7 @@
   },
   "description": "directed weighted graph (7,055 nodes, 30,082 non-zeros)",
   "expectedCounts": {
-    "edges": 34856,
+    "edges": 34855,
     "nodes": 7055
   },
   "id": "ss-lucifora-cell2",

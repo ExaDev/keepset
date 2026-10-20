@@ -13,7 +13,7 @@
   },
   "description": "Web graph of the University of Notre Dame domain. 325,729 pages, 1,497,135 hyperlinks.",
   "expectedCounts": {
-    "edges": 154249,
+    "edges": 1497135,
     "nodes": 325729
   },
   "id": "pajek-nd-www",
@@ -34,10 +34,10 @@
     "directed": true,
     "edgeTypes": 1,
     "heterogeneous": true,
-    "multigraph": false,
+    "multigraph": true,
     "nodeTypes": 1,
     "rawBytes": 19602142,
-    "selfLoops": false,
+    "selfLoops": true,
     "weighted": true
   },
   "recipe": {
