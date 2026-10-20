@@ -1,4 +1,4 @@
-import { CrosswalkSchema, validateCrosswalk, type Crosswalk } from "twindex";
+import { CrosswalkSchema, validateCrosswalk, type Crosswalk } from "crossmap";
 import { z } from "zod";
 import { kindOf } from "./categories";
 import { define } from "./define";
@@ -10,7 +10,7 @@ import { getOwn } from "./own";
 import { recordOf } from "./record";
 
 /**
- * A catalogue index: the manifest, every entry, and every crosswalk file of the catalogue, keyed by its catalogue-relative path. The build assembles it from a catalogue directory; a consumer holding its own catalogue (a fork, say) can pass one to `createCatalogue`. Entry ids are unique, every fully qualified name (the whole path of an id or alias) identifies one entry and is not another entry's id, every namespace segment the manifest gives aliases to is some entry's segment and no alias is itself one, every crosswalk passes twindex's structural validation, every crosswalk file reference resolves, and every crosswalk's target is the category of each entry that uses it.
+ * A catalogue index: the manifest, every entry, and every crosswalk file of the catalogue, keyed by its catalogue-relative path. The build assembles it from a catalogue directory; a consumer holding its own catalogue (a fork, say) can pass one to `createCatalogue`. Entry ids are unique, every fully qualified name (the whole path of an id or alias) identifies one entry and is not another entry's id, every namespace segment the manifest gives aliases to is some entry's segment and no alias is itself one, every crosswalk passes crossmap's structural validation, every crosswalk file reference resolves, and every crosswalk's target is the category of each entry that uses it.
  */
 export const CatalogueIndexSchema = define(
   z

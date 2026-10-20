@@ -60,7 +60,7 @@ describe("createCatalogue", () => {
     expect(CatalogueIndexSchema.is({ ...fixtureIndex, crosswalks: { "crosswalks/graph-v1/topology.json": { ...topologyCrosswalk, target: "graph/v2" } } })).toBe(false);
   });
 
-  it("rejects a crosswalk that fails twindex's structural validation", () => {
+  it("rejects a crosswalk that fails crossmap's structural validation", () => {
     const duplicateTarget = { ...topologyCrosswalk, rules: [...topologyCrosswalk.rules, { op: "move", from: "extra", to: "meta" }] };
     expect(CatalogueIndexSchema.is({ ...fixtureIndex, crosswalks: { "crosswalks/graph-v1/topology.json": duplicateTarget } })).toBe(false);
   });

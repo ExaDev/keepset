@@ -1,4 +1,4 @@
-import { CrosswalkSchema, validateCrosswalk, type Crosswalk } from "twindex";
+import { CrosswalkSchema, validateCrosswalk, type Crosswalk } from "crossmap";
 import { parseEntry, type Entry } from "../../src/entry";
 import { columnNames } from "../../src/parsers/csv-table";
 import { POINT_COLUMNS } from "../../src/parsers/geojson";
@@ -193,7 +193,7 @@ function checkFetchable(id: string, outcome: TableOutcome): void {
  * The crosswalk of a fetchable outcome: the document's meta and node ids and each mapped column onto its field. The recipe's parser keeps only the mapped columns, so there is nothing left to drop and the round trip holds.
  * @param outcome - The outcome.
  * @returns The crosswalk document.
- * @throws Error when twindex finds the crosswalk structurally invalid.
+ * @throws Error when crossmap finds the crosswalk structurally invalid.
  */
 function crosswalkOf(outcome: TableOutcome): Crosswalk {
   const crosswalk = {
@@ -286,7 +286,7 @@ function checkInstanceFiles(id: string, outcome: InstanceFilesOutcome): void {
  * The crosswalk of an instance files outcome, which is the same for a single file and for each member of a collection: the document's meta (the file's header values and, for a single file, the entry's) moves whole, and each node column is mapped onto its field, kept under its own name or dropped by a one-way rule, so the round trip holds.
  * @param outcome - The outcome.
  * @returns The crosswalk document.
- * @throws Error when twindex finds the crosswalk structurally invalid.
+ * @throws Error when crossmap finds the crosswalk structurally invalid.
  */
 function instanceFilesCrosswalkOf(outcome: InstanceFilesOutcome): Crosswalk {
   const shape = INSTANCE_SHAPES[outcome.parser.format];

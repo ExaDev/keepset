@@ -1,5 +1,5 @@
 import { createHash } from "node:crypto";
-import { assertRoundTrip, encode, RoundTripMismatchError } from "twindex";
+import { assertRoundTrip, encode, RoundTripMismatchError } from "crossmap";
 import { getDataset } from "../bundled";
 import { countTarget, getCollectionTarget, getTarget, type CategoryTarget, type CollectionTarget } from "../categories";
 import type { Dataset } from "../catalogue";
@@ -178,7 +178,7 @@ async function runToNative(dataset: Dataset, options: FetchOptions): Promise<Nat
 }
 
 /**
- * Runs a dataset's recipe: downloads the source (from its pinned snapshot when the source is dead), unpacks the archive, parses the native shape, applies the twindex crosswalk and validates the result against the category target. The native document the crosswalk receives is the parser's output with `meta` built from the entry.
+ * Runs a dataset's recipe: downloads the source (from its pinned snapshot when the source is dead), unpacks the archive, parses the native shape, applies the crossmap crosswalk and validates the result against the category target. The native document the crosswalk receives is the parser's output with `meta` built from the entry.
  * @param dataset - A dataset from any catalogue.
  * @param options - The network port, abort signal and clock.
  * @returns The resolved target with its provenance and any count warnings.
@@ -230,7 +230,7 @@ export async function fetchDataset(id: string, options: FetchOptions = {}): Prom
 export type RoundTripReport = { readonly holds: true; readonly provenance: Provenance } | { readonly holds: false; readonly path: string; readonly message: string; readonly provenance: Provenance };
 
 /**
- * Checks a dataset's crosswalk on its real data: runs the recipe to the native document, then twindex's `assertRoundTrip`, which encodes it, decodes the result and compares the two over every path the crosswalk promises to preserve.
+ * Checks a dataset's crosswalk on its real data: runs the recipe to the native document, then crossmap's `assertRoundTrip`, which encodes it, decodes the result and compares the two over every path the crosswalk promises to preserve.
  * @param dataset - A dataset from any catalogue.
  * @param options - The network port, abort signal and clock.
  * @returns Whether the round trip holds, and where it first differs when it does not.

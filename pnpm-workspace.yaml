@@ -3,12 +3,12 @@ packages: []
 # Every dependency add or update writes an exact version, never a range: a floating range lets a routine `pnpm install` silently resolve to a version nobody has reviewed.
 saveExact: true
 
-# ExaDev's own packages are exempt from the minimum release age: the gate guards against a compromised third-party maintainer, which does not apply to a package this organisation publishes itself. CI never reads the global pnpm config, so the exemption is stated here. twindex, trilean (twindex's predicate dependency) and trilean's exact-pinned trilean-regex are unscoped but ours.
+# ExaDev's own packages are exempt from the minimum release age: the gate guards against a compromised third-party maintainer, which does not apply to a package this organisation publishes itself. CI never reads the global pnpm config, so the exemption is stated here. crossmap, trilean (crossmap's predicate dependency) and trilean's exact-pinned trilean-regex are unscoped but ours.
 minimumReleaseAgeExclude:
   - "@exadev/eslint-config"
   - "trilean"
   - "trilean-regex"
-  - "twindex"
+  - "crossmap"
 
 # Seven days, matching the global install policy on the development machines: CI never reads a global pnpm config, so the gate is stated here where every install sees it.
 minimumReleaseAge: 10080

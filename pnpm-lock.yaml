@@ -178,6 +178,9 @@ importers:
       '@vanilla-extract/css':
         specifier: 1.21.3
         version: 1.21.3
+      crossmap:
+        specifier: 0.2.0
+        version: 0.2.0
       fflate:
         specifier: 0.8.3
         version: 0.8.3
@@ -187,9 +190,6 @@ importers:
       react-dom:
         specifier: 19.3.0
         version: 19.3.0(react@19.3.0)
-      twindex:
-        specifier: 0.1.4
-        version: 0.1.4
       zod:
         specifier: 4.6.6
         version: 4.6.6
@@ -1652,6 +1652,11 @@ packages:
   cross-spawn@7.0.6:
     resolution: {integrity: sha512-uV2QOWP2nWzsy2aMp8aRibhi9dlzF5Hgh5SHaB9OiTGEyDTiJJyx0uy51QXdyWbtAHNua4XJzUKca3OzKUd3vA==}
     engines: {node: '>= 8'}
+
+  crossmap@0.2.0:
+    resolution: {integrity: sha512-42ZfQrxU/nTxx27nl3T9ZwUBFbm5+XqSi41cTadoDhRqWJVqiBUgNki9NSMvN7jd4yQM6n8pnXuNht+xDRx+Kw==}
+    engines: {node: '>=22'}
+    hasBin: true
 
   crypto-random-string@4.0.0:
     resolution: {integrity: sha512-x8dy3RnvYdlUcPOjkEHqozhiwzKNSq7GcPuXFbnyMOCHxX8V3OgIg/pYuabl2sbUPfIJaeAQB7PMOK8DFIdoRA==}
@@ -3132,10 +3137,6 @@ packages:
   tunnel@0.0.6:
     resolution: {integrity: sha512-1h/Lnq9yajKY2PEbBadPXj3VxsDDu844OnaAo52UVmIzIvwwtBPIuNvkjuzBlTWpfJyUbG3ez0KSBibQkj4ojg==}
     engines: {node: '>=0.6.11 <=0.7.0 || >=0.7.3'}
-
-  twindex@0.1.4:
-    resolution: {integrity: sha512-g5+W+ZUJKR0gLMGFPf49rnYsTaF2Oso95XyjDg8mb662vSU+YeUMEI5CfHMpzyCnNoxNeGOuwgwqP2q08RBhAg==}
-    engines: {node: '>=22'}
 
   type-check@0.4.0:
     resolution: {integrity: sha512-XleUoc9uwGXqjWwXaUTZAmzMcFZ5858QA2vvx1Ur5xIcixXIP+8LnFDgRplU30us6teqdlskFfu+ae4K79Ooew==}
@@ -4862,6 +4863,11 @@ snapshots:
       shebang-command: 2.0.0
       which: 2.0.2
 
+  crossmap@0.2.0:
+    dependencies:
+      trilean: 1.9.0
+      zod: 4.6.6
+
   crypto-random-string@4.0.0:
     dependencies:
       type-fest: 1.4.0
@@ -6216,11 +6222,6 @@ snapshots:
       fsevents: 2.3.3
 
   tunnel@0.0.6: {}
-
-  twindex@0.1.4:
-    dependencies:
-      trilean: 1.9.0
-      zod: 4.6.6
 
   type-check@0.4.0:
     dependencies:

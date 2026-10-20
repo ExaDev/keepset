@@ -31,13 +31,13 @@ function versionOf(packageJsonPath: string): string {
 /** Each generated schema, with its published file name. */
 const files = ["entry.schema.json", "manifest.schema.json"].map((file) => ({ file, text: readFileSync(join(repoRoot, "schemas", file), "utf8") }));
 
-/** An Ajv instance holding twindex's and trilean's published schemas from node_modules, so the external $refs resolve offline exactly as they would from the CDN. */
+/** An Ajv instance holding crossmap's and trilean's published schemas from node_modules, so the external $refs resolve offline exactly as they would from the CDN. */
 function validatorFor(file: string) {
   const ajv = new Ajv2020({ strict: false, allErrors: true });
   addFormats(ajv);
-  // trilean is twindex's dependency, not this package's, so it is found beside twindex's real directory rather than at the top of node_modules.
-  const twindexDir = realpathSync(join(repoRoot, "node_modules/twindex"));
-  for (const path of [join(twindexDir, "schemas/twindex.schema.json"), join(twindexDir, "../trilean/schemas/trilean.schema.json")]) {
+  // trilean is crossmap's dependency, not this package's, so it is found beside crossmap's real directory rather than at the top of node_modules.
+  const crossmapDir = realpathSync(join(repoRoot, "node_modules/crossmap"));
+  for (const path of [join(crossmapDir, "schemas/crossmap.schema.json"), join(crossmapDir, "../trilean/schemas/trilean.schema.json")]) {
     const schema = readJson(path);
     if (!isRecord(schema)) {
       throw new Error(`${path} is not a JSON object`);
@@ -61,10 +61,10 @@ describe("the generated JSON Schemas", () => {
     expect(JSON.parse(text)).toMatchObject({ $id: `https://cdn.jsdelivr.net/npm/keepset@${versionOf(join(repoRoot, "package.json"))}/schemas/${file}` });
   });
 
-  it("refs twindex's published crosswalk schema at the installed version", () => {
+  it("refs crossmap's published crosswalk schema at the installed version", () => {
     const [entry] = files;
     expect(JSON.parse(entry?.text ?? "null")).toMatchObject({
-      $defs: { Crosswalk: { $ref: `https://cdn.jsdelivr.net/npm/twindex@${versionOf(join(repoRoot, "node_modules/twindex/package.json"))}/schemas/twindex.schema.json` } },
+      $defs: { Crosswalk: { $ref: `https://cdn.jsdelivr.net/npm/crossmap@${versionOf(join(repoRoot, "node_modules/crossmap/package.json"))}/schemas/crossmap.schema.json` } },
     });
   });
 

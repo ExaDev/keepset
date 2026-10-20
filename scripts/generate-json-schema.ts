@@ -4,7 +4,7 @@
 
    Each schema is one self-contained 2020-12 document: its root is a $ref to its own entry under $defs, and every shared schema the root reaches sits beside it under $defs. zod's registry conversion returns a bag of separately addressable documents whose cross-references are bare id strings, which do not resolve inside one document; the `uri` callback redirects each to an in-document fragment ("#/$defs/<id>"). "__shared" is the fixed key zod uses for schemas reused across registered roots, and mapping it to the empty string keeps its already-correct internal fragments intact.
 
-   The entry's inline crosswalk is twindex's own CrosswalkSchema, registered under the id "Crosswalk" so the conversion references it by fragment, and $defs.Crosswalk is then overwritten with an external $ref to twindex's published schema at the installed twindex version: an embedded copy could drift from the published crosswalk format with no signal. A $defs entry that is itself an external $ref is valid 2020-12.
+   The entry's inline crosswalk is crossmap's own CrosswalkSchema, registered under the id "Crosswalk" so the conversion references it by fragment, and $defs.Crosswalk is then overwritten with an external $ref to crossmap's published schema at the installed crossmap version: an embedded copy could drift from the published crosswalk format with no signal. A $defs entry that is itself an external $ref is valid 2020-12.
 
    Written in RFC 8785 canonical form with no trailing newline, so each file's bytes are exactly canonicalize(JSON.parse(file)).
 
@@ -14,7 +14,7 @@ import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import canonicalize from "canonicalize";
-import { CrosswalkSchema } from "twindex";
+import { CrosswalkSchema } from "crossmap";
 import { z } from "zod";
 import { EntrySchema, ManifestSchema } from "../dist/index.js";
 
@@ -73,8 +73,8 @@ function reachableDefs(defs: Readonly<Record<string, z.core.JSONSchema.JSONSchem
 }
 
 const packageVersion = readVersion(join(repoRoot, "package.json"));
-// The twindex version of the actual install (an exact pin in package.json), so the external $ref names precisely the crosswalk schema this build validated against. Read as a file: twindex's exports map does not expose its package.json.
-const twindexVersion = readVersion(join(repoRoot, "node_modules/twindex/package.json"));
+// The crossmap version of the actual install (an exact pin in package.json), so the external $ref names precisely the crosswalk schema this build validated against. Read as a file: crossmap's exports map does not expose its package.json.
+const crossmapVersion = readVersion(join(repoRoot, "node_modules/crossmap/package.json"));
 
 /** The documents this script writes: the published file name and the registry id of its root schema. */
 const documents = [
@@ -104,11 +104,11 @@ for (const document of documents) {
   delete rootDef.$schema;
   delete rootDef.$id;
 
-  // The crosswalk's own conversion (twindex's rules and trilean's recursive predicate and JSON value schemas) lands in the shared $defs, but once $defs.Crosswalk is an external $ref nothing in this document points at it, so only the shared definitions the root actually reaches are kept.
+  // The crosswalk's own conversion (crossmap's rules and trilean's recursive predicate and JSON value schemas) lands in the shared $defs, but once $defs.Crosswalk is an external $ref nothing in this document points at it, so only the shared definitions the root actually reaches are kept.
   const sharedDefs = schemas["__shared"]?.$defs ?? {};
   const defs: Record<string, z.core.JSONSchema.JSONSchema> = {
     [document.id]: rootDef,
-    Crosswalk: { $ref: `https://cdn.jsdelivr.net/npm/twindex@${twindexVersion}/schemas/twindex.schema.json` },
+    Crosswalk: { $ref: `https://cdn.jsdelivr.net/npm/crossmap@${crossmapVersion}/schemas/crossmap.schema.json` },
     ...sharedDefs,
   };
 
