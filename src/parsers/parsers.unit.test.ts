@@ -386,3 +386,132 @@ describe("the tsplib parser", () => {
     expect(parseError(() => parseNative(utf8(cop.replace("2 87 3 4", "1 87 3 4")), tsplib)).message).toMatch(/set 1 appears twice/);
   });
 });
+
+describe("the vrp-rep parser", () => {
+  const vrpRep: Parser = { format: "vrp-rep", encoding: "utf-8" };
+  const xml = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<instance>
+  <info><dataset>Example set</dataset><name>X101.100_25-5-5-5</name></info>
+  <network>
+    <nodes>
+      <node id="0" type="0"><cx>50.0</cx><cy>50.0</cy></node>
+      <node id="1" type="1"><cx>12.0</cx><cy>80.5</cy></node>
+      <node id="26" type="2"><cx>33.0</cx><cy>41.0</cy></node>
+      <node id="27" type="2"><cx>-3.25</cx><cy>41.0</cy></node>
+    </nodes>
+    <euclidean/><decimals>14</decimals>
+  </network>
+  <fleet>
+    <vehicle_profile type="0" number="1"><departure_node>1</departure_node><arrival_node>1</arrival_node><fix_cost>0.0</fix_cost><cost_x_distance>1.0</cost_x_distance><resource id="1"><max>1.0</max></resource></vehicle_profile>
+  </fleet>
+  <requests>
+    <request id="0" node="26"><skill>2</skill><resource id="6">1.0</resource><resource id="7">1.0</resource></request>
+    <request id="1" node="27"><skill>3</skill></request>
+  </requests>
+  <resources><resource id="1" renewable="true" name="tool-1">INF</resource></resources>
+  <drivers><driver_profile type="0"><compatible_vehicle_type>0</compatible_vehicle_type><skill id="2"/><skill id="4"/></driver_profile></drivers>
+</instance>
+`;
+
+  it("reads the nodes with their type, position, the skills and resources their requests need, and the skills of the drivers based there", () => {
+    expect(parseNative(utf8(xml), vrpRep)).toEqual({
+      meta: { dataset: "Example set", name: "X101.100_25-5-5-5" },
+      nodes: [
+        { id: "0", x: 50, y: 50, type: "0", skill: null, skills: null, resources: null },
+        { id: "1", x: 12, y: 80.5, type: "1", skill: null, skills: "2,4", resources: null },
+        { id: "26", x: 33, y: 41, type: "2", skill: "2", skills: null, resources: "6,7" },
+        { id: "27", x: -3.25, y: 41, type: "2", skill: "3", skills: null, resources: null },
+      ],
+    });
+  });
+
+  it("rejects a root that is not an instance, a missing element, a coordinate that is not a number and a repeated node", () => {
+    expect(parseError(() => parseNative(utf8(xml.replace(/<\/?instance>/g, (tag) => tag.replace("instance", "problem"))), vrpRep)).message).toMatch(/expected the root element <instance>, found <problem>/);
+    expect(parseError(() => parseNative(utf8(xml.replace("<network>", "<net>").replace("</network>", "</net>")), vrpRep)).message).toMatch(/expected one <network> in <instance>, found 0/);
+    expect(parseError(() => parseNative(utf8(xml.replace("<cx>12.0</cx>", "<cx>twelve</cx>")), vrpRep)).message).toMatch(/expected <cx> to hold a number, found "twelve"/);
+    expect(parseError(() => parseNative(utf8(xml.replace('<node id="27"', '<node id="26"')), vrpRep)).message).toMatch(/node 26 appears twice/);
+    expect(parseError(() => parseNative(utf8(xml.replace('<node id="1" type="1">', '<node id="1">')), vrpRep)).message).toMatch(/expected <node> to have the attribute type/);
+  });
+
+  it("rejects a request or a vehicle at a node the network lacks", () => {
+    expect(parseError(() => parseNative(utf8(xml.replace('node="27"', 'node="99"')), vrpRep)).message).toMatch(/request 1 is at node 99, which the network lacks/);
+    expect(parseError(() => parseNative(utf8(xml.replace("<departure_node>1<", "<departure_node>99<")), vrpRep)).message).toMatch(/vehicle type 0 departs from node 99/);
+  });
+});
+
+describe("the verolog-2019 parser", () => {
+  const verolog: Parser = { format: "verolog-2019", encoding: "utf-8" };
+  const header: readonly (readonly string[])[] = [
+    ["DATASET", "=", "ORTEC", "Early", "VeRoLog", "2019"],
+    ["NAME", "=", "Instance", "2"],
+    ["DAYS", "=", "6"],
+    ["TRUCK_CAPACITY", "=", "15"],
+    ["TRUCK_MAX_DISTANCE", "=", "1000"],
+    ["TRUCK_DISTANCE_COST", "=", "1"],
+    ["TRUCK_DAY_COST", "=", "100"],
+    ["TRUCK_COST", "=", "5000"],
+    ["TECHNICIAN_DISTANCE_COST", "=", "2"],
+    ["TECHNICIAN_DAY_COST", "=", "50"],
+    ["TECHNICIAN_COST", "=", "900"],
+  ];
+  const body: readonly (readonly string[])[] = [
+    ["MACHINES", "=", "2"],
+    ["1", "6", "300"],
+    ["2", "4", "120"],
+    ["LOCATIONS", "=", "3"],
+    ["1", "100", "200"],
+    ["2", "310", "40"],
+    ["3", "505", "260"],
+    ["REQUESTS", "=", "3"],
+    ["1", "2", "1", "3", "1", "2"],
+    ["2", "3", "5", "6", "2", "1"],
+    ["3", "2", "2", "2", "1", "3"],
+    ["TECHNICIANS", "=", "2"],
+    ["1", "1", "400", "6", "1", "0"],
+    ["2", "3", "250", "5", "0", "1"],
+  ];
+  /** How wide the space padded layout right-aligns each field. */
+  const COLUMN_WIDTH = 5;
+  /** The three layouts the files come in: padded spaces with blank lines between sections, tabs with trailing tabs, and semicolons with trailing semicolons. */
+  const layouts = {
+    spaces: [...header, [], ...body.flatMap((row) => (row[1] === "=" ? [[], row] : [row.map((field) => field.padStart(COLUMN_WIDTH)) ]))].map((row) => (row[1] === "=" ? row.join(" ") : row.join(" "))).join("\r\n"),
+    tabs: [...header, ...body].map((row) => `${row.join("\t")}\t\t\t\t`).join("\r\n"),
+    semicolons: [...header, ...body].map((row) => `${row.join(";")};;;;`).join("\r\n"),
+  } as const;
+  const expected = {
+    meta: { dataset: "ORTEC Early VeRoLog 2019", name: "Instance 2", days: 6, truckCapacity: 15, truckMaxDistance: 1000, truckDistanceCost: 1, truckDayCost: 100, truckCost: 5000, technicianDistanceCost: 2, technicianDayCost: 50, technicianCost: 900, technicians: 2 },
+    nodes: [
+      { id: "depot", x: 100, y: 200, kind: "depot", location: 1, fromDay: null, toDay: null, machine: null, amount: null },
+      { id: "1", x: 310, y: 40, kind: "request", location: 2, fromDay: 1, toDay: 3, machine: "1", amount: 2 },
+      { id: "2", x: 505, y: 260, kind: "request", location: 3, fromDay: 5, toDay: 6, machine: "2", amount: 1 },
+      { id: "3", x: 310, y: 40, kind: "request", location: 2, fromDay: 2, toDay: 2, machine: "1", amount: 3 },
+    ],
+  };
+
+  for (const [name, text] of Object.entries(layouts)) {
+    it(`reads the ${name} layout: the depot, then a node per request at its location's position`, () => {
+      expect(parseNative(utf8(text), verolog)).toEqual(expected);
+    });
+  }
+
+  it("rejects a header line that is missing or out of order, and a section that is short or announced out of order", () => {
+    const text = layouts.tabs;
+    expect(parseError(() => parseNative(utf8(text.replace("DAYS\t=\t6", "DAY\t=\t6")), verolog)).message).toMatch(/expected "DAYS = <value>", found "DAY = 6"/);
+    expect(parseError(() => parseNative(utf8(text.replace("DAYS\t=\t6", "DAYS\t=\tsix")), verolog)).message).toMatch(/expected a number for DAYS, found "six"/);
+    expect(parseError(() => parseNative(utf8(text.replace("REQUESTS\t=\t3", "REQUESTS\t=\t4")), verolog)).message).toMatch(/REQUESTS announces 4 rows|expected "TECHNICIANS = <count>"/);
+    expect(parseError(() => parseNative(utf8(text.replace("LOCATIONS\t=\t3", "SITES\t=\t3")), verolog)).message).toMatch(/expected "LOCATIONS = <count>", found "SITES = 3"/);
+    expect(parseError(() => parseNative(utf8(`${text}\r\n9\t9`), verolog)).message).toMatch(/expected the end of the file after TECHNICIANS/);
+  });
+
+  it("rejects a row with the wrong id or length, and a request outside the file's locations, machines or days", () => {
+    const text = layouts.tabs;
+    expect(parseError(() => parseNative(utf8(text.replace("2\t310\t40", "5\t310\t40")), verolog)).message).toMatch(/expected LOCATIONS row 2 to start with that id, found "5"/);
+    expect(parseError(() => parseNative(utf8(text.replace("2\t310\t40", "2\t310")), verolog)).message).toMatch(/expected 3 fields in a LOCATIONS row, found 2/);
+    expect(parseError(() => parseNative(utf8(text.replace("1\t2\t1\t3\t1\t2", "1\t9\t1\t3\t1\t2")), verolog)).message).toMatch(/location 9 is outside 1 to 3/);
+    expect(parseError(() => parseNative(utf8(text.replace("1\t2\t1\t3\t1\t2", "1\t2\t1\t3\t7\t2")), verolog)).message).toMatch(/machine 7 is outside 1 to 2/);
+    expect(parseError(() => parseNative(utf8(text.replace("1\t2\t1\t3\t1\t2", "1\t2\t4\t3\t1\t2")), verolog)).message).toMatch(/the days 4 to 3 are not within 1 to 6/);
+    expect(parseError(() => parseNative(utf8(text.replace("1\t2\t1\t3\t1\t2", "1\t2\t1\t7\t1\t2")), verolog)).message).toMatch(/the days 1 to 7 are not within 1 to 6/);
+    expect(parseError(() => parseNative(utf8(text.replace("1\t2\t1\t3\t1\t2", "1\t2\t1\t3\t1\t0")), verolog)).message).toMatch(/expected an amount of at least 1, found 0/);
+    expect(parseError(() => parseNative(utf8(text.replace("1\t1\t400\t6\t1\t0", "1\t1\t400\t6\t1")), verolog)).message).toMatch(/expected 6 fields in a TECHNICIANS row, found 5/);
+  });
+});
