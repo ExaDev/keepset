@@ -115,6 +115,13 @@ describe("search", () => {
     expect(calls).toEqual([["listDatasets", { text: "elegans", kind: "graph", domain: "Ecology", category: "graph/v1" }]]);
   });
 
+  it("passes a subject filter to listDatasets, and the bundled search honours it", async () => {
+    const { library, io, calls, out } = harness();
+    await run(["search", "--subject", "network-science"], library, io);
+    expect(calls).toEqual([["listDatasets", { subject: "network-science" }]]);
+    expect(out.stdout).toBe("karate\tZachary Karate Club\tgraph/v1\tfetchable\n");
+  });
+
   it("prints one tab-separated line per dataset, or the entries as JSON", async () => {
     const human = harness();
     expect(await run(["search", "karate"], human.library, human.io)).toBe(EXIT_OK);

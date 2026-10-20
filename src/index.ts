@@ -22,6 +22,7 @@ export {
   RelativePathSchema,
   RESERVED_META_KEYS,
   SnapshotSchema,
+  SubjectSchema,
   SourceSchema,
   WaybackTimestampSchema,
   waybackUrl,

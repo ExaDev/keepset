@@ -45,11 +45,11 @@ export const EXIT_FAILED = 2;
 const usage = `Usage: keepset <command> [options]
 
 Commands:
-  search [text] [--kind <kind>] [--domain <domain>] [--namespace <path>]
-         [--category <id>] [--json]
+  search [text] [--kind <kind>] [--domain <domain>] [--subject <subject>]
+         [--namespace <path>] [--category <id>] [--json]
                       list the datasets whose id, alias, namespace, name,
-                      description, domain or tags contain the text, filtered by
-                      kind, domain, namespace (and every namespace beneath it,
+                      description, domain, subjects or tags contain the text,
+                      filtered by kind, domain, subject, namespace (and every namespace beneath it,
                       segment aliases allowed) or category
   namespaces [path] [--json]
                       list the namespaces directly beneath a path, or the
@@ -82,7 +82,7 @@ bad usage, an unknown or ambiguous dataset or namespace or a recipe that failed.
 
 /** The parsed command line. */
 interface CommandLine {
-  readonly values: { readonly kind?: string; readonly domain?: string; readonly namespace?: string; readonly category?: string; readonly json?: boolean; readonly out?: string; readonly help?: boolean; readonly version?: boolean };
+  readonly values: { readonly kind?: string; readonly domain?: string; readonly subject?: string; readonly namespace?: string; readonly category?: string; readonly json?: boolean; readonly out?: string; readonly help?: boolean; readonly version?: boolean };
   readonly positionals: readonly string[];
 }
 
@@ -94,6 +94,7 @@ function parseCommandLine(args: readonly string[]): CommandLine {
     options: {
       kind: { type: "string" },
       domain: { type: "string" },
+      subject: { type: "string" },
       namespace: { type: "string" },
       category: { type: "string" },
       json: { type: "boolean" },
@@ -148,6 +149,9 @@ export function formatShow(dataset: Dataset): string {
   }
   if (entry.aliases !== undefined) {
     lines.push(`aliases: ${entry.aliases.join(", ")}`);
+  }
+  if (entry.subjects !== undefined) {
+    lines.push(`subjects: ${entry.subjects.join(", ")}`);
   }
   if (entry.domain !== undefined) {
     lines.push(`domain: ${entry.domain}`);
@@ -259,6 +263,7 @@ export async function run(args: readonly string[], library: CliLibrary, io: CliI
         ...(text === undefined ? {} : { text }),
         ...(values.kind === undefined ? {} : { kind: values.kind }),
         ...(values.domain === undefined ? {} : { domain: values.domain }),
+        ...(values.subject === undefined ? {} : { subject: values.subject }),
         ...(values.namespace === undefined ? {} : { namespace: values.namespace }),
         ...(values.category === undefined ? {} : { category: values.category }),
       };

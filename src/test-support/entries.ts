@@ -19,6 +19,7 @@ export const liveEntry = {
   name: "Zachary Karate Club",
   description: "Friendships between members of a university karate club.",
   domain: "Social network",
+  subjects: ["network-science", "social-science"],
   tags: ["social", "small"],
   category: "graph/v1",
   sources: [{ url: "https://example.org/data/karate.txt", retrieved: "2026-04-19", status: "live" }],

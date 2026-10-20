@@ -13,6 +13,9 @@ export const IdSchema = z.string().regex(/^[A-Za-z0-9][A-Za-z0-9._-]*$/, {
 });
 
 /** A key of an entry's `properties` or `expectedCounts` record: an identifier that starts with a letter, so it can never be `__proto__` or another name Object.prototype reacts to on assignment. */
+/** A subject: the field of study a dataset is relevant to, as a lowercase slug of words joined by hyphens, such as `operations-research`. It is separate from the entry's domain (its topic), its tags (the node fields it carries) and its namespace (the source it comes from), and it is the value a search filters by. */
+export const SubjectSchema = z.string().regex(/^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$/, { message: "must be a lowercase slug of words joined by hyphens, such as operations-research" });
+
 /** An alias: an id, or a path of ids joined by `/` such as `foo/graphs/bar`. A bare id is a name inside the entry's own namespace; a path is a name of its own, in the group its leading segments name. The segment pattern repeats the one in `IdSchema` so that each part of a path is an id. */
 export const AliasSchema = z.string().regex(/^[A-Za-z0-9][A-Za-z0-9._-]*(?:\/[A-Za-z0-9][A-Za-z0-9._-]*)*$/, {
   message: "must be an id, or ids joined by '/', each starting with a letter or digit and containing only letters, digits, '.', '_' and '-'",
@@ -229,7 +232,7 @@ export type CrosswalkReference = z.infer<typeof CrosswalkReferenceSchema>;
 export const RESERVED_META_KEYS = ["id", "name"] as const;
 
 /**
- * One catalogue entry: the descriptor (id, optional namespace and aliases, name, description, domain, tags), the category whose target the entry resolves to, where the bytes come from, the licence and citations, the recipe, the crosswalk, the counts a fetched result is expected to have and the dataset's recorded properties. The kind of data is the category's (`kindOf(category)`), never a second field that could disagree with it.
+ * One catalogue entry: the descriptor (id, optional namespace and aliases, name, description, domain, subjects, tags), the category whose target the entry resolves to, where the bytes come from, the licence and citations, the recipe, the crosswalk, the counts a fetched result is expected to have and the dataset's recorded properties. The kind of data is the category's (`kindOf(category)`), never a second field that could disagree with it.
  */
 export const EntrySchema = define(
   z
@@ -240,6 +243,11 @@ export const EntrySchema = define(
       name: z.string().min(1),
       description: z.string().min(1).optional(),
       domain: z.string().min(1).optional(),
+      subjects: z
+        .array(SubjectSchema)
+        .min(1)
+        .refine((subjects) => new Set(subjects).size === subjects.length, { message: "subjects must be unique" })
+        .optional(),
       tags: z.array(z.string().min(1)).refine((tags) => new Set(tags).size === tags.length, { message: "tags must be unique" }),
       category: CategoryIdSchema,
       sources: z.array(SourceSchema).min(1),

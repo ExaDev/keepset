@@ -193,3 +193,19 @@ describe("an archive that selects one file or every file", () => {
     expect(issues(withArchive(orCollectionEntry, { kind: "rar", members: { extensions: [".csv"] } }))).not.toBe("");
   });
 });
+
+describe("an entry's subjects", () => {
+  it("accepts one or more subject slugs, and none", () => {
+    expect(EntrySchema.is({ ...liveEntry, subjects: ["operations-research"] })).toBe(true);
+    expect(EntrySchema.is({ ...liveEntry, subjects: ["network-science", "social-science"] })).toBe(true);
+    expect(EntrySchema.is(without(liveEntry, "subjects"))).toBe(true);
+  });
+
+  it("refuses a subject that is not a lowercase slug, an empty list and a repeated subject", () => {
+    for (const bad of ["Operations Research", "operations_research", "-operations", "operations-", "operations--research", "1research", ""]) {
+      expect(EntrySchema.is({ ...liveEntry, subjects: [bad] })).toBe(false);
+    }
+    expect(EntrySchema.is({ ...liveEntry, subjects: [] })).toBe(false);
+    expect(EntrySchema.is({ ...liveEntry, subjects: ["network-science", "network-science"] })).toBe(false);
+  });
+});
