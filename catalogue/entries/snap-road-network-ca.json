@@ -13,8 +13,8 @@
   },
   "description": "Large undirected, weighted road network of California. Nodes represent road intersections or endpoints, edges represent roads. Edge weights represent the Euclidean distance between intersections in miles. Highly connected large-scale transportation network suitable for testing scalability of graph algorithms.",
   "expectedCounts": {
-    "edges": 2760388,
-    "nodes": 1971281
+    "edges": 5533214,
+    "nodes": 1965206
   },
   "id": "snap-road-network-ca",
   "licence": {
@@ -32,7 +32,7 @@
     "directed": false,
     "edgeTypes": 1,
     "heterogeneous": false,
-    "multigraph": false,
+    "multigraph": true,
     "nodeTypes": 1,
     "rawBytes": 0,
     "selfLoops": false,

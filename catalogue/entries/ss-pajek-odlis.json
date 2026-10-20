@@ -13,8 +13,8 @@
   },
   "description": "Online Dictionary for Library and Information Science hyperlink network.",
   "expectedCounts": {
-    "edges": 0,
-    "nodes": 0
+    "edges": 18246,
+    "nodes": 2900
   },
   "id": "ss-pajek-odlis",
   "licence": {
@@ -37,7 +37,7 @@
     "multigraph": false,
     "nodeTypes": 1,
     "rawBytes": 1056075,
-    "selfLoops": false,
+    "selfLoops": true,
     "weighted": true
   },
   "recipe": {

@@ -13,7 +13,7 @@
   },
   "description": "undirected graph sequence (49,152 nodes, 196,608 non-zeros)",
   "expectedCounts": {
-    "edges": 196608,
+    "edges": 98304,
     "nodes": 49152
   },
   "id": "ss-ag-monien-bfly",

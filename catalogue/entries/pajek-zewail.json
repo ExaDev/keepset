@@ -13,8 +13,8 @@
   },
   "description": "Citation network around Ahmed Zewail's femtochemistry research.",
   "expectedCounts": {
-    "edges": 0,
-    "nodes": 0
+    "edges": 54253,
+    "nodes": 6752
   },
   "id": "pajek-zewail",
   "licence": {
@@ -32,10 +32,10 @@
     "directed": true,
     "edgeTypes": 1,
     "heterogeneous": false,
-    "multigraph": false,
+    "multigraph": true,
     "nodeTypes": 1,
     "rawBytes": 636485,
-    "selfLoops": false,
+    "selfLoops": true,
     "weighted": true
   },
   "recipe": {

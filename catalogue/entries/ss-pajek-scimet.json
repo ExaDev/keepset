@@ -13,8 +13,8 @@
   },
   "description": "Scientometric citation network.",
   "expectedCounts": {
-    "edges": 0,
-    "nodes": 0
+    "edges": 10413,
+    "nodes": 2729
   },
   "id": "ss-pajek-scimet",
   "licence": {
@@ -37,7 +37,7 @@
     "multigraph": false,
     "nodeTypes": 1,
     "rawBytes": 665523,
-    "selfLoops": false,
+    "selfLoops": true,
     "weighted": true
   },
   "recipe": {

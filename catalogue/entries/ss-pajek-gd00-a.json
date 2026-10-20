@@ -34,10 +34,10 @@
     "directed": true,
     "edgeTypes": 1,
     "heterogeneous": false,
-    "multigraph": true,
+    "multigraph": false,
     "nodeTypes": 1,
     "rawBytes": 45269,
-    "selfLoops": false,
+    "selfLoops": true,
     "weighted": false
   },
   "recipe": {

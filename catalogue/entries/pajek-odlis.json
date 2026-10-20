@@ -13,8 +13,8 @@
   },
   "description": "Cross-reference network from the Online Dictionary for Library and Information Science.",
   "expectedCounts": {
-    "edges": 0,
-    "nodes": 0
+    "edges": 18419,
+    "nodes": 2909
   },
   "id": "pajek-odlis",
   "licence": {
@@ -32,10 +32,10 @@
     "directed": true,
     "edgeTypes": 1,
     "heterogeneous": false,
-    "multigraph": false,
+    "multigraph": true,
     "nodeTypes": 1,
     "rawBytes": 341682,
-    "selfLoops": false,
+    "selfLoops": true,
     "weighted": true
   },
   "recipe": {

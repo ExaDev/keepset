@@ -13,8 +13,8 @@
   },
   "description": "Citation network from Lederberg's Roget thesaurus analysis.",
   "expectedCounts": {
-    "edges": 0,
-    "nodes": 0
+    "edges": 41601,
+    "nodes": 8324
   },
   "id": "ss-pajek-lederberg",
   "licence": {
@@ -37,7 +37,7 @@
     "multigraph": false,
     "nodeTypes": 1,
     "rawBytes": 2502066,
-    "selfLoops": false,
+    "selfLoops": true,
     "weighted": true
   },
   "recipe": {

@@ -26,7 +26,7 @@
     "directed": false,
     "edgeTypes": 1,
     "heterogeneous": false,
-    "multigraph": false,
+    "multigraph": true,
     "nodeTypes": 1,
     "rawBytes": 246662965,
     "selfLoops": false,

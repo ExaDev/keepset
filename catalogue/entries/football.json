@@ -11,7 +11,7 @@
   "description": "Network of American football games between Division IA colleges during regular season Fall 2000. Nodes represent teams and edges connect teams that played each other. The 'value' property indicates conference membership.",
   "domain": "Sports network",
   "expectedCounts": {
-    "edges": 616,
+    "edges": 613,
     "nodes": 115
   },
   "id": "football",
@@ -29,7 +29,7 @@
     "directed": false,
     "edgeTypes": 1,
     "heterogeneous": false,
-    "multigraph": true,
+    "multigraph": false,
     "nodeTypes": 1,
     "rawBytes": 43920,
     "selfLoops": false,

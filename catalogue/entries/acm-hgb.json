@@ -10,8 +10,8 @@
   },
   "description": "Heterogeneous academic network from the Heterogeneous Graph Benchmark suite. Contains papers, authors, and subject categories as node types with 3 relation types: writes (author-paper), published-in (paper-subject), and related subject links. Moderate-size heterogeneous graph used for benchmarking heterogeneous graph neural networks on node classification.",
   "expectedCounts": {
-    "edges": 65407,
-    "nodes": 10024
+    "edges": 547872,
+    "nodes": 10942
   },
   "id": "acm-hgb",
   "licence": {
@@ -26,10 +26,10 @@
     "directed": true,
     "edgeTypes": 1,
     "heterogeneous": true,
-    "multigraph": false,
+    "multigraph": true,
     "nodeTypes": 1,
     "rawBytes": 0,
-    "selfLoops": false,
+    "selfLoops": true,
     "weighted": false
   },
   "recipe": {

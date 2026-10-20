@@ -13,7 +13,7 @@
   },
   "description": "power network problem sequence (4,929 nodes, 33,108 non-zeros)",
   "expectedCounts": {
-    "edges": 33186,
+    "edges": 33185,
     "nodes": 4929
   },
   "id": "ss-hb-gemat11",
@@ -37,7 +37,7 @@
     "multigraph": false,
     "nodeTypes": 1,
     "rawBytes": 0,
-    "selfLoops": false,
+    "selfLoops": true,
     "weighted": true
   },
   "recipe": {

@@ -13,8 +13,8 @@
   },
   "description": "Western US power grid topology.",
   "expectedCounts": {
-    "edges": 0,
-    "nodes": 0
+    "edges": 6594,
+    "nodes": 4941
   },
   "id": "pajek-uspowergrid",
   "licence": {

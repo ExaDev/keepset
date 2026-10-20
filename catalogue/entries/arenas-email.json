@@ -13,8 +13,8 @@
   },
   "description": "E-mail interchanges between members of the University Rovira i Virgili (Tarragona).",
   "expectedCounts": {
-    "edges": 0,
-    "nodes": 0
+    "edges": 10903,
+    "nodes": 1133
   },
   "id": "arenas-email",
   "licence": {
@@ -35,7 +35,7 @@
     "multigraph": false,
     "nodeTypes": 1,
     "rawBytes": 722086,
-    "selfLoops": false,
+    "selfLoops": true,
     "weighted": true
   },
   "recipe": {

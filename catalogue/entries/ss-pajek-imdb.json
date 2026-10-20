@@ -14,7 +14,7 @@
   "description": "bipartite graph (428,440 nodes, 3,782,463 non-zeros)",
   "expectedCounts": {
     "edges": 3782463,
-    "nodes": 428440
+    "nodes": 1324748
   },
   "id": "ss-pajek-imdb",
   "licence": {

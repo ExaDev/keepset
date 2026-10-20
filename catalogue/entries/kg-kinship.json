@@ -23,7 +23,7 @@
   "properties": {
     "directed": true,
     "heterogeneous": true,
-    "multigraph": true,
+    "multigraph": false,
     "selfLoops": false,
     "weighted": false
   },

@@ -13,8 +13,8 @@
   },
   "description": "Pages matching the query 'California'. Constructed by expanding a 200-page search engine response set.",
   "expectedCounts": {
-    "edges": 0,
-    "nodes": 0
+    "edges": 16150,
+    "nodes": 6175
   },
   "id": "pajek-california",
   "licence": {

@@ -13,7 +13,7 @@
   },
   "description": "Directed, weighted email communication network from the Enron corpus. Nodes represent Enron employees, edges represent email communications. Edge weights correspond to the number of emails sent from one employee to another. Useful for studying directed communication patterns in organisational networks.",
   "expectedCounts": {
-    "edges": 183831,
+    "edges": 367662,
     "nodes": 36692
   },
   "id": "snap-email-enron",
@@ -29,10 +29,10 @@
     "connected": false,
     "cyclic": true,
     "density": 0.00027309755503535,
-    "directed": true,
+    "directed": false,
     "edgeTypes": 1,
     "heterogeneous": false,
-    "multigraph": false,
+    "multigraph": true,
     "nodeTypes": 1,
     "rawBytes": 0,
     "selfLoops": false,
@@ -54,15 +54,10 @@
       "sourceColumn": 0,
       "targetColumn": 1
     },
-    "source": 1,
+    "source": 0,
     "status": "fetchable"
   },
   "sources": [
-    {
-      "retrieved": "2026-03-26",
-      "status": "live",
-      "url": "https://snap.stanford.edu/data/email-Enron.html"
-    },
     {
       "retrieved": "2026-03-26",
       "status": "live",

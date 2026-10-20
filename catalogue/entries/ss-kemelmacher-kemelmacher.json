@@ -14,7 +14,7 @@
   "description": "computer graphics/vision problem (28,452 nodes, 100,875 non-zeros)",
   "expectedCounts": {
     "edges": 100875,
-    "nodes": 28452
+    "nodes": 38145
   },
   "id": "ss-kemelmacher-kemelmacher",
   "licence": {

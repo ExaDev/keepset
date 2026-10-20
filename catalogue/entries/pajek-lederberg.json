@@ -13,8 +13,8 @@
   },
   "description": "Citation network around Joshua Lederberg's genetics research.",
   "expectedCounts": {
-    "edges": 0,
-    "nodes": 0
+    "edges": 41609,
+    "nodes": 8843
   },
   "id": "pajek-lederberg",
   "licence": {
@@ -32,10 +32,10 @@
     "directed": true,
     "edgeTypes": 1,
     "heterogeneous": false,
-    "multigraph": false,
+    "multigraph": true,
     "nodeTypes": 1,
     "rawBytes": 733180,
-    "selfLoops": false,
+    "selfLoops": true,
     "weighted": true
   },
   "recipe": {

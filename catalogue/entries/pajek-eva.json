@@ -13,8 +13,8 @@
   },
   "description": "Corporate ownership network from EVA database. 8,343 entities, 6,726 ownership links.",
   "expectedCounts": {
-    "edges": 0,
-    "nodes": 0
+    "edges": 6726,
+    "nodes": 8322
   },
   "id": "pajek-eva",
   "licence": {
@@ -35,7 +35,7 @@
     "multigraph": false,
     "nodeTypes": 1,
     "rawBytes": 831492,
-    "selfLoops": false,
+    "selfLoops": true,
     "weighted": false
   },
   "recipe": {

@@ -13,8 +13,8 @@
   },
   "description": "Interlocking directorates of the top 200 Dutch companies. Two-mode network of directors and boards.",
   "expectedCounts": {
-    "edges": 0,
-    "nodes": 0
+    "edges": 5221,
+    "nodes": 4747
   },
   "id": "pajek-dutch-elite",
   "licence": {
@@ -34,7 +34,7 @@
     "directed": false,
     "edgeTypes": 1,
     "heterogeneous": true,
-    "multigraph": false,
+    "multigraph": true,
     "nodeTypes": 1,
     "rawBytes": 527657,
     "selfLoops": false,

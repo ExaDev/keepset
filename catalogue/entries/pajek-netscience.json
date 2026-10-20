@@ -13,8 +13,8 @@
   },
   "description": "Collaboration network of network science researchers. 1,589 authors.",
   "expectedCounts": {
-    "edges": 0,
-    "nodes": 0
+    "edges": 2742,
+    "nodes": 1589
   },
   "id": "pajek-netscience",
   "licence": {

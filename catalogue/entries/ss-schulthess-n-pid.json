@@ -13,8 +13,8 @@
   },
   "description": "biochemical network (3,625 nodes, 8,054 non-zeros)",
   "expectedCounts": {
-    "edges": 8055,
-    "nodes": 3923
+    "edges": 8054,
+    "nodes": 7548
   },
   "id": "ss-schulthess-n-pid",
   "licence": {

@@ -14,7 +14,7 @@
   "description": "Attendance at 14 social events by 18 Southern women in the 1930s. A classic bipartite (two-mode) network.",
   "expectedCounts": {
     "edges": 93,
-    "nodes": 18
+    "nodes": 32
   },
   "id": "ucinet-davis",
   "licence": {
@@ -33,7 +33,7 @@
     "directed": false,
     "edgeTypes": 1,
     "heterogeneous": true,
-    "multigraph": true,
+    "multigraph": false,
     "nodeTypes": 1,
     "rawBytes": 6104,
     "selfLoops": false,

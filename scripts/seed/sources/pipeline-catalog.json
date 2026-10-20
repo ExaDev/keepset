@@ -82,7 +82,7 @@
       "url": "http://vlado.fmf.uni-lj.si/pub/networks/data/UciNet/UciData.htm"
     }
   },
-  "datasetCount": 856,
+  "datasetCount": 848,
   "datasets": {
     "7th_graders": {
       "category": "heterogeneous",
@@ -182,20 +182,20 @@
         "year": 2021
       },
       "description": "Heterogeneous academic network from the Heterogeneous Graph Benchmark suite. Contains papers, authors, and subject categories as node types with 3 relation types: writes (author-paper), published-in (paper-subject), and related subject links. Moderate-size heterogeneous graph used for benchmarking heterogeneous graph neural networks on node classification.",
-      "edgeCount": 65407,
+      "edgeCount": 547872,
       "id": "acm-hgb",
       "name": "Heterogeneous Graph Benchmark - ACM",
-      "nodeCount": 10024,
+      "nodeCount": 10942,
       "preferredFormat": "hgb",
       "properties": {
         "density": 0.004575930276299103,
         "edge_type_count": 1,
-        "has_self_loops": false,
+        "has_self_loops": true,
         "is_connected": true,
         "is_cyclic": true,
         "is_directed": true,
         "is_heterogeneous": true,
-        "is_multigraph": false,
+        "is_multigraph": true,
         "is_weighted": false,
         "n_components": 1,
         "node_type_count": 1
@@ -308,7 +308,7 @@
       "properties": {
         "density": 0.6666666666666666,
         "edge_type_count": 1,
-        "has_self_loops": false,
+        "has_self_loops": true,
         "is_connected": true,
         "is_cyclic": true,
         "is_directed": true,
@@ -472,7 +472,8 @@
           "downloads": [
             {
               "format": "amazon-ratings-undirected",
-              "url": "http://jmcauley.ucsd.edu/data/amazon/categoryFiles/ratings_Movies_and_TV.csv"
+              "url": "https://snap.stanford.edu/data/amazon/productGraph/categoryFiles/ratings_Movies_and_TV.csv",
+              "note": "2014 McAuley Amazon reviews, Movies and TV category ratings; the original jmcauley.ucsd.edu categoryFiles link is dead, the SNAP product-graph page mirrors the same file"
             }
           ],
           "source": "mcauley-ucsd"
@@ -591,7 +592,7 @@
       "properties": {
         "density": 0.000026194088195261075,
         "edge_type_count": 1,
-        "has_self_loops": true,
+        "has_self_loops": false,
         "is_connected": true,
         "is_cyclic": true,
         "is_directed": true,
@@ -713,7 +714,7 @@
         "has_self_loops": true,
         "is_connected": true,
         "is_cyclic": true,
-        "is_directed": true,
+        "is_directed": false,
         "is_heterogeneous": false,
         "is_multigraph": true,
         "is_weighted": false,
@@ -726,7 +727,7 @@
         {
           "downloads": [
             {
-              "format": "various",
+              "format": "pajek",
               "url": "https://web.archive.org/web/20230601/http://deim.urv.cat/~aarenas/data/xarxes/celegans_metabolic.zip",
               "innerPath": "celegans_metabolic.net"
             }
@@ -752,14 +753,14 @@
         "year": 2003
       },
       "description": "E-mail interchanges between members of the University Rovira i Virgili (Tarragona).",
-      "edgeCount": 0,
+      "edgeCount": 10903,
       "id": "arenas-email",
       "name": "Email Network URV",
-      "nodeCount": 0,
+      "nodeCount": 1133,
       "properties": {
         "density": 0.0085017730219967,
         "edge_type_count": 1,
-        "has_self_loops": false,
+        "has_self_loops": true,
         "is_connected": true,
         "is_cyclic": true,
         "is_directed": true,
@@ -807,7 +808,7 @@
         "has_self_loops": false,
         "is_connected": true,
         "is_cyclic": false,
-        "is_directed": true,
+        "is_directed": false,
         "is_heterogeneous": false,
         "is_multigraph": true,
         "is_weighted": false,
@@ -820,7 +821,7 @@
         {
           "downloads": [
             {
-              "format": "various",
+              "format": "pajek",
               "url": "https://web.archive.org/web/20230601/http://deim.urv.cat/~aarenas/data/xarxes/jazz.zip",
               "innerPath": "jazz.net"
             }
@@ -845,10 +846,10 @@
         "year": 2004
       },
       "description": "Giant component of the network of users of the Pretty-Good-Privacy algorithm for secure information interchange.",
-      "edgeCount": 35021,
+      "edgeCount": 24340,
       "id": "arenas-pgp",
       "name": "PGP Network",
-      "nodeCount": 21361,
+      "nodeCount": 10680,
       "properties": {
         "density": 0.00021320151945099995,
         "edge_type_count": 1,
@@ -857,7 +858,7 @@
         "is_cyclic": false,
         "is_directed": false,
         "is_heterogeneous": false,
-        "is_multigraph": false,
+        "is_multigraph": true,
         "is_weighted": true,
         "n_components": 1,
         "node_type_count": 1
@@ -868,7 +869,7 @@
         {
           "downloads": [
             {
-              "format": "various",
+              "format": "pajek",
               "url": "https://web.archive.org/web/20230601/http://deim.urv.cat/~aarenas/data/xarxes/PGP.zip"
             }
           ],
@@ -895,15 +896,15 @@
         "year": 2010
       },
       "description": "Directed acyclic graph of paper citations from arXiv high-energy physics preprints. Papers can only cite papers published before them. Medium-sized DAG with clear temporal ordering. Useful for benchmarking DAG algorithms on realistic citation networks and temporal graph analysis.",
-      "edgeCount": 2332014,
+      "edgeCount": 421578,
       "id": "arxiv-citations",
       "name": "arXiv Citation Network (DAG)",
-      "nodeCount": 178569,
+      "nodeCount": 34546,
       "preferredFormat": "edge-list",
       "properties": {
         "density": 0.0007054197642773696,
         "edge_type_count": 1,
-        "has_self_loops": false,
+        "has_self_loops": true,
         "is_connected": false,
         "is_cyclic": true,
         "is_directed": true,
@@ -918,11 +919,6 @@
       "sources": [
         {
           "downloads": [
-            {
-              "description": "Citation DAG from HEP-PH arXiv papers with temporal structure",
-              "format": "edge-list",
-              "url": "https://snap.stanford.edu/data/cit-HepPh.html"
-            },
             {
               "description": "Compressed edge list (source target year)",
               "format": "edge-list",
@@ -1106,12 +1102,12 @@
       "properties": {
         "density": 0.0013029931073553016,
         "edge_type_count": 1,
-        "has_self_loops": false,
+        "has_self_loops": true,
         "is_connected": false,
         "is_cyclic": true,
         "is_directed": false,
         "is_heterogeneous": false,
-        "is_multigraph": false,
+        "is_multigraph": true,
         "is_weighted": false,
         "n_components": 173,
         "node_type_count": 1
@@ -1152,12 +1148,12 @@
       "properties": {
         "density": 0.000021066408037288526,
         "edge_type_count": 1,
-        "has_self_loops": false,
+        "has_self_loops": true,
         "is_connected": true,
         "is_cyclic": true,
         "is_directed": true,
         "is_heterogeneous": false,
-        "is_multigraph": false,
+        "is_multigraph": true,
         "is_weighted": false,
         "n_components": 1,
         "node_type_count": 1
@@ -1195,7 +1191,13 @@
         "is_weighted": false,
         "n_components": 371,
         "node_type_count": 1
-      }
+      },
+      "sources": [
+        {
+          "homepage": "https://networkrepository.com",
+          "note": "source URL unrecorded: the cache graph's meta names networkrepository and a snap-edgelist format, but no catalogue entry ever named the file, so the cached graph is the sole artifact and a refetch needs the origin identified first"
+        }
+      ]
     },
     "bos_genetic": {
       "category": "heterogeneous",
@@ -1258,12 +1260,12 @@
       "properties": {
         "density": 0.0011244455715955115,
         "edge_type_count": 1,
-        "has_self_loops": false,
+        "has_self_loops": true,
         "is_connected": false,
         "is_cyclic": true,
         "is_directed": false,
         "is_heterogeneous": false,
-        "is_multigraph": false,
+        "is_multigraph": true,
         "is_weighted": false,
         "n_components": 290,
         "node_type_count": 1
@@ -1323,12 +1325,12 @@
       "properties": {
         "density": 0.0003494479766981958,
         "edge_type_count": 1,
-        "has_self_loops": false,
+        "has_self_loops": true,
         "is_connected": false,
         "is_cyclic": true,
         "is_directed": false,
         "is_heterogeneous": false,
-        "is_multigraph": false,
+        "is_multigraph": true,
         "is_weighted": false,
         "n_components": 567,
         "node_type_count": 1
@@ -1384,12 +1386,12 @@
       "properties": {
         "density": 0.0010548414931401452,
         "edge_type_count": 1,
-        "has_self_loops": false,
+        "has_self_loops": true,
         "is_connected": false,
         "is_cyclic": true,
         "is_directed": false,
         "is_heterogeneous": false,
-        "is_multigraph": false,
+        "is_multigraph": true,
         "is_weighted": false,
         "n_components": 355,
         "node_type_count": 1
@@ -1449,12 +1451,12 @@
       "properties": {
         "density": 0.0016440692740471677,
         "edge_type_count": 1,
-        "has_self_loops": false,
+        "has_self_loops": true,
         "is_connected": false,
         "is_cyclic": true,
         "is_directed": false,
         "is_heterogeneous": false,
-        "is_multigraph": false,
+        "is_multigraph": true,
         "is_weighted": false,
         "n_components": 278,
         "node_type_count": 1
@@ -1510,12 +1512,12 @@
       "properties": {
         "density": 0.000532788617943188,
         "edge_type_count": 1,
-        "has_self_loops": false,
+        "has_self_loops": true,
         "is_connected": false,
         "is_cyclic": true,
         "is_directed": false,
         "is_heterogeneous": false,
-        "is_multigraph": false,
+        "is_multigraph": true,
         "is_weighted": false,
         "n_components": 429,
         "node_type_count": 1
@@ -1641,32 +1643,12 @@
         {
           "downloads": [
             {
-              "format": "edgelist",
-              "note": "C elegans frontal neuron network (131 neurons, 764 synapses) - direct edge-list in gzip format",
-              "url": "https://snap.stanford.edu/data/C-elegans-frontal.txt.gz"
+              "format": "netzschleuder",
+              "note": "Cook et al. 2019 adult hermaphrodite chemical connectome, directed pre- to post-synaptic (the entry once copied the 131-neuron frontal matrix's URL, so its cache graph was that other network)",
+              "url": "https://networks.skewed.de/net/celegans_2019/files/hermaphrodite_chemical.gt.zst"
             }
           ],
-          "source": "snap"
-        },
-        {
-          "downloads": [
-            {
-              "format": "edgelist",
-              "note": "C elegans directed neural network (302 neurons, 2386 edges) from Network Data Repository",
-              "url": "https://nrvis.com/download/data/bio/bio-celegans-dir.zip"
-            }
-          ],
-          "source": "networkrepository"
-        },
-        {
-          "downloads": [
-            {
-              "format": "csv",
-              "note": "C elegans connectome with gap junctions and chemical synapses (2024 data)",
-              "url": "https://huggingface.co/datasets/qsimeon/celegans_connectome_data/raw/main/celegans_connectome_data.csv"
-            }
-          ],
-          "source": "huggingface"
+          "source": "netzschleuder"
         }
       ]
     },
@@ -1713,31 +1695,6 @@
               "url": "https://networks.skewed.de/net/celegans_interactomes/files/LCI.gt.zst"
             }
           ]
-        }
-      ]
-    },
-    "celegans-metabolic-undir": {
-      "description": "Graph from benchmark analysis (celegans-metabolic-undir)",
-      "edgeCount": 4596,
-      "id": "celegans-metabolic-undir",
-      "name": "celegans-metabolic-undir",
-      "nodeCount": 453,
-      "properties": {
-        "has_self_loops": true,
-        "is_directed": false,
-        "is_heterogeneous": true,
-        "is_multigraph": true,
-        "is_weighted": false
-      },
-      "sources": [
-        {
-          "downloads": [
-            {
-              "format": "netzschleuder",
-              "url": "https://networks.skewed.de/net/celegans_metabolic"
-            }
-          ],
-          "source": "netzschleuder"
         }
       ]
     },
@@ -1802,7 +1759,7 @@
       "properties": {
         "density": 0.0007053828945682933,
         "edge_type_count": 1,
-        "has_self_loops": false,
+        "has_self_loops": true,
         "is_connected": false,
         "is_cyclic": true,
         "is_directed": true,
@@ -1867,7 +1824,7 @@
       "properties": {
         "density": 0.00091371775893858,
         "edge_type_count": 1,
-        "has_self_loops": false,
+        "has_self_loops": true,
         "is_connected": false,
         "is_cyclic": true,
         "is_directed": true,
@@ -2435,10 +2392,10 @@
         "year": 2006
       },
       "description": "Computer Science PhD advisor-student relationships.",
-      "edgeCount": 0,
+      "edgeCount": 1740,
       "id": "csphd",
       "name": "CS PhD Genealogy",
-      "nodeCount": 0,
+      "nodeCount": 1882,
       "properties": {
         "density": 0.0009830391842808644,
         "edge_type_count": 1,
@@ -2592,7 +2549,7 @@
         "year": 1993
       },
       "description": "Network of English words of length 2-8, connected if they differ by one letter.",
-      "edgeCount": 28635,
+      "edgeCount": 89038,
       "id": "dic28",
       "name": "Words 2-8",
       "nodeCount": 52652,
@@ -2646,7 +2603,7 @@
         "is_cyclic": true,
         "is_directed": false,
         "is_heterogeneous": true,
-        "is_multigraph": true,
+        "is_multigraph": false,
         "is_weighted": false,
         "n_components": 1,
         "node_type_count": 1
@@ -2690,7 +2647,7 @@
       "properties": {
         "density": 0.08408249603384453,
         "edge_type_count": 1,
-        "has_self_loops": true,
+        "has_self_loops": false,
         "is_connected": true,
         "is_cyclic": true,
         "is_directed": false,
@@ -2731,49 +2688,6 @@
         }
       ]
     },
-    "ego-facebook": {
-      "citation": {
-        "authors": [
-          "J. McAuley",
-          "J. Leskovec"
-        ],
-        "journal": "NIPS",
-        "title": "Learning to Discover Social Circles in Ego Networks",
-        "type": "article",
-        "year": 2012
-      },
-      "description": "Social circles from Facebook (anonymized). Nodes are users and edges are friendships.",
-      "edgeCount": 88234,
-      "id": "ego-facebook",
-      "name": "Facebook Social Circles",
-      "nodeCount": 4039,
-      "properties": {
-        "density": 0.010819963503439287,
-        "edge_type_count": 1,
-        "has_self_loops": false,
-        "is_connected": true,
-        "is_cyclic": true,
-        "is_directed": false,
-        "is_heterogeneous": false,
-        "is_multigraph": false,
-        "is_weighted": false,
-        "n_components": 1,
-        "node_type_count": 1
-      },
-      "rawBytes": 4484148,
-      "retrieved": "2026-01-17",
-      "sources": [
-        {
-          "downloads": [
-            {
-              "format": "various",
-              "url": "https://snap.stanford.edu/data/facebook_combined.txt.gz"
-            }
-          ],
-          "source": "snap"
-        }
-      ]
-    },
     "ego-twitter": {
       "citation": {
         "authors": [
@@ -2793,12 +2707,12 @@
       "properties": {
         "density": 0.0004061072162436206,
         "edge_type_count": 1,
-        "has_self_loops": false,
+        "has_self_loops": true,
         "is_connected": true,
         "is_cyclic": true,
         "is_directed": true,
         "is_heterogeneous": false,
-        "is_multigraph": false,
+        "is_multigraph": true,
         "is_weighted": false,
         "n_components": 1,
         "node_type_count": 1
@@ -2842,7 +2756,7 @@
         "is_cyclic": true,
         "is_directed": false,
         "is_heterogeneous": false,
-        "is_multigraph": false,
+        "is_multigraph": true,
         "is_weighted": false,
         "n_components": 1065,
         "node_type_count": 1
@@ -2898,7 +2812,7 @@
       "properties": {
         "density": 0.000010394636114519873,
         "edge_type_count": 1,
-        "has_self_loops": false,
+        "has_self_loops": true,
         "is_connected": false,
         "is_cyclic": true,
         "is_directed": true,
@@ -2959,10 +2873,10 @@
         "year": 2006
       },
       "description": "Collaboration network centered on Paul Erdos. Nodes are mathematicians who collaborated with Erdos or his collaborators.",
-      "edgeCount": 0,
+      "edgeCount": 11850,
       "id": "erdos02",
       "name": "Erdos Collaboration 2002",
-      "nodeCount": 0,
+      "nodeCount": 6927,
       "properties": {
         "density": 0.0005533706457904673,
         "edge_type_count": 1,
@@ -3109,7 +3023,7 @@
         "year": 2015
       },
       "description": "Heterogeneous knowledge graph from Freebase with 237 relation types. A subset of FB15k created by removing inverse relations to prevent test leakage. Contains entities from multiple domains (people, locations, music, film) with directed relation edges. Standard benchmark for knowledge graph completion and link prediction.",
-      "edgeCount": 116,
+      "edgeCount": 283869,
       "id": "fb15k-237",
       "name": "FB15k-237",
       "nodeCount": 14543,
@@ -3117,7 +3031,7 @@
       "properties": {
         "density": 0.004329004329004329,
         "edge_type_count": 1,
-        "has_self_loops": false,
+        "has_self_loops": true,
         "is_connected": false,
         "is_cyclic": false,
         "is_directed": true,
@@ -3141,23 +3055,11 @@
           "source": "uni-mannheim"
         },
         {
-          "downloads": [
-            {
-              "description": "PyKEEN auto-download format",
-              "format": "pykeen",
-              "url": "https://github.com/pykeen/pykeen#datasets"
-            }
-          ],
+          "homepage": "https://github.com/pykeen/pykeen#datasets",
           "source": "pykeen"
         },
         {
-          "downloads": [
-            {
-              "description": "Original format: train.txt, valid.txt, test.txt with head relation tail triples",
-              "format": "txt",
-              "url": "https://www.microsoft.com/en-us/download/details.aspx?id=52312"
-            }
-          ],
+          "homepage": "https://www.microsoft.com/en-us/download/details.aspx?id=52312",
           "source": "microsoft"
         }
       ]
@@ -3219,7 +3121,7 @@
       "citeKey": "girvan2002community",
       "description": "Network of American football games between Division IA colleges during regular season Fall 2000. Nodes represent teams and edges connect teams that played each other. The 'value' property indicates conference membership.",
       "domain": "Sports network",
-      "edgeCount": 616,
+      "edgeCount": 613,
       "id": "football",
       "maxPaths": 15,
       "name": "American College Football",
@@ -3233,7 +3135,7 @@
         "is_cyclic": true,
         "is_directed": false,
         "is_heterogeneous": false,
-        "is_multigraph": true,
+        "is_multigraph": false,
         "is_weighted": false,
         "n_components": 1,
         "node_type_count": 1
@@ -3287,7 +3189,7 @@
       "properties": {
         "density": 0.0935163996948894,
         "edge_type_count": 1,
-        "has_self_loops": true,
+        "has_self_loops": false,
         "is_connected": true,
         "is_cyclic": true,
         "is_directed": false,
@@ -3500,10 +3402,10 @@
         "year": 2006
       },
       "description": "Collaboration network of computational geometry researchers.",
-      "edgeCount": 0,
+      "edgeCount": 11898,
       "id": "geom",
       "name": "Computational Geometry Collaboration",
-      "nodeCount": 0,
+      "nodeCount": 7343,
       "properties": {
         "density": 0.0006276176119693188,
         "edge_type_count": 1,
@@ -3629,10 +3531,10 @@
         "year": 2001
       },
       "description": "Weighted network of coauthorships between scientists posting preprints on the High-Energy Theory E-Print Archive between Jan 1, 1995 and December 31, 1999.",
-      "edgeCount": 0,
+      "edgeCount": 15751,
       "id": "hep-th",
       "name": "High-Energy Theory Collaborations",
-      "nodeCount": 0,
+      "nodeCount": 8361,
       "properties": {
         "density": 0.0005440338046324214,
         "edge_type_count": 1,
@@ -3697,11 +3599,11 @@
       "citeKey": "himmelstein2017systematic",
       "description": "Heterogeneous biomedical knowledge graph integrating 29 public databases. Contains 11 node types (Compounds, Diseases, Genes, Proteins, etc.) connected by 24 edge types including compound-disease treatments, gene-disease associations, and protein interactions. Designed for drug repurposing and biomedical discovery.",
       "domain": "Biomedical knowledge graph",
-      "edgeCount": 2250198,
+      "edgeCount": 2250197,
       "id": "hetionet",
       "name": "Hetionet",
-      "nodeCount": 20164,
-      "preferredFormat": "gz",
+      "nodeCount": 45158,
+      "preferredFormat": "edge-list",
       "properties": {
         "density": 0.0003807640611381848,
         "edge_type_count": 1,
@@ -3721,8 +3623,13 @@
         {
           "downloads": [
             {
-              "description": "SIF format edge list from GitHub LFS (media.githubusercontent.com)",
-              "format": "gz",
+              "columns": [
+                0,
+                2
+              ],
+              "description": "SIF format edge list from GitHub LFS (media.githubusercontent.com): a header row, then source, metaedge, target",
+              "format": "edge-list",
+              "skipLines": 1,
               "url": "https://media.githubusercontent.com/media/hetio/hetionet/main/hetnet/tsv/hetionet-v1.0-edges.sif.gz"
             }
           ],
@@ -3987,16 +3894,16 @@
       "citeKey": "zachary1977information",
       "description": "Social network of friendships between 34 members of a karate club at a US university in the 1970s.",
       "domain": "Social network",
-      "edgeCount": 79,
+      "edgeCount": 78,
       "id": "karate",
       "maxPaths": 15,
       "name": "Zachary's Karate Club",
       "nodeCount": 34,
-      "preferredFormat": "edge-list",
+      "preferredFormat": "gml",
       "properties": {
         "density": 0.1408199643493761,
         "edge_type_count": 1,
-        "has_self_loops": true,
+        "has_self_loops": false,
         "is_connected": true,
         "is_cyclic": true,
         "is_directed": false,
@@ -4051,10 +3958,10 @@
       },
       "description": "Small knowledge graph from the CoDEx (Comprehensive Distillation and Extraction) benchmark. Extracted from Wikidata and Wikipedia. Contains 42 relation types connecting entities, with 337 entity pairs having multiple relation types. Directed triples (head, relation, tail) format.",
       "domain": "Encyclopedic knowledge graph",
-      "edgeCount": 0,
+      "edgeCount": 32888,
       "id": "kg-codex-s",
       "name": "CoDEx-S Knowledge Graph",
-      "nodeCount": 0,
+      "nodeCount": 2034,
       "preferredFormat": "tsv",
       "properties": {
         "has_self_loops": false,
@@ -4068,7 +3975,11 @@
         {
           "downloads": [
             {
-              "format": "tsv",
+              "columns": [
+                0,
+                2
+              ],
+              "format": "edge-list",
               "url": "https://github.com/tsafavi/codex/raw/master/data/triples/codex-s/train.txt"
             }
           ],
@@ -4103,7 +4014,7 @@
         "has_self_loops": false,
         "is_directed": true,
         "is_heterogeneous": true,
-        "is_multigraph": true,
+        "is_multigraph": false,
         "is_weighted": false
       },
       "retrieved": "2026-04-19",
@@ -4210,17 +4121,17 @@
       "edgeCount": 58595,
       "id": "konect-opsahl-collaboration",
       "name": "Opsahl Collaboration Network",
-      "nodeCount": 22015,
+      "nodeCount": 38741,
       "preferredFormat": "konect-tarbz2",
       "properties": {
         "density": 0.00024177210459736553,
         "edge_type_count": 1,
-        "has_self_loops": true,
+        "has_self_loops": false,
         "is_connected": true,
         "is_cyclic": true,
         "is_directed": false,
         "is_heterogeneous": false,
-        "is_multigraph": true,
+        "is_multigraph": false,
         "is_weighted": true,
         "n_components": 1,
         "node_type_count": 1
@@ -4378,15 +4289,15 @@
       "citeKey": "lv2021we",
       "description": "Heterogeneous music recommendation network from Last.fm. Contains users, artists, and tags with directed user-to-artist listening relationships, social user-user connections, and artist-tag associations. Used for link prediction and recommendation tasks in heterogeneous graph neural network benchmarks.",
       "domain": "Music recommendation network",
-      "edgeCount": 92835,
+      "edgeCount": 92834,
       "id": "lastfm-hgb",
       "name": "LastFM (HGB)",
-      "nodeCount": 17646,
-      "preferredFormat": "zip",
+      "nodeCount": 19524,
+      "preferredFormat": "two-mode-table",
       "properties": {
         "density": 0.0005933961402754534,
         "edge_type_count": 1,
-        "has_self_loops": true,
+        "has_self_loops": false,
         "is_connected": false,
         "is_cyclic": true,
         "is_directed": true,
@@ -4403,7 +4314,7 @@
           "downloads": [
             {
               "description": "HetRec 2011 LastFM dataset",
-              "format": "zip",
+              "format": "two-mode-table",
               "innerPath": "user_artists.dat",
               "url": "https://files.grouplens.org/datasets/hetrec2011/hetrec2011-lastfm-2k.zip"
             }
@@ -4584,7 +4495,7 @@
         "is_cyclic": true,
         "is_directed": false,
         "is_heterogeneous": false,
-        "is_multigraph": false,
+        "is_multigraph": true,
         "is_weighted": false,
         "n_components": 547,
         "node_type_count": 1
@@ -4645,7 +4556,7 @@
         "is_cyclic": true,
         "is_directed": false,
         "is_heterogeneous": false,
-        "is_multigraph": false,
+        "is_multigraph": true,
         "is_weighted": false,
         "n_components": 1,
         "node_type_count": 1
@@ -5000,10 +4911,10 @@
         "year": 2006
       },
       "description": "Coauthorship network of scientists working on network theory and experiment, compiled by M. Newman in May 2006.",
-      "edgeCount": 0,
+      "edgeCount": 2742,
       "id": "netscience",
       "name": "Network Science Coauthorships",
-      "nodeCount": 0,
+      "nodeCount": 1589,
       "properties": {
         "density": 0.0025709544035329526,
         "edge_type_count": 1,
@@ -5371,15 +5282,15 @@
       ]
     },
     "netzschleuder-copenhagen-bt": {
-      "edgeCount": 5508,
+      "edgeCount": 2426279,
       "id": "netzschleuder-copenhagen-bt",
       "name": "Copenhagen Bluetooth Network",
-      "nodeCount": 10944,
+      "nodeCount": 692,
       "properties": {
         "has_self_loops": false,
         "is_directed": false,
         "is_heterogeneous": false,
-        "is_multigraph": false,
+        "is_multigraph": true,
         "is_weighted": true
       },
       "sources": [
@@ -5394,15 +5305,15 @@
       ]
     },
     "netzschleuder-copenhagen-bt-unweighted": {
-      "edgeCount": 5508,
+      "edgeCount": 2426279,
       "id": "netzschleuder-copenhagen-bt-unweighted",
       "name": "Copenhagen Bluetooth (Unweighted Events)",
-      "nodeCount": 10944,
+      "nodeCount": 692,
       "properties": {
         "has_self_loops": false,
         "is_directed": false,
         "is_heterogeneous": false,
-        "is_multigraph": false,
+        "is_multigraph": true,
         "is_weighted": false
       },
       "sources": [
@@ -5873,40 +5784,6 @@
         }
       ]
     },
-    "netzschleuder-interactome_pdz": {
-      "citation": [
-        [
-          "T. Beuming et al. \"PDZBase: a protein–protein interaction database for PDZ-domains.\" Bioinformatics 21.6, 827-828. (2005).",
-          "https://doi.org/10.1093/bioinformatics/bti098"
-        ]
-      ],
-      "description": "A network of PDZ-domain-mediated protein–protein binding interactions, extracted from the PDZBase database. Nodes represent proteins and an edge represents a binding interaction between two proteins.[^icon]\n[^icon]: Description obtained from the [ICON](https://icon.colorado.edu) project.",
-      "edgeCount": 244,
-      "id": "netzschleuder-interactome_pdz",
-      "name": "PDZ-domain interactome (2005)",
-      "nodeCount": 212,
-      "preferredFormat": "csv",
-      "properties": {
-        "has_self_loops": true,
-        "is_directed": false,
-        "is_heterogeneous": false,
-        "is_multigraph": false,
-        "is_weighted": false
-      },
-      "retrieved": "2026-04-20",
-      "sources": [
-        "http://konect.cc/networks/maayan-pdzbase",
-        {
-          "downloads": [
-            {
-              "format": "netzschleuder",
-              "url": "https://networks.skewed.de/net/interactome_pdz"
-            }
-          ],
-          "source": "netzschleuder"
-        }
-      ]
-    },
     "netzschleuder-internet-top-pop-eenet": {
       "edgeCount": 16,
       "id": "netzschleuder-internet-top-pop-eenet",
@@ -6060,40 +5937,6 @@
       "rawBytes": 0,
       "retrieved": "2026-04-20",
       "sources": [
-        {
-          "downloads": [
-            {
-              "format": "netzschleuder",
-              "url": "https://networks.skewed.de/net/law_firm"
-            }
-          ],
-          "source": "netzschleuder"
-        }
-      ]
-    },
-    "netzschleuder-law_firm": {
-      "citation": [
-        [
-          "Emmanuel Lazega, \"The Collegial Phenomenon: The Social Mechanisms of Cooperation Among Peers in a Corporate Law Partnership\". Oxford University Press (2001)",
-          "http://elazega.fr/wp-content/uploads/2012/10/Lazega-Collegial-Phenomenon-2001-Introduction.pdf"
-        ]
-      ],
-      "description": "Multiplex network with 3 edge types representing relationships (coworkers, friendship, advice) between partners and associates of a corporate law firm.  Data hosted by Manlio De Domenico.[^icon]\n[^icon]: Description obtained from the [ICON](https://icon.colorado.edu) project.",
-      "edgeCount": 2571,
-      "id": "netzschleuder-law_firm",
-      "name": "Lazega law firm network",
-      "nodeCount": 71,
-      "preferredFormat": "csv",
-      "properties": {
-        "has_self_loops": false,
-        "is_directed": true,
-        "is_heterogeneous": true,
-        "is_multigraph": true,
-        "is_weighted": false
-      },
-      "retrieved": "2026-04-20",
-      "sources": [
-        "https://manliodedomenico.com/data.php",
         {
           "downloads": [
             {
@@ -6441,40 +6284,6 @@
         }
       ]
     },
-    "netzschleuder-plant_pol_kato": {
-      "citation": [
-        [
-          "M. Kato et al., \"Insect-flower relationship in the primary beech forest of Ashu, Kyoto: an overview of the flowering phenology and seasonal pattern of insect visits.\" Contr. Biol. Lab. Kyoto Univ. 27, 309-375 (1990)",
-          "http://hdl.handle.net/2433/156101"
-        ]
-      ],
-      "description": "A bipartite network of plants and pollinators from Kyoto University Forest of Ashu, Japan, from 1984 to 1987. Edge weights represent frequency of interactions[^icon]\n[^icon]: Description obtained from the [ICON](https://icon.colorado.edu) project.",
-      "edgeCount": 1206,
-      "id": "netzschleuder-plant_pol_kato",
-      "name": "Kato plant-pollinator web",
-      "nodeCount": 772,
-      "preferredFormat": "csv",
-      "properties": {
-        "has_self_loops": false,
-        "is_directed": false,
-        "is_heterogeneous": true,
-        "is_multigraph": false,
-        "is_weighted": false
-      },
-      "retrieved": "2026-04-20",
-      "sources": [
-        "https://iwdb.nceas.ucsb.edu/html/kato_1990.html",
-        {
-          "downloads": [
-            {
-              "format": "netzschleuder",
-              "url": "https://networks.skewed.de/net/plant_pol_kato"
-            }
-          ],
-          "source": "netzschleuder"
-        }
-      ]
-    },
     "netzschleuder-polblogs": {
       "category": "labeled",
       "citation": {
@@ -6550,15 +6359,15 @@
       ]
     },
     "netzschleuder-reality-mining": {
-      "edgeCount": 0,
+      "edgeCount": 1086404,
       "id": "netzschleuder-reality-mining",
       "name": "Reality Mining Proximity Network",
-      "nodeCount": 0,
+      "nodeCount": 96,
       "properties": {
         "has_self_loops": false,
         "is_directed": false,
         "is_heterogeneous": false,
-        "is_multigraph": false,
+        "is_multigraph": true,
         "is_weighted": true
       },
       "sources": [
@@ -6573,15 +6382,15 @@
       ]
     },
     "netzschleuder-reality-mining-unweighted": {
-      "edgeCount": 0,
+      "edgeCount": 1086404,
       "id": "netzschleuder-reality-mining-unweighted",
       "name": "Reality Mining Proximity (Unweighted Events)",
-      "nodeCount": 0,
+      "nodeCount": 96,
       "properties": {
         "has_self_loops": false,
         "is_directed": false,
         "is_heterogeneous": false,
-        "is_multigraph": false,
+        "is_multigraph": true,
         "is_weighted": false
       },
       "sources": [
@@ -6974,29 +6783,6 @@
       "edgeCount": 20818,
       "id": "netzschleuder-sp-hypertext-contacts",
       "name": "Hypertext 2009 Contact Network",
-      "nodeCount": 113,
-      "properties": {
-        "has_self_loops": false,
-        "is_directed": false,
-        "is_heterogeneous": false,
-        "is_multigraph": true,
-        "is_weighted": true
-      },
-      "sources": [
-        {
-          "downloads": [
-            {
-              "format": "netzschleuder",
-              "url": "https://networks.skewed.de/net/sp_hypertext/files/contacts.gt.zst"
-            }
-          ]
-        }
-      ]
-    },
-    "netzschleuder-sp-hypertext-contacts-weighted": {
-      "edgeCount": 20818,
-      "id": "netzschleuder-sp-hypertext-contacts-weighted",
-      "name": "Hypertext 2009 (Weighted Contact Counts)",
       "nodeCount": 113,
       "properties": {
         "has_self_loops": false,
@@ -7586,18 +7372,18 @@
       "name": "Mangrove Wetland Food Web (Undirected)",
       "nodeCount": 97,
       "properties": {
-        "has_self_loops": true,
+        "has_self_loops": false,
         "is_directed": false,
         "is_heterogeneous": true,
-        "is_multigraph": false,
+        "is_multigraph": true,
         "is_weighted": true
       },
       "sources": [
         {
           "downloads": [
             {
-              "format": "networkrepository-zip",
-              "url": "https://nrvis.com/download/data/bio/nr-eco-mangwet.zip"
+              "format": "edges",
+              "url": "https://nrvis.com/download/data/eco/eco-mangwet.zip"
             }
           ],
           "source": "networkrepository"
@@ -7723,13 +7509,13 @@
         {
           "downloads": [
             {
-              "description": "Pre-cached Kaggle ZIP containing graph_Engineering.pt",
-              "format": "pytorch-hetero-zip",
-              "innerPath": "graph_Engineering.pt",
+              "description": "OAG Engineering academic graph (PyTorch HeteroData), the H2GB benchmark file mirrored on the cluster after the Kaggle zip vanished with the pre-consolidation cache",
+              "format": "pytorch-hetero",
+              "innerPath": "OAG_Engineering.pt",
               "url": "file:(local path withheld)"
             }
           ],
-          "source": "local-cache"
+          "source": "cluster-mirror"
         },
         {
           "downloads": [
@@ -7740,16 +7526,6 @@
             }
           ],
           "source": "huggingface"
-        },
-        {
-          "downloads": [
-            {
-              "description": "H2GB format via Kaggle (requires authentication)",
-              "format": "h2gb",
-              "url": "https://www.kaggle.com/datasets/junhenglin/h2gb-oag-eng"
-            }
-          ],
-          "source": "kaggle"
         }
       ]
     },
@@ -7787,11 +7563,6 @@
       "sources": [
         {
           "downloads": [
-            {
-              "description": "Biomedical knowledge graph with 5 node types and 51 relation types",
-              "format": "ogb-zip",
-              "url": "https://ogb.stanford.edu/docs/linkprop/#ogbl-biokg"
-            },
             {
               "description": "Mirror download via PyG data server",
               "format": "ogb-zip",
@@ -7930,7 +7701,7 @@
         "is_cyclic": true,
         "is_directed": true,
         "is_heterogeneous": true,
-        "is_multigraph": true,
+        "is_multigraph": false,
         "is_weighted": false,
         "n_components": 1,
         "node_type_count": 2
@@ -7940,11 +7711,6 @@
       "sources": [
         {
           "downloads": [
-            {
-              "description": "Heterogeneous academic graph with node and edge types",
-              "format": "ogb-zip",
-              "url": "https://ogb.stanford.edu/docs/nodeprop/#ogbn-mag"
-            },
             {
               "description": "Mirror download via PyG data server",
               "format": "ogb-zip",
@@ -8453,10 +8219,10 @@
         "year": 2002
       },
       "description": "Pages matching the query 'California'. Constructed by expanding a 200-page search engine response set.",
-      "edgeCount": 0,
+      "edgeCount": 16150,
       "id": "pajek-california",
       "name": "Pages matching the query 'California'",
-      "nodeCount": 0,
+      "nodeCount": 6175,
       "properties": {
         "density": 0.0008377301180738345,
         "edge_type_count": 1,
@@ -8474,12 +8240,7 @@
       "retrieved": "2026-02-16",
       "sources": [
         {
-          "downloads": [
-            {
-              "format": "pajek",
-              "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/"
-            }
-          ],
+          "homepage": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/",
           "source": "pajek"
         },
         {
@@ -8512,10 +8273,10 @@
         "year": 2006
       },
       "description": "Interlocking directorates of the top 200 Dutch companies. Two-mode network of directors and boards.",
-      "edgeCount": 0,
+      "edgeCount": 5221,
       "id": "pajek-dutch-elite",
       "name": "Dutch Elite Network",
-      "nodeCount": 0,
+      "nodeCount": 4747,
       "properties": {
         "density": 0.0004637645858595486,
         "edge_type_count": 1,
@@ -8524,7 +8285,7 @@
         "is_cyclic": true,
         "is_directed": false,
         "is_heterogeneous": true,
-        "is_multigraph": false,
+        "is_multigraph": true,
         "is_weighted": false,
         "n_components": 216,
         "node_type_count": 1
@@ -8563,7 +8324,7 @@
       "properties": {
         "density": 0.0011323305963121687,
         "edge_type_count": 1,
-        "has_self_loops": false,
+        "has_self_loops": true,
         "is_connected": true,
         "is_cyclic": true,
         "is_directed": true,
@@ -8615,10 +8376,10 @@
         "year": 2006
       },
       "description": "Web pages from the US Environmental Protection Agency site.",
-      "edgeCount": 0,
+      "edgeCount": 8965,
       "id": "pajek-epa",
       "name": "Web pages from the US Environmental Protection Agency site",
-      "nodeCount": 0,
+      "nodeCount": 4271,
       "properties": {
         "density": 0.0009770156224896737,
         "edge_type_count": 1,
@@ -8636,12 +8397,7 @@
       "retrieved": "2026-02-16",
       "sources": [
         {
-          "downloads": [
-            {
-              "format": "pajek",
-              "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/"
-            }
-          ],
+          "homepage": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/",
           "source": "pajek"
         },
         {
@@ -8674,7 +8430,7 @@
         "year": 2006
       },
       "description": "Core Erdos collaboration network, 1997 version. Direct collaborators only.",
-      "edgeCount": 337,
+      "edgeCount": 1314,
       "id": "pajek-erdos-971",
       "name": "Erdos Collaboration 1997 (Core)",
       "nodeCount": 472,
@@ -8686,7 +8442,7 @@
         "is_cyclic": true,
         "is_directed": false,
         "is_heterogeneous": false,
-        "is_multigraph": true,
+        "is_multigraph": false,
         "is_weighted": true,
         "n_components": 3,
         "node_type_count": 1
@@ -8733,10 +8489,10 @@
         "year": 2006
       },
       "description": "Extended Erdos collaboration network, 1997 version. Includes second-order collaborators.",
-      "edgeCount": 0,
+      "edgeCount": 8972,
       "id": "pajek-erdos-972",
       "name": "Erdos Collaboration 1997 (Extended)",
-      "nodeCount": 0,
+      "nodeCount": 5488,
       "properties": {
         "density": 0.0006284300885053086,
         "edge_type_count": 1,
@@ -8792,7 +8548,7 @@
         "year": 2006
       },
       "description": "Core Erdos collaboration network, 1998 version.",
-      "edgeCount": 347,
+      "edgeCount": 1381,
       "id": "pajek-erdos-981",
       "name": "Erdos Collaboration 1998 (Core)",
       "nodeCount": 485,
@@ -8804,7 +8560,7 @@
         "is_cyclic": true,
         "is_directed": false,
         "is_heterogeneous": false,
-        "is_multigraph": true,
+        "is_multigraph": false,
         "is_weighted": true,
         "n_components": 4,
         "node_type_count": 1
@@ -8851,10 +8607,10 @@
         "year": 2006
       },
       "description": "Extended Erdos collaboration network, 1998 version.",
-      "edgeCount": 0,
+      "edgeCount": 9505,
       "id": "pajek-erdos-982",
       "name": "Erdos Collaboration 1998 (Extended)",
-      "nodeCount": 0,
+      "nodeCount": 5822,
       "properties": {
         "density": 0.0005991920372699884,
         "edge_type_count": 1,
@@ -8910,7 +8666,7 @@
         "year": 2006
       },
       "description": "Core Erdos collaboration network, 1999 version.",
-      "edgeCount": 355,
+      "edgeCount": 1417,
       "id": "pajek-erdos-991",
       "name": "Erdos Collaboration 1999 (Core)",
       "nodeCount": 492,
@@ -8922,7 +8678,7 @@
         "is_cyclic": true,
         "is_directed": false,
         "is_heterogeneous": false,
-        "is_multigraph": true,
+        "is_multigraph": false,
         "is_weighted": true,
         "n_components": 5,
         "node_type_count": 1
@@ -8969,10 +8725,10 @@
         "year": 2006
       },
       "description": "Extended Erdos collaboration network, 1999 version.",
-      "edgeCount": 0,
+      "edgeCount": 9939,
       "id": "pajek-erdos-992",
       "name": "Erdos Collaboration 1999 (Extended)",
-      "nodeCount": 0,
+      "nodeCount": 6100,
       "properties": {
         "density": 0.0005793304605018043,
         "edge_type_count": 1,
@@ -9028,14 +8784,14 @@
         "year": 2006
       },
       "description": "Corporate ownership network from EVA database. 8,343 entities, 6,726 ownership links.",
-      "edgeCount": 0,
+      "edgeCount": 6726,
       "id": "pajek-eva",
       "name": "EVA Ownership Network",
-      "nodeCount": 0,
+      "nodeCount": 8322,
       "properties": {
         "density": 0.00009317013848024793,
         "edge_type_count": 1,
-        "has_self_loops": false,
+        "has_self_loops": true,
         "is_connected": false,
         "is_cyclic": true,
         "is_directed": true,
@@ -9141,7 +8897,7 @@
         "is_cyclic": true,
         "is_directed": true,
         "is_heterogeneous": false,
-        "is_multigraph": true,
+        "is_multigraph": false,
         "is_weighted": true,
         "n_components": 1,
         "node_type_count": 1
@@ -9196,7 +8952,7 @@
       "properties": {
         "density": 0.0006402977011672923,
         "edge_type_count": 1,
-        "has_self_loops": false,
+        "has_self_loops": true,
         "is_connected": true,
         "is_cyclic": true,
         "is_directed": true,
@@ -9238,12 +8994,12 @@
       "properties": {
         "density": 0.006237006237006237,
         "edge_type_count": 1,
-        "has_self_loops": false,
+        "has_self_loops": true,
         "is_connected": false,
         "is_cyclic": true,
         "is_directed": true,
         "is_heterogeneous": false,
-        "is_multigraph": true,
+        "is_multigraph": false,
         "is_weighted": false,
         "n_components": 7,
         "node_type_count": 1
@@ -9285,7 +9041,7 @@
         "is_cyclic": true,
         "is_directed": true,
         "is_heterogeneous": false,
-        "is_multigraph": true,
+        "is_multigraph": false,
         "is_weighted": false,
         "n_components": 1,
         "node_type_count": 1
@@ -9339,12 +9095,12 @@
       "properties": {
         "density": 0.02197802197802198,
         "edge_type_count": 1,
-        "has_self_loops": false,
+        "has_self_loops": true,
         "is_connected": true,
         "is_cyclic": true,
         "is_directed": true,
         "is_heterogeneous": true,
-        "is_multigraph": true,
+        "is_multigraph": false,
         "is_weighted": false,
         "n_components": 1,
         "node_type_count": 1
@@ -9866,7 +9622,7 @@
         "is_cyclic": true,
         "is_directed": true,
         "is_heterogeneous": true,
-        "is_multigraph": true,
+        "is_multigraph": false,
         "is_weighted": false,
         "n_components": 1,
         "node_type_count": 1
@@ -9896,10 +9652,10 @@
         "year": 2006
       },
       "description": "Graph Drawing 1996 contest, Problem A. 1,096 vertices, 1,691 arcs.",
-      "edgeCount": 0,
+      "edgeCount": 1691,
       "id": "pajek-gd96",
       "name": "GD96 Contest Graph A",
-      "nodeCount": 0,
+      "nodeCount": 1096,
       "properties": {
         "density": 0.0013973602639736026,
         "edge_type_count": 1,
@@ -9908,7 +9664,7 @@
         "is_cyclic": false,
         "is_directed": true,
         "is_heterogeneous": false,
-        "is_multigraph": false,
+        "is_multigraph": true,
         "is_weighted": true,
         "n_components": 1,
         "node_type_count": 1
@@ -9992,7 +9748,7 @@
         "is_cyclic": true,
         "is_directed": true,
         "is_heterogeneous": false,
-        "is_multigraph": true,
+        "is_multigraph": false,
         "is_weighted": false,
         "n_components": 4,
         "node_type_count": 1
@@ -10034,7 +9790,7 @@
         "is_cyclic": false,
         "is_directed": true,
         "is_heterogeneous": false,
-        "is_multigraph": true,
+        "is_multigraph": false,
         "is_weighted": false,
         "n_components": 9,
         "node_type_count": 1
@@ -10044,10 +9800,6 @@
       "sources": [
         {
           "downloads": [
-            {
-              "format": "pajek",
-              "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/"
-            },
             {
               "description": "Wayback Machine archive of original Pajek dataset",
               "format": "pajek",
@@ -10095,7 +9847,7 @@
       "properties": {
         "density": 0.0009216898720894434,
         "edge_type_count": 1,
-        "has_self_loops": false,
+        "has_self_loops": true,
         "is_connected": false,
         "is_cyclic": true,
         "is_directed": true,
@@ -10154,12 +9906,12 @@
       "properties": {
         "density": 0.7912404930500918,
         "edge_type_count": 1,
-        "has_self_loops": false,
+        "has_self_loops": true,
         "is_connected": true,
         "is_cyclic": true,
         "is_directed": false,
         "is_heterogeneous": false,
-        "is_multigraph": true,
+        "is_multigraph": false,
         "is_weighted": true,
         "n_components": 1,
         "node_type_count": 1
@@ -10169,10 +9921,6 @@
       "sources": [
         {
           "downloads": [
-            {
-              "format": "pajek",
-              "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/"
-            },
             {
               "description": "Wayback Machine archive of original Pajek dataset",
               "format": "pajek",
@@ -10253,14 +10001,14 @@
         "year": 2006
       },
       "description": "Citation network around self-organising maps research (Teuvo Kohonen).",
-      "edgeCount": 0,
+      "edgeCount": 12731,
       "id": "pajek-kohonen",
       "name": "Kohonen Citations",
-      "nodeCount": 0,
+      "nodeCount": 4470,
       "properties": {
         "density": 0.0006373010592983831,
         "edge_type_count": 1,
-        "has_self_loops": false,
+        "has_self_loops": true,
         "is_connected": false,
         "is_cyclic": true,
         "is_directed": true,
@@ -10295,19 +10043,19 @@
         "year": 2006
       },
       "description": "Citation network around Joshua Lederberg's genetics research.",
-      "edgeCount": 0,
+      "edgeCount": 41609,
       "id": "pajek-lederberg",
       "name": "Lederberg Citations",
-      "nodeCount": 0,
+      "nodeCount": 8843,
       "properties": {
         "density": 0.0005320514543801272,
         "edge_type_count": 1,
-        "has_self_loops": false,
+        "has_self_loops": true,
         "is_connected": false,
         "is_cyclic": true,
         "is_directed": true,
         "is_heterogeneous": false,
-        "is_multigraph": false,
+        "is_multigraph": true,
         "is_weighted": true,
         "n_components": 554,
         "node_type_count": 1
@@ -10337,10 +10085,10 @@
         "year": 2006
       },
       "description": "Two-mode network of actors and films. 392,400 actors, 127,823 films, 1,470,418 appearances.",
-      "edgeCount": 127823,
+      "edgeCount": 1470404,
       "id": "pajek-nd-actors",
       "name": "Notre Dame Actors",
-      "nodeCount": 520223,
+      "nodeCount": 511463,
       "properties": {
         "density": 0.000010866468052283042,
         "edge_type_count": 1,
@@ -10409,19 +10157,19 @@
         "year": 1999
       },
       "description": "Web graph of the University of Notre Dame domain. 325,729 pages, 1,497,135 hyperlinks.",
-      "edgeCount": 154249,
+      "edgeCount": 1497135,
       "id": "pajek-nd-www",
       "name": "Notre Dame WWW",
       "nodeCount": 325729,
       "properties": {
         "density": 0.000014110719364589702,
         "edge_type_count": 1,
-        "has_self_loops": false,
+        "has_self_loops": true,
         "is_connected": true,
         "is_cyclic": true,
         "is_directed": true,
         "is_heterogeneous": true,
-        "is_multigraph": false,
+        "is_multigraph": true,
         "is_weighted": true,
         "n_components": 1,
         "node_type_count": 1
@@ -10478,10 +10226,10 @@
         "year": 2004
       },
       "description": "Collaboration network of network science researchers. 1,589 authors.",
-      "edgeCount": 0,
+      "edgeCount": 2742,
       "id": "pajek-netscience",
       "name": "Network Science Collaboration",
-      "nodeCount": 0,
+      "nodeCount": 1589,
       "properties": {
         "density": 0.0021733168683312383,
         "edge_type_count": 1,
@@ -10520,19 +10268,19 @@
         "year": 2006
       },
       "description": "Cross-reference network from the Online Dictionary for Library and Information Science.",
-      "edgeCount": 0,
+      "edgeCount": 18419,
       "id": "pajek-odlis",
       "name": "ODLIS Dictionary",
-      "nodeCount": 0,
+      "nodeCount": 2909,
       "properties": {
         "density": 0.002156897698788988,
         "edge_type_count": 1,
-        "has_self_loops": false,
+        "has_self_loops": true,
         "is_connected": false,
         "is_cyclic": true,
         "is_directed": true,
         "is_heterogeneous": false,
-        "is_multigraph": false,
+        "is_multigraph": true,
         "is_weighted": true,
         "n_components": 11,
         "node_type_count": 1
@@ -10572,9 +10320,9 @@
         "has_self_loops": false,
         "is_connected": false,
         "is_cyclic": true,
-        "is_directed": true,
+        "is_directed": false,
         "is_heterogeneous": true,
-        "is_multigraph": true,
+        "is_multigraph": false,
         "is_weighted": false,
         "n_components": 3,
         "node_type_count": 1
@@ -10621,19 +10369,19 @@
         "year": 2006
       },
       "description": "Citation network from science of science research.",
-      "edgeCount": 0,
+      "edgeCount": 10416,
       "id": "pajek-scimet",
       "name": "Science of Science Citations",
-      "nodeCount": 0,
+      "nodeCount": 3084,
       "properties": {
         "density": 0.0010951862289876326,
         "edge_type_count": 1,
-        "has_self_loops": false,
+        "has_self_loops": true,
         "is_connected": false,
         "is_cyclic": true,
         "is_directed": true,
         "is_heterogeneous": false,
-        "is_multigraph": false,
+        "is_multigraph": true,
         "is_weighted": true,
         "n_components": 376,
         "node_type_count": 1
@@ -10673,9 +10421,9 @@
         "has_self_loops": false,
         "is_connected": false,
         "is_cyclic": true,
-        "is_directed": true,
+        "is_directed": false,
         "is_heterogeneous": true,
-        "is_multigraph": false,
+        "is_multigraph": true,
         "is_weighted": true,
         "n_components": 4,
         "node_type_count": 1
@@ -10722,10 +10470,10 @@
         "year": 2006
       },
       "description": "Citation network from Scientometrics literature.",
-      "edgeCount": 0,
+      "edgeCount": 4922,
       "id": "pajek-smagri",
       "name": "Scientometrics Citations",
-      "nodeCount": 0,
+      "nodeCount": 1059,
       "properties": {
         "density": 0.00439031007959501,
         "edge_type_count": 1,
@@ -10819,7 +10567,7 @@
         "is_cyclic": true,
         "is_directed": false,
         "is_heterogeneous": false,
-        "is_multigraph": true,
+        "is_multigraph": false,
         "is_weighted": true,
         "n_components": 1,
         "node_type_count": 1
@@ -10892,10 +10640,10 @@
         "year": 1998
       },
       "description": "Western US power grid topology.",
-      "edgeCount": 0,
+      "edgeCount": 6594,
       "id": "pajek-uspowergrid",
       "name": "Western US power grid topology",
-      "nodeCount": 0,
+      "nodeCount": 4941,
       "properties": {
         "density": 0.0005403026973346214,
         "edge_type_count": 1,
@@ -10913,12 +10661,7 @@
       "retrieved": "2026-02-16",
       "sources": [
         {
-          "downloads": [
-            {
-              "format": "pajek",
-              "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/"
-            }
-          ],
+          "homepage": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/",
           "source": "pajek"
         },
         {
@@ -10951,14 +10694,14 @@
         "year": 1995
       },
       "description": "Lexical reference network from Princeton WordNet. 82,670 synsets, 133,445 relations.",
-      "edgeCount": 98678,
+      "edgeCount": 133445,
       "id": "pajek-wordnet",
       "name": "WordNet",
       "nodeCount": 82670,
       "properties": {
         "density": 0.00004107710791579482,
         "edge_type_count": 1,
-        "has_self_loops": false,
+        "has_self_loops": true,
         "is_connected": false,
         "is_cyclic": true,
         "is_directed": true,
@@ -11022,7 +10765,7 @@
         "is_cyclic": true,
         "is_directed": true,
         "is_heterogeneous": true,
-        "is_multigraph": true,
+        "is_multigraph": false,
         "is_weighted": true,
         "n_components": 1,
         "node_type_count": 1
@@ -11031,12 +10774,7 @@
       "retrieved": "2026-02-16",
       "sources": [
         {
-          "downloads": [
-            {
-              "format": "pajek",
-              "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/"
-            }
-          ],
+          "homepage": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/",
           "source": "pajek"
         },
         {
@@ -11070,19 +10808,19 @@
         "year": 2006
       },
       "description": "Citation network around Ahmed Zewail's femtochemistry research.",
-      "edgeCount": 0,
+      "edgeCount": 54253,
       "id": "pajek-zewail",
       "name": "Zewail Citations",
-      "nodeCount": 0,
+      "nodeCount": 6752,
       "properties": {
         "density": 0.0011897702007987582,
         "edge_type_count": 1,
-        "has_self_loops": false,
+        "has_self_loops": true,
         "is_connected": false,
         "is_cyclic": true,
         "is_directed": true,
         "is_heterogeneous": false,
-        "is_multigraph": false,
+        "is_multigraph": true,
         "is_weighted": true,
         "n_components": 106,
         "node_type_count": 1
@@ -11140,19 +10878,19 @@
         "year": 2005
       },
       "description": "Directed network of hyperlinks between weblogs on US politics, recorded in 2005. The 'value' property indicates political leaning: 0 for left/liberal, 1 for right/conservative.",
-      "edgeCount": 0,
+      "edgeCount": 19090,
       "id": "polblogs",
       "name": "Political Blogs",
-      "nodeCount": 0,
+      "nodeCount": 1490,
       "properties": {
         "density": 0.02233404945515955,
         "edge_type_count": 1,
-        "has_self_loops": false,
+        "has_self_loops": true,
         "is_connected": false,
         "is_cyclic": true,
         "is_directed": true,
         "is_heterogeneous": false,
-        "is_multigraph": false,
+        "is_multigraph": true,
         "is_weighted": false,
         "n_components": 2,
         "node_type_count": 1
@@ -11274,10 +11012,10 @@
         "year": 1998
       },
       "description": "Undirected, unweighted network representing the topology of the Western States Power Grid of the United States. Nodes represent generators, transformers, and substations.",
-      "edgeCount": 0,
+      "edgeCount": 6594,
       "id": "power",
       "name": "Western States Power Grid",
-      "nodeCount": 0,
+      "nodeCount": 4941,
       "properties": {
         "density": 0.0005403026973346214,
         "edge_type_count": 1,
@@ -11333,15 +11071,15 @@
         "year": 2019
       },
       "description": "Undirected, weighted network of human protein interactions. Nodes represent proteins, edges represent confirmed physical interactions. Edge weights represent confidence scores (0-1) from interaction prediction methods and experimental evidence aggregation. Heavily connected biological network useful for studying scale-free properties in real biological systems.",
-      "edgeCount": 186481,
+      "edgeCount": 987845,
       "id": "ppi-human",
       "name": "Human Protein-Protein Interaction Network",
-      "nodeCount": 20194,
+      "nodeCount": 20744,
       "preferredFormat": "edge-list",
       "properties": {
         "density": 0.0026566697784573623,
         "edge_type_count": 1,
-        "has_self_loops": false,
+        "has_self_loops": true,
         "is_connected": false,
         "is_cyclic": true,
         "is_directed": false,
@@ -11358,35 +11096,10 @@
           "downloads": [
             {
               "format": "biogrid-zip",
-              "url": "https://downloads.thebiogrid.org/Download/BioGRID/Latest-Release/BIOGRID-ORGANISM-LATEST.tab3.zip"
+              "url": "https://downloads.thebiogrid.org/Download/BioGRID/Release-Archive/BIOGRID-5.0.262/BIOGRID-ORGANISM-5.0.262.tab3.zip"
             }
           ],
           "source": "biogrid"
-        }
-      ]
-    },
-    "radoslaw-email-multigraph": {
-      "description": "Graph from benchmark analysis (radoslaw-email-multigraph)",
-      "edgeCount": 82927,
-      "id": "radoslaw-email-multigraph",
-      "name": "radoslaw-email-multigraph",
-      "nodeCount": 167,
-      "properties": {
-        "has_self_loops": true,
-        "is_directed": true,
-        "is_heterogeneous": false,
-        "is_multigraph": true,
-        "is_weighted": false
-      },
-      "sources": [
-        {
-          "downloads": [
-            {
-              "format": "tsv",
-              "url": "http://konect.cc/files/download.tsv.radoslaw_email.tar.bz2"
-            }
-          ],
-          "source": "konect"
         }
       ]
     },
@@ -11416,7 +11129,7 @@
         "is_cyclic": true,
         "is_directed": false,
         "is_heterogeneous": false,
-        "is_multigraph": false,
+        "is_multigraph": true,
         "is_weighted": false,
         "n_components": 424,
         "node_type_count": 1
@@ -11463,14 +11176,14 @@
         "year": 2006
       },
       "description": "Network of cross-references in Roget's Thesaurus.",
-      "edgeCount": 0,
+      "edgeCount": 5075,
       "id": "roget",
       "name": "Roget's Thesaurus",
-      "nodeCount": 0,
+      "nodeCount": 1022,
       "properties": {
         "density": 0.00716030968805503,
         "edge_type_count": 1,
-        "has_self_loops": false,
+        "has_self_loops": true,
         "is_connected": false,
         "is_cyclic": true,
         "is_directed": true,
@@ -11564,7 +11277,7 @@
         "year": 2008
       },
       "description": "Directed, weighted email communication network from the Enron corpus. Nodes represent Enron employees, edges represent email communications. Edge weights correspond to the number of emails sent from one employee to another. Useful for studying directed communication patterns in organisational networks.",
-      "edgeCount": 183831,
+      "edgeCount": 367662,
       "id": "snap-email-enron",
       "name": "Enron Email Communication Network",
       "nodeCount": 36692,
@@ -11575,9 +11288,9 @@
         "has_self_loops": false,
         "is_connected": false,
         "is_cyclic": true,
-        "is_directed": true,
+        "is_directed": false,
         "is_heterogeneous": false,
-        "is_multigraph": false,
+        "is_multigraph": true,
         "is_weighted": true,
         "n_components": 1065,
         "node_type_count": 1
@@ -11587,11 +11300,6 @@
       "sources": [
         {
           "downloads": [
-            {
-              "description": "Directed communication graph with email count weights",
-              "format": "edge-list",
-              "url": "https://snap.stanford.edu/data/email-Enron.html"
-            },
             {
               "description": "Compressed edge list (source target weight)",
               "format": "edge-list",
@@ -11623,7 +11331,7 @@
       "properties": {
         "density": 0.00008191540346643227,
         "edge_type_count": 1,
-        "has_self_loops": false,
+        "has_self_loops": true,
         "is_connected": false,
         "is_cyclic": true,
         "is_directed": true,
@@ -11660,10 +11368,10 @@
         "year": 2005
       },
       "description": "Large undirected, weighted road network of California. Nodes represent road intersections or endpoints, edges represent roads. Edge weights represent the Euclidean distance between intersections in miles. Highly connected large-scale transportation network suitable for testing scalability of graph algorithms.",
-      "edgeCount": 2760388,
+      "edgeCount": 5533214,
       "id": "snap-road-network-ca",
       "name": "California Road Network",
-      "nodeCount": 1971281,
+      "nodeCount": 1965206,
       "preferredFormat": "edge-list",
       "properties": {
         "density": 0.0000014327206657979522,
@@ -11673,7 +11381,7 @@
         "is_cyclic": true,
         "is_directed": false,
         "is_heterogeneous": false,
-        "is_multigraph": false,
+        "is_multigraph": true,
         "is_weighted": true,
         "n_components": 2638,
         "node_type_count": 1
@@ -11754,7 +11462,7 @@
       "properties": {
         "density": 0.00016971648709164337,
         "edge_type_count": 1,
-        "has_self_loops": false,
+        "has_self_loops": true,
         "is_connected": true,
         "is_cyclic": true,
         "is_directed": true,
@@ -11813,7 +11521,7 @@
       "properties": {
         "density": 0.00017256407249715723,
         "edge_type_count": 1,
-        "has_self_loops": false,
+        "has_self_loops": true,
         "is_connected": true,
         "is_cyclic": true,
         "is_directed": true,
@@ -11868,7 +11576,7 @@
         "year": 2011
       },
       "description": "undirected graph sequence (49,152 nodes, 196,608 non-zeros)",
-      "edgeCount": 196608,
+      "edgeCount": 98304,
       "id": "ss-ag-monien-bfly",
       "name": "AG-Monien/bfly",
       "nodeCount": 49152,
@@ -11928,7 +11636,7 @@
       "properties": {
         "density": 0.038356164383561646,
         "edge_type_count": 1,
-        "has_self_loops": true,
+        "has_self_loops": false,
         "is_connected": true,
         "is_cyclic": true,
         "is_directed": false,
@@ -12251,7 +11959,7 @@
         "is_cyclic": true,
         "is_directed": false,
         "is_heterogeneous": false,
-        "is_multigraph": true,
+        "is_multigraph": false,
         "is_weighted": true,
         "n_components": 1,
         "node_type_count": 1
@@ -12352,7 +12060,7 @@
       "properties": {
         "density": 0.14059375480695277,
         "edge_type_count": 1,
-        "has_self_loops": true,
+        "has_self_loops": false,
         "is_connected": true,
         "is_cyclic": true,
         "is_directed": false,
@@ -12458,10 +12166,10 @@
       "properties": {
         "density": 0.0032879371420574234,
         "edge_type_count": 1,
-        "has_self_loops": false,
+        "has_self_loops": true,
         "is_connected": false,
         "is_cyclic": true,
-        "is_directed": false,
+        "is_directed": true,
         "is_heterogeneous": false,
         "is_multigraph": false,
         "is_weighted": true,
@@ -12516,7 +12224,7 @@
         "is_cyclic": true,
         "is_directed": true,
         "is_heterogeneous": false,
-        "is_multigraph": true,
+        "is_multigraph": false,
         "is_weighted": true,
         "n_components": 1,
         "node_type_count": 1
@@ -12613,7 +12321,7 @@
       "edgeCount": 1470404,
       "id": "ss-barabasi-notredame-actors",
       "name": "Barabasi/NotreDame_actors",
-      "nodeCount": 392400,
+      "nodeCount": 520223,
       "properties": {
         "density": 0.000019833856878435467,
         "edge_type_count": 1,
@@ -12931,7 +12639,7 @@
       "edgeCount": 22624727,
       "id": "ss-buss-12month1",
       "name": "Buss/12month1",
-      "nodeCount": 12471,
+      "nodeCount": 885093,
       "properties": {
         "density": 0.000059102196438584194,
         "edge_type_count": 1,
@@ -12981,7 +12689,7 @@
         "year": 2011
       },
       "description": "undirected bipartite graph (512 nodes, 1,127,525 non-zeros)",
-      "edgeCount": 1,
+      "edgeCount": 1127525,
       "id": "ss-buss-connectus",
       "name": "Buss/connectus",
       "nodeCount": 395304,
@@ -13037,7 +12745,7 @@
       "edgeCount": 589824,
       "id": "ss-bydder-mri1",
       "name": "Bydder/mri1",
-      "nodeCount": 65536,
+      "nodeCount": 212992,
       "properties": {
         "density": 0.00006855391529105148,
         "edge_type_count": 1,
@@ -13090,7 +12798,7 @@
       "edgeCount": 569160,
       "id": "ss-bydder-mri2",
       "name": "Bydder/mri2",
-      "nodeCount": 63240,
+      "nodeCount": 210696,
       "properties": {
         "density": 0.00007240737878152379,
         "edge_type_count": 1,
@@ -13143,7 +12851,7 @@
       "edgeCount": 647495,
       "id": "ss-clark-tomographic1",
       "name": "Clark/tomographic1",
-      "nodeCount": 73159,
+      "nodeCount": 132657,
       "properties": {
         "density": 0.00027170154954599303,
         "edge_type_count": 1,
@@ -14017,7 +13725,7 @@
       "properties": {
         "density": 0.22941970310391363,
         "edge_type_count": 1,
-        "has_self_loops": true,
+        "has_self_loops": false,
         "is_connected": true,
         "is_cyclic": true,
         "is_directed": false,
@@ -18780,14 +18488,14 @@
         "year": 2011
       },
       "description": "random undirected graph (100,000 nodes, 999,970 non-zeros)",
-      "edgeCount": 499986,
+      "edgeCount": 499985,
       "id": "ss-dimacs10-preferentialattachment",
       "name": "DIMACS10/preferentialAttachment",
       "nodeCount": 100000,
       "properties": {
         "density": 0.0000999979999799998,
         "edge_type_count": 1,
-        "has_self_loops": true,
+        "has_self_loops": false,
         "is_connected": true,
         "is_cyclic": true,
         "is_directed": false,
@@ -21808,7 +21516,7 @@
       "properties": {
         "density": 0.0005999731567123878,
         "edge_type_count": 1,
-        "has_self_loops": false,
+        "has_self_loops": true,
         "is_connected": true,
         "is_cyclic": true,
         "is_directed": true,
@@ -21914,7 +21622,7 @@
       "properties": {
         "density": 0.0005775323497161254,
         "edge_type_count": 1,
-        "has_self_loops": false,
+        "has_self_loops": true,
         "is_connected": true,
         "is_cyclic": true,
         "is_directed": true,
@@ -22705,11 +22413,11 @@
       "edgeCount": 36854,
       "id": "ss-gleich-wb-cs-stanford",
       "name": "Gleich/wb-cs-stanford",
-      "nodeCount": 9914,
+      "nodeCount": 9435,
       "properties": {
         "density": 0.0006308631893188378,
         "edge_type_count": 1,
-        "has_self_loops": false,
+        "has_self_loops": true,
         "is_connected": false,
         "is_cyclic": true,
         "is_directed": true,
@@ -23027,7 +22735,7 @@
       "properties": {
         "density": 0.06,
         "edge_type_count": 1,
-        "has_self_loops": true,
+        "has_self_loops": false,
         "is_connected": true,
         "is_cyclic": true,
         "is_directed": false,
@@ -23080,7 +22788,7 @@
       "properties": {
         "density": 0.06,
         "edge_type_count": 1,
-        "has_self_loops": true,
+        "has_self_loops": false,
         "is_connected": true,
         "is_cyclic": true,
         "is_directed": false,
@@ -23133,7 +22841,7 @@
       "properties": {
         "density": 0.0050062578222778474,
         "edge_type_count": 1,
-        "has_self_loops": true,
+        "has_self_loops": false,
         "is_connected": true,
         "is_cyclic": true,
         "is_directed": false,
@@ -23186,7 +22894,7 @@
       "properties": {
         "density": 0.0050062578222778474,
         "edge_type_count": 1,
-        "has_self_loops": true,
+        "has_self_loops": false,
         "is_connected": true,
         "is_cyclic": true,
         "is_directed": false,
@@ -23239,7 +22947,7 @@
       "properties": {
         "density": 0.0050062578222778474,
         "edge_type_count": 1,
-        "has_self_loops": true,
+        "has_self_loops": false,
         "is_connected": true,
         "is_cyclic": true,
         "is_directed": false,
@@ -23292,7 +23000,7 @@
       "properties": {
         "density": 0.014687108886107634,
         "edge_type_count": 1,
-        "has_self_loops": true,
+        "has_self_loops": false,
         "is_connected": true,
         "is_cyclic": true,
         "is_directed": false,
@@ -23345,7 +23053,7 @@
       "properties": {
         "density": 0.014583854818523154,
         "edge_type_count": 1,
-        "has_self_loops": true,
+        "has_self_loops": false,
         "is_connected": true,
         "is_cyclic": true,
         "is_directed": false,
@@ -23398,7 +23106,7 @@
       "properties": {
         "density": 0.014618272841051314,
         "edge_type_count": 1,
-        "has_self_loops": true,
+        "has_self_loops": false,
         "is_connected": true,
         "is_cyclic": true,
         "is_directed": false,
@@ -23451,7 +23159,7 @@
       "properties": {
         "density": 0.014602628285356696,
         "edge_type_count": 1,
-        "has_self_loops": true,
+        "has_self_loops": false,
         "is_connected": true,
         "is_cyclic": true,
         "is_directed": false,
@@ -23504,7 +23212,7 @@
       "properties": {
         "density": 0.014687108886107634,
         "edge_type_count": 1,
-        "has_self_loops": true,
+        "has_self_loops": false,
         "is_connected": true,
         "is_cyclic": true,
         "is_directed": false,
@@ -23557,7 +23265,7 @@
       "properties": {
         "density": 0.014583854818523154,
         "edge_type_count": 1,
-        "has_self_loops": true,
+        "has_self_loops": false,
         "is_connected": true,
         "is_cyclic": true,
         "is_directed": false,
@@ -23610,7 +23318,7 @@
       "properties": {
         "density": 0.06,
         "edge_type_count": 1,
-        "has_self_loops": true,
+        "has_self_loops": false,
         "is_connected": true,
         "is_cyclic": true,
         "is_directed": false,
@@ -23663,7 +23371,7 @@
       "properties": {
         "density": 0.014618272841051314,
         "edge_type_count": 1,
-        "has_self_loops": true,
+        "has_self_loops": false,
         "is_connected": true,
         "is_cyclic": true,
         "is_directed": false,
@@ -23716,7 +23424,7 @@
       "properties": {
         "density": 0.014602628285356696,
         "edge_type_count": 1,
-        "has_self_loops": true,
+        "has_self_loops": false,
         "is_connected": true,
         "is_cyclic": true,
         "is_directed": false,
@@ -24193,7 +23901,7 @@
       "properties": {
         "density": 0.06,
         "edge_type_count": 1,
-        "has_self_loops": true,
+        "has_self_loops": false,
         "is_connected": true,
         "is_cyclic": true,
         "is_directed": false,
@@ -24776,7 +24484,7 @@
       "properties": {
         "density": 0.06,
         "edge_type_count": 1,
-        "has_self_loops": true,
+        "has_self_loops": false,
         "is_connected": true,
         "is_cyclic": true,
         "is_directed": false,
@@ -24981,14 +24689,14 @@
         "year": 2011
       },
       "description": "undirected random graph (1,000 nodes, 19,980 non-zeros)",
-      "edgeCount": 9991,
+      "edgeCount": 9990,
       "id": "ss-gset-g43",
       "name": "Gset/G43",
       "nodeCount": 1000,
       "properties": {
         "density": 0.02,
         "edge_type_count": 1,
-        "has_self_loops": true,
+        "has_self_loops": false,
         "is_connected": true,
         "is_cyclic": true,
         "is_directed": false,
@@ -25041,7 +24749,7 @@
       "properties": {
         "density": 0.02,
         "edge_type_count": 1,
-        "has_self_loops": true,
+        "has_self_loops": false,
         "is_connected": true,
         "is_cyclic": true,
         "is_directed": false,
@@ -25094,7 +24802,7 @@
       "properties": {
         "density": 0.02,
         "edge_type_count": 1,
-        "has_self_loops": true,
+        "has_self_loops": false,
         "is_connected": true,
         "is_cyclic": true,
         "is_directed": false,
@@ -25147,7 +24855,7 @@
       "properties": {
         "density": 0.02,
         "edge_type_count": 1,
-        "has_self_loops": true,
+        "has_self_loops": false,
         "is_connected": true,
         "is_cyclic": true,
         "is_directed": false,
@@ -25200,7 +24908,7 @@
       "properties": {
         "density": 0.02,
         "edge_type_count": 1,
-        "has_self_loops": true,
+        "has_self_loops": false,
         "is_connected": true,
         "is_cyclic": true,
         "is_directed": false,
@@ -25359,7 +25067,7 @@
       "properties": {
         "density": 0.06,
         "edge_type_count": 1,
-        "has_self_loops": true,
+        "has_self_loops": false,
         "is_connected": true,
         "is_cyclic": true,
         "is_directed": false,
@@ -25465,7 +25173,7 @@
       "properties": {
         "density": 0.01182982982982983,
         "edge_type_count": 1,
-        "has_self_loops": true,
+        "has_self_loops": false,
         "is_connected": true,
         "is_cyclic": true,
         "is_directed": false,
@@ -25518,7 +25226,7 @@
       "properties": {
         "density": 0.011843843843843843,
         "edge_type_count": 1,
-        "has_self_loops": true,
+        "has_self_loops": false,
         "is_connected": true,
         "is_cyclic": true,
         "is_directed": false,
@@ -25571,7 +25279,7 @@
       "properties": {
         "density": 0.01183983983983984,
         "edge_type_count": 1,
-        "has_self_loops": true,
+        "has_self_loops": false,
         "is_connected": true,
         "is_cyclic": true,
         "is_directed": false,
@@ -25624,7 +25332,7 @@
       "properties": {
         "density": 0.011843843843843843,
         "edge_type_count": 1,
-        "has_self_loops": true,
+        "has_self_loops": false,
         "is_connected": true,
         "is_cyclic": true,
         "is_directed": false,
@@ -25942,7 +25650,7 @@
       "properties": {
         "density": 0.06,
         "edge_type_count": 1,
-        "has_self_loops": true,
+        "has_self_loops": false,
         "is_connected": true,
         "is_cyclic": true,
         "is_directed": false,
@@ -26359,7 +26067,7 @@
         "year": 2011
       },
       "description": "undirected weighted random graph (10,000 nodes, 40,000 non-zeros)",
-      "edgeCount": 20001,
+      "edgeCount": 20000,
       "id": "ss-gset-g67",
       "name": "Gset/G67",
       "nodeCount": 10000,
@@ -26419,7 +26127,7 @@
       "properties": {
         "density": 0.06,
         "edge_type_count": 1,
-        "has_self_loops": true,
+        "has_self_loops": false,
         "is_connected": true,
         "is_cyclic": true,
         "is_directed": false,
@@ -26472,7 +26180,7 @@
       "properties": {
         "density": 0.06,
         "edge_type_count": 1,
-        "has_self_loops": true,
+        "has_self_loops": false,
         "is_connected": true,
         "is_cyclic": true,
         "is_directed": false,
@@ -26525,7 +26233,7 @@
       "properties": {
         "density": 0.06,
         "edge_type_count": 1,
-        "has_self_loops": true,
+        "has_self_loops": false,
         "is_connected": true,
         "is_cyclic": true,
         "is_directed": false,
@@ -26631,7 +26339,7 @@
       "properties": {
         "density": 0.00000929950163799639,
         "edge_type_count": 1,
-        "has_self_loops": false,
+        "has_self_loops": true,
         "is_connected": true,
         "is_cyclic": true,
         "is_directed": true,
@@ -26680,7 +26388,7 @@
       "edgeCount": 40451632,
       "id": "ss-hardesty-hardesty3",
       "name": "Hardesty/Hardesty3",
-      "nodeCount": 8217820,
+      "nodeCount": 15809384,
       "properties": {
         "density": 5.989945234798146e-7,
         "edge_type_count": 1,
@@ -26692,7 +26400,7 @@
         "is_multigraph": false,
         "is_weighted": true,
         "n_components": 1,
-        "node_type_count": 1
+        "node_type_count": 2
       },
       "rawBytes": 0,
       "retrieved": "2026-02-16",
@@ -26733,7 +26441,7 @@
       "edgeCount": 13734559,
       "id": "ss-harvard-seismology-jp",
       "name": "Harvard_Seismology/JP",
-      "nodeCount": 87616,
+      "nodeCount": 154936,
       "properties": {
         "density": 0.0035752426728148214,
         "edge_type_count": 1,
@@ -26848,7 +26556,7 @@
         "is_cyclic": true,
         "is_directed": false,
         "is_heterogeneous": false,
-        "is_multigraph": true,
+        "is_multigraph": false,
         "is_weighted": true,
         "n_components": 1,
         "node_type_count": 1
@@ -26901,7 +26609,7 @@
         "is_cyclic": true,
         "is_directed": false,
         "is_heterogeneous": false,
-        "is_multigraph": true,
+        "is_multigraph": false,
         "is_weighted": true,
         "n_components": 1,
         "node_type_count": 1
@@ -26954,7 +26662,7 @@
         "is_cyclic": true,
         "is_directed": false,
         "is_heterogeneous": false,
-        "is_multigraph": true,
+        "is_multigraph": false,
         "is_weighted": true,
         "n_components": 1,
         "node_type_count": 1
@@ -27007,7 +26715,7 @@
         "is_cyclic": true,
         "is_directed": false,
         "is_heterogeneous": false,
-        "is_multigraph": true,
+        "is_multigraph": false,
         "is_weighted": false,
         "n_components": 1,
         "node_type_count": 1
@@ -27060,7 +26768,7 @@
         "is_cyclic": true,
         "is_directed": false,
         "is_heterogeneous": false,
-        "is_multigraph": true,
+        "is_multigraph": false,
         "is_weighted": false,
         "n_components": 1,
         "node_type_count": 1
@@ -27113,7 +26821,7 @@
         "is_cyclic": true,
         "is_directed": false,
         "is_heterogeneous": false,
-        "is_multigraph": true,
+        "is_multigraph": false,
         "is_weighted": false,
         "n_components": 1,
         "node_type_count": 1
@@ -27166,7 +26874,7 @@
         "is_cyclic": true,
         "is_directed": false,
         "is_heterogeneous": false,
-        "is_multigraph": true,
+        "is_multigraph": false,
         "is_weighted": false,
         "n_components": 1,
         "node_type_count": 1
@@ -27219,7 +26927,7 @@
         "is_cyclic": true,
         "is_directed": false,
         "is_heterogeneous": false,
-        "is_multigraph": true,
+        "is_multigraph": false,
         "is_weighted": false,
         "n_components": 1,
         "node_type_count": 1
@@ -27547,10 +27255,10 @@
         "year": 2011
       },
       "description": "power network problem (4,929 nodes, 46,591 non-zeros)",
-      "edgeCount": 47370,
+      "edgeCount": 47369,
       "id": "ss-hb-gemat1",
       "name": "HB/gemat1",
-      "nodeCount": 10595,
+      "nodeCount": 15524,
       "properties": {
         "density": 0.0008436841247634717,
         "edge_type_count": 1,
@@ -27600,14 +27308,14 @@
         "year": 2011
       },
       "description": "power network problem sequence (4,929 nodes, 33,108 non-zeros)",
-      "edgeCount": 33186,
+      "edgeCount": 33185,
       "id": "ss-hb-gemat11",
       "name": "HB/gemat11",
       "nodeCount": 4929,
       "properties": {
         "density": 0.0027305761290849543,
         "edge_type_count": 1,
-        "has_self_loops": false,
+        "has_self_loops": true,
         "is_connected": false,
         "is_cyclic": true,
         "is_directed": true,
@@ -27653,7 +27361,7 @@
         "year": 2011
       },
       "description": "subsequent power network problem (4,929 nodes, 33,044 non-zeros)",
-      "edgeCount": 33112,
+      "edgeCount": 33111,
       "id": "ss-hb-gemat12",
       "name": "HB/gemat12",
       "nodeCount": 4929,
@@ -27713,7 +27421,7 @@
       "properties": {
         "density": 0.009252316754632284,
         "edge_type_count": 1,
-        "has_self_loops": false,
+        "has_self_loops": true,
         "is_connected": true,
         "is_cyclic": true,
         "is_directed": true,
@@ -27771,7 +27479,7 @@
         "is_cyclic": true,
         "is_directed": true,
         "is_heterogeneous": false,
-        "is_multigraph": true,
+        "is_multigraph": false,
         "is_weighted": true,
         "n_components": 1,
         "node_type_count": 1
@@ -27824,7 +27532,7 @@
         "is_cyclic": true,
         "is_directed": true,
         "is_heterogeneous": false,
-        "is_multigraph": true,
+        "is_multigraph": false,
         "is_weighted": true,
         "n_components": 1,
         "node_type_count": 1
@@ -27877,7 +27585,7 @@
         "is_cyclic": true,
         "is_directed": true,
         "is_heterogeneous": false,
-        "is_multigraph": true,
+        "is_multigraph": false,
         "is_weighted": true,
         "n_components": 1,
         "node_type_count": 1
@@ -27930,7 +27638,7 @@
         "is_cyclic": true,
         "is_directed": true,
         "is_heterogeneous": false,
-        "is_multigraph": true,
+        "is_multigraph": false,
         "is_weighted": true,
         "n_components": 1,
         "node_type_count": 1
@@ -27983,7 +27691,7 @@
         "is_cyclic": true,
         "is_directed": true,
         "is_heterogeneous": false,
-        "is_multigraph": true,
+        "is_multigraph": false,
         "is_weighted": true,
         "n_components": 1,
         "node_type_count": 1
@@ -28036,7 +27744,7 @@
         "is_cyclic": true,
         "is_directed": true,
         "is_heterogeneous": false,
-        "is_multigraph": true,
+        "is_multigraph": false,
         "is_weighted": true,
         "n_components": 1,
         "node_type_count": 1
@@ -28089,7 +27797,7 @@
         "is_cyclic": true,
         "is_directed": true,
         "is_heterogeneous": false,
-        "is_multigraph": true,
+        "is_multigraph": false,
         "is_weighted": true,
         "n_components": 1,
         "node_type_count": 1
@@ -28142,7 +27850,7 @@
         "is_cyclic": true,
         "is_directed": true,
         "is_heterogeneous": false,
-        "is_multigraph": true,
+        "is_multigraph": false,
         "is_weighted": false,
         "n_components": 1,
         "node_type_count": 1
@@ -28738,7 +28446,7 @@
       "edgeCount": 100875,
       "id": "ss-kemelmacher-kemelmacher",
       "name": "Kemelmacher/Kemelmacher",
-      "nodeCount": 28452,
+      "nodeCount": 38145,
       "properties": {
         "density": 0.00024920695165663834,
         "edge_type_count": 1,
@@ -28901,7 +28609,7 @@
       "properties": {
         "density": 0.00005333503306727271,
         "edge_type_count": 1,
-        "has_self_loops": false,
+        "has_self_loops": true,
         "is_connected": true,
         "is_cyclic": true,
         "is_directed": true,
@@ -29007,7 +28715,7 @@
       "properties": {
         "density": 0.00010677874036180398,
         "edge_type_count": 1,
-        "has_self_loops": false,
+        "has_self_loops": true,
         "is_connected": false,
         "is_cyclic": true,
         "is_directed": true,
@@ -29060,7 +28768,7 @@
       "properties": {
         "density": 0.00004471958154078869,
         "edge_type_count": 1,
-        "has_self_loops": false,
+        "has_self_loops": true,
         "is_connected": true,
         "is_cyclic": true,
         "is_directed": true,
@@ -29590,7 +29298,7 @@
       "properties": {
         "density": 0.0034264505954300843,
         "edge_type_count": 1,
-        "has_self_loops": false,
+        "has_self_loops": true,
         "is_connected": false,
         "is_cyclic": true,
         "is_directed": true,
@@ -29636,7 +29344,7 @@
         "year": 2011
       },
       "description": "power network problem (4,908 nodes, 30,482 non-zeros)",
-      "edgeCount": 30483,
+      "edgeCount": 30482,
       "id": "ss-legresley-legresley-4908",
       "name": "LeGresley/LeGresley_4908",
       "nodeCount": 4908,
@@ -29696,7 +29404,7 @@
       "properties": {
         "density": 0.00008934528357215024,
         "edge_type_count": 1,
-        "has_self_loops": false,
+        "has_self_loops": true,
         "is_connected": false,
         "is_cyclic": true,
         "is_directed": true,
@@ -29848,7 +29556,7 @@
         "year": 2011
       },
       "description": "directed weighted graph (7,055 nodes, 30,082 non-zeros)",
-      "edgeCount": 34856,
+      "edgeCount": 34855,
       "id": "ss-lucifora-cell1",
       "name": "Lucifora/cell1",
       "nodeCount": 7055,
@@ -29901,7 +29609,7 @@
         "year": 2011
       },
       "description": "directed weighted graph (7,055 nodes, 30,082 non-zeros)",
-      "edgeCount": 34856,
+      "edgeCount": 34855,
       "id": "ss-lucifora-cell2",
       "name": "Lucifora/cell2",
       "nodeCount": 7055,
@@ -29976,10 +29684,10 @@
         "year": 2011
       },
       "description": "computer graphics/vision problem (4,472 nodes, 37,056 non-zeros)",
-      "edgeCount": 37057,
+      "edgeCount": 37056,
       "id": "ss-luong-photogrammetry2",
       "name": "Luong/photogrammetry2",
-      "nodeCount": 4472,
+      "nodeCount": 5408,
       "properties": {
         "density": 0.0037033532336596528,
         "edge_type_count": 1,
@@ -30036,7 +29744,7 @@
       "properties": {
         "density": 0.00004417781026266245,
         "edge_type_count": 1,
-        "has_self_loops": false,
+        "has_self_loops": true,
         "is_connected": true,
         "is_cyclic": true,
         "is_directed": true,
@@ -30147,7 +29855,7 @@
         "is_cyclic": true,
         "is_directed": true,
         "is_heterogeneous": false,
-        "is_multigraph": true,
+        "is_multigraph": false,
         "is_weighted": true,
         "n_components": 37,
         "node_type_count": 1
@@ -30513,7 +30221,7 @@
       "properties": {
         "density": 0.12686433063791555,
         "edge_type_count": 1,
-        "has_self_loops": true,
+        "has_self_loops": false,
         "is_connected": true,
         "is_cyclic": true,
         "is_directed": false,
@@ -30619,7 +30327,7 @@
       "properties": {
         "density": 0.016508508508508508,
         "edge_type_count": 1,
-        "has_self_loops": true,
+        "has_self_loops": false,
         "is_connected": true,
         "is_cyclic": true,
         "is_directed": false,
@@ -30937,7 +30645,7 @@
       "properties": {
         "density": 0.0182648401826484,
         "edge_type_count": 1,
-        "has_self_loops": true,
+        "has_self_loops": false,
         "is_connected": true,
         "is_cyclic": true,
         "is_directed": false,
@@ -30990,7 +30698,7 @@
       "properties": {
         "density": 0.04051172707889126,
         "edge_type_count": 1,
-        "has_self_loops": true,
+        "has_self_loops": false,
         "is_connected": true,
         "is_cyclic": true,
         "is_directed": false,
@@ -31096,7 +30804,7 @@
       "properties": {
         "density": 0.06550831468562152,
         "edge_type_count": 1,
-        "has_self_loops": true,
+        "has_self_loops": false,
         "is_connected": true,
         "is_cyclic": true,
         "is_directed": false,
@@ -31255,7 +30963,7 @@
       "properties": {
         "density": 0.2468903803131991,
         "edge_type_count": 1,
-        "has_self_loops": true,
+        "has_self_loops": false,
         "is_connected": true,
         "is_cyclic": true,
         "is_directed": false,
@@ -31520,7 +31228,7 @@
       "properties": {
         "density": 0.029704734691369403,
         "edge_type_count": 1,
-        "has_self_loops": true,
+        "has_self_loops": false,
         "is_connected": true,
         "is_cyclic": true,
         "is_directed": false,
@@ -31626,7 +31334,7 @@
       "properties": {
         "density": 0.03543859649122807,
         "edge_type_count": 1,
-        "has_self_loops": true,
+        "has_self_loops": false,
         "is_connected": true,
         "is_cyclic": true,
         "is_directed": false,
@@ -31944,7 +31652,7 @@
       "properties": {
         "density": 0.02637245496215755,
         "edge_type_count": 1,
-        "has_self_loops": true,
+        "has_self_loops": false,
         "is_connected": true,
         "is_cyclic": true,
         "is_directed": false,
@@ -31997,7 +31705,7 @@
       "properties": {
         "density": 0.021178609301620965,
         "edge_type_count": 1,
-        "has_self_loops": true,
+        "has_self_loops": false,
         "is_connected": true,
         "is_cyclic": true,
         "is_directed": false,
@@ -32103,7 +31811,7 @@
       "properties": {
         "density": 0.015239134388070558,
         "edge_type_count": 1,
-        "has_self_loops": true,
+        "has_self_loops": false,
         "is_connected": true,
         "is_cyclic": true,
         "is_directed": false,
@@ -32209,7 +31917,7 @@
       "properties": {
         "density": 0.08381374722838138,
         "edge_type_count": 1,
-        "has_self_loops": true,
+        "has_self_loops": false,
         "is_connected": true,
         "is_cyclic": true,
         "is_directed": false,
@@ -32474,7 +32182,7 @@
       "properties": {
         "density": 0.048867048867048866,
         "edge_type_count": 1,
-        "has_self_loops": true,
+        "has_self_loops": false,
         "is_connected": true,
         "is_cyclic": true,
         "is_directed": true,
@@ -32527,7 +32235,7 @@
       "properties": {
         "density": 0.08680792891319207,
         "edge_type_count": 1,
-        "has_self_loops": true,
+        "has_self_loops": false,
         "is_connected": true,
         "is_cyclic": true,
         "is_directed": false,
@@ -32582,7 +32290,7 @@
         "is_cyclic": true,
         "is_directed": true,
         "is_heterogeneous": true,
-        "is_multigraph": true,
+        "is_multigraph": false,
         "is_weighted": true,
         "n_components": 1,
         "node_type_count": 1
@@ -32591,12 +32299,7 @@
       "retrieved": "2026-02-16",
       "sources": [
         {
-          "downloads": [
-            {
-              "format": "pajek",
-              "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/"
-            }
-          ],
+          "homepage": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/",
           "source": "pajek"
         },
         {
@@ -32630,10 +32333,10 @@
         "year": 2006
       },
       "description": "Word adjacency network from a dictionary. Edges connect words differing by one letter.",
-      "edgeCount": 178076,
+      "edgeCount": 89038,
       "id": "ss-pajek-dictionary28",
       "name": "Word adjacency network from a dictionary",
-      "nodeCount": 52652,
+      "nodeCount": 39327,
       "properties": {
         "density": 0.00011514227306719542,
         "edge_type_count": 1,
@@ -32651,12 +32354,7 @@
       "retrieved": "2026-02-16",
       "sources": [
         {
-          "downloads": [
-            {
-              "format": "pajek",
-              "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/"
-            }
-          ],
+          "homepage": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/",
           "source": "pajek"
         },
         {
@@ -32702,7 +32400,7 @@
         "is_cyclic": true,
         "is_directed": true,
         "is_heterogeneous": true,
-        "is_multigraph": true,
+        "is_multigraph": false,
         "is_weighted": false,
         "n_components": 1,
         "node_type_count": 1
@@ -32711,12 +32409,7 @@
       "retrieved": "2026-02-16",
       "sources": [
         {
-          "downloads": [
-            {
-              "format": "pajek",
-              "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/"
-            }
-          ],
+          "homepage": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/",
           "source": "pajek"
         },
         {
@@ -32755,11 +32448,11 @@
       "edgeCount": 325589,
       "id": "ss-pajek-eat-sr",
       "name": "Edinburgh Associative Thesaurus, response-stimulus direction",
-      "nodeCount": 23219,
+      "nodeCount": 23218,
       "properties": {
         "density": 0.0011334632895532034,
         "edge_type_count": 1,
-        "has_self_loops": false,
+        "has_self_loops": true,
         "is_connected": true,
         "is_cyclic": true,
         "is_directed": true,
@@ -32773,12 +32466,7 @@
       "retrieved": "2026-02-16",
       "sources": [
         {
-          "downloads": [
-            {
-              "format": "pajek",
-              "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/"
-            }
-          ],
+          "homepage": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/",
           "source": "pajek"
         },
         {
@@ -32812,14 +32500,14 @@
         "year": 2006
       },
       "description": "Citation network from EVA (Electronic Visualisation and the Arts) conference proceedings.",
-      "edgeCount": 0,
+      "edgeCount": 6726,
       "id": "ss-pajek-eva",
       "name": "Citation network from EVA (Electronic Visualisation and the Arts) conference proceedings",
-      "nodeCount": 0,
+      "nodeCount": 7253,
       "properties": {
         "density": 0.0002552341732188495,
         "edge_type_count": 1,
-        "has_self_loops": false,
+        "has_self_loops": true,
         "is_connected": false,
         "is_cyclic": true,
         "is_directed": true,
@@ -32833,12 +32521,7 @@
       "retrieved": "2026-02-16",
       "sources": [
         {
-          "downloads": [
-            {
-              "format": "pajek",
-              "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/"
-            }
-          ],
+          "homepage": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/",
           "source": "pajek"
         },
         {
@@ -32879,7 +32562,7 @@
       "properties": {
         "density": 0.0011319662718341623,
         "edge_type_count": 1,
-        "has_self_loops": false,
+        "has_self_loops": true,
         "is_connected": true,
         "is_cyclic": true,
         "is_directed": true,
@@ -32893,12 +32576,7 @@
       "retrieved": "2026-02-16",
       "sources": [
         {
-          "downloads": [
-            {
-              "format": "pajek",
-              "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/"
-            }
-          ],
+          "homepage": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/",
           "source": "pajek"
         },
         {
@@ -32938,12 +32616,12 @@
       "properties": {
         "density": 0.007413882413882414,
         "edge_type_count": 1,
-        "has_self_loops": false,
+        "has_self_loops": true,
         "is_connected": false,
         "is_cyclic": true,
         "is_directed": true,
         "is_heterogeneous": false,
-        "is_multigraph": true,
+        "is_multigraph": false,
         "is_weighted": false,
         "n_components": 26,
         "node_type_count": 1
@@ -32952,12 +32630,7 @@
       "retrieved": "2026-02-16",
       "sources": [
         {
-          "downloads": [
-            {
-              "format": "pajek",
-              "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/"
-            }
-          ],
+          "homepage": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/",
           "source": "pajek"
         },
         {
@@ -32997,12 +32670,12 @@
       "properties": {
         "density": 0.00506882280281295,
         "edge_type_count": 1,
-        "has_self_loops": false,
+        "has_self_loops": true,
         "is_connected": true,
         "is_cyclic": true,
         "is_directed": true,
         "is_heterogeneous": false,
-        "is_multigraph": true,
+        "is_multigraph": false,
         "is_weighted": true,
         "n_components": 1,
         "node_type_count": 1
@@ -33011,12 +32684,7 @@
       "retrieved": "2026-02-16",
       "sources": [
         {
-          "downloads": [
-            {
-              "format": "pajek",
-              "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/"
-            }
-          ],
+          "homepage": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/",
           "source": "pajek"
         },
         {
@@ -33061,7 +32729,7 @@
         "is_cyclic": true,
         "is_directed": true,
         "is_heterogeneous": false,
-        "is_multigraph": true,
+        "is_multigraph": false,
         "is_weighted": true,
         "n_components": 6,
         "node_type_count": 1
@@ -33070,12 +32738,7 @@
       "retrieved": "2026-02-16",
       "sources": [
         {
-          "downloads": [
-            {
-              "format": "pajek",
-              "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/"
-            }
-          ],
+          "homepage": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/",
           "source": "pajek"
         },
         {
@@ -33120,7 +32783,7 @@
         "is_cyclic": true,
         "is_directed": true,
         "is_heterogeneous": true,
-        "is_multigraph": true,
+        "is_multigraph": false,
         "is_weighted": true,
         "n_components": 6,
         "node_type_count": 1
@@ -33129,12 +32792,7 @@
       "retrieved": "2026-02-16",
       "sources": [
         {
-          "downloads": [
-            {
-              "format": "pajek",
-              "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/"
-            }
-          ],
+          "homepage": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/",
           "source": "pajek"
         },
         {
@@ -33174,12 +32832,12 @@
       "properties": {
         "density": 0.1830065359477124,
         "edge_type_count": 1,
-        "has_self_loops": false,
+        "has_self_loops": true,
         "is_connected": true,
         "is_cyclic": true,
         "is_directed": true,
         "is_heterogeneous": false,
-        "is_multigraph": true,
+        "is_multigraph": false,
         "is_weighted": false,
         "n_components": 1,
         "node_type_count": 1
@@ -33188,12 +32846,7 @@
       "retrieved": "2026-02-16",
       "sources": [
         {
-          "downloads": [
-            {
-              "format": "pajek",
-              "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/"
-            }
-          ],
+          "homepage": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/",
           "source": "pajek"
         },
         {
@@ -33238,7 +32891,7 @@
         "is_cyclic": true,
         "is_directed": true,
         "is_heterogeneous": false,
-        "is_multigraph": true,
+        "is_multigraph": false,
         "is_weighted": true,
         "n_components": 1,
         "node_type_count": 1
@@ -33247,12 +32900,7 @@
       "retrieved": "2026-02-16",
       "sources": [
         {
-          "downloads": [
-            {
-              "format": "pajek",
-              "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/"
-            }
-          ],
+          "homepage": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/",
           "source": "pajek"
         },
         {
@@ -33297,7 +32945,7 @@
         "is_cyclic": true,
         "is_directed": true,
         "is_heterogeneous": false,
-        "is_multigraph": true,
+        "is_multigraph": false,
         "is_weighted": false,
         "n_components": 1,
         "node_type_count": 1
@@ -33306,12 +32954,7 @@
       "retrieved": "2026-02-16",
       "sources": [
         {
-          "downloads": [
-            {
-              "format": "pajek",
-              "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/"
-            }
-          ],
+          "homepage": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/",
           "source": "pajek"
         },
         {
@@ -33356,7 +32999,7 @@
         "is_cyclic": true,
         "is_directed": true,
         "is_heterogeneous": false,
-        "is_multigraph": true,
+        "is_multigraph": false,
         "is_weighted": false,
         "n_components": 1,
         "node_type_count": 1
@@ -33365,12 +33008,7 @@
       "retrieved": "2026-02-16",
       "sources": [
         {
-          "downloads": [
-            {
-              "format": "pajek",
-              "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/"
-            }
-          ],
+          "homepage": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/",
           "source": "pajek"
         },
         {
@@ -33403,10 +33041,10 @@
         "year": 2006
       },
       "description": "Graph Drawing Contest 2006, Java class dependency graph.",
-      "edgeCount": 0,
+      "edgeCount": 8032,
       "id": "ss-pajek-gd06-java",
       "name": "Graph Drawing Contest 2006, Java class dependency graph",
-      "nodeCount": 0,
+      "nodeCount": 1538,
       "properties": {
         "density": 0.006613630152806415,
         "edge_type_count": 1,
@@ -33424,12 +33062,7 @@
       "retrieved": "2026-02-16",
       "sources": [
         {
-          "downloads": [
-            {
-              "format": "pajek",
-              "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/"
-            }
-          ],
+          "homepage": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/",
           "source": "pajek"
         },
         {
@@ -33474,7 +33107,7 @@
         "is_cyclic": true,
         "is_directed": false,
         "is_heterogeneous": false,
-        "is_multigraph": true,
+        "is_multigraph": false,
         "is_weighted": false,
         "n_components": 1,
         "node_type_count": 1
@@ -33483,12 +33116,7 @@
       "retrieved": "2026-02-16",
       "sources": [
         {
-          "downloads": [
-            {
-              "format": "pajek",
-              "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/"
-            }
-          ],
+          "homepage": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/",
           "source": "pajek"
         },
         {
@@ -33533,7 +33161,7 @@
         "is_cyclic": true,
         "is_directed": true,
         "is_heterogeneous": false,
-        "is_multigraph": true,
+        "is_multigraph": false,
         "is_weighted": false,
         "n_components": 1,
         "node_type_count": 1
@@ -33542,12 +33170,7 @@
       "retrieved": "2026-02-16",
       "sources": [
         {
-          "downloads": [
-            {
-              "format": "pajek",
-              "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/"
-            }
-          ],
+          "homepage": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/",
           "source": "pajek"
         },
         {
@@ -33587,12 +33210,12 @@
       "properties": {
         "density": 0.03975155279503106,
         "edge_type_count": 1,
-        "has_self_loops": false,
+        "has_self_loops": true,
         "is_connected": true,
         "is_cyclic": true,
         "is_directed": true,
         "is_heterogeneous": false,
-        "is_multigraph": true,
+        "is_multigraph": false,
         "is_weighted": false,
         "n_components": 1,
         "node_type_count": 1
@@ -33601,12 +33224,7 @@
       "retrieved": "2026-02-16",
       "sources": [
         {
-          "downloads": [
-            {
-              "format": "pajek",
-              "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/"
-            }
-          ],
+          "homepage": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/",
           "source": "pajek"
         },
         {
@@ -33651,7 +33269,7 @@
         "is_cyclic": true,
         "is_directed": true,
         "is_heterogeneous": false,
-        "is_multigraph": true,
+        "is_multigraph": false,
         "is_weighted": false,
         "n_components": 1,
         "node_type_count": 1
@@ -33660,12 +33278,7 @@
       "retrieved": "2026-02-16",
       "sources": [
         {
-          "downloads": [
-            {
-              "format": "pajek",
-              "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/"
-            }
-          ],
+          "homepage": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/",
           "source": "pajek"
         },
         {
@@ -33698,10 +33311,10 @@
         "year": 1996
       },
       "description": "Graph Drawing Contest 1996, graph A.",
-      "edgeCount": 0,
+      "edgeCount": 1677,
       "id": "ss-pajek-gd96-a",
       "name": "Graph Drawing Contest 1996, graph A",
-      "nodeCount": 0,
+      "nodeCount": 1096,
       "properties": {
         "density": 0.002794720527947205,
         "edge_type_count": 1,
@@ -33719,12 +33332,7 @@
       "retrieved": "2026-02-16",
       "sources": [
         {
-          "downloads": [
-            {
-              "format": "pajek",
-              "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/"
-            }
-          ],
+          "homepage": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/",
           "source": "pajek"
         },
         {
@@ -33769,7 +33377,7 @@
         "is_cyclic": true,
         "is_directed": true,
         "is_heterogeneous": false,
-        "is_multigraph": true,
+        "is_multigraph": false,
         "is_weighted": false,
         "n_components": 1,
         "node_type_count": 1
@@ -33778,12 +33386,7 @@
       "retrieved": "2026-02-16",
       "sources": [
         {
-          "downloads": [
-            {
-              "format": "pajek",
-              "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/"
-            }
-          ],
+          "homepage": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/",
           "source": "pajek"
         },
         {
@@ -33828,7 +33431,7 @@
         "is_cyclic": true,
         "is_directed": false,
         "is_heterogeneous": false,
-        "is_multigraph": true,
+        "is_multigraph": false,
         "is_weighted": false,
         "n_components": 1,
         "node_type_count": 1
@@ -33837,12 +33440,7 @@
       "retrieved": "2026-02-16",
       "sources": [
         {
-          "downloads": [
-            {
-              "format": "pajek",
-              "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/"
-            }
-          ],
+          "homepage": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/",
           "source": "pajek"
         },
         {
@@ -33887,7 +33485,7 @@
         "is_cyclic": true,
         "is_directed": true,
         "is_heterogeneous": false,
-        "is_multigraph": true,
+        "is_multigraph": false,
         "is_weighted": false,
         "n_components": 1,
         "node_type_count": 1
@@ -33896,12 +33494,7 @@
       "retrieved": "2026-02-16",
       "sources": [
         {
-          "downloads": [
-            {
-              "format": "pajek",
-              "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/"
-            }
-          ],
+          "homepage": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/",
           "source": "pajek"
         },
         {
@@ -33946,7 +33539,7 @@
         "is_cyclic": true,
         "is_directed": false,
         "is_heterogeneous": false,
-        "is_multigraph": true,
+        "is_multigraph": false,
         "is_weighted": false,
         "n_components": 1,
         "node_type_count": 1
@@ -33955,12 +33548,7 @@
       "retrieved": "2026-02-16",
       "sources": [
         {
-          "downloads": [
-            {
-              "format": "pajek",
-              "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/"
-            }
-          ],
+          "homepage": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/",
           "source": "pajek"
         },
         {
@@ -34005,7 +33593,7 @@
         "is_cyclic": true,
         "is_directed": false,
         "is_heterogeneous": false,
-        "is_multigraph": true,
+        "is_multigraph": false,
         "is_weighted": true,
         "n_components": 1,
         "node_type_count": 1
@@ -34014,12 +33602,7 @@
       "retrieved": "2026-02-16",
       "sources": [
         {
-          "downloads": [
-            {
-              "format": "pajek",
-              "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/"
-            }
-          ],
+          "homepage": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/",
           "source": "pajek"
         },
         {
@@ -34064,7 +33647,7 @@
         "is_cyclic": true,
         "is_directed": true,
         "is_heterogeneous": true,
-        "is_multigraph": true,
+        "is_multigraph": false,
         "is_weighted": true,
         "n_components": 3,
         "node_type_count": 1
@@ -34073,12 +33656,7 @@
       "retrieved": "2026-02-16",
       "sources": [
         {
-          "downloads": [
-            {
-              "format": "pajek",
-              "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/"
-            }
-          ],
+          "homepage": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/",
           "source": "pajek"
         },
         {
@@ -34123,7 +33701,7 @@
         "is_cyclic": true,
         "is_directed": true,
         "is_heterogeneous": false,
-        "is_multigraph": true,
+        "is_multigraph": false,
         "is_weighted": false,
         "n_components": 4,
         "node_type_count": 1
@@ -34132,12 +33710,7 @@
       "retrieved": "2026-02-16",
       "sources": [
         {
-          "downloads": [
-            {
-              "format": "pajek",
-              "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/"
-            }
-          ],
+          "homepage": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/",
           "source": "pajek"
         },
         {
@@ -34182,7 +33755,7 @@
         "is_cyclic": true,
         "is_directed": true,
         "is_heterogeneous": false,
-        "is_multigraph": true,
+        "is_multigraph": false,
         "is_weighted": false,
         "n_components": 1,
         "node_type_count": 1
@@ -34191,12 +33764,7 @@
       "retrieved": "2026-02-16",
       "sources": [
         {
-          "downloads": [
-            {
-              "format": "pajek",
-              "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/"
-            }
-          ],
+          "homepage": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/",
           "source": "pajek"
         },
         {
@@ -34241,7 +33809,7 @@
         "is_cyclic": true,
         "is_directed": false,
         "is_heterogeneous": false,
-        "is_multigraph": true,
+        "is_multigraph": false,
         "is_weighted": false,
         "n_components": 1,
         "node_type_count": 1
@@ -34250,12 +33818,7 @@
       "retrieved": "2026-02-16",
       "sources": [
         {
-          "downloads": [
-            {
-              "format": "pajek",
-              "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/"
-            }
-          ],
+          "homepage": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/",
           "source": "pajek"
         },
         {
@@ -34295,12 +33858,12 @@
       "properties": {
         "density": 0.06299603174603174,
         "edge_type_count": 1,
-        "has_self_loops": false,
+        "has_self_loops": true,
         "is_connected": true,
         "is_cyclic": true,
         "is_directed": false,
         "is_heterogeneous": false,
-        "is_multigraph": true,
+        "is_multigraph": false,
         "is_weighted": true,
         "n_components": 1,
         "node_type_count": 1
@@ -34309,12 +33872,7 @@
       "retrieved": "2026-02-16",
       "sources": [
         {
-          "downloads": [
-            {
-              "format": "pajek",
-              "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/"
-            }
-          ],
+          "homepage": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/",
           "source": "pajek"
         },
         {
@@ -34359,7 +33917,7 @@
         "is_cyclic": true,
         "is_directed": true,
         "is_heterogeneous": false,
-        "is_multigraph": true,
+        "is_multigraph": false,
         "is_weighted": false,
         "n_components": 1,
         "node_type_count": 1
@@ -34368,12 +33926,7 @@
       "retrieved": "2026-02-16",
       "sources": [
         {
-          "downloads": [
-            {
-              "format": "pajek",
-              "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/"
-            }
-          ],
+          "homepage": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/",
           "source": "pajek"
         },
         {
@@ -34413,7 +33966,7 @@
       "properties": {
         "density": 0.0009137683330762914,
         "edge_type_count": 1,
-        "has_self_loops": false,
+        "has_self_loops": true,
         "is_connected": false,
         "is_cyclic": true,
         "is_directed": true,
@@ -34427,12 +33980,7 @@
       "retrieved": "2026-02-16",
       "sources": [
         {
-          "downloads": [
-            {
-              "format": "pajek",
-              "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/"
-            }
-          ],
+          "homepage": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/",
           "source": "pajek"
         },
         {
@@ -34472,7 +34020,7 @@
       "edgeCount": 3782463,
       "id": "ss-pajek-imdb",
       "name": "Pajek/IMDB",
-      "nodeCount": 428440,
+      "nodeCount": 1324748,
       "properties": {
         "density": 0.000009416564750214564,
         "edge_type_count": 1,
@@ -34520,14 +34068,14 @@
         "year": 2006
       },
       "description": "Citation network related to Kohonen self-organising map publications.",
-      "edgeCount": 0,
+      "edgeCount": 12731,
       "id": "ss-pajek-kohonen",
       "name": "Citation network related to Kohonen self-organising map publications",
-      "nodeCount": 0,
+      "nodeCount": 3772,
       "properties": {
         "density": 0.0017884997777029758,
         "edge_type_count": 1,
-        "has_self_loops": false,
+        "has_self_loops": true,
         "is_connected": false,
         "is_cyclic": true,
         "is_directed": true,
@@ -34541,12 +34089,7 @@
       "retrieved": "2026-02-16",
       "sources": [
         {
-          "downloads": [
-            {
-              "format": "pajek",
-              "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/"
-            }
-          ],
+          "homepage": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/",
           "source": "pajek"
         },
         {
@@ -34580,14 +34123,14 @@
         "year": 2006
       },
       "description": "Citation network from Lederberg's Roget thesaurus analysis.",
-      "edgeCount": 0,
+      "edgeCount": 41601,
       "id": "ss-pajek-lederberg",
       "name": "Citation network from Lederberg's Roget thesaurus analysis",
-      "nodeCount": 0,
+      "nodeCount": 8324,
       "properties": {
         "density": 0.0011990504939243356,
         "edge_type_count": 1,
-        "has_self_loops": false,
+        "has_self_loops": true,
         "is_connected": false,
         "is_cyclic": true,
         "is_directed": true,
@@ -34601,12 +34144,7 @@
       "retrieved": "2026-02-16",
       "sources": [
         {
-          "downloads": [
-            {
-              "format": "pajek",
-              "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/"
-            }
-          ],
+          "homepage": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/",
           "source": "pajek"
         },
         {
@@ -34640,14 +34178,14 @@
         "year": 2006
       },
       "description": "Online Dictionary for Library and Information Science hyperlink network.",
-      "edgeCount": 0,
+      "edgeCount": 18246,
       "id": "ss-pajek-odlis",
       "name": "Online Dictionary for Library and Information Science hyperlink network",
-      "nodeCount": 0,
+      "nodeCount": 2900,
       "properties": {
         "density": 0.003897182143664284,
         "edge_type_count": 1,
-        "has_self_loops": false,
+        "has_self_loops": true,
         "is_connected": false,
         "is_cyclic": true,
         "is_directed": true,
@@ -34661,12 +34199,7 @@
       "retrieved": "2026-02-16",
       "sources": [
         {
-          "downloads": [
-            {
-              "format": "pajek",
-              "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/"
-            }
-          ],
+          "homepage": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/",
           "source": "pajek"
         },
         {
@@ -34815,12 +34348,12 @@
       "properties": {
         "density": 0.2463768115942029,
         "edge_type_count": 1,
-        "has_self_loops": false,
+        "has_self_loops": true,
         "is_connected": true,
         "is_cyclic": true,
         "is_directed": true,
         "is_heterogeneous": false,
-        "is_multigraph": true,
+        "is_multigraph": false,
         "is_weighted": true,
         "n_components": 1,
         "node_type_count": 1
@@ -34829,12 +34362,7 @@
       "retrieved": "2026-02-16",
       "sources": [
         {
-          "downloads": [
-            {
-              "format": "pajek",
-              "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/"
-            }
-          ],
+          "homepage": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/",
           "source": "pajek"
         },
         {
@@ -34875,12 +34403,12 @@
       "properties": {
         "density": 0.2134387351778656,
         "edge_type_count": 1,
-        "has_self_loops": false,
+        "has_self_loops": true,
         "is_connected": true,
         "is_cyclic": true,
         "is_directed": true,
         "is_heterogeneous": false,
-        "is_multigraph": true,
+        "is_multigraph": false,
         "is_weighted": true,
         "n_components": 1,
         "node_type_count": 1
@@ -34889,12 +34417,7 @@
       "retrieved": "2026-02-16",
       "sources": [
         {
-          "downloads": [
-            {
-              "format": "pajek",
-              "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/"
-            }
-          ],
+          "homepage": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/",
           "source": "pajek"
         },
         {
@@ -34940,7 +34463,7 @@
         "is_cyclic": true,
         "is_directed": false,
         "is_heterogeneous": false,
-        "is_multigraph": true,
+        "is_multigraph": false,
         "is_weighted": true,
         "n_components": 1,
         "node_type_count": 1
@@ -34949,12 +34472,7 @@
       "retrieved": "2026-02-16",
       "sources": [
         {
-          "downloads": [
-            {
-              "format": "pajek",
-              "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/"
-            }
-          ],
+          "homepage": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/",
           "source": "pajek"
         },
         {
@@ -34988,14 +34506,14 @@
         "year": 2006
       },
       "description": "Scientometric citation network.",
-      "edgeCount": 0,
+      "edgeCount": 10413,
       "id": "ss-pajek-scimet",
       "name": "Scientometric citation network",
-      "nodeCount": 0,
+      "nodeCount": 2729,
       "properties": {
         "density": 0.002793929436088327,
         "edge_type_count": 1,
-        "has_self_loops": false,
+        "has_self_loops": true,
         "is_connected": false,
         "is_cyclic": true,
         "is_directed": true,
@@ -35009,12 +34527,7 @@
       "retrieved": "2026-02-16",
       "sources": [
         {
-          "downloads": [
-            {
-              "format": "pajek",
-              "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/"
-            }
-          ],
+          "homepage": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/",
           "source": "pajek"
         },
         {
@@ -35048,14 +34561,14 @@
         "year": 2006
       },
       "description": "Small graph drawing contest network.",
-      "edgeCount": 0,
+      "edgeCount": 4919,
       "id": "ss-pajek-smagri",
       "name": "Small graph drawing contest network",
-      "nodeCount": 0,
+      "nodeCount": 1024,
       "properties": {
         "density": 0.009387600806451613,
         "edge_type_count": 1,
-        "has_self_loops": false,
+        "has_self_loops": true,
         "is_connected": true,
         "is_cyclic": true,
         "is_directed": true,
@@ -35069,12 +34582,7 @@
       "retrieved": "2026-02-16",
       "sources": [
         {
-          "downloads": [
-            {
-              "format": "pajek",
-              "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/"
-            }
-          ],
+          "homepage": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/",
           "source": "pajek"
         },
         {
@@ -35120,7 +34628,7 @@
         "is_cyclic": true,
         "is_directed": true,
         "is_heterogeneous": false,
-        "is_multigraph": true,
+        "is_multigraph": false,
         "is_weighted": true,
         "n_components": 1,
         "node_type_count": 1
@@ -35129,12 +34637,7 @@
       "retrieved": "2026-02-16",
       "sources": [
         {
-          "downloads": [
-            {
-              "format": "pajek",
-              "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/"
-            }
-          ],
+          "homepage": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/",
           "source": "pajek"
         },
         {
@@ -35180,7 +34683,7 @@
         "is_cyclic": true,
         "is_directed": false,
         "is_heterogeneous": false,
-        "is_multigraph": true,
+        "is_multigraph": false,
         "is_weighted": true,
         "n_components": 1,
         "node_type_count": 1
@@ -35189,12 +34692,7 @@
       "retrieved": "2026-02-16",
       "sources": [
         {
-          "downloads": [
-            {
-              "format": "pajek",
-              "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/"
-            }
-          ],
+          "homepage": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/",
           "source": "pajek"
         },
         {
@@ -35240,7 +34738,7 @@
         "is_cyclic": true,
         "is_directed": true,
         "is_heterogeneous": false,
-        "is_multigraph": true,
+        "is_multigraph": false,
         "is_weighted": false,
         "n_components": 1,
         "node_type_count": 1
@@ -35249,12 +34747,7 @@
       "retrieved": "2026-02-16",
       "sources": [
         {
-          "downloads": [
-            {
-              "format": "pajek",
-              "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/"
-            }
-          ],
+          "homepage": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/",
           "source": "pajek"
         },
         {
@@ -35300,7 +34793,7 @@
         "is_cyclic": true,
         "is_directed": true,
         "is_heterogeneous": false,
-        "is_multigraph": true,
+        "is_multigraph": false,
         "is_weighted": false,
         "n_components": 1,
         "node_type_count": 1
@@ -35309,12 +34802,7 @@
       "retrieved": "2026-02-16",
       "sources": [
         {
-          "downloads": [
-            {
-              "format": "pajek",
-              "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/"
-            }
-          ],
+          "homepage": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/",
           "source": "pajek"
         },
         {
@@ -35360,7 +34848,7 @@
         "is_cyclic": true,
         "is_directed": true,
         "is_heterogeneous": false,
-        "is_multigraph": true,
+        "is_multigraph": false,
         "is_weighted": false,
         "n_components": 1,
         "node_type_count": 1
@@ -35369,12 +34857,7 @@
       "retrieved": "2026-02-16",
       "sources": [
         {
-          "downloads": [
-            {
-              "format": "pajek",
-              "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/"
-            }
-          ],
+          "homepage": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/",
           "source": "pajek"
         },
         {
@@ -35420,7 +34903,7 @@
         "is_cyclic": true,
         "is_directed": true,
         "is_heterogeneous": false,
-        "is_multigraph": true,
+        "is_multigraph": false,
         "is_weighted": false,
         "n_components": 1,
         "node_type_count": 1
@@ -35429,12 +34912,7 @@
       "retrieved": "2026-02-16",
       "sources": [
         {
-          "downloads": [
-            {
-              "format": "pajek",
-              "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/"
-            }
-          ],
+          "homepage": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/",
           "source": "pajek"
         },
         {
@@ -35468,14 +34946,14 @@
         "year": 2006
       },
       "description": "Citation network related to Ahmed Zewail's Nobel Prize publications.",
-      "edgeCount": 0,
+      "edgeCount": 54233,
       "id": "ss-pajek-zewail",
       "name": "Citation network related to Ahmed Zewail's Nobel Prize publications",
-      "nodeCount": 0,
+      "nodeCount": 6651,
       "properties": {
         "density": 0.002450103608140785,
         "edge_type_count": 1,
-        "has_self_loops": false,
+        "has_self_loops": true,
         "is_connected": false,
         "is_cyclic": true,
         "is_directed": true,
@@ -35489,12 +34967,7 @@
       "retrieved": "2026-02-16",
       "sources": [
         {
-          "downloads": [
-            {
-              "format": "pajek",
-              "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/"
-            }
-          ],
+          "homepage": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/",
           "source": "pajek"
         },
         {
@@ -35690,10 +35163,10 @@
         "year": 2011
       },
       "description": "biochemical network (1,922 nodes, 4,335 non-zeros)",
-      "edgeCount": 4336,
+      "edgeCount": 4335,
       "id": "ss-schulthess-n-biocarta",
       "name": "Schulthess/N_biocarta",
-      "nodeCount": 1996,
+      "nodeCount": 3918,
       "properties": {
         "density": 0.0021772869046363403,
         "edge_type_count": 1,
@@ -35743,10 +35216,10 @@
         "year": 2011
       },
       "description": "biochemical network (3,625 nodes, 8,054 non-zeros)",
-      "edgeCount": 8055,
+      "edgeCount": 8054,
       "id": "ss-schulthess-n-pid",
       "name": "Schulthess/N_pid",
-      "nodeCount": 3923,
+      "nodeCount": 7548,
       "properties": {
         "density": 0.0010467953801655868,
         "edge_type_count": 1,
@@ -35799,7 +35272,7 @@
       "edgeCount": 43816,
       "id": "ss-schulthess-n-reactome",
       "name": "Schulthess/N_reactome",
-      "nodeCount": 10204,
+      "nodeCount": 26763,
       "properties": {
         "density": 0.0003195519247113257,
         "edge_type_count": 1,
@@ -35856,7 +35329,7 @@
       "properties": {
         "density": 0.009526721296419132,
         "edge_type_count": 1,
-        "has_self_loops": false,
+        "has_self_loops": true,
         "is_connected": true,
         "is_cyclic": true,
         "is_directed": true,
@@ -36651,7 +36124,7 @@
       "properties": {
         "density": 0.03311331787278746,
         "edge_type_count": 1,
-        "has_self_loops": false,
+        "has_self_loops": true,
         "is_connected": false,
         "is_cyclic": true,
         "is_directed": true,
@@ -36704,7 +36177,7 @@
       "properties": {
         "density": 0.033080384262929745,
         "edge_type_count": 1,
-        "has_self_loops": true,
+        "has_self_loops": false,
         "is_connected": true,
         "is_cyclic": true,
         "is_directed": true,
@@ -36757,7 +36230,7 @@
       "properties": {
         "density": 0.00011998105736069538,
         "edge_type_count": 1,
-        "has_self_loops": false,
+        "has_self_loops": true,
         "is_connected": false,
         "is_cyclic": true,
         "is_directed": true,
@@ -37340,7 +36813,7 @@
       "properties": {
         "density": 0.00008191540346643227,
         "edge_type_count": 1,
-        "has_self_loops": false,
+        "has_self_loops": true,
         "is_connected": false,
         "is_cyclic": true,
         "is_directed": true,
@@ -37552,7 +37025,7 @@
       "properties": {
         "density": 0.00004002950418644955,
         "edge_type_count": 1,
-        "has_self_loops": false,
+        "has_self_loops": true,
         "is_connected": false,
         "is_cyclic": true,
         "is_directed": true,
@@ -37605,7 +37078,7 @@
       "properties": {
         "density": 0.0006493596467263749,
         "edge_type_count": 1,
-        "has_self_loops": false,
+        "has_self_loops": true,
         "is_connected": false,
         "is_cyclic": true,
         "is_directed": true,
@@ -37711,7 +37184,7 @@
       "properties": {
         "density": 0.00004168325738932872,
         "edge_type_count": 1,
-        "has_self_loops": false,
+        "has_self_loops": true,
         "is_connected": false,
         "is_cyclic": true,
         "is_directed": true,
@@ -38131,7 +37604,7 @@
       "edgeCount": 117954,
       "id": "ss-sumner-graphics",
       "name": "Sumner/graphics",
-      "nodeCount": 29493,
+      "nodeCount": 41315,
       "properties": {
         "density": 0.00027117722578165324,
         "edge_type_count": 1,
@@ -39142,7 +38615,7 @@
       "properties": {
         "density": 0.013838126108633839,
         "edge_type_count": 1,
-        "has_self_loops": false,
+        "has_self_loops": true,
         "is_connected": true,
         "is_cyclic": true,
         "is_directed": true,
@@ -39195,7 +38668,7 @@
       "properties": {
         "density": 0.005096924150154337,
         "edge_type_count": 1,
-        "has_self_loops": false,
+        "has_self_loops": true,
         "is_connected": true,
         "is_cyclic": true,
         "is_directed": true,
@@ -39248,7 +38721,7 @@
       "properties": {
         "density": 0.0038655968128245466,
         "edge_type_count": 1,
-        "has_self_loops": false,
+        "has_self_loops": true,
         "is_connected": true,
         "is_cyclic": true,
         "is_directed": true,
@@ -39301,7 +38774,7 @@
       "properties": {
         "density": 0.020552312533193232,
         "edge_type_count": 1,
-        "has_self_loops": false,
+        "has_self_loops": true,
         "is_connected": true,
         "is_cyclic": true,
         "is_directed": true,
@@ -39354,7 +38827,7 @@
       "properties": {
         "density": 0.022229930971951837,
         "edge_type_count": 1,
-        "has_self_loops": false,
+        "has_self_loops": true,
         "is_connected": true,
         "is_cyclic": true,
         "is_directed": true,
@@ -39407,7 +38880,7 @@
       "properties": {
         "density": 0.022229930971951837,
         "edge_type_count": 1,
-        "has_self_loops": false,
+        "has_self_loops": true,
         "is_connected": true,
         "is_cyclic": true,
         "is_directed": true,
@@ -39460,7 +38933,7 @@
       "properties": {
         "density": 0.013880775932473124,
         "edge_type_count": 1,
-        "has_self_loops": false,
+        "has_self_loops": true,
         "is_connected": true,
         "is_cyclic": true,
         "is_directed": true,
@@ -39513,7 +38986,7 @@
       "properties": {
         "density": 0.007296102790030638,
         "edge_type_count": 1,
-        "has_self_loops": false,
+        "has_self_loops": true,
         "is_connected": true,
         "is_cyclic": true,
         "is_directed": true,
@@ -39566,7 +39039,7 @@
       "properties": {
         "density": 0.004947257169415649,
         "edge_type_count": 1,
-        "has_self_loops": false,
+        "has_self_loops": true,
         "is_connected": true,
         "is_cyclic": true,
         "is_directed": true,
@@ -39619,7 +39092,7 @@
       "properties": {
         "density": 0.0008902450288552206,
         "edge_type_count": 1,
-        "has_self_loops": false,
+        "has_self_loops": true,
         "is_connected": true,
         "is_cyclic": true,
         "is_directed": true,
@@ -39672,7 +39145,7 @@
       "properties": {
         "density": 0.0005813756606149376,
         "edge_type_count": 1,
-        "has_self_loops": false,
+        "has_self_loops": true,
         "is_connected": true,
         "is_cyclic": true,
         "is_directed": true,
@@ -39725,7 +39198,7 @@
       "properties": {
         "density": 0.0024689605497962746,
         "edge_type_count": 1,
-        "has_self_loops": false,
+        "has_self_loops": true,
         "is_connected": true,
         "is_cyclic": true,
         "is_directed": true,
@@ -39778,7 +39251,7 @@
       "properties": {
         "density": 0.02510030564051928,
         "edge_type_count": 1,
-        "has_self_loops": false,
+        "has_self_loops": true,
         "is_connected": true,
         "is_cyclic": true,
         "is_directed": true,
@@ -39831,7 +39304,7 @@
       "properties": {
         "density": 0.013728506064722732,
         "edge_type_count": 1,
-        "has_self_loops": false,
+        "has_self_loops": true,
         "is_connected": true,
         "is_cyclic": true,
         "is_directed": true,
@@ -39884,7 +39357,7 @@
       "properties": {
         "density": 0.0017959157171267065,
         "edge_type_count": 1,
-        "has_self_loops": false,
+        "has_self_loops": true,
         "is_connected": true,
         "is_cyclic": true,
         "is_directed": true,
@@ -39937,7 +39410,7 @@
       "properties": {
         "density": 0.0011598764560070167,
         "edge_type_count": 1,
-        "has_self_loops": false,
+        "has_self_loops": true,
         "is_connected": true,
         "is_cyclic": true,
         "is_directed": true,
@@ -39990,7 +39463,7 @@
       "properties": {
         "density": 0.00039205070982041877,
         "edge_type_count": 1,
-        "has_self_loops": false,
+        "has_self_loops": true,
         "is_connected": true,
         "is_cyclic": true,
         "is_directed": true,
@@ -40096,7 +39569,7 @@
       "properties": {
         "density": 0.00003996196688812037,
         "edge_type_count": 1,
-        "has_self_loops": false,
+        "has_self_loops": true,
         "is_connected": true,
         "is_cyclic": true,
         "is_directed": true,
@@ -40260,7 +39733,7 @@
         "is_cyclic": true,
         "is_directed": true,
         "is_heterogeneous": false,
-        "is_multigraph": true,
+        "is_multigraph": false,
         "is_weighted": true,
         "n_components": 1,
         "node_type_count": 1
@@ -40313,7 +39786,7 @@
         "is_cyclic": true,
         "is_directed": true,
         "is_heterogeneous": false,
-        "is_multigraph": true,
+        "is_multigraph": false,
         "is_weighted": true,
         "n_components": 1,
         "node_type_count": 1
@@ -40366,7 +39839,7 @@
         "is_cyclic": true,
         "is_directed": true,
         "is_heterogeneous": false,
-        "is_multigraph": true,
+        "is_multigraph": false,
         "is_weighted": true,
         "n_components": 1,
         "node_type_count": 1
@@ -40419,7 +39892,7 @@
         "is_cyclic": true,
         "is_directed": true,
         "is_heterogeneous": false,
-        "is_multigraph": true,
+        "is_multigraph": false,
         "is_weighted": true,
         "n_components": 1,
         "node_type_count": 1
@@ -40472,7 +39945,7 @@
         "is_cyclic": true,
         "is_directed": true,
         "is_heterogeneous": false,
-        "is_multigraph": true,
+        "is_multigraph": false,
         "is_weighted": true,
         "n_components": 1,
         "node_type_count": 1
@@ -40520,7 +39993,7 @@
       "properties": {
         "density": 0.011676917247209024,
         "edge_type_count": 1,
-        "has_self_loops": false,
+        "has_self_loops": true,
         "is_connected": true,
         "is_cyclic": true,
         "is_directed": true,
@@ -40573,7 +40046,7 @@
       "properties": {
         "density": 0.0036143974244935493,
         "edge_type_count": 1,
-        "has_self_loops": false,
+        "has_self_loops": true,
         "is_connected": true,
         "is_cyclic": true,
         "is_directed": true,
@@ -40728,7 +40201,7 @@
       "edgeCount": 102432,
       "id": "ss-ycheng-psse0",
       "name": "YCheng/psse0",
-      "nodeCount": 26722,
+      "nodeCount": 37750,
       "properties": {
         "density": 0.0002869004713501734,
         "edge_type_count": 1,
@@ -40781,7 +40254,7 @@
       "edgeCount": 57376,
       "id": "ss-ycheng-psse1",
       "name": "YCheng/psse1",
-      "nodeCount": 14318,
+      "nodeCount": 25346,
       "properties": {
         "density": 0.0005596836377139763,
         "edge_type_count": 1,
@@ -40834,7 +40307,7 @@
       "edgeCount": 115262,
       "id": "ss-ycheng-psse2",
       "name": "YCheng/psse2",
-      "nodeCount": 28634,
+      "nodeCount": 39662,
       "properties": {
         "density": 0.00028115181846681206,
         "edge_type_count": 1,
@@ -40887,7 +40360,7 @@
       "edgeCount": 711683,
       "id": "ss-yoshiyasu-image-interp",
       "name": "Yoshiyasu/image_interp",
-      "nodeCount": 240000,
+      "nodeCount": 360000,
       "properties": {
         "density": 0.00001746872751367437,
         "edge_type_count": 1,
@@ -40940,7 +40413,7 @@
       "edgeCount": 853829,
       "id": "ss-yoshiyasu-mesh-deform",
       "name": "Yoshiyasu/mesh_deform",
-      "nodeCount": 234023,
+      "nodeCount": 243416,
       "properties": {
         "density": 0.000031180503570751426,
         "edge_type_count": 1,
@@ -41046,20 +40519,20 @@
         "year": 2004
       },
       "description": "Undirected, weighted transportation network of airline routes between world airports. Nodes are major airports globally, edges represent direct flight routes. Edge weights represent the number of direct flights (or airline routes) between airports. Scale-free small-world network demonstrating weight heterogeneity in real transportation systems.",
-      "edgeCount": 0,
+      "edgeCount": 67663,
       "id": "transport-airline",
       "name": "Worldwide Airline Network",
-      "nodeCount": 0,
+      "nodeCount": 3425,
       "preferredFormat": "edge-list",
       "properties": {
         "density": 0.003205795074698138,
         "edge_type_count": 1,
-        "has_self_loops": false,
+        "has_self_loops": true,
         "is_connected": false,
         "is_cyclic": true,
         "is_directed": false,
         "is_heterogeneous": false,
-        "is_multigraph": false,
+        "is_multigraph": true,
         "is_weighted": true,
         "n_components": 8,
         "node_type_count": 1
@@ -41070,6 +40543,10 @@
         {
           "downloads": [
             {
+              "columns": [
+                2,
+                4
+              ],
               "format": "csv",
               "url": "https://raw.githubusercontent.com/jpatokal/openflights/master/data/routes.dat"
             }
@@ -41105,7 +40582,7 @@
         "is_cyclic": true,
         "is_directed": false,
         "is_heterogeneous": false,
-        "is_multigraph": false,
+        "is_multigraph": true,
         "is_weighted": true,
         "n_components": 1,
         "node_type_count": 1
@@ -41196,7 +40673,7 @@
         "is_cyclic": true,
         "is_directed": false,
         "is_heterogeneous": false,
-        "is_multigraph": false,
+        "is_multigraph": true,
         "is_weighted": true,
         "n_components": 1,
         "node_type_count": 1
@@ -41242,7 +40719,7 @@
         "is_cyclic": true,
         "is_directed": false,
         "is_heterogeneous": false,
-        "is_multigraph": false,
+        "is_multigraph": true,
         "is_weighted": true,
         "n_components": 1,
         "node_type_count": 1
@@ -41277,7 +40754,7 @@
       "edgeCount": 93,
       "id": "ucinet-davis",
       "name": "Davis Southern Club Women",
-      "nodeCount": 18,
+      "nodeCount": 32,
       "properties": {
         "density": 0.1875,
         "edge_type_count": 1,
@@ -41286,7 +40763,7 @@
         "is_cyclic": true,
         "is_directed": false,
         "is_heterogeneous": true,
-        "is_multigraph": true,
+        "is_multigraph": false,
         "is_weighted": false,
         "n_components": 1,
         "node_type_count": 1
@@ -41736,42 +41213,6 @@
         }
       ]
     },
-    "ucinet-sampson-monastery": {
-      "citation": {
-        "authors": [
-          "S. F. Sampson"
-        ],
-        "publisher": "Cornell University",
-        "title": "A Novitiate in a Period of Change: An Experimental and Case Study of Social Relationships",
-        "type": "thesis",
-        "year": 1968
-      },
-      "description": "Social relations among 18 monk-novitiates preparing to enter a monastery. Includes liking, esteem, influence, and praise relations. From Sampson (1968), collected retrospectively during a period of conflict that resulted in several monks leaving.",
-      "edgeCount": 55,
-      "id": "ucinet-sampson-monastery",
-      "name": "Sampson's Monastery (Undirected)",
-      "nodeCount": 18,
-      "preferredFormat": "ucinet-dl",
-      "properties": {
-        "has_self_loops": false,
-        "is_directed": false,
-        "is_heterogeneous": false,
-        "is_multigraph": true,
-        "is_weighted": false
-      },
-      "retrieved": "2026-05-06",
-      "sources": [
-        {
-          "downloads": [
-            {
-              "format": "ucinet-dl",
-              "url": "https://web.archive.org/web/20230601195358id_/http://vlado.fmf.uni-lj.si/pub/networks/data/UciNet/sampson.dat"
-            }
-          ],
-          "source": "ucinet"
-        }
-      ]
-    },
     "ucinet-southern-women-2": {
       "citation": {
         "authors": [
@@ -41789,7 +41230,7 @@
       "id": "ucinet-southern-women-2",
       "name": "Southern Women Event Attendance (Bipartite)",
       "nodeCount": 32,
-      "preferredFormat": "ucinet-dl",
+      "preferredFormat": "ucinet",
       "properties": {
         "has_self_loops": false,
         "is_directed": false,
@@ -41802,7 +41243,7 @@
         {
           "downloads": [
             {
-              "format": "ucinet-dl",
+              "format": "ucinet",
               "url": "https://web.archive.org/web/20231006152128id_/http://vlado.fmf.uni-lj.si/pub/networks/data/Ucinet/davis.dat"
             }
           ],
@@ -41965,7 +41406,7 @@
         "is_cyclic": false,
         "is_directed": false,
         "is_heterogeneous": false,
-        "is_multigraph": true,
+        "is_multigraph": false,
         "is_weighted": false,
         "n_components": 1,
         "node_type_count": 1
@@ -42049,7 +41490,7 @@
         "is_cyclic": false,
         "is_directed": false,
         "is_heterogeneous": false,
-        "is_multigraph": true,
+        "is_multigraph": false,
         "is_weighted": false,
         "n_components": 2,
         "node_type_count": 1
@@ -42133,9 +41574,9 @@
         "has_self_loops": false,
         "is_connected": true,
         "is_cyclic": true,
-        "is_directed": true,
+        "is_directed": false,
         "is_heterogeneous": false,
-        "is_multigraph": true,
+        "is_multigraph": false,
         "is_weighted": true,
         "n_components": 1,
         "node_type_count": 1
@@ -42191,7 +41632,7 @@
       "properties": {
         "density": 0.000021066408037288526,
         "edge_type_count": 1,
-        "has_self_loops": false,
+        "has_self_loops": true,
         "is_connected": true,
         "is_cyclic": true,
         "is_directed": true,
@@ -42377,7 +41818,7 @@
       "properties": {
         "density": 0.000015858183359093675,
         "edge_type_count": 1,
-        "has_self_loops": false,
+        "has_self_loops": true,
         "is_connected": true,
         "is_cyclic": true,
         "is_directed": true,
@@ -42530,20 +41971,20 @@
         "year": 2018
       },
       "description": "Heterogeneous knowledge graph derived from WordNet lexical database. Contains words and their semantic relationships (hypernyms, synonyms, etc.) with 11 relation types. Created to fix test set leakage in the original WN18 dataset by removing inverse relation redundancy. Standard benchmark for knowledge graph completion.",
-      "edgeCount": 3134,
+      "edgeCount": 92879,
       "id": "wn18rr",
       "name": "WN18RR",
-      "nodeCount": 2969,
+      "nodeCount": 40943,
       "preferredFormat": "tar.gz",
       "properties": {
         "density": 0.0006858835096536629,
         "edge_type_count": 1,
-        "has_self_loops": false,
+        "has_self_loops": true,
         "is_connected": false,
         "is_cyclic": true,
         "is_directed": true,
         "is_heterogeneous": true,
-        "is_multigraph": true,
+        "is_multigraph": false,
         "is_weighted": false,
         "n_components": 2,
         "node_type_count": 2
@@ -42555,20 +41996,14 @@
           "downloads": [
             {
               "description": "Uni Mannheim KGE datasets archive",
-              "format": "tar.gz",
+              "format": "kge-triples-tar",
               "url": "https://web.informatik.uni-mannheim.de/pi1/kge-datasets/wnrr.tar.gz"
             }
           ],
           "source": "uni-mannheim"
         },
         {
-          "downloads": [
-            {
-              "description": "PyKEEN auto-download format",
-              "format": "pykeen",
-              "url": "https://github.com/pykeen/pykeen#datasets"
-            }
-          ],
+          "homepage": "https://github.com/pykeen/pykeen#datasets",
           "source": "pykeen"
         }
       ]
@@ -42894,13 +42329,13 @@
       },
       "description": "Directed unweighted multigraph of all synaptic connections (chemical + electrical) in the L1 larval C. elegans. Each synapse is a separate edge. Contains self-loops (autapses via electrical junctions). No connection-type distinction (homogeneous).",
       "domain": "Neural connectome",
-      "edgeCount": 0,
+      "edgeCount": 1463,
       "id": "wormwiring-witvliet-L1-1-all-unweighted",
       "name": "C. elegans L1 Connectome Full (Witvliet 2020, Specimen 1, Unweighted)",
-      "nodeCount": 0,
+      "nodeCount": 188,
       "preferredFormat": "witvliet-json",
       "properties": {
-        "has_self_loops": false,
+        "has_self_loops": true,
         "is_directed": true,
         "is_heterogeneous": false,
         "is_multigraph": true,
@@ -42952,10 +42387,10 @@
       },
       "description": "Directed multigraph of chemical synapses in the L1 larval stage C. elegans. Each synapse is a separate unweighted edge. Multiple synapses between the same neuron pair create multi-edges. Gap junctions excluded. No autapses.",
       "domain": "Neural connectome",
-      "edgeCount": 0,
+      "edgeCount": 1297,
       "id": "wormwiring-witvliet-L1-1-chemical",
       "name": "C. elegans L1 Larval Chemical Connectome (Witvliet 2020, Specimen 1)",
-      "nodeCount": 0,
+      "nodeCount": 188,
       "preferredFormat": "witvliet-json",
       "properties": {
         "has_self_loops": false,
@@ -42992,13 +42427,13 @@
       },
       "description": "Directed unweighted multigraph of all synaptic connections in the L1 larval C. elegans (specimen 4). Each synapse is a separate edge. Contains autapses. Homogeneous (no connection-type distinction).",
       "domain": "Neural connectome",
-      "edgeCount": 0,
+      "edgeCount": 3197,
       "id": "wormwiring-witvliet-L1-4-all-unweighted",
       "name": "C. elegans L1 Connectome Full (Witvliet 2020, Specimen 4, Unweighted)",
-      "nodeCount": 0,
+      "nodeCount": 206,
       "preferredFormat": "witvliet-json",
       "properties": {
-        "has_self_loops": false,
+        "has_self_loops": true,
         "is_directed": true,
         "is_heterogeneous": false,
         "is_multigraph": true,
@@ -43032,10 +42467,10 @@
       },
       "description": "Directed multigraph of chemical synapses in the L1 larval stage C. elegans (specimen 4). Each synapse is a separate unweighted edge. Multiple synapses create multi-edges. Gap junctions excluded. No autapses.",
       "domain": "Neural connectome",
-      "edgeCount": 0,
+      "edgeCount": 2779,
       "id": "wormwiring-witvliet-L1-4-chemical",
       "name": "C. elegans L1 Larval Chemical Connectome (Witvliet 2020, Specimen 4)",
-      "nodeCount": 0,
+      "nodeCount": 205,
       "preferredFormat": "witvliet-json",
       "properties": {
         "has_self_loops": false,
@@ -43072,10 +42507,10 @@
       },
       "description": "Directed multigraph of chemical synapses in the L2 larval stage C. elegans. Each synapse is a separate unweighted edge. Multiple synapses create multi-edges. Gap junctions excluded. No autapses.",
       "domain": "Neural connectome",
-      "edgeCount": 0,
+      "edgeCount": 4118,
       "id": "wormwiring-witvliet-L2-chemical",
       "name": "C. elegans L2 Larval Chemical Connectome (Witvliet 2020)",
-      "nodeCount": 0,
+      "nodeCount": 212,
       "preferredFormat": "witvliet-json",
       "properties": {
         "has_self_loops": false,
@@ -43112,10 +42547,10 @@
       },
       "description": "Directed multigraph of chemical synapses in the L3 larval stage C. elegans. Each synapse is a separate unweighted edge. Multiple synapses create multi-edges. Gap junctions excluded. No autapses.",
       "domain": "Neural connectome",
-      "edgeCount": 0,
+      "edgeCount": 4459,
       "id": "wormwiring-witvliet-L3-chemical",
       "name": "C. elegans L3 Larval Chemical Connectome (Witvliet 2020)",
-      "nodeCount": 0,
+      "nodeCount": 219,
       "preferredFormat": "witvliet-json",
       "properties": {
         "has_self_loops": false,
@@ -43149,11 +42584,11 @@
         "year": 2007
       },
       "description": "Large heterogeneous knowledge graph automatically extracted from Wikipedia and Wikidata. Contains 5 node types: entities, types, literals, relations, and concepts. Contains 37+ relation types (isA, created, hasCapital, etc.). Serves as a reference knowledge base for information retrieval and entity linking. Demonstrates multi-relational graph structure typical of Linked Open Data.",
-      "edgeCount": 1018447,
+      "edgeCount": 797297,
       "id": "yago3-10",
       "name": "YAGO 3.10 Knowledge Graph",
       "nodeCount": 123182,
-      "preferredFormat": "edge-list",
+      "preferredFormat": "kge-triples-tar",
       "properties": {
         "density": 0.0004193789497930294,
         "edge_type_count": 1,
@@ -43162,7 +42597,7 @@
         "is_cyclic": true,
         "is_directed": true,
         "is_heterogeneous": false,
-        "is_multigraph": true,
+        "is_multigraph": false,
         "is_weighted": false,
         "n_components": 21,
         "node_type_count": 2
@@ -43173,17 +42608,16 @@
         {
           "downloads": [
             {
-              "description": "Knowledge graph with typed entities and relations",
-              "format": "edge-list",
-              "url": "https://www.yago-knowledge.org/"
-            },
-            {
-              "description": "Direct download from YAGO website",
-              "format": "edge-list",
-              "url": "https://www.yago-knowledge.org/resource/download/yago/YAGO3-10/"
+              "description": "Uni Mannheim KGE datasets archive: the train, valid and test triple files",
+              "format": "kge-triples-tar",
+              "url": "https://web.informatik.uni-mannheim.de/pi1/kge-datasets/yago3-10.tar.gz"
             }
           ],
-          "source": "snap"
+          "source": "uni-mannheim"
+        },
+        {
+          "homepage": "https://www.yago-knowledge.org/",
+          "source": "yago"
         }
       ]
     },
@@ -43201,14 +42635,14 @@
         "year": 2001
       },
       "description": "Protein-protein interaction network in yeast (Saccharomyces cerevisiae).",
-      "edgeCount": 0,
+      "edgeCount": 7182,
       "id": "yeast",
       "name": "Yeast Protein Interactions",
-      "nodeCount": 0,
+      "nodeCount": 2361,
       "properties": {
         "density": 0.0024817120008040258,
         "edge_type_count": 1,
-        "has_self_loops": false,
+        "has_self_loops": true,
         "is_connected": false,
         "is_cyclic": true,
         "is_directed": false,
@@ -43293,5 +42727,14 @@
         }
       ]
     }
+  },
+  "aliases": {
+    "celegans-metabolic-undir": "netzschleuder-celegans-metabolic",
+    "ego-facebook": "facebook",
+    "netzschleuder-interactome_pdz": "netzschleuder-interactome-pdz",
+    "netzschleuder-law_firm": "netzschleuder-law-firm",
+    "netzschleuder-plant_pol_kato": "plant-pol-kato",
+    "netzschleuder-sp-hypertext-contacts-weighted": "netzschleuder-sp-hypertext-contacts",
+    "radoslaw-email-multigraph": "konect-radoslaw-email"
   }
 }

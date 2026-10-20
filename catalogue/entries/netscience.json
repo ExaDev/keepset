@@ -10,8 +10,8 @@
   },
   "description": "Coauthorship network of scientists working on network theory and experiment, compiled by M. Newman in May 2006.",
   "expectedCounts": {
-    "edges": 0,
-    "nodes": 0
+    "edges": 2742,
+    "nodes": 1589
   },
   "id": "netscience",
   "licence": {

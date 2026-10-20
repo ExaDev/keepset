@@ -13,8 +13,8 @@
   },
   "description": "Citation network related to Ahmed Zewail's Nobel Prize publications.",
   "expectedCounts": {
-    "edges": 0,
-    "nodes": 0
+    "edges": 54233,
+    "nodes": 6651
   },
   "id": "ss-pajek-zewail",
   "licence": {
@@ -37,7 +37,7 @@
     "multigraph": false,
     "nodeTypes": 1,
     "rawBytes": 3032293,
-    "selfLoops": false,
+    "selfLoops": true,
     "weighted": true
   },
   "recipe": {

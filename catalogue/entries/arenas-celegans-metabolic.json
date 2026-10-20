@@ -29,7 +29,7 @@
     "connected": true,
     "cyclic": true,
     "density": 0.009963078005040146,
-    "directed": true,
+    "directed": false,
     "edgeTypes": 1,
     "heterogeneous": false,
     "multigraph": true,

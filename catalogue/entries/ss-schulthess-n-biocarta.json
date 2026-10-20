@@ -13,8 +13,8 @@
   },
   "description": "biochemical network (1,922 nodes, 4,335 non-zeros)",
   "expectedCounts": {
-    "edges": 4336,
-    "nodes": 1996
+    "edges": 4335,
+    "nodes": 3918
   },
   "id": "ss-schulthess-n-biocarta",
   "licence": {

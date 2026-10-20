@@ -35,7 +35,7 @@
     "multigraph": false,
     "nodeTypes": 1,
     "rawBytes": 0,
-    "selfLoops": false,
+    "selfLoops": true,
     "weighted": true
   },
   "recipe": {

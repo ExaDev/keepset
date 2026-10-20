@@ -14,7 +14,7 @@
   "description": "computer graphics/vision problem (234,023 nodes, 853,829 non-zeros)",
   "expectedCounts": {
     "edges": 853829,
-    "nodes": 234023
+    "nodes": 243416
   },
   "id": "ss-yoshiyasu-mesh-deform",
   "licence": {

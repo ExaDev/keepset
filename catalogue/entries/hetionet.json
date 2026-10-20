@@ -11,8 +11,8 @@
   "description": "Heterogeneous biomedical knowledge graph integrating 29 public databases. Contains 11 node types (Compounds, Diseases, Genes, Proteins, etc.) connected by 24 edge types including compound-disease treatments, gene-disease associations, and protein interactions. Designed for drug repurposing and biomedical discovery.",
   "domain": "Biomedical knowledge graph",
   "expectedCounts": {
-    "edges": 2250198,
-    "nodes": 20164
+    "edges": 2250197,
+    "nodes": 45158
   },
   "id": "hetionet",
   "licence": {
@@ -47,9 +47,9 @@
       "delimiter": "detect",
       "encoding": "utf-8",
       "format": "edge-list",
-      "skipLines": 0,
+      "skipLines": 1,
       "sourceColumn": 0,
-      "targetColumn": 1
+      "targetColumn": 2
     },
     "source": 0,
     "status": "fetchable"

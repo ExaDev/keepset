@@ -11,8 +11,8 @@
   "description": "Heterogeneous music recommendation network from Last.fm. Contains users, artists, and tags with directed user-to-artist listening relationships, social user-user connections, and artist-tag associations. Used for link prediction and recommendation tasks in heterogeneous graph neural network benchmarks.",
   "domain": "Music recommendation network",
   "expectedCounts": {
-    "edges": 92835,
-    "nodes": 17646
+    "edges": 92834,
+    "nodes": 19524
   },
   "id": "lastfm-hgb",
   "licence": {
@@ -32,11 +32,11 @@
     "multigraph": false,
     "nodeTypes": 2,
     "rawBytes": 0,
-    "selfLoops": true,
+    "selfLoops": false,
     "weighted": false
   },
   "recipe": {
-    "reason": "no download is in a form keepset reads yet (zip: format zip has a pipeline-specific parser with no declarative keepset form yet)",
+    "reason": "no download is in a form keepset reads yet (two-mode-table: format two-mode-table has a pipeline-specific parser with no declarative keepset form yet)",
     "status": "not-fetchable"
   },
   "sources": [

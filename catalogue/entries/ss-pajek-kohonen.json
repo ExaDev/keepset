@@ -13,8 +13,8 @@
   },
   "description": "Citation network related to Kohonen self-organising map publications.",
   "expectedCounts": {
-    "edges": 0,
-    "nodes": 0
+    "edges": 12731,
+    "nodes": 3772
   },
   "id": "ss-pajek-kohonen",
   "licence": {
@@ -37,7 +37,7 @@
     "multigraph": false,
     "nodeTypes": 1,
     "rawBytes": 847619,
-    "selfLoops": false,
+    "selfLoops": true,
     "weighted": false
   },
   "recipe": {

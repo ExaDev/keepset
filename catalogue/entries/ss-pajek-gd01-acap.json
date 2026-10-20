@@ -34,7 +34,7 @@
     "directed": true,
     "edgeTypes": 1,
     "heterogeneous": true,
-    "multigraph": true,
+    "multigraph": false,
     "nodeTypes": 1,
     "rawBytes": 65790,
     "selfLoops": false,

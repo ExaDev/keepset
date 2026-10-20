@@ -10,7 +10,7 @@
   },
   "description": "Network of English words of length 2-8, connected if they differ by one letter.",
   "expectedCounts": {
-    "edges": 28635,
+    "edges": 89038,
     "nodes": 52652
   },
   "id": "dic28",

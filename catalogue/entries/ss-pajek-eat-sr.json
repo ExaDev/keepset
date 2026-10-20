@@ -14,7 +14,7 @@
   "description": "Edinburgh Associative Thesaurus, response-stimulus direction.",
   "expectedCounts": {
     "edges": 325589,
-    "nodes": 23219
+    "nodes": 23218
   },
   "id": "ss-pajek-eat-sr",
   "licence": {
@@ -37,7 +37,7 @@
     "multigraph": false,
     "nodeTypes": 1,
     "rawBytes": 19339539,
-    "selfLoops": false,
+    "selfLoops": true,
     "weighted": true
   },
   "recipe": {

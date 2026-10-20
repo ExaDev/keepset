@@ -11,7 +11,7 @@
   "description": "Social network of friendships between 34 members of a karate club at a US university in the 1970s.",
   "domain": "Social network",
   "expectedCounts": {
-    "edges": 79,
+    "edges": 78,
     "nodes": 34
   },
   "id": "karate",
@@ -32,7 +32,7 @@
     "multigraph": false,
     "nodeTypes": 1,
     "rawBytes": 5004,
-    "selfLoops": true,
+    "selfLoops": false,
     "weighted": false
   },
   "recipe": {

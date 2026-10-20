@@ -14,7 +14,7 @@
   "description": "biochemical network (10,204 nodes, 43,816 non-zeros)",
   "expectedCounts": {
     "edges": 43816,
-    "nodes": 10204
+    "nodes": 26763
   },
   "id": "ss-schulthess-n-reactome",
   "licence": {

@@ -13,8 +13,8 @@
   },
   "description": "computer graphics/vision problem (4,472 nodes, 37,056 non-zeros)",
   "expectedCounts": {
-    "edges": 37057,
-    "nodes": 4472
+    "edges": 37056,
+    "nodes": 5408
   },
   "id": "ss-luong-photogrammetry2",
   "licence": {

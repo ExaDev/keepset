@@ -13,8 +13,8 @@
   },
   "description": "Graph Drawing 1996 contest, Problem A. 1,096 vertices, 1,691 arcs.",
   "expectedCounts": {
-    "edges": 0,
-    "nodes": 0
+    "edges": 1691,
+    "nodes": 1096
   },
   "id": "pajek-gd96",
   "licence": {
@@ -33,7 +33,7 @@
     "directed": true,
     "edgeTypes": 1,
     "heterogeneous": false,
-    "multigraph": false,
+    "multigraph": true,
     "nodeTypes": 1,
     "rawBytes": 203875,
     "selfLoops": false,

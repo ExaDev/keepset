@@ -31,13 +31,13 @@
     "connected": false,
     "cyclic": true,
     "density": 0.0032879371420574234,
-    "directed": false,
+    "directed": true,
     "edgeTypes": 1,
     "heterogeneous": false,
     "multigraph": false,
     "nodeTypes": 1,
     "rawBytes": 0,
-    "selfLoops": false,
+    "selfLoops": true,
     "weighted": true
   },
   "recipe": {

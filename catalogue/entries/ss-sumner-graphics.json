@@ -14,7 +14,7 @@
   "description": "computer graphics/vision problem (29,493 nodes, 117,954 non-zeros)",
   "expectedCounts": {
     "edges": 117954,
-    "nodes": 29493
+    "nodes": 41315
   },
   "id": "ss-sumner-graphics",
   "licence": {

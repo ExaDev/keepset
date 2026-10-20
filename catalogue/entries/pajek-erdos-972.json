@@ -13,8 +13,8 @@
   },
   "description": "Extended Erdos collaboration network, 1997 version. Includes second-order collaborators.",
   "expectedCounts": {
-    "edges": 0,
-    "nodes": 0
+    "edges": 8972,
+    "nodes": 5488
   },
   "id": "pajek-erdos-972",
   "licence": {
