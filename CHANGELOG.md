@@ -1,3 +1,18 @@
+# [0.27.0](https://github.com/Mearman/keepset/compare/v0.26.0...v0.27.0) (2026-10-20)
+
+
+### Features
+
+* **archive:** select members by a pattern their path matches ([a07c883](https://github.com/Mearman/keepset/commit/a07c8830cc4999f1e8c21b288e1095f12c5b614d))
+* **catalogue:** fetch the Hartford meter reading customers ([d9525bf](https://github.com/Mearman/keepset/commit/d9525bf8f55c76ee3d3dd1f7a325be3dad8d7e32))
+* **catalogue:** fetch the park and loop routing client locations ([bdd2e0a](https://github.com/Mearman/keepset/commit/bdd2e0a31766d2bebe0f14f5986e2d2b4819edb9))
+* **catalogue:** fetch the technician routing collections ([3360946](https://github.com/Mearman/keepset/commit/33609463bbf14d68266b84b0ecc2bf3f6778090d))
+* **parsers:** read customer points files ([6572710](https://github.com/Mearman/keepset/commit/6572710a73d64a91d65619f9777376f869bf4aee))
+* **parsers:** read VeRoLog 2019 technician routing instances ([29655b0](https://github.com/Mearman/keepset/commit/29655b0b53534970c4f9962e6cc64b222e0e15c4))
+* **parsers:** read VRP-REP XML instances ([b4aff77](https://github.com/Mearman/keepset/commit/b4aff77b43a59faf9908376795dc85a229c270e4))
+* **seed:** import a collection of table files from the or survey ([4409a63](https://github.com/Mearman/keepset/commit/4409a6331632ed19f4f73d2e33925427ec3ffd82))
+* **seed:** import one instance file as an or/v1 document ([57f9344](https://github.com/Mearman/keepset/commit/57f934421c08ba1dd07e0d591905b4d606976ec4))
+
 # [0.26.0](https://github.com/Mearman/keepset/compare/v0.25.0...v0.26.0) (2026-10-20)
 
 
