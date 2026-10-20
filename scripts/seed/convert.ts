@@ -426,7 +426,7 @@ function recipeFor(download: Download, datasetId: string): Chosen | { readonly u
     // The GD 2004 contest bundle ships its problems in a zip inside the zip (GD04/challenge.zip), and the catalogue's inner path is the problem's path inside that inner zip.
     flags.push("GD contest bundle: the problem is read from the bundle's one inner .zip member, which the source catalogue does not record");
 
-    return { url: download.url, archive: { kind, member: { extensions: [".zip"] }, inner: { kind: "zip", member: { path: download.innerPath } } }, parser, flags };
+    return { url: download.url, archive: { kind, member: { extensions: [".zip"] }, inner: { kind: "zip", member: { path: download.innerPath } } }, parser, crosswalk: CROSSWALKS.topology, flags };
   }
   if (download.innerPath !== undefined) {
     return { url: download.url, archive: { kind, member: { path: download.innerPath } }, parser, crosswalk: CROSSWALKS.topology, flags };

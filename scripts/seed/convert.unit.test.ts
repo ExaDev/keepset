@@ -11,7 +11,7 @@ const graphbox = GraphboxCatalogueSchema.parse(JSON.parse(readFileSync(join(impo
 
 const stated = (id: string, name: string, prefixes: readonly string[]) => ({ id, name, prefixes, terms: { licence: { kind: "spdx", id: "CC-BY-4.0" }, statedAt: `https://${id}.example/terms`, statement: `${name} states CC-BY-4.0` } });
 const unstated = (id: string, name: string, prefixes: readonly string[]) => ({ id, name, prefixes, terms: { readAt: [`https://${id}.example/about`], reason: `${name} states no terms` } });
-/* A licence curation covering exactly the hosts the slice's recipes read from: Pajek states one licence for everything it hosts, the others state none, and the Hugging Face dataset states its own. */
+/* A licence curation covering exactly the hosts the slice's recipes read from: Pajek states one licence for everything it hosts, the others state none, and the Hugging Face dataset states its own. GroupLens is curated per dataset. */
 const licences = GraphLicencesSchema.parse({
   readOn: "2026-10-20",
   publishers: [
@@ -23,10 +23,14 @@ const licences = GraphLicencesSchema.parse({
     unstated("linqs", "LINQS", ["https://linqs-data.soe.ucsc.edu/"]),
     unstated("conve", "ConvE", ["https://github.com/TimDettmers/ConvE/"]),
     unstated("konect", "KONECT", ["http://konect.cc/"]),
+    unstated("example", "Example", ["https://example.org/"]),
+    unstated("amazon-ratings", "Amazon product data", ["http://jmcauley.ucsd.edu/"]),
+    { id: "grouplens", name: "GroupLens", prefixes: ["https://files.grouplens.org/datasets/"], perDataset: true },
     unstated("openke", "OpenKE", ["https://raw.githubusercontent.com/thunlp/OpenKE/"]),
     { id: "huggingface", name: "Hugging Face", prefixes: ["https://huggingface.co/"], perDataset: true },
   ],
   datasets: {
+    ...Object.fromEntries(["movielens-100k", "movielens-1m", "movielens-25m", "movielens-unread"].map((id) => [id, { readAt: ["https://files.grouplens.org/datasets/movielens/"], reason: "The release page states no terms." }])),
     "ieee-cis-g": { licence: { kind: "spdx", id: "MIT" }, statedAt: "https://huggingface.co/api/datasets/example/data", statement: "The card's licence field is mit." },
     "oag-eng": { readAt: ["https://huggingface.co/api/datasets/example/data"], reason: "The card has no licence field." },
   },
