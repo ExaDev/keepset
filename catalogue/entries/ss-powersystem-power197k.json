@@ -18,7 +18,8 @@
   },
   "id": "ss-powersystem-power197k",
   "licence": {
-    "kind": "unrecorded"
+    "id": "CC-BY-4.0",
+    "kind": "spdx"
   },
   "name": "PowerSystem/power197k",
   "namespace": [

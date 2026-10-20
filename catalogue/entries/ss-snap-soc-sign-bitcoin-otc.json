@@ -18,7 +18,8 @@
   },
   "id": "ss-snap-soc-sign-bitcoin-otc",
   "licence": {
-    "kind": "unrecorded"
+    "id": "CC-BY-4.0",
+    "kind": "spdx"
   },
   "name": "SNAP/soc-sign-bitcoin-otc",
   "namespace": [

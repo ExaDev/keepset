@@ -18,7 +18,8 @@
   },
   "id": "ss-andrews-andrews",
   "licence": {
-    "kind": "unrecorded"
+    "id": "CC-BY-4.0",
+    "kind": "spdx"
   },
   "name": "Andrews/Andrews",
   "namespace": [

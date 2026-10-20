@@ -18,7 +18,8 @@
   },
   "id": "ucinet-gama",
   "licence": {
-    "kind": "unrecorded"
+    "id": "CC-BY-NC-SA-2.5",
+    "kind": "spdx"
   },
   "name": "Gahuku-Gama Highland Tribes",
   "namespace": [

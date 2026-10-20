@@ -18,7 +18,8 @@
   },
   "id": "ss-dimacs10-fe-rotor",
   "licence": {
-    "kind": "unrecorded"
+    "id": "CC-BY-4.0",
+    "kind": "spdx"
   },
   "name": "DIMACS10/fe_rotor",
   "namespace": [

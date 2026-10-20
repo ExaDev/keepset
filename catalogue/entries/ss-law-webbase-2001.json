@@ -18,7 +18,8 @@
   },
   "id": "ss-law-webbase-2001",
   "licence": {
-    "kind": "unrecorded"
+    "id": "CC-BY-4.0",
+    "kind": "spdx"
   },
   "name": "LAW/webbase-2001",
   "namespace": [

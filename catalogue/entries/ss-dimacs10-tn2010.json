@@ -18,7 +18,8 @@
   },
   "id": "ss-dimacs10-tn2010",
   "licence": {
-    "kind": "unrecorded"
+    "id": "CC-BY-4.0",
+    "kind": "spdx"
   },
   "name": "DIMACS10/tn2010",
   "namespace": [

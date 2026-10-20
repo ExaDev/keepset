@@ -16,7 +16,8 @@
   },
   "id": "ogbl-citation2",
   "licence": {
-    "kind": "unrecorded"
+    "id": "ODC-By-1.0",
+    "kind": "spdx"
   },
   "name": "OGB Citation v2",
   "properties": {

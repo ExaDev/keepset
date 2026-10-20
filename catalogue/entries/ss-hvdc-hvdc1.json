@@ -18,7 +18,8 @@
   },
   "id": "ss-hvdc-hvdc1",
   "licence": {
-    "kind": "unrecorded"
+    "id": "CC-BY-4.0",
+    "kind": "spdx"
   },
   "name": "HVDC/hvdc1",
   "namespace": [

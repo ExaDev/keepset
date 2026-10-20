@@ -18,7 +18,8 @@
   },
   "id": "ucinet-zachary",
   "licence": {
-    "kind": "unrecorded"
+    "id": "CC-BY-NC-SA-2.5",
+    "kind": "spdx"
   },
   "name": "Zachary Karate Club",
   "namespace": [

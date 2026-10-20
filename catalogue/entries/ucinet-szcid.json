@@ -18,7 +18,8 @@
   },
   "id": "ucinet-szcid",
   "licence": {
-    "kind": "unrecorded"
+    "id": "CC-BY-NC-SA-2.5",
+    "kind": "spdx"
   },
   "name": "Stokman-Ziegler Netherlands Interlocks",
   "namespace": [

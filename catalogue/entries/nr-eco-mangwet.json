@@ -19,7 +19,9 @@
   },
   "id": "nr-eco-mangwet",
   "licence": {
-    "kind": "unrecorded"
+    "kind": "custom",
+    "name": "Creative Commons Attribution-ShareAlike (version not stated)",
+    "url": "https://networkrepository.com/policy.php"
   },
   "name": "Mangrove Wetland Food Web",
   "namespace": [

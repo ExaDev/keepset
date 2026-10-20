@@ -18,7 +18,8 @@
   },
   "id": "ss-gset-g18",
   "licence": {
-    "kind": "unrecorded"
+    "id": "CC-BY-4.0",
+    "kind": "spdx"
   },
   "name": "Gset/G18",
   "namespace": [

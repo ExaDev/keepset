@@ -16,7 +16,8 @@
   },
   "id": "kg-kinship",
   "licence": {
-    "kind": "unrecorded"
+    "id": "MIT",
+    "kind": "spdx"
   },
   "name": "Kinship Knowledge Graph",
   "properties": {

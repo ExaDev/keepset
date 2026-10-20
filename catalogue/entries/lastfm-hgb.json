@@ -16,7 +16,9 @@
   },
   "id": "lastfm-hgb",
   "licence": {
-    "kind": "unrecorded"
+    "kind": "custom",
+    "name": "Last.fm HetRec 2011 data (non-commercial use)",
+    "url": "https://files.grouplens.org/datasets/hetrec2011/hetrec2011-lastfm-readme.txt"
   },
   "name": "LastFM (HGB)",
   "properties": {

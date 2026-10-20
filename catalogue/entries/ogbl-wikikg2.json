@@ -15,7 +15,8 @@
   },
   "id": "ogbl-wikikg2",
   "licence": {
-    "kind": "unrecorded"
+    "id": "CC0-1.0",
+    "kind": "spdx"
   },
   "name": "OGBL-WikiKG2",
   "properties": {

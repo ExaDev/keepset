@@ -18,7 +18,8 @@
   },
   "id": "ucinet-southern-women-2",
   "licence": {
-    "kind": "unrecorded"
+    "id": "CC-BY-NC-SA-2.5",
+    "kind": "spdx"
   },
   "name": "Southern Women Event Attendance (Bipartite)",
   "namespace": [

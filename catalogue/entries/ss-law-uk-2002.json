@@ -18,7 +18,8 @@
   },
   "id": "ss-law-uk-2002",
   "licence": {
-    "kind": "unrecorded"
+    "id": "CC-BY-4.0",
+    "kind": "spdx"
   },
   "name": "LAW/uk-2002",
   "namespace": [

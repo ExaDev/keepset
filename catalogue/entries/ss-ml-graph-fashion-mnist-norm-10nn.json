@@ -18,7 +18,8 @@
   },
   "id": "ss-ml-graph-fashion-mnist-norm-10nn",
   "licence": {
-    "kind": "unrecorded"
+    "id": "CC-BY-4.0",
+    "kind": "spdx"
   },
   "name": "ML_Graph/Fashion_MNIST_norm_10NN",
   "namespace": [

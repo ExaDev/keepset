@@ -18,7 +18,8 @@
   },
   "id": "ss-law-cnr-2000",
   "licence": {
-    "kind": "unrecorded"
+    "id": "CC-BY-4.0",
+    "kind": "spdx"
   },
   "name": "LAW/cnr-2000",
   "namespace": [

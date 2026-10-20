@@ -18,7 +18,8 @@
   },
   "id": "ss-snap-oregon-2",
   "licence": {
-    "kind": "unrecorded"
+    "id": "CC-BY-4.0",
+    "kind": "spdx"
   },
   "name": "SNAP/Oregon-2",
   "namespace": [

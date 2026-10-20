@@ -18,7 +18,8 @@
   },
   "id": "pajek-tina",
   "licence": {
-    "kind": "unrecorded"
+    "id": "CC-BY-NC-SA-2.5",
+    "kind": "spdx"
   },
   "name": "Tina Social Network",
   "namespace": [

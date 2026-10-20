@@ -15,7 +15,8 @@
   },
   "id": "ogbl-biokg",
   "licence": {
-    "kind": "unrecorded"
+    "id": "CC0-1.0",
+    "kind": "spdx"
   },
   "name": "Open Graph Benchmark - BioKG (Biomedical Knowledge Graph)",
   "properties": {

@@ -18,7 +18,8 @@
   },
   "id": "ss-snap-higgs-twitter",
   "licence": {
-    "kind": "unrecorded"
+    "id": "CC-BY-4.0",
+    "kind": "spdx"
   },
   "name": "SNAP/higgs-twitter",
   "namespace": [

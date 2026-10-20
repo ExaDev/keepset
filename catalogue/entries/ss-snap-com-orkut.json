@@ -18,7 +18,8 @@
   },
   "id": "ss-snap-com-orkut",
   "licence": {
-    "kind": "unrecorded"
+    "id": "CC-BY-4.0",
+    "kind": "spdx"
   },
   "name": "SNAP/com-Orkut",
   "namespace": [

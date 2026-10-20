@@ -16,7 +16,8 @@
   },
   "id": "kg-codex-s",
   "licence": {
-    "kind": "unrecorded"
+    "id": "MIT",
+    "kind": "spdx"
   },
   "name": "CoDEx-S Knowledge Graph",
   "properties": {

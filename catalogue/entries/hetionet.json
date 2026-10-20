@@ -16,7 +16,9 @@
   },
   "id": "hetionet",
   "licence": {
-    "kind": "unrecorded"
+    "kind": "custom",
+    "name": "CC0 1.0 for original content, with each integrated source under its own licence",
+    "url": "https://github.com/hetio/hetionet#license"
   },
   "name": "Hetionet",
   "properties": {

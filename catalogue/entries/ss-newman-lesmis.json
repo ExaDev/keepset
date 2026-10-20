@@ -18,7 +18,8 @@
   },
   "id": "ss-newman-lesmis",
   "licence": {
-    "kind": "unrecorded"
+    "id": "CC-BY-4.0",
+    "kind": "spdx"
   },
   "name": "Newman/lesmis",
   "namespace": [

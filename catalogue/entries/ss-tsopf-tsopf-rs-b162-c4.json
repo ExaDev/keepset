@@ -18,7 +18,8 @@
   },
   "id": "ss-tsopf-tsopf-rs-b162-c4",
   "licence": {
-    "kind": "unrecorded"
+    "id": "CC-BY-4.0",
+    "kind": "spdx"
   },
   "name": "TSOPF/TSOPF_RS_b162_c4",
   "namespace": [

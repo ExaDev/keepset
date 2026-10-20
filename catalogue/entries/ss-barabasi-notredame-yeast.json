@@ -18,7 +18,8 @@
   },
   "id": "ss-barabasi-notredame-yeast",
   "licence": {
-    "kind": "unrecorded"
+    "id": "CC-BY-4.0",
+    "kind": "spdx"
   },
   "name": "Barabasi/NotreDame_yeast",
   "namespace": [

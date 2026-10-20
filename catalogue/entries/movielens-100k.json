@@ -16,7 +16,9 @@
   },
   "id": "movielens-100k",
   "licence": {
-    "kind": "unrecorded"
+    "kind": "custom",
+    "name": "MovieLens usage license (research use, no redistribution, no commercial use without permission)",
+    "url": "https://files.grouplens.org/datasets/movielens/ml-100k-README.txt"
   },
   "name": "MovieLens 100K User-Movie Ratings",
   "properties": {

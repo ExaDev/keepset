@@ -18,7 +18,8 @@
   },
   "id": "ss-belcastro-human-gene1",
   "licence": {
-    "kind": "unrecorded"
+    "id": "CC-BY-4.0",
+    "kind": "spdx"
   },
   "name": "Belcastro/human_gene1",
   "namespace": [

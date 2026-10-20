@@ -18,7 +18,8 @@
   },
   "id": "ss-ipso-opf-10000",
   "licence": {
-    "kind": "unrecorded"
+    "id": "CC-BY-4.0",
+    "kind": "spdx"
   },
   "name": "IPSO/OPF_10000",
   "namespace": [

@@ -18,7 +18,8 @@
   },
   "id": "ss-dimacs10-delaunay-n14",
   "licence": {
-    "kind": "unrecorded"
+    "id": "CC-BY-4.0",
+    "kind": "spdx"
   },
   "name": "DIMACS10/delaunay_n14",
   "namespace": [

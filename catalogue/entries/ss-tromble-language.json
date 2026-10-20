@@ -18,7 +18,8 @@
   },
   "id": "ss-tromble-language",
   "licence": {
-    "kind": "unrecorded"
+    "id": "CC-BY-4.0",
+    "kind": "spdx"
   },
   "name": "Tromble/language",
   "namespace": [

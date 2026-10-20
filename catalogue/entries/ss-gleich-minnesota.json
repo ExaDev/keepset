@@ -18,7 +18,8 @@
   },
   "id": "ss-gleich-minnesota",
   "licence": {
-    "kind": "unrecorded"
+    "id": "CC-BY-4.0",
+    "kind": "spdx"
   },
   "name": "Gleich/minnesota",
   "namespace": [

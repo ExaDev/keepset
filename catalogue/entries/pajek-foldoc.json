@@ -18,7 +18,8 @@
   },
   "id": "pajek-foldoc",
   "licence": {
-    "kind": "unrecorded"
+    "id": "GFDL-1.1-or-later",
+    "kind": "spdx"
   },
   "name": "FOLDOC Dictionary",
   "namespace": [

@@ -18,7 +18,8 @@
   },
   "id": "ss-pajek-gd00-a",
   "licence": {
-    "kind": "unrecorded"
+    "id": "CC-BY-4.0",
+    "kind": "spdx"
   },
   "name": "Graph Drawing Contest 2000, graph A",
   "namespace": [

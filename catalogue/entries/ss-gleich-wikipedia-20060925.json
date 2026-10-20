@@ -18,7 +18,8 @@
   },
   "id": "ss-gleich-wikipedia-20060925",
   "licence": {
-    "kind": "unrecorded"
+    "id": "CC-BY-4.0",
+    "kind": "spdx"
   },
   "name": "Gleich/wikipedia-20060925",
   "namespace": [

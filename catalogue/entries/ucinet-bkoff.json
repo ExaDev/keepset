@@ -18,7 +18,8 @@
   },
   "id": "ucinet-bkoff",
   "licence": {
-    "kind": "unrecorded"
+    "id": "CC-BY-NC-SA-2.5",
+    "kind": "spdx"
   },
   "name": "Bernard & Killworth Office",
   "namespace": [

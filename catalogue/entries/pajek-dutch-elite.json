@@ -18,7 +18,9 @@
   },
   "id": "pajek-dutch-elite",
   "licence": {
-    "kind": "unrecorded"
+    "kind": "custom",
+    "name": "Use as you will, no need to credit",
+    "url": "https://web.archive.org/web/20240928120234/http://vlado.fmf.uni-lj.si/pub/networks/data/2mode/DutchElite.htm"
   },
   "name": "Dutch Elite Network",
   "namespace": [

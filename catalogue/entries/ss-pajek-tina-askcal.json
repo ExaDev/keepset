@@ -18,7 +18,8 @@
   },
   "id": "ss-pajek-tina-askcal",
   "licence": {
-    "kind": "unrecorded"
+    "id": "CC-BY-4.0",
+    "kind": "spdx"
   },
   "name": "Tina's network: ask/calendar interactions",
   "namespace": [

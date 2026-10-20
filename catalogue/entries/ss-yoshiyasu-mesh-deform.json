@@ -18,7 +18,8 @@
   },
   "id": "ss-yoshiyasu-mesh-deform",
   "licence": {
-    "kind": "unrecorded"
+    "id": "CC-BY-4.0",
+    "kind": "spdx"
   },
   "name": "Yoshiyasu/mesh_deform",
   "namespace": [

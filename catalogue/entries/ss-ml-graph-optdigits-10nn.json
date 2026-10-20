@@ -18,7 +18,8 @@
   },
   "id": "ss-ml-graph-optdigits-10nn",
   "licence": {
-    "kind": "unrecorded"
+    "id": "CC-BY-4.0",
+    "kind": "spdx"
   },
   "name": "ML_Graph/optdigits_10NN",
   "namespace": [

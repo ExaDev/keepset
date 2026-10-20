@@ -18,7 +18,8 @@
   },
   "id": "ss-dimacs10-vsp-bump2-e18-aa01-model1-crew1",
   "licence": {
-    "kind": "unrecorded"
+    "id": "CC-BY-4.0",
+    "kind": "spdx"
   },
   "name": "DIMACS10/vsp_bump2_e18_aa01_model1_crew1",
   "namespace": [

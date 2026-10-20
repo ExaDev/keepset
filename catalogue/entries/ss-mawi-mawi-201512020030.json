@@ -18,7 +18,8 @@
   },
   "id": "ss-mawi-mawi-201512020030",
   "licence": {
-    "kind": "unrecorded"
+    "id": "CC-BY-4.0",
+    "kind": "spdx"
   },
   "name": "MAWI/mawi_201512020030",
   "namespace": [

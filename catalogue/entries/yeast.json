@@ -15,7 +15,8 @@
   },
   "id": "yeast",
   "licence": {
-    "kind": "unrecorded"
+    "id": "CC-BY-NC-SA-2.5",
+    "kind": "spdx"
   },
   "name": "Yeast Protein Interactions",
   "properties": {

@@ -18,7 +18,8 @@
   },
   "id": "pajek-gd96",
   "licence": {
-    "kind": "unrecorded"
+    "id": "CC-BY-NC-SA-2.5",
+    "kind": "spdx"
   },
   "name": "GD96 Contest Graph A",
   "namespace": [

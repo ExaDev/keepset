@@ -18,7 +18,8 @@
   },
   "id": "ss-pajek-gd98-c",
   "licence": {
-    "kind": "unrecorded"
+    "id": "CC-BY-4.0",
+    "kind": "spdx"
   },
   "name": "Graph Drawing Contest 1998, graph C",
   "namespace": [

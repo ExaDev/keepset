@@ -18,7 +18,8 @@
   },
   "id": "pajek-gd95",
   "licence": {
-    "kind": "unrecorded"
+    "id": "CC-BY-NC-SA-2.5",
+    "kind": "spdx"
   },
   "name": "GD95 Contest Graph A",
   "namespace": [

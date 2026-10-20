@@ -18,7 +18,8 @@
   },
   "id": "ss-ipso-htc-336-4438",
   "licence": {
-    "kind": "unrecorded"
+    "id": "CC-BY-4.0",
+    "kind": "spdx"
   },
   "name": "IPSO/HTC_336_4438",
   "namespace": [

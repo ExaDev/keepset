@@ -16,7 +16,8 @@
   },
   "id": "kg-nations",
   "licence": {
-    "kind": "unrecorded"
+    "id": "MIT",
+    "kind": "spdx"
   },
   "name": "Nations Knowledge Graph",
   "properties": {

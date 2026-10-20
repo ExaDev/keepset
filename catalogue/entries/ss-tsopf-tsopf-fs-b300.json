@@ -18,7 +18,8 @@
   },
   "id": "ss-tsopf-tsopf-fs-b300",
   "licence": {
-    "kind": "unrecorded"
+    "id": "CC-BY-4.0",
+    "kind": "spdx"
   },
   "name": "TSOPF/TSOPF_FS_b300",
   "namespace": [

@@ -18,7 +18,8 @@
   },
   "id": "ss-dimacs10-vsp-c-60-data-cti-cs4",
   "licence": {
-    "kind": "unrecorded"
+    "id": "CC-BY-4.0",
+    "kind": "spdx"
   },
   "name": "DIMACS10/vsp_c-60_data_cti_cs4",
   "namespace": [

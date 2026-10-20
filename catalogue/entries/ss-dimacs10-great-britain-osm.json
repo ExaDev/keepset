@@ -18,7 +18,8 @@
   },
   "id": "ss-dimacs10-great-britain-osm",
   "licence": {
-    "kind": "unrecorded"
+    "id": "CC-BY-4.0",
+    "kind": "spdx"
   },
   "name": "DIMACS10/great-britain_osm",
   "namespace": [

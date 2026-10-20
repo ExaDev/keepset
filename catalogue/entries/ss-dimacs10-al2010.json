@@ -18,7 +18,8 @@
   },
   "id": "ss-dimacs10-al2010",
   "licence": {
-    "kind": "unrecorded"
+    "id": "CC-BY-4.0",
+    "kind": "spdx"
   },
   "name": "DIMACS10/al2010",
   "namespace": [

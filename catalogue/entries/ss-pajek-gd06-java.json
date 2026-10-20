@@ -18,7 +18,8 @@
   },
   "id": "ss-pajek-gd06-java",
   "licence": {
-    "kind": "unrecorded"
+    "id": "CC-BY-4.0",
+    "kind": "spdx"
   },
   "name": "Graph Drawing Contest 2006, Java class dependency graph",
   "namespace": [

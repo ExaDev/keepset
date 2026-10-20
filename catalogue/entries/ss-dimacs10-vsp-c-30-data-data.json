@@ -18,7 +18,8 @@
   },
   "id": "ss-dimacs10-vsp-c-30-data-data",
   "licence": {
-    "kind": "unrecorded"
+    "id": "CC-BY-4.0",
+    "kind": "spdx"
   },
   "name": "DIMACS10/vsp_c-30_data_data",
   "namespace": [

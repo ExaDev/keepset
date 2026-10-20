@@ -18,7 +18,8 @@
   },
   "id": "ss-pajek-gd02-b",
   "licence": {
-    "kind": "unrecorded"
+    "id": "CC-BY-4.0",
+    "kind": "spdx"
   },
   "name": "Graph Drawing Contest 2002, graph B",
   "namespace": [

@@ -18,7 +18,8 @@
   },
   "id": "ss-snap-sx-superuser",
   "licence": {
-    "kind": "unrecorded"
+    "id": "CC-BY-4.0",
+    "kind": "spdx"
   },
   "name": "SNAP/sx-superuser",
   "namespace": [

@@ -18,7 +18,8 @@
   },
   "id": "pajek-stranke94",
   "licence": {
-    "kind": "unrecorded"
+    "id": "CC-BY-NC-SA-2.5",
+    "kind": "spdx"
   },
   "name": "Slovene Political Parties 1994",
   "namespace": [

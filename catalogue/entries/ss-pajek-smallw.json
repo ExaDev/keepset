@@ -18,7 +18,8 @@
   },
   "id": "ss-pajek-smallw",
   "licence": {
-    "kind": "unrecorded"
+    "id": "CC-BY-4.0",
+    "kind": "spdx"
   },
   "name": "Small-world network dataset",
   "namespace": [

@@ -18,7 +18,8 @@
   },
   "id": "ss-pajek-eva",
   "licence": {
-    "kind": "unrecorded"
+    "id": "CC-BY-4.0",
+    "kind": "spdx"
   },
   "name": "Citation network from EVA (Electronic Visualisation and the Arts) conference proceedings",
   "namespace": [
