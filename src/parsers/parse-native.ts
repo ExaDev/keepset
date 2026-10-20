@@ -1,6 +1,7 @@
 import type { Parser } from "../entry";
 import { NativeParseError } from "../errors";
 import { parseEdgeList } from "./edge-list";
+import { parseGdContest } from "./gd-contest";
 import { parseGml } from "./gml";
 import { parseMatrixMarket } from "./matrix-market";
 import { parseCsvTable } from "./csv-table";
@@ -111,6 +112,9 @@ export function parseNative(bytes: Uint8Array, parser: Parser): NativeDocument {
   }
   if (parser.format === "ucinet-dl") {
     return parseUcinetDl(text, parser);
+  }
+  if (parser.format === "gd-contest") {
+    return parseGdContest(text);
   }
   if (parser.format === "customer-points") {
     return parseCustomerPoints(text);
