@@ -5,11 +5,12 @@ import { join } from "node:path";
 import { zipSync } from "fflate";
 import { describe, expect, it } from "vitest";
 import { ArchiveError } from "../errors";
-import { gzip, tar, zip } from "../test-support/archives";
+import { bzip2, gzip, tar, zip } from "../test-support/archives";
 import { unpack, unpackMembers } from "./archive";
 import { readTar } from "./tar";
 
 const text = (bytes: Uint8Array): string => new TextDecoder().decode(bytes);
+const names = (members: readonly { readonly path: string }[]): string[] => members.map((member) => member.path);
 
 describe("readTar", () => {
   it("lists regular files with their full paths, skipping directories", () => {
@@ -120,6 +121,74 @@ describe("unpack", () => {
   });
 });
 
+describe("bzip2 archives", () => {
+  const concat = (...parts: readonly Uint8Array[]): Uint8Array => Uint8Array.from(parts.flatMap((part) => [...part]));
+  // Long enough to span several 100 kB bzip2 blocks, so a stream cut inside a block, between blocks and inside the trailer are all different faults.
+  const REPEATS = 120_000;
+  const long = "1 2 3\n".repeat(REPEATS);
+
+  it("unpacks a bare bzip2 file", () => {
+    expect(text(unpack(bzip2("1 2\n2 3\n"), { kind: "bzip2" }).bytes)).toBe("1 2\n2 3\n");
+    expect(text(unpack(bzip2(long), { kind: "bzip2" }).bytes)).toBe(long);
+  });
+
+  it("unpacks the stream of an empty file to no bytes", () => {
+    expect(unpack(bzip2(""), { kind: "bzip2" }).bytes).toHaveLength(0);
+  });
+
+  it("reads concatenated streams as one file, as bzip2 -d does", () => {
+    expect(text(unpack(concat(bzip2("first\n"), bzip2("second\n")), { kind: "bzip2" }).bytes)).toBe("first\nsecond\n");
+  });
+
+  it("selects a tar.bz2 member by path, extension and pattern, and gives the same members as a tar.gz", () => {
+    const files = [
+      { path: "moreno_lesmis/out.moreno_lesmis_lesmis", text: "% sym posweighted\n1 2 1\n" },
+      { path: "moreno_lesmis/meta.moreno_lesmis_lesmis", text: "name: Les Miserables\n" },
+      { path: "moreno_lesmis/README.moreno_lesmis", text: "readme" },
+    ];
+    const archive = bzip2(tar(files));
+    expect(unpack(archive, { kind: "tar.bz2", member: { path: "out.moreno_lesmis_lesmis" } }).member).toBe("moreno_lesmis/out.moreno_lesmis_lesmis");
+    expect(unpack(archive, { kind: "tar.bz2", member: { pattern: "(?:[^/]+/)?out\\.[^/]+" } })).toEqual({ bytes: new TextEncoder().encode("% sym posweighted\n1 2 1\n"), member: "moreno_lesmis/out.moreno_lesmis_lesmis" });
+    expect(names(unpackMembers(archive, { kind: "tar.bz2", members: { extensions: [".moreno_lesmis"] } }))).toEqual(["moreno_lesmis/README.moreno_lesmis"]);
+    expect(names(unpackMembers(archive, { kind: "tar.bz2", members: { pattern: "moreno_lesmis/(?:meta|out)\\..*" } }))).toEqual(names(unpackMembers(gzip(tar(files)), { kind: "tar.gz", members: { pattern: "moreno_lesmis/(?:meta|out)\\..*" } })));
+  });
+
+  it("reads an archive written by the system tar and bzip2, not only by this suite's own writer", () => {
+    const dir = mkdtempSync(join(tmpdir(), "keepset-tarbz2-"));
+    try {
+      mkdirSync(join(dir, "net"));
+      writeFileSync(join(dir, "net", "out.net"), "% sym unweighted\n1 2\n");
+      execFileSync("tar", ["-cjf", join(dir, "net.tar.bz2"), "-C", dir, "net"]);
+      expect(text(unpack(readFileSync(join(dir, "net.tar.bz2")), { kind: "tar.bz2", member: { path: "out.net" } }).bytes)).toBe("% sym unweighted\n1 2\n");
+    } finally {
+      rmSync(dir, { recursive: true, force: true });
+    }
+  });
+
+  const whole = bzip2(long);
+  const flipped = Uint8Array.from(whole);
+  const MIDDLE = Math.floor(whole.length / 2);
+  // Any single flipped bit in the compressed data fails a block's CRC or the decoding that precedes it.
+  const FLIPPED_BIT = 0b10000;
+  flipped[MIDDLE] = (flipped[MIDDLE] ?? 0) ^ FLIPPED_BIT;
+  const TRAILER_BYTES = 10;
+  it.each([
+    ["data that is not bzip2", new TextEncoder().encode("not bzip2 at all"), /does not start with the BZh header/],
+    ["no data", new Uint8Array(0), /does not start with the BZh header/],
+    ["a header with an impossible block size digit", new TextEncoder().encode("BZh0"), /does not start with the BZh header/],
+    ["a stream cut inside a block", whole.subarray(0, MIDDLE), /./],
+    ["a stream missing its end-of-stream trailer", whole.subarray(0, whole.length - TRAILER_BYTES), /input stream ended prematurely/],
+    ["a corrupted block", flipped, /./],
+    ["bytes after the last stream that are not another stream", concat(whole, new TextEncoder().encode("JUNKJUNKJUNK")), /./],
+  ] as const)("rejects %s", (_name, bytes, message) => {
+    for (const archive of [{ kind: "bzip2" }, { kind: "tar.bz2", member: { path: "a" } }] as const) {
+      expect(() => unpack(bytes, archive)).toThrow(ArchiveError);
+      expect(() => unpack(bytes, archive)).toThrow(/not valid bzip2 data/);
+      expect(() => unpack(bytes, archive)).toThrow(message);
+    }
+  });
+});
+
 describe("unpackMembers", () => {
   const files = [
     { path: "suite/b.txt", text: "b" },
@@ -128,7 +197,6 @@ describe("unpackMembers", () => {
     { path: "__MACOSX/suite/._a.txt", text: "fork" },
     { path: "suite/other/c.txt", text: "c" },
   ];
-  const names = (members: readonly { readonly path: string }[]): string[] => members.map((member) => member.path);
 
   it("gives every member an extension selector matches, in path order and without resource forks", () => {
     const members = unpackMembers(zip(files), { kind: "zip", members: { extensions: [".txt"] } });

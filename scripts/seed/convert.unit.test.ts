@@ -118,8 +118,13 @@ describe("the seed import's classification", () => {
 
   it("marks an entry not fetchable when no download has a declarative form, saying why", () => {
     expect(outcome("lesmis")).toMatchObject({ outcome: "converted-with-flags", recipe: "not-fetchable" });
-    expect(entry("lesmis").recipe).toEqual({ status: "not-fetchable", reason: "no download is in a form keepset reads yet (konect-tarbz2: bzip2 compression has no keepset unpacker yet)" });
+    expect(entry("lesmis").recipe).toEqual({ status: "not-fetchable", reason: "no download is in a form keepset reads yet (konect-tarbz2: format konect-tarbz2 has a pipeline-specific parser with no declarative keepset form yet)" });
     expect(entry("ieee-cis-g").recipe).toMatchObject({ status: "not-fetchable" });
+  });
+
+  it("reads a bzip2 download as a bare bzip2 file when its name says so", () => {
+    expect(entry("bz2-edges").recipe).toMatchObject({ status: "fetchable", archive: { kind: "bzip2" }, parser: { format: "edge-list" } });
+    expect(entry("bz2-edges").crosswalk).toEqual({ file: "crosswalks/graph-v1/topology.json" });
   });
 
   it("resolves a snapshot of a snapshot to the innermost capture and skips a directory listing", () => {
