@@ -1,5 +1,6 @@
 import { z } from "zod";
-import { ArchiveSchema, ColumnNameSchema, HttpUrlSchema, IdSchema, LicenceSchema } from "../../src/entry";
+import { ArchiveSchema, CollectionArchiveSchema, ColumnNameSchema, HttpUrlSchema, IdSchema, LicenceSchema, ParserSchema } from "../../src/entry";
+import { isInstanceParser } from "../../src/parsers/instance-shapes";
 
 /* The operations-research survey the seed import reads (scripts/seed/sources/or-datasets-survey.json) and the curation that turns each surveyed item into a catalogue entry. The survey says what each item is and which fields of the routing-with-rewards node model it carries; the curation records, per item, what a download actually gives and how its columns map onto the or/v1 node, because that takes reading each source and is a judgement the survey cannot make. */
 
@@ -112,6 +113,21 @@ export type ArcgisOutcome = z.infer<typeof ArcgisOutcomeSchema>;
 /** An outcome with a recipe: a table in one file, or a paged ArcGIS layer. */
 export type TableOutcome = FetchableOutcome | ArcgisOutcome;
 
+/** A dataset that is a collection of instance files in an archive: the members it reads, the instance file parser that reads each, which of the parser's node columns fill the or/v1 node's fields (`map`), which pass through under their own names (`keep`) and which of the file's header values the instance's `meta` carries. A node column in neither is dropped by a one-way rule, so what an entry leaves out is written down. `timeUnit` says what the source's time quantities are measured in, since the or/v1 `duration` is seconds. */
+export const CollectionOutcomeSchema = z
+  .object({
+    status: z.literal("fetchable-collection"),
+    archive: CollectionArchiveSchema,
+    parser: ParserSchema.refine(isInstanceParser, { message: "must be an instance file parser" }),
+    map: FieldMapSchema,
+    keep: z.array(ColumnNameSchema),
+    meta: z.array(z.string().min(1)).min(1),
+    timeUnit: z.enum(["seconds", "abstract units"]),
+    expectedInstances: z.int().min(0).optional(),
+  })
+  .strict();
+export type CollectionOutcome = z.infer<typeof CollectionOutcomeSchema>;
+
 /** A dataset with no recipe yet, and why. */
 export const NotFetchableOutcomeSchema = z.object({ status: z.literal("not-fetchable"), reason: prose() }).strict();
 
@@ -126,7 +142,7 @@ export const CurationItemSchema = z
     licence: LicenceSchema,
     downloadUrl: HttpUrlSchema.optional(),
     flags: z.array(prose()),
-    outcome: z.discriminatedUnion("status", [FetchableOutcomeSchema, ArcgisOutcomeSchema, NotFetchableOutcomeSchema]),
+    outcome: z.discriminatedUnion("status", [FetchableOutcomeSchema, ArcgisOutcomeSchema, CollectionOutcomeSchema, NotFetchableOutcomeSchema]),
   })
   .strict();
 export type CurationItem = z.infer<typeof CurationItemSchema>;

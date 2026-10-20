@@ -141,7 +141,8 @@ async function verifyOne(curated: CurationItem): Promise<string> {
     }
   };
   const result = entire ? await fetchEntry(dataset) : await attempt(0);
-  const nodes = "nodes" in result.data ? result.data.nodes : [];
+  const instances = "instances" in result.data ? result.data.instances : [];
+  const nodes = "nodes" in result.data ? result.data.nodes : instances.flatMap((instance) => instance.nodes);
   const fields = TARGET_FIELD_NAMES.filter((field) => outcome.map[field] !== undefined).map((field) => {
     const values = nodes.map((node) => (field in node ? node[field] : null)).filter((value) => value !== null && value !== undefined);
     const numbers = values.filter((value): value is number => typeof value === "number");
@@ -150,11 +151,12 @@ async function verifyOne(curated: CurationItem): Promise<string> {
     return `${field} ${String(values.length)}${range}`;
   });
 
-  const recorded = entire && outcome.rowCount !== undefined ? ` (the curation recorded ${String(outcome.rowCount)})` : "";
+  const recorded = entire && outcome.status !== "fetchable-collection" && outcome.rowCount !== undefined ? ` (the curation recorded ${String(outcome.rowCount)})` : "";
+  const shape = outcome.status === "fetchable-collection" ? `${String(instances.length)} instances, ${String(nodes.length)} nodes` : `${String(nodes.length)} rows`;
 
   const warned = result.warnings.length > 0 ? ` WARNING ${result.warnings.join("; ")}` : "";
 
-  return `${curated.surveyId} ${curated.id}: ${String(nodes.length)} rows${recorded}; ${fields.join("; ")}${warned}`;
+  return `${curated.surveyId} ${curated.id}: ${shape}${recorded}; ${fields.join("; ")}${warned}`;
 }
 
 /**
