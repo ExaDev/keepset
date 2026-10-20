@@ -7,6 +7,15 @@ import { deadEntry, fixtureIndex, liveEntry, representativeEntries, topologyCros
 const catalogue = createCatalogue(fixtureIndex);
 
 describe("createCatalogue", () => {
+  it("filters by subject, exactly, and finds an entry by a subject in a text search", () => {
+    expect(catalogue.listDatasets({ subject: "network-science" }).map((dataset) => dataset.entry.id)).toEqual(["karate"]);
+    expect(catalogue.listDatasets({ subject: "social-science" }).map((dataset) => dataset.entry.id)).toEqual(["karate"]);
+    expect(catalogue.listDatasets({ subject: "network" })).toEqual([]);
+    expect(catalogue.listDatasets({ subject: "operations-research" })).toEqual([]);
+    expect(catalogue.listDatasets({ text: "social-science" }).map((dataset) => dataset.entry.id)).toEqual(["karate"]);
+    expect(catalogue.listDatasets({ subject: "network-science", kind: "or" })).toEqual([]);
+  });
+
   it("lists every dataset in entry id order when no filter is given", () => {
     expect(catalogue.listDatasets().map((dataset) => dataset.entry.id)).toEqual(["auth-walled", "celegans-metabolic", "karate"]);
   });

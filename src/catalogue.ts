@@ -86,9 +86,11 @@ export interface DatasetQuery {
   readonly category?: string;
   /** The entry's domain, matched exactly. */
   readonly domain?: string;
+  /** A subject slug such as `operations-research`, matched exactly against the entry's subjects. */
+  readonly subject?: string;
   /** A group path such as `suitesparse` or `suitesparse/gset`, in which any segment may be an alias the manifest gives it: matches the entries in that group, in any group beneath it, and the entries a path alias files there. */
   readonly namespace?: string;
-  /** Text that must appear, ignoring case, in the entry's id, an alias, one of its groups, name, description, domain or one of its tags. */
+  /** Text that must appear, ignoring case, in the entry's id, an alias, one of its groups, name, description, domain, one of its subjects or one of its tags. */
   readonly text?: string;
 }
 
@@ -143,12 +145,15 @@ function matches(dataset: Dataset, query: DatasetQuery, groups: readonly string[
   if (query.domain !== undefined && entry.domain !== query.domain) {
     return false;
   }
+  if (query.subject !== undefined && entry.subjects?.includes(query.subject) !== true) {
+    return false;
+  }
   if (namespace !== undefined && !groups.some((group) => group === namespace || group.startsWith(`${namespace}${NAME_SEPARATOR}`))) {
     return false;
   }
   if (query.text !== undefined) {
     const needle = query.text.toLowerCase();
-    const haystack = [entry.id, ...(entry.aliases ?? []), ...groups, entry.name, entry.description, entry.domain, ...entry.tags].filter((field): field is string => field !== undefined);
+    const haystack = [entry.id, ...(entry.aliases ?? []), ...groups, entry.name, entry.description, entry.domain, ...(entry.subjects ?? []), ...entry.tags].filter((field): field is string => field !== undefined);
 
     return haystack.some((field) => field.toLowerCase().includes(needle));
   }
