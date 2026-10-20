@@ -1,3 +1,10 @@
+## [0.29.3](https://github.com/Mearman/keepset/compare/v0.29.2...v0.29.3) (2026-10-20)
+
+
+### Bug Fixes
+
+* **deps:** depend on crossmap, the renamed crosswalk codec, instead of twindex ([a75eda3](https://github.com/Mearman/keepset/commit/a75eda33df462cc6cd0278325b37b0d90756415d))
+
 ## [0.29.2](https://github.com/Mearman/keepset/compare/v0.29.1...v0.29.2) (2026-10-20)
 
 ## [0.29.1](https://github.com/Mearman/keepset/compare/v0.29.0...v0.29.1) (2026-10-20)
