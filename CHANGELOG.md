@@ -1,3 +1,16 @@
+# [0.26.0](https://github.com/Mearman/keepset/compare/v0.25.0...v0.26.0) (2026-10-20)
+
+
+### Bug Fixes
+
+* **download:** send an Accept header ([ead4f99](https://github.com/Mearman/keepset/commit/ead4f993215697db96b98c91457237a6cdf9646a))
+
+
+### Features
+
+* **catalogue:** fetch the VRP-REP orienteering instance collections ([0f01449](https://github.com/Mearman/keepset/commit/0f01449db73eb5c92b751442cd7d7f52b0fcc364))
+* **parsers:** read TSPLIB probabilistic and clustered orienteering files ([39357ee](https://github.com/Mearman/keepset/commit/39357ee6bc572347bb204d45581468dee1f6d4d5))
+
 # [0.25.0](https://github.com/Mearman/keepset/compare/v0.24.0...v0.25.0) (2026-10-20)
 
 
