@@ -1,3 +1,12 @@
+# [0.23.0](https://github.com/Mearman/keepset/compare/v0.22.1...v0.23.0) (2026-10-20)
+
+
+### Features
+
+* **catalogue:** fetch the FEMA flood insurance claims ([216e9bc](https://github.com/Mearman/keepset/commit/216e9bc6f6cdfdc303c156a4ee7ae250ce494bc2))
+* **parsers:** page an OpenFEMA entity and check each page ([58d6a57](https://github.com/Mearman/keepset/commit/58d6a575107c5ea97da5b1a1cf390b33e4b85b2d))
+* **seed:** page OpenFEMA sources and raise the cell limit to what was measured ([911ada4](https://github.com/Mearman/keepset/commit/911ada44ac75a363b9d13fa425319587bdf42068))
+
 ## [0.22.1](https://github.com/Mearman/keepset/compare/v0.22.0...v0.22.1) (2026-10-20)
 
 # [0.22.0](https://github.com/Mearman/keepset/compare/v0.21.0...v0.22.0) (2026-10-20)
