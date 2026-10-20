@@ -12,6 +12,7 @@ import { parseSolomon } from "./solomon";
 import { parseTop } from "./top";
 import { parseToptw } from "./toptw";
 import { parseTsplib } from "./tsplib";
+import { parseUcinetDl } from "./ucinet-dl";
 import { parseVerolog2019 } from "./verolog-2019";
 import { parseVrpRep } from "./vrp-rep";
 import type { InstanceParser } from "./instance-shapes";
@@ -107,6 +108,9 @@ export function parseNative(bytes: Uint8Array, parser: Parser): NativeDocument {
   }
   if (parser.format === "gml") {
     return parseGml(text);
+  }
+  if (parser.format === "ucinet-dl") {
+    return parseUcinetDl(text, parser);
   }
   if (parser.format === "customer-points") {
     return parseCustomerPoints(text);
