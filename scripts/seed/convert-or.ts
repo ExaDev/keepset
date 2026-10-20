@@ -3,7 +3,7 @@ import { parseEntry, type Entry } from "../../src/entry";
 import { columnNames } from "../../src/parsers/csv-table";
 import { POINT_COLUMNS } from "../../src/parsers/geojson";
 import { INSTANCE_SHAPES } from "../../src/parsers/instance-shapes";
-import { CurationSchema, TARGET_FIELD_NAMES, TARGET_FIELDS, type CollectionOutcome, type Curation, type CurationItem, type SurveyEntry, type SurveySource, type TableOutcome, type TargetField } from "./or-survey";
+import { CurationSchema, TARGET_FIELD_NAMES, TARGET_FIELDS, type InstanceFilesOutcome, type Curation, type CurationItem, type SurveyEntry, type SurveySource, type TableOutcome, type TargetField } from "./or-survey";
 
 /** The shared crosswalk of an entry with no recipe yet: the document's meta and node ids, all that is known of a dataset whose columns have not been read into a mapping. */
 export const OR_NODES_CROSSWALK = "crosswalks/or-v1/nodes.json";
@@ -225,12 +225,19 @@ function crosswalkOf(outcome: TableOutcome): Crosswalk {
 }
 
 /**
- * Checks a collection outcome against the rules that keep a recipe sound: the columns and header keys it names are ones its parser emits, a column is mapped or kept at most once, a kept column does not take the name of an or/v1 node field (a column that fills a field of its own name is mapped, so what fills each field is written in one place), every column of an instance file is a number so none fills a text field, and the instance's meta carries at least one header key, since an instance has a meta record to carry.
+ * Whether an instance files outcome reads a collection of files (an or-set/v1 entry) and not one file.
+ * @param outcome - The outcome.
+ * @returns True when its archive selects members.
+ */
+const readsCollection = (outcome: InstanceFilesOutcome): boolean => "members" in outcome.archive;
+
+/**
+ * Checks an instance files outcome against the rules that keep a recipe sound: the columns and header keys it names are ones its parser emits, a column is mapped or kept at most once, a kept column does not take the name of an or/v1 node field (a column that fills a field of its own name is mapped, so what fills each field is written in one place), every column of an instance file is a number so none fills a text field, and a collection's instance meta carries at least one header key while a single file's carries none (all its header values go in the entry's meta).
  * @param id - The surveyed item's id, for errors.
  * @param outcome - The outcome.
  * @throws Error naming the item and the rule it breaks.
  */
-function checkCollection(id: string, outcome: CollectionOutcome): void {
+function checkInstanceFiles(id: string, outcome: InstanceFilesOutcome): void {
   const fail = (message: string): never => {
     throw new Error(`${id}: ${message}`);
   };
@@ -274,6 +281,18 @@ function checkCollection(id: string, outcome: CollectionOutcome): void {
     fail("the outcome maps and keeps no column, so a fetch would carry nothing beyond ids");
   }
   const keys: readonly string[] = shape.meta;
+  if (readsCollection(outcome) && outcome.meta.length === 0) {
+    fail("a collection's meta carries at least one header key, since an instance has a meta record");
+  }
+  if (!readsCollection(outcome) && outcome.meta.length > 0) {
+    fail("a single file's header values are all carried in the entry's meta, so its meta list is empty");
+  }
+  if (!readsCollection(outcome) && outcome.expectedInstances !== undefined) {
+    fail("a single file is one instance and has no expectedInstances");
+  }
+  if (readsCollection(outcome) && outcome.expectedNodes !== undefined) {
+    fail("a collection counts instances, not nodes");
+  }
   for (const key of outcome.meta) {
     if (!keys.includes(key)) {
       fail(`meta names ${key}, which the ${outcome.parser.format} parser does not emit (it emits ${keys.join(", ")})`);
@@ -285,32 +304,34 @@ function checkCollection(id: string, outcome: CollectionOutcome): void {
 }
 
 /**
- * The crosswalk of a collection outcome: each member becomes an instance, its id and the header keys the outcome carries move across, and each node column is mapped onto its field, kept under its own name or dropped by a one-way rule, so the round trip holds.
+ * The crosswalk of an instance files outcome: for a collection each member becomes an instance, its id and the header keys the outcome carries move across; for a single file the entry's meta moves whole; and each node column is mapped onto its field, kept under its own name or dropped by a one-way rule, so the round trip holds.
  * @param outcome - The outcome.
  * @returns The crosswalk document.
  * @throws Error when twindex finds the crosswalk structurally invalid.
  */
-function collectionCrosswalkOf(outcome: CollectionOutcome): Crosswalk {
+function instanceFilesCrosswalkOf(outcome: InstanceFilesOutcome): Crosswalk {
   const shape = INSTANCE_SHAPES[outcome.parser.format];
+  const collection = readsCollection(outcome);
+  const from = collection ? "members[].nodes[]" : "nodes[]";
+  const to = collection ? "instances[].nodes[]" : "nodes[]";
   const mapped = new Map(TARGET_FIELD_NAMES.flatMap((field) => (outcome.map[field] === undefined ? [] : [[outcome.map[field], field] as const])));
   const crosswalk = {
     source: outcome.parser.format,
-    target: "or-set/v1",
+    target: collection ? "or-set/v1" : "or/v1",
     rules: [
       { op: "move", from: "meta", to: "meta" },
-      { op: "move", from: "members[].id", to: "instances[].id" },
-      ...outcome.meta.map((key) => ({ op: "move", from: `members[].meta.${key}`, to: `instances[].meta.${key}` })),
-      { op: "move", from: "members[].nodes[].id", to: "instances[].nodes[].id" },
+      ...(collection ? [{ op: "move", from: "members[].id", to: "instances[].id" }, ...outcome.meta.map((key) => ({ op: "move", from: `members[].meta.${key}`, to: `instances[].meta.${key}` }))] : []),
+      { op: "move", from: `${from}.id`, to: `${to}.id` },
       ...TARGET_FIELD_NAMES.flatMap((field) => {
         const column = outcome.map[field];
 
-        return column === undefined ? [] : [{ op: "move", from: `members[].nodes[].${column}`, to: `instances[].nodes[].${field}` }];
+        return column === undefined ? [] : [{ op: "move", from: `${from}.${column}`, to: `${to}.${field}` }];
       }),
-      ...outcome.keep.map((column) => ({ op: "move", from: `members[].nodes[].${column}`, to: `instances[].nodes[].${column}` })),
+      ...outcome.keep.map((column) => ({ op: "move", from: `${from}.${column}`, to: `${to}.${column}` })),
     ],
     oneWay: [
-      ...shape.meta.filter((key) => !outcome.meta.includes(key)).map((key) => ({ op: "drop", from: `members[].meta.${key}`, direction: "encode" })),
-      ...shape.columns.filter((column) => !mapped.has(column) && !outcome.keep.includes(column)).map((column) => ({ op: "drop", from: `members[].nodes[].${column}`, direction: "encode" })),
+      ...(collection ? shape.meta.filter((key) => !outcome.meta.includes(key)).map((key) => ({ op: "drop", from: `members[].meta.${key}`, direction: "encode" })) : []),
+      ...shape.columns.filter((column) => !mapped.has(column) && !outcome.keep.includes(column)).map((column) => ({ op: "drop", from: `${from}.${column}`, direction: "encode" })),
     ],
   };
   const parsed = CrosswalkSchema.parse(crosswalk);
@@ -336,7 +357,7 @@ function recipeOf(outcome: CurationItem["outcome"], source: number, url: string)
   if (outcome.status === "not-fetchable") {
     return { status: "not-fetchable", reason: outcome.reason };
   }
-  if (outcome.status === "fetchable-collection") {
+  if (outcome.status === "fetchable-instance-files") {
     return { status: "fetchable", source, archive: outcome.archive, parser: outcome.parser };
   }
   if (outcome.status === "fetchable-arcgis") {
@@ -368,7 +389,10 @@ function recipeOf(outcome: CurationItem["outcome"], source: number, url: string)
  * @returns The expected counts.
  */
 function expectedCountsOf(outcome: CurationItem["outcome"]): Record<string, number> {
-  if (outcome.status === "fetchable-collection" || outcome.status === "fetchable-table-collection") {
+  if (outcome.status === "fetchable-instance-files" && !readsCollection(outcome)) {
+    return outcome.expectedNodes === undefined ? {} : { nodes: outcome.expectedNodes };
+  }
+  if (outcome.status === "fetchable-instance-files" || outcome.status === "fetchable-table-collection") {
     return outcome.expectedInstances === undefined ? {} : { instances: outcome.expectedInstances };
   }
   if (outcome.status === "not-fetchable" || outcome.expectedNodes === undefined) {
@@ -396,8 +420,8 @@ export function convertItem(item: SurveyEntry, curation: CurationItem, probedOn:
   const sources = [item.url, ...(dataUrl === undefined ? [] : [dataUrl])].map((url) => ({ url, retrieved: probedOn, status: "live" }));
   const prefix = `${curation.namespace}-`;
   const alias = curation.id.startsWith(prefix) ? curation.id.slice(prefix.length) : "";
-  if (outcome.status === "fetchable-collection") {
-    checkCollection(item.id, outcome);
+  if (outcome.status === "fetchable-instance-files") {
+    checkInstanceFiles(item.id, outcome);
   } else if (outcome.status !== "not-fetchable") {
     checkFetchable(item.id, outcome);
   }
@@ -409,14 +433,14 @@ export function convertItem(item: SurveyEntry, curation: CurationItem, probedOn:
     ...(curation.description === undefined ? {} : { description: curation.description }),
     domain: domainOf(item),
     tags: [...new Set(item.fields)],
-    category: outcome.status === "fetchable-collection" || outcome.status === "fetchable-table-collection" ? "or-set/v1" : "or/v1",
+    category: (outcome.status === "fetchable-instance-files" && readsCollection(outcome)) || outcome.status === "fetchable-table-collection" ? "or-set/v1" : "or/v1",
     sources,
     licence: curation.licence,
     citations: [],
     recipe: recipeOf(outcome, dataUrl === undefined ? 0 : 1, givenUrl),
-    crosswalk: outcome.status === "not-fetchable" ? { file: OR_NODES_CROSSWALK } : outcome.status === "fetchable-collection" ? collectionCrosswalkOf(outcome) : crosswalkOf(outcome),
+    crosswalk: outcome.status === "not-fetchable" ? { file: OR_NODES_CROSSWALK } : outcome.status === "fetchable-instance-files" ? instanceFilesCrosswalkOf(outcome) : crosswalkOf(outcome),
     expectedCounts: expectedCountsOf(outcome),
-    properties: { surveyId: item.id, ...((outcome.status === "fetchable-collection" || outcome.status === "fetchable-table-collection") && outcome.timeUnit !== undefined ? { timeUnit: outcome.timeUnit } : {}) },
+    properties: { surveyId: item.id, ...((outcome.status === "fetchable-instance-files" || outcome.status === "fetchable-table-collection") && outcome.timeUnit !== undefined ? { timeUnit: outcome.timeUnit } : {}) },
   });
 
   return {

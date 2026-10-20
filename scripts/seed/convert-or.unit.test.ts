@@ -287,7 +287,7 @@ describe("convertItem for a paged ArcGIS layer", () => {
 describe("convertItem for a collection of instance files", () => {
   const item = survey.entries[0];
   const collection = {
-    status: "fetchable-collection",
+    status: "fetchable-instance-files",
     archive: { kind: "zip", members: { extensions: [".txt"] } },
     parser: { format: "solomon", encoding: "utf-8" },
     map: { x: "x", y: "y", deadline: "due" },
@@ -379,9 +379,9 @@ describe("convertItem for a collection of instance files", () => {
     expect(failure({ ...collection, meta: ["name", "name"] })).toMatch(/meta lists a key more than once/);
   });
 
-  it("refuses a parser that is not an instance file parser, and an archive that selects one member", () => {
+  it("refuses a parser that is not an instance file parser, and header keys on an archive that selects one member", () => {
     expect(() => curated({ ...collection, parser: { format: "gml", encoding: "utf-8" } })).toThrow(/must be an instance file parser/);
-    expect(() => curated({ ...collection, archive: { kind: "zip", member: { extensions: [".txt"] } } })).toThrow();
+    expect(failure({ ...collection, archive: { kind: "zip", member: { extensions: [".txt"] } } })).toMatch(/a single file's header values are all carried in the entry's meta/);
   });
 });
 
@@ -447,5 +447,56 @@ describe("convertItem for a collection of table files", () => {
     };
     expect(failure({ ...tables, map: { lon: "Longitude", lat: "Elevation" } })).toMatch(/lat maps the column Elevation, which the table does not have/);
     expect(failure({ ...tables, numericColumns: [{ column: "Longitude", factor: 1 }, { column: "Latitude", factor: 1 }] })).toMatch(/duration is a number but ServiceTime_min is not declared numeric/);
+  });
+});
+
+describe("convertItem for one instance file", () => {
+  const item = survey.entries[0];
+  const single = {
+    status: "fetchable-instance-files",
+    archive: { kind: "zip", member: { path: "customers.txt" } },
+    parser: { format: "customer-points", encoding: "utf-8" },
+    map: { x: "x", y: "y" },
+    keep: [],
+    meta: [],
+    expectedNodes: 2,
+  };
+  const curated = (outcome: Record<string, unknown>): Parameters<typeof convertItem>[1] => CurationItemSchema.parse({ surveyId: "or-10", id: "example-customers", namespace: "example", name: "Customers", licence: { kind: "unrecorded" }, flags: [], outcome });
+  const entryOf = (outcome: Record<string, unknown>): ReturnType<typeof convertItem>["entry"] => convertItem(item ?? expect.unreachable("the fixture survey has an item"), curated(outcome), "2026-10-19").entry;
+  const failure = (outcome: Record<string, unknown>): string => {
+    try {
+      entryOf(outcome);
+    } catch (error) {
+      return error instanceof Error ? error.message : String(error);
+    }
+    throw new Error("expected the conversion to fail");
+  };
+
+  it("makes an or/v1 entry that selects the one file, with the node count and the whole header in the meta", async () => {
+    const entry = entryOf(single);
+    expect(entry.category).toBe("or/v1");
+    expect(entry.recipe).toEqual({ status: "fetchable", source: 0, archive: single.archive, parser: single.parser });
+    expect(entry.expectedCounts).toEqual({ nodes: 2 });
+    expect(entry.crosswalk).toMatchObject({ source: "customer-points", target: "or/v1", oneWay: [] });
+    const dataset = createCatalogue({ manifest: fixtureManifest, crosswalks: {}, entries: [entry] }).listDatasets()[0] ?? expect.unreachable("the catalogue lists its entry");
+    const fetch = async (): Promise<Response> => Promise.resolve(new Response(zip([{ path: "Instance/customers.txt", text: "customers 2\r\n\r\n0\t1.5\t2.5\r\n1\t3\t4\r\n" }, { path: "Instance/network.txt", text: "ignored" }])));
+    const fetched = await fetchEntry(dataset, { fetch });
+    expect(fetched.warnings).toEqual([]);
+    expect(fetched.data).toEqual({
+      meta: { id: "example-customers", name: "Customers", surveyId: "or-10", customers: 2 },
+      nodes: [
+        { id: "0", x: 1.5, y: 2.5 },
+        { id: "1", x: 3, y: 4 },
+      ],
+    });
+    expect(await roundTripEntry(dataset, { fetch })).toMatchObject({ holds: true });
+  });
+
+  it("refuses header keys listed for a single file, instance counts on it, node counts on a collection and a collection with no header key", () => {
+    expect(failure({ ...single, meta: ["customers"] })).toMatch(/a single file's header values are all carried in the entry's meta, so its meta list is empty/);
+    expect(failure({ ...single, expectedInstances: 1 })).toMatch(/a single file is one instance and has no expectedInstances/);
+    const collection = { ...single, archive: { kind: "zip", members: { extensions: [".txt"] } }, meta: ["customers"] };
+    expect(failure({ ...collection, expectedNodes: 2 })).toMatch(/a collection counts instances, not nodes/);
+    expect(failure({ ...collection, meta: [] })).toMatch(/a collection's meta carries at least one header key/);
   });
 });
