@@ -1,0 +1,62 @@
+name: Source liveness
+
+# Requests every source URL the catalogue records and keeps one tracking issue up to date with the ones that no longer resolve (scripts/check-sources.ts). The check edits no entry: marking a source dead and pinning its snapshot is a reviewed change.
+on:
+  schedule:
+    # Weekly, off the hour, so it does not queue with every other schedule that fires at the top of an hour.
+    - cron: '17 4 * * 1'
+  workflow_dispatch:
+
+# One check at a time: a manual run during a scheduled one waits rather than doubling the requests to every host.
+concurrency:
+  group: source-liveness
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+env:
+  # The one open issue the check maintains is found by this exact title.
+  ISSUE_TITLE: Recorded sources no longer match the catalogue
+
+jobs:
+  check:
+    name: Check recorded sources
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    permissions:
+      contents: read
+      issues: write # to open, update or close the tracking issue
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: pnpm/action-setup@ea17c68df8912ef543352723c149a84f56e3d413 # v6.1.0
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: '22'
+          cache: pnpm
+      # The previous run's report, to compare stated lengths against. Cache entries are immutable, so each run saves under its own id and the newest earlier one is restored.
+      - uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: reports/source-check.json
+          key: source-liveness-${{ github.run_id }}
+          restore-keys: source-liveness-
+      - run: pnpm install --frozen-lockfile
+      - name: Request every recorded source
+        run: pnpm run sources:check --baseline reports/source-check.json
+      - name: Update the tracking issue
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          number=$(gh issue list --state open --limit 100 --json number,title --jq '[.[] | select(.title == env.ISSUE_TITLE)][0].number // empty')
+          if [[ -f reports/source-check.md ]]; then
+            if [[ -n "$number" ]]; then
+              gh issue edit "$number" --body-file reports/source-check.md
+            else
+              gh issue create --title "$ISSUE_TITLE" --body-file reports/source-check.md
+            fi
+          elif [[ -n "$number" ]]; then
+            gh issue close "$number" --comment "The scheduled check found every recorded source matching the catalogue."
+          fi
