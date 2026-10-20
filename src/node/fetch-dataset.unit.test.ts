@@ -3,7 +3,7 @@ import { describe, expect, it } from "vitest";
 import { createCatalogue, type Dataset } from "../catalogue";
 import { DatasetNotFoundError, KeepsetError, RecipeError, type RecipeStep } from "../errors";
 import { gzip, tar, zip } from "../test-support/archives";
-import { arcgisEntry, ckanEntry, deadEntry, fixtureIndex, liveEntry, notFetchableEntry, openFemaEntry, orEntry, socrataEntry } from "../test-support/entries";
+import { arcgisEntry, ckanEntry, deadEntry, fixtureIndex, liveEntry, notFetchableEntry, openFemaEntry, orEntry, orSetEntry, socrataEntry } from "../test-support/entries";
 import { downloadUrl, fetchDataset, fetchEntry, roundTripDataset, roundTripEntry, type FetchPort } from "./fetch-dataset";
 
 const karateText = "% karate excerpt\n1 2\n2 3\n3 1\n";
@@ -99,7 +99,7 @@ describe("fetchEntry", () => {
     };
     const mtx = "%%MatrixMarket matrix coordinate pattern symmetric\n3 3 2\n2 1\n3 1\n";
     const { fetch } = servedBy({ "https://example.org/data/karate.txt": gzip(tar([{ path: "karate/karate.mtx", text: mtx }])) });
-    expect((await fetchEntry(datasetWith(entry), { fetch, now })).data.nodes.map((node) => node.id)).toEqual(["1", "2", "3"]);
+    expect((await fetchEntry(datasetWith(entry), { fetch, now })).data).toMatchObject({ nodes: [{ id: "1" }, { id: "2" }, { id: "3" }] });
   });
 
   it("passes the abort signal to the network port", async () => {
@@ -222,6 +222,68 @@ describe("an or/v1 entry", () => {
     const error = await failure(fetchEntry(dataset, { fetch: bad.fetch, now }));
     expect(error.step).toBe("parse");
     expect(error.message).toMatch(/line 2/);
+  });
+});
+
+describe("an or-set/v1 entry", () => {
+  const suite = (files: readonly { readonly path: string; readonly text: string }[]): ReturnType<typeof servedBy> => servedBy({ "https://example.org/data/suite.zip": zip(files) });
+  const members = [
+    { path: "suite/b.csv", text: "customer,x,y,prize\n1,0,0,0\n" },
+    { path: "suite/a.csv", text: "customer,x,y,prize\n1,4,5,0\n2,6,7,3\n" },
+    { path: "suite/readme.txt", text: "not an instance" },
+  ];
+  const dataset = datasetWith(orSetEntry);
+
+  it("reads every matching member as an instance, in path order, each numbering its own nodes", async () => {
+    const fetched = await fetchEntry(dataset, { fetch: suite(members).fetch, now });
+    expect(fetched.warnings).toEqual([]);
+    expect(fetched.data).toEqual({
+      meta: { id: "route-suite", name: "Route suite" },
+      instances: [
+        {
+          id: "suite/a.csv",
+          meta: {},
+          nodes: [
+            { id: "1", x: 4, y: 5, prize: 0 },
+            { id: "2", x: 6, y: 7, prize: 3 },
+          ],
+        },
+        { id: "suite/b.csv", meta: {}, nodes: [{ id: "1", x: 0, y: 0, prize: 0 }] },
+      ],
+    });
+  });
+
+  it("records the members it read in the provenance", async () => {
+    const { provenance } = await fetchEntry(dataset, { fetch: suite(members).fetch, now });
+    expect(provenance.members).toEqual(["suite/a.csv", "suite/b.csv"]);
+    expect(provenance.member).toBeUndefined();
+  });
+
+  it("warns when the instance count differs from the recorded one", async () => {
+    const fetched = await fetchEntry(dataset, { fetch: suite(members.slice(0, 2).slice(0, 1)).fetch, now });
+    expect(fetched.warnings).toEqual(["instances: the entry records 2, the fetched result has 1"]);
+  });
+
+  it("holds the round trip over every member", async () => {
+    expect(await roundTripEntry(dataset, { fetch: suite(members).fetch, now })).toMatchObject({ holds: true });
+  });
+
+  it("fails at the extract step when no member matches", async () => {
+    const error = await failure(fetchEntry(dataset, { fetch: suite([{ path: "readme.txt", text: "none" }]).fetch, now }));
+    expect(error.step).toBe("extract");
+    expect(error.message).toMatch(/at least one member ending \.csv/);
+  });
+
+  it("fails at the parse step naming the member that does not parse, and returns nothing partial", async () => {
+    const error = await failure(fetchEntry(dataset, { fetch: suite([members[1] ?? expect.unreachable("fixture"), { path: "suite/z.csv", text: "customer,x,y,prize\n1,a,5,0\n" }]).fetch, now }));
+    expect(error.step).toBe("parse");
+    expect(error.message).toMatch(/member suite\/z\.csv: .*line 2/);
+  });
+
+  it("fails at the validate step naming the instance whose node ids repeat", async () => {
+    const error = await failure(fetchEntry(dataset, { fetch: suite([{ path: "suite/a.csv", text: "customer,x,y,prize\n1,4,5,0\n1,6,7,3\n" }]).fetch, now }));
+    expect(error.step).toBe("validate");
+    expect(error.message).toMatch(/instances\.0\.nodes\.1\.id/);
   });
 });
 

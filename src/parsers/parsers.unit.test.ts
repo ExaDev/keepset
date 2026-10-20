@@ -201,3 +201,50 @@ describe("decoding", () => {
     expect(parseNative(bytesOf("a \u00e9\u0080\n"), edgeList({ encoding: "latin1" })).edges).toEqual([{ source: "a", target: "\u00e9\u0080" }]);
   });
 });
+
+describe("the solomon parser", () => {
+  const solomon: Parser = { format: "solomon", encoding: "utf-8" };
+  const original = "X101\r\n\r\nVEHICLE\r\nNUMBER     CAPACITY\r\n  3         100\r\n\r\nCUSTOMER\r\nCUST NO.  XCOORD.   YCOORD.    DEMAND   READY TIME  DUE DATE   SERVICE   TIME\r\n \r\n    0      10         20          0          0        500          0   \r\n    1      12         25          5         40         90         10   \r\n    2       8         31          7        120        180         10   \r\n \r\n";
+  const tabbed = "demo-tw1\n\nVEHICLE\nNUMBER     CAPACITY\n2\t50\n\nCUSTOMER\nCUST NO.\tXCOORD.\tYCOORD.\tDEMAND\tREADY TIME\tDUE DATE\tSERVICE   TIME\n\n0\t28.0718\t-16.6220\t0\t0\t28800\t0\n661\t28.0519\t-16.7154\t20\t11400\t17400\t1200\n1235\t28.4450\t-16.3003\t20\t0\t9600\t600\n";
+
+  it("reads the name, vehicles, capacity and customer rows of a CRLF file with padded spaces, skipping whitespace only lines", () => {
+    expect(parseNative(utf8(original), solomon)).toEqual({
+      meta: { name: "X101", vehicles: 3, capacity: 100 },
+      nodes: [
+        { id: "0", x: 10, y: 20, demand: 0, ready: 0, due: 500, service: 0 },
+        { id: "1", x: 12, y: 25, demand: 5, ready: 40, due: 90, service: 10 },
+        { id: "2", x: 8, y: 31, demand: 7, ready: 120, due: 180, service: 10 },
+      ],
+    });
+  });
+
+  it("reads a tab separated file with decimal positions and ids that are not consecutive", () => {
+    expect(parseNative(utf8(tabbed), solomon)).toEqual({
+      meta: { name: "demo-tw1", vehicles: 2, capacity: 50 },
+      nodes: [
+        { id: "0", x: 28.0718, y: -16.622, demand: 0, ready: 0, due: 28800, service: 0 },
+        { id: "661", x: 28.0519, y: -16.7154, demand: 20, ready: 11400, due: 17400, service: 1200 },
+        { id: "1235", x: 28.445, y: -16.3003, demand: 20, ready: 0, due: 9600, service: 600 },
+      ],
+    });
+  });
+
+  it("names the line of a row that is not seven numbers", () => {
+    expect(parseError(() => parseNative(utf8(original.replace("   1      12         25          5         40         90         10   ", "1 12 25 5 40 90")), solomon)).message).toMatch(/solomon line 11: expected seven numbers/);
+    expect(parseError(() => parseNative(utf8(original.replace("40         90         10", "40         90         ten")), solomon)).message).toMatch(/solomon line 11: expected the service time/);
+  });
+
+  it("rejects a repeated node id, a fractional id and a file without a customer", () => {
+    expect(parseError(() => parseNative(utf8(`${original}2 1 1 1 1 1 1\n`), solomon)).message).toMatch(/node 2 appears twice/);
+    expect(parseError(() => parseNative(utf8(original.replace("    1      12", "  1.5      12")), solomon)).message).toMatch(/whole number node id/);
+    expect(parseError(() => parseNative(utf8("X\n\nVEHICLE\nH\n1 2\n\nCUSTOMER\nH\n"), solomon)).message).toMatch(/no rows/);
+  });
+
+  it("rejects a file missing its sections or its name, and text outside the sections", () => {
+    expect(parseError(() => parseNative(utf8(""), solomon)).message).toMatch(/line 1: expected the instance name/);
+    expect(parseError(() => parseNative(utf8("X\n\nCUSTOMER\nH\n0 1 1 0 0 1 0\n"), solomon)).message).toMatch(/expected a VEHICLE section/);
+    expect(parseError(() => parseNative(utf8("X\n\nVEHICLE\nH\n1 2\n"), solomon)).message).toMatch(/expected a CUSTOMER section/);
+    expect(parseError(() => parseNative(utf8("X\nstray\nVEHICLE\n"), solomon)).message).toMatch(/line 2: expected VEHICLE or CUSTOMER/);
+    expect(parseError(() => parseNative(utf8("X\n\nVEHICLE\nH\n1 2 3\n"), solomon)).message).toMatch(/line 5: expected the vehicle count and capacity/);
+  });
+});

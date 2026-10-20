@@ -218,8 +218,52 @@ export const openFemaEntry = {
 /** One of each entry shape, for round-trip and schema-agreement tests. */
 export const representativeEntries = [liveEntry, deadEntry, notFetchableEntry];
 
+/** A fetchable or-set/v1 entry: a zip of CSV files, one instance each, read through the `csv-table` parser and mapped onto the set's instances; the archive's other files are not read. */
+export const orSetEntry = {
+  id: "route-suite",
+  name: "Route suite",
+  tags: [],
+  category: "or-set/v1",
+  sources: [{ url: "https://example.org/data/suite.zip", retrieved: "2026-10-20", status: "live" }],
+  licence: { kind: "unrecorded" },
+  citations: [],
+  recipe: {
+    status: "fetchable",
+    source: 0,
+    archive: { kind: "zip", members: { extensions: [".csv"] } },
+    parser: {
+      format: "csv-table",
+      encoding: "utf-8",
+      delimiter: "comma",
+      skipLines: 0,
+      idColumn: "customer",
+      numericColumns: [
+        { column: "x", factor: 1 },
+        { column: "y", factor: 1 },
+        { column: "prize", factor: 1 },
+      ],
+    },
+  },
+  crosswalk: {
+    source: "csv-table",
+    target: "or-set/v1",
+    rules: [
+      { op: "move", from: "meta", to: "meta" },
+      { op: "move", from: "members[].id", to: "instances[].id" },
+      { op: "move", from: "members[].meta", to: "instances[].meta" },
+      { op: "move", from: "members[].nodes[].id", to: "instances[].nodes[].id" },
+      { op: "move", from: "members[].nodes[].x", to: "instances[].nodes[].x" },
+      { op: "move", from: "members[].nodes[].y", to: "instances[].nodes[].y" },
+      { op: "move", from: "members[].nodes[].prize", to: "instances[].nodes[].prize" },
+    ],
+    oneWay: [],
+  },
+  expectedCounts: { instances: 2 },
+  properties: {},
+} as const;
+
 /** Every entry shape, one entry of each category as well: for the tests that check the entry schema, its generated JSON Schema and serialisation, which the catalogue fixtures (graph entries only) do not need to carry. */
-export const everyEntryShape = [...representativeEntries, orEntry, arcgisEntry, socrataEntry, ckanEntry, openFemaEntry];
+export const everyEntryShape = [...representativeEntries, orEntry, orSetEntry, arcgisEntry, socrataEntry, ckanEntry, openFemaEntry];
 
 /** A catalogue manifest for fixture catalogues. */
 export const fixtureManifest = {

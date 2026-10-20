@@ -1,16 +1,18 @@
 import { z } from "zod";
 import { UnknownCategoryError } from "./errors";
 import { GraphV1Schema, type GraphV1 } from "./targets/graph-v1";
+import { OrSetV1Schema, type OrSetV1 } from "./targets/or-set-v1";
 import { OrV1Schema, type OrV1 } from "./targets/or-v1";
 
 /** Every category id the registry knows. A category id is `<kind>/v<version>`: the kind of data, and the version of its normalisation target, so a breaking change to a target is a new category rather than an edit to an old one. */
-export const CategoryIdSchema = z.enum(["graph/v1", "or/v1"]);
+export const CategoryIdSchema = z.enum(["graph/v1", "or/v1", "or-set/v1"]);
 export type CategoryId = z.infer<typeof CategoryIdSchema>;
 
 /** The normalisation target each category resolves to, keyed by category id. */
 export interface CategoryTargets {
   readonly "graph/v1": GraphV1;
   readonly "or/v1": OrV1;
+  readonly "or-set/v1": OrSetV1;
 }
 
 /** The normalised shape of any category: what `fetchDataset` can resolve to. */
@@ -19,10 +21,14 @@ export type CategoryTarget = CategoryTargets[CategoryId];
 /** The keys of a target whose values are arrays: the collections an entry's `expectedCounts` may name. */
 export type CountedKey<Target> = { readonly [Key in keyof Target]: Target[Key] extends readonly unknown[] ? Key : never }[keyof Target] & string;
 
-/** One category: its id, what it holds, the schema of its normalisation target, and which of the target's arrays an entry may record expected counts for. */
+/** What one fetch of an entry in a category reads: a single document, or a set of documents, one per member of the archive the source unpacks to. */
+export type CategoryShape = "document" | "collection";
+
+/** One category: its id, what it holds, whether an entry is one document or a collection of them, the schema of its normalisation target, and which of the target's arrays an entry may record expected counts for. */
 interface CategoryOf<Id extends CategoryId> {
   readonly id: Id;
   readonly description: string;
+  readonly shape: CategoryShape;
   readonly target: z.ZodType<CategoryTargets[Id]>;
   readonly counted: readonly CountedKey<CategoryTargets[Id]>[];
 }
@@ -35,14 +41,23 @@ const registry: { readonly [Id in CategoryId]: CategoryOf<Id> } = {
   "graph/v1": {
     id: "graph/v1",
     description: "A graph as { meta, nodes, edges }: a flat record of scalar metadata, nodes carrying at least an id, and edges carrying at least source and target node ids, with optional node and edge types.",
+    shape: "document",
     target: GraphV1Schema,
     counted: ["nodes", "edges"],
   },
   "or/v1": {
     id: "or/v1",
     description: "An operations-research instance as { meta, nodes }: a flat record of scalar metadata and nodes carrying at least an id, with optional coordinates, prize, prize probability, duration, travel time, skill, territory, lifecycle status and times, and deadline.",
+    shape: "document",
     target: OrV1Schema,
     counted: ["nodes"],
+  },
+  "or-set/v1": {
+    id: "or-set/v1",
+    description: "A collection of operations-research instances as { meta, instances }: a flat record of scalar metadata and instances, each an or/v1 document ({ meta, nodes }) under an id of its own, read from every matching member of an archive.",
+    shape: "collection",
+    target: OrSetV1Schema,
+    counted: ["instances"],
   },
 };
 

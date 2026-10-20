@@ -26,8 +26,14 @@ export interface NativeTable {
   readonly nodes: readonly NativeRow[];
 }
 
+/** The native shape the instance file parsers emit: the instance's nodes, and a `meta` of its own header values (its name, a vehicle count) that the fetch flow merges beneath the entry's own metadata. */
+export interface NativeInstance {
+  readonly meta: Readonly<Record<string, string | number | boolean | null>>;
+  readonly nodes: readonly NativeRow[];
+}
+
 /** What a parser emits: the native shape of its category family, to which the fetch flow adds `meta`. */
-export type NativeDocument = NativeGraph | NativeTable;
+export type NativeDocument = NativeGraph | NativeTable | NativeInstance;
 
 /**
  * Collects node ids in order of first appearance, so a parser that learns its nodes from its edges emits them deterministically.

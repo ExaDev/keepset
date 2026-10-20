@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import { EntrySchema, parseEntry, SourceSchema, waybackUrl } from "./entry";
 import { CatalogueSyntaxError } from "./errors";
 import { serialise } from "./serialise";
-import { arcgisEntry, deadEntry, everyEntryShape, liveEntry } from "./test-support/entries";
+import { arcgisEntry, deadEntry, everyEntryShape, liveEntry, orEntry, orSetEntry } from "./test-support/entries";
 
 const requiredFields = ["id", "name", "tags", "category", "sources", "licence", "citations", "recipe", "crosswalk", "expectedCounts", "properties"] as const;
 
@@ -154,5 +154,37 @@ describe("an entry's namespace and aliases", () => {
   it("refuses a repeated alias and an alias equal to the entry's own id", () => {
     expect(EntrySchema.is({ ...liveEntry, aliases: ["short", "short"] })).toBe(false);
     expect(EntrySchema.is({ ...liveEntry, aliases: [liveEntry.id] })).toBe(false);
+  });
+});
+
+describe("an archive that selects one file or every file", () => {
+  const withArchive = (base: typeof orEntry | typeof orSetEntry, archive: unknown): unknown => ({ ...base, recipe: { ...base.recipe, archive } });
+  const issues = (doc: unknown): string => {
+    try {
+      parseEntry(doc);
+    } catch (error) {
+      return error instanceof Error ? error.message : String(error);
+    }
+
+    return "";
+  };
+
+  it("accepts a collection that selects its members and a document that selects its member", () => {
+    expect(issues(orSetEntry)).toBe("");
+    expect(issues(withArchive(orEntry, { kind: "zip", member: { extensions: [".csv"] } }))).toBe("");
+  });
+
+  it("rejects a collection whose archive selects one member, or none", () => {
+    expect(issues(withArchive(orSetEntry, { kind: "zip", member: { extensions: [".csv"] } }))).toMatch(/or-set\/v1 is a collection, so the archive must select its members with `members`/);
+    expect(issues(withArchive(orSetEntry, { kind: "none" }))).toMatch(/is a collection/);
+  });
+
+  it("rejects a document whose archive selects members", () => {
+    expect(issues(withArchive(orEntry, { kind: "zip", members: { extensions: [".csv"] } }))).toMatch(/or\/v1 is one document, so the archive selects one file with `member`/);
+  });
+
+  it("rejects an archive that names both a member and members, or an unknown kind", () => {
+    expect(issues(withArchive(orSetEntry, { kind: "zip", member: { extensions: [".csv"] }, members: { extensions: [".csv"] } }))).not.toBe("");
+    expect(issues(withArchive(orSetEntry, { kind: "rar", members: { extensions: [".csv"] } }))).not.toBe("");
   });
 });

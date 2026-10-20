@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import { CategoryIdSchema, countTarget, getCategory, getTarget, kindOf, listCategories } from "./categories";
 import { KeepsetError, UnknownCategoryError } from "./errors";
 import { GraphV1Schema } from "./targets/graph-v1";
+import { OrSetV1Schema } from "./targets/or-set-v1";
 import { OrV1Schema } from "./targets/or-v1";
 
 const graph = {
@@ -27,7 +28,7 @@ describe("the category registry", () => {
   it("rejects an unknown category id with an error naming the known ones", () => {
     expect(() => getTarget("graph/v2")).toThrow(UnknownCategoryError);
     expect(() => getTarget("graph/v2")).toThrow(KeepsetError);
-    expect(() => getTarget("graph/v2")).toThrow(/known categories are graph\/v1, or\/v1/);
+    expect(() => getTarget("graph/v2")).toThrow(/known categories are graph\/v1, or\/v1, or-set\/v1/);
   });
 
   it("does not resolve names inherited from Object.prototype", () => {
@@ -46,6 +47,13 @@ describe("the category registry", () => {
   it("derives the kind of data from the id", () => {
     expect(kindOf("graph/v1")).toBe("graph");
     expect(kindOf("or/v1")).toBe("or");
+    expect(kindOf("or-set/v1")).toBe("or-set");
+  });
+
+  it("resolves or-set/v1 to its target schema, a collection that counts its instances", () => {
+    expect(getTarget("or-set/v1")).toBe(OrSetV1Schema);
+    expect(getCategory("or-set/v1")).toMatchObject({ shape: "collection", counted: ["instances"] });
+    expect(listCategories().filter((category) => category.shape === "collection").map((category) => category.id)).toEqual(["or-set/v1"]);
   });
 });
 
@@ -122,5 +130,47 @@ describe("the or/v1 target", () => {
 
   it("counts its nodes", () => {
     expect(countTarget("or/v1", OrV1Schema.parse(instance))).toEqual(new Map([["nodes", instance.nodes.length]]));
+  });
+});
+
+describe("the or-set/v1 target", () => {
+  const set = {
+    meta: { name: "Route suite" },
+    instances: [
+      { id: "suite/a.txt", meta: { capacity: 200 }, nodes: [{ id: "1", x: 4, y: 5 }, { id: "2", prize: 3 }] },
+      { id: "suite/b.txt", meta: {}, nodes: [{ id: "1", x: 0, y: 0 }] },
+    ],
+  };
+
+  it("accepts a set of instances, each numbering its own nodes", () => {
+    expect(OrSetV1Schema.parse(set)).toEqual(set);
+  });
+
+  it("counts instances, not nodes", () => {
+    expect(countTarget("or-set/v1", OrSetV1Schema.parse(set))).toEqual(new Map([["instances", 2]]));
+  });
+
+  it("rejects a duplicate instance id, naming the instance", () => {
+    const result = OrSetV1Schema.safeParse({ ...set, instances: [...set.instances, { id: "suite/a.txt", meta: {}, nodes: [] }] });
+    expect(result.success).toBe(false);
+    expect(result.error?.issues.map((issue) => issue.path)).toEqual([["instances", 2, "id"]]);
+  });
+
+  it("rejects a duplicate node id within one instance, naming the instance and the node", () => {
+    const result = OrSetV1Schema.safeParse({ ...set, instances: [{ id: "x", meta: {}, nodes: [{ id: "1" }, { id: "1" }] }] });
+    expect(result.success).toBe(false);
+    expect(result.error?.issues.map((issue) => issue.path)).toEqual([["instances", 0, "nodes", 1, "id"]]);
+  });
+
+  it("rejects a node field outside the or/v1 node's range, and an instance without its id, meta or nodes", () => {
+    expect(OrSetV1Schema.is({ ...set, instances: [{ id: "x", meta: {}, nodes: [{ id: "1", lat: 91 }] }] })).toBe(false);
+    for (const missing of ["id", "meta", "nodes"]) {
+      const rest = Object.fromEntries(Object.entries({ id: "x", meta: {}, nodes: [] }).filter(([key]) => key !== missing));
+      expect(OrSetV1Schema.is({ ...set, instances: [rest] })).toBe(false);
+    }
+  });
+
+  it("rejects a key beyond meta and instances", () => {
+    expect(OrSetV1Schema.is({ ...set, nodes: [] })).toBe(false);
   });
 });

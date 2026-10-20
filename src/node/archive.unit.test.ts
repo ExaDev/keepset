@@ -5,7 +5,7 @@ import { join } from "node:path";
 import { describe, expect, it } from "vitest";
 import { ArchiveError } from "../errors";
 import { gzip, tar, zip } from "../test-support/archives";
-import { unpack } from "./archive";
+import { unpack, unpackMembers } from "./archive";
 import { readTar } from "./tar";
 
 const text = (bytes: Uint8Array): string => new TextDecoder().decode(bytes);
@@ -98,5 +98,41 @@ describe("unpack", () => {
     const notAnArchive = new TextEncoder().encode("not an archive at all");
     expect(() => unpack(notAnArchive, { kind: "gzip" })).toThrow(ArchiveError);
     expect(() => unpack(notAnArchive, { kind: "zip", member: { path: "a" } })).toThrow(ArchiveError);
+  });
+});
+
+describe("unpackMembers", () => {
+  const files = [
+    { path: "suite/b.txt", text: "b" },
+    { path: "suite/a.txt", text: "a" },
+    { path: "suite/readme.md", text: "readme" },
+    { path: "__MACOSX/suite/._a.txt", text: "fork" },
+    { path: "suite/other/c.txt", text: "c" },
+  ];
+  const names = (members: readonly { readonly path: string }[]): string[] => members.map((member) => member.path);
+
+  it("gives every member an extension selector matches, in path order and without resource forks", () => {
+    const members = unpackMembers(zip(files), { kind: "zip", members: { extensions: [".txt"] } });
+    expect(names(members)).toEqual(["suite/a.txt", "suite/b.txt", "suite/other/c.txt"]);
+    expect(members.map((member) => text(member.bytes))).toEqual(["a", "b", "c"]);
+  });
+
+  it("gives the same members from a tar and a tar.gz", () => {
+    const archive = tar(files);
+    expect(names(unpackMembers(archive, { kind: "tar", members: { extensions: [".txt"] } }))).toEqual(["suite/a.txt", "suite/b.txt", "suite/other/c.txt"]);
+    expect(names(unpackMembers(gzip(archive), { kind: "tar.gz", members: { extensions: [".txt"] } }))).toEqual(["suite/a.txt", "suite/b.txt", "suite/other/c.txt"]);
+  });
+
+  it("takes a path selector as one member, matched by its trailing segments", () => {
+    expect(names(unpackMembers(zip(files), { kind: "zip", members: { path: "b.txt" } }))).toEqual(["suite/b.txt"]);
+  });
+
+  it("rejects a selector that matches nothing, listing what the archive holds", () => {
+    expect(() => unpackMembers(zip(files), { kind: "zip", members: { extensions: [".csv"] } })).toThrow(/at least one member ending \.csv, found none among: .*suite\/a\.txt/);
+    expect(() => unpackMembers(zip(files), { kind: "zip", members: { path: "nope.txt" } })).toThrow(/at least one member nope\.txt/);
+  });
+
+  it("rejects bytes that are not the stated archive kind", () => {
+    expect(() => unpackMembers(new TextEncoder().encode("not an archive"), { kind: "zip", members: { extensions: [".txt"] } })).toThrow(ArchiveError);
   });
 });
