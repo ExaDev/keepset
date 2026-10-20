@@ -16,6 +16,7 @@ interface SearchRecord {
   readonly description?: string;
   readonly domain?: string;
   readonly kind: string;
+  readonly subjects?: readonly string[];
   readonly tags: readonly string[];
 }
 
@@ -64,7 +65,7 @@ function Listing({ records }: { readonly records: readonly SearchRecord[] }): Re
       if (needle === "") {
         return true;
       }
-      const haystack = [record.id, record.namespace, ...(record.aliases ?? []), record.name, record.description, record.domain, ...record.tags].filter((field): field is string => field !== undefined);
+      const haystack = [record.id, record.namespace, ...(record.aliases ?? []), record.name, record.description, record.domain, ...(record.subjects ?? []), ...record.tags].filter((field): field is string => field !== undefined);
 
       return haystack.some((field) => field.toLowerCase().includes(needle));
     });

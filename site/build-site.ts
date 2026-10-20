@@ -13,6 +13,7 @@ export interface SearchRecord {
   readonly description?: string;
   readonly domain?: string;
   readonly kind: string;
+  readonly subjects?: readonly string[];
   readonly tags: readonly string[];
   readonly fetchable: boolean;
 }
@@ -38,14 +39,13 @@ export type SiteFiles = ReadonlyMap<string, string>;
 /**
  * Groups datasets by a label, refusing two labels that share a slug, since they would share a listing page.
  * @param datasets - The datasets.
- * @param labelOf - Each dataset's label, or undefined for none.
+ * @param labelsOf - Each dataset's labels, none for a dataset the grouping does not apply to.
  * @returns The groups in label order.
  */
-function groupBy(datasets: readonly Dataset[], labelOf: (dataset: Dataset) => string | undefined): { label: string; datasets: Dataset[] }[] {
+function groupBy(datasets: readonly Dataset[], labelsOf: (dataset: Dataset) => readonly string[]): { label: string; datasets: Dataset[] }[] {
   const groups = new Map<string, Dataset[]>();
   for (const dataset of datasets) {
-    const label = labelOf(dataset);
-    if (label !== undefined) {
+    for (const label of new Set(labelsOf(dataset))) {
       groups.set(label, [...(groups.get(label) ?? []), dataset]);
     }
   }
@@ -85,7 +85,7 @@ function allNamespaces(catalogue: SiteCatalogue): NamespaceNode[] {
 }
 
 /**
- * Generates the static site's pages and data: the home page, one page per entry, listing pages by domain and by kind and one for each namespace, at any depth, with their indexes, the search index, the web app manifest and the service worker's precache manifest. Static assets and the client bundle are added by the caller.
+ * Generates the static site's pages and data: the home page, one page per entry, listing pages by domain, by subject and by kind and one for each namespace, at any depth, with their indexes, the search index, the web app manifest and the service worker's precache manifest. Static assets and the client bundle are added by the caller.
  * @param options - The catalogue, versions, URL and output directory.
  * @returns Every file written, by relative path.
  */
@@ -101,8 +101,9 @@ export function buildSite(options: SiteOptions): SiteFiles {
     files.set(`datasets/${dataset.entry.id}/index.html`, entryPage(context("../../"), dataset));
   }
   for (const [title, directory, groups] of [
-    ["Domains", "domains", groupBy(datasets, (dataset) => dataset.entry.domain)],
-    ["Kinds", "kinds", groupBy(datasets, (dataset) => dataset.kind)],
+    ["Domains", "domains", groupBy(datasets, (dataset) => (dataset.entry.domain === undefined ? [] : [dataset.entry.domain]))],
+    ["Subjects", "subjects", groupBy(datasets, (dataset) => dataset.entry.subjects ?? [])],
+    ["Kinds", "kinds", groupBy(datasets, (dataset) => [dataset.kind])],
   ] as const) {
     files.set(`${directory}/index.html`, groupsPage(context("../"), title, groups.map((group) => ({ label: group.label, count: group.datasets.length }))));
     for (const group of groups) {
@@ -124,6 +125,7 @@ export function buildSite(options: SiteOptions): SiteFiles {
     name: entry.name,
     ...(entry.description === undefined ? {} : { description: entry.description }),
     ...(entry.domain === undefined ? {} : { domain: entry.domain }),
+    ...(entry.subjects === undefined ? {} : { subjects: entry.subjects }),
     kind,
     tags: entry.tags,
     fetchable: entry.recipe.status === "fetchable",
@@ -134,7 +136,7 @@ export function buildSite(options: SiteOptions): SiteFiles {
     JSON.stringify({ name: "keepset", short_name: "keepset", description: manifest.description, start_url: "./", scope: "./", display: "standalone", background_color: "#ffffff", theme_color: "#1f4e79", icons: [{ src: "icon.svg", sizes: "any", type: "image/svg+xml" }] }, undefined, 2),
   );
   // The service worker precaches the shell and every listing page, and caches entry pages as they are visited: the entry pages together are most of the site, too much to download on a first visit.
-  const shell = ["./", "app.css", "app.js", "icon.svg", "manifest.webmanifest", "search-index.json", ...[...files.keys()].filter((path) => path.startsWith("domains/") || path.startsWith("kinds/") || path.startsWith("namespaces/")).map((path) => path.replace(/index\.html$/, ""))];
+  const shell = ["./", "app.css", "app.js", "icon.svg", "manifest.webmanifest", "search-index.json", ...[...files.keys()].filter((path) => path.startsWith("domains/") || path.startsWith("subjects/") || path.startsWith("kinds/") || path.startsWith("namespaces/")).map((path) => path.replace(/index\.html$/, ""))];
   files.set("precache.json", JSON.stringify({ version: `${packageVersion}+${manifest.id}@${manifest.version}`, urls: shell }));
 
   for (const [path, text] of files) {

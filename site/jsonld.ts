@@ -59,7 +59,7 @@ export function datasetJsonLd(dataset: Dataset, pageUrl: string, catalogueUrl: s
     url: pageUrl,
     identifier: entry.id,
     ...(entry.aliases === undefined ? {} : { alternateName: entry.aliases }),
-    keywords: [dataset.kind, ...(entry.domain === undefined ? [] : [entry.domain]), ...entry.tags],
+    keywords: [dataset.kind, ...(entry.domain === undefined ? [] : [entry.domain]), ...(entry.subjects ?? []), ...entry.tags],
     ...(license === undefined ? {} : { license }),
     ...(citation.length === 0 ? {} : { citation }),
     isPartOf: { "@type": "DataCatalog", name: dataset.catalogue.id, url: catalogueUrl },
