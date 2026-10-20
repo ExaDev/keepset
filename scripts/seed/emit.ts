@@ -2,8 +2,9 @@
 
 import { existsSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { join, relative } from "node:path";
-import type { Entry } from "../../src/entry";
+import { type Entry, parseEntry } from "../../src/entry";
 import { serialise } from "../../src/serialise";
+import { pinSnapshots } from "../sources/entries";
 
 /** What an import produces: every file it writes, by absolute path, and the entry files a previous import wrote that this one does not produce, which it removes. */
 export interface Output {
@@ -12,13 +13,27 @@ export interface Output {
 }
 
 /**
- * The files for a set of entries.
+ * The files for a set of entries. An import does not know the snapshots `scripts/archive-sources.ts` pins on live sources, so an entry carries over the snapshot its committed file pins for any source URL it still lists without one; every other field is the import's.
  * @param entries - The entries.
  * @param entriesDir - The directory entry files live in.
  * @returns Each entry's file path mapped to its serialised text.
  */
 export function entryWrites(entries: readonly Entry[], entriesDir: string): Map<string, string> {
-  return new Map(entries.map((entry) => [join(entriesDir, `${entry.id}.json`), serialise(entry)]));
+  return new Map(
+    entries.map((entry) => {
+      const path = join(entriesDir, `${entry.id}.json`);
+      const pinned = new Map<string, string>();
+      if (existsSync(path)) {
+        for (const source of parseEntry(JSON.parse(readFileSync(path, "utf8"))).sources) {
+          if (source.snapshot !== undefined) {
+            pinned.set(source.url, source.snapshot.timestamp);
+          }
+        }
+      }
+
+      return [path, serialise(pinSnapshots(entry, pinned))];
+    }),
+  );
 }
 
 /**

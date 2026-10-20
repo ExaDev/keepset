@@ -2,7 +2,8 @@ import { existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { afterAll, describe, expect, it } from "vitest";
-import { parseEntry } from "../../src/entry";
+import { parseEntry, waybackUrl } from "../../src/entry";
+import { serialise } from "../../src/serialise";
 import { liveEntry } from "../../src/test-support/entries";
 import { apply, entryWrites, reportedIds, staleEntries } from "./emit";
 
@@ -25,6 +26,27 @@ describe("entryWrites", () => {
     const writes = entryWrites([parseEntry(liveEntry)], "/entries");
     expect([...writes.keys()]).toEqual(["/entries/karate.json"]);
     expect(JSON.parse(writes.get("/entries/karate.json") ?? "null")).toMatchObject({ id: "karate" });
+  });
+});
+
+describe("entryWrites and pinned snapshots", () => {
+  it("carries over a snapshot the committed file pins for a source the import lists without one, and nothing else", () => {
+    const root = scratch();
+    const url = "https://example.org/data/karate.txt";
+    const committed = parseEntry({ ...liveEntry, name: "An older name", sources: [{ url, retrieved: "2026-01-01", status: "live", snapshot: { timestamp: "20260101000000", url: waybackUrl("20260101000000", url) } }] });
+    writeFileSync(join(root, "karate.json"), serialise(committed));
+    const written = parseEntry(JSON.parse(entryWrites([parseEntry(liveEntry)], root).get(join(root, "karate.json")) ?? "null"));
+    expect(written.sources[0]?.snapshot).toEqual({ timestamp: "20260101000000", url: waybackUrl("20260101000000", url) });
+    expect(written.sources[0]?.retrieved).toBe(liveEntry.sources[0]?.retrieved);
+    expect(written.name).toBe(liveEntry.name);
+  });
+
+  it("does not pin a snapshot for a URL the import no longer lists", () => {
+    const root = scratch();
+    const committed = parseEntry({ ...liveEntry, sources: [{ url: "https://example.org/other", retrieved: "2026-01-01", status: "live", snapshot: { timestamp: "20260101000000", url: waybackUrl("20260101000000", "https://example.org/other") } }] });
+    writeFileSync(join(root, "karate.json"), serialise(committed));
+    const written = parseEntry(JSON.parse(entryWrites([parseEntry(liveEntry)], root).get(join(root, "karate.json")) ?? "null"));
+    expect(written.sources[0]?.snapshot).toBeUndefined();
   });
 });
 
