@@ -2335,7 +2335,10 @@
     },
     {
       "flags": [
-        "No licence statement was seen."
+        "No licence statement was seen.",
+        "half of the instances give only a weight matrix and no coordinates, so their nodes carry a prize and probability and no position",
+        "geographic coordinates are written as degrees and minutes in one number and are converted to decimal degrees",
+        "the travel budget is a distance in the instance's own units and is kept as meta, not as a time"
       ],
       "id": "vrp-rep-probabilistic-orienteering",
       "licence": {
@@ -2344,10 +2347,39 @@
       "name": "Probabilistic orienteering problem",
       "namespace": "vrp-rep",
       "outcome": {
-        "reason": "The download is a collection of TSPLIB style instance files with a prize and probability section, half of which carry no coordinates and some of which use the degrees and minutes form, and a collection is more than one or/v1 document, so no recipe reads it.",
-        "status": "not-fetchable"
+        "status": "fetchable-collection",
+        "archive": {
+          "kind": "zip",
+          "members": {
+            "extensions": [
+              ".pop"
+            ]
+          }
+        },
+        "parser": {
+          "format": "tsplib",
+          "encoding": "utf-8"
+        },
+        "map": {
+          "x": "x",
+          "y": "y",
+          "lat": "lat",
+          "lon": "lon",
+          "prize": "prize",
+          "prizeProbability": "probability"
+        },
+        "keep": [],
+        "meta": [
+          "name",
+          "type",
+          "budget",
+          "edgeWeightType",
+          "totalPrize"
+        ],
+        "expectedInstances": 264
       },
-      "surveyId": "or-3"
+      "surveyId": "or-3",
+      "downloadUrl": "https://www.vrp-rep.org/datasets/download/angelelli-et-al-2017.zip"
     },
     {
       "flags": [
@@ -2808,7 +2840,10 @@
       "description": "Clustered orienteering problem benchmark instances with node coordinates, cluster prizes and a travel budget.",
       "flags": [
         "no licence stated in the readme and the vrp-rep item page was not found",
-        "prizes belong to clusters (CONSTRAINING_SET_SECTION), not to individual nodes"
+        "prizes belong to clusters (CONSTRAINING_SET_SECTION), not to individual nodes",
+        "the prizes belong to sets of nodes that overlap, so no node has a prize of its own: each node lists the sets it is in and the set prizes are kept as meta",
+        "a set prize is never divided among its nodes",
+        "the travel budget is a distance in the instance's own units and is kept as meta, not as a time"
       ],
       "id": "vrp-rep-clustered-orienteering-problem",
       "licence": {
@@ -2817,10 +2852,39 @@
       "name": "Clustered orienteering problem instances (Angelelli et al. 2014)",
       "namespace": "vrp-rep",
       "outcome": {
-        "reason": "The download is a collection of TSPLIB style instance files whose prizes belong to overlapping clusters of nodes and not to nodes, and a collection is more than one or/v1 document, so no recipe reads it.",
-        "status": "not-fetchable"
+        "status": "fetchable-collection",
+        "archive": {
+          "kind": "zip",
+          "members": {
+            "extensions": [
+              ".cop"
+            ]
+          }
+        },
+        "parser": {
+          "format": "tsplib",
+          "encoding": "utf-8"
+        },
+        "map": {
+          "x": "x",
+          "y": "y",
+          "lat": "lat",
+          "lon": "lon"
+        },
+        "keep": [
+          "clusters"
+        ],
+        "meta": [
+          "name",
+          "type",
+          "budget",
+          "edgeWeightType",
+          "setPrizes"
+        ],
+        "expectedInstances": 924
       },
-      "surveyId": "or-4"
+      "surveyId": "or-4",
+      "downloadUrl": "https://www.vrp-rep.org/datasets/download/angelelli-et-al-2014.zip"
     },
     {
       "description": "Philadelphia properties with delinquent real estate taxes, amounts due and enforcement status.",
