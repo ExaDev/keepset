@@ -13,6 +13,9 @@ const REDIRECTS: ReadonlySet<number> = new Set(Object.values(REDIRECT_STATUS));
 /** What the downloader says it is, so a server operator can tell where the traffic comes from. */
 const USER_AGENT = "keepset (+https://github.com/Mearman/keepset)";
 
+/** What the downloader accepts: anything, as the file is the recipe's to read. Node's HTTP client sends no `Accept` header of its own, and a server that content-negotiates a download (the VRP-REP host answers 406 to a request without one) refuses it; every other HTTP client sends this, and RFC 9110 reads an absent header as the same. */
+const ACCEPT = "*/*";
+
 /** How long a connection may send nothing, at any point of a download, before it is given up as dead. A healthy server of the open data portals recipes read sends something every few seconds even while it prepares a large page, and a socket that has gone silent otherwise holds the download for ever, as one did in the middle of a table of millions of rows. */
 export const STALL_MILLISECONDS = 120_000;
 
@@ -54,7 +57,7 @@ async function get(url: URL, signal: AbortSignal | undefined, stall: number): Pr
     let answered: IncomingMessage | undefined;
     const request = send(
       url,
-      { method: "GET", headers: { "user-agent": USER_AGENT }, ...(signal === undefined ? {} : { signal }) },
+      { method: "GET", headers: { accept: ACCEPT, "user-agent": USER_AGENT }, ...(signal === undefined ? {} : { signal }) },
       (response) => {
         answered = response;
         resolve(response);
