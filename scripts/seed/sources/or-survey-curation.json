@@ -4,8 +4,10 @@
       "description": "Benchmark instances for the team orienteering problem, with node coordinates and scores, from the KU Leuven orienteering page.",
       "downloadUrl": "https://www.mech.kuleuven.be/en/mim/op/instances/ChaoTOP4",
       "flags": [
-        "The survey URL is a landing page; the verified download is the extensionless zip for the Chao TOP4 set only, and the other sets were not checked.",
-        "The page states no licence."
+        "The survey URL is the extensionless zip download for the Chao TOP4 set.",
+        "The page states no licence.",
+        "only the instances of this archive are read: the host serves further sets of the same format as separate archives",
+        "the file has no node ids, so a node's id is its row number, and the first and last rows are where the paths start and end"
       ],
       "id": "ku-leuven-team-orienteering-chao-instances",
       "licence": {
@@ -14,8 +16,33 @@
       "name": "Team Orienteering Problem instances (Chao and Tsiligirides sets)",
       "namespace": "ku-leuven",
       "outcome": {
-        "reason": "The download is a collection of 60 text instance files of one 100 node point set under different budgets (planar coordinates and a prize, with no time quantities), and a collection is more than one or/v1 document, so no recipe reads it.",
-        "status": "not-fetchable"
+        "status": "fetchable-collection",
+        "archive": {
+          "kind": "zip",
+          "members": {
+            "extensions": [
+              ".txt"
+            ]
+          }
+        },
+        "parser": {
+          "format": "top",
+          "encoding": "utf-8"
+        },
+        "map": {
+          "x": "x",
+          "y": "y",
+          "prize": "score"
+        },
+        "keep": [
+          "role"
+        ],
+        "meta": [
+          "points",
+          "paths",
+          "budget"
+        ],
+        "expectedInstances": 60
       },
       "surveyId": "or-0"
     },
@@ -23,8 +50,10 @@
       "description": "Benchmark instances for the orienteering problem with time windows, with coordinates, service durations, scores and time windows.",
       "downloadUrl": "https://www.mech.kuleuven.be/en/mim/op/instances/righiniTOPTW1",
       "flags": [
-        "The survey URL is a landing page; only the righiniTOPTW1 zip was fetched, and the other sets on the page were not checked.",
-        "The page states no licence."
+        "The survey URL is the zip download for the righiniTOPTW1 set.",
+        "The page states no licence.",
+        "only the instances of this archive are read: the host serves further sets of the same format as separate archives",
+        "time quantities are in the unit of the coordinate grid, which the host does not name"
       ],
       "id": "ku-leuven-toptw-righini-instances",
       "licence": {
@@ -33,8 +62,36 @@
       "name": "Team Orienteering Problem with Time Windows instances (Righini)",
       "namespace": "ku-leuven",
       "outcome": {
-        "reason": "The download is a collection of Solomon style time window instance files (planar coordinates, service durations, prizes and windows in abstract units, not seconds), and a collection is more than one or/v1 document, so no recipe reads it.",
-        "status": "not-fetchable"
+        "status": "fetchable-collection",
+        "archive": {
+          "kind": "zip",
+          "members": {
+            "extensions": [
+              ".txt"
+            ]
+          }
+        },
+        "parser": {
+          "format": "toptw",
+          "encoding": "utf-8"
+        },
+        "map": {
+          "x": "x",
+          "y": "y",
+          "prize": "profit",
+          "deadline": "close"
+        },
+        "keep": [
+          "service",
+          "open"
+        ],
+        "meta": [
+          "paths",
+          "customers",
+          "capacity"
+        ],
+        "timeUnit": "abstract units",
+        "expectedInstances": 29
       },
       "surveyId": "or-1"
     },
