@@ -100,7 +100,9 @@
       "downloadUrl": "https://www.vrp-rep.org/datasets/download/cabrera-et-al-2021.zip",
       "flags": [
         "The licence section of the readme only asks users to email the authors describing their use of the instances, so no licence is recorded.",
-        "The zip holds 60 comma separated files with a .txt extension."
+        "the zip holds 60 comma separated files with a .txt extension and a readme, so the members are selected by name",
+        "ids run across the files and do not restart in each, and a few rows sit at latitude 0 and longitude 0, which the source gives and the entry keeps",
+        "service times are written in minutes and scaled to seconds"
       ],
       "id": "vrp-rep-park-and-loop-routing-cabrera-2021",
       "licence": {
@@ -109,8 +111,44 @@
       "name": "Park-and-loop routing instances (Cabrera et al., 2021)",
       "namespace": "vrp-rep",
       "outcome": {
-        "reason": "The download is a collection of separate coordinate files plus a readme, and a collection is more than one or/v1 document, so no recipe reads it.",
-        "status": "not-fetchable"
+        "status": "fetchable-table-collection",
+        "archive": {
+          "kind": "zip",
+          "members": {
+            "pattern": "Coordinates_\\d+\\.txt"
+          }
+        },
+        "encoding": "utf-8",
+        "delimiter": "comma",
+        "skipLines": 0,
+        "idColumn": "ID",
+        "numericColumns": [
+          {
+            "column": "Longitude",
+            "factor": 1
+          },
+          {
+            "column": "Latitude",
+            "factor": 1
+          },
+          {
+            "column": "ServiceTime_min",
+            "factor": 60
+          }
+        ],
+        "header": [
+          "ID",
+          "Longitude",
+          "Latitude",
+          "ServiceTime (min)"
+        ],
+        "map": {
+          "lon": "Longitude",
+          "lat": "Latitude",
+          "duration": "ServiceTime_min"
+        },
+        "timeUnit": "seconds",
+        "expectedInstances": 60
       },
       "surveyId": "or-10"
     },
