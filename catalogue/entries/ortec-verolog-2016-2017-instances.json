@@ -21,7 +21,7 @@
     "surveyId": "or-26"
   },
   "recipe": {
-    "reason": "The instances are keyword format text files on a Wayback Machine snapshot, a collection of separate files, and a collection is more than one or/v1 document, so no recipe reads it.",
+    "reason": "The instances are keyword format text files that the Wayback Machine serves one at a time, as the archive zips of each set were not captured, and a recipe reads one download, so no recipe reaches the collection.",
     "status": "not-fetchable"
   },
   "sources": [

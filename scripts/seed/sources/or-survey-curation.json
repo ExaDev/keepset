@@ -2017,7 +2017,7 @@
       "name": "HHCRSP curated instances (Kummer, 2021)",
       "namespace": "github-afkummer",
       "outcome": {
-        "reason": "The instances are keyword format text files of matrices (a collection of many, indexed by dataset.csv), and a collection is more than one or/v1 document, so no recipe reads it.",
+        "reason": "The instances are keyword format text files with node positions, time windows, service durations and a travel time matrix, but the repository holds them as a very large number of separate files in size directories and publishes no archive of the curated selection, so a recipe has no single download to read; the repository's own archive holds every instance and is several gigabytes.",
         "status": "not-fetchable"
       },
       "surveyId": "or-17"
@@ -2136,7 +2136,10 @@
     {
       "flags": [
         "The XML carries coordinates and skill resources but no time windows or service times.",
-        "No licence statement was seen."
+        "No licence statement was seen.",
+        "the instances have coordinates and skills but no times, so the nodes carry no duration or window",
+        "the fleet's costs and tool and spare part stocks have no place in an or/v1 node and are not read",
+        "a node's type is kept as the file writes it; the file does not say what the types mean"
       ],
       "id": "vrp-rep-technician-routing-pillac",
       "licence": {
@@ -2145,10 +2148,37 @@
       "name": "Technician routing and scheduling problem (Pillac et al.)",
       "namespace": "vrp-rep",
       "outcome": {
-        "reason": "The download is a collection of VRP-REP XML instance files holding coordinates and skills but no times, and a collection is more than one or/v1 document, so no recipe reads it.",
-        "status": "not-fetchable"
+        "status": "fetchable-collection",
+        "archive": {
+          "kind": "zip",
+          "members": {
+            "extensions": [
+              ".xml"
+            ]
+          }
+        },
+        "parser": {
+          "format": "vrp-rep",
+          "encoding": "utf-8"
+        },
+        "map": {
+          "x": "x",
+          "y": "y",
+          "skill": "skill"
+        },
+        "keep": [
+          "type",
+          "skills",
+          "resources"
+        ],
+        "meta": [
+          "dataset",
+          "name"
+        ],
+        "expectedInstances": 57
       },
-      "surveyId": "or-21"
+      "surveyId": "or-21",
+      "downloadUrl": "https://www.vrp-rep.org/datasets/download/pillac-et-al-2013.zip"
     },
     {
       "flags": [
@@ -2188,7 +2218,11 @@
     },
     {
       "flags": [
-        "A third-party student repository mirroring ORTEC instances; no licence statement."
+        "A third-party student repository mirroring ORTEC instances; no licence statement.",
+        "the mirror holds each instance as a .txt and again as a .csv, and a solution file beside the instances, so the instances are selected by name",
+        "the instances come in three whitespace layouts (padded spaces, tabs and semicolons) that the parser reads alike",
+        "requests have a window of delivery days and no time of day or service duration, so the nodes carry the days as fromDay and toDay and no duration or deadline",
+        "the trucks, machines and technicians are not nodes and are not read beyond the technician count"
       ],
       "id": "github-bascoding-verolog-2019",
       "licence": {
@@ -2197,10 +2231,47 @@
       "name": "VeRoLog 2019 machine delivery and installation instances",
       "namespace": "github-bascoding",
       "outcome": {
-        "reason": "The instances are keyword format text files in a collection mirrored by a student without a licence statement, and a collection is more than one or/v1 document, so no recipe reads it.",
-        "status": "not-fetchable"
+        "status": "fetchable-collection",
+        "archive": {
+          "kind": "zip",
+          "members": {
+            "pattern": "VeRoLog-2019-main/All Instances/VSC2019_(?:EX\\d\\d|ORTEC_early_\\d\\d)\\.txt"
+          }
+        },
+        "parser": {
+          "format": "verolog-2019",
+          "encoding": "utf-8"
+        },
+        "map": {
+          "x": "x",
+          "y": "y",
+          "skill": "machine"
+        },
+        "keep": [
+          "kind",
+          "location",
+          "fromDay",
+          "toDay",
+          "amount"
+        ],
+        "meta": [
+          "dataset",
+          "name",
+          "days",
+          "truckCapacity",
+          "truckMaxDistance",
+          "truckDistanceCost",
+          "truckDayCost",
+          "truckCost",
+          "technicianDistanceCost",
+          "technicianDayCost",
+          "technicianCost",
+          "technicians"
+        ],
+        "expectedInstances": 27
       },
-      "surveyId": "or-24"
+      "surveyId": "or-24",
+      "downloadUrl": "https://codeload.github.com/BasCoding/VeRoLog-2019/zip/refs/heads/main"
     },
     {
       "flags": [
@@ -2214,7 +2285,7 @@
       "name": "Technician dispatch data (Mathlouthi, Gendreau and Potvin)",
       "namespace": "zenodo",
       "outcome": {
-        "reason": "The Zenodo files are a custom sectioned text format (technicians, tasks and a travel time matrix of millions of lines) and not a table, and two of them are collections of instance files.",
+        "reason": "The instances are a custom sectioned text format whose tasks have no positions, and the collection is hundreds of megabytes compressed, almost all of it a pairwise travel time matrix that or/v1 has no arcs to hold, so reading it would hold gigabytes in memory to keep a few fields per task.",
         "status": "not-fetchable"
       },
       "surveyId": "or-25"
@@ -2231,7 +2302,7 @@
       "name": "VeRoLog 2016-2017 scarce-equipment pickup and delivery instances",
       "namespace": "ortec",
       "outcome": {
-        "reason": "The instances are keyword format text files on a Wayback Machine snapshot, a collection of separate files, and a collection is more than one or/v1 document, so no recipe reads it.",
+        "reason": "The instances are keyword format text files that the Wayback Machine serves one at a time, as the archive zips of each set were not captured, and a recipe reads one download, so no recipe reaches the collection.",
         "status": "not-fetchable"
       },
       "surveyId": "or-26"

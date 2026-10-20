@@ -2,13 +2,74 @@
   "aliases": [
     "technician-routing-pillac"
   ],
-  "category": "or/v1",
+  "category": "or-set/v1",
   "citations": [],
   "crosswalk": {
-    "file": "crosswalks/or-v1/nodes.json"
+    "oneWay": [],
+    "rules": [
+      {
+        "from": "meta",
+        "op": "move",
+        "to": "meta"
+      },
+      {
+        "from": "members[].id",
+        "op": "move",
+        "to": "instances[].id"
+      },
+      {
+        "from": "members[].meta.dataset",
+        "op": "move",
+        "to": "instances[].meta.dataset"
+      },
+      {
+        "from": "members[].meta.name",
+        "op": "move",
+        "to": "instances[].meta.name"
+      },
+      {
+        "from": "members[].nodes[].id",
+        "op": "move",
+        "to": "instances[].nodes[].id"
+      },
+      {
+        "from": "members[].nodes[].skill",
+        "op": "move",
+        "to": "instances[].nodes[].skill"
+      },
+      {
+        "from": "members[].nodes[].x",
+        "op": "move",
+        "to": "instances[].nodes[].x"
+      },
+      {
+        "from": "members[].nodes[].y",
+        "op": "move",
+        "to": "instances[].nodes[].y"
+      },
+      {
+        "from": "members[].nodes[].type",
+        "op": "move",
+        "to": "instances[].nodes[].type"
+      },
+      {
+        "from": "members[].nodes[].skills",
+        "op": "move",
+        "to": "instances[].nodes[].skills"
+      },
+      {
+        "from": "members[].nodes[].resources",
+        "op": "move",
+        "to": "instances[].nodes[].resources"
+      }
+    ],
+    "source": "vrp-rep",
+    "target": "or-set/v1"
   },
   "domain": "Technician and home-care routing",
-  "expectedCounts": {},
+  "expectedCounts": {
+    "instances": 57
+  },
   "id": "vrp-rep-technician-routing-pillac",
   "licence": {
     "kind": "unrecorded"
@@ -21,14 +82,31 @@
     "surveyId": "or-21"
   },
   "recipe": {
-    "reason": "The download is a collection of VRP-REP XML instance files holding coordinates and skills but no times, and a collection is more than one or/v1 document, so no recipe reads it.",
-    "status": "not-fetchable"
+    "archive": {
+      "kind": "zip",
+      "members": {
+        "extensions": [
+          ".xml"
+        ]
+      }
+    },
+    "parser": {
+      "encoding": "utf-8",
+      "format": "vrp-rep"
+    },
+    "source": 1,
+    "status": "fetchable"
   },
   "sources": [
     {
       "retrieved": "2026-10-19",
       "status": "live",
       "url": "http://www.vrp-rep.org/datasets/download/pillac-et-al-2013.zip"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://www.vrp-rep.org/datasets/download/pillac-et-al-2013.zip"
     }
   ],
   "tags": [
