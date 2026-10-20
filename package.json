@@ -87,6 +87,7 @@
     "url": "git+https://github.com/Mearman/keepset.git"
   },
   "scripts": {
+    "archive:check": "tsx scripts/archive-sources.ts --check",
     "build": "pnpm run catalogue && tsdown && tsx scripts/generate-json-schema.ts",
     "catalogue": "tsx scripts/build-catalogue.ts",
     "lint": "eslint . --fix --cache --max-warnings 0",
