@@ -132,7 +132,7 @@ export type TableCollectionOutcome = z.infer<typeof TableCollectionOutcomeSchema
 /** An outcome with a recipe that reads a table: one file, a paged ArcGIS layer, or every table file of an archive. */
 export type TableOutcome = FetchableOutcome | ArcgisOutcome | TableCollectionOutcome;
 
-/** A dataset whose download is made of instance files read by an instance file parser: either one file (`archive` selects it with `member`, or the download is the file itself, and the entry is an or/v1 document), or every file of an archive that a `members` selector matches (an or-set/v1 collection, one instance per file). `map` says which of the parser's node columns fill the or/v1 node's fields, `keep` which pass through under their own names, and a node column in neither is dropped by a one-way rule, so what an entry leaves out is written down. A collection's `meta` lists the file header values each instance's meta carries (at least one, since an instance has a meta record); a document's header values are all carried in the entry's meta, so its `meta` is empty. `timeUnit` says what the source's time quantities are measured in, since the or/v1 `duration` is seconds, and is left out for a source that has none. */
+/** A dataset whose download is made of instance files read by an instance file parser: either one file (`archive` selects it with `member`, or the download is the file itself, and the entry is an or/v1 document), or every file of an archive that a `members` selector matches (an or-set/v1 collection, one instance per file). `map` says which of the parser's node columns fill the or/v1 node's fields, `keep` which pass through under their own names, and a node column in neither is dropped by a one-way rule, so what an entry leaves out is written down. The file's header values are all carried in the document's meta (for a collection, in each instance's). `timeUnit` says what the source's time quantities are measured in, since the or/v1 `duration` is seconds, and is left out for a source that has none. */
 export const InstanceFilesOutcomeSchema = z
   .object({
     status: z.literal("fetchable-instance-files"),
@@ -140,7 +140,6 @@ export const InstanceFilesOutcomeSchema = z
     parser: ParserSchema.refine(isInstanceParser, { message: "must be an instance file parser" }),
     map: FieldMapSchema,
     keep: z.array(ColumnNameSchema),
-    meta: z.array(z.string().min(1)),
     timeUnit: z.enum(["seconds", "abstract units"]).optional(),
     expectedInstances: z.int().min(0).optional(),
     expectedNodes: z.int().min(0).optional(),
