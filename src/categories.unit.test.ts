@@ -30,6 +30,14 @@ describe("the category registry", () => {
     expect(() => getTarget("graph/v2")).toThrow(/known categories are graph\/v1, tasks\/v1/);
   });
 
+  it("holds the removed ids out of the registry: the registry is graph/v1 and tasks/v1, and or/v1 and or-set/v1 are unknown", () => {
+    expect(listCategories().map((category) => category.id)).toEqual(["graph/v1", "tasks/v1"]);
+    for (const removed of ["or/v1", "or-set/v1"]) {
+      expect(() => getTarget(removed)).toThrow(UnknownCategoryError);
+      expect(() => getCategory(removed)).toThrow(/known categories are graph\/v1, tasks\/v1$/);
+    }
+  });
+
   it("does not resolve names inherited from Object.prototype", () => {
     expect(() => getTarget("constructor")).toThrow(UnknownCategoryError);
     expect(() => getTarget("__proto__")).toThrow(UnknownCategoryError);
