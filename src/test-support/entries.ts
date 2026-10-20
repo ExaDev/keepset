@@ -205,11 +205,21 @@ export const ckanEntry = {
   recipe: { ...socrataEntry.recipe, paging: { kind: "ckan-datastore", pageSize: 2 }, parser: { ...socrataEntry.recipe.parser, idColumn: "id", columns: ["status", "borough"] } },
 };
 
+/** A fetchable or/v1 entry whose source is an OpenFEMA entity read two rows at a time, with a `$select` in its source URL. */
+export const openFemaEntry = {
+  ...socrataEntry,
+  id: "entity-claims",
+  name: "Entity claims",
+  sources: [{ url: "https://www.fema.gov/api/open/v3/Claims?$select=id,state,county", retrieved: "2026-10-19", status: "live" }],
+  recipe: { ...socrataEntry.recipe, paging: { kind: "openfema", pageSize: 2 }, parser: { ...socrataEntry.recipe.parser, idColumn: "id", columns: ["state", "county"] } },
+  crosswalk: { ...socrataEntry.crosswalk, rules: [{ op: "move", from: "meta", to: "meta" }, { op: "move", from: "nodes[].id", to: "nodes[].id" }, { op: "move", from: "nodes[].state", to: "nodes[].status" }, { op: "move", from: "nodes[].county", to: "nodes[].territory" }] },
+};
+
 /** One of each entry shape, for round-trip and schema-agreement tests. */
 export const representativeEntries = [liveEntry, deadEntry, notFetchableEntry];
 
 /** Every entry shape, one entry of each category as well: for the tests that check the entry schema, its generated JSON Schema and serialisation, which the catalogue fixtures (graph entries only) do not need to carry. */
-export const everyEntryShape = [...representativeEntries, orEntry, arcgisEntry, socrataEntry, ckanEntry];
+export const everyEntryShape = [...representativeEntries, orEntry, arcgisEntry, socrataEntry, ckanEntry, openFemaEntry];
 
 /** A catalogue manifest for fixture catalogues. */
 export const fixtureManifest = {

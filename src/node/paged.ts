@@ -265,6 +265,47 @@ async function downloadCkanDatastore(dump: string, pageSize: number, port: Fetch
   return downloadPages({ resource: dump, pageUrl: (offset) => `${dump}?format=csv&limit=${String(pageSize)}&offset=${String(offset)}`, pageSize, count: count.data.result.total, port, signal });
 }
 
+const OpenFemaCountSchema = z.object({ metadata: z.object({ count: z.int().min(0) }) });
+
+/**
+ * Downloads a whole OpenFEMA entity, or the rows of it the source URL selects, as one CSV: the row count is read from the API's own metadata, then pages of `pageSize` rows in the order of the entity's id, each checked to hold the rows it should, and joined under the first page's header.
+ * @param entity - The entity's URL with any `$select` or `$filter` but no `$top`, `$skip`, `$orderby` or `$format`, such as `https://www.fema.gov/api/open/v3/NfipClaims?$select=id,state`.
+ * @param pageSize - How many rows a page holds.
+ * @param port - The network port.
+ * @param signal - Aborts the download.
+ * @returns The bytes of one CSV, which is what the parser reads and what the provenance hashes.
+ * @throws KeepsetError when the source URL sets a paging parameter, the entity does not report a count, or a page is not what it should be.
+ */
+async function downloadOpenFema(entity: string, pageSize: number, port: FetchPort, signal: AbortSignal | undefined): Promise<Uint8Array> {
+  const base = new URL(entity);
+  for (const name of ["$top", "$skip", "$orderby", "$format", "$inlinecount"]) {
+    if (base.searchParams.has(name)) {
+      throw new KeepsetError(`${entity} sets ${name}, which the download sets itself`);
+    }
+  }
+  const withParameters = (parameters: Readonly<Record<string, string>>): string => {
+    const url = new URL(entity);
+    for (const [name, value] of Object.entries(parameters)) {
+      url.searchParams.set(name, value);
+    }
+
+    return url.href;
+  };
+  const countUrl = withParameters({ $inlinecount: "allpages", $top: "1" });
+  let body: unknown;
+  try {
+    body = JSON.parse(new TextDecoder("utf-8").decode(await withAttempts(async () => getBytes(port, countUrl, signal), signal)));
+  } catch (error) {
+    throw new KeepsetError(`${countUrl} did not answer JSON (${error instanceof Error ? error.message : String(error)})`);
+  }
+  const count = OpenFemaCountSchema.safeParse(body);
+  if (!count.success) {
+    throw new KeepsetError(`${entity} did not report a row count`);
+  }
+
+  return downloadPages({ resource: entity, pageUrl: (offset) => withParameters({ $format: "csv", $orderby: "id", $top: String(pageSize), $skip: String(offset) }), pageSize, count: count.data.metadata.count, port, signal });
+}
+
 /**
  * Downloads a paged source as the one file its pages make, in the way its recipe's paging says.
  * @param url - The source's URL.
@@ -279,5 +320,9 @@ export async function downloadPaged(url: string, paging: Readonly<Paging>, port:
     return downloadArcgisLayer(url, paging.orderBy, port, signal);
   }
 
-  return paging.kind === "socrata-resource" ? downloadSocrataResource(url, paging.pageSize, port, signal) : downloadCkanDatastore(url, paging.pageSize, port, signal);
+  if (paging.kind === "socrata-resource") {
+    return downloadSocrataResource(url, paging.pageSize, port, signal);
+  }
+
+  return paging.kind === "ckan-datastore" ? downloadCkanDatastore(url, paging.pageSize, port, signal) : downloadOpenFema(url, paging.pageSize, port, signal);
 }

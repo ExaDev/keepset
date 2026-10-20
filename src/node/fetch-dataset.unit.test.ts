@@ -3,7 +3,7 @@ import { describe, expect, it } from "vitest";
 import { createCatalogue, type Dataset } from "../catalogue";
 import { DatasetNotFoundError, KeepsetError, RecipeError, type RecipeStep } from "../errors";
 import { gzip, tar, zip } from "../test-support/archives";
-import { arcgisEntry, ckanEntry, deadEntry, fixtureIndex, liveEntry, notFetchableEntry, orEntry, socrataEntry } from "../test-support/entries";
+import { arcgisEntry, ckanEntry, deadEntry, fixtureIndex, liveEntry, notFetchableEntry, openFemaEntry, orEntry, socrataEntry } from "../test-support/entries";
 import { downloadUrl, fetchDataset, fetchEntry, roundTripDataset, roundTripEntry, type FetchPort } from "./fetch-dataset";
 
 const karateText = "% karate excerpt\n1 2\n2 3\n3 1\n";
@@ -414,5 +414,55 @@ describe("an or/v1 entry whose source is a CKAN datastore dump read in pages", (
     const wrongTotal = portalServing(rows, JSON.stringify({ success: true, result: { total: 5 } }));
     expect((await failure(fetchEntry(dataset, { fetch: wrongTotal.fetch, now }))).message).toMatch(/gave 1 rows at offset 2 where 2 of its 5 were due/);
     expect((await failure(fetchEntry(dataset, { fetch: portalServing(rows, "not json").fetch, now }))).message).toMatch(/did not answer JSON/);
+  });
+});
+
+describe("an or/v1 entry whose source is an OpenFEMA entity read in pages", () => {
+  const header = "id,state,county\n";
+  const rows = ["1,WA,King\n", "2,OR,Lane\n", "3,WA,Pierce\n"];
+  const dataset = datasetWith(openFemaEntry);
+
+  /** A stand-in API that answers a one-row JSON request with the count in its metadata, and CSV pages by `$skip` and `$top`. */
+  function apiServing(all: readonly string[], count: string = JSON.stringify({ metadata: { count: all.length } })): { fetch: FetchPort; requested: string[] } {
+    const requested: string[] = [];
+    const fetch: FetchPort = async (url) => {
+      requested.push(url);
+      if (url.includes("inlinecount")) {
+        return Promise.resolve(new Response(count));
+      }
+      const skip = Number(/skip=(\d+)/.exec(url)?.[1]);
+      const top = Number(/top=(\d+)/.exec(url)?.[1]);
+
+      return Promise.resolve(new Response(header + all.slice(skip, skip + top).join("")));
+    };
+
+    return { fetch, requested };
+  }
+
+  it("reads the count from the API's metadata, then pages in order of the id with the source's own select kept, and joins them", async () => {
+    const served = apiServing(rows);
+    const fetched = await fetchEntry(dataset, { fetch: served.fetch, now });
+    expect(fetched.data).toEqual({
+      meta: { id: "entity-claims", name: "Entity claims" },
+      nodes: [
+        { id: "1", status: "WA", territory: "King" },
+        { id: "2", status: "OR", territory: "Lane" },
+        { id: "3", status: "WA", territory: "Pierce" },
+      ],
+    });
+    expect(served.requested[0]).toContain("%24select=id%2Cstate%2Ccounty");
+    expect(served.requested[0]).toContain("%24inlinecount=allpages");
+    const first = new URL(served.requested[1] ?? "").searchParams;
+    expect([first.get("$select"), first.get("$format"), first.get("$orderby"), first.get("$top"), first.get("$skip")]).toEqual(["id,state,county", "csv", "id", "2", "0"]);
+    expect(new URL(served.requested[2] ?? "").searchParams.get("$skip")).toBe("2");
+    expect(served.requested).toHaveLength(FEATURES);
+  });
+
+  it("fails at the download step when the count is missing, a page is short, or the source URL sets a paging parameter", async () => {
+    expect((await failure(fetchEntry(dataset, { fetch: apiServing(rows, "{}").fetch, now }))).message).toMatch(/did not report a row count/);
+    const wrongTotal = apiServing(rows, JSON.stringify({ metadata: { count: 5 } }));
+    expect((await failure(fetchEntry(dataset, { fetch: wrongTotal.fetch, now }))).message).toMatch(/gave 1 rows at offset 2 where 2 of its 5 were due/);
+    const setsTop = datasetWith({ ...openFemaEntry, sources: [{ url: "https://www.fema.gov/api/open/v3/Claims?$top=5", retrieved: "2026-10-19", status: "live" }] });
+    expect((await failure(fetchEntry(setsTop, { fetch: apiServing(rows).fetch, now }))).message).toMatch(/sets \$top, which the download sets itself/);
   });
 });
