@@ -77,6 +77,20 @@ describe("the seed import's classification", () => {
     expect(entry("oag-eng").sources.every((source) => source.url.startsWith("https://"))).toBe(true);
   });
 
+  it("reads a UCINet download's first matrix with the DL parser, and gives a download that is not DL its reason", () => {
+    expect(entry("ucinet-zachary").recipe).toEqual({ status: "fetchable", source: 0, archive: { kind: "none" }, parser: { format: "ucinet-dl", encoding: "utf-8", matrix: 1 } });
+    expect(outcome("ucinet-zachary").flags).toContain("UCINet DL: the recipe reads the file's first matrix, the one the pipeline reads");
+    expect(entry("ucinet-knokbur").recipe).toEqual({
+      status: "not-fetchable",
+      reason: "no download is in a form keepset reads yet (ucinet: the file is not a DL file: its first line says it has to be converted into DL format, and its matrices sit under comma-separated headers and end with DOS end-of-file marks)",
+    });
+  });
+
+  it("reads a GD contest problem from the zip inside the contest bundle", () => {
+    expect(entry("pajek-gd04-prob1").recipe).toMatchObject({ status: "fetchable", archive: { kind: "zip", member: { extensions: [".zip"] }, inner: { kind: "zip", member: { path: "challenge/prob1.gd4" } } }, parser: { format: "gd-contest", encoding: "utf-8" } });
+    expect(outcome("pajek-gd04-prob1").flags).toContain("GD contest bundle: the problem is read from the bundle's one inner .zip member, which the source catalogue does not record");
+  });
+
   it("marks an entry not fetchable when no download has a declarative form, saying why", () => {
     expect(outcome("lesmis")).toMatchObject({ outcome: "converted-with-flags", recipe: "not-fetchable" });
     expect(entry("lesmis").recipe).toEqual({ status: "not-fetchable", reason: "no download is in a form keepset reads yet (konect-tarbz2: bzip2 compression has no keepset unpacker yet)" });

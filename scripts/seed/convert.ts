@@ -28,6 +28,9 @@ export const PIPELINE_PARSER_OVERRIDES: ReadonlyMap<string, { readonly delimiter
   ["nell-995", { skipLines: 1 }],
 ]);
 
+/** Downloads, by original URL, whose bytes are not in the format the catalogue records, found by reading them: the import gives each the reason in place of a recipe that would fail. */
+export const MISRECORDED_DOWNLOADS: ReadonlyMap<string, string> = new Map([["http://vlado.fmf.uni-lj.si/pub/networks/data/UciNet/knokbur.dat", "the file is not a DL file: its first line says it has to be converted into DL format, and its matrices sit under comma-separated headers and end with DOS end-of-file marks"]]);
+
 /** Datasets the pipeline removed by judgement rather than recording in its catalogue (the comment beside `HETEROGENEOUS_DATASETS` in the same file): named in the report so their absence is visible. */
 export const JUDGEMENT_CALL_REMOVALS: readonly { readonly id: string; readonly reason: string }[] = [
   { id: "yelp-hin", reason: "removed by the pipeline: no automatable download source" },
@@ -163,10 +166,10 @@ function archiveKindOf(url: string): Exclude<Archive["kind"], "xlsx"> | { readon
   return "none";
 }
 
-/** The keepset parser each catalogue format reads with, by the pipeline's own dispatch (`_fetch_content_for_format`): formats whose pipeline parser is the generic edge list, GML, Pajek or Matrix Market reader. */
 /** The parser formats that read a graph, which are the ones the graph import maps a source's format to. */
 type GraphFormat = Exclude<Parser["format"], "csv-table" | "geojson" | InstanceFormat>;
 
+/** The keepset parser each catalogue format reads with, by the pipeline's own dispatch (the format branches of experiments/pipeline/scripts/download_benchmark_graph.py in Mearman/Thesis): formats whose pipeline parser is the generic edge list, GML, Pajek, Matrix Market, UCINet DL or GD contest reader. */
 const PARSERS: ReadonlyMap<string, GraphFormat | "linqs"> = new Map([
   ["matrix-market", "matrix-market"],
   ["gml", "gml"],
@@ -179,6 +182,10 @@ const PARSERS: ReadonlyMap<string, GraphFormat | "linqs"> = new Map([
   ["snap", "edge-list"],
   ["gz", "edge-list"],
   ["linqs", "linqs"],
+  ["ucinet", "ucinet-dl"],
+  ["ucinet-dl", "ucinet-dl"],
+  ["dl", "ucinet-dl"],
+  ["gd-contest", "gd-contest"],
 ]);
 
 /** The file extensions each parser's member carries, for an archive whose member the catalogue does not name. */
@@ -188,6 +195,8 @@ const MEMBER_EXTENSIONS: Readonly<Record<GraphFormat | "linqs", readonly string[
   pajek: [".net", ".paj"],
   "edge-list": [".txt"],
   linqs: [".cites"],
+  "ucinet-dl": [".dat", ".dl"],
+  "gd-contest": [".gd4"],
 };
 
 /** Inner-path extensions the pipeline resolves a `various` download by (`get_parser_format`); anything else is its default edge list. */
@@ -220,6 +229,10 @@ function recipeFor(download: Download, datasetId: string): Chosen | { readonly u
     return kind;
   }
   const { format } = download;
+  const misrecorded = MISRECORDED_DOWNLOADS.get(original);
+  if (misrecorded !== undefined) {
+    return { unsupported: misrecorded };
+  }
   if (format === undefined) {
     return { unsupported: "the download records no format" };
   }
@@ -253,6 +266,9 @@ function recipeFor(download: Download, datasetId: string): Chosen | { readonly u
     if (override?.skipLines !== undefined) {
       flags.push(`pipeline parser override: skip ${String(override.skipLines)} header line`);
     }
+  } else if (mapped === "ucinet-dl") {
+    parser = { format: mapped, encoding: "utf-8", matrix: 1 };
+    flags.push("UCINet DL: the recipe reads the file's first matrix, the one the pipeline reads");
   } else if (mapped === "pajek") {
     // Pajek vertex numbers and keywords are ASCII, and labels (where non-ASCII text appears, often in a Windows code page) are not carried, so latin1, which decodes any byte, reads every Pajek file to the same graph.
     parser = { format: mapped, encoding: "latin1" };
@@ -265,6 +281,12 @@ function recipeFor(download: Download, datasetId: string): Chosen | { readonly u
   }
   // SuiteSparse serves each matrix as /MM/<group>/<name>.tar.gz holding <name>/<name>.mtx.
   const suiteSparse = new URL(original).hostname === "sparse.tamu.edu" ? /^\/MM\/[^/]+\/([^/]+)\.tar\.gz$/.exec(new URL(original).pathname) : null;
+  if (mapped === "gd-contest" && kind === "zip" && download.innerPath !== undefined) {
+    // The GD 2004 contest bundle ships its problems in a zip inside the zip (GD04/challenge.zip), and the catalogue's inner path is the problem's path inside that inner zip.
+    flags.push("GD contest bundle: the problem is read from the bundle's one inner .zip member, which the source catalogue does not record");
+
+    return { url: download.url, archive: { kind, member: { extensions: [".zip"] }, inner: { kind: "zip", member: { path: download.innerPath } } }, parser, flags };
+  }
   if (download.innerPath !== undefined) {
     return { url: download.url, archive: { kind, member: { path: download.innerPath } }, parser, flags };
   }

@@ -39,7 +39,7 @@
     "weighted": false
   },
   "recipe": {
-    "reason": "no download is in a form keepset reads yet (ucinet: format ucinet has a pipeline-specific parser with no declarative keepset form yet)",
+    "reason": "no download is in a form keepset reads yet (ucinet: the file is not a DL file: its first line says it has to be converted into DL format, and its matrices sit under comma-separated headers and end with DOS end-of-file marks)",
     "status": "not-fetchable"
   },
   "sources": [

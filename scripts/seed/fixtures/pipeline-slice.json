@@ -1065,6 +1065,48 @@
         }
       ]
     },
+    "pajek-gd04-prob1": {
+      "citation": {
+        "authors": [
+          "S. Kobourov"
+        ],
+        "title": "GD 2004 Graph Drawing Contest",
+        "type": "article",
+        "year": 2004
+      },
+      "description": "Graph Drawing 2004 crossing minimisation contest, Problem 1. 69 nodes, 151 edges.",
+      "edgeCount": 151,
+      "id": "pajek-gd04-prob1",
+      "name": "GD04 Contest Problem 1",
+      "nodeCount": 69,
+      "properties": {
+        "density": 0.06436487638533675,
+        "edge_type_count": 1,
+        "has_self_loops": false,
+        "is_connected": true,
+        "is_cyclic": true,
+        "is_directed": false,
+        "is_heterogeneous": false,
+        "is_multigraph": false,
+        "is_weighted": false,
+        "n_components": 1,
+        "node_type_count": 1
+      },
+      "rawBytes": 10773,
+      "retrieved": "2026-02-16",
+      "sources": [
+        {
+          "downloads": [
+            {
+              "format": "gd-contest",
+              "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/GD/gd04/gd04.zip",
+              "innerPath": "challenge/prob1.gd4"
+            }
+          ],
+          "source": "pajek"
+        }
+      ]
+    },
     "pajek-journals": {
       "citation": {
         "authors": [
@@ -1148,6 +1190,93 @@
         {
           "format": "json-cache",
           "urls": []
+        }
+      ]
+    },
+    "ucinet-knokbur": {
+      "citation": {
+        "authors": [
+          "D. Knoke",
+          "J. Kuklinski"
+        ],
+        "publisher": "Sage",
+        "title": "Network analysis",
+        "type": "book",
+        "year": 1982
+      },
+      "description": "Information exchange among 10 organizations in Indianapolis.",
+      "edgeCount": 49,
+      "id": "ucinet-knokbur",
+      "name": "Knoke Bureaucracies",
+      "nodeCount": 10,
+      "properties": {
+        "density": 0.5444444444444444,
+        "edge_type_count": 1,
+        "has_self_loops": false,
+        "is_connected": true,
+        "is_cyclic": true,
+        "is_directed": false,
+        "is_heterogeneous": false,
+        "is_multigraph": true,
+        "is_weighted": false,
+        "n_components": 1,
+        "node_type_count": 1
+      },
+      "rawBytes": 3229,
+      "retrieved": "2026-02-16",
+      "sources": [
+        {
+          "downloads": [
+            {
+              "format": "ucinet",
+              "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/UciNet/knokbur.dat"
+            }
+          ],
+          "source": "ucinet"
+        }
+      ]
+    },
+    "ucinet-zachary": {
+      "citation": {
+        "authors": [
+          "W. Zachary"
+        ],
+        "journal": "Journal of Anthropological Research",
+        "pages": "452-473",
+        "title": "An information flow model for conflict and fission in small groups",
+        "type": "article",
+        "volume": 33,
+        "year": 1977
+      },
+      "description": "Social network of a university karate club. Famous for the split following disputes between members.",
+      "edgeCount": 156,
+      "id": "ucinet-zachary",
+      "name": "Zachary Karate Club",
+      "nodeCount": 34,
+      "properties": {
+        "density": 0.13903743315508021,
+        "edge_type_count": 1,
+        "has_self_loops": false,
+        "is_connected": true,
+        "is_cyclic": true,
+        "is_directed": false,
+        "is_heterogeneous": false,
+        "is_multigraph": true,
+        "is_weighted": false,
+        "n_components": 1,
+        "node_type_count": 1
+      },
+      "rawBytes": 8506,
+      "retrieved": "2026-02-16",
+      "sources": [
+        {
+          "downloads": [
+            {
+              "format": "ucinet",
+              "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/UciNet/zachary.dat"
+            }
+          ],
+          "source": "ucinet"
         }
       ]
     },
