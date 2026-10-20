@@ -1,3 +1,11 @@
+# [0.25.0](https://github.com/Mearman/keepset/compare/v0.24.0...v0.25.0) (2026-10-20)
+
+
+### Features
+
+* **catalogue:** fetch the KU Leuven orienteering instance collections ([f0b7b1b](https://github.com/Mearman/keepset/commit/f0b7b1bd4a8696aee17df6fb69e42797c06d9d88))
+* **parsers:** read TOPTW and team orienteering instance files ([fd947a3](https://github.com/Mearman/keepset/commit/fd947a3feca6fcab3b4927de29c4b30aeb75391d))
+
 # [0.24.0](https://github.com/Mearman/keepset/compare/v0.23.0...v0.24.0) (2026-10-20)
 
 
