@@ -4,6 +4,9 @@ import { lines, type NativeInstance, type NativeRow } from "./native";
 /** The columns of a node of a team orienteering file, as the parser names them: the position, the score, and whether it is where the paths start, where they end or a point to visit. */
 export const TOP_COLUMNS = ["x", "y", "score", "role"] as const;
 
+/** The columns whose values are text; the others are numbers. */
+export const TOP_TEXT_COLUMNS = ["role"] as const;
+
 /** The metadata keys the parser reads: the number of points, the number of paths and the length budget of each path. */
 export const TOP_META = ["points", "paths", "budget"] as const;
 

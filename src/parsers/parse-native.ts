@@ -11,6 +11,8 @@ import { parseSolomon } from "./solomon";
 import { parseTop } from "./top";
 import { parseToptw } from "./toptw";
 import { parseTsplib } from "./tsplib";
+import { parseVerolog2019 } from "./verolog-2019";
+import { parseVrpRep } from "./vrp-rep";
 import type { InstanceParser } from "./instance-shapes";
 
 /** Bytes converted per String.fromCharCode call: spreading a whole file would exceed the engine's argument-count limit, and this many stays well inside every engine's. */
@@ -116,6 +118,12 @@ export function parseNative(bytes: Uint8Array, parser: Parser): NativeDocument {
   }
   if (parser.format === "tsplib") {
     return parseTsplib(text);
+  }
+  if (parser.format === "verolog-2019") {
+    return parseVerolog2019(text);
+  }
+  if (parser.format === "vrp-rep") {
+    return parseVrpRep(text);
   }
 
   return parsePajek(text);

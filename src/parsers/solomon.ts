@@ -4,6 +4,9 @@ import { lines, type NativeInstance, type NativeRow } from "./native";
 /** The columns of a node of a Solomon style file, as the parser names them: the position (planar for Solomon's own files, latitude then longitude in the Tenerife set), the demand, the time window and the service time. */
 export const SOLOMON_COLUMNS = ["x", "y", "demand", "ready", "due", "service"] as const;
 
+/** The columns whose values are text; the others are numbers. Every column of a Solomon style file is a number. */
+export const SOLOMON_TEXT_COLUMNS = [] as const;
+
 /** The metadata keys the parser reads: the instance's name (its first line), the vehicle count and the vehicle capacity. */
 export const SOLOMON_META = ["name", "vehicles", "capacity"] as const;
 

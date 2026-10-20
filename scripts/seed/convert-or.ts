@@ -246,8 +246,12 @@ function checkCollection(id: string, outcome: CollectionOutcome): void {
     if (!columns.includes(column)) {
       fail(`${field} maps the column ${column}, which the ${outcome.parser.format} parser does not emit (it emits ${columns.join(", ")})`);
     }
-    if (TARGET_FIELDS[field] === "text") {
+    const isText = shape.text.some((text) => text === column);
+    if (TARGET_FIELDS[field] === "text" && !isText) {
       fail(`${field} is text but ${column} is a number`);
+    }
+    if (TARGET_FIELDS[field] === "number" && isText) {
+      fail(`${field} is a number but ${column} is text`);
     }
     if (used.has(column)) {
       fail(`the column ${column} fills more than one field`);

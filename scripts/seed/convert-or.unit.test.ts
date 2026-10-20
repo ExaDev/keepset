@@ -369,6 +369,7 @@ describe("convertItem for a collection of instance files", () => {
   it("refuses a column the parser does not emit, a text field, a column used twice, a field-named kept column, no column at all and a bad meta key", () => {
     expect(failure({ ...collection, map: { x: "x", y: "latitude" } })).toMatch(/y maps the column latitude, which the solomon parser does not emit \(it emits x, y, demand, ready, due, service\)/);
     expect(failure({ ...collection, map: { x: "x", status: "due" } })).toMatch(/status is text but due is a number/);
+    expect(failure({ ...collection, parser: { format: "tsplib", encoding: "utf-8" }, map: { x: "x", prize: "clusters" }, keep: [], meta: ["name"] })).toMatch(/prize is a number but clusters is text/);
     expect(failure({ ...collection, keep: ["x"], map: { y: "y" } })).toMatch(/keep names x, which is an or\/v1 field: map it instead/);
     expect(failure({ ...collection, keep: ["demand", "demand"] })).toMatch(/demand is mapped or kept more than once/);
     expect(failure({ ...collection, map: { x: "x", y: "x" } })).toMatch(/the column x fills more than one field/);
