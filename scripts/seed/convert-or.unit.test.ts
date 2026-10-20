@@ -321,6 +321,12 @@ describe("convertItem for a collection of instance files", () => {
     expect(outcome.recipe).toBe("fetchable");
   });
 
+  it("records no time unit for a source that has no time quantities", () => {
+    const untimed = Object.fromEntries(Object.entries(collection).filter(([key]) => key !== "timeUnit"));
+    const { entry } = convertItem(item ?? expect.unreachable("the fixture survey has an item"), curated(untimed), "2026-10-19");
+    expect(entry.properties).toEqual({ surveyId: "or-10" });
+  });
+
   it("maps, keeps and drops every column of the parser so the crosswalk says what the entry leaves out", () => {
     const { entry } = convertItem(item ?? expect.unreachable("the fixture survey has an item"), curated(collection), "2026-10-19");
     expect(entry.crosswalk).toMatchObject({

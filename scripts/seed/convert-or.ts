@@ -402,7 +402,7 @@ export function convertItem(item: SurveyEntry, curation: CurationItem, probedOn:
     recipe: recipeOf(outcome, dataUrl === undefined ? 0 : 1, givenUrl),
     crosswalk: outcome.status === "not-fetchable" ? { file: OR_NODES_CROSSWALK } : outcome.status === "fetchable-collection" ? collectionCrosswalkOf(outcome) : crosswalkOf(outcome),
     expectedCounts: expectedCountsOf(outcome),
-    properties: { surveyId: item.id, ...(outcome.status === "fetchable-collection" ? { timeUnit: outcome.timeUnit } : {}) },
+    properties: { surveyId: item.id, ...(outcome.status === "fetchable-collection" && outcome.timeUnit !== undefined ? { timeUnit: outcome.timeUnit } : {}) },
   });
 
   return {

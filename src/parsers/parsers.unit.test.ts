@@ -248,3 +248,59 @@ describe("the solomon parser", () => {
     expect(parseError(() => parseNative(utf8("X\n\nVEHICLE\nH\n1 2 3\n"), solomon)).message).toMatch(/line 5: expected the vehicle count and capacity/);
   });
 });
+
+describe("the toptw parser", () => {
+  const toptw: Parser = { format: "toptw", encoding: "utf-8" };
+  const text = "4 10 3 1 \n0 200\n  0 40.00 50.00 0.00 0.00 0 0 0 1236\n  1 45.00 68.00 90.00 10.00 1 1 1 912 967\n  2 -30.664 5.463 7 8 1 4 1 2 4 8 98 438\r\n  3 42.00 66.00 90.00 10.00 1 1 1 65 146\n \n";
+
+  it("reads the paths, customers and capacity, and each row's window around a list of any length, skipping whitespace only lines", () => {
+    expect(parseNative(utf8(text), toptw)).toEqual({
+      meta: { paths: 10, customers: 3, capacity: 200 },
+      nodes: [
+        { id: "0", x: 40, y: 50, service: 0, profit: 0, open: 0, close: 1236 },
+        { id: "1", x: 45, y: 68, service: 90, profit: 10, open: 912, close: 967 },
+        { id: "2", x: -30.664, y: 5.463, service: 7, profit: 8, open: 98, close: 438 },
+        { id: "3", x: 42, y: 66, service: 90, profit: 10, open: 65, close: 146 },
+      ],
+    });
+  });
+
+  it("rejects a row whose length does not fit its list, and a count that is not the customers plus the depot", () => {
+    expect(parseError(() => parseNative(utf8(text.replace("1 4 1 2 4 8 98 438", "1 4 1 2 4 98 438")), toptw)).message).toMatch(/toptw line 5: expected 13 numbers for a list of 4, found 12/);
+    expect(parseError(() => parseNative(utf8(text.replace("4 10 3 1", "4 10 4 1")), toptw)).message).toMatch(/header gives 4 customers, so expected 5 rows with the depot, found 4/);
+  });
+
+  it("rejects a malformed header, a number that is not one and a repeated or fractional id", () => {
+    expect(parseError(() => parseNative(utf8(text.replace("4 10 3 1 \n", "4 10 3\n")), toptw)).message).toMatch(/line 1: expected four numbers/);
+    expect(parseError(() => parseNative(utf8(text.replace("90.00 10.00 1 1 1 912 967", "ninety 10.00 1 1 1 912 967")), toptw)).message).toMatch(/line 4: expected the service duration/);
+    expect(parseError(() => parseNative(utf8(text.replace("  3 42.00", "  2 42.00")), toptw)).message).toMatch(/node 2 appears twice/);
+    expect(parseError(() => parseNative(utf8(text.replace("  3 42.00", "  3.5 42.00")), toptw)).message).toMatch(/whole number node id/);
+    expect(parseError(() => parseNative(utf8(""), toptw)).message).toMatch(/expected the two header lines/);
+  });
+});
+
+describe("the top parser", () => {
+  const top: Parser = { format: "top", encoding: "utf-8" };
+  const text = "n 4\r\nm 2\r\ntmax 25.0\r\n18.190\t6.320\t0\r\n15.520\t28.030\t7\r\n9.000\t28.010\t5\r\n2.380\t18.260\t0\r\n";
+
+  it("reads the points with row numbers as ids, the first as the start and the last as the end", () => {
+    expect(parseNative(utf8(text), top)).toEqual({
+      meta: { points: 4, paths: 2, budget: 25 },
+      nodes: [
+        { id: "0", x: 18.19, y: 6.32, score: 0, role: "start" },
+        { id: "1", x: 15.52, y: 28.03, score: 7, role: "visit" },
+        { id: "2", x: 9, y: 28.01, score: 5, role: "visit" },
+        { id: "3", x: 2.38, y: 18.26, score: 0, role: "end" },
+      ],
+    });
+  });
+
+  it("rejects header lines out of order or malformed, a row that is not three numbers and a wrong row count", () => {
+    expect(parseError(() => parseNative(utf8(text.replace("n 4", "points 4")), top)).message).toMatch(/line 1: expected "n <number>"/);
+    expect(parseError(() => parseNative(utf8(text.replace("tmax 25.0", "tmax")), top)).message).toMatch(/line 3: expected "tmax <number>"/);
+    expect(parseError(() => parseNative(utf8(text.replace("15.520\t28.030\t7", "15.520\t28.030")), top)).message).toMatch(/line 5: expected three numbers/);
+    expect(parseError(() => parseNative(utf8(text.replace("n 4", "n 5")), top)).message).toMatch(/header gives 5 points, found 4 rows/);
+    expect(parseError(() => parseNative(utf8("n 1\nm 1\ntmax 1\n0 0 0\n"), top)).message).toMatch(/at least a start and an end point/);
+    expect(parseError(() => parseNative(utf8(""), top)).message).toMatch(/expected "n <number>"/);
+  });
+});
