@@ -1,3 +1,16 @@
+# [0.31.0](https://github.com/Mearman/keepset/compare/v0.30.0...v0.31.0) (2026-10-20)
+
+
+### Bug Fixes
+
+* **seed:** keep archived snapshots when an import rewrites an entry ([98d234f](https://github.com/Mearman/keepset/commit/98d234fe3cabb82924fc8b9301d5ee6cc40655ab))
+
+
+### Features
+
+* **scripts:** archive source URLs on the Wayback Machine ([e3b8a7e](https://github.com/Mearman/keepset/commit/e3b8a7e657823f6b92c4b85b3254f24e01853842))
+* **scripts:** check recorded sources for liveness on a schedule ([c63ccd5](https://github.com/Mearman/keepset/commit/c63ccd5a9eeebf9cb6108561cabd948332f7ea4f))
+
 # [0.30.0](https://github.com/Mearman/keepset/compare/v0.29.3...v0.30.0) (2026-10-20)
 
 
