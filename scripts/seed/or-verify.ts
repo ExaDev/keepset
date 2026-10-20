@@ -1,4 +1,4 @@
-/* Runs each fetchable item of a curation on a real sample of its download, through the same fetch flow `keepset fetch` uses: the first part of the file is downloaded, cut back to whole rows, parsed with the recipe's parser, mapped by the crosswalk and validated against or/v1. It needs the network and is a curator's check, not part of CI: the committed import is checked offline by `seed:check`.
+/* Runs each fetchable item of a curation on a real sample of its download, through the same fetch flow `keepset fetch` uses: the first part of the file is downloaded, cut back to whole rows, parsed with the recipe's parser, mapped by the crosswalk and validated against tasks/v1. It needs the network and is a curator's check, not part of CI: the committed import is checked offline by `seed:check`.
 
    pnpm exec tsx scripts/seed/or-verify.ts <curation.json> [or-1,or-7] [--whole]
 
@@ -35,7 +35,7 @@ if (path === undefined) {
 const wanted = only === undefined ? undefined : new Set(only.split(","));
 const survey = SurveySourceSchema.parse(JSON.parse(readFileSync(join(here, "sources/or-datasets-survey.json"), "utf8")));
 const curation = CurationSchema.parse(JSON.parse(readFileSync(path, "utf8")));
-const nodesCrosswalk = parseCrosswalk(JSON.parse(readFileSync(join(here, "../../catalogue/crosswalks/or-v1/nodes.json"), "utf8")));
+const nodesCrosswalk = parseCrosswalk(JSON.parse(readFileSync(join(here, "../../catalogue/crosswalks/tasks-v1/nodes.json"), "utf8")));
 const manifest = { id: "or-verify", name: "or verify", description: "A throwaway catalogue for checking one entry.", version: "0.0.0", repository: "https://github.com/Mearman/keepset" };
 
 /** A stream reader, as far as this tool uses one. */
@@ -124,7 +124,7 @@ async function verifyOne(curated: CurationItem): Promise<string> {
   }
   const { outcome } = curated;
   const { entry } = convertItem(item, curated, curation.probedOn);
-  const dataset = createCatalogue({ manifest, crosswalks: { "crosswalks/or-v1/nodes.json": nodesCrosswalk }, entries: [entry] }).listDatasets()[0];
+  const dataset = createCatalogue({ manifest, crosswalks: { "crosswalks/tasks-v1/nodes.json": nodesCrosswalk }, entries: [entry] }).listDatasets()[0];
   if (dataset === undefined || entry.recipe.status !== "fetchable") {
     throw new Error("the entry did not build");
   }

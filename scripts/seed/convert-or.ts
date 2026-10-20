@@ -6,7 +6,7 @@ import { INSTANCE_SHAPES } from "../../src/parsers/instance-shapes";
 import { CurationSchema, TARGET_FIELD_NAMES, TARGET_FIELDS, type InstanceFilesOutcome, type Curation, type CurationItem, type SurveyEntry, type SurveySource, type TableOutcome, type TargetField } from "./or-survey";
 
 /** The shared crosswalk of an entry with no recipe yet: the document's meta and node ids, all that is known of a dataset whose columns have not been read into a mapping. */
-export const OR_NODES_CROSSWALK = "crosswalks/or-v1/nodes.json";
+export const OR_NODES_CROSSWALK = "crosswalks/tasks-v1/nodes.json";
 
 /** The most cells (rows times the cells each row keeps, its id included) a table may have to be given a recipe. A fetch holds every kept cell of the table at once, in the parsed rows, the crosswalk's result and the validated document, so memory grows with the cells and not with the file's size; a table of tens of millions of cells is not read by one fetch and is imported without a recipe, saying so. Measured on whole fetches: a table of about five million cells needed a heap of between 512 and 768 MiB, one of about eleven million cells (1.6 million rows) between 1 and 1.5 GiB, and one of about fourteen million cells (2.7 million rows) between 2 and 3 GiB, so this stays within Node's default heap of 4 GiB on a machine with the memory for it. */
 export const MAX_CELLS = 14_000_000;
@@ -198,7 +198,7 @@ function checkFetchable(id: string, outcome: TableOutcome): void {
 function crosswalkOf(outcome: TableOutcome): Crosswalk {
   const crosswalk = {
     source: outcome.status === "fetchable-arcgis" ? "geojson" : "csv-table",
-    target: "or/v1",
+    target: "tasks/v1",
     rules: [
       { op: "move", from: "meta", to: "meta" },
       { op: "move", from: "nodes[].id", to: "nodes[].id" },
@@ -226,7 +226,7 @@ function crosswalkOf(outcome: TableOutcome): Crosswalk {
 const readsCollection = (outcome: InstanceFilesOutcome): boolean => "members" in outcome.archive;
 
 /**
- * Checks an instance files outcome against the rules that keep a recipe sound: the columns and header keys it names are ones its parser emits, a column is mapped or kept at most once, a kept column does not take the name of an or/v1 node field (a column that fills a field of its own name is mapped, so what fills each field is written in one place), every column of an instance file is a number so none fills a text field, and the counts it records fit its shape (instances for a collection, nodes for a single file).
+ * Checks an instance files outcome against the rules that keep a recipe sound: the columns and header keys it names are ones its parser emits, a column is mapped or kept at most once, a kept column does not take the name of a tasks/v1 node field (a column that fills a field of its own name is mapped, so what fills each field is written in one place), every column of an instance file is a number so none fills a text field, and the counts it records fit its shape (instances for a collection, nodes for a single file).
  * @param id - The surveyed item's id, for errors.
  * @param outcome - The outcome.
  * @throws Error naming the item and the rule it breaks.
@@ -264,7 +264,7 @@ function checkInstanceFiles(id: string, outcome: InstanceFilesOutcome): void {
       fail(`keep names ${column}, which the ${outcome.parser.format} parser does not emit (it emits ${columns.join(", ")})`);
     }
     if (TARGET_FIELD_NAMES.some((field) => field === column)) {
-      fail(`keep names ${column}, which is an or/v1 field: map it instead`);
+      fail(`keep names ${column}, which is a tasks/v1 field: map it instead`);
     }
     if (used.has(column)) {
       fail(`the column ${column} is mapped or kept more than once`);
@@ -293,7 +293,7 @@ function instanceFilesCrosswalkOf(outcome: InstanceFilesOutcome): Crosswalk {
   const mapped = new Map(TARGET_FIELD_NAMES.flatMap((field) => (outcome.map[field] === undefined ? [] : [[outcome.map[field], field] as const])));
   const crosswalk = {
     source: outcome.parser.format,
-    target: "or/v1",
+    target: "tasks/v1",
     rules: [
       { op: "move", from: "meta", to: "meta" },
       { op: "move", from: "nodes[].id", to: "nodes[].id" },
@@ -406,7 +406,7 @@ export function convertItem(item: SurveyEntry, curation: CurationItem, probedOn:
     domain: domainOf(item),
     subjects: [SUBJECT],
     tags: [...new Set(item.fields)],
-    category: "or/v1",
+    category: "tasks/v1",
     sources,
     licence: curation.licence,
     citations: [],

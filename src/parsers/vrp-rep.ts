@@ -83,7 +83,7 @@ function listOf(ids: readonly string[]): string | null {
 }
 
 /**
- * Parses a VRP-REP instance (the XML format of the VRP-REP repository) in the layout its technician routing instances use: an `instance` with `info`, a `network` of `node` elements with `cx` and `cy`, a `fleet` of vehicle profiles that each depart from a node, `requests` that each sit at a node and name the skill and resources they need, and `drivers` whose profiles list the skills a vehicle type's driver has. Each node becomes a row with its position and `type`; a node's request skills and resources, and the skills of the drivers whose vehicles depart from it, are attached to it. Fleet costs and resource stocks are not read, as or/v1 has no place for them.
+ * Parses a VRP-REP instance (the XML format of the VRP-REP repository) in the layout its technician routing instances use: an `instance` with `info`, a `network` of `node` elements with `cx` and `cy`, a `fleet` of vehicle profiles that each depart from a node, `requests` that each sit at a node and name the skill and resources they need, and `drivers` whose profiles list the skills a vehicle type's driver has. Each node becomes a row with its position and `type`; a node's request skills and resources, and the skills of the drivers whose vehicles depart from it, are attached to it. Fleet costs and resource stocks are not read, as tasks/v1 has no place for them.
  * @param text - The file text.
  * @returns The instance: its dataset and name as `meta`, and its nodes in document order.
  * @throws NativeParseError for malformed XML, a root that is not `instance`, a missing element or attribute, a coordinate that is not a number, a repeated node id, or a request or vehicle that names a node the network lacks.

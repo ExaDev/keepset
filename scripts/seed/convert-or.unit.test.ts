@@ -83,7 +83,7 @@ describe("convertSurvey", () => {
       aliases: ["service-requests"],
       domain: "Case records",
       tags: ["location", "lifecycle"],
-      category: "or/v1",
+      category: "tasks/v1",
       licence: { kind: "spdx", id: "CC-BY-4.0" },
       properties: { surveyId: "or-10" },
       expectedCounts: {},
@@ -104,7 +104,7 @@ describe("convertSurvey", () => {
   it("builds a crosswalk that moves meta, ids and each mapped column, and a parser that keeps only the mapped columns", () => {
     expect(requests?.crosswalk).toEqual({
       source: "csv-table",
-      target: "or/v1",
+      target: "tasks/v1",
       rules: [
         { op: "move", from: "meta", to: "meta" },
         { op: "move", from: "nodes[].id", to: "nodes[].id" },
@@ -120,7 +120,7 @@ describe("convertSurvey", () => {
   });
 
   it("gives an item with no recipe the not-fetchable reason, one source and the shared nodes crosswalk, and no alias when its id does not start with its namespace", () => {
-    expect(instances).toMatchObject({ recipe: { status: "not-fetchable", reason: "the instances are in a text format with no parser yet" }, crosswalk: { file: "crosswalks/or-v1/nodes.json" }, domain: "Orienteering" });
+    expect(instances).toMatchObject({ recipe: { status: "not-fetchable", reason: "the instances are in a text format with no parser yet" }, crosswalk: { file: "crosswalks/tasks-v1/nodes.json" }, domain: "Orienteering" });
     expect(instances?.sources).toHaveLength(1);
     expect(instances?.aliases).toBeUndefined();
     expect(report.outcomes[0]).toEqual({ surveyId: "or-2", id: "classic-instances", recipe: "not-fetchable", reason: "the instances are in a text format with no parser yet", flags: [] });
@@ -128,8 +128,8 @@ describe("convertSurvey", () => {
   });
 
   it("builds a fetchable entry that fetches, maps only the mapped columns, and holds the round trip", async () => {
-    const nodes = parseCrosswalk(JSON.parse(readFileSync(join(import.meta.dirname, "../../catalogue/crosswalks/or-v1/nodes.json"), "utf8")));
-    const dataset = createCatalogue({ manifest: fixtureManifest, crosswalks: { "crosswalks/or-v1/nodes.json": nodes }, entries }).getDataset("example-service-requests");
+    const nodes = parseCrosswalk(JSON.parse(readFileSync(join(import.meta.dirname, "../../catalogue/crosswalks/tasks-v1/nodes.json"), "utf8")));
+    const dataset = createCatalogue({ manifest: fixtureManifest, crosswalks: { "crosswalks/tasks-v1/nodes.json": nodes }, entries }).getDataset("example-service-requests");
     const port = async (): Promise<Response> => Promise.resolve(new Response("request_id,status,latitude,longitude,minutes,district,Private note,id\nr1,Open,51.5,-0.1,2,Camden,secret,x1\nr2,Closed,,,,,,\n"));
     const fetched = await fetchEntry(dataset, { fetch: port });
     expect(fetched.data).toEqual({
@@ -277,7 +277,7 @@ describe("convertItem for a paged ArcGIS layer", () => {
         columns: ["geometry_latitude", "geometry_longitude", "OPENED", "FINE", "KIND"],
       },
     });
-    expect(entry.crosswalk).toMatchObject({ source: "geojson", target: "or/v1", oneWay: [] });
+    expect(entry.crosswalk).toMatchObject({ source: "geojson", target: "tasks/v1", oneWay: [] });
   });
 
   it("refuses a layer with no URL, a date written onto a number field, a date column the layer lacks, and a property named like a point column", () => {
@@ -315,9 +315,9 @@ describe("convertItem for a collection of instance files", () => {
     { path: "suite/notes.md", text: "not an instance" },
   ]);
 
-  it("makes an or/v1 entry whose recipe selects the members, with the fixed count and the time unit recorded", () => {
+  it("makes a tasks/v1 entry whose recipe selects the members, with the fixed count and the time unit recorded", () => {
     const { entry, outcome } = convertItem(item ?? expect.unreachable("the fixture survey has an item"), curated(collection), "2026-10-19");
-    expect(entry.category).toBe("or/v1");
+    expect(entry.category).toBe("tasks/v1");
     expect(entry.recipe).toEqual({ status: "fetchable", source: 0, archive: collection.archive, parser: collection.parser });
     expect(entry.expectedCounts).toEqual({ instances: 2 });
     expect(entry.properties).toEqual({ surveyId: "or-10", timeUnit: "abstract units" });
@@ -334,7 +334,7 @@ describe("convertItem for a collection of instance files", () => {
     const { entry } = convertItem(item ?? expect.unreachable("the fixture survey has an item"), curated(collection), "2026-10-19");
     expect(entry.crosswalk).toMatchObject({
       source: "solomon",
-      target: "or/v1",
+      target: "tasks/v1",
       oneWay: [{ op: "drop", from: "nodes[].ready", direction: "encode" }],
     });
     const { crosswalk } = entry;
@@ -370,7 +370,7 @@ describe("convertItem for a collection of instance files", () => {
     expect(failure({ ...collection, map: { x: "x", y: "latitude" } })).toMatch(/y maps the column latitude, which the solomon parser does not emit \(it emits x, y, demand, ready, due, service\)/);
     expect(failure({ ...collection, map: { x: "x", status: "due" } })).toMatch(/status is text but due is a number/);
     expect(failure({ ...collection, parser: { format: "tsplib", encoding: "utf-8" }, map: { x: "x", prize: "clusters" }, keep: [] })).toMatch(/prize is a number but clusters is text/);
-    expect(failure({ ...collection, keep: ["x"], map: { y: "y" } })).toMatch(/keep names x, which is an or\/v1 field: map it instead/);
+    expect(failure({ ...collection, keep: ["x"], map: { y: "y" } })).toMatch(/keep names x, which is a tasks\/v1 field: map it instead/);
     expect(failure({ ...collection, keep: ["demand", "demand"] })).toMatch(/demand is mapped or kept more than once/);
     expect(failure({ ...collection, map: { x: "x", y: "x" } })).toMatch(/the column x fills more than one field/);
     expect(failure({ ...collection, map: {}, keep: [] })).toMatch(/maps and keeps no column/);
@@ -411,13 +411,13 @@ describe("convertItem for a collection of table files", () => {
     { path: "readme.txt", text: "not a table" },
   ]);
 
-  it("makes an or/v1 entry that reads each matching file as a table and moves each member's columns onto the node fields", () => {
+  it("makes a tasks/v1 entry that reads each matching file as a table and moves each member's columns onto the node fields", () => {
     const entry = entryOf(tables);
-    expect(entry.category).toBe("or/v1");
+    expect(entry.category).toBe("tasks/v1");
     expect(entry.recipe).toMatchObject({ status: "fetchable", archive: tables.archive, parser: { format: "csv-table", idColumn: "ID", columns: ["ServiceTime_min", "Latitude", "Longitude"] } });
     expect(entry.expectedCounts).toEqual({ instances: 2 });
     expect(entry.properties).toEqual({ surveyId: "or-10", timeUnit: "seconds" });
-    expect(entry.crosswalk).toMatchObject({ source: "csv-table", target: "or/v1", oneWay: [] });
+    expect(entry.crosswalk).toMatchObject({ source: "csv-table", target: "tasks/v1", oneWay: [] });
   });
 
   it("fetches the files as instances in path order, scales minutes to seconds and holds the round trip", async () => {
@@ -469,12 +469,12 @@ describe("convertItem for one instance file", () => {
     throw new Error("expected the conversion to fail");
   };
 
-  it("makes an or/v1 entry that selects the one file, with the node count and the whole header in the meta", async () => {
+  it("makes a tasks/v1 entry that selects the one file, with the node count and the whole header in the meta", async () => {
     const entry = entryOf(single);
-    expect(entry.category).toBe("or/v1");
+    expect(entry.category).toBe("tasks/v1");
     expect(entry.recipe).toEqual({ status: "fetchable", source: 0, archive: single.archive, parser: single.parser });
     expect(entry.expectedCounts).toEqual({ nodes: 2 });
-    expect(entry.crosswalk).toMatchObject({ source: "customer-points", target: "or/v1", oneWay: [] });
+    expect(entry.crosswalk).toMatchObject({ source: "customer-points", target: "tasks/v1", oneWay: [] });
     const dataset = createCatalogue({ manifest: fixtureManifest, crosswalks: {}, entries: [entry] }).listDatasets()[0] ?? expect.unreachable("the catalogue lists its entry");
     const fetch = async (): Promise<Response> => Promise.resolve(new Response(zip([{ path: "Instance/customers.txt", text: "customers 2\r\n\r\n0\t1.5\t2.5\r\n1\t3\t4\r\n" }, { path: "Instance/network.txt", text: "ignored" }])));
     const fetched = await fetchEntry(dataset, { fetch });

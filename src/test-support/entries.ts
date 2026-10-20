@@ -77,12 +77,12 @@ export const notFetchableEntry = {
   recipe: { status: "not-fetchable", reason: "the source requires an account to download" },
 };
 
-/** A fetchable or/v1 entry: a CSV table of cases whose columns an inline crosswalk maps onto the target's node fields, with minutes scaled to seconds by the parser. */
-export const orEntry = {
+/** A fetchable tasks/v1 entry: a CSV table of cases whose columns an inline crosswalk maps onto the target's node fields, with minutes scaled to seconds by the parser. */
+export const taskEntry = {
   id: "service-requests",
   name: "Service requests",
   tags: [],
-  category: "or/v1",
+  category: "tasks/v1",
   sources: [{ url: "https://example.org/data/requests.csv", retrieved: "2026-10-19", status: "live" }],
   licence: { kind: "unrecorded" },
   citations: [],
@@ -105,7 +105,7 @@ export const orEntry = {
   },
   crosswalk: {
     source: "csv-table",
-    target: "or/v1",
+    target: "tasks/v1",
     rules: [
       { op: "move", from: "meta", to: "meta" },
       { op: "move", from: "nodes[].id", to: "nodes[].id" },
@@ -121,12 +121,12 @@ export const orEntry = {
   properties: { durationUnit: "seconds" },
 };
 
-/** A fetchable or/v1 entry whose source is a paged ArcGIS feature layer: the point's position and three properties fill node fields, an epoch-millisecond date is written as text, and a property the crosswalk does not map is not kept. */
+/** A fetchable tasks/v1 entry whose source is a paged ArcGIS feature layer: the point's position and three properties fill node fields, an epoch-millisecond date is written as text, and a property the crosswalk does not map is not kept. */
 export const arcgisEntry = {
   id: "layer-violations",
   name: "Layer violations",
   tags: [],
-  category: "or/v1",
+  category: "tasks/v1",
   sources: [{ url: "https://example.org/arcgis/rest/services/Violations/FeatureServer/0", retrieved: "2026-10-19", status: "live" }],
   licence: { kind: "unrecorded" },
   citations: [],
@@ -150,7 +150,7 @@ export const arcgisEntry = {
   },
   crosswalk: {
     source: "geojson",
-    target: "or/v1",
+    target: "tasks/v1",
     rules: [
       { op: "move", from: "meta", to: "meta" },
       { op: "move", from: "nodes[].id", to: "nodes[].id" },
@@ -166,12 +166,12 @@ export const arcgisEntry = {
   properties: {},
 };
 
-/** A fetchable or/v1 entry whose source is a Socrata resource read two rows at a time: the table's status and borough fill node fields and every other column is left out by the parser. */
+/** A fetchable tasks/v1 entry whose source is a Socrata resource read two rows at a time: the table's status and borough fill node fields and every other column is left out by the parser. */
 export const socrataEntry = {
   id: "resource-cases",
   name: "Resource cases",
   tags: [],
-  category: "or/v1",
+  category: "tasks/v1",
   sources: [{ url: "https://data.example.org/resource/abcd-1234.csv", retrieved: "2026-10-19", status: "live" }],
   licence: { kind: "unrecorded" },
   citations: [],
@@ -184,7 +184,7 @@ export const socrataEntry = {
   },
   crosswalk: {
     source: "csv-table",
-    target: "or/v1",
+    target: "tasks/v1",
     rules: [
       { op: "move", from: "meta", to: "meta" },
       { op: "move", from: "nodes[].id", to: "nodes[].id" },
@@ -197,7 +197,7 @@ export const socrataEntry = {
   properties: {},
 };
 
-/** A fetchable or/v1 entry whose source is a CKAN datastore dump read two rows at a time, on a portal that serves CKAN under the path prefix `/data`. */
+/** A fetchable tasks/v1 entry whose source is a CKAN datastore dump read two rows at a time, on a portal that serves CKAN under the path prefix `/data`. */
 export const ckanEntry = {
   ...socrataEntry,
   id: "datastore-cases",
@@ -206,7 +206,7 @@ export const ckanEntry = {
   recipe: { ...socrataEntry.recipe, paging: { kind: "ckan-datastore", pageSize: 2 }, parser: { ...socrataEntry.recipe.parser, idColumn: "id", columns: ["status", "borough"] } },
 };
 
-/** A fetchable or/v1 entry whose source is an OpenFEMA entity read two rows at a time, with a `$select` in its source URL. */
+/** A fetchable tasks/v1 entry whose source is an OpenFEMA entity read two rows at a time, with a `$select` in its source URL. */
 export const openFemaEntry = {
   ...socrataEntry,
   id: "entity-claims",
@@ -219,12 +219,12 @@ export const openFemaEntry = {
 /** One of each entry shape, for round-trip and schema-agreement tests. */
 export const representativeEntries = [liveEntry, deadEntry, notFetchableEntry];
 
-/** A fetchable or/v1 entry that is a collection: a zip of CSV files, one instance each, read through the `csv-table` parser. The crosswalk is the one a single table of the same columns would have, applied to each member; the archive's other files are not read. */
-export const orCollectionEntry = {
+/** A fetchable tasks/v1 entry that is a collection: a zip of CSV files, one instance each, read through the `csv-table` parser. The crosswalk is the one a single table of the same columns would have, applied to each member; the archive's other files are not read. */
+export const taskCollectionEntry = {
   id: "route-suite",
   name: "Route suite",
   tags: [],
-  category: "or/v1",
+  category: "tasks/v1",
   sources: [{ url: "https://example.org/data/suite.zip", retrieved: "2026-10-20", status: "live" }],
   licence: { kind: "unrecorded" },
   citations: [],
@@ -247,7 +247,7 @@ export const orCollectionEntry = {
   },
   crosswalk: {
     source: "csv-table",
-    target: "or/v1",
+    target: "tasks/v1",
     rules: [
       { op: "move", from: "meta", to: "meta" },
       { op: "move", from: "nodes[].id", to: "nodes[].id" },
@@ -282,7 +282,7 @@ export const graphCollectionEntry = {
 } as const;
 
 /** Every entry shape, one entry of each category as well: for the tests that check the entry schema, its generated JSON Schema and serialisation, which the catalogue fixtures (graph entries only) do not need to carry. */
-export const everyEntryShape = [...representativeEntries, orEntry, orCollectionEntry, graphCollectionEntry, arcgisEntry, socrataEntry, ckanEntry, openFemaEntry];
+export const everyEntryShape = [...representativeEntries, taskEntry, taskCollectionEntry, graphCollectionEntry, arcgisEntry, socrataEntry, ckanEntry, openFemaEntry];
 
 /** A catalogue manifest for fixture catalogues. */
 export const fixtureManifest = {

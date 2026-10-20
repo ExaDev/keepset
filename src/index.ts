@@ -39,8 +39,8 @@ export { GraphEdgeSchema, GraphNodeSchema, GraphV1Schema } from "./targets/graph
 export type { GraphEdge, GraphNode, GraphV1 } from "./targets/graph-v1";
 export { JsonScalarSchema } from "./targets/json-scalar";
 export type { JsonScalar } from "./targets/json-scalar";
-export { OrNodeSchema, OrV1Schema } from "./targets/or-v1";
-export type { OrNode, OrV1 } from "./targets/or-v1";
+export { TaskSchema, TasksV1Schema } from "./targets/tasks-v1";
+export type { Task, TasksV1 } from "./targets/tasks-v1";
 export { collectionOf } from "./targets/collection";
 export type { Collection, Instance } from "./targets/collection";
 export { validateDataset } from "./validate";
