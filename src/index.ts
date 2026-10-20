@@ -2,12 +2,13 @@ export { getDataset, getManifest, listDatasets, listNamespaces } from "./bundled
 export { CatalogueIndexSchema, createCatalogue } from "./catalogue";
 export type { Catalogue, CatalogueIndex, Dataset, DatasetQuery, NamespaceNode } from "./catalogue";
 export { CategoryIdSchema, countTarget, getCategory, getTarget, kindOf, listCategories } from "./categories";
-export type { Category, CategoryId, CategoryTarget, CategoryTargets, CountedKey } from "./categories";
+export type { Category, CategoryId, CategoryShape, CategoryTarget, CategoryTargets, CountedKey } from "./categories";
 export {
   AliasSchema,
   ArchiveMemberSchema,
   ArchiveSchema,
   CitationSchema,
+  CollectionArchiveSchema,
   ColumnNameSchema,
   CrosswalkReferenceSchema,
   EntrySchema,
@@ -25,7 +26,7 @@ export {
   WaybackTimestampSchema,
   waybackUrl,
 } from "./entry";
-export type { Archive, ArchiveMember, Citation, CrosswalkReference, Entry, Licence, Namespace, Parser, Recipe, Snapshot, Source } from "./entry";
+export type { Archive, ArchiveMember, Citation, CollectionArchive, CrosswalkReference, DocumentArchive, Entry, Licence, Namespace, Parser, Recipe, Snapshot, Source } from "./entry";
 export { ArchiveError, CatalogueSyntaxError, DatasetAmbiguousError, DatasetNotFoundError, KeepsetError, NativeParseError, RecipeError, UnknownCategoryError } from "./errors";
 export type { RecipeStep, SyntaxIssue } from "./errors";
 export { groupsOf, NAME_SEPARATOR, namesOf } from "./names";
@@ -39,4 +40,6 @@ export { JsonScalarSchema } from "./targets/json-scalar";
 export type { JsonScalar } from "./targets/json-scalar";
 export { OrNodeSchema, OrV1Schema } from "./targets/or-v1";
 export type { OrNode, OrV1 } from "./targets/or-v1";
+export { OrInstanceSchema, OrSetV1Schema } from "./targets/or-set-v1";
+export type { OrInstance, OrSetV1 } from "./targets/or-set-v1";
 export { validateDataset } from "./validate";
