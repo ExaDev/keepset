@@ -68,11 +68,12 @@
     {
       "flags": [
         "coordinates are planar x and y, not latitude and longitude",
-        "there are no time windows or service times, so it is not a VRPTW instance"
+        "there are no time windows or service times, so it is not a VRPTW instance",
+        "the download holds the customers and the road network of one arc routing instance; the customers are read as nodes and the network's nodes and links, which or/v1 has no arcs for, are not read",
+        "several customers share a position"
       ],
       "id": "zenodo-hartford-meter-reading-instance",
-      "reason": "The download is one arc routing instance in two tab separated text files with no column names, holding only planar coordinates of customers and a road network, so there is no field of the or/v1 node beyond a position and no table the parser reads.",
-      "recipe": "not-fetchable",
+      "recipe": "fetchable",
       "surveyId": "or-6"
     },
     {
