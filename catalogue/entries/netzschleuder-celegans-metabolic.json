@@ -21,7 +21,7 @@
   "licence": {
     "kind": "unrecorded"
   },
-  "name": "C. elegans Metabolic Network",
+  "name": "C. elegans Metabolic Network (Netzschleuder)",
   "namespace": [
     "netzschleuder"
   ],

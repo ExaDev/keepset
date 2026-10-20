@@ -51,6 +51,13 @@ describe("createCatalogue", () => {
     expect(() => createCatalogue({ ...fixtureIndex, entries: [liveEntry, liveEntry] })).toThrow(CatalogueSyntaxError);
   });
 
+  it("rejects two entries whose names a listing could not tell apart, ignoring case and spacing", () => {
+    const twin = { ...liveEntry, id: "karate-copy", name: liveEntry.name };
+    expect(() => createCatalogue({ ...fixtureIndex, entries: [liveEntry, twin] })).toThrow(/is also the name of entry karate/);
+    expect(() => createCatalogue({ ...fixtureIndex, entries: [liveEntry, { ...twin, name: `  ${liveEntry.name.toUpperCase().replace(" ", "   ")} ` }] })).toThrow(CatalogueSyntaxError);
+    expect(() => createCatalogue({ ...fixtureIndex, entries: [liveEntry, { ...twin, name: `${liveEntry.name} (another source)` }] })).not.toThrow();
+  });
+
   it("rejects a crosswalk file reference that does not resolve, including a prototype name", () => {
     expect(CatalogueIndexSchema.is({ ...fixtureIndex, crosswalks: {} })).toBe(false);
     expect(CatalogueIndexSchema.is({ ...fixtureIndex, entries: [{ ...deadEntry, crosswalk: { file: "constructor.json" } }] })).toBe(false);
@@ -67,9 +74,9 @@ describe("createCatalogue", () => {
 });
 
 /** Entries in two collections that share leaf names, so the short forms of a name can be ambiguous: `shared` is in `one/inner` and in `two`, and `lone` is only in `one/inner`. */
-const inOne = { ...liveEntry, id: "one-shared", namespace: ["one", "inner"], aliases: ["shared"] };
-const inTwo = { ...liveEntry, id: "two-shared", namespace: ["two"], aliases: ["shared"] };
-const onlyInOne = { ...liveEntry, id: "one-lone", namespace: ["one", "inner"], aliases: ["lone"] };
+const inOne = { ...liveEntry, id: "one-shared", name: "Entry one-shared", namespace: ["one", "inner"], aliases: ["shared"] };
+const inTwo = { ...liveEntry, id: "two-shared", name: "Entry two-shared", namespace: ["two"], aliases: ["shared"] };
+const onlyInOne = { ...liveEntry, id: "one-lone", name: "Entry one-lone", namespace: ["one", "inner"], aliases: ["lone"] };
 const namespaced = createCatalogue({ ...fixtureIndex, entries: [inOne, inTwo, onlyInOne] });
 
 describe("namespaces and aliases", () => {
@@ -96,7 +103,7 @@ describe("namespaces and aliases", () => {
   });
 
   it("answers an entry's own id ahead of an alias or a short form that another entry also answers to", () => {
-    const wins = createCatalogue({ ...fixtureIndex, entries: [{ ...liveEntry, id: "g53" }, { ...liveEntry, id: "ss-gset-g53", namespace: ["suitesparse", "gset"], aliases: ["g53"] }] });
+    const wins = createCatalogue({ ...fixtureIndex, entries: [{ ...liveEntry, id: "g53" }, { ...liveEntry, id: "ss-gset-g53", name: "Entry ss-gset-g53", namespace: ["suitesparse", "gset"], aliases: ["g53"] }] });
     expect(wins.getDataset("g53").entry.id).toBe("g53");
     expect(wins.getDataset("gset/g53").entry.id).toBe("ss-gset-g53");
   });
@@ -122,7 +129,7 @@ describe("namespaces and aliases", () => {
   });
 
   it("rejects two entries whose fully qualified names are the same", () => {
-    const twin = { ...liveEntry, id: "twin", namespace: ["one", "inner"], aliases: ["lone"] };
+    const twin = { ...liveEntry, id: "twin", name: "Entry twin", namespace: ["one", "inner"], aliases: ["lone"] };
     expect(CatalogueIndexSchema.is({ ...fixtureIndex, entries: [onlyInOne, twin] })).toBe(false);
   });
 
@@ -137,8 +144,8 @@ describe("namespaces and aliases", () => {
 });
 
 /** Entries for grouping: `bar` is in `home/deep`, listed also under `foo/graphs` and `one` by path aliases, and `baz` is in `foo/graphs` only, so the tree has three depths and an entry in two branches. */
-const bar = { ...liveEntry, id: "bar", namespace: ["home", "deep"], aliases: ["foo/graphs/bar", "one/bar"] };
-const baz = { ...liveEntry, id: "baz", namespace: ["foo", "graphs"] };
+const bar = { ...liveEntry, id: "bar", name: "Entry bar", namespace: ["home", "deep"], aliases: ["foo/graphs/bar", "one/bar"] };
+const baz = { ...liveEntry, id: "baz", name: "Entry baz", namespace: ["foo", "graphs"] };
 const grouped = createCatalogue({ ...fixtureIndex, manifest: { ...fixtureIndex.manifest, namespaceAliases: { foo: ["f"], graphs: ["g"] } }, entries: [bar, baz] });
 
 describe("grouped aliases", () => {
@@ -222,7 +229,7 @@ describe("listNamespaces", () => {
   });
 
   it("counts an entry once however many of a namespace's groups it is in", () => {
-    const twice = createCatalogue({ ...fixtureIndex, entries: [{ ...liveEntry, id: "twice", namespace: ["a", "x"], aliases: ["a/y/twice"] }] });
+    const twice = createCatalogue({ ...fixtureIndex, entries: [{ ...liveEntry, id: "twice", name: "Entry twice", namespace: ["a", "x"], aliases: ["a/y/twice"] }] });
     expect(twice.listNamespaces()).toEqual([{ path: "a", name: "a", count: 1 }]);
     expect(twice.listNamespaces("a")).toEqual([
       { path: "a/x", name: "x", count: 1 },
