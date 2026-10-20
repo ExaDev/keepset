@@ -1,6 +1,7 @@
 import { unzipSync } from "fflate";
 import { ArchiveError } from "../errors";
 import { getOwn } from "../own";
+import { csvField } from "./csv-text";
 
 const HEXADECIMAL = 16;
 const DECIMAL = 10;
@@ -163,15 +164,6 @@ function columnOf(reference: string): number {
 }
 
 /**
- * One CSV field: quoted when it holds a comma, a quote or a line break.
- * @param text - The cell text.
- * @returns The field.
- */
-function field(text: string): string {
-  return /[",\r\n]/.test(text) ? `"${text.replaceAll('"', '""')}"` : text;
-}
-
-/**
  * Finds the part that holds a named sheet.
  * @param workbook - The `workbook.xml` text.
  * @param rels - The workbook's relationships text.
@@ -285,7 +277,7 @@ export function sheetToCsv(bytes: Uint8Array, sheet: string): Uint8Array {
   const lines: string[] = [];
   for (let number = 1; number <= last; number += 1) {
     const cells = rows.get(number) ?? [];
-    lines.push(Array.from({ length: width }, (_empty, column) => field(cells[column] ?? "")).join(","));
+    lines.push(Array.from({ length: width }, (_empty, column) => csvField(cells[column] ?? "")).join(","));
   }
 
   return new TextEncoder().encode(lines.length === 0 ? "" : `${lines.join("\n")}\n`);
