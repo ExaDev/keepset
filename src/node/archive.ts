@@ -4,6 +4,7 @@ import type { CollectionArchive, DocumentArchive, ArchiveMember, InnerArchive } 
 import { ArchiveError } from "../errors";
 import { getOwn } from "../own";
 import { bunzip2 } from "./bzip2";
+import { pointShapefileToCsv } from "./shapefile";
 import { readTar } from "./tar";
 import { sheetToCsv } from "./xlsx";
 
@@ -109,6 +110,9 @@ export function unpack(bytes: Uint8Array, archive: DocumentArchive): Unpacked {
   if (archive.kind === "xlsx") {
     return { bytes: sheetToCsv(bytes, archive.sheet), member: archive.sheet };
   }
+  if (archive.kind === "shapefile") {
+    return unpackShapefile(bytes, archive.member);
+  }
   const outer = selectMember(bytes, archive);
   if (archive.inner === undefined) {
     return outer;
@@ -159,6 +163,49 @@ function selectMember(bytes: Uint8Array, archive: Exclude<InnerArchive, { readon
   }
 
   return { bytes: found.data, member: path };
+}
+
+/**
+ * Unpacks a zipped point shapefile into the CSV its attribute table and positions make. The `.dbf`, `.prj` and `.cpg` are the members with the `.shp`'s path and their own extension, matched without case as GIS tools write extensions either way.
+ * @param bytes - The zip's bytes.
+ * @param member - The selector of the `.shp`.
+ * @returns The CSV, and the `.shp`'s path as the member read.
+ * @throws ArchiveError when the bytes are not a zip, the selector does not match exactly one `.shp`, a part beside it is missing or there is more than one of it, or the shapefile cannot be read.
+ */
+function unpackShapefile(bytes: Uint8Array, member: ArchiveMember): Unpacked {
+  const names: string[] = [];
+  unzip(bytes, (file) => {
+    names.push(file.name);
+
+    return false;
+  });
+  const shp = pick(names, member);
+  if (!shp.toLowerCase().endsWith(".shp")) {
+    throw new ArchiveError(`the shapefile member ${shp} is not a .shp`);
+  }
+  const stem = shp.slice(0, -".shp".length);
+  const beside = (extension: string): string => {
+    const matched = names.filter((name) => name.length === stem.length + extension.length && name.startsWith(stem) && name.toLowerCase().endsWith(extension));
+    const [only] = matched;
+    if (only === undefined || matched.length !== 1) {
+      throw new ArchiveError(`expected one ${extension} beside ${shp}, found ${String(matched.length)} among: ${names.join(", ")}`);
+    }
+
+    return only;
+  };
+  const paths = { shp, dbf: beside(".dbf"), prj: beside(".prj"), cpg: beside(".cpg") };
+  const wanted = new Set(Object.values(paths));
+  const files = unzip(bytes, (candidate) => wanted.has(candidate.name));
+  const read = (path: string): Uint8Array => {
+    const file = getOwn(files, path);
+    if (file === undefined) {
+      throw new ArchiveError(`zip member ${path} could not be read`);
+    }
+
+    return file;
+  };
+
+  return { bytes: pointShapefileToCsv({ shp: read(paths.shp), dbf: read(paths.dbf), prj: read(paths.prj), cpg: read(paths.cpg) }), member: shp };
 }
 
 /** One file of a collection: its path in the archive and its bytes. */
