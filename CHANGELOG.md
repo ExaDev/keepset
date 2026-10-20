@@ -1,3 +1,12 @@
+# [0.22.0](https://github.com/Mearman/keepset/compare/v0.21.0...v0.22.0) (2026-10-20)
+
+
+### Features
+
+* **catalogue:** fetch more open data tables and correct the reasons left ([d6e3e4a](https://github.com/Mearman/keepset/commit/d6e3e4a8dfb206ee15a12b3a7f2eaa368d9e9b8b))
+* **parsers:** page a CKAN datastore dump and read NA as a missing value ([216d9fa](https://github.com/Mearman/keepset/commit/216d9fae6b714584de6ceb1dedc3216e4bb2be61))
+* **seed:** import archived and CKAN sources and verify paged ones whole ([60fcb59](https://github.com/Mearman/keepset/commit/60fcb5958397b2d9e5b072f6e77a4b53cf737643))
+
 # [0.21.0](https://github.com/Mearman/keepset/compare/v0.20.0...v0.21.0) (2026-10-20)
 
 
