@@ -108,6 +108,14 @@ describe("buildSite on a fixture catalogue", () => {
     expect(Array.isArray(index) ? index.map((record: unknown) => (typeof record === "object" && record !== null && "id" in record ? record.id : undefined)) : []).toEqual(catalogue.listDatasets().map((dataset) => dataset.entry.id));
   });
 
+  it("carries each entry's recorded dimensions into the search index and the static listing", () => {
+    const index: unknown = JSON.parse(page(files, "search-index.json"));
+    expect(index).toContainEqual(expect.objectContaining({ id: "karate", nodes: 34, edges: 78 }));
+    const listing = page(files, "kinds/graph/index.html");
+    expect(listing).toContain('<th scope="col">Nodes</th><th scope="col">Edges</th><th scope="col">Instances</th><th scope="col">Size</th>');
+    expect(listing).toContain("<td>34</td><td>78</td>");
+  });
+
   it("escapes catalogue text, so data never becomes markup", () => {
     const hostile = createCatalogue({ ...fixtureIndex, entries: [{ ...liveEntry, name: '<script>alert("x")</script>', description: "a </script> in prose" }] });
     const hostileFiles = build(hostile);

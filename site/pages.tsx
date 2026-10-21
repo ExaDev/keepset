@@ -4,6 +4,7 @@
 import { Fragment, type ReactNode } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { groupsOf, NAME_SEPARATOR, type Archive, type ArchiveMember, type Dataset, type Manifest, type NamespaceNode, type Parser } from "keepset";
+import { dimensionsOf, formatBytes, formatCount } from "./dimensions";
 import { scriptJson, slug } from "./html";
 import { datasetJsonLd, describe } from "./jsonld";
 
@@ -27,16 +28,17 @@ export interface PageContent {
 /** One row of a listing table. */
 function Row({ dataset, root }: { readonly dataset: Dataset; readonly root: string }): ReactNode {
   const { entry } = dataset;
+  const { nodes, edges, instances, bytes } = dimensionsOf(entry);
 
   return (
-    <tr data-id={entry.id}><td title={entry.name}><a href={`${root}datasets/${entry.id}/`}>{entry.name}</a></td><td title={entry.id}><code>{entry.id}</code></td><td>{dataset.kind}</td><td title={entry.domain}>{entry.domain ?? ""}</td><td>{entry.recipe.status === "fetchable" ? "fetchable" : "not fetchable yet"}</td></tr>
+    <tr data-id={entry.id}><td title={entry.name}><a href={`${root}datasets/${entry.id}/`}>{entry.name}</a></td><td title={entry.id}><code>{entry.id}</code></td><td>{dataset.kind}</td><td title={entry.domain}>{entry.domain ?? ""}</td><td>{formatCount(nodes)}</td><td>{formatCount(edges)}</td><td>{formatCount(instances)}</td><td>{formatBytes(bytes)}</td><td>{entry.recipe.status === "fetchable" ? "fetchable" : "not fetchable yet"}</td></tr>
   );
 }
 
 /** A table listing datasets, inside the wrapper that scrolls it sideways on narrow screens; the class pairs with the stylesheet's sticky desktop header. */
 function Listing({ datasets, root }: { readonly datasets: readonly Dataset[]; readonly root: string }): ReactNode {
   return (
-    <div className="table-wrap listing"><table className="listing"><thead><tr><th scope="col">Name</th><th scope="col">Id</th><th scope="col">Kind</th><th scope="col">Domain</th><th scope="col">Recipe</th></tr></thead><tbody>{datasets.map((dataset) => <Row key={dataset.entry.id} dataset={dataset} root={root} />)}</tbody></table></div>
+    <div className="table-wrap listing"><table className="listing"><thead><tr><th scope="col">Name</th><th scope="col">Id</th><th scope="col">Kind</th><th scope="col">Domain</th><th scope="col">Nodes</th><th scope="col">Edges</th><th scope="col">Instances</th><th scope="col">Size</th><th scope="col">Recipe</th></tr></thead><tbody>{datasets.map((dataset) => <Row key={dataset.entry.id} dataset={dataset} root={root} />)}</tbody></table></div>
   );
 }
 
