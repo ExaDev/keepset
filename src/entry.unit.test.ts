@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import { EntrySchema, parseEntry, SourceSchema, waybackUrl } from "./entry";
 import { CatalogueSyntaxError } from "./errors";
 import { serialise } from "./serialise";
-import { arcgisEntry, deadEntry, everyEntryShape, graphCollectionEntry, liveEntry, taskCollectionEntry, taskEntry } from "./test-support/entries";
+import { arcgisEntry, deadEntry, everyEntryShape, graphCollectionEntry, liveEntry, ogbEntry, taskCollectionEntry, taskEntry } from "./test-support/entries";
 
 const requiredFields = ["id", "name", "tags", "category", "sources", "licence", "citations", "recipe", "crosswalk", "expectedCounts", "properties"] as const;
 
@@ -196,6 +196,14 @@ describe("an archive that selects one file or every file", () => {
     expect(issues(withArchive(taskEntry, { kind: "gzip", inner }))).not.toBe("");
     expect(issues(withArchive(taskEntry, { kind: "zip", member: { extensions: [".zip"] }, inner: { ...inner, inner } }))).not.toBe("");
     expect(issues(withArchive(taskEntry, { kind: "zip", member: { extensions: [".zip"] }, inner: { kind: "none" } }))).not.toBe("");
+  });
+
+  it("gives a files archive only to a multi-file parser, and a multi-file parser only a files archive", () => {
+    expect(issues(ogbEntry)).toBe("");
+    expect(issues({ ...ogbEntry, recipe: { ...ogbEntry.recipe, parser: liveEntry.recipe.parser } })).toMatch(/a files archive is read by a multi-file parser \(ogb\)/);
+    expect(issues({ ...ogbEntry, recipe: { ...ogbEntry.recipe, archive: { kind: "zip", member: { path: "raw/edge.csv.gz" }, inner: { kind: "gzip" } } } })).toMatch(/a files archive is read by a multi-file parser/);
+    expect(issues({ ...ogbEntry, recipe: { ...ogbEntry.recipe, archive: { kind: "zip", members: { extensions: [".gz"] } } } })).toMatch(/a files archive is read by a multi-file parser/);
+    expect(issues({ ...ogbEntry, recipe: { ...ogbEntry.recipe, archive: { ...ogbEntry.recipe.archive, inner: { kind: "zip", member: { path: "x" } } } } })).not.toBe("");
   });
 
   it("accepts edge-list where conditions, and refuses an empty list or an empty value", () => {

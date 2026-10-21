@@ -6,6 +6,7 @@ import { parseGml } from "./gml";
 import { parseHgb } from "./hgb";
 import { parseKgTriples } from "./kg-triples";
 import { parseKonect } from "./konect";
+import { parseOgb } from "./ogb";
 import { parseMatrixMarket } from "./matrix-market";
 import { parseCsvTable } from "./csv-table";
 import { parseGeojson } from "./geojson";
@@ -166,6 +167,10 @@ export function parseNative(bytes: Uint8Array, parser: Parser): NativeDocument {
   if (parser.format === "hhcrsp") {
     return parseHhcrsp(text);
   }
+  if (parser.format === "ogb") {
+    // The recipe schema gives a multi-file parser only a files archive, which is read by parseNativeFiles, so a parsed entry never reaches this.
+    throw new NativeParseError(parser.format, 1, "the format reads the several files a files archive selects, not one file");
+  }
 
   return parsePajek(text);
 }
@@ -200,4 +205,20 @@ export function parseNativeParts(parts: readonly NamedBytes[], parser: Parser): 
     return parseHgb({ nodes: decodePieces(nodes.bytes, parser), links: decodePieces(links.bytes, parser) }, parser);
   }
   throw new NativeParseError(parser.format, 1, `the ${parser.format} parser reads one file, not named parts`);
+}
+
+/**
+ * Reads the several files of a multi-file format into the one native document they make together.
+ * @param files - The files a `files` archive selects, each with its path in the archive, in path order.
+ * @param parser - The recipe's parser, which must be a multi-file format.
+ * @returns The native graph.
+ * @throws NativeParseError when a file is not valid in the stated encoding or the files are not in the stated format, or when the parser reads one file and not several.
+ */
+export function parseNativeFiles(files: readonly { readonly path: string; readonly bytes: Uint8Array }[], parser: Parser): NativeGraph {
+  if (parser.format !== "ogb") {
+    // The recipe schema gives a files archive only to a multi-file parser, so a parsed entry never reaches this.
+    throw new NativeParseError(parser.format, 1, "the format reads one file, not the several a files archive selects");
+  }
+
+  return parseOgb(files.map((file) => ({ path: file.path, text: () => decodePieces(file.bytes, parser) })));
 }

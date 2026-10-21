@@ -6,7 +6,7 @@ import { zipSync } from "fflate";
 import { describe, expect, it } from "vitest";
 import { ArchiveError } from "../errors";
 import { bzip2, gzip, tar, zip } from "../test-support/archives";
-import { unpack, unpackMembers } from "./archive";
+import { unpack, unpackFiles, unpackMembers } from "./archive";
 import { readTar } from "./tar";
 
 const text = (bytes: Uint8Array): string => new TextDecoder().decode(bytes);
@@ -238,3 +238,36 @@ describe("unpackMembers", () => {
     expect(() => unpackMembers(new TextEncoder().encode("not an archive"), { kind: "zip", members: { extensions: [".txt"] } })).toThrow(ArchiveError);
   });
 });
+
+describe("unpackFiles", () => {
+  /** An OGB dataset zip's layout: its tables are gzipped files beside ones the recipe does not read. */
+  const archive = zipSync({
+    "mag/raw/num-node-dict.csv.gz": gzip("paper,author\n2,1\n"),
+    "mag/raw/relations/author___writes___paper/edge.csv.gz": gzip("0,1\n"),
+    "mag/raw/node-feat/paper/node-feat.csv.gz": gzip("0.5\n"),
+    "mag/mapping/README.md": new TextEncoder().encode("readme"),
+  });
+  const files = { pattern: "mag/raw/(?:num-node-dict|relations/[^/]+/edge)\\.csv\\.gz" };
+
+  it("gives every file the selector matches, in path order, gunzipped when inner says so and under its own path", () => {
+    const unpacked = unpackFiles(archive, { kind: "zip", files, inner: { kind: "gzip" } });
+    expect(unpacked.map((file) => [file.path, text(file.bytes)])).toEqual([
+      ["mag/raw/num-node-dict.csv.gz", "paper,author\n2,1\n"],
+      ["mag/raw/relations/author___writes___paper/edge.csv.gz", "0,1\n"],
+    ]);
+  });
+
+  it("gives the bytes as stored without inner", () => {
+    const [first] = unpackFiles(archive, { kind: "zip", files });
+    expect(Array.from(first?.bytes ?? [])).toEqual(Array.from(gzip("paper,author\n2,1\n")));
+  });
+
+  it("rejects a selected file that is not gzip when inner says it is, naming it", () => {
+    expect(() => unpackFiles(archive, { kind: "zip", files: { path: "mag/mapping/README.md" }, inner: { kind: "gzip" } })).toThrow(/member mag\/mapping\/README\.md: not valid gzip data/);
+  });
+
+  it("rejects a selector that matches nothing", () => {
+    expect(() => unpackFiles(archive, { kind: "zip", files: { extensions: [".parquet"] } })).toThrow(ArchiveError);
+  });
+});
+

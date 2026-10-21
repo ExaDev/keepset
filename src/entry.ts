@@ -130,6 +130,9 @@ const FileArchiveKindSchema = z.enum(["zip", "tar", "tar.gz", "tar.bz2"]);
 /** An archive a collection is read from: every file a selector matches, at least one. With `inner` of kind `xlsx`, every matched member is a workbook and each of its sheets, in the workbook's order, is one file of the collection: the sheet's CSV, at the path of the member and the sheet's name joined by `/`, for an instance format laid out on a sheet. `sheets` is a regular expression a sheet's whole name must match for the sheet to be read (every sheet when it is absent), and it must match at least one sheet of every workbook. */
 export const CollectionArchiveSchema = z.object({ kind: FileArchiveKindSchema, members: ArchiveMemberSchema, inner: z.object({ kind: z.literal("xlsx"), sheets: MemberPatternSchema.optional() }).strict().optional() }).strict();
 
+/** An archive whose dataset is spread over several of its files, which a parser of a multi-file format (`ogb`) reads together into one document: every file the `files` selector matches, at least one, in path order, each gunzipped first when `inner` says so (an OGB dataset zip holds its tables as `.csv.gz` files). */
+export const FilesArchiveSchema = z.object({ kind: FileArchiveKindSchema, files: ArchiveMemberSchema, inner: z.object({ kind: z.literal("gzip") }).strict().optional() }).strict();
+
 /** A spreadsheet read as the CSV of one of its sheets (the sheet's name, as the workbook gives it): an Excel workbook (`xlsx`), a legacy binary Excel 97 to 2003 workbook (`xls`, BIFF8) or an OpenDocument spreadsheet (`ods`, whose sheets are its tables). The three give the same text for the same cells. */
 export const SheetArchiveSchema = z.object({ kind: z.enum(["xlsx", "xls", "ods"]), sheet: z.string().min(1) }).strict();
 export type SheetArchive = z.infer<typeof SheetArchiveSchema>;
@@ -153,7 +156,7 @@ export const PartsArchiveSchema = z
   .strict();
 export type PartsArchive = z.infer<typeof PartsArchiveSchema>;
 
-/** How the downloaded bytes unpack into the file the parser reads, the named files a parser reads together into one document (`parts`), or for a collection the files it reads one by one. A `members` selector gives every member it matches, at least one, in path order. `gzip` and `bzip2` are one compressed file, and `tar.gz` and `tar.bz2` a tar archive compressed with them. A member that is an archive in its turn (a contest bundle that ships its problems as a zip inside the zip, a spreadsheet inside a zip) is unpacked by `inner`. A spreadsheet (`xlsx`, `xls` or `ods`) is read as the CSV of its named sheet, with dates as ISO 8601 text, for the `csv-table` or `edge-list` parser. A point shapefile (`shapefile`) is a zip whose `member` selects the `.shp`, read with the `.dbf`, `.prj` and `.cpg` of the same name beside it as the CSV of its attribute table with each point's stored coordinates and its WGS84 position, for the `csv-table` parser. */
+/** How the downloaded bytes unpack into the file the parser reads, the named files a parser of a parts format reads together into one document (`parts`, such as the split files of a triples download or an HGB dataset's nodes and links), the files a parser of a multi-file format reads together into one document (`files`, such as an OGB raw directory), or for a collection the files it reads one by one. A `members` selector gives every member it matches, at least one, in path order. `gzip` and `bzip2` are one compressed file, and `tar.gz` and `tar.bz2` a tar archive compressed with them. A member that is an archive in its turn (a contest bundle that ships its problems as a zip inside the zip, a spreadsheet inside a zip) is unpacked by `inner`. A spreadsheet (`xlsx`, `xls` or `ods`) is read as the CSV of its named sheet, with dates as ISO 8601 text, for the `csv-table` or `edge-list` parser. A point shapefile (`shapefile`) is a zip whose `member` selects the `.shp`, read with the `.dbf`, `.prj` and `.cpg` of the same name beside it as the CSV of its attribute table with each point's stored coordinates and its WGS84 position, for the `csv-table` parser. */
 export const ArchiveSchema = z.union([
   z.object({ kind: z.literal("none") }).strict(),
   z.object({ kind: z.literal("gzip") }).strict(),
@@ -161,14 +164,17 @@ export const ArchiveSchema = z.union([
   z.object({ kind: FileArchiveKindSchema, member: ArchiveMemberSchema, inner: InnerArchiveSchema.optional() }).strict(),
   CollectionArchiveSchema,
   PartsArchiveSchema,
+  FilesArchiveSchema,
   SheetArchiveSchema,
   z.object({ kind: z.literal("shapefile"), member: ArchiveMemberSchema }).strict(),
 ]);
 export type Archive = z.infer<typeof ArchiveSchema>;
 /** An archive that gives the one file a document is read from. */
-export type DocumentArchive = Exclude<Archive, { readonly members: ArchiveMember } | PartsArchive>;
+export type DocumentArchive = Exclude<Archive, { readonly members: ArchiveMember } | PartsArchive | { readonly files: ArchiveMember }>;
 /** An archive that gives every file a collection is read from. */
 export type CollectionArchive = z.infer<typeof CollectionArchiveSchema>;
+/** An archive that gives the several files one document of a multi-file format is read from. */
+export type FilesArchive = z.infer<typeof FilesArchiveSchema>;
 
 const ColumnSchema = z.int().min(0);
 
@@ -283,6 +289,8 @@ export const ParserSchema = z.discriminatedUnion("format", [
   z.object({ format: z.literal("gd-contest"), encoding: EncodingSchema }).strict(),
   /** The synapse files of Witvliet et al.'s developmental connectomes (`DatasetN_synapses.json` in github.com/dwitvliet/nature2021): a JSON array of chemical synapses, each a presynaptic neuron (`pre`) and the neurons it contacts (`post`). */
   z.object({ format: z.literal("witvliet-synapses"), encoding: z.literal("utf-8") }).strict(),
+  /** An Open Graph Benchmark dataset's raw directory, read from the several files a `files` archive selects. */
+  z.object({ format: z.literal("ogb"), encoding: z.literal("utf-8") }).strict(),
   z.object({ format: z.literal("customer-points"), encoding: EncodingSchema }).strict(),
   z.object({ format: z.literal("solomon"), encoding: EncodingSchema }).strict(),
   z.object({ format: z.literal("top"), encoding: EncodingSchema }).strict(),
@@ -332,6 +340,9 @@ export const PagingSchema = z.discriminatedUnion("kind", [
 ]);
 export type Paging = z.infer<typeof PagingSchema>;
 
+/** The parser formats that read a dataset spread over several files of one archive, and so the only ones a `files` archive is given to. */
+export const MULTI_FILE_FORMATS: ReadonlySet<Parser["format"]> = new Set(["ogb"]);
+
 /** How to obtain the dataset: a fetchable recipe naming the source (by index into `sources`), the archive layout and the parser, or a statement that no declarative recipe exists yet and why. */
 /** The parser formats that read a document from named parts, and the part names each requires (none for a format whose part names are its own, such as the splits of a triples download). */
 const PART_FORMATS: ReadonlyMap<Parser["format"], readonly string[] | undefined> = new Map([
@@ -354,7 +365,10 @@ export const RecipeSchema = z.discriminatedUnion("status", [
           ctx.addIssue({ code: "custom", path: ["archive"], message: `the ${recipe.parser.format} parser reads the parts ${required.join(" and ")} from a parts archive` });
         }
       }
-    }),
+          if (("files" in recipe.archive) !== MULTI_FILE_FORMATS.has(recipe.parser.format)) {
+        ctx.addIssue({ code: "custom", path: ["archive"], message: `a files archive is read by a multi-file parser (${[...MULTI_FILE_FORMATS].join(", ")}), and such a parser reads only a files archive` });
+      }
+}),
   z.object({ status: z.literal("not-fetchable"), reason: z.string().min(1) }).strict(),
 ]);
 export type Recipe = z.infer<typeof RecipeSchema>;

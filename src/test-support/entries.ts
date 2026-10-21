@@ -282,8 +282,28 @@ export const graphCollectionEntry = {
   properties: {},
 } as const;
 
+/** A graph entry of a multi-file format: an Open Graph Benchmark zip whose raw directory's gzipped files are read together into one graph. */
+export const ogbEntry = {
+  id: "ogb-suite",
+  name: "OGB dataset",
+  tags: [],
+  category: "graph/v1",
+  sources: [{ url: "https://example.org/data/dataset.zip", retrieved: "2026-10-21", status: "live" }],
+  licence: { kind: "unrecorded" },
+  citations: [],
+  recipe: {
+    status: "fetchable",
+    source: 0,
+    archive: { kind: "zip", files: { pattern: "[^/]+/raw/(?:num-node-list|num-node-dict|edge|num-edge-list|triplet-type-list|relations/[^/]+/(?:edge|num-edge-list))\\.csv\\.gz" }, inner: { kind: "gzip" } },
+    parser: { format: "ogb", encoding: "utf-8" },
+  },
+  crosswalk: { file: "crosswalks/graph-v1/topology.json" },
+  expectedCounts: { nodes: 3, edges: 2 },
+  properties: {},
+} as const;
+
 /** Every entry shape, one entry of each category as well: for the tests that check the entry schema, its generated JSON Schema and serialisation, which the catalogue fixtures (graph entries only) do not need to carry. */
-export const everyEntryShape = [...representativeEntries, taskEntry, taskCollectionEntry, graphCollectionEntry, arcgisEntry, socrataEntry, ckanEntry, openFemaEntry];
+export const everyEntryShape = [...representativeEntries, taskEntry, taskCollectionEntry, graphCollectionEntry, ogbEntry, arcgisEntry, socrataEntry, ckanEntry, openFemaEntry];
 
 /** A catalogue manifest for fixture catalogues. */
 export const fixtureManifest = {

@@ -6,9 +6,9 @@ import type { Dataset } from "../catalogue";
 import type { Entry, Snapshot, Source } from "../entry";
 import { KeepsetError, RecipeError, type RecipeStep } from "../errors";
 import type { NativeDocument } from "../parsers/native";
-import { parseNative, parseNativeParts } from "../parsers/parse-native";
+import { parseNative, parseNativeFiles, parseNativeParts } from "../parsers/parse-native";
 import type { JsonScalar } from "../targets/json-scalar";
-import { unpack, unpackMembers, unpackParts, type Unpacked } from "./archive";
+import { unpack, unpackFiles, unpackMembers, unpackParts, type Unpacked } from "./archive";
 import { downloadRaw } from "./download";
 import { downloadPaged } from "./paged";
 
@@ -34,7 +34,7 @@ export interface Provenance {
   readonly byteLength: number;
   /** The archive member a document was read from. */
   readonly member?: string;
-  /** The archive members a collection, or a document read from named parts, was read from, in the order they were read. */
+  /** The archive members a collection, or a document read from several files, was read from, in the order they were read. */
   readonly members?: readonly string[];
 }
 
@@ -94,7 +94,7 @@ function metaOf(entry: Entry): Record<string, JsonScalar> {
 /** A native document with the `meta` the crosswalk receives. */
 type NativeWithMeta = NativeDocument & { readonly meta: Record<string, JsonScalar> };
 
-/** A recipe run up to the native documents, before the crosswalk: what both a fetch and a round-trip check start from. A document recipe has one, the parser's output with the entry's `meta` over the parser's own header values; a collection recipe has one per archive member, named by the member's path, each the parser's output with only its own header values as `meta`, because the entry's metadata belongs to the collection and not to each instance. */
+/** A recipe run up to the native documents, before the crosswalk: what both a fetch and a round-trip check start from. A document recipe has one, the parser's output with the entry's `meta` over the parser's own header values (a multi-file format's document among them, read from every file its archive selects); a collection recipe has one per archive member, named by the member's path, each the parser's output with only its own header values as `meta`, because the entry's metadata belongs to the collection and not to each instance. */
 interface NativeRun {
   readonly collection: boolean;
   readonly documents: readonly { readonly id: string | undefined; readonly native: NativeWithMeta }[];
@@ -175,6 +175,12 @@ async function runToNative(dataset: Dataset, options: FetchOptions): Promise<Nat
     const parsed = await step(entry.id, "parse", () => parseNativeParts(parts, recipe.parser));
 
     return { collection: false, documents: [{ id: undefined, native: { ...parsed, meta: metaOf(entry) } }], provenance: provenanceOf({ members: parts.map((part) => part.path) }) };
+  }
+  if ("files" in archive) {
+    const files = await step(entry.id, "extract", () => unpackFiles(bytes, archive));
+    const parsed = await step(entry.id, "parse", () => parseNativeFiles(files, recipe.parser));
+
+    return { collection: false, documents: [{ id: undefined, native: { ...parsed, meta: metaOf(entry) } }], provenance: provenanceOf({ members: files.map((file) => file.path) }) };
   }
   const unpacked: Unpacked = await step(entry.id, "extract", () => unpack(bytes, archive));
   const parsed = await step(entry.id, "parse", () => parseNative(unpacked.bytes, recipe.parser));

@@ -1,6 +1,6 @@
 import { gunzipSync } from "node:zlib";
 import { unzipSync, type UnzipFileFilter } from "fflate";
-import type { CollectionArchive, DocumentArchive, ArchiveMember, InnerArchive, PartsArchive, SheetArchive } from "../entry";
+import type { CollectionArchive, DocumentArchive, ArchiveMember, FilesArchive, InnerArchive, PartsArchive, SheetArchive } from "../entry";
 import { ArchiveError } from "../errors";
 import { getOwn } from "../own";
 import { bunzip2 } from "./bzip2";
@@ -344,6 +344,28 @@ export function sheetToCsv(bytes: Uint8Array, archive: Readonly<SheetArchive>): 
   const read = { xlsx: xlsxGrid, xls: xlsGrid, ods: odsGrid }[archive.kind];
 
   return gridToCsv(read(bytes, archive.sheet));
+}
+
+/**
+ * Unpacks downloaded bytes into every file a multi-file format's selector matches, gunzipping each when the layout's `inner` says so. The paths stay the archive's own, so a gunzipped `edge.csv.gz` keeps its name.
+ * @param bytes - The downloaded bytes.
+ * @param archive - The recipe's archive layout, which selects files with `files`.
+ * @returns Each matching file, in path order.
+ * @throws ArchiveError when the bytes, or a file `inner` gunzips, are not well-formed, or the selector matches no member.
+ */
+export function unpackFiles(bytes: Uint8Array, archive: FilesArchive): Member[] {
+  const files = unpackMembers(bytes, { kind: archive.kind, members: archive.files });
+  if (archive.inner === undefined) {
+    return files;
+  }
+
+  return files.map((file) => {
+    try {
+      return { path: file.path, bytes: gunzip(file.bytes) };
+    } catch (error) {
+      throw new ArchiveError(`member ${file.path}: ${error instanceof Error ? error.message : String(error)}`, { cause: error });
+    }
+  });
 }
 
 /**
