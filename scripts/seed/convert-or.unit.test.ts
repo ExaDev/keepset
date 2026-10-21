@@ -180,9 +180,9 @@ describe("convertSurvey refuses an inconsistent curation", () => {
     expect(() => convertSurvey(odd, { probedOn: "2026-10-19", items: [instances] }, none)).toThrow(/matches 0 domain labels/);
   });
 
-  it("a table with more cells than a fetch holds, and one exactly at the limit", () => {
+  it("a table read from one file with more cells than a fetch holds, and one exactly at the limit", () => {
     const longest = Math.floor(MAX_CELLS / CELLS_PER_ROW);
-    expect(problem(withFirst({ rowCount: longest + 1 }))).toMatch(new RegExp(`${String(longest + 1)} rows of ${String(CELLS_PER_ROW)} kept cells`));
+    expect(problem(withFirst({ rowCount: longest + 1 }))).toMatch(new RegExp(`${String(longest + 1)} rows of ${String(CELLS_PER_ROW)} kept cells.*source is one file and not paged, so it can neither be held nor streamed`));
     expect(() => convertSurvey(survey, withFirst({ rowCount: longest }), none)).not.toThrow();
   });
 
@@ -245,7 +245,23 @@ describe("pagingOf", () => {
     const curated = CurationItemSchema.parse({ ...curation.items[0], downloadUrl: "https://data.example.org/resource/abcd-1234.csv" });
     const { entry } = convertItem(item ?? expect.unreachable("the fixture survey has an item"), curated, "2026-10-19");
     expect(entry.sources.map((source) => source.url)).toEqual(["https://example.org/requests", "https://data.example.org/resource/abcd-1234.csv"]);
-    expect(entry.recipe).toMatchObject({ status: "fetchable", source: 1, paging: { kind: "socrata-resource", pageSize: PAGE_ROWS } });
+    expect(entry.recipe).toMatchObject({ status: "fetchable", source: 1, paging: { kind: "socrata-resource", pageSize: PAGE_ROWS, select: ["request_id", "minutes", "latitude", "longitude", "status", "district"] } });
+    expect(entry.recipe).not.toHaveProperty("stream");
+  });
+
+  it("streams a paged table of more cells than a fetch holds, and holds one exactly at the limit", () => {
+    const [item] = survey.entries;
+    const longest = Math.floor(MAX_CELLS / CELLS_PER_ROW);
+    const paged = (rowCount: number): ReturnType<typeof CurationItemSchema.parse> => CurationItemSchema.parse({ ...curation.items[0], downloadUrl: "https://data.example.org/resource/abcd-1234.csv", outcome: { ...fetchable, rowCount } });
+    const recipe = (rowCount: number): unknown => convertItem(item ?? expect.unreachable("the fixture survey has an item"), paged(rowCount), "2026-10-19").entry.recipe;
+    expect(recipe(longest + 1)).toMatchObject({ status: "fetchable", stream: true, paging: { kind: "socrata-resource" } });
+    expect(recipe(longest)).not.toHaveProperty("stream");
+  });
+
+  it("refuses a Socrata selection of a kept column whose header cell is not its parser name", () => {
+    const [item] = survey.entries;
+    const curated = CurationItemSchema.parse({ ...curation.items[0], downloadUrl: "https://data.example.org/resource/abcd-1234.csv", outcome: { ...fetchable, map: { ...fetchable.map, skill: "Private_note" } } });
+    expect(() => convertItem(item ?? expect.unreachable("the fixture survey has an item"), curated, "2026-10-19")).toThrow(/Private_note has the header cell "Private note"/);
   });
 });
 
