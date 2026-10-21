@@ -2163,7 +2163,12 @@
       ],
       "description": "Random instances for the home health care routing and scheduling problem with multiple time windows and multiple synchronised services, generated from the benchmark instances of Mankowska et al.",
       "flags": [
-        "The instances appear to be travel-time matrices and tables without coordinates."
+        "Version 1 of the Mendeley Data record holds the workbooks only in a RAR archive; version 2 adds the workbooks themselves beside it, and the record's download of a whole version is one zip, so the workbooks are read from version 2's zip and the RAR is left out.",
+        "Each macro-enabled workbook holds seven instances, one per sheet, laid out as labelled blocks side by side, and every sheet is read as one instance with the care centre first and the patients after it.",
+        "Sheets G5 and J5 are left out: their patient time window header names one window while every row holds four values and an unlabelled row follows the patients, so their windows cannot be read as the sheet labels them.",
+        "A patient requiring two synchronised services has both in its services, with their durations in the same order; the travel time matrix, the caregivers' skills and their working windows are not carried, and each instance's meta counts the caregivers.",
+        "One requirement cell of sheet E1 is empty where the others hold 0, and the count beside the marks confirms the service is not required.",
+        "The sheets name no unit for their times."
       ],
       "id": "mendeley-data-hhcrsp-multi-window",
       "licence": {
@@ -2177,10 +2182,42 @@
       "name": "Home health care routing, multi-window variant",
       "namespace": "mendeley-data",
       "outcome": {
-        "reason": "The download is a RAR archive of macro enabled Excel workbooks, and keepset reads neither RAR archives nor macro workbooks.",
-        "status": "not-fetchable"
+        "status": "fetchable-instance-files",
+        "archive": {
+          "kind": "zip",
+          "members": {
+            "extensions": [
+              ".xlsm"
+            ]
+          },
+          "inner": {
+            "kind": "xlsx",
+            "sheets": "(?!G5$|J5$).+"
+          }
+        },
+        "parser": {
+          "format": "hhcrsp",
+          "encoding": "utf-8"
+        },
+        "map": {
+          "x": "x",
+          "y": "y",
+          "skill": "services"
+        },
+        "keep": [
+          "role",
+          "duration1",
+          "duration2",
+          "earliest1",
+          "latest1",
+          "earliest2",
+          "latest2"
+        ],
+        "timeUnit": "abstract units",
+        "expectedInstances": 82
       },
-      "surveyId": "or-16"
+      "surveyId": "or-16",
+      "downloadUrl": "https://data.mendeley.com/public-api/zip/hp3xftsrfx/download/2"
     },
     {
       "citations": [
