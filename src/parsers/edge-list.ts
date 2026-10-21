@@ -43,18 +43,38 @@ function detect(dataLine: string): Exclude<EdgeListParser["delimiter"], "detect"
 }
 
 /**
- * Parses a delimited edge list: one edge per line, source and target in the configured columns, after `skipLines` header lines, with blank lines and lines whose first non-blank characters are a comment prefix skipped. A `detect` delimiter is fixed from the first data line. Nodes are the endpoints, in order of first appearance.
+ * Reads a line's multiplicity.
+ * @param fields - The line's fields.
+ * @param column - The multiplicity column.
+ * @param lineNumber - The 1-based line, for the error.
+ * @returns How many edges the line stands for.
+ * @throws NativeParseError when the field is not a positive whole number.
+ */
+function multiplicity(fields: readonly string[], column: number, lineNumber: number): number {
+  const value = fields[column]?.trim() ?? "";
+  if (!/^[1-9]\d*$/.test(value)) {
+    throw new NativeParseError("edge-list", lineNumber, `column ${String(column)} holds ${JSON.stringify(value)}, which is not a positive whole number of edges`);
+  }
+
+  return Number(value);
+}
+
+/**
+ * Parses a delimited edge list: one edge per line, source and target in the configured columns, after `skipLines` header lines, with blank lines and lines whose first non-blank characters are a comment prefix skipped. A `detect` delimiter is fixed from the first data line. A recipe that names a `keep` column reads only the lines whose field there is one of its values; one that names a `multiplicityColumn` emits as many edges for a line as the field says; one that says `mirrored` emits each pair of mirror-image lines once. Nodes are the endpoints of the lines read, in order of first appearance.
  * @param text - The file text.
  * @param options - The recipe's edge-list parser.
  * @returns The native graph.
- * @throws NativeParseError naming the line when a data line has too few fields or an empty endpoint, or when the file holds no edges.
+ * @throws NativeParseError naming the line when a data line has too few fields, an empty endpoint or a multiplicity that is not a positive whole number, when a mirrored table has a line without its mirror, or when the file holds no edges.
  */
-export function parseEdgeList(text: string, options: EdgeListParser): NativeGraph {
+export function parseEdgeList(text: string, options: Readonly<EdgeListParser>): NativeGraph {
   let split = options.delimiter === "detect" ? undefined : splitters[options.delimiter];
-  const needed = Math.max(options.sourceColumn, options.targetColumn) + 1;
+  const needed = Math.max(options.sourceColumn, options.targetColumn, options.keep?.column ?? 0, options.multiplicityColumn ?? 0) + 1;
   const order = new NodeOrder();
   const edges: NativeEdge[] = [];
-  for (const [index, line] of lines(text).entries()) {
+  // For a mirrored table: the lines still awaiting their mirror, keyed by the mirror's endpoints and multiplicity, each with the line it was read from.
+  const awaiting = new Map<string, number[]>();
+  const all = lines(text);
+  for (const [index, line] of all.entries()) {
     const lineNumber = index + 1;
     const content = line.trimStart();
     if (index < options.skipLines || content === "" || options.commentPrefixes.some((prefix) => content.startsWith(prefix))) {
@@ -65,14 +85,36 @@ export function parseEdgeList(text: string, options: EdgeListParser): NativeGrap
     if (fields.length < needed) {
       throw new NativeParseError("edge-list", lineNumber, `expected at least ${String(needed)} fields, found ${String(fields.length)}`);
     }
+    if (options.keep !== undefined && !options.keep.values.includes(fields[options.keep.column]?.trim() ?? "")) {
+      continue;
+    }
     const source = endpoint(fields, options.sourceColumn, lineNumber);
     const target = endpoint(fields, options.targetColumn, lineNumber);
+    const count = options.multiplicityColumn === undefined ? 1 : multiplicity(fields, options.multiplicityColumn, lineNumber);
     order.add(source);
     order.add(target);
-    edges.push({ source, target });
+    if (options.mirrored === true && source !== target) {
+      const key = JSON.stringify([source, target, count]);
+      const waiting = awaiting.get(key);
+      if (waiting !== undefined && waiting.length > 0) {
+        waiting.shift();
+        continue;
+      }
+      const mirror = JSON.stringify([target, source, count]);
+      awaiting.set(mirror, [...(awaiting.get(mirror) ?? []), lineNumber]);
+    }
+    for (let copy = 0; copy < count; copy += 1) {
+      edges.push({ source, target });
+    }
+  }
+  for (const [key, waiting] of awaiting) {
+    const [first] = waiting;
+    if (first !== undefined) {
+      throw new NativeParseError("edge-list", first, `the table is mirrored but this line has no mirror image (${key} is never listed)`);
+    }
   }
   if (edges.length === 0) {
-    throw new NativeParseError("edge-list", lines(text).length, "the file holds no edges");
+    throw new NativeParseError("edge-list", all.length, "the file holds no edges");
   }
 
   return { nodes: order.nodes(), edges };
