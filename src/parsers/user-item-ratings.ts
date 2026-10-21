@@ -1,6 +1,6 @@
 import type { Parser } from "../entry";
 import { NativeParseError } from "../errors";
-import { forEachLine, type NativeGraph, type NativeRating, type NativeTypedNode } from "./native";
+import { BipartiteNodes, forEachLine, type NativeGraph, type NativeRating } from "./native";
 
 type RatingsParser = Extract<Parser, { format: "user-item-ratings" }>;
 
@@ -39,26 +39,16 @@ const FIELDS = 4;
  */
 export function parseUserItemRatings(pieces: Readonly<Iterable<string>>, options: Readonly<RatingsParser>): NativeGraph {
   const separator = SEPARATORS[options.delimiter];
-  const itemPrefix = ITEM_PREFIXES[options.itemType];
-  const users = new Map<string, string>();
-  const items = new Map<string, string>();
-  const nodes: NativeTypedNode[] = [];
+  const graph = new BipartiteNodes();
+  const sets = { user: { type: USER_TYPE, id: graph.set(USER_PREFIX, USER_TYPE) }, item: { type: options.itemType, id: graph.set(ITEM_PREFIXES[options.itemType], options.itemType) } };
   const edges: NativeRating[] = [];
-  /** The ids of one node set seen so far, by source id, so each distinct id is held once however many edges name it. */
-  const sets = { user: { known: users, prefix: USER_PREFIX, type: USER_TYPE }, item: { known: items, prefix: itemPrefix, type: options.itemType } };
   /** Returns the node id of a source id in a set, adding the node when the id has not appeared in it. */
   const idOf = (set: (typeof sets)[keyof typeof sets], raw: string, number: number): string => {
     if (raw === "") {
       throw new NativeParseError(FORMAT, number, `the ${set.type} id is empty`);
     }
-    let id = set.known.get(raw);
-    if (id === undefined) {
-      id = `${set.prefix}${raw}`;
-      set.known.set(raw, id);
-      nodes.push({ id, type: set.type });
-    }
 
-    return id;
+    return set.id(raw);
   };
   let lastLine = 0;
   forEachLine(pieces, (line, number) => {
@@ -89,5 +79,5 @@ export function parseUserItemRatings(pieces: Readonly<Iterable<string>>, options
     throw new NativeParseError(FORMAT, lastLine, "the file holds no ratings");
   }
 
-  return { nodes, edges };
+  return { nodes: graph.nodes(), edges };
 }
