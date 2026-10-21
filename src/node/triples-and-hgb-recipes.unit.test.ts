@@ -9,7 +9,14 @@ import { CatalogueSyntaxError } from "../errors";
 import { gzip, tar, zip } from "../test-support/archives";
 import { fixtureManifest } from "../test-support/entries";
 import { DBLP_LINKS, DBLP_NODES, HETIONET, KINSHIP_TEST, KINSHIP_TRAIN, KINSHIP_VALID, LASTFM, WIKIKG2_TRAIN } from "../test-support/excerpts";
-import { fetchEntry, roundTripEntry, type FetchPort } from "./fetch-dataset";
+import { fetchEntry, roundTripEntry, type DownloadProvenance, type FetchPort, type Provenance } from "./fetch-dataset";
+
+/**
+ * The provenance of a result read from one download.
+ * @param provenance - A provenance record.
+ * @returns It, narrowed.
+ */
+const single = (provenance: Provenance): DownloadProvenance => ("files" in provenance ? expect.unreachable("the result is read from one download") : provenance);
 
 /** The crosswalk files the catalogue ships for these parsers, read from where they are committed. */
 const CROSSWALK_DIR = join(import.meta.dirname, "../../catalogue/crosswalks/graph-v1");
@@ -70,7 +77,7 @@ describe("a triples recipe", () => {
       ]),
     );
     const { data, provenance } = await fetchEntry(dataset, { fetch: serving(download) });
-    expect(provenance.members).toEqual(["train.txt", "valid.txt", "test.txt"]);
+    expect(single(provenance).members).toEqual(["train.txt", "valid.txt", "test.txt"]);
     expect("edges" in data && data.edges[0]).toEqual({ source: "person100", target: "person80", type: "term6", split: "train" });
     expect("edges" in data && data.edges.at(-1)).toEqual({ source: "person20", target: "person90", type: "term11", split: "test" });
     expect((await roundTripEntry(dataset, { fetch: serving(download) })).holds).toBe(true);
@@ -108,7 +115,7 @@ describe("an HGB recipe", () => {
   it("reads node.dat and link.dat from the zip into typed nodes and typed edges, and the round trip holds", async () => {
     const dataset = datasetFor({ status: "fetchable", source: 0, archive: { kind: "zip", parts: HGB_PARTS }, parser: { format: "hgb", encoding: "utf-8", ...DBLP_TYPES } }, "typed");
     const { data, provenance } = await fetchEntry(dataset, { fetch: serving(dblpDownload) });
-    expect(provenance.members).toEqual(["DBLP/node.dat", "DBLP/link.dat"]);
+    expect(single(provenance).members).toEqual(["DBLP/node.dat", "DBLP/link.dat"]);
     expect("nodes" in data && data.nodes[1]).toEqual({ id: "4057", type: "paper" });
     expect("edges" in data && data.edges[0]).toEqual({ source: "262", target: "4057", type: "author-paper" });
     expect((await roundTripEntry(dataset, { fetch: serving(dblpDownload) })).holds).toBe(true);
@@ -143,6 +150,9 @@ describe("the triples, HGB and counts recipes in the bundled catalogue", () => {
   const expected = (dataset: Dataset): string | undefined => {
     const { recipe } = dataset.entry;
     if (recipe.status !== "fetchable") {
+      return undefined;
+    }
+    if ("files" in recipe) {
       return undefined;
     }
     if (recipe.parser.format === "kg-triples") {

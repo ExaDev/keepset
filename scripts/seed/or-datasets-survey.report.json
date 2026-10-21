@@ -190,11 +190,11 @@
     },
     {
       "flags": [
-        "The repository is large and carries no licence file or statement."
+        "The repository is large and carries no licence file or statement.",
+        "The recipe reads the curated selection the repository's dataset.csv lists, at a pinned commit; the travel matrix and the caregivers' qualifications are not kept, as tasks/v1 has no arcs."
       ],
       "id": "github-afkummer-hhcrsp-curated-instances",
-      "reason": "The instances are keyword format text files with node positions, time windows, service durations and a travel time matrix, but the repository holds them as a very large number of separate files in size directories and publishes no archive of the curated selection, so a recipe has no single download to read; the repository's own archive holds every instance and is several gigabytes.",
-      "recipe": "not-fetchable",
+      "recipe": "fetchable",
       "surveyId": "or-17"
     },
     {
@@ -276,21 +276,21 @@
     },
     {
       "flags": [
-        "The survey field list for this item is unverified."
+        "The survey field list for this item is unverified.",
+        "Durations are minutes in the files and are scaled to seconds; the investment option files, the technicians' details and the travel times are not kept."
       ],
       "id": "zenodo-tdc-technician-dispatch",
-      "reason": "The instances are a custom sectioned text format whose tasks have no positions, and the collection is hundreds of megabytes compressed, almost all of it a pairwise travel time matrix that tasks/v1 has no arcs to hold, so reading it would hold gigabytes in memory to keep a few fields per task.",
-      "recipe": "not-fetchable",
+      "recipe": "fetchable",
       "surveyId": "or-25"
     },
     {
       "flags": [
         "The archive zip link tried returned 404; only individual instance files are reachable.",
-        "No licence statement was seen."
+        "No licence statement was seen.",
+        "The challenge site no longer answers, so each instance file is read from its own Wayback capture; the tool table's sizes and costs are not kept."
       ],
       "id": "ortec-verolog-2016-2017-instances",
-      "reason": "The instances are keyword format text files that the Wayback Machine serves one at a time, as the archive zips of each set were not captured, and a recipe reads one download, so no recipe reaches the collection.",
-      "recipe": "not-fetchable",
+      "recipe": "fetchable",
       "surveyId": "or-26"
     },
     {

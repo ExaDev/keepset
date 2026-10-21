@@ -155,10 +155,12 @@ export function parseNative(bytes: Uint8Array, parser: Parser): NativeDocument {
   if (parser.format === "user-item-counts") {
     return parseUserItemCounts(decodePieces(bytes, parser), parser);
   }
+  if (parser.format === "kg-triples") {
+    return parseKgTriples([{ split: undefined, pieces: decodePieces(bytes, parser) }], parser);
+  }
   // A technician dispatch file is almost all travel time lines, hundreds of megabytes of text that are checked and let go a line at a time.
   if (parser.format === "tdc") {
     return parseTdc(decodePieces(bytes, parser));
-  }
   }
   if (parser.format === "edge-list") {
     return parseEdgeList(decodePieces(bytes, parser), parser);
@@ -209,6 +211,7 @@ export function parseNative(bytes: Uint8Array, parser: Parser): NativeDocument {
   if (parser.format === "ogb") {
     // The recipe schema gives a multi-file parser only a files archive, which is read by parseNativeFiles, so a parsed entry never reaches this.
     throw new NativeParseError(parser.format, 1, "the format reads the several files a files archive selects, not one file");
+  }
   if (parser.format === "mankowska") {
     return parseMankowska(text);
   }
