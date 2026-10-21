@@ -40,7 +40,8 @@ await build({
   plugins: [vanillaExtractPlugin()],
   // unbzip2-stream, the bzip2 reader the archive layer shares with Node, requires Node's `stream`; readable-stream is the same interface as a package, so the preview worker can read a bzip2 archive in a browser.
   alias: { stream: "readable-stream" },
-  loader: { ".svg": "dataurl" },
+  // Leaflet's stylesheet names its control icons as PNGs; the preview draws circle markers and no controls that use them, so they are inlined rather than shipped as separate files.
+  loader: { ".svg": "dataurl", ".png": "dataurl" },
 });
 // After the bundle, so the digest the service worker's cache is named for covers app.js and app.css too.
 finalisePrecache(outDir);

@@ -1,9 +1,11 @@
 /* The client island, now a React application: the whole script the site runs. On a page with a dataset listing it mounts a Mantine-controlled, TanStack-table view over the generated search index (the static table and form stay in the HTML as the no-JS baseline and are hidden once the island is live); on every page it turns each fetch command's mount into a Mantine copy button; everywhere it registers the service worker. Every page still works without it: listings are static, commands are plain text. */
 
-import { useMemo, useState, type ReactNode } from "react";
+import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { createRoot } from "react-dom/client";
 import { Badge, Button, CopyButton, MantineProvider, Select, Table as MantineTable, TextInput, Tooltip } from "@mantine/core";
 import "@mantine/core/styles.css";
+import "leaflet/dist/leaflet.css";
+import { CircleMarker, MapContainer, TileLayer } from "react-leaflet";
 import { type ColumnDef, createSortedRowModel, rowSortingFeature, tableFeatures, useTable } from "@tanstack/react-table";
 import "../styles.css";
 
@@ -228,6 +230,127 @@ function previewOf(data: unknown): { readonly meta: unknown; readonly nodes?: re
   return { meta: record["meta"], ...(nodes === undefined ? {} : { nodes }), ...(instances === undefined ? {} : { instances }) };
 }
 
+/** How many points the map draws before it samples evenly instead, so a tab stays responsive whatever the result holds; the sample is even over the row order, so a spatial pattern survives it. */
+const MAP_POINTS = 10_000;
+
+/** The size of the planar plot's canvas, and the margin its points keep from the edge. */
+const CANVAS_WIDTH = 600;
+const CANVAS_HEIGHT = 400;
+const CANVAS_MARGIN = 10;
+
+/** The side of one plotted point on the canvas, in pixels. */
+const POINT_SIDE = 2;
+
+/** The map's starting zoom, wide enough to show a continent before it fits itself to the points. */
+const MAP_ZOOM = 4;
+
+/** The radius of a circle marker on the map, in pixels. */
+const MARKER_RADIUS = 2;
+
+/** A point placed by geography. */
+interface GeoPoint {
+  readonly lat: number;
+  readonly lon: number;
+}
+
+/** A point placed on a plane. */
+interface PlanarPoint {
+  readonly x: number;
+  readonly y: number;
+}
+
+/**
+ * The rows that carry a latitude and a longitude, as points.
+ * @param rows - The preview's rows.
+ * @returns The geographic points, or undefined when no row is placed by geography.
+ */
+function geoPointsOf(rows: readonly Record<string, unknown>[]): readonly GeoPoint[] | undefined {
+  const placed: GeoPoint[] = [];
+  for (const row of rows) {
+    const { lat, lon } = row;
+    if (typeof lat === "number" && typeof lon === "number") {
+      placed.push({ lat, lon });
+    }
+  }
+
+  return placed.length === 0 ? undefined : placed;
+}
+
+/**
+ * The rows that carry planar x and y and no geography, as points.
+ * @param rows - The preview's rows.
+ * @returns The planar points, or undefined when no row is placed only by x and y.
+ */
+function planarPointsOf(rows: readonly Record<string, unknown>[]): readonly PlanarPoint[] | undefined {
+  const placed: PlanarPoint[] = [];
+  for (const row of rows) {
+    const { x, y, lat } = row;
+    if (typeof x === "number" && typeof y === "number" && lat === undefined) {
+      placed.push({ x, y });
+    }
+  }
+
+  return placed.length === 0 ? undefined : placed;
+}
+
+/**
+ * Every n-th point so that at most `MAP_POINTS` remain, evenly over the order.
+ * @param points - The points.
+ * @returns The points, or an even sample of them.
+ */
+function sampled<T>(points: readonly T[]): readonly T[] {
+  const step = Math.ceil(points.length / MAP_POINTS);
+
+  return step <= 1 ? points : points.filter((_, index) => index % step === 0);
+}
+
+/** Draws planar points on a canvas, with no tiles: a planar dataset's plane has no geography to show under it. */
+function PlanarCanvas({ points }: { readonly points: readonly PlanarPoint[] }): ReactNode {
+  const ref = useRef<HTMLCanvasElement>(null);
+  useEffect(() => {
+    const canvas = ref.current;
+    const context = canvas?.getContext("2d");
+    if (canvas === null || context === null || context === undefined) {
+      return;
+    }
+    context.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+    const xs = points.map((point) => point.x);
+    const ys = points.map((point) => point.y);
+    const minX = Math.min(...xs);
+    const minY = Math.min(...ys);
+    const spanX = Math.max(...xs) - minX || 1;
+    const spanY = Math.max(...ys) - minY || 1;
+    context.fillStyle = "#1f4e79";
+    for (const point of points) {
+      const px = ((point.x - minX) / spanX) * (CANVAS_WIDTH - 2 * CANVAS_MARGIN) + CANVAS_MARGIN;
+      const py = CANVAS_HEIGHT - CANVAS_MARGIN - ((point.y - minY) / spanY) * (CANVAS_HEIGHT - 2 * CANVAS_MARGIN);
+      context.fillRect(px, py, POINT_SIDE, POINT_SIDE);
+    }
+  }, [points]);
+
+  return <canvas ref={ref} width={CANVAS_WIDTH} height={CANVAS_HEIGHT} className="preview-canvas" aria-label="A scatter of the result's points on the plane" />;
+}
+
+/** The map of a result's geographic points: OpenStreetMap tiles under Leaflet, both free with the attribution shown, and a circle marker per sampled point. */
+function PointMap({ points }: { readonly points: readonly GeoPoint[] }): ReactNode {
+  const drawn = sampled(points);
+  const lats = drawn.map((point) => point.lat);
+  const lons = drawn.map((point) => point.lon);
+  const centre: [number, number] = [(Math.min(...lats) + Math.max(...lats)) / 2, (Math.min(...lons) + Math.max(...lons)) / 2];
+
+  return (
+    <div className="preview-map">
+      <MapContainer center={centre} zoom={MAP_ZOOM} scrollWheelZoom style={{ height: `${String(CANVAS_HEIGHT)}px`, width: "100%" }}>
+        <TileLayer attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors' url="https://tile.openstreetmap.org/{z}/{x}/{y}.png" />
+        {drawn.map((point, index) => (
+          <CircleMarker key={String(index)} center={[point.lat, point.lon]} radius={MARKER_RADIUS} pathOptions={{ color: "#1f4e79", fillOpacity: 0.7 }} />
+        ))}
+      </MapContainer>
+      {points.length > MAP_POINTS ? <p>Drawing {String(drawn.length)} of {String(points.length)} points, sampled evenly over the result's order.</p> : null}
+    </div>
+  );
+}
+
 /** The preview of one dataset: a button that runs the recipe in the worker, the result's nodes in a table, a JSON download, an instance picker for a collection, and a file drop for a source the page could not read. */
 function Preview({ id }: { readonly id: string }): ReactNode {
   const [state, setState] = useState<"idle" | "working" | "done" | "unreadable" | "error">("idle");
@@ -278,6 +401,8 @@ function Preview({ id }: { readonly id: string }): ReactNode {
 
   const chosen = instance !== null && data?.instances !== undefined ? data.instances.find((one) => one.id === instance)?.value : undefined;
   const rows = data?.nodes ?? previewOf(chosen)?.nodes ?? [];
+  const geo = geoPointsOf(rows);
+  const planar = planarPointsOf(rows);
   const instances = data?.instances;
 
   return (
@@ -302,6 +427,8 @@ function Preview({ id }: { readonly id: string }): ReactNode {
             <p>The result holds no node rows.</p>
           )}
           {rows.length > PREVIEW_ROWS ? <p>Showing {String(PREVIEW_ROWS)} of {String(rows.length)} rows; the download carries the whole result.</p> : null}
+          {geo === undefined ? null : <PointMap points={geo} />}
+          {planar === undefined ? null : <PlanarCanvas points={sampled(planar)} />}
           {provenance !== null ? <p className="preview-provenance">SHA-256 {provenance.sha256.slice(0, HASH_SHOWN)}, {String(provenance.byteLength)} bytes.</p> : null}
           <Button component="a" href={URL.createObjectURL(new Blob([JSON.stringify(data)], { type: "application/json" }))} download={`${id}.json`}>Download JSON</Button>
         </div>
