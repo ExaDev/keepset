@@ -1,3 +1,10 @@
+# [0.45.0](https://github.com/Mearman/keepset/compare/v0.44.0...v0.45.0) (2026-10-21)
+
+
+### Features
+
+* **site:** plot a result's points on a map or a plane in the preview ([af99983](https://github.com/Mearman/keepset/commit/af99983dc059c8807315856e60f09957b0f9e851))
+
 # [0.44.0](https://github.com/Mearman/keepset/compare/v0.43.0...v0.44.0) (2026-10-21)
 
 
