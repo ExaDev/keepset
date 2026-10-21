@@ -4,12 +4,12 @@ import { columnNames } from "../../src/parsers/csv-table";
 import { POINT_COLUMNS } from "../../src/parsers/geojson";
 import { INSTANCE_SHAPES } from "../../src/parsers/instance-shapes";
 import { assertMachineReadableRead, licenceOf } from "./licence";
-import { CurationSchema, TARGET_FIELD_NAMES, TARGET_FIELDS, type InstanceFilesOutcome, type Curation, type CurationItem, type SurveyEntry, type SurveySource, type TableOutcome, type TargetField } from "./or-survey";
+import { CurationSchema, TARGET_FIELD_NAMES, TARGET_FIELDS, type FetchableOutcome, type InstanceFilesOutcome, type Curation, type CurationItem, type SurveyEntry, type SurveySource, type TableOutcome, type TargetField } from "./or-survey";
 
 /** The shared crosswalk of an entry with no recipe yet: the document's meta and node ids, all that is known of a dataset whose columns have not been read into a mapping. */
 export const OR_NODES_CROSSWALK = "crosswalks/tasks-v1/nodes.json";
 
-/** The most cells (rows times the cells each row keeps, its id included) a table may have to be given a recipe. A fetch holds every kept cell of the table at once, in the parsed rows, the crosswalk's result and the validated document, so memory grows with the cells and not with the file's size; a table of tens of millions of cells is not read by one fetch and is imported without a recipe, saying so. Measured on whole fetches: a table of about five million cells needed a heap of between 512 and 768 MiB, one of about eleven million cells (1.6 million rows) between 1 and 1.5 GiB, and one of about fourteen million cells (2.7 million rows) between 2 and 3 GiB, so this stays within Node's default heap of 4 GiB on a machine with the memory for it. */
+/** The most cells (rows times the cells each row keeps, its id included) a table may have to be held as one document. A held fetch keeps every kept cell of the table at once, in the parsed rows, the crosswalk's result and the validated document, so memory grows with the cells and not with the file's size. Measured on whole fetches: a table of about five million cells needed a heap of between 512 and 768 MiB, one of about eleven million cells (1.6 million rows) between 1 and 1.5 GiB, and one of about fourteen million cells (2.7 million rows) between 2 and 3 GiB, so this stays within Node's default heap of 4 GiB on a machine with the memory for it. A table of more cells is streamed when its source is paged, and has no recipe when it is not, as one file is downloaded whole before it is read. */
 export const MAX_CELLS = 14_000_000;
 
 /** How many rows a page of a paged CSV source holds. A response is a CSV of every column, so a page is a few tens of megabytes for a table of up to a kilobyte a row, short enough that a response is not cut off in transit and long enough that a table of millions of rows is a few dozen requests. */
@@ -116,13 +116,62 @@ function columnsOf(id: string, outcome: TableOutcome): { readonly names: readonl
   }
 }
 
+/** The columns a recipe's parser keeps: those a field is mapped from, in the order of the fields. */
+const keptColumns = (outcome: TableOutcome): string[] => TARGET_FIELD_NAMES.flatMap((field) => outcome.map[field] ?? []);
+
 /**
- * Checks a fetchable outcome against the rules that keep a recipe sound: the columns it names exist, a field is filled by one column and a column fills one field, a number field reads a numeric column and a text field does not, only durations and travel times are scaled, and no table too long to read is given a recipe.
+ * The cells a table outcome's recipe keeps: its rows times the mapped columns and the id. A collection of table files records no row count, as each file is its own document.
+ * @param outcome - The outcome.
+ * @returns The cells, zero where no row count is recorded.
+ */
+function cellsOf(outcome: TableOutcome): number {
+  const rowCount = outcome.status === "fetchable-table-collection" ? undefined : outcome.rowCount;
+
+  return (rowCount ?? 0) * (keptColumns(outcome).length + 1);
+}
+
+/**
+ * Whether a table outcome's recipe streams: a table of more cells than a fetch holds is streamed when it is one table read from a CSV paged source.
+ * @param outcome - The outcome.
+ * @param url - The URL the table is read from.
+ * @returns True to stream, false to hold, or undefined for a table too long to hold whose source cannot be streamed.
+ */
+function streams(outcome: TableOutcome, url: string): boolean | undefined {
+  if (cellsOf(outcome) <= MAX_CELLS) {
+    return false;
+  }
+
+  return outcome.status === "fetchable" && outcome.archive === undefined && pagingOf(url) !== undefined ? true : undefined;
+}
+
+/**
+ * The Socrata fields a recipe selects: the raw header cells of its id column and of the columns its parser keeps, so the columns it drops are never transferred. A resource names each field in the header as the API names it, and a field is selected by that name, so a kept column whose parser name is not its header cell cannot be selected and is refused.
+ * @param id - The surveyed item's id, for errors.
+ * @param outcome - A table read from one file.
+ * @returns The fields, the id column's first.
+ * @throws Error naming the item when a kept column's header cell is not its parser name.
+ */
+function socrataSelection(id: string, outcome: FetchableOutcome): string[] {
+  const names = columnNames(outcome.header, outcome.idColumn, 1);
+
+  return [...(outcome.idColumn === null ? [] : [outcome.idColumn]), ...keptColumns(outcome)].map((column) => {
+    const cell = outcome.header[names.indexOf(column)];
+    if (cell !== column) {
+      throw new Error(`${id}: the column ${column} has the header cell ${JSON.stringify(cell)}, which a Socrata selection cannot name as it is`);
+    }
+
+    return cell;
+  });
+}
+
+/**
+ * Checks a fetchable outcome against the rules that keep a recipe sound: the columns it names exist, a field is filled by one column and a column fills one field, a number field reads a numeric column and a text field does not, only durations and travel times are scaled, and a table too long to hold is read from a source that can be streamed.
  * @param id - The surveyed item's id, for errors.
  * @param outcome - The outcome.
+ * @param url - The URL the table is read from.
  * @throws Error naming the item and the rule it breaks.
  */
-function checkFetchable(id: string, outcome: TableOutcome): void {
+function checkFetchable(id: string, outcome: TableOutcome, url: string): void {
   const fail = (message: string): never => {
     throw new Error(`${id}: ${message}`);
   };
@@ -141,10 +190,8 @@ function checkFetchable(id: string, outcome: TableOutcome): void {
   if (mapped.length === 0) {
     fail("the map fills no field, so a fetch would carry nothing beyond ids");
   }
-  const rowCount = outcome.status === "fetchable-table-collection" ? undefined : outcome.rowCount;
-  const cells = (rowCount ?? 0) * (mapped.length + 1);
-  if (cells > MAX_CELLS) {
-    fail(`the table has ${String(rowCount)} rows of ${String(mapped.length + 1)} kept cells, ${String(cells)} cells, more than ${String(MAX_CELLS)}, so it has no recipe`);
+  if (streams(outcome, url) === undefined) {
+    fail(`the table has ${String(outcome.status === "fetchable-table-collection" ? undefined : outcome.rowCount)} rows of ${String(mapped.length + 1)} kept cells, ${String(cellsOf(outcome))} cells, more than ${String(MAX_CELLS)}, and its source is one file and not paged, so it can neither be held nor streamed`);
   }
   if (outcome.status === "fetchable-arcgis") {
     for (const column of outcome.dateColumns) {
@@ -316,17 +363,15 @@ function instanceFilesCrosswalkOf(outcome: InstanceFilesOutcome): Crosswalk {
   return parsed;
 }
 
-/** The columns a recipe's parser keeps: those a field is mapped from, in the order of the fields. */
-const keptColumns = (outcome: TableOutcome): string[] => TARGET_FIELD_NAMES.flatMap((field) => outcome.map[field] ?? []);
-
 /**
- * The recipe of an outcome.
+ * The recipe of an outcome. A table read from a Socrata resource selects only the fields its parser reads, and a table too long to hold is streamed.
+ * @param id - The surveyed item's id, for errors.
  * @param outcome - The outcome.
  * @param source - The index of the entry's source the recipe reads.
  * @param url - The URL of that source.
  * @returns The recipe, fetchable or not.
  */
-function recipeOf(outcome: CurationItem["outcome"], source: number, url: string): unknown {
+function recipeOf(id: string, outcome: CurationItem["outcome"], source: number, url: string): unknown {
   if (outcome.status === "not-fetchable") {
     return { status: "not-fetchable", reason: outcome.reason };
   }
@@ -345,12 +390,14 @@ function recipeOf(outcome: CurationItem["outcome"], source: number, url: string)
     };
   }
 
-  const paging = pagingOf(url);
+  const paged = pagingOf(url);
+  const paging = paged?.kind === "socrata-resource" && outcome.status === "fetchable" ? { ...paged, select: socrataSelection(id, outcome) } : paged;
 
   return {
     status: "fetchable",
     source,
     ...(paging === undefined ? {} : { paging }),
+    ...(streams(outcome, url) === true ? { stream: true } : {}),
     archive: outcome.archive ?? { kind: "none" },
     parser: { format: "csv-table", encoding: outcome.encoding, delimiter: outcome.delimiter, skipLines: outcome.skipLines, idColumn: outcome.idColumn, numericColumns: outcome.numericColumns, columns: keptColumns(outcome), ...(outcome.nullValues === undefined ? {} : { nullValues: outcome.nullValues }) },
   };
@@ -396,7 +443,7 @@ export function convertItem(item: SurveyEntry, curation: CurationItem, probedOn:
   if (outcome.status === "fetchable-instance-files") {
     checkInstanceFiles(item.id, outcome);
   } else if (outcome.status !== "not-fetchable") {
-    checkFetchable(item.id, outcome);
+    checkFetchable(item.id, outcome, givenUrl);
   }
   assertMachineReadableRead(curation.id, item.url, curation.licence);
   const entry = parseEntry({
@@ -412,7 +459,7 @@ export function convertItem(item: SurveyEntry, curation: CurationItem, probedOn:
     sources,
     licence: licenceOf(curation.licence),
     citations: curation.citations ?? [],
-    recipe: recipeOf(outcome, dataUrl === undefined ? 0 : 1, givenUrl),
+    recipe: recipeOf(item.id, outcome, dataUrl === undefined ? 0 : 1, givenUrl),
     crosswalk: outcome.status === "not-fetchable" ? { file: OR_NODES_CROSSWALK } : outcome.status === "fetchable-instance-files" ? instanceFilesCrosswalkOf(outcome) : crosswalkOf(outcome),
     expectedCounts: expectedCountsOf(outcome),
     properties: { surveyId: item.id, ...((outcome.status === "fetchable-instance-files" || outcome.status === "fetchable-table-collection") && outcome.timeUnit !== undefined ? { timeUnit: outcome.timeUnit } : {}) },
