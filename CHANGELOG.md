@@ -1,3 +1,19 @@
+# [0.38.0](https://github.com/Mearman/keepset/compare/v0.37.1...v0.38.0) (2026-10-21)
+
+
+### Bug Fixes
+
+* **parsers:** read a zero multiplicity as a line with no edges ([013122e](https://github.com/Mearman/keepset/commit/013122e27287551f13b2a75779f1c2d6ffb11493))
+
+
+### Features
+
+* **archive:** read legacy xls and OpenDocument spreadsheets as sheets ([60f61bd](https://github.com/Mearman/keepset/commit/60f61bd2fa43f20877bd3ab7af37298091225211))
+* **parsers:** filter, count and fold mirrored lines in an edge list ([ae0c2e4](https://github.com/Mearman/keepset/commit/ae0c2e45613783d05190b34ac4508c60dc359344))
+* **parsers:** read Witvliet connectome synapse files ([be53e72](https://github.com/Mearman/keepset/commit/be53e72cd67202f2a53f0792d88a5e22274bf54d))
+* **seed:** give the WormAtlas and WormWiring connectomes recipes ([678382a](https://github.com/Mearman/keepset/commit/678382a1e371e3961f1d8552a3469b775595cfbe))
+* **seed:** read the Perm sites workbook and the flood warnings table ([4dbf752](https://github.com/Mearman/keepset/commit/4dbf75287d75e82dc1f3bdaa0d42d384cdbd3fb8))
+
 ## [0.37.1](https://github.com/Mearman/keepset/compare/v0.37.0...v0.37.1) (2026-10-21)
 
 # [0.37.0](https://github.com/Mearman/keepset/compare/v0.36.0...v0.37.0) (2026-10-21)
