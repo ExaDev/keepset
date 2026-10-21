@@ -127,8 +127,8 @@ export type ArchiveMember = z.infer<typeof ArchiveMemberSchema>;
 /** The archive kinds that hold several files, from which a recipe selects one (`member`) or every one a selector matches (`members`). */
 const FileArchiveKindSchema = z.enum(["zip", "tar", "tar.gz", "tar.bz2"]);
 
-/** An archive a collection is read from: every file a selector matches, at least one. */
-export const CollectionArchiveSchema = z.object({ kind: FileArchiveKindSchema, members: ArchiveMemberSchema }).strict();
+/** An archive a collection is read from: every file a selector matches, at least one. With `inner` of kind `xlsx`, every matched member is a workbook and each of its sheets, in the workbook's order, is one file of the collection: the sheet's CSV, at the path of the member and the sheet's name joined by `/`, for an instance format laid out on a sheet. `sheets` is a regular expression a sheet's whole name must match for the sheet to be read (every sheet when it is absent), and it must match at least one sheet of every workbook. */
+export const CollectionArchiveSchema = z.object({ kind: FileArchiveKindSchema, members: ArchiveMemberSchema, inner: z.object({ kind: z.literal("xlsx"), sheets: MemberPatternSchema.optional() }).strict().optional() }).strict();
 
 /** How a member that is itself an archive unpacks into the file the parser reads: gunzipped, or one member of it selected. It nests one level, which is as deep as any source in the catalogue goes. */
 export const InnerArchiveSchema = z.union([z.object({ kind: z.literal("gzip") }).strict(), z.object({ kind: FileArchiveKindSchema, member: ArchiveMemberSchema }).strict()]);
