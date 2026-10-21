@@ -1,3 +1,10 @@
+# [0.42.0](https://github.com/Mearman/keepset/compare/v0.41.1...v0.42.0) (2026-10-21)
+
+
+### Features
+
+* **sources:** hash what a source serves and check its mirrors ([87f1f69](https://github.com/Mearman/keepset/commit/87f1f69cf404c66137c414f6cbd9ee3ff6a715eb))
+
 ## [0.41.1](https://github.com/Mearman/keepset/compare/v0.41.0...v0.41.1) (2026-10-21)
 
 
