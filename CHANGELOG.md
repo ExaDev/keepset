@@ -1,3 +1,10 @@
+# [0.46.0](https://github.com/Mearman/keepset/compare/v0.45.0...v0.46.0) (2026-10-21)
+
+
+### Features
+
+* **fetch:** resolve sources through the Wayback Machine and contribute a capture ([cbe4cb0](https://github.com/Mearman/keepset/commit/cbe4cb0476458fd9babc7fa2c6491517a095ef6c))
+
 # [0.45.0](https://github.com/Mearman/keepset/compare/v0.44.0...v0.45.0) (2026-10-21)
 
 
