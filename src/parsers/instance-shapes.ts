@@ -1,4 +1,5 @@
 import type { Parser } from "../entry";
+import { HHCRSP_COLUMNS, HHCRSP_META, HHCRSP_TEXT_COLUMNS } from "./hhcrsp";
 import { CUSTOMER_POINTS_COLUMNS, CUSTOMER_POINTS_META, CUSTOMER_POINTS_TEXT_COLUMNS } from "./customer-points";
 import { SOLOMON_COLUMNS, SOLOMON_META, SOLOMON_TEXT_COLUMNS } from "./solomon";
 import { TOP_COLUMNS, TOP_META, TOP_TEXT_COLUMNS } from "./top";
@@ -16,6 +17,7 @@ export const INSTANCE_SHAPES = {
   "vrp-rep": { columns: VRP_REP_COLUMNS, text: VRP_REP_TEXT_COLUMNS, meta: VRP_REP_META },
   tsplib: { columns: TSPLIB_COLUMNS, text: TSPLIB_TEXT_COLUMNS, meta: TSPLIB_META },
   toptw: { columns: TOPTW_COLUMNS, text: TOPTW_TEXT_COLUMNS, meta: TOPTW_META },
+  hhcrsp: { columns: HHCRSP_COLUMNS, text: HHCRSP_TEXT_COLUMNS, meta: HHCRSP_META },
 } as const;
 
 /** The format names of the instance file parsers. */

@@ -203,6 +203,16 @@ function* records(pieces: Readonly<Iterable<string>>, delimiter: string, firstLi
 }
 
 /**
+ * Splits comma-separated text into its records' fields by RFC 4180, as `records` does, keeping every record (blank lines included) at its position: the grid a workbook sheet's CSV makes, for a parser that reads a layout of blocks and not one table.
+ * @param text - The text.
+ * @returns Each record's fields, in order.
+ * @throws NativeParseError when a quoted field is never closed or a quote opens inside an unquoted field.
+ */
+export function csvGrid(text: string): (readonly string[])[] {
+  return [...records([text], ",", 1)].map((record) => record.fields);
+}
+
+/**
  * Drops the first physical lines of a file given in pieces.
  * @param pieces - The file text in order.
  * @param count - How many physical lines to drop.

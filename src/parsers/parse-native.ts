@@ -7,6 +7,7 @@ import { parseKonect } from "./konect";
 import { parseMatrixMarket } from "./matrix-market";
 import { parseCsvTable } from "./csv-table";
 import { parseGeojson } from "./geojson";
+import { parseHhcrsp } from "./hhcrsp";
 import type { NativeDocument, NativeGraph, NativeInstance, NativeTable } from "./native";
 import { parsePajek } from "./pajek";
 import { parseCustomerPoints } from "./customer-points";
@@ -145,6 +146,9 @@ export function parseNative(bytes: Uint8Array, parser: Parser): NativeDocument {
   }
   if (parser.format === "vrp-rep") {
     return parseVrpRep(text);
+  }
+  if (parser.format === "hhcrsp") {
+    return parseHhcrsp(text);
   }
 
   return parsePajek(text);
