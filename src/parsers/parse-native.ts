@@ -22,6 +22,7 @@ import { parseVerolog2019 } from "./verolog-2019";
 import { parseUserItemCounts } from "./user-item-counts";
 import { parseUserItemRatings } from "./user-item-ratings";
 import { parseVrpRep } from "./vrp-rep";
+import { parseWitvlietSynapses } from "./witvliet-synapses";
 import type { InstanceParser } from "./instance-shapes";
 
 /** Bytes converted per String.fromCharCode call: spreading a whole file would exceed the engine's argument-count limit, and this many stays well inside every engine's. */
@@ -137,6 +138,9 @@ export function parseNative(bytes: Uint8Array, parser: Parser): NativeDocument {
   }
   if (parser.format === "gd-contest") {
     return parseGdContest(text);
+  }
+  if (parser.format === "witvliet-synapses") {
+    return parseWitvlietSynapses(text);
   }
   if (parser.format === "customer-points") {
     return parseCustomerPoints(text);
