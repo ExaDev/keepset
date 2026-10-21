@@ -1,3 +1,16 @@
+# [0.36.0](https://github.com/Mearman/keepset/compare/v0.35.0...v0.36.0) (2026-10-21)
+
+
+### Bug Fixes
+
+* **seed:** refresh the pipeline catalogue copy and regenerate the graph entries ([95ff983](https://github.com/Mearman/keepset/commit/95ff98380d3d85823b7748a2ae5d37140b537dbe)), closes [#116](https://github.com/Mearman/keepset/issues/116)
+
+
+### Features
+
+* **seed:** fetch SuiteSparse matrices from the University of Florida mirror ([36d855d](https://github.com/Mearman/keepset/commit/36d855d67ea794f6f59ecc8f67dfdb61373a1231)), closes [#115](https://github.com/Mearman/keepset/issues/115)
+* **seed:** read homepage sources and a download's endpoint columns and header lines ([ad56654](https://github.com/Mearman/keepset/commit/ad566541c033b39e2bf268475b1e927adf9116cc))
+
 # [0.35.0](https://github.com/Mearman/keepset/compare/v0.34.0...v0.35.0) (2026-10-21)
 
 
