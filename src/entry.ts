@@ -189,9 +189,19 @@ export const ParserSchema = z.discriminatedUnion("format", [
       commentPrefixes: z.array(z.string().min(1)),
       sourceColumn: ColumnSchema,
       targetColumn: ColumnSchema,
+      /** Keep only the lines whose `column` holds one of `values`, so a table that lists several relations side by side (a connectome's synapse types) gives the graph of the ones named. */
+      keep: z
+        .object({ column: ColumnSchema, values: z.array(z.string().min(1)).min(1) })
+        .strict()
+        .optional(),
+      /** The column holding how many edges a line stands for, a positive whole number, for a table that lists each pair once with its count. */
+      multiplicityColumn: ColumnSchema.optional(),
+      /** The table lists every undirected edge twice, once in each direction and with the same multiplicity: each pair's edges are emitted once, in the direction it is first listed, a self-loop's once, and a line whose mirror is missing is an error. graph/v1 records direction in `meta` and never by duplicating edges, so an undirected graph read from such a table needs this. */
+      mirrored: z.literal(true).optional(),
     })
     .strict()
-    .refine((parser) => parser.sourceColumn !== parser.targetColumn, { message: "sourceColumn and targetColumn must differ", path: ["targetColumn"] }),
+    .refine((parser) => parser.sourceColumn !== parser.targetColumn, { message: "sourceColumn and targetColumn must differ", path: ["targetColumn"] })
+    .refine((parser) => [parser.keep?.column, parser.multiplicityColumn].every((column) => column === undefined || (column !== parser.sourceColumn && column !== parser.targetColumn)), { message: "the keep and multiplicity columns must not be an endpoint column", path: ["keep"] }),
   z.object({ format: z.literal("matrix-market"), encoding: EncodingSchema }).strict(),
   z
     .object({
