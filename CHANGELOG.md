@@ -1,3 +1,10 @@
+## [0.47.1](https://github.com/Mearman/keepset/compare/v0.47.0...v0.47.1) (2026-10-21)
+
+
+### Bug Fixes
+
+* **archive:** pin the capture a fresh capture's replay answers from ([b1e4c68](https://github.com/Mearman/keepset/commit/b1e4c68dac21a8de2b1648923302cca745122bf1))
+
 # [0.47.0](https://github.com/Mearman/keepset/compare/v0.46.1...v0.47.0) (2026-10-21)
 
 
