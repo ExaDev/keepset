@@ -1,71 +1,11 @@
 import { unzipSync } from "fflate";
 import { ArchiveError } from "../errors";
 import { getOwn } from "../own";
-import { csvField } from "./csv-text";
+import { BUILT_IN_DATE_FORMATS, isDateFormat, isoOf, type SheetGrid } from "./sheet";
+import { attributesOf, elements, unescape } from "./xml-part";
 
-const HEXADECIMAL = 16;
-const DECIMAL = 10;
 const LETTERS = 26;
 const FIRST_LETTER = "A".charCodeAt(0);
-const SECONDS_PER_DAY = 86_400;
-const MILLISECONDS = 1000;
-/** The serial number Excel gives its 29th of February 1900, a day that never existed: serials above it count from 30 December 1899 and serials below it from 31 December 1899. */
-const LEAP_BUG_SERIAL = 60;
-/** The day a serial number counts from: 1 January 1904 in a workbook that says so, otherwise 31 December 1899 for the serials before Excel's false 29th of February 1900 and 30 December 1899 for those after it. */
-const EPOCH_1904 = "1904-01-01T00:00:00Z";
-const EPOCH_BEFORE_LEAP_BUG = "1899-12-31T00:00:00Z";
-const EPOCH_AFTER_LEAP_BUG = "1899-12-30T00:00:00Z";
-const DATE_LENGTH = "2000-01-01".length;
-const DATE_TIME_LENGTH = "2000-01-01T00:00:00".length;
-const SECONDS_PER_MINUTE = 60;
-const MINUTES_PER_HOUR = 60;
-
-/** One element's attributes, by name with any namespace prefix kept (`r:id`). */
-type Attributes = Readonly<Record<string, string>>;
-
-/**
- * Replaces the XML entities and character references of a text.
- * @param text - Escaped text.
- * @returns The text.
- */
-function unescape(text: string): string {
-  return text.replaceAll(/&(#x[0-9A-Fa-f]+|#[0-9]+|amp|lt|gt|quot|apos);/g, (_whole, entity: string) => {
-    if (entity.startsWith("#x")) {
-      return String.fromCodePoint(Number.parseInt(entity.slice(2), HEXADECIMAL));
-    }
-    if (entity.startsWith("#")) {
-      return String.fromCodePoint(Number.parseInt(entity.slice(1), DECIMAL));
-    }
-
-    return { amp: "&", lt: "<", gt: ">", quot: '"', apos: "'" }[entity] ?? "";
-  });
-}
-
-/**
- * The attributes of a start tag's text.
- * @param tag - The text between `<` and `>`, name included.
- * @returns The attributes, unescaped.
- */
-function attributesOf(tag: string): Attributes {
-  const attributes: Record<string, string> = {};
-  for (const [, name, value] of tag.matchAll(/([\w:.-]+)\s*=\s*"([^"]*)"/g)) {
-    if (name !== undefined && value !== undefined) {
-      attributes[name] = unescape(value);
-    }
-  }
-
-  return attributes;
-}
-
-/**
- * The start tags of one element name in an XML part, in order.
- * @param xml - The part's text.
- * @param name - The element name.
- * @returns The attributes of each start tag.
- */
-function elements(xml: string, name: string): Attributes[] {
-  return [...xml.matchAll(new RegExp(`<${name}(?=[\\s/>])([^>]*)>`, "g"))].map((match) => attributesOf(match[1] ?? ""));
-}
 
 /**
  * The strings of a workbook's shared string table, in index order: each item's text runs joined, the phonetic runs of East Asian text left out.
@@ -78,23 +18,6 @@ function sharedStrings(xml: string): string[] {
 
     return [...runs.matchAll(/<t(?:\s[^>]*)?>([\s\S]*?)<\/t>/g)].map((text) => unescape(text[1] ?? "")).join("");
   });
-}
-
-/** The built-in number format ids that show a date or a time, as inclusive ranges (ECMA-376, 18.8.30): the short and long dates and times, the locale dates, and the elapsed and minute times. */
-const BUILT_IN_DATE_FORMATS = [
-  { first: 14, last: 22 },
-  { first: 27, last: 36 },
-  { first: 45, last: 47 },
-  { first: 50, last: 58 },
-] as const;
-
-/**
- * Whether a custom number format shows a date or a time: it names a year, month, day, hour or second once its quoted text, escaped characters and bracketed conditions and colours are removed.
- * @param code - The format code.
- * @returns True for a date or time format.
- */
-function isDateFormat(code: string): boolean {
-  return /[ymdhs]/i.test(code.replaceAll(/"[^"]*"|\\.|\[[^\]]*\]/g, ""));
 }
 
 /**
@@ -125,29 +48,6 @@ function dateStyles(xml: string | undefined): ReadonlySet<number> {
   return styles;
 }
 
-/**
- * A date serial number as ISO 8601 text: a date when it has no time of day, a date and time when it has, and a time alone for a serial below one day in a 1900 workbook.
- * @param serial - The serial number, with the time of day as its fraction.
- * @param date1904 - Whether the workbook counts days from 1 January 1904.
- * @returns The text.
- * @throws ArchiveError for the serial of the 29th of February 1900, which is not a date.
- */
-function isoOf(serial: number, date1904: boolean): string {
-  const whole = Math.floor(serial);
-  const seconds = Math.round((serial - whole) * SECONDS_PER_DAY);
-  if (!date1904 && whole === 0) {
-    const clock = [Math.floor(seconds / (SECONDS_PER_MINUTE * MINUTES_PER_HOUR)), Math.floor(seconds / SECONDS_PER_MINUTE) % MINUTES_PER_HOUR, seconds % SECONDS_PER_MINUTE];
-
-    return clock.map((part) => String(part).padStart(2, "0")).join(":");
-  }
-  if (!date1904 && whole === LEAP_BUG_SERIAL) {
-    throw new ArchiveError("a cell holds the serial of 29 February 1900, which is not a date");
-  }
-  const epoch = Date.parse(date1904 ? EPOCH_1904 : whole < LEAP_BUG_SERIAL ? EPOCH_BEFORE_LEAP_BUG : EPOCH_AFTER_LEAP_BUG);
-  const stamp = new Date(epoch + (whole * SECONDS_PER_DAY + seconds) * MILLISECONDS).toISOString();
-
-  return stamp.slice(0, seconds === 0 ? DATE_LENGTH : DATE_TIME_LENGTH);
-}
 
 /**
  * The 0-based column of a cell reference such as `AB12`.
@@ -162,6 +62,7 @@ function columnOf(reference: string): number {
 
   return index - 1;
 }
+
 
 /**
  * Finds the part that holds a named sheet.
@@ -194,7 +95,7 @@ function sheetPath(workbook: string, rels: string, name: string): string {
  * @returns The rows by 1-based row number, each a sparse list of the cells' text, and the widest row's column count.
  * @throws ArchiveError when a cell names a shared string the workbook lacks or a date cell holds no number.
  */
-function readRows(xml: string, strings: readonly string[], dates: ReadonlySet<number>, date1904: boolean): { readonly rows: ReadonlyMap<number, string[]>; readonly width: number } {
+function readRows(xml: string, strings: readonly string[], dates: ReadonlySet<number>, date1904: boolean): SheetGrid {
   const rows = new Map<number, string[]>();
   let width = 0;
   let next = 1;
@@ -272,13 +173,13 @@ export function sheetNames(bytes: Uint8Array): string[] {
 }
 
 /**
- * Writes one sheet of an xlsx workbook as CSV text, so a recipe reads it with the table parser: one line for every row number from the first to the last (a row the sheet leaves out is an empty line, so the lines above the header are the rows an editor shows), every line the width of the sheet's widest row, a date cell as ISO 8601 text, a boolean as TRUE or FALSE, a number as the text the workbook stores, and a formula as its stored result.
+ * Reads one sheet of an xlsx workbook: a date cell as ISO 8601 text (recognised by its cell style's number format, in either date system), a boolean as TRUE or FALSE, a number as the text the workbook stores, and a formula as its stored result.
  * @param bytes - The workbook.
  * @param sheet - The sheet's name.
- * @returns The CSV, in UTF-8.
+ * @returns The sheet's cells.
  * @throws ArchiveError when the bytes are not a workbook, the sheet is missing, or a cell cannot be read.
  */
-export function sheetToCsv(bytes: Uint8Array, sheet: string): Uint8Array {
+export function xlsxGrid(bytes: Uint8Array, sheet: string): SheetGrid {
   let parts: Readonly<Record<string, Uint8Array>>;
   try {
     const wanted = new Set(["xl/workbook.xml", "xl/_rels/workbook.xml.rels", "xl/sharedStrings.xml", "xl/styles.xml"]);
@@ -302,13 +203,6 @@ export function sheetToCsv(bytes: Uint8Array, sheet: string): Uint8Array {
     throw new ArchiveError(`the workbook names the sheet ${sheet} in ${path}, which the file does not have`);
   }
   const strings = text("xl/sharedStrings.xml");
-  const { rows, width } = readRows(new TextDecoder("utf-8").decode(sheetBytes), strings === undefined ? [] : sharedStrings(strings), dateStyles(text("xl/styles.xml")), /<workbookPr(?=[\s/>])[^>]*date1904="(?:1|true)"/.test(workbook));
-  const last = Math.max(0, ...rows.keys());
-  const lines: string[] = [];
-  for (let number = 1; number <= last; number += 1) {
-    const cells = rows.get(number) ?? [];
-    lines.push(Array.from({ length: width }, (_empty, column) => csvField(cells[column] ?? "")).join(","));
-  }
 
-  return new TextEncoder().encode(lines.length === 0 ? "" : `${lines.join("\n")}\n`);
+  return readRows(new TextDecoder("utf-8").decode(sheetBytes), strings === undefined ? [] : sharedStrings(strings), dateStyles(text("xl/styles.xml")), /<workbookPr(?=[\s/>])[^>]*date1904="(?:1|true)"/.test(workbook));
 }

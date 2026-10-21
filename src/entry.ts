@@ -130,8 +130,12 @@ const FileArchiveKindSchema = z.enum(["zip", "tar", "tar.gz", "tar.bz2"]);
 /** An archive a collection is read from: every file a selector matches, at least one. With `inner` of kind `xlsx`, every matched member is a workbook and each of its sheets, in the workbook's order, is one file of the collection: the sheet's CSV, at the path of the member and the sheet's name joined by `/`, for an instance format laid out on a sheet. `sheets` is a regular expression a sheet's whole name must match for the sheet to be read (every sheet when it is absent), and it must match at least one sheet of every workbook. */
 export const CollectionArchiveSchema = z.object({ kind: FileArchiveKindSchema, members: ArchiveMemberSchema, inner: z.object({ kind: z.literal("xlsx"), sheets: MemberPatternSchema.optional() }).strict().optional() }).strict();
 
-/** How a member that is itself an archive unpacks into the file the parser reads: gunzipped, or one member of it selected. It nests one level, which is as deep as any source in the catalogue goes. */
-export const InnerArchiveSchema = z.union([z.object({ kind: z.literal("gzip") }).strict(), z.object({ kind: FileArchiveKindSchema, member: ArchiveMemberSchema }).strict()]);
+/** A spreadsheet read as the CSV of one of its sheets (the sheet's name, as the workbook gives it): an Excel workbook (`xlsx`), a legacy binary Excel 97 to 2003 workbook (`xls`, BIFF8) or an OpenDocument spreadsheet (`ods`, whose sheets are its tables). The three give the same text for the same cells. */
+export const SheetArchiveSchema = z.object({ kind: z.enum(["xlsx", "xls", "ods"]), sheet: z.string().min(1) }).strict();
+export type SheetArchive = z.infer<typeof SheetArchiveSchema>;
+
+/** How a member that is itself an archive unpacks into the file the parser reads: gunzipped, one member of it selected, or one sheet of it read when it is a spreadsheet. It nests one level, which is as deep as any source in the catalogue goes. */
+export const InnerArchiveSchema = z.union([z.object({ kind: z.literal("gzip") }).strict(), z.object({ kind: FileArchiveKindSchema, member: ArchiveMemberSchema }).strict(), SheetArchiveSchema]);
 export type InnerArchive = z.infer<typeof InnerArchiveSchema>;
 
 /** The name of a part of a document read from several files, which the parser gives its meaning: the split a triples file holds (`train`, `valid`, `test`), or which of an HGB dataset's files it is (`nodes`, `links`). */
@@ -149,7 +153,7 @@ export const PartsArchiveSchema = z
   .strict();
 export type PartsArchive = z.infer<typeof PartsArchiveSchema>;
 
-/** How the downloaded bytes unpack into the file the parser reads, the named files a parser reads together into one document (`parts`), or for a collection the files it reads one by one. A `members` selector gives every member it matches, at least one, in path order. `gzip` and `bzip2` are one compressed file, and `tar.gz` and `tar.bz2` a tar archive compressed with them. A member that is an archive in its turn (a contest bundle that ships its problems as a zip inside the zip) is unpacked by `inner`. A workbook (`xlsx`) is read as the CSV of its named sheet, with dates as ISO 8601 text, for the `csv-table` parser. A point shapefile (`shapefile`) is a zip whose `member` selects the `.shp`, read with the `.dbf`, `.prj` and `.cpg` of the same name beside it as the CSV of its attribute table with each point's stored coordinates and its WGS84 position, for the `csv-table` parser. */
+/** How the downloaded bytes unpack into the file the parser reads, the named files a parser reads together into one document (`parts`), or for a collection the files it reads one by one. A `members` selector gives every member it matches, at least one, in path order. `gzip` and `bzip2` are one compressed file, and `tar.gz` and `tar.bz2` a tar archive compressed with them. A member that is an archive in its turn (a contest bundle that ships its problems as a zip inside the zip, a spreadsheet inside a zip) is unpacked by `inner`. A spreadsheet (`xlsx`, `xls` or `ods`) is read as the CSV of its named sheet, with dates as ISO 8601 text, for the `csv-table` or `edge-list` parser. A point shapefile (`shapefile`) is a zip whose `member` selects the `.shp`, read with the `.dbf`, `.prj` and `.cpg` of the same name beside it as the CSV of its attribute table with each point's stored coordinates and its WGS84 position, for the `csv-table` parser. */
 export const ArchiveSchema = z.union([
   z.object({ kind: z.literal("none") }).strict(),
   z.object({ kind: z.literal("gzip") }).strict(),
@@ -157,7 +161,7 @@ export const ArchiveSchema = z.union([
   z.object({ kind: FileArchiveKindSchema, member: ArchiveMemberSchema, inner: InnerArchiveSchema.optional() }).strict(),
   CollectionArchiveSchema,
   PartsArchiveSchema,
-  z.object({ kind: z.literal("xlsx"), sheet: z.string().min(1) }).strict(),
+  SheetArchiveSchema,
   z.object({ kind: z.literal("shapefile"), member: ArchiveMemberSchema }).strict(),
 ]);
 export type Archive = z.infer<typeof ArchiveSchema>;
