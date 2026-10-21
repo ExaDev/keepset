@@ -6,7 +6,7 @@
     }
   ],
   "crosswalk": {
-    "file": "crosswalks/graph-v1/relations-split.json"
+    "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "Large-scale heterogeneous knowledge graph from Wikidata. Contains 2.5 million entities connected through 535 relation types with over 17 million factual triples. Challenging benchmark for knowledge graph completion requiring prediction of potential relationships among massive complex facts. Part of the Open Graph Benchmark.",
   "expectedCounts": {
@@ -25,48 +25,17 @@
     "cyclic": true,
     "density": 0.000002692292964066484,
     "directed": true,
-    "edgeTypes": 1,
+    "edgeTypes": 535,
     "heterogeneous": true,
     "multigraph": true,
-    "nodeTypes": 2,
+    "nodeTypes": 1,
     "rawBytes": 0,
-    "selfLoops": false,
+    "selfLoops": true,
     "weighted": false
   },
   "recipe": {
-    "archive": {
-      "kind": "zip",
-      "parts": [
-        {
-          "member": {
-            "path": "wikikg2/train.txt"
-          },
-          "name": "train"
-        },
-        {
-          "member": {
-            "path": "wikikg2/valid.txt"
-          },
-          "name": "valid"
-        },
-        {
-          "member": {
-            "path": "wikikg2/test.txt"
-          },
-          "name": "test"
-        }
-      ]
-    },
-    "parser": {
-      "delimiter": "tab",
-      "encoding": "utf-8",
-      "format": "kg-triples",
-      "header": "none",
-      "order": "head-relation-tail",
-      "quoted": true
-    },
-    "source": 0,
-    "status": "fetchable"
+    "reason": "no download is in a form keepset reads yet (kge-triples-zip: the triples are more edges than one fetch holds: a whole fetch at Node's default heap aborts with an allocation failure, because the crosswalk step copies every edge (ExaDev/crossmap#57))",
+    "status": "not-fetchable"
   },
   "sources": [
     {

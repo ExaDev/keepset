@@ -125,6 +125,16 @@ export const CORRECTIONS: ReadonlyMap<string, Correction> = new Map([
       reason: "the catalogue's edge count and properties describe a reading that kept almost none of the triples, while the recipe reads every triple of the three splits with its relation as the edge type",
     },
   ],
+  [
+    "wikidata5m",
+    {
+      expectedNodes: 4594485,
+      expectedEdges: 20624575,
+      properties: { edgeTypes: 822 },
+      reason: "the catalogue records round figures for the transductive splits, whose files hold these entities and triples, and one edge type where they hold a relation per type",
+    },
+  ],
+  ["ogbl-wikikg2", { properties: { edgeTypes: 535, nodeTypes: 1, selfLoops: true }, reason: "the triples' relations are the edge types, the entities carry no type, and some triples name the same entity as head and tail" }],
   ["nell-995", { properties: { edgeTypes: 200, nodeTypes: 1 }, reason: "the recipe reads each triple's relation as the edge type, and the entities carry no type" }],
   [
     "hetionet",
@@ -440,9 +450,12 @@ function ratingsRecipe(download: Download, format: "amazon-ratings" | "amazon-ra
  * The recipe for a triples download.
  * @param url - The download URL.
  * @param layout - Its layout.
- * @returns The recipe.
+ * @returns The recipe, or the reason a download whose layout is read has none.
  */
-function triplesRecipe(url: string, layout: TriplesLayout): Chosen {
+function triplesRecipe(url: string, layout: TriplesLayout): Chosen | { readonly unsupported: string } {
+  if (layout.notFetchable !== undefined) {
+    return { unsupported: layout.notFetchable };
+  }
   const parser: Parser = { format: "kg-triples", encoding: "utf-8", ...layout.parser };
   const flags = [`triples layout read from the downloaded file: ${layout.what}`];
   if (!("splits" in layout.archive)) {

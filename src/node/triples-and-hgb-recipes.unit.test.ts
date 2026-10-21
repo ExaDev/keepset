@@ -158,7 +158,7 @@ describe("the triples, HGB and counts recipes in the bundled catalogue", () => {
 
   it("covers the knowledge graph, HGB and Last.fm entries", () => {
     const ids = withParser.map((dataset) => dataset.entry.id);
-    for (const id of ["kg-kinship", "fb15k-237", "wn18rr", "ogbl-wikikg2", "wikidata5m", "kg-codex-s", "nell-995", "hetionet", "acm", "acm-hgb", "dblp-het", "freebase", "imdb", "lastfm-hgb"]) {
+    for (const id of ["kg-kinship", "fb15k-237", "wn18rr", "kg-codex-s", "nell-995", "hetionet", "acm", "acm-hgb", "dblp-het", "freebase", "imdb", "lastfm-hgb"]) {
       expect(ids).toContain(id);
     }
   });
