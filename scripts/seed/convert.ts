@@ -438,6 +438,46 @@ function ratingsRecipe(download: Download, format: "amazon-ratings" | "amazon-ra
   };
 }
 
+/** A recipe the import writes for one dataset by its id, with the counts that recipe reads where they differ from the catalogue's and the flag that says where it differs from the pipeline's reading; or the reason no recipe reads the dataset. */
+export type DatasetRecipe = { readonly archive: Archive; readonly parser: Parser; readonly counts?: { readonly nodes: number; readonly edges: number }; readonly flag: string } | { readonly unsupported: string };
+
+/** The WormAtlas NeuronConnect sheet: Neuron 1, Neuron 2, the synapse type and the synapse count, under one header row. */
+const NEURON_CONNECT = { archive: { kind: "xls", sheet: "NeuronConnect.csv" }, columns: { type: 2, count: 3 } } as const;
+
+/** WormAtlas's synapse types (https://www.wormatlas.org/neuronalwiring.html, section 2.1): S and Sp are chemical synapses sent from Neuron 1 to Neuron 2, R and Rp the same synapses recorded from the receiving side, so they are left out of every graph to count each synapse once; EJ is a gap junction, listed from each side; NMJ is a neuromuscular junction, whose Neuron 2 is the literal NMJ. */
+const SENDS = ["S", "Sp"];
+
+/**
+ * An edge-list parser over a sheet the xls reader writes as CSV.
+ * @param options - The options beyond a comma-delimited table with one header line and the endpoints in its first two columns.
+ * @returns The parser.
+ */
+function sheetEdges(options: Partial<Extract<Parser, { format: "edge-list" }>>): Parser {
+  return edgeList({ delimiter: "comma", skipLines: 1, commentPrefixes: [], ...options });
+}
+
+/** The send-only chemical flag shared by the WormAtlas chemical graphs. */
+const SENDS_FLAG = "WormAtlas NeuronConnect: the recipe reads the send rows (S, Sp) from Neuron 1 to Neuron 2 and leaves out the receive rows (R, Rp), which record the same synapses from the other side; the pipeline read all four, counting each synapse twice and half of them reversed, so the counts are the recipe's";
+
+/**
+ * Recipes for datasets whose pipeline parser is chosen by the dataset's id and not its format (`_download_and_convert_xls`, `_download_and_convert_bumbarger_consensus` and `_download_and_convert_witvliet_json` in experiments/pipeline/scripts/download_benchmark_graph.py of Mearman/Thesis), written out as declarative recipes. graph/v1 carries topology only, so a weight or synapse type the pipeline kept on an edge is not carried; where the recipe reads different counts from the catalogue's, the counts it reads, measured on the downloads, are stated. A dataset no single download gives is recorded with the reason.
+ */
+export const DATASET_RECIPES: ReadonlyMap<string, DatasetRecipe> = new Map<string, DatasetRecipe>([
+  ["wormwiring-celegans-hermaphrodite-chemical", { archive: NEURON_CONNECT.archive, parser: sheetEdges({ keep: { column: NEURON_CONNECT.columns.type, values: SENDS }, multiplicityColumn: NEURON_CONNECT.columns.count }), counts: { nodes: 279, edges: 6394 }, flag: `${SENDS_FLAG}; each synapse is an edge, a row giving as many as its count` }],
+  ["wormwiring-celegans-hermaphrodite-chemical-weighted", { archive: NEURON_CONNECT.archive, parser: sheetEdges({ keep: { column: NEURON_CONNECT.columns.type, values: SENDS } }), counts: { nodes: 279, edges: 2575 }, flag: `${SENDS_FLAG}; each row is one edge and its synapse count, the weight, is not carried` }],
+  ["wormwiring-celegans-hermaphrodite-chemical-typed", { archive: NEURON_CONNECT.archive, parser: sheetEdges({ keep: { column: NEURON_CONNECT.columns.type, values: SENDS } }), counts: { nodes: 279, edges: 2575 }, flag: `${SENDS_FLAG}; each row is one edge and its type and count are not carried` }],
+  ["wormwiring-celegans-hermaphrodite-chemical-undirected-typed", { archive: NEURON_CONNECT.archive, parser: sheetEdges({ keep: { column: NEURON_CONNECT.columns.type, values: SENDS } }), counts: { nodes: 279, edges: 2575 }, flag: `${SENDS_FLAG}; each row is one undirected edge, a reciprocal pair staying two, and its type and count are not carried` }],
+  ["wormwiring-celegans-hermaphrodite-full", { archive: NEURON_CONNECT.archive, parser: sheetEdges({ keep: { column: NEURON_CONNECT.columns.type, values: [...SENDS, "EJ", "NMJ"] } }), counts: { nodes: 281, edges: 3759 }, flag: `${SENDS_FLAG}; the gap junction rows (EJ) give an edge each way, as the file lists them, and the neuromuscular rows (NMJ) an edge to the node NMJ; each row is one edge and its type and count are not carried` }],
+  ["wormwiring-celegans-hermaphrodite-gapjunctions", { archive: NEURON_CONNECT.archive, parser: sheetEdges({ keep: { column: NEURON_CONNECT.columns.type, values: ["EJ"] }, mirrored: true }), counts: { nodes: 253, edges: 517 }, flag: "WormAtlas NeuronConnect: the recipe reads the gap junction rows (EJ), which list each junction from both neurons, as one undirected edge per pair; the pipeline kept both listings, so the counts are the recipe's, and the junction count, the weight, is not carried" }],
+  ["wormwiring-ppacificus-pharyngeal", { archive: { kind: "xlsx", sheet: "Sheet1" }, parser: edgeList({ delimiter: "comma", skipLines: 2, commentPrefixes: [] }), counts: { nodes: 29, edges: 78 }, flag: "Bumbarger and Sommer's consensus network (Table S2) gives each connection the synapse count of each of its two specimens and their average, which is a half for many connections, so no whole number of synapses is recorded: the recipe reads each connection as one edge from the presynaptic to the postsynaptic neuron, below the table's title and header rows; the pipeline rounded the average half to even, so the counts are the recipe's" }],
+  ["wormwiring-witvliet-L1-1-chemical", { archive: { kind: "none" }, parser: { format: "witvliet-synapses", encoding: "utf-8" }, flag: "Witvliet synapses: each partner of a polyadic chemical synapse is an edge from the presynaptic neuron" }],
+  ["wormwiring-witvliet-L1-4-chemical", { archive: { kind: "none" }, parser: { format: "witvliet-synapses", encoding: "utf-8" }, flag: "Witvliet synapses: each partner of a polyadic chemical synapse is an edge from the presynaptic neuron" }],
+  ["wormwiring-witvliet-L2-chemical", { archive: { kind: "none" }, parser: { format: "witvliet-synapses", encoding: "utf-8" }, flag: "Witvliet synapses: each partner of a polyadic chemical synapse is an edge from the presynaptic neuron" }],
+  ["wormwiring-witvliet-L3-chemical", { archive: { kind: "none" }, parser: { format: "witvliet-synapses", encoding: "utf-8" }, flag: "Witvliet synapses: each partner of a polyadic chemical synapse is an edge from the presynaptic neuron" }],
+  ["wormwiring-witvliet-L1-1-all-unweighted", { unsupported: "the graph joins the specimen's chemical synapse file with its gap junction file (Dataset1_gapjunctions.json beside it), and a recipe reads one download" }],
+  ["wormwiring-witvliet-L1-4-all-unweighted", { unsupported: "the graph joins the specimen's chemical synapse file with its gap junction file (Dataset4_gapjunctions.json beside it), and a recipe reads one download" }],
+]);
+
 /**
  * The recipe for a triples download.
  * @param url - The download URL.
@@ -733,13 +773,28 @@ function downloadsOf(sources: readonly SourceEntry[]): SourceDownload[] {
   });
 }
 
+/** Downloads, by URL, that a client verifying TLS cannot fetch from their host although it still serves them, each with the Wayback snapshot holding the same bytes, which the recipe fetches instead, and why. The import records such a download as a dead source pinned to that snapshot and flags the reason. */
+export const UNVERIFIABLE_DOWNLOADS: ReadonlyMap<string, { readonly timestamp: string; readonly reason: string }> = new Map([
+  [
+    "https://www.wormatlas.org/images/NeuronConnect.xls",
+    {
+      timestamp: "20260829213511",
+      reason: "www.wormatlas.org sends only its own certificate and not the InCommon intermediate that issued it, so a client that does not fetch missing intermediates (Node's among them) cannot verify it, and its plain http address redirects to a malformed one; the snapshot holds the bytes the host serves (its Wayback digest is the SHA-1 of the live file)",
+    },
+  ],
+]);
+
 /**
- * The keepset source for a download URL: a snapshot URL becomes a dead source pinned to its timestamp, anything else a live one.
+ * The keepset source for a download URL: a snapshot URL becomes a dead source pinned to its timestamp, as does a download in `UNVERIFIABLE_DOWNLOADS`, and anything else a live one.
  * @param url - The download URL.
  * @param retrieved - The dataset's retrieval date.
  * @returns The source.
  */
 function sourceFor(url: string, retrieved: string): Source {
+  const unverifiable = UNVERIFIABLE_DOWNLOADS.get(url);
+  if (unverifiable !== undefined) {
+    return { url, retrieved, status: "dead", snapshot: { url: waybackUrl(unverifiable.timestamp, url), timestamp: unverifiable.timestamp } };
+  }
   const snapshot = parseWayback(url);
   if (snapshot === undefined) {
     return { url, retrieved, status: "live" };
@@ -766,15 +821,25 @@ export interface Curation {
   readonly mirror: SuiteSparseMirror;
 }
 
+/** What the import supplies by dataset id beyond the catalogue's record: replacement names, and recipes for the datasets whose pipeline parser the id chooses. */
+export interface Overrides {
+  readonly names: ReadonlyMap<string, string>;
+  readonly recipes: ReadonlyMap<string, DatasetRecipe>;
+}
+
+/** The overrides the import runs with. */
+export const OVERRIDES: Overrides = { names: NAME_OVERRIDES, recipes: DATASET_RECIPES };
+
 /**
  * Converts one dataset.
  * @param dataset - The catalogue's dataset.
  * @param licences - Where each dataset's licence was read: the entry's licence is the one its curation records for the source its recipe fetches (its first source when it has no recipe).
  * @param mirror - The SuiteSparse mirror: a download it holds is offered from the mirror ahead of the collection's own link.
- * @param nameOverrides - Replacement names by dataset id; a dataset not listed keeps the name the catalogue gives it.
+ * @param overrides - Replacement names and dataset recipes by dataset id; a dataset named in neither keeps the catalogue's name and gets the recipe its format gives.
  * @returns The entry, when the dataset converts, and its outcome for the report.
+ * @throws Error when a dataset recipe reads a download in the preferred format and the dataset has none.
  */
-export function convertDataset(dataset: SourceDataset, licences: Readonly<GraphLicenceResolver>, mirror: SuiteSparseMirror, nameOverrides: ReadonlyMap<string, string> = NAME_OVERRIDES): { readonly entry?: Entry; readonly outcome: Outcome } {
+export function convertDataset(dataset: SourceDataset, licences: Readonly<GraphLicenceResolver>, mirror: SuiteSparseMirror, overrides: Overrides = OVERRIDES): { readonly entry?: Entry; readonly outcome: Outcome } {
   const { id } = dataset;
   const flags: string[] = [];
   const notConverted = (reason: string): { outcome: Outcome } => ({ outcome: { id, outcome: "not-converted", reason, flags } });
@@ -824,8 +889,17 @@ export function convertDataset(dataset: SourceDataset, licences: Readonly<GraphL
 
   let chosen: Chosen | undefined;
   const unsupported: string[] = [];
+  const fixed = overrides.recipes.get(id);
   const netzschleuder = downloads.find((download) => download.format === "netzschleuder");
-  if (netzschleuder !== undefined) {
+  if (fixed !== undefined) {
+    if ("archive" in fixed) {
+      const download = downloads.find((candidate) => candidate.format === dataset.preferredFormat);
+      if (download === undefined) {
+        throw new Error(`${id}: its dataset recipe reads the download in the preferred format ${dataset.preferredFormat ?? "(none)"}, which the dataset does not have`);
+      }
+      chosen = { url: download.url, archive: fixed.archive, parser: fixed.parser, crosswalk: CROSSWALKS.topology, flags: [fixed.flag] };
+    }
+  } else if (netzschleuder !== undefined) {
     chosen = {
       url: netzschleuderCsv(netzschleuder.url),
       archive: { kind: "zip", member: { path: "edges.csv" } },
@@ -850,12 +924,16 @@ export function convertDataset(dataset: SourceDataset, licences: Readonly<GraphL
   const sources = urls.map((url) => sourceFor(url, url.startsWith(mirror.host) ? mirror.readOn : retrieved));
   let recipe: Recipe;
   if (chosen === undefined) {
-    recipe = { status: "not-fetchable", reason: `no download is in a form keepset reads yet (${[...new Set(unsupported)].join("; ")})` };
+    recipe = { status: "not-fetchable", reason: fixed !== undefined && "unsupported" in fixed ? fixed.unsupported : `no download is in a form keepset reads yet (${[...new Set(unsupported)].join("; ")})` };
     flags.push("not fetchable yet: no declarative recipe exists for any download");
   } else {
     flags.push(...chosen.flags);
     if (parseWayback(chosen.url) !== undefined) {
       flags.push("the source is dead and the recipe fetches its pinned Wayback snapshot");
+    }
+    const unverifiable = UNVERIFIABLE_DOWNLOADS.get(chosen.url);
+    if (unverifiable !== undefined) {
+      flags.push(`the recipe fetches the source's pinned Wayback snapshot: ${unverifiable.reason}`);
     }
     recipe = { status: "fetchable", source: urls.indexOf(chosen.url), archive: chosen.archive, parser: chosen.parser };
   }
@@ -873,7 +951,7 @@ export function convertDataset(dataset: SourceDataset, licences: Readonly<GraphL
   const entry = parseEntry({
     id,
     ...(named === undefined ? {} : { namespace: named.namespace, aliases: [named.alias] }),
-    name: nameOverrides.get(id) ?? dataset.name,
+    name: overrides.names.get(id) ?? dataset.name,
     ...(description === undefined || description === "" ? {} : { description }),
     ...(dataset.domain === undefined ? {} : { domain: dataset.domain }),
     tags: dataset.category === undefined ? [] : [dataset.category],
@@ -883,7 +961,7 @@ export function convertDataset(dataset: SourceDataset, licences: Readonly<GraphL
     citations: citationsOf(dataset.citation),
     recipe,
     crosswalk: { file: chosen?.crosswalk ?? CROSSWALKS.topology },
-    expectedCounts: { nodes: correction?.expectedNodes ?? dataset.nodeCount, edges: correction?.expectedEdges ?? dataset.edgeCount },
+    expectedCounts: (fixed !== undefined && "archive" in fixed ? fixed.counts : undefined) ?? { nodes: correction?.expectedNodes ?? dataset.nodeCount, edges: correction?.expectedEdges ?? dataset.edgeCount },
     properties: { ...propertiesOf(dataset), ...correction?.properties },
   });
 
@@ -940,12 +1018,17 @@ export interface Report {
  * @param pipeline - The pipeline catalogue.
  * @param graphbox - The graphbox catalogue, for the overlap section.
  * @param curation - The licence curation, whose resolver is checked for unused records once every dataset has converted, and the SuiteSparse mirror inventory.
- * @param nameOverrides - Replacement names by dataset id.
+ * @param overrides - Replacement names and dataset recipes by dataset id.
  * @returns The entries in id order and the report.
  * @throws Error when an override names a dataset the catalogue lacks or gives the name the dataset already has.
  */
-export function convertCatalogue(pipeline: SourceCatalogue, graphbox: GraphboxCatalogue, curation: Curation, nameOverrides: ReadonlyMap<string, string> = NAME_OVERRIDES): { readonly entries: readonly Entry[]; readonly report: Report } {
-  for (const [id, name] of nameOverrides) {
+export function convertCatalogue(pipeline: SourceCatalogue, graphbox: GraphboxCatalogue, curation: Curation, overrides: Overrides = OVERRIDES): { readonly entries: readonly Entry[]; readonly report: Report } {
+  for (const id of overrides.recipes.keys()) {
+    if (!Object.values(pipeline.datasets).some((candidate) => candidate.id === id)) {
+      throw new Error(`the dataset recipe for ${id} names no dataset of the catalogue`);
+    }
+  }
+  for (const [id, name] of overrides.names) {
     const dataset = Object.values(pipeline.datasets).find((candidate) => candidate.id === id);
     if (dataset === undefined) {
       throw new Error(`the name override for ${id} names no dataset of the catalogue`);
@@ -957,7 +1040,7 @@ export function convertCatalogue(pipeline: SourceCatalogue, graphbox: GraphboxCa
   const entries: Entry[] = [];
   const outcomes: Outcome[] = [];
   for (const dataset of Object.values(pipeline.datasets).sort((left, right) => (left.id < right.id ? -1 : 1))) {
-    const converted = convertDataset(dataset, curation.licences, curation.mirror, nameOverrides);
+    const converted = convertDataset(dataset, curation.licences, curation.mirror, overrides);
     if (converted.entry !== undefined) {
       entries.push(converted.entry);
     }
