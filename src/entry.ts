@@ -46,6 +46,16 @@ export function waybackUrl(timestamp: string, url: string): string {
   return `https://web.archive.org/web/${timestamp}/${url}`;
 }
 
+/**
+ * The raw form of a snapshot: the bytes as they were captured, without the archive's page chrome. A recipe downloads a dead source from this URL.
+ * @param timestamp - A Wayback timestamp.
+ * @param url - The original URL.
+ * @returns The raw snapshot URL.
+ */
+export function rawSnapshotUrl(timestamp: string, url: string): string {
+  return `https://web.archive.org/web/${timestamp}id_/${url}`;
+}
+
 /** A pinned Wayback Machine snapshot of a source. The timestamp is part of the recipe's reproducibility, not incidental metadata, so it travels with the URL and the two are checked against each other. */
 export const SnapshotSchema = z
   .object({

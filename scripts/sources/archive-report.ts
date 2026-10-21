@@ -1,7 +1,8 @@
-/* The committed record of the sources the Wayback Machine cannot hold, one exception per URL with the reason. `archive-sources.ts --check` accepts a source without a snapshot only when this report lists it, so every source is either pinned or accounted for. */
+/* The committed record of the archive: the sources the Wayback Machine cannot hold, one exception per URL with the reason, and the pins that have been requested back and served their bytes. `archive-sources.ts --check` accepts a source without a snapshot only when this report lists it, and a pin only when this report lists it as verified, so every source is either pinned and verified or accounted for. The record of verification is committed, not kept in the untracked state file, because `--check` must give the same answer on a clean checkout and in CI as on the machine that ran the verification. */
 
 import { existsSync, readFileSync } from "node:fs";
 import { z } from "zod";
+import { WaybackTimestampSchema } from "../../src/entry";
 import { canonicalJson } from "../../src/serialise";
 
 /**
@@ -26,23 +27,34 @@ export const ArchiveExceptionSchema = z
   .strict();
 export type ArchiveException = z.infer<typeof ArchiveExceptionSchema>;
 
-const ReportSchema = z.object({ exceptions: z.array(ArchiveExceptionSchema) }).strict();
+/** A pin whose raw snapshot was requested and served the captured bytes: the source URL and the pinned timestamp. A pin that changes is a different pin, so a record never vouches for a timestamp it did not check. */
+export const VerifiedPinSchema = z.object({ url: z.url(), timestamp: WaybackTimestampSchema }).strict();
+export type VerifiedPin = z.infer<typeof VerifiedPinSchema>;
+
+const ReportSchema = z.object({ exceptions: z.array(ArchiveExceptionSchema), verified: z.array(VerifiedPinSchema) }).strict();
+export type Report = z.infer<typeof ReportSchema>;
+
+/** The report of an archive nothing has been recorded about. */
+export const EMPTY_REPORT: Report = { exceptions: [], verified: [] };
 
 /**
- * The report file's text: the exceptions sorted by URL, in the committed JSON form.
- * @param exceptions - The exceptions.
+ * The report file's text: the exceptions and the verified pins sorted by URL (then timestamp), in the committed JSON form.
+ * @param report - The report.
  * @returns The file text.
  */
-export function reportText(exceptions: readonly ArchiveException[]): string {
-  return canonicalJson({ exceptions: [...exceptions].sort((left, right) => (left.url < right.url ? -1 : 1)) });
+export function reportText(report: Readonly<Report>): string {
+  return canonicalJson({
+    exceptions: [...report.exceptions].sort((left, right) => (left.url < right.url ? -1 : 1)),
+    verified: [...report.verified].sort((left, right) => (left.url === right.url ? (left.timestamp < right.timestamp ? -1 : 1) : left.url < right.url ? -1 : 1)),
+  });
 }
 
 /**
  * Reads the committed report.
  * @param path - The report file.
- * @returns Its exceptions; none when the file does not exist yet.
+ * @returns The report; an empty one when the file does not exist yet.
  * @throws The schema's error when the file does not have the report's shape.
  */
-export function readReport(path: string): ArchiveException[] {
-  return existsSync(path) ? ReportSchema.parse(JSON.parse(readFileSync(path, "utf8"))).exceptions : [];
+export function readReport(path: string): Report {
+  return existsSync(path) ? ReportSchema.parse(JSON.parse(readFileSync(path, "utf8"))) : EMPTY_REPORT;
 }

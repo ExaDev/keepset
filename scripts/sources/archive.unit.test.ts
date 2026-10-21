@@ -2,11 +2,13 @@ import { describe, expect, it } from "vitest";
 import { HTTP_STATUS } from "./http-status";
 import { type ArchiveException } from "./archive-report";
 import { archiveProblems, archiveSources, type ArchivePorts, type ArchiveRequest, type ArchiveState, classifyStatus, MAX_CONSECUTIVE_UNRESOLVED, SAVE_ATTEMPTS, SAVE_BACKOFF_MILLISECONDS } from "./archive";
+import type { Report } from "./archive-report";
 import { groupSources, snapshotOf } from "./entries";
 import { intervalForRate } from "./pacing";
 import { PoliteClient } from "./polite-client";
 import { answerFrom, at, connectionError, entryWith, FakeClock, liveSource, scriptedNetwork, type SeenRequest, TEST_POLITENESS } from "./test-support";
 import { ARCHIVE_SIZE_LIMIT_BYTES, type SaveOutcome } from "./wayback";
+import { VERIFY_BACKOFF_MILLISECONDS } from "./verify";
 
 /** The documented anonymous limits, which a test uses unless it states its own. */
 const DEFAULT_PER_MINUTE = 3;
@@ -19,15 +21,18 @@ interface World {
   readonly perDay?: number;
   /** What the availability API says per URL: a timestamp, or none. */
   readonly available?: Readonly<Record<string, string>>;
-  /** What the host answers per URL for HEAD and GET: a status and a length. */
-  readonly hosts?: Readonly<Record<string, { status: number; length?: number; finalUrl?: string } | "unreachable">>;
+  /** What the host answers per URL for HEAD and GET: a status, a length and a media type. */
+  readonly hosts?: Readonly<Record<string, { status: number; length?: number; finalUrl?: string; type?: string } | "unreachable">>;
+  /** What the raw `id_` replay of a capture timestamp answers: a status, a landing timestamp it answers from, a media type, or unreachable. A timestamp not named answers as a good replay of the live source. */
+  readonly replays?: Readonly<Record<string, { status?: number; landing?: string; type?: string } | "unreachable">>;
   /** What each capture request comes to, in order. */
   readonly saves?: readonly SaveOutcome[];
 }
 
-function run(urls: readonly string[], world: World, overrides: Partial<ArchiveRequest> = {}): { result: ReturnType<typeof archiveSources>; recorded: Map<string, string>; excepted: ArchiveException[]; captured: string[]; captureTimes: number[]; clock: FakeClock; states: ArchiveState[]; seen: SeenRequest[] } {
+function run(urls: readonly string[], world: World, overrides: Partial<ArchiveRequest> = {}): { result: ReturnType<typeof archiveSources>; recorded: Map<string, string>; verified: Map<string, string>; excepted: ArchiveException[]; captured: string[]; captureTimes: number[]; clock: FakeClock; states: ArchiveState[]; seen: SeenRequest[] } {
   const clock = new FakeClock(NOON);
   const seen: SeenRequest[] = [];
+  const host = (url: string): { status: number; length?: number; finalUrl?: string; type?: string } | "unreachable" => world.hosts?.[url] ?? { status: 200 };
   const network = scriptedNetwork((request) => {
     seen.push(request);
     if (request.url.startsWith("https://archive.org/wayback/available")) {
@@ -36,14 +41,31 @@ function run(urls: readonly string[], world: World, overrides: Partial<ArchiveRe
 
       return new Response(JSON.stringify({ archived_snapshots: timestamp === undefined ? {} : { closest: { available: true, status: "200", timestamp } } }), { status: 200 });
     }
-    const host = world.hosts?.[request.url] ?? { status: 200 };
-    if (host === "unreachable") {
+    const replayed = /^https:\/\/web\.archive\.org\/web\/(\d+)id_\/(.*)$/.exec(request.url);
+    if (replayed) {
+      const timestamp = at(replayed, 1);
+      const original = at(replayed, 2);
+      const answer = world.replays?.[timestamp];
+      if (answer === "unreachable") {
+        return connectionError("ECONNREFUSED");
+      }
+      const live = host(decodeURIComponent(original));
+      const type = answer?.type ?? (live === "unreachable" ? undefined : live.type) ?? "application/octet-stream";
+      const landing = answer?.landing ?? timestamp;
+      // A good replay carries the memento headers a replay answers with (RFC 7089); a failing status answers with the Wayback Machine's own page, which carries none.
+      const headers = answer?.status === undefined ? { "memento-datetime": "Tue, 20 Oct 2026 12:00:00 GMT", "content-type": type } : { "content-type": "text/html" };
+
+      return answerFrom(`https://web.archive.org/web/${landing}id_/${original}`, { status: answer?.status ?? HTTP_STATUS.partialContent, headers });
+    }
+    const answer = host(request.url);
+    if (answer === "unreachable") {
       return connectionError("ENOTFOUND");
     }
 
-    return answerFrom(host.finalUrl ?? "", { status: host.status, headers: host.length === undefined ? {} : { "content-length": String(host.length) } });
+    return answerFrom(answer.finalUrl ?? "", { status: answer.status, headers: { ...(answer.type === undefined ? {} : { "content-type": answer.type }), ...(answer.length === undefined ? {} : { "content-length": String(answer.length) }) } });
   });
   const recorded = new Map<string, string>();
+  const verified = new Map<string, string>();
   const excepted: ArchiveException[] = [];
   const captured: string[] = [];
   const captureTimes: number[] = [];
@@ -69,6 +91,9 @@ function run(urls: readonly string[], world: World, overrides: Partial<ArchiveRe
     record: (url, timestamp) => {
       recorded.set(url, timestamp);
     },
+    verified: (url, timestamp) => {
+      verified.set(url, timestamp);
+    },
     except: (exception) => {
       excepted.push(exception);
     },
@@ -78,35 +103,110 @@ function run(urls: readonly string[], world: World, overrides: Partial<ArchiveRe
     log: () => undefined,
   };
   const files = urls.map((url, index) => ({ path: String(index), entry: entryWith(`e${String(index)}`, [liveSource(url)]) }));
-  const request: ArchiveRequest = { groups: groupSources(files), exceptions: [], retryExceptions: false, entryIds: undefined, limit: undefined, state: { day: "", captures: 0 }, ...overrides };
+  const request: ArchiveRequest = { groups: groupSources(files), exceptions: [], retryExceptions: false, entryIds: undefined, limit: undefined, state: { day: "", captures: 0, rejected: {} }, ...overrides };
 
-  return { result: archiveSources(ports, request), recorded, excepted, captured, captureTimes, clock, states, seen };
+  return { result: archiveSources(ports, request), recorded, verified, excepted, captured, captureTimes, clock, states, seen };
 }
 
 const A = "https://example.org/a";
 const B = "https://example.org/b";
 
 describe("archiveSources", () => {
-  it("pins an existing snapshot without probing the source or requesting a capture", async () => {
+  it("pins an existing capture that serves its bytes, without requesting a new capture", async () => {
     const trial = run([A], { available: { [A]: "20250101000000" } });
     expect((await trial.result).unresolved).toEqual([]);
     expect(trial.recorded.get(A)).toBe("20250101000000");
+    expect(trial.verified.get(A)).toBe("20250101000000");
     expect(trial.captured).toEqual([]);
-    expect(trial.seen.every((request) => request.url.startsWith("https://archive.org/"))).toBe(true);
+    expect(trial.seen.some((request) => request.url === "https://web.archive.org/web/20250101000000id_/https://example.org/a")).toBe(true);
   });
 
-  it("requests a capture only when there is no snapshot, and pins the capture's timestamp", async () => {
+  it("requests a capture only when there is no snapshot, and pins it once its raw form serves the bytes", async () => {
     const trial = run([A], { saves: [{ kind: "saved", timestamp: "20261020120001" }] });
     await trial.result;
     expect(trial.captured).toEqual([A]);
     expect(trial.recorded.get(A)).toBe("20261020120001");
+    expect(trial.verified.get(A)).toBe("20261020120001");
+  });
+
+  it("rejects an existing capture whose raw form does not serve its bytes, and requests a fresh one in its place", async () => {
+    const trial = run([A], { available: { [A]: "20250101000000" }, replays: { "20250101000000": { status: HTTP_STATUS.notFound } }, saves: [{ kind: "saved", timestamp: "20261020120001" }] });
+    await trial.result;
+    expect(trial.captured).toEqual([A]);
+    expect(trial.recorded.get(A)).toBe("20261020120001");
+    expect(trial.states.at(-1)?.rejected[A]).toEqual(["20250101000000"]);
+  });
+
+  it("does not trust a capture it has already rejected when the availability API offers it again", async () => {
+    const known = { day: "", captures: 0, rejected: { [A]: ["20250101000000"] } };
+    const trial = run([A], { available: { [A]: "20250101000000" }, saves: [{ kind: "saved", timestamp: "20261020120001" }] }, { state: known });
+    await trial.result;
+    expect(trial.seen.some((request) => request.url === "https://web.archive.org/web/20250101000000id_/https://example.org/a")).toBe(false);
+    expect(trial.recorded.get(A)).toBe("20261020120001");
+  });
+
+  it("leaves a URL unresolved when a fresh capture's raw form never serves its bytes, and remembers the capture as rejected", async () => {
+    const trial = run([A], { replays: { "20261020120001": { status: HTTP_STATUS.notFound } }, saves: [{ kind: "saved", timestamp: "20261020120001" }] });
+    const outcome = await trial.result;
+    expect(trial.captured).toEqual([A]);
+    expect(trial.recorded.size).toBe(0);
+    expect(outcome.unresolved).toEqual([A]);
+    expect(trial.states.at(-1)?.rejected[A]).toEqual(["20261020120001"]);
+  });
+
+  it("waits for a fresh capture's indexing to clear before accepting it", async () => {
+    const times = ["20261020120001", "20261020120002"];
+    let looks = 0;
+    const clock = new FakeClock(NOON);
+    const seen: SeenRequest[] = [];
+    const network = scriptedNetwork((request) => {
+      seen.push(request);
+      if (request.url.startsWith("https://archive.org/wayback/available")) {
+        return new Response(JSON.stringify({ archived_snapshots: {} }), { status: 200 });
+      }
+      if (request.url === "https://web.archive.org/web/20261020120001id_/https://example.org/a") {
+        looks += 1;
+
+        return answerFrom(looks === 1 ? "" : request.url, { status: looks === 1 ? HTTP_STATUS.notFound : HTTP_STATUS.partialContent, headers: looks === 1 ? { "content-type": "text/html" } : { "memento-datetime": "Tue, 20 Oct 2026 12:00:00 GMT", "content-type": "application/octet-stream" } });
+      }
+
+      return answerFrom("", { status: 200 });
+    });
+    const trial = await archiveSources(
+      {
+        client: new PoliteClient(network.fetch, clock, { ...TEST_POLITENESS, attempts: 1 }),
+        saver: { limits: { capturesPerMinute: DEFAULT_PER_MINUTE, capturesPerDay: DEFAULT_PER_DAY }, save: async () => {
+          await Promise.resolve();
+
+          return { kind: "saved", timestamp: at(times, 0) };
+        } },
+        clock,
+        record: () => undefined,
+        verified: () => undefined,
+        except: () => undefined,
+        persist: () => undefined,
+        log: () => undefined,
+      },
+      { groups: groupSources([{ path: "x", entry: entryWith("x", [liveSource(A)]) }]), exceptions: [], retryExceptions: false, entryIds: undefined, limit: undefined, state: { day: "", captures: 0, rejected: {} } },
+    );
+    expect(trial.unresolved).toEqual([]);
+    expect(looks).toBe(2);
+    expect(clock.sleeps).toContain(VERIFY_BACKOFF_MILLISECONDS);
+  });
+
+  it("rejects a fresh capture whose bytes differ from the live source", async () => {
+    const trial = run([A], { hosts: { [A]: { status: 200, type: "text/csv" } }, replays: { "20261020120001": { type: "text/html" } }, saves: [{ kind: "saved", timestamp: "20261020120001" }] });
+    const outcome = await trial.result;
+    expect(trial.recorded.size).toBe(0);
+    expect(outcome.unresolved).toEqual([A]);
+    expect(trial.states.at(-1)?.rejected[A]).toEqual(["20261020120001"]);
   });
 
   it("spreads capture requests by the documented rate and counts them in the state", async () => {
     const trial = run([A, B], { saves: [{ kind: "saved", timestamp: "20261020120001" }, { kind: "saved", timestamp: "20261020120002" }] });
     await trial.result;
     expect(at(trial.captureTimes, 1) - at(trial.captureTimes, 0)).toBeGreaterThanOrEqual(intervalForRate(DEFAULT_PER_MINUTE));
-    expect(trial.states.at(-1)).toEqual({ day: "2026-10-20", captures: 2 });
+    expect(trial.states.at(-1)).toEqual({ day: "2026-10-20", captures: 2, rejected: {} });
   });
 
   it("excepts a paged source without any request", async () => {
@@ -182,10 +282,10 @@ describe("archiveSources", () => {
   });
 
   it("counts the day's captures afresh on a new UTC day", async () => {
-    const trial = run([A], { saves: [{ kind: "saved", timestamp: "20261020120001" }] }, { state: { day: "2026-10-19", captures: 200 } });
+    const trial = run([A], { saves: [{ kind: "saved", timestamp: "20261020120001" }] }, { state: { day: "2026-10-19", captures: 200, rejected: {} } });
     await trial.result;
     expect(trial.captured).toEqual([A]);
-    expect(trial.states.at(-1)).toEqual({ day: "2026-10-20", captures: 1 });
+    expect(trial.states.at(-1)).toEqual({ day: "2026-10-20", captures: 1, rejected: {} });
   });
 
   it("stops when the account's own limit is exhausted", async () => {
@@ -262,11 +362,12 @@ describe("archiveSources", () => {
         } },
         clock,
         record: () => undefined,
+        verified: () => undefined,
         except: () => undefined,
         persist: () => undefined,
         log: () => undefined,
       },
-      { groups: groupSources(files), exceptions: [], retryExceptions: false, entryIds: undefined, limit: undefined, state: { day: "", captures: 0 } },
+      { groups: groupSources(files), exceptions: [], retryExceptions: false, entryIds: undefined, limit: undefined, state: { day: "", captures: 0, rejected: {} } },
     );
     expect(outcome.unresolved).toEqual([A]);
   });
@@ -286,20 +387,35 @@ describe("classifyStatus", () => {
 describe("archiveProblems", () => {
   const unpinned = groupSources([{ path: "x", entry: entryWith("x", [liveSource(A)]) }]);
   const known: ArchiveException = { url: A, entries: ["x"], reason: "access-wall", evidence: "HTTP 403" };
+  const report = (parts: { exceptions?: readonly ArchiveException[]; verified?: readonly { url: string; timestamp: string }[] } = {}): Report => ({ exceptions: [...(parts.exceptions ?? [])], verified: [...(parts.verified ?? [])] });
 
   it("fails a source that has no snapshot and no exception", () => {
-    expect(archiveProblems(unpinned, [])).toEqual([expect.stringContaining(A)]);
+    expect(archiveProblems(unpinned, report({}))).toEqual([expect.stringContaining(A)]);
   });
 
   it("accepts a source with an exception, and one with a snapshot", () => {
-    expect(archiveProblems(unpinned, [known])).toEqual([]);
-    expect(archiveProblems(groupSources([{ path: "x", entry: entryWith("x", [{ ...liveSource(A), snapshot: snapshotOf("20250101000000", A) }]) }]), [])).toEqual([]);
+    expect(archiveProblems(unpinned, report({ exceptions: [known] }))).toEqual([]);
+    const pinned = groupSources([{ path: "x", entry: entryWith("x", [{ ...liveSource(A), snapshot: snapshotOf("20250101000000", A) }]) }]);
+    expect(archiveProblems(pinned, report({ verified: [{ url: A, timestamp: "20250101000000" }] }))).toEqual([]);
+  });
+
+  it("fails a pin the report does not record as verified, and accepts a dead source's verified pin", () => {
+    const livePinned = groupSources([{ path: "x", entry: entryWith("x", [{ ...liveSource(A), snapshot: snapshotOf("20250101000000", A) }]) }]);
+    expect(archiveProblems(livePinned, report({}))).toEqual([expect.stringContaining("has not been verified")]);
+    const deadPinned = groupSources([{ path: "x", entry: entryWith("x", [{ url: A, retrieved: "2026-10-01", status: "dead", snapshot: snapshotOf("20250101000000", A) }]) }]);
+    expect(archiveProblems(deadPinned, report({ verified: [{ url: A, timestamp: "20250101000000" }] }))).toEqual([]);
+  });
+
+  it("fails a verification for a pin no entry holds, and for the wrong timestamp", () => {
+    const pinned = groupSources([{ path: "x", entry: entryWith("x", [{ ...liveSource(A), snapshot: snapshotOf("20250101000000", A) }]) }]);
+    expect(archiveProblems(pinned, report({ verified: [{ url: A, timestamp: "20260101000000" }] }))).toEqual([expect.stringContaining("has not been verified"), expect.stringContaining("which no entry pins")]);
+    expect(archiveProblems(pinned, report({ verified: [{ url: B, timestamp: "20250101000000" }] }))).toEqual([expect.stringContaining("has not been verified"), expect.stringContaining("which no entry pins")]);
   });
 
   it("fails an exception for a source that is pinned, for one that is not a source, and for the wrong entries", () => {
     const pinned = groupSources([{ path: "x", entry: entryWith("x", [{ ...liveSource(A), snapshot: snapshotOf("20250101000000", A) }]) }]);
-    expect(archiveProblems(pinned, [known])).toEqual([expect.stringContaining("pins a snapshot")]);
-    expect(archiveProblems(unpinned, [known, { ...known, url: B }])).toEqual([expect.stringContaining(B)]);
-    expect(archiveProblems(unpinned, [{ ...known, entries: ["y"] }])).toEqual([expect.stringContaining("different entries")]);
+    expect(archiveProblems(pinned, report({ exceptions: [known], verified: [{ url: A, timestamp: "20250101000000" }] }))).toEqual([expect.stringContaining("pins a snapshot")]);
+    expect(archiveProblems(unpinned, report({ exceptions: [known, { ...known, url: B }] }))).toEqual([expect.stringContaining(B)]);
+    expect(archiveProblems(unpinned, report({ exceptions: [{ ...known, entries: ["y"] }] }))).toEqual([expect.stringContaining("different entries")]);
   });
 });
