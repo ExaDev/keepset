@@ -165,7 +165,7 @@ export function entryPage(context: PageContext, dataset: Dataset): string {
       <Facts key="recipe-facts" rows={[
         ["Source", `#${String(recipe.source)}`],
         ["Archive", recipe.archive.kind],
-        ...("member" in recipe.archive ? [selectorRow("Member", recipe.archive.member)] : "members" in recipe.archive ? [selectorRow("Members", recipe.archive.members)] : []),
+        ...("member" in recipe.archive ? [selectorRow("Member", recipe.archive.member)] : "members" in recipe.archive ? [selectorRow("Members", recipe.archive.members)] : "files" in recipe.archive ? [selectorRow("Files", recipe.archive.files)] : []),
         ...("inner" in recipe.archive && recipe.archive.inner !== undefined ? [["Inner archive", recipe.archive.inner.kind] as const, ...("member" in recipe.archive.inner ? [selectorRow("Inner member", recipe.archive.inner.member)] : []), ...("sheets" in recipe.archive.inner && recipe.archive.inner.sheets !== undefined ? [["Sheets matching", <code key="sheets">{recipe.archive.inner.sheets}</code>] as const] : [])] : []),
         ...Object.entries(recipe.parser).map(([option, value]) => [`Parser ${option}`, <code key={option}>{JSON.stringify(value)}</code>] as const),
       ]} />

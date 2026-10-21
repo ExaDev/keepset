@@ -1,9 +1,10 @@
 import { createHash } from "node:crypto";
+import { zipSync } from "fflate";
 import { describe, expect, it } from "vitest";
 import { createCatalogue, type Dataset } from "../catalogue";
 import { DatasetNotFoundError, KeepsetError, RecipeError, type RecipeStep } from "../errors";
 import { gzip, tar, zip } from "../test-support/archives";
-import { arcgisEntry, ckanEntry, deadEntry, fixtureIndex, liveEntry, notFetchableEntry, openFemaEntry, taskCollectionEntry, taskEntry, graphCollectionEntry, socrataEntry } from "../test-support/entries";
+import { arcgisEntry, ckanEntry, deadEntry, fixtureIndex, liveEntry, notFetchableEntry, ogbEntry, openFemaEntry, taskCollectionEntry, taskEntry, graphCollectionEntry, socrataEntry } from "../test-support/entries";
 import { downloadUrl, fetchDataset, fetchEntry, roundTripDataset, roundTripEntry, type FetchPort } from "./fetch-dataset";
 
 const karateText = "% karate excerpt\n1 2\n2 3\n3 1\n";
@@ -317,6 +318,53 @@ describe("a graph/v1 entry that is a collection", () => {
 
   it("holds the round trip for every member", async () => {
     expect(await roundTripEntry(dataset, { fetch: served.fetch, now })).toMatchObject({ holds: true });
+  });
+});
+
+describe("a graph/v1 entry of a multi-file format", () => {
+  const archive = zipSync({
+    "dataset/raw/num-node-dict.csv.gz": gzip("paper,author\n2,1\n"),
+    "dataset/raw/triplet-type-list.csv.gz": gzip("author,writes,paper\npaper,cites,paper\n"),
+    "dataset/raw/relations/author___writes___paper/edge.csv.gz": gzip("0,1\n"),
+    "dataset/raw/relations/author___writes___paper/num-edge-list.csv.gz": gzip("1\n"),
+    "dataset/raw/relations/paper___cites___paper/edge.csv.gz": gzip("1,0\n"),
+    "dataset/raw/relations/paper___cites___paper/num-edge-list.csv.gz": gzip("1\n"),
+    "dataset/raw/node-feat/paper/node-feat.csv.gz": gzip("0.5\n0.25\n"),
+    "dataset/split/time/paper/train.csv.gz": gzip("0\n"),
+  });
+  const served = servedBy({ "https://example.org/data/dataset.zip": archive });
+  const dataset = datasetWith(ogbEntry);
+
+  it("reads every selected file of the archive into one graph, recording them in the provenance", async () => {
+    const fetched = await fetchEntry(dataset, { fetch: served.fetch, now });
+    expect(fetched.warnings).toEqual([]);
+    expect(fetched.data).toEqual({
+      meta: { id: "ogb-suite", name: "OGB dataset" },
+      nodes: [{ id: "author:0" }, { id: "paper:0" }, { id: "paper:1" }],
+      edges: [
+        { source: "author:0", target: "paper:1" },
+        { source: "paper:1", target: "paper:0" },
+      ],
+    });
+    expect(fetched.provenance.members).toEqual([
+      "dataset/raw/num-node-dict.csv.gz",
+      "dataset/raw/relations/author___writes___paper/edge.csv.gz",
+      "dataset/raw/relations/author___writes___paper/num-edge-list.csv.gz",
+      "dataset/raw/relations/paper___cites___paper/edge.csv.gz",
+      "dataset/raw/relations/paper___cites___paper/num-edge-list.csv.gz",
+      "dataset/raw/triplet-type-list.csv.gz",
+    ]);
+  });
+
+  it("holds the round trip", async () => {
+    expect(await roundTripEntry(dataset, { fetch: served.fetch, now })).toMatchObject({ holds: true });
+  });
+
+  it("fails at the parse step when the files do not make one dataset", async () => {
+    const broken = servedBy({ "https://example.org/data/dataset.zip": zipSync({ "dataset/raw/num-node-dict.csv.gz": gzip("paper\n1\n") }) });
+    const error = await failure(fetchEntry(dataset, { fetch: broken.fetch, now }));
+    expect(error.step).toBe("parse");
+    expect(error.message).toMatch(/has no raw\/triplet-type-list\.csv\.gz/);
   });
 });
 
