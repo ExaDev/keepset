@@ -198,6 +198,14 @@ describe("an archive that selects one file or every file", () => {
     expect(issues(withArchive(taskEntry, { kind: "zip", member: { extensions: [".zip"] }, inner: { kind: "none" } }))).not.toBe("");
   });
 
+  it("accepts edge-list where conditions, and refuses an empty list or an empty value", () => {
+    const withWhere = (where: unknown): unknown => ({ ...liveEntry, recipe: { ...liveEntry.recipe, parser: { ...liveEntry.recipe.parser, where } } });
+    expect(issues(withWhere([{ column: 12, equals: "physical" }]))).toBe("");
+    expect(issues(withWhere([]))).not.toBe("");
+    expect(issues(withWhere([{ column: 12, equals: "" }]))).not.toBe("");
+    expect(issues(withWhere([{ column: -1, equals: "physical" }]))).not.toBe("");
+  });
+
   it("rejects an archive that names both a member and members, or an unknown kind", () => {
     expect(issues(withArchive(taskCollectionEntry, { kind: "zip", member: { extensions: [".csv"] }, members: { extensions: [".csv"] } }))).not.toBe("");
     expect(issues(withArchive(taskCollectionEntry, { kind: "rar", members: { extensions: [".csv"] } }))).not.toBe("");

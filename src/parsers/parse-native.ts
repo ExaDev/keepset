@@ -120,12 +120,12 @@ export function parseNative(bytes: Uint8Array, parser: Parser): NativeDocument {
   if (parser.format === "hgb") {
     throw new NativeParseError(parser.format, 1, "an HGB dataset is two files, nodes and links, which a recipe reads from a parts archive");
   }
+  if (parser.format === "edge-list") {
+    return parseEdgeList(decodePieces(bytes, parser), parser);
+  }
   const text = decode(bytes, parser);
   if (parser.format === "geojson") {
     return parseGeojson(text, parser);
-  }
-  if (parser.format === "edge-list") {
-    return parseEdgeList(text, parser);
   }
   if (parser.format === "matrix-market") {
     return parseMatrixMarket(text);

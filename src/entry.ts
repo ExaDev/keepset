@@ -198,10 +198,15 @@ export const ParserSchema = z.discriminatedUnion("format", [
       multiplicityColumn: ColumnSchema.optional(),
       /** The table lists every undirected edge twice, once in each direction and with the same multiplicity: each pair's edges are emitted once, in the direction it is first listed, a self-loop's once, and a line whose mirror is missing is an error. graph/v1 records direction in `meta` and never by duplicating edges, so an undirected graph read from such a table needs this. */
       mirrored: z.literal(true).optional(),
+      /** The conditions a data line must meet to be an edge, each a column whose trimmed field equals a value; a file whose rows are of several kinds (an interaction file listing genetic beside physical interactions, or interactions with another organism's proteins) is read for the rows the dataset is made of. Without it every data line is an edge. */
+      where: z
+        .array(z.object({ column: ColumnSchema, equals: z.string().min(1) }).strict())
+        .min(1)
+        .optional(),
     })
     .strict()
     .refine((parser) => parser.sourceColumn !== parser.targetColumn, { message: "sourceColumn and targetColumn must differ", path: ["targetColumn"] })
-    .refine((parser) => [parser.keep?.column, parser.multiplicityColumn].every((column) => column === undefined || (column !== parser.sourceColumn && column !== parser.targetColumn)), { message: "the keep and multiplicity columns must not be an endpoint column", path: ["keep"] }),
+    .refine((parser) => [parser.keep?.column, parser.multiplicityColumn, ...(parser.where ?? []).map((condition) => condition.column)].every((column) => column === undefined || (column !== parser.sourceColumn && column !== parser.targetColumn)), { message: "the keep, multiplicity and where columns must not be an endpoint column", path: ["keep"] }),
   z.object({ format: z.literal("matrix-market"), encoding: EncodingSchema }).strict(),
   z
     .object({
