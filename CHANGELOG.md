@@ -1,3 +1,12 @@
+# [0.39.0](https://github.com/Mearman/keepset/compare/v0.38.0...v0.39.0) (2026-10-21)
+
+
+### Features
+
+* **catalogue:** fetch the OGB, SNAP signed, STRING, BioGRID, e-mail and airline graph entries ([6432ef3](https://github.com/Mearman/keepset/commit/6432ef3b11282444f4deae0ded62c17e841b0d86))
+* **parsers:** read edge lists in pieces and keep only lines meeting where conditions ([ddda9a0](https://github.com/Mearman/keepset/commit/ddda9a0bfc68017eff55a6ba1c1b04ef466ab5bc))
+* **parsers:** read Open Graph Benchmark raw directories from a files archive ([ebbc123](https://github.com/Mearman/keepset/commit/ebbc1231fb421a2cecb22ae34080696443e130f9))
+
 # [0.38.0](https://github.com/Mearman/keepset/compare/v0.37.1...v0.38.0) (2026-10-21)
 
 
