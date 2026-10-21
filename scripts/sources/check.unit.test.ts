@@ -1,7 +1,8 @@
+import { createHash } from "node:crypto";
 import { describe, expect, it } from "vitest";
 import { HTTP_STATUS } from "./http-status";
-import { checkReportText, checkSources, classifyProbe, type Findings, findingsOf, interleaveByHost, issueBody, needsIssue, parseCheckReport, type SourceResult } from "./check";
-import { groupSources, snapshotOf } from "./entries";
+import { checkReportText, checkSources, classifyProbe, type Findings, findingsOf, HASH_PREFIX_BYTES, interleaveByHost, issueBody, needsIssue, parseCheckReport, type SourceResult } from "./check";
+import { canonicalUrlsOf, groupSources, snapshotOf } from "./entries";
 import { PoliteClient } from "./polite-client";
 import { connectionError, entryWith, FakeClock, liveSource, scriptedNetwork, TEST_POLITENESS } from "./test-support";
 
@@ -76,10 +77,27 @@ describe("checkSources", () => {
     expect(results[0]?.entries).toEqual(["a"]);
   });
 
-  it("never edits anything: it only requests", async () => {
-    const network = scriptedNetwork(() => new Response(null, { status: 200 }));
-    await checkSources(new PoliteClient(network.fetch, new FakeClock(), { ...TEST_POLITENESS, attempts: 1 }), groupSources(files), 2);
-    expect(new Set(network.seen.map((request) => request.method))).toEqual(new Set(["HEAD"]));
+  it("never edits anything: it only requests, and reads bytes only from the sources that answered", async () => {
+    const network = scriptedNetwork(() => new Response(null, { status: 404 }));
+    const results = await checkSources(new PoliteClient(network.fetch, new FakeClock(), { ...TEST_POLITENESS, attempts: 1 }), groupSources(files), 2);
+    expect([...new Set(network.seen.map((request) => request.method))].every((method) => method === "HEAD" || method === "GET")).toBe(true);
+    expect(results.every((entry) => entry.contentHash === undefined)).toBe(true);
+  });
+
+  it("hashes the bytes an answering source serves", async () => {
+    const body = "0123456789";
+    const digest = createHash("sha256").update(body).digest("hex");
+    const network = scriptedNetwork((request) => {
+      if (request.method === "HEAD") {
+        return new Response(null, { status: 200, headers: { "content-length": String(body.length) } });
+      }
+
+      return new Response(body, { status: 206 });
+    });
+    const results = await checkSources(new PoliteClient(network.fetch, new FakeClock(), { ...TEST_POLITENESS, attempts: 1 }), groupSources([{ path: "a", entry: entryWith("a", [liveSource(U)]) }]), 2);
+    expect(results[0]?.contentHash).toBe(digest);
+    const ranged = network.seen.find((request) => request.method === "GET");
+    expect(ranged?.headers.get("range")).toBe(`bytes=0-${String(HASH_PREFIX_BYTES - 1)}`);
   });
 });
 
@@ -111,8 +129,17 @@ describe("findingsOf", () => {
   });
 });
 
+/** How many repeats of the sixteen hex characters make one sixty-four-character SHA-256 fixture. */
+const SHA_256_HEX_REPEATS = 4;
+/** One character short of a full hash fixture, so a fixture that differs from another can carry the difference at its end. */
+const HASH_LESS_ONE = 63;
+/** A SHA-256 as sixty-four hex characters, spelled out for the fixtures that build one. */
+const SHA_256_HEX = "0123456789abcdef".repeat(SHA_256_HEX_REPEATS);
+/** How many hex characters of a hash the issue body shows, kept beside the fixture so the two move together. */
+const HASH_SHOWN = 12;
+
 describe("needsIssue and issueBody", () => {
-  const empty: Findings = { lost: [], revived: [], changed: [], blocked: [] };
+  const empty: Findings = { lost: [], revived: [], changed: [], content: [], diverged: [], blocked: [] };
   const lost = result({ url: "https://x.example/c", entries: ["one", "two"], state: "gone", evidence: "HTTP 404" });
 
   it("asks for an issue for a lost, revived or changed source, and not for a source that only refuses this client", () => {
@@ -121,17 +148,27 @@ describe("needsIssue and issueBody", () => {
     expect(needsIssue({ ...empty, lost: [lost] })).toBe(true);
     expect(needsIssue({ ...empty, revived: [lost] })).toBe(true);
     expect(needsIssue({ ...empty, changed: [{ result: lost, was: 1, now: 2 }] })).toBe(true);
+    expect(needsIssue({ ...empty, content: [{ result: lost, was: SHA_256_HEX, now: `${SHA_256_HEX.slice(0, HASH_LESS_ONE)}9` }] })).toBe(true);
+    expect(needsIssue({ ...empty, diverged: [{ result: lost, entry: "one", canonical: lost, differs: "length" }] })).toBe(true);
   });
 
   it("names each source, its entries and what was observed", () => {
-    const body = issueBody({ ...empty, lost: [lost], changed: [{ result: lost, was: 100, now: 250 }] });
+    const body = issueBody({
+      ...empty,
+      lost: [lost],
+      changed: [{ result: lost, was: 100, now: 250 }],
+      content: [{ result: lost, was: SHA_256_HEX, now: `9${SHA_256_HEX.slice(0, HASH_LESS_ONE)}` }],
+      diverged: [{ result: result({ url: "https://mirror.example/c" }), entry: "one", canonical: result({ url: "https://x.example/c" }), differs: "hash" }],
+    });
     expect(body).toContain("- https://x.example/c (one, two): gone, HTTP 404");
     expect(body).toContain("100 bytes, now 250");
+    expect(body).toContain(`${SHA_256_HEX.slice(0, HASH_SHOWN)}, now 9${SHA_256_HEX.slice(0, HASH_SHOWN - 1)}`);
+    expect(body).toContain("- https://mirror.example/c (one) differs from https://x.example/c in hash");
     expect(body).not.toContain("answering again");
   });
 
   it("is free of spaced double hyphens and em-dashes", () => {
-    const body = issueBody({ lost: [lost], revived: [lost], changed: [{ result: lost, was: 1, now: 2 }], blocked: [lost] });
+    const body = issueBody({ lost: [lost], revived: [lost], changed: [{ result: lost, was: 1, now: 2 }], content: [], diverged: [], blocked: [lost] });
     expect(body).not.toMatch(/\s--\s|\u2014/);
   });
 });
@@ -146,5 +183,15 @@ describe("the check report", () => {
 
   it("refuses text that is not a report", () => {
     expect(() => parseCheckReport("{}")).toThrow();
+  });
+});
+
+describe("canonicalUrlsOf", () => {
+  it("maps each entry to the URL its recipe reads, and nothing for an entry with no one-source recipe", () => {
+    const fetchable = entryWith("one", [liveSource("https://a.example/canonical"), liveSource("https://b.example/mirror")], { recipe: { status: "fetchable", source: 0, archive: { kind: "none" }, parser: { format: "csv-table", encoding: "utf-8", delimiter: "comma", skipLines: 0, idColumn: null, numericColumns: [] } } });
+    const notFetchable = entryWith("two", [liveSource("https://c.example/any")], { recipe: { status: "not-fetchable", reason: "no parser" } });
+    const canonical = canonicalUrlsOf([{ path: "a", entry: fetchable }, { path: "b", entry: notFetchable }]);
+    expect(canonical.get("one")).toBe("https://a.example/canonical");
+    expect(canonical.has("two")).toBe(false);
   });
 });

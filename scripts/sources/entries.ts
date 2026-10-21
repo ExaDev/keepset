@@ -86,6 +86,25 @@ export function groupSources(files: readonly EntryFile[]): SourceGroup[] {
 }
 
 /**
+ * The URL each entry's recipe reads, by entry id, for the checks that compare a mirror against the copy it stands in for. An entry whose recipe is not a one-source fetchable recipe has no entry here.
+ * @param files - The entry files.
+ * @returns The map of entry id to the canonical source URL.
+ */
+export function canonicalUrlsOf(files: readonly EntryFile[]): Map<string, string> {
+  const canonical = new Map<string, string>();
+  for (const { entry } of files) {
+    if (entry.recipe.status === "fetchable" && "source" in entry.recipe) {
+      const url = entry.sources[entry.recipe.source]?.url;
+      if (url !== undefined) {
+        canonical.set(entry.id, url);
+      }
+    }
+  }
+
+  return canonical;
+}
+
+/**
  * The snapshot of a URL at a timestamp, with its URL spelt as the entry schema requires.
  * @param timestamp - A Wayback timestamp.
  * @param url - The source URL.
