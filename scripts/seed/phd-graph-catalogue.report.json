@@ -4860,11 +4860,12 @@
     },
     {
       "flags": [
-        "triples layout read from the downloaded file: DGL archive: wikikg2/train.txt, valid.txt and test.txt, head, relation and tail separated by tabs, each in double quotes"
+        "not fetchable yet: no declarative recipe exists for any download",
+        "corrected against the downloaded file: the triples' relations are the edge types, the entities carry no type, and some triples name the same entity as head and tail"
       ],
       "id": "ogbl-wikikg2",
       "outcome": "converted-with-flags",
-      "recipe": "fetchable"
+      "recipe": "not-fetchable"
     },
     {
       "flags": [
@@ -10609,11 +10610,12 @@
     },
     {
       "flags": [
-        "triples layout read from the downloaded file: Wikidata5M transductive archive: wikidata5m_transductive_train.txt, _valid.txt and _test.txt, head, relation and tail separated by tabs"
+        "not fetchable yet: no declarative recipe exists for any download",
+        "corrected against the downloaded file: the catalogue records round figures for the transductive splits, whose files hold these entities and triples, and one edge type where they hold a relation per type"
       ],
       "id": "wikidata5m",
       "outcome": "converted-with-flags",
-      "recipe": "fetchable"
+      "recipe": "not-fetchable"
     },
     {
       "flags": [

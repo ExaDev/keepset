@@ -6,12 +6,12 @@
     }
   ],
   "crosswalk": {
-    "file": "crosswalks/graph-v1/relations-split.json"
+    "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "Large-scale heterogeneous knowledge graph from Wikidata 2021 dump. Contains ~5M entities connected by 822 relation types with ~21M triples. Each entity paired with Wikipedia article text for joint structured-unstructured modeling. Supports transductive and inductive link prediction settings.",
   "expectedCounts": {
-    "edges": 21000000,
-    "nodes": 5000000
+    "edges": 20624575,
+    "nodes": 4594485
   },
   "id": "wikidata5m",
   "licence": {
@@ -24,7 +24,7 @@
     "cyclic": true,
     "density": 9.770379358670848e-7,
     "directed": true,
-    "edgeTypes": 1,
+    "edgeTypes": 822,
     "heterogeneous": true,
     "multigraph": false,
     "nodeTypes": 1,
@@ -33,39 +33,8 @@
     "weighted": false
   },
   "recipe": {
-    "archive": {
-      "kind": "tar.gz",
-      "parts": [
-        {
-          "member": {
-            "path": "wikidata5m_transductive_train.txt"
-          },
-          "name": "train"
-        },
-        {
-          "member": {
-            "path": "wikidata5m_transductive_valid.txt"
-          },
-          "name": "valid"
-        },
-        {
-          "member": {
-            "path": "wikidata5m_transductive_test.txt"
-          },
-          "name": "test"
-        }
-      ]
-    },
-    "parser": {
-      "delimiter": "tab",
-      "encoding": "utf-8",
-      "format": "kg-triples",
-      "header": "none",
-      "order": "head-relation-tail",
-      "quoted": false
-    },
-    "source": 0,
-    "status": "fetchable"
+    "reason": "no download is in a form keepset reads yet (kge-triples-tar: the triples are more edges than one fetch holds: a whole fetch at Node's default heap aborts with an allocation failure, because the crosswalk step copies every edge (ExaDev/crossmap#57))",
+    "status": "not-fetchable"
   },
   "sources": [
     {
