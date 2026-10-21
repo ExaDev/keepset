@@ -5,7 +5,36 @@
   "category": "tasks/v1",
   "citations": [],
   "crosswalk": {
-    "file": "crosswalks/tasks-v1/nodes.json"
+    "oneWay": [],
+    "rules": [
+      {
+        "from": "meta",
+        "op": "move",
+        "to": "meta"
+      },
+      {
+        "from": "nodes[].id",
+        "op": "move",
+        "to": "nodes[].id"
+      },
+      {
+        "from": "nodes[].DATE",
+        "op": "move",
+        "to": "nodes[].opened"
+      },
+      {
+        "from": "nodes[].TYPE",
+        "op": "move",
+        "to": "nodes[].status"
+      },
+      {
+        "from": "nodes[].AREA",
+        "op": "move",
+        "to": "nodes[].territory"
+      }
+    ],
+    "source": "csv-table",
+    "target": "tasks/v1"
   },
   "description": "Every severe flood warning, flood warning and flood alert the Environment Agency has issued for flooding from rivers, the sea and some groundwater sites since the warning system began in January 2006.",
   "domain": "Civic and environmental monitoring",
@@ -23,14 +52,44 @@
     "surveyId": "or-120"
   },
   "recipe": {
-    "reason": "The download is a zip holding one OpenDocument spreadsheet whose member name changes every quarter, and keepset reads xlsx and not ods.",
-    "status": "not-fetchable"
+    "archive": {
+      "inner": {
+        "kind": "ods",
+        "sheet": "tblAllData"
+      },
+      "kind": "zip",
+      "member": {
+        "extensions": [
+          ".ods"
+        ]
+      }
+    },
+    "parser": {
+      "columns": [
+        "DATE",
+        "TYPE",
+        "AREA"
+      ],
+      "delimiter": "comma",
+      "encoding": "utf-8",
+      "format": "csv-table",
+      "idColumn": null,
+      "numericColumns": [],
+      "skipLines": 0
+    },
+    "source": 1,
+    "status": "fetchable"
   },
   "sources": [
     {
       "retrieved": "2026-10-19",
       "status": "live",
       "url": "https://environment.data.gov.uk/dataset/88bed270-d465-11e4-8669-f0def148f590"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://environment.data.gov.uk/api/file/download?fileDataSetId=766cb094-b392-4bd6-a02e-f60e143f3213&fileName=Historic_Flood_Warnings.zip"
     }
   ],
   "subjects": [

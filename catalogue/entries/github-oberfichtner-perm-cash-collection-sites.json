@@ -10,11 +10,37 @@
     }
   ],
   "crosswalk": {
-    "file": "crosswalks/tasks-v1/nodes.json"
+    "oneWay": [],
+    "rules": [
+      {
+        "from": "meta",
+        "op": "move",
+        "to": "meta"
+      },
+      {
+        "from": "nodes[].id",
+        "op": "move",
+        "to": "nodes[].id"
+      },
+      {
+        "from": "nodes[].LATITUDE",
+        "op": "move",
+        "to": "nodes[].lat"
+      },
+      {
+        "from": "nodes[].LONGITUDE",
+        "op": "move",
+        "to": "nodes[].lon"
+      }
+    ],
+    "source": "csv-table",
+    "target": "tasks/v1"
   },
   "description": "Coordinates of ATM and point-of-sale cash-collection sites around Perm, Russia, used for clustering and TSP routing examples.",
   "domain": "Cash collection",
-  "expectedCounts": {},
+  "expectedCounts": {
+    "nodes": 237
+  },
   "id": "github-oberfichtner-perm-cash-collection-sites",
   "licence": {
     "kind": "unrecorded"
@@ -27,14 +53,44 @@
     "surveyId": "or-38"
   },
   "recipe": {
-    "reason": "The only data file is an old binary xls workbook, and keepset reads only xlsx.",
-    "status": "not-fetchable"
+    "archive": {
+      "kind": "xls",
+      "sheet": "objects"
+    },
+    "parser": {
+      "columns": [
+        "LATITUDE",
+        "LONGITUDE"
+      ],
+      "delimiter": "comma",
+      "encoding": "utf-8",
+      "format": "csv-table",
+      "idColumn": null,
+      "numericColumns": [
+        {
+          "column": "LATITUDE",
+          "factor": 1
+        },
+        {
+          "column": "LONGITUDE",
+          "factor": 1
+        }
+      ],
+      "skipLines": 0
+    },
+    "source": 1,
+    "status": "fetchable"
   },
   "sources": [
     {
       "retrieved": "2026-10-19",
       "status": "live",
       "url": "https://github.com/Oberfichtner/Clustering_and_TSP_with_R"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/Oberfichtner/Clustering_and_TSP_with_R/main/rawdataclear.xls"
     }
   ],
   "subjects": [

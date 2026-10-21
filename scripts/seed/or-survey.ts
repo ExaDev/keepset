@@ -78,7 +78,7 @@ export const FetchableOutcomeSchema = z
     skipLines: z.int().min(0),
     /** Cell texts, besides the empty cell, that the source writes for a missing value, such as `NA`. */
     nullValues: z.array(z.string().min(1)).optional(),
-    /** How the download unpacks into the table's file, when it is an archive: a zip with the member to read, or an xlsx workbook with the sheet (then `skipLines` counts the sheet's rows above the header, and `encoding` and `delimiter` describe the CSV the sheet is turned into: utf-8 and comma). */
+    /** How the download unpacks into the table's file, when it is an archive: a zip with the member to read, or a spreadsheet (xlsx, xls or ods, alone or as a zip member's inner layout) with the sheet (then `skipLines` counts the sheet's rows above the header, and `encoding` and `delimiter` describe the CSV the sheet is turned into: utf-8 and comma). */
     archive: ArchiveSchema.optional(),
     idColumn: ColumnNameSchema.nullable(),
     numericColumns: z.array(z.object({ column: ColumnNameSchema, factor: z.number().positive() }).strict()),
