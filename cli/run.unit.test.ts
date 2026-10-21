@@ -1,7 +1,7 @@
 import { createCatalogue, DatasetNotFoundError, RecipeError, type Dataset, type DatasetQuery } from "keepset";
 import type { FetchedDataset, RoundTripReport } from "keepset/node";
 import { describe, expect, it } from "vitest";
-import { fixtureIndex } from "../src/test-support/entries";
+import { fixtureIndex, streamedEntry } from "../src/test-support/entries";
 import { EXIT_FAILED, EXIT_NO, EXIT_OK, formatNamespaces, formatSearch, formatShow, provenancePath, run, type CliIo, type CliLibrary } from "./run";
 
 const catalogue = createCatalogue(fixtureIndex);
@@ -57,6 +57,11 @@ function harness(overrides: Partial<CliLibrary> = {}) {
 
       return Promise.resolve({ holds: true, provenance: fetched.provenance });
     },
+    streamDataset: async (id) => {
+      calls.push(["streamDataset", id]);
+
+      return Promise.reject(new Error("the fixture catalogue streams nothing"));
+    },
     countTarget: () =>
       new Map([
         ["nodes", 2],
@@ -64,7 +69,7 @@ function harness(overrides: Partial<CliLibrary> = {}) {
       ]),
     ...overrides,
   };
-  const out = { stdout: "", stderr: "", files: new Map<string, string>() };
+  const out = { stdout: "", stderr: "", files: new Map<string, string>(), closed: [] as string[] };
   const io: CliIo = {
     writeStdout: (text) => {
       out.stdout += text;
@@ -74,6 +79,20 @@ function harness(overrides: Partial<CliLibrary> = {}) {
     },
     writeFile: (path, text) => {
       out.files.set(path, text);
+    },
+    openFile: (path) => {
+      out.files.set(path, "");
+
+      return {
+        write: async (text) => {
+          out.files.set(path, `${out.files.get(path) ?? ""}${text}`);
+          await Promise.resolve();
+        },
+        close: async () => {
+          out.closed.push(path);
+          await Promise.resolve();
+        },
+      };
     },
     version: "9.9.9",
   };
@@ -177,6 +196,44 @@ describe("show", () => {
     });
     expect(await run(["show", "missing"], library, io)).toBe(EXIT_FAILED);
     expect(out.stderr).toBe('no dataset "missing" in the catalogue\n');
+  });
+});
+
+describe("fetch of a streamed entry", () => {
+  const streamedCatalogue = createCatalogue({ ...fixtureIndex, entries: [streamedEntry] });
+  const streamed = streamedCatalogue.getDataset("streamed-cases");
+  const meta = { id: "streamed-cases", name: "Streamed cases" };
+  const pages = [[{ id: "a1", status: "Open", territory: "Camden" }, { id: "a2", status: null }], [{ id: "a3", territory: "Hackney" }]];
+
+  /** A library whose stream hands on the given pages. */
+  const streaming = (handed: readonly (readonly { readonly id: string }[])[]): Partial<CliLibrary> => ({
+    getDataset: () => streamed,
+    fetchDataset: async () => Promise.reject(new Error("a streamed entry is not fetched whole")),
+    streamDataset: async (_id, sink) => {
+      await sink.meta(meta);
+      await handed.reduce(async (previous, page) => {
+        await previous;
+        await sink.nodes(page);
+      }, Promise.resolve());
+
+      return { dataset: streamed, meta, provenance: fetched.provenance, counts: new Map([["nodes", handed.flat().length]]), warnings: ["nodes: the entry records 9, the fetched result has 3"] };
+    },
+  });
+
+  it("writes the same text a held fetch of the same nodes writes, then the provenance, and says it streamed", async () => {
+    const { library, io, out } = harness(streaming(pages));
+    expect(await run(["fetch", "streamed-cases"], library, io)).toBe(EXIT_OK);
+    expect(out.files.get("streamed-cases.json")).toBe(`${JSON.stringify({ meta, nodes: pages.flat() }, undefined, 2)}\n`);
+    expect(out.closed).toEqual(["streamed-cases.json"]);
+    expect(JSON.parse(out.files.get("streamed-cases.provenance.json") ?? "null")).toEqual(fetched.provenance);
+    expect(out.stdout).toBe("wrote streamed-cases.json (nodes 3, streamed) and streamed-cases.provenance.json\n");
+    expect(out.stderr).toBe("warning: nodes: the entry records 9, the fetched result has 3\n");
+  });
+
+  it("writes an empty node list as a held fetch would", async () => {
+    const { library, io, out } = harness(streaming([]));
+    await run(["fetch", "streamed-cases", "--out", "none.json"], library, io);
+    expect(out.files.get("none.json")).toBe(`${JSON.stringify({ meta, nodes: [] }, undefined, 2)}\n`);
   });
 });
 
