@@ -1,5 +1,6 @@
 /* The liveness check's decisions, apart from its files: what a probe of a source means, which sources are findings, and what the report and the tracking issue say. The check never edits an entry. */
 
+import { createHash } from "node:crypto";
 import { z } from "zod";
 import { canonicalJson } from "../../src/serialise";
 import type { SourceGroup } from "./entries";
@@ -11,7 +12,13 @@ import { isDefinitiveFailure, type Probe, probe, redirectsToMissingPage, statusE
 export const SOURCE_STATES = ["ok", "gone", "blocked", "unreachable"] as const;
 export type SourceState = (typeof SOURCE_STATES)[number];
 
-/** One source URL's result: what the catalogue records about it, what the probe found and the length the host stated. */
+/** How many hex characters of a hash the tracking issue shows: enough to identify it in the report, short enough for a line of sources. */
+const HASH_DISPLAY_LENGTH = 12;
+
+/** How many bytes of a source the check reads to hash, after a probe answers: a prefix this large tells two different files of one dataset apart at the cost of a bounded read per source, whatever the file's size, and a host that ignores the range request is cut off after it rather than read whole. */
+export const HASH_PREFIX_BYTES = 1_048_576;
+
+/** One source URL's result: what the catalogue records about it, what the probe found, the length the host stated and the hash of the bytes it served. */
 export const SourceResultSchema = z
   .object({
     url: z.url(),
@@ -20,6 +27,7 @@ export const SourceResultSchema = z
     state: z.enum(SOURCE_STATES),
     evidence: z.string().min(1),
     contentLength: z.int().min(0).optional(),
+    contentHash: z.string().regex(/^[0-9a-f]{64}$/).optional(),
   })
   .strict();
 export type SourceResult = z.infer<typeof SourceResultSchema>;
@@ -78,6 +86,47 @@ export function interleaveByHost(urls: readonly string[]): string[] {
 }
 
 /**
+ * Reads the first bytes a source serves and hashes them, so a mirror can be compared with the copy it stands in for and an earlier reading with today's. A host that ignores the range request has its answer cut off after the prefix rather than read whole.
+ * @param client - The polite client, which paces per host.
+ * @param url - The URL that answered.
+ * @returns The SHA-256 of the bytes read, hex, or undefined when the answer could not be read.
+ */
+export async function contentHashOf(client: PoliteClient, url: string): Promise<string | undefined> {
+  const response = await client.request(url, { headers: { accept: "*/*", range: `bytes=0-${String(HASH_PREFIX_BYTES - 1)}` } });
+  if (!response.ok || response.body === null) {
+    return undefined;
+  }
+  const reader: ReadableStreamDefaultReader<Uint8Array> = response.body.getReader();
+  const prefix: Uint8Array[] = [];
+  let length = 0;
+
+  /**
+   * Takes the next chunk of the answer, recursing rather than looping so the bytes are read one await at a time.
+   * @returns The prefix once it is long enough or the answer ends.
+   */
+  const take = async (): Promise<void> => {
+    if (length >= HASH_PREFIX_BYTES) {
+      return;
+    }
+    const { done, value } = await reader.read();
+    if (done) {
+      return;
+    }
+    prefix.push(value);
+    length += value.length;
+    await take();
+  };
+  await take();
+  await reader.cancel().catch(() => undefined);
+  const digest = createHash("sha256");
+  for (const chunk of prefix) {
+    digest.update(chunk);
+  }
+
+  return digest.digest("hex");
+}
+
+/**
  * Probes every source URL of the catalogue.
  * @param client - The polite client, which paces per host.
  * @param groups - The catalogue's source groups.
@@ -98,12 +147,15 @@ export async function checkSources(client: PoliteClient, groups: readonly Source
       throw new Error(`${url} was queued without a group`);
     }
     const looked = await probe(client, url);
+    const classified = classifyProbe(url, looked);
+    const hashable = looked.kind === "answered" && isSuccess(looked.status) && !redirectsToMissingPage(url, looked.finalUrl);
     results.push({
       url,
       entries: [...group.entryIds],
       recorded: group.live ? "live" : "dead",
-      ...classifyProbe(url, looked),
+      ...classified,
       ...(looked.kind === "answered" && looked.contentLength !== undefined && isSuccess(looked.status) ? { contentLength: looked.contentLength } : {}),
+      ...(hashable ? { contentHash: await contentHashOf(client, url) } : {}),
     });
 
     return worker();
@@ -139,6 +191,23 @@ export interface LengthChange {
   readonly now: number;
 }
 
+/** A source whose bytes differ from the ones an earlier check read, whether or not the stated length moved. */
+export interface ContentChange {
+  readonly result: SourceResult;
+  readonly was: string;
+  readonly now: string;
+}
+
+/** A mirror whose answer no longer matches the copy it stands in for. */
+export interface DivergedMirror {
+  readonly result: SourceResult;
+  /** The entry whose canonical source the mirror serves alongside. */
+  readonly entry: string;
+  readonly canonical: SourceResult;
+  /** What differed: the stated length, the bytes' hash, or both. */
+  readonly differs: "length" | "hash" | "both";
+}
+
 /** What the check found that the catalogue does not yet reflect. */
 export interface Findings {
   /** Recorded `live` but no longer resolving (`gone` or `unreachable`). */
@@ -147,6 +216,10 @@ export interface Findings {
   readonly revived: readonly SourceResult[];
   /** Answering, with a different length than the earlier check recorded. */
   readonly changed: readonly LengthChange[];
+  /** Answering, with different bytes than the earlier check read. */
+  readonly content: readonly ContentChange[];
+  /** Answering, but no longer the copy of the canonical source the mirror stands in for. */
+  readonly diverged: readonly DivergedMirror[];
   /** Recorded `live` and refusing this client; not a finding on its own, listed for a person to look at. */
   readonly blocked: readonly SourceResult[];
 }
@@ -157,13 +230,43 @@ export interface Findings {
  * @param baseline - The earlier check's results, when there is one.
  * @returns The findings.
  */
-export function findingsOf(results: readonly SourceResult[], baseline: readonly SourceResult[]): Findings {
+export function findingsOf(results: readonly SourceResult[], baseline: readonly SourceResult[], canonical: ReadonlyMap<string, string> = new Map()): Findings {
   const earlier = new Map(baseline.map((result) => [result.url, result]));
+  const byUrl = new Map(results.map((result) => [result.url, result]));
   const changed: LengthChange[] = [];
+  const content: ContentChange[] = [];
   for (const result of results) {
-    const was = earlier.get(result.url)?.contentLength;
-    if (result.state === "ok" && result.contentLength !== undefined && was !== undefined && was !== result.contentLength) {
-      changed.push({ result, was, now: result.contentLength });
+    const was = earlier.get(result.url);
+    if (result.state === "ok" && result.contentLength !== undefined && was?.contentLength !== undefined && was.contentLength !== result.contentLength) {
+      changed.push({ result, was: was.contentLength, now: result.contentLength });
+    }
+    if (result.state === "ok" && result.contentHash !== undefined && was?.contentHash !== undefined && was.contentHash !== result.contentHash) {
+      content.push({ result, was: was.contentHash, now: result.contentHash });
+    }
+  }
+  const diverged: DivergedMirror[] = [];
+  for (const result of results) {
+    if (result.state !== "ok" || result.contentHash === undefined) {
+      continue;
+    }
+    for (const entry of result.entries) {
+      const canonicalUrl = canonical.get(entry);
+      if (canonicalUrl === undefined || canonicalUrl === result.url) {
+        continue;
+      }
+      const canonicalResult = byUrl.get(canonicalUrl);
+      if (canonicalResult?.state !== "ok") {
+        continue;
+      }
+      const lengthDiffers = result.contentLength !== undefined && canonicalResult.contentLength !== undefined && result.contentLength !== canonicalResult.contentLength;
+      const hashDiffers = canonicalResult.contentHash !== undefined && result.contentHash !== canonicalResult.contentHash;
+      if (lengthDiffers && hashDiffers) {
+        diverged.push({ result, entry, canonical: canonicalResult, differs: "both" });
+      } else if (lengthDiffers) {
+        diverged.push({ result, entry, canonical: canonicalResult, differs: "length" });
+      } else if (hashDiffers) {
+        diverged.push({ result, entry, canonical: canonicalResult, differs: "hash" });
+      }
     }
   }
 
@@ -171,6 +274,8 @@ export function findingsOf(results: readonly SourceResult[], baseline: readonly 
     lost: results.filter((result) => result.recorded === "live" && (result.state === "gone" || result.state === "unreachable")),
     revived: results.filter((result) => result.recorded === "dead" && result.state === "ok"),
     changed,
+    content,
+    diverged,
     blocked: results.filter((result) => result.recorded === "live" && result.state === "blocked"),
   };
 }
@@ -181,7 +286,7 @@ export function findingsOf(results: readonly SourceResult[], baseline: readonly 
  * @returns True when there is something to track.
  */
 export function needsIssue(findings: Findings): boolean {
-  return findings.lost.length > 0 || findings.revived.length > 0 || findings.changed.length > 0;
+  return findings.lost.length > 0 || findings.revived.length > 0 || findings.changed.length > 0 || findings.content.length > 0 || findings.diverged.length > 0;
 }
 
 const list = (results: readonly SourceResult[], describe: (result: SourceResult) => string): string[] => results.map((result) => `- ${result.url} (${result.entries.join(", ")}): ${describe(result)}`);
@@ -201,6 +306,12 @@ export function issueBody(findings: Findings): string {
   }
   if (findings.changed.length > 0) {
     sections.push(["Stated length changed since the last check:", ...findings.changed.map(({ result, was, now }) => `- ${result.url} (${result.entries.join(", ")}): ${String(was)} bytes, now ${String(now)}`)].join("\n"));
+  }
+  if (findings.content.length > 0) {
+    sections.push(["Bytes changed since the last check at the same stated length or with none stated:", ...findings.content.map(({ result, was, now }) => `- ${result.url} (${result.entries.join(", ")}): ${was.slice(0, HASH_DISPLAY_LENGTH)}, now ${now.slice(0, HASH_DISPLAY_LENGTH)}`)].join("\n"));
+  }
+  if (findings.diverged.length > 0) {
+    sections.push(["A mirror no longer serves the copy its canonical source does:", ...findings.diverged.map(({ result, entry, canonical, differs }) => `- ${result.url} (${entry}) differs from ${canonical.url} in ${differs}`)].join("\n"));
   }
   if (findings.blocked.length > 0) {
     sections.push(["Refusing this client, which does not show they are gone:", ...list(findings.blocked, (result) => result.evidence)].join("\n"));
