@@ -2,16 +2,16 @@
 
    pnpm exec tsx scripts/seed/or-verify.ts <curation.json> [or-1,or-7] [--whole]
 
-   With `--whole` the flow runs on the entire download instead of a sample (a paged source and anything in an archive are always read whole), which is the only way to meet a fault that lies further into the file than the sample (an id that repeats or is empty, a malformed row, a table too large to hold in memory) or a source that returns only part of a table; each line then also gives the row count the curation recorded. A whole run downloads every table, so it is slow and is best given a list of items.
+   With `--whole` the flow runs on the entire download instead of a sample (a paged source and anything in an archive are always read whole), which is the only way to meet a fault that lies further into the file than the sample (an id that repeats or is empty, a malformed row, a table too large to hold in memory) or a source that returns only part of a table; each line then also gives the row count the curation recorded. A whole run downloads every table, so it is slow and is best given a list of items. A streamed recipe is read through streamEntry and its nodes are tallied as they arrive, never held.
 
-   Per item it prints the rows read and, for each mapped field, how many of them have a value, with the range of a number field, so a mapping that picked the wrong column shows as an empty or implausible field. A download that is not a plain table (an archive, a page, an error) fails with the reason. */
+   Per item it prints the rows read and, for each mapped field, how many of them have a value, with the range of a number field, so a mapping that picked the wrong column shows as an empty or implausible field, then the most rows held at once (every row for a held fetch, the largest page for a streamed one) and the peak heap and resident memory sampled as the fetch ran. A download that is not a plain table (an archive, a page, an error) fails with the reason. */
 
 import { readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { parseCrosswalk } from "crossmap";
 import { createCatalogue } from "../../src/catalogue";
-import { fetchEntry } from "../../src/node/fetch-dataset";
+import { fetchEntry, streamEntry, type StreamedNode } from "../../src/node/fetch-dataset";
 import { convertItem } from "./convert-or";
 import { CurationSchema, SurveySourceSchema, TARGET_FIELD_NAMES, type CurationItem } from "./or-survey";
 
@@ -111,6 +111,75 @@ function cutBack(bytes: Uint8Array, back: number): Uint8Array {
   return bytes.subarray(0, end);
 }
 
+/** What the values of each mapped field are, tallied a page at a time so a streamed table is described without being held: how many nodes have a value, the range of the numbers, and the first value seen. */
+class FieldTally {
+  private readonly counts = new Map<string, number>();
+
+  private readonly least = new Map<string, number>();
+
+  private readonly most = new Map<string, number>();
+
+  private readonly first = new Map<string, unknown>();
+
+  public constructor(private readonly fields: readonly string[]) {}
+
+  /**
+   * Tallies nodes.
+   * @param nodes - Nodes of the result.
+   */
+  public add(nodes: readonly StreamedNode[]): void {
+    for (const node of nodes) {
+      for (const field of this.fields) {
+        const value: unknown = Object.entries(node).find(([key]) => key === field)?.[1];
+        if (value !== null && value !== undefined) {
+          this.counts.set(field, (this.counts.get(field) ?? 0) + 1);
+          if (!this.first.has(field)) {
+            this.first.set(field, value);
+          }
+          if (typeof value === "number") {
+            this.least.set(field, Math.min(this.least.get(field) ?? value, value));
+            this.most.set(field, Math.max(this.most.get(field) ?? value, value));
+          }
+        }
+      }
+    }
+  }
+
+  /** @returns Each field's count, with its numbers' range or an example value. */
+  public describe(): string {
+    return this.fields
+      .map((field) => {
+        const least = this.least.get(field);
+        const most = this.most.get(field);
+        const range = least !== undefined && most !== undefined ? ` [${String(least)}..${String(most)}]` : this.first.has(field) ? ` e.g. ${JSON.stringify(this.first.get(field)).slice(0, VALUE_WIDTH)}` : "";
+
+        return `${field} ${String(this.counts.get(field) ?? 0)}${range}`;
+      })
+      .join("; ");
+  }
+}
+
+const MEBIBYTE = KIBIBYTE * KIBIBYTE;
+
+/** The most heap and resident memory the process used at the moments it was sampled. */
+class MemoryPeak {
+  private heap = 0;
+
+  private resident = 0;
+
+  /** Samples the process's memory now. */
+  public sample(): void {
+    const usage = process.memoryUsage();
+    this.heap = Math.max(this.heap, usage.heapUsed + usage.arrayBuffers);
+    this.resident = Math.max(this.resident, usage.rss);
+  }
+
+  /** @returns The peaks, in mebibytes. */
+  public describe(): string {
+    return `peak heap ${String(Math.round(this.heap / MEBIBYTE))} MiB, peak resident ${String(Math.round(this.resident / MEBIBYTE))} MiB`;
+  }
+}
+
 /**
  * Runs one fetchable item on the start of its download through the real flow, retreating the cut when it lands inside a quoted field.
  * @param curated - The curation item.
@@ -140,23 +209,40 @@ async function verifyOne(curated: CurationItem): Promise<string> {
       throw error;
     }
   };
-  const result = entire ? await fetchEntry(dataset) : await attempt(0);
-  const instances = "instances" in result.data ? result.data.instances : [];
-  const nodes = "nodes" in result.data ? result.data.nodes : instances.flatMap((instance) => instance.nodes);
-  const fields = TARGET_FIELD_NAMES.filter((field) => outcome.map[field] !== undefined).map((field) => {
-    const values = nodes.map((node) => (field in node ? node[field] : null)).filter((value) => value !== null && value !== undefined);
-    const numbers = values.filter((value): value is number => typeof value === "number");
-    const range = numbers.length > 0 ? ` [${String(numbers.reduce((least, number) => Math.min(least, number)))}..${String(numbers.reduce((most, number) => Math.max(most, number)))}]` : values.length > 0 ? ` e.g. ${JSON.stringify(values[0]).slice(0, VALUE_WIDTH)}` : "";
-
-    return `${field} ${String(values.length)}${range}`;
-  });
+  const fields = TARGET_FIELD_NAMES.filter((field) => outcome.map[field] !== undefined);
+  const tally = new FieldTally(fields);
+  const memory = new MemoryPeak();
+  let held = 0;
+  let shape: string;
+  let warnings: readonly string[];
+  if (entry.recipe.stream === true) {
+    const streamed = await streamEntry(dataset, {
+      meta: () => undefined,
+      nodes: (page) => {
+        tally.add(page);
+        held = Math.max(held, page.length);
+        memory.sample();
+      },
+    });
+    shape = `${String(streamed.counts.get("nodes"))} rows, streamed`;
+    ({ warnings } = streamed);
+  } else {
+    const result = entire ? await fetchEntry(dataset) : await attempt(0);
+    memory.sample();
+    const instances = "instances" in result.data ? result.data.instances : [];
+    const nodes = "nodes" in result.data ? result.data.nodes : instances.flatMap((instance) => instance.nodes);
+    tally.add(nodes);
+    held = nodes.length;
+    shape = "instances" in result.data ? `${String(instances.length)} instances, ${String(nodes.length)} nodes` : `${String(nodes.length)} rows`;
+    ({ warnings } = result);
+  }
 
   const recorded = entire && "rowCount" in outcome && outcome.rowCount !== undefined ? ` (the curation recorded ${String(outcome.rowCount)})` : "";
-  const shape = "instances" in result.data ? `${String(instances.length)} instances, ${String(nodes.length)} nodes` : `${String(nodes.length)} rows`;
+  const warned = warnings.length > 0 ? ` WARNING ${warnings.join("; ")}` : "";
+  const fieldsText = tally.describe();
+  const memoryText = `; rows held at most ${String(held)}; ${memory.describe()}`;
 
-  const warned = result.warnings.length > 0 ? ` WARNING ${result.warnings.join("; ")}` : "";
-
-  return `${curated.surveyId} ${curated.id}: ${shape}${recorded}; ${fields.join("; ")}${warned}`;
+  return `${curated.surveyId} ${curated.id}: ${shape}${recorded}; ${fieldsText}${memoryText}${warned}`;
 }
 
 /**
