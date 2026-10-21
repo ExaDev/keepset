@@ -157,6 +157,11 @@ export function entryPage(context: PageContext, dataset: Dataset): string {
     <h1 key="name">{entry.name}</h1>,
     entry.description === undefined ? null : <p className="description" key="description">{entry.description}</p>,
     <p className="command" key="command"><code>{command}</code> <span data-copy-command={command} /></p>,
+    recipe.status === "fetchable" ? (
+      <div className="preview" key="preview" data-preview-id={entry.id}>
+        <p className="preview-note">Fetch and preview this dataset on this page, or download the result as JSON. The command line fetches it without a browser.</p>
+      </div>
+    ) : null,
     recipe.status === "fetchable" ? null : <p className="warning" key="warning">This entry has no fetchable recipe yet: {recipe.reason}</p>,
     <h2 key="overview">Overview</h2>,
     <Facts key="overview" rows={[

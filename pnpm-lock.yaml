@@ -254,6 +254,9 @@ importers:
       eslint:
         specifier: 10.12.0
         version: 10.12.0(jiti@2.7.0)(supports-color@7.2.0)
+      events:
+        specifier: 3.3.0
+        version: 3.3.0
       husky:
         specifier: 9.1.7
         version: 9.1.7
@@ -266,6 +269,9 @@ importers:
       publint:
         specifier: 0.3.25
         version: 0.3.25
+      readable-stream:
+        specifier: 2.3.8
+        version: 2.3.8
       semantic-release:
         specifier: 25.0.9
         version: 25.0.9(supports-color@7.2.0)(typescript@6.0.3)
@@ -1879,6 +1885,10 @@ packages:
   eval@0.1.8:
     resolution: {integrity: sha512-EzV94NYKoO09GLXGjXj9JIlXijVck4ONSr5wiCWDvhsvj5jxSrzTmRU/9C1DyB6uToszLs8aifA6NQ7lEQdvFw==}
     engines: {node: '>= 0.8'}
+
+  events@3.3.0:
+    resolution: {integrity: sha512-mQw+2fkQbALzQ7V0MY0IqdnXNOeTtP4r0lN9z7AAawCXgqea7bDii20AYrIBrFd/Hx0M2Ocz6S111CaFkUcb0Q==}
+    engines: {node: '>=0.8.x'}
 
   execa@10.1.0:
     resolution: {integrity: sha512-5HT/600HqXEtmkb9mK/PkTWw+bQSCzPnWiZ4/87wD3Hi0wFzCapOuNT9p4M08PDd+KLHdHvFhKjOWmNx/npRNQ==}
@@ -5132,6 +5142,8 @@ snapshots:
     dependencies:
       '@types/node': 26.6.5
       require-like: 0.1.2
+
+  events@3.3.0: {}
 
   execa@10.1.0:
     dependencies:

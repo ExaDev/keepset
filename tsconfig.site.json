@@ -12,6 +12,7 @@
   "extends": "./tsconfig.json",
   "include": [
     "site/client/app.tsx",
+    "site/client/fetch-worker.ts",
     "site/styles.css.ts",
     "site/client/mantine-styles.d.ts"
   ]
