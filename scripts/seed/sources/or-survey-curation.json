@@ -2431,7 +2431,8 @@
       ],
       "description": "Instances for the daily home health care routing and scheduling problem with several service types, multiple visits and route interdependence, generated on OpenAddresses data for Porto Alegre, with lower and upper bounds and a curated selection of hard and random instances for each size.",
       "flags": [
-        "The repository is large and carries no licence file or statement."
+        "The repository is large and carries no licence file or statement.",
+        "The recipe reads the curated selection the repository's dataset.csv lists, at a pinned commit; the travel matrix and the caregivers' qualifications are not kept, as tasks/v1 has no arcs."
       ],
       "id": "github-afkummer-hhcrsp-curated-instances",
       "licence": {
@@ -2443,8 +2444,1149 @@
       "name": "HHCRSP curated instances (Kummer, 2021)",
       "namespace": "github-afkummer",
       "outcome": {
-        "reason": "The instances are keyword format text files with node positions, time windows, service durations and a travel time matrix, but the repository holds them as a very large number of separate files in size directories and publishes no archive of the curated selection, so a recipe has no single download to read; the repository's own archive holds every instance and is several gigabytes.",
-        "status": "not-fetchable"
+        "expectedInstances": 160,
+        "files": [
+          {
+            "path": "instances-10/HHCRSP_10_3_88_1.6_R_C.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-10/HHCRSP_10_3_88_1.6_R_C.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-10/HHCRSP_10_3_40_0.8_R_C.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-10/HHCRSP_10_3_40_0.8_R_C.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-10/HHCRSP_10_3_40_1.0_R_C.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-10/HHCRSP_10_3_40_1.0_R_C.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-10/HHCRSP_10_3_35_1.0_R_R.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-10/HHCRSP_10_3_35_1.0_R_R.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-10/HHCRSP_10_3_88_1.0_R_C.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-10/HHCRSP_10_3_88_1.0_R_C.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-10/HHCRSP_10_3_88_1.2_R_C.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-10/HHCRSP_10_3_88_1.2_R_C.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-10/HHCRSP_10_3_81_1.2_R_C.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-10/HHCRSP_10_3_81_1.2_R_C.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-10/HHCRSP_10_3_86_1.2_C_C.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-10/HHCRSP_10_3_86_1.2_C_C.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-10/HHCRSP_10_3_88_1.6_C_C.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-10/HHCRSP_10_3_88_1.6_C_C.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-10/HHCRSP_10_3_16_1.6_C_C.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-10/HHCRSP_10_3_16_1.6_C_C.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-25/HHCRSP_25_5_22_1.0_C_C.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-25/HHCRSP_25_5_22_1.0_C_C.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-25/HHCRSP_25_5_69_1.6_R_RC.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-25/HHCRSP_25_5_69_1.6_R_RC.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-25/HHCRSP_25_5_47_0.8_R_C.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-25/HHCRSP_25_5_47_0.8_R_C.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-25/HHCRSP_25_5_37_0.8_R_RC.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-25/HHCRSP_25_5_37_0.8_R_RC.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-25/HHCRSP_25_5_37_1.0_R_RC.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-25/HHCRSP_25_5_37_1.0_R_RC.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-25/HHCRSP_25_5_26_0.8_C_C.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-25/HHCRSP_25_5_26_0.8_C_C.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-25/HHCRSP_25_5_6_0.8_R_C.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-25/HHCRSP_25_5_6_0.8_R_C.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-25/HHCRSP_25_5_69_1.6_R_C.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-25/HHCRSP_25_5_69_1.6_R_C.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-25/HHCRSP_25_5_42_0.8_R_RC.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-25/HHCRSP_25_5_42_0.8_R_RC.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-25/HHCRSP_25_5_96_0.8_R_C.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-25/HHCRSP_25_5_96_0.8_R_C.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-50/HHCRSP_50_10_80_1.0_C_C.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-50/HHCRSP_50_10_80_1.0_C_C.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-50/HHCRSP_50_10_81_1.0_R_RC.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-50/HHCRSP_50_10_81_1.0_R_RC.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-50/HHCRSP_50_10_80_1.0_C_RC.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-50/HHCRSP_50_10_80_1.0_C_RC.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-50/HHCRSP_50_10_97_0.8_C_RC.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-50/HHCRSP_50_10_97_0.8_C_RC.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-50/HHCRSP_50_10_32_1.2_R_C.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-50/HHCRSP_50_10_32_1.2_R_C.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-50/HHCRSP_50_10_3_0.8_R_C.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-50/HHCRSP_50_10_3_0.8_R_C.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-50/HHCRSP_50_10_80_0.4_C_C.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-50/HHCRSP_50_10_80_0.4_C_C.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-50/HHCRSP_50_10_26_1.0_C_RC.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-50/HHCRSP_50_10_26_1.0_C_RC.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-50/HHCRSP_50_10_26_1.2_R_C.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-50/HHCRSP_50_10_26_1.2_R_C.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-50/HHCRSP_50_10_44_1.6_R_C.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-50/HHCRSP_50_10_44_1.6_R_C.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-75/HHCRSP_75_15_97_1.0_R_RC.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-75/HHCRSP_75_15_97_1.0_R_RC.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-75/HHCRSP_75_15_35_0.8_R_C.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-75/HHCRSP_75_15_35_0.8_R_C.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-75/HHCRSP_75_15_35_1.0_C_RC.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-75/HHCRSP_75_15_35_1.0_C_RC.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-75/HHCRSP_75_15_97_1.0_C_C.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-75/HHCRSP_75_15_97_1.0_C_C.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-75/HHCRSP_75_15_79_1.2_R_C.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-75/HHCRSP_75_15_79_1.2_R_C.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-75/HHCRSP_75_15_10_1.6_R_C.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-75/HHCRSP_75_15_10_1.6_R_C.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-75/HHCRSP_75_15_88_1.6_R_C.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-75/HHCRSP_75_15_88_1.6_R_C.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-75/HHCRSP_75_15_98_1.6_R_C.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-75/HHCRSP_75_15_98_1.6_R_C.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-75/HHCRSP_75_15_21_1.6_R_C.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-75/HHCRSP_75_15_21_1.6_R_C.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-75/HHCRSP_75_15_87_1.6_C_C.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-75/HHCRSP_75_15_87_1.6_C_C.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-100/HHCRSP_100_20_8_1.2_R_C.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-100/HHCRSP_100_20_8_1.2_R_C.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-100/HHCRSP_100_20_63_1.2_R_C.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-100/HHCRSP_100_20_63_1.2_R_C.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-100/HHCRSP_100_20_39_1.6_R_C.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-100/HHCRSP_100_20_39_1.6_R_C.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-100/HHCRSP_100_20_76_1.6_R_C.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-100/HHCRSP_100_20_76_1.6_R_C.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-100/HHCRSP_100_20_57_1.6_R_C.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-100/HHCRSP_100_20_57_1.6_R_C.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-100/HHCRSP_100_20_25_0.8_R_C.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-100/HHCRSP_100_20_25_0.8_R_C.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-100/HHCRSP_100_20_77_1.0_R_C.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-100/HHCRSP_100_20_77_1.0_R_C.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-100/HHCRSP_100_20_11_1.2_R_C.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-100/HHCRSP_100_20_11_1.2_R_C.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-100/HHCRSP_100_20_30_1.0_R_C.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-100/HHCRSP_100_20_30_1.0_R_C.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-100/HHCRSP_100_20_23_1.2_R_C.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-100/HHCRSP_100_20_23_1.2_R_C.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-200/HHCRSP_200_40_52_1.6_R_C.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-200/HHCRSP_200_40_52_1.6_R_C.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-200/HHCRSP_200_40_7_1.2_R_C.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-200/HHCRSP_200_40_7_1.2_R_C.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-200/HHCRSP_200_40_30_1.6_R_C.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-200/HHCRSP_200_40_30_1.6_R_C.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-200/HHCRSP_200_40_76_1.2_R_C.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-200/HHCRSP_200_40_76_1.2_R_C.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-200/HHCRSP_200_40_7_1.6_R_C.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-200/HHCRSP_200_40_7_1.6_R_C.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-200/HHCRSP_200_40_51_1.0_R_C.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-200/HHCRSP_200_40_51_1.0_R_C.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-200/HHCRSP_200_40_17_1.6_R_C.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-200/HHCRSP_200_40_17_1.6_R_C.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-200/HHCRSP_200_40_40_1.0_R_C.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-200/HHCRSP_200_40_40_1.0_R_C.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-200/HHCRSP_200_40_71_1.6_R_C.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-200/HHCRSP_200_40_71_1.6_R_C.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-200/HHCRSP_200_40_98_1.2_R_C.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-200/HHCRSP_200_40_98_1.2_R_C.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-300/HHCRSP_300_60_4_1.6_R_C.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-300/HHCRSP_300_60_4_1.6_R_C.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-300/HHCRSP_300_60_89_1.6_R_C.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-300/HHCRSP_300_60_89_1.6_R_C.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-300/HHCRSP_300_60_82_1.2_R_C.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-300/HHCRSP_300_60_82_1.2_R_C.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-300/HHCRSP_300_60_95_1.2_R_C.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-300/HHCRSP_300_60_95_1.2_R_C.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-300/HHCRSP_300_60_22_1.2_R_C.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-300/HHCRSP_300_60_22_1.2_R_C.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-300/HHCRSP_300_60_85_1.2_R_C.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-300/HHCRSP_300_60_85_1.2_R_C.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-300/HHCRSP_300_60_81_1.6_R_C.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-300/HHCRSP_300_60_81_1.6_R_C.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-300/HHCRSP_300_60_23_1.2_R_C.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-300/HHCRSP_300_60_23_1.2_R_C.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-300/HHCRSP_300_60_34_1.2_R_C.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-300/HHCRSP_300_60_34_1.2_R_C.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-300/HHCRSP_300_60_69_1.0_R_C.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-300/HHCRSP_300_60_69_1.0_R_C.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-400/HHCRSP_400_80_59_1.0_R_C.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-400/HHCRSP_400_80_59_1.0_R_C.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-400/HHCRSP_400_80_16_1.2_R_C.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-400/HHCRSP_400_80_16_1.2_R_C.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-400/HHCRSP_400_80_51_1.0_R_C.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-400/HHCRSP_400_80_51_1.0_R_C.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-400/HHCRSP_400_80_97_1.6_R_C.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-400/HHCRSP_400_80_97_1.6_R_C.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-400/HHCRSP_400_80_30_1.6_R_C.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-400/HHCRSP_400_80_30_1.6_R_C.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-400/HHCRSP_400_80_34_1.0_R_C.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-400/HHCRSP_400_80_34_1.0_R_C.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-400/HHCRSP_400_80_92_1.6_R_C.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-400/HHCRSP_400_80_92_1.6_R_C.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-400/HHCRSP_400_80_91_1.2_R_C.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-400/HHCRSP_400_80_91_1.2_R_C.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-400/HHCRSP_400_80_28_1.2_R_C.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-400/HHCRSP_400_80_28_1.2_R_C.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-400/HHCRSP_400_80_81_1.6_R_C.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-400/HHCRSP_400_80_81_1.6_R_C.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-10/HHCRSP_10_3_80_1.0_C_R.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-10/HHCRSP_10_3_80_1.0_C_R.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-10/HHCRSP_10_3_56_1.2_R_RC.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-10/HHCRSP_10_3_56_1.2_R_RC.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-10/HHCRSP_10_3_22_1.6_R_C.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-10/HHCRSP_10_3_22_1.6_R_C.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-10/HHCRSP_10_3_90_1.2_C_RC.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-10/HHCRSP_10_3_90_1.2_C_RC.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-10/HHCRSP_10_3_46_1.6_R_C.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-10/HHCRSP_10_3_46_1.6_R_C.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-10/HHCRSP_10_3_90_1.2_C_C.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-10/HHCRSP_10_3_90_1.2_C_C.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-10/HHCRSP_10_3_60_1.0_R_RC.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-10/HHCRSP_10_3_60_1.0_R_RC.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-10/HHCRSP_10_3_51_1.0_R_RC.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-10/HHCRSP_10_3_51_1.0_R_RC.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-10/HHCRSP_10_3_11_0.4_R_C.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-10/HHCRSP_10_3_11_0.4_R_C.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-10/HHCRSP_10_3_96_1.0_R_C.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-10/HHCRSP_10_3_96_1.0_R_C.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-25/HHCRSP_25_5_48_1.0_C_C.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-25/HHCRSP_25_5_48_1.0_C_C.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-25/HHCRSP_25_5_80_0.8_C_RC.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-25/HHCRSP_25_5_80_0.8_C_RC.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-25/HHCRSP_25_5_70_1.0_R_C.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-25/HHCRSP_25_5_70_1.0_R_C.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-25/HHCRSP_25_5_56_0.8_R_RC.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-25/HHCRSP_25_5_56_0.8_R_RC.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-25/HHCRSP_25_5_73_0.4_R_RC.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-25/HHCRSP_25_5_73_0.4_R_RC.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-25/HHCRSP_25_5_76_1.2_C_C.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-25/HHCRSP_25_5_76_1.2_C_C.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-25/HHCRSP_25_5_21_1.6_R_RC.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-25/HHCRSP_25_5_21_1.6_R_RC.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-25/HHCRSP_25_5_49_0.4_C_C.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-25/HHCRSP_25_5_49_0.4_C_C.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-25/HHCRSP_25_5_42_0.8_C_RC.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-25/HHCRSP_25_5_42_0.8_C_RC.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-25/HHCRSP_25_5_97_1.0_R_R.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-25/HHCRSP_25_5_97_1.0_R_R.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-50/HHCRSP_50_10_33_0.4_R_RC.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-50/HHCRSP_50_10_33_0.4_R_RC.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-50/HHCRSP_50_10_62_1.2_R_C.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-50/HHCRSP_50_10_62_1.2_R_C.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-50/HHCRSP_50_10_2_1.0_C_R.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-50/HHCRSP_50_10_2_1.0_C_R.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-50/HHCRSP_50_10_53_1.2_R_C.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-50/HHCRSP_50_10_53_1.2_R_C.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-50/HHCRSP_50_10_74_1.0_R_RC.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-50/HHCRSP_50_10_74_1.0_R_RC.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-50/HHCRSP_50_10_60_0.4_C_RC.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-50/HHCRSP_50_10_60_0.4_C_RC.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-50/HHCRSP_50_10_3_1.6_C_C.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-50/HHCRSP_50_10_3_1.6_C_C.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-50/HHCRSP_50_10_88_1.6_C_RC.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-50/HHCRSP_50_10_88_1.6_C_RC.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-50/HHCRSP_50_10_100_1.6_C_C.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-50/HHCRSP_50_10_100_1.6_C_C.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-50/HHCRSP_50_10_61_1.0_R_RC.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-50/HHCRSP_50_10_61_1.0_R_RC.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-75/HHCRSP_75_15_19_0.8_R_C.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-75/HHCRSP_75_15_19_0.8_R_C.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-75/HHCRSP_75_15_30_1.0_R_C.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-75/HHCRSP_75_15_30_1.0_R_C.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-75/HHCRSP_75_15_84_0.8_R_RC.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-75/HHCRSP_75_15_84_0.8_R_RC.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-75/HHCRSP_75_15_63_1.0_R_RC.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-75/HHCRSP_75_15_63_1.0_R_RC.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-75/HHCRSP_75_15_65_1.0_C_C.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-75/HHCRSP_75_15_65_1.0_C_C.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-75/HHCRSP_75_15_32_1.2_R_RC.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-75/HHCRSP_75_15_32_1.2_R_RC.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-75/HHCRSP_75_15_63_0.4_R_C.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-75/HHCRSP_75_15_63_0.4_R_C.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-75/HHCRSP_75_15_97_0.4_C_C.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-75/HHCRSP_75_15_97_0.4_C_C.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-75/HHCRSP_75_15_40_0.8_R_RC.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-75/HHCRSP_75_15_40_0.8_R_RC.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-75/HHCRSP_75_15_5_0.8_C_RC.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-75/HHCRSP_75_15_5_0.8_C_RC.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-100/HHCRSP_100_20_54_1.2_R_RC.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-100/HHCRSP_100_20_54_1.2_R_RC.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-100/HHCRSP_100_20_9_1.0_R_R.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-100/HHCRSP_100_20_9_1.0_R_R.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-100/HHCRSP_100_20_65_0.4_R_RC.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-100/HHCRSP_100_20_65_0.4_R_RC.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-100/HHCRSP_100_20_88_1.2_C_C.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-100/HHCRSP_100_20_88_1.2_C_C.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-100/HHCRSP_100_20_61_0.4_R_RC.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-100/HHCRSP_100_20_61_0.4_R_RC.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-100/HHCRSP_100_20_99_0.4_C_RC.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-100/HHCRSP_100_20_99_0.4_C_RC.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-100/HHCRSP_100_20_68_1.6_R_C.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-100/HHCRSP_100_20_68_1.6_R_C.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-100/HHCRSP_100_20_49_0.4_C_C.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-100/HHCRSP_100_20_49_0.4_C_C.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-100/HHCRSP_100_20_10_1.2_R_C.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-100/HHCRSP_100_20_10_1.2_R_C.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-100/HHCRSP_100_20_35_1.6_C_RC.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-100/HHCRSP_100_20_35_1.6_C_RC.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-200/HHCRSP_200_40_10_1.6_C_RC.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-200/HHCRSP_200_40_10_1.6_C_RC.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-200/HHCRSP_200_40_71_1.6_C_C.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-200/HHCRSP_200_40_71_1.6_C_C.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-200/HHCRSP_200_40_60_0.4_C_RC.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-200/HHCRSP_200_40_60_0.4_C_RC.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-200/HHCRSP_200_40_80_1.0_C_C.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-200/HHCRSP_200_40_80_1.0_C_C.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-200/HHCRSP_200_40_17_1.6_C_C.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-200/HHCRSP_200_40_17_1.6_C_C.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-200/HHCRSP_200_40_75_1.6_R_C.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-200/HHCRSP_200_40_75_1.6_R_C.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-200/HHCRSP_200_40_82_1.0_C_R.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-200/HHCRSP_200_40_82_1.0_C_R.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-200/HHCRSP_200_40_98_1.6_C_RC.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-200/HHCRSP_200_40_98_1.6_C_RC.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-200/HHCRSP_200_40_100_0.4_C_C.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-200/HHCRSP_200_40_100_0.4_C_C.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-200/HHCRSP_200_40_69_1.0_C_R.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-200/HHCRSP_200_40_69_1.0_C_R.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-300/HHCRSP_300_60_48_0.8_C_C.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-300/HHCRSP_300_60_48_0.8_C_C.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-300/HHCRSP_300_60_26_0.4_C_RC.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-300/HHCRSP_300_60_26_0.4_C_RC.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-300/HHCRSP_300_60_4_1.0_R_C.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-300/HHCRSP_300_60_4_1.0_R_C.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-300/HHCRSP_300_60_68_0.8_C_RC.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-300/HHCRSP_300_60_68_0.8_C_RC.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-300/HHCRSP_300_60_45_1.6_C_C.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-300/HHCRSP_300_60_45_1.6_C_C.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-300/HHCRSP_300_60_75_1.2_C_RC.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-300/HHCRSP_300_60_75_1.2_C_RC.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-300/HHCRSP_300_60_73_0.8_R_RC.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-300/HHCRSP_300_60_73_0.8_R_RC.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-300/HHCRSP_300_60_46_0.4_R_C.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-300/HHCRSP_300_60_46_0.4_R_C.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-300/HHCRSP_300_60_7_1.2_R_RC.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-300/HHCRSP_300_60_7_1.2_R_RC.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-300/HHCRSP_300_60_81_0.8_C_C.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-300/HHCRSP_300_60_81_0.8_C_C.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-400/HHCRSP_400_80_20_0.4_C_RC.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-400/HHCRSP_400_80_20_0.4_C_RC.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-400/HHCRSP_400_80_45_0.4_C_C.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-400/HHCRSP_400_80_45_0.4_C_C.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-400/HHCRSP_400_80_61_0.4_C_RC.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-400/HHCRSP_400_80_61_0.4_C_RC.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-400/HHCRSP_400_80_54_1.2_C_RC.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-400/HHCRSP_400_80_54_1.2_C_RC.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-400/HHCRSP_400_80_95_1.0_C_R.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-400/HHCRSP_400_80_95_1.0_C_R.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-400/HHCRSP_400_80_77_1.2_R_RC.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-400/HHCRSP_400_80_77_1.2_R_RC.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-400/HHCRSP_400_80_22_1.6_C_C.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-400/HHCRSP_400_80_22_1.6_C_C.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-400/HHCRSP_400_80_33_1.0_C_RC.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-400/HHCRSP_400_80_33_1.0_C_RC.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-400/HHCRSP_400_80_65_1.0_C_R.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-400/HHCRSP_400_80_65_1.0_C_R.txt",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "instances-400/HHCRSP_400_80_60_0.8_C_C.txt",
+            "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-400/HHCRSP_400_80_60_0.8_C_C.txt",
+            "archive": {
+              "kind": "none"
+            }
+          }
+        ],
+        "keep": [
+          "role",
+          "duration1",
+          "duration2",
+          "earliest",
+          "minGap",
+          "maxGap"
+        ],
+        "map": {
+          "deadline": "latest",
+          "lat": "x",
+          "lon": "y",
+          "skill": "services"
+        },
+        "parser": {
+          "encoding": "utf-8",
+          "format": "mankowska"
+        },
+        "status": "fetchable-instance-files",
+        "timeUnit": "abstract units"
       },
       "surveyId": "or-17"
     },
@@ -2813,7 +3955,8 @@
       ],
       "description": "Instance sets and raw results for the technician routing and scheduling problem of Gamst and Pisinger, including the instances of Mathlouthi, Gendreau and Potvin and a further technician dispatch set called TDCData.",
       "flags": [
-        "The survey field list for this item is unverified."
+        "The survey field list for this item is unverified.",
+        "Durations are minutes in the files and are scaled to seconds; the investment option files, the technicians' details and the travel times are not kept."
       ],
       "id": "zenodo-tdc-technician-dispatch",
       "licence": {
@@ -2827,8 +3970,51 @@
       "name": "Technician dispatch data (Mathlouthi, Gendreau and Potvin)",
       "namespace": "zenodo",
       "outcome": {
-        "reason": "The instances are a custom sectioned text format whose tasks have no positions, and the collection is hundreds of megabytes compressed, almost all of it a pairwise travel time matrix that tasks/v1 has no arcs to hold, so reading it would hold gigabytes in memory to keep a few fields per task.",
-        "status": "not-fetchable"
+        "expectedInstances": 1186,
+        "factors": {
+          "duration": 60
+        },
+        "files": [
+          {
+            "path": "mathlouthi_instances.zip",
+            "url": "https://zenodo.org/records/7904015/files/mathlouthi_instances.zip?download=1",
+            "archive": {
+              "kind": "zip",
+              "members": {
+                "pattern": "Data[^/]*_inst\\d+\\.txt"
+              }
+            }
+          },
+          {
+            "path": "TDCData_instance.zip",
+            "url": "https://zenodo.org/records/7904015/files/TDCData_instance.zip?download=1",
+            "archive": {
+              "kind": "zip",
+              "member": {
+                "path": "TDCData.txt"
+              }
+            }
+          }
+        ],
+        "keep": [
+          "earliest",
+          "priority",
+          "penalty",
+          "modified",
+          "cancelled"
+        ],
+        "map": {
+          "deadline": "latest",
+          "duration": "durationMinutes",
+          "opened": "created",
+          "skill": "skills"
+        },
+        "parser": {
+          "encoding": "utf-8",
+          "format": "tdc"
+        },
+        "status": "fetchable-instance-files",
+        "timeUnit": "seconds"
       },
       "surveyId": "or-25"
     },
@@ -2842,7 +4028,8 @@
       "description": "Instances for the ORTEC VeRoLog Solver Challenge of 2016 to 2017, a routing problem that redistributes scarce equipment between customers within time windows, released in sets from the early test instances to the hidden ones.",
       "flags": [
         "The archive zip link tried returned 404; only individual instance files are reachable.",
-        "No licence statement was seen."
+        "No licence statement was seen.",
+        "The challenge site no longer answers, so each instance file is read from its own Wayback capture; the tool table's sizes and costs are not kept."
       ],
       "id": "ortec-verolog-2016-2017-instances",
       "licence": {
@@ -2854,8 +4041,907 @@
       "name": "VeRoLog 2016-2017 scarce-equipment pickup and delivery instances",
       "namespace": "ortec",
       "outcome": {
-        "reason": "The instances are keyword format text files that the Wayback Machine serves one at a time, as the archive zips of each set were not captured, and a recipe reads one download, so no recipe reaches the collection.",
-        "status": "not-fetchable"
+        "expectedInstances": 110,
+        "files": [
+          {
+            "path": "ORTEC_Test_01.txt",
+            "url": "https://verolog2017.ortec.com/instance/1/1-7166387f68986ca720f76fbd5290113b.txt/ORTEC_Test_01.txt",
+            "snapshot": "20260207012433",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "ORTEC_Test_02.txt",
+            "url": "https://verolog2017.ortec.com/instance/1/1-587f1c1000eae4d5f373184139d6ccce.txt/ORTEC_Test_02.txt",
+            "snapshot": "20260121023722",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "ORTEC_Test_03.txt",
+            "url": "https://verolog2017.ortec.com/instance/1/1-4a0b98c851d035bbc369bd2aeff918d3.txt/ORTEC_Test_03.txt",
+            "snapshot": "20260207014524",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "ORTEC_Test_04.txt",
+            "url": "https://verolog2017.ortec.com/instance/1/1-76b4d92b07456b03405254c91482878d.txt/ORTEC_Test_04.txt",
+            "snapshot": "20260312010452",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "ORTEC_Test_05.txt",
+            "url": "https://verolog2017.ortec.com/instance/1/1-5ea19e27a944831b27ce7923350ec6db.txt/ORTEC_Test_05.txt",
+            "snapshot": "20251217090840",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "ORTEC_Test_06.txt",
+            "url": "https://verolog2017.ortec.com/instance/1/1-2cbfe10526cd3fb9e8b6f3aebd4354a7.txt/ORTEC_Test_06.txt",
+            "snapshot": "20240918083607",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "ORTEC_Test_07.txt",
+            "url": "https://verolog2017.ortec.com/instance/1/1-b1492a7bb01ab0a6d2e6acfeffc4a774.txt/ORTEC_Test_07.txt",
+            "snapshot": "20260312003519",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "ORTEC_Test_08.txt",
+            "url": "https://verolog2017.ortec.com/instance/1/1-37cffcc7f322d8d251abf6fe7e352f8e.txt/ORTEC_Test_08.txt",
+            "snapshot": "20260312014131",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "ORTEC_Test_09.txt",
+            "url": "https://verolog2017.ortec.com/instance/1/1-2acc3935112c7e1200f61bb647c13e7d.txt/ORTEC_Test_09.txt",
+            "snapshot": "20260515020640",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "ORTEC_Test_10.txt",
+            "url": "https://verolog2017.ortec.com/instance/1/1-4889fb56dafd5fb571a4bbc6b997f170.txt/ORTEC_Test_10.txt",
+            "snapshot": "20260312015701",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "VeRoLog_hidden_r1000d20_1.txt",
+            "url": "https://verolog2017.ortec.com/instance/4/4-be04139192c0baa4e61ea66c52569b5f.txt/VeRoLog_hidden_r1000d20_1.txt",
+            "snapshot": "20260420181417",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "VeRoLog_hidden_r1000d20_2.txt",
+            "url": "https://verolog2017.ortec.com/instance/4/4-8ead08ac53237ff62df8682b61eef5df.txt/VeRoLog_hidden_r1000d20_2.txt",
+            "snapshot": "20240918065212",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "VeRoLog_hidden_r1000d20_3.txt",
+            "url": "https://verolog2017.ortec.com/instance/4/4-0fd89018562f2f2badb817d471b22dc6.txt/VeRoLog_hidden_r1000d20_3.txt",
+            "snapshot": "20240912215100",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "VeRoLog_hidden_r1000d20_4.txt",
+            "url": "https://verolog2017.ortec.com/instance/4/4-aa702cb83f7a4303a6dfa658e90fa07f.txt/VeRoLog_hidden_r1000d20_4.txt",
+            "snapshot": "20260420181213",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "VeRoLog_hidden_r1000d20_5.txt",
+            "url": "https://verolog2017.ortec.com/instance/4/4-8b75c7e8364dc820f3489e9d200daf0b.txt/VeRoLog_hidden_r1000d20_5.txt",
+            "snapshot": "20260312020110",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "VeRoLog_hidden_r1000d25_1.txt",
+            "url": "https://verolog2017.ortec.com/instance/4/4-3619fdb5157feb13589296f8a36de630.txt/VeRoLog_hidden_r1000d25_1.txt",
+            "snapshot": "20260420192045",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "VeRoLog_hidden_r1000d25_2.txt",
+            "url": "https://verolog2017.ortec.com/instance/4/4-e50fa17b45d39fc65912a8ddc12efd0c.txt/VeRoLog_hidden_r1000d25_2.txt",
+            "snapshot": "20241005121718",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "VeRoLog_hidden_r1000d25_3.txt",
+            "url": "https://verolog2017.ortec.com/instance/4/4-2013cc2dad7b631f3ef5ce5e8471bcc6.txt/VeRoLog_hidden_r1000d25_3.txt",
+            "snapshot": "20241108083248",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "VeRoLog_hidden_r1000d25_4.txt",
+            "url": "https://verolog2017.ortec.com/instance/4/4-05104f29c166b54289d4151d2c159356.txt/VeRoLog_hidden_r1000d25_4.txt",
+            "snapshot": "20260420190742",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "VeRoLog_hidden_r1000d25_5.txt",
+            "url": "https://verolog2017.ortec.com/instance/4/4-8a1b91228cdd77a81ebdb2363b00e1a0.txt/VeRoLog_hidden_r1000d25_5.txt",
+            "snapshot": "20251108023820",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "VeRoLog_hidden_r1500d30_1.txt",
+            "url": "https://verolog2017.ortec.com/instance/4/4-97f69a558d19c2df77ae75a062e9fb55.txt/VeRoLog_hidden_r1500d30_1.txt",
+            "snapshot": "20260515005156",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "VeRoLog_hidden_r1500d30_2.txt",
+            "url": "https://verolog2017.ortec.com/instance/4/4-34c90ab02514069c5cd25072659ca8b4.txt/VeRoLog_hidden_r1500d30_2.txt",
+            "snapshot": "20260608140306",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "VeRoLog_hidden_r1500d30_3.txt",
+            "url": "https://verolog2017.ortec.com/instance/4/4-1f4d8eed1312f4bf17d8e575c9a38470.txt/VeRoLog_hidden_r1500d30_3.txt",
+            "snapshot": "20251108041308",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "VeRoLog_hidden_r1500d30_4.txt",
+            "url": "https://verolog2017.ortec.com/instance/4/4-13853d226925ae24f49e1061e8c26b33.txt/VeRoLog_hidden_r1500d30_4.txt",
+            "snapshot": "20260207022254",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "VeRoLog_hidden_r1500d30_5.txt",
+            "url": "https://verolog2017.ortec.com/instance/4/4-308be6015c952d331c2c7a075390051b.txt/VeRoLog_hidden_r1500d30_5.txt",
+            "snapshot": "20260312021838",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "VeRoLog_hidden_r1500d40_1.txt",
+            "url": "https://verolog2017.ortec.com/instance/4/4-1cc60f2f35c1b9395a042ec4afcbb43b.txt/VeRoLog_hidden_r1500d40_1.txt",
+            "snapshot": "20241005124153",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "VeRoLog_hidden_r1500d40_2.txt",
+            "url": "https://verolog2017.ortec.com/instance/4/4-ee38e57599ef794853df2f913f194ec0.txt/VeRoLog_hidden_r1500d40_2.txt",
+            "snapshot": "20241005114103",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "VeRoLog_hidden_r1500d40_3.txt",
+            "url": "https://verolog2017.ortec.com/instance/4/4-a7804949e0e4238f7255d03f74b8e7f5.txt/VeRoLog_hidden_r1500d40_3.txt",
+            "snapshot": "20260312004649",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "VeRoLog_hidden_r1500d40_4.txt",
+            "url": "https://verolog2017.ortec.com/instance/4/4-6cb0bc297af8a4658e7139372388bb9f.txt/VeRoLog_hidden_r1500d40_4.txt",
+            "snapshot": "20260207023324",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "VeRoLog_hidden_r1500d40_5.txt",
+            "url": "https://verolog2017.ortec.com/instance/4/4-750ddb23f886bd4a5d0ba9b5e406b304.txt/VeRoLog_hidden_r1500d40_5.txt",
+            "snapshot": "20260420183615",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "VeRoLog_hidden_r2000d50_1.txt",
+            "url": "https://verolog2017.ortec.com/instance/4/4-4d6d6181085e32c13e34f97b400028b2.txt/VeRoLog_hidden_r2000d50_1.txt",
+            "snapshot": "20260312013912",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "VeRoLog_hidden_r2000d50_2.txt",
+            "url": "https://verolog2017.ortec.com/instance/4/4-219cc43fa93f0e408039381b02b34acc.txt/VeRoLog_hidden_r2000d50_2.txt",
+            "snapshot": "20240918081710",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "VeRoLog_hidden_r2000d50_3.txt",
+            "url": "https://verolog2017.ortec.com/instance/4/4-17bf56538032dbcceebf7d61c9839c74.txt/VeRoLog_hidden_r2000d50_3.txt",
+            "snapshot": "20251217091457",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "VeRoLog_hidden_r2000d50_4.txt",
+            "url": "https://verolog2017.ortec.com/instance/4/4-c6867fddc41d12c6c267d85516cc21cd.txt/VeRoLog_hidden_r2000d50_4.txt",
+            "snapshot": "20260207015854",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "VeRoLog_hidden_r2000d50_5.txt",
+            "url": "https://verolog2017.ortec.com/instance/4/4-cd2b0778df2a85d1dd383cd65f5340fd.txt/VeRoLog_hidden_r2000d50_5.txt",
+            "snapshot": "20260515005816",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "VeRoLog_hidden_r2000d65_1.txt",
+            "url": "https://verolog2017.ortec.com/instance/4/4-b31239590a37d97be636d003d342d71f.txt/VeRoLog_hidden_r2000d65_1.txt",
+            "snapshot": "20251016145704",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "VeRoLog_hidden_r2000d65_2.txt",
+            "url": "https://verolog2017.ortec.com/instance/4/4-d38ed6173b521dc682fd88b4b88a6965.txt/VeRoLog_hidden_r2000d65_2.txt",
+            "snapshot": "20260515011707",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "VeRoLog_hidden_r2000d65_3.txt",
+            "url": "https://verolog2017.ortec.com/instance/4/4-f3d185d2bb9fd808c7d570f100ee4896.txt/VeRoLog_hidden_r2000d65_3.txt",
+            "snapshot": "20260312021409",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "VeRoLog_hidden_r2000d65_4.txt",
+            "url": "https://verolog2017.ortec.com/instance/4/4-cf8056812e79b675b4c3e5fa3c071fd4.txt/VeRoLog_hidden_r2000d65_4.txt",
+            "snapshot": "20260515021721",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "VeRoLog_hidden_r2000d65_5.txt",
+            "url": "https://verolog2017.ortec.com/instance/4/4-927ab7ab6410e2235e07aff8bc2b8177.txt/VeRoLog_hidden_r2000d65_5.txt",
+            "snapshot": "20260608142404",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "VeRoLog_hidden_r2500d70_1.txt",
+            "url": "https://verolog2017.ortec.com/instance/4/4-4a0ba2cd58a6252c4231efb39e6cd963.txt/VeRoLog_hidden_r2500d70_1.txt",
+            "snapshot": "20260515012737",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "VeRoLog_hidden_r2500d70_2.txt",
+            "url": "https://verolog2017.ortec.com/instance/4/4-8c2cc50bc5d106f1e3d8c95d9b19a152.txt/VeRoLog_hidden_r2500d70_2.txt",
+            "snapshot": "20260420182857",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "VeRoLog_hidden_r2500d70_3.txt",
+            "url": "https://verolog2017.ortec.com/instance/4/4-a221e173a7386c660a1e3a08d5d3ca1d.txt/VeRoLog_hidden_r2500d70_3.txt",
+            "snapshot": "20260420180048",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "VeRoLog_hidden_r2500d70_4.txt",
+            "url": "https://verolog2017.ortec.com/instance/4/4-da6be2d652d5bd20ed453fa8907d3b82.txt/VeRoLog_hidden_r2500d70_4.txt",
+            "snapshot": "20241005132839",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "VeRoLog_hidden_r2500d70_5.txt",
+            "url": "https://verolog2017.ortec.com/instance/4/4-619898c7fc56d603e53e37a3b7b897bb.txt/VeRoLog_hidden_r2500d70_5.txt",
+            "snapshot": "20240912231050",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "VeRoLog_hidden_r2500d75_1.txt",
+            "url": "https://verolog2017.ortec.com/instance/4/4-540b4feec283ffc0af583eafdecd8b9f.txt/VeRoLog_hidden_r2500d75_1.txt",
+            "snapshot": "20260312021323",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "VeRoLog_hidden_r2500d75_2.txt",
+            "url": "https://verolog2017.ortec.com/instance/4/4-29ad9ed7b6580a8c95c77eabfdb42d7b.txt/VeRoLog_hidden_r2500d75_2.txt",
+            "snapshot": "20260515021416",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "VeRoLog_hidden_r2500d75_3.txt",
+            "url": "https://verolog2017.ortec.com/instance/4/4-c4f1d44e782817d358d0acef48324b1f.txt/VeRoLog_hidden_r2500d75_3.txt",
+            "snapshot": "20260608143842",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "VeRoLog_hidden_r2500d75_4.txt",
+            "url": "https://verolog2017.ortec.com/instance/4/4-aa79544d951a92a665021e701a46cdd0.txt/VeRoLog_hidden_r2500d75_4.txt",
+            "snapshot": "20260608144031",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "VeRoLog_hidden_r2500d75_5.txt",
+            "url": "https://verolog2017.ortec.com/instance/4/4-be5c23e2dc4aad1d70f4be1467768658.txt/VeRoLog_hidden_r2500d75_5.txt",
+            "snapshot": "20260515014054",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "VeRoLog_hidden_r500d10_1.txt",
+            "url": "https://verolog2017.ortec.com/instance/4/4-c7da5a2b627993b3cff4e32f8f949560.txt/VeRoLog_hidden_r500d10_1.txt",
+            "snapshot": "20260608133658",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "VeRoLog_hidden_r500d10_2.txt",
+            "url": "https://verolog2017.ortec.com/instance/4/4-defd7e2c010dc71fa8b58eef656bbec3.txt/VeRoLog_hidden_r500d10_2.txt",
+            "snapshot": "20260312012821",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "VeRoLog_hidden_r500d10_3.txt",
+            "url": "https://verolog2017.ortec.com/instance/4/4-863381e592edb918ecda33929205fb55.txt/VeRoLog_hidden_r500d10_3.txt",
+            "snapshot": "20260420184838",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "VeRoLog_hidden_r500d10_4.txt",
+            "url": "https://verolog2017.ortec.com/instance/4/4-dbd98cf26272ea19b516653508e11305.txt/VeRoLog_hidden_r500d10_4.txt",
+            "snapshot": "20251217083246",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "VeRoLog_hidden_r500d10_5.txt",
+            "url": "https://verolog2017.ortec.com/instance/4/4-77d436e7259a91987c341f7f58a6423f.txt/VeRoLog_hidden_r500d10_5.txt",
+            "snapshot": "20260312012057",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "VeRoLog_hidden_r500d15_1.txt",
+            "url": "https://verolog2017.ortec.com/instance/4/4-cad6088b3ca9de473b623dc87054d44c.txt/VeRoLog_hidden_r500d15_1.txt",
+            "snapshot": "20260515014704",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "VeRoLog_hidden_r500d15_2.txt",
+            "url": "https://verolog2017.ortec.com/instance/4/4-6dbaa8f662e56bd6c9ca37a9abc9c8ab.txt/VeRoLog_hidden_r500d15_2.txt",
+            "snapshot": "20260515011935",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "VeRoLog_hidden_r500d15_3.txt",
+            "url": "https://verolog2017.ortec.com/instance/4/4-3c537216665db1e5e644ccf7e4a8d856.txt/VeRoLog_hidden_r500d15_3.txt",
+            "snapshot": "20260515021348",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "VeRoLog_hidden_r500d15_4.txt",
+            "url": "https://verolog2017.ortec.com/instance/4/4-d0766547a7567eca85d90499fe553440.txt/VeRoLog_hidden_r500d15_4.txt",
+            "snapshot": "20241005124523",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "VeRoLog_hidden_r500d15_5.txt",
+            "url": "https://verolog2017.ortec.com/instance/4/4-1ebd83f6f72bbd4da5d9bdc3c5be4fd6.txt/VeRoLog_hidden_r500d15_5.txt",
+            "snapshot": "20260420182030",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "VeRoLog_late_r1000d20_1.txt",
+            "url": "https://verolog2017.ortec.com/instance/3/3-f580b34d7def5fc5d6fda2e9f3508d79.txt/VeRoLog_late_r1000d20_1.txt",
+            "snapshot": "20260207020936",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "VeRoLog_late_r1000d20_2.txt",
+            "url": "https://verolog2017.ortec.com/instance/3/3-96de7219e3738e808a6df7c260f1c33c.txt/VeRoLog_late_r1000d20_2.txt",
+            "snapshot": "20251217101531",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "VeRoLog_late_r1000d20_3.txt",
+            "url": "https://verolog2017.ortec.com/instance/3/3-35d5b707cb7a910172a5c207185b4ba8.txt/VeRoLog_late_r1000d20_3.txt",
+            "snapshot": "20260312004140",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "VeRoLog_late_r1000d20_4.txt",
+            "url": "https://verolog2017.ortec.com/instance/3/3-6a110759ce03028e1bc9cab9b37c8710.txt/VeRoLog_late_r1000d20_4.txt",
+            "snapshot": "20260312021919",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "VeRoLog_late_r1000d20_5.txt",
+            "url": "https://verolog2017.ortec.com/instance/3/3-645b5550320a7c4e1eb04f429d007954.txt/VeRoLog_late_r1000d20_5.txt",
+            "snapshot": "20260420192135",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "VeRoLog_late_r1000d25_1.txt",
+            "url": "https://verolog2017.ortec.com/instance/3/3-5eca77c395f9e0968c8c55ead8536b87.txt/VeRoLog_late_r1000d25_1.txt",
+            "snapshot": "20240912210859",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "VeRoLog_late_r1000d25_2.txt",
+            "url": "https://verolog2017.ortec.com/instance/3/3-b4f24025d548c29d2c4dddc7c3f5e7b3.txt/VeRoLog_late_r1000d25_2.txt",
+            "snapshot": "20260420183922",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "VeRoLog_late_r1000d25_3.txt",
+            "url": "https://verolog2017.ortec.com/instance/3/3-aabadeb7c7a194e2f70d3e935df2b6e0.txt/VeRoLog_late_r1000d25_3.txt",
+            "snapshot": "20260608144003",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "VeRoLog_late_r1000d25_4.txt",
+            "url": "https://verolog2017.ortec.com/instance/3/3-1045166e331747ad78cd39968f786a9f.txt/VeRoLog_late_r1000d25_4.txt",
+            "snapshot": "20260515014506",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "VeRoLog_late_r1000d25_5.txt",
+            "url": "https://verolog2017.ortec.com/instance/3/3-7b7fe6e884d7611ada9a6d154427d16b.txt/VeRoLog_late_r1000d25_5.txt",
+            "snapshot": "20260515005656",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "VeRoLog_late_r1500d30_1.txt",
+            "url": "https://verolog2017.ortec.com/instance/3/3-ee76b6689fd61f920ac880c28d1861c2.txt/VeRoLog_late_r1500d30_1.txt",
+            "snapshot": "20260207010147",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "VeRoLog_late_r1500d30_2.txt",
+            "url": "https://verolog2017.ortec.com/instance/3/3-3c1f574bd2c692d8fa1ac99a523251de.txt/VeRoLog_late_r1500d30_2.txt",
+            "snapshot": "20260207014556",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "VeRoLog_late_r1500d30_3.txt",
+            "url": "https://verolog2017.ortec.com/instance/3/3-c1c70692186f3b71f82b235e349eafe2.txt/VeRoLog_late_r1500d30_3.txt",
+            "snapshot": "20260420195636",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "VeRoLog_late_r1500d30_4.txt",
+            "url": "https://verolog2017.ortec.com/instance/3/3-ace5ca00194c0cbd5380d54be59b8f5f.txt/VeRoLog_late_r1500d30_4.txt",
+            "snapshot": "20260608145342",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "VeRoLog_late_r1500d30_5.txt",
+            "url": "https://verolog2017.ortec.com/instance/3/3-14bd3a8649d8a62193d25a2040b5a588.txt/VeRoLog_late_r1500d30_5.txt",
+            "snapshot": "20260312012458",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "VeRoLog_late_r2000d50_1.txt",
+            "url": "https://verolog2017.ortec.com/instance/3/3-9d95cf1b1b5218d3b8fae73ddf9438ef.txt/VeRoLog_late_r2000d50_1.txt",
+            "snapshot": "20240918085142",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "VeRoLog_late_r2000d50_2.txt",
+            "url": "https://verolog2017.ortec.com/instance/3/3-1398027b0be0e0cca51e4c8bb41cb3ee.txt/VeRoLog_late_r2000d50_2.txt",
+            "snapshot": "20260608150044",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "VeRoLog_late_r2000d50_3.txt",
+            "url": "https://verolog2017.ortec.com/instance/3/3-b0341329a2d2142b5b6ed46cf378061f.txt/VeRoLog_late_r2000d50_3.txt",
+            "snapshot": "20260312013006",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "VeRoLog_late_r2000d50_4.txt",
+            "url": "https://verolog2017.ortec.com/instance/3/3-1722fe117321d74369f07c621ee888aa.txt/VeRoLog_late_r2000d50_4.txt",
+            "snapshot": "20260117095355",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "VeRoLog_late_r2000d50_5.txt",
+            "url": "https://verolog2017.ortec.com/instance/3/3-531223e16f1a8e9e4b19cd8c60d20daa.txt/VeRoLog_late_r2000d50_5.txt",
+            "snapshot": "20260420184731",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "VeRoLog_late_r2000d65_1.txt",
+            "url": "https://verolog2017.ortec.com/instance/3/3-47bf8a084b98886f5f509806036ae675.txt/VeRoLog_late_r2000d65_1.txt",
+            "snapshot": "20260420191151",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "VeRoLog_late_r2000d65_2.txt",
+            "url": "https://verolog2017.ortec.com/instance/3/3-6b8b42b5b057fba3d35b2ec6166c7143.txt/VeRoLog_late_r2000d65_2.txt",
+            "snapshot": "20260420191029",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "VeRoLog_late_r2000d65_3.txt",
+            "url": "https://verolog2017.ortec.com/instance/3/3-52660ad28266896ac5b0cd04235dcf89.txt/VeRoLog_late_r2000d65_3.txt",
+            "snapshot": "20240912232015",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "VeRoLog_late_r2000d65_4.txt",
+            "url": "https://verolog2017.ortec.com/instance/3/3-51ecda514d281a43a21e5ebcdbb32cd4.txt/VeRoLog_late_r2000d65_4.txt",
+            "snapshot": "20260515022500",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "VeRoLog_late_r2000d65_5.txt",
+            "url": "https://verolog2017.ortec.com/instance/3/3-5c0df34c3ca934cbe31ec36005cd2e8d.txt/VeRoLog_late_r2000d65_5.txt",
+            "snapshot": "20251217091012",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "VeRoLog_r1000d25_1.txt",
+            "url": "https://verolog2017.ortec.com/instance/2/2-5ce1690919d497e10e4342fea8711fa6.txt/VeRoLog_r1000d25_1.txt",
+            "snapshot": "20260515021156",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "VeRoLog_r1000d25_2.txt",
+            "url": "https://verolog2017.ortec.com/instance/2/2-21bf32aed935ca3e3c3cd5f7916101d4.txt/VeRoLog_r1000d25_2.txt",
+            "snapshot": "20260312015955",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "VeRoLog_r1000d25_3.txt",
+            "url": "https://verolog2017.ortec.com/instance/2/2-31fe0ac583519fa0ace0282c4833c5b7.txt/VeRoLog_r1000d25_3.txt",
+            "snapshot": "20260116005504",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "VeRoLog_r1000d25_4.txt",
+            "url": "https://verolog2017.ortec.com/instance/2/2-ed805f3a9cdebeb31a5cc09e63e68994.txt/VeRoLog_r1000d25_4.txt",
+            "snapshot": "20260608135921",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "VeRoLog_r1000d25_5.txt",
+            "url": "https://verolog2017.ortec.com/instance/2/2-383a3661a1a01fbe8c46257e4e4f6f75.txt/VeRoLog_r1000d25_5.txt",
+            "snapshot": "20260420182622",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "VeRoLog_r1000d30_1.txt",
+            "url": "https://verolog2017.ortec.com/instance/2/2-57b6b790e379b921cbc64214912d0253.txt/VeRoLog_r1000d30_1.txt",
+            "snapshot": "20260312021345",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "VeRoLog_r1000d30_2.txt",
+            "url": "https://verolog2017.ortec.com/instance/2/2-02daee73f7334399cb17873a2b0b89e8.txt/VeRoLog_r1000d30_2.txt",
+            "snapshot": "20260515022114",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "VeRoLog_r1000d30_3.txt",
+            "url": "https://verolog2017.ortec.com/instance/2/2-fa701cdb9a8fc80e2c13539df4ffa20b.txt/VeRoLog_r1000d30_3.txt",
+            "snapshot": "20260420185710",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "VeRoLog_r1000d30_4.txt",
+            "url": "https://verolog2017.ortec.com/instance/2/2-4ec98c5172d3b31fb57d9dd6d7389e45.txt/VeRoLog_r1000d30_4.txt",
+            "snapshot": "20260515020826",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "VeRoLog_r1000d30_5.txt",
+            "url": "https://verolog2017.ortec.com/instance/2/2-865ab33704c6c015f86455d8c0f4d0ed.txt/VeRoLog_r1000d30_5.txt",
+            "snapshot": "20260420184538",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "VeRoLog_r100d10_1.txt",
+            "url": "https://verolog2017.ortec.com/instance/2/2-928afcad056d83ac35d97a0002f3be32.txt/VeRoLog_r100d10_1.txt",
+            "snapshot": "20260115234444",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "VeRoLog_r100d10_2.txt",
+            "url": "https://verolog2017.ortec.com/instance/2/2-6a67fa406eb51a4bcee6bfe8d559c89f.txt/VeRoLog_r100d10_2.txt",
+            "snapshot": "20260420181534",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "VeRoLog_r100d10_3.txt",
+            "url": "https://verolog2017.ortec.com/instance/2/2-a015036db8bc6a63a29e2bb8ccc2d466.txt/VeRoLog_r100d10_3.txt",
+            "snapshot": "20260207003120",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "VeRoLog_r100d10_4.txt",
+            "url": "https://verolog2017.ortec.com/instance/2/2-3c4274ebbe58c729876fb22d6bbf3b69.txt/VeRoLog_r100d10_4.txt",
+            "snapshot": "20260515014746",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "VeRoLog_r100d10_5.txt",
+            "url": "https://verolog2017.ortec.com/instance/2/2-74c7f9046ffd90355aa661fd2725db45.txt/VeRoLog_r100d10_5.txt",
+            "snapshot": "20240912211836",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "VeRoLog_r100d5_1.txt",
+            "url": "https://verolog2017.ortec.com/instance/2/2-060a5f0d84a31a2bfb3caed1e710dbb2.txt/VeRoLog_r100d5_1.txt",
+            "snapshot": "20260312004441",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "VeRoLog_r100d5_2.txt",
+            "url": "https://verolog2017.ortec.com/instance/2/2-3cf29198647d8fab8e506a2a339f9c02.txt/VeRoLog_r100d5_2.txt",
+            "snapshot": "20251217094610",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "VeRoLog_r100d5_3.txt",
+            "url": "https://verolog2017.ortec.com/instance/2/2-7468f64ae5f77b89876f256c18ed38a8.txt/VeRoLog_r100d5_3.txt",
+            "snapshot": "20260608145913",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "VeRoLog_r100d5_4.txt",
+            "url": "https://verolog2017.ortec.com/instance/2/2-f460a51e10005ceed101b970bf9b8891.txt/VeRoLog_r100d5_4.txt",
+            "snapshot": "20260608134056",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "VeRoLog_r100d5_5.txt",
+            "url": "https://verolog2017.ortec.com/instance/2/2-460e31f42e02023b0eafe3bff9b3619d.txt/VeRoLog_r100d5_5.txt",
+            "snapshot": "20240806163723",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "VeRoLog_r500d15_1.txt",
+            "url": "https://verolog2017.ortec.com/instance/2/2-7dda63127d8d82f7bada1053ba66fe77.txt/VeRoLog_r500d15_1.txt",
+            "snapshot": "20260608145319",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "VeRoLog_r500d15_2.txt",
+            "url": "https://verolog2017.ortec.com/instance/2/2-e5f7658bbde9d0cfcc2c24cf41d46983.txt/VeRoLog_r500d15_2.txt",
+            "snapshot": "20251217092333",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "VeRoLog_r500d15_3.txt",
+            "url": "https://verolog2017.ortec.com/instance/2/2-0cea83552613029d753460f5dce494f8.txt/VeRoLog_r500d15_3.txt",
+            "snapshot": "20241005120847",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "VeRoLog_r500d15_4.txt",
+            "url": "https://verolog2017.ortec.com/instance/2/2-63cd07b1ec2c2fb4b175804ec79bbd95.txt/VeRoLog_r500d15_4.txt",
+            "snapshot": "20260515010815",
+            "archive": {
+              "kind": "none"
+            }
+          },
+          {
+            "path": "VeRoLog_r500d15_5.txt",
+            "url": "https://verolog2017.ortec.com/instance/2/2-17d5d31ec545123bc151fc292a09f44f.txt/VeRoLog_r500d15_5.txt",
+            "snapshot": "20240912232803",
+            "archive": {
+              "kind": "none"
+            }
+          }
+        ],
+        "keep": [
+          "kind",
+          "location",
+          "fromDay",
+          "toDay",
+          "stayDays",
+          "amount"
+        ],
+        "map": {
+          "skill": "tool",
+          "x": "x",
+          "y": "y"
+        },
+        "parser": {
+          "encoding": "utf-8",
+          "format": "verolog-2017"
+        },
+        "status": "fetchable-instance-files"
       },
       "surveyId": "or-26"
     },

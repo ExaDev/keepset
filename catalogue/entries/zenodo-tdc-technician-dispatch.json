@@ -10,11 +10,73 @@
     }
   ],
   "crosswalk": {
-    "file": "crosswalks/tasks-v1/nodes.json"
+    "oneWay": [],
+    "rules": [
+      {
+        "from": "meta",
+        "op": "move",
+        "to": "meta"
+      },
+      {
+        "from": "nodes[].id",
+        "op": "move",
+        "to": "nodes[].id"
+      },
+      {
+        "from": "nodes[].latest",
+        "op": "move",
+        "to": "nodes[].deadline"
+      },
+      {
+        "factor": 60,
+        "from": "nodes[].durationMinutes",
+        "op": "scale",
+        "to": "nodes[].duration"
+      },
+      {
+        "from": "nodes[].created",
+        "op": "move",
+        "to": "nodes[].opened"
+      },
+      {
+        "from": "nodes[].skills",
+        "op": "move",
+        "to": "nodes[].skill"
+      },
+      {
+        "from": "nodes[].earliest",
+        "op": "move",
+        "to": "nodes[].earliest"
+      },
+      {
+        "from": "nodes[].priority",
+        "op": "move",
+        "to": "nodes[].priority"
+      },
+      {
+        "from": "nodes[].penalty",
+        "op": "move",
+        "to": "nodes[].penalty"
+      },
+      {
+        "from": "nodes[].modified",
+        "op": "move",
+        "to": "nodes[].modified"
+      },
+      {
+        "from": "nodes[].cancelled",
+        "op": "move",
+        "to": "nodes[].cancelled"
+      }
+    ],
+    "source": "tdc",
+    "target": "tasks/v1"
   },
   "description": "Instance sets and raw results for the technician routing and scheduling problem of Gamst and Pisinger, including the instances of Mathlouthi, Gendreau and Potvin and a further technician dispatch set called TDCData.",
   "domain": "Technician and home-care routing",
-  "expectedCounts": {},
+  "expectedCounts": {
+    "instances": 1186
+  },
   "id": "zenodo-tdc-technician-dispatch",
   "licence": {
     "id": "CC-BY-4.0",
@@ -25,17 +87,53 @@
     "zenodo"
   ],
   "properties": {
-    "surveyId": "or-25"
+    "surveyId": "or-25",
+    "timeUnit": "seconds"
   },
   "recipe": {
-    "reason": "The instances are a custom sectioned text format whose tasks have no positions, and the collection is hundreds of megabytes compressed, almost all of it a pairwise travel time matrix that tasks/v1 has no arcs to hold, so reading it would hold gigabytes in memory to keep a few fields per task.",
-    "status": "not-fetchable"
+    "files": [
+      {
+        "archive": {
+          "kind": "zip",
+          "members": {
+            "pattern": "Data[^/]*_inst\\d+\\.txt"
+          }
+        },
+        "path": "mathlouthi_instances.zip",
+        "source": 1
+      },
+      {
+        "archive": {
+          "kind": "zip",
+          "member": {
+            "path": "TDCData.txt"
+          }
+        },
+        "path": "TDCData_instance.zip",
+        "source": 2
+      }
+    ],
+    "parser": {
+      "encoding": "utf-8",
+      "format": "tdc"
+    },
+    "status": "fetchable"
   },
   "sources": [
     {
       "retrieved": "2026-10-19",
       "status": "live",
       "url": "https://zenodo.org/records/7904015"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://zenodo.org/records/7904015/files/mathlouthi_instances.zip?download=1"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://zenodo.org/records/7904015/files/TDCData_instance.zip?download=1"
     }
   ],
   "subjects": [

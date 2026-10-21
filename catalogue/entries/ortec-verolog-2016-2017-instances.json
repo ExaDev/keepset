@@ -10,11 +10,72 @@
     }
   ],
   "crosswalk": {
-    "file": "crosswalks/tasks-v1/nodes.json"
+    "oneWay": [],
+    "rules": [
+      {
+        "from": "meta",
+        "op": "move",
+        "to": "meta"
+      },
+      {
+        "from": "nodes[].id",
+        "op": "move",
+        "to": "nodes[].id"
+      },
+      {
+        "from": "nodes[].tool",
+        "op": "move",
+        "to": "nodes[].skill"
+      },
+      {
+        "from": "nodes[].x",
+        "op": "move",
+        "to": "nodes[].x"
+      },
+      {
+        "from": "nodes[].y",
+        "op": "move",
+        "to": "nodes[].y"
+      },
+      {
+        "from": "nodes[].kind",
+        "op": "move",
+        "to": "nodes[].kind"
+      },
+      {
+        "from": "nodes[].location",
+        "op": "move",
+        "to": "nodes[].location"
+      },
+      {
+        "from": "nodes[].fromDay",
+        "op": "move",
+        "to": "nodes[].fromDay"
+      },
+      {
+        "from": "nodes[].toDay",
+        "op": "move",
+        "to": "nodes[].toDay"
+      },
+      {
+        "from": "nodes[].stayDays",
+        "op": "move",
+        "to": "nodes[].stayDays"
+      },
+      {
+        "from": "nodes[].amount",
+        "op": "move",
+        "to": "nodes[].amount"
+      }
+    ],
+    "source": "verolog-2017",
+    "target": "tasks/v1"
   },
   "description": "Instances for the ORTEC VeRoLog Solver Challenge of 2016 to 2017, a routing problem that redistributes scarce equipment between customers within time windows, released in sets from the early test instances to the hidden ones.",
   "domain": "Technician and home-care routing",
-  "expectedCounts": {},
+  "expectedCounts": {
+    "instances": 110
+  },
   "id": "ortec-verolog-2016-2017-instances",
   "licence": {
     "kind": "unrecorded"
@@ -27,14 +88,1779 @@
     "surveyId": "or-26"
   },
   "recipe": {
-    "reason": "The instances are keyword format text files that the Wayback Machine serves one at a time, as the archive zips of each set were not captured, and a recipe reads one download, so no recipe reaches the collection.",
-    "status": "not-fetchable"
+    "files": [
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "ORTEC_Test_01.txt",
+        "source": 1
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "ORTEC_Test_02.txt",
+        "source": 2
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "ORTEC_Test_03.txt",
+        "source": 3
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "ORTEC_Test_04.txt",
+        "source": 4
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "ORTEC_Test_05.txt",
+        "source": 5
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "ORTEC_Test_06.txt",
+        "source": 6
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "ORTEC_Test_07.txt",
+        "source": 7
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "ORTEC_Test_08.txt",
+        "source": 8
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "ORTEC_Test_09.txt",
+        "source": 9
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "ORTEC_Test_10.txt",
+        "source": 10
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "VeRoLog_hidden_r1000d20_1.txt",
+        "source": 11
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "VeRoLog_hidden_r1000d20_2.txt",
+        "source": 12
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "VeRoLog_hidden_r1000d20_3.txt",
+        "source": 13
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "VeRoLog_hidden_r1000d20_4.txt",
+        "source": 14
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "VeRoLog_hidden_r1000d20_5.txt",
+        "source": 15
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "VeRoLog_hidden_r1000d25_1.txt",
+        "source": 16
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "VeRoLog_hidden_r1000d25_2.txt",
+        "source": 17
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "VeRoLog_hidden_r1000d25_3.txt",
+        "source": 18
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "VeRoLog_hidden_r1000d25_4.txt",
+        "source": 19
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "VeRoLog_hidden_r1000d25_5.txt",
+        "source": 20
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "VeRoLog_hidden_r1500d30_1.txt",
+        "source": 21
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "VeRoLog_hidden_r1500d30_2.txt",
+        "source": 22
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "VeRoLog_hidden_r1500d30_3.txt",
+        "source": 23
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "VeRoLog_hidden_r1500d30_4.txt",
+        "source": 24
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "VeRoLog_hidden_r1500d30_5.txt",
+        "source": 25
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "VeRoLog_hidden_r1500d40_1.txt",
+        "source": 26
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "VeRoLog_hidden_r1500d40_2.txt",
+        "source": 27
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "VeRoLog_hidden_r1500d40_3.txt",
+        "source": 28
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "VeRoLog_hidden_r1500d40_4.txt",
+        "source": 29
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "VeRoLog_hidden_r1500d40_5.txt",
+        "source": 30
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "VeRoLog_hidden_r2000d50_1.txt",
+        "source": 31
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "VeRoLog_hidden_r2000d50_2.txt",
+        "source": 32
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "VeRoLog_hidden_r2000d50_3.txt",
+        "source": 33
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "VeRoLog_hidden_r2000d50_4.txt",
+        "source": 34
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "VeRoLog_hidden_r2000d50_5.txt",
+        "source": 35
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "VeRoLog_hidden_r2000d65_1.txt",
+        "source": 36
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "VeRoLog_hidden_r2000d65_2.txt",
+        "source": 37
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "VeRoLog_hidden_r2000d65_3.txt",
+        "source": 38
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "VeRoLog_hidden_r2000d65_4.txt",
+        "source": 39
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "VeRoLog_hidden_r2000d65_5.txt",
+        "source": 40
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "VeRoLog_hidden_r2500d70_1.txt",
+        "source": 41
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "VeRoLog_hidden_r2500d70_2.txt",
+        "source": 42
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "VeRoLog_hidden_r2500d70_3.txt",
+        "source": 43
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "VeRoLog_hidden_r2500d70_4.txt",
+        "source": 44
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "VeRoLog_hidden_r2500d70_5.txt",
+        "source": 45
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "VeRoLog_hidden_r2500d75_1.txt",
+        "source": 46
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "VeRoLog_hidden_r2500d75_2.txt",
+        "source": 47
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "VeRoLog_hidden_r2500d75_3.txt",
+        "source": 48
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "VeRoLog_hidden_r2500d75_4.txt",
+        "source": 49
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "VeRoLog_hidden_r2500d75_5.txt",
+        "source": 50
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "VeRoLog_hidden_r500d10_1.txt",
+        "source": 51
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "VeRoLog_hidden_r500d10_2.txt",
+        "source": 52
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "VeRoLog_hidden_r500d10_3.txt",
+        "source": 53
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "VeRoLog_hidden_r500d10_4.txt",
+        "source": 54
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "VeRoLog_hidden_r500d10_5.txt",
+        "source": 55
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "VeRoLog_hidden_r500d15_1.txt",
+        "source": 56
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "VeRoLog_hidden_r500d15_2.txt",
+        "source": 57
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "VeRoLog_hidden_r500d15_3.txt",
+        "source": 58
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "VeRoLog_hidden_r500d15_4.txt",
+        "source": 59
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "VeRoLog_hidden_r500d15_5.txt",
+        "source": 60
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "VeRoLog_late_r1000d20_1.txt",
+        "source": 61
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "VeRoLog_late_r1000d20_2.txt",
+        "source": 62
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "VeRoLog_late_r1000d20_3.txt",
+        "source": 63
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "VeRoLog_late_r1000d20_4.txt",
+        "source": 64
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "VeRoLog_late_r1000d20_5.txt",
+        "source": 65
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "VeRoLog_late_r1000d25_1.txt",
+        "source": 66
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "VeRoLog_late_r1000d25_2.txt",
+        "source": 67
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "VeRoLog_late_r1000d25_3.txt",
+        "source": 68
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "VeRoLog_late_r1000d25_4.txt",
+        "source": 69
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "VeRoLog_late_r1000d25_5.txt",
+        "source": 70
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "VeRoLog_late_r1500d30_1.txt",
+        "source": 71
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "VeRoLog_late_r1500d30_2.txt",
+        "source": 72
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "VeRoLog_late_r1500d30_3.txt",
+        "source": 73
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "VeRoLog_late_r1500d30_4.txt",
+        "source": 74
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "VeRoLog_late_r1500d30_5.txt",
+        "source": 75
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "VeRoLog_late_r2000d50_1.txt",
+        "source": 76
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "VeRoLog_late_r2000d50_2.txt",
+        "source": 77
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "VeRoLog_late_r2000d50_3.txt",
+        "source": 78
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "VeRoLog_late_r2000d50_4.txt",
+        "source": 79
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "VeRoLog_late_r2000d50_5.txt",
+        "source": 80
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "VeRoLog_late_r2000d65_1.txt",
+        "source": 81
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "VeRoLog_late_r2000d65_2.txt",
+        "source": 82
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "VeRoLog_late_r2000d65_3.txt",
+        "source": 83
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "VeRoLog_late_r2000d65_4.txt",
+        "source": 84
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "VeRoLog_late_r2000d65_5.txt",
+        "source": 85
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "VeRoLog_r1000d25_1.txt",
+        "source": 86
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "VeRoLog_r1000d25_2.txt",
+        "source": 87
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "VeRoLog_r1000d25_3.txt",
+        "source": 88
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "VeRoLog_r1000d25_4.txt",
+        "source": 89
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "VeRoLog_r1000d25_5.txt",
+        "source": 90
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "VeRoLog_r1000d30_1.txt",
+        "source": 91
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "VeRoLog_r1000d30_2.txt",
+        "source": 92
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "VeRoLog_r1000d30_3.txt",
+        "source": 93
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "VeRoLog_r1000d30_4.txt",
+        "source": 94
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "VeRoLog_r1000d30_5.txt",
+        "source": 95
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "VeRoLog_r100d10_1.txt",
+        "source": 96
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "VeRoLog_r100d10_2.txt",
+        "source": 97
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "VeRoLog_r100d10_3.txt",
+        "source": 98
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "VeRoLog_r100d10_4.txt",
+        "source": 99
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "VeRoLog_r100d10_5.txt",
+        "source": 100
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "VeRoLog_r100d5_1.txt",
+        "source": 101
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "VeRoLog_r100d5_2.txt",
+        "source": 102
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "VeRoLog_r100d5_3.txt",
+        "source": 103
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "VeRoLog_r100d5_4.txt",
+        "source": 104
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "VeRoLog_r100d5_5.txt",
+        "source": 105
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "VeRoLog_r500d15_1.txt",
+        "source": 106
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "VeRoLog_r500d15_2.txt",
+        "source": 107
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "VeRoLog_r500d15_3.txt",
+        "source": 108
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "VeRoLog_r500d15_4.txt",
+        "source": 109
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "VeRoLog_r500d15_5.txt",
+        "source": 110
+      }
+    ],
+    "parser": {
+      "encoding": "utf-8",
+      "format": "verolog-2017"
+    },
+    "status": "fetchable"
   },
   "sources": [
     {
       "retrieved": "2026-10-19",
       "status": "live",
       "url": "http://web.archive.org/web/20240523121816/https://verolog2017.ortec.com/instances"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20260207012433",
+        "url": "https://web.archive.org/web/20260207012433/https://verolog2017.ortec.com/instance/1/1-7166387f68986ca720f76fbd5290113b.txt/ORTEC_Test_01.txt"
+      },
+      "status": "dead",
+      "url": "https://verolog2017.ortec.com/instance/1/1-7166387f68986ca720f76fbd5290113b.txt/ORTEC_Test_01.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20260121023722",
+        "url": "https://web.archive.org/web/20260121023722/https://verolog2017.ortec.com/instance/1/1-587f1c1000eae4d5f373184139d6ccce.txt/ORTEC_Test_02.txt"
+      },
+      "status": "dead",
+      "url": "https://verolog2017.ortec.com/instance/1/1-587f1c1000eae4d5f373184139d6ccce.txt/ORTEC_Test_02.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20260207014524",
+        "url": "https://web.archive.org/web/20260207014524/https://verolog2017.ortec.com/instance/1/1-4a0b98c851d035bbc369bd2aeff918d3.txt/ORTEC_Test_03.txt"
+      },
+      "status": "dead",
+      "url": "https://verolog2017.ortec.com/instance/1/1-4a0b98c851d035bbc369bd2aeff918d3.txt/ORTEC_Test_03.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20260312010452",
+        "url": "https://web.archive.org/web/20260312010452/https://verolog2017.ortec.com/instance/1/1-76b4d92b07456b03405254c91482878d.txt/ORTEC_Test_04.txt"
+      },
+      "status": "dead",
+      "url": "https://verolog2017.ortec.com/instance/1/1-76b4d92b07456b03405254c91482878d.txt/ORTEC_Test_04.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20251217090840",
+        "url": "https://web.archive.org/web/20251217090840/https://verolog2017.ortec.com/instance/1/1-5ea19e27a944831b27ce7923350ec6db.txt/ORTEC_Test_05.txt"
+      },
+      "status": "dead",
+      "url": "https://verolog2017.ortec.com/instance/1/1-5ea19e27a944831b27ce7923350ec6db.txt/ORTEC_Test_05.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20240918083607",
+        "url": "https://web.archive.org/web/20240918083607/https://verolog2017.ortec.com/instance/1/1-2cbfe10526cd3fb9e8b6f3aebd4354a7.txt/ORTEC_Test_06.txt"
+      },
+      "status": "dead",
+      "url": "https://verolog2017.ortec.com/instance/1/1-2cbfe10526cd3fb9e8b6f3aebd4354a7.txt/ORTEC_Test_06.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20260312003519",
+        "url": "https://web.archive.org/web/20260312003519/https://verolog2017.ortec.com/instance/1/1-b1492a7bb01ab0a6d2e6acfeffc4a774.txt/ORTEC_Test_07.txt"
+      },
+      "status": "dead",
+      "url": "https://verolog2017.ortec.com/instance/1/1-b1492a7bb01ab0a6d2e6acfeffc4a774.txt/ORTEC_Test_07.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20260312014131",
+        "url": "https://web.archive.org/web/20260312014131/https://verolog2017.ortec.com/instance/1/1-37cffcc7f322d8d251abf6fe7e352f8e.txt/ORTEC_Test_08.txt"
+      },
+      "status": "dead",
+      "url": "https://verolog2017.ortec.com/instance/1/1-37cffcc7f322d8d251abf6fe7e352f8e.txt/ORTEC_Test_08.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20260515020640",
+        "url": "https://web.archive.org/web/20260515020640/https://verolog2017.ortec.com/instance/1/1-2acc3935112c7e1200f61bb647c13e7d.txt/ORTEC_Test_09.txt"
+      },
+      "status": "dead",
+      "url": "https://verolog2017.ortec.com/instance/1/1-2acc3935112c7e1200f61bb647c13e7d.txt/ORTEC_Test_09.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20260312015701",
+        "url": "https://web.archive.org/web/20260312015701/https://verolog2017.ortec.com/instance/1/1-4889fb56dafd5fb571a4bbc6b997f170.txt/ORTEC_Test_10.txt"
+      },
+      "status": "dead",
+      "url": "https://verolog2017.ortec.com/instance/1/1-4889fb56dafd5fb571a4bbc6b997f170.txt/ORTEC_Test_10.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20260420181417",
+        "url": "https://web.archive.org/web/20260420181417/https://verolog2017.ortec.com/instance/4/4-be04139192c0baa4e61ea66c52569b5f.txt/VeRoLog_hidden_r1000d20_1.txt"
+      },
+      "status": "dead",
+      "url": "https://verolog2017.ortec.com/instance/4/4-be04139192c0baa4e61ea66c52569b5f.txt/VeRoLog_hidden_r1000d20_1.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20240918065212",
+        "url": "https://web.archive.org/web/20240918065212/https://verolog2017.ortec.com/instance/4/4-8ead08ac53237ff62df8682b61eef5df.txt/VeRoLog_hidden_r1000d20_2.txt"
+      },
+      "status": "dead",
+      "url": "https://verolog2017.ortec.com/instance/4/4-8ead08ac53237ff62df8682b61eef5df.txt/VeRoLog_hidden_r1000d20_2.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20240912215100",
+        "url": "https://web.archive.org/web/20240912215100/https://verolog2017.ortec.com/instance/4/4-0fd89018562f2f2badb817d471b22dc6.txt/VeRoLog_hidden_r1000d20_3.txt"
+      },
+      "status": "dead",
+      "url": "https://verolog2017.ortec.com/instance/4/4-0fd89018562f2f2badb817d471b22dc6.txt/VeRoLog_hidden_r1000d20_3.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20260420181213",
+        "url": "https://web.archive.org/web/20260420181213/https://verolog2017.ortec.com/instance/4/4-aa702cb83f7a4303a6dfa658e90fa07f.txt/VeRoLog_hidden_r1000d20_4.txt"
+      },
+      "status": "dead",
+      "url": "https://verolog2017.ortec.com/instance/4/4-aa702cb83f7a4303a6dfa658e90fa07f.txt/VeRoLog_hidden_r1000d20_4.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20260312020110",
+        "url": "https://web.archive.org/web/20260312020110/https://verolog2017.ortec.com/instance/4/4-8b75c7e8364dc820f3489e9d200daf0b.txt/VeRoLog_hidden_r1000d20_5.txt"
+      },
+      "status": "dead",
+      "url": "https://verolog2017.ortec.com/instance/4/4-8b75c7e8364dc820f3489e9d200daf0b.txt/VeRoLog_hidden_r1000d20_5.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20260420192045",
+        "url": "https://web.archive.org/web/20260420192045/https://verolog2017.ortec.com/instance/4/4-3619fdb5157feb13589296f8a36de630.txt/VeRoLog_hidden_r1000d25_1.txt"
+      },
+      "status": "dead",
+      "url": "https://verolog2017.ortec.com/instance/4/4-3619fdb5157feb13589296f8a36de630.txt/VeRoLog_hidden_r1000d25_1.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20241005121718",
+        "url": "https://web.archive.org/web/20241005121718/https://verolog2017.ortec.com/instance/4/4-e50fa17b45d39fc65912a8ddc12efd0c.txt/VeRoLog_hidden_r1000d25_2.txt"
+      },
+      "status": "dead",
+      "url": "https://verolog2017.ortec.com/instance/4/4-e50fa17b45d39fc65912a8ddc12efd0c.txt/VeRoLog_hidden_r1000d25_2.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20241108083248",
+        "url": "https://web.archive.org/web/20241108083248/https://verolog2017.ortec.com/instance/4/4-2013cc2dad7b631f3ef5ce5e8471bcc6.txt/VeRoLog_hidden_r1000d25_3.txt"
+      },
+      "status": "dead",
+      "url": "https://verolog2017.ortec.com/instance/4/4-2013cc2dad7b631f3ef5ce5e8471bcc6.txt/VeRoLog_hidden_r1000d25_3.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20260420190742",
+        "url": "https://web.archive.org/web/20260420190742/https://verolog2017.ortec.com/instance/4/4-05104f29c166b54289d4151d2c159356.txt/VeRoLog_hidden_r1000d25_4.txt"
+      },
+      "status": "dead",
+      "url": "https://verolog2017.ortec.com/instance/4/4-05104f29c166b54289d4151d2c159356.txt/VeRoLog_hidden_r1000d25_4.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20251108023820",
+        "url": "https://web.archive.org/web/20251108023820/https://verolog2017.ortec.com/instance/4/4-8a1b91228cdd77a81ebdb2363b00e1a0.txt/VeRoLog_hidden_r1000d25_5.txt"
+      },
+      "status": "dead",
+      "url": "https://verolog2017.ortec.com/instance/4/4-8a1b91228cdd77a81ebdb2363b00e1a0.txt/VeRoLog_hidden_r1000d25_5.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20260515005156",
+        "url": "https://web.archive.org/web/20260515005156/https://verolog2017.ortec.com/instance/4/4-97f69a558d19c2df77ae75a062e9fb55.txt/VeRoLog_hidden_r1500d30_1.txt"
+      },
+      "status": "dead",
+      "url": "https://verolog2017.ortec.com/instance/4/4-97f69a558d19c2df77ae75a062e9fb55.txt/VeRoLog_hidden_r1500d30_1.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20260608140306",
+        "url": "https://web.archive.org/web/20260608140306/https://verolog2017.ortec.com/instance/4/4-34c90ab02514069c5cd25072659ca8b4.txt/VeRoLog_hidden_r1500d30_2.txt"
+      },
+      "status": "dead",
+      "url": "https://verolog2017.ortec.com/instance/4/4-34c90ab02514069c5cd25072659ca8b4.txt/VeRoLog_hidden_r1500d30_2.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20251108041308",
+        "url": "https://web.archive.org/web/20251108041308/https://verolog2017.ortec.com/instance/4/4-1f4d8eed1312f4bf17d8e575c9a38470.txt/VeRoLog_hidden_r1500d30_3.txt"
+      },
+      "status": "dead",
+      "url": "https://verolog2017.ortec.com/instance/4/4-1f4d8eed1312f4bf17d8e575c9a38470.txt/VeRoLog_hidden_r1500d30_3.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20260207022254",
+        "url": "https://web.archive.org/web/20260207022254/https://verolog2017.ortec.com/instance/4/4-13853d226925ae24f49e1061e8c26b33.txt/VeRoLog_hidden_r1500d30_4.txt"
+      },
+      "status": "dead",
+      "url": "https://verolog2017.ortec.com/instance/4/4-13853d226925ae24f49e1061e8c26b33.txt/VeRoLog_hidden_r1500d30_4.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20260312021838",
+        "url": "https://web.archive.org/web/20260312021838/https://verolog2017.ortec.com/instance/4/4-308be6015c952d331c2c7a075390051b.txt/VeRoLog_hidden_r1500d30_5.txt"
+      },
+      "status": "dead",
+      "url": "https://verolog2017.ortec.com/instance/4/4-308be6015c952d331c2c7a075390051b.txt/VeRoLog_hidden_r1500d30_5.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20241005124153",
+        "url": "https://web.archive.org/web/20241005124153/https://verolog2017.ortec.com/instance/4/4-1cc60f2f35c1b9395a042ec4afcbb43b.txt/VeRoLog_hidden_r1500d40_1.txt"
+      },
+      "status": "dead",
+      "url": "https://verolog2017.ortec.com/instance/4/4-1cc60f2f35c1b9395a042ec4afcbb43b.txt/VeRoLog_hidden_r1500d40_1.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20241005114103",
+        "url": "https://web.archive.org/web/20241005114103/https://verolog2017.ortec.com/instance/4/4-ee38e57599ef794853df2f913f194ec0.txt/VeRoLog_hidden_r1500d40_2.txt"
+      },
+      "status": "dead",
+      "url": "https://verolog2017.ortec.com/instance/4/4-ee38e57599ef794853df2f913f194ec0.txt/VeRoLog_hidden_r1500d40_2.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20260312004649",
+        "url": "https://web.archive.org/web/20260312004649/https://verolog2017.ortec.com/instance/4/4-a7804949e0e4238f7255d03f74b8e7f5.txt/VeRoLog_hidden_r1500d40_3.txt"
+      },
+      "status": "dead",
+      "url": "https://verolog2017.ortec.com/instance/4/4-a7804949e0e4238f7255d03f74b8e7f5.txt/VeRoLog_hidden_r1500d40_3.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20260207023324",
+        "url": "https://web.archive.org/web/20260207023324/https://verolog2017.ortec.com/instance/4/4-6cb0bc297af8a4658e7139372388bb9f.txt/VeRoLog_hidden_r1500d40_4.txt"
+      },
+      "status": "dead",
+      "url": "https://verolog2017.ortec.com/instance/4/4-6cb0bc297af8a4658e7139372388bb9f.txt/VeRoLog_hidden_r1500d40_4.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20260420183615",
+        "url": "https://web.archive.org/web/20260420183615/https://verolog2017.ortec.com/instance/4/4-750ddb23f886bd4a5d0ba9b5e406b304.txt/VeRoLog_hidden_r1500d40_5.txt"
+      },
+      "status": "dead",
+      "url": "https://verolog2017.ortec.com/instance/4/4-750ddb23f886bd4a5d0ba9b5e406b304.txt/VeRoLog_hidden_r1500d40_5.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20260312013912",
+        "url": "https://web.archive.org/web/20260312013912/https://verolog2017.ortec.com/instance/4/4-4d6d6181085e32c13e34f97b400028b2.txt/VeRoLog_hidden_r2000d50_1.txt"
+      },
+      "status": "dead",
+      "url": "https://verolog2017.ortec.com/instance/4/4-4d6d6181085e32c13e34f97b400028b2.txt/VeRoLog_hidden_r2000d50_1.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20240918081710",
+        "url": "https://web.archive.org/web/20240918081710/https://verolog2017.ortec.com/instance/4/4-219cc43fa93f0e408039381b02b34acc.txt/VeRoLog_hidden_r2000d50_2.txt"
+      },
+      "status": "dead",
+      "url": "https://verolog2017.ortec.com/instance/4/4-219cc43fa93f0e408039381b02b34acc.txt/VeRoLog_hidden_r2000d50_2.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20251217091457",
+        "url": "https://web.archive.org/web/20251217091457/https://verolog2017.ortec.com/instance/4/4-17bf56538032dbcceebf7d61c9839c74.txt/VeRoLog_hidden_r2000d50_3.txt"
+      },
+      "status": "dead",
+      "url": "https://verolog2017.ortec.com/instance/4/4-17bf56538032dbcceebf7d61c9839c74.txt/VeRoLog_hidden_r2000d50_3.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20260207015854",
+        "url": "https://web.archive.org/web/20260207015854/https://verolog2017.ortec.com/instance/4/4-c6867fddc41d12c6c267d85516cc21cd.txt/VeRoLog_hidden_r2000d50_4.txt"
+      },
+      "status": "dead",
+      "url": "https://verolog2017.ortec.com/instance/4/4-c6867fddc41d12c6c267d85516cc21cd.txt/VeRoLog_hidden_r2000d50_4.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20260515005816",
+        "url": "https://web.archive.org/web/20260515005816/https://verolog2017.ortec.com/instance/4/4-cd2b0778df2a85d1dd383cd65f5340fd.txt/VeRoLog_hidden_r2000d50_5.txt"
+      },
+      "status": "dead",
+      "url": "https://verolog2017.ortec.com/instance/4/4-cd2b0778df2a85d1dd383cd65f5340fd.txt/VeRoLog_hidden_r2000d50_5.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20251016145704",
+        "url": "https://web.archive.org/web/20251016145704/https://verolog2017.ortec.com/instance/4/4-b31239590a37d97be636d003d342d71f.txt/VeRoLog_hidden_r2000d65_1.txt"
+      },
+      "status": "dead",
+      "url": "https://verolog2017.ortec.com/instance/4/4-b31239590a37d97be636d003d342d71f.txt/VeRoLog_hidden_r2000d65_1.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20260515011707",
+        "url": "https://web.archive.org/web/20260515011707/https://verolog2017.ortec.com/instance/4/4-d38ed6173b521dc682fd88b4b88a6965.txt/VeRoLog_hidden_r2000d65_2.txt"
+      },
+      "status": "dead",
+      "url": "https://verolog2017.ortec.com/instance/4/4-d38ed6173b521dc682fd88b4b88a6965.txt/VeRoLog_hidden_r2000d65_2.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20260312021409",
+        "url": "https://web.archive.org/web/20260312021409/https://verolog2017.ortec.com/instance/4/4-f3d185d2bb9fd808c7d570f100ee4896.txt/VeRoLog_hidden_r2000d65_3.txt"
+      },
+      "status": "dead",
+      "url": "https://verolog2017.ortec.com/instance/4/4-f3d185d2bb9fd808c7d570f100ee4896.txt/VeRoLog_hidden_r2000d65_3.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20260515021721",
+        "url": "https://web.archive.org/web/20260515021721/https://verolog2017.ortec.com/instance/4/4-cf8056812e79b675b4c3e5fa3c071fd4.txt/VeRoLog_hidden_r2000d65_4.txt"
+      },
+      "status": "dead",
+      "url": "https://verolog2017.ortec.com/instance/4/4-cf8056812e79b675b4c3e5fa3c071fd4.txt/VeRoLog_hidden_r2000d65_4.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20260608142404",
+        "url": "https://web.archive.org/web/20260608142404/https://verolog2017.ortec.com/instance/4/4-927ab7ab6410e2235e07aff8bc2b8177.txt/VeRoLog_hidden_r2000d65_5.txt"
+      },
+      "status": "dead",
+      "url": "https://verolog2017.ortec.com/instance/4/4-927ab7ab6410e2235e07aff8bc2b8177.txt/VeRoLog_hidden_r2000d65_5.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20260515012737",
+        "url": "https://web.archive.org/web/20260515012737/https://verolog2017.ortec.com/instance/4/4-4a0ba2cd58a6252c4231efb39e6cd963.txt/VeRoLog_hidden_r2500d70_1.txt"
+      },
+      "status": "dead",
+      "url": "https://verolog2017.ortec.com/instance/4/4-4a0ba2cd58a6252c4231efb39e6cd963.txt/VeRoLog_hidden_r2500d70_1.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20260420182857",
+        "url": "https://web.archive.org/web/20260420182857/https://verolog2017.ortec.com/instance/4/4-8c2cc50bc5d106f1e3d8c95d9b19a152.txt/VeRoLog_hidden_r2500d70_2.txt"
+      },
+      "status": "dead",
+      "url": "https://verolog2017.ortec.com/instance/4/4-8c2cc50bc5d106f1e3d8c95d9b19a152.txt/VeRoLog_hidden_r2500d70_2.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20260420180048",
+        "url": "https://web.archive.org/web/20260420180048/https://verolog2017.ortec.com/instance/4/4-a221e173a7386c660a1e3a08d5d3ca1d.txt/VeRoLog_hidden_r2500d70_3.txt"
+      },
+      "status": "dead",
+      "url": "https://verolog2017.ortec.com/instance/4/4-a221e173a7386c660a1e3a08d5d3ca1d.txt/VeRoLog_hidden_r2500d70_3.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20241005132839",
+        "url": "https://web.archive.org/web/20241005132839/https://verolog2017.ortec.com/instance/4/4-da6be2d652d5bd20ed453fa8907d3b82.txt/VeRoLog_hidden_r2500d70_4.txt"
+      },
+      "status": "dead",
+      "url": "https://verolog2017.ortec.com/instance/4/4-da6be2d652d5bd20ed453fa8907d3b82.txt/VeRoLog_hidden_r2500d70_4.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20240912231050",
+        "url": "https://web.archive.org/web/20240912231050/https://verolog2017.ortec.com/instance/4/4-619898c7fc56d603e53e37a3b7b897bb.txt/VeRoLog_hidden_r2500d70_5.txt"
+      },
+      "status": "dead",
+      "url": "https://verolog2017.ortec.com/instance/4/4-619898c7fc56d603e53e37a3b7b897bb.txt/VeRoLog_hidden_r2500d70_5.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20260312021323",
+        "url": "https://web.archive.org/web/20260312021323/https://verolog2017.ortec.com/instance/4/4-540b4feec283ffc0af583eafdecd8b9f.txt/VeRoLog_hidden_r2500d75_1.txt"
+      },
+      "status": "dead",
+      "url": "https://verolog2017.ortec.com/instance/4/4-540b4feec283ffc0af583eafdecd8b9f.txt/VeRoLog_hidden_r2500d75_1.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20260515021416",
+        "url": "https://web.archive.org/web/20260515021416/https://verolog2017.ortec.com/instance/4/4-29ad9ed7b6580a8c95c77eabfdb42d7b.txt/VeRoLog_hidden_r2500d75_2.txt"
+      },
+      "status": "dead",
+      "url": "https://verolog2017.ortec.com/instance/4/4-29ad9ed7b6580a8c95c77eabfdb42d7b.txt/VeRoLog_hidden_r2500d75_2.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20260608143842",
+        "url": "https://web.archive.org/web/20260608143842/https://verolog2017.ortec.com/instance/4/4-c4f1d44e782817d358d0acef48324b1f.txt/VeRoLog_hidden_r2500d75_3.txt"
+      },
+      "status": "dead",
+      "url": "https://verolog2017.ortec.com/instance/4/4-c4f1d44e782817d358d0acef48324b1f.txt/VeRoLog_hidden_r2500d75_3.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20260608144031",
+        "url": "https://web.archive.org/web/20260608144031/https://verolog2017.ortec.com/instance/4/4-aa79544d951a92a665021e701a46cdd0.txt/VeRoLog_hidden_r2500d75_4.txt"
+      },
+      "status": "dead",
+      "url": "https://verolog2017.ortec.com/instance/4/4-aa79544d951a92a665021e701a46cdd0.txt/VeRoLog_hidden_r2500d75_4.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20260515014054",
+        "url": "https://web.archive.org/web/20260515014054/https://verolog2017.ortec.com/instance/4/4-be5c23e2dc4aad1d70f4be1467768658.txt/VeRoLog_hidden_r2500d75_5.txt"
+      },
+      "status": "dead",
+      "url": "https://verolog2017.ortec.com/instance/4/4-be5c23e2dc4aad1d70f4be1467768658.txt/VeRoLog_hidden_r2500d75_5.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20260608133658",
+        "url": "https://web.archive.org/web/20260608133658/https://verolog2017.ortec.com/instance/4/4-c7da5a2b627993b3cff4e32f8f949560.txt/VeRoLog_hidden_r500d10_1.txt"
+      },
+      "status": "dead",
+      "url": "https://verolog2017.ortec.com/instance/4/4-c7da5a2b627993b3cff4e32f8f949560.txt/VeRoLog_hidden_r500d10_1.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20260312012821",
+        "url": "https://web.archive.org/web/20260312012821/https://verolog2017.ortec.com/instance/4/4-defd7e2c010dc71fa8b58eef656bbec3.txt/VeRoLog_hidden_r500d10_2.txt"
+      },
+      "status": "dead",
+      "url": "https://verolog2017.ortec.com/instance/4/4-defd7e2c010dc71fa8b58eef656bbec3.txt/VeRoLog_hidden_r500d10_2.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20260420184838",
+        "url": "https://web.archive.org/web/20260420184838/https://verolog2017.ortec.com/instance/4/4-863381e592edb918ecda33929205fb55.txt/VeRoLog_hidden_r500d10_3.txt"
+      },
+      "status": "dead",
+      "url": "https://verolog2017.ortec.com/instance/4/4-863381e592edb918ecda33929205fb55.txt/VeRoLog_hidden_r500d10_3.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20251217083246",
+        "url": "https://web.archive.org/web/20251217083246/https://verolog2017.ortec.com/instance/4/4-dbd98cf26272ea19b516653508e11305.txt/VeRoLog_hidden_r500d10_4.txt"
+      },
+      "status": "dead",
+      "url": "https://verolog2017.ortec.com/instance/4/4-dbd98cf26272ea19b516653508e11305.txt/VeRoLog_hidden_r500d10_4.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20260312012057",
+        "url": "https://web.archive.org/web/20260312012057/https://verolog2017.ortec.com/instance/4/4-77d436e7259a91987c341f7f58a6423f.txt/VeRoLog_hidden_r500d10_5.txt"
+      },
+      "status": "dead",
+      "url": "https://verolog2017.ortec.com/instance/4/4-77d436e7259a91987c341f7f58a6423f.txt/VeRoLog_hidden_r500d10_5.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20260515014704",
+        "url": "https://web.archive.org/web/20260515014704/https://verolog2017.ortec.com/instance/4/4-cad6088b3ca9de473b623dc87054d44c.txt/VeRoLog_hidden_r500d15_1.txt"
+      },
+      "status": "dead",
+      "url": "https://verolog2017.ortec.com/instance/4/4-cad6088b3ca9de473b623dc87054d44c.txt/VeRoLog_hidden_r500d15_1.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20260515011935",
+        "url": "https://web.archive.org/web/20260515011935/https://verolog2017.ortec.com/instance/4/4-6dbaa8f662e56bd6c9ca37a9abc9c8ab.txt/VeRoLog_hidden_r500d15_2.txt"
+      },
+      "status": "dead",
+      "url": "https://verolog2017.ortec.com/instance/4/4-6dbaa8f662e56bd6c9ca37a9abc9c8ab.txt/VeRoLog_hidden_r500d15_2.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20260515021348",
+        "url": "https://web.archive.org/web/20260515021348/https://verolog2017.ortec.com/instance/4/4-3c537216665db1e5e644ccf7e4a8d856.txt/VeRoLog_hidden_r500d15_3.txt"
+      },
+      "status": "dead",
+      "url": "https://verolog2017.ortec.com/instance/4/4-3c537216665db1e5e644ccf7e4a8d856.txt/VeRoLog_hidden_r500d15_3.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20241005124523",
+        "url": "https://web.archive.org/web/20241005124523/https://verolog2017.ortec.com/instance/4/4-d0766547a7567eca85d90499fe553440.txt/VeRoLog_hidden_r500d15_4.txt"
+      },
+      "status": "dead",
+      "url": "https://verolog2017.ortec.com/instance/4/4-d0766547a7567eca85d90499fe553440.txt/VeRoLog_hidden_r500d15_4.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20260420182030",
+        "url": "https://web.archive.org/web/20260420182030/https://verolog2017.ortec.com/instance/4/4-1ebd83f6f72bbd4da5d9bdc3c5be4fd6.txt/VeRoLog_hidden_r500d15_5.txt"
+      },
+      "status": "dead",
+      "url": "https://verolog2017.ortec.com/instance/4/4-1ebd83f6f72bbd4da5d9bdc3c5be4fd6.txt/VeRoLog_hidden_r500d15_5.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20260207020936",
+        "url": "https://web.archive.org/web/20260207020936/https://verolog2017.ortec.com/instance/3/3-f580b34d7def5fc5d6fda2e9f3508d79.txt/VeRoLog_late_r1000d20_1.txt"
+      },
+      "status": "dead",
+      "url": "https://verolog2017.ortec.com/instance/3/3-f580b34d7def5fc5d6fda2e9f3508d79.txt/VeRoLog_late_r1000d20_1.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20251217101531",
+        "url": "https://web.archive.org/web/20251217101531/https://verolog2017.ortec.com/instance/3/3-96de7219e3738e808a6df7c260f1c33c.txt/VeRoLog_late_r1000d20_2.txt"
+      },
+      "status": "dead",
+      "url": "https://verolog2017.ortec.com/instance/3/3-96de7219e3738e808a6df7c260f1c33c.txt/VeRoLog_late_r1000d20_2.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20260312004140",
+        "url": "https://web.archive.org/web/20260312004140/https://verolog2017.ortec.com/instance/3/3-35d5b707cb7a910172a5c207185b4ba8.txt/VeRoLog_late_r1000d20_3.txt"
+      },
+      "status": "dead",
+      "url": "https://verolog2017.ortec.com/instance/3/3-35d5b707cb7a910172a5c207185b4ba8.txt/VeRoLog_late_r1000d20_3.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20260312021919",
+        "url": "https://web.archive.org/web/20260312021919/https://verolog2017.ortec.com/instance/3/3-6a110759ce03028e1bc9cab9b37c8710.txt/VeRoLog_late_r1000d20_4.txt"
+      },
+      "status": "dead",
+      "url": "https://verolog2017.ortec.com/instance/3/3-6a110759ce03028e1bc9cab9b37c8710.txt/VeRoLog_late_r1000d20_4.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20260420192135",
+        "url": "https://web.archive.org/web/20260420192135/https://verolog2017.ortec.com/instance/3/3-645b5550320a7c4e1eb04f429d007954.txt/VeRoLog_late_r1000d20_5.txt"
+      },
+      "status": "dead",
+      "url": "https://verolog2017.ortec.com/instance/3/3-645b5550320a7c4e1eb04f429d007954.txt/VeRoLog_late_r1000d20_5.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20240912210859",
+        "url": "https://web.archive.org/web/20240912210859/https://verolog2017.ortec.com/instance/3/3-5eca77c395f9e0968c8c55ead8536b87.txt/VeRoLog_late_r1000d25_1.txt"
+      },
+      "status": "dead",
+      "url": "https://verolog2017.ortec.com/instance/3/3-5eca77c395f9e0968c8c55ead8536b87.txt/VeRoLog_late_r1000d25_1.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20260420183922",
+        "url": "https://web.archive.org/web/20260420183922/https://verolog2017.ortec.com/instance/3/3-b4f24025d548c29d2c4dddc7c3f5e7b3.txt/VeRoLog_late_r1000d25_2.txt"
+      },
+      "status": "dead",
+      "url": "https://verolog2017.ortec.com/instance/3/3-b4f24025d548c29d2c4dddc7c3f5e7b3.txt/VeRoLog_late_r1000d25_2.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20260608144003",
+        "url": "https://web.archive.org/web/20260608144003/https://verolog2017.ortec.com/instance/3/3-aabadeb7c7a194e2f70d3e935df2b6e0.txt/VeRoLog_late_r1000d25_3.txt"
+      },
+      "status": "dead",
+      "url": "https://verolog2017.ortec.com/instance/3/3-aabadeb7c7a194e2f70d3e935df2b6e0.txt/VeRoLog_late_r1000d25_3.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20260515014506",
+        "url": "https://web.archive.org/web/20260515014506/https://verolog2017.ortec.com/instance/3/3-1045166e331747ad78cd39968f786a9f.txt/VeRoLog_late_r1000d25_4.txt"
+      },
+      "status": "dead",
+      "url": "https://verolog2017.ortec.com/instance/3/3-1045166e331747ad78cd39968f786a9f.txt/VeRoLog_late_r1000d25_4.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20260515005656",
+        "url": "https://web.archive.org/web/20260515005656/https://verolog2017.ortec.com/instance/3/3-7b7fe6e884d7611ada9a6d154427d16b.txt/VeRoLog_late_r1000d25_5.txt"
+      },
+      "status": "dead",
+      "url": "https://verolog2017.ortec.com/instance/3/3-7b7fe6e884d7611ada9a6d154427d16b.txt/VeRoLog_late_r1000d25_5.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20260207010147",
+        "url": "https://web.archive.org/web/20260207010147/https://verolog2017.ortec.com/instance/3/3-ee76b6689fd61f920ac880c28d1861c2.txt/VeRoLog_late_r1500d30_1.txt"
+      },
+      "status": "dead",
+      "url": "https://verolog2017.ortec.com/instance/3/3-ee76b6689fd61f920ac880c28d1861c2.txt/VeRoLog_late_r1500d30_1.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20260207014556",
+        "url": "https://web.archive.org/web/20260207014556/https://verolog2017.ortec.com/instance/3/3-3c1f574bd2c692d8fa1ac99a523251de.txt/VeRoLog_late_r1500d30_2.txt"
+      },
+      "status": "dead",
+      "url": "https://verolog2017.ortec.com/instance/3/3-3c1f574bd2c692d8fa1ac99a523251de.txt/VeRoLog_late_r1500d30_2.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20260420195636",
+        "url": "https://web.archive.org/web/20260420195636/https://verolog2017.ortec.com/instance/3/3-c1c70692186f3b71f82b235e349eafe2.txt/VeRoLog_late_r1500d30_3.txt"
+      },
+      "status": "dead",
+      "url": "https://verolog2017.ortec.com/instance/3/3-c1c70692186f3b71f82b235e349eafe2.txt/VeRoLog_late_r1500d30_3.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20260608145342",
+        "url": "https://web.archive.org/web/20260608145342/https://verolog2017.ortec.com/instance/3/3-ace5ca00194c0cbd5380d54be59b8f5f.txt/VeRoLog_late_r1500d30_4.txt"
+      },
+      "status": "dead",
+      "url": "https://verolog2017.ortec.com/instance/3/3-ace5ca00194c0cbd5380d54be59b8f5f.txt/VeRoLog_late_r1500d30_4.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20260312012458",
+        "url": "https://web.archive.org/web/20260312012458/https://verolog2017.ortec.com/instance/3/3-14bd3a8649d8a62193d25a2040b5a588.txt/VeRoLog_late_r1500d30_5.txt"
+      },
+      "status": "dead",
+      "url": "https://verolog2017.ortec.com/instance/3/3-14bd3a8649d8a62193d25a2040b5a588.txt/VeRoLog_late_r1500d30_5.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20240918085142",
+        "url": "https://web.archive.org/web/20240918085142/https://verolog2017.ortec.com/instance/3/3-9d95cf1b1b5218d3b8fae73ddf9438ef.txt/VeRoLog_late_r2000d50_1.txt"
+      },
+      "status": "dead",
+      "url": "https://verolog2017.ortec.com/instance/3/3-9d95cf1b1b5218d3b8fae73ddf9438ef.txt/VeRoLog_late_r2000d50_1.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20260608150044",
+        "url": "https://web.archive.org/web/20260608150044/https://verolog2017.ortec.com/instance/3/3-1398027b0be0e0cca51e4c8bb41cb3ee.txt/VeRoLog_late_r2000d50_2.txt"
+      },
+      "status": "dead",
+      "url": "https://verolog2017.ortec.com/instance/3/3-1398027b0be0e0cca51e4c8bb41cb3ee.txt/VeRoLog_late_r2000d50_2.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20260312013006",
+        "url": "https://web.archive.org/web/20260312013006/https://verolog2017.ortec.com/instance/3/3-b0341329a2d2142b5b6ed46cf378061f.txt/VeRoLog_late_r2000d50_3.txt"
+      },
+      "status": "dead",
+      "url": "https://verolog2017.ortec.com/instance/3/3-b0341329a2d2142b5b6ed46cf378061f.txt/VeRoLog_late_r2000d50_3.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20260117095355",
+        "url": "https://web.archive.org/web/20260117095355/https://verolog2017.ortec.com/instance/3/3-1722fe117321d74369f07c621ee888aa.txt/VeRoLog_late_r2000d50_4.txt"
+      },
+      "status": "dead",
+      "url": "https://verolog2017.ortec.com/instance/3/3-1722fe117321d74369f07c621ee888aa.txt/VeRoLog_late_r2000d50_4.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20260420184731",
+        "url": "https://web.archive.org/web/20260420184731/https://verolog2017.ortec.com/instance/3/3-531223e16f1a8e9e4b19cd8c60d20daa.txt/VeRoLog_late_r2000d50_5.txt"
+      },
+      "status": "dead",
+      "url": "https://verolog2017.ortec.com/instance/3/3-531223e16f1a8e9e4b19cd8c60d20daa.txt/VeRoLog_late_r2000d50_5.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20260420191151",
+        "url": "https://web.archive.org/web/20260420191151/https://verolog2017.ortec.com/instance/3/3-47bf8a084b98886f5f509806036ae675.txt/VeRoLog_late_r2000d65_1.txt"
+      },
+      "status": "dead",
+      "url": "https://verolog2017.ortec.com/instance/3/3-47bf8a084b98886f5f509806036ae675.txt/VeRoLog_late_r2000d65_1.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20260420191029",
+        "url": "https://web.archive.org/web/20260420191029/https://verolog2017.ortec.com/instance/3/3-6b8b42b5b057fba3d35b2ec6166c7143.txt/VeRoLog_late_r2000d65_2.txt"
+      },
+      "status": "dead",
+      "url": "https://verolog2017.ortec.com/instance/3/3-6b8b42b5b057fba3d35b2ec6166c7143.txt/VeRoLog_late_r2000d65_2.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20240912232015",
+        "url": "https://web.archive.org/web/20240912232015/https://verolog2017.ortec.com/instance/3/3-52660ad28266896ac5b0cd04235dcf89.txt/VeRoLog_late_r2000d65_3.txt"
+      },
+      "status": "dead",
+      "url": "https://verolog2017.ortec.com/instance/3/3-52660ad28266896ac5b0cd04235dcf89.txt/VeRoLog_late_r2000d65_3.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20260515022500",
+        "url": "https://web.archive.org/web/20260515022500/https://verolog2017.ortec.com/instance/3/3-51ecda514d281a43a21e5ebcdbb32cd4.txt/VeRoLog_late_r2000d65_4.txt"
+      },
+      "status": "dead",
+      "url": "https://verolog2017.ortec.com/instance/3/3-51ecda514d281a43a21e5ebcdbb32cd4.txt/VeRoLog_late_r2000d65_4.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20251217091012",
+        "url": "https://web.archive.org/web/20251217091012/https://verolog2017.ortec.com/instance/3/3-5c0df34c3ca934cbe31ec36005cd2e8d.txt/VeRoLog_late_r2000d65_5.txt"
+      },
+      "status": "dead",
+      "url": "https://verolog2017.ortec.com/instance/3/3-5c0df34c3ca934cbe31ec36005cd2e8d.txt/VeRoLog_late_r2000d65_5.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20260515021156",
+        "url": "https://web.archive.org/web/20260515021156/https://verolog2017.ortec.com/instance/2/2-5ce1690919d497e10e4342fea8711fa6.txt/VeRoLog_r1000d25_1.txt"
+      },
+      "status": "dead",
+      "url": "https://verolog2017.ortec.com/instance/2/2-5ce1690919d497e10e4342fea8711fa6.txt/VeRoLog_r1000d25_1.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20260312015955",
+        "url": "https://web.archive.org/web/20260312015955/https://verolog2017.ortec.com/instance/2/2-21bf32aed935ca3e3c3cd5f7916101d4.txt/VeRoLog_r1000d25_2.txt"
+      },
+      "status": "dead",
+      "url": "https://verolog2017.ortec.com/instance/2/2-21bf32aed935ca3e3c3cd5f7916101d4.txt/VeRoLog_r1000d25_2.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20260116005504",
+        "url": "https://web.archive.org/web/20260116005504/https://verolog2017.ortec.com/instance/2/2-31fe0ac583519fa0ace0282c4833c5b7.txt/VeRoLog_r1000d25_3.txt"
+      },
+      "status": "dead",
+      "url": "https://verolog2017.ortec.com/instance/2/2-31fe0ac583519fa0ace0282c4833c5b7.txt/VeRoLog_r1000d25_3.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20260608135921",
+        "url": "https://web.archive.org/web/20260608135921/https://verolog2017.ortec.com/instance/2/2-ed805f3a9cdebeb31a5cc09e63e68994.txt/VeRoLog_r1000d25_4.txt"
+      },
+      "status": "dead",
+      "url": "https://verolog2017.ortec.com/instance/2/2-ed805f3a9cdebeb31a5cc09e63e68994.txt/VeRoLog_r1000d25_4.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20260420182622",
+        "url": "https://web.archive.org/web/20260420182622/https://verolog2017.ortec.com/instance/2/2-383a3661a1a01fbe8c46257e4e4f6f75.txt/VeRoLog_r1000d25_5.txt"
+      },
+      "status": "dead",
+      "url": "https://verolog2017.ortec.com/instance/2/2-383a3661a1a01fbe8c46257e4e4f6f75.txt/VeRoLog_r1000d25_5.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20260312021345",
+        "url": "https://web.archive.org/web/20260312021345/https://verolog2017.ortec.com/instance/2/2-57b6b790e379b921cbc64214912d0253.txt/VeRoLog_r1000d30_1.txt"
+      },
+      "status": "dead",
+      "url": "https://verolog2017.ortec.com/instance/2/2-57b6b790e379b921cbc64214912d0253.txt/VeRoLog_r1000d30_1.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20260515022114",
+        "url": "https://web.archive.org/web/20260515022114/https://verolog2017.ortec.com/instance/2/2-02daee73f7334399cb17873a2b0b89e8.txt/VeRoLog_r1000d30_2.txt"
+      },
+      "status": "dead",
+      "url": "https://verolog2017.ortec.com/instance/2/2-02daee73f7334399cb17873a2b0b89e8.txt/VeRoLog_r1000d30_2.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20260420185710",
+        "url": "https://web.archive.org/web/20260420185710/https://verolog2017.ortec.com/instance/2/2-fa701cdb9a8fc80e2c13539df4ffa20b.txt/VeRoLog_r1000d30_3.txt"
+      },
+      "status": "dead",
+      "url": "https://verolog2017.ortec.com/instance/2/2-fa701cdb9a8fc80e2c13539df4ffa20b.txt/VeRoLog_r1000d30_3.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20260515020826",
+        "url": "https://web.archive.org/web/20260515020826/https://verolog2017.ortec.com/instance/2/2-4ec98c5172d3b31fb57d9dd6d7389e45.txt/VeRoLog_r1000d30_4.txt"
+      },
+      "status": "dead",
+      "url": "https://verolog2017.ortec.com/instance/2/2-4ec98c5172d3b31fb57d9dd6d7389e45.txt/VeRoLog_r1000d30_4.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20260420184538",
+        "url": "https://web.archive.org/web/20260420184538/https://verolog2017.ortec.com/instance/2/2-865ab33704c6c015f86455d8c0f4d0ed.txt/VeRoLog_r1000d30_5.txt"
+      },
+      "status": "dead",
+      "url": "https://verolog2017.ortec.com/instance/2/2-865ab33704c6c015f86455d8c0f4d0ed.txt/VeRoLog_r1000d30_5.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20260115234444",
+        "url": "https://web.archive.org/web/20260115234444/https://verolog2017.ortec.com/instance/2/2-928afcad056d83ac35d97a0002f3be32.txt/VeRoLog_r100d10_1.txt"
+      },
+      "status": "dead",
+      "url": "https://verolog2017.ortec.com/instance/2/2-928afcad056d83ac35d97a0002f3be32.txt/VeRoLog_r100d10_1.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20260420181534",
+        "url": "https://web.archive.org/web/20260420181534/https://verolog2017.ortec.com/instance/2/2-6a67fa406eb51a4bcee6bfe8d559c89f.txt/VeRoLog_r100d10_2.txt"
+      },
+      "status": "dead",
+      "url": "https://verolog2017.ortec.com/instance/2/2-6a67fa406eb51a4bcee6bfe8d559c89f.txt/VeRoLog_r100d10_2.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20260207003120",
+        "url": "https://web.archive.org/web/20260207003120/https://verolog2017.ortec.com/instance/2/2-a015036db8bc6a63a29e2bb8ccc2d466.txt/VeRoLog_r100d10_3.txt"
+      },
+      "status": "dead",
+      "url": "https://verolog2017.ortec.com/instance/2/2-a015036db8bc6a63a29e2bb8ccc2d466.txt/VeRoLog_r100d10_3.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20260515014746",
+        "url": "https://web.archive.org/web/20260515014746/https://verolog2017.ortec.com/instance/2/2-3c4274ebbe58c729876fb22d6bbf3b69.txt/VeRoLog_r100d10_4.txt"
+      },
+      "status": "dead",
+      "url": "https://verolog2017.ortec.com/instance/2/2-3c4274ebbe58c729876fb22d6bbf3b69.txt/VeRoLog_r100d10_4.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20240912211836",
+        "url": "https://web.archive.org/web/20240912211836/https://verolog2017.ortec.com/instance/2/2-74c7f9046ffd90355aa661fd2725db45.txt/VeRoLog_r100d10_5.txt"
+      },
+      "status": "dead",
+      "url": "https://verolog2017.ortec.com/instance/2/2-74c7f9046ffd90355aa661fd2725db45.txt/VeRoLog_r100d10_5.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20260312004441",
+        "url": "https://web.archive.org/web/20260312004441/https://verolog2017.ortec.com/instance/2/2-060a5f0d84a31a2bfb3caed1e710dbb2.txt/VeRoLog_r100d5_1.txt"
+      },
+      "status": "dead",
+      "url": "https://verolog2017.ortec.com/instance/2/2-060a5f0d84a31a2bfb3caed1e710dbb2.txt/VeRoLog_r100d5_1.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20251217094610",
+        "url": "https://web.archive.org/web/20251217094610/https://verolog2017.ortec.com/instance/2/2-3cf29198647d8fab8e506a2a339f9c02.txt/VeRoLog_r100d5_2.txt"
+      },
+      "status": "dead",
+      "url": "https://verolog2017.ortec.com/instance/2/2-3cf29198647d8fab8e506a2a339f9c02.txt/VeRoLog_r100d5_2.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20260608145913",
+        "url": "https://web.archive.org/web/20260608145913/https://verolog2017.ortec.com/instance/2/2-7468f64ae5f77b89876f256c18ed38a8.txt/VeRoLog_r100d5_3.txt"
+      },
+      "status": "dead",
+      "url": "https://verolog2017.ortec.com/instance/2/2-7468f64ae5f77b89876f256c18ed38a8.txt/VeRoLog_r100d5_3.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20260608134056",
+        "url": "https://web.archive.org/web/20260608134056/https://verolog2017.ortec.com/instance/2/2-f460a51e10005ceed101b970bf9b8891.txt/VeRoLog_r100d5_4.txt"
+      },
+      "status": "dead",
+      "url": "https://verolog2017.ortec.com/instance/2/2-f460a51e10005ceed101b970bf9b8891.txt/VeRoLog_r100d5_4.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20240806163723",
+        "url": "https://web.archive.org/web/20240806163723/https://verolog2017.ortec.com/instance/2/2-460e31f42e02023b0eafe3bff9b3619d.txt/VeRoLog_r100d5_5.txt"
+      },
+      "status": "dead",
+      "url": "https://verolog2017.ortec.com/instance/2/2-460e31f42e02023b0eafe3bff9b3619d.txt/VeRoLog_r100d5_5.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20260608145319",
+        "url": "https://web.archive.org/web/20260608145319/https://verolog2017.ortec.com/instance/2/2-7dda63127d8d82f7bada1053ba66fe77.txt/VeRoLog_r500d15_1.txt"
+      },
+      "status": "dead",
+      "url": "https://verolog2017.ortec.com/instance/2/2-7dda63127d8d82f7bada1053ba66fe77.txt/VeRoLog_r500d15_1.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20251217092333",
+        "url": "https://web.archive.org/web/20251217092333/https://verolog2017.ortec.com/instance/2/2-e5f7658bbde9d0cfcc2c24cf41d46983.txt/VeRoLog_r500d15_2.txt"
+      },
+      "status": "dead",
+      "url": "https://verolog2017.ortec.com/instance/2/2-e5f7658bbde9d0cfcc2c24cf41d46983.txt/VeRoLog_r500d15_2.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20241005120847",
+        "url": "https://web.archive.org/web/20241005120847/https://verolog2017.ortec.com/instance/2/2-0cea83552613029d753460f5dce494f8.txt/VeRoLog_r500d15_3.txt"
+      },
+      "status": "dead",
+      "url": "https://verolog2017.ortec.com/instance/2/2-0cea83552613029d753460f5dce494f8.txt/VeRoLog_r500d15_3.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20260515010815",
+        "url": "https://web.archive.org/web/20260515010815/https://verolog2017.ortec.com/instance/2/2-63cd07b1ec2c2fb4b175804ec79bbd95.txt/VeRoLog_r500d15_4.txt"
+      },
+      "status": "dead",
+      "url": "https://verolog2017.ortec.com/instance/2/2-63cd07b1ec2c2fb4b175804ec79bbd95.txt/VeRoLog_r500d15_4.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20240912232803",
+        "url": "https://web.archive.org/web/20240912232803/https://verolog2017.ortec.com/instance/2/2-17d5d31ec545123bc151fc292a09f44f.txt/VeRoLog_r500d15_5.txt"
+      },
+      "status": "dead",
+      "url": "https://verolog2017.ortec.com/instance/2/2-17d5d31ec545123bc151fc292a09f44f.txt/VeRoLog_r500d15_5.txt"
     }
   ],
   "subjects": [

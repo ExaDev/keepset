@@ -14,11 +14,77 @@
     }
   ],
   "crosswalk": {
-    "file": "crosswalks/tasks-v1/nodes.json"
+    "oneWay": [],
+    "rules": [
+      {
+        "from": "meta",
+        "op": "move",
+        "to": "meta"
+      },
+      {
+        "from": "nodes[].id",
+        "op": "move",
+        "to": "nodes[].id"
+      },
+      {
+        "from": "nodes[].latest",
+        "op": "move",
+        "to": "nodes[].deadline"
+      },
+      {
+        "from": "nodes[].x",
+        "op": "move",
+        "to": "nodes[].lat"
+      },
+      {
+        "from": "nodes[].y",
+        "op": "move",
+        "to": "nodes[].lon"
+      },
+      {
+        "from": "nodes[].services",
+        "op": "move",
+        "to": "nodes[].skill"
+      },
+      {
+        "from": "nodes[].role",
+        "op": "move",
+        "to": "nodes[].role"
+      },
+      {
+        "from": "nodes[].duration1",
+        "op": "move",
+        "to": "nodes[].duration1"
+      },
+      {
+        "from": "nodes[].duration2",
+        "op": "move",
+        "to": "nodes[].duration2"
+      },
+      {
+        "from": "nodes[].earliest",
+        "op": "move",
+        "to": "nodes[].earliest"
+      },
+      {
+        "from": "nodes[].minGap",
+        "op": "move",
+        "to": "nodes[].minGap"
+      },
+      {
+        "from": "nodes[].maxGap",
+        "op": "move",
+        "to": "nodes[].maxGap"
+      }
+    ],
+    "source": "mankowska",
+    "target": "tasks/v1"
   },
   "description": "Instances for the daily home health care routing and scheduling problem with several service types, multiple visits and route interdependence, generated on OpenAddresses data for Porto Alegre, with lower and upper bounds and a curated selection of hard and random instances for each size.",
   "domain": "Technician and home-care routing",
-  "expectedCounts": {},
+  "expectedCounts": {
+    "instances": 160
+  },
   "id": "github-afkummer-hhcrsp-curated-instances",
   "licence": {
     "kind": "unrecorded"
@@ -28,17 +94,1943 @@
     "github-afkummer"
   ],
   "properties": {
-    "surveyId": "or-17"
+    "surveyId": "or-17",
+    "timeUnit": "abstract units"
   },
   "recipe": {
-    "reason": "The instances are keyword format text files with node positions, time windows, service durations and a travel time matrix, but the repository holds them as a very large number of separate files in size directories and publishes no archive of the curated selection, so a recipe has no single download to read; the repository's own archive holds every instance and is several gigabytes.",
-    "status": "not-fetchable"
+    "files": [
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-10/HHCRSP_10_3_88_1.6_R_C.txt",
+        "source": 1
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-10/HHCRSP_10_3_40_0.8_R_C.txt",
+        "source": 2
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-10/HHCRSP_10_3_40_1.0_R_C.txt",
+        "source": 3
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-10/HHCRSP_10_3_35_1.0_R_R.txt",
+        "source": 4
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-10/HHCRSP_10_3_88_1.0_R_C.txt",
+        "source": 5
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-10/HHCRSP_10_3_88_1.2_R_C.txt",
+        "source": 6
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-10/HHCRSP_10_3_81_1.2_R_C.txt",
+        "source": 7
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-10/HHCRSP_10_3_86_1.2_C_C.txt",
+        "source": 8
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-10/HHCRSP_10_3_88_1.6_C_C.txt",
+        "source": 9
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-10/HHCRSP_10_3_16_1.6_C_C.txt",
+        "source": 10
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-25/HHCRSP_25_5_22_1.0_C_C.txt",
+        "source": 11
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-25/HHCRSP_25_5_69_1.6_R_RC.txt",
+        "source": 12
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-25/HHCRSP_25_5_47_0.8_R_C.txt",
+        "source": 13
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-25/HHCRSP_25_5_37_0.8_R_RC.txt",
+        "source": 14
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-25/HHCRSP_25_5_37_1.0_R_RC.txt",
+        "source": 15
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-25/HHCRSP_25_5_26_0.8_C_C.txt",
+        "source": 16
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-25/HHCRSP_25_5_6_0.8_R_C.txt",
+        "source": 17
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-25/HHCRSP_25_5_69_1.6_R_C.txt",
+        "source": 18
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-25/HHCRSP_25_5_42_0.8_R_RC.txt",
+        "source": 19
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-25/HHCRSP_25_5_96_0.8_R_C.txt",
+        "source": 20
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-50/HHCRSP_50_10_80_1.0_C_C.txt",
+        "source": 21
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-50/HHCRSP_50_10_81_1.0_R_RC.txt",
+        "source": 22
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-50/HHCRSP_50_10_80_1.0_C_RC.txt",
+        "source": 23
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-50/HHCRSP_50_10_97_0.8_C_RC.txt",
+        "source": 24
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-50/HHCRSP_50_10_32_1.2_R_C.txt",
+        "source": 25
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-50/HHCRSP_50_10_3_0.8_R_C.txt",
+        "source": 26
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-50/HHCRSP_50_10_80_0.4_C_C.txt",
+        "source": 27
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-50/HHCRSP_50_10_26_1.0_C_RC.txt",
+        "source": 28
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-50/HHCRSP_50_10_26_1.2_R_C.txt",
+        "source": 29
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-50/HHCRSP_50_10_44_1.6_R_C.txt",
+        "source": 30
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-75/HHCRSP_75_15_97_1.0_R_RC.txt",
+        "source": 31
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-75/HHCRSP_75_15_35_0.8_R_C.txt",
+        "source": 32
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-75/HHCRSP_75_15_35_1.0_C_RC.txt",
+        "source": 33
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-75/HHCRSP_75_15_97_1.0_C_C.txt",
+        "source": 34
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-75/HHCRSP_75_15_79_1.2_R_C.txt",
+        "source": 35
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-75/HHCRSP_75_15_10_1.6_R_C.txt",
+        "source": 36
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-75/HHCRSP_75_15_88_1.6_R_C.txt",
+        "source": 37
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-75/HHCRSP_75_15_98_1.6_R_C.txt",
+        "source": 38
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-75/HHCRSP_75_15_21_1.6_R_C.txt",
+        "source": 39
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-75/HHCRSP_75_15_87_1.6_C_C.txt",
+        "source": 40
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-100/HHCRSP_100_20_8_1.2_R_C.txt",
+        "source": 41
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-100/HHCRSP_100_20_63_1.2_R_C.txt",
+        "source": 42
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-100/HHCRSP_100_20_39_1.6_R_C.txt",
+        "source": 43
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-100/HHCRSP_100_20_76_1.6_R_C.txt",
+        "source": 44
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-100/HHCRSP_100_20_57_1.6_R_C.txt",
+        "source": 45
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-100/HHCRSP_100_20_25_0.8_R_C.txt",
+        "source": 46
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-100/HHCRSP_100_20_77_1.0_R_C.txt",
+        "source": 47
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-100/HHCRSP_100_20_11_1.2_R_C.txt",
+        "source": 48
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-100/HHCRSP_100_20_30_1.0_R_C.txt",
+        "source": 49
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-100/HHCRSP_100_20_23_1.2_R_C.txt",
+        "source": 50
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-200/HHCRSP_200_40_52_1.6_R_C.txt",
+        "source": 51
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-200/HHCRSP_200_40_7_1.2_R_C.txt",
+        "source": 52
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-200/HHCRSP_200_40_30_1.6_R_C.txt",
+        "source": 53
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-200/HHCRSP_200_40_76_1.2_R_C.txt",
+        "source": 54
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-200/HHCRSP_200_40_7_1.6_R_C.txt",
+        "source": 55
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-200/HHCRSP_200_40_51_1.0_R_C.txt",
+        "source": 56
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-200/HHCRSP_200_40_17_1.6_R_C.txt",
+        "source": 57
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-200/HHCRSP_200_40_40_1.0_R_C.txt",
+        "source": 58
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-200/HHCRSP_200_40_71_1.6_R_C.txt",
+        "source": 59
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-200/HHCRSP_200_40_98_1.2_R_C.txt",
+        "source": 60
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-300/HHCRSP_300_60_4_1.6_R_C.txt",
+        "source": 61
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-300/HHCRSP_300_60_89_1.6_R_C.txt",
+        "source": 62
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-300/HHCRSP_300_60_82_1.2_R_C.txt",
+        "source": 63
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-300/HHCRSP_300_60_95_1.2_R_C.txt",
+        "source": 64
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-300/HHCRSP_300_60_22_1.2_R_C.txt",
+        "source": 65
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-300/HHCRSP_300_60_85_1.2_R_C.txt",
+        "source": 66
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-300/HHCRSP_300_60_81_1.6_R_C.txt",
+        "source": 67
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-300/HHCRSP_300_60_23_1.2_R_C.txt",
+        "source": 68
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-300/HHCRSP_300_60_34_1.2_R_C.txt",
+        "source": 69
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-300/HHCRSP_300_60_69_1.0_R_C.txt",
+        "source": 70
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-400/HHCRSP_400_80_59_1.0_R_C.txt",
+        "source": 71
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-400/HHCRSP_400_80_16_1.2_R_C.txt",
+        "source": 72
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-400/HHCRSP_400_80_51_1.0_R_C.txt",
+        "source": 73
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-400/HHCRSP_400_80_97_1.6_R_C.txt",
+        "source": 74
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-400/HHCRSP_400_80_30_1.6_R_C.txt",
+        "source": 75
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-400/HHCRSP_400_80_34_1.0_R_C.txt",
+        "source": 76
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-400/HHCRSP_400_80_92_1.6_R_C.txt",
+        "source": 77
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-400/HHCRSP_400_80_91_1.2_R_C.txt",
+        "source": 78
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-400/HHCRSP_400_80_28_1.2_R_C.txt",
+        "source": 79
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-400/HHCRSP_400_80_81_1.6_R_C.txt",
+        "source": 80
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-10/HHCRSP_10_3_80_1.0_C_R.txt",
+        "source": 81
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-10/HHCRSP_10_3_56_1.2_R_RC.txt",
+        "source": 82
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-10/HHCRSP_10_3_22_1.6_R_C.txt",
+        "source": 83
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-10/HHCRSP_10_3_90_1.2_C_RC.txt",
+        "source": 84
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-10/HHCRSP_10_3_46_1.6_R_C.txt",
+        "source": 85
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-10/HHCRSP_10_3_90_1.2_C_C.txt",
+        "source": 86
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-10/HHCRSP_10_3_60_1.0_R_RC.txt",
+        "source": 87
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-10/HHCRSP_10_3_51_1.0_R_RC.txt",
+        "source": 88
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-10/HHCRSP_10_3_11_0.4_R_C.txt",
+        "source": 89
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-10/HHCRSP_10_3_96_1.0_R_C.txt",
+        "source": 90
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-25/HHCRSP_25_5_48_1.0_C_C.txt",
+        "source": 91
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-25/HHCRSP_25_5_80_0.8_C_RC.txt",
+        "source": 92
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-25/HHCRSP_25_5_70_1.0_R_C.txt",
+        "source": 93
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-25/HHCRSP_25_5_56_0.8_R_RC.txt",
+        "source": 94
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-25/HHCRSP_25_5_73_0.4_R_RC.txt",
+        "source": 95
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-25/HHCRSP_25_5_76_1.2_C_C.txt",
+        "source": 96
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-25/HHCRSP_25_5_21_1.6_R_RC.txt",
+        "source": 97
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-25/HHCRSP_25_5_49_0.4_C_C.txt",
+        "source": 98
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-25/HHCRSP_25_5_42_0.8_C_RC.txt",
+        "source": 99
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-25/HHCRSP_25_5_97_1.0_R_R.txt",
+        "source": 100
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-50/HHCRSP_50_10_33_0.4_R_RC.txt",
+        "source": 101
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-50/HHCRSP_50_10_62_1.2_R_C.txt",
+        "source": 102
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-50/HHCRSP_50_10_2_1.0_C_R.txt",
+        "source": 103
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-50/HHCRSP_50_10_53_1.2_R_C.txt",
+        "source": 104
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-50/HHCRSP_50_10_74_1.0_R_RC.txt",
+        "source": 105
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-50/HHCRSP_50_10_60_0.4_C_RC.txt",
+        "source": 106
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-50/HHCRSP_50_10_3_1.6_C_C.txt",
+        "source": 107
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-50/HHCRSP_50_10_88_1.6_C_RC.txt",
+        "source": 108
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-50/HHCRSP_50_10_100_1.6_C_C.txt",
+        "source": 109
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-50/HHCRSP_50_10_61_1.0_R_RC.txt",
+        "source": 110
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-75/HHCRSP_75_15_19_0.8_R_C.txt",
+        "source": 111
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-75/HHCRSP_75_15_30_1.0_R_C.txt",
+        "source": 112
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-75/HHCRSP_75_15_84_0.8_R_RC.txt",
+        "source": 113
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-75/HHCRSP_75_15_63_1.0_R_RC.txt",
+        "source": 114
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-75/HHCRSP_75_15_65_1.0_C_C.txt",
+        "source": 115
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-75/HHCRSP_75_15_32_1.2_R_RC.txt",
+        "source": 116
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-75/HHCRSP_75_15_63_0.4_R_C.txt",
+        "source": 117
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-75/HHCRSP_75_15_97_0.4_C_C.txt",
+        "source": 118
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-75/HHCRSP_75_15_40_0.8_R_RC.txt",
+        "source": 119
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-75/HHCRSP_75_15_5_0.8_C_RC.txt",
+        "source": 120
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-100/HHCRSP_100_20_54_1.2_R_RC.txt",
+        "source": 121
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-100/HHCRSP_100_20_9_1.0_R_R.txt",
+        "source": 122
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-100/HHCRSP_100_20_65_0.4_R_RC.txt",
+        "source": 123
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-100/HHCRSP_100_20_88_1.2_C_C.txt",
+        "source": 124
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-100/HHCRSP_100_20_61_0.4_R_RC.txt",
+        "source": 125
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-100/HHCRSP_100_20_99_0.4_C_RC.txt",
+        "source": 126
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-100/HHCRSP_100_20_68_1.6_R_C.txt",
+        "source": 127
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-100/HHCRSP_100_20_49_0.4_C_C.txt",
+        "source": 128
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-100/HHCRSP_100_20_10_1.2_R_C.txt",
+        "source": 129
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-100/HHCRSP_100_20_35_1.6_C_RC.txt",
+        "source": 130
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-200/HHCRSP_200_40_10_1.6_C_RC.txt",
+        "source": 131
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-200/HHCRSP_200_40_71_1.6_C_C.txt",
+        "source": 132
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-200/HHCRSP_200_40_60_0.4_C_RC.txt",
+        "source": 133
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-200/HHCRSP_200_40_80_1.0_C_C.txt",
+        "source": 134
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-200/HHCRSP_200_40_17_1.6_C_C.txt",
+        "source": 135
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-200/HHCRSP_200_40_75_1.6_R_C.txt",
+        "source": 136
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-200/HHCRSP_200_40_82_1.0_C_R.txt",
+        "source": 137
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-200/HHCRSP_200_40_98_1.6_C_RC.txt",
+        "source": 138
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-200/HHCRSP_200_40_100_0.4_C_C.txt",
+        "source": 139
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-200/HHCRSP_200_40_69_1.0_C_R.txt",
+        "source": 140
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-300/HHCRSP_300_60_48_0.8_C_C.txt",
+        "source": 141
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-300/HHCRSP_300_60_26_0.4_C_RC.txt",
+        "source": 142
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-300/HHCRSP_300_60_4_1.0_R_C.txt",
+        "source": 143
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-300/HHCRSP_300_60_68_0.8_C_RC.txt",
+        "source": 144
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-300/HHCRSP_300_60_45_1.6_C_C.txt",
+        "source": 145
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-300/HHCRSP_300_60_75_1.2_C_RC.txt",
+        "source": 146
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-300/HHCRSP_300_60_73_0.8_R_RC.txt",
+        "source": 147
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-300/HHCRSP_300_60_46_0.4_R_C.txt",
+        "source": 148
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-300/HHCRSP_300_60_7_1.2_R_RC.txt",
+        "source": 149
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-300/HHCRSP_300_60_81_0.8_C_C.txt",
+        "source": 150
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-400/HHCRSP_400_80_20_0.4_C_RC.txt",
+        "source": 151
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-400/HHCRSP_400_80_45_0.4_C_C.txt",
+        "source": 152
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-400/HHCRSP_400_80_61_0.4_C_RC.txt",
+        "source": 153
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-400/HHCRSP_400_80_54_1.2_C_RC.txt",
+        "source": 154
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-400/HHCRSP_400_80_95_1.0_C_R.txt",
+        "source": 155
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-400/HHCRSP_400_80_77_1.2_R_RC.txt",
+        "source": 156
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-400/HHCRSP_400_80_22_1.6_C_C.txt",
+        "source": 157
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-400/HHCRSP_400_80_33_1.0_C_RC.txt",
+        "source": 158
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-400/HHCRSP_400_80_65_1.0_C_R.txt",
+        "source": 159
+      },
+      {
+        "archive": {
+          "kind": "none"
+        },
+        "path": "instances-400/HHCRSP_400_80_60_0.8_C_C.txt",
+        "source": 160
+      }
+    ],
+    "parser": {
+      "encoding": "utf-8",
+      "format": "mankowska"
+    },
+    "status": "fetchable"
   },
   "sources": [
     {
       "retrieved": "2026-10-19",
       "status": "live",
       "url": "https://github.com/afkummer/hhcrsp-dataset-2021"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-10/HHCRSP_10_3_88_1.6_R_C.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-10/HHCRSP_10_3_40_0.8_R_C.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-10/HHCRSP_10_3_40_1.0_R_C.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-10/HHCRSP_10_3_35_1.0_R_R.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-10/HHCRSP_10_3_88_1.0_R_C.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-10/HHCRSP_10_3_88_1.2_R_C.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-10/HHCRSP_10_3_81_1.2_R_C.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-10/HHCRSP_10_3_86_1.2_C_C.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-10/HHCRSP_10_3_88_1.6_C_C.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-10/HHCRSP_10_3_16_1.6_C_C.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-25/HHCRSP_25_5_22_1.0_C_C.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-25/HHCRSP_25_5_69_1.6_R_RC.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-25/HHCRSP_25_5_47_0.8_R_C.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-25/HHCRSP_25_5_37_0.8_R_RC.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-25/HHCRSP_25_5_37_1.0_R_RC.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-25/HHCRSP_25_5_26_0.8_C_C.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-25/HHCRSP_25_5_6_0.8_R_C.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-25/HHCRSP_25_5_69_1.6_R_C.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-25/HHCRSP_25_5_42_0.8_R_RC.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-25/HHCRSP_25_5_96_0.8_R_C.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-50/HHCRSP_50_10_80_1.0_C_C.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-50/HHCRSP_50_10_81_1.0_R_RC.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-50/HHCRSP_50_10_80_1.0_C_RC.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-50/HHCRSP_50_10_97_0.8_C_RC.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-50/HHCRSP_50_10_32_1.2_R_C.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-50/HHCRSP_50_10_3_0.8_R_C.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-50/HHCRSP_50_10_80_0.4_C_C.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-50/HHCRSP_50_10_26_1.0_C_RC.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-50/HHCRSP_50_10_26_1.2_R_C.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-50/HHCRSP_50_10_44_1.6_R_C.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-75/HHCRSP_75_15_97_1.0_R_RC.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-75/HHCRSP_75_15_35_0.8_R_C.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-75/HHCRSP_75_15_35_1.0_C_RC.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-75/HHCRSP_75_15_97_1.0_C_C.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-75/HHCRSP_75_15_79_1.2_R_C.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-75/HHCRSP_75_15_10_1.6_R_C.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-75/HHCRSP_75_15_88_1.6_R_C.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-75/HHCRSP_75_15_98_1.6_R_C.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-75/HHCRSP_75_15_21_1.6_R_C.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-75/HHCRSP_75_15_87_1.6_C_C.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-100/HHCRSP_100_20_8_1.2_R_C.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-100/HHCRSP_100_20_63_1.2_R_C.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-100/HHCRSP_100_20_39_1.6_R_C.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-100/HHCRSP_100_20_76_1.6_R_C.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-100/HHCRSP_100_20_57_1.6_R_C.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-100/HHCRSP_100_20_25_0.8_R_C.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-100/HHCRSP_100_20_77_1.0_R_C.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-100/HHCRSP_100_20_11_1.2_R_C.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-100/HHCRSP_100_20_30_1.0_R_C.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-100/HHCRSP_100_20_23_1.2_R_C.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-200/HHCRSP_200_40_52_1.6_R_C.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-200/HHCRSP_200_40_7_1.2_R_C.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-200/HHCRSP_200_40_30_1.6_R_C.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-200/HHCRSP_200_40_76_1.2_R_C.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-200/HHCRSP_200_40_7_1.6_R_C.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-200/HHCRSP_200_40_51_1.0_R_C.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-200/HHCRSP_200_40_17_1.6_R_C.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-200/HHCRSP_200_40_40_1.0_R_C.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-200/HHCRSP_200_40_71_1.6_R_C.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-200/HHCRSP_200_40_98_1.2_R_C.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-300/HHCRSP_300_60_4_1.6_R_C.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-300/HHCRSP_300_60_89_1.6_R_C.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-300/HHCRSP_300_60_82_1.2_R_C.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-300/HHCRSP_300_60_95_1.2_R_C.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-300/HHCRSP_300_60_22_1.2_R_C.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-300/HHCRSP_300_60_85_1.2_R_C.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-300/HHCRSP_300_60_81_1.6_R_C.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-300/HHCRSP_300_60_23_1.2_R_C.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-300/HHCRSP_300_60_34_1.2_R_C.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-300/HHCRSP_300_60_69_1.0_R_C.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-400/HHCRSP_400_80_59_1.0_R_C.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-400/HHCRSP_400_80_16_1.2_R_C.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-400/HHCRSP_400_80_51_1.0_R_C.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-400/HHCRSP_400_80_97_1.6_R_C.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-400/HHCRSP_400_80_30_1.6_R_C.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-400/HHCRSP_400_80_34_1.0_R_C.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-400/HHCRSP_400_80_92_1.6_R_C.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-400/HHCRSP_400_80_91_1.2_R_C.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-400/HHCRSP_400_80_28_1.2_R_C.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-400/HHCRSP_400_80_81_1.6_R_C.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-10/HHCRSP_10_3_80_1.0_C_R.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-10/HHCRSP_10_3_56_1.2_R_RC.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-10/HHCRSP_10_3_22_1.6_R_C.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-10/HHCRSP_10_3_90_1.2_C_RC.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-10/HHCRSP_10_3_46_1.6_R_C.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-10/HHCRSP_10_3_90_1.2_C_C.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-10/HHCRSP_10_3_60_1.0_R_RC.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-10/HHCRSP_10_3_51_1.0_R_RC.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-10/HHCRSP_10_3_11_0.4_R_C.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-10/HHCRSP_10_3_96_1.0_R_C.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-25/HHCRSP_25_5_48_1.0_C_C.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-25/HHCRSP_25_5_80_0.8_C_RC.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-25/HHCRSP_25_5_70_1.0_R_C.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-25/HHCRSP_25_5_56_0.8_R_RC.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-25/HHCRSP_25_5_73_0.4_R_RC.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-25/HHCRSP_25_5_76_1.2_C_C.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-25/HHCRSP_25_5_21_1.6_R_RC.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-25/HHCRSP_25_5_49_0.4_C_C.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-25/HHCRSP_25_5_42_0.8_C_RC.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-25/HHCRSP_25_5_97_1.0_R_R.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-50/HHCRSP_50_10_33_0.4_R_RC.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-50/HHCRSP_50_10_62_1.2_R_C.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-50/HHCRSP_50_10_2_1.0_C_R.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-50/HHCRSP_50_10_53_1.2_R_C.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-50/HHCRSP_50_10_74_1.0_R_RC.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-50/HHCRSP_50_10_60_0.4_C_RC.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-50/HHCRSP_50_10_3_1.6_C_C.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-50/HHCRSP_50_10_88_1.6_C_RC.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-50/HHCRSP_50_10_100_1.6_C_C.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-50/HHCRSP_50_10_61_1.0_R_RC.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-75/HHCRSP_75_15_19_0.8_R_C.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-75/HHCRSP_75_15_30_1.0_R_C.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-75/HHCRSP_75_15_84_0.8_R_RC.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-75/HHCRSP_75_15_63_1.0_R_RC.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-75/HHCRSP_75_15_65_1.0_C_C.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-75/HHCRSP_75_15_32_1.2_R_RC.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-75/HHCRSP_75_15_63_0.4_R_C.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-75/HHCRSP_75_15_97_0.4_C_C.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-75/HHCRSP_75_15_40_0.8_R_RC.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-75/HHCRSP_75_15_5_0.8_C_RC.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-100/HHCRSP_100_20_54_1.2_R_RC.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-100/HHCRSP_100_20_9_1.0_R_R.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-100/HHCRSP_100_20_65_0.4_R_RC.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-100/HHCRSP_100_20_88_1.2_C_C.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-100/HHCRSP_100_20_61_0.4_R_RC.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-100/HHCRSP_100_20_99_0.4_C_RC.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-100/HHCRSP_100_20_68_1.6_R_C.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-100/HHCRSP_100_20_49_0.4_C_C.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-100/HHCRSP_100_20_10_1.2_R_C.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-100/HHCRSP_100_20_35_1.6_C_RC.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-200/HHCRSP_200_40_10_1.6_C_RC.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-200/HHCRSP_200_40_71_1.6_C_C.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-200/HHCRSP_200_40_60_0.4_C_RC.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-200/HHCRSP_200_40_80_1.0_C_C.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-200/HHCRSP_200_40_17_1.6_C_C.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-200/HHCRSP_200_40_75_1.6_R_C.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-200/HHCRSP_200_40_82_1.0_C_R.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-200/HHCRSP_200_40_98_1.6_C_RC.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-200/HHCRSP_200_40_100_0.4_C_C.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-200/HHCRSP_200_40_69_1.0_C_R.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-300/HHCRSP_300_60_48_0.8_C_C.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-300/HHCRSP_300_60_26_0.4_C_RC.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-300/HHCRSP_300_60_4_1.0_R_C.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-300/HHCRSP_300_60_68_0.8_C_RC.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-300/HHCRSP_300_60_45_1.6_C_C.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-300/HHCRSP_300_60_75_1.2_C_RC.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-300/HHCRSP_300_60_73_0.8_R_RC.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-300/HHCRSP_300_60_46_0.4_R_C.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-300/HHCRSP_300_60_7_1.2_R_RC.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-300/HHCRSP_300_60_81_0.8_C_C.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-400/HHCRSP_400_80_20_0.4_C_RC.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-400/HHCRSP_400_80_45_0.4_C_C.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-400/HHCRSP_400_80_61_0.4_C_RC.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-400/HHCRSP_400_80_54_1.2_C_RC.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-400/HHCRSP_400_80_95_1.0_C_R.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-400/HHCRSP_400_80_77_1.2_R_RC.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-400/HHCRSP_400_80_22_1.6_C_C.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-400/HHCRSP_400_80_33_1.0_C_RC.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-400/HHCRSP_400_80_65_1.0_C_R.txt"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-400/HHCRSP_400_80_60_0.8_C_C.txt"
     }
   ],
   "subjects": [
