@@ -6,12 +6,12 @@
     }
   ],
   "crosswalk": {
-    "file": "crosswalks/graph-v1/topology.json"
+    "file": "crosswalks/graph-v1/relations-split.json"
   },
   "description": "Heterogeneous knowledge graph from Freebase with 237 relation types. A subset of FB15k created by removing inverse relations to prevent test leakage. Contains entities from multiple domains (people, locations, music, film) with directed relation edges. Standard benchmark for knowledge graph completion and link prediction.",
   "expectedCounts": {
-    "edges": 283869,
-    "nodes": 14543
+    "edges": 310116,
+    "nodes": 14541
   },
   "id": "fb15k-237",
   "licence": {
@@ -19,22 +19,53 @@
   },
   "name": "FB15k-237",
   "properties": {
-    "components": 116,
+    "components": 6,
     "connected": false,
-    "cyclic": false,
-    "density": 0.004329004329004329,
+    "cyclic": true,
+    "density": 0.0014667817328547926,
     "directed": true,
-    "edgeTypes": 1,
+    "edgeTypes": 237,
     "heterogeneous": true,
-    "multigraph": false,
+    "multigraph": true,
     "nodeTypes": 1,
     "rawBytes": 0,
     "selfLoops": true,
     "weighted": false
   },
   "recipe": {
-    "reason": "no download is in a form keepset reads yet (kge-triples-tar: format kge-triples-tar has a pipeline-specific parser with no declarative keepset form yet; landing-page: a landing page, not a download; landing-page: the download is a web page, not a data file)",
-    "status": "not-fetchable"
+    "archive": {
+      "kind": "tar.gz",
+      "parts": [
+        {
+          "member": {
+            "path": "fb15k-237/train.txt"
+          },
+          "name": "train"
+        },
+        {
+          "member": {
+            "path": "fb15k-237/valid.txt"
+          },
+          "name": "valid"
+        },
+        {
+          "member": {
+            "path": "fb15k-237/test.txt"
+          },
+          "name": "test"
+        }
+      ]
+    },
+    "parser": {
+      "delimiter": "tab",
+      "encoding": "utf-8",
+      "format": "kg-triples",
+      "header": "none",
+      "order": "head-relation-tail",
+      "quoted": false
+    },
+    "source": 0,
+    "status": "fetchable"
   },
   "sources": [
     {

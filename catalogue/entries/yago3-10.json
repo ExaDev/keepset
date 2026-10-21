@@ -33,7 +33,7 @@
     "weighted": false
   },
   "recipe": {
-    "reason": "no download is in a form keepset reads yet (kge-triples-tar: format kge-triples-tar has a pipeline-specific parser with no declarative keepset form yet; landing-page: the download is a directory listing, not a data file)",
+    "reason": "no download is in a form keepset reads yet (kge-triples-tar: format kge-triples-tar has a pipeline-specific parser with no declarative keepset form yet; landing-page: the URL is the YAGO project's home page, not a download)",
     "status": "not-fetchable"
   },
   "sources": [

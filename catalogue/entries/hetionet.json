@@ -6,7 +6,7 @@
     }
   ],
   "crosswalk": {
-    "file": "crosswalks/graph-v1/topology.json"
+    "file": "crosswalks/graph-v1/relations.json"
   },
   "description": "Heterogeneous biomedical knowledge graph integrating 29 public databases. Contains 11 node types (Compounds, Diseases, Genes, Proteins, etc.) connected by 24 edge types including compound-disease treatments, gene-disease associations, and protein interactions. Designed for drug repurposing and biomedical discovery.",
   "domain": "Biomedical knowledge graph",
@@ -22,15 +22,15 @@
   },
   "name": "Hetionet",
   "properties": {
-    "components": 6,
-    "connected": false,
+    "components": 1,
+    "connected": true,
     "cyclic": true,
-    "density": 0.0003807640611381848,
+    "density": 0.0011034705835981234,
     "directed": true,
-    "edgeTypes": 1,
+    "edgeTypes": 24,
     "heterogeneous": true,
     "multigraph": true,
-    "nodeTypes": 2,
+    "nodeTypes": 1,
     "rawBytes": 0,
     "selfLoops": false,
     "weighted": false
@@ -40,16 +40,12 @@
       "kind": "gzip"
     },
     "parser": {
-      "commentPrefixes": [
-        "#",
-        "%"
-      ],
-      "delimiter": "detect",
+      "delimiter": "tab",
       "encoding": "utf-8",
-      "format": "edge-list",
-      "skipLines": 1,
-      "sourceColumn": 0,
-      "targetColumn": 2
+      "format": "kg-triples",
+      "header": "names",
+      "order": "head-relation-tail",
+      "quoted": false
     },
     "source": 0,
     "status": "fetchable"

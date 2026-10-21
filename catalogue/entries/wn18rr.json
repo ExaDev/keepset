@@ -6,11 +6,11 @@
     }
   ],
   "crosswalk": {
-    "file": "crosswalks/graph-v1/topology.json"
+    "file": "crosswalks/graph-v1/relations-split.json"
   },
   "description": "Heterogeneous knowledge graph derived from WordNet lexical database. Contains words and their semantic relationships (hypernyms, synonyms, etc.) with 11 relation types. Created to fix test set leakage in the original WN18 dataset by removing inverse relation redundancy. Standard benchmark for knowledge graph completion.",
   "expectedCounts": {
-    "edges": 92879,
+    "edges": 93003,
     "nodes": 40943
   },
   "id": "wn18rr",
@@ -19,22 +19,53 @@
   },
   "name": "WN18RR",
   "properties": {
-    "components": 2,
+    "components": 13,
     "connected": false,
     "cyclic": true,
-    "density": 0.0006858835096536629,
+    "density": 0.000055481506174749874,
     "directed": true,
-    "edgeTypes": 1,
+    "edgeTypes": 11,
     "heterogeneous": true,
     "multigraph": false,
-    "nodeTypes": 2,
+    "nodeTypes": 1,
     "rawBytes": 0,
     "selfLoops": true,
     "weighted": false
   },
   "recipe": {
-    "reason": "no download is in a form keepset reads yet (kge-triples-tar: format kge-triples-tar has a pipeline-specific parser with no declarative keepset form yet; landing-page: a landing page, not a download)",
-    "status": "not-fetchable"
+    "archive": {
+      "kind": "tar.gz",
+      "parts": [
+        {
+          "member": {
+            "path": "wnrr/train.txt"
+          },
+          "name": "train"
+        },
+        {
+          "member": {
+            "path": "wnrr/valid.txt"
+          },
+          "name": "valid"
+        },
+        {
+          "member": {
+            "path": "wnrr/test.txt"
+          },
+          "name": "test"
+        }
+      ]
+    },
+    "parser": {
+      "delimiter": "tab",
+      "encoding": "utf-8",
+      "format": "kg-triples",
+      "header": "none",
+      "order": "head-relation-tail",
+      "quoted": false
+    },
+    "source": 0,
+    "status": "fetchable"
   },
   "sources": [
     {

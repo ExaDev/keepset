@@ -6,7 +6,7 @@
     }
   ],
   "crosswalk": {
-    "file": "crosswalks/graph-v1/topology.json"
+    "file": "crosswalks/graph-v1/relations-split.json"
   },
   "description": "Directed knowledge graph encoding relationships between 14 countries. Edges represent 55 interaction types (e.g. 'exports', 'accusation', 'aidgiven'). The same country pair can have multiple relation types, creating a dense multigraph. Used as a standard benchmark for knowledge graph embedding methods.",
   "domain": "International relations knowledge graph",
@@ -28,8 +28,39 @@
     "weighted": false
   },
   "recipe": {
-    "reason": "no download is in a form keepset reads yet (tsv: format tsv is a triple file whose head and tail columns the catalogue does not record)",
-    "status": "not-fetchable"
+    "archive": {
+      "kind": "tar.gz",
+      "parts": [
+        {
+          "member": {
+            "path": "train.txt"
+          },
+          "name": "train"
+        },
+        {
+          "member": {
+            "path": "valid.txt"
+          },
+          "name": "valid"
+        },
+        {
+          "member": {
+            "path": "test.txt"
+          },
+          "name": "test"
+        }
+      ]
+    },
+    "parser": {
+      "delimiter": "tab",
+      "encoding": "utf-8",
+      "format": "kg-triples",
+      "header": "none",
+      "order": "head-relation-tail",
+      "quoted": false
+    },
+    "source": 0,
+    "status": "fetchable"
   },
   "sources": [
     {

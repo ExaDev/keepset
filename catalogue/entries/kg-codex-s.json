@@ -6,7 +6,7 @@
     }
   ],
   "crosswalk": {
-    "file": "crosswalks/graph-v1/topology.json"
+    "file": "crosswalks/graph-v1/relations.json"
   },
   "description": "Small knowledge graph from the CoDEx (Comprehensive Distillation and Extraction) benchmark. Extracted from Wikidata and Wikipedia. Contains 42 relation types connecting entities, with 337 entity pairs having multiple relation types. Directed triples (head, relation, tail) format.",
   "domain": "Encyclopedic knowledge graph",
@@ -32,16 +32,12 @@
       "kind": "none"
     },
     "parser": {
-      "commentPrefixes": [
-        "#",
-        "%"
-      ],
-      "delimiter": "detect",
+      "delimiter": "tab",
       "encoding": "utf-8",
-      "format": "edge-list",
-      "skipLines": 0,
-      "sourceColumn": 0,
-      "targetColumn": 2
+      "format": "kg-triples",
+      "header": "none",
+      "order": "head-relation-tail",
+      "quoted": false
     },
     "source": 0,
     "status": "fetchable"

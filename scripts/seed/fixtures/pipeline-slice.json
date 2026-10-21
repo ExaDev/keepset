@@ -843,6 +843,57 @@
         }
       ]
     },
+    "dblp-het": {
+      "category": "heterogeneous",
+      "citation": {
+        "authors": [
+          "Xinyu Lv",
+          "Tong Zhao",
+          "Yozen Liu",
+          "Neil Shah",
+          "Yong Li"
+        ],
+        "publisher": "Proceedings of the 27th ACM SIGKDD Conference on Knowledge Discovery and Data Mining",
+        "title": "Are we really making much progress? Revisiting, benchmarking and refining heterogeneous graph neural networks",
+        "type": "conference",
+        "year": 2021
+      },
+      "citeKey": "lv2021we",
+      "description": "Heterogeneous academic network from DBLP. Contains authors, papers, terms, and venues with authorship, term-usage, and publication-venue relations. Distinct from the homogeneous DBLP coauthorship network.",
+      "domain": "Academic heterogeneous",
+      "edgeCount": 239566,
+      "id": "dblp-het",
+      "name": "DBLP (Heterogeneous)",
+      "nodeCount": 26128,
+      "preferredFormat": "hgb",
+      "properties": {
+        "density": 0.00035093725028794413,
+        "edge_type_count": 1,
+        "has_self_loops": false,
+        "is_connected": true,
+        "is_cyclic": true,
+        "is_directed": false,
+        "is_heterogeneous": true,
+        "is_multigraph": true,
+        "is_weighted": false,
+        "n_components": 1,
+        "node_type_count": 2
+      },
+      "rawBytes": 0,
+      "retrieved": "2026-02-16",
+      "sources": [
+        {
+          "downloads": [
+            {
+              "description": "HGB format ZIP with node.dat, link.dat, info.dat",
+              "format": "hgb",
+              "url": "https://drive.google.com/uc?id=1fLLoy559V7jJaQ_9mQEsC06VKd6Qd3SC&export=download"
+            }
+          ],
+          "source": "hgb"
+        }
+      ]
+    },
     "h-pokec": {
       "citation": {
         "authors": [
@@ -1000,6 +1051,43 @@
             {
               "format": "tsv",
               "url": "https://github.com/TimDettmers/ConvE/raw/master/nations.tar.gz"
+            }
+          ],
+          "source": "conve"
+        }
+      ]
+    },
+    "kg-unread": {
+      "category": "knowledge-graph",
+      "citation": {
+        "authors": [
+          "L. A. Zetterström"
+        ],
+        "title": "Knowledge Graph Embeddings",
+        "type": "thesis",
+        "year": 2021
+      },
+      "description": "Directed knowledge graph encoding relationships between 14 countries. Edges represent 55 interaction types (e.g. 'exports', 'accusation', 'aidgiven'). The same country pair can have multiple relation types, creating a dense multigraph. Used as a standard benchmark for knowledge graph embedding methods.",
+      "domain": "International relations knowledge graph",
+      "edgeCount": 1992,
+      "id": "kg-unread",
+      "name": "Unread Knowledge Graph",
+      "nodeCount": 14,
+      "preferredFormat": "tsv",
+      "properties": {
+        "has_self_loops": false,
+        "is_directed": true,
+        "is_heterogeneous": true,
+        "is_multigraph": true,
+        "is_weighted": false
+      },
+      "retrieved": "2026-04-19",
+      "sources": [
+        {
+          "downloads": [
+            {
+              "format": "tsv",
+              "url": "https://github.com/TimDettmers/ConvE/raw/master/unread.tar.gz"
             }
           ],
           "source": "conve"
@@ -1207,6 +1295,58 @@
             }
           ],
           "source": "konect"
+        }
+      ]
+    },
+    "lastfm-hgb": {
+      "category": "heterogeneous",
+      "citation": {
+        "authors": [
+          "Xinyu Lv",
+          "Tong Zhao",
+          "Yozen Liu",
+          "Neil Shah",
+          "Yong Li"
+        ],
+        "publisher": "Proceedings of the 27th ACM SIGKDD Conference on Knowledge Discovery and Data Mining",
+        "title": "Are We Really Making Much Progress? Revisiting, Benchmarking and Refining Heterogeneous Graph Neural Networks",
+        "type": "conference",
+        "year": 2021
+      },
+      "citeKey": "lv2021we",
+      "description": "Heterogeneous music recommendation network from Last.fm. Contains users, artists, and tags with directed user-to-artist listening relationships, social user-user connections, and artist-tag associations. Used for link prediction and recommendation tasks in heterogeneous graph neural network benchmarks.",
+      "domain": "Music recommendation network",
+      "edgeCount": 92835,
+      "id": "lastfm-hgb",
+      "name": "LastFM (HGB)",
+      "nodeCount": 17646,
+      "preferredFormat": "zip",
+      "properties": {
+        "density": 0.0005933961402754534,
+        "edge_type_count": 1,
+        "has_self_loops": true,
+        "is_connected": false,
+        "is_cyclic": true,
+        "is_directed": true,
+        "is_heterogeneous": true,
+        "is_multigraph": false,
+        "is_weighted": false,
+        "n_components": 2,
+        "node_type_count": 2
+      },
+      "rawBytes": 0,
+      "retrieved": "2026-03-03",
+      "sources": [
+        {
+          "downloads": [
+            {
+              "description": "HetRec 2011 LastFM dataset",
+              "format": "zip",
+              "innerPath": "user_artists.dat",
+              "url": "https://files.grouplens.org/datasets/hetrec2011/hetrec2011-lastfm-2k.zip"
+            }
+          ],
+          "source": "grouplens-hetrec"
         }
       ]
     },
@@ -2006,6 +2146,55 @@
             }
           ],
           "source": "suitesparse"
+        }
+      ]
+    },
+    "yago3-10": {
+      "citation": {
+        "authors": [
+          "Suchanek et al."
+        ],
+        "journal": "ACM International Conference on World Wide Web",
+        "title": "YAGO: A Core of Semantic Knowledge Unifying DBpedia and Wikipedia",
+        "type": "conference",
+        "year": 2007
+      },
+      "description": "Large heterogeneous knowledge graph automatically extracted from Wikipedia and Wikidata. Contains 5 node types: entities, types, literals, relations, and concepts. Contains 37+ relation types (isA, created, hasCapital, etc.). Serves as a reference knowledge base for information retrieval and entity linking. Demonstrates multi-relational graph structure typical of Linked Open Data.",
+      "edgeCount": 1018447,
+      "id": "yago3-10",
+      "name": "YAGO 3.10 Knowledge Graph",
+      "nodeCount": 123182,
+      "preferredFormat": "edge-list",
+      "properties": {
+        "density": 0.0004193789497930294,
+        "edge_type_count": 1,
+        "has_self_loops": false,
+        "is_connected": false,
+        "is_cyclic": true,
+        "is_directed": true,
+        "is_heterogeneous": false,
+        "is_multigraph": true,
+        "is_weighted": false,
+        "n_components": 21,
+        "node_type_count": 2
+      },
+      "rawBytes": 0,
+      "retrieved": "2026-03-26",
+      "sources": [
+        {
+          "downloads": [
+            {
+              "description": "Knowledge graph with typed entities and relations",
+              "format": "edge-list",
+              "url": "https://www.yago-knowledge.org/"
+            },
+            {
+              "description": "Direct download from YAGO website",
+              "format": "edge-list",
+              "url": "https://www.yago-knowledge.org/resource/download/yago/YAGO3-10/"
+            }
+          ],
+          "source": "snap"
         }
       ]
     }
