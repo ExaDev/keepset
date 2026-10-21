@@ -83,7 +83,18 @@
     },
     "paging": {
       "kind": "socrata-resource",
-      "pageSize": 50000
+      "pageSize": 50000,
+      "select": [
+        "id",
+        "hearing_date",
+        "latitude",
+        "longitude",
+        "violation_date",
+        "imposed_fine",
+        "violation_description",
+        "case_disposition",
+        "ward"
+      ]
     },
     "parser": {
       "columns": [

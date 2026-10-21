@@ -5,7 +5,51 @@
   "category": "tasks/v1",
   "citations": [],
   "crosswalk": {
-    "file": "crosswalks/tasks-v1/nodes.json"
+    "oneWay": [],
+    "rules": [
+      {
+        "from": "meta",
+        "op": "move",
+        "to": "meta"
+      },
+      {
+        "from": "nodes[].id",
+        "op": "move",
+        "to": "nodes[].id"
+      },
+      {
+        "from": "nodes[].incident_close_datetime",
+        "op": "move",
+        "to": "nodes[].closed"
+      },
+      {
+        "from": "nodes[].incident_datetime",
+        "op": "move",
+        "to": "nodes[].opened"
+      },
+      {
+        "from": "nodes[].final_call_type",
+        "op": "move",
+        "to": "nodes[].skill"
+      },
+      {
+        "from": "nodes[].incident_disposition_code",
+        "op": "move",
+        "to": "nodes[].status"
+      },
+      {
+        "from": "nodes[].borough",
+        "op": "move",
+        "to": "nodes[].territory"
+      },
+      {
+        "from": "nodes[].incident_travel_tm_seconds_qy",
+        "op": "move",
+        "to": "nodes[].travelTime"
+      }
+    ],
+    "source": "csv-table",
+    "target": "tasks/v1"
   },
   "description": "Emergency medical incident dispatch records for New York City, with severity codes, response and travel seconds and areas.",
   "domain": "Emergency dispatch",
@@ -22,8 +66,46 @@
     "surveyId": "or-107"
   },
   "recipe": {
-    "reason": "The table has 30,389,767 rows, so even one mapped column and the id hold more cells than a fetch can hold in memory.",
-    "status": "not-fetchable"
+    "archive": {
+      "kind": "none"
+    },
+    "paging": {
+      "kind": "socrata-resource",
+      "pageSize": 50000,
+      "select": [
+        "incident_id",
+        "incident_close_datetime",
+        "incident_datetime",
+        "final_call_type",
+        "incident_disposition_code",
+        "borough",
+        "incident_travel_tm_seconds_qy"
+      ]
+    },
+    "parser": {
+      "columns": [
+        "incident_close_datetime",
+        "incident_datetime",
+        "final_call_type",
+        "incident_disposition_code",
+        "borough",
+        "incident_travel_tm_seconds_qy"
+      ],
+      "delimiter": "comma",
+      "encoding": "utf-8",
+      "format": "csv-table",
+      "idColumn": "incident_id",
+      "numericColumns": [
+        {
+          "column": "incident_travel_tm_seconds_qy",
+          "factor": 1
+        }
+      ],
+      "skipLines": 0
+    },
+    "source": 1,
+    "status": "fetchable",
+    "stream": true
   },
   "sources": [
     {

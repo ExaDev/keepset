@@ -5,7 +5,51 @@
   "category": "tasks/v1",
   "citations": [],
   "crosswalk": {
-    "file": "crosswalks/tasks-v1/nodes.json"
+    "oneWay": [],
+    "rules": [
+      {
+        "from": "meta",
+        "op": "move",
+        "to": "meta"
+      },
+      {
+        "from": "nodes[].id",
+        "op": "move",
+        "to": "nodes[].id"
+      },
+      {
+        "from": "nodes[].closng_ts",
+        "op": "move",
+        "to": "nodes[].closed"
+      },
+      {
+        "from": "nodes[].latitude",
+        "op": "move",
+        "to": "nodes[].lat"
+      },
+      {
+        "from": "nodes[].longitude",
+        "op": "move",
+        "to": "nodes[].lon"
+      },
+      {
+        "from": "nodes[].add_ts",
+        "op": "move",
+        "to": "nodes[].opened"
+      },
+      {
+        "from": "nodes[].typ_desc",
+        "op": "move",
+        "to": "nodes[].skill"
+      },
+      {
+        "from": "nodes[].boro_nm",
+        "op": "move",
+        "to": "nodes[].territory"
+      }
+    ],
+    "source": "csv-table",
+    "target": "tasks/v1"
   },
   "description": "NYPD calls for service in New York City, with location, precinct and dispatch, arrival and closing timestamps.",
   "domain": "Emergency dispatch",
@@ -22,8 +66,50 @@
     "surveyId": "or-108"
   },
   "recipe": {
-    "reason": "The table has 10,484,258 rows, so a mapping of even two columns and the id holds more cells than a fetch can hold in memory.",
-    "status": "not-fetchable"
+    "archive": {
+      "kind": "none"
+    },
+    "paging": {
+      "kind": "socrata-resource",
+      "pageSize": 50000,
+      "select": [
+        "cad_evnt_id",
+        "closng_ts",
+        "latitude",
+        "longitude",
+        "add_ts",
+        "typ_desc",
+        "boro_nm"
+      ]
+    },
+    "parser": {
+      "columns": [
+        "closng_ts",
+        "latitude",
+        "longitude",
+        "add_ts",
+        "typ_desc",
+        "boro_nm"
+      ],
+      "delimiter": "comma",
+      "encoding": "utf-8",
+      "format": "csv-table",
+      "idColumn": "cad_evnt_id",
+      "numericColumns": [
+        {
+          "column": "latitude",
+          "factor": 1
+        },
+        {
+          "column": "longitude",
+          "factor": 1
+        }
+      ],
+      "skipLines": 0
+    },
+    "source": 1,
+    "status": "fetchable",
+    "stream": true
   },
   "sources": [
     {

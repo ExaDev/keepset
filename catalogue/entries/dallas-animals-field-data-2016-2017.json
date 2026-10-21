@@ -67,7 +67,14 @@
     },
     "paging": {
       "kind": "socrata-resource",
-      "pageSize": 50000
+      "pageSize": 50000,
+      "select": [
+        "completed_date_time",
+        "call_date_time",
+        "activity_type",
+        "activity_status",
+        "council_district"
+      ]
     },
     "parser": {
       "columns": [

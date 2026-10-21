@@ -71,7 +71,16 @@
     },
     "paging": {
       "kind": "socrata-resource",
-      "pageSize": 50000
+      "pageSize": 50000,
+      "select": [
+        "objectid",
+        "closeddate",
+        "latitude",
+        "longitude",
+        "createddate",
+        "wotype",
+        "wostatus"
+      ]
     },
     "parser": {
       "columns": [

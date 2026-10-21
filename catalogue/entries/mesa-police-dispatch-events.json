@@ -73,7 +73,16 @@
     },
     "paging": {
       "kind": "socrata-resource",
-      "pageSize": 50000
+      "pageSize": 50000,
+      "select": [
+        "event_number",
+        "clear_date_time",
+        "on_scene_time_seconds",
+        "received_date_time",
+        "initial_case_type",
+        "district",
+        "response_time_seconds"
+      ]
     },
     "parser": {
       "columns": [

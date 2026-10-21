@@ -5,7 +5,61 @@
   "category": "tasks/v1",
   "citations": [],
   "crosswalk": {
-    "file": "crosswalks/tasks-v1/nodes.json"
+    "oneWay": [],
+    "rules": [
+      {
+        "from": "meta",
+        "op": "move",
+        "to": "meta"
+      },
+      {
+        "from": "nodes[].id",
+        "op": "move",
+        "to": "nodes[].id"
+      },
+      {
+        "from": "nodes[].issuance_date",
+        "op": "move",
+        "to": "nodes[].closed"
+      },
+      {
+        "from": "nodes[].expiration_date",
+        "op": "move",
+        "to": "nodes[].deadline"
+      },
+      {
+        "from": "nodes[].gis_latitude",
+        "op": "move",
+        "to": "nodes[].lat"
+      },
+      {
+        "from": "nodes[].gis_longitude",
+        "op": "move",
+        "to": "nodes[].lon"
+      },
+      {
+        "from": "nodes[].filing_date",
+        "op": "move",
+        "to": "nodes[].opened"
+      },
+      {
+        "from": "nodes[].permit_type",
+        "op": "move",
+        "to": "nodes[].skill"
+      },
+      {
+        "from": "nodes[].permit_status",
+        "op": "move",
+        "to": "nodes[].status"
+      },
+      {
+        "from": "nodes[].borough",
+        "op": "move",
+        "to": "nodes[].territory"
+      }
+    ],
+    "source": "csv-table",
+    "target": "tasks/v1"
   },
   "description": "Construction permits issued by the NYC Department of Buildings.",
   "domain": "Case records",
@@ -22,14 +76,65 @@
     "surveyId": "or-86"
   },
   "recipe": {
-    "reason": "The table has 3,990,985 rows, so a mapping of more than two columns plus the id holds more cells than a fetch can hold in memory, and two columns would carry too little of what the table offers.",
-    "status": "not-fetchable"
+    "archive": {
+      "kind": "none"
+    },
+    "paging": {
+      "kind": "socrata-resource",
+      "pageSize": 50000,
+      "select": [
+        "permit_si_no",
+        "issuance_date",
+        "expiration_date",
+        "gis_latitude",
+        "gis_longitude",
+        "filing_date",
+        "permit_type",
+        "permit_status",
+        "borough"
+      ]
+    },
+    "parser": {
+      "columns": [
+        "issuance_date",
+        "expiration_date",
+        "gis_latitude",
+        "gis_longitude",
+        "filing_date",
+        "permit_type",
+        "permit_status",
+        "borough"
+      ],
+      "delimiter": "comma",
+      "encoding": "utf-8",
+      "format": "csv-table",
+      "idColumn": "permit_si_no",
+      "numericColumns": [
+        {
+          "column": "gis_latitude",
+          "factor": 1
+        },
+        {
+          "column": "gis_longitude",
+          "factor": 1
+        }
+      ],
+      "skipLines": 0
+    },
+    "source": 1,
+    "status": "fetchable",
+    "stream": true
   },
   "sources": [
     {
       "retrieved": "2026-10-19",
       "status": "live",
       "url": "https://data.cityofnewyork.us/Housing-Development/DOB-Permit-Issuance/ipu4-2q9a"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://data.cityofnewyork.us/resource/ipu4-2q9a.csv"
     }
   ],
   "subjects": [

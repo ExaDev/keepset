@@ -61,7 +61,13 @@
     },
     "paging": {
       "kind": "socrata-resource",
-      "pageSize": 50000
+      "pageSize": 50000,
+      "select": [
+        "date",
+        "total_value",
+        "structure_type",
+        "council_district"
+      ]
     },
     "parser": {
       "columns": [
