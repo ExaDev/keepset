@@ -3480,7 +3480,7 @@
     {
       "flags": [
         "HGB layout read from the download: a zip of ACM/node.dat and link.dat, with the node and link types its info.dat gives",
-        "corrected against the downloaded file: the files hold four node types and eight link types, which the recipe reads as the node and edge types, where the catalogue records two and one and the description leaves out the terms and the citation and term relations"
+        "corrected against the downloaded file: the files hold four node types and eight link types, which the recipe reads as the node and edge types, where the catalogue records two and one, and the description leaves out the terms and the citation and term relations"
       ],
       "id": "acm",
       "outcome": "converted-with-flags",
@@ -3489,7 +3489,7 @@
     {
       "flags": [
         "HGB layout read from the download: a zip of ACM/node.dat and link.dat, with the node and link types its info.dat gives",
-        "corrected against the downloaded file: the download is the same file as acm's, and its node.dat and link.dat give the counts, types and properties recorded here; the catalogue's counts and three relation types match no reading of it"
+        "corrected against the downloaded file: the download is the same file as acm's, whose four node types and eight link types the recipe reads as the node and edge types, where the catalogue records one of each and its description three relation types"
       ],
       "id": "acm-hgb",
       "outcome": "converted-with-flags",
@@ -3940,7 +3940,7 @@
     {
       "flags": [
         "triples layout read from the downloaded file: Mannheim KGE archive: fb15k-237/train.txt, valid.txt and test.txt, head, relation and tail separated by tabs, CRLF endings",
-        "corrected against the downloaded file: the catalogue's edge count and properties describe a reading that kept almost none of the triples, while the recipe reads every triple of the three splits with its relation as the edge type"
+        "corrected against the downloaded file: the catalogue counts each head and tail pair once and names two entities the splits do not hold, while the recipe reads every triple of the three splits; its other properties describe a reading of another graph, and the relations are the edge types"
       ],
       "id": "fb15k-237",
       "outcome": "converted-with-flags",
@@ -3974,7 +3974,7 @@
     {
       "flags": [
         "HGB layout read from the download: a zip of Freebase/node.dat and link.dat, with the node and link types its info.dat gives",
-        "corrected against the downloaded file: the files hold eight node types and 36 link types, which the recipe reads as the node and edge types, where the catalogue records two and one"
+        "corrected against the downloaded file: the files hold eight node types and 36 link types, which the recipe reads as the node and edge types, where the catalogue records two and one, and the graph its files give has more components than the catalogue records"
       ],
       "id": "freebase",
       "outcome": "converted-with-flags",
@@ -4028,7 +4028,7 @@
     {
       "flags": [
         "triples layout read from the downloaded file: Hetionet SIF: a header line naming source, metaedge and target, then one edge per line separated by tabs",
-        "corrected against the downloaded file: the catalogue's counts and properties come from reading the header line as an edge and the metaedge column as the target, while the recipe skips the header and reads each line as source, metaedge type and target; a node's kind is part of its id, not a type of its own"
+        "corrected against the downloaded file: the catalogue's properties come from reading the metaedge column as the target, while the recipe reads it as each edge's type, which makes the graph connected; a node's kind is part of its id, not a type of its own"
       ],
       "id": "hetionet",
       "outcome": "converted-with-flags",
@@ -4062,7 +4062,7 @@
     {
       "flags": [
         "HGB layout read from the download: a zip of IMDB/node.dat and link.dat, with the node and link types its info.dat gives",
-        "corrected against the downloaded file: the files hold four node types and six link types, which the recipe reads as the node and edge types, where the catalogue records two and one and the description leaves out the keywords"
+        "corrected against the downloaded file: the files hold four node types and six link types, which the recipe reads as the node and edge types, where the catalogue records two and one, and the description leaves out the keywords"
       ],
       "id": "imdb",
       "outcome": "converted-with-flags",
@@ -4088,8 +4088,7 @@
     },
     {
       "flags": [
-        "triples layout read from the downloaded file: CoDEx training split: head, relation and tail separated by tabs",
-        "corrected against the downloaded file: the catalogue records no nodes or edges for the training split the recipe reads"
+        "triples layout read from the downloaded file: CoDEx training split: head, relation and tail separated by tabs"
       ],
       "id": "kg-codex-s",
       "outcome": "converted-with-flags",
@@ -4097,8 +4096,7 @@
     },
     {
       "flags": [
-        "triples layout read from the downloaded file: ConvE archive: train.txt, valid.txt and test.txt, head, relation and tail separated by tabs",
-        "corrected against the downloaded file: no person pair has two relations in the triples, as the description says, while the catalogue's properties call the graph a multigraph"
+        "triples layout read from the downloaded file: ConvE archive: train.txt, valid.txt and test.txt, head, relation and tail separated by tabs"
       ],
       "id": "kg-kinship",
       "outcome": "converted-with-flags",
@@ -4156,7 +4154,7 @@
     {
       "flags": [
         "counts layout read from the downloaded file: user_artists.dat, user, artist and listening count separated by tabs after one header line, users and artists numbered independently",
-        "corrected against the downloaded file: the catalogue's counts and properties come from reading user_artists.dat as a plain edge list, which merges users and artists that share a number and reads the header as an edge, while the recipe reads users and artists as two node sets with the listening count as the weight; the description named tags and friendships the recipe's file does not hold"
+        "corrected against the downloaded file: the recipe reads user_artists.dat as users and artists in two node sets with the listening count as each edge's weight, and the graph that gives has the components and cycles recorded here; the catalogue's properties and its description, which names tags and friendships the file does not hold, describe another reading"
       ],
       "id": "lastfm-hgb",
       "outcome": "converted-with-flags",
@@ -4248,7 +4246,7 @@
     {
       "flags": [
         "triples layout read from the downloaded file: OpenKE id triples: the triple count on the first line, then head, tail and relation ids separated by spaces",
-        "corrected against the downloaded file: the recipe reads each triple's relation as the edge type, and the entities carry no type"
+        "corrected against the downloaded file: the triples' relations are the edge types and the entities carry no type"
       ],
       "id": "nell-995",
       "outcome": "converted-with-flags",
@@ -10620,7 +10618,7 @@
     {
       "flags": [
         "triples layout read from the downloaded file: Mannheim KGE archive: wnrr/train.txt, valid.txt and test.txt, head, relation and tail separated by tabs",
-        "corrected against the downloaded file: the catalogue's counts and properties are those of the test split read alone, while the recipe reads the three splits; its entities carry no type and its relations are the edge types"
+        "corrected against the downloaded file: the catalogue counts each head and tail pair once, while the recipe reads every triple, so a pair with two relations is two edges; its other properties describe a reading of another graph, and the triples' relations are the edge types and the entities carry no type"
       ],
       "id": "wn18rr",
       "outcome": "converted-with-flags",
@@ -10732,11 +10730,12 @@
     },
     {
       "flags": [
-        "not fetchable yet: no declarative recipe exists for any download"
+        "triples layout read from the downloaded file: Mannheim KGE archive: yago3-10/train.txt, valid.txt and test.txt, head, relation and tail separated by tabs",
+        "corrected against the downloaded file: the catalogue counts each head and tail pair once, while the recipe reads every triple of the three splits, so a pair with two relations is two edges, and the graph the triples give has fewer components than the catalogue records; the triples' relations are the edge types, which makes the graph heterogeneous, and the entities carry no type"
       ],
       "id": "yago3-10",
       "outcome": "converted-with-flags",
-      "recipe": "not-fetchable"
+      "recipe": "fetchable"
     },
     {
       "flags": [

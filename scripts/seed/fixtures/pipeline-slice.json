@@ -1316,15 +1316,15 @@
       "citeKey": "lv2021we",
       "description": "Heterogeneous music recommendation network from Last.fm. Contains users, artists, and tags with directed user-to-artist listening relationships, social user-user connections, and artist-tag associations. Used for link prediction and recommendation tasks in heterogeneous graph neural network benchmarks.",
       "domain": "Music recommendation network",
-      "edgeCount": 92835,
+      "edgeCount": 92834,
       "id": "lastfm-hgb",
       "name": "LastFM (HGB)",
-      "nodeCount": 17646,
-      "preferredFormat": "zip",
+      "nodeCount": 19524,
+      "preferredFormat": "two-mode-table",
       "properties": {
         "density": 0.0005933961402754534,
         "edge_type_count": 1,
-        "has_self_loops": true,
+        "has_self_loops": false,
         "is_connected": false,
         "is_cyclic": true,
         "is_directed": true,
@@ -1341,7 +1341,7 @@
           "downloads": [
             {
               "description": "HetRec 2011 LastFM dataset",
-              "format": "zip",
+              "format": "two-mode-table",
               "innerPath": "user_artists.dat",
               "url": "https://files.grouplens.org/datasets/hetrec2011/hetrec2011-lastfm-2k.zip"
             }
@@ -2160,11 +2160,11 @@
         "year": 2007
       },
       "description": "Large heterogeneous knowledge graph automatically extracted from Wikipedia and Wikidata. Contains 5 node types: entities, types, literals, relations, and concepts. Contains 37+ relation types (isA, created, hasCapital, etc.). Serves as a reference knowledge base for information retrieval and entity linking. Demonstrates multi-relational graph structure typical of Linked Open Data.",
-      "edgeCount": 1018447,
+      "edgeCount": 797297,
       "id": "yago3-10",
       "name": "YAGO 3.10 Knowledge Graph",
       "nodeCount": 123182,
-      "preferredFormat": "edge-list",
+      "preferredFormat": "kge-triples-tar",
       "properties": {
         "density": 0.0004193789497930294,
         "edge_type_count": 1,
@@ -2173,7 +2173,7 @@
         "is_cyclic": true,
         "is_directed": true,
         "is_heterogeneous": false,
-        "is_multigraph": true,
+        "is_multigraph": false,
         "is_weighted": false,
         "n_components": 21,
         "node_type_count": 2
@@ -2184,17 +2184,16 @@
         {
           "downloads": [
             {
-              "description": "Knowledge graph with typed entities and relations",
-              "format": "edge-list",
-              "url": "https://www.yago-knowledge.org/"
-            },
-            {
-              "description": "Direct download from YAGO website",
-              "format": "edge-list",
-              "url": "https://www.yago-knowledge.org/resource/download/yago/YAGO3-10/"
+              "description": "Uni Mannheim KGE datasets archive: the train, valid and test triple files",
+              "format": "kge-triples-tar",
+              "url": "https://web.informatik.uni-mannheim.de/pi1/kge-datasets/yago3-10.tar.gz"
             }
           ],
-          "source": "snap"
+          "source": "uni-mannheim"
+        },
+        {
+          "homepage": "https://www.yago-knowledge.org/",
+          "source": "yago"
         }
       ]
     }

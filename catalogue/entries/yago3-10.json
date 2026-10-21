@@ -6,11 +6,11 @@
     }
   ],
   "crosswalk": {
-    "file": "crosswalks/graph-v1/topology.json"
+    "file": "crosswalks/graph-v1/relations-split.json"
   },
   "description": "Large heterogeneous knowledge graph automatically extracted from Wikipedia and Wikidata. Contains 5 node types: entities, types, literals, relations, and concepts. Contains 37+ relation types (isA, created, hasCapital, etc.). Serves as a reference knowledge base for information retrieval and entity linking. Demonstrates multi-relational graph structure typical of Linked Open Data.",
   "expectedCounts": {
-    "edges": 797297,
+    "edges": 1089040,
     "nodes": 123182
   },
   "id": "yago3-10",
@@ -19,22 +19,53 @@
   },
   "name": "YAGO 3.10 Knowledge Graph",
   "properties": {
-    "components": 21,
+    "components": 11,
     "connected": false,
     "cyclic": true,
     "density": 0.0004193789497930294,
     "directed": true,
-    "edgeTypes": 1,
-    "heterogeneous": false,
-    "multigraph": false,
-    "nodeTypes": 2,
+    "edgeTypes": 37,
+    "heterogeneous": true,
+    "multigraph": true,
+    "nodeTypes": 1,
     "rawBytes": 0,
     "selfLoops": false,
     "weighted": false
   },
   "recipe": {
-    "reason": "no download is in a form keepset reads yet (kge-triples-tar: format kge-triples-tar has a pipeline-specific parser with no declarative keepset form yet; landing-page: the URL is the YAGO project's home page, not a download)",
-    "status": "not-fetchable"
+    "archive": {
+      "kind": "tar.gz",
+      "parts": [
+        {
+          "member": {
+            "path": "yago3-10/train.txt"
+          },
+          "name": "train"
+        },
+        {
+          "member": {
+            "path": "yago3-10/valid.txt"
+          },
+          "name": "valid"
+        },
+        {
+          "member": {
+            "path": "yago3-10/test.txt"
+          },
+          "name": "test"
+        }
+      ]
+    },
+    "parser": {
+      "delimiter": "tab",
+      "encoding": "utf-8",
+      "format": "kg-triples",
+      "header": "none",
+      "order": "head-relation-tail",
+      "quoted": false
+    },
+    "source": 0,
+    "status": "fetchable"
   },
   "sources": [
     {

@@ -30,7 +30,7 @@ const licences = GraphLicencesSchema.parse({
     { id: "grouplens", name: "GroupLens", prefixes: ["https://files.grouplens.org/datasets/"], perDataset: true },
     unstated("openke", "OpenKE", ["https://raw.githubusercontent.com/thunlp/OpenKE/"]),
     unstated("hgb", "Heterogeneous Graph Benchmark", ["https://drive.google.com/"]),
-    unstated("yago", "YAGO", ["https://www.yago-knowledge.org/"]),
+    unstated("mannheim", "Mannheim KGE datasets", ["https://web.informatik.uni-mannheim.de/pi1/kge-datasets/"]),
     { id: "huggingface", name: "Hugging Face", prefixes: ["https://huggingface.co/"], perDataset: true },
   ],
   datasets: {
@@ -217,6 +217,8 @@ describe("the seed import's classification", () => {
     expect(entry("kg-nations").crosswalk).toEqual({ file: "crosswalks/graph-v1/relations-split.json" });
     expect(entry("nell-995").recipe).toMatchObject({ archive: { kind: "none" }, parser: { format: "kg-triples", delimiter: "space", order: "head-tail-relation", header: "count" } });
     expect(entry("nell-995").crosswalk).toEqual({ file: "crosswalks/graph-v1/relations.json" });
+    expect(entry("yago3-10").recipe).toMatchObject({ status: "fetchable", source: 0, archive: { kind: "tar.gz", parts: [{ name: "train", member: { path: "yago3-10/train.txt" } }, { name: "valid", member: { path: "yago3-10/valid.txt" } }, { name: "test", member: { path: "yago3-10/test.txt" } }] } });
+    expect(entry("yago3-10").expectedCounts).toEqual({ nodes: 123182, edges: 1089040 });
     expect(outcome("nell-995").flags).toContain("triples layout read from the downloaded file: OpenKE id triples: the triple count on the first line, then head, tail and relation ids separated by spaces");
   });
 
@@ -239,9 +241,9 @@ describe("the seed import's classification", () => {
     expect(outcome("lastfm-hgb").flags.some((flag) => flag.startsWith("corrected against the downloaded file:"))).toBe(true);
   });
 
-  it("does not guess the layout of a triples download it has not read, the member of an archive in format various, or a URL that answers with a page", () => {
+  it("does not guess the layout of a triples download it has not read or the member of an archive in format various", () => {
     expect(entry("kg-unread").recipe).toEqual({ status: "not-fetchable", reason: "no download is in a form keepset reads yet (tsv: format tsv is a triple file whose layout the import has not read)" });
-    expect(JSON.stringify(entry("yago3-10").recipe)).toMatch(/certificate does not name www\.yago-knowledge\.org/);
+
     // arenas-pgp's first download is an archive in format various, so the recipe reads its second, a GML archive.
     expect(entry("arenas-pgp").recipe).toMatchObject({ status: "fetchable", source: 1, parser: { format: "gml" } });
   });

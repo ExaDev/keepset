@@ -20,7 +20,7 @@
   },
   "name": "Freebase",
   "properties": {
-    "components": 353,
+    "components": 378,
     "connected": false,
     "cyclic": true,
     "density": 0.00004721988619699187,
