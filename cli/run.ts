@@ -1,7 +1,7 @@
 import { parseArgs } from "node:util";
 // Through the package's own name, as cli/keepset.ts imports the library: an `instanceof` check needs the very class the library throws, not a second copy bundled into the command.
 import { KeepsetError, NAME_SEPARATOR, type ArchiveMember, type Dataset, type DatasetQuery, type NamespaceNode, type SyntaxIssue } from "keepset";
-import type { FetchedDataset, RoundTripReport } from "keepset/node";
+import type { FetchedDataset, NodeSink, RoundTripReport, StreamedDataset } from "keepset/node";
 
 /**
  * Says which archive file or files a recipe reads, for the `info` output.
@@ -23,6 +23,7 @@ export interface CliLibrary {
   readonly listNamespaces: (path?: string) => readonly NamespaceNode[];
   readonly validateDataset: (dataset: Dataset) => readonly SyntaxIssue[];
   readonly fetchDataset: (id: string) => Promise<FetchedDataset>;
+  readonly streamDataset: (id: string, sink: NodeSink) => Promise<StreamedDataset>;
   readonly roundTripDataset: (id: string) => Promise<RoundTripReport>;
   readonly countTarget: (dataset: FetchedDataset) => ReadonlyMap<string, number>;
 }
@@ -32,7 +33,15 @@ export interface CliIo {
   readonly writeStdout: (text: string) => void;
   readonly writeStderr: (text: string) => void;
   readonly writeFile: (path: string, text: string) => void;
+  /** Opens a file to be written a piece at a time, for a result too large to hold as one text; each write resolves once the piece may be followed by the next. */
+  readonly openFile: (path: string) => FileWriter;
   readonly version: string;
+}
+
+/** A file being written a piece at a time. */
+export interface FileWriter {
+  readonly write: (text: string) => Promise<void>;
+  readonly close: () => Promise<void>;
 }
 
 /** The command finished and its answer is yes: a result was printed, an entry is valid, a round trip holds. */
@@ -60,7 +69,8 @@ Commands:
   fetch <dataset> [--out <file>]
                       run the dataset's recipe and write the normalised result
                       to <file> (default <id>.json), with its provenance beside
-                      it in <file without .json>.provenance.json
+                      it in <file without .json>.provenance.json; a table too
+                      large to hold is streamed into the file a page at a time
   validate <dataset>  check the entry against the entry schema and its
                       crosswalk against crossmap's validation
   roundtrip <dataset> fetch the dataset and check that decoding the encoded
@@ -110,8 +120,44 @@ function parseCommandLine(args: readonly string[]): CommandLine {
  * @param value - The value.
  * @returns The text.
  */
+/** The spaces each level of the JSON the command writes is indented by. */
+const JSON_INDENT = 2;
+
 function json(value: unknown): string {
-  return `${JSON.stringify(value, undefined, 2)}\n`;
+  return `${JSON.stringify(value, undefined, JSON_INDENT)}\n`;
+}
+
+/**
+ * Indents every line of a text after its first, so a value stringified on its own sits at its depth in an enclosing document.
+ * @param text - The text.
+ * @param spaces - How many spaces deeper it sits.
+ * @returns The indented text.
+ */
+function indented(text: string, spaces: number): string {
+  return text.replaceAll("\n", `\n${" ".repeat(spaces)}`);
+}
+
+/**
+ * Writes a streamed result to a file as it arrives, as the same text `json` gives the whole `{ meta, nodes }` document, so a streamed fetch's file is byte for byte the file a held fetch of the same nodes would write.
+ * @param file - The file.
+ * @returns The sink that writes the meta and the nodes, and the step that ends the document.
+ */
+function jsonDocumentSink(file: FileWriter): { readonly sink: NodeSink; readonly end: () => Promise<void> } {
+  let written = 0;
+  // The indent of the document's own keys, and of each node in the nodes array.
+  const one = " ".repeat(JSON_INDENT);
+  const two = " ".repeat(2 * JSON_INDENT);
+
+  return {
+    sink: {
+      meta: async (meta) => file.write(`{\n${one}"meta": ${indented(JSON.stringify(meta, undefined, JSON_INDENT), JSON_INDENT)},\n${one}"nodes": [`),
+      nodes: async (nodes) => file.write(nodes.map((node) => `${written++ === 0 ? "\n" : ",\n"}${two}${indented(JSON.stringify(node, undefined, JSON_INDENT), 2 * JSON_INDENT)}`).join("")),
+    },
+    end: async () => {
+      await file.write(written === 0 ? "]\n}\n" : `\n${one}]\n}\n`);
+      await file.close();
+    },
+  };
 }
 
 /**
@@ -315,6 +361,20 @@ export async function run(args: readonly string[], library: CliLibrary, io: CliI
         return EXIT_NO;
       }
       io.writeStdout(`${id} is valid\n`);
+
+      return EXIT_OK;
+    }
+    if (command === "fetch" && dataset.entry.recipe.status === "fetchable" && dataset.entry.recipe.stream === true) {
+      const out = values.out ?? `${id}.json`;
+      const document = jsonDocumentSink(io.openFile(out));
+      const streamed = await library.streamDataset(id, document.sink);
+      await document.end();
+      io.writeFile(provenancePath(out), json(streamed.provenance));
+      for (const warning of streamed.warnings) {
+        io.writeStderr(`warning: ${warning}\n`);
+      }
+      const counts = [...streamed.counts].map(([key, count]) => `${key} ${String(count)}`).join(", ");
+      io.writeStdout(`wrote ${out} (${counts}, streamed) and ${provenancePath(out)}\n`);
 
       return EXIT_OK;
     }

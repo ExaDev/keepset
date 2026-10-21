@@ -1,7 +1,7 @@
 #!/usr/bin/env node
-import { writeFileSync } from "node:fs";
+import { createWriteStream, writeFileSync } from "node:fs";
 import { countTarget, getDataset, listDatasets, listNamespaces, validateDataset } from "keepset";
-import { fetchDataset, roundTripDataset } from "keepset/node";
+import { fetchDataset, roundTripDataset, streamDataset } from "keepset/node";
 import packageJson from "../package.json" with { type: "json" };
 import { run } from "./run";
 
@@ -18,6 +18,7 @@ process.exitCode = await run(
     listNamespaces,
     validateDataset,
     fetchDataset: async (id) => fetchDataset(id),
+    streamDataset: async (id, sink) => streamDataset(id, sink),
     roundTripDataset: async (id) => roundTripDataset(id),
     countTarget: (fetched) => countTarget(fetched.dataset.entry.category, fetched.data),
   },
@@ -30,6 +31,35 @@ process.exitCode = await run(
     },
     writeFile: (path, text) => {
       writeFileSync(path, text, "utf8");
+    },
+    openFile: (path) => {
+      const stream = createWriteStream(path, { encoding: "utf8" });
+      const failed = new Promise<never>((_, reject) => {
+        stream.once("error", reject);
+      });
+      // Read only through the races below; a failure before any write still rejects the next one.
+      failed.catch(() => undefined);
+
+      return {
+        // Waits for the stream to drain when its buffer is full, so a slow disk holds the fetch back rather than the pages piling up in memory.
+        write: async (text) => {
+          if (!stream.write(text)) {
+            await Promise.race([
+              new Promise((resolve) => {
+                stream.once("drain", resolve);
+              }),
+              failed,
+            ]);
+          }
+        },
+        close: async () =>
+          Promise.race([
+            new Promise<void>((resolve) => {
+              stream.end(resolve);
+            }),
+            failed,
+          ]),
+      };
     },
     version: packageJson.version,
   },
