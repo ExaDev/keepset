@@ -1,3 +1,10 @@
+## [0.41.1](https://github.com/Mearman/keepset/compare/v0.41.0...v0.41.1) (2026-10-21)
+
+
+### Bug Fixes
+
+* **archive:** read a report written before verification existed ([4bc1cc2](https://github.com/Mearman/keepset/commit/4bc1cc2f3e82d11db6a3a76d9acbf3b4968d2a80))
+
 # [0.41.0](https://github.com/Mearman/keepset/compare/v0.40.0...v0.41.0) (2026-10-21)
 
 
