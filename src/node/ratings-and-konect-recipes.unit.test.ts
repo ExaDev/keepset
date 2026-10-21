@@ -152,7 +152,7 @@ describe("the recipes in the bundled catalogue", () => {
 
   it("covers the ratings and KONECT entries the catalogue lists", () => {
     const ids = withParser.map((dataset) => dataset.entry.id);
-    for (const id of ["amazon-beauty", "movielens-25m", "konect-wikispeedia", "lesmis"]) {
+    for (const id of ["amazon-beauty", "movielens-10m", "konect-wikispeedia", "lesmis"]) {
       expect(ids).toContain(id);
     }
   });

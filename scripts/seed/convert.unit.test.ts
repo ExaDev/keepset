@@ -30,7 +30,7 @@ const licences = GraphLicencesSchema.parse({
     { id: "huggingface", name: "Hugging Face", prefixes: ["https://huggingface.co/"], perDataset: true },
   ],
   datasets: {
-    ...Object.fromEntries(["movielens-100k", "movielens-1m", "movielens-25m", "movielens-unread"].map((id) => [id, { readAt: ["https://files.grouplens.org/datasets/movielens/"], reason: "The release page states no terms." }])),
+    ...Object.fromEntries(["movielens-100k", "movielens-1m", "movielens-10m", "movielens-25m", "movielens-unread"].map((id) => [id, { readAt: ["https://files.grouplens.org/datasets/movielens/"], reason: "The release page states no terms." }])),
     "ieee-cis-g": { licence: { kind: "spdx", id: "MIT" }, statedAt: "https://huggingface.co/api/datasets/example/data", statement: "The card's licence field is mit." },
     "oag-eng": { readAt: ["https://huggingface.co/api/datasets/example/data"], reason: "The card has no licence field." },
   },
@@ -143,9 +143,16 @@ describe("the seed import's classification", () => {
   it("reads each MovieLens release in the layout that release has, naming the member", () => {
     expect(entry("movielens-100k").recipe).toMatchObject({ archive: { kind: "zip", member: { path: "u.data" } }, parser: { format: "user-item-ratings", delimiter: "tab", skipLines: 0, itemType: "movie", maxRating: 5 } });
     expect(entry("movielens-1m").recipe).toMatchObject({ archive: { kind: "zip", member: { path: "ratings.dat" } }, parser: { delimiter: "double-colon", skipLines: 0 } });
-    expect(entry("movielens-25m").recipe).toMatchObject({ archive: { kind: "zip", member: { path: "ratings.csv" } }, parser: { delimiter: "comma", skipLines: 1 } });
-    expect(entry("movielens-25m").crosswalk).toEqual({ file: "crosswalks/graph-v1/rated.json" });
-    expect(outcome("movielens-25m").flags).toContain("ratings layout of ml-25m read from the release: ratings.csv, delimiter comma, 1 header lines");
+    expect(entry("movielens-10m").recipe).toMatchObject({ archive: { kind: "zip", member: { path: "ratings.dat" } }, parser: { delimiter: "double-colon", skipLines: 0 } });
+    expect(entry("movielens-10m").crosswalk).toEqual({ file: "crosswalks/graph-v1/rated.json" });
+    expect(outcome("movielens-10m").flags).toContain("ratings layout of ml-10m read from the release: ratings.dat, delimiter double-colon, 0 header lines");
+  });
+
+  it("gives a release whose whole fetch failed no recipe, though its layout is read", () => {
+    expect(entry("movielens-25m").recipe).toEqual({
+      status: "not-fetchable",
+      reason: "no download is in a form keepset reads yet (movielens: the ratings file has more edges than one fetch can hold: the crosswalk step aborts on it with an allocation failure (ExaDev/crossmap#57), where ml-10m completes)",
+    });
   });
 
   it("does not guess the layout of a MovieLens release it has not read", () => {
