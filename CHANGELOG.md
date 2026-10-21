@@ -1,3 +1,15 @@
+# [0.47.0](https://github.com/Mearman/keepset/compare/v0.46.1...v0.47.0) (2026-10-21)
+
+
+### Bug Fixes
+
+* **archive:** pace the Wayback Machine's hosts at a request every five seconds ([511951d](https://github.com/Mearman/keepset/commit/511951d984f0ed906e8a438df09466c15bbbcd1f))
+
+
+### Features
+
+* **site:** show dataset dimensions in the listing with sorting and range filters ([b415770](https://github.com/Mearman/keepset/commit/b41577047c1d9b5f36bf4645a6d2f9eaf91279f7))
+
 ## [0.46.1](https://github.com/Mearman/keepset/compare/v0.46.0...v0.46.1) (2026-10-21)
 
 
