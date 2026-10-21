@@ -4,8 +4,15 @@ import { describe, expect, it } from "vitest";
 import { createCatalogue, type Dataset } from "../catalogue";
 import { DatasetNotFoundError, KeepsetError, RecipeError, type RecipeStep } from "../errors";
 import { gzip, tar, zip } from "../test-support/archives";
-import { arcgisEntry, ckanEntry, deadEntry, fixtureIndex, liveEntry, notFetchableEntry, ogbEntry, openFemaEntry, taskCollectionEntry, taskEntry, graphCollectionEntry, socrataEntry } from "../test-support/entries";
-import { downloadUrl, fetchDataset, fetchEntry, roundTripDataset, roundTripEntry, type FetchPort } from "./fetch-dataset";
+import { arcgisEntry, ckanEntry, deadEntry, filesCollectionEntry, fixtureIndex, liveEntry, notFetchableEntry, ogbEntry, openFemaEntry, taskCollectionEntry, taskEntry, graphCollectionEntry, socrataEntry } from "../test-support/entries";
+import { downloadUrl, fetchDataset, fetchEntry, roundTripDataset, roundTripEntry, type DownloadProvenance, type FetchPort, type Provenance } from "./fetch-dataset";
+
+/**
+ * The provenance of a result read from one download.
+ * @param provenance - A provenance record.
+ * @returns It, narrowed.
+ */
+const single = (provenance: Provenance): DownloadProvenance => ("files" in provenance ? expect.unreachable("the result is read from one download") : provenance);
 
 const karateText = "% karate excerpt\n1 2\n2 3\n3 1\n";
 
@@ -226,6 +233,94 @@ describe("a tasks/v1 entry", () => {
   });
 });
 
+describe("a tasks/v1 entry whose collection is files downloaded one by one", () => {
+  const north = "customer,x,y,prize\n1,1,2,0\n";
+  const south = "customer,x,y,prize\n1,3,4,5\n2,6,7,0\n";
+  const more = zip([
+    { path: "more/west.csv", text: "customer,x,y,prize\n9,0,0,1\n" },
+    { path: "more/east.csv", text: "customer,x,y,prize\n8,1,1,2\n" },
+    { path: "more/readme.txt", text: "not an instance" },
+  ]);
+  const served = (overrides: Readonly<Record<string, Uint8Array | string>> = {}): ReturnType<typeof servedBy> =>
+    servedBy({
+      "https://example.org/data/routes/north.csv": north,
+      "https://web.archive.org/web/20240101000000id_/https://example.org/data/routes/south.csv": south,
+      "https://example.org/data/routes/more.zip": more,
+      ...overrides,
+    });
+  const dataset = datasetWith(filesCollectionEntry);
+
+  it("downloads each file in turn, a dead one from its snapshot, and files every instance under its path", async () => {
+    const { fetch, requested } = served();
+    const fetched = await fetchEntry(dataset, { fetch, now });
+    expect(requested).toEqual(["https://example.org/data/routes/north.csv", "https://web.archive.org/web/20240101000000id_/https://example.org/data/routes/south.csv", "https://example.org/data/routes/more.zip"]);
+    expect(fetched.warnings).toEqual([]);
+    expect(fetched.data).toEqual({
+      meta: { id: "route-files", name: "Route files" },
+      instances: [
+        { id: "north.csv", meta: {}, nodes: [{ id: "1", x: 1, y: 2, prize: 0 }] },
+        {
+          id: "south.csv",
+          meta: {},
+          nodes: [
+            { id: "1", x: 3, y: 4, prize: 5 },
+            { id: "2", x: 6, y: 7, prize: 0 },
+          ],
+        },
+        { id: "more.zip/more/east.csv", meta: {}, nodes: [{ id: "8", x: 1, y: 1, prize: 2 }] },
+        { id: "more.zip/more/west.csv", meta: {}, nodes: [{ id: "9", x: 0, y: 0, prize: 1 }] },
+      ],
+    });
+  });
+
+  it("records each file's download, hash and the instances it gave", async () => {
+    const { provenance } = await fetchEntry(dataset, { fetch: served().fetch, now });
+    expect(provenance).toEqual({
+      entryId: "route-files",
+      catalogue: { id: "fixture", version: "1.2.3" },
+      category: "tasks/v1",
+      retrievedAt: "2026-10-18T12:00:00.000Z",
+      files: [
+        { path: "north.csv", instances: ["north.csv"], source: { url: "https://example.org/data/routes/north.csv", status: "live" }, fetchedUrl: "https://example.org/data/routes/north.csv", sha256: createHash("sha256").update(north).digest("hex"), byteLength: north.length },
+        {
+          path: "south.csv",
+          instances: ["south.csv"],
+          source: { url: "https://example.org/data/routes/south.csv", status: "dead", snapshot: filesCollectionEntry.sources[2].snapshot },
+          fetchedUrl: "https://web.archive.org/web/20240101000000id_/https://example.org/data/routes/south.csv",
+          sha256: createHash("sha256").update(south).digest("hex"),
+          byteLength: south.length,
+        },
+        { path: "more.zip", instances: ["more.zip/more/east.csv", "more.zip/more/west.csv"], source: { url: "https://example.org/data/routes/more.zip", status: "live" }, fetchedUrl: "https://example.org/data/routes/more.zip", sha256: createHash("sha256").update(more).digest("hex"), byteLength: more.byteLength },
+      ],
+    });
+  });
+
+  it("holds the round trip over every instance", async () => {
+    expect(await roundTripEntry(dataset, { fetch: served().fetch, now })).toMatchObject({ holds: true });
+  });
+
+  it("fails at the download step on a file that does not answer, after the files before it and before those after it", async () => {
+    const { fetch, requested } = served({ "https://web.archive.org/web/20240101000000id_/https://example.org/data/routes/south.csv": new Uint8Array() });
+    const missing = servedBy({ "https://example.org/data/routes/north.csv": north });
+    const error = await failure(fetchEntry(dataset, { fetch: missing.fetch, now }));
+    expect(error.step).toBe("download");
+    expect(error.message).toMatch(/south\.csv answered 404/);
+    expect(missing.requested).toHaveLength(2);
+    const broken = await failure(fetchEntry(dataset, { fetch, now }));
+    expect(broken.step).toBe("parse");
+    expect(broken.message).toMatch(/member south\.csv: /);
+    expect(requested).toHaveLength(2);
+  });
+});
+
+describe("a files recipe in the entry schema", () => {
+  it("names sources the entry has and files with distinct paths", () => {
+    expect(() => datasetWith({ ...filesCollectionEntry, recipe: { ...filesCollectionEntry.recipe, files: [{ path: "x.csv", source: 9, archive: { kind: "none" } }] } })).toThrow(/recipe\.files\.0\.source: names source 9 but the entry has 4/);
+    expect(() => datasetWith({ ...filesCollectionEntry, recipe: { ...filesCollectionEntry.recipe, files: [filesCollectionEntry.recipe.files[0], filesCollectionEntry.recipe.files[0]] } })).toThrow(/each file's path must be unique/);
+    expect(() => datasetWith({ ...filesCollectionEntry, expectedCounts: { nodes: 1 } })).toThrow(/collections count only instances/);
+  });
+});
+
 describe("a tasks/v1 entry that is a collection", () => {
   const suite = (files: readonly { readonly path: string; readonly text: string }[]): ReturnType<typeof servedBy> => servedBy({ "https://example.org/data/suite.zip": zip(files) });
   const members = [
@@ -256,8 +351,8 @@ describe("a tasks/v1 entry that is a collection", () => {
 
   it("records the members it read in the provenance", async () => {
     const { provenance } = await fetchEntry(dataset, { fetch: suite(members).fetch, now });
-    expect(provenance.members).toEqual(["suite/a.csv", "suite/b.csv"]);
-    expect(provenance.member).toBeUndefined();
+    expect(single(provenance).members).toEqual(["suite/a.csv", "suite/b.csv"]);
+    expect(single(provenance).member).toBeUndefined();
   });
 
   it("warns when the instance count differs from the recorded one", async () => {
@@ -415,8 +510,8 @@ describe("a tasks/v1 entry whose source is a paged ArcGIS layer", () => {
     expect(served.requested).toHaveLength(FEATURES);
     expect(served.requested[1]).toContain("orderByFields=OBJECTID&resultOffset=0&f=geojson");
     expect(served.requested[2]).toContain("resultOffset=2");
-    expect(fetched.provenance.fetchedUrl).toBe(layer);
-    expect(fetched.provenance.byteLength).toBeGreaterThan(0);
+    expect(single(fetched.provenance).fetchedUrl).toBe(layer);
+    expect(single(fetched.provenance).byteLength).toBeGreaterThan(0);
   });
 
   it("holds the round trip over the paths the crosswalk maps", async () => {
@@ -474,8 +569,8 @@ describe("a tasks/v1 entry whose source is a Socrata resource read in pages", ()
       ],
     });
     expect(served.requested).toEqual([`${resource}?%24select=count(*)`, `${resource}?%24order=%3Aid&%24limit=2&%24offset=0`, `${resource}?%24order=%3Aid&%24limit=2&%24offset=2`]);
-    expect(fetched.provenance.fetchedUrl).toBe(resource);
-    expect(fetched.provenance.byteLength).toBe(new TextEncoder().encode(header + rows.join("")).length);
+    expect(single(fetched.provenance).fetchedUrl).toBe(resource);
+    expect(single(fetched.provenance).byteLength).toBe(new TextEncoder().encode(header + rows.join("")).length);
   });
 
   it("holds the round trip over the paths the crosswalk maps", async () => {

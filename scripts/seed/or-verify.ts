@@ -197,8 +197,9 @@ async function verifyOne(curated: CurationItem): Promise<string> {
   if (dataset === undefined || entry.recipe.status !== "fetchable") {
     throw new Error("the entry did not build");
   }
-  const entire = whole || entry.recipe.paging !== undefined || entry.recipe.archive.kind !== "none";
-  const sample = entire ? new Uint8Array() : await startOf(entry.sources[entry.recipe.source]?.url ?? "");
+  const { recipe } = entry;
+  const entire = whole || "files" in recipe || recipe.paging !== undefined || recipe.archive.kind !== "none";
+  const sample = entire || "files" in recipe ? new Uint8Array() : await startOf(entry.sources[recipe.source]?.url ?? "");
   const attempt = async (back: number): Promise<Awaited<ReturnType<typeof fetchEntry>>> => {
     try {
       return await fetchEntry(dataset, { fetch: async () => Promise.resolve(new Response(cutBack(sample, back))) });
@@ -215,7 +216,7 @@ async function verifyOne(curated: CurationItem): Promise<string> {
   let held = 0;
   let shape: string;
   let warnings: readonly string[];
-  if (entry.recipe.stream === true) {
+  if (!("files" in recipe) && recipe.stream === true) {
     const streamed = await streamEntry(dataset, {
       meta: () => undefined,
       nodes: (page) => {

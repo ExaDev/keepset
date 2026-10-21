@@ -3,7 +3,7 @@
 
 import { Fragment, type ReactNode } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
-import { groupsOf, NAME_SEPARATOR, type ArchiveMember, type Dataset, type Manifest, type NamespaceNode } from "keepset";
+import { groupsOf, NAME_SEPARATOR, type Archive, type ArchiveMember, type Dataset, type Manifest, type NamespaceNode, type Parser } from "keepset";
 import { scriptJson, slug } from "./html";
 import { datasetJsonLd, describe } from "./jsonld";
 
@@ -62,6 +62,28 @@ function Facts({ rows }: { readonly rows: readonly (readonly [string, ReactNode]
   return (
     <table className="facts"><tbody>{rows.map(([label, value]) => <tr key={label}><th scope="row">{label}</th><td>{value}</td></tr>)}</tbody></table>
   );
+}
+
+/**
+ * The rows that describe how a download unpacks.
+ * @param archive - The archive layout.
+ * @returns Its kind, the member or members it selects and any inner archive.
+ */
+function archiveRows(archive: Archive): readonly (readonly [string, ReactNode])[] {
+  return [
+    ["Archive", archive.kind],
+    ...("member" in archive ? [selectorRow("Member", archive.member)] : "members" in archive ? [selectorRow("Members", archive.members)] : "parts" in archive ? archive.parts.map((part) => selectorRow(`Part ${part.name}`, part.member)) : "files" in archive ? [selectorRow("Files", archive.files)] : []),
+    ...("inner" in archive && archive.inner !== undefined ? [["Inner archive", archive.inner.kind] as const, ...("member" in archive.inner ? [selectorRow("Inner member", archive.inner.member)] : []), ...("sheets" in archive.inner && archive.inner.sheets !== undefined ? [["Sheets matching", <code key="sheets">{archive.inner.sheets}</code>] as const] : [])] : []),
+  ];
+}
+
+/**
+ * The rows that describe a recipe's parser: one per option.
+ * @param parser - The parser.
+ * @returns The rows.
+ */
+function parserRows(parser: Parser): readonly (readonly [string, ReactNode])[] {
+  return Object.entries(parser).map(([option, value]) => [`Parser ${option}`, <code key={option}>{JSON.stringify(value)}</code>] as const);
 }
 
 /** A link whose text is its URL. */
@@ -161,13 +183,17 @@ export function entryPage(context: PageContext, dataset: Dataset): string {
     <h2 key="recipe">Recipe</h2>,
     recipe.status === "not-fetchable" ? (
       <Facts key="recipe-facts" rows={[["Status", `not fetchable: ${recipe.reason}`]]} />
+    ) : "files" in recipe ? (
+      <Fragment key="recipe-facts">
+        <Facts rows={[["Files", `${recipe.files.length.toLocaleString("en-GB")}, each downloaded from its own source`], ...parserRows(recipe.parser)]} />
+        <div className="table-wrap"><table className="sources"><thead><tr><th scope="col">File</th><th scope="col">Source</th><th scope="col">Archive</th></tr></thead><tbody>{recipe.files.map((file) => <tr key={file.path}><td><code>{file.path}</code></td><td>#{String(file.source)}</td><td>{file.archive.kind}</td></tr>)}</tbody></table></div>
+      </Fragment>
     ) : (
       <Facts key="recipe-facts" rows={[
         ["Source", `#${String(recipe.source)}`],
-        ["Archive", recipe.archive.kind],
-        ...("member" in recipe.archive ? [selectorRow("Member", recipe.archive.member)] : "members" in recipe.archive ? [selectorRow("Members", recipe.archive.members)] : "files" in recipe.archive ? [selectorRow("Files", recipe.archive.files)] : []),
-        ...("inner" in recipe.archive && recipe.archive.inner !== undefined ? [["Inner archive", recipe.archive.inner.kind] as const, ...("member" in recipe.archive.inner ? [selectorRow("Inner member", recipe.archive.inner.member)] : []), ...("sheets" in recipe.archive.inner && recipe.archive.inner.sheets !== undefined ? [["Sheets matching", <code key="sheets">{recipe.archive.inner.sheets}</code>] as const] : [])] : []),
-        ...Object.entries(recipe.parser).map(([option, value]) => [`Parser ${option}`, <code key={option}>{JSON.stringify(value)}</code>] as const),
+        ...(recipe.stream === true ? [["Delivery", "streamed a page at a time, too large to hold as one document"] as const] : []),
+        ...archiveRows(recipe.archive),
+        ...parserRows(recipe.parser),
       ]} />
     ),
     <h2 key="crosswalk">Crosswalk</h2>,

@@ -62,7 +62,7 @@ export function groupSources(files: readonly EntryFile[]): SourceGroup[] {
       if (source.snapshot !== undefined && (group.snapshot === undefined || source.snapshot.timestamp > group.snapshot.timestamp)) {
         group.snapshot = source.snapshot;
       }
-      group.paged ||= entry.recipe.status === "fetchable" && entry.recipe.source === index && entry.recipe.paging !== undefined;
+      group.paged ||= entry.recipe.status === "fetchable" && "source" in entry.recipe && entry.recipe.source === index && entry.recipe.paging !== undefined;
       group.unpinned ||= source.snapshot === undefined;
       group.live ||= source.status === "live";
       groups.set(source.url, group);

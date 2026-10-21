@@ -1,5 +1,5 @@
 import { createCatalogue, DatasetNotFoundError, RecipeError, type Dataset, type DatasetQuery } from "keepset";
-import type { FetchedDataset, RoundTripReport } from "keepset/node";
+import type { DownloadProvenance, FetchedDataset, RoundTripReport } from "keepset/node";
 import { describe, expect, it } from "vitest";
 import { fixtureIndex, streamedEntry } from "../src/test-support/entries";
 import { EXIT_FAILED, EXIT_NO, EXIT_OK, formatNamespaces, formatSearch, formatShow, provenancePath, run, type CliIo, type CliLibrary } from "./run";
@@ -11,19 +11,22 @@ const walled = catalogue.getDataset("auth-walled");
 /** A SHA-256 is 64 hex digits. */
 const SHA256_DIGITS = 64;
 
+/** The provenance of the fixture download. */
+const provenance: DownloadProvenance = {
+  entryId: "karate",
+  catalogue: karate.catalogue,
+  category: "graph/v1",
+  source: { url: "https://example.org/data/karate.txt", status: "live" },
+  fetchedUrl: "https://example.org/data/karate.txt",
+  retrievedAt: "2026-10-18T12:00:00.000Z",
+  sha256: "0".repeat(SHA256_DIGITS),
+  byteLength: 4,
+};
+
 const fetched: FetchedDataset = {
   dataset: karate,
   data: { meta: { id: "karate", name: "Zachary Karate Club" }, nodes: [{ id: "1" }, { id: "2" }], edges: [{ source: "1", target: "2" }] },
-  provenance: {
-    entryId: "karate",
-    catalogue: karate.catalogue,
-    category: "graph/v1",
-    source: { url: "https://example.org/data/karate.txt", status: "live" },
-    fetchedUrl: "https://example.org/data/karate.txt",
-    retrievedAt: "2026-10-18T12:00:00.000Z",
-    sha256: "0".repeat(SHA256_DIGITS),
-    byteLength: 4,
-  },
+  provenance,
   warnings: ["nodes: the entry records 34, the fetched result has 2"],
 };
 
@@ -216,7 +219,7 @@ describe("fetch of a streamed entry", () => {
         await sink.nodes(page);
       }, Promise.resolve());
 
-      return { dataset: streamed, meta, provenance: fetched.provenance, counts: new Map([["nodes", handed.flat().length]]), warnings: ["nodes: the entry records 9, the fetched result has 3"] };
+      return { dataset: streamed, meta, provenance, counts: new Map([["nodes", handed.flat().length]]), warnings: ["nodes: the entry records 9, the fetched result has 3"] };
     },
   });
 

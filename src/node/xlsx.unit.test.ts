@@ -102,7 +102,7 @@ describe("unpackMembers for the sheets of workbooks", () => {
 
   it("names the sheets in the workbook's order and yields each matched workbook's sheets as CSV, members in path order", () => {
     expect(sheetNames(workbook({ sheets: { A2: "", A1: "" } }))).toEqual(["A2", "A1"]);
-    const files = unpackMembers(archive, { kind: "zip", members: { extensions: [".xlsm"] }, inner: { kind: "xlsx" } });
+    const files = [...unpackMembers(archive, { kind: "zip", members: { extensions: [".xlsm"] }, inner: { kind: "xlsx" } })];
     expect(files.map((file) => [file.path, text(file.bytes)])).toEqual([
       ["MSMTW/J.xlsm/J1", "j1\n"],
       ["MSMTW/J.xlsm/J5", "j5\n"],
@@ -112,8 +112,8 @@ describe("unpackMembers for the sheets of workbooks", () => {
   });
 
   it("reads only the sheets the pattern matches in full, and refuses a workbook left with none and a member that is not a workbook", () => {
-    expect(unpackMembers(archive, { kind: "zip", members: { extensions: [".xlsm"] }, inner: { kind: "xlsx", sheets: "(?!J5$).+" } }).map((file) => file.path)).toEqual(["MSMTW/J.xlsm/J1", "SSSTW/A.xlsm/A2", "SSSTW/A.xlsm/A1"]);
-    expect(() => unpackMembers(archive, { kind: "zip", members: { extensions: [".xlsm"] }, inner: { kind: "xlsx", sheets: "A." } })).toThrow(/MSMTW\/J.xlsm has no sheet matching A\./);
-    expect(() => unpackMembers(archive, { kind: "zip", members: { extensions: [".docx"] }, inner: { kind: "xlsx" } })).toThrow(/member notes.docx: not a valid workbook/);
+    expect([...unpackMembers(archive, { kind: "zip", members: { extensions: [".xlsm"] }, inner: { kind: "xlsx", sheets: "(?!J5$).+" } })].map((file) => file.path)).toEqual(["MSMTW/J.xlsm/J1", "SSSTW/A.xlsm/A2", "SSSTW/A.xlsm/A1"]);
+    expect(() => [...unpackMembers(archive, { kind: "zip", members: { extensions: [".xlsm"] }, inner: { kind: "xlsx", sheets: "A." } })]).toThrow(/MSMTW\/J.xlsm has no sheet matching A\./);
+    expect(() => [...unpackMembers(archive, { kind: "zip", members: { extensions: [".docx"] }, inner: { kind: "xlsx" } })]).toThrow(/member notes.docx: not a valid workbook/);
   });
 });
