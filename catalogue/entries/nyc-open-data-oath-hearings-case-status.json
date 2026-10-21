@@ -5,7 +5,56 @@
   "category": "tasks/v1",
   "citations": [],
   "crosswalk": {
-    "file": "crosswalks/tasks-v1/nodes.json"
+    "oneWay": [],
+    "rules": [
+      {
+        "from": "meta",
+        "op": "move",
+        "to": "meta"
+      },
+      {
+        "from": "nodes[].id",
+        "op": "move",
+        "to": "nodes[].id"
+      },
+      {
+        "from": "nodes[].decision_date",
+        "op": "move",
+        "to": "nodes[].closed"
+      },
+      {
+        "from": "nodes[].hearing_date",
+        "op": "move",
+        "to": "nodes[].deadline"
+      },
+      {
+        "from": "nodes[].violation_date",
+        "op": "move",
+        "to": "nodes[].opened"
+      },
+      {
+        "from": "nodes[].total_violation_amount",
+        "op": "move",
+        "to": "nodes[].prize"
+      },
+      {
+        "from": "nodes[].issuing_agency",
+        "op": "move",
+        "to": "nodes[].skill"
+      },
+      {
+        "from": "nodes[].hearing_status",
+        "op": "move",
+        "to": "nodes[].status"
+      },
+      {
+        "from": "nodes[].violation_location_borough",
+        "op": "move",
+        "to": "nodes[].territory"
+      }
+    ],
+    "source": "csv-table",
+    "target": "tasks/v1"
   },
   "description": "Summonses for public safety and quality of life violations filed and adjudicated at New York City's Office of Administrative Trials and Hearings, with the infraction charged, the decision, payments and amounts.",
   "domain": "Case records",
@@ -22,14 +71,59 @@
     "surveyId": "or-63"
   },
   "recipe": {
-    "reason": "The table has 22,151,329 rows, so even one mapped column and the id hold more cells than a fetch can hold in memory.",
-    "status": "not-fetchable"
+    "archive": {
+      "kind": "none"
+    },
+    "paging": {
+      "kind": "socrata-resource",
+      "pageSize": 50000,
+      "select": [
+        "ticket_number",
+        "decision_date",
+        "hearing_date",
+        "violation_date",
+        "total_violation_amount",
+        "issuing_agency",
+        "hearing_status",
+        "violation_location_borough"
+      ]
+    },
+    "parser": {
+      "columns": [
+        "decision_date",
+        "hearing_date",
+        "violation_date",
+        "total_violation_amount",
+        "issuing_agency",
+        "hearing_status",
+        "violation_location_borough"
+      ],
+      "delimiter": "comma",
+      "encoding": "utf-8",
+      "format": "csv-table",
+      "idColumn": "ticket_number",
+      "numericColumns": [
+        {
+          "column": "total_violation_amount",
+          "factor": 1
+        }
+      ],
+      "skipLines": 0
+    },
+    "source": 1,
+    "status": "fetchable",
+    "stream": true
   },
   "sources": [
     {
       "retrieved": "2026-10-19",
       "status": "live",
       "url": "https://data.cityofnewyork.us/City-Government/OATH-Hearings-Division-Case-Status/jz4z-kudi"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://data.cityofnewyork.us/resource/jz4z-kudi.csv"
     }
   ],
   "subjects": [

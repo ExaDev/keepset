@@ -78,7 +78,16 @@
     },
     "paging": {
       "kind": "socrata-resource",
-      "pageSize": 50000
+      "pageSize": 50000,
+      "select": [
+        "clear_datetime",
+        "latitude",
+        "longitude",
+        "call_received_datetime",
+        "reason_category",
+        "city",
+        "response_time_in_seconds"
+      ]
     },
     "parser": {
       "columns": [

@@ -66,7 +66,14 @@
     },
     "paging": {
       "kind": "socrata-resource",
-      "pageSize": 50000
+      "pageSize": 50000,
+      "select": [
+        "redemption_date",
+        "boot_date",
+        "judgment_amount",
+        "type",
+        "case_status"
+      ]
     },
     "parser": {
       "columns": [

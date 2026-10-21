@@ -24,7 +24,7 @@
     "surveyId": "or-105"
   },
   "recipe": {
-    "reason": "The bulk download is a zip of 355,930,383 bytes covering every product, and the debt collection subset is only reachable through a search API that keepset cannot page.",
+    "reason": "The bulk download is a zip of 355,930,383 bytes covering every product, and the debt collection subset is reachable only through the complaint search API, whose CSV export answers every request with a 400 naming its size parameter and whose JSON results past the first ten thousand are reached only through search_after break points, a paging no recipe reads; the subset is small enough to hold, so the obstacle is the paging and not the size.",
     "status": "not-fetchable"
   },
   "sources": [

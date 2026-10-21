@@ -5,7 +5,61 @@
   "category": "tasks/v1",
   "citations": [],
   "crosswalk": {
-    "file": "crosswalks/tasks-v1/nodes.json"
+    "oneWay": [],
+    "rules": [
+      {
+        "from": "meta",
+        "op": "move",
+        "to": "meta"
+      },
+      {
+        "from": "nodes[].id",
+        "op": "move",
+        "to": "nodes[].id"
+      },
+      {
+        "from": "nodes[].closed_date",
+        "op": "move",
+        "to": "nodes[].closed"
+      },
+      {
+        "from": "nodes[].due_date",
+        "op": "move",
+        "to": "nodes[].deadline"
+      },
+      {
+        "from": "nodes[].latitude",
+        "op": "move",
+        "to": "nodes[].lat"
+      },
+      {
+        "from": "nodes[].longitude",
+        "op": "move",
+        "to": "nodes[].lon"
+      },
+      {
+        "from": "nodes[].created_date",
+        "op": "move",
+        "to": "nodes[].opened"
+      },
+      {
+        "from": "nodes[].complaint_type",
+        "op": "move",
+        "to": "nodes[].skill"
+      },
+      {
+        "from": "nodes[].status",
+        "op": "move",
+        "to": "nodes[].status"
+      },
+      {
+        "from": "nodes[].borough",
+        "op": "move",
+        "to": "nodes[].territory"
+      }
+    ],
+    "source": "csv-table",
+    "target": "tasks/v1"
   },
   "description": "New York City 311 service requests from 2020, with agency, complaint type, location, status and dates.",
   "domain": "Civic and environmental monitoring",
@@ -22,8 +76,54 @@
     "surveyId": "or-116"
   },
   "recipe": {
-    "reason": "The table has 22,844,087 rows, so even one mapped column and the id hold more cells than a fetch can hold in memory.",
-    "status": "not-fetchable"
+    "archive": {
+      "kind": "none"
+    },
+    "paging": {
+      "kind": "socrata-resource",
+      "pageSize": 50000,
+      "select": [
+        "unique_key",
+        "closed_date",
+        "due_date",
+        "latitude",
+        "longitude",
+        "created_date",
+        "complaint_type",
+        "status",
+        "borough"
+      ]
+    },
+    "parser": {
+      "columns": [
+        "closed_date",
+        "due_date",
+        "latitude",
+        "longitude",
+        "created_date",
+        "complaint_type",
+        "status",
+        "borough"
+      ],
+      "delimiter": "comma",
+      "encoding": "utf-8",
+      "format": "csv-table",
+      "idColumn": "unique_key",
+      "numericColumns": [
+        {
+          "column": "latitude",
+          "factor": 1
+        },
+        {
+          "column": "longitude",
+          "factor": 1
+        }
+      ],
+      "skipLines": 0
+    },
+    "source": 1,
+    "status": "fetchable",
+    "stream": true
   },
   "sources": [
     {

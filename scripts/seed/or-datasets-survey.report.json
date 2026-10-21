@@ -387,7 +387,7 @@
         "the record's station level file is a separate table of about 1.4 million rows that this entry does not read"
       ],
       "id": "mendeley-data-va-appointment-wait-times",
-      "reason": "The county-level file has 14,365,643 rows, so even the id alone passes the importer's cell limit (a mapped column would hold twice that many cells), and 8,264 of its rows have unquoted commas in the state and county names of the armed forces entries, which the csv-table parser refuses at line 1892.",
+      "reason": "The county-level file is one download of 14,365,643 rows, more cells than a fetch can hold even for the id alone, and a recipe streams only a paged source, since a single file is downloaded whole before it is read; 8,264 of its rows also have unquoted commas in the state and county names of the armed forces entries, which the csv-table parser refuses at line 1892.",
       "recipe": "not-fetchable",
       "surveyId": "or-35"
     },
@@ -670,8 +670,7 @@
         "The Socrata metadata carries no licence and the NYC Open Data terms page could not be read."
       ],
       "id": "nyc-open-data-housing-maintenance-code-violations",
-      "reason": "The table has 11,324,217 rows, so a mapping of even one column and the id holds more cells than a fetch can hold in memory.",
-      "recipe": "not-fetchable",
+      "recipe": "fetchable",
       "surveyId": "or-60"
     },
     {
@@ -705,8 +704,7 @@
         "respondent personal fields were removed from May 2026 per the dataset description, but respondent name columns remain in the header"
       ],
       "id": "nyc-open-data-oath-hearings-case-status",
-      "reason": "The table has 22,151,329 rows, so even one mapped column and the id hold more cells than a fetch can hold in memory.",
-      "recipe": "not-fetchable",
+      "recipe": "fetchable",
       "surveyId": "or-63"
     },
     {
@@ -962,8 +960,7 @@
         "The table includes permittee, owner and superintendent names and a phone number."
       ],
       "id": "nyc-open-data-dob-permit-issuance",
-      "reason": "The table has 3,990,985 rows, so a mapping of more than two columns plus the id holds more cells than a fetch can hold in memory, and two columns would carry too little of what the table offers.",
-      "recipe": "not-fetchable",
+      "recipe": "fetchable",
       "surveyId": "or-86"
     },
     {
@@ -972,8 +969,7 @@
         "The table includes applicant and owner names."
       ],
       "id": "nyc-open-data-dob-job-application-filings",
-      "reason": "The table has 2,716,297 rows, so a mapping of more than three columns plus the id holds more cells than a fetch can hold in memory, and three columns would carry too little of what the table offers.",
-      "recipe": "not-fetchable",
+      "recipe": "fetchable",
       "surveyId": "or-87"
     },
     {
@@ -1164,7 +1160,7 @@
         "The table has no coordinates and ZIP codes are partly masked."
       ],
       "id": "cfpb-consumer-complaints-debt-collection",
-      "reason": "The bulk download is a zip of 355,930,383 bytes covering every product, and the debt collection subset is only reachable through a search API that keepset cannot page.",
+      "reason": "The bulk download is a zip of 355,930,383 bytes covering every product, and the debt collection subset is reachable only through the complaint search API, whose CSV export answers every request with a 400 naming its size parameter and whose JSON results past the first ten thousand are reached only through search_after break points, a paging no recipe reads; the subset is small enough to hold, so the obstacle is the paging and not the size.",
       "recipe": "not-fetchable",
       "surveyId": "or-105"
     },
@@ -1186,8 +1182,7 @@
         "There are no coordinates, only borough, zip and dispatch area."
       ],
       "id": "nyc-open-data-fdny-ems-incident-dispatch",
-      "reason": "The table has 30,389,767 rows, so even one mapped column and the id hold more cells than a fetch can hold in memory.",
-      "recipe": "not-fetchable",
+      "recipe": "fetchable",
       "surveyId": "or-107"
     },
     {
@@ -1196,8 +1191,7 @@
         "The NYC terms page returned HTTP 403 to the survey, so no licence is recorded."
       ],
       "id": "nyc-open-data-nypd-calls-for-service",
-      "reason": "The table has 10,484,258 rows, so a mapping of even two columns and the id holds more cells than a fetch can hold in memory.",
-      "recipe": "not-fetchable",
+      "recipe": "fetchable",
       "surveyId": "or-108"
     },
     {
@@ -1284,8 +1278,7 @@
         "The NYC terms page returned HTTP 403 to the survey, so no licence is recorded."
       ],
       "id": "nyc-open-data-311-service-requests-2020-to-present",
-      "reason": "The table has 22,844,087 rows, so even one mapped column and the id hold more cells than a fetch can hold in memory.",
-      "recipe": "not-fetchable",
+      "recipe": "fetchable",
       "surveyId": "or-116"
     },
     {

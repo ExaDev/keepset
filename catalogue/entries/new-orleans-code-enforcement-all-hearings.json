@@ -72,7 +72,15 @@
     },
     "paging": {
       "kind": "socrata-resource",
-      "pageSize": 50000
+      "pageSize": 50000,
+      "select": [
+        "hearingdate",
+        "caseestablished",
+        "o_c",
+        "councildistrict",
+        "xpos",
+        "ypos"
+      ]
     },
     "parser": {
       "columns": [

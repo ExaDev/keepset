@@ -73,7 +73,15 @@
     },
     "paging": {
       "kind": "socrata-resource",
-      "pageSize": 50000
+      "pageSize": 50000,
+      "select": [
+        "nextinspectiondate",
+        "latitude",
+        "longitude",
+        "firstinspectiondate",
+        "rating",
+        "city"
+      ]
     },
     "parser": {
       "columns": [

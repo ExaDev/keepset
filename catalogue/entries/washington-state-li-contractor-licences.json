@@ -67,7 +67,15 @@
     },
     "paging": {
       "kind": "socrata-resource",
-      "pageSize": 50000
+      "pageSize": 50000,
+      "select": [
+        "contractorlicensenumber",
+        "licenseexpirationdate",
+        "licenseeffectivedate",
+        "specialtycode1desc",
+        "contractorlicensestatus",
+        "city"
+      ]
     },
     "parser": {
       "columns": [

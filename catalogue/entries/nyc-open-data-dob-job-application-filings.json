@@ -5,7 +5,56 @@
   "category": "tasks/v1",
   "citations": [],
   "crosswalk": {
-    "file": "crosswalks/tasks-v1/nodes.json"
+    "oneWay": [],
+    "rules": [
+      {
+        "from": "meta",
+        "op": "move",
+        "to": "meta"
+      },
+      {
+        "from": "nodes[].id",
+        "op": "move",
+        "to": "nodes[].id"
+      },
+      {
+        "from": "nodes[].signoff_date",
+        "op": "move",
+        "to": "nodes[].closed"
+      },
+      {
+        "from": "nodes[].gis_latitude",
+        "op": "move",
+        "to": "nodes[].lat"
+      },
+      {
+        "from": "nodes[].gis_longitude",
+        "op": "move",
+        "to": "nodes[].lon"
+      },
+      {
+        "from": "nodes[].pre__filing_date",
+        "op": "move",
+        "to": "nodes[].opened"
+      },
+      {
+        "from": "nodes[].job_type",
+        "op": "move",
+        "to": "nodes[].skill"
+      },
+      {
+        "from": "nodes[].job_status_descrp",
+        "op": "move",
+        "to": "nodes[].status"
+      },
+      {
+        "from": "nodes[].borough",
+        "op": "move",
+        "to": "nodes[].territory"
+      }
+    ],
+    "source": "csv-table",
+    "target": "tasks/v1"
   },
   "description": "Job application filings with the NYC Department of Buildings.",
   "domain": "Case records",
@@ -22,14 +71,63 @@
     "surveyId": "or-87"
   },
   "recipe": {
-    "reason": "The table has 2,716,297 rows, so a mapping of more than three columns plus the id holds more cells than a fetch can hold in memory, and three columns would carry too little of what the table offers.",
-    "status": "not-fetchable"
+    "archive": {
+      "kind": "none"
+    },
+    "paging": {
+      "kind": "socrata-resource",
+      "pageSize": 50000,
+      "select": [
+        "job_s1_no",
+        "signoff_date",
+        "gis_latitude",
+        "gis_longitude",
+        "pre__filing_date",
+        "job_type",
+        "job_status_descrp",
+        "borough"
+      ]
+    },
+    "parser": {
+      "columns": [
+        "signoff_date",
+        "gis_latitude",
+        "gis_longitude",
+        "pre__filing_date",
+        "job_type",
+        "job_status_descrp",
+        "borough"
+      ],
+      "delimiter": "comma",
+      "encoding": "utf-8",
+      "format": "csv-table",
+      "idColumn": "job_s1_no",
+      "numericColumns": [
+        {
+          "column": "gis_latitude",
+          "factor": 1
+        },
+        {
+          "column": "gis_longitude",
+          "factor": 1
+        }
+      ],
+      "skipLines": 0
+    },
+    "source": 1,
+    "status": "fetchable",
+    "stream": true
   },
   "sources": [
     {
       "retrieved": "2026-10-19",
       "status": "live",
       "url": "https://data.cityofnewyork.us/Housing-Development/DOB-Job-Application-Filings/ic3t-wcy2"
+    },
+    {
+      "retrieved": "2026-10-19",
+      "status": "live",
+      "url": "https://data.cityofnewyork.us/resource/ic3t-wcy2.csv"
     }
   ],
   "subjects": [

@@ -61,7 +61,13 @@
     },
     "paging": {
       "kind": "socrata-resource",
-      "pageSize": 50000
+      "pageSize": 50000,
+      "select": [
+        "latitude",
+        "longitude",
+        "residential_commercial_ind",
+        "borough"
+      ]
     },
     "parser": {
       "columns": [

@@ -83,7 +83,18 @@
     },
     "paging": {
       "kind": "socrata-resource",
-      "pageSize": 50000
+      "pageSize": 50000,
+      "select": [
+        "work_order_id",
+        "date_work_order_closed",
+        "project_finish_date",
+        "latitude",
+        "longitude",
+        "initiated_date",
+        "work_order_cost",
+        "work_order_category",
+        "status"
+      ]
     },
     "parser": {
       "columns": [

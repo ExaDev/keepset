@@ -56,7 +56,12 @@
     },
     "paging": {
       "kind": "socrata-resource",
-      "pageSize": 50000
+      "pageSize": 50000,
+      "select": [
+        "date",
+        "worktype",
+        "boroughname"
+      ]
     },
     "parser": {
       "columns": [
