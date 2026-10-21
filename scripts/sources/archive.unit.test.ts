@@ -19,7 +19,7 @@ const NOON = new Date("2026-10-20T12:00:00Z").getTime();
 interface World {
   /** The account's captures a day, when a test needs a smaller one. */
   readonly perDay?: number;
-  /** What the availability API says per URL: a timestamp, or none. */
+  /** What the capture index says per URL: a timestamp, or none. */
   readonly available?: Readonly<Record<string, string>>;
   /** What the host answers per URL for HEAD and GET: a status, a length and a media type. */
   readonly hosts?: Readonly<Record<string, { status: number; length?: number; finalUrl?: string; type?: string } | "unreachable">>;
@@ -35,11 +35,11 @@ function run(urls: readonly string[], world: World, overrides: Partial<ArchiveRe
   const host = (url: string): { status: number; length?: number; finalUrl?: string; type?: string } | "unreachable" => world.hosts?.[url] ?? { status: 200 };
   const network = scriptedNetwork((request) => {
     seen.push(request);
-    if (request.url.startsWith("https://archive.org/wayback/available")) {
+    if (request.url.startsWith("https://web.archive.org/cdx/search/cdx")) {
       const url = new URL(request.url).searchParams.get("url") ?? "";
       const timestamp = world.available?.[url];
 
-      return new Response(JSON.stringify({ archived_snapshots: timestamp === undefined ? {} : { closest: { available: true, status: "200", timestamp } } }), { status: 200 });
+      return new Response(timestamp === undefined ? "" : `${timestamp}\n`, { status: 200 });
     }
     const replayed = /^https:\/\/web\.archive\.org\/web\/(\d+)id_\/(.*)$/.exec(request.url);
     if (replayed) {
@@ -137,7 +137,7 @@ describe("archiveSources", () => {
     expect(trial.states.at(-1)?.rejected[A]).toEqual(["20250101000000"]);
   });
 
-  it("does not trust a capture it has already rejected when the availability API offers it again", async () => {
+  it("does not trust a capture it has already rejected when the capture index offers it again", async () => {
     const known = { day: "", captures: 0, rejected: { [A]: ["20250101000000"] } };
     const trial = run([A], { available: { [A]: "20250101000000" }, saves: [{ kind: "saved", timestamp: "20261020120001" }] }, { state: known });
     await trial.result;
@@ -161,8 +161,8 @@ describe("archiveSources", () => {
     const seen: SeenRequest[] = [];
     const network = scriptedNetwork((request) => {
       seen.push(request);
-      if (request.url.startsWith("https://archive.org/wayback/available")) {
-        return new Response(JSON.stringify({ archived_snapshots: {} }), { status: 200 });
+      if (request.url.startsWith("https://web.archive.org/cdx/search/cdx")) {
+        return new Response("", { status: 200 });
       }
       if (request.url === "https://web.archive.org/web/20261020120001id_/https://example.org/a") {
         looks += 1;
@@ -350,7 +350,7 @@ describe("archiveSources", () => {
   it("treats a connection failure while capturing as a retry", async () => {
     // The saver throws a RequestFailure when the network drops; the archiver must not abort the run.
     const clock = new FakeClock(NOON);
-    const network = scriptedNetwork(() => new Response(JSON.stringify({ archived_snapshots: {} }), { status: 200 }));
+    const network = scriptedNetwork(() => new Response("", { status: 200 }));
     const { RequestFailure } = await import("./polite-client");
     const files = [{ path: "x", entry: entryWith("x", [liveSource(A)]) }];
     const outcome = await archiveSources(

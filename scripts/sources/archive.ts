@@ -32,7 +32,7 @@ export interface Saver {
 
 /** Everything the archiver touches outside itself. */
 export interface ArchivePorts {
-  /** Probes sources and asks the availability API. */
+  /** Probes sources and asks the capture index. */
   readonly client: PoliteClient;
   readonly saver: Saver;
   readonly clock: Clock;
@@ -144,7 +144,7 @@ export async function archiveSources(ports: Readonly<ArchivePorts>, request: Rea
   };
 
   /**
-   * Requests a capture's raw snapshot before it is pinned. A capture that fails is remembered as rejected, so the availability API offering it again is not trusted a second time.
+   * Requests a capture's raw snapshot before it is pinned. A capture that fails is remembered as rejected, so the capture index offering it again is not trusted a second time.
    * @param group - The URL and what the catalogue records about it.
    * @param timestamp - The capture's timestamp.
    * @param attempts - How many lookups at most; more for a capture just made, whose indexing lags.

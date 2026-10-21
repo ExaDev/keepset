@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import { HTTP_STATUS } from "./http-status";
 import { PoliteClient } from "./polite-client";
 import { connectionError, FakeClock, scriptedNetwork, type Script, TEST_POLITENESS } from "./test-support";
-import { AVAILABILITY_URL, classifySaveError, findSnapshot, SAVE_URL, saveAnonymously, saveAuthenticated, STATUS_POLL_MILLISECONDS, WaybackBusy, WaybackError } from "./wayback";
+import { CDX_URL, classifySaveError, findSnapshot, SAVE_URL, saveAnonymously, saveAuthenticated, STATUS_POLL_MILLISECONDS, WaybackBusy, WaybackError } from "./wayback";
 
 const json = (body: unknown, status = 200): Response => new Response(JSON.stringify(body), { status, headers: { "content-type": "application/json" } });
 const single = (script: Script): { client: PoliteClient; clock: FakeClock; seen: ReturnType<typeof scriptedNetwork>["seen"] } => {
@@ -11,28 +11,22 @@ const single = (script: Script): { client: PoliteClient; clock: FakeClock; seen:
 
   return { client: new PoliteClient(network.fetch, clock, { ...TEST_POLITENESS, attempts: 1 }), clock, seen: network.seen };
 };
-const closest = (timestamp: string, options: Readonly<{ status?: string; available?: boolean }> = {}): unknown => ({ url: "x", archived_snapshots: { closest: { available: options.available ?? true, status: options.status ?? "200", timestamp, url: "http://web.archive.org/web/x" } } });
 const PENDING_POLLS = 2;
 
 describe("findSnapshot", () => {
-  it("asks the availability API for the URL, encoded, and returns the closest capture's timestamp", async () => {
-    const { client, seen } = single(() => json(closest("20260414181127")));
+  it("asks the capture index for the URL's latest 200 capture, encoded, and returns its timestamp", async () => {
+    const { client, seen } = single(() => new Response("20260414181127\n"));
     expect(await findSnapshot(client, "https://example.org/a?b=c&d=e")).toBe("20260414181127");
-    expect(seen[0]?.url).toBe(`${AVAILABILITY_URL}?url=${encodeURIComponent("https://example.org/a?b=c&d=e")}`);
+    expect(seen[0]?.url).toBe(`${CDX_URL}?url=${encodeURIComponent("https://example.org/a?b=c&d=e")}&fl=timestamp&filter=statuscode%3A200&limit=-1`);
   });
 
   it("returns undefined when the Machine holds no capture", async () => {
-    expect(await findSnapshot(single(() => json({ url: "x", archived_snapshots: {} })).client, "https://example.org/a")).toBeUndefined();
+    expect(await findSnapshot(single(() => new Response("")).client, "https://example.org/a")).toBeUndefined();
   });
 
-  it("does not count a capture that did not answer 200, or one marked unavailable", async () => {
-    expect(await findSnapshot(single(() => json(closest("20260414181127", { status: "404" }))).client, "https://example.org/a")).toBeUndefined();
-    expect(await findSnapshot(single(() => json(closest("20260414181127", { available: false }))).client, "https://example.org/a")).toBeUndefined();
-  });
-
-  it("reports a busy service as WaybackBusy and an unrecognised body as WaybackError", async () => {
+  it("reports a busy service as WaybackBusy and a line that is not a timestamp as WaybackError", async () => {
     await expect(findSnapshot(single(() => new Response("slow down", { status: 429 })).client, "https://example.org/a")).rejects.toBeInstanceOf(WaybackBusy);
-    const failure = await findSnapshot(single(() => json({ unexpected: true })).client, "https://example.org/a").catch((error: unknown) => error);
+    const failure = await findSnapshot(single(() => new Response("<html>")).client, "https://example.org/a").catch((error: unknown) => error);
     expect(failure).toBeInstanceOf(WaybackError);
     expect(failure).not.toBeInstanceOf(WaybackBusy);
   });
