@@ -2,7 +2,8 @@ import { z } from "zod";
 import { UnknownCategoryError } from "./errors";
 import { GraphV1Schema, type GraphV1 } from "./targets/graph-v1";
 import { COLLECTION_COUNTED, collectionOf, type Collection } from "./targets/collection";
-import { TasksV1Schema, type TasksV1 } from "./targets/tasks-v1";
+import { TaskSchema, TasksMetaSchema, TasksV1Schema, type Task, type TasksV1 } from "./targets/tasks-v1";
+import type { JsonScalar } from "./targets/json-scalar";
 
 /** Every category id the registry knows. A category id is `<kind>/v<version>`: the kind of data, and the version of its normalisation target, so a breaking change to a target is a new category rather than an edit to an old one. */
 export const CategoryIdSchema = z.enum(["graph/v1", "tasks/v1"]);
@@ -23,13 +24,28 @@ export type CountedKey<Target> = { readonly [Key in keyof Target]: Target[Key] e
 /** What a fetch of a collection entry resolves to: the entry's metadata and one instance per archive member, each a document of the entry's category. */
 export type CollectionTarget<Id extends CategoryId = CategoryId> = Id extends CategoryId ? Collection<CategoryTargets[Id]> : never;
 
-/** One category: its id, what it holds, the schema of its normalisation target (one document), the schema of a collection of such documents derived from it, and which of the target's arrays an entry may record expected counts for. */
+/** The node a streamed result of each category hands on, for a category whose target is `{ meta, nodes }` and nothing else. */
+export interface StreamedNodes {
+  readonly "tasks/v1": Task;
+}
+
+/** The categories that can be streamed. */
+export type StreamableId = keyof StreamedNodes & CategoryId;
+
+/** How a streamed result of a category is checked: its target is meta and nodes with unique ids, so the meta is checked once and each node on its own, and the ids across every node. */
+export interface StreamedShape<Node> {
+  readonly meta: z.ZodType<Record<string, JsonScalar>>;
+  readonly node: z.ZodType<Node>;
+}
+
+/** One category: its id, what it holds, the schema of its normalisation target (one document), the schema of a collection of such documents derived from it, which of the target's arrays an entry may record expected counts for, and for a category whose target is meta and nodes alone the shape a streamed result is checked against. */
 interface CategoryOf<Id extends CategoryId> {
   readonly id: Id;
   readonly description: string;
   readonly target: z.ZodType<CategoryTargets[Id]>;
   readonly collection: z.ZodType<Collection<CategoryTargets[Id]>>;
   readonly counted: readonly CountedKey<CategoryTargets[Id]>[];
+  readonly streamed: Id extends StreamableId ? StreamedShape<StreamedNodes[Id]> : undefined;
 }
 
 /** A category, or with no argument any of them: a union over the ids, so each category keeps its own target and counted keys. */
@@ -43,6 +59,7 @@ const registry: { readonly [Id in CategoryId]: CategoryOf<Id> } = {
     target: GraphV1Schema,
     collection: collectionOf(GraphV1Schema),
     counted: ["nodes", "edges"],
+    streamed: undefined,
   },
   "tasks/v1": {
     id: "tasks/v1",
@@ -50,6 +67,7 @@ const registry: { readonly [Id in CategoryId]: CategoryOf<Id> } = {
     target: TasksV1Schema,
     collection: collectionOf(TasksV1Schema),
     counted: ["nodes"],
+    streamed: { meta: TasksMetaSchema, node: TaskSchema },
   },
 };
 
@@ -90,6 +108,24 @@ export function getTarget(id: string): z.ZodType<CategoryTarget> {
  */
 export function getCollectionTarget(id: string): z.ZodType<CollectionTarget> {
   return getCategory(id).collection;
+}
+
+/**
+ * Whether a category's results can be streamed: its target is meta and nodes alone.
+ * @param id - A category id.
+ * @returns True for a streamable category.
+ */
+export function isStreamable(id: CategoryId): id is StreamableId {
+  return getCategory(id).streamed !== undefined;
+}
+
+/**
+ * The shape a streamed result of a category is checked against.
+ * @param id - A streamable category id.
+ * @returns Its meta and node schemas.
+ */
+export function getStreamedShape<Id extends StreamableId>(id: Id): StreamedShape<StreamedNodes[Id]> {
+  return registry[id].streamed;
 }
 
 /**

@@ -1,6 +1,6 @@
 import { CrosswalkSchema } from "crossmap";
 import { z } from "zod";
-import { CategoryIdSchema, countedKeys } from "./categories";
+import { CategoryIdSchema, countedKeys, isStreamable, type CategoryId } from "./categories";
 import { define } from "./define";
 import { namesOf } from "./names";
 import { CatalogueSyntaxError, type SyntaxIssue } from "./errors";
@@ -331,10 +331,18 @@ export const ParserSchema = z.discriminatedUnion("format", [
 ]);
 export type Parser = z.infer<typeof ParserSchema>;
 
-/** Where a source is a paged query and not one file. An ArcGIS feature layer returns a limited number of features per request: the source URL is the layer's, the download reads every page in `orderBy` order and the parser reads the one GeoJSON collection they make. A Socrata resource endpoint (`/resource/<id>.csv`) is read `pageSize` rows at a time in the order of its row ids, a CKAN datastore dump (`/datastore/dump/<id>`) and an OpenFEMA entity (`/api/open/v<n>/<Entity>`, with any `$select` or `$filter` in the source URL) `pageSize` rows at a time, each page a CSV with its own header; the download joins them into the one CSV the parser reads, so no single response has to survive a long transfer. */
+/** Where a source is a paged query and not one file. An ArcGIS feature layer returns a limited number of features per request: the source URL is the layer's, the download reads every page in `orderBy` order and the parser reads the one GeoJSON collection they make. A Socrata resource endpoint (`/resource/<id>.csv`) is read `pageSize` rows at a time in the order of its row ids, with only the `select` fields when a recipe lists them, a CKAN datastore dump (`/datastore/dump/<id>`) and an OpenFEMA entity (`/api/open/v<n>/<Entity>`, with any `$select` or `$filter` in the source URL) `pageSize` rows at a time, each page a CSV with its own header; the download joins them into the one CSV the parser reads, so no single response has to survive a long transfer. */
 export const PagingSchema = z.discriminatedUnion("kind", [
   z.object({ kind: z.literal("arcgis-query"), orderBy: z.string().regex(/^[A-Za-z_][A-Za-z0-9_]*$/, { message: "must be a field name of the layer" }) }).strict(),
-  z.object({ kind: z.literal("socrata-resource"), pageSize: z.int().min(1) }).strict(),
+  z
+    .object({
+      kind: z.literal("socrata-resource"),
+      pageSize: z.int().min(1),
+      /** The resource's fields a page holds, in the order requested; every field when absent. A recipe lists the id column and the columns its parser keeps, so the columns it would drop are never transferred. */
+      select: z.array(ColumnNameSchema).min(1).optional(),
+    })
+    .strict()
+    .refine((paging) => paging.select === undefined || new Set(paging.select).size === paging.select.length, { message: "a field may be selected once", path: ["select"] }),
   z.object({ kind: z.literal("ckan-datastore"), pageSize: z.int().min(1) }).strict(),
   z.object({ kind: z.literal("openfema"), pageSize: z.int().min(1) }).strict(),
 ]);
@@ -352,7 +360,15 @@ const PART_FORMATS: ReadonlyMap<Parser["format"], readonly string[] | undefined>
 
 export const RecipeSchema = z.discriminatedUnion("status", [
   z
-    .object({ status: z.literal("fetchable"), source: z.int().min(0), paging: PagingSchema.optional(), archive: ArchiveSchema, parser: ParserSchema })
+    .object({
+      status: z.literal("fetchable"),
+      source: z.int().min(0),
+      paging: PagingSchema.optional(),
+      archive: ArchiveSchema,
+      parser: ParserSchema,
+      /** Set on a table too large for a fetch to hold as one document: `fetchDataset` refuses it, and `streamDataset` reads it a page at a time, handing on each page's nodes as they are checked. A streamed recipe reads a CSV paged source with no archive through the `csv-table` parser, for a category whose target is meta and nodes. */
+      stream: z.literal(true).optional(),
+    })
     .strict()
     .superRefine((recipe, ctx) => {
       const required = PART_FORMATS.get(recipe.parser.format);
@@ -372,6 +388,32 @@ export const RecipeSchema = z.discriminatedUnion("status", [
   z.object({ status: z.literal("not-fetchable"), reason: z.string().min(1) }).strict(),
 ]);
 export type Recipe = z.infer<typeof RecipeSchema>;
+
+/**
+ * Reports the ways a fetchable recipe's parts disagree with each other: a streamed recipe that is not a CSV paged source read by the `csv-table` parser with no archive, for a category that can be streamed, and a Socrata selection that leaves out the id column or a column the parser keeps.
+ * @param recipe - The fetchable recipe.
+ * @param category - The entry's category.
+ * @param ctx - The refinement context to report to.
+ */
+function addRecipeIssues(recipe: Extract<Recipe, { readonly status: "fetchable" }>, category: CategoryId, ctx: z.core.$RefinementCtx): void {
+  const { paging, parser } = recipe;
+  if (recipe.stream === true) {
+    if (paging === undefined || paging.kind === "arcgis-query" || recipe.archive.kind !== "none" || parser.format !== "csv-table") {
+      ctx.addIssue({ code: "custom", path: ["recipe", "stream"], message: "a streamed recipe reads a CSV paged source (Socrata, CKAN or OpenFEMA) with no archive through the csv-table parser" });
+    }
+    if (!isStreamable(category)) {
+      ctx.addIssue({ code: "custom", path: ["recipe", "stream"], message: `${category} has no streamed form, as its target is not meta and nodes alone` });
+    }
+  }
+  if (paging?.kind === "socrata-resource" && paging.select !== undefined && parser.format === "csv-table") {
+    const selected = new Set(paging.select);
+    for (const column of [...(parser.idColumn === null ? [] : [parser.idColumn]), ...(parser.columns ?? [])]) {
+      if (!selected.has(column)) {
+        ctx.addIssue({ code: "custom", path: ["recipe", "paging", "select"], message: `must select ${column}, which the parser reads` });
+      }
+    }
+  }
+}
 
 /** The crossmap crosswalk from the native shape to the category target: the document inline, or a `.json` file path relative to the catalogue root, so entries that share a native shape share one crosswalk. */
 export const CrosswalkReferenceSchema = z.union([CrosswalkSchema, z.object({ file: RelativePathSchema.refine((path) => path.endsWith(".json"), { message: "must name a .json file" }) }).strict()]);
@@ -422,6 +464,9 @@ export const EntrySchema = define(
       }
       if ("target" in entry.crosswalk && entry.crosswalk.target !== entry.category) {
         ctx.addIssue({ code: "custom", path: ["crosswalk", "target"], message: `must be the entry's category, ${entry.category}` });
+      }
+      if (entry.recipe.status === "fetchable") {
+        addRecipeIssues(entry.recipe, entry.category, ctx);
       }
       const counted = countedKeys(entry.category, entry.recipe.status === "fetchable" && "members" in entry.recipe.archive);
       for (const key of Object.keys(entry.expectedCounts)) {
