@@ -34,8 +34,23 @@
     "weighted": true
   },
   "recipe": {
-    "reason": "no download is in a form keepset reads yet (csv: format csv has a pipeline-specific parser with no declarative keepset form yet)",
-    "status": "not-fetchable"
+    "archive": {
+      "kind": "none"
+    },
+    "parser": {
+      "commentPrefixes": [
+        "#",
+        "%"
+      ],
+      "delimiter": "detect",
+      "encoding": "utf-8",
+      "format": "edge-list",
+      "skipLines": 0,
+      "sourceColumn": 2,
+      "targetColumn": 4
+    },
+    "source": 0,
+    "status": "fetchable"
   },
   "sources": [
     {

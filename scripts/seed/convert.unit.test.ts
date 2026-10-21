@@ -3,6 +3,7 @@ import { join } from "node:path";
 import { describe, expect, it } from "vitest";
 import { convertCatalogue, convertDataset, NAME_OVERRIDES, namespaceOf, netzschleuderCsv, parseWayback, type Outcome } from "./convert";
 import { DATASET_RECIPES, UNVERIFIABLE_DOWNLOADS } from "./dataset-recipes";
+import { FORMAT_RECIPES, READ_DOWNLOADS, REPLACED_DOWNLOADS, UNREADABLE_FORMATS } from "./graph-recipes";
 import { GraphLicencesSchema, graphLicenceResolver } from "./licence";
 import { SuiteSparseMirrorSchema } from "./mirror";
 import { GraphboxCatalogueSchema, SourceCatalogueSchema } from "./source";
@@ -380,6 +381,73 @@ describe("name overrides", () => {
   it("gives each override a name that no other override shares, ignoring case", () => {
     const names = [...NAME_OVERRIDES.values()].map((name) => name.toLowerCase());
     expect(new Set(names).size).toBe(names.length);
+  });
+});
+
+describe("the recipes the import states for formats and downloads it has read", () => {
+  const full = SourceCatalogueSchema.parse(JSON.parse(readFileSync(join(import.meta.dirname, "sources/pipeline-catalog.json"), "utf8")));
+  const fullLicences = GraphLicencesSchema.parse(JSON.parse(readFileSync(join(import.meta.dirname, "sources/graph-licences.json"), "utf8")));
+  const fullMirror = SuiteSparseMirrorSchema.parse(JSON.parse(readFileSync(join(import.meta.dirname, "sources/suitesparse-mirror.json"), "utf8")));
+  const converted = (id: string) => {
+    const dataset = Object.values(full.datasets).find((candidate) => candidate.id === id);
+    if (dataset === undefined) {
+      throw new Error(`the committed catalogue has no dataset ${id}`);
+    }
+
+    return convertDataset(dataset, graphLicenceResolver(fullLicences), fullMirror);
+  };
+  const recipeOf = (id: string) => converted(id).entry?.recipe;
+
+  it("reads the SNAP signed, STRING and BioGRID formats with the publisher's fixed layout", () => {
+    expect(recipeOf("snap-epinions-signed")).toMatchObject({ status: "fetchable", archive: { kind: "gzip" }, parser: { format: "edge-list", delimiter: "tab", sourceColumn: 0, targetColumn: 1 } });
+    expect(recipeOf("string-human-ppi")).toMatchObject({ status: "fetchable", source: 0, archive: { kind: "gzip" }, parser: { format: "edge-list", delimiter: "space", skipLines: 1 } });
+    const biogrid = FORMAT_RECIPES.get("biogrid-zip");
+    expect(recipeOf("ppi-human")).toEqual({ status: "fetchable", source: 0, archive: biogrid?.archive, parser: biogrid?.parser });
+    expect(recipeOf("ppi-human")).toMatchObject({ parser: { sourceColumn: 3, targetColumn: 4, where: [{ column: 12, equals: "physical" }, { column: 15, equals: "9606" }, { column: 16, equals: "9606" }] } });
+  });
+
+  it("reads every OGB zip's raw directory with the ogb parser, and adds the publisher's download where the catalogue's mirror answers 404", () => {
+    expect(recipeOf("ogbl-citation2")).toMatchObject({ status: "fetchable", source: 0, archive: { kind: "zip", inner: { kind: "gzip" } }, parser: { format: "ogb" } });
+    for (const [id, pygMirror] of [
+      ["ogbl-biokg", "https://data.pyg.org/datasets/ogbl_biokg.zip"],
+      ["ogbn-mag", "https://data.pyg.org/datasets/ogbn_mag.zip"],
+    ] as const) {
+      const result = converted(id);
+      const replacement = REPLACED_DOWNLOADS.get(pygMirror);
+      const converts = result.entry;
+      if (replacement === undefined || converts === undefined) {
+        throw new Error(`${id}: no replacement for ${pygMirror}, or no entry`);
+      }
+      const urls = converts.sources.map((source) => source.url);
+      expect(urls.indexOf(replacement.url), id).toBe(urls.indexOf(pygMirror) + 1);
+      expect(converts.sources[urls.indexOf(replacement.url)]?.retrieved, id).toBe(replacement.retrieved);
+      expect(converts.recipe, id).toMatchObject({ status: "fetchable", source: urls.indexOf(replacement.url), parser: { format: "ogb" } });
+      expect(result.outcome.flags, id).toContain(`added ${replacement.url} beside ${pygMirror}: ${replacement.reason}`);
+    }
+  });
+
+  it("reads a download whose layout the catalogue does not record by the layout found in it", () => {
+    expect(recipeOf("arenas-email")).toMatchObject({ status: "fetchable", archive: { kind: "zip", member: { path: "email.txt" } }, parser: { format: "edge-list", delimiter: "whitespace" } });
+    expect(converted("arenas-email").outcome.flags).toContain(READ_DOWNLOADS.get("http://deim.urv.cat/~aarenas/data/xarxes/email.zip")?.flag);
+  });
+
+  it("reads a csv download as an edge list over the endpoint columns the catalogue records", () => {
+    expect(recipeOf("transport-airline")).toMatchObject({ status: "fetchable", archive: { kind: "none" }, parser: { format: "edge-list", delimiter: "detect", sourceColumn: 2, targetColumn: 4 } });
+  });
+
+  it("gives a format read and found unreadable its reason, ahead of the archive kind's", () => {
+    for (const [id, format] of [
+      ["oag-eng", "pytorch-hetero"],
+      ["ieee-cis-g", "ieee-cis-zip"],
+      ["aminer-cs", "aminer-7z"],
+      ["openalex-citations", "parquet"],
+    ] as const) {
+      const reason = UNREADABLE_FORMATS.get(format);
+      if (reason === undefined) {
+        throw new Error(`no reason for ${format}`);
+      }
+      expect(recipeOf(id), id).toEqual({ status: "not-fetchable", reason: `no download is in a form keepset reads yet (${format}: ${reason})` });
+    }
   });
 });
 

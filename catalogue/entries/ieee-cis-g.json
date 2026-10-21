@@ -33,7 +33,7 @@
     "weighted": false
   },
   "recipe": {
-    "reason": "no download is in a form keepset reads yet (ieee-cis-zip: format ieee-cis-zip has a pipeline-specific parser with no declarative keepset form yet)",
+    "reason": "no download is in a form keepset reads yet (ieee-cis-zip: the archive holds the IEEE-CIS fraud detection competition's raw transaction and identity tables, not a graph: H2GB builds its graph from shared card, address, email and device fields with its own construction code)",
     "status": "not-fetchable"
   },
   "sources": [

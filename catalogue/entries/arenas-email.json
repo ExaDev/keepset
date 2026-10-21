@@ -39,8 +39,26 @@
     "weighted": true
   },
   "recipe": {
-    "reason": "no download is in a form keepset reads yet (various: an archive in format various, whose member and format the catalogue does not record)",
-    "status": "not-fetchable"
+    "archive": {
+      "kind": "zip",
+      "member": {
+        "path": "email.txt"
+      }
+    },
+    "parser": {
+      "commentPrefixes": [
+        "#",
+        "%"
+      ],
+      "delimiter": "whitespace",
+      "encoding": "utf-8",
+      "format": "edge-list",
+      "skipLines": 0,
+      "sourceColumn": 0,
+      "targetColumn": 1
+    },
+    "source": 0,
+    "status": "fetchable"
   },
   "sources": [
     {

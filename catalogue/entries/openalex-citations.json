@@ -33,7 +33,7 @@
     "weighted": false
   },
   "recipe": {
-    "reason": "no download is in a form keepset reads yet (parquet: format parquet has a pipeline-specific parser with no declarative keepset form yet)",
+    "reason": "no download is in a form keepset reads yet (parquet: the download is a Hugging Face dataset repository whose citation table is thousands of Parquet files holding billions of rows, tens of gigabytes in all, more than a fetch can hold in memory, so no Parquet reader is added for it)",
     "status": "not-fetchable"
   },
   "sources": [
