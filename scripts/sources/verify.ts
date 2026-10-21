@@ -26,7 +26,7 @@ const LANDING_TIMESTAMP = /^https:\/\/web\.archive\.org\/web\/(\d{14})id_\//;
  * Why a pin does not serve its bytes:
  * - `not-served`: the raw form does not answer with the capture (a 404, an answer from a URL that is not a capture).
  * - `wayback-page`: it answers 200 with the Wayback Machine's own page, not the captured bytes.
- * - `other-capture`: a pin to one capture answers with the capture of another moment, so a recipe would read other bytes than the pin names.
+ * - `other-capture`: a pin to one capture answers with the capture of another moment (named in the verdict's `landed`), so a recipe would read other bytes than the pin names.
  * - `differs-from-source`: the live source answers with a different kind of file, a different length or different first bytes than the capture.
  */
 export type FailureReason = "not-served" | "wayback-page" | "other-capture" | "differs-from-source";
@@ -36,7 +36,7 @@ export type FailureReason = "not-served" | "wayback-page" | "other-capture" | "d
  */
 export type Verdict =
   | { readonly kind: "verified"; readonly notes: readonly string[] }
-  | { readonly kind: "failed"; readonly reason: FailureReason; readonly evidence: string }
+  | { readonly kind: "failed"; readonly reason: FailureReason; readonly evidence: string; readonly landed?: string }
   | { readonly kind: "busy"; readonly evidence: string };
 
 /** What a request's answer carries that the verification reads: the final status and URL, the headers and the first bytes of the body. `bytes` is undefined when the body stream failed. */
@@ -203,7 +203,7 @@ async function judge(client: PoliteClient, pin: Pin, live: Head | undefined): Pr
   }
   // A day-only pin is resolved by the Wayback Machine to the nearest capture; a full timestamp names one capture.
   if (pin.timestamp.length === landed.length && landed !== pin.timestamp) {
-    return { kind: "failed", reason: "other-capture", evidence: `the raw snapshot answered with the capture of ${landed}` };
+    return { kind: "failed", reason: "other-capture", evidence: `the raw snapshot answered with the capture of ${landed}`, landed };
   }
   const notes = live === undefined ? [] : differences(replay, live);
   if (notes.length > 0 && pin.compareStrictly) {

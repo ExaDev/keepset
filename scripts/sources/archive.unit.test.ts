@@ -154,6 +154,21 @@ describe("archiveSources", () => {
     expect(trial.states.at(-1)?.rejected[A]).toEqual(["20261020120001"]);
   });
 
+  it("pins the capture a fresh capture's replay answers from, once that one serves its own bytes", async () => {
+    const trial = run([A], { replays: { "20261020120001": { landing: "20250623193623" } }, saves: [{ kind: "saved", timestamp: "20261020120001" }] });
+    const outcome = await trial.result;
+    expect(trial.recorded.get(A)).toBe("20250623193623");
+    expect(outcome.unresolved).toEqual([]);
+    expect(trial.states.at(-1)?.rejected[A]).toEqual(["20261020120001"]);
+  });
+
+  it("follows a landing capture only once, so a chain of captures answering from one another ends unresolved", async () => {
+    const trial = run([A], { replays: { "20261020120001": { landing: "20250623193623" }, "20250623193623": { landing: "20240101000000" } }, saves: [{ kind: "saved", timestamp: "20261020120001" }] });
+    const outcome = await trial.result;
+    expect(trial.recorded.size).toBe(0);
+    expect(outcome.unresolved).toEqual([A]);
+  });
+
   it("waits for a fresh capture's indexing to clear before accepting it", async () => {
     const times = ["20261020120001", "20261020120002"];
     let looks = 0;

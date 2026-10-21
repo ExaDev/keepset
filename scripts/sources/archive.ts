@@ -148,9 +148,10 @@ export async function archiveSources(ports: Readonly<ArchivePorts>, request: Rea
    * @param group - The URL and what the catalogue records about it.
    * @param timestamp - The capture's timestamp.
    * @param attempts - How many lookups at most; more for a capture just made, whose indexing lags.
+   * @param followed - Whether this timestamp is the capture another's replay answered from, which is followed once and no further.
    * @returns pinned when the raw snapshot serves the captured bytes, unresolved when the archive could not say, failed with what was observed when it does not serve them.
    */
-  const check = async (group: SourceGroup, timestamp: string, attempts: number): Promise<Resolution | { kind: "failed"; evidence: string }> => {
+  const check = async (group: SourceGroup, timestamp: string, attempts: number, followed = false): Promise<Resolution | { kind: "failed"; evidence: string }> => {
     const verdict = await verifyPin({ client, clock }, { url: group.url, timestamp, live: group.live, compareStrictly: true }, attempts);
     if (verdict.kind === "verified") {
       return { kind: "pinned", timestamp };
@@ -160,6 +161,12 @@ export async function archiveSources(ports: Readonly<ArchivePorts>, request: Rea
     }
     state.rejected[group.url] = [...(state.rejected[group.url] ?? []), timestamp];
     persist(structuredClone(state));
+    // A capture whose replay answers from an earlier capture is no capture of its own (the Wayback Machine stores an unchanged file once), but the capture it answers from is one: it is checked on its own, so the pin names bytes that exist.
+    if (verdict.reason === "other-capture" && verdict.landed !== undefined && !followed && state.rejected[group.url]?.includes(verdict.landed) !== true) {
+      log(`${group.url}: the capture ${timestamp} answers from ${verdict.landed}; checking that one`);
+
+      return check(group, verdict.landed, 1, true);
+    }
 
     return { kind: "failed", evidence: verdict.evidence };
   };
