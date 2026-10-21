@@ -9,6 +9,7 @@ import type { JsonScalar } from "./targets/json-scalar";
 import { unpack, unpackFiles, unpackMembers, unpackParts, type Unpacked } from "./archive";
 import { downloadPaged } from "./paged";
 import { metaOf, sourceRecord, sourceUrl, step } from "./recipe-run";
+import { resolveSource } from "./resolve";
 import type { Archive, Entry, FilesRecipe, Parser, Snapshot, Source } from "./entry";
 
 /** The network port a recipe downloads through: `downloadRaw` by default, which returns the bytes exactly as served, or a stand-in under test. */
@@ -103,23 +104,6 @@ interface NativeRun {
  */
 function withId(document: unknown, id: string | undefined): unknown {
   return typeof document === "object" && document !== null && !Array.isArray(document) ? { ...document, id } : document;
-}
-
-/**
- * Downloads one URL's bytes through the network port.
- * @param port - The network port.
- * @param url - The URL.
- * @param signal - Aborts the download.
- * @returns The bytes.
- * @throws KeepsetError when the server does not answer successfully.
- */
-async function downloadBytes(port: FetchPort, url: string, signal: AbortSignal | undefined): Promise<Uint8Array> {
-  const response = await port(url, signal === undefined ? {} : { signal });
-  if (!response.ok) {
-    throw new KeepsetError(`${url} answered ${String(response.status)} ${response.statusText}`);
-  }
-
-  return new Uint8Array(await response.arrayBuffer());
 }
 
 /**
@@ -229,8 +213,8 @@ async function runFiles(dataset: Dataset, recipe: FilesRecipe, options: FetchOpt
     if (source === undefined) {
       throw new RecipeError(entry.id, "recipe", `file ${file.path} names source ${String(file.source)}, which the entry does not have`);
     }
-    const fetchedUrl = sourceUrl(source);
-    const bytes = await step(entry.id, "download", async () => downloadBytes(port, fetchedUrl, signal));
+    const resolved = await step(entry.id, "download", async () => resolveSource(source, { port, ...(signal === undefined ? {} : { signal }) }));
+    const { bytes, url: fetchedUrl } = resolved;
     const documents = extractAndParse(entry.id, () => instancesOf(bytes, file.archive, recipe.parser, file.path));
 
     return [{ documents, download: { ...(await downloadOf(source, fetchedUrl, bytes, digestPort)), path: file.path, instances: documents.map((document) => document.id) } }, ...(await read(index + 1))];
@@ -271,10 +255,14 @@ async function runToNative(dataset: Dataset, options: FetchOptions): Promise<Nat
   if (source === undefined) {
     throw new RecipeError(entry.id, "recipe", `the recipe names source ${String(recipe.source)}, which the entry does not have`);
   }
-  const fetchedUrl = sourceUrl(source);
-
   const retrievedAt = now().toISOString();
-  const bytes = await step(entry.id, "download", async () => (recipe.paging === undefined ? downloadBytes(fetchPort, fetchedUrl, signal) : downloadPaged(fetchedUrl, recipe.paging, fetchPort, signal)));
+  // A paged query is not a file anyone archives (a capture of the URL is not the data), so a paged source is read directly; every other source goes through the chain of pinned snapshot, closest capture and live URL.
+  const resolved = await step(entry.id, "download", async () =>
+    recipe.paging === undefined
+      ? resolveSource(source, { port: fetchPort, ...(signal === undefined ? {} : { signal }) })
+      : { bytes: await downloadPaged(sourceUrl(source), recipe.paging, fetchPort, signal), url: sourceUrl(source) },
+  );
+  const { bytes, url: fetchedUrl } = resolved;
   const provenanceOf = async (extra: Pick<DownloadProvenance, "member" | "members">): Promise<DownloadProvenance> => ({
     entryId: entry.id,
     catalogue: dataset.catalogue,

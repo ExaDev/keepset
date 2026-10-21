@@ -1,5 +1,5 @@
 import { createCatalogue, DatasetNotFoundError, RecipeError, type Dataset, type DatasetQuery } from "keepset";
-import type { DownloadProvenance, FetchedDataset, RoundTripReport } from "keepset/node";
+import { captureRequestsFor, type DownloadProvenance, type FetchedDataset, type RoundTripReport } from "keepset/node";
 import { describe, expect, it } from "vitest";
 import { fixtureIndex, streamedEntry } from "../src/test-support/entries";
 import { EXIT_FAILED, EXIT_NO, EXIT_OK, formatNamespaces, formatSearch, formatShow, provenancePath, run, type CliIo, type CliLibrary } from "./run";
@@ -70,6 +70,12 @@ function harness(overrides: Partial<CliLibrary> = {}) {
         ["nodes", 2],
         ["edges", 1],
       ]),
+    captureRequests: () => [],
+    requestCapture: async (saveUrl) => {
+      calls.push(["requestCapture", saveUrl]);
+
+      return Promise.resolve();
+    },
     ...overrides,
   };
   const out = { stdout: "", stderr: "", files: new Map<string, string>(), closed: [] as string[] };
@@ -249,6 +255,30 @@ describe("fetch", () => {
     expect(JSON.parse(out.files.get("karate.provenance.json") ?? "null")).toEqual(fetched.provenance);
     expect(out.stdout).toBe("wrote karate.json (nodes 2, edges 1) and karate.provenance.json\n");
     expect(out.stderr).toBe("warning: nodes: the entry records 34, the fetched result has 2\n");
+  });
+
+  it("asks the Archive to capture a source read live, after the files are written, and says so", async () => {
+    const { library, io, out, calls } = harness({ captureRequests: captureRequestsFor });
+    expect(await run(["fetch", "karate"], library, io)).toBe(EXIT_OK);
+    expect(calls.at(-1)).toEqual(["requestCapture", "https://web.archive.org/save/https://example.org/data/karate.txt"]);
+    expect(out.stderr).toContain("asking the Internet Archive to capture it (https://web.archive.org/save/https://example.org/data/karate.txt)");
+  });
+
+  it("sends no request with --no-archive, or for a source read from a snapshot", async () => {
+    const off = harness({ captureRequests: captureRequestsFor });
+    await run(["fetch", "karate", "--no-archive"], off.library, off.io);
+    expect(off.calls.some(([name]) => name === "requestCapture")).toBe(false);
+
+    const snapshot: FetchedDataset = { ...fetched, provenance: { ...provenance, fetchedUrl: "https://web.archive.org/web/20240101000000id_/https://example.org/data/karate.txt" } };
+    const pinned = harness({ captureRequests: captureRequestsFor, fetchDataset: async () => Promise.resolve(snapshot) });
+    await run(["fetch", "karate"], pinned.library, pinned.io);
+    expect(pinned.calls.some(([name]) => name === "requestCapture")).toBe(false);
+  });
+
+  it("keeps the fetch's success when the capture request cannot be sent", async () => {
+    const { library, io, out } = harness({ captureRequests: captureRequestsFor, requestCapture: async () => Promise.reject(new TypeError("fetch failed")) });
+    expect(await run(["fetch", "karate"], library, io)).toBe(EXIT_OK);
+    expect(out.stderr).toContain("warning: could not send the capture request: fetch failed");
   });
 
   it("writes to --out, with provenance beside it", async () => {

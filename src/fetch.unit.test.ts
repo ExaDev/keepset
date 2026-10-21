@@ -14,6 +14,9 @@ import { downloadUrl, fetchDataset, fetchEntry, roundTripDataset, roundTripEntry
  */
 const single = (provenance: Provenance): DownloadProvenance => ("files" in provenance ? expect.unreachable("the result is read from one download") : provenance);
 
+/** The availability lookup a source with no usable pin is first sent, before its live URL. */
+const availabilityOf = (url: string): string => `https://archive.org/wayback/available?${new URLSearchParams({ url }).toString()}`;
+
 const karateText = "% karate excerpt\n1 2\n2 3\n3 1\n";
 
 /** A network port that serves fixed bytes by URL and records every request, standing in for the platform fetch so no test touches the network. */
@@ -64,7 +67,7 @@ describe("fetchEntry", () => {
   it("downloads a live source, parses it, applies the crosswalk and resolves graph/v1", async () => {
     const { fetch, requested } = servedBy({ "https://example.org/data/karate.txt": karateText });
     const result = await fetchEntry(datasetWith(liveEntry), { ...digestPort, fetch, now });
-    expect(requested).toEqual(["https://example.org/data/karate.txt"]);
+    expect(requested).toEqual([availabilityOf("https://example.org/data/karate.txt"), "https://example.org/data/karate.txt"]);
     expect(result.data).toEqual({
       meta: { id: "karate", name: "Zachary Karate Club", directed: false, weighted: false, density: 0.139 },
       nodes: [{ id: "1" }, { id: "2" }, { id: "3" }],
@@ -260,7 +263,13 @@ describe("a tasks/v1 entry whose collection is files downloaded one by one", () 
   it("downloads each file in turn, a dead one from its snapshot, and files every instance under its path", async () => {
     const { fetch, requested } = served();
     const fetched = await fetchEntry(dataset, { ...digestPort, fetch, now });
-    expect(requested).toEqual(["https://example.org/data/routes/north.csv", "https://web.archive.org/web/20240101000000id_/https://example.org/data/routes/south.csv", "https://example.org/data/routes/more.zip"]);
+    expect(requested).toEqual([
+      availabilityOf("https://example.org/data/routes/north.csv"),
+      "https://example.org/data/routes/north.csv",
+      "https://web.archive.org/web/20240101000000id_/https://example.org/data/routes/south.csv",
+      availabilityOf("https://example.org/data/routes/more.zip"),
+      "https://example.org/data/routes/more.zip",
+    ]);
     expect(fetched.warnings).toEqual([]);
     expect(fetched.data).toEqual({
       meta: { id: "route-files", name: "Route files" },
@@ -312,11 +321,16 @@ describe("a tasks/v1 entry whose collection is files downloaded one by one", () 
     const error = await failure(fetchEntry(dataset, { ...digestPort, fetch: missing.fetch, now }));
     expect(error.step).toBe("download");
     expect(error.message).toMatch(/south\.csv answered 404/);
-    expect(missing.requested).toHaveLength(2);
+    expect(missing.requested).toEqual([
+      availabilityOf("https://example.org/data/routes/north.csv"),
+      "https://example.org/data/routes/north.csv",
+      "https://web.archive.org/web/20240101000000id_/https://example.org/data/routes/south.csv",
+      availabilityOf("https://example.org/data/routes/south.csv"),
+    ]);
     const broken = await failure(fetchEntry(dataset, { ...digestPort, fetch, now }));
     expect(broken.step).toBe("parse");
     expect(broken.message).toMatch(/member south\.csv: /);
-    expect(requested).toHaveLength(2);
+    expect(requested).toEqual([availabilityOf("https://example.org/data/routes/north.csv"), "https://example.org/data/routes/north.csv", "https://web.archive.org/web/20240101000000id_/https://example.org/data/routes/south.csv"]);
   });
 });
 

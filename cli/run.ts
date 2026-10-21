@@ -1,7 +1,7 @@
 import { parseArgs } from "node:util";
 // Through the package's own name, as cli/keepset.ts imports the library: an `instanceof` check needs the very class the library throws, not a second copy bundled into the command.
 import { KeepsetError, NAME_SEPARATOR, type Archive, type ArchiveMember, type Dataset, type DatasetQuery, type NamespaceNode, type SyntaxIssue } from "keepset";
-import type { FetchedDataset, NodeSink, RoundTripReport, StreamedDataset } from "keepset/node";
+import type { FetchedDataset, NodeSink, Provenance, RoundTripReport, StreamedDataset } from "keepset/node";
 
 /**
  * Says which archive file or files a recipe reads, for the `info` output.
@@ -38,6 +38,10 @@ export interface CliLibrary {
   readonly streamDataset: (id: string, sink: NodeSink) => Promise<StreamedDataset>;
   readonly roundTripDataset: (id: string) => Promise<RoundTripReport>;
   readonly countTarget: (dataset: FetchedDataset) => ReadonlyMap<string, number>;
+  /** The Save Page Now requests a fetch's provenance leaves to make: one for each download read from its live URL. */
+  readonly captureRequests: (provenance: Provenance) => readonly string[];
+  /** Sends one of those requests to the Internet Archive. */
+  readonly requestCapture: (saveUrl: string) => Promise<void>;
 }
 
 /** Everything the command touches outside its arguments and the library. */
@@ -78,11 +82,16 @@ Commands:
                       tab-separated
   show <dataset> [--json]
                       print a dataset's metadata, recipe and crosswalk
-  fetch <dataset> [--out <file>]
+  fetch <dataset> [--out <file>] [--no-archive]
                       run the dataset's recipe and write the normalised result
                       to <file> (default <id>.json), with its provenance beside
                       it in <file without .json>.provenance.json; a table too
-                      large to hold is streamed into the file a page at a time
+                      large to hold is streamed into the file a page at a time.
+                      A source is read from its pinned Internet Archive snapshot
+                      first, then the closest capture the Archive holds, then its
+                      live URL; a source read live is also sent to the Archive to
+                      capture, so the next fetch starts from a snapshot, unless
+                      --no-archive is given
   validate <dataset>  check the entry against the entry schema and its
                       crosswalk against crossmap's validation
   roundtrip <dataset> fetch the dataset and check that decoding the encoded
@@ -104,7 +113,7 @@ bad usage, an unknown or ambiguous dataset or namespace or a recipe that failed.
 
 /** The parsed command line. */
 interface CommandLine {
-  readonly values: { readonly kind?: string; readonly domain?: string; readonly subject?: string; readonly namespace?: string; readonly category?: string; readonly json?: boolean; readonly out?: string; readonly help?: boolean; readonly version?: boolean };
+  readonly values: { readonly kind?: string; readonly domain?: string; readonly subject?: string; readonly namespace?: string; readonly category?: string; readonly json?: boolean; readonly out?: string; readonly "no-archive"?: boolean; readonly help?: boolean; readonly version?: boolean };
   readonly positionals: readonly string[];
 }
 
@@ -121,6 +130,7 @@ function parseCommandLine(args: readonly string[]): CommandLine {
       category: { type: "string" },
       json: { type: "boolean" },
       out: { type: "string" },
+      "no-archive": { type: "boolean" },
       help: { type: "boolean", short: "h" },
       version: { type: "boolean", short: "v" },
     },
@@ -282,6 +292,25 @@ function formatIssues(issues: readonly SyntaxIssue[]): string {
 }
 
 /**
+ * Asks the Internet Archive to capture each source a fetch had to read live, once the result is written so the request never delays it. Saying so on stderr is what lets a person who does not want it stop it next time; a request that cannot be sent is a warning, because the fetch itself succeeded.
+ * @param provenance - What the fetch recorded.
+ * @param library - The library calls.
+ * @param io - Output.
+ */
+async function requestCaptures(provenance: Provenance, library: CliLibrary, io: CliIo): Promise<void> {
+  await Promise.all(
+    library.captureRequests(provenance).map(async (request) => {
+      io.writeStderr(`no snapshot was readable, so the source was read live: asking the Internet Archive to capture it (${request}); --no-archive stops this\n`);
+      try {
+        await library.requestCapture(request);
+      } catch (error) {
+        io.writeStderr(`warning: could not send the capture request: ${error instanceof Error ? error.message : String(error)}\n`);
+      }
+    }),
+  );
+}
+
+/**
  * Runs the command. A KeepsetError from the library (an unknown dataset, a failing recipe) is the command's failure to answer and becomes exit status 2 with its message; anything else is a bug and propagates.
  * @param args - The arguments after the command name.
  * @param library - The library calls.
@@ -390,6 +419,9 @@ export async function run(args: readonly string[], library: CliLibrary, io: CliI
       }
       const counts = [...streamed.counts].map(([key, count]) => `${key} ${String(count)}`).join(", ");
       io.writeStdout(`wrote ${out} (${counts}, streamed) and ${provenancePath(out)}\n`);
+      if (values["no-archive"] !== true) {
+        await requestCaptures(streamed.provenance, library, io);
+      }
 
       return EXIT_OK;
     }
@@ -403,6 +435,9 @@ export async function run(args: readonly string[], library: CliLibrary, io: CliI
       }
       const counts = [...library.countTarget(fetched)].map(([key, count]) => `${key} ${String(count)}`).join(", ");
       io.writeStdout(`wrote ${out} (${counts}) and ${provenancePath(out)}\n`);
+      if (values["no-archive"] !== true) {
+        await requestCaptures(fetched.provenance, library, io);
+      }
 
       return EXIT_OK;
     }
