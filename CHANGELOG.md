@@ -1,3 +1,10 @@
+# [0.48.0](https://github.com/Mearman/keepset/compare/v0.47.1...v0.48.0) (2026-10-21)
+
+
+### Features
+
+* **archive:** record and display a checksum for each pinned snapshot ([87e7483](https://github.com/Mearman/keepset/commit/87e7483f007748a7e743ad87b99e0b616107c937))
+
 ## [0.47.1](https://github.com/Mearman/keepset/compare/v0.47.0...v0.47.1) (2026-10-21)
 
 
