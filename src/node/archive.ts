@@ -1,12 +1,15 @@
 import { gunzipSync } from "node:zlib";
 import { unzipSync, type UnzipFileFilter } from "fflate";
-import type { CollectionArchive, DocumentArchive, ArchiveMember, InnerArchive, PartsArchive } from "../entry";
+import type { CollectionArchive, DocumentArchive, ArchiveMember, InnerArchive, PartsArchive, SheetArchive } from "../entry";
 import { ArchiveError } from "../errors";
 import { getOwn } from "../own";
 import { bunzip2 } from "./bzip2";
 import { pointShapefileToCsv } from "./shapefile";
 import { readTar } from "./tar";
-import { sheetNames, sheetToCsv } from "./xlsx";
+import { odsGrid } from "./ods";
+import { gridToCsv } from "./sheet";
+import { xlsGrid } from "./xls";
+import { sheetNames, xlsxGrid } from "./xlsx";
 
 /** The file a recipe's archive step yields: its bytes, and the member path it came from when the archive holds several. */
 export interface Unpacked {
@@ -91,7 +94,7 @@ function pick(paths: readonly string[], member: ArchiveMember): string {
 }
 
 /**
- * Unpacks downloaded bytes into the one file the parser reads. A member with an `inner` archive is unpacked again by that layout, and the path reported is the outer member's, joined by `/` to the inner member's when the inner layout selects one, as though the inner archive were a directory.
+ * Unpacks downloaded bytes into the one file the parser reads. A member with an `inner` archive is unpacked again by that layout, and the path reported is the outer member's, joined by `/` to the inner member's or the inner sheet's name when the inner layout selects one, as though the inner archive were a directory.
  * @param bytes - The downloaded bytes.
  * @param archive - The recipe's archive layout.
  * @returns The file's bytes, and its member path for a multi-file archive.
@@ -107,8 +110,8 @@ export function unpack(bytes: Uint8Array, archive: DocumentArchive): Unpacked {
   if (archive.kind === "bzip2") {
     return { bytes: bunzip2(bytes) };
   }
-  if (archive.kind === "xlsx") {
-    return { bytes: sheetToCsv(bytes, archive.sheet), member: archive.sheet };
+  if ("sheet" in archive) {
+    return { bytes: sheetToCsv(bytes, archive), member: archive.sheet };
   }
   if (archive.kind === "shapefile") {
     return unpackShapefile(bytes, archive.member);
@@ -119,6 +122,9 @@ export function unpack(bytes: Uint8Array, archive: DocumentArchive): Unpacked {
   }
   if (archive.inner.kind === "gzip") {
     return { bytes: gunzip(outer.bytes), member: outer.member };
+  }
+  if ("sheet" in archive.inner) {
+    return { bytes: sheetToCsv(outer.bytes, archive.inner), member: `${outer.member}/${archive.inner.sheet}` };
   }
   const inner = selectMember(outer.bytes, archive.inner);
 
@@ -132,7 +138,7 @@ export function unpack(bytes: Uint8Array, archive: DocumentArchive): Unpacked {
  * @returns The member's bytes and path.
  * @throws ArchiveError when the bytes are not a well-formed archive of the stated kind or the selector does not match exactly one member.
  */
-function selectMember(bytes: Uint8Array, archive: Exclude<InnerArchive, { readonly kind: "gzip" }>): { readonly bytes: Uint8Array; readonly member: string } {
+function selectMember(bytes: Uint8Array, archive: Extract<InnerArchive, { readonly member: ArchiveMember }>): { readonly bytes: Uint8Array; readonly member: string } {
   if (archive.kind === "zip") {
     const names: string[] = [];
     // fflate's filter sees every entry's name before inflating, so listing the names decompresses nothing and only the chosen member is ever inflated.
@@ -241,7 +247,7 @@ export function unpackMembers(bytes: Uint8Array, archive: CollectionArchive): Me
       throw new ArchiveError(`member ${member.path} has no sheet matching ${sheets ?? ""}`);
     }
 
-    return names.map((sheet) => ({ path: `${member.path}/${sheet}`, bytes: sheetToCsv(member.bytes, sheet) }));
+    return names.map((sheet) => ({ path: `${member.path}/${sheet}`, bytes: sheetToCsv(member.bytes, { kind: "xlsx", sheet }) }));
   });
 }
 
@@ -325,6 +331,19 @@ function untarred(bytes: Uint8Array, kind: "tar" | "tar.gz" | "tar.bz2"): Uint8A
   }
 
   return kind === "tar.gz" ? gunzip(bytes) : bunzip2(bytes);
+}
+
+/**
+ * Reads one sheet of a spreadsheet as CSV text, by the spreadsheet's format.
+ * @param bytes - The spreadsheet.
+ * @param archive - Its format and the sheet to read.
+ * @returns The CSV, in UTF-8.
+ * @throws ArchiveError when the bytes are not a spreadsheet of that format, the sheet is missing, or a cell cannot be read.
+ */
+export function sheetToCsv(bytes: Uint8Array, archive: Readonly<SheetArchive>): Uint8Array {
+  const read = { xlsx: xlsxGrid, xls: xlsGrid, ods: odsGrid }[archive.kind];
+
+  return gridToCsv(read(bytes, archive.sheet));
 }
 
 /**

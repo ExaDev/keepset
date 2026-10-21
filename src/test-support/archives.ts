@@ -130,3 +130,19 @@ export function workbook(parts: WorkbookParts): Uint8Array {
 export function bzip2(data: string | Uint8Array): Uint8Array {
   return execFileSync("bzip2", ["-c"], { input: typeof data === "string" ? new TextEncoder().encode(data) : data, maxBuffer: Number.MAX_SAFE_INTEGER });
 }
+
+/**
+ * Writes an OpenDocument spreadsheet: a zip whose `mimetype` and `content.xml` hold the tables given.
+ * @param tables - Each table's rows as the XML inside its `table:table` element, by name.
+ * @returns The spreadsheet bytes.
+ */
+export function odsSpreadsheet(tables: Readonly<Record<string, string>>): Uint8Array {
+  const body = Object.entries(tables)
+    .map(([name, rows]) => `<table:table table:name="${name}"><table:table-column table:number-columns-repeated="1024"/>${rows}</table:table>`)
+    .join("");
+
+  return zip([
+    { path: "mimetype", text: "application/vnd.oasis.opendocument.spreadsheet" },
+    { path: "content.xml", text: `<?xml version="1.0" encoding="UTF-8"?><office:document-content xmlns:office="urn:oasis:names:tc:opendocument:xmlns:office:1.0" xmlns:table="urn:oasis:names:tc:opendocument:xmlns:table:1.0" xmlns:text="urn:oasis:names:tc:opendocument:xmlns:text:1.0" office:version="1.3"><office:body><office:spreadsheet>${body}</office:spreadsheet></office:body></office:document-content>` },
+  ]);
+}

@@ -2,11 +2,11 @@ import { describe, expect, it } from "vitest";
 import { ArchiveError } from "../errors";
 import { workbook } from "../test-support/archives";
 import { zipSync } from "fflate";
-import { unpack, unpackMembers } from "./archive";
-import { sheetNames, sheetToCsv } from "./xlsx";
+import { sheetToCsv, unpack, unpackMembers } from "./archive";
+import { sheetNames } from "./xlsx";
 
 const text = (bytes: Uint8Array): string => new TextDecoder().decode(bytes);
-const csv = (parts: Parameters<typeof workbook>[0], sheet = "Data"): string => text(sheetToCsv(workbook(parts), sheet));
+const csv = (parts: Parameters<typeof workbook>[0], sheet = "Data"): string => text(sheetToCsv(workbook(parts), { kind: "xlsx", sheet }));
 
 /** A cell with a shared string, a number, an inline string, a boolean, a formula's text result and an error. */
 const cell = (reference: string, type: string | undefined, value: string, style?: number): string => `<c r="${reference}"${type === undefined ? "" : ` t="${type}"`}${style === undefined ? "" : ` s="${String(style)}"`}><v>${value}</v></c>`;
@@ -46,8 +46,13 @@ describe("sheetToCsv", () => {
   });
 
   it("places a cell by its reference, leaving the cells between empty, and pads every line to the widest row", () => {
-    const rows = `<row r="1">${cell("A1", "s", "0")}${cell("D1", "s", "1")}</row><row r="2">${cell("B2", undefined, "7")}</row><row r="3"/>`;
-    expect(csv({ sheets: { Data: rows }, sharedStrings: ["a", "d"] })).toBe("a,,,d\n,7,,\n,,,\n");
+    const rows = `<row r="1">${cell("A1", "s", "0")}${cell("D1", "s", "1")}</row><row r="2"/><row r="3">${cell("B3", undefined, "7")}</row>`;
+    expect(csv({ sheets: { Data: rows }, sharedStrings: ["a", "d"] })).toBe("a,,,d\n,,,\n,7,,\n");
+  });
+
+  it("ends at the last row holding a value, leaving out the formatted but empty rows after it", () => {
+    const rows = `<row r="1">${cell("A1", undefined, "1")}${cell("B1", undefined, "2")}</row><row r="2"><c r="A2" s="1"/><c r="B2" s="1"/></row><row r="3"/>`;
+    expect(csv({ sheets: { Data: rows } })).toBe("1,2\n");
   });
 
   it("writes a date-styled number as ISO 8601: a date, a date and time, and a time alone, by built-in and custom formats", () => {
@@ -75,7 +80,7 @@ describe("sheetToCsv", () => {
   it("refuses a sheet the workbook lacks, a shared string it lacks, and bytes that are not a workbook", () => {
     expect(() => csv({ sheets: { Data: "" } }, "Missing")).toThrow(/has no sheet Missing; it has Data/);
     expect(() => csv({ sheets: { Data: `<row r="1">${cell("A1", "s", String(SHARED_STRING_MISSING))}</row>` }, sharedStrings: ["a"] })).toThrow(new RegExp(`shared string ${String(SHARED_STRING_MISSING)}`));
-    expect(() => sheetToCsv(new TextEncoder().encode("not a zip"), "Data")).toThrow(ArchiveError);
+    expect(() => sheetToCsv(new TextEncoder().encode("not a zip"), { kind: "xlsx", sheet: "Data" })).toThrow(ArchiveError);
   });
 });
 

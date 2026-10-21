@@ -1,4 +1,4 @@
-import { parseEntry, waybackUrl, type Archive, type Citation, type Entry, type Parser, type Recipe, type Source } from "../../src/entry";
+import { parseEntry, waybackUrl, type Archive, type Citation, type Entry, type Parser, type Recipe, type SheetArchive, type Source } from "../../src/entry";
 import type { InstanceFormat } from "../../src/parsers/instance-shapes";
 import type { JsonScalar } from "../../src/targets/json-scalar";
 import { HGB_FILES, SPLITS, TRIPLE_FILES, type HgbLayout, type TriplesLayout } from "./graph-layouts";
@@ -267,7 +267,7 @@ function pathOf(url: string): string {
  * @param url - The download URL (the original URL for a snapshot).
  * @returns The archive kind, or the reason no keepset unpacker reads it.
  */
-function archiveKindOf(url: string): Exclude<Archive["kind"], "xlsx" | "shapefile"> | { readonly unsupported: string } {
+function archiveKindOf(url: string): Exclude<Archive["kind"], SheetArchive["kind"] | "shapefile"> | { readonly unsupported: string } {
   const path = pathOf(url);
   for (const [extension, name] of [
     [".zst", "zstd"],
