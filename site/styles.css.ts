@@ -168,17 +168,20 @@ globalStyle(".table-wrap.listing th, .table-wrap.listing td", {
   overflowWrap: "normal",
 });
 
-/* Column shares of the width as percentages, in column order; the last column is Recipe on the static table and Tags in the island. The name and id carry the long text in the catalogue, the kind is a short word, and the shares sum to the whole width. */
-const LISTING_COLUMN_SHARES = { name: 32, id: 27, kind: 8, domain: 20, last: 13 };
+/* Column shares of the width as percentages, in column order; the last column is Recipe on the static table and Tags in the island. The name and id carry the long text in the catalogue, the kind is a short word, the four dimension columns hold a number each, and the shares sum to the whole width. */
+const LISTING_COLUMN_SHARES = { name: 22, id: 20, kind: 7, domain: 13, nodes: 7, edges: 7, instances: 7, size: 7, last: 10 };
 Object.values(LISTING_COLUMN_SHARES).forEach((share, index) => {
   globalStyle(`.table-wrap.listing th:nth-child(${String(index + 1)})`, { width: `${String(share)}%` });
 });
+
+/* The dimension columns (the fifth to the eighth) hold numbers, which read right-aligned. */
+globalStyle(".table-wrap.listing th:nth-child(n+5):nth-child(-n+8), .table-wrap.listing td:nth-child(n+5):nth-child(-n+8)", { textAlign: "right" });
 
 /* Below desktop width the shares would leave columns too narrow to read, so the table keeps a floor width and the wrapper scrolls sideways instead. */
 globalStyle(".table-wrap.listing table", {
   "@media": {
     "(max-width: 47.99em)": {
-      minWidth: "46rem",
+      minWidth: "64rem",
     },
   },
 });

@@ -1,11 +1,12 @@
 import { mkdirSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { NAME_SEPARATOR, type Dataset, type DatasetQuery, type Manifest, type NamespaceNode } from "keepset";
+import { dimensionsOf, type Dimensions } from "./dimensions";
 import { slug } from "./html";
 import { entryPage, groupsPage, homePage, listingPage, namespacePage, type PageContext } from "./pages";
 
 /** One row of the search index the client island loads: enough to filter and label a result without fetching its page. */
-export interface SearchRecord {
+export interface SearchRecord extends Dimensions {
   readonly id: string;
   readonly namespace?: string;
   readonly aliases?: readonly string[];
@@ -129,6 +130,7 @@ export function buildSite(options: SiteOptions): SiteFiles {
     kind,
     tags: entry.tags,
     fetchable: entry.recipe.status === "fetchable",
+    ...dimensionsOf(entry),
   }));
   files.set("search-index.json", JSON.stringify(search));
   files.set(

@@ -2,15 +2,16 @@
 
 import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { createRoot } from "react-dom/client";
-import { Badge, Button, CopyButton, MantineProvider, Select, Table as MantineTable, TextInput, Tooltip } from "@mantine/core";
+import { Badge, Button, CopyButton, MantineProvider, NumberInput, Select, Table as MantineTable, TextInput, Tooltip } from "@mantine/core";
 import "@mantine/core/styles.css";
 import "leaflet/dist/leaflet.css";
 import { CircleMarker, MapContainer, TileLayer } from "react-leaflet";
 import { type ColumnDef, createSortedRowModel, rowSortingFeature, tableFeatures, useTable } from "@tanstack/react-table";
+import { formatBytes, formatCount, type Dimensions } from "../dimensions";
 import "../styles.css";
 
 /** A row of search-index.json, as site/build-site.ts writes it. */
-interface SearchRecord {
+interface SearchRecord extends Dimensions {
   readonly id: string;
   readonly namespace?: string;
   readonly aliases?: readonly string[];
@@ -45,11 +46,36 @@ const features = tableFeatures({ rowSortingFeature, sortedRowModel: createSorted
 
 type ListingFeatures = typeof features;
 
+/** The count bounds the listing filters by: a minimum and a maximum for nodes and for edges, with the placeholder each input shows. */
+type BoundKey = "minNodes" | "maxNodes" | "minEdges" | "maxEdges";
+const BOUND_INPUTS: readonly (readonly [BoundKey, string])[] = [
+  ["minNodes", "min nodes"],
+  ["maxNodes", "max nodes"],
+  ["minEdges", "min edges"],
+  ["maxEdges", "max edges"],
+];
+
+/**
+ * Whether a recorded count lies inside the bounds set on it. A count the entry does not record is inside no bound, so setting one hides the entries that cannot answer it.
+ * @param count - The count, or undefined where the entry records none.
+ * @param min - The least wanted, when set.
+ * @param max - The most wanted, when set.
+ * @returns True when the count passes every bound that is set.
+ */
+function within(count: number | undefined, min: number | undefined, max: number | undefined): boolean {
+  if (min === undefined && max === undefined) {
+    return true;
+  }
+
+  return count !== undefined && (min === undefined || count >= min) && (max === undefined || count <= max);
+}
+
 /** The interactive listing: filter inputs over the search index and a sortable table of what matches. */
 function Listing({ records }: { readonly records: readonly SearchRecord[] }): ReactNode {
   const [text, setText] = useState("");
   const [kind, setKind] = useState<string | null>(null);
   const [domain, setDomain] = useState<string | null>(null);
+  const [bounds, setBounds] = useState<Readonly<Record<BoundKey, number | undefined>>>({ minNodes: undefined, maxNodes: undefined, minEdges: undefined, maxEdges: undefined });
 
   const kinds = useMemo(() => [...new Set(records.map((record) => record.kind))].sort(), [records]);
   const domains = useMemo(() => [...new Set(records.flatMap((record) => (record.domain === undefined ? [] : [record.domain])))].sort(), [records]);
@@ -64,6 +90,9 @@ function Listing({ records }: { readonly records: readonly SearchRecord[] }): Re
       if (domain !== null && record.domain !== domain) {
         return false;
       }
+      if (!within(record.nodes, bounds.minNodes, bounds.maxNodes) || !within(record.edges, bounds.minEdges, bounds.maxEdges)) {
+        return false;
+      }
       if (needle === "") {
         return true;
       }
@@ -71,7 +100,7 @@ function Listing({ records }: { readonly records: readonly SearchRecord[] }): Re
 
       return haystack.some((field) => field.toLowerCase().includes(needle));
     });
-  }, [records, text, kind, domain]);
+  }, [records, text, kind, domain, bounds]);
 
   // Column definitions are written as plain literals against the hook's own column type, not built through createColumnHelper: the helper infers each accessor over its own value type, which does not inter-type with the widened union under exactOptionalPropertyTypes. The order matches the static table's Name, Id, Kind, Domain so the two views of the listing read the same way.
   const columns: readonly ColumnDef<ListingFeatures, SearchRecord>[] = [
@@ -79,6 +108,11 @@ function Listing({ records }: { readonly records: readonly SearchRecord[] }): Re
     { accessorKey: "id", header: "Id", cell: (info) => <code>{info.row.original.id}</code> },
     { accessorKey: "kind", header: "Kind" },
     { accessorKey: "domain", header: "Domain" },
+    // An unrecorded count sorts after every recorded one, whichever way the column is sorted.
+    { id: "nodes", accessorFn: (row) => row.nodes, header: "Nodes", sortUndefined: "last", cell: (info) => formatCount(info.row.original.nodes) },
+    { id: "edges", accessorFn: (row) => row.edges, header: "Edges", sortUndefined: "last", cell: (info) => formatCount(info.row.original.edges) },
+    { id: "instances", accessorFn: (row) => row.instances, header: "Instances", sortUndefined: "last", cell: (info) => formatCount(info.row.original.instances) },
+    { id: "size", accessorFn: (row) => row.bytes, header: "Size", sortUndefined: "last", cell: (info) => formatBytes(info.row.original.bytes) },
     { id: "tags", accessorFn: (row) => row.tags.join(", "), header: "Tags" },
   ];
 
@@ -90,6 +124,9 @@ function Listing({ records }: { readonly records: readonly SearchRecord[] }): Re
         <TextInput className="island-search" placeholder="search the catalogue" value={text} onChange={(event) => { setText(event.currentTarget.value); }} />
         <Select className="island-filter" placeholder="kind" data={kinds} value={kind} onChange={(value) => { setKind(value); }} clearable searchable />
         <Select className="island-filter" placeholder="domain" data={domains} value={domain} onChange={(value) => { setDomain(value); }} clearable searchable />
+        {BOUND_INPUTS.map(([key, placeholder]) => (
+          <NumberInput key={key} className="island-bound" placeholder={placeholder} min={0} allowNegative={false} allowDecimal={false} value={bounds[key] ?? ""} onChange={(value) => { setBounds((current) => ({ ...current, [key]: typeof value === "number" ? value : undefined })); }} />
+        ))}
         <Badge variant="light" size="lg">
           {String(filtered.length)} of {String(records.length)}
         </Badge>
