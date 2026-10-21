@@ -6,7 +6,7 @@ import { getOwn } from "../own";
 import { bunzip2 } from "./bzip2";
 import { pointShapefileToCsv } from "./shapefile";
 import { readTar } from "./tar";
-import { sheetToCsv } from "./xlsx";
+import { sheetNames, sheetToCsv } from "./xlsx";
 
 /** The file a recipe's archive step yields: its bytes, and the member path it came from when the archive holds several. */
 export interface Unpacked {
@@ -215,13 +215,44 @@ export interface Member {
 }
 
 /**
- * Unpacks downloaded bytes into every file a collection's selector matches.
+ * Unpacks downloaded bytes into every file a collection's selector matches, or, with an `xlsx` inner layout, into every sheet of every matched workbook that its `sheets` pattern matches as the sheet's CSV, at the member's path and the sheet's name joined by `/`, members in path order and sheets in the workbook's order.
  * @param bytes - The downloaded bytes.
  * @param archive - The recipe's archive layout, which selects members with `members`.
- * @returns Each matching file, in path order.
- * @throws ArchiveError when the bytes are not a well-formed archive of the stated kind or the selector matches no member.
+ * @returns Each file.
+ * @throws ArchiveError when the bytes are not a well-formed archive of the stated kind, the selector matches no member, or a member an `xlsx` layout reads is not a workbook or has no sheet the pattern matches.
  */
 export function unpackMembers(bytes: Uint8Array, archive: CollectionArchive): Member[] {
+  const members = selectMembers(bytes, archive);
+  if (archive.inner === undefined) {
+    return members;
+  }
+
+  const { sheets } = archive.inner;
+  const wanted = sheets === undefined ? undefined : new RegExp(`^(?:${sheets})$`, "u");
+
+  return members.flatMap((member) => {
+    let names: string[];
+    try {
+      names = sheetNames(member.bytes).filter((sheet) => wanted === undefined || wanted.test(sheet));
+    } catch (error) {
+      throw new ArchiveError(`member ${member.path}: ${error instanceof Error ? error.message : String(error)}`, { cause: error });
+    }
+    if (names.length === 0) {
+      throw new ArchiveError(`member ${member.path} has no sheet matching ${sheets ?? ""}`);
+    }
+
+    return names.map((sheet) => ({ path: `${member.path}/${sheet}`, bytes: sheetToCsv(member.bytes, sheet) }));
+  });
+}
+
+/**
+ * Unpacks every member a collection's selector matches.
+ * @param bytes - The downloaded bytes.
+ * @param archive - The recipe's archive layout.
+ * @returns Each matching member, in path order.
+ * @throws ArchiveError when the bytes are not a well-formed archive of the stated kind or the selector matches no member.
+ */
+function selectMembers(bytes: Uint8Array, archive: CollectionArchive): Member[] {
   if (archive.kind === "zip") {
     const names: string[] = [];
     unzip(bytes, (file) => {

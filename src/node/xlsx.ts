@@ -242,6 +242,36 @@ function readRows(xml: string, strings: readonly string[], dates: ReadonlySet<nu
 }
 
 /**
+ * The names of a workbook's sheets, in the order the workbook lists them, which is the order of the tabs an editor shows.
+ * @param bytes - The workbook.
+ * @returns The sheet names.
+ * @throws ArchiveError when the bytes are not a workbook.
+ */
+export function sheetNames(bytes: Uint8Array): string[] {
+  let part: Uint8Array | undefined;
+  try {
+    part = getOwn(
+      unzipSync(bytes, { filter: (file) => file.name === "xl/workbook.xml" }),
+      "xl/workbook.xml",
+    );
+  } catch (error) {
+    throw new ArchiveError(`not a valid workbook: ${error instanceof Error ? error.message : String(error)}`, { cause: error });
+  }
+  if (part === undefined) {
+    throw new ArchiveError("the file is not an xlsx workbook: it has no xl/workbook.xml");
+  }
+
+  return elements(new TextDecoder("utf-8").decode(part), "sheet").map((sheet, index) => {
+    const name = sheet["name"];
+    if (name === undefined) {
+      throw new ArchiveError(`the workbook's sheet ${String(index + 1)} has no name`);
+    }
+
+    return name;
+  });
+}
+
+/**
  * Writes one sheet of an xlsx workbook as CSV text, so a recipe reads it with the table parser: one line for every row number from the first to the last (a row the sheet leaves out is an empty line, so the lines above the header are the rows an editor shows), every line the width of the sheet's widest row, a date cell as ISO 8601 text, a boolean as TRUE or FALSE, a number as the text the workbook stores, and a formula as its stored result.
  * @param bytes - The workbook.
  * @param sheet - The sheet's name.
