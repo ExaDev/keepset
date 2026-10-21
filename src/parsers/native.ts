@@ -51,14 +51,30 @@ export type NativeDocument = NativeGraph | NativeTable | NativeInstance;
  * Collects node ids in order of first appearance, so a parser that learns its nodes from its edges emits them deterministically.
  */
 export class NodeOrder {
-  readonly #ids = new Set<string>();
+  /** Each id, keyed by itself, so that `intern` can hand back the one string held for it. */
+  readonly #ids = new Map<string, string>();
 
   /**
    * Records an id; a repeat keeps its first position.
    * @param id - The node id.
    */
   add(id: string): void {
-    this.#ids.add(id);
+    this.intern(id);
+  }
+
+  /**
+   * Records an id and returns the string held for it, so that every edge naming a node shares one string instead of each holding a copy cut from its own line.
+   * @param id - The node id.
+   * @returns The first string recorded with this value.
+   */
+  intern(id: string): string {
+    const held = this.#ids.get(id);
+    if (held !== undefined) {
+      return held;
+    }
+    this.#ids.set(id, id);
+
+    return id;
   }
 
   /** @returns Whether the id has been recorded. */
@@ -68,7 +84,40 @@ export class NodeOrder {
 
   /** @returns The nodes, in first-appearance order. */
   nodes(): NativeNode[] {
-    return [...this.#ids].map((id) => ({ id }));
+    return [...this.#ids.keys()].map((id) => ({ id }));
+  }
+}
+
+/**
+ * Collects the nodes of a bipartite graph whose two sets a source numbers independently, giving each set's ids its own prefix (`u:1` and `m:1` are a user and a movie) and type. Nodes are kept in order of first appearance across both sets, and each distinct id is held once however many edges name it.
+ */
+export class BipartiteNodes {
+  readonly #nodes: NativeTypedNode[] = [];
+
+  /**
+   * Opens one of the graph's node sets.
+   * @param prefix - The prefix its node ids take.
+   * @param type - Its nodes' type.
+   * @returns A function from an id as the source writes it to the node id, adding the node the first time the id appears in this set.
+   */
+  set(prefix: string, type: string): (raw: string) => string {
+    const known = new Map<string, string>();
+
+    return (raw) => {
+      let id = known.get(raw);
+      if (id === undefined) {
+        id = `${prefix}${raw}`;
+        known.set(raw, id);
+        this.#nodes.push({ id, type });
+      }
+
+      return id;
+    };
+  }
+
+  /** @returns The nodes, in first-appearance order. */
+  nodes(): NativeTypedNode[] {
+    return this.#nodes;
   }
 }
 
