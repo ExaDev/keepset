@@ -3,7 +3,7 @@ import { assertRoundTrip, encode, RoundTripMismatchError } from "crossmap";
 import { getDataset } from "../bundled";
 import { countTarget, getCollectionTarget, getTarget, type CategoryTarget, type CollectionTarget } from "../categories";
 import type { Dataset } from "../catalogue";
-import { KeepsetError, RecipeError } from "../errors";
+import { ArchiveError, KeepsetError, RecipeError } from "../errors";
 import type { NativeDocument } from "../parsers/native";
 import { parseNative, parseNativeFiles, parseNativeParts } from "../parsers/parse-native";
 import type { JsonScalar } from "../targets/json-scalar";
@@ -13,7 +13,7 @@ import { downloadPaged } from "./paged";
 import { metaOf, sourceRecord, sourceUrl, step } from "./recipe-run";
 import { isStreamed, roundTripTable, streamTable } from "./stream-dataset";
 import type { StreamableId, StreamedNodes } from "../categories";
-import type { Entry, Snapshot, Source } from "../entry";
+import type { Archive, Entry, FilesRecipe, Parser, Snapshot, Source } from "../entry";
 
 /** The network port a recipe downloads through: `downloadRaw` by default, which returns the bytes exactly as served, or a stand-in under test. */
 export type FetchPort = (url: string, init: { readonly signal?: AbortSignal }) => Promise<Response>;
@@ -33,17 +33,35 @@ export interface Download {
   readonly byteLength: number;
 }
 
-/** Where a fetched result's bytes came from: enough to say which entry, catalogue and source produced it, which URL was actually requested, when, and exactly which bytes arrived. */
-export interface Provenance extends Download {
+/** What every provenance record says: which entry and catalogue produced the result, its category, and when it was fetched. */
+interface ProvenanceOf {
   readonly entryId: string;
   readonly catalogue: Dataset["catalogue"];
   readonly category: Entry["category"];
   readonly retrievedAt: string;
+}
+
+/** The provenance of a result read from one download: the download, and the archive member or members it was read from. */
+export interface DownloadProvenance extends ProvenanceOf, Download {
   /** The archive member a document was read from. */
   readonly member?: string;
   /** The archive members a collection, or a document read from several files, was read from, in the order they were read. */
   readonly members?: readonly string[];
 }
+
+/** One file of a collection read file by file: its download, the file's path in the collection, and the instances it gave (the path itself, or the path joined to each archive member it unpacked into). */
+export interface FileDownload extends Download {
+  readonly path: string;
+  readonly instances: readonly string[];
+}
+
+/** The provenance of a collection read from files downloaded one by one: each file's download, in the order they were read. */
+export interface FilesProvenance extends ProvenanceOf {
+  readonly files: readonly FileDownload[];
+}
+
+/** Where a fetched result's bytes came from: enough to say which entry, catalogue and source produced it, which URL was actually requested, when, and exactly which bytes arrived, for the one download a recipe reads or for each file of a collection read file by file (told apart by `files`). */
+export type Provenance = DownloadProvenance | FilesProvenance;
 
 /** Whether decoding a dataset's encoded native document gives the native document back, with the provenance of the bytes it was checked on. */
 export type RoundTripReport = { readonly holds: true; readonly provenance: Provenance } | { readonly holds: false; readonly path: string; readonly message: string; readonly provenance: Provenance };
@@ -61,7 +79,7 @@ export interface NodeSink {
 export interface StreamedDataset {
   readonly dataset: Dataset;
   readonly meta: Readonly<Record<string, JsonScalar>>;
-  readonly provenance: Provenance;
+  readonly provenance: DownloadProvenance;
   readonly counts: ReadonlyMap<string, number>;
   readonly warnings: readonly string[];
 }
@@ -104,6 +122,135 @@ function withId(document: unknown, id: string | undefined): unknown {
 }
 
 /**
+ * Downloads one URL's bytes through the network port.
+ * @param port - The network port.
+ * @param url - The URL.
+ * @param signal - Aborts the download.
+ * @returns The bytes.
+ * @throws KeepsetError when the server does not answer successfully.
+ */
+async function downloadBytes(port: FetchPort, url: string, signal: AbortSignal | undefined): Promise<Uint8Array> {
+  const response = await port(url, signal === undefined ? {} : { signal });
+  if (!response.ok) {
+    throw new KeepsetError(`${url} answered ${String(response.status)} ${response.statusText}`);
+  }
+
+  return new Uint8Array(await response.arrayBuffer());
+}
+
+/**
+ * The record of one download: the source, the URL requested and a hash of exactly the bytes that arrived.
+ * @param source - The entry's source.
+ * @param fetchedUrl - The URL requested.
+ * @param bytes - The bytes.
+ * @returns The download record.
+ */
+function downloadOf(source: Source, fetchedUrl: string, bytes: Uint8Array): Download {
+  return { source: sourceRecord(source), fetchedUrl, sha256: createHash("sha256").update(bytes).digest("hex"), byteLength: bytes.byteLength };
+}
+
+/**
+ * Parses one file of a collection into its native document, naming the file when it fails.
+ * @param id - The instance's id.
+ * @param bytes - The file's bytes.
+ * @param parser - The recipe's parser.
+ * @returns The instance's native document, with only its own header values as `meta`.
+ * @throws KeepsetError naming the instance when the file does not parse.
+ */
+function parseInstance(id: string, bytes: Uint8Array, parser: Parser): { readonly id: string; readonly native: NativeWithMeta } {
+  try {
+    const parsed = parseNative(bytes, parser);
+
+    return { id, native: { ...parsed, meta: "meta" in parsed ? parsed.meta : {} } };
+  } catch (error) {
+    throw new KeepsetError(`member ${id}: ${error instanceof Error ? error.message : String(error)}`, { cause: error });
+  }
+}
+
+/**
+ * Unpacks and parses the bytes of one archive or file into instances, each member let go once it is parsed.
+ * @param bytes - The bytes.
+ * @param archive - Their archive layout.
+ * @param parser - The recipe's parser.
+ * @param prefix - The path the instance ids are filed under, joined to each member's path, or undefined to use the member's path alone.
+ * @returns The instances, in member order.
+ */
+function instancesOf(bytes: Uint8Array, archive: Archive, parser: Parser, prefix: string | undefined): { readonly id: string; readonly native: NativeWithMeta }[] {
+  const named = (member: string | undefined): string => {
+    if (prefix === undefined) {
+      // A collection read from one download is always of `members`, which name every instance.
+      if (member === undefined) {
+        throw new KeepsetError("an instance of a collection has no path");
+      }
+
+      return member;
+    }
+
+    return member === undefined ? prefix : `${prefix}/${member}`;
+  };
+  if ("members" in archive) {
+    return Array.from(unpackMembers(bytes, archive), (member) => parseInstance(named(member.path), member.bytes, parser));
+  }
+  const unpacked = unpack(bytes, archive);
+
+  return [parseInstance(named(unpacked.member), unpacked.bytes, parser)];
+}
+
+/**
+ * Unpacks and parses instances as `instancesOf` does, failing at the extract step when the archive cannot be read or its selector matches nothing, and at the parse step when a member does not parse: the members are unpacked one at a time as they are parsed, so the two steps interleave.
+ * @param entryId - The entry.
+ * @param run - The unpacking and parsing.
+ * @returns The instances.
+ * @throws RecipeError naming the entry and the step that failed.
+ */
+function extractAndParse<Result>(entryId: string, run: () => Result): Result {
+  try {
+    return run();
+  } catch (error) {
+    throw new RecipeError(entryId, error instanceof ArchiveError ? "extract" : "parse", error instanceof Error ? error.message : String(error), { cause: error });
+  }
+}
+
+/**
+ * Runs a files recipe: downloads each file in turn (a dead file from its own pinned snapshot), unpacks it and parses it into its instances, so only one file's bytes are held at a time.
+ * @param dataset - The dataset.
+ * @param recipe - Its files recipe.
+ * @param options - The network port, abort signal and clock.
+ * @returns The instances and the provenance of every file.
+ */
+async function runFiles(dataset: Dataset, recipe: FilesRecipe, options: FetchOptions): Promise<NativeRun> {
+  const { entry } = dataset;
+  const { fetch: port = downloadRaw, signal, now = () => new Date() } = options;
+  const retrievedAt = now().toISOString();
+  const read = async (index: number): Promise<readonly { readonly documents: readonly { readonly id: string; readonly native: NativeWithMeta }[]; readonly download: FileDownload }[]> => {
+    const file = recipe.files[index];
+    if (file === undefined) {
+      return [];
+    }
+    const source = entry.sources[file.source];
+    if (source === undefined) {
+      throw new RecipeError(entry.id, "recipe", `file ${file.path} names source ${String(file.source)}, which the entry does not have`);
+    }
+    const fetchedUrl = sourceUrl(source);
+    const bytes = await step(entry.id, "download", async () => downloadBytes(port, fetchedUrl, signal));
+    const documents = extractAndParse(entry.id, () => instancesOf(bytes, file.archive, recipe.parser, file.path));
+
+    return [{ documents, download: { ...downloadOf(source, fetchedUrl, bytes), path: file.path, instances: documents.map((document) => document.id) } }, ...(await read(index + 1))];
+  };
+  const files = await read(0);
+  const documents = files.flatMap((file) => file.documents);
+  const ids = new Set<string>();
+  for (const { id } of documents) {
+    if (ids.has(id)) {
+      throw new RecipeError(entry.id, "extract", `two files give the instance ${id}`);
+    }
+    ids.add(id);
+  }
+
+  return { collection: true, documents, provenance: { entryId: entry.id, catalogue: dataset.catalogue, category: entry.category, retrievedAt, files: files.map((file) => file.download) } };
+}
+
+/**
  * Runs a recipe's download, extract and parse steps, and builds the native documents the crosswalk receives.
  * @param dataset - The dataset.
  * @param options - The network port, abort signal and clock.
@@ -116,6 +263,9 @@ async function runToNative(dataset: Dataset, options: FetchOptions): Promise<Nat
   if (recipe.status === "not-fetchable") {
     throw new RecipeError(entry.id, "recipe", `the entry has no fetchable recipe: ${recipe.reason}`);
   }
+  if ("files" in recipe) {
+    return runFiles(dataset, recipe, options);
+  }
   if (recipe.stream === true) {
     throw new RecipeError(entry.id, "recipe", "the table is too large to hold as one document, so its recipe streams: read it with streamDataset, which hands its nodes on a page at a time");
   }
@@ -126,44 +276,20 @@ async function runToNative(dataset: Dataset, options: FetchOptions): Promise<Nat
   const fetchedUrl = sourceUrl(source);
 
   const retrievedAt = now().toISOString();
-  const bytes = await step(entry.id, "download", async () => {
-    if (recipe.paging !== undefined) {
-      return downloadPaged(fetchedUrl, recipe.paging, fetchPort, signal);
-    }
-    const response = await fetchPort(fetchedUrl, signal === undefined ? {} : { signal });
-    if (!response.ok) {
-      throw new KeepsetError(`${fetchedUrl} answered ${String(response.status)} ${response.statusText}`);
-    }
-
-    return new Uint8Array(await response.arrayBuffer());
-  });
-  const provenanceOf = (extra: Pick<Provenance, "member" | "members">): Provenance => ({
+  const bytes = await step(entry.id, "download", async () => (recipe.paging === undefined ? downloadBytes(fetchPort, fetchedUrl, signal) : downloadPaged(fetchedUrl, recipe.paging, fetchPort, signal)));
+  const provenanceOf = (extra: Pick<DownloadProvenance, "member" | "members">): DownloadProvenance => ({
     entryId: entry.id,
     catalogue: dataset.catalogue,
     category: entry.category,
-    source: sourceRecord(source),
-    fetchedUrl,
     retrievedAt,
-    sha256: createHash("sha256").update(bytes).digest("hex"),
-    byteLength: bytes.byteLength,
+    ...downloadOf(source, fetchedUrl, bytes),
     ...extra,
   });
   const { archive } = recipe;
   if ("members" in archive) {
-    const files = await step(entry.id, "extract", () => unpackMembers(bytes, archive));
-    const documents = await step(entry.id, "parse", () =>
-      files.map((file) => {
-        try {
-          const parsed = parseNative(file.bytes, recipe.parser);
+    const documents = extractAndParse(entry.id, () => instancesOf(bytes, archive, recipe.parser, undefined));
 
-          return { id: file.path, native: { ...parsed, meta: "meta" in parsed ? parsed.meta : {} } };
-        } catch (error) {
-          throw new KeepsetError(`member ${file.path}: ${error instanceof Error ? error.message : String(error)}`, { cause: error });
-        }
-      }),
-    );
-
-    return { collection: true, documents, provenance: provenanceOf({ members: files.map((file) => file.path) }) };
+    return { collection: true, documents, provenance: provenanceOf({ members: documents.map((document) => document.id) }) };
   }
   if ("parts" in archive) {
     const parts = await step(entry.id, "extract", () => unpackParts(bytes, archive));

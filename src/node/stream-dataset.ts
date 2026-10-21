@@ -11,7 +11,7 @@ import type { JsonScalar } from "../targets/json-scalar";
 import { downloadRaw } from "./download";
 import { IdSet } from "./id-set";
 import { csvPages, type CsvPaging } from "./paged";
-import type { FetchOptions, NodeSink, Provenance, RoundTripReport, StreamedDataset } from "./fetch-dataset";
+import type { DownloadProvenance, FetchOptions, NodeSink, RoundTripReport, StreamedDataset } from "./fetch-dataset";
 import { metaOf, sourceRecord, sourceUrl, step } from "./recipe-run";
 
 /** A streamed recipe, narrowed to the parts streaming reads. */
@@ -32,7 +32,7 @@ function streamedRecipe(entry: Entry): StreamedRecipe & { readonly category: Str
   if (recipe.status === "not-fetchable") {
     throw new RecipeError(entry.id, "recipe", `the entry has no fetchable recipe: ${recipe.reason}`);
   }
-  if (recipe.stream !== true) {
+  if ("files" in recipe || recipe.stream !== true) {
     throw new RecipeError(entry.id, "recipe", "the recipe is not streamed, so fetchDataset reads it as one document");
   }
   const { paging, parser } = recipe;
@@ -49,7 +49,7 @@ function streamedRecipe(entry: Entry): StreamedRecipe & { readonly category: Str
  * @returns True for a streamed recipe.
  */
 export function isStreamed(recipe: Recipe): boolean {
-  return recipe.status === "fetchable" && recipe.stream === true;
+  return recipe.status === "fetchable" && !("files" in recipe) && recipe.stream === true;
 }
 
 /**
@@ -108,7 +108,7 @@ async function* inStep<Item>(entryId: string, name: RecipeStep, source: Readonly
 interface NativeStream {
   readonly meta: Record<string, JsonScalar>;
   readonly pages: AsyncGenerator<readonly NativeRow[], void, undefined>;
-  readonly provenance: () => Provenance;
+  readonly provenance: () => DownloadProvenance;
 }
 
 /**

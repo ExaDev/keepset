@@ -350,44 +350,71 @@ export type Paging = z.infer<typeof PagingSchema>;
 
 /** The parser formats that read a dataset spread over several files of one archive, and so the only ones a `files` archive is given to. */
 export const MULTI_FILE_FORMATS: ReadonlySet<Parser["format"]> = new Set(["ogb"]);
-
-/** How to obtain the dataset: a fetchable recipe naming the source (by index into `sources`), the archive layout and the parser, or a statement that no declarative recipe exists yet and why. */
 /** The parser formats that read a document from named parts, and the part names each requires (none for a format whose part names are its own, such as the splits of a triples download). */
 const PART_FORMATS: ReadonlyMap<Parser["format"], readonly string[] | undefined> = new Map([
   ["kg-triples", undefined],
   ["hgb", ["nodes", "links"]],
 ]);
 
-export const RecipeSchema = z.discriminatedUnion("status", [
-  z
-    .object({
-      status: z.literal("fetchable"),
-      source: z.int().min(0),
-      paging: PagingSchema.optional(),
-      archive: ArchiveSchema,
-      parser: ParserSchema,
-      /** Set on a table too large for a fetch to hold as one document: `fetchDataset` refuses it, and `streamDataset` reads it a page at a time, handing on each page's nodes as they are checked. A streamed recipe reads a CSV paged source with no archive through the `csv-table` parser, for a category whose target is meta and nodes. */
-      stream: z.literal(true).optional(),
-    })
-    .strict()
-    .superRefine((recipe, ctx) => {
-      const required = PART_FORMATS.get(recipe.parser.format);
-      if ("parts" in recipe.archive && !PART_FORMATS.has(recipe.parser.format)) {
-        ctx.addIssue({ code: "custom", path: ["archive", "parts"], message: `the ${recipe.parser.format} parser reads one file, so its archive selects a member rather than parts` });
+/** A recipe that downloads one source: the source (by index into `sources`), how it is paged when it is a paged query, the archive layout its bytes unpack by, and the parser. */
+export const SourceRecipeSchema = z
+  .object({
+    status: z.literal("fetchable"),
+    source: z.int().min(0),
+    paging: PagingSchema.optional(),
+    archive: ArchiveSchema,
+    parser: ParserSchema,
+    /** Set on a table too large for a fetch to hold as one document: `fetchDataset` refuses it, and `streamDataset` reads it a page at a time, handing on each page's nodes as they are checked. A streamed recipe reads a CSV paged source with no archive through the `csv-table` parser, for a category whose target is meta and nodes. */
+    stream: z.literal(true).optional(),
+  })
+  .strict()
+  .superRefine((recipe, ctx) => {
+    const required = PART_FORMATS.get(recipe.parser.format);
+    if ("parts" in recipe.archive && !PART_FORMATS.has(recipe.parser.format)) {
+      ctx.addIssue({ code: "custom", path: ["archive", "parts"], message: `the ${recipe.parser.format} parser reads one file, so its archive selects a member rather than parts` });
+    }
+    if (required !== undefined) {
+      const names = "parts" in recipe.archive ? recipe.archive.parts.map((part) => part.name) : [];
+      if (names.length !== required.length || !required.every((name) => names.includes(name))) {
+        ctx.addIssue({ code: "custom", path: ["archive"], message: `the ${recipe.parser.format} parser reads the parts ${required.join(" and ")} from a parts archive` });
       }
-      if (required !== undefined) {
-        const names = "parts" in recipe.archive ? recipe.archive.parts.map((part) => part.name) : [];
-        if (names.length !== required.length || !required.every((name) => names.includes(name))) {
-          ctx.addIssue({ code: "custom", path: ["archive"], message: `the ${recipe.parser.format} parser reads the parts ${required.join(" and ")} from a parts archive` });
-        }
-      }
-          if (("files" in recipe.archive) !== MULTI_FILE_FORMATS.has(recipe.parser.format)) {
+      if (("files" in recipe.archive) !== MULTI_FILE_FORMATS.has(recipe.parser.format)) {
         ctx.addIssue({ code: "custom", path: ["archive"], message: `a files archive is read by a multi-file parser (${[...MULTI_FILE_FORMATS].join(", ")}), and such a parser reads only a files archive` });
       }
-}),
-  z.object({ status: z.literal("not-fetchable"), reason: z.string().min(1) }).strict(),
-]);
+  });
+
+/** One file of a collection read file by file: the path it is filed under in the collection, the entry's source it is downloaded from (by index into `sources`, so a dead file is fetched from its own pinned snapshot), and the archive layout its bytes unpack by into the one file or, with `members`, the several files the parser reads. */
+export const CollectionFileSchema = z.object({ path: RelativePathSchema, source: z.int().min(0), archive: ArchiveSchema }).strict();
+export type CollectionFile = z.infer<typeof CollectionFileSchema>;
+
+/** A recipe for a collection whose files are separate downloads (a repository tree, a set of files served one at a time) rather than members of one archive: every file is downloaded in turn and each file, or each member it unpacks into, is an instance, read by the one parser. An instance's id is the file's path, joined by `/` to the member's path when the file is an archive. */
+export const FilesRecipeSchema = z
+  .object({
+    status: z.literal("fetchable"),
+    files: z
+      .array(CollectionFileSchema)
+      .min(1)
+      .refine((files) => new Set(files.map((file) => file.path)).size === files.length, { message: "each file's path must be unique" }),
+    parser: ParserSchema,
+  })
+  .strict();
+
+/** How to obtain the dataset: a fetchable recipe that downloads one source, one that downloads each file of a collection, or a statement that no declarative recipe exists yet and why. The fetchable shapes share their status and are told apart by `files`, so this is a union of strict objects. */
+export const RecipeSchema = z.union([SourceRecipeSchema, FilesRecipeSchema, z.object({ status: z.literal("not-fetchable"), reason: z.string().min(1) }).strict()]);
 export type Recipe = z.infer<typeof RecipeSchema>;
+/** A fetchable recipe that downloads one source. */
+export type SourceRecipe = z.infer<typeof SourceRecipeSchema>;
+/** A fetchable recipe that downloads each file of a collection. */
+export type FilesRecipe = z.infer<typeof FilesRecipeSchema>;
+
+/**
+ * Whether a recipe reads a collection, whose result is `{ meta, instances }`: one that downloads each file of a collection, or one whose archive selects `members`.
+ * @param recipe - A recipe.
+ * @returns True for a collection recipe.
+ */
+export function readsCollection(recipe: Recipe): boolean {
+  return recipe.status === "fetchable" && ("files" in recipe || "members" in recipe.archive);
+}
 
 /**
  * Reports the ways a fetchable recipe's parts disagree with each other: a streamed recipe that is not a CSV paged source read by the `csv-table` parser with no archive, for a category that can be streamed, and a Socrata selection that leaves out the id column or a column the parser keeps.
@@ -395,7 +422,7 @@ export type Recipe = z.infer<typeof RecipeSchema>;
  * @param category - The entry's category.
  * @param ctx - The refinement context to report to.
  */
-function addRecipeIssues(recipe: Extract<Recipe, { readonly status: "fetchable" }>, category: CategoryId, ctx: z.core.$RefinementCtx): void {
+function addRecipeIssues(recipe: SourceRecipe, category: CategoryId, ctx: z.core.$RefinementCtx): void {
   const { paging, parser } = recipe;
   if (recipe.stream === true) {
     if (paging === undefined || paging.kind === "arcgis-query" || recipe.archive.kind !== "none" || parser.format !== "csv-table") {
@@ -459,19 +486,27 @@ export const EntrySchema = define(
       if (new Set(full).size !== full.length) {
         ctx.addIssue({ code: "custom", path: ["aliases"], message: "the entry's id and aliases must not give the same fully qualified name twice" });
       }
-      if (entry.recipe.status === "fetchable" && entry.recipe.source >= entry.sources.length) {
+      if (entry.recipe.status === "fetchable" && "source" in entry.recipe && entry.recipe.source >= entry.sources.length) {
         ctx.addIssue({ code: "custom", path: ["recipe", "source"], message: `names source ${String(entry.recipe.source)} but the entry has ${String(entry.sources.length)}` });
       }
       if ("target" in entry.crosswalk && entry.crosswalk.target !== entry.category) {
         ctx.addIssue({ code: "custom", path: ["crosswalk", "target"], message: `must be the entry's category, ${entry.category}` });
       }
-      if (entry.recipe.status === "fetchable") {
+      if (entry.recipe.status === "fetchable" && !("files" in entry.recipe)) {
         addRecipeIssues(entry.recipe, entry.category, ctx);
       }
-      const counted = countedKeys(entry.category, entry.recipe.status === "fetchable" && "members" in entry.recipe.archive);
+      if (entry.recipe.status === "fetchable" && "files" in entry.recipe) {
+        for (const [index, file] of entry.recipe.files.entries()) {
+          if (file.source >= entry.sources.length) {
+            ctx.addIssue({ code: "custom", path: ["recipe", "files", index, "source"], message: `names source ${String(file.source)} but the entry has ${String(entry.sources.length)}` });
+          }
+        }
+      }
+      const collection = readsCollection(entry.recipe);
+      const counted = countedKeys(entry.category, collection);
       for (const key of Object.keys(entry.expectedCounts)) {
         if (!counted.includes(key)) {
-          ctx.addIssue({ code: "custom", path: ["expectedCounts", key], message: `${entry.category} ${entry.recipe.status === "fetchable" && "members" in entry.recipe.archive ? "collections count" : "counts"} only ${counted.join(", ")}` });
+          ctx.addIssue({ code: "custom", path: ["expectedCounts", key], message: `${entry.category} ${collection ? "collections count" : "counts"} only ${counted.join(", ")}` });
         }
       }
       for (const key of RESERVED_META_KEYS) {

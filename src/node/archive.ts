@@ -221,22 +221,20 @@ export interface Member {
 }
 
 /**
- * Unpacks downloaded bytes into every file a collection's selector matches, or, with an `xlsx` inner layout, into every sheet of every matched workbook that its `sheets` pattern matches as the sheet's CSV, at the member's path and the sheet's name joined by `/`, members in path order and sheets in the workbook's order.
+ * Unpacks downloaded bytes into every file a collection's selector matches, or, with an `xlsx` inner layout, into every sheet of every matched workbook that its `sheets` pattern matches as the sheet's CSV, at the member's path and the sheet's name joined by `/`, members in path order and sheets in the workbook's order. The files are given one at a time: a zip member is inflated only when it is reached, so a reader that lets each file go before taking the next holds one member's bytes beside the archive, never every member at once.
  * @param bytes - The downloaded bytes.
  * @param archive - The recipe's archive layout, which selects members with `members`.
  * @returns Each file.
- * @throws ArchiveError when the bytes are not a well-formed archive of the stated kind, the selector matches no member, or a member an `xlsx` layout reads is not a workbook or has no sheet the pattern matches.
+ * @throws ArchiveError when the bytes are not a well-formed archive of the stated kind, the selector matches no member (at the first file taken), or a member an `xlsx` layout reads is not a workbook or has no sheet the pattern matches (at that member).
  */
-export function unpackMembers(bytes: Uint8Array, archive: CollectionArchive): Member[] {
-  const members = selectMembers(bytes, archive);
-  if (archive.inner === undefined) {
-    return members;
-  }
-
-  const { sheets } = archive.inner;
+export function* unpackMembers(bytes: Uint8Array, archive: CollectionArchive): Generator<Member, void, undefined> {
+  const { sheets } = archive.inner ?? {};
   const wanted = sheets === undefined ? undefined : new RegExp(`^(?:${sheets})$`, "u");
-
-  return members.flatMap((member) => {
+  for (const member of selectMembers(bytes, archive)) {
+    if (archive.inner === undefined) {
+      yield member;
+      continue;
+    }
     let names: string[];
     try {
       names = sheetNames(member.bytes).filter((sheet) => wanted === undefined || wanted.test(sheet));
@@ -246,20 +244,19 @@ export function unpackMembers(bytes: Uint8Array, archive: CollectionArchive): Me
     if (names.length === 0) {
       throw new ArchiveError(`member ${member.path} has no sheet matching ${sheets ?? ""}`);
     }
-
-    return names.map((sheet) => ({ path: `${member.path}/${sheet}`, bytes: sheetToCsv(member.bytes, { kind: "xlsx", sheet }) }));
-  });
+    yield* names.map((sheet) => ({ path: `${member.path}/${sheet}`, bytes: sheetToCsv(member.bytes, { kind: "xlsx", sheet }) }));
+  }
 }
 
 /**
- * Unpacks every member a collection's selector matches.
+ * Unpacks every member a collection's selector matches, one at a time.
  * @param bytes - The downloaded bytes.
  * @param archive - The recipe's archive layout.
  * @returns Each matching member, in path order.
- * @throws ArchiveError when the bytes are not a well-formed archive of the stated kind or the selector matches no member.
+ * @throws ArchiveError when the bytes are not a well-formed archive of the stated kind or the selector matches no member, at the first member taken.
  */
-function selectMembers(bytes: Uint8Array, archive: CollectionArchive): Member[] {
-  return readMembers(bytes, archive.kind, (paths) => pickAll(paths, archive.members).map((path) => ({ path })));
+function* selectMembers(bytes: Uint8Array, archive: CollectionArchive): Generator<Member, void, undefined> {
+  yield* readMembers(bytes, archive.kind, (paths) => pickAll(paths, archive.members).map((path) => ({ path })));
 }
 
 /** One named part of a document read from several files: the name the recipe gives it, and the file. */
@@ -275,62 +272,47 @@ export interface Part extends Member {
  * @throws ArchiveError when the bytes are not a well-formed archive of the stated kind or a part's selector does not match exactly one member.
  */
 export function unpackParts(bytes: Uint8Array, archive: PartsArchive): Part[] {
-  return readMembers(bytes, archive.kind, (paths) => archive.parts.map((part) => ({ name: part.name, path: pick(paths, part.member) })));
+  return [...readMembers(bytes, archive.kind, (paths) => archive.parts.map((part) => ({ name: part.name, path: pick(paths, part.member) })))];
 }
 
 /**
- * Reads the members of a file archive that a choice makes from its member paths, listing the archive once and decompressing it once however many members are chosen.
- * @param bytes - The downloaded bytes.
+ * Reads the members of a file archive that a choice makes from its member paths, one at a time: the archive is listed once and a zip member is inflated only when it is reached, so a reader that lets each member go before taking the next holds one member's bytes beside the archive.
+ * @param bytes - The archive's bytes.
  * @param kind - The archive kind.
  * @param choose - Given every member path, the members to read, in the order wanted, each naming its path.
  * @returns Each choice with the bytes of the member it names, in the order chosen.
  * @throws ArchiveError when the bytes are not a well-formed archive of the stated kind or a chosen member cannot be read; whatever `choose` throws.
  */
-function readMembers<Choice extends { readonly path: string }>(bytes: Uint8Array, kind: CollectionArchive["kind"], choose: (paths: readonly string[]) => readonly Choice[]): (Choice & { readonly bytes: Uint8Array })[] {
+function* readMembers<Choice extends { readonly path: string }>(bytes: Uint8Array, kind: CollectionArchive["kind"], choose: (paths: readonly string[]) => readonly Choice[]): Generator<Choice & { readonly bytes: Uint8Array }, void, undefined> {
   if (kind === "zip") {
     const names: string[] = [];
+    // fflate's filter sees every entry's name before inflating, so listing the names decompresses nothing.
     unzip(bytes, (file) => {
       names.push(file.name);
 
       return false;
     });
-    const choices = choose(names);
-    const chosen = new Set(choices.map((choice) => choice.path));
-    const files = unzip(bytes, (candidate) => chosen.has(candidate.name));
-
-    return choices.map((choice) => {
-      const file = getOwn(files, choice.path);
+    for (const choice of choose(names)) {
+      const file = getOwn(
+        unzip(bytes, (candidate) => candidate.name === choice.path),
+        choice.path,
+      );
       if (file === undefined) {
         throw new ArchiveError(`zip member ${choice.path} could not be read`);
       }
+      yield { ...choice, bytes: file };
+    }
 
-      return { ...choice, bytes: file };
-    });
+    return;
   }
   const members = readTar(untarred(bytes, kind));
-
-  return choose(members.map((member) => member.path)).map((choice) => {
+  for (const choice of choose(members.map((member) => member.path))) {
     const found = members.find((member) => member.path === choice.path);
     if (found === undefined) {
       throw new ArchiveError(`tar member ${choice.path} could not be read`);
     }
-
-    return { ...choice, bytes: found.data };
-  });
-}
-
-/**
- * Removes the compression a tar archive kind states, leaving the tar bytes.
- * @param bytes - The downloaded bytes.
- * @param kind - The tar archive kind: `tar` is uncompressed, `tar.gz` is gzip and `tar.bz2` is bzip2.
- * @returns The tar archive.
- */
-function untarred(bytes: Uint8Array, kind: "tar" | "tar.gz" | "tar.bz2"): Uint8Array {
-  if (kind === "tar") {
-    return bytes;
+    yield { ...choice, bytes: found.data };
   }
-
-  return kind === "tar.gz" ? gunzip(bytes) : bunzip2(bytes);
 }
 
 /**

@@ -1,6 +1,6 @@
 import { parseArgs } from "node:util";
 // Through the package's own name, as cli/keepset.ts imports the library: an `instanceof` check needs the very class the library throws, not a second copy bundled into the command.
-import { KeepsetError, NAME_SEPARATOR, type ArchiveMember, type Dataset, type DatasetQuery, type NamespaceNode, type SyntaxIssue } from "keepset";
+import { KeepsetError, NAME_SEPARATOR, type Archive, type ArchiveMember, type Dataset, type DatasetQuery, type NamespaceNode, type SyntaxIssue } from "keepset";
 import type { FetchedDataset, NodeSink, RoundTripReport, StreamedDataset } from "keepset/node";
 
 /**
@@ -14,6 +14,18 @@ function selectorText(selector: ArchiveMember): string {
   }
 
   return "pattern" in selector ? `matching ${selector.pattern}` : `ending ${selector.extensions.join(" or ")}`;
+}
+
+/**
+ * Says how a download unpacks, for the `show` output.
+ * @param archive - The archive layout.
+ * @returns Its kind, the member or members it selects and any inner archive.
+ */
+function archiveText(archive: Archive): string {
+  const innerText = "inner" in archive && archive.inner !== undefined ? `, inner ${archive.inner.kind}${"member" in archive.inner ? `, member ${selectorText(archive.inner.member)}` : ""}` : "";
+  const memberText = "member" in archive ? `, member ${selectorText(archive.member)}${innerText}` : "members" in archive ? `, members ${selectorText(archive.members)}` : "parts" in archive ? `, parts ${archive.parts.map((part) => `${part.name} from ${selectorText(part.member)}`).join(", ")}` : "files" in archive ? `, files ${selectorText(archive.files)}${innerText}` : "";
+
+  return `${archive.kind}${memberText}`;
 }
 
 /** The library calls the command delegates to: every command is one of these plus argument parsing and output formatting, injected so the command's own layer is tested alone. */
@@ -224,11 +236,13 @@ export function formatShow(dataset: Dataset): string {
   if (recipe.status === "not-fetchable") {
     lines.push(`  not fetchable: ${recipe.reason}`);
   } else {
-    const { archive } = recipe;
-    const innerText = "inner" in archive && archive.inner !== undefined ? `, inner ${archive.inner.kind}${"member" in archive.inner ? `, member ${selectorText(archive.inner.member)}` : ""}` : "";
-    const memberText = "member" in archive ? `, member ${selectorText(archive.member)}${innerText}` : "members" in archive ? `, members ${selectorText(archive.members)}` : "parts" in archive ? `, parts ${archive.parts.map((part) => `${part.name} from ${selectorText(part.member)}`).join(", ")}` : "files" in archive ? `, files ${selectorText(archive.files)}${innerText}` : "";
     const { format, ...options } = recipe.parser;
-    lines.push(`  source: [${String(recipe.source)}]`, `  archive: ${archive.kind}${memberText}`, `  parser: ${format} ${JSON.stringify(options)}`);
+    if ("files" in recipe) {
+      lines.push(`  files: ${String(recipe.files.length)}, each downloaded from its own source`, ...recipe.files.map((file) => `    ${file.path}: source [${String(file.source)}], archive ${archiveText(file.archive)}`));
+    } else {
+      lines.push(`  source: [${String(recipe.source)}]${recipe.stream === true ? ", streamed" : ""}`, `  archive: ${archiveText(recipe.archive)}`);
+    }
+    lines.push(`  parser: ${format} ${JSON.stringify(options)}`);
   }
   lines.push("", `crosswalk: ${crosswalk.source} -> ${crosswalk.target}`);
   for (const rule of crosswalk.rules) {
@@ -364,7 +378,8 @@ export async function run(args: readonly string[], library: CliLibrary, io: CliI
 
       return EXIT_OK;
     }
-    if (command === "fetch" && dataset.entry.recipe.status === "fetchable" && dataset.entry.recipe.stream === true) {
+    const { recipe } = dataset.entry;
+    if (command === "fetch" && recipe.status === "fetchable" && !("files" in recipe) && recipe.stream === true) {
       const out = values.out ?? `${id}.json`;
       const document = jsonDocumentSink(io.openFile(out));
       const streamed = await library.streamDataset(id, document.sink);

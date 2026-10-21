@@ -149,8 +149,8 @@ describe("bzip2 archives", () => {
     const archive = bzip2(tar(files));
     expect(unpack(archive, { kind: "tar.bz2", member: { path: "out.moreno_lesmis_lesmis" } }).member).toBe("moreno_lesmis/out.moreno_lesmis_lesmis");
     expect(unpack(archive, { kind: "tar.bz2", member: { pattern: "(?:[^/]+/)?out\\.[^/]+" } })).toEqual({ bytes: new TextEncoder().encode("% sym posweighted\n1 2 1\n"), member: "moreno_lesmis/out.moreno_lesmis_lesmis" });
-    expect(names(unpackMembers(archive, { kind: "tar.bz2", members: { extensions: [".moreno_lesmis"] } }))).toEqual(["moreno_lesmis/README.moreno_lesmis"]);
-    expect(names(unpackMembers(archive, { kind: "tar.bz2", members: { pattern: "moreno_lesmis/(?:meta|out)\\..*" } }))).toEqual(names(unpackMembers(gzip(tar(files)), { kind: "tar.gz", members: { pattern: "moreno_lesmis/(?:meta|out)\\..*" } })));
+    expect(names([...unpackMembers(archive, { kind: "tar.bz2", members: { extensions: [".moreno_lesmis"] } })])).toEqual(["moreno_lesmis/README.moreno_lesmis"]);
+    expect(names([...unpackMembers(archive, { kind: "tar.bz2", members: { pattern: "moreno_lesmis/(?:meta|out)\\..*" } })])).toEqual(names([...unpackMembers(gzip(tar(files)), { kind: "tar.gz", members: { pattern: "moreno_lesmis/(?:meta|out)\\..*" } })]));
   });
 
   it("reads an archive written by the system tar and bzip2, not only by this suite's own writer", () => {
@@ -189,6 +189,10 @@ describe("bzip2 archives", () => {
   });
 });
 
+/** A member long enough that the zip writer deflates it rather than storing it. */
+const BROKEN_LENGTH = 64;
+const ALL_ONES = 0xff;
+
 describe("unpackMembers", () => {
   const files = [
     { path: "suite/b.txt", text: "b" },
@@ -199,15 +203,15 @@ describe("unpackMembers", () => {
   ];
 
   it("gives every member an extension selector matches, in path order and without resource forks", () => {
-    const members = unpackMembers(zip(files), { kind: "zip", members: { extensions: [".txt"] } });
+    const members = [...unpackMembers(zip(files), { kind: "zip", members: { extensions: [".txt"] } })];
     expect(names(members)).toEqual(["suite/a.txt", "suite/b.txt", "suite/other/c.txt"]);
     expect(members.map((member) => text(member.bytes))).toEqual(["a", "b", "c"]);
   });
 
   it("gives the same members from a tar and a tar.gz", () => {
     const archive = tar(files);
-    expect(names(unpackMembers(archive, { kind: "tar", members: { extensions: [".txt"] } }))).toEqual(["suite/a.txt", "suite/b.txt", "suite/other/c.txt"]);
-    expect(names(unpackMembers(gzip(archive), { kind: "tar.gz", members: { extensions: [".txt"] } }))).toEqual(["suite/a.txt", "suite/b.txt", "suite/other/c.txt"]);
+    expect(names([...unpackMembers(archive, { kind: "tar", members: { extensions: [".txt"] } })])).toEqual(["suite/a.txt", "suite/b.txt", "suite/other/c.txt"]);
+    expect(names([...unpackMembers(gzip(archive), { kind: "tar.gz", members: { extensions: [".txt"] } })])).toEqual(["suite/a.txt", "suite/b.txt", "suite/other/c.txt"]);
   });
 
   it("takes a pattern selector as every member whose whole path matches it, so a readme and a solution beside the instances are left out", () => {
@@ -218,24 +222,41 @@ describe("unpackMembers", () => {
       { path: "suite/Coordinates_10.txt.bak", text: "backup" },
     ]);
     const members = { pattern: "suite/Coordinates_\\d+\\.txt" };
-    expect(names(unpackMembers(suite, { kind: "zip", members }))).toEqual(["suite/Coordinates_10.txt", "suite/Coordinates_2.txt"]);
-    expect(names(unpackMembers(tar([{ path: "a/x1.txt", text: "1" }, { path: "a/x2.md", text: "2" }]), { kind: "tar", members: { pattern: ".*\\.txt" } }))).toEqual(["a/x1.txt"]);
-    expect(() => unpackMembers(suite, { kind: "zip", members: { pattern: "suite/Coordinates" } })).toThrow(/at least one member matching suite\/Coordinates, found none/);
+    expect(names([...unpackMembers(suite, { kind: "zip", members })])).toEqual(["suite/Coordinates_10.txt", "suite/Coordinates_2.txt"]);
+    expect(names([...unpackMembers(tar([{ path: "a/x1.txt", text: "1" }, { path: "a/x2.md", text: "2" }]), { kind: "tar", members: { pattern: ".*\\.txt" } })])).toEqual(["a/x1.txt"]);
+    expect(() => [...unpackMembers(suite, { kind: "zip", members: { pattern: "suite/Coordinates" } })]).toThrow(/at least one member matching suite\/Coordinates, found none/);
     expect(unpack(suite, { kind: "zip", member: { pattern: "suite/readme\\.txt" } }).member).toBe("suite/readme.txt");
     expect(() => unpack(suite, { kind: "zip", member: { pattern: "suite/Coordinates_.*" } })).toThrow(/expected one member matching suite\/Coordinates_\.\*, found 3/);
   });
 
   it("takes a path selector as one member, matched by its trailing segments", () => {
-    expect(names(unpackMembers(zip(files), { kind: "zip", members: { path: "b.txt" } }))).toEqual(["suite/b.txt"]);
+    expect(names([...unpackMembers(zip(files), { kind: "zip", members: { path: "b.txt" } })])).toEqual(["suite/b.txt"]);
   });
 
   it("rejects a selector that matches nothing, listing what the archive holds", () => {
-    expect(() => unpackMembers(zip(files), { kind: "zip", members: { extensions: [".csv"] } })).toThrow(/at least one member ending \.csv, found none among: .*suite\/a\.txt/);
-    expect(() => unpackMembers(zip(files), { kind: "zip", members: { path: "nope.txt" } })).toThrow(/at least one member nope\.txt/);
+    expect(() => [...unpackMembers(zip(files), { kind: "zip", members: { extensions: [".csv"] } })]).toThrow(/at least one member ending \.csv, found none among: .*suite\/a\.txt/);
+    expect(() => [...unpackMembers(zip(files), { kind: "zip", members: { path: "nope.txt" } })]).toThrow(/at least one member nope\.txt/);
+  });
+
+  it("inflates each zip member only when it is reached, so a member that cannot be read fails only once it is taken", () => {
+    const archive = zip([
+      { path: "suite/b.txt", text: "b".repeat(BROKEN_LENGTH) },
+      { path: "suite/a.txt", text: "a".repeat(BROKEN_LENGTH) },
+    ]);
+    // b is written first, so the first occurrence of its name is its local header; its deflated data follows the name and the extra field, whose length sits just before the name.
+    const name = new TextEncoder().encode("suite/b.txt");
+    const at = archive.findIndex((_, index) => name.every((byte, offset) => archive[index + offset] === byte));
+    const extra = new DataView(archive.buffer, archive.byteOffset).getUint16(at - 2, true);
+    const broken = archive.slice();
+    // A deflate block header of all ones names block type 3, which does not exist.
+    broken[at + name.length + extra] = ALL_ONES;
+    const members = unpackMembers(broken, { kind: "zip", members: { extensions: [".txt"] } });
+    expect(text(members.next().value?.bytes ?? expect.unreachable("the generator yields the first member"))).toBe("a".repeat(BROKEN_LENGTH));
+    expect(() => members.next()).toThrow(ArchiveError);
   });
 
   it("rejects bytes that are not the stated archive kind", () => {
-    expect(() => unpackMembers(new TextEncoder().encode("not an archive"), { kind: "zip", members: { extensions: [".txt"] } })).toThrow(ArchiveError);
+    expect(() => [...unpackMembers(new TextEncoder().encode("not an archive"), { kind: "zip", members: { extensions: [".txt"] } })]).toThrow(ArchiveError);
   });
 });
 

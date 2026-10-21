@@ -9,6 +9,8 @@ export {
   ArchiveSchema,
   CitationSchema,
   CollectionArchiveSchema,
+  CollectionFileSchema,
+  FilesRecipeSchema,
   ColumnNameSchema,
   CrosswalkReferenceSchema,
   EntrySchema,
@@ -20,14 +22,16 @@ export {
   ParserSchema,
   RecipeSchema,
   RelativePathSchema,
+  readsCollection,
   RESERVED_META_KEYS,
   SnapshotSchema,
+  SourceRecipeSchema,
   SubjectSchema,
   SourceSchema,
   WaybackTimestampSchema,
   waybackUrl,
 } from "./entry";
-export type { Archive, ArchiveMember, Citation, CollectionArchive, CrosswalkReference, DocumentArchive, Entry, Licence, Namespace, Parser, PartsArchive, Recipe, Snapshot, Source } from "./entry";
+export type { Archive, ArchiveMember, Citation, CollectionArchive, CollectionFile, CrosswalkReference, DocumentArchive, Entry, FilesRecipe, Licence, Namespace, Parser, Recipe, Snapshot, Source, SourceRecipe } from "./entry";
 export { ArchiveError, CatalogueSyntaxError, DatasetAmbiguousError, DatasetNotFoundError, KeepsetError, NativeParseError, RecipeError, UnknownCategoryError } from "./errors";
 export type { RecipeStep, SyntaxIssue } from "./errors";
 export { groupsOf, NAME_SEPARATOR, namesOf } from "./names";

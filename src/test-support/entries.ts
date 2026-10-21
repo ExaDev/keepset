@@ -305,8 +305,31 @@ export const ogbEntry = {
   properties: {},
 } as const;
 
+/** A fetchable tasks/v1 entry whose collection is files downloaded one by one rather than one archive: a live file, a dead file fetched from its pinned snapshot, and a zip whose matching members are instances of their own, all read with the collection fixture's parser and crosswalk. */
+export const filesCollectionEntry = {
+  ...taskCollectionEntry,
+  id: "route-files",
+  name: "Route files",
+  sources: [
+    { url: "https://example.org/data/routes", retrieved: "2026-10-21", status: "live" },
+    { url: "https://example.org/data/routes/north.csv", retrieved: "2026-10-21", status: "live" },
+    { url: "https://example.org/data/routes/south.csv", retrieved: "2026-10-21", status: "dead", snapshot: { timestamp: "20240101000000", url: "https://web.archive.org/web/20240101000000/https://example.org/data/routes/south.csv" } },
+    { url: "https://example.org/data/routes/more.zip", retrieved: "2026-10-21", status: "live" },
+  ],
+  recipe: {
+    status: "fetchable",
+    files: [
+      { path: "north.csv", source: 1, archive: { kind: "none" } },
+      { path: "south.csv", source: 2, archive: { kind: "none" } },
+      { path: "more.zip", source: 3, archive: { kind: "zip", members: { extensions: [".csv"] } } },
+    ],
+    parser: taskCollectionEntry.recipe.parser,
+  },
+  expectedCounts: { instances: 4 },
+} as const;
+
 /** Every entry shape, one entry of each category as well: for the tests that check the entry schema, its generated JSON Schema and serialisation, which the catalogue fixtures (graph entries only) do not need to carry. */
-export const everyEntryShape = [...representativeEntries, taskEntry, taskCollectionEntry, graphCollectionEntry, ogbEntry, arcgisEntry, socrataEntry, ckanEntry, openFemaEntry];
+export const everyEntryShape = [...representativeEntries, taskEntry, taskCollectionEntry, filesCollectionEntry, graphCollectionEntry, ogbEntry, arcgisEntry, socrataEntry, streamedEntry, ckanEntry, openFemaEntry];
 
 /** A catalogue manifest for fixture catalogues. */
 export const fixtureManifest = {

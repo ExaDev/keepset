@@ -57,7 +57,7 @@ describe("a KONECT tar.bz2 recipe", () => {
   it("reads a weighted network's weights onto the edges, from the one member that holds the edges", async () => {
     const dataset = datasetFor(konectRecipe({ weighted: true, timestamped: false }), "weighted", { directed: false });
     const { data, provenance } = await fetchEntry(dataset, { fetch: serving(konectDownload("moreno_lesmis", LESMIS)) });
-    expect(provenance.member).toBe("moreno_lesmis/out.moreno_lesmis");
+    expect(provenance).toMatchObject({ member: "moreno_lesmis/out.moreno_lesmis" });
     expect("edges" in data && data.edges.slice(0, WEIGHTED_SAMPLE)).toEqual([
       { source: "1", target: "2", weight: 1 },
       { source: "2", target: "3", weight: 8 },
@@ -121,7 +121,7 @@ describe("a ratings recipe", () => {
       { path: `${release}/movies.dat`, text: "1::Toy Story (1995)::Animation\n" },
     ]);
     const { data, provenance } = await fetchEntry(dataset, { fetch: serving(download) });
-    expect(provenance.member).toBe(`${release}/${member}`);
+    expect(provenance).toMatchObject({ member: `${release}/${member}` });
     expect("edges" in data && data.edges.every((edge) => edge.type === "rating" && typeof edge["weight"] === "number" && typeof edge["timestamp"] === "number")).toBe(true);
     expect("nodes" in data && data.nodes.every((node) => node.type === "user" || node.type === "movie")).toBe(true);
     expect((await roundTripEntry(dataset, { fetch: serving(download) })).holds).toBe(true);
