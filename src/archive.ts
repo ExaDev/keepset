@@ -1,15 +1,14 @@
-import { gunzipSync } from "node:zlib";
-import { unzipSync, type UnzipFileFilter } from "fflate";
-import type { CollectionArchive, DocumentArchive, ArchiveMember, FilesArchive, InnerArchive, PartsArchive, SheetArchive } from "../entry";
-import { ArchiveError } from "../errors";
-import { getOwn } from "../own";
-import { bunzip2 } from "./bzip2";
-import { pointShapefileToCsv } from "./shapefile";
-import { readTar } from "./tar";
-import { odsGrid } from "./ods";
-import { gridToCsv } from "./sheet";
-import { xlsGrid } from "./xls";
-import { sheetNames, xlsxGrid } from "./xlsx";
+import { gunzipSync, unzipSync, type UnzipFileFilter } from "fflate";
+import type { CollectionArchive, DocumentArchive, ArchiveMember, FilesArchive, InnerArchive, PartsArchive, SheetArchive } from "./entry";
+import { ArchiveError } from "./errors";
+import { getOwn } from "./own";
+import { bunzip2 } from "./node/bzip2";
+import { pointShapefileToCsv } from "./node/shapefile";
+import { readTar } from "./node/tar";
+import { odsGrid } from "./node/ods";
+import { gridToCsv } from "./node/sheet";
+import { xlsGrid } from "./node/xls";
+import { sheetNames, xlsxGrid } from "./node/xlsx";
 
 /** The file a recipe's archive step yields: its bytes, and the member path it came from when the archive holds several. */
 export interface Unpacked {

@@ -1,6 +1,6 @@
 import { createHash } from "node:crypto";
 import { assertRoundTrip, encode, RoundTripMismatchError, type Crosswalk } from "crossmap";
-import { getStreamedShape, isStreamable, type StreamableId } from "../categories";
+import { getStreamedShape, isStreamable } from "../categories";
 import type { Dataset } from "../catalogue";
 import type { Entry, Parser, Recipe } from "../entry";
 import { KeepsetError, RecipeError, type RecipeStep } from "../errors";
@@ -8,11 +8,29 @@ import { TableReader } from "../parsers/csv-table";
 import type { NativeRow } from "../parsers/native";
 import { PieceDecoder } from "../parsers/parse-native";
 import type { JsonScalar } from "../targets/json-scalar";
-import { downloadRaw } from "./download";
 import { IdSet } from "./id-set";
-import { csvPages, type CsvPaging } from "./paged";
-import type { DownloadProvenance, FetchOptions, NodeSink, RoundTripReport, StreamedDataset } from "./fetch-dataset";
-import { metaOf, sourceRecord, sourceUrl, step } from "./recipe-run";
+import { csvPages, type CsvPaging } from "../paged";
+import type { DownloadProvenance, FetchOptions, RoundTripReport } from "../fetch";
+import type { StreamedNodes, StreamableId } from "../categories";
+import { metaOf, sourceRecord, sourceUrl, step } from "../recipe-run";
+
+/** Where a streamed result goes: the meta once, before any node, then the nodes a page at a time, each already checked against the category's node shape and for an id no earlier node had. A sink that returns a promise is awaited before the next page is read, so a slow sink holds the stream back rather than letting pages pile up. */
+export interface NodeSink {
+  readonly meta: (meta: Readonly<Record<string, JsonScalar>>) => void | Promise<void>;
+  readonly nodes: (nodes: readonly StreamedNode[]) => void | Promise<void>;
+}
+
+/** What a streamed fetch ends with, once every node has been handed on: the meta, the provenance of the bytes, how many nodes there were, and any warnings, such as a count that differs from the one the entry records. */
+export interface StreamedDataset {
+  readonly dataset: Dataset;
+  readonly meta: Readonly<Record<string, JsonScalar>>;
+  readonly provenance: DownloadProvenance;
+  readonly counts: ReadonlyMap<string, number>;
+  readonly warnings: readonly string[];
+}
+
+/** A node a streamed result hands on: a node of a streamable category's target. */
+export type StreamedNode = StreamedNodes[StreamableId];
 
 /** A streamed recipe, narrowed to the parts streaming reads. */
 interface StreamedRecipe {
@@ -120,7 +138,7 @@ interface NativeStream {
  */
 function openNative(dataset: Dataset, recipe: StreamedRecipe, options: FetchOptions): NativeStream {
   const { entry } = dataset;
-  const { fetch: port = downloadRaw, signal, now = () => new Date() } = options;
+  const { fetch: port, signal, now = () => new Date() } = options;
   const source = entry.sources[recipe.source];
   if (source === undefined) {
     throw new RecipeError(entry.id, "recipe", `the recipe names source ${String(recipe.source)}, which the entry does not have`);

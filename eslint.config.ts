@@ -18,4 +18,9 @@ export default defineConfig(
     files: ['src/define.ts'],
     rules: { 'exadev/no-object-assign': 'off' },
   },
+  {
+    // The package entry points (keepset/node, keepset/browser) are the barrels of their platform surfaces: each composes the neutral fetch core's types with its own ports, which is what a package entry is for. The rule admits only src/index.ts by name and the shared config allows no inline disables.
+    files: ['src/node/fetch-dataset.ts', 'src/browser/entry.ts'],
+    rules: { 'exadev/barrel-policy': 'off' },
+  },
 );

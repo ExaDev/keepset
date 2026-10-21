@@ -1,7 +1,7 @@
 import { zipSync } from "fflate";
 import { describe, expect, it } from "vitest";
 import { ArchiveError } from "../errors";
-import { unpack } from "./archive";
+import { unpack } from "../archive";
 import { pointShapefileToCsv, type ShapefileParts } from "./shapefile";
 
 /** The `.prj` of the Sitadel housing permits shapefile, as published: RGF93 Lambert-93 in ESRI's spelling. */
