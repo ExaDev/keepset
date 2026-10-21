@@ -358,11 +358,13 @@ function Preview({ id }: { readonly id: string }): ReactNode {
   const [provenance, setProvenance] = useState<{ readonly sha256: string; readonly byteLength: number } | null>(null);
   const [instance, setInstance] = useState<string | null>(null);
   const [message, setMessage] = useState("");
+  const [captured, setCaptured] = useState(false);
   const [worker, setWorker] = useState<Worker | null>(null);
 
   /** Sends the request to the worker, creating it on first use, and routes each answer to the state it leaves the preview in. */
   const ask = (bytes?: ArrayBuffer): void => {
     setState("working");
+    setCaptured(false);
 
     const run = worker ?? new Worker(`${siteRoot()}fetchWorker.js`, { type: "module" });
     setWorker(run);
@@ -372,6 +374,11 @@ function Preview({ id }: { readonly id: string }): ReactNode {
         setData(previewOf(answer.data));
         setProvenance(answer.provenance);
         setState("done");
+
+        return;
+      }
+      if (answer.kind === "captured") {
+        setCaptured(true);
 
         return;
       }
@@ -429,6 +436,7 @@ function Preview({ id }: { readonly id: string }): ReactNode {
           {rows.length > PREVIEW_ROWS ? <p>Showing {String(PREVIEW_ROWS)} of {String(rows.length)} rows; the download carries the whole result.</p> : null}
           {geo === undefined ? null : <PointMap points={geo} />}
           {planar === undefined ? null : <PlanarCanvas points={sampled(planar)} />}
+          {captured ? <p className="preview-capture">No snapshot of this source was readable, so it was read live and the Internet Archive was asked to capture it, which leaves the next visitor a snapshot to read.</p> : null}
           {provenance !== null ? <p className="preview-provenance">SHA-256 {provenance.sha256.slice(0, HASH_SHOWN)}, {String(provenance.byteLength)} bytes.</p> : null}
           <Button component="a" href={URL.createObjectURL(new Blob([JSON.stringify(data)], { type: "application/json" }))} download={`${id}.json`}>Download JSON</Button>
         </div>

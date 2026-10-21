@@ -32,7 +32,7 @@ export {
   waybackUrl,
 } from "./entry";
 export type { Archive, ArchiveMember, Citation, CollectionArchive, CollectionFile, CrosswalkReference, DocumentArchive, Entry, FilesRecipe, Licence, Namespace, Parser, Recipe, Snapshot, Source, SourceRecipe } from "./entry";
-export { ArchiveError, CatalogueSyntaxError, DatasetAmbiguousError, DatasetNotFoundError, KeepsetError, NativeParseError, RecipeError, UnknownCategoryError } from "./errors";
+export { ArchiveError, CatalogueSyntaxError, DatasetAmbiguousError, DatasetNotFoundError, KeepsetError, NativeParseError, RecipeError, UnknownCategoryError, UnreachableSourceError } from "./errors";
 export type { RecipeStep, SyntaxIssue } from "./errors";
 export { groupsOf, NAME_SEPARATOR, namesOf } from "./names";
 export type { EntryNames, SegmentAliases } from "./names";

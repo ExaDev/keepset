@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import { createWriteStream, writeFileSync } from "node:fs";
 import { countTarget, getDataset, listDatasets, listNamespaces, validateDataset } from "keepset";
-import { fetchDataset, roundTripDataset, streamDataset } from "keepset/node";
+import { captureRequestsFor, fetchDataset, requestCapture, roundTripDataset, streamDataset } from "keepset/node";
 import packageJson from "../package.json" with { type: "json" };
 import { run } from "./run";
 
@@ -21,6 +21,8 @@ process.exitCode = await run(
     streamDataset: async (id, sink) => streamDataset(id, sink),
     roundTripDataset: async (id) => roundTripDataset(id),
     countTarget: (fetched) => countTarget(fetched.dataset.entry.category, fetched.data),
+    captureRequests: captureRequestsFor,
+    requestCapture: async (saveUrl) => requestCapture(saveUrl),
   },
   {
     writeStdout: (text) => {

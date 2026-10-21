@@ -7,11 +7,13 @@ import { getDataset } from "../bundled";
 import { fetchDataset as fetchCore, fetchEntry as fetchEntryCore, type FetchOptions, type FetchPort, roundTripEntry as roundTripEntryCore } from "../fetch";
 import type { NodeSink, StreamedDataset } from "./stream-dataset";
 import { downloadRaw } from "./download";
+import { requestCapture as requestCaptureCore } from "../resolve";
 import { isStreamed, roundTripTable, streamTable } from "./stream-dataset";
 
 
 export type { DigestPort, Download, DownloadProvenance, FetchedDataset, FetchOptions, FetchPort, FilesProvenance, Provenance, RoundTripReport } from "../fetch";
 export { downloadUrl } from "../fetch";
+export { captureRequestsFor } from "../resolve";
 export type { NodeSink, StreamedDataset, StreamedNode } from "./stream-dataset";
 export { downloadRaw, type DownloadInit, STALL_MILLISECONDS, DOWNLOAD_ATTEMPTS, RETRY_DELAY_MILLISECONDS } from "./download";
 
@@ -79,3 +81,12 @@ export async function streamEntry(dataset: Dataset, sink: NodeSink, options: Nod
 }
 
 export { streamTable };
+
+/**
+ * Asks the Archive to capture a URL a fetch read live; see `../resolve`'s `requestCapture`. Node's own `fetch` sends it.
+ * @param saveUrl - A request URL from `captureRequestsFor`.
+ * @param signal - Aborts the request.
+ */
+export async function requestCapture(saveUrl: string, signal?: AbortSignal): Promise<void> {
+  await requestCaptureCore(saveUrl, async (url, init) => await fetch(url, init), signal);
+}

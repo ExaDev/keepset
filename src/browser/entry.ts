@@ -3,6 +3,7 @@
 
 import type { Dataset } from "../catalogue";
 import { fetchDataset as fetchCore, fetchEntry as fetchEntryCore, type FetchOptions, roundTripEntry as roundTripEntryCore } from "../fetch";
+import { requestCapture as requestCaptureCore } from "../resolve";
 import { downloadRaw } from "./download";
 
 
@@ -20,6 +21,8 @@ const digest: FetchOptions["digest"] = async (bytes) => {
 /** The browser's own options: an abort signal and the clock, the downloader and digest already chosen. */
 export type { DigestPort, Download, DownloadProvenance, FetchedDataset, FetchOptions, FetchPort, FilesProvenance, Provenance, RoundTripReport } from "../fetch";
 export { downloadUrl } from "../fetch";
+export { captureRequestsFor } from "../resolve";
+export { RecipeError, UnreachableSourceError } from "../errors";
 export { downloadRaw, type DownloadInit, STALL_MILLISECONDS, DOWNLOAD_ATTEMPTS, RETRY_DELAY_MILLISECONDS } from "./download";
 
 export type BrowserFetchOptions = Omit<FetchOptions, "fetch" | "digest"> & { readonly fetch?: FetchOptions["fetch"] };
@@ -64,4 +67,13 @@ export async function roundTripEntry(dataset: Dataset, options: BrowserFetchOpti
  */
 export async function roundTripDataset(id: string, options: BrowserFetchOptions): Promise<Awaited<ReturnType<typeof roundTripEntryCore>>> {
   return roundTripEntryCore((await import("../bundled")).getDataset(id), ports(options));
+}
+
+/**
+ * Asks the Archive to capture a URL a fetch read live; see `../resolve`'s `requestCapture`. The platform sends it without reading the answer, which the Archive's replies to a page on another origin do not allow.
+ * @param saveUrl - A request URL from `captureRequestsFor`.
+ * @param signal - Aborts the request.
+ */
+export async function requestCapture(saveUrl: string, signal?: AbortSignal): Promise<void> {
+  await requestCaptureCore(saveUrl, async (url, init) => await fetch(url, { ...init, mode: "no-cors" }), signal);
 }

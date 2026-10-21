@@ -6,6 +6,9 @@ export class KeepsetError extends Error {
   }
 }
 
+/** Thrown when no tier of a source's resolution chain gave an HTTP answer at all: the connection failed or the host refuses the request, which a page on another origin meets for every host without CORS headers. Telling it from a source that answered with an error is what lets a caller offer the file to be supplied by hand. */
+export class UnreachableSourceError extends KeepsetError {}
+
 /** Thrown when a category id names no category in the registry. Carries the ids that do exist, so the message says what would have been accepted. */
 export class UnknownCategoryError extends KeepsetError {
   readonly categoryId: string;
