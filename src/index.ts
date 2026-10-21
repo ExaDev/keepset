@@ -27,7 +27,7 @@ export {
   WaybackTimestampSchema,
   waybackUrl,
 } from "./entry";
-export type { Archive, ArchiveMember, Citation, CollectionArchive, CrosswalkReference, DocumentArchive, Entry, Licence, Namespace, Parser, Recipe, Snapshot, Source } from "./entry";
+export type { Archive, ArchiveMember, Citation, CollectionArchive, CrosswalkReference, DocumentArchive, Entry, Licence, Namespace, Parser, PartsArchive, Recipe, Snapshot, Source } from "./entry";
 export { ArchiveError, CatalogueSyntaxError, DatasetAmbiguousError, DatasetNotFoundError, KeepsetError, NativeParseError, RecipeError, UnknownCategoryError } from "./errors";
 export type { RecipeStep, SyntaxIssue } from "./errors";
 export { groupsOf, NAME_SEPARATOR, namesOf } from "./names";

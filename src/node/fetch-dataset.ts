@@ -6,9 +6,9 @@ import type { Dataset } from "../catalogue";
 import type { Entry, Snapshot, Source } from "../entry";
 import { KeepsetError, RecipeError, type RecipeStep } from "../errors";
 import type { NativeDocument } from "../parsers/native";
-import { parseNative } from "../parsers/parse-native";
+import { parseNative, parseNativeParts } from "../parsers/parse-native";
 import type { JsonScalar } from "../targets/json-scalar";
-import { unpack, unpackMembers, type Unpacked } from "./archive";
+import { unpack, unpackMembers, unpackParts, type Unpacked } from "./archive";
 import { downloadRaw } from "./download";
 import { downloadPaged } from "./paged";
 
@@ -34,7 +34,7 @@ export interface Provenance {
   readonly byteLength: number;
   /** The archive member a document was read from. */
   readonly member?: string;
-  /** The archive members a collection was read from, in the order they were read. */
+  /** The archive members a collection, or a document read from named parts, was read from, in the order they were read. */
   readonly members?: readonly string[];
 }
 
@@ -169,6 +169,12 @@ async function runToNative(dataset: Dataset, options: FetchOptions): Promise<Nat
     );
 
     return { collection: true, documents, provenance: provenanceOf({ members: files.map((file) => file.path) }) };
+  }
+  if ("parts" in archive) {
+    const parts = await step(entry.id, "extract", () => unpackParts(bytes, archive));
+    const parsed = await step(entry.id, "parse", () => parseNativeParts(parts, recipe.parser));
+
+    return { collection: false, documents: [{ id: undefined, native: { ...parsed, meta: metaOf(entry) } }], provenance: provenanceOf({ members: parts.map((part) => part.path) }) };
   }
   const unpacked: Unpacked = await step(entry.id, "extract", () => unpack(bytes, archive));
   const parsed = await step(entry.id, "parse", () => parseNative(unpacked.bytes, recipe.parser));

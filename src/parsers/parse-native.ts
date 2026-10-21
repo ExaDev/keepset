@@ -3,6 +3,8 @@ import { NativeParseError } from "../errors";
 import { parseEdgeList } from "./edge-list";
 import { parseGdContest } from "./gd-contest";
 import { parseGml } from "./gml";
+import { parseHgb } from "./hgb";
+import { parseKgTriples } from "./kg-triples";
 import { parseKonect } from "./konect";
 import { parseMatrixMarket } from "./matrix-market";
 import { parseCsvTable } from "./csv-table";
@@ -17,6 +19,7 @@ import { parseToptw } from "./toptw";
 import { parseTsplib } from "./tsplib";
 import { parseUcinetDl } from "./ucinet-dl";
 import { parseVerolog2019 } from "./verolog-2019";
+import { parseUserItemCounts } from "./user-item-counts";
 import { parseUserItemRatings } from "./user-item-ratings";
 import { parseVrpRep } from "./vrp-rep";
 import type { InstanceParser } from "./instance-shapes";
@@ -107,6 +110,15 @@ export function parseNative(bytes: Uint8Array, parser: Parser): NativeDocument {
   if (parser.format === "konect") {
     return parseKonect(decodePieces(bytes, parser), parser);
   }
+  if (parser.format === "user-item-counts") {
+    return parseUserItemCounts(decodePieces(bytes, parser), parser);
+  }
+  if (parser.format === "kg-triples") {
+    return parseKgTriples([{ split: undefined, pieces: decodePieces(bytes, parser) }], parser);
+  }
+  if (parser.format === "hgb") {
+    throw new NativeParseError(parser.format, 1, "an HGB dataset is two files, nodes and links, which a recipe reads from a parts archive");
+  }
   const text = decode(bytes, parser);
   if (parser.format === "geojson") {
     return parseGeojson(text, parser);
@@ -152,4 +164,36 @@ export function parseNative(bytes: Uint8Array, parser: Parser): NativeDocument {
   }
 
   return parsePajek(text);
+}
+
+/** A file of a document read from several, as the archive step gives it: the part's name and its bytes. */
+export interface NamedBytes {
+  readonly name: string;
+  readonly bytes: Uint8Array;
+}
+
+/**
+ * Reads the named parts of a parts archive into the one native graph of the recipe's parser: the split files of a triples download, each edge carrying its part's name as its split, or an HGB dataset's `nodes` and `links` files.
+ * @param parts - The parts, in the order the recipe names them.
+ * @param parser - The recipe's parser, one of the formats that read parts.
+ * @returns The native graph.
+ * @throws NativeParseError when a part is not valid in the stated encoding, its text is not in the stated format, the parser reads one file, or an HGB recipe lacks its `nodes` or `links` part.
+ */
+export function parseNativeParts(parts: readonly NamedBytes[], parser: Parser): NativeGraph {
+  if (parser.format === "kg-triples") {
+    return parseKgTriples(
+      parts.map((part) => ({ split: part.name, pieces: decodePieces(part.bytes, parser) })),
+      parser,
+    );
+  }
+  if (parser.format === "hgb") {
+    const nodes = parts.find((part) => part.name === "nodes");
+    const links = parts.find((part) => part.name === "links");
+    if (nodes === undefined || links === undefined) {
+      throw new NativeParseError(parser.format, 1, "an HGB recipe reads the parts nodes and links");
+    }
+
+    return parseHgb({ nodes: decodePieces(nodes.bytes, parser), links: decodePieces(links.bytes, parser) }, parser);
+  }
+  throw new NativeParseError(parser.format, 1, `the ${parser.format} parser reads one file, not named parts`);
 }
