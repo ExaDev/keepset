@@ -1,3 +1,10 @@
+# [0.43.0](https://github.com/Mearman/keepset/compare/v0.42.0...v0.43.0) (2026-10-21)
+
+
+### Features
+
+* **browser:** a keepset/browser entry point over the neutral fetch core ([252a350](https://github.com/Mearman/keepset/commit/252a3502df24f65002c304c9b9ff286bd2d52c57))
+
 # [0.42.0](https://github.com/Mearman/keepset/compare/v0.41.1...v0.42.0) (2026-10-21)
 
 
