@@ -2435,7 +2435,7 @@
       "namespace": "mendeley-data",
       "outcome": {
         "status": "not-fetchable",
-        "reason": "Each instance is a MATLAB 5 file whose orders, the nodes with their quantities, mix codes and delivery times, are a MATLAB table of datetime and other class objects, which MATLAB stores in the file's undocumented MCOS subsystem data rather than as arrays; the only plain arrays are travel time matrices, so nothing at node level can be read without reverse engineering that serialisation."
+        "reason": "Each instance is a MATLAB 5 file whose orders, the nodes with their quantities, mix codes and delivery times, are a MATLAB table of datetime and other class objects, which MATLAB stores in the file's undocumented MCOS subsystem data rather than as arrays; the only plain arrays are the travel time and distance matrices, so nothing at node level can be read without reverse engineering that serialisation."
       },
       "surveyId": "or-22"
     },
