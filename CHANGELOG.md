@@ -1,3 +1,20 @@
+# [0.35.0](https://github.com/Mearman/keepset/compare/v0.34.0...v0.35.0) (2026-10-21)
+
+
+### Bug Fixes
+
+* **catalogue:** name the distance matrices among the concrete delivery arrays ([15e6ab1](https://github.com/Mearman/keepset/commit/15e6ab13ebc9b919d027d064cde11a84b1a5215f))
+* **catalogue:** state why the concrete delivery and SRU notice entries are not fetchable ([cc5dd0d](https://github.com/Mearman/keepset/commit/cc5dd0d43c36df0a431982dd6b0a11935febde09))
+
+
+### Features
+
+* **archive:** read every sheet of a collection's workbooks as an instance ([c8bf0a0](https://github.com/Mearman/keepset/commit/c8bf0a0993b13aa9ef8abe79b07a8ba9d4013b45))
+* **archive:** read zipped point shapefiles as tables ([31c3187](https://github.com/Mearman/keepset/commit/31c3187b6cb4ba49a9d53ce36409bd2851649a57))
+* **catalogue:** fetch the home health care routing workbooks ([8e1b2b7](https://github.com/Mearman/keepset/commit/8e1b2b742c34b3f444d3538ac4fc158c2aec724b))
+* **catalogue:** fetch the Sitadel housing permits shapefile ([487f665](https://github.com/Mearman/keepset/commit/487f665a19c030d6db6b0e97722d4d6ff81b9ac2))
+* **parsers:** read home health care routing sheets ([26f5b4f](https://github.com/Mearman/keepset/commit/26f5b4fb236a9d84e27a6b67f1b76f07247883c5))
+
 # [0.34.0](https://github.com/Mearman/keepset/compare/v0.33.0...v0.34.0) (2026-10-21)
 
 
