@@ -41,11 +41,16 @@ describe("parseEdgeList on a table of several relations", () => {
     ]);
   });
 
-  it("refuses a mirrored line without its mirror, one whose mirror has another count, and a count that is not a positive whole number", () => {
+  it("reads a line whose count is zero as no edge, adding none of its neurons", () => {
+    const graph = parseEdgeList("h\nAVFL,VB01,Sp,0\nFLPR,VB01,Sp,1", parser({ multiplicityColumn: COLUMN.count }));
+    expect(graph).toEqual({ nodes: [{ id: "FLPR" }, { id: "VB01" }], edges: [{ source: "FLPR", target: "VB01" }] });
+  });
+
+  it("refuses a mirrored line without its mirror, one whose mirror has another count, and a count that is not a whole number", () => {
     const options = parser({ keep: { column: COLUMN.type, values: ["EJ"] }, mirrored: true });
     expect(() => parseEdgeList("h\nADAR,ADAL,EJ,1", options)).toThrow(/line 2: the table is mirrored but this line has no mirror image/);
     expect(() => parseEdgeList("h\nADAR,ADAL,EJ,1\nADAL,ADAR,EJ,2", { ...options, multiplicityColumn: COLUMN.count })).toThrow(NativeParseError);
-    expect(() => parseEdgeList("h\nADAR,ADAL,EJ,1.5", parser({ multiplicityColumn: COLUMN.count }))).toThrow(/not a positive whole number/);
-    expect(() => parseEdgeList("h\nADAR,ADAL,EJ,0", parser({ multiplicityColumn: COLUMN.count }))).toThrow(/not a positive whole number/);
+    expect(() => parseEdgeList("h\nADAR,ADAL,EJ,1.5", parser({ multiplicityColumn: COLUMN.count }))).toThrow(/not a whole number/);
+    expect(() => parseEdgeList("h\nADAR,ADAL,EJ,-1", parser({ multiplicityColumn: COLUMN.count }))).toThrow(/not a whole number/);
   });
 });

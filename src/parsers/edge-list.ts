@@ -48,23 +48,23 @@ function detect(dataLine: string): Exclude<EdgeListParser["delimiter"], "detect"
  * @param column - The multiplicity column.
  * @param lineNumber - The 1-based line, for the error.
  * @returns How many edges the line stands for.
- * @throws NativeParseError when the field is not a positive whole number.
+ * @throws NativeParseError when the field is not a whole number.
  */
 function multiplicity(fields: readonly string[], column: number, lineNumber: number): number {
   const value = fields[column]?.trim() ?? "";
-  if (!/^[1-9]\d*$/.test(value)) {
-    throw new NativeParseError("edge-list", lineNumber, `column ${String(column)} holds ${JSON.stringify(value)}, which is not a positive whole number of edges`);
+  if (!/^(?:0|[1-9]\d*)$/.test(value)) {
+    throw new NativeParseError("edge-list", lineNumber, `column ${String(column)} holds ${JSON.stringify(value)}, which is not a whole number of edges`);
   }
 
   return Number(value);
 }
 
 /**
- * Parses a delimited edge list: one edge per line, source and target in the configured columns, after `skipLines` header lines, with blank lines and lines whose first non-blank characters are a comment prefix skipped. A `detect` delimiter is fixed from the first data line. A recipe that names a `keep` column reads only the lines whose field there is one of its values; one that names a `multiplicityColumn` emits as many edges for a line as the field says; one that says `mirrored` emits each pair of mirror-image lines once. Nodes are the endpoints of the lines read, in order of first appearance.
+ * Parses a delimited edge list: one edge per line, source and target in the configured columns, after `skipLines` header lines, with blank lines and lines whose first non-blank characters are a comment prefix skipped. A `detect` delimiter is fixed from the first data line. A recipe that names a `keep` column reads only the lines whose field there is one of its values; one that names a `multiplicityColumn` emits as many edges for a line as the field says, none for a zero; one that says `mirrored` emits each pair of mirror-image lines once. Nodes are the endpoints of the lines read, in order of first appearance.
  * @param text - The file text.
  * @param options - The recipe's edge-list parser.
  * @returns The native graph.
- * @throws NativeParseError naming the line when a data line has too few fields, an empty endpoint or a multiplicity that is not a positive whole number, when a mirrored table has a line without its mirror, or when the file holds no edges.
+ * @throws NativeParseError naming the line when a data line has too few fields, an empty endpoint or a multiplicity that is not a whole number, when a mirrored table has a line without its mirror, or when the file holds no edges.
  */
 export function parseEdgeList(text: string, options: Readonly<EdgeListParser>): NativeGraph {
   let split = options.delimiter === "detect" ? undefined : splitters[options.delimiter];
@@ -91,6 +91,10 @@ export function parseEdgeList(text: string, options: Readonly<EdgeListParser>): 
     const source = endpoint(fields, options.sourceColumn, lineNumber);
     const target = endpoint(fields, options.targetColumn, lineNumber);
     const count = options.multiplicityColumn === undefined ? 1 : multiplicity(fields, options.multiplicityColumn, lineNumber);
+    // A line that stands for no edges (a pair a connectome lists with no synapses) is not read at all, so it adds no node either.
+    if (count === 0) {
+      continue;
+    }
     order.add(source);
     order.add(target);
     if (options.mirrored === true && source !== target) {

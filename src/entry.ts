@@ -194,7 +194,7 @@ export const ParserSchema = z.discriminatedUnion("format", [
         .object({ column: ColumnSchema, values: z.array(z.string().min(1)).min(1) })
         .strict()
         .optional(),
-      /** The column holding how many edges a line stands for, a positive whole number, for a table that lists each pair once with its count. */
+      /** The column holding how many edges a line stands for, a whole number, for a table that lists each pair once with its count; a line that stands for none adds neither an edge nor a node. */
       multiplicityColumn: ColumnSchema.optional(),
       /** The table lists every undirected edge twice, once in each direction and with the same multiplicity: each pair's edges are emitted once, in the direction it is first listed, a self-loop's once, and a line whose mirror is missing is an error. graph/v1 records direction in `meta` and never by duplicating edges, so an undirected graph read from such a table needs this. */
       mirrored: z.literal(true).optional(),
