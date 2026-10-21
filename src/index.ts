@@ -1,8 +1,8 @@
 export { getDataset, getManifest, listDatasets, listNamespaces } from "./bundled";
 export { CatalogueIndexSchema, createCatalogue } from "./catalogue";
 export type { Catalogue, CatalogueIndex, Dataset, DatasetQuery, NamespaceNode } from "./catalogue";
-export { CategoryIdSchema, countedKeys, countTarget, getCategory, getCollectionTarget, getTarget, kindOf, listCategories } from "./categories";
-export type { Category, CategoryId, CategoryTarget, CategoryTargets, CollectionTarget, CountedKey } from "./categories";
+export { CategoryIdSchema, countedKeys, countTarget, getCategory, getCollectionTarget, getStreamedShape, getTarget, isStreamable, kindOf, listCategories } from "./categories";
+export type { Category, CategoryId, CategoryTarget, CategoryTargets, CollectionTarget, CountedKey, StreamableId, StreamedNodes, StreamedShape } from "./categories";
 export {
   AliasSchema,
   ArchiveMemberSchema,
@@ -39,7 +39,7 @@ export { GraphEdgeSchema, GraphNodeSchema, GraphV1Schema } from "./targets/graph
 export type { GraphEdge, GraphNode, GraphV1 } from "./targets/graph-v1";
 export { JsonScalarSchema } from "./targets/json-scalar";
 export type { JsonScalar } from "./targets/json-scalar";
-export { TaskSchema, TasksV1Schema } from "./targets/tasks-v1";
+export { TaskSchema, TasksMetaSchema, TasksV1Schema } from "./targets/tasks-v1";
 export type { Task, TasksV1 } from "./targets/tasks-v1";
 export { collectionOf } from "./targets/collection";
 export type { Collection, Instance } from "./targets/collection";

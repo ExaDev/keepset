@@ -171,16 +171,29 @@ interface ResourceRead {
 }
 
 /**
- * Reads a source's pages, each starting where the rows held so far end, and checks each holds exactly the rows it should, so a response cut short is an error and not a table with rows missing.
+ * Reads a source's pages in order, each starting where the rows read so far end, and checks each holds exactly the rows it should, so a response cut short is an error and not a table with rows missing. Only the page being read and the first page's header are held, so a caller that hands each page on holds no more of the source than that.
  * @param read - The source read.
- * @param held - The pages read so far, each after the first without its header record.
- * @param offset - How many rows the pages hold.
- * @returns Every page.
- * @throws KeepsetError when a page holds a different number of rows than the count says it should, or its header differs from the first page's.
+ * @returns Each page, the first with its header record and every later one without it.
+ * @throws KeepsetError when the source has no rows, a page holds a different number of rows than the count says it should, or its header differs from the first page's.
  */
-async function readResourcePages(read: Readonly<ResourceRead>, held: readonly Uint8Array[], offset: number): Promise<readonly Uint8Array[]> {
+async function* resourcePages(read: Readonly<ResourceRead>): AsyncGenerator<Uint8Array, void, undefined> {
+  if (read.count === 0) {
+    throw new KeepsetError(`${read.resource} has no rows`);
+  }
+  yield* pagesFrom(read, 0, undefined);
+}
+
+/**
+ * Reads one page and then, by recursion, the pages after it.
+ * @param read - The source read.
+ * @param offset - The row the page starts at.
+ * @param header - The first page's header record, or undefined when this is the first page.
+ * @returns This page and every page after it.
+ * @throws KeepsetError as `resourcePages` does.
+ */
+async function* pagesFrom(read: Readonly<ResourceRead>, offset: number, header: Uint8Array | undefined): AsyncGenerator<Uint8Array, void, undefined> {
   if (offset >= read.count) {
-    return held;
+    return;
   }
   const expected = Math.min(read.pageSize, read.count - offset);
   const page = await withAttempts(async () => {
@@ -192,13 +205,19 @@ async function readResourcePages(read: Readonly<ResourceRead>, held: readonly Ui
 
     return bytes;
   }, read.signal);
-  const first = held[0];
   const headerEnd = page.indexOf(LINE_FEED) + 1;
-  if (first !== undefined && !page.subarray(0, headerEnd).every((byte, index) => byte === first[index])) {
+  if (header === undefined) {
+    yield page;
+    // A copy, so holding the header does not hold the whole first page.
+    yield* pagesFrom(read, offset + expected, page.slice(0, headerEnd));
+
+    return;
+  }
+  if (headerEnd !== header.length || !page.subarray(0, headerEnd).every((byte, index) => byte === header[index])) {
     throw new KeepsetError(`${read.resource} gave a different header at offset ${String(offset)} than at the start`);
   }
-
-  return readResourcePages(read, [...held, first === undefined ? page : page.subarray(headerEnd)], offset + expected);
+  yield page.subarray(headerEnd);
+  yield* pagesFrom(read, offset + expected, header);
 }
 
 /**
@@ -208,44 +227,49 @@ async function readResourcePages(read: Readonly<ResourceRead>, held: readonly Ui
  * @throws KeepsetError when the source has no rows or a page is not what it should be.
  */
 async function downloadPages(read: Readonly<ResourceRead>): Promise<Uint8Array> {
-  const pages = await readResourcePages(read, [], 0);
-  if (pages.length === 0) {
-    throw new KeepsetError(`${read.resource} has no rows`);
+  const pages: Uint8Array[] = [];
+  for await (const page of resourcePages(read)) {
+    pages.push(page);
   }
 
   return Buffer.concat(pages);
 }
 
+/** The paging kinds whose pages are CSV, each with its own header. */
+export type CsvPaging = Exclude<Paging, { readonly kind: "arcgis-query" }>;
+
 /**
- * Downloads a whole Socrata resource as one CSV: the row count is read first, then pages of `pageSize` rows in the order of the rows' ids, each checked to hold the rows it should, and joined under the first page's header.
+ * How a Socrata resource is read: its row count is read first, then pages of `pageSize` rows in the order of the rows' ids, with only the `select` columns when the recipe lists them, so the columns a parser drops are never transferred.
  * @param resource - The resource's URL, such as `https://data.example.org/resource/abcd-1234.csv`, without a query.
- * @param pageSize - How many rows a page holds.
+ * @param paging - The recipe's paging.
  * @param port - The network port.
  * @param signal - Aborts the download.
- * @returns The bytes of one CSV, which is what the parser reads and what the provenance hashes.
- * @throws KeepsetError when the resource does not report a count, or a page is not what it should be.
+ * @returns The source read.
+ * @throws KeepsetError when the resource does not report a count.
  */
-async function downloadSocrataResource(resource: string, pageSize: number, port: FetchPort, signal: AbortSignal | undefined): Promise<Uint8Array> {
+async function socrataRead(resource: string, paging: Extract<Paging, { readonly kind: "socrata-resource" }>, port: FetchPort, signal: AbortSignal | undefined): Promise<ResourceRead> {
   const reported = /^"count"\r?\n"(\d+)"/.exec(new TextDecoder("utf-8").decode(await getBytes(port, `${resource}?%24select=count(*)`, signal)));
   if (reported?.[1] === undefined) {
     throw new KeepsetError(`${resource} did not report a row count`);
   }
+  const { pageSize, select } = paging;
+  const columns = select === undefined ? "" : `%24select=${encodeURIComponent(select.join(","))}&`;
 
-  return downloadPages({ resource, pageUrl: (offset) => `${resource}?%24order=%3Aid&%24limit=${String(pageSize)}&%24offset=${String(offset)}`, pageSize, count: Number(reported[1]), port, signal });
+  return { resource, pageUrl: (offset) => `${resource}?${columns}%24order=%3Aid&%24limit=${String(pageSize)}&%24offset=${String(offset)}`, pageSize, count: Number(reported[1]), port, signal };
 }
 
 const CountResultSchema = z.object({ result: z.object({ total: z.int().min(0) }) });
 
 /**
- * Downloads a whole CKAN datastore table as one CSV: the row count is read from the portal's datastore API, then pages of `pageSize` rows of the table's CSV dump, each checked to hold the rows it should, and joined under the first page's header.
+ * How a CKAN datastore table is read: the row count is read from the portal's datastore API, then pages of `pageSize` rows of the table's CSV dump.
  * @param dump - The dump's URL, such as `https://data.example.org/datastore/dump/<resource id>`, without a query; a portal that serves CKAN under a path prefix keeps it before `/datastore/dump/`.
  * @param pageSize - How many rows a page holds.
  * @param port - The network port.
  * @param signal - Aborts the download.
- * @returns The bytes of one CSV, which is what the parser reads and what the provenance hashes.
- * @throws KeepsetError when the URL is not a datastore dump, the table does not report a count, or a page is not what it should be.
+ * @returns The source read.
+ * @throws KeepsetError when the URL is not a datastore dump or the table does not report a count.
  */
-async function downloadCkanDatastore(dump: string, pageSize: number, port: FetchPort, signal: AbortSignal | undefined): Promise<Uint8Array> {
+async function ckanRead(dump: string, pageSize: number, port: FetchPort, signal: AbortSignal | undefined): Promise<ResourceRead> {
   const parsed = /^(.*)\/datastore\/dump\/([^/?#]+)$/.exec(dump);
   if (parsed?.[1] === undefined || parsed[2] === undefined) {
     throw new KeepsetError(`${dump} is not a CKAN datastore dump URL`);
@@ -262,21 +286,21 @@ async function downloadCkanDatastore(dump: string, pageSize: number, port: Fetch
     throw new KeepsetError(`${dump} did not report a row count`);
   }
 
-  return downloadPages({ resource: dump, pageUrl: (offset) => `${dump}?format=csv&limit=${String(pageSize)}&offset=${String(offset)}`, pageSize, count: count.data.result.total, port, signal });
+  return { resource: dump, pageUrl: (offset) => `${dump}?format=csv&limit=${String(pageSize)}&offset=${String(offset)}`, pageSize, count: count.data.result.total, port, signal };
 }
 
 const OpenFemaCountSchema = z.object({ metadata: z.object({ count: z.int().min(0) }) });
 
 /**
- * Downloads a whole OpenFEMA entity, or the rows of it the source URL selects, as one CSV: the row count is read from the API's own metadata, then pages of `pageSize` rows in the order of the entity's id, each checked to hold the rows it should, and joined under the first page's header.
+ * How an OpenFEMA entity, or the rows of it the source URL selects, is read: the row count is read from the API's own metadata, then pages of `pageSize` rows in the order of the entity's id.
  * @param entity - The entity's URL with any `$select` or `$filter` but no `$top`, `$skip`, `$orderby` or `$format`, such as `https://www.fema.gov/api/open/v3/NfipClaims?$select=id,state`.
  * @param pageSize - How many rows a page holds.
  * @param port - The network port.
  * @param signal - Aborts the download.
- * @returns The bytes of one CSV, which is what the parser reads and what the provenance hashes.
- * @throws KeepsetError when the source URL sets a paging parameter, the entity does not report a count, or a page is not what it should be.
+ * @returns The source read.
+ * @throws KeepsetError when the source URL sets a paging parameter or the entity does not report a count.
  */
-async function downloadOpenFema(entity: string, pageSize: number, port: FetchPort, signal: AbortSignal | undefined): Promise<Uint8Array> {
+async function openFemaRead(entity: string, pageSize: number, port: FetchPort, signal: AbortSignal | undefined): Promise<ResourceRead> {
   const base = new URL(entity);
   for (const name of ["$top", "$skip", "$orderby", "$format", "$inlinecount"]) {
     if (base.searchParams.has(name)) {
@@ -303,11 +327,40 @@ async function downloadOpenFema(entity: string, pageSize: number, port: FetchPor
     throw new KeepsetError(`${entity} did not report a row count`);
   }
 
-  return downloadPages({ resource: entity, pageUrl: (offset) => withParameters({ $format: "csv", $orderby: "id", $top: String(pageSize), $skip: String(offset) }), pageSize, count: count.data.metadata.count, port, signal });
+  return { resource: entity, pageUrl: (offset) => withParameters({ $format: "csv", $orderby: "id", $top: String(pageSize), $skip: String(offset) }), pageSize, count: count.data.metadata.count, port, signal };
 }
 
 /**
- * Downloads a paged source as the one file its pages make, in the way its recipe's paging says.
+ * How a CSV paged source is read, in the way its recipe's paging says.
+ * @param url - The source's URL.
+ * @param paging - How the source is paged.
+ * @param port - The network port.
+ * @param signal - Aborts the download.
+ * @returns The source read.
+ */
+async function csvRead(url: string, paging: Readonly<CsvPaging>, port: FetchPort, signal: AbortSignal | undefined): Promise<ResourceRead> {
+  if (paging.kind === "socrata-resource") {
+    return socrataRead(url, paging, port, signal);
+  }
+
+  return paging.kind === "ckan-datastore" ? ckanRead(url, paging.pageSize, port, signal) : openFemaRead(url, paging.pageSize, port, signal);
+}
+
+/**
+ * Reads a CSV paged source a page at a time: the first page with its header and every later page without it, so the pages in order are the one CSV `downloadPaged` joins them into. Only the page being read is held.
+ * @param url - The source's URL.
+ * @param paging - How the source is paged.
+ * @param port - The network port.
+ * @param signal - Aborts the download.
+ * @returns Each page's bytes, in order.
+ * @throws KeepsetError when the source does not report a count, has no rows, or a page is not what it should be.
+ */
+export async function* csvPages(url: string, paging: Readonly<CsvPaging>, port: FetchPort, signal: AbortSignal | undefined): AsyncGenerator<Uint8Array, void, undefined> {
+  yield* resourcePages(await csvRead(url, paging, port, signal));
+}
+
+/**
+ * Downloads a paged source as the one file its pages make, in the way its recipe's paging says: an ArcGIS layer as one GeoJSON feature collection, any other source as one CSV of its pages joined under the first page's header.
  * @param url - The source's URL.
  * @param paging - How the source is paged.
  * @param port - The network port.
@@ -320,9 +373,5 @@ export async function downloadPaged(url: string, paging: Readonly<Paging>, port:
     return downloadArcgisLayer(url, paging.orderBy, port, signal);
   }
 
-  if (paging.kind === "socrata-resource") {
-    return downloadSocrataResource(url, paging.pageSize, port, signal);
-  }
-
-  return paging.kind === "ckan-datastore" ? downloadCkanDatastore(url, paging.pageSize, port, signal) : downloadOpenFema(url, paging.pageSize, port, signal);
+  return downloadPages(await csvRead(url, paging, port, signal));
 }

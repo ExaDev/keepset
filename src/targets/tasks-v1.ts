@@ -38,10 +38,13 @@ export type Task = z.infer<typeof TaskSchema>;
 /**
  * The tasks/v1 normalisation target: `{ meta, nodes }`, a set of tasks as the nodes it offers to visit or serve, whether it comes from a routing benchmark or from an open data register of permits and complaints. It describes the result `fetchDataset` resolves an entry to, not what a source file may contain. Beyond the field shapes it checks that node ids are unique. It has no arcs: a source that carries a travel matrix or arc list keeps it out of this version.
  */
+/** The metadata of a tasks/v1 document: a flat record of scalars. */
+export const TasksMetaSchema = recordOf(z.string().min(1), JsonScalarSchema);
+
 export const TasksV1Schema = define(
   z
     .object({
-      meta: recordOf(z.string().min(1), JsonScalarSchema),
+      meta: TasksMetaSchema,
       nodes: z.array(TaskSchema),
     })
     .strict()

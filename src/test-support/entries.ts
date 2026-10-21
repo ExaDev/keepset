@@ -198,6 +198,9 @@ export const socrataEntry = {
   properties: {},
 };
 
+/** The Socrata entry with a streamed recipe: the same source, paging, parser and crosswalk, read a page at a time by `streamEntry` rather than held by `fetchEntry`. */
+export const streamedEntry = { ...socrataEntry, id: "streamed-cases", name: "Streamed cases", recipe: { ...socrataEntry.recipe, stream: true } };
+
 /** A fetchable tasks/v1 entry whose source is a CKAN datastore dump read two rows at a time, on a portal that serves CKAN under the path prefix `/data`. */
 export const ckanEntry = {
   ...socrataEntry,

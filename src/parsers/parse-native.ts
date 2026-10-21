@@ -60,6 +60,53 @@ const PIECE_MEBIBYTES = 8;
 export const DECODE_PIECE_BYTES = PIECE_MEBIBYTES * KIBIBYTE * KIBIBYTE;
 
 /**
+ * Decodes a file's bytes in the recipe's encoding as they arrive in pieces, as strictly as `decode`: a character whose bytes span two pieces is decoded whole with the later one, and bytes that are not valid in the stated encoding fail.
+ */
+export class PieceDecoder {
+  private readonly utf8: TextDecoder | undefined;
+
+  public constructor(private readonly parser: Parser) {
+    this.utf8 = parser.encoding === "latin1" ? undefined : new TextDecoder("utf-8", { fatal: true });
+  }
+
+  /**
+   * Decodes the next piece.
+   * @param piece - Bytes that follow the pieces decoded before them.
+   * @returns Their text, without a character the piece ends partway through.
+   * @throws NativeParseError when the bytes are not valid in the stated encoding.
+   */
+  public decode(piece: Uint8Array): string {
+    const { utf8 } = this;
+
+    return utf8 === undefined ? decode(piece, this.parser) : this.strictly(() => utf8.decode(piece, { stream: true }));
+  }
+
+  /**
+   * Ends the file.
+   * @returns The text of any bytes still held.
+   * @throws NativeParseError when the file ends partway through a character.
+   */
+  public end(): string {
+    const { utf8 } = this;
+
+    return utf8 === undefined ? "" : this.strictly(() => utf8.decode());
+  }
+
+  /**
+   * Runs a utf-8 decode, rethrowing its failure in the package's taxonomy: TextDecoder reports invalid bytes only as a TypeError with no position.
+   * @param run - The decode.
+   * @returns Its text.
+   */
+  private strictly(run: () => string): string {
+    try {
+      return run();
+    } catch (error) {
+      throw new NativeParseError(this.parser.format, 1, `the file is not valid utf-8 (${error instanceof Error ? error.message : String(error)}); a recipe for a latin1 file states encoding latin1`);
+    }
+  }
+}
+
+/**
  * Decodes a file's bytes in the recipe's encoding a piece at a time, as strictly as `decode`, so a file whose text would not fit in one string can still be read.
  * @param bytes - The unpacked file.
  * @param parser - The recipe's parser, which names the encoding.
@@ -68,23 +115,13 @@ export const DECODE_PIECE_BYTES = PIECE_MEBIBYTES * KIBIBYTE * KIBIBYTE;
  * @throws NativeParseError when the bytes are not valid in the stated encoding.
  */
 export function* decodePieces(bytes: Uint8Array, parser: Parser, pieceBytes: number = DECODE_PIECE_BYTES): Generator<string, void, undefined> {
-  const decoder = parser.encoding === "latin1" ? undefined : new TextDecoder("utf-8", { fatal: true });
-  try {
-    for (let start = 0; start < bytes.length; start += pieceBytes) {
-      const piece = bytes.subarray(start, start + pieceBytes);
-      yield decoder === undefined ? decode(piece, parser) : decoder.decode(piece, { stream: true });
-    }
-    if (decoder !== undefined) {
-      const rest = decoder.decode();
-      if (rest !== "") {
-        yield rest;
-      }
-    }
-  } catch (error) {
-    if (error instanceof NativeParseError) {
-      throw error;
-    }
-    throw new NativeParseError(parser.format, 1, `the file is not valid utf-8 (${error instanceof Error ? error.message : String(error)}); a recipe for a latin1 file states encoding latin1`);
+  const decoder = new PieceDecoder(parser);
+  for (let start = 0; start < bytes.length; start += pieceBytes) {
+    yield decoder.decode(bytes.subarray(start, start + pieceBytes));
+  }
+  const rest = decoder.end();
+  if (rest !== "") {
+    yield rest;
   }
 }
 
