@@ -58,6 +58,11 @@
       "url": "https://websites.umich.edu/~mejn/netdata/football.zip"
     },
     {
+      "retrieved": "2026-10-21",
+      "status": "live",
+      "url": "https://www.cise.ufl.edu/research/sparse/MM/Newman/football.tar.gz"
+    },
+    {
       "retrieved": "2026-01-17",
       "status": "live",
       "url": "https://sparse.tamu.edu/MM/Newman/football.tar.gz"

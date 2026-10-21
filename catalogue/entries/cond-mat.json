@@ -57,6 +57,11 @@
       "url": "https://websites.umich.edu/~mejn/netdata/cond-mat.zip"
     },
     {
+      "retrieved": "2026-10-21",
+      "status": "live",
+      "url": "https://www.cise.ufl.edu/research/sparse/MM/Newman/cond-mat.tar.gz"
+    },
+    {
       "retrieved": "2026-01-17",
       "status": "live",
       "url": "https://sparse.tamu.edu/MM/Newman/cond-mat.tar.gz"

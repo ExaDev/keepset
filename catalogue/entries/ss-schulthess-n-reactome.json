@@ -56,6 +56,11 @@
   },
   "sources": [
     {
+      "retrieved": "2026-10-21",
+      "status": "live",
+      "url": "https://www.cise.ufl.edu/research/sparse/MM/Schulthess/N_reactome.tar.gz"
+    },
+    {
       "retrieved": "2026-02-16",
       "status": "live",
       "url": "https://sparse.tamu.edu/MM/Schulthess/N_reactome.tar.gz"
