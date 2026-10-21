@@ -418,11 +418,12 @@
     {
       "flags": [
         "repository has no licence file",
-        "only latitude and longitude of the points; no demands, times or cost matrix"
+        "only latitude and longitude of the points; no demands, times or cost matrix",
+        "the data file is a binary xls workbook (BIFF8) with one sheet, objects, read as a table",
+        "rows are numbered, the workbook having no id column"
       ],
       "id": "github-oberfichtner-perm-cash-collection-sites",
-      "reason": "The only data file is an old binary xls workbook, and keepset reads only xlsx.",
-      "recipe": "not-fetchable",
+      "recipe": "fetchable",
       "surveyId": "or-38"
     },
     {
@@ -1321,11 +1322,15 @@
     },
     {
       "flags": [
-        "Survey URL is a landing page and the named zip was not reachable, so its contents are unseen."
+        "the download URL is built from the data set and file ids the dataset page records, and was not a link on the page",
+        "the zip holds a documentation odt and one OpenDocument spreadsheet whose name starts with the quarter it was published in, so the spreadsheet is selected by its extension",
+        "the spreadsheet's one table, tblAllData, is read",
+        "the zip is replaced each quarter with a cumulative update, so no node count is recorded",
+        "the warning area code repeats, so rows are numbered",
+        "the issue time is mapped as the opening time, the Environment Agency area as the territory and the warning type as the status; the warning area code and name are not mapped"
       ],
       "id": "defra-historic-flood-warnings",
-      "reason": "The download is a zip holding one OpenDocument spreadsheet whose member name changes every quarter, and keepset reads xlsx and not ods.",
-      "recipe": "not-fetchable",
+      "recipe": "fetchable",
       "surveyId": "or-120"
     },
     {

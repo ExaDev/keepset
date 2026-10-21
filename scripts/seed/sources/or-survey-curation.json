@@ -1556,7 +1556,12 @@
     {
       "description": "Every severe flood warning, flood warning and flood alert the Environment Agency has issued for flooding from rivers, the sea and some groundwater sites since the warning system began in January 2006.",
       "flags": [
-        "Survey URL is a landing page and the named zip was not reachable, so its contents are unseen."
+        "the download URL is built from the data set and file ids the dataset page records, and was not a link on the page",
+        "the zip holds a documentation odt and one OpenDocument spreadsheet whose name starts with the quarter it was published in, so the spreadsheet is selected by its extension",
+        "the spreadsheet's one table, tblAllData, is read",
+        "the zip is replaced each quarter with a cumulative update, so no node count is recorded",
+        "the warning area code repeats, so rows are numbered",
+        "the issue time is mapped as the opening time, the Environment Agency area as the territory and the warning type as the status; the warning area code and name are not mapped"
       ],
       "id": "defra-historic-flood-warnings",
       "licence": {
@@ -1570,10 +1575,40 @@
       "name": "Historic Flood Warnings (England)",
       "namespace": "defra",
       "outcome": {
-        "reason": "The download is a zip holding one OpenDocument spreadsheet whose member name changes every quarter, and keepset reads xlsx and not ods.",
-        "status": "not-fetchable"
+        "archive": {
+          "kind": "zip",
+          "member": {
+            "extensions": [
+              ".ods"
+            ]
+          },
+          "inner": {
+            "kind": "ods",
+            "sheet": "tblAllData"
+          }
+        },
+        "delimiter": "comma",
+        "encoding": "utf-8",
+        "header": [
+          "DATE",
+          "AREA",
+          "CODE",
+          "WARNING / ALERT AREA NAME",
+          "TYPE"
+        ],
+        "idColumn": null,
+        "map": {
+          "opened": "DATE",
+          "status": "TYPE",
+          "territory": "AREA"
+        },
+        "numericColumns": [],
+        "rowCount": 85993,
+        "skipLines": 0,
+        "status": "fetchable"
       },
-      "surveyId": "or-120"
+      "surveyId": "or-120",
+      "downloadUrl": "https://environment.data.gov.uk/api/file/download?fileDataSetId=766cb094-b392-4bd6-a02e-f60e143f3213&fileName=Historic_Flood_Warnings.zip"
     },
     {
       "description": "Scheduled street milling and paving work by borough, street segment and date, from NYC DOT.",
@@ -3296,7 +3331,9 @@
       "description": "Coordinates of ATM and point-of-sale cash-collection sites around Perm, Russia, used for clustering and TSP routing examples.",
       "flags": [
         "repository has no licence file",
-        "only latitude and longitude of the points; no demands, times or cost matrix"
+        "only latitude and longitude of the points; no demands, times or cost matrix",
+        "the data file is a binary xls workbook (BIFF8) with one sheet, objects, read as a table",
+        "rows are numbered, the workbook having no id column"
       ],
       "id": "github-oberfichtner-perm-cash-collection-sites",
       "licence": {
@@ -3308,10 +3345,37 @@
       "name": "Perm cash-collection sites (ATM and POS points)",
       "namespace": "github-oberfichtner",
       "outcome": {
-        "reason": "The only data file is an old binary xls workbook, and keepset reads only xlsx.",
-        "status": "not-fetchable"
+        "archive": {
+          "kind": "xls",
+          "sheet": "objects"
+        },
+        "delimiter": "comma",
+        "encoding": "utf-8",
+        "expectedNodes": 237,
+        "header": [
+          "LATITUDE",
+          "LONGITUDE"
+        ],
+        "idColumn": null,
+        "map": {
+          "lat": "LATITUDE",
+          "lon": "LONGITUDE"
+        },
+        "numericColumns": [
+          {
+            "column": "LATITUDE",
+            "factor": 1
+          },
+          {
+            "column": "LONGITUDE",
+            "factor": 1
+          }
+        ],
+        "skipLines": 0,
+        "status": "fetchable"
       },
-      "surveyId": "or-38"
+      "surveyId": "or-38",
+      "downloadUrl": "https://raw.githubusercontent.com/Oberfichtner/Clustering_and_TSP_with_R/main/rawdataclear.xls"
     },
     {
       "description": "Tax warrants filed by the New York State Department of Taxation and Finance, with amount, status, dates and county.",
