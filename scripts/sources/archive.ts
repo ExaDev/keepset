@@ -18,9 +18,9 @@ export const SAVE_BACKOFF_MILLISECONDS = 30_000;
 /** How many URLs in a row may end unresolved before the run stops. A service or network that fails five URLs in a row is down or has throttled this client, and going on only adds requests; the run is resumable, so stopping loses nothing. */
 export const MAX_CONSECUTIVE_UNRESOLVED = 5;
 
-/** What the archiver keeps between runs in its gitignored state file: the UTC day and how many captures were requested on it, so the account's daily limit holds across restarts, and the captures of each URL that failed verification, so the availability API handing the same bad capture back is not trusted again. A state file written before the rejections were kept has none, and nothing was rejected then. */
+/** What the archiver keeps between runs in its gitignored state file: the UTC day and how many captures were requested on it, so the account's daily limit holds across restarts, and the captures of each URL that failed verification, so the availability API handing the same bad capture back is not trusted again. A state file written before the rejections were kept has none, and nothing was rejected then. `deferred` counts the runs in a row each URL ended unresolved, so a URL that cannot be settled goes behind the ones that can and never holds up the queue. */
 export const ArchiveStateSchema = z
-  .object({ day: z.string(), captures: z.int().min(0), rejected: z.record(z.string(), z.array(WaybackTimestampSchema)).default({}) })
+  .object({ day: z.string(), captures: z.int().min(0), rejected: z.record(z.string(), z.array(WaybackTimestampSchema)).default({}), deferred: z.record(z.string(), z.int().min(1)).default({}) })
   .strict();
 export type ArchiveState = z.infer<typeof ArchiveStateSchema>;
 
@@ -112,6 +112,8 @@ export async function archiveSources(ports: Readonly<ArchivePorts>, request: Rea
   const excepted = new Map<string, Pick<ArchiveException, "reason" | "evidence">>();
   const pinned = new Set<string>();
   const unresolved: string[] = [];
+  // A URL that ended unresolved in earlier runs is tried after those that did not, so a few that cannot be settled do not stop the run before it reaches the rest; the sort is stable, so URLs with the same count keep the catalogue's order.
+  const queue = [...request.groups].sort((left, right) => (state.deferred[left.url] ?? 0) - (state.deferred[right.url] ?? 0));
   let resolved = 0;
   let consecutive = 0;
   let stopped: string | undefined;
@@ -249,6 +251,17 @@ export async function archiveSources(ports: Readonly<ArchivePorts>, request: Rea
   };
 
   /**
+   * Forgets that a URL was ever left unresolved, once it is settled.
+   * @param url - The URL.
+   */
+  const clearDeferred = (url: string): void => {
+    if (state.deferred[url] !== undefined) {
+      state.deferred = Object.fromEntries(Object.entries(state.deferred).filter(([key]) => key !== url));
+      persist(structuredClone(state));
+    }
+  };
+
+  /**
    * Applies a resolution to the run's records.
    * @param group - The URL's group.
    * @param resolution - What it came to.
@@ -256,6 +269,7 @@ export async function archiveSources(ports: Readonly<ArchivePorts>, request: Rea
   const settle = (group: SourceGroup, resolution: Resolution): void => {
     switch (resolution.kind) {
       case "pinned":
+        clearDeferred(group.url);
         record(group.url, resolution.timestamp);
         verified(group.url, resolution.timestamp);
         pinned.add(group.url);
@@ -263,12 +277,15 @@ export async function archiveSources(ports: Readonly<ArchivePorts>, request: Rea
         log(`${group.url}: pinned ${resolution.timestamp}`);
         break;
       case "excepted":
+        clearDeferred(group.url);
         excepted.set(group.url, { reason: resolution.reason, evidence: resolution.evidence });
         except({ url: group.url, entries: [...group.entryIds], reason: resolution.reason, evidence: resolution.evidence });
         consecutive = 0;
         log(`${group.url}: cannot be archived (${resolution.reason}: ${resolution.evidence})`);
         break;
       case "unresolved":
+        state.deferred[group.url] = (state.deferred[group.url] ?? 0) + 1;
+        persist(structuredClone(state));
         unresolved.push(group.url);
         consecutive += 1;
         log(`${group.url}: left unresolved (${resolution.evidence})`);
@@ -288,7 +305,7 @@ export async function archiveSources(ports: Readonly<ArchivePorts>, request: Rea
    * @param index - The group to work on.
    */
   const work = async (index: number): Promise<void> => {
-    const group = request.groups[index];
+    const group = queue[index];
     if (group === undefined || stopped !== undefined) {
       return;
     }

@@ -74,7 +74,7 @@ function trial(pins: readonly { url: string; timestamp: string; dead: boolean }[
     },
   };
   const entries = sources.map((source, index) => ({ path: String(index), entry: entryWith(`e${String(index)}`, [source]) }));
-  const request: VerifyRequest = { groups: groupSources(entries), alreadyVerified: new Set<string>(), reverify: false, entryIds: undefined, limit: undefined, state: { day: "", captures: 0, rejected: {} }, ...overrides };
+  const request: VerifyRequest = { groups: groupSources(entries), alreadyVerified: new Set<string>(), reverify: false, entryIds: undefined, limit: undefined, state: { day: "", captures: 0, rejected: {}, deferred: {} }, ...overrides };
 
   return { result: verifyPins(ports, request), unpinned, verified, unverified, states, log };
 }

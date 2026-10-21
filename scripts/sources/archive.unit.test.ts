@@ -103,7 +103,7 @@ function run(urls: readonly string[], world: World, overrides: Partial<ArchiveRe
     log: () => undefined,
   };
   const files = urls.map((url, index) => ({ path: String(index), entry: entryWith(`e${String(index)}`, [liveSource(url)]) }));
-  const request: ArchiveRequest = { groups: groupSources(files), exceptions: [], retryExceptions: false, entryIds: undefined, limit: undefined, state: { day: "", captures: 0, rejected: {} }, ...overrides };
+  const request: ArchiveRequest = { groups: groupSources(files), exceptions: [], retryExceptions: false, entryIds: undefined, limit: undefined, state: { day: "", captures: 0, rejected: {}, deferred: {} }, ...overrides };
 
   return { result: archiveSources(ports, request), recorded, verified, excepted, captured, captureTimes, clock, states, seen };
 }
@@ -138,7 +138,7 @@ describe("archiveSources", () => {
   });
 
   it("does not trust a capture it has already rejected when the capture index offers it again", async () => {
-    const known = { day: "", captures: 0, rejected: { [A]: ["20250101000000"] } };
+    const known = { day: "", captures: 0, rejected: { [A]: ["20250101000000"] }, deferred: {} };
     const trial = run([A], { available: { [A]: "20250101000000" }, saves: [{ kind: "saved", timestamp: "20261020120001" }] }, { state: known });
     await trial.result;
     expect(trial.seen.some((request) => request.url === "https://web.archive.org/web/20250101000000id_/https://example.org/a")).toBe(false);
@@ -167,6 +167,20 @@ describe("archiveSources", () => {
     const outcome = await trial.result;
     expect(trial.recorded.size).toBe(0);
     expect(outcome.unresolved).toEqual([A]);
+  });
+
+  it("tries URLs that ended unresolved in earlier runs after the others, and forgets the count once one settles", async () => {
+    const known = { day: "", captures: 0, rejected: {}, deferred: { [A]: 2 } };
+    const trial = run([A, B], { replays: {}, saves: [{ kind: "saved", timestamp: "20261020120001" }, { kind: "saved", timestamp: "20261020120002" }] }, { state: known });
+    await trial.result;
+    expect(trial.captured).toEqual([B, A]);
+    expect(trial.states.at(-1)?.deferred).toEqual({});
+  });
+
+  it("counts a run in which a URL ended unresolved", async () => {
+    const trial = run([A], { replays: { "20261020120001": { status: HTTP_STATUS.notFound } }, saves: [{ kind: "saved", timestamp: "20261020120001" }] });
+    await trial.result;
+    expect(trial.states.at(-1)?.deferred).toEqual({ [A]: 1 });
   });
 
   it("waits for a fresh capture's indexing to clear before accepting it", async () => {
@@ -202,7 +216,7 @@ describe("archiveSources", () => {
         persist: () => undefined,
         log: () => undefined,
       },
-      { groups: groupSources([{ path: "x", entry: entryWith("x", [liveSource(A)]) }]), exceptions: [], retryExceptions: false, entryIds: undefined, limit: undefined, state: { day: "", captures: 0, rejected: {} } },
+      { groups: groupSources([{ path: "x", entry: entryWith("x", [liveSource(A)]) }]), exceptions: [], retryExceptions: false, entryIds: undefined, limit: undefined, state: { day: "", captures: 0, rejected: {}, deferred: {} } },
     );
     expect(trial.unresolved).toEqual([]);
     expect(looks).toBe(2);
@@ -221,7 +235,7 @@ describe("archiveSources", () => {
     const trial = run([A, B], { saves: [{ kind: "saved", timestamp: "20261020120001" }, { kind: "saved", timestamp: "20261020120002" }] });
     await trial.result;
     expect(at(trial.captureTimes, 1) - at(trial.captureTimes, 0)).toBeGreaterThanOrEqual(intervalForRate(DEFAULT_PER_MINUTE));
-    expect(trial.states.at(-1)).toEqual({ day: "2026-10-20", captures: 2, rejected: {} });
+    expect(trial.states.at(-1)).toEqual({ day: "2026-10-20", captures: 2, rejected: {}, deferred: {} });
   });
 
   it("excepts a paged source without any request", async () => {
@@ -297,10 +311,10 @@ describe("archiveSources", () => {
   });
 
   it("counts the day's captures afresh on a new UTC day", async () => {
-    const trial = run([A], { saves: [{ kind: "saved", timestamp: "20261020120001" }] }, { state: { day: "2026-10-19", captures: 200, rejected: {} } });
+    const trial = run([A], { saves: [{ kind: "saved", timestamp: "20261020120001" }] }, { state: { day: "2026-10-19", captures: 200, rejected: {}, deferred: {} } });
     await trial.result;
     expect(trial.captured).toEqual([A]);
-    expect(trial.states.at(-1)).toEqual({ day: "2026-10-20", captures: 1, rejected: {} });
+    expect(trial.states.at(-1)).toEqual({ day: "2026-10-20", captures: 1, rejected: {}, deferred: {} });
   });
 
   it("stops when the account's own limit is exhausted", async () => {
@@ -382,7 +396,7 @@ describe("archiveSources", () => {
         persist: () => undefined,
         log: () => undefined,
       },
-      { groups: groupSources(files), exceptions: [], retryExceptions: false, entryIds: undefined, limit: undefined, state: { day: "", captures: 0, rejected: {} } },
+      { groups: groupSources(files), exceptions: [], retryExceptions: false, entryIds: undefined, limit: undefined, state: { day: "", captures: 0, rejected: {}, deferred: {} } },
     );
     expect(outcome.unresolved).toEqual([A]);
   });
