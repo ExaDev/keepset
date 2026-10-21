@@ -1,3 +1,10 @@
+# [0.41.0](https://github.com/Mearman/keepset/compare/v0.40.0...v0.41.0) (2026-10-21)
+
+
+### Features
+
+* **archive:** verify a snapshot serves its bytes before pinning it ([19f1a61](https://github.com/Mearman/keepset/commit/19f1a61455c2ee3acceb54a5548389690c056b60))
+
 # [0.40.0](https://github.com/Mearman/keepset/compare/v0.39.0...v0.40.0) (2026-10-21)
 
 
