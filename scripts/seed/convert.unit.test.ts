@@ -29,9 +29,12 @@ const licences = GraphLicencesSchema.parse({
     unstated("amazon-ratings", "Amazon product data", ["http://jmcauley.ucsd.edu/"]),
     { id: "grouplens", name: "GroupLens", prefixes: ["https://files.grouplens.org/datasets/"], perDataset: true },
     unstated("openke", "OpenKE", ["https://raw.githubusercontent.com/thunlp/OpenKE/"]),
+    unstated("hgb", "Heterogeneous Graph Benchmark", ["https://drive.google.com/"]),
+    unstated("yago", "YAGO", ["https://www.yago-knowledge.org/"]),
     { id: "huggingface", name: "Hugging Face", prefixes: ["https://huggingface.co/"], perDataset: true },
   ],
   datasets: {
+    "lastfm-hgb": { readAt: ["https://files.grouplens.org/datasets/hetrec2011/"], reason: "The release page states no terms." },
     ...Object.fromEntries(["movielens-100k", "movielens-1m", "movielens-10m", "movielens-25m", "movielens-unread"].map((id) => [id, { readAt: ["https://files.grouplens.org/datasets/movielens/"], reason: "The release page states no terms." }])),
     "ieee-cis-g": { licence: { kind: "spdx", id: "MIT" }, statedAt: "https://huggingface.co/api/datasets/example/data", statement: "The card's licence field is mit." },
     "oag-eng": { readAt: ["https://huggingface.co/api/datasets/example/data"], reason: "The card has no licence field." },
@@ -77,8 +80,6 @@ describe("the seed import's classification", () => {
 
   it("flags each parser override, derived member and pinned snapshot the import supplied", () => {
     expect(outcome("wiki-vote").flags).toContain("pipeline parser override: delimiter tab");
-    expect(outcome("nell-995").flags).toContain("pipeline parser override: skip 1 header line");
-    expect(entry("nell-995").recipe).toMatchObject({ parser: { skipLines: 1 } });
     expect(outcome("adjnoun")).toMatchObject({ outcome: "converted-with-flags", recipe: "fetchable" });
     expect(outcome("csphd").flags).toEqual(["archive member chosen by extension .net or .paj, which the source catalogue does not record", "the source is dead and the recipe fetches its pinned Wayback snapshot"]);
     expect(outcome("advogato").flags).toEqual(["archive member chosen by extension .edges, which the source catalogue does not record"]);
@@ -199,9 +200,48 @@ describe("the seed import's classification", () => {
     expect(journals.recipe).toMatchObject({ status: "fetchable", source: 1 });
   });
 
-  it("does not guess the columns of a knowledge-graph triple file or the member of an archive in format various", () => {
-    expect(entry("kg-nations").recipe).toMatchObject({ status: "not-fetchable" });
-    expect(JSON.stringify(entry("kg-nations").recipe)).toMatch(/head and tail columns/);
+  it("reads each triples download in the layout read from it: the splits of an archive as named parts, or one file with its header and field order", () => {
+    expect(entry("kg-nations").recipe).toEqual({
+      status: "fetchable",
+      source: 0,
+      archive: {
+        kind: "tar.gz",
+        parts: [
+          { name: "train", member: { path: "train.txt" } },
+          { name: "valid", member: { path: "valid.txt" } },
+          { name: "test", member: { path: "test.txt" } },
+        ],
+      },
+      parser: { format: "kg-triples", encoding: "utf-8", delimiter: "tab", order: "head-relation-tail", header: "none", quoted: false },
+    });
+    expect(entry("kg-nations").crosswalk).toEqual({ file: "crosswalks/graph-v1/relations-split.json" });
+    expect(entry("nell-995").recipe).toMatchObject({ archive: { kind: "none" }, parser: { format: "kg-triples", delimiter: "space", order: "head-tail-relation", header: "count" } });
+    expect(entry("nell-995").crosswalk).toEqual({ file: "crosswalks/graph-v1/relations.json" });
+    expect(outcome("nell-995").flags).toContain("triples layout read from the downloaded file: OpenKE id triples: the triple count on the first line, then head, tail and relation ids separated by spaces");
+  });
+
+  it("reads an HGB zip's node and link files with the types its info.dat gives, and a user-item counts file as two node sets", () => {
+    expect(entry("dblp-het").recipe).toMatchObject({
+      status: "fetchable",
+      archive: {
+        kind: "zip",
+        parts: [
+          { name: "nodes", member: { path: "DBLP/node.dat" } },
+          { name: "links", member: { path: "DBLP/link.dat" } },
+        ],
+      },
+      parser: { format: "hgb", nodeTypes: ["author", "paper", "term", "venue"] },
+    });
+    expect(entry("dblp-het").crosswalk).toEqual({ file: "crosswalks/graph-v1/typed.json" });
+    expect(entry("lastfm-hgb").recipe).toMatchObject({ archive: { kind: "zip", member: { path: "user_artists.dat" } }, parser: { format: "user-item-counts", skipLines: 1, itemType: "artist" } });
+    expect(entry("lastfm-hgb").crosswalk).toEqual({ file: "crosswalks/graph-v1/typed-weighted.json" });
+    expect(entry("lastfm-hgb").expectedCounts).toEqual({ nodes: 19524, edges: 92834 });
+    expect(outcome("lastfm-hgb").flags.some((flag) => flag.startsWith("corrected against the downloaded file:"))).toBe(true);
+  });
+
+  it("does not guess the layout of a triples download it has not read, the member of an archive in format various, or a URL that answers with a page", () => {
+    expect(entry("kg-unread").recipe).toEqual({ status: "not-fetchable", reason: "no download is in a form keepset reads yet (tsv: format tsv is a triple file whose layout the import has not read)" });
+    expect(JSON.stringify(entry("yago3-10").recipe)).toMatch(/certificate does not name www\.yago-knowledge\.org/);
     // arenas-pgp's first download is an archive in format various, so the recipe reads its second, a GML archive.
     expect(entry("arenas-pgp").recipe).toMatchObject({ status: "fetchable", source: 1, parser: { format: "gml" } });
   });

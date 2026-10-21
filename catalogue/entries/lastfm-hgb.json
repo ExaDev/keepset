@@ -6,9 +6,9 @@
     }
   ],
   "crosswalk": {
-    "file": "crosswalks/graph-v1/topology.json"
+    "file": "crosswalks/graph-v1/typed-weighted.json"
   },
-  "description": "Heterogeneous music recommendation network from Last.fm. Contains users, artists, and tags with directed user-to-artist listening relationships, social user-user connections, and artist-tag associations. Used for link prediction and recommendation tasks in heterogeneous graph neural network benchmarks.",
+  "description": "Bipartite user-artist listening network from Last.fm, from the HetRec 2011 release. Users are linked to the artists they listened to, and each edge's weight is how many times the user listened to the artist.",
   "domain": "Music recommendation network",
   "expectedCounts": {
     "edges": 92834,
@@ -22,10 +22,10 @@
   },
   "name": "LastFM (HGB)",
   "properties": {
-    "components": 2,
+    "components": 8,
     "connected": false,
-    "cyclic": true,
-    "density": 0.0005933961402754534,
+    "cyclic": false,
+    "density": 0.00024355200564397155,
     "directed": true,
     "edgeTypes": 1,
     "heterogeneous": true,
@@ -33,11 +33,24 @@
     "nodeTypes": 2,
     "rawBytes": 0,
     "selfLoops": false,
-    "weighted": false
+    "weighted": true
   },
   "recipe": {
-    "reason": "no download is in a form keepset reads yet (two-mode-table: format two-mode-table has a pipeline-specific parser with no declarative keepset form yet)",
-    "status": "not-fetchable"
+    "archive": {
+      "kind": "zip",
+      "member": {
+        "path": "user_artists.dat"
+      }
+    },
+    "parser": {
+      "delimiter": "tab",
+      "encoding": "utf-8",
+      "format": "user-item-counts",
+      "itemType": "artist",
+      "skipLines": 1
+    },
+    "source": 0,
+    "status": "fetchable"
   },
   "sources": [
     {

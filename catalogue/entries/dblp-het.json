@@ -6,7 +6,7 @@
     }
   ],
   "crosswalk": {
-    "file": "crosswalks/graph-v1/topology.json"
+    "file": "crosswalks/graph-v1/typed.json"
   },
   "description": "Heterogeneous academic network from DBLP. Contains authors, papers, terms, and venues with authorship, term-usage, and publication-venue relations. Distinct from the homogeneous DBLP coauthorship network.",
   "domain": "Academic heterogeneous",
@@ -25,17 +25,76 @@
     "cyclic": true,
     "density": 0.00035093725028794413,
     "directed": false,
-    "edgeTypes": 1,
+    "edgeTypes": 6,
     "heterogeneous": true,
     "multigraph": true,
-    "nodeTypes": 2,
+    "nodeTypes": 4,
     "rawBytes": 0,
     "selfLoops": false,
     "weighted": false
   },
   "recipe": {
-    "reason": "no download is in a form keepset reads yet (hgb: format hgb has a pipeline-specific parser with no declarative keepset form yet)",
-    "status": "not-fetchable"
+    "archive": {
+      "kind": "zip",
+      "parts": [
+        {
+          "member": {
+            "path": "DBLP/node.dat"
+          },
+          "name": "nodes"
+        },
+        {
+          "member": {
+            "path": "DBLP/link.dat"
+          },
+          "name": "links"
+        }
+      ]
+    },
+    "parser": {
+      "encoding": "utf-8",
+      "format": "hgb",
+      "linkTypes": [
+        {
+          "name": "author-paper",
+          "source": "author",
+          "target": "paper"
+        },
+        {
+          "name": "paper-term",
+          "source": "paper",
+          "target": "term"
+        },
+        {
+          "name": "paper-venue",
+          "source": "paper",
+          "target": "venue"
+        },
+        {
+          "name": "paper-author",
+          "source": "paper",
+          "target": "author"
+        },
+        {
+          "name": "term-paper",
+          "source": "term",
+          "target": "paper"
+        },
+        {
+          "name": "venue-paper",
+          "source": "venue",
+          "target": "paper"
+        }
+      ],
+      "nodeTypes": [
+        "author",
+        "paper",
+        "term",
+        "venue"
+      ]
+    },
+    "source": 0,
+    "status": "fetchable"
   },
   "sources": [
     {

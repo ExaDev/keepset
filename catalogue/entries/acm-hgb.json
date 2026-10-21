@@ -6,9 +6,9 @@
     }
   ],
   "crosswalk": {
-    "file": "crosswalks/graph-v1/topology.json"
+    "file": "crosswalks/graph-v1/typed.json"
   },
-  "description": "Heterogeneous academic network from the Heterogeneous Graph Benchmark suite. Contains papers, authors, and subject categories as node types with 3 relation types: writes (author-paper), published-in (paper-subject), and related subject links. Moderate-size heterogeneous graph used for benchmarking heterogeneous graph neural networks on node classification.",
+  "description": "The ACM network as the Heterogeneous Graph Benchmark suite ships it, the same file as the acm entry. Contains papers, authors, subjects and terms, linked by citation, reference, authorship, subject and term relations, each listed in both directions. Used for benchmarking heterogeneous graph neural networks on node classification.",
   "expectedCounts": {
     "edges": 547872,
     "nodes": 10942
@@ -22,19 +22,88 @@
     "components": 1,
     "connected": true,
     "cyclic": true,
-    "density": 0.004575930276299103,
+    "density": 0.004576414754527161,
     "directed": true,
-    "edgeTypes": 1,
+    "edgeTypes": 8,
     "heterogeneous": true,
     "multigraph": true,
-    "nodeTypes": 1,
+    "nodeTypes": 4,
     "rawBytes": 0,
     "selfLoops": true,
     "weighted": false
   },
   "recipe": {
-    "reason": "no download is in a form keepset reads yet (hgb-zip: format hgb-zip has a pipeline-specific parser with no declarative keepset form yet)",
-    "status": "not-fetchable"
+    "archive": {
+      "kind": "zip",
+      "parts": [
+        {
+          "member": {
+            "path": "ACM/node.dat"
+          },
+          "name": "nodes"
+        },
+        {
+          "member": {
+            "path": "ACM/link.dat"
+          },
+          "name": "links"
+        }
+      ]
+    },
+    "parser": {
+      "encoding": "utf-8",
+      "format": "hgb",
+      "linkTypes": [
+        {
+          "name": "paper-cite-paper",
+          "source": "paper",
+          "target": "paper"
+        },
+        {
+          "name": "paper-ref-paper",
+          "source": "paper",
+          "target": "paper"
+        },
+        {
+          "name": "paper-author",
+          "source": "paper",
+          "target": "author"
+        },
+        {
+          "name": "author-paper",
+          "source": "author",
+          "target": "paper"
+        },
+        {
+          "name": "paper-subject",
+          "source": "paper",
+          "target": "subject"
+        },
+        {
+          "name": "subject-paper",
+          "source": "subject",
+          "target": "paper"
+        },
+        {
+          "name": "paper-term",
+          "source": "paper",
+          "target": "term"
+        },
+        {
+          "name": "term-paper",
+          "source": "term",
+          "target": "paper"
+        }
+      ],
+      "nodeTypes": [
+        "paper",
+        "author",
+        "subject",
+        "term"
+      ]
+    },
+    "source": 0,
+    "status": "fetchable"
   },
   "sources": [
     {

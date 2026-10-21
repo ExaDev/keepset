@@ -6,7 +6,7 @@
     }
   ],
   "crosswalk": {
-    "file": "crosswalks/graph-v1/topology.json"
+    "file": "crosswalks/graph-v1/typed.json"
   },
   "description": "Heterogeneous knowledge graph subset from the Freebase collaborative knowledge base. Contains 8 entity types and 36 relation types spanning people, locations, organisations, and other categories.",
   "domain": "Knowledge graph",
@@ -25,17 +25,230 @@
     "cyclic": true,
     "density": 0.00004721988619699187,
     "directed": true,
-    "edgeTypes": 1,
+    "edgeTypes": 36,
     "heterogeneous": true,
     "multigraph": false,
-    "nodeTypes": 2,
+    "nodeTypes": 8,
     "rawBytes": 0,
     "selfLoops": true,
     "weighted": false
   },
   "recipe": {
-    "reason": "no download is in a form keepset reads yet (hgb: format hgb has a pipeline-specific parser with no declarative keepset form yet)",
-    "status": "not-fetchable"
+    "archive": {
+      "kind": "zip",
+      "parts": [
+        {
+          "member": {
+            "path": "Freebase/node.dat"
+          },
+          "name": "nodes"
+        },
+        {
+          "member": {
+            "path": "Freebase/link.dat"
+          },
+          "name": "links"
+        }
+      ]
+    },
+    "parser": {
+      "encoding": "utf-8",
+      "format": "hgb",
+      "linkTypes": [
+        {
+          "name": "BOOK-and-BOOK",
+          "source": "BOOK",
+          "target": "BOOK"
+        },
+        {
+          "name": "BOOK-to-FILM",
+          "source": "BOOK",
+          "target": "FILM"
+        },
+        {
+          "name": "BOOK-on-SPORTS",
+          "source": "BOOK",
+          "target": "SPORTS"
+        },
+        {
+          "name": "BOOK-on-LOCATION",
+          "source": "BOOK",
+          "target": "LOCATION"
+        },
+        {
+          "name": "BOOK-about-ORGANIZATION",
+          "source": "BOOK",
+          "target": "ORGANIZATION"
+        },
+        {
+          "name": "FILM-and-FILM",
+          "source": "FILM",
+          "target": "FILM"
+        },
+        {
+          "name": "MUSIC-in-BOOK",
+          "source": "MUSIC",
+          "target": "BOOK"
+        },
+        {
+          "name": "MUSIC-in-FILM",
+          "source": "MUSIC",
+          "target": "FILM"
+        },
+        {
+          "name": "MUSIC-and-MUSIC",
+          "source": "MUSIC",
+          "target": "MUSIC"
+        },
+        {
+          "name": "MUSIC-for-SPORTS",
+          "source": "MUSIC",
+          "target": "SPORTS"
+        },
+        {
+          "name": "MUSIC-on-LOCATION",
+          "source": "MUSIC",
+          "target": "LOCATION"
+        },
+        {
+          "name": "SPORTS-in-FILM",
+          "source": "SPORTS",
+          "target": "FILM"
+        },
+        {
+          "name": "SPORTS-and-SPORTS",
+          "source": "SPORTS",
+          "target": "SPORTS"
+        },
+        {
+          "name": "SPORTS-on-LOCATION",
+          "source": "SPORTS",
+          "target": "LOCATION"
+        },
+        {
+          "name": "PEOPLE-to-BOOK",
+          "source": "PEOPLE",
+          "target": "BOOK"
+        },
+        {
+          "name": "PEOPLE-to-FILM",
+          "source": "PEOPLE",
+          "target": "FILM"
+        },
+        {
+          "name": "PEOPLE-to-MUSIC",
+          "source": "PEOPLE",
+          "target": "MUSIC"
+        },
+        {
+          "name": "PEOPLE-to-SPORTS",
+          "source": "PEOPLE",
+          "target": "SPORTS"
+        },
+        {
+          "name": "PEOPLE-and-PEOPLE",
+          "source": "PEOPLE",
+          "target": "PEOPLE"
+        },
+        {
+          "name": "PEOPLE-on-LOCATION",
+          "source": "PEOPLE",
+          "target": "LOCATION"
+        },
+        {
+          "name": "PEOPLE-in-ORGANIZATION",
+          "source": "PEOPLE",
+          "target": "ORGANIZATION"
+        },
+        {
+          "name": "PEOPLE-in-BUSINESS",
+          "source": "PEOPLE",
+          "target": "BUSINESS"
+        },
+        {
+          "name": "LOCATION-in-FILM",
+          "source": "LOCATION",
+          "target": "FILM"
+        },
+        {
+          "name": "LOCATION-and-LOCATION",
+          "source": "LOCATION",
+          "target": "LOCATION"
+        },
+        {
+          "name": "ORGANIZATION-in-FILM",
+          "source": "ORGANIZATION",
+          "target": "FILM"
+        },
+        {
+          "name": "ORGANIZATION-to-MUSIC",
+          "source": "ORGANIZATION",
+          "target": "MUSIC"
+        },
+        {
+          "name": "ORGANIZATION-to-SPORTS",
+          "source": "ORGANIZATION",
+          "target": "SPORTS"
+        },
+        {
+          "name": "ORGANIZATION-on-LOCATION",
+          "source": "ORGANIZATION",
+          "target": "LOCATION"
+        },
+        {
+          "name": "ORGANIZATION-and-ORGANIZATION",
+          "source": "ORGANIZATION",
+          "target": "ORGANIZATION"
+        },
+        {
+          "name": "ORGANIZATION-for-BUSINESS",
+          "source": "ORGANIZATION",
+          "target": "BUSINESS"
+        },
+        {
+          "name": "BUSINESS-about-BOOK",
+          "source": "BUSINESS",
+          "target": "BOOK"
+        },
+        {
+          "name": "BUSINESS-about-FILM",
+          "source": "BUSINESS",
+          "target": "FILM"
+        },
+        {
+          "name": "BUSINESS-about-MUSIC",
+          "source": "BUSINESS",
+          "target": "MUSIC"
+        },
+        {
+          "name": "BUSINESS-about-SPORTS",
+          "source": "BUSINESS",
+          "target": "SPORTS"
+        },
+        {
+          "name": "BUSINESS-on-LOCATION",
+          "source": "BUSINESS",
+          "target": "LOCATION"
+        },
+        {
+          "name": "BUSINESS-and-BUSINESS",
+          "source": "BUSINESS",
+          "target": "BUSINESS"
+        }
+      ],
+      "nodeTypes": [
+        "BOOK",
+        "FILM",
+        "MUSIC",
+        "SPORTS",
+        "PEOPLE",
+        "LOCATION",
+        "ORGANIZATION",
+        "BUSINESS"
+      ]
+    },
+    "source": 0,
+    "status": "fetchable"
   },
   "sources": [
     {

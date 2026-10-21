@@ -1,17 +1,22 @@
 import { parseEntry, waybackUrl, type Archive, type Citation, type Entry, type Parser, type Recipe, type Source } from "../../src/entry";
 import type { InstanceFormat } from "../../src/parsers/instance-shapes";
 import type { JsonScalar } from "../../src/targets/json-scalar";
+import { HGB_FILES, SPLITS, TRIPLE_FILES, type HgbLayout, type TriplesLayout } from "./graph-layouts";
 import type { GraphLicenceResolver } from "./licence";
 import { matrixMarketPath, mirrorUrl, SUITESPARSE_ORIGIN, type SuiteSparseMirror } from "./mirror";
 import type { GraphboxCatalogue, SourceCatalogue, SourceDataset, SourceDownload, SourceEntry, StructuredCitation } from "./source";
 
-/** The crosswalk files of graph/v1, each for the fields of the native graph a parser emits: the topology every parser emits, and with it the edge weight, the edge time, both, or (for the ratings parser) node and edge types as well. */
+/** The crosswalk files of graph/v1, each for the fields of the native graph a parser emits: the topology every parser emits, and with it the edge weight, the edge time, both, or (for the ratings parser) node and edge types as well; edge types alone, or with each edge's split (the triples parser); node and edge types (HGB); and those with an edge weight (the counts parser). */
 export const CROSSWALKS = {
   topology: "crosswalks/graph-v1/topology.json",
   weighted: "crosswalks/graph-v1/weighted.json",
   timestamped: "crosswalks/graph-v1/timestamped.json",
   weightedTimestamped: "crosswalks/graph-v1/weighted-timestamped.json",
   rated: "crosswalks/graph-v1/rated.json",
+  relations: "crosswalks/graph-v1/relations.json",
+  relationsSplit: "crosswalks/graph-v1/relations-split.json",
+  typed: "crosswalks/graph-v1/typed.json",
+  typedWeighted: "crosswalks/graph-v1/typed-weighted.json",
 } as const;
 export type CrosswalkFile = (typeof CROSSWALKS)[keyof typeof CROSSWALKS];
 
@@ -34,11 +39,14 @@ export const PIPELINE_PARSER_OVERRIDES: ReadonlyMap<string, { readonly delimiter
   ["com-lj", { delimiter: "tab" }],
   ["wiki-topcats", { delimiter: "tab" }],
   ["as-skitter", { delimiter: "tab" }],
-  ["nell-995", { skipLines: 1 }],
 ]);
 
 /** Downloads, by original URL, whose bytes are not in the format the catalogue records, found by reading them: the import gives each the reason in place of a recipe that would fail. */
-export const MISRECORDED_DOWNLOADS: ReadonlyMap<string, string> = new Map([["http://vlado.fmf.uni-lj.si/pub/networks/data/UciNet/knokbur.dat", "the file is not a DL file: its first line says it has to be converted into DL format, and its matrices sit under comma-separated headers and end with DOS end-of-file marks"]]);
+export const MISRECORDED_DOWNLOADS: ReadonlyMap<string, string> = new Map([
+  ["http://vlado.fmf.uni-lj.si/pub/networks/data/UciNet/knokbur.dat", "the file is not a DL file: its first line says it has to be converted into DL format, and its matrices sit under comma-separated headers and end with DOS end-of-file marks"],
+  ["https://www.yago-knowledge.org/", "the URL is the YAGO project's home page, not a download"],
+  ["https://www.yago-knowledge.org/resource/download/yago/YAGO3-10/", "the URL is not a download: its host's certificate does not name www.yago-knowledge.org, and past that the site answers with its own 404 page"],
+]);
 
 /** Datasets the pipeline removed by judgement rather than recording in its catalogue (the comment beside `HETEROGENEOUS_DATASETS` in the same file): named in the report so their absence is visible. */
 export const JUDGEMENT_CALL_REMOVALS: readonly { readonly id: string; readonly reason: string }[] = [
@@ -55,10 +63,11 @@ export const OMITTED_FIELDS: readonly { readonly field: string; readonly reason:
   { field: "properties sync-back", reason: "the pipeline writes detected structural properties back into its catalogue; keepset entries are not rewritten by fetching, and a fetch reports count drift as a warning instead" },
 ];
 
-/** What a downloaded file shows the catalogue's record of a dataset to get wrong, found by reading the whole file when a recipe was written for it: the replacement description, expected node count and structural properties, with the reason. A correction is applied over the catalogue's record and flagged in the report; the source catalogue itself is never edited. */
+/** What a downloaded file shows the catalogue's record of a dataset to get wrong, found by reading the whole file when a recipe was written for it: the replacement description, expected node and edge counts and structural properties, with the reason. A correction is applied over the catalogue's record and flagged in the report; the source catalogue itself is never edited. */
 export interface Correction {
   readonly description?: string;
   readonly expectedNodes?: number;
+  readonly expectedEdges?: number;
   readonly properties?: Readonly<Record<string, JsonScalar>>;
   readonly reason: string;
 }
@@ -94,6 +103,74 @@ export const CORRECTIONS: ReadonlyMap<string, Correction> = new Map([
     {
       description: "Undirected bipartite user-product review network for Movies and TV on Amazon. Users are linked to products they reviewed; edge weights are normalised star ratings.",
       reason: "the catalogue records this download as undirected (format amazon-ratings-undirected, property directed false), while its description calls the network directed",
+    },
+  ],
+  ["kg-kinship", { properties: { multigraph: false }, reason: "no person pair has two relations in the triples, as the description says, while the catalogue's properties call the graph a multigraph" }],
+  ["kg-codex-s", { expectedNodes: 2034, expectedEdges: 32888, reason: "the catalogue records no nodes or edges for the training split the recipe reads" }],
+  [
+    "wn18rr",
+    {
+      expectedNodes: 40943,
+      expectedEdges: 93003,
+      properties: { components: 13, density: 5.5481506174749874e-5, edgeTypes: 11, nodeTypes: 1, selfLoops: true },
+      reason: "the catalogue's counts and properties are those of the test split read alone, while the recipe reads the three splits; its entities carry no type and its relations are the edge types",
+    },
+  ],
+  [
+    "fb15k-237",
+    {
+      expectedNodes: 14541,
+      expectedEdges: 310116,
+      properties: { components: 6, cyclic: true, density: 0.0014667817328547926, edgeTypes: 237, multigraph: true, selfLoops: true },
+      reason: "the catalogue's edge count and properties describe a reading that kept almost none of the triples, while the recipe reads every triple of the three splits with its relation as the edge type",
+    },
+  ],
+  ["nell-995", { properties: { edgeTypes: 200, nodeTypes: 1 }, reason: "the recipe reads each triple's relation as the edge type, and the entities carry no type" }],
+  [
+    "hetionet",
+    {
+      expectedNodes: 45158,
+      expectedEdges: 2250197,
+      properties: { components: 1, connected: true, density: 0.0011034705835981234, edgeTypes: 24, nodeTypes: 1 },
+      reason: "the catalogue's counts and properties come from reading the header line as an edge and the metaedge column as the target, while the recipe skips the header and reads each line as source, metaedge type and target; a node's kind is part of its id, not a type of its own",
+    },
+  ],
+  [
+    "acm",
+    {
+      description: "Heterogeneous academic network from the ACM digital library, as the Heterogeneous Graph Benchmark packages it. Contains papers, authors, subjects and terms, linked by citation, reference, authorship, subject and term relations, each listed in both directions. Used as a standard benchmark for heterogeneous graph neural networks.",
+      properties: { edgeTypes: 8, nodeTypes: 4 },
+      reason: "the files hold four node types and eight link types, which the recipe reads as the node and edge types, where the catalogue records two and one and the description leaves out the terms and the citation and term relations",
+    },
+  ],
+  [
+    "acm-hgb",
+    {
+      description: "The ACM network as the Heterogeneous Graph Benchmark suite ships it, the same file as the acm entry. Contains papers, authors, subjects and terms, linked by citation, reference, authorship, subject and term relations, each listed in both directions. Used for benchmarking heterogeneous graph neural networks on node classification.",
+      expectedNodes: 10942,
+      expectedEdges: 547872,
+      properties: { density: 0.004576414754527161, edgeTypes: 8, multigraph: true, nodeTypes: 4, selfLoops: true },
+      reason: "the download is the same file as acm's, and its node.dat and link.dat give the counts, types and properties recorded here; the catalogue's counts and three relation types match no reading of it",
+    },
+  ],
+  ["dblp-het", { properties: { edgeTypes: 6, nodeTypes: 4 }, reason: "the files hold four node types and six link types, which the recipe reads as the node and edge types, where the catalogue records two and one" }],
+  ["freebase", { properties: { edgeTypes: 36, nodeTypes: 8 }, reason: "the files hold eight node types and 36 link types, which the recipe reads as the node and edge types, where the catalogue records two and one" }],
+  [
+    "imdb",
+    {
+      description: "Heterogeneous film network from the Internet Movie Database, as the Heterogeneous Graph Benchmark packages it. Contains movies, directors, actors and plot keywords, with director, actor and keyword relations each listed in both directions. Used as a standard benchmark for heterogeneous graph neural networks.",
+      properties: { edgeTypes: 6, nodeTypes: 4 },
+      reason: "the files hold four node types and six link types, which the recipe reads as the node and edge types, where the catalogue records two and one and the description leaves out the keywords",
+    },
+  ],
+  [
+    "lastfm-hgb",
+    {
+      description: "Bipartite user-artist listening network from Last.fm, from the HetRec 2011 release. Users are linked to the artists they listened to, and each edge's weight is how many times the user listened to the artist.",
+      expectedNodes: 19524,
+      expectedEdges: 92834,
+      properties: { components: 8, cyclic: false, density: 0.00024355200564397155, selfLoops: false, weighted: true },
+      reason: "the catalogue's counts and properties come from reading user_artists.dat as a plain edge list, which merges users and artists that share a number and reads the header as an edge, while the recipe reads users and artists as two node sets with the listening count as the weight; the description named tags and friendships the recipe's file does not hold",
     },
   ],
 ]);
@@ -229,7 +306,7 @@ function archiveKindOf(url: string): Exclude<Archive["kind"], "xlsx" | "shapefil
 }
 
 /** The parser formats the graph import maps a catalogue format to by name alone: those that read a graph and need no option beyond the encoding. The ratings and KONECT parsers have options, which the import reads from the file. */
-type GraphFormat = Exclude<Parser["format"], "csv-table" | "geojson" | "user-item-ratings" | "konect" | InstanceFormat>;
+type GraphFormat = Exclude<Parser["format"], "csv-table" | "geojson" | "user-item-ratings" | "konect" | "kg-triples" | "hgb" | "user-item-counts" | InstanceFormat>;
 
 /** The keepset parser each catalogue format reads with, by the pipeline's own dispatch (the format branches of experiments/pipeline/scripts/download_benchmark_graph.py in Mearman/Thesis): formats whose pipeline parser is the generic edge list, GML, Pajek, Matrix Market, UCINet DL or GD contest reader. */
 const PARSERS: ReadonlyMap<string, GraphFormat | "linqs"> = new Map([
@@ -360,6 +437,58 @@ function ratingsRecipe(download: Download, format: "amazon-ratings" | "amazon-ra
 }
 
 /**
+ * The recipe for a triples download.
+ * @param url - The download URL.
+ * @param layout - Its layout.
+ * @returns The recipe.
+ */
+function triplesRecipe(url: string, layout: TriplesLayout): Chosen {
+  const parser: Parser = { format: "kg-triples", encoding: "utf-8", ...layout.parser };
+  const flags = [`triples layout read from the downloaded file: ${layout.what}`];
+  if (!("splits" in layout.archive)) {
+    return { url, archive: { kind: layout.archive.kind }, parser, crosswalk: CROSSWALKS.relations, flags };
+  }
+  const { prefix } = layout.archive.splits;
+
+  return { url, archive: { kind: layout.archive.kind, parts: SPLITS.map((split) => ({ name: split, member: { path: `${prefix}${split}.txt` } })) }, parser, crosswalk: CROSSWALKS.relationsSplit, flags };
+}
+
+/**
+ * The recipe for an HGB download: a zip of one directory holding `node.dat` and `link.dat`, read as the parts `nodes` and `links`.
+ * @param url - The download URL.
+ * @param layout - Its layout.
+ * @returns The recipe.
+ */
+function hgbRecipe(url: string, layout: HgbLayout): Chosen {
+  return {
+    url,
+    archive: {
+      kind: "zip",
+      parts: [
+        { name: "nodes", member: { path: `${layout.directory}/node.dat` } },
+        { name: "links", member: { path: `${layout.directory}/link.dat` } },
+      ],
+    },
+    parser: { format: "hgb", encoding: "utf-8", nodeTypes: [...layout.nodeTypes], linkTypes: layout.linkTypes.map((link) => ({ ...link })) },
+    crosswalk: CROSSWALKS.typed,
+    flags: [`HGB layout read from the download: a zip of ${layout.directory}/node.dat and link.dat, with the node and link types its info.dat gives`],
+  };
+}
+
+/** Each user-item counts download, by its original URL, with its recipe. */
+const COUNT_FILES: ReadonlyMap<string, Omit<Chosen, "url">> = new Map([
+  [
+    "https://files.grouplens.org/datasets/hetrec2011/hetrec2011-lastfm-2k.zip",
+    {
+      archive: { kind: "zip", member: { path: "user_artists.dat" } },
+      parser: { format: "user-item-counts", encoding: "utf-8", delimiter: "tab", skipLines: 1, itemType: "artist" },
+      crosswalk: CROSSWALKS.typedWeighted,
+      flags: ["counts layout read from the downloaded file: user_artists.dat, user, artist and listening count separated by tabs after one header line, users and artists numbered independently"],
+    },
+  ],
+]);
+
+/**
  * Chooses a recipe for one download.
  * @param download - The download.
  * @param datasetId - The dataset, for the pipeline's parser overrides.
@@ -368,15 +497,28 @@ function ratingsRecipe(download: Download, format: "amazon-ratings" | "amazon-ra
  */
 function recipeFor(download: Download, datasetId: string, mirror: SuiteSparseMirror): Chosen | { readonly unsupported: string } {
   const original = parseWayback(download.url)?.original ?? download.url;
+  // A download whose bytes were read is judged by what they are, before anything its URL suggests.
+  const misrecorded = MISRECORDED_DOWNLOADS.get(original);
+  if (misrecorded !== undefined) {
+    return { unsupported: misrecorded };
+  }
+  const triples = TRIPLE_FILES.get(original);
+  if (triples !== undefined) {
+    return triplesRecipe(download.url, triples);
+  }
+  const hgb = HGB_FILES.get(original);
+  if (hgb !== undefined) {
+    return hgbRecipe(download.url, hgb);
+  }
+  const counts = COUNT_FILES.get(original);
+  if (counts !== undefined) {
+    return { url: download.url, ...counts };
+  }
   const kind = archiveKindOf(original);
   if (typeof kind === "object") {
     return kind;
   }
   const { format } = download;
-  const misrecorded = MISRECORDED_DOWNLOADS.get(original);
-  if (misrecorded !== undefined) {
-    return { unsupported: misrecorded };
-  }
   if (format === undefined) {
     return { unsupported: "the download records no format" };
   }
@@ -390,9 +532,9 @@ function recipeFor(download: Download, datasetId: string, mirror: SuiteSparseMir
   if ((format === "konect-tarbz2" || format === "tsv") && new URL(original).hostname === "konect.cc" && kind === "tar.bz2") {
     return konectRecipe(download, datasetId);
   }
-  // Knowledge-graph triple files: which columns hold the head and the tail varies by benchmark and is not recorded, so only one the pipeline itself fixes (an entry in PIPELINE_PARSER_OVERRIDES) reads as an edge list.
+  // Knowledge-graph triple files: which columns hold the head, relation and tail, and how the splits are packed, vary by benchmark and are not recorded, so a triple file reads only once its layout is in TRIPLE_FILES.
   if ((format === "tsv" || format === "txt") && !PIPELINE_PARSER_OVERRIDES.has(datasetId)) {
-    return { unsupported: `format ${format} is a triple file whose head and tail columns the catalogue does not record` };
+    return { unsupported: `format ${format} is a triple file whose layout the import has not read` };
   }
   if (format === "various" && download.innerPath === undefined && kind !== "none" && kind !== "gzip") {
     return { unsupported: "an archive in format various, whose member and format the catalogue does not record" };
@@ -736,7 +878,7 @@ export function convertDataset(dataset: SourceDataset, licences: Readonly<GraphL
     citations: citationsOf(dataset.citation),
     recipe,
     crosswalk: { file: chosen?.crosswalk ?? CROSSWALKS.topology },
-    expectedCounts: { nodes: correction?.expectedNodes ?? dataset.nodeCount, edges: dataset.edgeCount },
+    expectedCounts: { nodes: correction?.expectedNodes ?? dataset.nodeCount, edges: correction?.expectedEdges ?? dataset.edgeCount },
     properties: { ...propertiesOf(dataset), ...correction?.properties },
   });
 

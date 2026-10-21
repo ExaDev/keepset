@@ -3479,19 +3479,21 @@
     },
     {
       "flags": [
-        "not fetchable yet: no declarative recipe exists for any download"
+        "HGB layout read from the download: a zip of ACM/node.dat and link.dat, with the node and link types its info.dat gives",
+        "corrected against the downloaded file: the files hold four node types and eight link types, which the recipe reads as the node and edge types, where the catalogue records two and one and the description leaves out the terms and the citation and term relations"
       ],
       "id": "acm",
       "outcome": "converted-with-flags",
-      "recipe": "not-fetchable"
+      "recipe": "fetchable"
     },
     {
       "flags": [
-        "not fetchable yet: no declarative recipe exists for any download"
+        "HGB layout read from the download: a zip of ACM/node.dat and link.dat, with the node and link types its info.dat gives",
+        "corrected against the downloaded file: the download is the same file as acm's, and its node.dat and link.dat give the counts, types and properties recorded here; the catalogue's counts and three relation types match no reading of it"
       ],
       "id": "acm-hgb",
       "outcome": "converted-with-flags",
-      "recipe": "not-fetchable"
+      "recipe": "fetchable"
     },
     {
       "flags": [
@@ -3855,11 +3857,12 @@
     },
     {
       "flags": [
-        "not fetchable yet: no declarative recipe exists for any download"
+        "HGB layout read from the download: a zip of DBLP/node.dat and link.dat, with the node and link types its info.dat gives",
+        "corrected against the downloaded file: the files hold four node types and six link types, which the recipe reads as the node and edge types, where the catalogue records two and one"
       ],
       "id": "dblp-het",
       "outcome": "converted-with-flags",
-      "recipe": "not-fetchable"
+      "recipe": "fetchable"
     },
     {
       "flags": [
@@ -3936,11 +3939,12 @@
     },
     {
       "flags": [
-        "not fetchable yet: no declarative recipe exists for any download"
+        "triples layout read from the downloaded file: Mannheim KGE archive: fb15k-237/train.txt, valid.txt and test.txt, head, relation and tail separated by tabs, CRLF endings",
+        "corrected against the downloaded file: the catalogue's edge count and properties describe a reading that kept almost none of the triples, while the recipe reads every triple of the three splits with its relation as the edge type"
       ],
       "id": "fb15k-237",
       "outcome": "converted-with-flags",
-      "recipe": "not-fetchable"
+      "recipe": "fetchable"
     },
     {
       "flags": [
@@ -3969,11 +3973,12 @@
     },
     {
       "flags": [
-        "not fetchable yet: no declarative recipe exists for any download"
+        "HGB layout read from the download: a zip of Freebase/node.dat and link.dat, with the node and link types its info.dat gives",
+        "corrected against the downloaded file: the files hold eight node types and 36 link types, which the recipe reads as the node and edge types, where the catalogue records two and one"
       ],
       "id": "freebase",
       "outcome": "converted-with-flags",
-      "recipe": "not-fetchable"
+      "recipe": "fetchable"
     },
     {
       "flags": [
@@ -4022,8 +4027,8 @@
     },
     {
       "flags": [
-        "catalogue: skip 1 header line",
-        "catalogue: edge endpoints in columns 0 and 2"
+        "triples layout read from the downloaded file: Hetionet SIF: a header line naming source, metaedge and target, then one edge per line separated by tabs",
+        "corrected against the downloaded file: the catalogue's counts and properties come from reading the header line as an edge and the metaedge column as the target, while the recipe skips the header and reads each line as source, metaedge type and target; a node's kind is part of its id, not a type of its own"
       ],
       "id": "hetionet",
       "outcome": "converted-with-flags",
@@ -4056,11 +4061,12 @@
     },
     {
       "flags": [
-        "not fetchable yet: no declarative recipe exists for any download"
+        "HGB layout read from the download: a zip of IMDB/node.dat and link.dat, with the node and link types its info.dat gives",
+        "corrected against the downloaded file: the files hold four node types and six link types, which the recipe reads as the node and edge types, where the catalogue records two and one and the description leaves out the keywords"
       ],
       "id": "imdb",
       "outcome": "converted-with-flags",
-      "recipe": "not-fetchable"
+      "recipe": "fetchable"
     },
     {
       "flags": [
@@ -4082,7 +4088,8 @@
     },
     {
       "flags": [
-        "catalogue: edge endpoints in columns 0 and 2"
+        "triples layout read from the downloaded file: CoDEx training split: head, relation and tail separated by tabs",
+        "corrected against the downloaded file: the catalogue records no nodes or edges for the training split the recipe reads"
       ],
       "id": "kg-codex-s",
       "outcome": "converted-with-flags",
@@ -4090,27 +4097,28 @@
     },
     {
       "flags": [
-        "not fetchable yet: no declarative recipe exists for any download"
+        "triples layout read from the downloaded file: ConvE archive: train.txt, valid.txt and test.txt, head, relation and tail separated by tabs",
+        "corrected against the downloaded file: no person pair has two relations in the triples, as the description says, while the catalogue's properties call the graph a multigraph"
       ],
       "id": "kg-kinship",
       "outcome": "converted-with-flags",
-      "recipe": "not-fetchable"
+      "recipe": "fetchable"
     },
     {
       "flags": [
-        "not fetchable yet: no declarative recipe exists for any download"
+        "triples layout read from the downloaded file: ConvE archive: train.txt, valid.txt and test.txt, head, relation and tail separated by tabs"
       ],
       "id": "kg-nations",
       "outcome": "converted-with-flags",
-      "recipe": "not-fetchable"
+      "recipe": "fetchable"
     },
     {
       "flags": [
-        "not fetchable yet: no declarative recipe exists for any download"
+        "triples layout read from the downloaded file: ConvE archive: train.txt, valid.txt and test.txt, head, relation and tail separated by tabs"
       ],
       "id": "kg-umls",
       "outcome": "converted-with-flags",
-      "recipe": "not-fetchable"
+      "recipe": "fetchable"
     },
     {
       "flags": [
@@ -4147,11 +4155,12 @@
     },
     {
       "flags": [
-        "not fetchable yet: no declarative recipe exists for any download"
+        "counts layout read from the downloaded file: user_artists.dat, user, artist and listening count separated by tabs after one header line, users and artists numbered independently",
+        "corrected against the downloaded file: the catalogue's counts and properties come from reading user_artists.dat as a plain edge list, which merges users and artists that share a number and reads the header as an edge, while the recipe reads users and artists as two node sets with the listening count as the weight; the description named tags and friendships the recipe's file does not hold"
       ],
       "id": "lastfm-hgb",
       "outcome": "converted-with-flags",
-      "recipe": "not-fetchable"
+      "recipe": "fetchable"
     },
     {
       "flags": [
@@ -4238,7 +4247,8 @@
     },
     {
       "flags": [
-        "pipeline parser override: skip 1 header line"
+        "triples layout read from the downloaded file: OpenKE id triples: the triple count on the first line, then head, tail and relation ids separated by spaces",
+        "corrected against the downloaded file: the recipe reads each triple's relation as the edge type, and the entities carry no type"
       ],
       "id": "nell-995",
       "outcome": "converted-with-flags",
@@ -4850,11 +4860,11 @@
     },
     {
       "flags": [
-        "not fetchable yet: no declarative recipe exists for any download"
+        "triples layout read from the downloaded file: DGL archive: wikikg2/train.txt, valid.txt and test.txt, head, relation and tail separated by tabs, each in double quotes"
       ],
       "id": "ogbl-wikikg2",
       "outcome": "converted-with-flags",
-      "recipe": "not-fetchable"
+      "recipe": "fetchable"
     },
     {
       "flags": [
@@ -10599,19 +10609,20 @@
     },
     {
       "flags": [
-        "not fetchable yet: no declarative recipe exists for any download"
+        "triples layout read from the downloaded file: Wikidata5M transductive archive: wikidata5m_transductive_train.txt, _valid.txt and _test.txt, head, relation and tail separated by tabs"
       ],
       "id": "wikidata5m",
       "outcome": "converted-with-flags",
-      "recipe": "not-fetchable"
+      "recipe": "fetchable"
     },
     {
       "flags": [
-        "not fetchable yet: no declarative recipe exists for any download"
+        "triples layout read from the downloaded file: Mannheim KGE archive: wnrr/train.txt, valid.txt and test.txt, head, relation and tail separated by tabs",
+        "corrected against the downloaded file: the catalogue's counts and properties are those of the test split read alone, while the recipe reads the three splits; its entities carry no type and its relations are the edge types"
       ],
       "id": "wn18rr",
       "outcome": "converted-with-flags",
-      "recipe": "not-fetchable"
+      "recipe": "fetchable"
     },
     {
       "flags": [

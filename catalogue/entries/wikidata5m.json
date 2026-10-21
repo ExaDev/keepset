@@ -6,7 +6,7 @@
     }
   ],
   "crosswalk": {
-    "file": "crosswalks/graph-v1/topology.json"
+    "file": "crosswalks/graph-v1/relations-split.json"
   },
   "description": "Large-scale heterogeneous knowledge graph from Wikidata 2021 dump. Contains ~5M entities connected by 822 relation types with ~21M triples. Each entity paired with Wikipedia article text for joint structured-unstructured modeling. Supports transductive and inductive link prediction settings.",
   "expectedCounts": {
@@ -33,8 +33,39 @@
     "weighted": false
   },
   "recipe": {
-    "reason": "no download is in a form keepset reads yet (kge-triples-tar: format kge-triples-tar has a pipeline-specific parser with no declarative keepset form yet)",
-    "status": "not-fetchable"
+    "archive": {
+      "kind": "tar.gz",
+      "parts": [
+        {
+          "member": {
+            "path": "wikidata5m_transductive_train.txt"
+          },
+          "name": "train"
+        },
+        {
+          "member": {
+            "path": "wikidata5m_transductive_valid.txt"
+          },
+          "name": "valid"
+        },
+        {
+          "member": {
+            "path": "wikidata5m_transductive_test.txt"
+          },
+          "name": "test"
+        }
+      ]
+    },
+    "parser": {
+      "delimiter": "tab",
+      "encoding": "utf-8",
+      "format": "kg-triples",
+      "header": "none",
+      "order": "head-relation-tail",
+      "quoted": false
+    },
+    "source": 0,
+    "status": "fetchable"
   },
   "sources": [
     {

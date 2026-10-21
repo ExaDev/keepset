@@ -6,7 +6,7 @@
     }
   ],
   "crosswalk": {
-    "file": "crosswalks/graph-v1/topology.json"
+    "file": "crosswalks/graph-v1/relations-split.json"
   },
   "description": "Large-scale heterogeneous knowledge graph from Wikidata. Contains 2.5 million entities connected through 535 relation types with over 17 million factual triples. Challenging benchmark for knowledge graph completion requiring prediction of potential relationships among massive complex facts. Part of the Open Graph Benchmark.",
   "expectedCounts": {
@@ -34,8 +34,39 @@
     "weighted": false
   },
   "recipe": {
-    "reason": "no download is in a form keepset reads yet (kge-triples-zip: format kge-triples-zip has a pipeline-specific parser with no declarative keepset form yet)",
-    "status": "not-fetchable"
+    "archive": {
+      "kind": "zip",
+      "parts": [
+        {
+          "member": {
+            "path": "wikikg2/train.txt"
+          },
+          "name": "train"
+        },
+        {
+          "member": {
+            "path": "wikikg2/valid.txt"
+          },
+          "name": "valid"
+        },
+        {
+          "member": {
+            "path": "wikikg2/test.txt"
+          },
+          "name": "test"
+        }
+      ]
+    },
+    "parser": {
+      "delimiter": "tab",
+      "encoding": "utf-8",
+      "format": "kg-triples",
+      "header": "none",
+      "order": "head-relation-tail",
+      "quoted": true
+    },
+    "source": 0,
+    "status": "fetchable"
   },
   "sources": [
     {
