@@ -1,3 +1,10 @@
+# [0.44.0](https://github.com/Mearman/keepset/compare/v0.43.0...v0.44.0) (2026-10-21)
+
+
+### Features
+
+* **site:** fetch and preview a dataset on its entry page ([c8d44e6](https://github.com/Mearman/keepset/commit/c8d44e6e370b97a105ef37c8444e98be6a8956d7))
+
 # [0.43.0](https://github.com/Mearman/keepset/compare/v0.42.0...v0.43.0) (2026-10-21)
 
 
