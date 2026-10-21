@@ -1,3 +1,10 @@
+## [0.48.1](https://github.com/Mearman/keepset/compare/v0.48.0...v0.48.1) (2026-10-21)
+
+
+### Bug Fixes
+
+* **archive:** try URLs that ended unresolved after the ones that can be settled ([9287cd1](https://github.com/Mearman/keepset/commit/9287cd133f4e07a35797170b941b4b8716ff4648))
+
 # [0.48.0](https://github.com/Mearman/keepset/compare/v0.47.1...v0.48.0) (2026-10-21)
 
 
