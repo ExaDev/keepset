@@ -1,4 +1,4 @@
-/* The Wayback Machine as the archiver uses it: the availability API to find an existing snapshot, and Save Page Now to request a capture when there is none. Save Page Now documentation: https://docs.google.com/document/d/1Nsv52MvSjbLb2PCpHlat0gkzw0EvtSgpKHu4mk0MnrA/mobilebasic (SPN2 Public API Docs). Availability API: https://archive.org/help/wayback_api.php. */
+/* The Wayback Machine as the archiver uses it: the capture index (CDX server) to find an existing snapshot, and Save Page Now to request a capture when there is none. Save Page Now documentation: https://docs.google.com/document/d/1Nsv52MvSjbLb2PCpHlat0gkzw0EvtSgpKHu4mk0MnrA/mobilebasic (SPN2 Public API Docs). CDX server: https://github.com/internetarchive/wayback/tree/master/wayback-cdx-server. */
 
 import { z } from "zod";
 import { WaybackTimestampSchema } from "../../src/entry";
@@ -7,8 +7,8 @@ import { HTTP_STATUS } from "./http-status";
 import type { Clock } from "./pacing";
 import type { PoliteClient } from "./polite-client";
 
-/** Where the availability API answers. */
-export const AVAILABILITY_URL = "https://archive.org/wayback/available";
+/** Where the capture index answers. The availability API answers the same question but throttles a client after its first request (12 requests in a row to the index all answered, the second request to the availability API did not), which stalled a run on the first URLs it could not settle. */
+export const CDX_URL = "https://web.archive.org/cdx/search/cdx";
 
 /** Save Page Now's endpoint: a GET of `<endpoint>/<url>` captures anonymously, a POST of `url=<url>` captures as the holder of an S3-style key pair. */
 export const SAVE_URL = "https://web.archive.org/save";
@@ -42,31 +42,29 @@ export class WaybackBusy extends WaybackError {
   }
 }
 
-const AvailabilitySchema = z.looseObject({
-  archived_snapshots: z.looseObject({
-    closest: z.looseObject({ available: z.boolean(), status: z.string(), timestamp: WaybackTimestampSchema }).optional(),
-  }),
-});
-
 /**
- * The timestamp of the Wayback Machine's closest successful capture of a URL.
+ * The timestamp of the Wayback Machine's latest successful capture of a URL.
  * @param client - The polite client.
  * @param url - The URL.
  * @returns The capture's timestamp, or undefined when the Machine holds none that answered 200.
- * @throws WaybackBusy when the service answers with a failing status; WaybackError when it answers with a body that is not the documented shape.
+ * @throws WaybackBusy when the service answers with a failing status; WaybackError when it answers with a line that is not a timestamp.
  */
 export async function findSnapshot(client: PoliteClient, url: string): Promise<string | undefined> {
-  const response = await client.request(`${AVAILABILITY_URL}?${new URLSearchParams({ url }).toString()}`, { headers: { accept: "application/json" } });
+  const query = new URLSearchParams({ url, fl: "timestamp", filter: "statuscode:200", limit: "-1" });
+  const response = await client.request(`${CDX_URL}?${query.toString()}`, {});
   if (!response.ok) {
-    throw new WaybackBusy(`the availability API answered ${String(response.status)} for ${url}`);
+    throw new WaybackBusy(`the capture index answered ${String(response.status)} for ${url}`);
   }
-  const parsed = AvailabilitySchema.safeParse(await response.json());
+  const [line] = (await response.text()).trim().split("\n");
+  if (line === undefined || line === "") {
+    return undefined;
+  }
+  const parsed = WaybackTimestampSchema.safeParse(line.trim());
   if (!parsed.success) {
-    throw new WaybackError(`the availability API answered with an unrecognised body for ${url}`, { cause: parsed.error });
+    throw new WaybackError(`the capture index answered with an unrecognised line for ${url}`, { cause: parsed.error });
   }
-  const { closest } = parsed.data.archived_snapshots;
 
-  return closest?.available === true && closest.status === "200" ? closest.timestamp : undefined;
+  return parsed.data;
 }
 
 /** What asking for a capture came to. `saved` carries the capture's timestamp. `refused` is the service's or the host's definite no, with the reason it belongs under and what was observed. `retry` is a failure that says nothing about the URL (a busy service, a timeout), so the URL stays unresolved. `exhausted` means the account's own limit is spent, so asking for more captures is pointless for now. */
