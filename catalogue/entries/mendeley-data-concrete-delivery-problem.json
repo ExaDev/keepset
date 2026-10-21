@@ -28,7 +28,7 @@
     "surveyId": "or-22"
   },
   "recipe": {
-    "reason": "The downloads are MATLAB data files and keepset has no parser for them.",
+    "reason": "Each instance is a MATLAB 5 file whose orders, the nodes with their quantities, mix codes and delivery times, are a MATLAB table of datetime and other class objects, which MATLAB stores in the file's undocumented MCOS subsystem data rather than as arrays; the only plain arrays are travel time matrices, so nothing at node level can be read without reverse engineering that serialisation.",
     "status": "not-fetchable"
   },
   "sources": [

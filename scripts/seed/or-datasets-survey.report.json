@@ -238,11 +238,11 @@
     },
     {
       "flags": [
-        "The abstract mentions 263 instances, but only three small files were listed.",
+        "The Mendeley Data record (b78bc94d95, version 1) lists every instance file separately, beside the shared plant, fleet and problem parameter files and the MATLAB scripts that use them, and its download of the whole record is one zip of the same files.",
         "The linked journal article is CC BY-NC-ND 4.0, which differs from the dataset licence."
       ],
       "id": "mendeley-data-concrete-delivery-problem",
-      "reason": "The downloads are MATLAB data files and keepset has no parser for them.",
+      "reason": "Each instance is a MATLAB 5 file whose orders, the nodes with their quantities, mix codes and delivery times, are a MATLAB table of datetime and other class objects, which MATLAB stores in the file's undocumented MCOS subsystem data rather than as arrays; the only plain arrays are travel time matrices, so nothing at node level can be read without reverse engineering that serialisation.",
       "recipe": "not-fetchable",
       "surveyId": "or-22"
     },
@@ -822,11 +822,12 @@
     },
     {
       "flags": [
-        "records are published notices, not structured permits",
-        "no licence statement was seen in the responses"
+        "records are published notices, not structured permits: the stage of a permit (application, grant, refusal) is in the notice's title text, and a position is given for some notices only",
+        "no licence statement was seen in the responses",
+        "the SRU interface answers at most 100 records a request and stops answering (504) for any record past the 10,000th of a result set, so a whole read would have to split the query by date into result sets below that bound"
       ],
       "id": "overheid-nl-gemeenteblad-omgevingsvergunning",
-      "reason": "The source is an SRU search endpoint that returns XML notices in a query language and not a table, and keepset has no parser for it.",
+      "reason": "The source is an SRU search interface whose Gemeenteblad environmental permit notices are a result set of well over a million records, while the interface serves at most 100 records a request and none past the 10,000th of a result set; a fetch would have to split the query by date into hundreds of windows and make more than ten thousand requests for gigabytes of XML, which no recipe reads, and a single window of the set is not this dataset.",
       "recipe": "not-fetchable",
       "surveyId": "or-74"
     },
