@@ -337,6 +337,7 @@ const MEMBER_EXTENSIONS: Readonly<Record<GraphFormat | "linqs", readonly string[
   linqs: [".cites"],
   "ucinet-dl": [".dat", ".dl"],
   "gd-contest": [".gd4"],
+  "witvliet-synapses": [".json"],
 };
 
 /** Inner-path extensions the pipeline resolves a `various` download by (`get_parser_format`); anything else is its default edge list. */

@@ -276,6 +276,8 @@ export const ParserSchema = z.discriminatedUnion("format", [
     })
     .strict(),
   z.object({ format: z.literal("gd-contest"), encoding: EncodingSchema }).strict(),
+  /** The synapse files of Witvliet et al.'s developmental connectomes (`DatasetN_synapses.json` in github.com/dwitvliet/nature2021): a JSON array of chemical synapses, each a presynaptic neuron (`pre`) and the neurons it contacts (`post`). */
+  z.object({ format: z.literal("witvliet-synapses"), encoding: z.literal("utf-8") }).strict(),
   z.object({ format: z.literal("customer-points"), encoding: EncodingSchema }).strict(),
   z.object({ format: z.literal("solomon"), encoding: EncodingSchema }).strict(),
   z.object({ format: z.literal("top"), encoding: EncodingSchema }).strict(),
