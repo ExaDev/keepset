@@ -1,6 +1,6 @@
 import { gunzipSync } from "node:zlib";
 import { unzipSync, type UnzipFileFilter } from "fflate";
-import type { CollectionArchive, DocumentArchive, ArchiveMember, InnerArchive } from "../entry";
+import type { CollectionArchive, DocumentArchive, ArchiveMember, InnerArchive, PartsArchive } from "../entry";
 import { ArchiveError } from "../errors";
 import { getOwn } from "../own";
 import { bunzip2 } from "./bzip2";
@@ -253,38 +253,63 @@ export function unpackMembers(bytes: Uint8Array, archive: CollectionArchive): Me
  * @throws ArchiveError when the bytes are not a well-formed archive of the stated kind or the selector matches no member.
  */
 function selectMembers(bytes: Uint8Array, archive: CollectionArchive): Member[] {
-  if (archive.kind === "zip") {
+  return readMembers(bytes, archive.kind, (paths) => pickAll(paths, archive.members).map((path) => ({ path })));
+}
+
+/** One named part of a document read from several files: the name the recipe gives it, and the file. */
+export interface Part extends Member {
+  readonly name: string;
+}
+
+/**
+ * Unpacks downloaded bytes into the files a parts archive names, each the one member its selector matches.
+ * @param bytes - The downloaded bytes.
+ * @param archive - The recipe's archive layout, which names its parts.
+ * @returns Each part, in the order the recipe names them.
+ * @throws ArchiveError when the bytes are not a well-formed archive of the stated kind or a part's selector does not match exactly one member.
+ */
+export function unpackParts(bytes: Uint8Array, archive: PartsArchive): Part[] {
+  return readMembers(bytes, archive.kind, (paths) => archive.parts.map((part) => ({ name: part.name, path: pick(paths, part.member) })));
+}
+
+/**
+ * Reads the members of a file archive that a choice makes from its member paths, listing the archive once and decompressing it once however many members are chosen.
+ * @param bytes - The downloaded bytes.
+ * @param kind - The archive kind.
+ * @param choose - Given every member path, the members to read, in the order wanted, each naming its path.
+ * @returns Each choice with the bytes of the member it names, in the order chosen.
+ * @throws ArchiveError when the bytes are not a well-formed archive of the stated kind or a chosen member cannot be read; whatever `choose` throws.
+ */
+function readMembers<Choice extends { readonly path: string }>(bytes: Uint8Array, kind: CollectionArchive["kind"], choose: (paths: readonly string[]) => readonly Choice[]): (Choice & { readonly bytes: Uint8Array })[] {
+  if (kind === "zip") {
     const names: string[] = [];
     unzip(bytes, (file) => {
       names.push(file.name);
 
       return false;
     });
-    const paths = pickAll(names, archive.members);
-    const chosen = new Set(paths);
+    const choices = choose(names);
+    const chosen = new Set(choices.map((choice) => choice.path));
     const files = unzip(bytes, (candidate) => chosen.has(candidate.name));
 
-    return paths.map((path) => {
-      const file = getOwn(files, path);
+    return choices.map((choice) => {
+      const file = getOwn(files, choice.path);
       if (file === undefined) {
-        throw new ArchiveError(`zip member ${path} could not be read`);
+        throw new ArchiveError(`zip member ${choice.path} could not be read`);
       }
 
-      return { path, bytes: file };
+      return { ...choice, bytes: file };
     });
   }
-  const members = readTar(untarred(bytes, archive.kind));
+  const members = readTar(untarred(bytes, kind));
 
-  return pickAll(
-    members.map((member) => member.path),
-    archive.members,
-  ).map((path) => {
-    const found = members.find((member) => member.path === path);
+  return choose(members.map((member) => member.path)).map((choice) => {
+    const found = members.find((member) => member.path === choice.path);
     if (found === undefined) {
-      throw new ArchiveError(`tar member ${path} could not be read`);
+      throw new ArchiveError(`tar member ${choice.path} could not be read`);
     }
 
-    return { path, bytes: found.data };
+    return { ...choice, bytes: found.data };
   });
 }
 

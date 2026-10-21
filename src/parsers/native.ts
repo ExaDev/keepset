@@ -21,6 +21,21 @@ export interface NativeRating extends NativeEdge {
   readonly timestamp: number;
 }
 
+/** An edge of a typed relation, as the triples and HGB parsers emit it: its type is the relation's name as the source writes it. */
+export interface NativeTypedEdge extends NativeEdge {
+  readonly type: string;
+}
+
+/** A typed edge that also says which split of the source it came from (`train`, `valid`, `test`), as the triples parser emits it for a download of several split files. */
+export interface NativeSplitEdge extends NativeTypedEdge {
+  readonly split: string;
+}
+
+/** A typed edge whose weight is a count, such as how many times a user listened to an artist. */
+export interface NativeCountEdge extends NativeTypedEdge {
+  readonly weight: number;
+}
+
 /** The native shape every parser in this version emits: the graph's topology, nodes in a deterministic order (each parser documents which) and edges in file order. */
 export interface NativeGraph {
   readonly nodes: readonly NativeNode[];

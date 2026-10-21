@@ -134,19 +134,35 @@ export const CollectionArchiveSchema = z.object({ kind: FileArchiveKindSchema, m
 export const InnerArchiveSchema = z.union([z.object({ kind: z.literal("gzip") }).strict(), z.object({ kind: FileArchiveKindSchema, member: ArchiveMemberSchema }).strict()]);
 export type InnerArchive = z.infer<typeof InnerArchiveSchema>;
 
-/** How the downloaded bytes unpack into the file the parser reads, or for a collection the files it reads one by one. A `members` selector gives every member it matches, at least one, in path order. `gzip` and `bzip2` are one compressed file, and `tar.gz` and `tar.bz2` a tar archive compressed with them. A member that is an archive in its turn (a contest bundle that ships its problems as a zip inside the zip) is unpacked by `inner`. A workbook (`xlsx`) is read as the CSV of its named sheet, with dates as ISO 8601 text, for the `csv-table` parser. A point shapefile (`shapefile`) is a zip whose `member` selects the `.shp`, read with the `.dbf`, `.prj` and `.cpg` of the same name beside it as the CSV of its attribute table with each point's stored coordinates and its WGS84 position, for the `csv-table` parser. */
+/** The name of a part of a document read from several files, which the parser gives its meaning: the split a triples file holds (`train`, `valid`, `test`), or which of an HGB dataset's files it is (`nodes`, `links`). */
+export const PartNameSchema = z.string().regex(/^[a-z][a-z0-9]*$/, { message: "must be a lowercase name of letters and digits, such as train" });
+
+/** An archive one document is read from several files of: each part names the one member it is read from, and the parser reads the parts together in the order given. */
+export const PartsArchiveSchema = z
+  .object({
+    kind: FileArchiveKindSchema,
+    parts: z
+      .array(z.object({ name: PartNameSchema, member: ArchiveMemberSchema }).strict())
+      .min(1)
+      .refine((parts) => new Set(parts.map((part) => part.name)).size === parts.length, { message: "each part must have its own name" }),
+  })
+  .strict();
+export type PartsArchive = z.infer<typeof PartsArchiveSchema>;
+
+/** How the downloaded bytes unpack into the file the parser reads, the named files a parser reads together into one document (`parts`), or for a collection the files it reads one by one. A `members` selector gives every member it matches, at least one, in path order. `gzip` and `bzip2` are one compressed file, and `tar.gz` and `tar.bz2` a tar archive compressed with them. A member that is an archive in its turn (a contest bundle that ships its problems as a zip inside the zip) is unpacked by `inner`. A workbook (`xlsx`) is read as the CSV of its named sheet, with dates as ISO 8601 text, for the `csv-table` parser. A point shapefile (`shapefile`) is a zip whose `member` selects the `.shp`, read with the `.dbf`, `.prj` and `.cpg` of the same name beside it as the CSV of its attribute table with each point's stored coordinates and its WGS84 position, for the `csv-table` parser. */
 export const ArchiveSchema = z.union([
   z.object({ kind: z.literal("none") }).strict(),
   z.object({ kind: z.literal("gzip") }).strict(),
   z.object({ kind: z.literal("bzip2") }).strict(),
   z.object({ kind: FileArchiveKindSchema, member: ArchiveMemberSchema, inner: InnerArchiveSchema.optional() }).strict(),
   CollectionArchiveSchema,
+  PartsArchiveSchema,
   z.object({ kind: z.literal("xlsx"), sheet: z.string().min(1) }).strict(),
   z.object({ kind: z.literal("shapefile"), member: ArchiveMemberSchema }).strict(),
 ]);
 export type Archive = z.infer<typeof ArchiveSchema>;
 /** An archive that gives the one file a document is read from. */
-export type DocumentArchive = Exclude<Archive, { readonly members: ArchiveMember }>;
+export type DocumentArchive = Exclude<Archive, { readonly members: ArchiveMember } | PartsArchive>;
 /** An archive that gives every file a collection is read from. */
 export type CollectionArchive = z.infer<typeof CollectionArchiveSchema>;
 
@@ -197,6 +213,44 @@ export const ParserSchema = z.discriminatedUnion("format", [
       timestamped: z.boolean(),
     })
     .strict(),
+  z
+    .object({
+      format: z.literal("user-item-counts"),
+      encoding: z.literal("utf-8"),
+      /** What separates the fields of a line. */
+      delimiter: z.enum(["tab"]),
+      /** The header lines before the first count, counted as the file's lines. */
+      skipLines: z.int().min(0),
+      /** What the counted items are, which is their node type and fixes the prefix of their ids. */
+      itemType: z.enum(["artist"]),
+    })
+    .strict(),
+  z
+    .object({
+      format: z.literal("kg-triples"),
+      encoding: EncodingSchema,
+      /** What separates the three fields of a line. */
+      delimiter: z.enum(["tab", "space"]),
+      /** Which field holds the relation: the middle one, or the last, as OpenKE's id files write it. */
+      order: z.enum(["head-relation-tail", "head-tail-relation"]),
+      /** What each file's first line is: a triple, a header naming the columns (skipped), or the number of triples the file holds (checked). */
+      header: z.enum(["none", "names", "count"]),
+      /** Whether every field is wrapped in double quotes, which are not part of the id. */
+      quoted: z.boolean(),
+    })
+    .strict(),
+  z
+    .object({
+      format: z.literal("hgb"),
+      encoding: z.literal("utf-8"),
+      /** The names of the node types, in the order of their codes in `node.dat`, as the dataset's `info.dat` gives them. */
+      nodeTypes: z.array(z.string().min(1)).min(1),
+      /** The link types, in the order of their codes in `link.dat`, each with its name and the node types its links run from and to, as `info.dat` gives them. */
+      linkTypes: z.array(z.object({ name: z.string().min(1), source: z.string().min(1), target: z.string().min(1) }).strict()).min(1),
+    })
+    .strict()
+    .refine((parser) => new Set(parser.nodeTypes).size === parser.nodeTypes.length, { message: "each node type must have its own name", path: ["nodeTypes"] })
+    .refine((parser) => parser.linkTypes.every((link) => parser.nodeTypes.includes(link.source) && parser.nodeTypes.includes(link.target)), { message: "a link type's source and target must be node types the recipe names", path: ["linkTypes"] }),
   z.object({ format: z.literal("gml"), encoding: EncodingSchema }).strict(),
   z.object({ format: z.literal("pajek"), encoding: EncodingSchema }).strict(),
   z
@@ -258,8 +312,28 @@ export const PagingSchema = z.discriminatedUnion("kind", [
 export type Paging = z.infer<typeof PagingSchema>;
 
 /** How to obtain the dataset: a fetchable recipe naming the source (by index into `sources`), the archive layout and the parser, or a statement that no declarative recipe exists yet and why. */
+/** The parser formats that read a document from named parts, and the part names each requires (none for a format whose part names are its own, such as the splits of a triples download). */
+const PART_FORMATS: ReadonlyMap<Parser["format"], readonly string[] | undefined> = new Map([
+  ["kg-triples", undefined],
+  ["hgb", ["nodes", "links"]],
+]);
+
 export const RecipeSchema = z.discriminatedUnion("status", [
-  z.object({ status: z.literal("fetchable"), source: z.int().min(0), paging: PagingSchema.optional(), archive: ArchiveSchema, parser: ParserSchema }).strict(),
+  z
+    .object({ status: z.literal("fetchable"), source: z.int().min(0), paging: PagingSchema.optional(), archive: ArchiveSchema, parser: ParserSchema })
+    .strict()
+    .superRefine((recipe, ctx) => {
+      const required = PART_FORMATS.get(recipe.parser.format);
+      if ("parts" in recipe.archive && !PART_FORMATS.has(recipe.parser.format)) {
+        ctx.addIssue({ code: "custom", path: ["archive", "parts"], message: `the ${recipe.parser.format} parser reads one file, so its archive selects a member rather than parts` });
+      }
+      if (required !== undefined) {
+        const names = "parts" in recipe.archive ? recipe.archive.parts.map((part) => part.name) : [];
+        if (names.length !== required.length || !required.every((name) => names.includes(name))) {
+          ctx.addIssue({ code: "custom", path: ["archive"], message: `the ${recipe.parser.format} parser reads the parts ${required.join(" and ")} from a parts archive` });
+        }
+      }
+    }),
   z.object({ status: z.literal("not-fetchable"), reason: z.string().min(1) }).strict(),
 ]);
 export type Recipe = z.infer<typeof RecipeSchema>;

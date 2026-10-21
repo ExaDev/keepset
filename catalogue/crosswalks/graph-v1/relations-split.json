@@ -1,0 +1,37 @@
+{
+  "oneWay": [],
+  "rules": [
+    {
+      "from": "meta",
+      "op": "move",
+      "to": "meta"
+    },
+    {
+      "from": "nodes[].id",
+      "op": "move",
+      "to": "nodes[].id"
+    },
+    {
+      "from": "edges[].source",
+      "op": "move",
+      "to": "edges[].source"
+    },
+    {
+      "from": "edges[].target",
+      "op": "move",
+      "to": "edges[].target"
+    },
+    {
+      "from": "edges[].type",
+      "op": "move",
+      "to": "edges[].type"
+    },
+    {
+      "from": "edges[].split",
+      "op": "move",
+      "to": "edges[].split"
+    }
+  ],
+  "source": "keepset/relations-split",
+  "target": "graph/v1"
+}

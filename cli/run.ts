@@ -180,7 +180,7 @@ export function formatShow(dataset: Dataset): string {
   } else {
     const { archive } = recipe;
     const innerText = "inner" in archive && archive.inner !== undefined ? `, inner ${archive.inner.kind}${"member" in archive.inner ? `, member ${selectorText(archive.inner.member)}` : ""}` : "";
-    const memberText = "member" in archive ? `, member ${selectorText(archive.member)}${innerText}` : "members" in archive ? `, members ${selectorText(archive.members)}` : "";
+    const memberText = "member" in archive ? `, member ${selectorText(archive.member)}${innerText}` : "members" in archive ? `, members ${selectorText(archive.members)}` : "parts" in archive ? `, parts ${archive.parts.map((part) => `${part.name} from ${selectorText(part.member)}`).join(", ")}` : "";
     const { format, ...options } = recipe.parser;
     lines.push(`  source: [${String(recipe.source)}]`, `  archive: ${archive.kind}${memberText}`, `  parser: ${format} ${JSON.stringify(options)}`);
   }
