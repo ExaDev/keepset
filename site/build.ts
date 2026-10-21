@@ -28,7 +28,7 @@ mkdirSync(outDir, { recursive: true });
 const files = buildSite({ catalogue: { manifest: getManifest(), listDatasets, listNamespaces }, packageVersion: packageJson.version, siteUrl: SITE_URL, outDir });
 copyFileSync(join(here, "static", "icon.svg"), join(outDir, "icon.svg"));
 await build({
-  entryPoints: { app: join(here, "client/app.tsx"), sw: join(here, "client/sw.ts") },
+  entryPoints: { app: join(here, "client/app.tsx"), fetchWorker: join(here, "client/fetch-worker.ts"), sw: join(here, "client/sw.ts") },
   outdir: outDir,
   bundle: true,
   format: "esm",
@@ -38,6 +38,8 @@ await build({
   splitting: true,
   outExtension: { ".js": ".js" },
   plugins: [vanillaExtractPlugin()],
+  // unbzip2-stream, the bzip2 reader the archive layer shares with Node, requires Node's `stream`; readable-stream is the same interface as a package, so the preview worker can read a bzip2 archive in a browser.
+  alias: { stream: "readable-stream" },
   loader: { ".svg": "dataurl" },
 });
 // After the bundle, so the digest the service worker's cache is named for covers app.js and app.css too.

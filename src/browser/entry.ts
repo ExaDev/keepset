@@ -22,9 +22,9 @@ export type { DigestPort, Download, DownloadProvenance, FetchedDataset, FetchOpt
 export { downloadUrl } from "../fetch";
 export { downloadRaw, type DownloadInit, STALL_MILLISECONDS, DOWNLOAD_ATTEMPTS, RETRY_DELAY_MILLISECONDS } from "./download";
 
-export type BrowserFetchOptions = Omit<FetchOptions, "fetch" | "digest">;
+export type BrowserFetchOptions = Omit<FetchOptions, "fetch" | "digest"> & { readonly fetch?: FetchOptions["fetch"] };
 
-const ports = (options: BrowserFetchOptions): FetchOptions => ({ ...options, fetch: downloadRaw, digest });
+const ports = (options: BrowserFetchOptions): FetchOptions => ({ ...options, fetch: options.fetch ?? downloadRaw, digest });
 
 /**
  * Fetches a dataset of the bundled catalogue by id through the platform's downloader and digest. See `../fetch`'s `fetchEntry` for what a fetch does; see `./download` for the one way the platform's bytes can differ from Node's.
