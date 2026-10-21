@@ -31,7 +31,8 @@ export type ArchiveException = z.infer<typeof ArchiveExceptionSchema>;
 export const VerifiedPinSchema = z.object({ url: z.url(), timestamp: WaybackTimestampSchema }).strict();
 export type VerifiedPin = z.infer<typeof VerifiedPinSchema>;
 
-const ReportSchema = z.object({ exceptions: z.array(ArchiveExceptionSchema), verified: z.array(VerifiedPinSchema) }).strict();
+/** `verified` is absent from a report written before verification existed, which means exactly what an empty list means: nothing had been asked back. */
+const ReportSchema = z.object({ exceptions: z.array(ArchiveExceptionSchema), verified: z.array(VerifiedPinSchema).default([]) }).strict();
 export type Report = z.infer<typeof ReportSchema>;
 
 /** The report of an archive nothing has been recorded about. */

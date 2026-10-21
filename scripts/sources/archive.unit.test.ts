@@ -419,3 +419,20 @@ describe("archiveProblems", () => {
     expect(archiveProblems(unpinned, report({ exceptions: [{ ...known, entries: ["y"] }] }))).toEqual([expect.stringContaining("different entries")]);
   });
 });
+
+describe("a report written before verification existed", () => {
+  it("parses as a report with nothing verified", async () => {
+    const { readReport } = await import("./archive-report");
+    const { mkdtempSync, writeFileSync, rmSync } = await import("node:fs");
+    const { tmpdir } = await import("node:os");
+    const { join } = await import("node:path");
+    const dir = mkdtempSync(join(tmpdir(), "keepset-report-"));
+    const path = join(dir, "report.json");
+    try {
+      writeFileSync(path, JSON.stringify({ exceptions: [{ url: "https://x.example/api", entries: ["a"], reason: "paged-api", evidence: "a paged query" }] }));
+      expect(readReport(path)).toEqual({ exceptions: [{ url: "https://x.example/api", entries: ["a"], reason: "paged-api", evidence: "a paged query" }], verified: [] });
+    } finally {
+      rmSync(dir, { recursive: true });
+    }
+  });
+});
