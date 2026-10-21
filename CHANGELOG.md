@@ -1,3 +1,17 @@
+# [0.37.0](https://github.com/Mearman/keepset/compare/v0.36.0...v0.37.0) (2026-10-21)
+
+
+### Bug Fixes
+
+* **catalogue:** give no recipe to the triples too large for one fetch ([101782d](https://github.com/Mearman/keepset/commit/101782d6d9e47a357369e48ad7135ba237b7b22b)), closes [ExaDev/crossmap#57](https://github.com/ExaDev/crossmap/issues/57)
+* **catalogue:** read YAGO3-10 and correct the triples and HGB records afresh ([c0cfaff](https://github.com/Mearman/keepset/commit/c0cfaff712bb493d0ccbcb37cbb7fdb0d833a43e))
+
+
+### Features
+
+* **catalogue:** give the knowledge graph, HGB and Last.fm entries recipes ([802cea4](https://github.com/Mearman/keepset/commit/802cea4be4313ffebd81c3a89b2f2d08e89db8e4))
+* **parsers:** read knowledge graph triples, HGB datasets and user-item counts ([5f283b1](https://github.com/Mearman/keepset/commit/5f283b178e01a99a2b715f9c72cc8f56115a32ff))
+
 # [0.36.0](https://github.com/Mearman/keepset/compare/v0.35.0...v0.36.0) (2026-10-21)
 
 
