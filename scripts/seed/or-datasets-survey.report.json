@@ -799,12 +799,14 @@
     },
     {
       "flags": [
-        "the shapefile attributes were not read, so fields are unverified",
-        "the zip is generated on request and its file name changes per request"
+        "the zip is generated on request and its file name changes per request, while the shapefile inside keeps its path",
+        "the positions are in Lambert-93 (RGF93), kept as x and y and converted to WGS84 degrees for lat and lon",
+        "the authorisation date is mapped as the opening date and the declared completion date as the closing date, which is empty until works are declared finished",
+        "the status is the Sitadel permit state code, the skill the permit type (PC for a building permit, DP for a prior declaration) and the territory the commune code",
+        "the applicant's name and the address fields are deliberately not mapped"
       ],
       "id": "france-sdes-sitadel-housing-permits-ile-de-france",
-      "reason": "The download is a per-request zip of a point shapefile (the attributes are in a dbf and the positions in a separate shp, in a projected system) with no CSV or GeoJSON route, and keepset has no shapefile parser.",
-      "recipe": "not-fetchable",
+      "recipe": "fetchable",
       "surveyId": "or-72"
     },
     {

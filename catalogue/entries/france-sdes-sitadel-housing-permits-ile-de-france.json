@@ -5,7 +5,66 @@
   "category": "tasks/v1",
   "citations": [],
   "crosswalk": {
-    "file": "crosswalks/tasks-v1/nodes.json"
+    "oneWay": [],
+    "rules": [
+      {
+        "from": "meta",
+        "op": "move",
+        "to": "meta"
+      },
+      {
+        "from": "nodes[].id",
+        "op": "move",
+        "to": "nodes[].id"
+      },
+      {
+        "from": "nodes[].date_ree_2",
+        "op": "move",
+        "to": "nodes[].closed"
+      },
+      {
+        "from": "nodes[].geometry_latitude",
+        "op": "move",
+        "to": "nodes[].lat"
+      },
+      {
+        "from": "nodes[].geometry_longitude",
+        "op": "move",
+        "to": "nodes[].lon"
+      },
+      {
+        "from": "nodes[].date_reell",
+        "op": "move",
+        "to": "nodes[].opened"
+      },
+      {
+        "from": "nodes[].type_dau",
+        "op": "move",
+        "to": "nodes[].skill"
+      },
+      {
+        "from": "nodes[].etat_dau",
+        "op": "move",
+        "to": "nodes[].status"
+      },
+      {
+        "from": "nodes[].comm",
+        "op": "move",
+        "to": "nodes[].territory"
+      },
+      {
+        "from": "nodes[].geometry_x",
+        "op": "move",
+        "to": "nodes[].x"
+      },
+      {
+        "from": "nodes[].geometry_y",
+        "op": "move",
+        "to": "nodes[].y"
+      }
+    ],
+    "source": "csv-table",
+    "target": "tasks/v1"
   },
   "description": "Building permits and prior declarations from the national Sitadel database that create, transform or demolish dwellings in Ile-de-France, published by the regional environment and transport directorate as a point shapefile.",
   "domain": "Case records",
@@ -24,8 +83,50 @@
     "surveyId": "or-72"
   },
   "recipe": {
-    "reason": "The download is a per-request zip of a point shapefile (the attributes are in a dbf and the positions in a separate shp, in a projected system) with no CSV or GeoJSON route, and keepset has no shapefile parser.",
-    "status": "not-fetchable"
+    "archive": {
+      "kind": "shapefile",
+      "member": {
+        "path": "dataset/L_SITADEL_LOGEMENT_R11.shp"
+      }
+    },
+    "parser": {
+      "columns": [
+        "date_ree_2",
+        "geometry_latitude",
+        "geometry_longitude",
+        "date_reell",
+        "type_dau",
+        "etat_dau",
+        "comm",
+        "geometry_x",
+        "geometry_y"
+      ],
+      "delimiter": "comma",
+      "encoding": "utf-8",
+      "format": "csv-table",
+      "idColumn": "id",
+      "numericColumns": [
+        {
+          "column": "geometry_latitude",
+          "factor": 1
+        },
+        {
+          "column": "geometry_longitude",
+          "factor": 1
+        },
+        {
+          "column": "geometry_x",
+          "factor": 1
+        },
+        {
+          "column": "geometry_y",
+          "factor": 1
+        }
+      ],
+      "skipLines": 0
+    },
+    "source": 1,
+    "status": "fetchable"
   },
   "sources": [
     {
