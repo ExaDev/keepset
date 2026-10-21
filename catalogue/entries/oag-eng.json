@@ -33,7 +33,7 @@
     "weighted": false
   },
   "recipe": {
-    "reason": "no download is in a form keepset reads yet (pytorch-hetero: format pytorch-hetero has a pipeline-specific parser with no declarative keepset form yet)",
+    "reason": "no download is in a form keepset reads yet (pytorch-hetero: the file is a PyTorch torch.save archive whose graph is a pickled Python dictionary (pyHGT's OAG layout of node_forward, node_feature and edge_list by target type, source type and relation), which only a Python runtime with PyTorch can unpickle, and it is several gigabytes)",
     "status": "not-fetchable"
   },
   "sources": [

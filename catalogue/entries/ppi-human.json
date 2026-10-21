@@ -34,8 +34,39 @@
     "weighted": true
   },
   "recipe": {
-    "reason": "no download is in a form keepset reads yet (biogrid-zip: format biogrid-zip has a pipeline-specific parser with no declarative keepset form yet)",
-    "status": "not-fetchable"
+    "archive": {
+      "kind": "zip",
+      "member": {
+        "pattern": "BIOGRID-ORGANISM-Homo_sapiens-[0-9.]+\\.tab3\\.txt"
+      }
+    },
+    "parser": {
+      "commentPrefixes": [
+        "#"
+      ],
+      "delimiter": "tab",
+      "encoding": "utf-8",
+      "format": "edge-list",
+      "skipLines": 0,
+      "sourceColumn": 3,
+      "targetColumn": 4,
+      "where": [
+        {
+          "column": 12,
+          "equals": "physical"
+        },
+        {
+          "column": 15,
+          "equals": "9606"
+        },
+        {
+          "column": 16,
+          "equals": "9606"
+        }
+      ]
+    },
+    "source": 0,
+    "status": "fetchable"
   },
   "sources": [
     {

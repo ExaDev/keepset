@@ -1,4 +1,5 @@
 import { parseEntry, waybackUrl, type Archive, type Citation, type Entry, type Parser, type Recipe, type SheetArchive, type Source } from "../../src/entry";
+import { edgeList, FORMAT_RECIPES, READ_DOWNLOADS, REPLACED_DOWNLOADS, REPLACEMENT_RETRIEVED, UNREADABLE_FORMATS } from "./graph-recipes";
 import type { InstanceFormat } from "../../src/parsers/instance-shapes";
 import { DATASET_RECIPES, UNVERIFIABLE_DOWNLOADS, type DatasetRecipe } from "./dataset-recipes";
 import type { JsonScalar } from "../../src/targets/json-scalar";
@@ -320,6 +321,7 @@ const PARSERS: ReadonlyMap<string, GraphFormat | "linqs"> = new Map([
   ["edge-list", "edge-list"],
   ["edgelist", "edge-list"],
   ["edges", "edge-list"],
+  ["csv", "edge-list"],
   ["snap", "edge-list"],
   ["gz", "edge-list"],
   ["linqs", "linqs"],
@@ -349,14 +351,6 @@ const VARIOUS_BY_EXTENSION: ReadonlyMap<string, GraphFormat> = new Map([
   [".mtx", "matrix-market"],
 ]);
 
-/**
- * An edge-list parser with every option stated. The delimiter is detected from the data unless the pipeline fixes one, which is the pipeline's own rule (`parse_edge_list` with no delimiter): the catalogue does not record which delimiter a file uses.
- * @param options - The options that differ from a two-column list with a detected delimiter and `#` and `%` comments.
- * @returns The parser.
- */
-function edgeList(options: Partial<Extract<Parser, { format: "edge-list" }>> = {}): Parser {
-  return { format: "edge-list", encoding: "utf-8", delimiter: "detect", skipLines: 0, commentPrefixes: ["#", "%"], sourceColumn: 0, targetColumn: 1, ...options };
-}
 
 /** The layout of each MovieLens release's ratings file, read from the release (the layouts differ between releases), keyed by the release's archive name: the delimiter, the header lines before the first rating, and the member that holds the ratings. A rating is out of 5 in every release (the later ones add half stars). `notFetchable` is the reason a release whose whole fetch failed is given no recipe, though the parser reads its layout. */
 const MOVIELENS_RELEASES: ReadonlyMap<string, { readonly delimiter: "comma" | "tab" | "double-colon"; readonly skipLines: number; readonly member: string; readonly notFetchable?: string }> = new Map([
@@ -504,6 +498,7 @@ const COUNT_FILES: ReadonlyMap<string, Omit<Chosen, "url">> = new Map([
  */
 function recipeFor(download: Download, datasetId: string, mirror: SuiteSparseMirror): Chosen | { readonly unsupported: string } {
   const original = parseWayback(download.url)?.original ?? download.url;
+  const { format } = download;
   // A download whose bytes were read is judged by what they are, before anything its URL suggests.
   const misrecorded = MISRECORDED_DOWNLOADS.get(original);
   if (misrecorded !== undefined) {
@@ -521,11 +516,26 @@ function recipeFor(download: Download, datasetId: string, mirror: SuiteSparseMir
   if (counts !== undefined) {
     return { url: download.url, ...counts };
   }
+  const unreadable = format === undefined ? undefined : UNREADABLE_FORMATS.get(format);
+  if (unreadable !== undefined) {
+    return { unsupported: unreadable };
+  }
   const kind = archiveKindOf(original);
   if (typeof kind === "object") {
     return kind;
   }
-  const { format } = download;
+  const replaced = REPLACED_DOWNLOADS.get(original);
+  if (replaced !== undefined) {
+    return { unsupported: replaced.reason };
+  }
+  const stated = READ_DOWNLOADS.get(original) ?? (format === undefined ? undefined : FORMAT_RECIPES.get(format));
+  if (stated !== undefined) {
+    if (stated.archive.kind !== kind) {
+      return { unsupported: `the recipe for this layout reads a ${stated.archive.kind} download, and the URL names a ${kind} one` };
+    }
+
+    return { url: download.url, archive: stated.archive, parser: stated.parser, crosswalk: CROSSWALKS.topology, flags: [stated.flag] };
+  }
   if (format === undefined) {
     return { unsupported: "the download records no format" };
   }
@@ -830,6 +840,11 @@ export function convertDataset(dataset: SourceDataset, licences: Readonly<GraphL
       flags.push("the collection's own link is also offered from the University of Florida mirror, which the recipe reads");
     }
     downloads.push({ url, ...recorded });
+    const replaced = REPLACED_DOWNLOADS.get(url);
+    if (replaced !== undefined) {
+      flags.push(`added ${replaced.url} beside ${url}: ${replaced.reason}`);
+      downloads.push({ url: replaced.url, ...recorded });
+    }
   }
   if (downloads.length === 0) {
     return notConverted("no public download remains: every download is auth-walled or a local file");
@@ -873,7 +888,7 @@ export function convertDataset(dataset: SourceDataset, licences: Readonly<GraphL
   }
 
   const urls = [...new Set([...downloads.map((download) => download.url), ...(chosen === undefined ? [] : [chosen.url])])];
-  const sources = urls.map((url) => sourceFor(url, url.startsWith(mirror.host) ? mirror.readOn : retrieved));
+  const sources = urls.map((url) => sourceFor(url, url.startsWith(mirror.host) ? mirror.readOn : (REPLACEMENT_RETRIEVED.get(url) ?? retrieved)));
   let recipe: Recipe;
   if (chosen === undefined) {
     recipe = { status: "not-fetchable", reason: fixed !== undefined && "unsupported" in fixed ? fixed.unsupported : `no download is in a form keepset reads yet (${[...new Set(unsupported)].join("; ")})` };

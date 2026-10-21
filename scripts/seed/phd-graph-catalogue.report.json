@@ -3579,11 +3579,12 @@
     },
     {
       "flags": [
-        "not fetchable yet: no declarative recipe exists for any download"
+        "the archive's one member, email.txt, is a whitespace-separated list of sender, recipient and weight",
+        "the source is dead and the recipe fetches its pinned Wayback snapshot"
       ],
       "id": "arenas-email",
       "outcome": "converted-with-flags",
-      "recipe": "not-fetchable"
+      "recipe": "fetchable"
     },
     {
       "flags": [
@@ -4842,19 +4843,20 @@
     },
     {
       "flags": [
-        "not fetchable yet: no declarative recipe exists for any download"
+        "added https://snap.stanford.edu/ogb/data/linkproppred/biokg.zip beside https://data.pyg.org/datasets/ogbl_biokg.zip: the PyG mirror answers 404; the URL is the one OGB's own ogb/linkproppred/master.csv names for ogbl-biokg",
+        "Open Graph Benchmark zip: the dataset's raw directory, read as OGB reads it, with typed node ids for a heterogeneous dataset"
       ],
       "id": "ogbl-biokg",
       "outcome": "converted-with-flags",
-      "recipe": "not-fetchable"
+      "recipe": "fetchable"
     },
     {
       "flags": [
-        "not fetchable yet: no declarative recipe exists for any download"
+        "Open Graph Benchmark zip: the dataset's raw directory, read as OGB reads it, with typed node ids for a heterogeneous dataset"
       ],
       "id": "ogbl-citation2",
       "outcome": "converted-with-flags",
-      "recipe": "not-fetchable"
+      "recipe": "fetchable"
     },
     {
       "flags": [
@@ -4867,11 +4869,12 @@
     },
     {
       "flags": [
-        "not fetchable yet: no declarative recipe exists for any download"
+        "added https://snap.stanford.edu/ogb/data/nodeproppred/mag.zip beside https://data.pyg.org/datasets/ogbn_mag.zip: the PyG mirror answers 404; the URL is the one OGB's own ogb/nodeproppred/master.csv names for ogbn-mag",
+        "Open Graph Benchmark zip: the dataset's raw directory, read as OGB reads it, with typed node ids for a heterogeneous dataset"
       ],
       "id": "ogbn-mag",
       "outcome": "converted-with-flags",
-      "recipe": "not-fetchable"
+      "recipe": "fetchable"
     },
     {
       "flags": [
@@ -5453,11 +5456,11 @@
     },
     {
       "flags": [
-        "not fetchable yet: no declarative recipe exists for any download"
+        "BioGRID organism archive: the Homo sapiens TAB3 file, one edge per physical interaction record between two human proteins (BioGRID ids), as the pipeline selects them; the pipeline also merges records of the same pair, which the recipe does not, so a pair with several records has several edges"
       ],
       "id": "ppi-human",
       "outcome": "converted-with-flags",
-      "recipe": "not-fetchable"
+      "recipe": "fetchable"
     },
     {
       "flags": [
@@ -5491,11 +5494,11 @@
     },
     {
       "flags": [
-        "not fetchable yet: no declarative recipe exists for any download"
+        "SNAP signed network: a gzipped tab-separated FromNodeId, ToNodeId, Sign list under # comments; the sign is not carried"
       ],
       "id": "snap-epinions-signed",
       "outcome": "converted-with-flags",
-      "recipe": "not-fetchable"
+      "recipe": "fetchable"
     },
     {
       "flags": [],
@@ -10336,19 +10339,19 @@
     },
     {
       "flags": [
-        "not fetchable yet: no declarative recipe exists for any download"
+        "STRING protein links: a gzipped space-separated protein1, protein2, combined_score list under one header line, every interaction listed in both directions; the score is not carried"
       ],
       "id": "string-human-ppi",
       "outcome": "converted-with-flags",
-      "recipe": "not-fetchable"
+      "recipe": "fetchable"
     },
     {
       "flags": [
-        "not fetchable yet: no declarative recipe exists for any download"
+        "catalogue: edge endpoints in columns 2 and 4"
       ],
       "id": "transport-airline",
       "outcome": "converted-with-flags",
-      "recipe": "not-fetchable"
+      "recipe": "fetchable"
     },
     {
       "flags": [

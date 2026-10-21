@@ -34,14 +34,32 @@
     "weighted": false
   },
   "recipe": {
-    "reason": "no download is in a form keepset reads yet (ogb-zip: format ogb-zip has a pipeline-specific parser with no declarative keepset form yet)",
-    "status": "not-fetchable"
+    "archive": {
+      "files": {
+        "pattern": "[^/]+/raw/(?:num-node-list|num-node-dict|edge|num-edge-list|triplet-type-list|relations/[^/]+/(?:edge|num-edge-list))\\.csv\\.gz"
+      },
+      "inner": {
+        "kind": "gzip"
+      },
+      "kind": "zip"
+    },
+    "parser": {
+      "encoding": "utf-8",
+      "format": "ogb"
+    },
+    "source": 1,
+    "status": "fetchable"
   },
   "sources": [
     {
       "retrieved": "2026-03-26",
       "status": "live",
       "url": "https://data.pyg.org/datasets/ogbl_biokg.zip"
+    },
+    {
+      "retrieved": "2026-10-21",
+      "status": "live",
+      "url": "https://snap.stanford.edu/ogb/data/linkproppred/biokg.zip"
     }
   ],
   "tags": []
