@@ -231,7 +231,8 @@ export function formatShow(dataset: Dataset): string {
   lines.push(`licence: ${licence.kind === "spdx" ? licence.id : licence.kind === "custom" ? `${licence.name} <${licence.url}>` : "not recorded by the source"}`);
   lines.push("", "sources:");
   for (const [index, source] of entry.sources.entries()) {
-    const snapshot = source.snapshot === undefined ? "" : `, snapshot ${source.snapshot.timestamp}`;
+    const checksum = source.snapshot?.sha256 === undefined ? "" : `, sha256 ${source.snapshot.sha256}, ${String(source.snapshot.byteLength)} bytes`;
+    const snapshot = source.snapshot === undefined ? "" : `, snapshot ${source.snapshot.timestamp}${checksum}`;
     lines.push(`  [${String(index)}] ${source.url} (${source.status}, retrieved ${source.retrieved}${snapshot})`);
   }
   if (entry.citations.length > 0) {

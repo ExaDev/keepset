@@ -56,13 +56,19 @@ export function rawSnapshotUrl(timestamp: string, url: string): string {
   return `https://web.archive.org/web/${timestamp}id_/${url}`;
 }
 
-/** A pinned Wayback Machine snapshot of a source. The timestamp is part of the recipe's reproducibility, not incidental metadata, so it travels with the URL and the two are checked against each other. */
+/** The SHA-256 of a snapshot's raw bytes, as 64 lower-case hex digits. */
+const Sha256Schema = z.string().regex(/^[0-9a-f]{64}$/, { message: "must be a lower-case hex SHA-256" });
+
+/** A pinned Wayback Machine snapshot of a source. The timestamp is part of the recipe's reproducibility, not incidental metadata, so it travels with the URL and the two are checked against each other. The checksum, once the archiver has read the snapshot's raw form, names the exact bytes the pin stands for: their SHA-256 and length, recorded together or not at all, so a caller can check a download against the entry without fetching through this package. */
 export const SnapshotSchema = z
   .object({
     url: HttpUrlSchema,
     timestamp: WaybackTimestampSchema,
+    sha256: Sha256Schema.optional(),
+    byteLength: z.int().min(0).optional(),
   })
-  .strict();
+  .strict()
+  .refine((snapshot) => (snapshot.sha256 === undefined) === (snapshot.byteLength === undefined), { message: "sha256 and byteLength are recorded together", path: ["sha256"] });
 export type Snapshot = z.infer<typeof SnapshotSchema>;
 
 /**

@@ -1,7 +1,7 @@
 import { createCatalogue, DatasetNotFoundError, RecipeError, type Dataset, type DatasetQuery } from "keepset";
 import { captureRequestsFor, type DownloadProvenance, type FetchedDataset, type RoundTripReport } from "keepset/node";
 import { describe, expect, it } from "vitest";
-import { fixtureIndex, streamedEntry } from "../src/test-support/entries";
+import { deadEntry, fixtureIndex, streamedEntry } from "../src/test-support/entries";
 import { EXIT_FAILED, EXIT_NO, EXIT_OK, formatNamespaces, formatSearch, formatShow, provenancePath, run, type CliIo, type CliLibrary } from "./run";
 
 const catalogue = createCatalogue(fixtureIndex);
@@ -165,6 +165,13 @@ describe("search", () => {
 });
 
 describe("show", () => {
+  it("prints a pinned snapshot's checksum and length beside its timestamp", () => {
+    const sha256 = "e".repeat(SHA256_DIGITS);
+    const [source] = deadEntry.sources;
+    const checksummed = createCatalogue({ ...fixtureIndex, entries: [{ ...deadEntry, sources: [{ ...source, snapshot: { ...source?.snapshot, sha256, byteLength: 4096 } }] }] }).getDataset("celegans-metabolic");
+    expect(formatShow(checksummed)).toContain(`snapshot 20230601, sha256 ${sha256}, 4096 bytes)`);
+  });
+
   it("prints the descriptor, sources, licence, citations, recipe and crosswalk", () => {
     const text = formatShow(karate);
     for (const line of [

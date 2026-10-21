@@ -5,6 +5,8 @@ export interface DataDownload {
   readonly "@type": "DataDownload";
   readonly contentUrl: string;
   readonly archivedAt?: string;
+  /** The SHA-256 of the bytes at `contentUrl`, where the entry records one for the snapshot it points at. */
+  readonly sha256?: string;
 }
 
 /** The schema.org Dataset (https://schema.org/Dataset) an entry page carries, with the properties Google Dataset Search reads (https://developers.google.com/search/docs/appearance/structured-data/dataset): name and description are required there, the rest recommended. */
@@ -65,7 +67,7 @@ export function datasetJsonLd(dataset: Dataset, pageUrl: string, catalogueUrl: s
     isPartOf: { "@type": "DataCatalog", name: dataset.catalogue.id, url: catalogueUrl },
     distribution: entry.sources.map((source) =>
       source.status === "dead" && source.snapshot !== undefined
-        ? { "@type": "DataDownload", contentUrl: source.snapshot.url, archivedAt: source.snapshot.url }
+        ? { "@type": "DataDownload", contentUrl: source.snapshot.url, archivedAt: source.snapshot.url, ...(source.snapshot.sha256 === undefined ? {} : { sha256: source.snapshot.sha256 }) }
         : { "@type": "DataDownload", contentUrl: source.url, ...(source.snapshot === undefined ? {} : { archivedAt: source.snapshot.url }) },
     ),
   };

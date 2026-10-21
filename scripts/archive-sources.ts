@@ -1,6 +1,6 @@
 /* Pins a Wayback Machine snapshot on every source of every catalogue entry, and reports the sources that cannot be archived.
 
-   pnpm exec tsx scripts/archive-sources.ts [--check | --verify [--reverify]] [--entry <id>]... [--limit <urls>] [--retry-exceptions] [--entries-dir <dir>] [--report <file>] [--state <file>]
+   pnpm exec tsx scripts/archive-sources.ts [--check | --verify [--reverify] | --checksum] [--entry <id>]... [--limit <urls>] [--retry-exceptions] [--entries-dir <dir>] [--report <file>] [--state <file>]
 
    For each distinct source URL with no snapshot it asks the Wayback Machine's capture index for an existing capture, and requests a new one with Save Page Now only when there is none. A capture, found or new, is pinned only after its raw `id_` form has been requested and answered with the captured bytes (see scripts/sources/verify.ts); one that does not is rejected, remembered in the state file so the capture index offering it again is not trusted, and a new capture is requested in its place. The snapshot is recorded on the source in the entry file as `{ timestamp, url }` with `url` exactly `waybackUrl(timestamp, url)`; entry files are read in canonical form and written with `serialise`, so nothing but the snapshot of a source changes. A URL that cannot be archived goes in scripts/archive-sources.report.json with the reason (see EXCEPTION_REASONS) and what was observed. A failure that says nothing about the URL (a busy service, a timeout) leaves it unresolved, to be tried by the next run: the entry files and the report are written as each URL settles, so a run can be stopped and started again at any point, on any machine.
 
@@ -8,20 +8,27 @@
 
    --verify requests the raw snapshot of every pin already recorded that the report does not list as verified, lists the ones that serve their bytes in the report, and removes the ones that do not from the live sources that hold them, so the next run captures them again; a failing pin on a dead source stays (the entry schema requires it, and the source cannot be captured again) and makes the run exit non-zero. --reverify requests the pins the report lists as verified again.
 
+   --checksum reads the raw form of every pinned snapshot that records no checksum, exactly as a fetch reads it, and records the SHA-256 and byte length of what it serves on every source that pins that snapshot, so the entry names the bytes the pin stands for; a snapshot the archive does not serve is listed and left for --verify, and a run cut short keeps what it read.
+
    --check changes nothing and exits non-zero when a source has no snapshot and the report does not account for it, when a pin is not listed as verified in the report, or when the report lists a source or a verification the catalogue no longer supports. --entry limits the run to the named entries, --limit to a number of URLs (or, with --verify, pins) requested over the network, --retry-exceptions looks again at URLs the report already excepts. --entries-dir, --report and --state point the run somewhere else, for a trial on a copy. */
 
+import { createHash } from "node:crypto";
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join, relative } from "node:path";
 import { fileURLToPath } from "node:url";
 import { parseArgs } from "node:util";
+import { rawSnapshotUrl } from "../src/entry";
+import { downloadRaw } from "../src/node/download";
 import { canonicalJson } from "../src/serialise";
 import { type ArchiveState, ArchiveStateSchema, archiveProblems, archiveSources, type Saver } from "./sources/archive";
 import { type ArchiveException, readReport, reportText, type VerifiedPin } from "./sources/archive-report";
-import { groupSources, loadEntryFiles, recordSnapshots, removeSnapshot } from "./sources/entries";
-import { systemClock } from "./sources/pacing";
+import { checksumPins, type Read } from "./sources/checksum";
+import { groupSources, loadEntryFiles, recordChecksum, recordSnapshots, removeSnapshot, unchecksummed } from "./sources/entries";
+import { HTTP_STATUS } from "./sources/http-status";
+import { Pacer, systemClock } from "./sources/pacing";
 import { DEFAULT_POLITENESS, PoliteClient } from "./sources/polite-client";
 import { pinKey, verifyPins } from "./sources/verify-pins";
-import { ANONYMOUS_LIMITS, AUTHENTICATED_LIMITS, MAX_CAPTURE_WAIT_MILLISECONDS, saveAnonymously, saveAuthenticated, WAYBACK_HOST_INTERVALS } from "./sources/wayback";
+import { ANONYMOUS_LIMITS, AUTHENTICATED_LIMITS, MAX_CAPTURE_WAIT_MILLISECONDS, saveAnonymously, saveAuthenticated, WAYBACK_HOST_INTERVAL_MILLISECONDS, WAYBACK_HOST_INTERVALS } from "./sources/wayback";
 
 const repoRoot = join(dirname(fileURLToPath(import.meta.url)), "..");
 
@@ -29,6 +36,7 @@ const { values } = parseArgs({
   options: {
     check: { type: "boolean" },
     verify: { type: "boolean" },
+    checksum: { type: "boolean" },
     reverify: { type: "boolean" },
     entry: { type: "string", multiple: true },
     limit: { type: "string" },
@@ -80,7 +88,40 @@ if (values.check === true) {
   };
   const entryIds = values.entry === undefined ? undefined : new Set(values.entry);
 
-  if (values.verify === true) {
+  if (values.checksum === true) {
+    const pacer = new Pacer(systemClock);
+    const read = async (url: string, timestamp: string): Promise<Read> => {
+      const snapshotUrl = rawSnapshotUrl(timestamp, url);
+      await pacer.wait(new URL(snapshotUrl).host, WAYBACK_HOST_INTERVAL_MILLISECONDS);
+      try {
+        const response = await downloadRaw(snapshotUrl, {});
+        if (response.status === HTTP_STATUS.tooManyRequests || response.status >= HTTP_STATUS.internalServerError) {
+          return { kind: "busy", evidence: `HTTP ${String(response.status)}` };
+        }
+        if (!response.ok) {
+          return { kind: "failed", evidence: `HTTP ${String(response.status)}` };
+        }
+        const bytes = new Uint8Array(await response.arrayBuffer());
+
+        return { kind: "read", sha256: createHash("sha256").update(bytes).digest("hex"), byteLength: bytes.length };
+      } catch (error) {
+        return { kind: "busy", evidence: error instanceof Error ? error.message : String(error) };
+      }
+    };
+    const result = await checksumPins(
+      {
+        read,
+        record: (url, timestamp, checksum) => {
+          files = recordChecksum(files, url, timestamp, checksum);
+        },
+        log: (line) => {
+          console.log(line);
+        },
+      },
+      { targets: unchecksummed(files), limit },
+    );
+    console.log(`Checksum pass finished; ${String(result.recorded)} recorded, ${String(result.failed.length)} not served, ${String(result.unresolved.length)} could not be read${result.stopped === undefined ? "" : `; stopped early: ${result.stopped}`}.`);
+  } else if (values.verify === true) {
     const result = await verifyPins(
       {
         client: probing,
