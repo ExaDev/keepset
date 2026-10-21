@@ -24,7 +24,7 @@ interface SideBySide {
  */
 function sheet(positions: readonly (readonly string[])[], blocks: SideBySide): string {
   const rows = Math.max(blocks.requests.length, blocks.times.length, blocks.skills.length, blocks.caregiverWindows.length, blocks.windows.length);
-  const cell = (block: readonly (readonly string[])[], row: number, width: number): string[] => block[row] ?? Array.from({ length: width }, () => "");
+  const cell = (block: readonly (readonly string[])[], row: number, width: number): readonly string[] => block[row] ?? Array.from({ length: width }, () => "");
   const lines = [
     [" Patients ", "X", "Y", "", "Travel time", "0"].join(","),
     ...positions.map((row) => [...row, "", row[0] ?? "", "0"].join(",")),
