@@ -24,6 +24,7 @@ const TOO_LARGE = "the triples are more edges than one fetch holds: a whole fetc
 export const TRIPLE_FILES: ReadonlyMap<string, TriplesLayout> = new Map([
   ...["kinship", "nations", "umls"].map((name): [string, TriplesLayout] => [`https://github.com/TimDettmers/ConvE/raw/master/${name}.tar.gz`, { archive: { kind: "tar.gz", splits: { prefix: "" } }, parser: PLAIN_TRIPLES, what: "ConvE archive: train.txt, valid.txt and test.txt, head, relation and tail separated by tabs" }]),
   ["https://web.informatik.uni-mannheim.de/pi1/kge-datasets/wnrr.tar.gz", { archive: { kind: "tar.gz", splits: { prefix: "wnrr/" } }, parser: PLAIN_TRIPLES, what: "Mannheim KGE archive: wnrr/train.txt, valid.txt and test.txt, head, relation and tail separated by tabs" }],
+  ["https://web.informatik.uni-mannheim.de/pi1/kge-datasets/yago3-10.tar.gz", { archive: { kind: "tar.gz", splits: { prefix: "yago3-10/" } }, parser: PLAIN_TRIPLES, what: "Mannheim KGE archive: yago3-10/train.txt, valid.txt and test.txt, head, relation and tail separated by tabs" }],
   ["https://web.informatik.uni-mannheim.de/pi1/kge-datasets/fb15k-237.tar.gz", { archive: { kind: "tar.gz", splits: { prefix: "fb15k-237/" } }, parser: PLAIN_TRIPLES, what: "Mannheim KGE archive: fb15k-237/train.txt, valid.txt and test.txt, head, relation and tail separated by tabs, CRLF endings" }],
   [
     "https://www.dropbox.com/scl/fi/04itkl1lnxev587n3xkap/wikidata5m_transductive.tar.gz?rlkey=usj1e6dlqgfzruyd7eb58ksht&dl=1",

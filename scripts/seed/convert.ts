@@ -44,8 +44,6 @@ export const PIPELINE_PARSER_OVERRIDES: ReadonlyMap<string, { readonly delimiter
 /** Downloads, by original URL, whose bytes are not in the format the catalogue records, found by reading them: the import gives each the reason in place of a recipe that would fail. */
 export const MISRECORDED_DOWNLOADS: ReadonlyMap<string, string> = new Map([
   ["http://vlado.fmf.uni-lj.si/pub/networks/data/UciNet/knokbur.dat", "the file is not a DL file: its first line says it has to be converted into DL format, and its matrices sit under comma-separated headers and end with DOS end-of-file marks"],
-  ["https://www.yago-knowledge.org/", "the URL is the YAGO project's home page, not a download"],
-  ["https://www.yago-knowledge.org/resource/download/yago/YAGO3-10/", "the URL is not a download: its host's certificate does not name www.yago-knowledge.org, and past that the site answers with its own 404 page"],
 ]);
 
 /** Datasets the pipeline removed by judgement rather than recording in its catalogue (the comment beside `HETEROGENEOUS_DATASETS` in the same file): named in the report so their absence is visible. */
@@ -105,15 +103,12 @@ export const CORRECTIONS: ReadonlyMap<string, Correction> = new Map([
       reason: "the catalogue records this download as undirected (format amazon-ratings-undirected, property directed false), while its description calls the network directed",
     },
   ],
-  ["kg-kinship", { properties: { multigraph: false }, reason: "no person pair has two relations in the triples, as the description says, while the catalogue's properties call the graph a multigraph" }],
-  ["kg-codex-s", { expectedNodes: 2034, expectedEdges: 32888, reason: "the catalogue records no nodes or edges for the training split the recipe reads" }],
   [
     "wn18rr",
     {
-      expectedNodes: 40943,
       expectedEdges: 93003,
-      properties: { components: 13, density: 5.5481506174749874e-5, edgeTypes: 11, nodeTypes: 1, selfLoops: true },
-      reason: "the catalogue's counts and properties are those of the test split read alone, while the recipe reads the three splits; its entities carry no type and its relations are the edge types",
+      properties: { components: 13, edgeTypes: 11, multigraph: true, nodeTypes: 1 },
+      reason: "the catalogue counts each head and tail pair once, while the recipe reads every triple, so a pair with two relations is two edges; its other properties describe a reading of another graph, and the triples' relations are the edge types and the entities carry no type",
     },
   ],
   [
@@ -121,8 +116,8 @@ export const CORRECTIONS: ReadonlyMap<string, Correction> = new Map([
     {
       expectedNodes: 14541,
       expectedEdges: 310116,
-      properties: { components: 6, cyclic: true, density: 0.0014667817328547926, edgeTypes: 237, multigraph: true, selfLoops: true },
-      reason: "the catalogue's edge count and properties describe a reading that kept almost none of the triples, while the recipe reads every triple of the three splits with its relation as the edge type",
+      properties: { components: 6, cyclic: true, edgeTypes: 237, multigraph: true },
+      reason: "the catalogue counts each head and tail pair once and names two entities the splits do not hold, while the recipe reads every triple of the three splits; its other properties describe a reading of another graph, and the relations are the edge types",
     },
   ],
   [
@@ -135,52 +130,48 @@ export const CORRECTIONS: ReadonlyMap<string, Correction> = new Map([
     },
   ],
   ["ogbl-wikikg2", { properties: { edgeTypes: 535, nodeTypes: 1, selfLoops: true }, reason: "the triples' relations are the edge types, the entities carry no type, and some triples name the same entity as head and tail" }],
-  ["nell-995", { properties: { edgeTypes: 200, nodeTypes: 1 }, reason: "the recipe reads each triple's relation as the edge type, and the entities carry no type" }],
   [
-    "hetionet",
+    "yago3-10",
     {
-      expectedNodes: 45158,
-      expectedEdges: 2250197,
-      properties: { components: 1, connected: true, density: 0.0011034705835981234, edgeTypes: 24, nodeTypes: 1 },
-      reason: "the catalogue's counts and properties come from reading the header line as an edge and the metaedge column as the target, while the recipe skips the header and reads each line as source, metaedge type and target; a node's kind is part of its id, not a type of its own",
+      expectedEdges: 1089040,
+      properties: { components: 11, edgeTypes: 37, heterogeneous: true, multigraph: true, nodeTypes: 1 },
+      reason: "the catalogue counts each head and tail pair once, while the recipe reads every triple of the three splits, so a pair with two relations is two edges, and the graph the triples give has fewer components than the catalogue records; the triples' relations are the edge types, which makes the graph heterogeneous, and the entities carry no type",
     },
   ],
+  ["nell-995", { properties: { edgeTypes: 200, nodeTypes: 1 }, reason: "the triples' relations are the edge types and the entities carry no type" }],
+  ["hetionet", { properties: { components: 1, connected: true, edgeTypes: 24, nodeTypes: 1 }, reason: "the catalogue's properties come from reading the metaedge column as the target, while the recipe reads it as each edge's type, which makes the graph connected; a node's kind is part of its id, not a type of its own" }],
   [
     "acm",
     {
       description: "Heterogeneous academic network from the ACM digital library, as the Heterogeneous Graph Benchmark packages it. Contains papers, authors, subjects and terms, linked by citation, reference, authorship, subject and term relations, each listed in both directions. Used as a standard benchmark for heterogeneous graph neural networks.",
       properties: { edgeTypes: 8, nodeTypes: 4 },
-      reason: "the files hold four node types and eight link types, which the recipe reads as the node and edge types, where the catalogue records two and one and the description leaves out the terms and the citation and term relations",
+      reason: "the files hold four node types and eight link types, which the recipe reads as the node and edge types, where the catalogue records two and one, and the description leaves out the terms and the citation and term relations",
     },
   ],
   [
     "acm-hgb",
     {
       description: "The ACM network as the Heterogeneous Graph Benchmark suite ships it, the same file as the acm entry. Contains papers, authors, subjects and terms, linked by citation, reference, authorship, subject and term relations, each listed in both directions. Used for benchmarking heterogeneous graph neural networks on node classification.",
-      expectedNodes: 10942,
-      expectedEdges: 547872,
-      properties: { density: 0.004576414754527161, edgeTypes: 8, multigraph: true, nodeTypes: 4, selfLoops: true },
-      reason: "the download is the same file as acm's, and its node.dat and link.dat give the counts, types and properties recorded here; the catalogue's counts and three relation types match no reading of it",
+      properties: { edgeTypes: 8, nodeTypes: 4 },
+      reason: "the download is the same file as acm's, whose four node types and eight link types the recipe reads as the node and edge types, where the catalogue records one of each and its description three relation types",
     },
   ],
   ["dblp-het", { properties: { edgeTypes: 6, nodeTypes: 4 }, reason: "the files hold four node types and six link types, which the recipe reads as the node and edge types, where the catalogue records two and one" }],
-  ["freebase", { properties: { edgeTypes: 36, nodeTypes: 8 }, reason: "the files hold eight node types and 36 link types, which the recipe reads as the node and edge types, where the catalogue records two and one" }],
+  ["freebase", { properties: { components: 378, edgeTypes: 36, nodeTypes: 8 }, reason: "the files hold eight node types and 36 link types, which the recipe reads as the node and edge types, where the catalogue records two and one, and the graph its files give has more components than the catalogue records" }],
   [
     "imdb",
     {
       description: "Heterogeneous film network from the Internet Movie Database, as the Heterogeneous Graph Benchmark packages it. Contains movies, directors, actors and plot keywords, with director, actor and keyword relations each listed in both directions. Used as a standard benchmark for heterogeneous graph neural networks.",
       properties: { edgeTypes: 6, nodeTypes: 4 },
-      reason: "the files hold four node types and six link types, which the recipe reads as the node and edge types, where the catalogue records two and one and the description leaves out the keywords",
+      reason: "the files hold four node types and six link types, which the recipe reads as the node and edge types, where the catalogue records two and one, and the description leaves out the keywords",
     },
   ],
   [
     "lastfm-hgb",
     {
       description: "Bipartite user-artist listening network from Last.fm, from the HetRec 2011 release. Users are linked to the artists they listened to, and each edge's weight is how many times the user listened to the artist.",
-      expectedNodes: 19524,
-      expectedEdges: 92834,
-      properties: { components: 8, cyclic: false, density: 0.00024355200564397155, selfLoops: false, weighted: true },
-      reason: "the catalogue's counts and properties come from reading user_artists.dat as a plain edge list, which merges users and artists that share a number and reads the header as an edge, while the recipe reads users and artists as two node sets with the listening count as the weight; the description named tags and friendships the recipe's file does not hold",
+      properties: { components: 8, cyclic: false, weighted: true },
+      reason: "the recipe reads user_artists.dat as users and artists in two node sets with the listening count as each edge's weight, and the graph that gives has the components and cycles recorded here; the catalogue's properties and its description, which names tags and friendships the file does not hold, describe another reading",
     },
   ],
 ]);
