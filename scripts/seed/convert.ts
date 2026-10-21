@@ -2,6 +2,7 @@ import { parseEntry, waybackUrl, type Archive, type Citation, type Entry, type P
 import type { InstanceFormat } from "../../src/parsers/instance-shapes";
 import type { JsonScalar } from "../../src/targets/json-scalar";
 import type { GraphLicenceResolver } from "./licence";
+import { matrixMarketPath, mirrorUrl, SUITESPARSE_ORIGIN, type SuiteSparseMirror } from "./mirror";
 import type { GraphboxCatalogue, SourceCatalogue, SourceDataset, SourceDownload, SourceEntry, StructuredCitation } from "./source";
 
 /** The crosswalk files of graph/v1, each for the fields of the native graph a parser emits: the topology every parser emits, and with it the edge weight, the edge time, both, or (for the ratings parser) node and edge types as well. */
@@ -362,9 +363,10 @@ function ratingsRecipe(download: Download, format: "amazon-ratings" | "amazon-ra
  * Chooses a recipe for one download.
  * @param download - The download.
  * @param datasetId - The dataset, for the pipeline's parser overrides.
+ * @param mirror - The SuiteSparse mirror, whose downloads are laid out as the collection's own.
  * @returns The recipe parts and their flags, or the reason this download has no declarative recipe.
  */
-function recipeFor(download: Download, datasetId: string): Chosen | { readonly unsupported: string } {
+function recipeFor(download: Download, datasetId: string, mirror: SuiteSparseMirror): Chosen | { readonly unsupported: string } {
   const original = parseWayback(download.url)?.original ?? download.url;
   const kind = archiveKindOf(original);
   if (typeof kind === "object") {
@@ -437,8 +439,8 @@ function recipeFor(download: Download, datasetId: string): Chosen | { readonly u
   if (kind === "none" || kind === "gzip" || kind === "bzip2") {
     return { url: download.url, archive: { kind }, parser, crosswalk: CROSSWALKS.topology, flags };
   }
-  // SuiteSparse serves each matrix as /MM/<group>/<name>.tar.gz holding <name>/<name>.mtx.
-  const suiteSparse = new URL(original).hostname === "sparse.tamu.edu" ? /^\/MM\/[^/]+\/([^/]+)\.tar\.gz$/.exec(new URL(original).pathname) : null;
+  // SuiteSparse serves each matrix as MM/<group>/<name>.tar.gz holding <name>/<name>.mtx, from its own host and from the mirror.
+  const suiteSparse = /([^/]+)\.tar\.gz$/.exec(matrixMarketPath(original, SUITESPARSE_ORIGIN) ?? matrixMarketPath(original, mirror.host) ?? "");
   if (mapped === "gd-contest" && kind === "zip" && download.innerPath !== undefined) {
     // The GD 2004 contest bundle ships its problems in a zip inside the zip (GD04/challenge.zip), and the catalogue's inner path is the problem's path inside that inner zip.
     flags.push("GD contest bundle: the problem is read from the bundle's one inner .zip member, which the source catalogue does not record");
@@ -609,14 +611,23 @@ export const NAME_OVERRIDES: ReadonlyMap<string, string> = new Map([
   ["ucinet-padgett", "Padgett Florentine Families (UCINET)"],
 ]);
 
+/** The curated inputs of a conversion that are not the pipeline catalogue itself. */
+export interface Curation {
+  /** Where each dataset's licence was read. */
+  readonly licences: Readonly<GraphLicenceResolver>;
+  /** The SuiteSparse files the University of Florida mirror holds. */
+  readonly mirror: SuiteSparseMirror;
+}
+
 /**
  * Converts one dataset.
  * @param dataset - The catalogue's dataset.
  * @param licences - Where each dataset's licence was read: the entry's licence is the one its curation records for the source its recipe fetches (its first source when it has no recipe).
+ * @param mirror - The SuiteSparse mirror: a download it holds is offered from the mirror ahead of the collection's own link.
  * @param nameOverrides - Replacement names by dataset id; a dataset not listed keeps the name the catalogue gives it.
  * @returns The entry, when the dataset converts, and its outcome for the report.
  */
-export function convertDataset(dataset: SourceDataset, licences: Readonly<GraphLicenceResolver>, nameOverrides: ReadonlyMap<string, string> = NAME_OVERRIDES): { readonly entry?: Entry; readonly outcome: Outcome } {
+export function convertDataset(dataset: SourceDataset, licences: Readonly<GraphLicenceResolver>, mirror: SuiteSparseMirror, nameOverrides: ReadonlyMap<string, string> = NAME_OVERRIDES): { readonly entry?: Entry; readonly outcome: Outcome } {
   const { id } = dataset;
   const flags: string[] = [];
   const notConverted = (reason: string): { outcome: Outcome } => ({ outcome: { id, outcome: "not-converted", reason, flags } });
@@ -648,7 +659,13 @@ export function convertDataset(dataset: SourceDataset, licences: Readonly<GraphL
       flags.push(`dropped an auth-walled download at ${new URL(url).hostname}`);
       continue;
     }
-    downloads.push({ url, format: download.format, innerPath: download.innerPath, columns: download.columns, skipLines: download.skipLines });
+    const recorded = { format: download.format, innerPath: download.innerPath, columns: download.columns, skipLines: download.skipLines };
+    const mirrored = mirrorUrl(mirror, url);
+    if (mirrored !== undefined) {
+      downloads.push({ url: mirrored, ...recorded });
+      flags.push("the collection's own link is also offered from the University of Florida mirror, which the recipe reads");
+    }
+    downloads.push({ url, ...recorded });
   }
   if (downloads.length === 0) {
     return notConverted("no public download remains: every download is auth-walled or a local file");
@@ -672,7 +689,7 @@ export function convertDataset(dataset: SourceDataset, licences: Readonly<GraphL
   } else {
     const ordered = [...downloads.filter((download) => download.format === dataset.preferredFormat), ...downloads.filter((download) => download.format !== dataset.preferredFormat)];
     for (const download of ordered) {
-      const candidate = recipeFor(download, id);
+      const candidate = recipeFor(download, id, mirror);
       if ("unsupported" in candidate) {
         unsupported.push(`${download.format ?? "unrecorded format"}: ${candidate.unsupported}`);
         continue;
@@ -683,7 +700,7 @@ export function convertDataset(dataset: SourceDataset, licences: Readonly<GraphL
   }
 
   const urls = [...new Set([...downloads.map((download) => download.url), ...(chosen === undefined ? [] : [chosen.url])])];
-  const sources = urls.map((url) => sourceFor(url, retrieved));
+  const sources = urls.map((url) => sourceFor(url, url.startsWith(mirror.host) ? mirror.readOn : retrieved));
   let recipe: Recipe;
   if (chosen === undefined) {
     recipe = { status: "not-fetchable", reason: `no download is in a form keepset reads yet (${[...new Set(unsupported)].join("; ")})` };
@@ -775,12 +792,12 @@ export interface Report {
  * Converts a whole catalogue.
  * @param pipeline - The pipeline catalogue.
  * @param graphbox - The graphbox catalogue, for the overlap section.
- * @param licences - The licence curation's resolver, checked for unused records once every dataset has converted.
+ * @param curation - The licence curation, whose resolver is checked for unused records once every dataset has converted, and the SuiteSparse mirror inventory.
  * @param nameOverrides - Replacement names by dataset id.
  * @returns The entries in id order and the report.
  * @throws Error when an override names a dataset the catalogue lacks or gives the name the dataset already has.
  */
-export function convertCatalogue(pipeline: SourceCatalogue, graphbox: GraphboxCatalogue, licences: Readonly<GraphLicenceResolver>, nameOverrides: ReadonlyMap<string, string> = NAME_OVERRIDES): { readonly entries: readonly Entry[]; readonly report: Report } {
+export function convertCatalogue(pipeline: SourceCatalogue, graphbox: GraphboxCatalogue, curation: Curation, nameOverrides: ReadonlyMap<string, string> = NAME_OVERRIDES): { readonly entries: readonly Entry[]; readonly report: Report } {
   for (const [id, name] of nameOverrides) {
     const dataset = Object.values(pipeline.datasets).find((candidate) => candidate.id === id);
     if (dataset === undefined) {
@@ -793,14 +810,14 @@ export function convertCatalogue(pipeline: SourceCatalogue, graphbox: GraphboxCa
   const entries: Entry[] = [];
   const outcomes: Outcome[] = [];
   for (const dataset of Object.values(pipeline.datasets).sort((left, right) => (left.id < right.id ? -1 : 1))) {
-    const converted = convertDataset(dataset, licences, nameOverrides);
+    const converted = convertDataset(dataset, curation.licences, curation.mirror, nameOverrides);
     if (converted.entry !== undefined) {
       entries.push(converted.entry);
     }
     outcomes.push(converted.outcome);
   }
 
-  licences.assertAllUsed();
+  curation.licences.assertAllUsed();
 
   return {
     entries,

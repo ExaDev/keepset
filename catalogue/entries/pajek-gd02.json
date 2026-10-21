@@ -61,6 +61,11 @@
       "url": "http://vlado.fmf.uni-lj.si/pub/networks/data/GD/gd02/A02.net"
     },
     {
+      "retrieved": "2026-10-21",
+      "status": "live",
+      "url": "https://www.cise.ufl.edu/research/sparse/MM/Pajek/GD02_a.tar.gz"
+    },
+    {
       "retrieved": "2026-02-16",
       "status": "live",
       "url": "https://sparse.tamu.edu/MM/Pajek/GD02_a.tar.gz"

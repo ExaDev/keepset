@@ -58,6 +58,11 @@
       "url": "https://snap.stanford.edu/data/email-Enron.txt.gz"
     },
     {
+      "retrieved": "2026-10-21",
+      "status": "live",
+      "url": "https://www.cise.ufl.edu/research/sparse/MM/SNAP/email-Enron.tar.gz"
+    },
+    {
       "retrieved": "2026-01-17",
       "status": "live",
       "url": "https://sparse.tamu.edu/MM/SNAP/email-Enron.tar.gz"

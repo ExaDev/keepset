@@ -61,6 +61,11 @@
       "url": "http://vlado.fmf.uni-lj.si/pub/networks/data/GED/CSphd.ZIP"
     },
     {
+      "retrieved": "2026-10-21",
+      "status": "live",
+      "url": "https://www.cise.ufl.edu/research/sparse/MM/Pajek/CSphd.tar.gz"
+    },
+    {
       "retrieved": "2026-01-17",
       "status": "live",
       "url": "https://sparse.tamu.edu/MM/Pajek/CSphd.tar.gz"

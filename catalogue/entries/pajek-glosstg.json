@@ -64,6 +64,11 @@
       "url": "http://vlado.fmf.uni-lj.si/pub/networks/data/DIC/TG/glossTG.paj"
     },
     {
+      "retrieved": "2026-10-21",
+      "status": "live",
+      "url": "https://www.cise.ufl.edu/research/sparse/MM/Pajek/GlossGT.tar.gz"
+    },
+    {
       "retrieved": "2026-02-16",
       "status": "live",
       "url": "https://sparse.tamu.edu/MM/Pajek/GlossGT.tar.gz"

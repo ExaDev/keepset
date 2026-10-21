@@ -65,6 +65,11 @@
       "url": "http://vlado.fmf.uni-lj.si/pub/networks/data/"
     },
     {
+      "retrieved": "2026-10-21",
+      "status": "live",
+      "url": "https://www.cise.ufl.edu/research/sparse/MM/Pajek/GD06_theory.tar.gz"
+    },
+    {
       "retrieved": "2026-02-16",
       "status": "live",
       "url": "https://sparse.tamu.edu/MM/Pajek/GD06_theory.tar.gz"

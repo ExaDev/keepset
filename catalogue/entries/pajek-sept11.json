@@ -67,6 +67,11 @@
       "url": "http://vlado.fmf.uni-lj.si/pub/networks/data/CRA/Days.zip"
     },
     {
+      "retrieved": "2026-10-21",
+      "status": "live",
+      "url": "https://www.cise.ufl.edu/research/sparse/MM/Pajek/Reuters911.tar.gz"
+    },
+    {
       "retrieved": "2026-02-16",
       "status": "live",
       "url": "https://sparse.tamu.edu/MM/Pajek/Reuters911.tar.gz"
