@@ -4,10 +4,10 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { zipSync } from "fflate";
 import { describe, expect, it } from "vitest";
-import { ArchiveError } from "../errors";
-import { bzip2, gzip, tar, zip } from "../test-support/archives";
+import { ArchiveError } from "./errors";
+import { bzip2, gzip, tar, zip } from "./test-support/archives";
 import { unpack, unpackFiles, unpackMembers } from "./archive";
-import { readTar } from "./tar";
+import { readTar } from "./node/tar";
 
 const text = (bytes: Uint8Array): string => new TextDecoder().decode(bytes);
 const names = (members: readonly { readonly path: string }[]): string[] => members.map((member) => member.path);

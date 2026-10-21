@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { ArchiveError } from "../errors";
 import { bytesOf, cells, compoundFile, FORMULA_KIND, record, rk, workbookStream, xlsWorkbook } from "../test-support/biff";
-import { sheetToCsv } from "./archive";
+import { sheetToCsv } from "../archive";
 
 const text = (bytes: Uint8Array): string => new TextDecoder().decode(bytes);
 const csv = (bytes: Uint8Array, sheet = "Data"): string => text(sheetToCsv(bytes, { kind: "xls", sheet }));

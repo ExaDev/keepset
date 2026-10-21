@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import { ArchiveError } from "../errors";
 import { workbook } from "../test-support/archives";
 import { zipSync } from "fflate";
-import { sheetToCsv, unpack, unpackMembers } from "./archive";
+import { sheetToCsv, unpack, unpackMembers } from "../archive";
 import { sheetNames } from "./xlsx";
 
 const text = (bytes: Uint8Array): string => new TextDecoder().decode(bytes);

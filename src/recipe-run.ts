@@ -1,7 +1,7 @@
-import { type Entry, rawSnapshotUrl, type Source } from "../entry";
-import { KeepsetError, RecipeError, type RecipeStep } from "../errors";
-import type { JsonScalar } from "../targets/json-scalar";
-import type { Download } from "./fetch-dataset";
+import { type Entry, rawSnapshotUrl, type Source } from "./entry";
+import { KeepsetError, RecipeError, type RecipeStep } from "./errors";
+import type { JsonScalar } from "./targets/json-scalar";
+import type { Download } from "./fetch";
 
 /**
  * The URL a recipe downloads a source from, as `downloadUrl` gives it. A dead source is fetched from its pinned snapshot in the Wayback Machine's `id_` form, which serves the archived bytes as they were captured rather than wrapped in the archive's page chrome.

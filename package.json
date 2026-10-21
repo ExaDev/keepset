@@ -60,6 +60,10 @@
       "types": "./dist/node/fetch-dataset.d.ts",
       "import": "./dist/node/fetch-dataset.js"
     },
+    "./browser": {
+      "types": "./dist/browser/entry.d.ts",
+      "import": "./dist/browser/entry.js"
+    },
     "./schemas/*.schema.json": "./schemas/*.schema.json"
   },
   "files": [

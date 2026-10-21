@@ -1,7 +1,7 @@
 import { z } from "zod";
-import { KeepsetError } from "../errors";
-import type { Paging } from "../entry";
-import type { FetchPort } from "./fetch-dataset";
+import { KeepsetError } from "./errors";
+import type { Paging } from "./entry";
+import type { FetchPort } from "./fetch";
 
 const countResponse = (value: unknown): number | undefined => (typeof value === "object" && value !== null && "count" in value && typeof value.count === "number" && Number.isInteger(value.count) && value.count >= 0 ? value.count : undefined);
 

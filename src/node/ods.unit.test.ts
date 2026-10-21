@@ -2,7 +2,7 @@ import { zipSync } from "fflate";
 import { describe, expect, it } from "vitest";
 import { ArchiveError } from "../errors";
 import { odsSpreadsheet, zip } from "../test-support/archives";
-import { sheetToCsv, unpack } from "./archive";
+import { sheetToCsv, unpack } from "../archive";
 
 const text = (bytes: Uint8Array): string => new TextDecoder().decode(bytes);
 const csv = (tables: Readonly<Record<string, string>>, sheet = "Data"): string => text(sheetToCsv(odsSpreadsheet(tables), { kind: "ods", sheet }));
