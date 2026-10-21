@@ -22,7 +22,7 @@
     "surveyId": "or-74"
   },
   "recipe": {
-    "reason": "The source is an SRU search endpoint that returns XML notices in a query language and not a table, and keepset has no parser for it.",
+    "reason": "The source is an SRU search interface whose Gemeenteblad environmental permit notices are a result set of well over a million records, while the interface serves at most 100 records a request and none past the 10,000th of a result set; a fetch would have to split the query by date into hundreds of windows and make more than ten thousand requests for gigabytes of XML, which no recipe reads, and a single window of the set is not this dataset.",
     "status": "not-fetchable"
   },
   "sources": [
