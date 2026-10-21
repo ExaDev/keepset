@@ -34,8 +34,15 @@
     "weighted": false
   },
   "recipe": {
-    "reason": "no download is in a form keepset reads yet (witvliet-json: format witvliet-json has a pipeline-specific parser with no declarative keepset form yet)",
-    "status": "not-fetchable"
+    "archive": {
+      "kind": "none"
+    },
+    "parser": {
+      "encoding": "utf-8",
+      "format": "witvliet-synapses"
+    },
+    "source": 0,
+    "status": "fetchable"
   },
   "sources": [
     {

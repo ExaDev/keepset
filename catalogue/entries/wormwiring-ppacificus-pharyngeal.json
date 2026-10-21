@@ -14,7 +14,7 @@
   "description": "Directed multigraph of chemical synapses in the pharyngeal nervous system of the nematode Pristionchus pacificus. Nodes are neurons and edges are individual chemical synapses. Multiple synapses between the same neuron pair create multi-edges. No autapses. Consensus network from two adult hermaphrodite specimens.",
   "domain": "Neural connectome",
   "expectedCounts": {
-    "edges": 533,
+    "edges": 78,
     "nodes": 29
   },
   "id": "wormwiring-ppacificus-pharyngeal",
@@ -34,8 +34,21 @@
     "weighted": false
   },
   "recipe": {
-    "reason": "no download is in a form keepset reads yet (bumbarger-consensus: format bumbarger-consensus has a pipeline-specific parser with no declarative keepset form yet)",
-    "status": "not-fetchable"
+    "archive": {
+      "kind": "xlsx",
+      "sheet": "Sheet1"
+    },
+    "parser": {
+      "commentPrefixes": [],
+      "delimiter": "comma",
+      "encoding": "utf-8",
+      "format": "edge-list",
+      "skipLines": 2,
+      "sourceColumn": 0,
+      "targetColumn": 1
+    },
+    "source": 0,
+    "status": "fetchable"
   },
   "sources": [
     {

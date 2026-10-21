@@ -34,7 +34,7 @@
     "weighted": false
   },
   "recipe": {
-    "reason": "no download is in a form keepset reads yet (witvliet-json: format witvliet-json has a pipeline-specific parser with no declarative keepset form yet)",
+    "reason": "the graph joins the specimen's chemical synapse file with its gap junction file (Dataset1_gapjunctions.json beside it), and a recipe reads one download",
     "status": "not-fetchable"
   },
   "sources": [

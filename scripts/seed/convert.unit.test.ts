@@ -1,7 +1,7 @@
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { describe, expect, it } from "vitest";
-import { convertCatalogue, convertDataset, NAME_OVERRIDES, namespaceOf, netzschleuderCsv, parseWayback, type Outcome } from "./convert";
+import { convertCatalogue, convertDataset, DATASET_RECIPES, NAME_OVERRIDES, namespaceOf, netzschleuderCsv, parseWayback, UNVERIFIABLE_DOWNLOADS, type Outcome } from "./convert";
 import { GraphLicencesSchema, graphLicenceResolver } from "./licence";
 import { SuiteSparseMirrorSchema } from "./mirror";
 import { GraphboxCatalogueSchema, SourceCatalogueSchema } from "./source";
@@ -40,11 +40,12 @@ const licences = GraphLicencesSchema.parse({
     "oag-eng": { readAt: ["https://huggingface.co/api/datasets/example/data"], reason: "The card has no licence field." },
   },
 });
-/* A resolver is single use: it remembers which curation records a conversion used. The slice holds none of the datasets NAME_OVERRIDES renames, so it converts with no overrides; the overrides are tested against the committed full catalogue below. */
+/* A resolver is single use: it remembers which curation records a conversion used. The slice holds none of the datasets NAME_OVERRIDES renames or DATASET_RECIPES reads, so it converts with no overrides; the overrides are tested against the committed full catalogue below. */
 const resolver = () => graphLicenceResolver(licences);
 /* The mirror holds Pajek/Kohonen and not Pajek/Missing, so one of the slice's two SuiteSparse downloads is offered from it. */
 const mirror = SuiteSparseMirrorSchema.parse({ readOn: "2026-10-21", host: "https://mirror.example/sparse/", holds: ["MM/Pajek/Kohonen.tar.gz"] });
-const { entries, report } = convertCatalogue(pipeline, graphbox, { licences: resolver(), mirror }, new Map());
+const NO_OVERRIDES = { names: new Map<string, string>(), recipes: new Map() } as const;
+const { entries, report } = convertCatalogue(pipeline, graphbox, { licences: resolver(), mirror }, NO_OVERRIDES);
 
 /** What the source catalogue records for the collaboration network's nodes, which the import corrects without editing it. */
 const CATALOGUE_COLLABORATION_NODES = 22015;
@@ -299,10 +300,10 @@ describe("the seed import's classification", () => {
 
   it("refuses a dataset no licence curation covers, and curation that serves no dataset", () => {
     const only = (publishers: readonly unknown[], datasets: Record<string, unknown> = {}) => graphLicenceResolver(GraphLicencesSchema.parse({ readOn: "2026-10-20", publishers, datasets }));
-    expect(() => convertCatalogue(pipeline, graphbox, { licences: only([]), mirror }, new Map())).toThrow(/no licence curation covers/);
+    expect(() => convertCatalogue(pipeline, graphbox, { licences: only([]), mirror }, NO_OVERRIDES)).toThrow(/no licence curation covers/);
     const everything = licences.publishers.map((publisher) => ({ ...publisher }));
-    expect(() => convertCatalogue(pipeline, graphbox, { licences: only([...everything, unstated("unused", "Unused", ["https://unused.example/"])], licences.datasets), mirror }, new Map())).toThrow(/no dataset's source falls under: unused/);
-    expect(() => convertCatalogue(pipeline, graphbox, { licences: only(everything, { ...licences.datasets, "not-a-dataset": { readAt: ["https://example.org/"], reason: "x" } }), mirror }, new Map())).toThrow(/not-a-dataset/);
+    expect(() => convertCatalogue(pipeline, graphbox, { licences: only([...everything, unstated("unused", "Unused", ["https://unused.example/"])], licences.datasets), mirror }, NO_OVERRIDES)).toThrow(/no dataset's source falls under: unused/);
+    expect(() => convertCatalogue(pipeline, graphbox, { licences: only(everything, { ...licences.datasets, "not-a-dataset": { readAt: ["https://example.org/"], reason: "x" } }), mirror }, NO_OVERRIDES)).toThrow(/not-a-dataset/);
   });
 
   it("names the judgement-call removals, the omitted fields and the graphbox overlap without merging", () => {
@@ -317,14 +318,14 @@ describe("the seed import's classification", () => {
 
 describe("name overrides", () => {
   it("replaces the name of a listed dataset and leaves every other name as the catalogue gives it", () => {
-    const renamed = convertCatalogue(pipeline, graphbox, { licences: resolver(), mirror }, new Map([["wiki-vote", "Wikipedia votes (a source)"]])).entries;
+    const renamed = convertCatalogue(pipeline, graphbox, { licences: resolver(), mirror }, { ...NO_OVERRIDES, names: new Map([["wiki-vote", "Wikipedia votes (a source)"]]) }).entries;
     expect(renamed.find((candidate) => candidate.id === "wiki-vote")?.name).toBe("Wikipedia votes (a source)");
     expect(renamed.find((candidate) => candidate.id === "amazon0302")?.name).toBe(entry("amazon0302").name);
   });
 
   it("refuses an override for a dataset the catalogue lacks, or one that repeats the catalogue's name", () => {
-    expect(() => convertCatalogue(pipeline, graphbox, { licences: resolver(), mirror }, new Map([["absent", "Anything"]]))).toThrow("the name override for absent names no dataset of the catalogue");
-    expect(() => convertCatalogue(pipeline, graphbox, { licences: resolver(), mirror }, new Map([["wiki-vote", entry("wiki-vote").name]]))).toThrow("the name override for wiki-vote repeats the name the catalogue already gives it");
+    expect(() => convertCatalogue(pipeline, graphbox, { licences: resolver(), mirror }, { ...NO_OVERRIDES, names: new Map([["absent", "Anything"]]) })).toThrow("the name override for absent names no dataset of the catalogue");
+    expect(() => convertCatalogue(pipeline, graphbox, { licences: resolver(), mirror }, { ...NO_OVERRIDES, names: new Map([["wiki-vote", entry("wiki-vote").name]]) })).toThrow("the name override for wiki-vote repeats the name the catalogue already gives it");
   });
 
   it("renames, in the committed full catalogue, every dataset it lists to the name it gives", () => {
@@ -336,6 +337,43 @@ describe("name overrides", () => {
       expect(dataset, id).toBeDefined();
       expect(dataset === undefined ? undefined : convertDataset(dataset, fullLicences, fullMirror).entry?.name, id).toBe(name);
     }
+  });
+
+  it("writes, in the committed full catalogue, each dataset recipe with its counts, or the reason no recipe reads the dataset", () => {
+    const full = SourceCatalogueSchema.parse(JSON.parse(readFileSync(join(import.meta.dirname, "sources/pipeline-catalog.json"), "utf8")));
+    const fullMirror = SuiteSparseMirrorSchema.parse(JSON.parse(readFileSync(join(import.meta.dirname, "sources/suitesparse-mirror.json"), "utf8")));
+    const fullLicences = graphLicenceResolver(GraphLicencesSchema.parse(JSON.parse(readFileSync(join(import.meta.dirname, "sources/graph-licences.json"), "utf8"))));
+    for (const [id, fixed] of DATASET_RECIPES) {
+      const dataset = Object.values(full.datasets).find((candidate) => candidate.id === id);
+      expect(dataset, id).toBeDefined();
+      const converted = dataset === undefined ? undefined : convertDataset(dataset, fullLicences, fullMirror).entry;
+      if ("archive" in fixed) {
+        expect(converted?.recipe, id).toMatchObject({ status: "fetchable", archive: fixed.archive, parser: fixed.parser });
+        expect(converted?.expectedCounts, id).toEqual(fixed.counts ?? { nodes: dataset?.nodeCount, edges: dataset?.edgeCount });
+      } else {
+        expect(converted?.recipe, id).toEqual({ status: "not-fetchable", reason: fixed.unsupported });
+      }
+    }
+  });
+
+  it("pins, in the committed full catalogue, every download a verifying client cannot fetch as a dead source with its snapshot", () => {
+    const full = SourceCatalogueSchema.parse(JSON.parse(readFileSync(join(import.meta.dirname, "sources/pipeline-catalog.json"), "utf8")));
+    const fullMirror = SuiteSparseMirrorSchema.parse(JSON.parse(readFileSync(join(import.meta.dirname, "sources/suitesparse-mirror.json"), "utf8")));
+    const fullLicences = graphLicenceResolver(GraphLicencesSchema.parse(JSON.parse(readFileSync(join(import.meta.dirname, "sources/graph-licences.json"), "utf8"))));
+    for (const [url, { timestamp }] of UNVERIFIABLE_DOWNLOADS) {
+      const sources = Object.values(full.datasets)
+        .map((dataset) => convertDataset(dataset, fullLicences, fullMirror).entry)
+        .flatMap((converted) => converted?.sources ?? [])
+        .filter((source) => source.url === url);
+      expect(sources.length, url).toBeGreaterThan(0);
+      for (const source of sources) {
+        expect(source).toMatchObject({ status: "dead", snapshot: { timestamp, url: `https://web.archive.org/web/${timestamp}/${url}` } });
+      }
+    }
+  });
+
+  it("refuses a dataset recipe for a dataset the catalogue lacks", () => {
+    expect(() => convertCatalogue(pipeline, graphbox, { licences: resolver(), mirror }, { ...NO_OVERRIDES, recipes: new Map([["absent", { unsupported: "anything" }]]) })).toThrow("the dataset recipe for absent names no dataset of the catalogue");
   });
 
   it("gives each override a name that no other override shares, ignoring case", () => {

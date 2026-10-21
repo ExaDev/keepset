@@ -10626,59 +10626,66 @@
     },
     {
       "flags": [
-        "not fetchable yet: no declarative recipe exists for any download"
+        "WormAtlas NeuronConnect: the recipe reads the send rows (S, Sp) from Neuron 1 to Neuron 2 and leaves out the receive rows (R, Rp), which record the same synapses from the other side; the pipeline read all four, counting each synapse twice and half of them reversed, so the counts are the recipe's; each synapse is an edge, a row giving as many as its count",
+        "the recipe fetches the source's pinned Wayback snapshot: www.wormatlas.org sends only its own certificate and not the InCommon intermediate that issued it, so a client that does not fetch missing intermediates (Node's among them) cannot verify it, and its plain http address redirects to a malformed one; the snapshot holds the bytes the host serves (its Wayback digest is the SHA-1 of the live file)"
       ],
       "id": "wormwiring-celegans-hermaphrodite-chemical",
       "outcome": "converted-with-flags",
-      "recipe": "not-fetchable"
+      "recipe": "fetchable"
     },
     {
       "flags": [
-        "not fetchable yet: no declarative recipe exists for any download"
+        "WormAtlas NeuronConnect: the recipe reads the send rows (S, Sp) from Neuron 1 to Neuron 2 and leaves out the receive rows (R, Rp), which record the same synapses from the other side; the pipeline read all four, counting each synapse twice and half of them reversed, so the counts are the recipe's; each row is one edge and its type and count are not carried",
+        "the recipe fetches the source's pinned Wayback snapshot: www.wormatlas.org sends only its own certificate and not the InCommon intermediate that issued it, so a client that does not fetch missing intermediates (Node's among them) cannot verify it, and its plain http address redirects to a malformed one; the snapshot holds the bytes the host serves (its Wayback digest is the SHA-1 of the live file)"
       ],
       "id": "wormwiring-celegans-hermaphrodite-chemical-typed",
       "outcome": "converted-with-flags",
-      "recipe": "not-fetchable"
+      "recipe": "fetchable"
     },
     {
       "flags": [
-        "not fetchable yet: no declarative recipe exists for any download"
+        "WormAtlas NeuronConnect: the recipe reads the send rows (S, Sp) from Neuron 1 to Neuron 2 and leaves out the receive rows (R, Rp), which record the same synapses from the other side; the pipeline read all four, counting each synapse twice and half of them reversed, so the counts are the recipe's; each row is one undirected edge, a reciprocal pair staying two, and its type and count are not carried",
+        "the recipe fetches the source's pinned Wayback snapshot: www.wormatlas.org sends only its own certificate and not the InCommon intermediate that issued it, so a client that does not fetch missing intermediates (Node's among them) cannot verify it, and its plain http address redirects to a malformed one; the snapshot holds the bytes the host serves (its Wayback digest is the SHA-1 of the live file)"
       ],
       "id": "wormwiring-celegans-hermaphrodite-chemical-undirected-typed",
       "outcome": "converted-with-flags",
-      "recipe": "not-fetchable"
+      "recipe": "fetchable"
     },
     {
       "flags": [
-        "not fetchable yet: no declarative recipe exists for any download"
+        "WormAtlas NeuronConnect: the recipe reads the send rows (S, Sp) from Neuron 1 to Neuron 2 and leaves out the receive rows (R, Rp), which record the same synapses from the other side; the pipeline read all four, counting each synapse twice and half of them reversed, so the counts are the recipe's; each row is one edge and its synapse count, the weight, is not carried",
+        "the recipe fetches the source's pinned Wayback snapshot: www.wormatlas.org sends only its own certificate and not the InCommon intermediate that issued it, so a client that does not fetch missing intermediates (Node's among them) cannot verify it, and its plain http address redirects to a malformed one; the snapshot holds the bytes the host serves (its Wayback digest is the SHA-1 of the live file)"
       ],
       "id": "wormwiring-celegans-hermaphrodite-chemical-weighted",
       "outcome": "converted-with-flags",
-      "recipe": "not-fetchable"
+      "recipe": "fetchable"
     },
     {
       "flags": [
-        "not fetchable yet: no declarative recipe exists for any download"
+        "WormAtlas NeuronConnect: the recipe reads the send rows (S, Sp) from Neuron 1 to Neuron 2 and leaves out the receive rows (R, Rp), which record the same synapses from the other side; the pipeline read all four, counting each synapse twice and half of them reversed, so the counts are the recipe's; the gap junction rows (EJ) give an edge each way, as the file lists them, and the neuromuscular rows (NMJ) an edge to the node NMJ; each row is one edge and its type and count are not carried",
+        "the recipe fetches the source's pinned Wayback snapshot: www.wormatlas.org sends only its own certificate and not the InCommon intermediate that issued it, so a client that does not fetch missing intermediates (Node's among them) cannot verify it, and its plain http address redirects to a malformed one; the snapshot holds the bytes the host serves (its Wayback digest is the SHA-1 of the live file)"
       ],
       "id": "wormwiring-celegans-hermaphrodite-full",
       "outcome": "converted-with-flags",
-      "recipe": "not-fetchable"
+      "recipe": "fetchable"
     },
     {
       "flags": [
-        "not fetchable yet: no declarative recipe exists for any download"
+        "WormAtlas NeuronConnect: the recipe reads the gap junction rows (EJ), which list each junction from both neurons, as one undirected edge per pair; the pipeline kept both listings, so the counts are the recipe's, and the junction count, the weight, is not carried",
+        "the recipe fetches the source's pinned Wayback snapshot: www.wormatlas.org sends only its own certificate and not the InCommon intermediate that issued it, so a client that does not fetch missing intermediates (Node's among them) cannot verify it, and its plain http address redirects to a malformed one; the snapshot holds the bytes the host serves (its Wayback digest is the SHA-1 of the live file)"
       ],
       "id": "wormwiring-celegans-hermaphrodite-gapjunctions",
       "outcome": "converted-with-flags",
-      "recipe": "not-fetchable"
+      "recipe": "fetchable"
     },
     {
       "flags": [
-        "not fetchable yet: no declarative recipe exists for any download"
+        "Bumbarger and Sommer's consensus network (Table S2) gives each connection the synapse count of each of its two specimens and their average, which is a half for many connections, so no whole number of synapses is recorded: the recipe reads each connection as one edge from the presynaptic to the postsynaptic neuron, below the table's title and header rows; the pipeline rounded the average half to even, so the counts are the recipe's",
+        "the source is dead and the recipe fetches its pinned Wayback snapshot"
       ],
       "id": "wormwiring-ppacificus-pharyngeal",
       "outcome": "converted-with-flags",
-      "recipe": "not-fetchable"
+      "recipe": "fetchable"
     },
     {
       "flags": [
@@ -10690,11 +10697,11 @@
     },
     {
       "flags": [
-        "not fetchable yet: no declarative recipe exists for any download"
+        "Witvliet synapses: each partner of a polyadic chemical synapse is an edge from the presynaptic neuron"
       ],
       "id": "wormwiring-witvliet-L1-1-chemical",
       "outcome": "converted-with-flags",
-      "recipe": "not-fetchable"
+      "recipe": "fetchable"
     },
     {
       "flags": [
@@ -10706,27 +10713,27 @@
     },
     {
       "flags": [
-        "not fetchable yet: no declarative recipe exists for any download"
+        "Witvliet synapses: each partner of a polyadic chemical synapse is an edge from the presynaptic neuron"
       ],
       "id": "wormwiring-witvliet-L1-4-chemical",
       "outcome": "converted-with-flags",
-      "recipe": "not-fetchable"
+      "recipe": "fetchable"
     },
     {
       "flags": [
-        "not fetchable yet: no declarative recipe exists for any download"
+        "Witvliet synapses: each partner of a polyadic chemical synapse is an edge from the presynaptic neuron"
       ],
       "id": "wormwiring-witvliet-L2-chemical",
       "outcome": "converted-with-flags",
-      "recipe": "not-fetchable"
+      "recipe": "fetchable"
     },
     {
       "flags": [
-        "not fetchable yet: no declarative recipe exists for any download"
+        "Witvliet synapses: each partner of a polyadic chemical synapse is an edge from the presynaptic neuron"
       ],
       "id": "wormwiring-witvliet-L3-chemical",
       "outcome": "converted-with-flags",
-      "recipe": "not-fetchable"
+      "recipe": "fetchable"
     },
     {
       "flags": [
