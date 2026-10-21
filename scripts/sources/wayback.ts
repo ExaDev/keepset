@@ -18,6 +18,10 @@ const BYTES_PER_GIBIBYTE = 1_073_741_824;
 /** The largest file Save Page Now captures: its documented maximum resource size of 2 GB, taken as binary gigabytes so a file in the gap between the two readings is attempted and refused by the service, which classifies it, rather than skipped on a guess. */
 export const ARCHIVE_SIZE_LIMIT_BYTES = 2 * BYTES_PER_GIBIBYTE;
 
+/** How long a client waits between two requests to one of the Wayback Machine's hosts. A request a second kept up for hours got the connection from one machine refused outright (the host answered other addresses throughout), and the Machine documents no rate for replay or the capture index, so this is chosen and not documented: a request every five seconds. */
+export const WAYBACK_HOST_INTERVAL_MILLISECONDS = 5000;
+export const WAYBACK_HOST_INTERVALS: Readonly<Record<string, number>> = { "web.archive.org": WAYBACK_HOST_INTERVAL_MILLISECONDS, "archive.org": WAYBACK_HOST_INTERVAL_MILLISECONDS };
+
 /** The documented capture limits for a visitor with no account and for one with a key pair: captures a minute and captures a day (SPN2 Public API Docs, "Limitations"). */
 export const ANONYMOUS_LIMITS = { capturesPerMinute: 3, capturesPerDay: 200 } as const;
 export const AUTHENTICATED_LIMITS = { capturesPerMinute: 7, capturesPerDay: 30_000 } as const;

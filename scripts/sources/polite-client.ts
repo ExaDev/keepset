@@ -19,6 +19,8 @@ export const MAX_RETRY_WAIT_MILLISECONDS = 120_000;
 export interface Politeness {
   /** The least time between two requests to one host. */
   readonly hostIntervalMilliseconds: number;
+  /** The least time between two requests to a host that needs more than `hostIntervalMilliseconds`, by host name. */
+  readonly hostIntervalOverrides?: Readonly<Record<string, number>>;
   /** The least time between two requests to any host. */
   readonly globalIntervalMilliseconds: number;
   /** How many times a request is made before its last answer or failure is given back. */
@@ -125,9 +127,9 @@ export class PoliteClient {
    */
   private async attempt(url: string, init: RequestInit, attempt: number): Promise<Response> {
     const { host } = new URL(url);
-    const { attempts, backoffMilliseconds, globalIntervalMilliseconds, hostIntervalMilliseconds, timeoutMilliseconds } = this.politeness;
+    const { attempts, backoffMilliseconds, globalIntervalMilliseconds, hostIntervalMilliseconds, hostIntervalOverrides, timeoutMilliseconds } = this.politeness;
     await this.pacer.wait(GLOBAL_KEY, globalIntervalMilliseconds);
-    await this.pacer.wait(host, hostIntervalMilliseconds);
+    await this.pacer.wait(host, hostIntervalOverrides?.[host] ?? hostIntervalMilliseconds);
     const last = attempt === attempts;
     let wait = backoffMilliseconds * 2 ** (attempt - 1);
     try {
