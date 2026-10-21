@@ -1,3 +1,10 @@
+## [0.46.1](https://github.com/Mearman/keepset/compare/v0.46.0...v0.46.1) (2026-10-21)
+
+
+### Bug Fixes
+
+* **archive:** look up existing snapshots through the capture index ([a6ee979](https://github.com/Mearman/keepset/commit/a6ee97966494e2ba96948cbd462f6dc2e9d98890))
+
 # [0.46.0](https://github.com/Mearman/keepset/compare/v0.45.0...v0.46.0) (2026-10-21)
 
 
