@@ -336,7 +336,7 @@ export function sheetToCsv(bytes: Uint8Array, archive: Readonly<SheetArchive>): 
  * @throws ArchiveError when the bytes, or a file `inner` gunzips, are not well-formed, or the selector matches no member.
  */
 export function unpackFiles(bytes: Uint8Array, archive: FilesArchive): Member[] {
-  const files = unpackMembers(bytes, { kind: archive.kind, members: archive.files });
+  const files = [...unpackMembers(bytes, { kind: archive.kind, members: archive.files })];
   if (archive.inner === undefined) {
     return files;
   }
@@ -348,6 +348,21 @@ export function unpackFiles(bytes: Uint8Array, archive: FilesArchive): Member[] 
       throw new ArchiveError(`member ${file.path}: ${error instanceof Error ? error.message : String(error)}`, { cause: error });
     }
   });
+}
+
+/**
+ * Unpacks a tar archive's bytes, which may be compressed: `tar.gz` is gunzipped and `tar.bz2` bunzipped first, `tar` read as it is.
+ * @param bytes - The archive's bytes.
+ * @param kind - The archive kind.
+ * @returns The tar's bytes.
+ * @throws ArchiveError when the bytes are not valid gzip or bzip2 data, as `gunzip` and `bunzip2` report.
+ */
+function untarred(bytes: Uint8Array, kind: "tar" | "tar.gz" | "tar.bz2"): Uint8Array {
+  if (kind === "tar") {
+    return bytes;
+  }
+
+  return kind === "tar.gz" ? gunzip(bytes) : bunzip2(bytes);
 }
 
 /**

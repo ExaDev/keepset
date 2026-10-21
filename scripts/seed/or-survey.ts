@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { ArchiveSchema, CitationSchema, CollectionArchiveSchema, ColumnNameSchema, HttpUrlSchema, IdSchema, ParserSchema } from "../../src/entry";
+import { ArchiveSchema, CitationSchema, CollectionArchiveSchema, ColumnNameSchema, HttpUrlSchema, IdSchema, ParserSchema, RelativePathSchema, WaybackTimestampSchema } from "../../src/entry";
 import { isInstanceParser } from "../../src/parsers/instance-shapes";
 import { LicenceTermsSchema, prose } from "./licence";
 
@@ -131,18 +131,28 @@ export type TableCollectionOutcome = z.infer<typeof TableCollectionOutcomeSchema
 export type TableOutcome = FetchableOutcome | ArcgisOutcome | TableCollectionOutcome;
 
 /** A dataset whose download is made of instance files read by an instance file parser: either one file (`archive` selects it with `member`, or the download is the file itself, and the entry is a tasks/v1 document), or every file of an archive that a `members` selector matches (a collection, one instance per file). `map` says which of the parser's node columns fill the tasks/v1 node's fields, `keep` which pass through under their own names, and a node column in neither is dropped by a one-way rule, so what an entry leaves out is written down. The file's header values are all carried in the document's meta (for a collection, in each instance's). `timeUnit` says what the source's time quantities are measured in, since the tasks/v1 `duration` is seconds, and is left out for a source that has none. */
+/** One file of a collection whose files are separate downloads, as a curation records it: its path in the collection, the URL it is downloaded from, the Wayback timestamp of the capture it is read from when that URL no longer serves it (the entry then records the source as dead and pins the snapshot), and how its bytes unpack. */
+export const CurationFileSchema = z.object({ path: RelativePathSchema, url: HttpUrlSchema, snapshot: WaybackTimestampSchema.optional(), archive: ArchiveSchema }).strict();
+export type CurationFile = z.infer<typeof CurationFileSchema>;
+
 export const InstanceFilesOutcomeSchema = z
   .object({
     status: z.literal("fetchable-instance-files"),
-    archive: ArchiveSchema,
+    /** How the download unpacks, for a dataset that is one download. */
+    archive: ArchiveSchema.optional(),
+    /** The files of a collection that are separate downloads, each its own source. */
+    files: z.array(CurationFileSchema).min(1).optional(),
     parser: ParserSchema.refine(isInstanceParser, { message: "must be an instance file parser" }),
     map: FieldMapSchema,
     keep: z.array(ColumnNameSchema),
+    /** What a mapped duration or travel time column is multiplied by to put it in seconds, for a source that gives minutes. */
+    factors: z.object({ duration: z.number().positive().optional(), travelTime: z.number().positive().optional() }).strict().optional(),
     timeUnit: z.enum(["seconds", "abstract units"]).optional(),
     expectedInstances: z.int().min(0).optional(),
     expectedNodes: z.int().min(0).optional(),
   })
-  .strict();
+  .strict()
+  .refine((outcome) => (outcome.archive === undefined) !== (outcome.files === undefined), { message: "an instance files outcome reads one download (archive) or separate downloads (files), not both or neither" });
 export type InstanceFilesOutcome = z.infer<typeof InstanceFilesOutcomeSchema>;
 
 /** A dataset with no recipe yet, and why. */

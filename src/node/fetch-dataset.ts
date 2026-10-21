@@ -191,6 +191,12 @@ function instancesOf(bytes: Uint8Array, archive: Archive, parser: Parser, prefix
   if ("members" in archive) {
     return Array.from(unpackMembers(bytes, archive), (member) => parseInstance(named(member.path), member.bytes, parser));
   }
+  if ("parts" in archive) {
+    throw new ArchiveError(`an instance is read from one file or from matching members, not from the named parts ${archive.parts.map((part) => part.name).join(", ")}`);
+  }
+  if ("files" in archive) {
+    throw new ArchiveError("an instance is read from one file or from matching members, not from every file a multi-file format's files selector matches");
+  }
   const unpacked = unpack(bytes, archive);
 
   return [parseInstance(named(unpacked.member), unpacked.bytes, parser)];

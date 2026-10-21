@@ -1,5 +1,5 @@
 import { CrosswalkSchema, validateCrosswalk, type Crosswalk } from "crossmap";
-import { parseEntry, type Entry } from "../../src/entry";
+import { parseEntry, waybackUrl, type Entry } from "../../src/entry";
 import { columnNames } from "../../src/parsers/csv-table";
 import { POINT_COLUMNS } from "../../src/parsers/geojson";
 import { INSTANCE_SHAPES } from "../../src/parsers/instance-shapes";
@@ -267,11 +267,11 @@ function crosswalkOf(outcome: TableOutcome): Crosswalk {
 }
 
 /**
- * Whether an instance files outcome reads a collection of files (its archive selects `members`) and not one file.
+ * Whether an instance files outcome reads a collection of files (separate downloads, or an archive that selects `members`) and not one file.
  * @param outcome - The outcome.
- * @returns True when its archive selects members.
+ * @returns True for a collection.
  */
-const readsCollection = (outcome: InstanceFilesOutcome): boolean => "members" in outcome.archive;
+const readsCollection = (outcome: InstanceFilesOutcome): boolean => outcome.files !== undefined || (outcome.archive !== undefined && "members" in outcome.archive);
 
 /**
  * Checks an instance files outcome against the rules that keep a recipe sound: the columns and header keys it names are ones its parser emits, a column is mapped or kept at most once, a kept column does not take the name of a tasks/v1 node field (a column that fills a field of its own name is mapped, so what fills each field is written in one place), every column of an instance file is a number so none fills a text field, and the counts it records fit its shape (instances for a collection, nodes for a single file).
@@ -322,6 +322,12 @@ function checkInstanceFiles(id: string, outcome: InstanceFilesOutcome): void {
   if (used.size === 0) {
     fail("the outcome maps and keeps no column, so a fetch would carry nothing beyond ids");
   }
+  for (const field of ["duration", "travelTime"] as const) {
+    const factor = outcome.factors?.[field];
+    if (factor !== undefined && outcome.map[field] === undefined) {
+      fail(`factors scales ${field}, which the map does not fill (factor ${String(factor)})`);
+    }
+  }
   if (!readsCollection(outcome) && outcome.expectedInstances !== undefined) {
     fail("a single file is one instance and has no expectedInstances");
   }
@@ -331,7 +337,7 @@ function checkInstanceFiles(id: string, outcome: InstanceFilesOutcome): void {
 }
 
 /**
- * The crosswalk of an instance files outcome, which is the same for a single file and for each member of a collection: the document's meta (the file's header values and, for a single file, the entry's) moves whole, and each node column is mapped onto its field, kept under its own name or dropped by a one-way rule, so the round trip holds.
+ * The crosswalk of an instance files outcome, which is the same for a single file and for each member of a collection: the document's meta (the file's header values and, for a single file, the entry's) moves whole, and each node column is mapped onto its field (scaled by its factor into seconds where the curation gives one), kept under its own name or dropped by a one-way rule, so the round trip holds.
  * @param outcome - The outcome.
  * @returns The crosswalk document.
  * @throws Error when crossmap finds the crosswalk structurally invalid.
@@ -347,8 +353,12 @@ function instanceFilesCrosswalkOf(outcome: InstanceFilesOutcome): Crosswalk {
       { op: "move", from: "nodes[].id", to: "nodes[].id" },
       ...TARGET_FIELD_NAMES.flatMap((field) => {
         const column = outcome.map[field];
+        const factor = field === "duration" || field === "travelTime" ? outcome.factors?.[field] : undefined;
+        if (column === undefined) {
+          return [];
+        }
 
-        return column === undefined ? [] : [{ op: "move", from: `nodes[].${column}`, to: `nodes[].${field}` }];
+        return [factor === undefined ? { op: "move", from: `nodes[].${column}`, to: `nodes[].${field}` } : { op: "scale", from: `nodes[].${column}`, to: `nodes[].${field}`, factor }];
       }),
       ...outcome.keep.map((column) => ({ op: "move", from: `nodes[].${column}`, to: `nodes[].${column}` })),
     ],
@@ -367,16 +377,16 @@ function instanceFilesCrosswalkOf(outcome: InstanceFilesOutcome): Crosswalk {
  * The recipe of an outcome. A table read from a Socrata resource selects only the fields its parser reads, and a table too long to hold is streamed.
  * @param id - The surveyed item's id, for errors.
  * @param outcome - The outcome.
- * @param source - The index of the entry's source the recipe reads.
- * @param url - The URL of that source.
+ * @param where - Where the recipe reads: the index of the entry's source it downloads and that source's URL, and the index of the source the first of an instance files outcome's separate files is, the rest following in order.
  * @returns The recipe, fetchable or not.
  */
-function recipeOf(id: string, outcome: CurationItem["outcome"], source: number, url: string): unknown {
+function recipeOf(id: string, outcome: CurationItem["outcome"], where: Readonly<{ source: number; url: string; firstFile: number }>): unknown {
+  const { source, url, firstFile } = where;
   if (outcome.status === "not-fetchable") {
     return { status: "not-fetchable", reason: outcome.reason };
   }
   if (outcome.status === "fetchable-instance-files") {
-    return { status: "fetchable", source, archive: outcome.archive, parser: outcome.parser };
+    return outcome.files === undefined ? { status: "fetchable", source, archive: outcome.archive, parser: outcome.parser } : { status: "fetchable", files: outcome.files.map((file, index) => ({ path: file.path, source: firstFile + index, archive: file.archive })), parser: outcome.parser };
   }
   if (outcome.status === "fetchable-arcgis") {
     const kept = new Set(keptColumns(outcome));
@@ -437,7 +447,11 @@ export function convertItem(item: SurveyEntry, curation: CurationItem, probedOn:
     throw new Error(`${item.id}: an ArcGIS recipe needs the layer's URL as the downloadUrl`);
   }
   const dataUrl = givenUrl === item.url ? undefined : givenUrl;
-  const sources = [item.url, ...(dataUrl === undefined ? [] : [dataUrl])].map((url) => ({ url, retrieved: probedOn, status: "live" }));
+  const files = outcome.status === "fetchable-instance-files" ? outcome.files : undefined;
+  const sources = [
+    ...[item.url, ...(dataUrl === undefined ? [] : [dataUrl])].map((url) => ({ url, retrieved: probedOn, status: "live" })),
+    ...(files === undefined ? [] : files.map((file) => ({ url: file.url, retrieved: probedOn, ...(file.snapshot === undefined ? { status: "live" } : { status: "dead", snapshot: { timestamp: file.snapshot, url: waybackUrl(file.snapshot, file.url) } }) }))),
+  ];
   const prefix = `${curation.namespace}-`;
   const alias = curation.id.startsWith(prefix) ? curation.id.slice(prefix.length) : "";
   if (outcome.status === "fetchable-instance-files") {
@@ -459,7 +473,7 @@ export function convertItem(item: SurveyEntry, curation: CurationItem, probedOn:
     sources,
     licence: licenceOf(curation.licence),
     citations: curation.citations ?? [],
-    recipe: recipeOf(item.id, outcome, dataUrl === undefined ? 0 : 1, givenUrl),
+    recipe: recipeOf(item.id, outcome, { source: dataUrl === undefined ? 0 : 1, url: givenUrl, firstFile: dataUrl === undefined ? 1 : 2 }),
     crosswalk: outcome.status === "not-fetchable" ? { file: OR_NODES_CROSSWALK } : outcome.status === "fetchable-instance-files" ? instanceFilesCrosswalkOf(outcome) : crosswalkOf(outcome),
     expectedCounts: expectedCountsOf(outcome),
     properties: { surveyId: item.id, ...((outcome.status === "fetchable-instance-files" || outcome.status === "fetchable-table-collection") && outcome.timeUnit !== undefined ? { timeUnit: outcome.timeUnit } : {}) },
