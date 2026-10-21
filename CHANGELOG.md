@@ -1,3 +1,19 @@
+# [0.34.0](https://github.com/Mearman/keepset/compare/v0.33.0...v0.34.0) (2026-10-21)
+
+
+### Bug Fixes
+
+* **catalogue:** carry the topology crosswalk for the GD contest recipe ([ca2b4a8](https://github.com/Mearman/keepset/commit/ca2b4a81bb42f0d842e2f6dc2dfda8fe580974bc))
+* **catalogue:** give no recipe to a release too large for one fetch ([08ef32a](https://github.com/Mearman/keepset/commit/08ef32a8430ce53640f0f5091f71fd7d9c365b88)), closes [ExaDev/crossmap#57](https://github.com/ExaDev/crossmap/issues/57)
+
+
+### Features
+
+* **archive:** read bzip2 files and tar.bz2 archives ([485150a](https://github.com/Mearman/keepset/commit/485150a3b7191908406d32859cf7879391692612))
+* **catalogue:** give the Amazon, MovieLens and KONECT entries recipes ([5050678](https://github.com/Mearman/keepset/commit/505067898e406f876a38a2dcf2c5059be9f00dff))
+* **parsers:** read KONECT edge files with their weights and times ([a7ed605](https://github.com/Mearman/keepset/commit/a7ed60554f0bfe6f44a4b5a0d34e295fccd590b5))
+* **parsers:** read user-item rating files as a bipartite graph ([9bec744](https://github.com/Mearman/keepset/commit/9bec744d5deab5df620e816e38946839e956c786))
+
 # [0.33.0](https://github.com/Mearman/keepset/compare/v0.32.0...v0.33.0) (2026-10-20)
 
 
