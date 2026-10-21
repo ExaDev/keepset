@@ -25,6 +25,9 @@ export interface PageContent {
   readonly head?: ReactNode;
 }
 
+/** How many hex characters of a checksum a table shows, enough to tell one from another; the cell's title and the entry's JSON carry the whole hash. */
+const HASH_SHOWN = 12;
+
 /** One row of a listing table. */
 function Row({ dataset, root }: { readonly dataset: Dataset; readonly root: string }): ReactNode {
   const { entry } = dataset;
@@ -180,7 +183,7 @@ export function entryPage(context: PageContext, dataset: Dataset): string {
       ["Catalogue", <Fragment key="catalogue"><code>{dataset.catalogue.id}</code> {dataset.catalogue.version}</Fragment>],
     ]} />,
     <h2 key="sources">Sources and provenance</h2>,
-    <div className="table-wrap" key="sources"><table className="sources"><thead><tr><th scope="col">#</th><th scope="col">URL</th><th scope="col">Status</th><th scope="col">Retrieved</th><th scope="col">Pinned snapshot</th></tr></thead><tbody>{entry.sources.map((source, index) => <tr key={String(index)}><td>{String(index)}</td><td><Link url={source.url} /></td><td>{source.status}</td><td>{source.retrieved}</td><td>{source.snapshot === undefined ? "" : <a href={source.snapshot.url}>{source.snapshot.timestamp}</a>}</td></tr>)}</tbody></table></div>,
+    <div className="table-wrap" key="sources"><table className="sources"><thead><tr><th scope="col">#</th><th scope="col">URL</th><th scope="col">Status</th><th scope="col">Retrieved</th><th scope="col">Pinned snapshot</th><th scope="col">SHA-256</th></tr></thead><tbody>{entry.sources.map((source, index) => <tr key={String(index)}><td>{String(index)}</td><td><Link url={source.url} /></td><td>{source.status}</td><td>{source.retrieved}</td><td>{source.snapshot === undefined ? "" : <a href={source.snapshot.url}>{source.snapshot.timestamp}</a>}</td><td>{source.snapshot?.sha256 === undefined ? "" : <code title={`${source.snapshot.sha256}, ${String(source.snapshot.byteLength)} bytes`}>{source.snapshot.sha256.slice(0, HASH_SHOWN)}</code>}</td></tr>)}</tbody></table></div>,
     entry.citations.length === 0 ? null : <h2 key="citations">Citations</h2>,
     entry.citations.length === 0 ? null : (
       <ul className="citations" key="citations-list">{entry.citations.map((cited, index) => (

@@ -4,10 +4,12 @@ import { join } from "node:path";
 import { createCatalogue, getManifest, listDatasets, listNamespaces } from "keepset";
 import { afterAll, describe, expect, it } from "vitest";
 import { z } from "zod";
-import { fixtureIndex, liveEntry } from "../src/test-support/entries";
+import { deadEntry, fixtureIndex, liveEntry } from "../src/test-support/entries";
 import { buildSite, type SiteCatalogue, type SiteFiles } from "./build-site";
 
 const SITE_URL = "https://example.org/keepset/";
+const SHA256_DIGITS = 64;
+const HASH_SHOWN = 12;
 
 /** The schema.org Dataset shape the pages promise: the properties Google Dataset Search requires (name, description) and those this generator always writes, each in schema.org's expected type. */
 const DatasetJsonLdSchema = z.looseObject({
@@ -21,7 +23,7 @@ const DatasetJsonLdSchema = z.looseObject({
   license: z.url().optional(),
   citation: z.array(z.string().min(1)).optional(),
   isPartOf: z.object({ "@type": z.literal("DataCatalog"), name: z.string(), url: z.url() }),
-  distribution: z.array(z.strictObject({ "@type": z.literal("DataDownload"), contentUrl: z.url(), archivedAt: z.url().optional() })).min(1),
+  distribution: z.array(z.strictObject({ "@type": z.literal("DataDownload"), contentUrl: z.url(), archivedAt: z.url().optional(), sha256: z.string().regex(/^[0-9a-f]{64}$/).optional() })).min(1),
 });
 
 const directories: string[] = [];
@@ -114,6 +116,16 @@ describe("buildSite on a fixture catalogue", () => {
     const listing = page(files, "kinds/graph/index.html");
     expect(listing).toContain('<th scope="col">Nodes</th><th scope="col">Edges</th><th scope="col">Instances</th><th scope="col">Size</th>');
     expect(listing).toContain("<td>34</td><td>78</td>");
+  });
+
+  it("shows a pinned snapshot's checksum in the sources table and the JSON-LD distribution", () => {
+    const sha256 = "d".repeat(SHA256_DIGITS);
+    const [source] = deadEntry.sources;
+    const checksummed = createCatalogue({ ...fixtureIndex, entries: [{ ...deadEntry, sources: [{ ...source, snapshot: { ...source?.snapshot, sha256, byteLength: 4096 } }] }] });
+    const text = page(build(checksummed), `datasets/${deadEntry.id}/index.html`);
+    expect(text).toContain('<th scope="col">SHA-256</th>');
+    expect(text).toContain(`<code title="${sha256}, 4096 bytes">${sha256.slice(0, HASH_SHOWN)}</code>`);
+    expect(DatasetJsonLdSchema.parse(jsonLdOf(text)).distribution[0]).toMatchObject({ sha256 });
   });
 
   it("escapes catalogue text, so data never becomes markup", () => {

@@ -98,6 +98,9 @@ describe("the entry format", () => {
   });
 });
 
+/** A SHA-256 is 64 hex digits. */
+const SHA256_DIGITS = 64;
+
 describe("a source's snapshot", () => {
   const url = "http://example.edu/data/net.zip";
 
@@ -107,6 +110,16 @@ describe("a source's snapshot", () => {
 
   it("may pin a live source", () => {
     expect(SourceSchema.safeParse({ url, retrieved: "2026-04-19", status: "live", snapshot: { url: waybackUrl("20061110114126", url), timestamp: "20061110114126" } }).success).toBe(true);
+  });
+
+  it("records its checksum as a SHA-256 and a length, together or not at all", () => {
+    const snapshot = { url: waybackUrl("20061110114126", url), timestamp: "20061110114126" };
+    const hash = "a".repeat(SHA256_DIGITS);
+    expect(SourceSchema.safeParse({ url, retrieved: "2026-04-19", status: "live", snapshot: { ...snapshot, sha256: hash, byteLength: 0 } }).success).toBe(true);
+    expect(SourceSchema.safeParse({ url, retrieved: "2026-04-19", status: "live", snapshot: { ...snapshot, sha256: hash } }).success).toBe(false);
+    expect(SourceSchema.safeParse({ url, retrieved: "2026-04-19", status: "live", snapshot: { ...snapshot, byteLength: 4 } }).success).toBe(false);
+    expect(SourceSchema.safeParse({ url, retrieved: "2026-04-19", status: "live", snapshot: { ...snapshot, sha256: "A".repeat(SHA256_DIGITS), byteLength: 4 } }).success).toBe(false);
+    expect(SourceSchema.safeParse({ url, retrieved: "2026-04-19", status: "live", snapshot: { ...snapshot, sha256: "a".repeat(SHA256_DIGITS - 1), byteLength: 4 } }).success).toBe(false);
   });
 
   it("must be the Wayback URL of this source at its own timestamp", () => {

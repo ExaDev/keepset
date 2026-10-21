@@ -176,6 +176,67 @@ export function removeSnapshot(files: readonly EntryFile[], url: string, timesta
   });
 }
 
+/** The SHA-256 and length of a snapshot's raw bytes, as an entry records them. */
+export interface Checksum {
+  readonly sha256: string;
+  readonly byteLength: number;
+}
+
+/**
+ * Every distinct pinned snapshot, by source URL and timestamp, that records no checksum yet.
+ * @param files - The entry files.
+ * @returns The snapshots to read, sorted by URL then timestamp.
+ */
+export function unchecksummed(files: readonly EntryFile[]): { url: string; timestamp: string }[] {
+  const pending = new Map<string, { url: string; timestamp: string }>();
+  for (const { entry } of files) {
+    for (const source of entry.sources) {
+      if (source.snapshot !== undefined && source.snapshot.sha256 === undefined) {
+        pending.set(`${source.url}\n${source.snapshot.timestamp}`, { url: source.url, timestamp: source.snapshot.timestamp });
+      }
+    }
+  }
+
+  return [...pending.values()].sort((left, right) => (left.url === right.url ? (left.timestamp < right.timestamp ? -1 : 1) : left.url < right.url ? -1 : 1));
+}
+
+/**
+ * The entry with a checksum recorded on every source that pins that snapshot of that URL. A snapshot that already records a checksum is never replaced, and no other field is touched.
+ * @param entry - The entry.
+ * @param url - The source URL.
+ * @param timestamp - The pinned snapshot's timestamp.
+ * @param checksum - The checksum of the snapshot's raw bytes.
+ * @returns The edited entry, or the same entry when nothing was recorded.
+ */
+export function withChecksum(entry: Entry, url: string, timestamp: string, checksum: Checksum): Entry {
+  const wanted = (source: Entry["sources"][number]): boolean => source.url === url && source.snapshot?.timestamp === timestamp && source.snapshot.sha256 === undefined;
+  if (!entry.sources.some(wanted)) {
+    return entry;
+  }
+
+  return { ...entry, sources: entry.sources.map((source) => (wanted(source) && source.snapshot !== undefined ? { ...source, snapshot: { ...source.snapshot, ...checksum } } : source)) };
+}
+
+/**
+ * Records a snapshot's checksum on the entry files that pin it and writes only those files.
+ * @param files - The entry files.
+ * @param url - The source URL.
+ * @param timestamp - The pinned snapshot's timestamp.
+ * @param checksum - The checksum of the snapshot's raw bytes.
+ * @returns The files after the edit.
+ */
+export function recordChecksum(files: readonly EntryFile[], url: string, timestamp: string, checksum: Checksum): EntryFile[] {
+  return files.map((file) => {
+    const entry = withChecksum(file.entry, url, timestamp, checksum);
+    if (entry === file.entry) {
+      return file;
+    }
+    writeFileSync(file.path, serialise(entry), "utf8");
+
+    return { path: file.path, entry };
+  });
+}
+
 /**
  * Pins snapshots on the entry files that need them and writes only those files.
  * @param files - The entry files.

@@ -4,7 +4,7 @@ import { join } from "node:path";
 import { afterAll, describe, expect, it } from "vitest";
 import { waybackUrl } from "../../src/entry";
 import { serialise } from "../../src/serialise";
-import { groupSources, loadEntryFiles, pinSnapshots, recordSnapshots, snapshotOf } from "./entries";
+import { groupSources, loadEntryFiles, pinSnapshots, recordChecksum, recordSnapshots, snapshotOf, unchecksummed, withChecksum } from "./entries";
 import { entryWith, liveSource } from "./test-support";
 
 const directories: string[] = [];
@@ -83,6 +83,44 @@ describe("recordSnapshots", () => {
     expect(files[0]?.entry.sources[0]?.snapshot?.timestamp).toBe("20260102030405");
     // The edited file is canonical, so the next run can read it.
     expect(loadEntryFiles(directory)[0]?.entry.sources[0]?.snapshot?.timestamp).toBe("20260102030405");
+  });
+});
+
+const SHA256_DIGITS = 64;
+const checksum = { sha256: "b".repeat(SHA256_DIGITS), byteLength: 4096 };
+
+describe("checksums", () => {
+  const url = "https://example.org/a";
+  const pinned = (timestamp: string): unknown => ({ ...liveSource(url), snapshot: snapshotOf(timestamp, url) });
+
+  it("lists each pinned snapshot without a checksum once, across the entries that pin it", () => {
+    const files = [
+      { path: "a.json", entry: entryWith("a", [pinned("20260101000000")]) },
+      { path: "b.json", entry: entryWith("b", [pinned("20260101000000")]) },
+      { path: "c.json", entry: entryWith("c", [liveSource("https://example.org/c")]) },
+      { path: "d.json", entry: withChecksum(entryWith("d", [pinned("20260202000000")]), url, "20260202000000", checksum) },
+    ];
+    expect(unchecksummed(files)).toEqual([{ url, timestamp: "20260101000000" }]);
+  });
+
+  it("records a checksum only on the sources that pin that snapshot, and never replaces one", () => {
+    const entry = entryWith("a", [pinned("20260101000000"), { ...liveSource("https://example.org/other"), snapshot: snapshotOf("20260101000000", "https://example.org/other") }]);
+    const edited = withChecksum(entry, url, "20260101000000", checksum);
+    expect(edited.sources[0]?.snapshot).toMatchObject(checksum);
+    expect(edited.sources[1]?.snapshot).not.toHaveProperty("sha256");
+    expect(withChecksum(edited, url, "20260101000000", { sha256: "c".repeat(SHA256_DIGITS), byteLength: 1 })).toBe(edited);
+    expect(withChecksum(entry, url, "20990101000000", checksum)).toBe(entry);
+  });
+
+  it("rewrites only the files that gain a checksum", () => {
+    const directory = scratch();
+    const target = entryWith("a", [pinned("20260101000000")]);
+    const bystander = entryWith("b", [liveSource("https://example.org/b")]);
+    writeFileSync(join(directory, "a.json"), serialise(target));
+    writeFileSync(join(directory, "b.json"), serialise(bystander));
+    recordChecksum(loadEntryFiles(directory), url, "20260101000000", checksum);
+    expect(readFileSync(join(directory, "b.json"), "utf8")).toBe(serialise(bystander));
+    expect(loadEntryFiles(directory)[0]?.entry.sources[0]?.snapshot).toMatchObject(checksum);
   });
 });
 
