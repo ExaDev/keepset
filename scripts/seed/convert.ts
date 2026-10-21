@@ -273,12 +273,12 @@ function edgeList(options: Partial<Extract<Parser, { format: "edge-list" }>> = {
   return { format: "edge-list", encoding: "utf-8", delimiter: "detect", skipLines: 0, commentPrefixes: ["#", "%"], sourceColumn: 0, targetColumn: 1, ...options };
 }
 
-/** The layout of each MovieLens release's ratings file, read from the release (the layouts differ between releases), keyed by the release's archive name: the delimiter, the header lines before the first rating, and the member that holds the ratings. A rating is out of 5 in every release (the later ones add half stars). */
-const MOVIELENS_RELEASES: ReadonlyMap<string, { readonly delimiter: "comma" | "tab" | "double-colon"; readonly skipLines: number; readonly member: string }> = new Map([
+/** The layout of each MovieLens release's ratings file, read from the release (the layouts differ between releases), keyed by the release's archive name: the delimiter, the header lines before the first rating, and the member that holds the ratings. A rating is out of 5 in every release (the later ones add half stars). `notFetchable` is the reason a release whose whole fetch failed is given no recipe, though the parser reads its layout. */
+const MOVIELENS_RELEASES: ReadonlyMap<string, { readonly delimiter: "comma" | "tab" | "double-colon"; readonly skipLines: number; readonly member: string; readonly notFetchable?: string }> = new Map([
   ["ml-100k", { delimiter: "tab", skipLines: 0, member: "u.data" }],
   ["ml-1m", { delimiter: "double-colon", skipLines: 0, member: "ratings.dat" }],
   ["ml-10m", { delimiter: "double-colon", skipLines: 0, member: "ratings.dat" }],
-  ["ml-25m", { delimiter: "comma", skipLines: 1, member: "ratings.csv" }],
+  ["ml-25m", { delimiter: "comma", skipLines: 1, member: "ratings.csv", notFetchable: "the ratings file has more edges than one fetch can hold: the crosswalk step aborts on it with an allocation failure (ExaDev/crossmap#57), where ml-10m completes" }],
 ]);
 
 /** The top of the rating scale of the ratings the catalogue lists: five stars in an Amazon file and in every MovieLens release. */
@@ -339,6 +339,10 @@ function ratingsRecipe(download: Download, format: "amazon-ratings" | "amazon-ra
   const layout = release === undefined ? undefined : MOVIELENS_RELEASES.get(release);
   if (release === undefined || layout === undefined) {
     return { unsupported: "a MovieLens release whose ratings layout the import has not read" };
+  }
+
+  if (layout.notFetchable !== undefined) {
+    return { unsupported: layout.notFetchable };
   }
 
   return {

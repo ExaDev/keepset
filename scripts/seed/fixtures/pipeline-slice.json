@@ -82,7 +82,7 @@
       "url": "http://vlado.fmf.uni-lj.si/pub/networks/data/UciNet/UciData.htm"
     }
   },
-  "datasetCount": 35,
+  "datasetCount": 39,
   "datasets": {
     "7th_graders": {
       "category": "heterogeneous",
@@ -1294,6 +1294,50 @@
             {
               "format": "movielens",
               "url": "https://files.grouplens.org/datasets/movielens/ml-100k.zip"
+            }
+          ],
+          "source": "grouplens"
+        }
+      ]
+    },
+    "movielens-10m": {
+      "citation": {
+        "authors": [
+          "Harper, F. Maxwell",
+          "Konstan, Joseph A."
+        ],
+        "publisher": "ACM Transactions on Interactive Intelligent Systems",
+        "title": "The MovieLens Datasets: History and Context",
+        "type": "journal",
+        "year": 2016
+      },
+      "description": "Bipartite user-movie rating network from the GroupLens research group. 10,000,054 ratings from 71,567 users on 10,681 movies. Edge weights are ratings normalised to [0, 1].",
+      "edgeCount": 10000054,
+      "id": "movielens-10m",
+      "name": "MovieLens 10M User-Movie Ratings",
+      "nodeCount": 80555,
+      "preferredFormat": "movielens",
+      "properties": {
+        "density": 0.0030821426003302156,
+        "edge_type_count": 1,
+        "has_self_loops": false,
+        "is_connected": true,
+        "is_cyclic": true,
+        "is_directed": false,
+        "is_heterogeneous": true,
+        "is_multigraph": false,
+        "is_weighted": true,
+        "n_components": 1,
+        "node_type_count": 2
+      },
+      "rawBytes": 0,
+      "retrieved": "2026-03-27",
+      "sources": [
+        {
+          "downloads": [
+            {
+              "format": "movielens",
+              "url": "https://files.grouplens.org/datasets/movielens/ml-10m.zip"
             }
           ],
           "source": "grouplens"

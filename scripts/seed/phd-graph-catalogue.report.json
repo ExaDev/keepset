@@ -4211,12 +4211,12 @@
     },
     {
       "flags": [
-        "ratings layout of ml-25m read from the release: ratings.csv, delimiter comma, 1 header lines",
+        "not fetchable yet: no declarative recipe exists for any download",
         "corrected against the downloaded file: the description counts users and movies from the release's own statement, while the ratings file the recipe reads rates fewer movies (or has fewer users), and the graph has the nodes of the ratings file"
       ],
       "id": "movielens-25m",
       "outcome": "converted-with-flags",
-      "recipe": "fetchable"
+      "recipe": "not-fetchable"
     },
     {
       "flags": [
