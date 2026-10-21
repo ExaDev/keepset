@@ -1188,7 +1188,8 @@
     {
       "flags": [
         "The URL resolves to the year to date dataset, not a full history.",
-        "The NYC terms page returned HTTP 403 to the survey, so no licence is recorded."
+        "The NYC terms page returned HTTP 403 to the survey, so no licence is recorded.",
+        "cad_evnt_id repeats across rows of the same event, so the rows are numbered in the order of the resource's row ids rather than keyed by it."
       ],
       "id": "nyc-open-data-nypd-calls-for-service",
       "recipe": "fetchable",

@@ -73,7 +73,6 @@
       "kind": "socrata-resource",
       "pageSize": 50000,
       "select": [
-        "cad_evnt_id",
         "closng_ts",
         "latitude",
         "longitude",
@@ -94,7 +93,7 @@
       "delimiter": "comma",
       "encoding": "utf-8",
       "format": "csv-table",
-      "idColumn": "cad_evnt_id",
+      "idColumn": null,
       "numericColumns": [
         {
           "column": "latitude",
