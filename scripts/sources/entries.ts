@@ -46,6 +46,14 @@ export interface SourceGroup {
   readonly unpinned: boolean;
   /** Whether some entry records the URL as `live`; false when every entry records it `dead`. */
   readonly live: boolean;
+  /** Every distinct snapshot an entry pins for the URL, by timestamp, with whether a source that pins it is `dead` (and so cannot lose it: the schema requires a dead source's snapshot). */
+  readonly pins: readonly Pin[];
+}
+
+/** A snapshot timestamp pinned on a source URL. */
+export interface Pin {
+  readonly timestamp: string;
+  readonly dead: boolean;
 }
 
 /**
@@ -54,10 +62,10 @@ export interface SourceGroup {
  * @returns One group per distinct URL, sorted by URL.
  */
 export function groupSources(files: readonly EntryFile[]): SourceGroup[] {
-  const groups = new Map<string, { entryIds: Set<string>; snapshot: Snapshot | undefined; paged: boolean; unpinned: boolean; live: boolean }>();
+  const groups = new Map<string, { entryIds: Set<string>; snapshot: Snapshot | undefined; paged: boolean; unpinned: boolean; live: boolean; pins: Map<string, boolean> }>();
   for (const { entry } of files) {
     entry.sources.forEach((source, index) => {
-      const group = groups.get(source.url) ?? { entryIds: new Set<string>(), snapshot: undefined, paged: false, unpinned: false, live: false };
+      const group = groups.get(source.url) ?? { entryIds: new Set<string>(), snapshot: undefined, paged: false, unpinned: false, live: false, pins: new Map<string, boolean>() };
       group.entryIds.add(entry.id);
       if (source.snapshot !== undefined && (group.snapshot === undefined || source.snapshot.timestamp > group.snapshot.timestamp)) {
         group.snapshot = source.snapshot;
@@ -65,13 +73,16 @@ export function groupSources(files: readonly EntryFile[]): SourceGroup[] {
       group.paged ||= entry.recipe.status === "fetchable" && "source" in entry.recipe && entry.recipe.source === index && entry.recipe.paging !== undefined;
       group.unpinned ||= source.snapshot === undefined;
       group.live ||= source.status === "live";
+      if (source.snapshot !== undefined) {
+        group.pins.set(source.snapshot.timestamp, (group.pins.get(source.snapshot.timestamp) ?? false) || source.status === "dead");
+      }
       groups.set(source.url, group);
     });
   }
 
   return [...groups]
     .sort(([left], [right]) => (left < right ? -1 : 1))
-    .map(([url, group]) => ({ url, entryIds: [...group.entryIds].sort(), snapshot: group.snapshot, paged: group.paged, unpinned: group.unpinned, live: group.live }));
+    .map(([url, group]) => ({ url, entryIds: [...group.entryIds].sort(), snapshot: group.snapshot, paged: group.paged, unpinned: group.unpinned, live: group.live, pins: [...group.pins].sort(([left], [right]) => (left < right ? -1 : 1)).map(([timestamp, dead]) => ({ timestamp, dead })) }));
 }
 
 /**
@@ -104,6 +115,46 @@ export function pinSnapshots(entry: Entry, snapshots: ReadonlyMap<string, string
       return timestamp === undefined ? source : { ...source, snapshot: snapshotOf(timestamp, source.url) };
     }),
   };
+}
+
+/**
+ * The entry without the snapshot of a `live` source URL at a timestamp. A `dead` source keeps its snapshot, which the schema requires, and no other field is touched.
+ * @param entry - The entry.
+ * @param url - The source URL.
+ * @param timestamp - The snapshot's timestamp.
+ * @returns The edited entry, or the same entry when no live source pins that snapshot.
+ */
+export function unpinSnapshot(entry: Entry, url: string, timestamp: string): Entry {
+  const pinned = (source: Entry["sources"][number]): boolean => source.url === url && source.status === "live" && source.snapshot?.timestamp === timestamp;
+  if (!entry.sources.some(pinned)) {
+    return entry;
+  }
+
+  return { ...entry, sources: entry.sources.map((source) => (pinned(source) ? withoutSnapshot(source) : source)) };
+}
+
+/** A source with its snapshot left out. */
+function withoutSnapshot(source: Entry["sources"][number]): Entry["sources"][number] {
+  return { url: source.url, retrieved: source.retrieved, status: source.status };
+}
+
+/**
+ * Removes the snapshot of a live source URL at a timestamp from every entry file that pins it, and writes only those files.
+ * @param files - The entry files.
+ * @param url - The source URL.
+ * @param timestamp - The snapshot's timestamp.
+ * @returns The files after the edit.
+ */
+export function removeSnapshot(files: readonly EntryFile[], url: string, timestamp: string): EntryFile[] {
+  return files.map((file) => {
+    const entry = unpinSnapshot(file.entry, url, timestamp);
+    if (entry === file.entry) {
+      return file;
+    }
+    writeFileSync(file.path, serialise(entry), "utf8");
+
+    return { path: file.path, entry };
+  });
 }
 
 /**

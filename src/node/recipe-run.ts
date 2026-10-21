@@ -1,4 +1,4 @@
-import type { Entry, Source } from "../entry";
+import { type Entry, rawSnapshotUrl, type Source } from "../entry";
 import { KeepsetError, RecipeError, type RecipeStep } from "../errors";
 import type { JsonScalar } from "../targets/json-scalar";
 import type { Download } from "./fetch-dataset";
@@ -15,7 +15,7 @@ export function sourceUrl(source: Source): string {
       throw new KeepsetError(`dead source ${source.url} has no snapshot`);
     }
 
-    return `https://web.archive.org/web/${source.snapshot.timestamp}id_/${source.url}`;
+    return rawSnapshotUrl(source.snapshot.timestamp, source.url);
   }
 
   return source.url;
