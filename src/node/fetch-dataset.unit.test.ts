@@ -441,7 +441,7 @@ describe("a graph/v1 entry of a multi-file format", () => {
         { source: "paper:1", target: "paper:0" },
       ],
     });
-    expect(fetched.provenance.members).toEqual([
+    expect(single(fetched.provenance).members).toEqual([
       "dataset/raw/num-node-dict.csv.gz",
       "dataset/raw/relations/author___writes___paper/edge.csv.gz",
       "dataset/raw/relations/author___writes___paper/num-edge-list.csv.gz",

@@ -381,9 +381,10 @@ export const SourceRecipeSchema = z
       if (names.length !== required.length || !required.every((name) => names.includes(name))) {
         ctx.addIssue({ code: "custom", path: ["archive"], message: `the ${recipe.parser.format} parser reads the parts ${required.join(" and ")} from a parts archive` });
       }
-      if (("files" in recipe.archive) !== MULTI_FILE_FORMATS.has(recipe.parser.format)) {
-        ctx.addIssue({ code: "custom", path: ["archive"], message: `a files archive is read by a multi-file parser (${[...MULTI_FILE_FORMATS].join(", ")}), and such a parser reads only a files archive` });
-      }
+    }
+    if (("files" in recipe.archive) !== MULTI_FILE_FORMATS.has(recipe.parser.format)) {
+      ctx.addIssue({ code: "custom", path: ["archive"], message: `a files archive is read by a multi-file parser (${[...MULTI_FILE_FORMATS].join(", ")}), and such a parser reads only a files archive` });
+    }
   });
 
 /** One file of a collection read file by file: the path it is filed under in the collection, the entry's source it is downloaded from (by index into `sources`, so a dead file is fetched from its own pinned snapshot), and the archive layout its bytes unpack by into the one file or, with `members`, the several files the parser reads. */

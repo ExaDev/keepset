@@ -321,6 +321,62 @@ describe("convertItem for a paged ArcGIS layer", () => {
   });
 });
 
+describe("convertItem for a collection of separate files", () => {
+  const item = survey.entries[0];
+  const tasks = (rows: readonly string[]): string => ["Technicians:", 'Technician id 1, skills ["A"], time window [2020-02-01T09:00:00, 2020-02-01T17:00:00], investment option false', "Tasks:", ...rows, "Travel time: ", "task1task2: 1.5", ""].join("\n");
+  /** The minutes the fixture tasks take, and the seconds a factor of sixty makes of them. */
+  const MINUTES = { first: 30, second: 2, third: 5 } as const;
+  const SECONDS_PER_MINUTE = 60;
+  const task = (id: number, minutes: number): string => `Task id ${String(id)}, skills ["A"], duration ${String(minutes)}, time window [2020-02-01T09:00:00, 2020-02-01T10:00:00], priority 1, penalty 50.0, created 2020-01-01T00:00:00, modified nothing, cancelled false, relevant technician ids [1]`;
+  const outcome = {
+    status: "fetchable-instance-files",
+    files: [
+      { path: "one.txt", url: "https://example.org/files/one.txt", archive: { kind: "none" } },
+      { path: "two.zip", url: "https://example.org/gone/two.zip", snapshot: "20240101000000", archive: { kind: "zip", member: { path: "two.txt" } } },
+    ],
+    parser: { format: "tdc", encoding: "utf-8" },
+    map: { duration: "durationMinutes", skill: "skills", deadline: "latest" },
+    keep: ["penalty"],
+    factors: { duration: 60 },
+    timeUnit: "seconds",
+    expectedInstances: 2,
+  };
+  const curated = (patch: Readonly<Record<string, unknown>> = {}): Parameters<typeof convertItem>[1] => CurationItemSchema.parse({ surveyId: "or-10", id: "example-files", namespace: "example", name: "Files", description: "A fixture dataset.", licence: UNSTATED, flags: [], outcome: { ...outcome, ...patch } });
+  const convert = (patch: Readonly<Record<string, unknown>> = {}): ReturnType<typeof convertItem> => convertItem(item ?? expect.unreachable("the fixture survey has an item"), curated(patch), "2026-10-19");
+
+  it("makes each file a source after the item's own, a captured one dead with its snapshot, and a files recipe naming them", () => {
+    const { entry } = convert();
+    expect(entry.sources.slice(1)).toEqual([
+      { url: "https://example.org/files/one.txt", retrieved: "2026-10-19", status: "live" },
+      { url: "https://example.org/gone/two.zip", retrieved: "2026-10-19", status: "dead", snapshot: { timestamp: "20240101000000", url: "https://web.archive.org/web/20240101000000/https://example.org/gone/two.zip" } },
+    ]);
+    expect(entry.recipe).toEqual({ status: "fetchable", files: [{ path: "one.txt", source: 1, archive: { kind: "none" } }, { path: "two.zip", source: 2, archive: { kind: "zip", member: { path: "two.txt" } } }], parser: outcome.parser });
+    expect(entry.expectedCounts).toEqual({ instances: 2 });
+  });
+
+  it("fetches each file, scales minutes to seconds and holds the round trip", async () => {
+    const { entry } = convert();
+    const dataset = createCatalogue({ manifest: fixtureManifest, crosswalks: {}, entries: [entry] }).listDatasets()[0] ?? expect.unreachable("the catalogue lists the entry");
+    const served: Readonly<Record<string, Uint8Array | string>> = {
+      "https://example.org/files/one.txt": tasks([task(1, MINUTES.first)]),
+      "https://web.archive.org/web/20240101000000id_/https://example.org/gone/two.zip": zip([{ path: "two.txt", text: tasks([task(1, MINUTES.second), task(2, MINUTES.third)]) }]),
+    };
+    const fetch = async (url: string): Promise<Response> => Promise.resolve(Object.hasOwn(served, url) ? new Response(served[url]) : new Response("missing", { status: 404 }));
+    const fetched = await fetchEntry(dataset, { fetch });
+    expect("instances" in fetched.data && fetched.data.instances.map((instance) => [instance.id, instance.nodes.map((node) => node.duration)])).toEqual([
+      ["one.txt", [MINUTES.first * SECONDS_PER_MINUTE]],
+      ["two.zip/two.txt", [MINUTES.second * SECONDS_PER_MINUTE, MINUTES.third * SECONDS_PER_MINUTE]],
+    ]);
+    expect(await roundTripEntry(dataset, { fetch })).toMatchObject({ holds: true });
+  });
+
+  it("refuses both an archive and files, neither, and a factor on a field the map does not fill", () => {
+    expect(() => curated({ archive: { kind: "none" } })).toThrow(/reads one download \(archive\) or separate downloads \(files\), not both or neither/);
+    expect(() => curated({ files: undefined })).toThrow(/not both or neither/);
+    expect(() => convert({ factors: { travelTime: 60 } })).toThrow(/factors scales travelTime, which the map does not fill/);
+  });
+});
+
 describe("convertItem for a collection of instance files", () => {
   const item = survey.entries[0];
   const collection = {
