@@ -1,3 +1,23 @@
+# [0.40.0](https://github.com/Mearman/keepset/compare/v0.39.0...v0.40.0) (2026-10-21)
+
+
+### Bug Fixes
+
+* **catalogue:** number the NYPD calls rows, whose event id repeats ([08b8c03](https://github.com/Mearman/keepset/commit/08b8c0303f3b6a60112bcd4c9fe1e71bf1f881f4))
+* reconcile the streamed and files recipes with parts archives ([cd8d283](https://github.com/Mearman/keepset/commit/cd8d283cf965a4e4062d7c39a946a182bbfb13a3))
+
+
+### Features
+
+* **catalogue:** stream the large NYC Open Data tables ([1385126](https://github.com/Mearman/keepset/commit/138512624a235a7d9bbcea53c5eae26d06f11e64))
+* **cli:** stream a streamed entry's fetch into its file ([645411b](https://github.com/Mearman/keepset/commit/645411b54d5c948b1a3df5305a064ae658861105))
+* **node:** stream a table too large to hold as one document ([2484750](https://github.com/Mearman/keepset/commit/248475054d7f5c2d8c3b13457de0849e1f834e87))
+* **parsers:** read Mankowska, VeRoLog 2017 and technician dispatch instance files ([0233108](https://github.com/Mearman/keepset/commit/023310804ea20bec3e672dcd4748ad4458274787))
+* read collections of separate downloads, breaking the Provenance type ([5b18ada](https://github.com/Mearman/keepset/commit/5b18adaf186d6263f99e453923b328bb6d40ac12))
+* **seed:** curate collections of separate files and scale instance durations ([15eff66](https://github.com/Mearman/keepset/commit/15eff66919959a05a7c9ad983a8fac9efa485f19))
+* **seed:** stream paged tables too long to hold and select Socrata fields ([d7cc2e8](https://github.com/Mearman/keepset/commit/d7cc2e8abe8100949ff1ad3780d8c84dba8b7acd))
+* **seed:** verify streamed recipes and report what a fetch held ([7d0c9be](https://github.com/Mearman/keepset/commit/7d0c9be53f23866ff28e366589157bbd29feb373))
+
 # [0.39.0](https://github.com/Mearman/keepset/compare/v0.38.0...v0.39.0) (2026-10-21)
 
 
