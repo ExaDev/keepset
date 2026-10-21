@@ -15,3 +15,6 @@ src/generated/
 # The instruction files are tracked symlinks to README.md; a global ignore may otherwise exclude them.
 !CLAUDE.md
 !AGENTS.md
+
+# Local Internet Archive credentials for scripts/archive-sources.ts.
+.env
