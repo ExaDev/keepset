@@ -1,7 +1,8 @@
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { describe, expect, it } from "vitest";
-import { convertCatalogue, convertDataset, DATASET_RECIPES, NAME_OVERRIDES, namespaceOf, netzschleuderCsv, parseWayback, UNVERIFIABLE_DOWNLOADS, type Outcome } from "./convert";
+import { convertCatalogue, convertDataset, NAME_OVERRIDES, namespaceOf, netzschleuderCsv, parseWayback, type Outcome } from "./convert";
+import { DATASET_RECIPES, UNVERIFIABLE_DOWNLOADS } from "./dataset-recipes";
 import { GraphLicencesSchema, graphLicenceResolver } from "./licence";
 import { SuiteSparseMirrorSchema } from "./mirror";
 import { GraphboxCatalogueSchema, SourceCatalogueSchema } from "./source";
