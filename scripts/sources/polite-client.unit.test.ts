@@ -7,6 +7,7 @@ const ok = (): Response => new Response("body", { status: HTTP_STATUS.ok });
 const busy = (options: Readonly<{ status?: number; headers?: Readonly<Record<string, string>> }> = {}): Response => new Response("busy", { status: options.status ?? HTTP_STATUS.serviceUnavailable, headers: { ...options.headers } });
 const unpaced = { ...TEST_POLITENESS, hostIntervalMilliseconds: 0, globalIntervalMilliseconds: 0 };
 const RETRY_AFTER_SECONDS = 7;
+const SLOWER_BY = 5;
 const HUGE_RETRY_AFTER_SECONDS = 99_999;
 
 describe("PoliteClient", () => {
@@ -85,6 +86,24 @@ describe("PoliteClient", () => {
     const [first, second, other] = ["https://a.example/1", "https://a.example/2", "https://b.example/1"].map((url) => times.get(url) ?? Number.NaN);
     expect((second ?? Number.NaN) - (first ?? Number.NaN)).toBeGreaterThanOrEqual(TEST_POLITENESS.hostIntervalMilliseconds);
     expect((other ?? Number.NaN) - (second ?? Number.NaN)).toBeLessThan(TEST_POLITENESS.hostIntervalMilliseconds);
+  });
+
+  it("spaces requests to a host named in the overrides by its own interval", async () => {
+    const clock = new FakeClock();
+    const times = new Map<string, number>();
+    const network = scriptedNetwork((request) => {
+      times.set(request.url, clock.now());
+
+      return ok();
+    });
+    const slow = TEST_POLITENESS.hostIntervalMilliseconds * SLOWER_BY;
+    const client = new PoliteClient(network.fetch, clock, { ...TEST_POLITENESS, hostIntervalOverrides: { "slow.example": slow } });
+    await client.request("https://slow.example/1");
+    await client.request("https://slow.example/2");
+    await client.request("https://a.example/1");
+    await client.request("https://a.example/2");
+    expect((times.get("https://slow.example/2") ?? Number.NaN) - (times.get("https://slow.example/1") ?? Number.NaN)).toBeGreaterThanOrEqual(slow);
+    expect((times.get("https://a.example/2") ?? Number.NaN) - (times.get("https://a.example/1") ?? Number.NaN)).toBeLessThan(slow);
   });
 
   it("spaces requests to different hosts by the global interval", async () => {

@@ -21,7 +21,7 @@ import { groupSources, loadEntryFiles, recordSnapshots, removeSnapshot } from ".
 import { systemClock } from "./sources/pacing";
 import { DEFAULT_POLITENESS, PoliteClient } from "./sources/polite-client";
 import { pinKey, verifyPins } from "./sources/verify-pins";
-import { ANONYMOUS_LIMITS, AUTHENTICATED_LIMITS, MAX_CAPTURE_WAIT_MILLISECONDS, saveAnonymously, saveAuthenticated } from "./sources/wayback";
+import { ANONYMOUS_LIMITS, AUTHENTICATED_LIMITS, MAX_CAPTURE_WAIT_MILLISECONDS, saveAnonymously, saveAuthenticated, WAYBACK_HOST_INTERVALS } from "./sources/wayback";
 
 const repoRoot = join(dirname(fileURLToPath(import.meta.url)), "..");
 
@@ -63,7 +63,7 @@ if (values.check === true) {
   }
   const credentials = accessKey === undefined || accessKey === "" || secretKey === undefined ? undefined : { accessKey, secretKey };
 
-  const probing = new PoliteClient(fetch, systemClock, DEFAULT_POLITENESS);
+  const probing = new PoliteClient(fetch, systemClock, { ...DEFAULT_POLITENESS, hostIntervalOverrides: WAYBACK_HOST_INTERVALS });
   const state: ArchiveState = existsSync(values.state) ? ArchiveStateSchema.parse(JSON.parse(readFileSync(values.state, "utf8"))) : ArchiveStateSchema.parse({ day: "", captures: 0 });
   const settled = new Map<string, ArchiveException>(report.exceptions.map((exception) => [exception.url, exception]));
   const verifiedPins = new Map<string, VerifiedPin>(report.verified.map((pin) => [pinKey(pin.url, pin.timestamp), pin]));
