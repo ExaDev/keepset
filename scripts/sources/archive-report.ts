@@ -12,8 +12,9 @@ import { canonicalJson } from "../../src/serialise";
  * - `access-wall`: the host answers a visitor with a login, a bot wall or a refusal (401, 403), so no capture holds the data.
  * - `paged-api`: a recipe reads the URL as a paged query, so a capture of the URL alone is the first page and not the data.
  * - `source-error`: the host answers with an error, does not resolve, or serves a certificate no client accepts, so there is nothing to capture.
+ * - `not-served`: captures of the URL were taken, and the Wayback Machine served none of them back (a 404 or its own page), so no capture can be pinned.
  */
-export const EXCEPTION_REASONS = ["size-limit", "excluded", "access-wall", "paged-api", "source-error"] as const;
+export const EXCEPTION_REASONS = ["size-limit", "excluded", "access-wall", "paged-api", "source-error", "not-served"] as const;
 export type ExceptionReason = (typeof EXCEPTION_REASONS)[number];
 
 /** One source the archive cannot hold: the URL, the entries that list it, the reason, and the observation the reason rests on (a status, an error code, a length or a paging kind). */
