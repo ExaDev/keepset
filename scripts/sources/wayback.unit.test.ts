@@ -24,6 +24,11 @@ describe("findSnapshot", () => {
     expect(await findSnapshot(single(() => new Response("")).client, "https://example.org/a")).toBeUndefined();
   });
 
+  it("reports a refused or dropped connection as WaybackBusy", async () => {
+    const dropped = new PoliteClient(scriptedNetwork(() => connectionError("ECONNREFUSED")).fetch, new FakeClock(), { ...TEST_POLITENESS, attempts: 1 });
+    await expect(findSnapshot(dropped, "https://example.org/a")).rejects.toBeInstanceOf(WaybackBusy);
+  });
+
   it("reports a busy service as WaybackBusy and a line that is not a timestamp as WaybackError", async () => {
     await expect(findSnapshot(single(() => new Response("slow down", { status: 429 })).client, "https://example.org/a")).rejects.toBeInstanceOf(WaybackBusy);
     const failure = await findSnapshot(single(() => new Response("<html>")).client, "https://example.org/a").catch((error: unknown) => error);

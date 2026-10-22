@@ -30,8 +30,8 @@ import { DEFAULT_POLITENESS, PoliteClient } from "./sources/polite-client";
 import { pinKey, verifyPins } from "./sources/verify-pins";
 import { ANONYMOUS_LIMITS, AUTHENTICATED_LIMITS, MAX_CAPTURE_WAIT_MILLISECONDS, saveAnonymously, saveAuthenticated, WAYBACK_HOST_INTERVAL_MILLISECONDS, WAYBACK_HOST_INTERVALS } from "./sources/wayback";
 
-/** How many URLs the archiver settles at once: enough that one URL waiting out a capture's indexing or a verification backoff does not leave the capture rate and the Wayback hosts' pacing idle, and few enough that they remain what bounds the requests. */
-const ARCHIVE_CONCURRENCY = 6;
+/** How many URLs the archiver settles at once: enough that one URL waiting out a capture's indexing or a verification backoff does not leave the capture rate and the Wayback hosts' pacing idle, and few enough that they remain what bounds the requests (six workers, each polling its capture, got the machine's connection to the Wayback Machine refused). */
+const ARCHIVE_CONCURRENCY = 3;
 
 const repoRoot = join(dirname(fileURLToPath(import.meta.url)), "..");
 
