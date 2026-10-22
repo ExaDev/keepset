@@ -79,6 +79,10 @@
     },
     {
       "retrieved": "2026-01-17",
+      "snapshot": {
+        "timestamp": "20221016224557",
+        "url": "https://web.archive.org/web/20221016224557/https://networkdata.ics.uci.edu/data/adjnoun/adjnoun.gml"
+      },
       "status": "live",
       "url": "https://networkdata.ics.uci.edu/data/adjnoun/adjnoun.gml"
     }

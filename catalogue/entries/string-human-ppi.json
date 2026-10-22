@@ -52,6 +52,10 @@
   "sources": [
     {
       "retrieved": "2026-03-27",
+      "snapshot": {
+        "timestamp": "20260609052254",
+        "url": "https://web.archive.org/web/20260609052254/https://stringdb-downloads.org/download/protein.links.v12.0/9606.protein.links.v12.0.txt.gz"
+      },
       "status": "live",
       "url": "https://stringdb-downloads.org/download/protein.links.v12.0/9606.protein.links.v12.0.txt.gz"
     },

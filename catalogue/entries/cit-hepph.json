@@ -55,6 +55,10 @@
   "sources": [
     {
       "retrieved": "2026-01-17",
+      "snapshot": {
+        "timestamp": "20240914083641",
+        "url": "https://web.archive.org/web/20240914083641/https://snap.stanford.edu/data/cit-HepPh.txt.gz"
+      },
       "status": "live",
       "url": "https://snap.stanford.edu/data/cit-HepPh.txt.gz"
     },

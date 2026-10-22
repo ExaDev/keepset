@@ -97,6 +97,10 @@
     },
     {
       "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20130716012808",
+        "url": "https://web.archive.org/web/20130716012808/https://neo.lcc.uma.es/vrp/wp-content/data/instances/solomon/solomon_100.zip"
+      },
       "status": "live",
       "url": "https://neo.lcc.uma.es/vrp/wp-content/data/instances/solomon/solomon_100.zip"
     }

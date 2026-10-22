@@ -57,11 +57,19 @@
   "sources": [
     {
       "retrieved": "2026-04-20",
+      "snapshot": {
+        "timestamp": "20260520190354",
+        "url": "https://web.archive.org/web/20260520190354/https://networks.skewed.de/net/law_firm"
+      },
       "status": "live",
       "url": "https://networks.skewed.de/net/law_firm"
     },
     {
       "retrieved": "2026-04-20",
+      "snapshot": {
+        "timestamp": "20250821071538",
+        "url": "https://web.archive.org/web/20250821071538/https://networks.skewed.de/net/law_firm/files/law_firm.csv.zip"
+      },
       "status": "live",
       "url": "https://networks.skewed.de/net/law_firm/files/law_firm.csv.zip"
     }

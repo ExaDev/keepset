@@ -110,11 +110,19 @@
   "sources": [
     {
       "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20260711234550",
+        "url": "https://web.archive.org/web/20260711234550/https://data.cityofnewyork.us/Housing-Development/Handyman-Work-Order-HWO-Charges/sbnd-xujn"
+      },
       "status": "live",
       "url": "https://data.cityofnewyork.us/Housing-Development/Handyman-Work-Order-HWO-Charges/sbnd-xujn"
     },
     {
       "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20250201015136",
+        "url": "https://web.archive.org/web/20250201015136/https://data.cityofnewyork.us/api/views/sbnd-xujn/rows.csv?accessType=DOWNLOAD"
+      },
       "status": "live",
       "url": "https://data.cityofnewyork.us/api/views/sbnd-xujn/rows.csv?accessType=DOWNLOAD"
     }

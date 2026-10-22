@@ -57,11 +57,19 @@
   "sources": [
     {
       "retrieved": "2026-04-20",
+      "snapshot": {
+        "timestamp": "20260606103138",
+        "url": "https://web.archive.org/web/20260606103138/https://networks.skewed.de/net/email_company"
+      },
       "status": "live",
       "url": "https://networks.skewed.de/net/email_company"
     },
     {
       "retrieved": "2026-04-20",
+      "snapshot": {
+        "timestamp": "20240428102453",
+        "url": "https://web.archive.org/web/20240428102453/https://networks.skewed.de/net/email_company/files/email_company.csv.zip"
+      },
       "status": "live",
       "url": "https://networks.skewed.de/net/email_company/files/email_company.csv.zip"
     }

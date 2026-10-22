@@ -133,6 +133,10 @@
   "sources": [
     {
       "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20250219093306",
+        "url": "https://web.archive.org/web/20250219093306/https://citydata.mesaaz.gov/Transportation/Transportation-Work-Orders-Public-View/ay68-xuca"
+      },
       "status": "live",
       "url": "https://citydata.mesaaz.gov/Transportation/Transportation-Work-Orders-Public-View/ay68-xuca"
     },

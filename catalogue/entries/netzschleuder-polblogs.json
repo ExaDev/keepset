@@ -56,6 +56,10 @@
   "sources": [
     {
       "retrieved": "2026-04-19",
+      "snapshot": {
+        "timestamp": "20260316211227",
+        "url": "https://web.archive.org/web/20260316211227/https://networks.skewed.de/net/polblogs"
+      },
       "status": "live",
       "url": "https://networks.skewed.de/net/polblogs"
     },

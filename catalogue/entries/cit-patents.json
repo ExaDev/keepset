@@ -55,6 +55,10 @@
   "sources": [
     {
       "retrieved": "2026-02-16",
+      "snapshot": {
+        "timestamp": "20250415223558",
+        "url": "https://web.archive.org/web/20250415223558/https://snap.stanford.edu/data/cit-Patents.txt.gz"
+      },
       "status": "live",
       "url": "https://snap.stanford.edu/data/cit-Patents.txt.gz"
     }

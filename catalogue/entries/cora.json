@@ -60,6 +60,10 @@
   "sources": [
     {
       "retrieved": "2026-02-16",
+      "snapshot": {
+        "timestamp": "20260923154413",
+        "url": "https://web.archive.org/web/20260923154413/https://linqs-data.soe.ucsc.edu/public/lbc/cora.tgz"
+      },
       "status": "live",
       "url": "https://linqs-data.soe.ucsc.edu/public/lbc/cora.tgz"
     }

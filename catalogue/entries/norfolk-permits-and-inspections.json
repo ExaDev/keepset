@@ -104,11 +104,19 @@
   "sources": [
     {
       "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20260508134130",
+        "url": "https://web.archive.org/web/20260508134130/https://data.norfolk.gov/Permits/Permits-and-Inspections/bnrb-u445"
+      },
       "status": "live",
       "url": "https://data.norfolk.gov/Permits/Permits-and-Inspections/bnrb-u445"
     },
     {
       "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20260517183938",
+        "url": "https://web.archive.org/web/20260517183938/https://data.norfolk.gov/api/views/bnrb-u445/rows.csv?accessType=DOWNLOAD"
+      },
       "status": "live",
       "url": "https://data.norfolk.gov/api/views/bnrb-u445/rows.csv?accessType=DOWNLOAD"
     }

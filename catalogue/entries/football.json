@@ -79,6 +79,10 @@
     },
     {
       "retrieved": "2026-01-17",
+      "snapshot": {
+        "timestamp": "20200210055345",
+        "url": "https://web.archive.org/web/20200210055345/https://networkdata.ics.uci.edu/data/football/football.gml"
+      },
       "status": "live",
       "url": "https://networkdata.ics.uci.edu/data/football/football.gml"
     }

@@ -61,6 +61,10 @@
   "sources": [
     {
       "retrieved": "2026-03-03",
+      "snapshot": {
+        "timestamp": "20210424035833",
+        "url": "https://web.archive.org/web/20210424035833/http://nrvis.com/download/data/misc/advogato.zip"
+      },
       "status": "live",
       "url": "http://nrvis.com/download/data/misc/advogato.zip"
     },

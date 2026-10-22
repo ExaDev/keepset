@@ -56,16 +56,28 @@
   "sources": [
     {
       "retrieved": "2026-04-20",
+      "snapshot": {
+        "timestamp": "20260421134847",
+        "url": "https://web.archive.org/web/20260421134847/http://konect.cc/networks/moreno_oz"
+      },
       "status": "live",
       "url": "http://konect.cc/networks/moreno_oz"
     },
     {
       "retrieved": "2026-04-20",
+      "snapshot": {
+        "timestamp": "20260520190054",
+        "url": "https://web.archive.org/web/20260520190054/https://networks.skewed.de/net/residence_hall"
+      },
       "status": "live",
       "url": "https://networks.skewed.de/net/residence_hall"
     },
     {
       "retrieved": "2026-04-20",
+      "snapshot": {
+        "timestamp": "20240428102613",
+        "url": "https://web.archive.org/web/20240428102613/https://networks.skewed.de/net/residence_hall/files/residence_hall.csv.zip"
+      },
       "status": "live",
       "url": "https://networks.skewed.de/net/residence_hall/files/residence_hall.csv.zip"
     }

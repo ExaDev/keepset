@@ -55,6 +55,10 @@
     },
     {
       "retrieved": "2026-04-19",
+      "snapshot": {
+        "timestamp": "20260421060831",
+        "url": "https://web.archive.org/web/20260421060831/https://networks.skewed.de/net/7th_graders/files/7th_graders.csv.zip"
+      },
       "status": "live",
       "url": "https://networks.skewed.de/net/7th_graders/files/7th_graders.csv.zip"
     }

@@ -114,6 +114,10 @@
   "sources": [
     {
       "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20261021014639",
+        "url": "https://web.archive.org/web/20261021014639/https://data.montgomerycountymd.gov/Housing/Troubled-Properties-Analysis/bw2r-araf"
+      },
       "status": "live",
       "url": "https://data.montgomerycountymd.gov/Housing/Troubled-Properties-Analysis/bw2r-araf"
     },

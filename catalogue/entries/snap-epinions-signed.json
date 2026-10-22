@@ -59,6 +59,10 @@
   "sources": [
     {
       "retrieved": "2026-03-27",
+      "snapshot": {
+        "timestamp": "20260324141226",
+        "url": "https://web.archive.org/web/20260324141226/https://snap.stanford.edu/data/soc-sign-epinions.txt.gz"
+      },
       "status": "live",
       "url": "https://snap.stanford.edu/data/soc-sign-epinions.txt.gz"
     }

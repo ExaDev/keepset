@@ -56,16 +56,28 @@
   "sources": [
     {
       "retrieved": "2026-04-20",
+      "snapshot": {
+        "timestamp": "20260421132503",
+        "url": "https://web.archive.org/web/20260421132503/http://konect.cc/networks/moreno_rhesus"
+      },
       "status": "live",
       "url": "http://konect.cc/networks/moreno_rhesus"
     },
     {
       "retrieved": "2026-04-20",
+      "snapshot": {
+        "timestamp": "20260606101012",
+        "url": "https://web.archive.org/web/20260606101012/https://networks.skewed.de/net/rhesus_monkey"
+      },
       "status": "live",
       "url": "https://networks.skewed.de/net/rhesus_monkey"
     },
     {
       "retrieved": "2026-04-20",
+      "snapshot": {
+        "timestamp": "20261022024024",
+        "url": "https://web.archive.org/web/20261022024024/https://networks.skewed.de/net/rhesus_monkey/files/rhesus_monkey.csv.zip"
+      },
       "status": "live",
       "url": "https://networks.skewed.de/net/rhesus_monkey/files/rhesus_monkey.csv.zip"
     }

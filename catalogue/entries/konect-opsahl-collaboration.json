@@ -57,6 +57,10 @@
   "sources": [
     {
       "retrieved": "2026-03-27",
+      "snapshot": {
+        "timestamp": "20261020230505",
+        "url": "https://web.archive.org/web/20261020230505/http://konect.cc/files/download.tsv.opsahl-collaboration.tar.bz2"
+      },
       "status": "live",
       "url": "http://konect.cc/files/download.tsv.opsahl-collaboration.tar.bz2"
     }

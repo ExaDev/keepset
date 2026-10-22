@@ -54,6 +54,10 @@
   "sources": [
     {
       "retrieved": "2026-01-17",
+      "snapshot": {
+        "timestamp": "20160730000909",
+        "url": "https://web.archive.org/web/20160730000909/https://snap.stanford.edu/data/ca-HepTh.txt.gz"
+      },
       "status": "live",
       "url": "https://snap.stanford.edu/data/ca-HepTh.txt.gz"
     },

@@ -110,6 +110,10 @@
   "sources": [
     {
       "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20250404161041",
+        "url": "https://web.archive.org/web/20250404161041/https://citydata.mesaaz.gov/Water-Resources/Water-Resources-Work-Orders-Public-View/7rqv-jcr4"
+      },
       "status": "live",
       "url": "https://citydata.mesaaz.gov/Water-Resources/Water-Resources-Work-Orders-Public-View/7rqv-jcr4"
     },

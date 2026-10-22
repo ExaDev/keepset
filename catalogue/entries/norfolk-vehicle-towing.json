@@ -90,11 +90,19 @@
   "sources": [
     {
       "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20250421133948",
+        "url": "https://web.archive.org/web/20250421133948/https://data.norfolk.gov/Government/Towing/4dwc-v3t8"
+      },
       "status": "live",
       "url": "https://data.norfolk.gov/Government/Towing/4dwc-v3t8"
     },
     {
       "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20260525180153",
+        "url": "https://web.archive.org/web/20260525180153/https://data.norfolk.gov/api/views/4dwc-v3t8/rows.csv?accessType=DOWNLOAD"
+      },
       "status": "live",
       "url": "https://data.norfolk.gov/api/views/4dwc-v3t8/rows.csv?accessType=DOWNLOAD"
     }

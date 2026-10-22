@@ -62,6 +62,10 @@
   "sources": [
     {
       "retrieved": "2026-04-20",
+      "snapshot": {
+        "timestamp": "20210525040742",
+        "url": "https://web.archive.org/web/20210525040742/https://nrvis.com/download/data/eco/eco-mangwet.zip"
+      },
       "status": "live",
       "url": "https://nrvis.com/download/data/eco/eco-mangwet.zip"
     }

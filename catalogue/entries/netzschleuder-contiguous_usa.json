@@ -56,16 +56,28 @@
   "sources": [
     {
       "retrieved": "2026-04-20",
+      "snapshot": {
+        "timestamp": "20260421131150",
+        "url": "https://web.archive.org/web/20260421131150/http://konect.cc/networks/contiguous-usa"
+      },
       "status": "live",
       "url": "http://konect.cc/networks/contiguous-usa"
     },
     {
       "retrieved": "2026-04-20",
+      "snapshot": {
+        "timestamp": "20260316211723",
+        "url": "https://web.archive.org/web/20260316211723/https://networks.skewed.de/net/contiguous_usa"
+      },
       "status": "live",
       "url": "https://networks.skewed.de/net/contiguous_usa"
     },
     {
       "retrieved": "2026-04-20",
+      "snapshot": {
+        "timestamp": "20240428102425",
+        "url": "https://web.archive.org/web/20240428102425/https://networks.skewed.de/net/contiguous_usa/files/contiguous_usa.csv.zip"
+      },
       "status": "live",
       "url": "https://networks.skewed.de/net/contiguous_usa/files/contiguous_usa.csv.zip"
     }

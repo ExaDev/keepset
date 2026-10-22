@@ -56,6 +56,10 @@
   "sources": [
     {
       "retrieved": "2026-04-20",
+      "snapshot": {
+        "timestamp": "20260415124441",
+        "url": "https://web.archive.org/web/20260415124441/http://konect.cc/networks/brunson_revolution"
+      },
       "status": "live",
       "url": "http://konect.cc/networks/brunson_revolution"
     },
@@ -66,6 +70,10 @@
     },
     {
       "retrieved": "2026-04-20",
+      "snapshot": {
+        "timestamp": "20260212115649",
+        "url": "https://web.archive.org/web/20260212115649/https://networks.skewed.de/net/revolution/files/revolution.csv.zip"
+      },
       "status": "live",
       "url": "https://networks.skewed.de/net/revolution/files/revolution.csv.zip"
     }

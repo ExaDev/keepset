@@ -55,6 +55,10 @@
   "sources": [
     {
       "retrieved": "2026-03-26",
+      "snapshot": {
+        "timestamp": "20260731105649",
+        "url": "https://web.archive.org/web/20260731105649/https://raw.githubusercontent.com/jpatokal/openflights/master/data/routes.dat"
+      },
       "status": "live",
       "url": "https://raw.githubusercontent.com/jpatokal/openflights/master/data/routes.dat"
     }

@@ -50,6 +50,10 @@
   "sources": [
     {
       "retrieved": "2026-04-19",
+      "snapshot": {
+        "timestamp": "20260316220725",
+        "url": "https://web.archive.org/web/20260316220725/https://networks.skewed.de/net/messal_shale"
+      },
       "status": "live",
       "url": "https://networks.skewed.de/net/messal_shale"
     },
