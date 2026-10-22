@@ -132,3 +132,18 @@ test("a readable live source previews, draws the map from its coordinates and as
   await expect(page.locator(".preview-capture")).toBeVisible();
   expect(captures).toEqual([`https://web.archive.org/save/${TOWS_URL}`]);
 });
+
+test("a new service worker fills its cache from the network and not from the browser's HTTP cache", async ({ page, request }) => {
+  // The server lets the browser reuse app.js for ten minutes and counts the requests it gets. A service worker that filled its cache through the HTTP cache would not ask again when it updates, and would store the previous build's app.js under the new version's name.
+  const hitsOnAppJs = async (): Promise<number> => Number(await (await request.get("/__hits/app.js")).text());
+  await page.goto("/");
+  await page.evaluate(async () => {
+    await navigator.serviceWorker.ready;
+  });
+  const beforeUpdate = await hitsOnAppJs();
+  await page.evaluate(async () => {
+    const registration = await navigator.serviceWorker.ready;
+    await registration.update();
+  });
+  await expect.poll(hitsOnAppJs).toBeGreaterThan(beforeUpdate);
+});
