@@ -1,3 +1,10 @@
+## [0.49.4](https://github.com/Mearman/keepset/compare/v0.49.3...v0.49.4) (2026-10-22)
+
+
+### Bug Fixes
+
+* **archive:** wait out a refused connection and ask the Wayback Machine less often ([f727c46](https://github.com/Mearman/keepset/commit/f727c46c1f9661e3d9e15066c88f4cacfde7d570))
+
 ## [0.49.3](https://github.com/Mearman/keepset/compare/v0.49.2...v0.49.3) (2026-10-22)
 
 
