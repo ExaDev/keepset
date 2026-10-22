@@ -5,7 +5,7 @@ import { WaybackTimestampSchema } from "../../src/entry";
 import type { ExceptionReason } from "./archive-report";
 import { HTTP_STATUS } from "./http-status";
 import type { Clock } from "./pacing";
-import type { PoliteClient } from "./polite-client";
+import { type PoliteClient, RequestFailure } from "./polite-client";
 
 /** Where the capture index answers. The availability API answers the same question but throttles a client after its first request (12 requests in a row to the index all answered, the second request to the availability API did not), which stalled a run on the first URLs it could not settle. */
 export const CDX_URL = "https://web.archive.org/cdx/search/cdx";
@@ -26,8 +26,8 @@ export const WAYBACK_HOST_INTERVALS: Readonly<Record<string, number>> = { "web.a
 export const ANONYMOUS_LIMITS = { capturesPerMinute: 3, capturesPerDay: 200 } as const;
 export const AUTHENTICATED_LIMITS = { capturesPerMinute: 7, capturesPerDay: 30_000 } as const;
 
-/** How often a pending capture is asked about, and how long it is waited on in all: the service's documented longest capture is two minutes, so a job still pending after that is not going to finish within the status record's life. */
-export const STATUS_POLL_MILLISECONDS = 5000;
+/** How often a pending capture is asked about (every capture in flight polls, so the rate to the Wayback Machine grows with the archiver's concurrency), and how long it is waited on in all: the service's documented longest capture is two minutes, so a job still pending after that is not going to finish within the status record's life. */
+export const STATUS_POLL_MILLISECONDS = 10_000;
 export const MAX_CAPTURE_WAIT_MILLISECONDS = 150_000;
 
 /** The failure of the Wayback Machine to answer a question the archiver put to it: an unusable status, a body that is not the documented shape, or credentials it rejects. The archiver stops rather than guess. */
@@ -55,7 +55,10 @@ export class WaybackBusy extends WaybackError {
  */
 export async function findSnapshot(client: PoliteClient, url: string): Promise<string | undefined> {
   const query = new URLSearchParams({ url, fl: "timestamp", filter: "statuscode:200", limit: "-1" });
-  const response = await client.request(`${CDX_URL}?${query.toString()}`, {});
+  const response = await client.request(`${CDX_URL}?${query.toString()}`, {}).catch((error: unknown) => {
+    // A connection the Wayback Machine refuses or drops is the service's trouble, like a busy answer, and is the caller's to wait out.
+    throw error instanceof RequestFailure ? new WaybackBusy(error.message) : error;
+  });
   if (!response.ok) {
     throw new WaybackBusy(`the capture index answered ${String(response.status)} for ${url}`);
   }
