@@ -80,6 +80,8 @@
     {
       "retrieved": "2026-01-17",
       "snapshot": {
+        "byteLength": 24461,
+        "sha256": "932e14f8155e96732cfea098765f5dcd59a5eafbe5e05e8266e10d4c439f735a",
         "timestamp": "20221016224557",
         "url": "https://web.archive.org/web/20221016224557/https://networkdata.ics.uci.edu/data/adjnoun/adjnoun.gml"
       },

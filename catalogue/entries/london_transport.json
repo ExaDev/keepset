@@ -51,6 +51,8 @@
     {
       "retrieved": "2026-04-19",
       "snapshot": {
+        "byteLength": 18752,
+        "sha256": "302f925c91c29f4a6c619fe11beef2ef0214d512023e244374e4fa4aee378ab6",
         "timestamp": "20260420165202",
         "url": "https://web.archive.org/web/20260420165202/https://networks.skewed.de/net/london_transport"
       },
@@ -60,6 +62,8 @@
     {
       "retrieved": "2026-04-19",
       "snapshot": {
+        "byteLength": 17444,
+        "sha256": "7a42a1cb07206a7d27e1d095578276ea90bf3c8d80eeab413a957603a824239f",
         "timestamp": "20261022023301",
         "url": "https://web.archive.org/web/20261022023301/https://networks.skewed.de/net/london_transport/files/london_transport.csv.zip"
       },

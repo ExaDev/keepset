@@ -122,6 +122,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 98508,
+        "sha256": "fdafac583728565442801007b1a95896279a7c2bda485d70a3aebd528c0cd996",
         "timestamp": "20240905063520",
         "url": "https://web.archive.org/web/20240905063520/https://data.mendeley.com/datasets/hp3xftsrfx/1"
       },

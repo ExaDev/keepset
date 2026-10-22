@@ -98,6 +98,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 22463,
+        "sha256": "2d1f17a3d3389da09d7447cbbec8d25f4e7bcd7da90ce277de10e9bfeda37de4",
         "timestamp": "20260811033725",
         "url": "https://web.archive.org/web/20260811033725/https://data.melbourne.vic.gov.au/explore/dataset/customer-service-requests-with-resolution-time/"
       },
@@ -107,6 +109,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 3762407,
+        "sha256": "d959d4ac2b64eb933087d0e172a059e67a00abb70973ddfba99e612905bed5a6",
         "timestamp": "20261021014220",
         "url": "https://web.archive.org/web/20261021014220/https://data.melbourne.vic.gov.au/api/explore/v2.1/catalog/datasets/customer-service-requests-with-resolution-time/exports/csv"
       },

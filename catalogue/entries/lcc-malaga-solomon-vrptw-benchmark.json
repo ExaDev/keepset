@@ -98,6 +98,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 81915,
+        "sha256": "ecada078a3eaecf19c74ab1d8590e73a1aa84000fae00bbcf29f615723d78a5d",
         "timestamp": "20130716012808",
         "url": "https://web.archive.org/web/20130716012808/https://neo.lcc.uma.es/vrp/wp-content/data/instances/solomon/solomon_100.zip"
       },

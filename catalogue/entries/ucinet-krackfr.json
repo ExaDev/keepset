@@ -55,6 +55,8 @@
     {
       "retrieved": "2026-02-16",
       "snapshot": {
+        "byteLength": 19679,
+        "sha256": "d8a2ffb9b5956c94a856656f0cf55887168a5815ec7d19beb01f7468aee026bd",
         "timestamp": "20230601",
         "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/UciNet/krackfr.dat"
       },

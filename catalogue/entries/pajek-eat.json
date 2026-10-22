@@ -60,6 +60,8 @@
     {
       "retrieved": "2026-02-16",
       "snapshot": {
+        "byteLength": 1067128,
+        "sha256": "218d0fab43571fd4280de6a67075c2e17001520b3a4ec782e1b79997d28e9fdb",
         "timestamp": "20230601",
         "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/dic/eat/EATnew.zip"
       },

@@ -118,6 +118,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 744554,
+        "sha256": "0de63de9c19deb536d7df7ff14a23cd016b2eaadb3752bee7bd52dbe0a7428f0",
         "timestamp": "20261011025224",
         "url": "https://web.archive.org/web/20261011025224/https://data.cityofnewyork.us/City-Government/OATH-Hearings-Division-Case-Status/jz4z-kudi"
       },

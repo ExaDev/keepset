@@ -56,6 +56,8 @@
     {
       "retrieved": "2026-01-17",
       "snapshot": {
+        "byteLength": 727502,
+        "sha256": "11b47db52441ce0140f2ec54999345459fecbc52ff6f9fe3956dc3cad9835872",
         "timestamp": "20230309171612",
         "url": "https://web.archive.org/web/20230309171612/https://snap.stanford.edu/data/ca-CondMat.txt.gz"
       },

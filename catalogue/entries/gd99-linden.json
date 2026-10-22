@@ -51,6 +51,8 @@
     {
       "retrieved": "2026-02-16",
       "snapshot": {
+        "byteLength": 165733,
+        "sha256": "1aca6aa67ad2913d3cb9bf2895d16448ffc063963ec93a140ba64e19bd098656",
         "timestamp": "20230601",
         "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/GD/a99m.zip"
       },

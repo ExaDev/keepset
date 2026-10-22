@@ -55,6 +55,8 @@
     {
       "retrieved": "2026-02-16",
       "snapshot": {
+        "byteLength": 19681,
+        "sha256": "94b9e5da4d8f6d1c43cd68965653f4bc62839cb0a0b197c027267213f5538fd9",
         "timestamp": "20230601",
         "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/UciNet/krackad.dat"
       },

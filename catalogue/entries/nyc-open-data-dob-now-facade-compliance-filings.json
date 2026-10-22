@@ -91,6 +91,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 230482,
+        "sha256": "f66620cff52b198f0531d1983e396101a9004b406cc4e76437c6cbb3dc43069b",
         "timestamp": "20260205024809",
         "url": "https://web.archive.org/web/20260205024809/https://data.cityofnewyork.us/Housing-Development/DOB-NOW-Safety-Facades-Compliance-Filings/xubg-57si"
       },
@@ -100,6 +102,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 8234753,
+        "sha256": "da4aae318423d68afc1babe0e24e2ca9e93b2167128346b3174fa1c4fff91222",
         "timestamp": "20260325124748",
         "url": "https://web.archive.org/web/20260325124748/https://data.cityofnewyork.us/api/views/xubg-57si/rows.csv?accessType=DOWNLOAD"
       },

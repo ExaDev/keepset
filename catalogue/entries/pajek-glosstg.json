@@ -57,6 +57,8 @@
     {
       "retrieved": "2026-02-16",
       "snapshot": {
+        "byteLength": 4215,
+        "sha256": "e7b81d7fb28acc39e0370fbfd243a7b7e543e1307f4ab7a2093aeac78e2fd710",
         "timestamp": "20041222052810",
         "url": "https://web.archive.org/web/20041222052810/http://vlado.fmf.uni-lj.si/pub/networks/data/DIC/TG/glossTG.paj"
       },

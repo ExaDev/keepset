@@ -96,6 +96,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 45706,
+        "sha256": "8a5a16ea15df27f4038bc0baded84f328a3269f91b913a9b07ab58aae07ddfd9",
         "timestamp": "20260922102933",
         "url": "https://web.archive.org/web/20260922102933/https://ratings.food.gov.uk/open-data"
       },
@@ -105,6 +107,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 145071010,
+        "sha256": "72786a7c15753d8e92b2d3ec81e8df4c8e2ad081771018959be562a7e102518f",
         "timestamp": "20261022040555",
         "url": "https://web.archive.org/web/20261022040555/https://safhrsprodstorage.blob.core.windows.net/opendatafileblobstorage/FHRS_All_en-GB.csv"
       },

@@ -60,6 +60,8 @@
     {
       "retrieved": "2026-02-16",
       "snapshot": {
+        "byteLength": 1372725,
+        "sha256": "e430faaa72c5748ab34533d1630dcec472dcc3bdee244d2377b860a2f41ae956",
         "timestamp": "20230601",
         "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/CRA/Days.zip"
       },

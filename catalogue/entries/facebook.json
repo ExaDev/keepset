@@ -56,6 +56,8 @@
     {
       "retrieved": "2026-02-16",
       "snapshot": {
+        "byteLength": 218576,
+        "sha256": "125e84db872eeba443d270c70315c256b0af43a502fcfe51f50621166ad035d7",
         "timestamp": "20261004065942",
         "url": "https://web.archive.org/web/20261004065942/https://snap.stanford.edu/data/facebook_combined.txt.gz"
       },

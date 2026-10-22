@@ -79,6 +79,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 150967,
+        "sha256": "9113146add884e3034586ccdd157311a0dc8b9f17f745743ad5ead4351818565",
         "timestamp": "20260802043945",
         "url": "https://web.archive.org/web/20260802043945/https://data.cityofnewyork.us/Housing-Development/DOB-NOW-Safety-Boiler/52dp-yji6"
       },
@@ -88,6 +90,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 25209586,
+        "sha256": "35e352ef2ef85434e5b5aafe91aedd74c1ac85c46b9f65bfacc6359d46b02cdb",
         "timestamp": "20260403015126",
         "url": "https://web.archive.org/web/20260403015126/https://data.cityofnewyork.us/api/views/52dp-yji6/rows.csv?accessType=DOWNLOAD"
       },

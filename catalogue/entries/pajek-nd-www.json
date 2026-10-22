@@ -61,6 +61,8 @@
     {
       "retrieved": "2026-02-16",
       "snapshot": {
+        "byteLength": 2098351,
+        "sha256": "a5a916d4b502ac9ed2760f9abd08a855f4d3810a4d75d7880df664ae30c602fc",
         "timestamp": "20130507100020",
         "url": "https://web.archive.org/web/20130507100020/http://vlado.fmf.uni-lj.si/pub/networks/data/ND/NDwww.zip"
       },
@@ -70,6 +72,8 @@
     {
       "retrieved": "2026-02-16",
       "snapshot": {
+        "byteLength": 2098351,
+        "sha256": "a5a916d4b502ac9ed2760f9abd08a855f4d3810a4d75d7880df664ae30c602fc",
         "timestamp": "20230601",
         "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/ND/NDwww.zip"
       },

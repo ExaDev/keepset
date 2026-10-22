@@ -119,6 +119,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 103930,
+        "sha256": "2ee379e7b3575dfbd036aee1b252e96c2c37f4aa538863ceb963757965a2b695",
         "timestamp": "20261022024711",
         "url": "https://web.archive.org/web/20261022024711/https://northernpowergrid.opendatasoft.com/explore/dataset/live-power-cuts-data/information/"
       },

@@ -52,6 +52,8 @@
     {
       "retrieved": "2026-03-03",
       "snapshot": {
+        "byteLength": 553308,
+        "sha256": "2c9611b2f5bc378ba7e74d10b97779b6fecdd94d83a667bf64fb356e760b4f52",
         "timestamp": "20261022040356",
         "url": "https://web.archive.org/web/20261022040356/https://raw.githubusercontent.com/thunlp/OpenKE/OpenKE-PyTorch/benchmarks/NELL-995/train2id.txt"
       },

@@ -55,6 +55,8 @@
     {
       "retrieved": "2026-02-16",
       "snapshot": {
+        "byteLength": 10011,
+        "sha256": "b9c37e8cdf6800d7d85fe947c62960be6ab502d963cf1ae84ac1e2080b9aba40",
         "timestamp": "20230601",
         "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/UciNet/bkoff.dat"
       },

@@ -51,6 +51,8 @@
     {
       "retrieved": "2026-04-19",
       "snapshot": {
+        "byteLength": 19031,
+        "sha256": "f14c61e7a19941b2991367ffa23eb39d0af5b7f9ab3548c7c249de6b9849f8db",
         "timestamp": "20260316220725",
         "url": "https://web.archive.org/web/20260316220725/https://networks.skewed.de/net/messal_shale"
       },

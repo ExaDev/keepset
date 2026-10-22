@@ -55,6 +55,8 @@
     {
       "retrieved": "2026-02-16",
       "snapshot": {
+        "byteLength": 13270,
+        "sha256": "c222720abc8b49d4973c456913efd42f10bea0fdd06da1d23543a693694cdcd0",
         "timestamp": "20230601",
         "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/UciNet/kaptail.dat"
       },

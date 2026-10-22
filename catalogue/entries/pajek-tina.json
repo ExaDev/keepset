@@ -57,6 +57,8 @@
     {
       "retrieved": "2026-02-16",
       "snapshot": {
+        "byteLength": 3033,
+        "sha256": "1b23cd229ff58e79fa6006d046618af19f5106d9ab073aed9fd45e0ec3a24f5a",
         "timestamp": "20230601",
         "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/soc/Tina/tina.zip"
       },

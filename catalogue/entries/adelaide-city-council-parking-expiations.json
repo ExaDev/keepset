@@ -92,6 +92,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 31444,
+        "sha256": "af04440f281f3804bc84502faaf20bf5ce09be6ade93a986a686f4dc21a8c621",
         "timestamp": "20250320125309",
         "url": "https://web.archive.org/web/20250320125309/https://data.sa.gov.au/data/dataset/parking-expiations"
       },
@@ -101,6 +103,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 131978253,
+        "sha256": "a03a959999fda0732f01974bdf9900e2eecd929c858503552cc2669822462b1d",
         "timestamp": "20261022040506",
         "url": "https://web.archive.org/web/20261022040506/https://s3.ap-southeast-2.amazonaws.com/dmzweb.adelaidecitycouncil.com/OpenData/Parking_Expiations/Parking_Expiations.csv"
       },

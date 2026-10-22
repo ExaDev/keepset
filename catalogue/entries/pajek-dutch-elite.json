@@ -61,6 +61,8 @@
     {
       "retrieved": "2026-02-16",
       "snapshot": {
+        "byteLength": 122066,
+        "sha256": "b6c55ed82b271d3b56849ef23141e0e8c853bb953281348cfe8a15f130e75ad5",
         "timestamp": "20230601",
         "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/2mode/dutchelite.zip"
       },

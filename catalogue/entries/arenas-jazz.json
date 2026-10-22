@@ -56,6 +56,8 @@
     {
       "retrieved": "2026-02-16",
       "snapshot": {
+        "byteLength": 15283,
+        "sha256": "877f2989b3c96969fe60e281580b3a5746b8d605c5b32075f69dbde089ab92e2",
         "timestamp": "20230601",
         "url": "https://web.archive.org/web/20230601/http://deim.urv.cat/~aarenas/data/xarxes/jazz.zip"
       },

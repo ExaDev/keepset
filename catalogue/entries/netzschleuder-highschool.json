@@ -57,6 +57,8 @@
     {
       "retrieved": "2026-04-20",
       "snapshot": {
+        "byteLength": 34893,
+        "sha256": "39d84c43fc5b7d953f8e0c3f6d067cff57dcfb5a43543e786850ed0a2b871f1f",
         "timestamp": "20260421124831",
         "url": "https://web.archive.org/web/20260421124831/http://konect.cc/networks/moreno_highschool"
       },
@@ -66,6 +68,8 @@
     {
       "retrieved": "2026-04-20",
       "snapshot": {
+        "byteLength": 17986,
+        "sha256": "b9412ee80ed58da3a56ff0c04a10ed6f5a0c28f86a82fc3a6d1f049157ef66b7",
         "timestamp": "20260520200423",
         "url": "https://web.archive.org/web/20260520200423/https://networks.skewed.de/net/highschool"
       },
@@ -75,6 +79,8 @@
     {
       "retrieved": "2026-04-20",
       "snapshot": {
+        "byteLength": 3736,
+        "sha256": "f995c6b4e91540726373e95b28d908ce70bc15c02fe3ca2c524aa74702278a35",
         "timestamp": "20240428102506",
         "url": "https://web.archive.org/web/20240428102506/https://networks.skewed.de/net/highschool/files/highschool.csv.zip"
       },

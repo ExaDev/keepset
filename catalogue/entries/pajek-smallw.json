@@ -56,6 +56,8 @@
     {
       "retrieved": "2026-02-16",
       "snapshot": {
+        "byteLength": 19535,
+        "sha256": "31e0cbc8b96ad52e5f50236e3fc17a584ed9f6f3b0baf9abda57708733fae263",
         "timestamp": "20230601",
         "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/cite/SmallW.zip"
       },

@@ -54,6 +54,8 @@
     {
       "retrieved": "2026-02-16",
       "snapshot": {
+        "byteLength": 18260,
+        "sha256": "e1449d0cab2179b797c818a700822f5be935441fe1deaee59dbc943dec040857",
         "timestamp": "20230601",
         "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/erdos/ERDOS971.NET"
       },

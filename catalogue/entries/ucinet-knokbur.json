@@ -47,6 +47,8 @@
     {
       "retrieved": "2026-02-16",
       "snapshot": {
+        "byteLength": 914,
+        "sha256": "f62d1dd2040870d2f61a35ead4811b277e0841bb13cdf35e4d7812268ff54029",
         "timestamp": "20230601",
         "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/UciNet/knokbur.dat"
       },

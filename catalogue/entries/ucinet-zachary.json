@@ -55,6 +55,8 @@
     {
       "retrieved": "2026-02-16",
       "snapshot": {
+        "byteLength": 4849,
+        "sha256": "4b24250430f5a0d6fd32f5172cd7c2765f95717566ed9b3595c996a2f4de3c45",
         "timestamp": "20230601",
         "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/UciNet/zachary.dat"
       },

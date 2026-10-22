@@ -102,6 +102,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 148809,
+        "sha256": "b7044bd7d35c328713dd784154951810453984b3e47a78f3dfb2764bc4a30e21",
         "timestamp": "20260727185048",
         "url": "https://web.archive.org/web/20260727185048/https://data.cityofnewyork.us/City-Government/DOF-Scofftow-Case-Information/qmh3-uvgq"
       },

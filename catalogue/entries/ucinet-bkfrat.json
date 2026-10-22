@@ -55,6 +55,8 @@
     {
       "retrieved": "2026-02-16",
       "snapshot": {
+        "byteLength": 17491,
+        "sha256": "ae82c627943f5760bfe1716d4c0b59154c6747570cc9ca03f78e89e3cf935b91",
         "timestamp": "20230601",
         "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/UciNet/bkfrat.dat"
       },

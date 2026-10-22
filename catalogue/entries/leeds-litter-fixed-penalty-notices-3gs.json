@@ -30,6 +30,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 92339,
+        "sha256": "db306f4064f5a74ad9836b516334ed7ede7f71a76a737743db29a72504840387",
         "timestamp": "20211130173025",
         "url": "https://web.archive.org/web/20211130173025/https://datamillnorth.org/dataset/litter-fines-issued-by-3gs"
       },

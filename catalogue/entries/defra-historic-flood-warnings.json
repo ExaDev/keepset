@@ -84,6 +84,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 4509,
+        "sha256": "11d9ea33272732db03bfe3f819113c58f1b7767c16805be691753e36f438c501",
         "timestamp": "20261022003023",
         "url": "https://web.archive.org/web/20261022003023/https://environment.data.gov.uk/dataset/88bed270-d465-11e4-8669-f0def148f590"
       },
@@ -93,6 +95,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 3628573,
+        "sha256": "4ffd560a948b3fb2d1026d928208f2a79ba991c0f82852112f83b1bca93a0dda",
         "timestamp": "20261022002932",
         "url": "https://web.archive.org/web/20261022002932/https://environment.data.gov.uk/api/file/download?fileDataSetId=766cb094-b392-4bd6-a02e-f60e143f3213&fileName=Historic_Flood_Warnings.zip"
       },

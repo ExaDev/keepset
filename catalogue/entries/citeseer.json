@@ -61,6 +61,8 @@
     {
       "retrieved": "2026-02-16",
       "snapshot": {
+        "byteLength": 359425,
+        "sha256": "b02ee7b5d83130f8fd45b59017a76fdae3e998629a1904c2c5e07343a9664685",
         "timestamp": "20260923154413",
         "url": "https://web.archive.org/web/20260923154413/https://linqs-data.soe.ucsc.edu/public/lbc/citeseer.tgz"
       },

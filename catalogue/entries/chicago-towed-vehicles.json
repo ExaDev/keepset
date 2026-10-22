@@ -64,6 +64,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 148316,
+        "sha256": "1428ea01f8ba9cfaf0b248af1d9a1608866bde9b80d83de6be58e809e49b2c5c",
         "timestamp": "20261011204233",
         "url": "https://web.archive.org/web/20261011204233/https://data.cityofchicago.org/Transportation/Towed-Vehicles/ygr5-vcbg"
       },
@@ -73,6 +75,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 93340,
+        "sha256": "f17d7a90e8242d1e1ecfbb540054393665a0fabc63f7349baffc5f7374fcd658",
         "timestamp": "20251011224717",
         "url": "https://web.archive.org/web/20251011224717/https://data.cityofchicago.org/api/views/ygr5-vcbg/rows.csv?accessType=DOWNLOAD"
       },

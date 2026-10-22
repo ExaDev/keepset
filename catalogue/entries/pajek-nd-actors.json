@@ -61,6 +61,8 @@
     {
       "retrieved": "2026-02-16",
       "snapshot": {
+        "byteLength": 4248772,
+        "sha256": "03879fd584be4a8acd1013a911fe6986c67750a55db8de6be3ffc1d164c136ab",
         "timestamp": "20100310000000",
         "url": "https://web.archive.org/web/20100310000000/http://vlado.fmf.uni-lj.si/pub/networks/data/ND/NDactors.zip"
       },
@@ -70,6 +72,8 @@
     {
       "retrieved": "2026-02-16",
       "snapshot": {
+        "byteLength": 4248772,
+        "sha256": "03879fd584be4a8acd1013a911fe6986c67750a55db8de6be3ffc1d164c136ab",
         "timestamp": "20230601",
         "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/ND/NDactors.zip"
       },

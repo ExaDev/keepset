@@ -89,6 +89,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 37266,
+        "sha256": "0a78c133fa5cf417c49dd91b0345b7a30481adcf2da940e8e3e9318cc0c4d5ec",
         "timestamp": "20261022005039",
         "url": "https://web.archive.org/web/20261022005039/https://github.com/zhangchenhaoseu/Database-for-HMCVRPTW-SD"
       },
@@ -98,6 +100,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 829,
+        "sha256": "4d61f87d0c83aeabe0c9e52303a0741b26a54a7a21cb180da6f2a7bc059f1475",
         "timestamp": "20261022040438",
         "url": "https://web.archive.org/web/20261022040438/https://raw.githubusercontent.com/zhangchenhaoseu/Database-for-HMCVRPTW-SD/main/Case%20study%20data/Jingdong%20Dataset/input/input_node.csv"
       },

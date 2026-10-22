@@ -59,6 +59,8 @@
     {
       "retrieved": "2026-10-21",
       "snapshot": {
+        "byteLength": 431762160,
+        "sha256": "2afe62ead87f2c301a7398796991d347db85b2d01c5442c95169372bf5a9fca4",
         "timestamp": "20261022042203",
         "url": "https://web.archive.org/web/20261022042203/https://snap.stanford.edu/ogb/data/nodeproppred/mag.zip"
       },

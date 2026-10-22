@@ -57,6 +57,8 @@
     {
       "retrieved": "2026-04-20",
       "snapshot": {
+        "byteLength": 18016,
+        "sha256": "1811b8ac92e6d054c8a9dbca8cf584c421792ebb34fa54cfc12d6de72a7e2bf4",
         "timestamp": "20260415124441",
         "url": "https://web.archive.org/web/20260415124441/http://konect.cc/networks/brunson_revolution"
       },
@@ -71,6 +73,8 @@
     {
       "retrieved": "2026-04-20",
       "snapshot": {
+        "byteLength": 4031,
+        "sha256": "aa017e584689eb7f4161cc83711a70f7cdf2a6b7692e5d6209ecf49c22d927ff",
         "timestamp": "20260212115649",
         "url": "https://web.archive.org/web/20260212115649/https://networks.skewed.de/net/revolution/files/revolution.csv.zip"
       },

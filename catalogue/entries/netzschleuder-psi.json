@@ -57,6 +57,8 @@
     {
       "retrieved": "2026-04-20",
       "snapshot": {
+        "byteLength": 18333,
+        "sha256": "a05b6080e2157d9d597a7c6a665798fdb72b2200f5b2c9349c42a90d8c9fd402",
         "timestamp": "20260520193029",
         "url": "https://web.archive.org/web/20260520193029/https://networks.skewed.de/net/psi"
       },

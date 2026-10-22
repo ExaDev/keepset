@@ -41,6 +41,8 @@
     {
       "retrieved": "2026-03-03",
       "snapshot": {
+        "byteLength": 157320561,
+        "sha256": "fffadd54d8971811323d8b444e5c05e8f0b8fc44666d834fa09b3a9a98c3f6a8",
         "timestamp": "20261020232542",
         "url": "https://web.archive.org/web/20261020232542/https://data.dgl.ai/dataset/wikikg2.zip"
       },

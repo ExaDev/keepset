@@ -55,6 +55,8 @@
     {
       "retrieved": "2026-02-16",
       "snapshot": {
+        "byteLength": 1067,
+        "sha256": "4eefb9c48aaeab789d749aba1400eb70f4c52a915471c4897e1bf9db37adfa22",
         "timestamp": "20230601",
         "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/UciNet/taro.dat"
       },

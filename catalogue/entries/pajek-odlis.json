@@ -59,6 +59,8 @@
     {
       "retrieved": "2026-02-16",
       "snapshot": {
+        "byteLength": 61994,
+        "sha256": "6ff87c322a97af0af3ca8a8e5b6e54c591cb2e1a933256eb9f16194339cb0853",
         "timestamp": "20230601",
         "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/dic/odlis/odlis.zip"
       },

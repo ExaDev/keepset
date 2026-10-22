@@ -57,6 +57,8 @@
     {
       "retrieved": "2026-02-16",
       "snapshot": {
+        "byteLength": 6490,
+        "sha256": "30999aadb17852efe4ec9841702acad0879cce53c7f033c8f77f645c5ee7ab42",
         "timestamp": "20230601",
         "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/GD/GD06/WC.net.zip"
       },

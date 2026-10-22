@@ -35,6 +35,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 16755,
+        "sha256": "89812d72f25ced421579bafc381128862326560dc4e9116185bec5df06d29221",
         "timestamp": "20260630140646",
         "url": "https://web.archive.org/web/20260630140646/https://registry.opendata.aws/amazon-last-mile-challenges/"
       },

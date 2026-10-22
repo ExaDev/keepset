@@ -55,6 +55,8 @@
     {
       "retrieved": "2026-01-17",
       "snapshot": {
+        "byteLength": 1630437,
+        "sha256": "69a2dab71fa5e3a0715487599fc16ca17ddc847379325a6c765bbad6e3e36938",
         "timestamp": "20241121191838",
         "url": "https://web.archive.org/web/20241121191838/https://snap.stanford.edu/data/soc-Epinions1.txt.gz"
       },

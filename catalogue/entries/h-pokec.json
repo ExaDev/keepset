@@ -55,6 +55,8 @@
     {
       "retrieved": "2026-02-16",
       "snapshot": {
+        "byteLength": 132454730,
+        "sha256": "1a23e0ec8a4e497752125f6b3f01696fea7fcdb696fa61d1e822faf4d0d69b14",
         "timestamp": "20240415183725",
         "url": "https://web.archive.org/web/20240415183725/https://snap.stanford.edu/data/soc-pokec-relationships.txt.gz"
       },

@@ -86,6 +86,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 150707,
+        "sha256": "6d884f48c5ff1004080649666e1b886c5662ca0bb3f5e8a9d48c394106b9d06e",
         "timestamp": "20260803015531",
         "url": "https://web.archive.org/web/20260803015531/https://opendata.maryland.gov/Housing/District-Court-of-Maryland-Eviction-Case-Data/mvqb-b4hf"
       },

@@ -54,6 +54,8 @@
     {
       "retrieved": "2026-04-20",
       "snapshot": {
+        "byteLength": 16028,
+        "sha256": "d9b514c9ef125c93312a827c9f2d7e38bbeda4d2181858cfafae7c60cd785ed7",
         "timestamp": "20250407124340",
         "url": "https://web.archive.org/web/20250407124340/https://www.wormwiring.org/si_other/bumbarger-sommer-S2-consensus-network.xlsx"
       },

@@ -54,6 +54,8 @@
     {
       "retrieved": "2026-01-17",
       "snapshot": {
+        "byteLength": 17242,
+        "sha256": "697a653299f771fb3eb115d5bdac7d10b5b5111eab9e952c4eadf22d9fbb1543",
         "timestamp": "20230601",
         "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/dic/roget/Roget.zip"
       },

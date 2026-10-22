@@ -57,6 +57,8 @@
     {
       "retrieved": "2026-04-20",
       "snapshot": {
+        "byteLength": 9139,
+        "sha256": "7ba44c22d52ec3da3948243d0c204510d3008967c2f227ac9fe232e0fdcc8b5e",
         "timestamp": "20210225172255",
         "url": "https://web.archive.org/web/20210225172255/https://sites.google.com/site/ucinetsoftware/datasets/covert-networks/montrealstreetgangs"
       },

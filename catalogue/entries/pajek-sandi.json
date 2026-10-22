@@ -54,6 +54,8 @@
     {
       "retrieved": "2026-02-16",
       "snapshot": {
+        "byteLength": 66650,
+        "sha256": "a9cf194e2f7a7dd9a8eaddee90514cf94311c1c0f0f858f2f5acd5100ee40985",
         "timestamp": "20230601",
         "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/2mode/Sandi/sandi.net"
       },

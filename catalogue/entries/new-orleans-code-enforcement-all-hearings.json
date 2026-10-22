@@ -114,6 +114,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 218062,
+        "sha256": "9a7367d8c31af1dcedd4c5ffbfef96b29e6e1fc67394b43717de91aabb4fe895",
         "timestamp": "20260404190228",
         "url": "https://web.archive.org/web/20260404190228/https://data.nola.gov/Housing-Land-Use-and-Blight/Code-Enforcement-All-Hearings/44ct-56tr"
       },

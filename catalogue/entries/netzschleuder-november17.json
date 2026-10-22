@@ -57,6 +57,8 @@
     {
       "retrieved": "2026-04-20",
       "snapshot": {
+        "byteLength": 32461,
+        "sha256": "a4b447b4d0c4533f33df389c4374e2b9e7927cd5162a5706de502c459eb11901",
         "timestamp": "20201011193306",
         "url": "https://web.archive.org/web/20201011193306/https://sites.google.com/site/ucinetsoftware/datasets/covert-networks/rhodesbombing"
       },
@@ -66,6 +68,8 @@
     {
       "retrieved": "2026-04-20",
       "snapshot": {
+        "byteLength": 18532,
+        "sha256": "13e1a187dbd2e616791b2bd5f4d4ecc81e74880095bf9ad3e46111c00ebf29ad",
         "timestamp": "20260606105522",
         "url": "https://web.archive.org/web/20260606105522/https://networks.skewed.de/net/november17"
       },
@@ -75,6 +79,8 @@
     {
       "retrieved": "2026-04-20",
       "snapshot": {
+        "byteLength": 1533,
+        "sha256": "bc61043d9e1a7fad122bdd1d4aee6fee275db5758f76349d48f5d034f4606d39",
         "timestamp": "20261022023715",
         "url": "https://web.archive.org/web/20261022023715/https://networks.skewed.de/net/november17/files/november17.csv.zip"
       },

@@ -57,6 +57,8 @@
     {
       "retrieved": "2026-04-20",
       "snapshot": {
+        "byteLength": 33527,
+        "sha256": "2dcbf3f8aff5fea0284324d7a295beed504e0b86dc12821e72bfda39441e49e2",
         "timestamp": "20250327064524",
         "url": "https://web.archive.org/web/20250327064524/http://konect.cc/networks/moreno_bison"
       },
@@ -66,6 +68,8 @@
     {
       "retrieved": "2026-04-20",
       "snapshot": {
+        "byteLength": 4208,
+        "sha256": "8bff042d4ca4b2da05b06f4f4ea34920aeaab2b5479c593f6915907b21642c33",
         "timestamp": "20261022012048",
         "url": "https://web.archive.org/web/20261022012048/https://networks.skewed.de/net/bison"
       },
@@ -75,6 +79,8 @@
     {
       "retrieved": "2026-04-20",
       "snapshot": {
+        "byteLength": 2904,
+        "sha256": "da06a2585f7e5434a9aeb4fd892ea4dc52c14fef4f066d91df6490c4337b391c",
         "timestamp": "20261022012054",
         "url": "https://web.archive.org/web/20261022012054/https://networks.skewed.de/net/bison/files/bison.csv.zip"
       },

@@ -58,6 +58,8 @@
     {
       "retrieved": "2026-04-20",
       "snapshot": {
+        "byteLength": 19220,
+        "sha256": "4d09a5769ac70b76be0a06145e745964b992bdd317350d8f6ae7311ea97c5baf",
         "timestamp": "20260520190354",
         "url": "https://web.archive.org/web/20260520190354/https://networks.skewed.de/net/law_firm"
       },
@@ -67,6 +69,8 @@
     {
       "retrieved": "2026-04-20",
       "snapshot": {
+        "byteLength": 7987,
+        "sha256": "a488ada5c0559de17c6d030ac2fcb40a1f92602daee69bb8e64999ab151e5f87",
         "timestamp": "20250821071538",
         "url": "https://web.archive.org/web/20250821071538/https://networks.skewed.de/net/law_firm/files/law_firm.csv.zip"
       },

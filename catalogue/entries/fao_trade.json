@@ -51,6 +51,8 @@
     {
       "retrieved": "2026-04-19",
       "snapshot": {
+        "byteLength": 18398,
+        "sha256": "7e7d699caa61242b00c46c49aeef4cc77a853524ef22bd9df7e9245a0939c201",
         "timestamp": "20260316203519",
         "url": "https://web.archive.org/web/20260316203519/https://networks.skewed.de/net/fao_trade"
       },
@@ -60,6 +62,8 @@
     {
       "retrieved": "2026-04-19",
       "snapshot": {
+        "byteLength": 1313202,
+        "sha256": "bed0e6d038b6121dd136e7a0301223da097d2c3bbb7a863f7a8d37890a0286c7",
         "timestamp": "20220402122443",
         "url": "https://web.archive.org/web/20220402122443/https://networks.skewed.de/net/fao_trade/files/fao_trade.csv.zip"
       },

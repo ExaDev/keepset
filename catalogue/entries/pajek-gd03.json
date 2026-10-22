@@ -54,6 +54,8 @@
     {
       "retrieved": "2026-02-16",
       "snapshot": {
+        "byteLength": 11093,
+        "sha256": "57dd038fb43ee29b5bd5174703d7b8c089f606b5bf9320079812dffe7d76527e",
         "timestamp": "20230601",
         "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/GD/gd03/A03.net"
       },

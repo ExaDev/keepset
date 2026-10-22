@@ -57,6 +57,8 @@
     {
       "retrieved": "2026-04-20",
       "snapshot": {
+        "byteLength": 33784,
+        "sha256": "45d033341b396963d8191c7c565257dd18c150fbda31c8b679575c042c7ebf94",
         "timestamp": "20260421132503",
         "url": "https://web.archive.org/web/20260421132503/http://konect.cc/networks/moreno_rhesus"
       },
@@ -66,6 +68,8 @@
     {
       "retrieved": "2026-04-20",
       "snapshot": {
+        "byteLength": 17736,
+        "sha256": "b205043a77beedf12258f047d77b11ac197d51abf20cb6781a35fc5a8f704a2f",
         "timestamp": "20260606101012",
         "url": "https://web.archive.org/web/20260606101012/https://networks.skewed.de/net/rhesus_monkey"
       },
@@ -75,6 +79,8 @@
     {
       "retrieved": "2026-04-20",
       "snapshot": {
+        "byteLength": 2359,
+        "sha256": "13ed5045336a2cb5a97b5f4cdc5e0f19cbc08f1421410f93f36a763e9c2997d8",
         "timestamp": "20261022024024",
         "url": "https://web.archive.org/web/20261022024024/https://networks.skewed.de/net/rhesus_monkey/files/rhesus_monkey.csv.zip"
       },

@@ -72,6 +72,8 @@
     {
       "retrieved": "2026-03-26",
       "snapshot": {
+        "byteLength": 188866951,
+        "sha256": "096a9e4d871ad5d698bd503b2b9a2409297b88f5b55bc479c710f0c700429820",
         "timestamp": "20261022000917",
         "url": "https://web.archive.org/web/20261022000917/https://downloads.thebiogrid.org/Download/BioGRID/Release-Archive/BIOGRID-5.0.262/BIOGRID-ORGANISM-5.0.262.tab3.zip"
       },

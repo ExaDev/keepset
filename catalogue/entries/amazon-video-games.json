@@ -51,6 +51,8 @@
     {
       "retrieved": "2026-03-27",
       "snapshot": {
+        "byteLength": 53949503,
+        "sha256": "f0ca171050c2e0f208d47f5267992476b21ab68a01439c21c8be1a4432982cfa",
         "timestamp": "20261020230424",
         "url": "https://web.archive.org/web/20261020230424/http://jmcauley.ucsd.edu/data/amazon/categoryFiles/ratings_Video_Games.csv"
       },

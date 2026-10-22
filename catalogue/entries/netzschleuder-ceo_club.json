@@ -57,6 +57,8 @@
     {
       "retrieved": "2026-04-20",
       "snapshot": {
+        "byteLength": 18619,
+        "sha256": "4f88954c76d3eb03d61c4ef3a7b131ac7c96ffef3e05737aa36cac08c14d0021",
         "timestamp": "20250623193623",
         "url": "https://web.archive.org/web/20250623193623/http://konect.cc/networks/brunson_club-membership"
       },
@@ -66,6 +68,8 @@
     {
       "retrieved": "2026-04-20",
       "snapshot": {
+        "byteLength": 17396,
+        "sha256": "1116275fea2b6ff97f71ceeb3e615d9beaf47a50e9750b90f0c9bcfc23ef71de",
         "timestamp": "20260606112650",
         "url": "https://web.archive.org/web/20260606112650/https://networks.skewed.de/net/ceo_club"
       },
@@ -75,6 +79,8 @@
     {
       "retrieved": "2026-04-20",
       "snapshot": {
+        "byteLength": 2414,
+        "sha256": "2deef7837849636ca42124c9881b1b9455a5be65042f2a49ec095e802f6f55ad",
         "timestamp": "20261022013648",
         "url": "https://web.archive.org/web/20261022013648/https://networks.skewed.de/net/ceo_club/files/ceo_club.csv.zip"
       },

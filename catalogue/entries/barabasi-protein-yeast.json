@@ -57,6 +57,8 @@
     {
       "retrieved": "2026-02-16",
       "snapshot": {
+        "byteLength": 15277,
+        "sha256": "23779403f1f52a863bfba99cb519797d78616817c3aec7fc643d6397b43915c5",
         "timestamp": "20061110114126",
         "url": "https://web.archive.org/web/20061110114126/http://www.nd.edu/~networks/resources/protein/bo.dat.gz"
       },

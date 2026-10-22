@@ -69,6 +69,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 22288,
+        "sha256": "08fb5ebb772ad8850f28b6c58365d83dca711023bf15009f79e3cf8c1a72b342",
         "timestamp": "20261008080210",
         "url": "https://web.archive.org/web/20261008080210/https://data.melbourne.vic.gov.au/explore/dataset/on-street-parking-bay-sensors/"
       },

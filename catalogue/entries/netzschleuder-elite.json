@@ -57,6 +57,8 @@
     {
       "retrieved": "2026-04-20",
       "snapshot": {
+        "byteLength": 19269,
+        "sha256": "d4d4f4fcf98c3ccf91afeacfa20ffeda6eca8bbaf8839c3f6b86d23a413df565",
         "timestamp": "20260410154946",
         "url": "https://web.archive.org/web/20260410154946/http://konect.cc/networks/brunson_corporate-leadership"
       },
@@ -66,6 +68,8 @@
     {
       "retrieved": "2026-04-20",
       "snapshot": {
+        "byteLength": 17277,
+        "sha256": "2f80f6811cc15c9e262ac3ac586e6f8cc173901cfb8c38f3e7b1edbb1eb852d5",
         "timestamp": "20260210205414",
         "url": "https://web.archive.org/web/20260210205414/https://networks.skewed.de/net/elite"
       },

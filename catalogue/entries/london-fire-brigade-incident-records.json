@@ -96,6 +96,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 252281,
+        "sha256": "4c1f8e55b63f559fb724596eae37101d09d823b9ee0102e12abcfbca330d3a6c",
         "timestamp": "20250811150551",
         "url": "https://web.archive.org/web/20250811150551/https://data.london.gov.uk/dataset/london-fire-brigade-incident-records"
       },
@@ -105,6 +107,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 328582222,
+        "sha256": "2b1f627b02826672c8ba65472d7b5078954a8f93ad6f6333fc06e4c7c27adfcf",
         "timestamp": "20260321211811",
         "url": "https://web.archive.org/web/20260321211811/https://data.london.gov.uk/download/em8xy/73728cf4-b70e-48e2-9b97-4e4341a2110d/LFB%20Incident%20data%20from%202009%20-%202017.csv"
       },

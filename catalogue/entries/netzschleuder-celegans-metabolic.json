@@ -58,6 +58,8 @@
     {
       "retrieved": "2026-04-20",
       "snapshot": {
+        "byteLength": 18253,
+        "sha256": "4ffdd7756267ab5c0208a103e5212a9605e8cc7f7dbc0e5d6eccb39927b5d48d",
         "timestamp": "20260420154621",
         "url": "https://web.archive.org/web/20260420154621/https://networks.skewed.de/net/celegans_metabolic"
       },
@@ -67,6 +69,8 @@
     {
       "retrieved": "2026-04-20",
       "snapshot": {
+        "byteLength": 17841,
+        "sha256": "cb47597954119e28af5b553733ac32243d1b0a2f7f3a902942242c445b4efa7e",
         "timestamp": "20261022013226",
         "url": "https://web.archive.org/web/20261022013226/https://networks.skewed.de/net/celegans_metabolic/files/celegans_metabolic.csv.zip"
       },

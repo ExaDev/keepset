@@ -63,6 +63,8 @@
     {
       "retrieved": "2026-04-20",
       "snapshot": {
+        "byteLength": 11933,
+        "sha256": "6e284f15d9705da75a4581d13559dbf403d0379c2eced90a975cd3dd83de225f",
         "timestamp": "20210525040742",
         "url": "https://web.archive.org/web/20210525040742/https://nrvis.com/download/data/eco/eco-mangwet.zip"
       },

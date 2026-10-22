@@ -111,6 +111,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 157399,
+        "sha256": "b3a1f9f65769bca5436f61c5747c64750657bafb6946d0c96b0e5685bbca5f6c",
         "timestamp": "20261013174906",
         "url": "https://web.archive.org/web/20261013174906/https://data.cityofnewyork.us/Public-Safety/EMS-Incident-Dispatch-Data/76xm-jjuj"
       },
@@ -120,6 +122,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 45212,
+        "sha256": "0554dc146cb55fa014f30601aa5a969ec1214ffd4dcca4ed6013e751c45974a9",
         "timestamp": "20260827170745",
         "url": "https://web.archive.org/web/20260827170745/https://data.cityofnewyork.us/resource/76xm-jjuj.csv"
       },

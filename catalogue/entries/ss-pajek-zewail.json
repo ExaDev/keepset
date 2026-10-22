@@ -58,6 +58,8 @@
     {
       "retrieved": "2026-02-16",
       "snapshot": {
+        "byteLength": 12155,
+        "sha256": "b77eae9c28e79b0bd5d233ca2a6a8596667460c20c45cc9e798954ed0d416e62",
         "timestamp": "20230601",
         "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/"
       },

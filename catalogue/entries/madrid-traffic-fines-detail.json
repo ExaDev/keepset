@@ -30,6 +30,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 264692,
+        "sha256": "6317fcca92320e68a2dc48856662af2e6b7de62787dd5315eec2107a5721dc18",
         "timestamp": "20260504202912",
         "url": "https://web.archive.org/web/20260504202912/https://datos.madrid.es/dataset/210104-0-multas-circulacion-detalle"
       },
@@ -39,6 +41,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 2608389,
+        "sha256": "5132d913620f73b0feb08490fab7e763d3f3550a01fdaff35b4220aad0aa22b9",
         "timestamp": "20261021014848",
         "url": "https://web.archive.org/web/20261021014848/https://datos.madrid.es/dataset/210104-0-multas-circulacion-detalle/resource/210104-385-multas-circulacion-detalle/download/210104-385-multas-circulacion-detalle.csv"
       },

@@ -61,6 +61,8 @@
     {
       "retrieved": "2026-04-20",
       "snapshot": {
+        "byteLength": 10616,
+        "sha256": "1d911b8da13e37b3be92a4fd84003190dabdb3c2f888118bb4ec5b922a16dbf8",
         "timestamp": "20230923111129",
         "url": "https://web.archive.org/web/20230923111129/http://www-personal.umich.edu/~mejn/netdata"
       },
@@ -70,6 +72,8 @@
     {
       "retrieved": "2026-04-20",
       "snapshot": {
+        "byteLength": 4328,
+        "sha256": "d9a646f367c7521b87cfdc0bcaf30d743d02a10d7950fd30814f998049d51083",
         "timestamp": "20261022013310",
         "url": "https://web.archive.org/web/20261022013310/https://networks.skewed.de/net/celegansneural"
       },
@@ -79,6 +83,8 @@
     {
       "retrieved": "2026-04-20",
       "snapshot": {
+        "byteLength": 12493,
+        "sha256": "0d0e1bb6a249cb3c104658323d71700e6463442a034adeee1d262c39c7090910",
         "timestamp": "20261022013639",
         "url": "https://web.archive.org/web/20261022013639/https://networks.skewed.de/net/celegansneural/files/celegansneural.csv.zip"
       },

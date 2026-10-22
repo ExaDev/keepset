@@ -100,6 +100,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 5295265,
+        "sha256": "ae6aa282168e4e5981d48a592eeb0ea622d7d846e0ca91b2672664a6d7c73826",
         "timestamp": "20261020231834",
         "url": "https://web.archive.org/web/20261020231834/https://data.buffalony.gov/api/views/pamv-gash/rows.csv?accessType=DOWNLOAD"
       },

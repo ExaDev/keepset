@@ -52,6 +52,8 @@
     {
       "retrieved": "2026-04-19",
       "snapshot": {
+        "byteLength": 552662,
+        "sha256": "5a9d1f71159b8da7a684d3079966768cb7469e49a74769604569120f0977473f",
         "timestamp": "20261020230842",
         "url": "https://web.archive.org/web/20261020230842/http://konect.cc/files/download.tsv.wikispeedia.tar.bz2"
       },

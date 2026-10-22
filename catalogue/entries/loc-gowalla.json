@@ -55,6 +55,8 @@
     {
       "retrieved": "2026-01-17",
       "snapshot": {
+        "byteLength": 6351523,
+        "sha256": "ac54352b60aca48eb1c63e94e7002808a29fa232b090539a0088b4907c847421",
         "timestamp": "20251020041923",
         "url": "https://web.archive.org/web/20251020041923/https://snap.stanford.edu/data/loc-gowalla_edges.txt.gz"
       },

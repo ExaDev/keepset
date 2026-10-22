@@ -129,6 +129,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 171690,
+        "sha256": "788fc9a725218dc096de77a16d9ae3528525510bc04ce7e661af1f049b70ecd7",
         "timestamp": "20261005200919",
         "url": "https://web.archive.org/web/20261005200919/https://data.cityofnewyork.us/Housing-Development/DOB-Permit-Issuance/ipu4-2q9a"
       },

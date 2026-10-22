@@ -60,6 +60,8 @@
     {
       "retrieved": "2026-02-16",
       "snapshot": {
+        "byteLength": 2668957,
+        "sha256": "ab22012caa9e9c816248fa29a4dfe9595b5b21fc0be553260ba2527bc7ab2b7a",
         "timestamp": "20230601",
         "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/hep-th/hep-th.zip"
       },

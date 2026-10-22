@@ -51,6 +51,8 @@
     {
       "retrieved": "2026-03-27",
       "snapshot": {
+        "byteLength": 20376609,
+        "sha256": "c541cf84fcc75d98cc595ebd856b0ebd351efce134671171c2de0d54b9573b9c",
         "timestamp": "20261020230404",
         "url": "https://web.archive.org/web/20261020230404/http://jmcauley.ucsd.edu/data/amazon/categoryFiles/ratings_Musical_Instruments.csv"
       },

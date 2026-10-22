@@ -55,6 +55,8 @@
     {
       "retrieved": "2026-02-16",
       "snapshot": {
+        "byteLength": 1428,
+        "sha256": "f4eab6ee42a7204ae62b7751a8e50a3c22c5e54b88e7caf5d29514676ca2af43",
         "timestamp": "20230601",
         "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/UciNet/gama.dat"
       },

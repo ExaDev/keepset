@@ -55,6 +55,8 @@
     {
       "retrieved": "2026-01-17",
       "snapshot": {
+        "byteLength": 210596,
+        "sha256": "7235c7e11887f8a32dfd03a3aa0c77efdf89d41591a959c7d6e4ca11b1299bb5",
         "timestamp": "20160730000909",
         "url": "https://web.archive.org/web/20160730000909/https://snap.stanford.edu/data/ca-HepTh.txt.gz"
       },

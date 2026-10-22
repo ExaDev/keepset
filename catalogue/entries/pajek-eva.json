@@ -59,6 +59,8 @@
     {
       "retrieved": "2026-02-16",
       "snapshot": {
+        "byteLength": 208099,
+        "sha256": "3616818c4512e373775abcda702c95b6b5c86984a335cbe934cb8ebb9fdaf104",
         "timestamp": "20230601",
         "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/econ/Eva/EVA.zip"
       },

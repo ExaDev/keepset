@@ -59,6 +59,8 @@
     {
       "retrieved": "2026-02-16",
       "snapshot": {
+        "byteLength": 171147,
+        "sha256": "a9604748863d35c63deb3bc8e4b36abc5e3857a799119a3ea30ec1e8a54ab16d",
         "timestamp": "20230601",
         "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/cite/Kohonen.zip"
       },

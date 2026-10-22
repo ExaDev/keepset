@@ -55,6 +55,8 @@
     {
       "retrieved": "2026-02-16",
       "snapshot": {
+        "byteLength": 1316,
+        "sha256": "18ccabcb3777de599a718941013bbe3167c109dd52d94187be22b7ac35d78c6d",
         "timestamp": "20230601",
         "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/UciNet/kapmine.dat"
       },

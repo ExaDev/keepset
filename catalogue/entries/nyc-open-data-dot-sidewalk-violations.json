@@ -74,6 +74,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 151573,
+        "sha256": "4c1168d2d7235d37eeea5f7b7068da10d589f8c3c6999de2855c927afc82e68c",
         "timestamp": "20260828170015",
         "url": "https://web.archive.org/web/20260828170015/https://data.cityofnewyork.us/Transportation/Sidewalk-Management-Database-Violations/6kbp-uz6m"
       },
@@ -83,6 +85,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 16966939,
+        "sha256": "48e741e366ed06ca5797deced1c45cea16d4cb0cda7d71ab4b0e08d1c434bc1d",
         "timestamp": "20260403020730",
         "url": "https://web.archive.org/web/20260403020730/https://data.cityofnewyork.us/api/views/6kbp-uz6m/rows.csv?accessType=DOWNLOAD"
       },

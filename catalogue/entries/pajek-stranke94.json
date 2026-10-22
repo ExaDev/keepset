@@ -54,6 +54,8 @@
     {
       "retrieved": "2026-02-16",
       "snapshot": {
+        "byteLength": 1477,
+        "sha256": "dc711cdaad1dcadd70ed00d3d95f69ae0f2eec2f3b743273251d291ffdf4832f",
         "timestamp": "20230601",
         "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/soc/Samo/Stranke94.net"
       },

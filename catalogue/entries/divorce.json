@@ -48,6 +48,8 @@
     {
       "retrieved": "2026-02-16",
       "snapshot": {
+        "byteLength": 1992,
+        "sha256": "9eb9025a60ab36ba7524a16dd5ae149d7db9c034c5ff6565443f1bd94943ff54",
         "timestamp": "20230601",
         "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/2mode/divorce.net"
       },

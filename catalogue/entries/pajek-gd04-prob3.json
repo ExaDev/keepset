@@ -65,6 +65,8 @@
     {
       "retrieved": "2026-02-16",
       "snapshot": {
+        "byteLength": 242204,
+        "sha256": "bd22fc2dd7673d03d5e3692d66b87479883f22fbe9af95db5d4bd993d1f2850a",
         "timestamp": "20230601",
         "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/GD/gd04/gd04.zip"
       },

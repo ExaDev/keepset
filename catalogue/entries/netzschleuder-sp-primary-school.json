@@ -58,6 +58,8 @@
     {
       "retrieved": "2026-04-20",
       "snapshot": {
+        "byteLength": 18796,
+        "sha256": "55b56adb02e2f27c277d0f1bb89635272200d90adb48d0c523677b99d61af5a9",
         "timestamp": "20260520185844",
         "url": "https://web.archive.org/web/20260520185844/https://networks.skewed.de/net/sp_primary_school"
       },
@@ -67,6 +69,8 @@
     {
       "retrieved": "2026-04-20",
       "snapshot": {
+        "byteLength": 356686,
+        "sha256": "62fb0b24d284a80f9d4d77844b42dcd6d0b86edfb4ca2c0474ab9e2b2bafa07b",
         "timestamp": "20261022024230",
         "url": "https://web.archive.org/web/20261022024230/https://networks.skewed.de/net/sp_primary_school/files/sp_primary_school.csv.zip"
       },

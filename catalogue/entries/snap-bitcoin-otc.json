@@ -61,6 +61,8 @@
     {
       "retrieved": "2026-03-26",
       "snapshot": {
+        "byteLength": 397258,
+        "sha256": "6424ac981dad3a019f697fc1b9fcd85c19d8d9f039797758e9ffb6fea100c373",
         "timestamp": "20230316065849",
         "url": "https://web.archive.org/web/20230316065849/https://snap.stanford.edu/data/soc-sign-bitcoinotc.csv.gz"
       },

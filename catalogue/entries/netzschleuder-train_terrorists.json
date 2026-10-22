@@ -57,6 +57,8 @@
     {
       "retrieved": "2026-04-20",
       "snapshot": {
+        "byteLength": 16657,
+        "sha256": "087e37107b936514bb8c5308e5540e5e431b82e26a44b61a89b3887e2bc8e216",
         "timestamp": "20260421132847",
         "url": "https://web.archive.org/web/20260421132847/http://konect.cc/networks/moreno_train"
       },
@@ -66,6 +68,8 @@
     {
       "retrieved": "2026-04-20",
       "snapshot": {
+        "byteLength": 18254,
+        "sha256": "d2ed875d416c687413c6a89f26c3bed1fb09db0204963b266534688c3e0f7924",
         "timestamp": "20260316213709",
         "url": "https://web.archive.org/web/20260316213709/https://networks.skewed.de/net/train_terrorists"
       },
@@ -75,6 +79,8 @@
     {
       "retrieved": "2026-04-20",
       "snapshot": {
+        "byteLength": 3255,
+        "sha256": "508999ae50efebcef0f0d51799c749235d75d8c08aa1797050f8aab4eba60ff9",
         "timestamp": "20261022024340",
         "url": "https://web.archive.org/web/20261022024340/https://networks.skewed.de/net/train_terrorists/files/train_terrorists.csv.zip"
       },

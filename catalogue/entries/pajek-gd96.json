@@ -54,6 +54,8 @@
     {
       "retrieved": "2026-02-16",
       "snapshot": {
+        "byteLength": 160999,
+        "sha256": "35749c0289bcca0f3b77421e1540cff0e51a70c39c74c91633e129831a6ca769",
         "timestamp": "20230601",
         "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/GD/gd96/A96.net"
       },

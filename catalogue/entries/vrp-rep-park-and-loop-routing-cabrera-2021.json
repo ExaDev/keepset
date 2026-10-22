@@ -98,6 +98,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 967083,
+        "sha256": "f52a33145284e6c6be0559b311f43db95f6bdfadd1dad3a61cf01c4039395d9e",
         "timestamp": "20261020231235",
         "url": "https://web.archive.org/web/20261020231235/http://www.vrp-rep.org/datasets/download/cabrera-et-al-2021.zip"
       },

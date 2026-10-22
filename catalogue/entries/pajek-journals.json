@@ -60,6 +60,8 @@
     {
       "retrieved": "2026-02-16",
       "snapshot": {
+        "byteLength": 16888,
+        "sha256": "303220d5d1ab5628902b3c8a08394d2cd594b61660ae6eaed121437a96af9609",
         "timestamp": "20130507053929",
         "url": "https://web.archive.org/web/20130507053929/http://vlado.fmf.uni-lj.si/pub/networks/data/2mode/revije.zip"
       },

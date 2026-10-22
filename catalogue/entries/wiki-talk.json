@@ -55,6 +55,8 @@
     {
       "retrieved": "2026-01-17",
       "snapshot": {
+        "byteLength": 16947922,
+        "sha256": "0f3fd7bb8435ad0d46bd3cd06d2fb947c72d298a9310c8ce82b4d29ef973fb9f",
         "timestamp": "20240414142953",
         "url": "https://web.archive.org/web/20240414142953/https://snap.stanford.edu/data/wiki-Talk.txt.gz"
       },

@@ -875,6 +875,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 4744,
+        "sha256": "6a8a6211883bbcecd40098415e35c3e12633b4dffc67dfe6c6bf5c4c0b55859e",
         "timestamp": "20260207012433",
         "url": "https://web.archive.org/web/20260207012433/https://verolog2017.ortec.com/instance/1/1-7166387f68986ca720f76fbd5290113b.txt/ORTEC_Test_01.txt"
       },
@@ -884,6 +886,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 9495,
+        "sha256": "04806135bd401bcb171a472238139550103cd47b029a04165634a342ce34f3ea",
         "timestamp": "20260121023722",
         "url": "https://web.archive.org/web/20260121023722/https://verolog2017.ortec.com/instance/1/1-587f1c1000eae4d5f373184139d6ccce.txt/ORTEC_Test_02.txt"
       },
@@ -893,6 +897,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 16210,
+        "sha256": "8b5b2021c0751292848ffba89b2e5ccffd3875a6e8bb10d6f146aa695e4dc321",
         "timestamp": "20260207014524",
         "url": "https://web.archive.org/web/20260207014524/https://verolog2017.ortec.com/instance/1/1-4a0b98c851d035bbc369bd2aeff918d3.txt/ORTEC_Test_03.txt"
       },
@@ -902,6 +908,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 4750,
+        "sha256": "f5e89a1c51aca845fed3709c87c2e84fccb780960508deb415a67e970248f20d",
         "timestamp": "20260312010452",
         "url": "https://web.archive.org/web/20260312010452/https://verolog2017.ortec.com/instance/1/1-76b4d92b07456b03405254c91482878d.txt/ORTEC_Test_04.txt"
       },
@@ -911,6 +919,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 9497,
+        "sha256": "880a2f1f6c8959cfe4aeedc9b0e01b94981a748231d4bf8ac9b4f99681ffe57c",
         "timestamp": "20251217090840",
         "url": "https://web.archive.org/web/20251217090840/https://verolog2017.ortec.com/instance/1/1-5ea19e27a944831b27ce7923350ec6db.txt/ORTEC_Test_05.txt"
       },
@@ -920,6 +930,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 16129,
+        "sha256": "42f26f2c82b6a26a9df5212b9660eea179b0113eec88d6115f4876866a2b691f",
         "timestamp": "20240918083607",
         "url": "https://web.archive.org/web/20240918083607/https://verolog2017.ortec.com/instance/1/1-2cbfe10526cd3fb9e8b6f3aebd4354a7.txt/ORTEC_Test_06.txt"
       },
@@ -929,6 +941,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 24296,
+        "sha256": "ca87d44cb1b4587950c54b58495b930fdca1c2c454b60bdfbdf6c118b54d9037",
         "timestamp": "20260312003519",
         "url": "https://web.archive.org/web/20260312003519/https://verolog2017.ortec.com/instance/1/1-b1492a7bb01ab0a6d2e6acfeffc4a774.txt/ORTEC_Test_07.txt"
       },
@@ -938,6 +952,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 24246,
+        "sha256": "fb297da71435e108c0aa3bd3036103a59e357896ff1d215316b6ebe9b9d20fb3",
         "timestamp": "20260312014131",
         "url": "https://web.archive.org/web/20260312014131/https://verolog2017.ortec.com/instance/1/1-37cffcc7f322d8d251abf6fe7e352f8e.txt/ORTEC_Test_08.txt"
       },
@@ -947,6 +963,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 32836,
+        "sha256": "f74eb1dc5cc2a3d7077ed600a6c141ea1b0b0acc31bb502e1b1b002d041febde",
         "timestamp": "20260515020640",
         "url": "https://web.archive.org/web/20260515020640/https://verolog2017.ortec.com/instance/1/1-2acc3935112c7e1200f61bb647c13e7d.txt/ORTEC_Test_09.txt"
       },
@@ -956,6 +974,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 32785,
+        "sha256": "ecbb722f43e1698a6b7b9a09a6eac51fb115a859360384706b8f37d3259d8bd9",
         "timestamp": "20260312015701",
         "url": "https://web.archive.org/web/20260312015701/https://verolog2017.ortec.com/instance/1/1-4889fb56dafd5fb571a4bbc6b997f170.txt/ORTEC_Test_10.txt"
       },
@@ -965,6 +985,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 34349,
+        "sha256": "4ba71456f60697245be331d26c073db52eb5624be7b1b77bb24e3f9cce30af22",
         "timestamp": "20260420181417",
         "url": "https://web.archive.org/web/20260420181417/https://verolog2017.ortec.com/instance/4/4-be04139192c0baa4e61ea66c52569b5f.txt/VeRoLog_hidden_r1000d20_1.txt"
       },
@@ -974,6 +996,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 34332,
+        "sha256": "4c6df504f8ba7fa9734ce0ed3e9a9665c35210e1835abaeccce457dbeed9ebca",
         "timestamp": "20240918065212",
         "url": "https://web.archive.org/web/20240918065212/https://verolog2017.ortec.com/instance/4/4-8ead08ac53237ff62df8682b61eef5df.txt/VeRoLog_hidden_r1000d20_2.txt"
       },
@@ -983,6 +1007,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 34240,
+        "sha256": "5fea2fbd89addd869df23c2653d20447083014b39eb81b54826af997ab36f309",
         "timestamp": "20240912215100",
         "url": "https://web.archive.org/web/20240912215100/https://verolog2017.ortec.com/instance/4/4-0fd89018562f2f2badb817d471b22dc6.txt/VeRoLog_hidden_r1000d20_3.txt"
       },
@@ -992,6 +1018,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 34255,
+        "sha256": "2a3c9148eb3028a2553751b472ae9e8772514784b27860e28158ed01b35285c4",
         "timestamp": "20260420181213",
         "url": "https://web.archive.org/web/20260420181213/https://verolog2017.ortec.com/instance/4/4-aa702cb83f7a4303a6dfa658e90fa07f.txt/VeRoLog_hidden_r1000d20_4.txt"
       },
@@ -1001,6 +1029,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 34362,
+        "sha256": "4eb1c1fe6fe83f0bf16c564ca792936c573e1072dc8ea4717ee2ac178ed92322",
         "timestamp": "20260312020110",
         "url": "https://web.archive.org/web/20260312020110/https://verolog2017.ortec.com/instance/4/4-8b75c7e8364dc820f3489e9d200daf0b.txt/VeRoLog_hidden_r1000d20_5.txt"
       },
@@ -1010,6 +1040,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 34491,
+        "sha256": "39239190110573a904bbb8539c9bf5e107489452b4415e9361a82872a82e3639",
         "timestamp": "20260420192045",
         "url": "https://web.archive.org/web/20260420192045/https://verolog2017.ortec.com/instance/4/4-3619fdb5157feb13589296f8a36de630.txt/VeRoLog_hidden_r1000d25_1.txt"
       },
@@ -1019,6 +1051,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 34686,
+        "sha256": "9c87a0498dffbcbfa1bd8fe924592181990407db175ddfdf7cf718a33933d64e",
         "timestamp": "20241005121718",
         "url": "https://web.archive.org/web/20241005121718/https://verolog2017.ortec.com/instance/4/4-e50fa17b45d39fc65912a8ddc12efd0c.txt/VeRoLog_hidden_r1000d25_2.txt"
       },
@@ -1028,6 +1062,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 34600,
+        "sha256": "c1e6b0bd15e3f0465e52b8806498db6a56c9abcac3852c5521ee9c7a4b3e073b",
         "timestamp": "20241108083248",
         "url": "https://web.archive.org/web/20241108083248/https://verolog2017.ortec.com/instance/4/4-2013cc2dad7b631f3ef5ce5e8471bcc6.txt/VeRoLog_hidden_r1000d25_3.txt"
       },
@@ -1037,6 +1073,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 34593,
+        "sha256": "ca8a453b6aa19d8980a99a99eed2357407424997a38f6a9e35046d7dd5c7c74b",
         "timestamp": "20260420190742",
         "url": "https://web.archive.org/web/20260420190742/https://verolog2017.ortec.com/instance/4/4-05104f29c166b54289d4151d2c159356.txt/VeRoLog_hidden_r1000d25_4.txt"
       },
@@ -1046,6 +1084,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 34607,
+        "sha256": "4ff4df3eb5ec95251ac1004e7403d5947e5859eec77c64a1de41997222a31344",
         "timestamp": "20251108023820",
         "url": "https://web.archive.org/web/20251108023820/https://verolog2017.ortec.com/instance/4/4-8a1b91228cdd77a81ebdb2363b00e1a0.txt/VeRoLog_hidden_r1000d25_5.txt"
       },
@@ -1055,6 +1095,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 52626,
+        "sha256": "822de169e24470d63e00da4ef214905380a201d3b4c6cc1df626dc08bb6e1282",
         "timestamp": "20260515005156",
         "url": "https://web.archive.org/web/20260515005156/https://verolog2017.ortec.com/instance/4/4-97f69a558d19c2df77ae75a062e9fb55.txt/VeRoLog_hidden_r1500d30_1.txt"
       },
@@ -1064,6 +1106,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 52558,
+        "sha256": "f1b2c9d446ac5577512cf5aee5573a34c66dc4e2d447b882dded4fd5a923245d",
         "timestamp": "20260608140306",
         "url": "https://web.archive.org/web/20260608140306/https://verolog2017.ortec.com/instance/4/4-34c90ab02514069c5cd25072659ca8b4.txt/VeRoLog_hidden_r1500d30_2.txt"
       },
@@ -1073,6 +1117,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 52570,
+        "sha256": "89e6fbfdb0d19dde1fa2ae8133fd9044e3a2c70efffc65230cedea62a66d24cf",
         "timestamp": "20251108041308",
         "url": "https://web.archive.org/web/20251108041308/https://verolog2017.ortec.com/instance/4/4-1f4d8eed1312f4bf17d8e575c9a38470.txt/VeRoLog_hidden_r1500d30_3.txt"
       },
@@ -1082,6 +1128,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 52565,
+        "sha256": "fc7ab4b7d81ed0cfa29bafedc5d96e21d57921dd3e48375fb90b1c1dae691cbd",
         "timestamp": "20260207022254",
         "url": "https://web.archive.org/web/20260207022254/https://verolog2017.ortec.com/instance/4/4-13853d226925ae24f49e1061e8c26b33.txt/VeRoLog_hidden_r1500d30_4.txt"
       },
@@ -1091,6 +1139,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 52681,
+        "sha256": "a59451d73c6614fc37ee333a4b635e8c04220dd68f349b54fda44247a0175b5b",
         "timestamp": "20260312021838",
         "url": "https://web.archive.org/web/20260312021838/https://verolog2017.ortec.com/instance/4/4-308be6015c952d331c2c7a075390051b.txt/VeRoLog_hidden_r1500d30_5.txt"
       },
@@ -1100,6 +1150,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 52768,
+        "sha256": "cb451d467a57a77900fb01c31635dbb33acabe0e026c0dc80b3ce618399e84c2",
         "timestamp": "20241005124153",
         "url": "https://web.archive.org/web/20241005124153/https://verolog2017.ortec.com/instance/4/4-1cc60f2f35c1b9395a042ec4afcbb43b.txt/VeRoLog_hidden_r1500d40_1.txt"
       },
@@ -1109,6 +1161,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 52701,
+        "sha256": "8af9209577011cb7cdbc0ba14fd48f2e8d25eca3b0081e7444d4b8f1b6e477de",
         "timestamp": "20241005114103",
         "url": "https://web.archive.org/web/20241005114103/https://verolog2017.ortec.com/instance/4/4-ee38e57599ef794853df2f913f194ec0.txt/VeRoLog_hidden_r1500d40_2.txt"
       },
@@ -1118,6 +1172,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 52715,
+        "sha256": "0e97d2aee1819ef1f782e17309357929246da369e02fc6eb7d46c6c81ced297e",
         "timestamp": "20260312004649",
         "url": "https://web.archive.org/web/20260312004649/https://verolog2017.ortec.com/instance/4/4-a7804949e0e4238f7255d03f74b8e7f5.txt/VeRoLog_hidden_r1500d40_3.txt"
       },
@@ -1127,6 +1183,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 52818,
+        "sha256": "86340845d863bdf68dc0dedc8758f0476a037a22b872587eb66abb28ea9174eb",
         "timestamp": "20260207023324",
         "url": "https://web.archive.org/web/20260207023324/https://verolog2017.ortec.com/instance/4/4-6cb0bc297af8a4658e7139372388bb9f.txt/VeRoLog_hidden_r1500d40_4.txt"
       },
@@ -1136,6 +1194,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 52971,
+        "sha256": "0f4b3c4241bb13283bc45bd80a7d263dd532670a63f5f9989b6869ae1488dbe8",
         "timestamp": "20260420183615",
         "url": "https://web.archive.org/web/20260420183615/https://verolog2017.ortec.com/instance/4/4-750ddb23f886bd4a5d0ba9b5e406b304.txt/VeRoLog_hidden_r1500d40_5.txt"
       },
@@ -1145,6 +1205,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 70821,
+        "sha256": "bae91003ca8794fb2808f4deee275fbbee613f9410962a05da060ebecdde84f0",
         "timestamp": "20260312013912",
         "url": "https://web.archive.org/web/20260312013912/https://verolog2017.ortec.com/instance/4/4-4d6d6181085e32c13e34f97b400028b2.txt/VeRoLog_hidden_r2000d50_1.txt"
       },
@@ -1154,6 +1216,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 70885,
+        "sha256": "bbbe4de7276118a83633219bb34cb83ada43b9c74a6dd5106e0de4365aab42c0",
         "timestamp": "20240918081710",
         "url": "https://web.archive.org/web/20240918081710/https://verolog2017.ortec.com/instance/4/4-219cc43fa93f0e408039381b02b34acc.txt/VeRoLog_hidden_r2000d50_2.txt"
       },
@@ -1163,6 +1227,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 70898,
+        "sha256": "2e6fafe719fbfd7be75d32cb43b8394a05583681562930df88267436abe5b711",
         "timestamp": "20251217091457",
         "url": "https://web.archive.org/web/20251217091457/https://verolog2017.ortec.com/instance/4/4-17bf56538032dbcceebf7d61c9839c74.txt/VeRoLog_hidden_r2000d50_3.txt"
       },
@@ -1172,6 +1238,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 70905,
+        "sha256": "a9a5583a06db7b12d42b558bf0a65b19cd2b29b3477f82d5b066e50529082a3c",
         "timestamp": "20260207015854",
         "url": "https://web.archive.org/web/20260207015854/https://verolog2017.ortec.com/instance/4/4-c6867fddc41d12c6c267d85516cc21cd.txt/VeRoLog_hidden_r2000d50_4.txt"
       },
@@ -1181,6 +1249,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 70663,
+        "sha256": "10e98ecb7b94428a1daecb6e0896f0f7690e39bf551c34e17e8390fe31257e86",
         "timestamp": "20260515005816",
         "url": "https://web.archive.org/web/20260515005816/https://verolog2017.ortec.com/instance/4/4-cd2b0778df2a85d1dd383cd65f5340fd.txt/VeRoLog_hidden_r2000d50_5.txt"
       },
@@ -1190,6 +1260,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 70816,
+        "sha256": "9844f7eae458d3be0e2968efdbed6c803cd205a425f01e9c4a07a4d5e8650acf",
         "timestamp": "20251016145704",
         "url": "https://web.archive.org/web/20251016145704/https://verolog2017.ortec.com/instance/4/4-b31239590a37d97be636d003d342d71f.txt/VeRoLog_hidden_r2000d65_1.txt"
       },
@@ -1199,6 +1271,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 70728,
+        "sha256": "edba14cb866fffd66cf43aada2345b9fa2f10369983d0f6eddc10d25f30e7c46",
         "timestamp": "20260515011707",
         "url": "https://web.archive.org/web/20260515011707/https://verolog2017.ortec.com/instance/4/4-d38ed6173b521dc682fd88b4b88a6965.txt/VeRoLog_hidden_r2000d65_2.txt"
       },
@@ -1208,6 +1282,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 70933,
+        "sha256": "ec619899f06705b0c8911e82894530fbac345a53ec0cae97750e485e3a84affe",
         "timestamp": "20260312021409",
         "url": "https://web.archive.org/web/20260312021409/https://verolog2017.ortec.com/instance/4/4-f3d185d2bb9fd808c7d570f100ee4896.txt/VeRoLog_hidden_r2000d65_3.txt"
       },
@@ -1217,6 +1293,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 70660,
+        "sha256": "48e338b530b10fdd89d858afebd5cc8014e58f2d545a98f03f29ed086e756d77",
         "timestamp": "20260515021721",
         "url": "https://web.archive.org/web/20260515021721/https://verolog2017.ortec.com/instance/4/4-cf8056812e79b675b4c3e5fa3c071fd4.txt/VeRoLog_hidden_r2000d65_4.txt"
       },
@@ -1226,6 +1304,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 71159,
+        "sha256": "9f3a2124a27fbbc33603900e6fde4dfd8cf2769da366523c2e36ba303787e9ef",
         "timestamp": "20260608142404",
         "url": "https://web.archive.org/web/20260608142404/https://verolog2017.ortec.com/instance/4/4-927ab7ab6410e2235e07aff8bc2b8177.txt/VeRoLog_hidden_r2000d65_5.txt"
       },
@@ -1235,6 +1315,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 88498,
+        "sha256": "9332fae46726149dc36b21483f29453afc00840166ea901bea2fae1a80fc66dd",
         "timestamp": "20260515012737",
         "url": "https://web.archive.org/web/20260515012737/https://verolog2017.ortec.com/instance/4/4-4a0ba2cd58a6252c4231efb39e6cd963.txt/VeRoLog_hidden_r2500d70_1.txt"
       },
@@ -1244,6 +1326,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 88475,
+        "sha256": "f1b591fc7e83d89373153a46bc3bb628895e7a60254c1be1a2edef8abc2561c2",
         "timestamp": "20260420182857",
         "url": "https://web.archive.org/web/20260420182857/https://verolog2017.ortec.com/instance/4/4-8c2cc50bc5d106f1e3d8c95d9b19a152.txt/VeRoLog_hidden_r2500d70_2.txt"
       },
@@ -1253,6 +1337,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 88658,
+        "sha256": "5b98b9fe9d057ccab2e45f716f38406b6054f2c93b452f6dc94bad91e7d19cd3",
         "timestamp": "20260420180048",
         "url": "https://web.archive.org/web/20260420180048/https://verolog2017.ortec.com/instance/4/4-a221e173a7386c660a1e3a08d5d3ca1d.txt/VeRoLog_hidden_r2500d70_3.txt"
       },
@@ -1262,6 +1348,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 88504,
+        "sha256": "0606ed6acde22e8fe2ea00210ff9d645d27adf6b92528f2307607ccec057c9a8",
         "timestamp": "20241005132839",
         "url": "https://web.archive.org/web/20241005132839/https://verolog2017.ortec.com/instance/4/4-da6be2d652d5bd20ed453fa8907d3b82.txt/VeRoLog_hidden_r2500d70_4.txt"
       },
@@ -1271,6 +1359,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 88051,
+        "sha256": "0adad2310663d0cefe6fa6a61b66cabb91af12d7a6c9b68251ca3268d91771bc",
         "timestamp": "20240912231050",
         "url": "https://web.archive.org/web/20240912231050/https://verolog2017.ortec.com/instance/4/4-619898c7fc56d603e53e37a3b7b897bb.txt/VeRoLog_hidden_r2500d70_5.txt"
       },
@@ -1280,6 +1370,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 88372,
+        "sha256": "aceecd474c6e233ee0cf6a511cd28a5714040c95a7df5e07a5866257fde94706",
         "timestamp": "20260312021323",
         "url": "https://web.archive.org/web/20260312021323/https://verolog2017.ortec.com/instance/4/4-540b4feec283ffc0af583eafdecd8b9f.txt/VeRoLog_hidden_r2500d75_1.txt"
       },
@@ -1289,6 +1381,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 88342,
+        "sha256": "54cd8d73ddf8e28d0bcbcc36ea1b2395d5709ff05286d85679127c31920dcf8e",
         "timestamp": "20260515021416",
         "url": "https://web.archive.org/web/20260515021416/https://verolog2017.ortec.com/instance/4/4-29ad9ed7b6580a8c95c77eabfdb42d7b.txt/VeRoLog_hidden_r2500d75_2.txt"
       },
@@ -1298,6 +1392,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 88192,
+        "sha256": "110433a4513f8532bcb1099e750f532d7f162f0293adc43213ec00c9bc10e132",
         "timestamp": "20260608143842",
         "url": "https://web.archive.org/web/20260608143842/https://verolog2017.ortec.com/instance/4/4-c4f1d44e782817d358d0acef48324b1f.txt/VeRoLog_hidden_r2500d75_3.txt"
       },
@@ -1307,6 +1403,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 88774,
+        "sha256": "08847fdca377703b89631015ef54a662b592972569d135ea57f9709103aed2ca",
         "timestamp": "20260608144031",
         "url": "https://web.archive.org/web/20260608144031/https://verolog2017.ortec.com/instance/4/4-aa79544d951a92a665021e701a46cdd0.txt/VeRoLog_hidden_r2500d75_4.txt"
       },
@@ -1316,6 +1414,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 88905,
+        "sha256": "3065f308035d1a2e122957d9ca18b80a7581201c67de2f71488e41056159148d",
         "timestamp": "20260515014054",
         "url": "https://web.archive.org/web/20260515014054/https://verolog2017.ortec.com/instance/4/4-be5c23e2dc4aad1d70f4be1467768658.txt/VeRoLog_hidden_r2500d75_5.txt"
       },
@@ -1325,6 +1425,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 16864,
+        "sha256": "b7fb71ba44728c4fb5fb6824acbcf8c5380a54c1dce1b05e9a26d05dd270d677",
         "timestamp": "20260608133658",
         "url": "https://web.archive.org/web/20260608133658/https://verolog2017.ortec.com/instance/4/4-c7da5a2b627993b3cff4e32f8f949560.txt/VeRoLog_hidden_r500d10_1.txt"
       },
@@ -1334,6 +1436,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 16943,
+        "sha256": "87e8f51a3cf59e9f88a9568e187b17a4bb303ef70c11f61854f96479e0f7b51b",
         "timestamp": "20260312012821",
         "url": "https://web.archive.org/web/20260312012821/https://verolog2017.ortec.com/instance/4/4-defd7e2c010dc71fa8b58eef656bbec3.txt/VeRoLog_hidden_r500d10_2.txt"
       },
@@ -1343,6 +1447,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 16940,
+        "sha256": "dcc49186df8a31e0a049307657e3bcea74d2a7c6dff63dfb7e83ca15453a29e8",
         "timestamp": "20260420184838",
         "url": "https://web.archive.org/web/20260420184838/https://verolog2017.ortec.com/instance/4/4-863381e592edb918ecda33929205fb55.txt/VeRoLog_hidden_r500d10_3.txt"
       },
@@ -1352,6 +1458,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 16945,
+        "sha256": "2919100efa776e5d936584b90f6d551957898400b08615b93cc0f0db047edbf0",
         "timestamp": "20251217083246",
         "url": "https://web.archive.org/web/20251217083246/https://verolog2017.ortec.com/instance/4/4-dbd98cf26272ea19b516653508e11305.txt/VeRoLog_hidden_r500d10_4.txt"
       },
@@ -1361,6 +1469,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 16960,
+        "sha256": "bec334ba6a703ca3403af65d21980558130431e5362139acb1f4ec7838801559",
         "timestamp": "20260312012057",
         "url": "https://web.archive.org/web/20260312012057/https://verolog2017.ortec.com/instance/4/4-77d436e7259a91987c341f7f58a6423f.txt/VeRoLog_hidden_r500d10_5.txt"
       },
@@ -1370,6 +1480,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 17190,
+        "sha256": "00def7cc3a367706a069ddd14d462ca231eea435d404c48d2ee5c2cf33afcb69",
         "timestamp": "20260515014704",
         "url": "https://web.archive.org/web/20260515014704/https://verolog2017.ortec.com/instance/4/4-cad6088b3ca9de473b623dc87054d44c.txt/VeRoLog_hidden_r500d15_1.txt"
       },
@@ -1379,6 +1491,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 17211,
+        "sha256": "6e047ab6fd3410f85544661a7114637aeef90fd85cffc44cf76bf198981ad48e",
         "timestamp": "20260515011935",
         "url": "https://web.archive.org/web/20260515011935/https://verolog2017.ortec.com/instance/4/4-6dbaa8f662e56bd6c9ca37a9abc9c8ab.txt/VeRoLog_hidden_r500d15_2.txt"
       },
@@ -1388,6 +1502,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 17152,
+        "sha256": "44eead15cbf096e64cb46c3efbecf0bfe2fcc1ed10c081e5c22af5fc62c1d2d8",
         "timestamp": "20260515021348",
         "url": "https://web.archive.org/web/20260515021348/https://verolog2017.ortec.com/instance/4/4-3c537216665db1e5e644ccf7e4a8d856.txt/VeRoLog_hidden_r500d15_3.txt"
       },
@@ -1397,6 +1513,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 17211,
+        "sha256": "359af307fd0320346173943b0b7e13ae4f3bd1ebde32bd0b50e20d370123ac3c",
         "timestamp": "20241005124523",
         "url": "https://web.archive.org/web/20241005124523/https://verolog2017.ortec.com/instance/4/4-d0766547a7567eca85d90499fe553440.txt/VeRoLog_hidden_r500d15_4.txt"
       },
@@ -1406,6 +1524,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 17233,
+        "sha256": "d1d82c8b749fb0eb600fb26332be818e44eb6f9cfd9b4c40f3c46666943b7379",
         "timestamp": "20260420182030",
         "url": "https://web.archive.org/web/20260420182030/https://verolog2017.ortec.com/instance/4/4-1ebd83f6f72bbd4da5d9bdc3c5be4fd6.txt/VeRoLog_hidden_r500d15_5.txt"
       },
@@ -1415,6 +1535,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 34453,
+        "sha256": "43b3bde5cec627d51efa3fc1eb67f8b8e3eb7ad23e5cad2784f03d9b10ca552b",
         "timestamp": "20260207020936",
         "url": "https://web.archive.org/web/20260207020936/https://verolog2017.ortec.com/instance/3/3-f580b34d7def5fc5d6fda2e9f3508d79.txt/VeRoLog_late_r1000d20_1.txt"
       },
@@ -1424,6 +1546,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 34344,
+        "sha256": "2d5d00e829a8e0ad174046e130d8e8eb71e4cc75cadeb2728fde267227019695",
         "timestamp": "20251217101531",
         "url": "https://web.archive.org/web/20251217101531/https://verolog2017.ortec.com/instance/3/3-96de7219e3738e808a6df7c260f1c33c.txt/VeRoLog_late_r1000d20_2.txt"
       },
@@ -1433,6 +1557,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 34283,
+        "sha256": "df2cbe8227f9491e1dcebc0558bceb3e172cceffa1363b738447f6584bfba830",
         "timestamp": "20260312004140",
         "url": "https://web.archive.org/web/20260312004140/https://verolog2017.ortec.com/instance/3/3-35d5b707cb7a910172a5c207185b4ba8.txt/VeRoLog_late_r1000d20_3.txt"
       },
@@ -1442,6 +1568,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 34441,
+        "sha256": "dcc0d48efcdea6b09eb2b0e19397d653d430d8c408463378268ac0be64970ec3",
         "timestamp": "20260312021919",
         "url": "https://web.archive.org/web/20260312021919/https://verolog2017.ortec.com/instance/3/3-6a110759ce03028e1bc9cab9b37c8710.txt/VeRoLog_late_r1000d20_4.txt"
       },
@@ -1451,6 +1579,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 34293,
+        "sha256": "8552f246f2cfa5b3eed4472f9d5661ed3ff1c48f5fbf24e4a99d50f46126349a",
         "timestamp": "20260420192135",
         "url": "https://web.archive.org/web/20260420192135/https://verolog2017.ortec.com/instance/3/3-645b5550320a7c4e1eb04f429d007954.txt/VeRoLog_late_r1000d20_5.txt"
       },
@@ -1460,6 +1590,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 34469,
+        "sha256": "5c79ee1259ab915f725eafc85b2dfd6356e938990f42d928eadfe1321ac3d0f5",
         "timestamp": "20240912210859",
         "url": "https://web.archive.org/web/20240912210859/https://verolog2017.ortec.com/instance/3/3-5eca77c395f9e0968c8c55ead8536b87.txt/VeRoLog_late_r1000d25_1.txt"
       },
@@ -1469,6 +1601,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 34498,
+        "sha256": "a38e5a51ddc41f1516d996763a3e1dd2c255cf573e9ce61cd7a7fecc81651790",
         "timestamp": "20260420183922",
         "url": "https://web.archive.org/web/20260420183922/https://verolog2017.ortec.com/instance/3/3-b4f24025d548c29d2c4dddc7c3f5e7b3.txt/VeRoLog_late_r1000d25_2.txt"
       },
@@ -1478,6 +1612,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 34529,
+        "sha256": "f810cdc57bb62448504e01db3b1a24716615662e174a38e8f2a525e3f4f0dfff",
         "timestamp": "20260608144003",
         "url": "https://web.archive.org/web/20260608144003/https://verolog2017.ortec.com/instance/3/3-aabadeb7c7a194e2f70d3e935df2b6e0.txt/VeRoLog_late_r1000d25_3.txt"
       },
@@ -1487,6 +1623,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 34602,
+        "sha256": "ba158d001efb8e4c9bff86fef45ab94769fc9cd2b1cfc6a82bd2233184beabd4",
         "timestamp": "20260515014506",
         "url": "https://web.archive.org/web/20260515014506/https://verolog2017.ortec.com/instance/3/3-1045166e331747ad78cd39968f786a9f.txt/VeRoLog_late_r1000d25_4.txt"
       },
@@ -1496,6 +1634,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 34529,
+        "sha256": "ec854db673be97bc6e1d4fc13bfc4e1e5b6cad516666127bf179a7f91e5eadc9",
         "timestamp": "20260515005656",
         "url": "https://web.archive.org/web/20260515005656/https://verolog2017.ortec.com/instance/3/3-7b7fe6e884d7611ada9a6d154427d16b.txt/VeRoLog_late_r1000d25_5.txt"
       },
@@ -1505,6 +1645,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 52705,
+        "sha256": "6a5a0c8cef81459fd282c82bfddd6c5ba210e8f33eaa89e2ee2f679a97cbf82d",
         "timestamp": "20260207010147",
         "url": "https://web.archive.org/web/20260207010147/https://verolog2017.ortec.com/instance/3/3-ee76b6689fd61f920ac880c28d1861c2.txt/VeRoLog_late_r1500d30_1.txt"
       },
@@ -1514,6 +1656,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 52854,
+        "sha256": "1297b4653c29e46674c35af1af7ed0f7754ebce5cae7a20105b0e205a883845a",
         "timestamp": "20260207014556",
         "url": "https://web.archive.org/web/20260207014556/https://verolog2017.ortec.com/instance/3/3-3c1f574bd2c692d8fa1ac99a523251de.txt/VeRoLog_late_r1500d30_2.txt"
       },
@@ -1523,6 +1667,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 52371,
+        "sha256": "efa2110be752528f0b434ecd3cba4a334d4b718fe61fb90ffadfcecc0db60389",
         "timestamp": "20260420195636",
         "url": "https://web.archive.org/web/20260420195636/https://verolog2017.ortec.com/instance/3/3-c1c70692186f3b71f82b235e349eafe2.txt/VeRoLog_late_r1500d30_3.txt"
       },
@@ -1532,6 +1678,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 52726,
+        "sha256": "a7f10dd3c14dbf0ec392451aac6cf0dfc6f729dd7dc04b3f17fe704fcdd252b2",
         "timestamp": "20260608145342",
         "url": "https://web.archive.org/web/20260608145342/https://verolog2017.ortec.com/instance/3/3-ace5ca00194c0cbd5380d54be59b8f5f.txt/VeRoLog_late_r1500d30_4.txt"
       },
@@ -1541,6 +1689,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 52536,
+        "sha256": "3a90160e5cce80fb20ebd28954535357d4bd04a5f9f6d2139f853bba512ba80f",
         "timestamp": "20260312012458",
         "url": "https://web.archive.org/web/20260312012458/https://verolog2017.ortec.com/instance/3/3-14bd3a8649d8a62193d25a2040b5a588.txt/VeRoLog_late_r1500d30_5.txt"
       },
@@ -1550,6 +1700,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 70784,
+        "sha256": "608c56ef26098a0a11e78338cce531519a9ff2cfcb80f61f61bc93a42ff9afd4",
         "timestamp": "20240918085142",
         "url": "https://web.archive.org/web/20240918085142/https://verolog2017.ortec.com/instance/3/3-9d95cf1b1b5218d3b8fae73ddf9438ef.txt/VeRoLog_late_r2000d50_1.txt"
       },
@@ -1559,6 +1711,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 70911,
+        "sha256": "7710d8f4699678e437067b53bdd2149ffcf320fc98d374131eff3730155cfead",
         "timestamp": "20260608150044",
         "url": "https://web.archive.org/web/20260608150044/https://verolog2017.ortec.com/instance/3/3-1398027b0be0e0cca51e4c8bb41cb3ee.txt/VeRoLog_late_r2000d50_2.txt"
       },
@@ -1568,6 +1722,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 71075,
+        "sha256": "63e59fc2d5f41db181b40bd220153e1932bbab1c0ffa2fa299e1f4355fd42033",
         "timestamp": "20260312013006",
         "url": "https://web.archive.org/web/20260312013006/https://verolog2017.ortec.com/instance/3/3-b0341329a2d2142b5b6ed46cf378061f.txt/VeRoLog_late_r2000d50_3.txt"
       },
@@ -1577,6 +1733,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 70874,
+        "sha256": "a47bd23a400f33274dfc56d0407cf20fb33e8513c90754cfc44745670c55ece5",
         "timestamp": "20260117095355",
         "url": "https://web.archive.org/web/20260117095355/https://verolog2017.ortec.com/instance/3/3-1722fe117321d74369f07c621ee888aa.txt/VeRoLog_late_r2000d50_4.txt"
       },
@@ -1586,6 +1744,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 70488,
+        "sha256": "b9ebdf39adee71b75a213d2b0548e50fc9faff9b54b6b65d2a2f7244ef8ff476",
         "timestamp": "20260420184731",
         "url": "https://web.archive.org/web/20260420184731/https://verolog2017.ortec.com/instance/3/3-531223e16f1a8e9e4b19cd8c60d20daa.txt/VeRoLog_late_r2000d50_5.txt"
       },
@@ -1595,6 +1755,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 70963,
+        "sha256": "41799c333339074cc36b3a22ecbfd573fb973af0c8a2f4db9e048a69b0f1ba57",
         "timestamp": "20260420191151",
         "url": "https://web.archive.org/web/20260420191151/https://verolog2017.ortec.com/instance/3/3-47bf8a084b98886f5f509806036ae675.txt/VeRoLog_late_r2000d65_1.txt"
       },
@@ -1604,6 +1766,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 71085,
+        "sha256": "cdd866624fc654b87f317a9f4b25d1b3f24a493b9e77104603a5c7abc827c135",
         "timestamp": "20260420191029",
         "url": "https://web.archive.org/web/20260420191029/https://verolog2017.ortec.com/instance/3/3-6b8b42b5b057fba3d35b2ec6166c7143.txt/VeRoLog_late_r2000d65_2.txt"
       },
@@ -1613,6 +1777,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 71197,
+        "sha256": "2a2dc7a1ac0a2c4c652f53a72c12ee6b7dd69097360a3ab1c0a4194a1faffe64",
         "timestamp": "20240912232015",
         "url": "https://web.archive.org/web/20240912232015/https://verolog2017.ortec.com/instance/3/3-52660ad28266896ac5b0cd04235dcf89.txt/VeRoLog_late_r2000d65_3.txt"
       },
@@ -1622,6 +1788,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 71458,
+        "sha256": "87f94c62268b50719fbd7c81a594025c8b7b9d4ac232859a62f1157418d97c03",
         "timestamp": "20260515022500",
         "url": "https://web.archive.org/web/20260515022500/https://verolog2017.ortec.com/instance/3/3-51ecda514d281a43a21e5ebcdbb32cd4.txt/VeRoLog_late_r2000d65_4.txt"
       },
@@ -1631,6 +1799,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 70533,
+        "sha256": "50b0e7e14be806983b8efb5dd7f1d8a3905b73d671297ba5ce12290c6b80dc44",
         "timestamp": "20251217091012",
         "url": "https://web.archive.org/web/20251217091012/https://verolog2017.ortec.com/instance/3/3-5c0df34c3ca934cbe31ec36005cd2e8d.txt/VeRoLog_late_r2000d65_5.txt"
       },
@@ -1640,6 +1810,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 32580,
+        "sha256": "dea58b46891ba096b371acef0ee20dfc823f610d069ccd4bdb6ccd432f677b2d",
         "timestamp": "20260515021156",
         "url": "https://web.archive.org/web/20260515021156/https://verolog2017.ortec.com/instance/2/2-5ce1690919d497e10e4342fea8711fa6.txt/VeRoLog_r1000d25_1.txt"
       },
@@ -1649,6 +1821,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 32473,
+        "sha256": "1a09834e1f7511a5e175064a8797cff40b191c4478e6d7fb729ac04988a39b5f",
         "timestamp": "20260312015955",
         "url": "https://web.archive.org/web/20260312015955/https://verolog2017.ortec.com/instance/2/2-21bf32aed935ca3e3c3cd5f7916101d4.txt/VeRoLog_r1000d25_2.txt"
       },
@@ -1658,6 +1832,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 32489,
+        "sha256": "f9ecd26ba0bd9068797385989d04e4d3faa5e9709172ff74b12a310805d26c93",
         "timestamp": "20260116005504",
         "url": "https://web.archive.org/web/20260116005504/https://verolog2017.ortec.com/instance/2/2-31fe0ac583519fa0ace0282c4833c5b7.txt/VeRoLog_r1000d25_3.txt"
       },
@@ -1667,6 +1843,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 32620,
+        "sha256": "b6169e652c8fd02b409d95cf6cb7c96fd209eb46820ed7a81e0063bbeefdd866",
         "timestamp": "20260608135921",
         "url": "https://web.archive.org/web/20260608135921/https://verolog2017.ortec.com/instance/2/2-ed805f3a9cdebeb31a5cc09e63e68994.txt/VeRoLog_r1000d25_4.txt"
       },
@@ -1676,6 +1854,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 32572,
+        "sha256": "c31a3949a9db92b320f8445e970dc6853bdf3b97af3e04427e86738dff947290",
         "timestamp": "20260420182622",
         "url": "https://web.archive.org/web/20260420182622/https://verolog2017.ortec.com/instance/2/2-383a3661a1a01fbe8c46257e4e4f6f75.txt/VeRoLog_r1000d25_5.txt"
       },
@@ -1685,6 +1865,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 32658,
+        "sha256": "70b70410e92b749d8035df899b706257ea08b5210ed4a4942bf24eaed4ba0506",
         "timestamp": "20260312021345",
         "url": "https://web.archive.org/web/20260312021345/https://verolog2017.ortec.com/instance/2/2-57b6b790e379b921cbc64214912d0253.txt/VeRoLog_r1000d30_1.txt"
       },
@@ -1694,6 +1876,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 32647,
+        "sha256": "e126c6bc8610bd956f80997a10a7414ea8b370de698ebf1cbd55888a472e91b2",
         "timestamp": "20260515022114",
         "url": "https://web.archive.org/web/20260515022114/https://verolog2017.ortec.com/instance/2/2-02daee73f7334399cb17873a2b0b89e8.txt/VeRoLog_r1000d30_2.txt"
       },
@@ -1703,6 +1887,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 32631,
+        "sha256": "793fb68e09c6410bec3bc3dd105e9902f1cad055b59dfd4dcafb3dad7637aac5",
         "timestamp": "20260420185710",
         "url": "https://web.archive.org/web/20260420185710/https://verolog2017.ortec.com/instance/2/2-fa701cdb9a8fc80e2c13539df4ffa20b.txt/VeRoLog_r1000d30_3.txt"
       },
@@ -1712,6 +1898,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 32491,
+        "sha256": "0ff27fc99b52927d13eafa01242e1b311efce3465d980611c42320d65c0ffdce",
         "timestamp": "20260515020826",
         "url": "https://web.archive.org/web/20260515020826/https://verolog2017.ortec.com/instance/2/2-4ec98c5172d3b31fb57d9dd6d7389e45.txt/VeRoLog_r1000d30_4.txt"
       },
@@ -1721,6 +1909,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 32711,
+        "sha256": "b1a234c2b0ea1fcc88f39fcec5a4f9ecf2bf7a8de1467c54f0839051516a339f",
         "timestamp": "20260420184538",
         "url": "https://web.archive.org/web/20260420184538/https://verolog2017.ortec.com/instance/2/2-865ab33704c6c015f86455d8c0f4d0ed.txt/VeRoLog_r1000d30_5.txt"
       },
@@ -1730,6 +1920,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 3267,
+        "sha256": "58fe2feb01e2b0572ebbac1ece674b1658256f33c34c8f6544dc0b6e179b6fb4",
         "timestamp": "20260115234444",
         "url": "https://web.archive.org/web/20260115234444/https://verolog2017.ortec.com/instance/2/2-928afcad056d83ac35d97a0002f3be32.txt/VeRoLog_r100d10_1.txt"
       },
@@ -1739,6 +1931,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 3299,
+        "sha256": "d5ebdc560520a2c35ba3abc894c3b52120a8259e801cbe071cab81794e981df3",
         "timestamp": "20260420181534",
         "url": "https://web.archive.org/web/20260420181534/https://verolog2017.ortec.com/instance/2/2-6a67fa406eb51a4bcee6bfe8d559c89f.txt/VeRoLog_r100d10_2.txt"
       },
@@ -1748,6 +1942,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 3249,
+        "sha256": "1fa618b8c6854f75953c3d9cc4a00ff506989fcd130cbb48ed1a2b7b87a9426f",
         "timestamp": "20260207003120",
         "url": "https://web.archive.org/web/20260207003120/https://verolog2017.ortec.com/instance/2/2-a015036db8bc6a63a29e2bb8ccc2d466.txt/VeRoLog_r100d10_3.txt"
       },
@@ -1757,6 +1953,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 3275,
+        "sha256": "db9972c91f02acbb261ac62c59d45b5af06317c49b89b815e3cce7e52f6562aa",
         "timestamp": "20260515014746",
         "url": "https://web.archive.org/web/20260515014746/https://verolog2017.ortec.com/instance/2/2-3c4274ebbe58c729876fb22d6bbf3b69.txt/VeRoLog_r100d10_4.txt"
       },
@@ -1766,6 +1964,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 3239,
+        "sha256": "20c9fdb91c1081a0a6507fb922ea4a8479203dfa20fe08e8d4e71f21468d3224",
         "timestamp": "20240912211836",
         "url": "https://web.archive.org/web/20240912211836/https://verolog2017.ortec.com/instance/2/2-74c7f9046ffd90355aa661fd2725db45.txt/VeRoLog_r100d10_5.txt"
       },
@@ -1775,6 +1975,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 3262,
+        "sha256": "2a8ca5199cfa6f7a9ddd3af25fdd0770025d9797dc9bb1784a6a22a447e6fb30",
         "timestamp": "20260312004441",
         "url": "https://web.archive.org/web/20260312004441/https://verolog2017.ortec.com/instance/2/2-060a5f0d84a31a2bfb3caed1e710dbb2.txt/VeRoLog_r100d5_1.txt"
       },
@@ -1784,6 +1986,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 3249,
+        "sha256": "2656190c2f8393151bd635cff03af598945dc3c83d264d304064b49302497085",
         "timestamp": "20251217094610",
         "url": "https://web.archive.org/web/20251217094610/https://verolog2017.ortec.com/instance/2/2-3cf29198647d8fab8e506a2a339f9c02.txt/VeRoLog_r100d5_2.txt"
       },
@@ -1793,6 +1997,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 3267,
+        "sha256": "5424e027c32d8e1034f321fe910a6231c3c63ed31842748582251da902b8b584",
         "timestamp": "20260608145913",
         "url": "https://web.archive.org/web/20260608145913/https://verolog2017.ortec.com/instance/2/2-7468f64ae5f77b89876f256c18ed38a8.txt/VeRoLog_r100d5_3.txt"
       },
@@ -1802,6 +2008,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 3274,
+        "sha256": "ab98cca6867dd3b008f4d72128e9890a04eedef90caf0289c5c7635c8d44b594",
         "timestamp": "20260608134056",
         "url": "https://web.archive.org/web/20260608134056/https://verolog2017.ortec.com/instance/2/2-f460a51e10005ceed101b970bf9b8891.txt/VeRoLog_r100d5_4.txt"
       },
@@ -1811,6 +2019,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 3245,
+        "sha256": "51cefad83685e15110cba39dd414d064ecd0ab8a24c6aca71844567f4fc57d29",
         "timestamp": "20240806163723",
         "url": "https://web.archive.org/web/20240806163723/https://verolog2017.ortec.com/instance/2/2-460e31f42e02023b0eafe3bff9b3619d.txt/VeRoLog_r100d5_5.txt"
       },
@@ -1820,6 +2030,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 16254,
+        "sha256": "8649ed9555b2912112ee02fcafe730b88aec8c657b78133fc3689209daded337",
         "timestamp": "20260608145319",
         "url": "https://web.archive.org/web/20260608145319/https://verolog2017.ortec.com/instance/2/2-7dda63127d8d82f7bada1053ba66fe77.txt/VeRoLog_r500d15_1.txt"
       },
@@ -1829,6 +2041,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 16210,
+        "sha256": "5c247058c06dd02888040a8d128632073fa9478fc155ba155fb894addd936440",
         "timestamp": "20251217092333",
         "url": "https://web.archive.org/web/20251217092333/https://verolog2017.ortec.com/instance/2/2-e5f7658bbde9d0cfcc2c24cf41d46983.txt/VeRoLog_r500d15_2.txt"
       },
@@ -1838,6 +2052,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 16165,
+        "sha256": "7c3e4600dbdfef7950eb63c544705d3d3c73d4b9d4e34d754e8a89140e61f22d",
         "timestamp": "20241005120847",
         "url": "https://web.archive.org/web/20241005120847/https://verolog2017.ortec.com/instance/2/2-0cea83552613029d753460f5dce494f8.txt/VeRoLog_r500d15_3.txt"
       },
@@ -1847,6 +2063,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 16160,
+        "sha256": "06825ddbfe19dd7766abe08892edcedb4aa8246835e567cb4b5ef8159c2008ff",
         "timestamp": "20260515010815",
         "url": "https://web.archive.org/web/20260515010815/https://verolog2017.ortec.com/instance/2/2-63cd07b1ec2c2fb4b175804ec79bbd95.txt/VeRoLog_r500d15_4.txt"
       },
@@ -1856,6 +2074,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 16152,
+        "sha256": "674418a044aaa3390e82c100f24d4789d1f2b9e60b31dc368925fcba24a00533",
         "timestamp": "20240912232803",
         "url": "https://web.archive.org/web/20240912232803/https://verolog2017.ortec.com/instance/2/2-17d5d31ec545123bc151fc292a09f44f.txt/VeRoLog_r500d15_5.txt"
       },
