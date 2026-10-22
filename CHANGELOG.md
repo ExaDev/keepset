@@ -1,3 +1,10 @@
+## [0.49.1](https://github.com/Mearman/keepset/compare/v0.49.0...v0.49.1) (2026-10-22)
+
+
+### Bug Fixes
+
+* **archive:** record a URL whose captures the Wayback Machine will not serve back ([e8e8f53](https://github.com/Mearman/keepset/commit/e8e8f53cd69a9ea33c837b03cc98cc7bf8dede6c))
+
 # [0.49.0](https://github.com/Mearman/keepset/compare/v0.48.1...v0.49.0) (2026-10-22)
 
 
