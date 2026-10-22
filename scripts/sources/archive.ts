@@ -58,6 +58,8 @@ export interface ArchiveRequest {
   readonly entryIds: ReadonlySet<string> | undefined;
   /** The most URLs to resolve over the network in this run; no bound when undefined. */
   readonly limit: number | undefined;
+  /** How many URLs are settled at once. The shared pacing (the capture rate and each host's interval) is what bounds the requests, so this only lets one URL's waits (a capture's indexing, a verification backoff) overlap the next URLs' work. */
+  readonly concurrency: number;
   readonly state: ArchiveState;
 }
 
@@ -300,18 +302,21 @@ export async function archiveSources(ports: Readonly<ArchivePorts>, request: Rea
     }
   };
 
+  /** The next group no worker has taken, which a worker claims before it first waits, so no two workers take the same one. */
+  let cursor = 0;
+
   /**
-   * Works through the groups from an index on, one at a time: the account's limits and the host pacing are shared, so the URLs are settled in order.
-   * @param index - The group to work on.
+   * One worker: takes the next group, settles it, and goes on until the groups or the run's bounds are used up.
    */
-  const work = async (index: number): Promise<void> => {
-    const group = queue[index];
+  const work = async (): Promise<void> => {
+    const group = queue[cursor];
+    cursor += 1;
     if (group === undefined || stopped !== undefined) {
       return;
     }
     const inScope = request.entryIds === undefined || group.entryIds.some((id) => request.entryIds?.has(id) === true);
     if (!inScope) {
-      return work(index + 1);
+      return work();
     }
     if (group.snapshot !== undefined) {
       if (group.unpinned) {
@@ -319,10 +324,10 @@ export async function archiveSources(ports: Readonly<ArchivePorts>, request: Rea
         log(`${group.url}: pinned on the entries that lacked it (${group.snapshot.timestamp})`);
       }
 
-      return work(index + 1);
+      return work();
     }
     if (known.has(group.url) && !request.retryExceptions) {
-      return work(index + 1);
+      return work();
     }
     if (request.limit !== undefined && resolved >= request.limit) {
       stopped = "the limit on URLs for this run is reached";
@@ -332,9 +337,9 @@ export async function archiveSources(ports: Readonly<ArchivePorts>, request: Rea
     resolved += 1;
     settle(group, await resolve(group));
 
-    return work(index + 1);
+    return work();
   };
-  await work(0);
+  await Promise.all(Array.from({ length: request.concurrency }, async () => work()));
 
   const exceptions: ArchiveException[] = [];
   for (const group of request.groups) {
