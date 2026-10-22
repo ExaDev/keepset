@@ -1,3 +1,10 @@
+# [0.49.0](https://github.com/Mearman/keepset/compare/v0.48.1...v0.49.0) (2026-10-22)
+
+
+### Features
+
+* **archive:** settle several URLs at once ([66fbf32](https://github.com/Mearman/keepset/commit/66fbf3222774f79d45821ebb581479788a55d297))
+
 ## [0.48.1](https://github.com/Mearman/keepset/compare/v0.48.0...v0.48.1) (2026-10-21)
 
 
