@@ -15,14 +15,7 @@ export interface GeoPoint {
   readonly lon: number;
 }
 
-/**
- * The map: OpenStreetMap tiles under Leaflet, both free with the attribution shown, and a circle marker per point.
- * @param props - The map's props.
- * @param props.points - The points to draw.
- * @param props.total - How many points the result held before they were sampled.
- * @param props.height - The map's height in pixels.
- * @returns The map.
- */
+/** The map: OpenStreetMap tiles under Leaflet, both free with the attribution shown, and a circle marker per point; `total` is how many points the result held before they were sampled, so the note under the map can say so. */
 export default function PointMap({ points, total, height }: { readonly points: readonly GeoPoint[]; readonly total: number; readonly height: number }): ReactNode {
   const lats = points.map((point) => point.lat);
   const lons = points.map((point) => point.lon);
