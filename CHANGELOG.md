@@ -1,3 +1,10 @@
+## [0.51.1](https://github.com/Mearman/keepset/compare/v0.51.0...v0.51.1) (2026-10-22)
+
+
+### Bug Fixes
+
+* **site:** fill the service worker's cache from the network, not the HTTP cache ([d8a483b](https://github.com/Mearman/keepset/commit/d8a483b8d1f4b87657af88859d1119003d730473))
+
 # [0.51.0](https://github.com/Mearman/keepset/compare/v0.50.0...v0.51.0) (2026-10-22)
 
 
