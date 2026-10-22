@@ -30,6 +30,9 @@ import { DEFAULT_POLITENESS, PoliteClient } from "./sources/polite-client";
 import { pinKey, verifyPins } from "./sources/verify-pins";
 import { ANONYMOUS_LIMITS, AUTHENTICATED_LIMITS, MAX_CAPTURE_WAIT_MILLISECONDS, saveAnonymously, saveAuthenticated, WAYBACK_HOST_INTERVAL_MILLISECONDS, WAYBACK_HOST_INTERVALS } from "./sources/wayback";
 
+/** How many URLs the archiver settles at once: enough that one URL waiting out a capture's indexing or a verification backoff does not leave the capture rate and the Wayback hosts' pacing idle, and few enough that they remain what bounds the requests. */
+const ARCHIVE_CONCURRENCY = 6;
+
 const repoRoot = join(dirname(fileURLToPath(import.meta.url)), "..");
 
 const { values } = parseArgs({
@@ -176,7 +179,7 @@ if (values.check === true) {
           console.log(line);
         },
       },
-      { groups: groupSources(files), exceptions: report.exceptions, retryExceptions: values["retry-exceptions"] === true, entryIds, limit, state },
+      { groups: groupSources(files), exceptions: report.exceptions, retryExceptions: values["retry-exceptions"] === true, entryIds, limit, concurrency: ARCHIVE_CONCURRENCY, state },
     );
     writeFileSync(values.report, reportText({ exceptions: result.exceptions, verified: [...verifiedPins.values()] }), "utf8");
     console.log(`${credentials === undefined ? "Anonymous" : "Authenticated"} run finished; report ${relative(repoRoot, values.report)}; ${String(result.unresolved.length)} URLs left unresolved${result.stopped === undefined ? "" : `; stopped early: ${result.stopped}`}.`);

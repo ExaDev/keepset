@@ -103,7 +103,7 @@ function run(urls: readonly string[], world: World, overrides: Partial<ArchiveRe
     log: () => undefined,
   };
   const files = urls.map((url, index) => ({ path: String(index), entry: entryWith(`e${String(index)}`, [liveSource(url)]) }));
-  const request: ArchiveRequest = { groups: groupSources(files), exceptions: [], retryExceptions: false, entryIds: undefined, limit: undefined, state: { day: "", captures: 0, rejected: {}, deferred: {} }, ...overrides };
+  const request: ArchiveRequest = { groups: groupSources(files), exceptions: [], retryExceptions: false, entryIds: undefined, limit: undefined, concurrency: 1, state: { day: "", captures: 0, rejected: {}, deferred: {} }, ...overrides };
 
   return { result: archiveSources(ports, request), recorded, verified, excepted, captured, captureTimes, clock, states, seen };
 }
@@ -183,6 +183,16 @@ describe("archiveSources", () => {
     expect(trial.states.at(-1)?.deferred).toEqual({ [A]: 1 });
   });
 
+  it("settles every URL exactly once however many workers share the queue", async () => {
+    const urls = ["https://example.org/a", "https://example.org/b", "https://example.org/c", "https://example.org/d", "https://example.org/e"];
+    const available = Object.fromEntries(urls.map((url, index) => [url, `2025010100000${String(index)}`]));
+    const trial = run(urls, { available }, { concurrency: 3 });
+    const outcome = await trial.result;
+    expect([...trial.recorded.keys()].sort()).toEqual(urls);
+    expect(outcome.unresolved).toEqual([]);
+    expect(trial.captured).toEqual([]);
+  });
+
   it("waits for a fresh capture's indexing to clear before accepting it", async () => {
     const times = ["20261020120001", "20261020120002"];
     let looks = 0;
@@ -216,7 +226,7 @@ describe("archiveSources", () => {
         persist: () => undefined,
         log: () => undefined,
       },
-      { groups: groupSources([{ path: "x", entry: entryWith("x", [liveSource(A)]) }]), exceptions: [], retryExceptions: false, entryIds: undefined, limit: undefined, state: { day: "", captures: 0, rejected: {}, deferred: {} } },
+      { groups: groupSources([{ path: "x", entry: entryWith("x", [liveSource(A)]) }]), exceptions: [], retryExceptions: false, entryIds: undefined, limit: undefined, concurrency: 1, state: { day: "", captures: 0, rejected: {}, deferred: {} } },
     );
     expect(trial.unresolved).toEqual([]);
     expect(looks).toBe(2);
@@ -396,7 +406,7 @@ describe("archiveSources", () => {
         persist: () => undefined,
         log: () => undefined,
       },
-      { groups: groupSources(files), exceptions: [], retryExceptions: false, entryIds: undefined, limit: undefined, state: { day: "", captures: 0, rejected: {}, deferred: {} } },
+      { groups: groupSources(files), exceptions: [], retryExceptions: false, entryIds: undefined, limit: undefined, concurrency: 1, state: { day: "", captures: 0, rejected: {}, deferred: {} } },
     );
     expect(outcome.unresolved).toEqual([A]);
   });
