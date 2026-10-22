@@ -1,3 +1,10 @@
+## [0.49.6](https://github.com/Mearman/keepset/compare/v0.49.5...v0.49.6) (2026-10-22)
+
+
+### Bug Fixes
+
+* **archive:** read a replay without a range request ([626cc9c](https://github.com/Mearman/keepset/commit/626cc9c22cea7f4c53d676cc64ccd954a465c056))
+
 ## [0.49.5](https://github.com/Mearman/keepset/compare/v0.49.4...v0.49.5) (2026-10-22)
 
 
