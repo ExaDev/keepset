@@ -15,7 +15,7 @@ import { ARCHIVE_SIZE_LIMIT_BYTES, findSnapshot, type SaveOutcome, WaybackBusy }
 export const SAVE_ATTEMPTS = 3;
 export const SAVE_BACKOFF_MILLISECONDS = 30_000;
 
-/** How many URLs in a row may end unresolved before the run stops. A service or network that fails five URLs in a row is down or has throttled this client, and going on only adds requests; the run is resumable, so stopping loses nothing. */
+/** How many URLs in a row may end unresolved because of the Wayback Machine before the run stops. A service or network that fails five URLs in a row is down or has throttled this client, and going on only adds requests; the run is resumable, so stopping loses nothing. */
 export const MAX_CONSECUTIVE_UNRESOLVED = 5;
 
 /** How many captures of one URL may be taken and not served back, as the Wayback Machine's 404 or its own page, before the URL is recorded as one it cannot serve. One such capture may be indexing lag, which the verification's waits cover; a second, taken later, is the host's answer. */
@@ -76,7 +76,7 @@ export interface ArchiveResult {
 type Resolution =
   | { readonly kind: "pinned"; readonly timestamp: string }
   | { readonly kind: "excepted"; readonly reason: ExceptionReason; readonly evidence: string }
-  | { readonly kind: "unresolved"; readonly evidence: string }
+  | { readonly kind: "unresolved"; readonly evidence: string; readonly service: boolean }
   | { readonly kind: "stop"; readonly why: string };
 
 /**
@@ -164,7 +164,7 @@ export async function archiveSources(ports: Readonly<ArchivePorts>, request: Rea
       return { kind: "pinned", timestamp };
     }
     if (verdict.kind === "busy") {
-      return { kind: "unresolved", evidence: `the capture ${timestamp} could not be verified (${verdict.evidence})` };
+      return { kind: "unresolved", service: true, evidence: `the capture ${timestamp} could not be verified (${verdict.evidence})` };
     }
     state.rejected[group.url] = [...(state.rejected[group.url] ?? []), timestamp];
     persist(structuredClone(state));
@@ -189,7 +189,7 @@ export async function archiveSources(ports: Readonly<ArchivePorts>, request: Rea
     const outcome = await requestCapture(url);
     if (outcome.kind === "retry") {
       if (attempt >= SAVE_ATTEMPTS) {
-        return { kind: "unresolved", evidence: outcome.evidence };
+        return { kind: "unresolved", service: true, evidence: outcome.evidence };
       }
       await clock.sleep(SAVE_BACKOFF_MILLISECONDS * 2 ** (attempt - 1));
 
@@ -205,7 +205,7 @@ export async function archiveSources(ports: Readonly<ArchivePorts>, request: Rea
         return { kind: "excepted", reason: "not-served", evidence: `${String(state.rejected[url]?.length)} captures were taken and the Wayback Machine served none of them back: ${checked.evidence}` };
       }
 
-      return checked.kind === "failed" ? { kind: "unresolved", evidence: `the capture ${outcome.timestamp} was not accepted: ${checked.evidence}` } : checked;
+      return checked.kind === "failed" ? { kind: "unresolved", service: false, evidence: `the capture ${outcome.timestamp} was not accepted: ${checked.evidence}` } : checked;
     }
     if (outcome.kind === "refused") {
       return { kind: "excepted", reason: outcome.reason, evidence: outcome.evidence };
@@ -236,18 +236,18 @@ export async function archiveSources(ports: Readonly<ArchivePorts>, request: Rea
       }
     } catch (error) {
       if (error instanceof WaybackBusy) {
-        return { kind: "unresolved", evidence: error.message };
+        return { kind: "unresolved", service: true, evidence: error.message };
       }
       throw error;
     }
     const looked = await probe(client, group.url);
     if (looked.kind === "unreachable") {
-      return isDefinitiveFailure(looked.code) ? { kind: "excepted", reason: "source-error", evidence: looked.code ?? "unreachable" } : { kind: "unresolved", evidence: looked.code ?? "unreachable" };
+      return isDefinitiveFailure(looked.code) ? { kind: "excepted", reason: "source-error", evidence: looked.code ?? "unreachable" } : { kind: "unresolved", service: false, evidence: looked.code ?? "unreachable" };
     }
     if (!isSuccess(looked.status)) {
       const refusal = classifyStatus(looked.status, statusEvidence(looked.status, group.url, looked.finalUrl));
 
-      return refusal === undefined ? { kind: "unresolved", evidence: `HTTP ${String(looked.status)}` } : { kind: "excepted", ...refusal };
+      return refusal === undefined ? { kind: "unresolved", service: false, evidence: `HTTP ${String(looked.status)}` } : { kind: "excepted", ...refusal };
     }
     if (redirectsToMissingPage(group.url, looked.finalUrl)) {
       return { kind: "excepted", reason: "source-error", evidence: `redirects to ${looked.finalUrl}` };
@@ -296,7 +296,8 @@ export async function archiveSources(ports: Readonly<ArchivePorts>, request: Rea
         state.deferred[group.url] = (state.deferred[group.url] ?? 0) + 1;
         persist(structuredClone(state));
         unresolved.push(group.url);
-        consecutive += 1;
+        // Only trouble with the Wayback Machine counts towards stopping: a URL whose own host fails, or whose capture is not served back, says nothing about the next URL, and the deferral already sends it behind the others.
+        consecutive += resolution.service ? 1 : 0;
         log(`${group.url}: left unresolved (${resolution.evidence})`);
         break;
       case "stop":
