@@ -1,3 +1,10 @@
+# [0.51.0](https://github.com/Mearman/keepset/compare/v0.50.0...v0.51.0) (2026-10-22)
+
+
+### Features
+
+* **site:** browse every node and edge of a previewed result ([6b9101a](https://github.com/Mearman/keepset/commit/6b9101a5e0229bf685978e808271208ae30ed205))
+
 # [0.50.0](https://github.com/Mearman/keepset/compare/v0.49.6...v0.50.0) (2026-10-22)
 
 
