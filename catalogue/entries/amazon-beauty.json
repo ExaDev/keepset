@@ -50,6 +50,10 @@
   "sources": [
     {
       "retrieved": "2026-03-27",
+      "snapshot": {
+        "timestamp": "20261021191005",
+        "url": "https://web.archive.org/web/20261021191005/http://jmcauley.ucsd.edu/data/amazon/categoryFiles/ratings_Beauty.csv"
+      },
       "status": "live",
       "url": "http://jmcauley.ucsd.edu/data/amazon/categoryFiles/ratings_Beauty.csv"
     }

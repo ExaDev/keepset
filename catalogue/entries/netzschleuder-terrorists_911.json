@@ -56,11 +56,19 @@
   "sources": [
     {
       "retrieved": "2026-04-20",
+      "snapshot": {
+        "timestamp": "20260421060917",
+        "url": "https://web.archive.org/web/20260421060917/https://aaronclauset.github.io/datacode.htm"
+      },
       "status": "live",
       "url": "https://aaronclauset.github.io/datacode.htm"
     },
     {
       "retrieved": "2026-04-20",
+      "snapshot": {
+        "timestamp": "20260520195045",
+        "url": "https://web.archive.org/web/20260520195045/https://networks.skewed.de/net/terrorists_911"
+      },
       "status": "live",
       "url": "https://networks.skewed.de/net/terrorists_911"
     },

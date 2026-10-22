@@ -56,11 +56,19 @@
   "sources": [
     {
       "retrieved": "2026-04-20",
+      "snapshot": {
+        "timestamp": "20260228133049",
+        "url": "https://web.archive.org/web/20260228133049/https://github.com/benmaier/BFMaierFBnetwork"
+      },
       "status": "live",
       "url": "https://github.com/benmaier/BFMaierFBnetwork"
     },
     {
       "retrieved": "2026-04-20",
+      "snapshot": {
+        "timestamp": "20260606111453",
+        "url": "https://web.archive.org/web/20260606111453/https://networks.skewed.de/net/facebook_friends"
+      },
       "status": "live",
       "url": "https://networks.skewed.de/net/facebook_friends"
     },

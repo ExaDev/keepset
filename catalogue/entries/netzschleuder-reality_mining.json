@@ -56,16 +56,28 @@
   "sources": [
     {
       "retrieved": "2026-04-20",
+      "snapshot": {
+        "timestamp": "20260416142413",
+        "url": "https://web.archive.org/web/20260416142413/http://konect.cc/networks/mit"
+      },
       "status": "live",
       "url": "http://konect.cc/networks/mit"
     },
     {
       "retrieved": "2026-04-20",
+      "snapshot": {
+        "timestamp": "20260606105919",
+        "url": "https://web.archive.org/web/20260606105919/https://networks.skewed.de/net/reality_mining"
+      },
       "status": "live",
       "url": "https://networks.skewed.de/net/reality_mining"
     },
     {
       "retrieved": "2026-04-20",
+      "snapshot": {
+        "timestamp": "20240428102442",
+        "url": "https://web.archive.org/web/20240428102442/https://networks.skewed.de/net/reality_mining/files/reality_mining.csv.zip"
+      },
       "status": "live",
       "url": "https://networks.skewed.de/net/reality_mining/files/reality_mining.csv.zip"
     }

@@ -54,11 +54,19 @@
   "sources": [
     {
       "retrieved": "2026-01-17",
+      "snapshot": {
+        "timestamp": "20220609094956",
+        "url": "https://web.archive.org/web/20220609094956/https://snap.stanford.edu/data/C-elegans-frontal.txt.gz"
+      },
       "status": "live",
       "url": "https://snap.stanford.edu/data/C-elegans-frontal.txt.gz"
     },
     {
       "retrieved": "2026-01-17",
+      "snapshot": {
+        "timestamp": "20210813214425",
+        "url": "https://web.archive.org/web/20210813214425/https://nrvis.com/download/data/bio/bio-celegans-dir.zip"
+      },
       "status": "live",
       "url": "https://nrvis.com/download/data/bio/bio-celegans-dir.zip"
     },

@@ -57,6 +57,10 @@
   "sources": [
     {
       "retrieved": "2026-04-20",
+      "snapshot": {
+        "timestamp": "20260420163051",
+        "url": "https://web.archive.org/web/20260420163051/https://networks.skewed.de/net/un_migrations"
+      },
       "status": "live",
       "url": "https://networks.skewed.de/net/un_migrations"
     },

@@ -50,6 +50,10 @@
   "sources": [
     {
       "retrieved": "2026-03-27",
+      "snapshot": {
+        "timestamp": "20251215134631",
+        "url": "https://web.archive.org/web/20251215134631/https://snap.stanford.edu/data/amazon/productGraph/categoryFiles/ratings_Movies_and_TV.csv"
+      },
       "status": "live",
       "url": "https://snap.stanford.edu/data/amazon/productGraph/categoryFiles/ratings_Movies_and_TV.csv"
     }

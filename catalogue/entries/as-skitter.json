@@ -55,6 +55,10 @@
   "sources": [
     {
       "retrieved": "2026-02-16",
+      "snapshot": {
+        "timestamp": "20240415083238",
+        "url": "https://web.archive.org/web/20240415083238/https://snap.stanford.edu/data/as-skitter.txt.gz"
+      },
       "status": "live",
       "url": "https://snap.stanford.edu/data/as-skitter.txt.gz"
     }

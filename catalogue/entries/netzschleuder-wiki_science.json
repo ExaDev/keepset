@@ -56,6 +56,10 @@
   "sources": [
     {
       "retrieved": "2026-04-20",
+      "snapshot": {
+        "timestamp": "20260722214503",
+        "url": "https://web.archive.org/web/20260722214503/https://figshare.com/articles/A_Wikipedia_Based_Map_of_Science/11638932"
+      },
       "status": "live",
       "url": "https://figshare.com/articles/A_Wikipedia_Based_Map_of_Science/11638932"
     },

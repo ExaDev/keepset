@@ -85,6 +85,10 @@
   "sources": [
     {
       "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20260803015531",
+        "url": "https://web.archive.org/web/20260803015531/https://opendata.maryland.gov/Housing/District-Court-of-Maryland-Eviction-Case-Data/mvqb-b4hf"
+      },
       "status": "live",
       "url": "https://opendata.maryland.gov/Housing/District-Court-of-Maryland-Eviction-Case-Data/mvqb-b4hf"
     },

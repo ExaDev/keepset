@@ -92,11 +92,19 @@
   "sources": [
     {
       "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20261022003111",
+        "url": "https://web.archive.org/web/20261022003111/https://environment.data.gov.uk/dataset/9c7728fc-68e2-46e1-addb-63790b6b5313"
+      },
       "status": "live",
       "url": "https://environment.data.gov.uk/dataset/9c7728fc-68e2-46e1-addb-63790b6b5313"
     },
     {
       "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20250413184547",
+        "url": "https://web.archive.org/web/20250413184547/https://environment.data.gov.uk/api/file/download?fileDataSetId=e06036f5-7f41-46a3-93ff-fbd0fa1a83cc&fileName=Environment_Agency_Prosecutions.xlsx"
+      },
       "status": "live",
       "url": "https://environment.data.gov.uk/api/file/download?fileDataSetId=e06036f5-7f41-46a3-93ff-fbd0fa1a83cc&fileName=Environment_Agency_Prosecutions.xlsx"
     }

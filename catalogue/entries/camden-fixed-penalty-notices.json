@@ -96,6 +96,10 @@
     },
     {
       "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20250430142721",
+        "url": "https://web.archive.org/web/20250430142721/https://opendata.camden.gov.uk/api/views/i6r8-r9vt/rows.csv?accessType=DOWNLOAD"
+      },
       "status": "live",
       "url": "https://opendata.camden.gov.uk/api/views/i6r8-r9vt/rows.csv?accessType=DOWNLOAD"
     }

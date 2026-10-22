@@ -50,11 +50,19 @@
   "sources": [
     {
       "retrieved": "2026-04-19",
+      "snapshot": {
+        "timestamp": "20260606113052",
+        "url": "https://web.archive.org/web/20260606113052/https://networks.skewed.de/net/high_tech_company"
+      },
       "status": "live",
       "url": "https://networks.skewed.de/net/high_tech_company"
     },
     {
       "retrieved": "2026-04-19",
+      "snapshot": {
+        "timestamp": "20260311124714",
+        "url": "https://web.archive.org/web/20260311124714/https://networks.skewed.de/net/high_tech_company/files/high_tech_company.csv.zip"
+      },
       "status": "live",
       "url": "https://networks.skewed.de/net/high_tech_company/files/high_tech_company.csv.zip"
     }

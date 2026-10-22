@@ -50,11 +50,19 @@
   "sources": [
     {
       "retrieved": "2026-04-19",
+      "snapshot": {
+        "timestamp": "20260316203519",
+        "url": "https://web.archive.org/web/20260316203519/https://networks.skewed.de/net/fao_trade"
+      },
       "status": "live",
       "url": "https://networks.skewed.de/net/fao_trade"
     },
     {
       "retrieved": "2026-04-19",
+      "snapshot": {
+        "timestamp": "20220402122443",
+        "url": "https://web.archive.org/web/20220402122443/https://networks.skewed.de/net/fao_trade/files/fao_trade.csv.zip"
+      },
       "status": "live",
       "url": "https://networks.skewed.de/net/fao_trade/files/fao_trade.csv.zip"
     }

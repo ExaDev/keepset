@@ -85,11 +85,19 @@
   "sources": [
     {
       "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20251015173011",
+        "url": "https://web.archive.org/web/20251015173011/https://ckan0.cf.opendata.inter.prod-toronto.ca/dataset/building-permits-active-permits"
+      },
       "status": "live",
       "url": "https://ckan0.cf.opendata.inter.prod-toronto.ca/dataset/building-permits-active-permits"
     },
     {
       "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20250903114241",
+        "url": "https://web.archive.org/web/20250903114241/https://ckan0.cf.opendata.inter.prod-toronto.ca/dataset/108c2bd1-6945-46f6-af92-02f5658ee7f7/resource/dfce3b7b-4f17-4a9d-9155-5e390a5ffa97/download/building-permits-active-permits.csv"
+      },
       "status": "live",
       "url": "https://ckan0.cf.opendata.inter.prod-toronto.ca/dataset/108c2bd1-6945-46f6-af92-02f5658ee7f7/resource/dfce3b7b-4f17-4a9d-9155-5e390a5ffa97/download/building-permits-active-permits.csv"
     }

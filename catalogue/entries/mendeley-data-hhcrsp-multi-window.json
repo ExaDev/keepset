@@ -121,6 +121,10 @@
   "sources": [
     {
       "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20240905063520",
+        "url": "https://web.archive.org/web/20240905063520/https://data.mendeley.com/datasets/hp3xftsrfx/1"
+      },
       "status": "live",
       "url": "https://data.mendeley.com/datasets/hp3xftsrfx/1"
     },

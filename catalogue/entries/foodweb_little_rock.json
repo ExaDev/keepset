@@ -50,11 +50,19 @@
   "sources": [
     {
       "retrieved": "2026-04-19",
+      "snapshot": {
+        "timestamp": "20260520190209",
+        "url": "https://web.archive.org/web/20260520190209/https://networks.skewed.de/net/foodweb_little_rock"
+      },
       "status": "live",
       "url": "https://networks.skewed.de/net/foodweb_little_rock"
     },
     {
       "retrieved": "2026-04-19",
+      "snapshot": {
+        "timestamp": "20261022015051",
+        "url": "https://web.archive.org/web/20261022015051/https://networks.skewed.de/net/foodweb_little_rock/files/foodweb_little_rock.csv.zip"
+      },
       "status": "live",
       "url": "https://networks.skewed.de/net/foodweb_little_rock/files/foodweb_little_rock.csv.zip"
     }

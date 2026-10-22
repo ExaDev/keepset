@@ -56,16 +56,28 @@
   "sources": [
     {
       "retrieved": "2026-04-20",
+      "snapshot": {
+        "timestamp": "20261022021217",
+        "url": "https://web.archive.org/web/20261022021217/https://github.com/rionbr/DDIBlumenau/tree/master/csv"
+      },
       "status": "live",
       "url": "https://github.com/rionbr/DDIBlumenau/tree/master/csv"
     },
     {
       "retrieved": "2026-04-20",
+      "snapshot": {
+        "timestamp": "20261022013006",
+        "url": "https://web.archive.org/web/20261022013006/https://networks.skewed.de/net/blumenau_drug"
+      },
       "status": "live",
       "url": "https://networks.skewed.de/net/blumenau_drug"
     },
     {
       "retrieved": "2026-04-20",
+      "snapshot": {
+        "timestamp": "20240428102501",
+        "url": "https://web.archive.org/web/20240428102501/https://networks.skewed.de/net/blumenau_drug/files/blumenau_drug.csv.zip"
+      },
       "status": "live",
       "url": "https://networks.skewed.de/net/blumenau_drug/files/blumenau_drug.csv.zip"
     }

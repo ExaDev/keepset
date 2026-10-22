@@ -54,6 +54,10 @@
   "sources": [
     {
       "retrieved": "2026-01-17",
+      "snapshot": {
+        "timestamp": "20160729230456",
+        "url": "https://web.archive.org/web/20160729230456/https://snap.stanford.edu/data/p2p-Gnutella09.txt.gz"
+      },
       "status": "live",
       "url": "https://snap.stanford.edu/data/p2p-Gnutella09.txt.gz"
     },

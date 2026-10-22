@@ -34,6 +34,10 @@
   "sources": [
     {
       "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20260630140646",
+        "url": "https://web.archive.org/web/20260630140646/https://registry.opendata.aws/amazon-last-mile-challenges/"
+      },
       "status": "live",
       "url": "https://registry.opendata.aws/amazon-last-mile-challenges/"
     }

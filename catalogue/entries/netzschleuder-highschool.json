@@ -56,16 +56,28 @@
   "sources": [
     {
       "retrieved": "2026-04-20",
+      "snapshot": {
+        "timestamp": "20260421124831",
+        "url": "https://web.archive.org/web/20260421124831/http://konect.cc/networks/moreno_highschool"
+      },
       "status": "live",
       "url": "http://konect.cc/networks/moreno_highschool"
     },
     {
       "retrieved": "2026-04-20",
+      "snapshot": {
+        "timestamp": "20260520200423",
+        "url": "https://web.archive.org/web/20260520200423/https://networks.skewed.de/net/highschool"
+      },
       "status": "live",
       "url": "https://networks.skewed.de/net/highschool"
     },
     {
       "retrieved": "2026-04-20",
+      "snapshot": {
+        "timestamp": "20240428102506",
+        "url": "https://web.archive.org/web/20240428102506/https://networks.skewed.de/net/highschool/files/highschool.csv.zip"
+      },
       "status": "live",
       "url": "https://networks.skewed.de/net/highschool/files/highschool.csv.zip"
     }

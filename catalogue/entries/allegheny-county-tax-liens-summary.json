@@ -71,6 +71,10 @@
   "sources": [
     {
       "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20260421192742",
+        "url": "https://web.archive.org/web/20260421192742/https://data.wprdc.org/dataset/allegheny-county-tax-liens-filed-and-satisfied"
+      },
       "status": "live",
       "url": "https://data.wprdc.org/dataset/allegheny-county-tax-liens-filed-and-satisfied"
     },

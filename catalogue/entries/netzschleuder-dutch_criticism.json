@@ -56,11 +56,19 @@
   "sources": [
     {
       "retrieved": "2026-04-20",
+      "snapshot": {
+        "timestamp": "20220812052146",
+        "url": "https://web.archive.org/web/20220812052146/http://vlado.fmf.uni-lj.si/pub/networks/data/esna/literature.htm"
+      },
       "status": "live",
       "url": "http://vlado.fmf.uni-lj.si/pub/networks/data/esna/literature.htm"
     },
     {
       "retrieved": "2026-04-20",
+      "snapshot": {
+        "timestamp": "20260316212946",
+        "url": "https://web.archive.org/web/20260316212946/https://networks.skewed.de/net/dutch_criticism"
+      },
       "status": "live",
       "url": "https://networks.skewed.de/net/dutch_criticism"
     },

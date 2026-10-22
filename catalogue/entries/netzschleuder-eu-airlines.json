@@ -57,11 +57,19 @@
   "sources": [
     {
       "retrieved": "2026-04-20",
+      "snapshot": {
+        "timestamp": "20260420163549",
+        "url": "https://web.archive.org/web/20260420163549/https://networks.skewed.de/net/eu_airlines"
+      },
       "status": "live",
       "url": "https://networks.skewed.de/net/eu_airlines"
     },
     {
       "retrieved": "2026-04-20",
+      "snapshot": {
+        "timestamp": "20240428102440",
+        "url": "https://web.archive.org/web/20240428102440/https://networks.skewed.de/net/eu_airlines/files/eu_airlines.csv.zip"
+      },
       "status": "live",
       "url": "https://networks.skewed.de/net/eu_airlines/files/eu_airlines.csv.zip"
     }

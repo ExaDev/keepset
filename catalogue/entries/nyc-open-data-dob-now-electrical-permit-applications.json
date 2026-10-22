@@ -97,6 +97,10 @@
   "sources": [
     {
       "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20261020232318",
+        "url": "https://web.archive.org/web/20261020232318/https://data.cityofnewyork.us/Housing-Development/DOB-NOW-Electrical-Permit-Applications/dm9a-ab7w"
+      },
       "status": "live",
       "url": "https://data.cityofnewyork.us/Housing-Development/DOB-NOW-Electrical-Permit-Applications/dm9a-ab7w"
     },

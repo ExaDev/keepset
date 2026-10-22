@@ -122,11 +122,19 @@
   "sources": [
     {
       "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20260911155936",
+        "url": "https://web.archive.org/web/20260911155936/https://data.cityofnewyork.us/Housing-Development/DOB-NOW-Build-Elevator-Permit-Applications/kfp4-dz4h"
+      },
       "status": "live",
       "url": "https://data.cityofnewyork.us/Housing-Development/DOB-NOW-Build-Elevator-Permit-Applications/kfp4-dz4h"
     },
     {
       "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20250131235451",
+        "url": "https://web.archive.org/web/20250131235451/https://data.cityofnewyork.us/api/views/kfp4-dz4h/rows.csv?accessType=DOWNLOAD"
+      },
       "status": "live",
       "url": "https://data.cityofnewyork.us/api/views/kfp4-dz4h/rows.csv?accessType=DOWNLOAD"
     }

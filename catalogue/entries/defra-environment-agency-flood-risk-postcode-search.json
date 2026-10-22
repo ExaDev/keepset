@@ -62,11 +62,19 @@
   "sources": [
     {
       "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20261022003031",
+        "url": "https://web.archive.org/web/20261022003031/https://environment.data.gov.uk/dataset/53cba123-71f8-417a-8441-4c7ba111e8e1"
+      },
       "status": "live",
       "url": "https://environment.data.gov.uk/dataset/53cba123-71f8-417a-8441-4c7ba111e8e1"
     },
     {
       "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20261022003002",
+        "url": "https://web.archive.org/web/20261022003002/https://environment.data.gov.uk/api/file/download?fileDataSetId=fb921496-1788-4fc2-b469-7b51e2a45553&fileName=Postcodes_Risk_Assessment_All.csv"
+      },
       "status": "live",
       "url": "https://environment.data.gov.uk/api/file/download?fileDataSetId=fb921496-1788-4fc2-b469-7b51e2a45553&fileName=Postcodes_Risk_Assessment_All.csv"
     }

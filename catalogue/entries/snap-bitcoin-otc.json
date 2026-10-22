@@ -60,6 +60,10 @@
   "sources": [
     {
       "retrieved": "2026-03-26",
+      "snapshot": {
+        "timestamp": "20230316065849",
+        "url": "https://web.archive.org/web/20230316065849/https://snap.stanford.edu/data/soc-sign-bitcoinotc.csv.gz"
+      },
       "status": "live",
       "url": "https://snap.stanford.edu/data/soc-sign-bitcoinotc.csv.gz"
     }

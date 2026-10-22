@@ -56,6 +56,10 @@
   "sources": [
     {
       "retrieved": "2026-03-27",
+      "snapshot": {
+        "timestamp": "20260917053053",
+        "url": "https://web.archive.org/web/20260917053053/https://files.grouplens.org/datasets/movielens/ml-100k.zip"
+      },
       "status": "live",
       "url": "https://files.grouplens.org/datasets/movielens/ml-100k.zip"
     }

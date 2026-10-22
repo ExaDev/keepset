@@ -56,6 +56,10 @@
   "sources": [
     {
       "retrieved": "2026-04-20",
+      "snapshot": {
+        "timestamp": "20230928153021",
+        "url": "https://web.archive.org/web/20230928153021/https://deim.urv.cat/~alexandre.arenas/data/welcome.htm"
+      },
       "status": "live",
       "url": "https://deim.urv.cat/~alexandre.arenas/data/welcome.htm"
     },

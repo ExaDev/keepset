@@ -50,11 +50,19 @@
   "sources": [
     {
       "retrieved": "2026-04-19",
+      "snapshot": {
+        "timestamp": "20260316204434",
+        "url": "https://web.archive.org/web/20260316204434/https://networks.skewed.de/net/cintestinalis"
+      },
       "status": "live",
       "url": "https://networks.skewed.de/net/cintestinalis"
     },
     {
       "retrieved": "2026-04-19",
+      "snapshot": {
+        "timestamp": "20261022013718",
+        "url": "https://web.archive.org/web/20261022013718/https://networks.skewed.de/net/cintestinalis/files/cintestinalis.csv.zip"
+      },
       "status": "live",
       "url": "https://networks.skewed.de/net/cintestinalis/files/cintestinalis.csv.zip"
     }

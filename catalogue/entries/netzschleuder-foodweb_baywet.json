@@ -56,11 +56,19 @@
   "sources": [
     {
       "retrieved": "2026-04-20",
+      "snapshot": {
+        "timestamp": "20250213220320",
+        "url": "https://web.archive.org/web/20250213220320/http://konect.cc/networks/foodweb-baywet"
+      },
       "status": "live",
       "url": "http://konect.cc/networks/foodweb-baywet"
     },
     {
       "retrieved": "2026-04-20",
+      "snapshot": {
+        "timestamp": "20260520192441",
+        "url": "https://web.archive.org/web/20260520192441/https://networks.skewed.de/net/foodweb_baywet"
+      },
       "status": "live",
       "url": "https://networks.skewed.de/net/foodweb_baywet"
     },

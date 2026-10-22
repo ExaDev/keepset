@@ -88,11 +88,19 @@
   "sources": [
     {
       "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20261020232159",
+        "url": "https://web.archive.org/web/20261020232159/https://data.cityofnewyork.us/Housing-Development/Bureau-of-Fire-Prevention-Inspections-Historical-/ssq6-fkht"
+      },
       "status": "live",
       "url": "https://data.cityofnewyork.us/Housing-Development/Bureau-of-Fire-Prevention-Inspections-Historical-/ssq6-fkht"
     },
     {
       "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20250201035112",
+        "url": "https://web.archive.org/web/20250201035112/https://data.cityofnewyork.us/api/views/ssq6-fkht/rows.csv?accessType=DOWNLOAD"
+      },
       "status": "live",
       "url": "https://data.cityofnewyork.us/api/views/ssq6-fkht/rows.csv?accessType=DOWNLOAD"
     }

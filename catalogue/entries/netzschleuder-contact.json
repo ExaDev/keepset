@@ -56,16 +56,28 @@
   "sources": [
     {
       "retrieved": "2026-04-20",
+      "snapshot": {
+        "timestamp": "20260421133725",
+        "url": "https://web.archive.org/web/20260421133725/http://konect.cc/networks/contact"
+      },
       "status": "live",
       "url": "http://konect.cc/networks/contact"
     },
     {
       "retrieved": "2026-04-20",
+      "snapshot": {
+        "timestamp": "20260606105117",
+        "url": "https://web.archive.org/web/20260606105117/https://networks.skewed.de/net/contact"
+      },
       "status": "live",
       "url": "https://networks.skewed.de/net/contact"
     },
     {
       "retrieved": "2026-04-20",
+      "snapshot": {
+        "timestamp": "20240420185201",
+        "url": "https://web.archive.org/web/20240420185201/https://networks.skewed.de/net/contact/files/contact.csv.zip"
+      },
       "status": "live",
       "url": "https://networks.skewed.de/net/contact/files/contact.csv.zip"
     }

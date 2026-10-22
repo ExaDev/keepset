@@ -90,11 +90,19 @@
   "sources": [
     {
       "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20260205024809",
+        "url": "https://web.archive.org/web/20260205024809/https://data.cityofnewyork.us/Housing-Development/DOB-NOW-Safety-Facades-Compliance-Filings/xubg-57si"
+      },
       "status": "live",
       "url": "https://data.cityofnewyork.us/Housing-Development/DOB-NOW-Safety-Facades-Compliance-Filings/xubg-57si"
     },
     {
       "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20260325124748",
+        "url": "https://web.archive.org/web/20260325124748/https://data.cityofnewyork.us/api/views/xubg-57si/rows.csv?accessType=DOWNLOAD"
+      },
       "status": "live",
       "url": "https://data.cityofnewyork.us/api/views/xubg-57si/rows.csv?accessType=DOWNLOAD"
     }

@@ -38,6 +38,10 @@
   "sources": [
     {
       "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20260614110129",
+        "url": "https://web.archive.org/web/20260614110129/https://data.mendeley.com/datasets/xnf6c4d5gt/1"
+      },
       "status": "live",
       "url": "https://data.mendeley.com/datasets/xnf6c4d5gt/1"
     }

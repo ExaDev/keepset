@@ -84,11 +84,19 @@
   "sources": [
     {
       "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20260616090728",
+        "url": "https://web.archive.org/web/20260616090728/https://datacatalog.cookcountyil.gov/Property-Taxation/Treasurer-Annual-Tax-Sale/55ju-2fs9"
+      },
       "status": "live",
       "url": "https://datacatalog.cookcountyil.gov/Property-Taxation/Treasurer-Annual-Tax-Sale/55ju-2fs9"
     },
     {
       "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20260217023830",
+        "url": "https://web.archive.org/web/20260217023830/https://datacatalog.cookcountyil.gov/api/views/55ju-2fs9/rows.csv?accessType=DOWNLOAD"
+      },
       "status": "live",
       "url": "https://datacatalog.cookcountyil.gov/api/views/55ju-2fs9/rows.csv?accessType=DOWNLOAD"
     }

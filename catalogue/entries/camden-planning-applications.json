@@ -107,6 +107,10 @@
   "sources": [
     {
       "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20261022025314",
+        "url": "https://web.archive.org/web/20261022025314/https://opendata.camden.gov.uk/Environment/Planning-Applications/2eiu-s2cw"
+      },
       "status": "live",
       "url": "https://opendata.camden.gov.uk/Environment/Planning-Applications/2eiu-s2cw"
     },

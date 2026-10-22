@@ -101,11 +101,19 @@
   "sources": [
     {
       "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20261022025354",
+        "url": "https://web.archive.org/web/20261022025354/https://opendata.camden.gov.uk/Housing/HMO-Licensing-Register/x43g-c2rf"
+      },
       "status": "live",
       "url": "https://opendata.camden.gov.uk/Housing/HMO-Licensing-Register/x43g-c2rf"
     },
     {
       "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20250420132924",
+        "url": "https://web.archive.org/web/20250420132924/https://opendata.camden.gov.uk/api/views/x43g-c2rf/rows.csv?accessType=DOWNLOAD"
+      },
       "status": "live",
       "url": "https://opendata.camden.gov.uk/api/views/x43g-c2rf/rows.csv?accessType=DOWNLOAD"
     }

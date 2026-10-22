@@ -78,11 +78,19 @@
   "sources": [
     {
       "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20260802043945",
+        "url": "https://web.archive.org/web/20260802043945/https://data.cityofnewyork.us/Housing-Development/DOB-NOW-Safety-Boiler/52dp-yji6"
+      },
       "status": "live",
       "url": "https://data.cityofnewyork.us/Housing-Development/DOB-NOW-Safety-Boiler/52dp-yji6"
     },
     {
       "retrieved": "2026-10-19",
+      "snapshot": {
+        "timestamp": "20260403015126",
+        "url": "https://web.archive.org/web/20260403015126/https://data.cityofnewyork.us/api/views/52dp-yji6/rows.csv?accessType=DOWNLOAD"
+      },
       "status": "live",
       "url": "https://data.cityofnewyork.us/api/views/52dp-yji6/rows.csv?accessType=DOWNLOAD"
     }

@@ -56,11 +56,19 @@
   "sources": [
     {
       "retrieved": "2026-04-20",
+      "snapshot": {
+        "timestamp": "20260410154946",
+        "url": "https://web.archive.org/web/20260410154946/http://konect.cc/networks/brunson_corporate-leadership"
+      },
       "status": "live",
       "url": "http://konect.cc/networks/brunson_corporate-leadership"
     },
     {
       "retrieved": "2026-04-20",
+      "snapshot": {
+        "timestamp": "20260210205414",
+        "url": "https://web.archive.org/web/20260210205414/https://networks.skewed.de/net/elite"
+      },
       "status": "live",
       "url": "https://networks.skewed.de/net/elite"
     },

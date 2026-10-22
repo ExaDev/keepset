@@ -57,11 +57,19 @@
   "sources": [
     {
       "retrieved": "2026-04-20",
+      "snapshot": {
+        "timestamp": "20260606101353",
+        "url": "https://web.archive.org/web/20260606101353/https://networks.skewed.de/net/interactome_pdz"
+      },
       "status": "live",
       "url": "https://networks.skewed.de/net/interactome_pdz"
     },
     {
       "retrieved": "2026-04-20",
+      "snapshot": {
+        "timestamp": "20261022023009",
+        "url": "https://web.archive.org/web/20261022023009/https://networks.skewed.de/net/interactome_pdz/files/interactome_pdz.csv.zip"
+      },
       "status": "live",
       "url": "https://networks.skewed.de/net/interactome_pdz/files/interactome_pdz.csv.zip"
     }
