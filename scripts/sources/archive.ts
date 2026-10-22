@@ -195,6 +195,9 @@ export async function archiveSources(ports: Readonly<ArchivePorts>, request: Rea
 
       return capture(group, attempt + 1);
     }
+    if (outcome.kind === "url-limited") {
+      return { kind: "unresolved", service: false, evidence: `the URL has been captured as often as a day allows (${outcome.evidence})` };
+    }
     if (outcome.kind === "limit") {
       return { kind: "stop", why: "the day's capture limit is spent" };
     }

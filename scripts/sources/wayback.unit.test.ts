@@ -38,7 +38,8 @@ describe("classifySaveError", () => {
     expect(classifySaveError("error:blocked-url", undefined)).toMatchObject({ kind: "refused", reason: "excluded" });
     expect(classifySaveError("error:blocked", undefined)).toMatchObject({ kind: "refused", reason: "access-wall" });
     expect(classifySaveError("error:not-found", undefined)).toMatchObject({ kind: "refused", reason: "source-error" });
-    expect(classifySaveError("error:too-many-daily-captures", undefined)).toMatchObject({ kind: "exhausted" });
+    expect(classifySaveError("error:too-many-daily-captures", undefined)).toMatchObject({ kind: "url-limited" });
+    expect(classifySaveError("error:max-daily-bandwidth", undefined)).toMatchObject({ kind: "exhausted" });
     expect(classifySaveError("error:read-timeout", undefined)).toMatchObject({ kind: "retry" });
     expect(classifySaveError(undefined, "boom")).toEqual({ kind: "retry", evidence: "boom" });
   });
@@ -100,7 +101,7 @@ describe("saveAuthenticated", () => {
 
   it("classifies an error returned in place of a job", async () => {
     const { client, clock } = single(() => json({ status: "error", status_ext: "error:too-many-daily-captures", message: "limit" }, HTTP_STATUS.tooManyRequests));
-    expect(await saveAuthenticated(client, clock, credentials, "https://example.org/a")).toMatchObject({ kind: "exhausted" });
+    expect(await saveAuthenticated(client, clock, credentials, "https://example.org/a")).toMatchObject({ kind: "url-limited" });
   });
 
   it("fails loudly when the key pair is rejected", async () => {

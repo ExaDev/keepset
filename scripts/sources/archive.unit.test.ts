@@ -349,8 +349,16 @@ describe("archiveSources", () => {
     expect(trial.states.at(-1)).toEqual({ day: "2026-10-20", captures: 1, rejected: {}, deferred: {} });
   });
 
+  it("leaves a URL that has used its own daily captures unresolved and goes on to the next", async () => {
+    const trial = run([A, B], { saves: [{ kind: "url-limited", evidence: "error:too-many-daily-captures" }, { kind: "saved", timestamp: "20261020120001" }] });
+    const outcome = await trial.result;
+    expect(outcome.stopped).toBeUndefined();
+    expect(outcome.unresolved).toEqual([A]);
+    expect(trial.recorded.get(B)).toBe("20261020120001");
+  });
+
   it("stops when the account's own limit is exhausted", async () => {
-    const trial = run([A, B], { saves: [{ kind: "exhausted", evidence: "error:too-many-daily-captures" }] });
+    const trial = run([A, B], { saves: [{ kind: "exhausted", evidence: "error:max-daily-bandwidth" }] });
     const outcome = await trial.result;
     expect(outcome.stopped).toMatch(/refused further captures/);
     expect(trial.captured).toEqual([A]);
