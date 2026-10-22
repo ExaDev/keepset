@@ -1,0 +1,104 @@
+/* Browser tests of the built site. Every request the site makes to another origin is answered here: a source host with the file and the CORS header a host that allows browsers sends, the Wayback Machine's replay failing as a browser's cross-origin read of it does, since it sends no CORS header, its availability API with CORS, and Save Page Now with an opaque answer. */
+
+import { expect, test, type Page, type Route } from "@playwright/test";
+
+const CORS = { "access-control-allow-origin": "*" };
+
+/** A Pajek file of a handful of vertices, standing in for a dead source's snapshot that the page cannot read. */
+const PAJEK = '*Vertices 4\n1 "a"\n2 "b"\n3 "c"\n4 "d"\n*Edges\n1 2\n2 3\n3 4\n';
+
+/** The rows of a tasks table with a latitude and a longitude, which the preview draws as a map. */
+const TOWS_CSV = "Latitude,Longitude,Tow_Date,Tow_Description\n42.88,-78.87,2026-01-01,Illegal parking\n42.9,-78.85,2026-01-02,Abandoned vehicle\n";
+
+/** How many vertices the Pajek file holds, which is how many rows the preview shows. */
+const PAJEK_VERTICES = 4;
+
+const TOWS_URL = "https://data.buffalony.gov/api/views/pamv-gash/rows.csv?accessType=DOWNLOAD";
+
+const FILE_NAMES = (page: Page): { requested: string[] } => {
+  const requested: string[] = [];
+  page.on("request", (request) => {
+    requested.push(new URL(request.url()).pathname.split("/").pop() ?? "");
+  });
+
+  return { requested };
+};
+
+/** Answers the Wayback Machine as it answers a browser: the availability API with CORS and no capture, a replay with no CORS header, and Save Page Now with a page the browser cannot read. Returns the capture requests it saw. */
+async function wayback(page: Page): Promise<string[]> {
+  const captures: string[] = [];
+  await page.route("https://archive.org/wayback/available**", async (route: Readonly<Route>) => {
+    await route.fulfill({ status: 200, headers: CORS, contentType: "application/json", body: JSON.stringify({ archived_snapshots: {} }) });
+  });
+  // Playwright's fulfil does not enforce CORS, so a replay's missing CORS header is reproduced as the failure a browser gives such a request: the fetch rejects.
+  await page.route("https://web.archive.org/web/**", async (route: Readonly<Route>) => {
+    await route.abort("failed");
+  });
+  await page.route("https://web.archive.org/save/**", async (route: Readonly<Route>) => {
+    captures.push(route.request().url());
+    await route.fulfill({ status: 200, contentType: "text/html", body: "<html></html>" });
+  });
+
+  return captures;
+}
+
+test("the listing renders only the rows near the viewport and reaches the last one", async ({ page }) => {
+  await page.goto("/");
+  const rows = page.locator("#island-root tbody tr[data-index]");
+  await expect(rows.first()).toBeVisible();
+  const total = Number((await page.locator("#island-root .mantine-Badge-root").textContent())?.split(" of ")[1]);
+  expect(await rows.count()).toBeLessThan(total);
+  await page.evaluate(() => {
+    window.scrollTo(0, document.body.scrollHeight);
+  });
+  await expect(rows.last()).toHaveAttribute("data-index", String(total - 1));
+});
+
+test("a minimum edge count filters the listing and the count says how many remain", async ({ page }) => {
+  await page.goto("/");
+  const badge = page.locator("#island-root .mantine-Badge-root");
+  await expect(badge).toBeVisible();
+  const [, total] = ((await badge.textContent()) ?? "").split(" of ");
+  await page.getByPlaceholder("min edges").fill("1000000");
+  await expect(badge).not.toHaveText(new RegExp(`^${String(total)} of`));
+  expect(Number(((await badge.textContent()) ?? "").split(" of ")[0])).toBeGreaterThan(0);
+});
+
+test("the listing loads neither the preview nor the map, and an entry page loads the preview but not the map", async ({ page }) => {
+  const listing = FILE_NAMES(page);
+  await page.goto("/");
+  await expect(page.locator("#island-root tbody tr[data-index]").first()).toBeVisible();
+  expect(listing.requested.some((name) => name.startsWith("preview-") || name.startsWith("point-map-"))).toBe(false);
+
+  const entry = FILE_NAMES(page);
+  await page.goto("/datasets/divorce/");
+  await expect(page.getByRole("button", { name: "Fetch and preview" })).toBeVisible();
+  expect(entry.requested.some((name) => name.startsWith("preview-"))).toBe(true);
+  expect(entry.requested.some((name) => name.startsWith("point-map-"))).toBe(false);
+});
+
+test("a source the page cannot read offers the file drop, and the dropped file previews with its checksum", async ({ page }) => {
+  const captures = await wayback(page);
+  await page.goto("/datasets/divorce/");
+  await page.getByRole("button", { name: "Fetch and preview" }).click();
+  await expect(page.getByText("The page could not read this source")).toBeVisible();
+  await page.locator('input[type="file"]').setInputFiles({ name: "divorce.net", mimeType: "text/plain", buffer: Buffer.from(PAJEK, "latin1") });
+  await expect(page.locator(".preview-result table tbody tr")).toHaveCount(PAJEK_VERTICES);
+  await expect(page.locator(".preview-provenance")).toContainText("SHA-256");
+  expect(captures).toEqual([]);
+});
+
+test("a readable live source previews, draws the map from its coordinates and asks the Archive to capture it", async ({ page }) => {
+  const captures = await wayback(page);
+  const chunks = FILE_NAMES(page);
+  await page.route(TOWS_URL, async (route: Readonly<Route>) => {
+    await route.fulfill({ status: 200, headers: CORS, contentType: "text/csv", body: TOWS_CSV });
+  });
+  await page.goto("/datasets/buffalo-recent-tows/");
+  await page.getByRole("button", { name: "Fetch and preview" }).click();
+  await expect(page.locator(".preview-result table tbody tr")).toHaveCount(2);
+  await expect(page.locator(".preview-map .leaflet-container")).toBeVisible();
+  expect(chunks.requested.some((name) => name.startsWith("point-map-"))).toBe(true);
+  await expect(page.locator(".preview-capture")).toBeVisible();
+  expect(captures).toEqual([`https://web.archive.org/save/${TOWS_URL}`]);
+});

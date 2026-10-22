@@ -9,6 +9,9 @@ coverage/
 .eslintcache
 .turbo/
 reports/
+# Playwright's output from `pnpm run test:e2e`.
+test-results/
+playwright-report/
 # Assembled from catalogue/ by scripts/build-catalogue.ts at the start of every build.
 src/generated/
 
