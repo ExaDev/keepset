@@ -1,3 +1,10 @@
+## [0.49.2](https://github.com/Mearman/keepset/compare/v0.49.1...v0.49.2) (2026-10-22)
+
+
+### Bug Fixes
+
+* **archive:** stop a run on Wayback Machine trouble only ([8ccbb98](https://github.com/Mearman/keepset/commit/8ccbb98d8b20d55a48358ef59b9d4a88b132fc79))
+
 ## [0.49.1](https://github.com/Mearman/keepset/compare/v0.49.0...v0.49.1) (2026-10-22)
 
 
