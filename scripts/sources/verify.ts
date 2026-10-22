@@ -16,8 +16,11 @@ export const VERIFY_BACKOFF_MILLISECONDS = 30_000;
 /** The marker of the Wayback Machine's own pages (its 404, its error and block pages): the title every one of them carries. A replay of an archived page never has it unless the archived page is the Wayback Machine's. */
 const WAYBACK_PAGE_TITLE = "<title>Wayback Machine</title>";
 
-/** The request headers of both lookups: the stored representation, and only the start of it. */
-const FIRST_BYTES_HEADERS = { "accept-encoding": "identity", range: `bytes=0-${String(FIRST_BYTES - 1)}` };
+/** The request headers of a lookup: the stored representation. */
+const STORED_HEADERS = { "accept-encoding": "identity" };
+
+/** The live source is asked for only the start of the file. A replay is not: the Wayback Machine answers a range request for a recent capture with its own 404 page while the same capture answers a plain request, so a replay is read from its start and dropped after the first bytes. */
+const LIVE_HEADERS = { ...STORED_HEADERS, range: `bytes=0-${String(FIRST_BYTES - 1)}` };
 
 /** The capture timestamp in the URL a raw replay finally answered from, after the Wayback Machine's redirects. */
 const LANDING_TIMESTAMP = /^https:\/\/web\.archive\.org\/web\/(\d{14})id_\//;
@@ -104,11 +107,12 @@ function join(chunks: readonly Uint8Array[], length: number): Uint8Array {
  * Requests the start of a URL.
  * @param client - The polite client.
  * @param url - The URL.
+ * @param headers - The request headers.
  * @returns What it answered, or undefined when the connection failed on every attempt.
  */
-async function look(client: PoliteClient, url: string): Promise<Head | undefined> {
+async function look(client: PoliteClient, url: string, headers: Readonly<Record<string, string>>): Promise<Head | undefined> {
   try {
-    const response = await client.request(url, { method: "GET", headers: FIRST_BYTES_HEADERS });
+    const response = await client.request(url, { method: "GET", headers });
 
     return { status: response.status, url: response.url, headers: response.headers, bytes: await readPrefix(response) };
   } catch (error) {
@@ -188,7 +192,7 @@ export interface Pin {
  * @returns The verdict.
  */
 async function judge(client: PoliteClient, pin: Pin, live: Head | undefined): Promise<Verdict> {
-  const replay = await look(client, rawSnapshotUrl(pin.timestamp, pin.url));
+  const replay = await look(client, rawSnapshotUrl(pin.timestamp, pin.url), STORED_HEADERS);
   if (replay === undefined) {
     return { kind: "busy", evidence: "the raw snapshot could not be reached" };
   }
@@ -234,7 +238,7 @@ function mayBeLagging(verdict: Extract<Verdict, { kind: "failed" }>): boolean {
  * @returns Verified when the raw form answers with the capture's bytes (`notes` holds any difference from the live source tolerated for an older pin); failed with the reason when a lookup that cannot be indexing lag, or the last one, does not; busy when the archive could not give an answer.
  */
 export async function verifyPin(ports: Readonly<{ client: PoliteClient; clock: Clock }>, pin: Pin, attempts: number): Promise<Verdict> {
-  const live = pin.live ? await look(ports.client, pin.url) : undefined;
+  const live = pin.live ? await look(ports.client, pin.url, LIVE_HEADERS) : undefined;
 
   return lookAgain({ ports, pin, live: live !== undefined && isSuccess(live.status) ? live : undefined, attempts, attempt: 1 });
 }

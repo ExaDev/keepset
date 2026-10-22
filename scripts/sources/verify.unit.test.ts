@@ -31,6 +31,21 @@ describe("isWaybackPage", () => {
   });
 });
 
+describe("the requests a verification makes", () => {
+  it("asks the source for the start of the file and the replay for the file, since the Wayback Machine 404s a range request for some captures", async () => {
+    const seen: { url: string; range: string | null }[] = [];
+    const network = scriptedNetwork((request) => {
+      seen.push({ url: request.url, range: request.headers.get("range") });
+
+      return request.url === RAW ? replay("a,b\n1,2\n") : live("a,b\n1,2\n");
+    });
+    const client = new PoliteClient(network.fetch, new FakeClock(), { ...TEST_POLITENESS, attempts: 1 });
+    await verifyPin({ client, clock: new FakeClock() }, { url: U, timestamp: TS, live: true, compareStrictly: true }, 1);
+    expect(seen.find((request) => request.url === RAW)?.range).toBeNull();
+    expect(seen.find((request) => request.url === U)?.range).toBe(`bytes=0-${String(FIRST_BYTES - 1)}`);
+  });
+});
+
 describe("differences", () => {
   const both = (replayBody: string, liveBody: string, headers: Readonly<{ replay?: Record<string, string>; live?: Record<string, string> }> = {}) =>
     differences(
