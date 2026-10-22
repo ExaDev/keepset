@@ -193,6 +193,23 @@ describe("archiveSources", () => {
     expect(trial.captured).toEqual([]);
   });
 
+  it("excepts a URL whose second capture is again not served back, naming how many were taken", async () => {
+    const known = { day: "", captures: 0, rejected: { [A]: ["20261019120000"] }, deferred: {} };
+    const trial = run([A], { replays: { "20261020120001": { status: HTTP_STATUS.notFound } }, saves: [{ kind: "saved", timestamp: "20261020120001" }] }, { state: known });
+    const outcome = await trial.result;
+    expect(outcome.exceptions).toHaveLength(1);
+    expect(outcome.exceptions[0]).toMatchObject({ url: A, reason: "not-served" });
+    expect(outcome.exceptions[0]?.evidence).toContain("2 captures were taken");
+    expect(outcome.unresolved).toEqual([]);
+  });
+
+  it("leaves a URL whose first capture is not served back unresolved, since that may be indexing lag", async () => {
+    const trial = run([A], { replays: { "20261020120001": { status: HTTP_STATUS.notFound } }, saves: [{ kind: "saved", timestamp: "20261020120001" }] });
+    const outcome = await trial.result;
+    expect(outcome.exceptions).toEqual([]);
+    expect(outcome.unresolved).toEqual([A]);
+  });
+
   it("waits for a fresh capture's indexing to clear before accepting it", async () => {
     const times = ["20261020120001", "20261020120002"];
     let looks = 0;

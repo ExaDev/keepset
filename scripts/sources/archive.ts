@@ -8,7 +8,7 @@ import { HTTP_STATUS, isRefusal, isSuccess } from "./http-status";
 import { type Clock, intervalForRate, Pacer } from "./pacing";
 import { type PoliteClient, RequestFailure } from "./polite-client";
 import { isDefinitiveFailure, probe, redirectsToMissingPage, statusEvidence } from "./probe";
-import { VERIFY_ATTEMPTS, verifyPin } from "./verify";
+import { type FailureReason, VERIFY_ATTEMPTS, verifyPin } from "./verify";
 import { ARCHIVE_SIZE_LIMIT_BYTES, findSnapshot, type SaveOutcome, WaybackBusy } from "./wayback";
 
 /** How many times a capture is requested for one URL in a run, and how long the wait before the second request is (each later wait doubles it). A busy service clears in a minute or two, and every request counts against the day's limit, so the tries are few and the first wait is long. */
@@ -17,6 +17,9 @@ export const SAVE_BACKOFF_MILLISECONDS = 30_000;
 
 /** How many URLs in a row may end unresolved before the run stops. A service or network that fails five URLs in a row is down or has throttled this client, and going on only adds requests; the run is resumable, so stopping loses nothing. */
 export const MAX_CONSECUTIVE_UNRESOLVED = 5;
+
+/** How many captures of one URL may be taken and not served back, as the Wayback Machine's 404 or its own page, before the URL is recorded as one it cannot serve. One such capture may be indexing lag, which the verification's waits cover; a second, taken later, is the host's answer. */
+export const UNSERVED_CAPTURES_BEFORE_EXCEPTION = 2;
 
 /** What the archiver keeps between runs in its gitignored state file: the UTC day and how many captures were requested on it, so the account's daily limit holds across restarts, and the captures of each URL that failed verification, so the availability API handing the same bad capture back is not trusted again. A state file written before the rejections were kept has none, and nothing was rejected then. `deferred` counts the runs in a row each URL ended unresolved, so a URL that cannot be settled goes behind the ones that can and never holds up the queue. */
 export const ArchiveStateSchema = z
@@ -155,7 +158,7 @@ export async function archiveSources(ports: Readonly<ArchivePorts>, request: Rea
    * @param followed - Whether this timestamp is the capture another's replay answered from, which is followed once and no further.
    * @returns pinned when the raw snapshot serves the captured bytes, unresolved when the archive could not say, failed with what was observed when it does not serve them.
    */
-  const check = async (group: SourceGroup, timestamp: string, attempts: number, followed = false): Promise<Resolution | { kind: "failed"; evidence: string }> => {
+  const check = async (group: SourceGroup, timestamp: string, attempts: number, followed = false): Promise<Resolution | { kind: "failed"; evidence: string; reason: FailureReason }> => {
     const verdict = await verifyPin({ client, clock }, { url: group.url, timestamp, live: group.live, compareStrictly: true }, attempts);
     if (verdict.kind === "verified") {
       return { kind: "pinned", timestamp };
@@ -172,7 +175,7 @@ export async function archiveSources(ports: Readonly<ArchivePorts>, request: Rea
       return check(group, verdict.landed, 1, true);
     }
 
-    return { kind: "failed", evidence: verdict.evidence };
+    return { kind: "failed", evidence: verdict.evidence, reason: verdict.reason };
   };
 
   /**
@@ -197,6 +200,10 @@ export async function archiveSources(ports: Readonly<ArchivePorts>, request: Rea
     }
     if (outcome.kind === "saved") {
       const checked = await check(group, outcome.timestamp, VERIFY_ATTEMPTS);
+
+      if (checked.kind === "failed" && (checked.reason === "not-served" || checked.reason === "wayback-page") && (state.rejected[url]?.length ?? 0) >= UNSERVED_CAPTURES_BEFORE_EXCEPTION) {
+        return { kind: "excepted", reason: "not-served", evidence: `${String(state.rejected[url]?.length)} captures were taken and the Wayback Machine served none of them back: ${checked.evidence}` };
+      }
 
       return checked.kind === "failed" ? { kind: "unresolved", evidence: `the capture ${outcome.timestamp} was not accepted: ${checked.evidence}` } : checked;
     }
