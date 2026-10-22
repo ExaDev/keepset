@@ -1,3 +1,10 @@
+## [0.49.3](https://github.com/Mearman/keepset/compare/v0.49.2...v0.49.3) (2026-10-22)
+
+
+### Bug Fixes
+
+* **archive:** treat a URL's daily capture limit as that URL's, not the account's ([24dd4a4](https://github.com/Mearman/keepset/commit/24dd4a4b79ae93ee341b337da4cf896dfe0c4ae9))
+
 ## [0.49.2](https://github.com/Mearman/keepset/compare/v0.49.1...v0.49.2) (2026-10-22)
 
 
