@@ -61,6 +61,8 @@
     {
       "retrieved": "2026-04-20",
       "snapshot": {
+        "byteLength": 518144,
+        "sha256": "120c2c6332050a2d1494c19c687f447ed65620ad0db5f8b732189aa10e5162f1",
         "timestamp": "20260829213511",
         "url": "https://web.archive.org/web/20260829213511/https://www.wormatlas.org/images/NeuronConnect.xls"
       },

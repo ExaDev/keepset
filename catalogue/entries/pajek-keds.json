@@ -57,6 +57,8 @@
     {
       "retrieved": "2026-02-16",
       "snapshot": {
+        "byteLength": 243745,
+        "sha256": "82ba7a1203bd0d20d3024ce38751125fa6eca84418afacb1721d4fc4cd3871df",
         "timestamp": "20230601",
         "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/KEDS/GulfLDays.zip"
       },

@@ -134,6 +134,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 848963,
+        "sha256": "d02599458b392d9c177d4612ebd3cedbb33ab7dac5c57b3c5fa42c59f4fa75c9",
         "timestamp": "20260419114552",
         "url": "https://web.archive.org/web/20260419114552/https://data.cityofchicago.org/Administration-Finance/Ordinance-Violations/6br9-quuz"
       },

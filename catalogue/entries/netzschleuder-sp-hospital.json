@@ -58,6 +58,8 @@
     {
       "retrieved": "2026-04-20",
       "snapshot": {
+        "byteLength": 19254,
+        "sha256": "c62636a2f12a2cb994a02068edb27c346bbd24aabc85400aa73f052e888fc31b",
         "timestamp": "20260420161102",
         "url": "https://web.archive.org/web/20260420161102/https://networks.skewed.de/net/sp_hospital"
       },
@@ -67,6 +69,8 @@
     {
       "retrieved": "2026-04-20",
       "snapshot": {
+        "byteLength": 85505,
+        "sha256": "bdfc46d23be5a4ecb853eda659f41c99b6c234b48ad11e4d3387497107dd7677",
         "timestamp": "20240706225630",
         "url": "https://web.archive.org/web/20240706225630/https://networks.skewed.de/net/sp_hospital/files/sp_hospital.csv.zip"
       },

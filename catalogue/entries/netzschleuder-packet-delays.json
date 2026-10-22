@@ -58,6 +58,8 @@
     {
       "retrieved": "2026-04-20",
       "snapshot": {
+        "byteLength": 18107,
+        "sha256": "b6e20a2da6ccb6eb750cbccf4b8ab496f38af10eb1c8daf9101c6b238d760947",
         "timestamp": "20260210203943",
         "url": "https://web.archive.org/web/20260210203943/https://networks.skewed.de/net/packet_delays"
       },
@@ -67,6 +69,8 @@
     {
       "retrieved": "2026-04-20",
       "snapshot": {
+        "byteLength": 28598,
+        "sha256": "f16a21264d63b1e33a01ee3f179e91f6cc2d0ff58bc9421d2fbb7bcb6dae82ff",
         "timestamp": "20261022023619",
         "url": "https://web.archive.org/web/20261022023619/https://networks.skewed.de/net/packet_delays/files/packet_delays.csv.zip"
       },

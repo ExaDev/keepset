@@ -48,6 +48,8 @@
     {
       "retrieved": "2026-05-06",
       "snapshot": {
+        "byteLength": 836,
+        "sha256": "93e802d061563166b35075d46d7718037894ffebbc31358da9852a1a6a3851a2",
         "timestamp": "20231006152128",
         "url": "https://web.archive.org/web/20231006152128/http://vlado.fmf.uni-lj.si/pub/networks/data/Ucinet/davis.dat"
       },

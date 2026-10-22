@@ -48,6 +48,8 @@
     {
       "retrieved": "2026-01-17",
       "snapshot": {
+        "byteLength": 80541,
+        "sha256": "1bba9ac716f00e4ed5ca11ba0693b30d6c766acfc41d23e284f413dcde0b2a0b",
         "timestamp": "20230601",
         "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/mix/USAir97.net"
       },

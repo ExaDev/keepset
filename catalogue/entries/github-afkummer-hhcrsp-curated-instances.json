@@ -1230,6 +1230,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 256422,
+        "sha256": "6111af6621b06cc19a62e3e2181264f4968aaa0bf7016abe1415e09afc7d62df",
         "timestamp": "20261022020950",
         "url": "https://web.archive.org/web/20261022020950/https://github.com/afkummer/hhcrsp-dataset-2021"
       },
@@ -1239,6 +1241,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 492,
+        "sha256": "ec5f9b59a77bad474e90bfe09e9360d16a5a59e539462b7482af752316d13a08",
         "timestamp": "20261022031359",
         "url": "https://web.archive.org/web/20261022031359/https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-10/HHCRSP_10_3_88_1.6_R_C.txt"
       },
@@ -1248,6 +1252,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 541,
+        "sha256": "5edbe2bd14771fe73fcffede3c7aa141e184e3a2ceeee189db5bf15f83dd9fba",
         "timestamp": "20261022031003",
         "url": "https://web.archive.org/web/20261022031003/https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-10/HHCRSP_10_3_40_0.8_R_C.txt"
       },
@@ -1257,6 +1263,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 541,
+        "sha256": "5edbe2bd14771fe73fcffede3c7aa141e184e3a2ceeee189db5bf15f83dd9fba",
         "timestamp": "20261022031011",
         "url": "https://web.archive.org/web/20261022031011/https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-10/HHCRSP_10_3_40_1.0_R_C.txt"
       },
@@ -1266,6 +1274,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 561,
+        "sha256": "51da6b28a3e09116fdd1c95647808be7bb1bddad31431bfc3d09ba1d9c614438",
         "timestamp": "20261022030924",
         "url": "https://web.archive.org/web/20261022030924/https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-10/HHCRSP_10_3_35_1.0_R_R.txt"
       },
@@ -1280,6 +1290,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 520,
+        "sha256": "0558d35fac1a4945df3432e5c9203be4f9da6a9a33a288d6b71b308f4cd66468",
         "timestamp": "20261022031240",
         "url": "https://web.archive.org/web/20261022031240/https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-10/HHCRSP_10_3_88_1.2_R_C.txt"
       },
@@ -1289,6 +1301,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 548,
+        "sha256": "54cc2d03ad50a1fb9593fceedb44b3210193d8c18846f57ed7ed08d8b300c3fc",
         "timestamp": "20261022031210",
         "url": "https://web.archive.org/web/20261022031210/https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-10/HHCRSP_10_3_81_1.2_R_C.txt"
       },
@@ -1298,6 +1312,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 550,
+        "sha256": "4fd819765c9de48eb97bf16262dbb81402901c0aa265e3882680ef41128ce0f6",
         "timestamp": "20261022031338",
         "url": "https://web.archive.org/web/20261022031338/https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-10/HHCRSP_10_3_86_1.2_C_C.txt"
       },
@@ -1316,6 +1332,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 547,
+        "sha256": "07260a0844ac12114fc2687aaad686ea01bd9fa128d8dd24710c008b2ba07bb1",
         "timestamp": "20261022030903",
         "url": "https://web.archive.org/web/20261022030903/https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-10/HHCRSP_10_3_16_1.6_C_C.txt"
       },
@@ -1325,6 +1343,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 1530,
+        "sha256": "938c78ff950aabb18354bf2a9e6cb9c2b5daa52dfa3ca00a9c139de3814204d8",
         "timestamp": "20261022032845",
         "url": "https://web.archive.org/web/20261022032845/https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-25/HHCRSP_25_5_22_1.0_C_C.txt"
       },
@@ -1334,6 +1354,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 1527,
+        "sha256": "f62fa96b5941c69ebe0b28b4c3afd7a65b207db1cc95780f7543872dff167b8b",
         "timestamp": "20261022033255",
         "url": "https://web.archive.org/web/20261022033255/https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-25/HHCRSP_25_5_69_1.6_R_RC.txt"
       },
@@ -1343,6 +1365,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 1464,
+        "sha256": "40ce93e5e032c6ead938e391a88713020b11f41e46352fe98a22ba32630480d6",
         "timestamp": "20261022033045",
         "url": "https://web.archive.org/web/20261022033045/https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-25/HHCRSP_25_5_47_0.8_R_C.txt"
       },
@@ -1352,6 +1376,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 1538,
+        "sha256": "1ec9df00cc6e9a5eee3b0d889ddd5bfb5dbe1c5ba5c2c6e1c7a7bcf75a4153b6",
         "timestamp": "20261022032949",
         "url": "https://web.archive.org/web/20261022032949/https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-25/HHCRSP_25_5_37_0.8_R_RC.txt"
       },
@@ -1376,6 +1402,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 1501,
+        "sha256": "2f2053db4fddc4199183daea0d6a9d7cf5a5aa362124f37b08eda86b6d116081",
         "timestamp": "20261022033236",
         "url": "https://web.archive.org/web/20261022033236/https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-25/HHCRSP_25_5_69_1.6_R_C.txt"
       },
@@ -1385,6 +1413,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 1549,
+        "sha256": "3d09ad7e5b4be234aca78586d27c3012215ae55080f161d0c60078dad6944483",
         "timestamp": "20261022033017",
         "url": "https://web.archive.org/web/20261022033017/https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-25/HHCRSP_25_5_42_0.8_R_RC.txt"
       },
@@ -1394,6 +1424,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 1515,
+        "sha256": "7c5c4410df655ff06fbc352a320c8cd97e39853dbb879bb2e536903615c20ac5",
         "timestamp": "20261022033419",
         "url": "https://web.archive.org/web/20261022033419/https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-25/HHCRSP_25_5_96_0.8_R_C.txt"
       },
@@ -1403,6 +1435,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 4169,
+        "sha256": "04c8dabf165a2f674b75f478a82de8e1c7bac32ccaccd4aa06e1a58679eacbf6",
         "timestamp": "20261022035414",
         "url": "https://web.archive.org/web/20261022035414/https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-50/HHCRSP_50_10_80_1.0_C_C.txt"
       },
@@ -1412,6 +1446,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 4227,
+        "sha256": "87491981312c210198433e33100fcf819151b12e0634d36c995bf2b315711b34",
         "timestamp": "20261022035520",
         "url": "https://web.archive.org/web/20261022035520/https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-50/HHCRSP_50_10_81_1.0_R_RC.txt"
       },
@@ -1421,6 +1457,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 4189,
+        "sha256": "2ca6504fefb3ca3095b1ea182622bcc5fcfd69b7541a916137edbaf85227aa01",
         "timestamp": "20261022035433",
         "url": "https://web.archive.org/web/20261022035433/https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-50/HHCRSP_50_10_80_1.0_C_RC.txt"
       },
@@ -1430,6 +1468,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 4253,
+        "sha256": "06bf9341934d7969bdbf7b9892c02be0b171706dd51076713ce110d03d554c40",
         "timestamp": "20261022035521",
         "url": "https://web.archive.org/web/20261022035521/https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-50/HHCRSP_50_10_97_0.8_C_RC.txt"
       },
@@ -1439,6 +1479,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 3997,
+        "sha256": "e316cf1f99d1d65bf1b9b9545805431dd29dfd57381c86ad8112e59c166b9adc",
         "timestamp": "20261022035009",
         "url": "https://web.archive.org/web/20261022035009/https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-50/HHCRSP_50_10_32_1.2_R_C.txt"
       },
@@ -1448,6 +1490,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 4231,
+        "sha256": "c20184dab1e55c24ace9d1f264b9a285347dc98ad3f44123f9501f593232a8bc",
         "timestamp": "20261022035122",
         "url": "https://web.archive.org/web/20261022035122/https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-50/HHCRSP_50_10_3_0.8_R_C.txt"
       },
@@ -1457,6 +1501,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 4246,
+        "sha256": "5cbe34386ace7c8999072a877ad924952d15a8c40a2998143a81b390b515a436",
         "timestamp": "20261022035327",
         "url": "https://web.archive.org/web/20261022035327/https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-50/HHCRSP_50_10_80_0.4_C_C.txt"
       },
@@ -1466,6 +1512,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 4068,
+        "sha256": "c0aee69c861a9e265151b3440da4f28188c58be72eb0f68480161cb7a0449112",
         "timestamp": "20261022034934",
         "url": "https://web.archive.org/web/20261022034934/https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-50/HHCRSP_50_10_26_1.0_C_RC.txt"
       },
@@ -1475,6 +1523,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 3989,
+        "sha256": "5e9f25c0e1fca30572707c9a89550502aade038150fbc4500d599f540ef6de00",
         "timestamp": "20261022035035",
         "url": "https://web.archive.org/web/20261022035035/https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-50/HHCRSP_50_10_26_1.2_R_C.txt"
       },
@@ -1484,6 +1534,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 3762,
+        "sha256": "709259eccee33dbb7338f404b0d4915d5b9be30d4126dd8a30961bc0c963be66",
         "timestamp": "20261022035225",
         "url": "https://web.archive.org/web/20261022035225/https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-50/HHCRSP_50_10_44_1.6_R_C.txt"
       },
@@ -1493,6 +1545,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 8498,
+        "sha256": "919c79bbeb9a3d15882dd6f9037ff1a00f5e3b5823425c7fb908bbd98a291179",
         "timestamp": "20261022040124",
         "url": "https://web.archive.org/web/20261022040124/https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-75/HHCRSP_75_15_97_1.0_R_RC.txt"
       },
@@ -1502,6 +1556,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 8223,
+        "sha256": "e8162b20a2920ba4a55eab4220b124722d4e9fab73cfee97e26200533b996878",
         "timestamp": "20261022035746",
         "url": "https://web.archive.org/web/20261022035746/https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-75/HHCRSP_75_15_35_0.8_R_C.txt"
       },
@@ -1511,6 +1567,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 8527,
+        "sha256": "1c1693cd142bc7bc3c9e156e74664dc361f29602684c0a8a78011b3b84cc76b4",
         "timestamp": "20261022035745",
         "url": "https://web.archive.org/web/20261022035745/https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-75/HHCRSP_75_15_35_1.0_C_RC.txt"
       },
@@ -1525,6 +1583,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 7687,
+        "sha256": "ff91cbb75896e8641fdb226afc6e6d10d293fdcbb6e384dceee95dbeb43d06a2",
         "timestamp": "20261022040011",
         "url": "https://web.archive.org/web/20261022040011/https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-75/HHCRSP_75_15_79_1.2_R_C.txt"
       },
@@ -1534,6 +1594,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 7433,
+        "sha256": "3b7bb08f6968592e49e469d18274e7463eb48d3c1f5a8439b10b32913acf5ae5",
         "timestamp": "20261022035608",
         "url": "https://web.archive.org/web/20261022035608/https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-75/HHCRSP_75_15_10_1.6_R_C.txt"
       },
@@ -1543,6 +1605,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 7717,
+        "sha256": "06bfb24d9b43c85da25a1f37315648f0ba01766cd67cbdd206fca87f60933285",
         "timestamp": "20261022040107",
         "url": "https://web.archive.org/web/20261022040107/https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-75/HHCRSP_75_15_88_1.6_R_C.txt"
       },
@@ -1552,6 +1616,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 7103,
+        "sha256": "7984bc68f239c6672108c540428365f30503733501dd6cbe42d093627428c04d",
         "timestamp": "20261022040211",
         "url": "https://web.archive.org/web/20261022040211/https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-75/HHCRSP_75_15_98_1.6_R_C.txt"
       },
@@ -1566,6 +1632,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 7446,
+        "sha256": "a092cfcd59d23abea42e816e17361bcbd250a84e3fc9b62440790a1c5ad15789",
         "timestamp": "20261022040029",
         "url": "https://web.archive.org/web/20261022040029/https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-75/HHCRSP_75_15_87_1.6_C_C.txt"
       },
@@ -1575,6 +1643,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 12705,
+        "sha256": "de8891032c75020caff421cb754a998e90d4cc92bb8eccd89d3e5f4d9dd373cb",
         "timestamp": "20261022032041",
         "url": "https://web.archive.org/web/20261022032041/https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-100/HHCRSP_100_20_8_1.2_R_C.txt"
       },
@@ -1584,6 +1654,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 12731,
+        "sha256": "cfc2fd5d1834bafe2e95cf2e5747bee7a4975a087f7f88755db846c916b9aca6",
         "timestamp": "20261022031801",
         "url": "https://web.archive.org/web/20261022031801/https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-100/HHCRSP_100_20_63_1.2_R_C.txt"
       },
@@ -1593,6 +1665,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 12598,
+        "sha256": "61937248009b4ef2b794ac499bb9b79296b8a340fbbcbddfea3db7d146404bb0",
         "timestamp": "20261022031634",
         "url": "https://web.archive.org/web/20261022031634/https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-100/HHCRSP_100_20_39_1.6_R_C.txt"
       },
@@ -1602,6 +1676,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 12065,
+        "sha256": "b0a9b2eee2ac9a34e4c4a567c1cab2f09aa5efafac330286998bd29939b98420",
         "timestamp": "20261022032007",
         "url": "https://web.archive.org/web/20261022032007/https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-100/HHCRSP_100_20_76_1.6_R_C.txt"
       },
@@ -1629,6 +1705,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 13734,
+        "sha256": "369e4b0f9b2b2e189ba43783258e276d4bda8c30aaa5f693dfd3ec0cfc5552a4",
         "timestamp": "20261022031917",
         "url": "https://web.archive.org/web/20261022031917/https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-100/HHCRSP_100_20_77_1.0_R_C.txt"
       },
@@ -1652,6 +1730,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 12679,
+        "sha256": "153fd81495f1e277315ce5bb6c944dd951fa1fa92f13c6d937bcde35260b1f8a",
         "timestamp": "20261022031505",
         "url": "https://web.archive.org/web/20261022031505/https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-100/HHCRSP_100_20_23_1.2_R_C.txt"
       },
@@ -1685,6 +1765,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 42155,
+        "sha256": "66f60540320f87c8b9a249e1ea508aa0365c2ce99d8404c2bdf69ba30fe673fc",
         "timestamp": "20261022032702",
         "url": "https://web.archive.org/web/20261022032702/https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-200/HHCRSP_200_40_7_1.6_R_C.txt"
       },
@@ -1694,6 +1776,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 48009,
+        "sha256": "9d47ce7fc4d541d90c8a56f99fb4ebe2c2322a114f3bfa27075a067a061eb77f",
         "timestamp": "20261022032323",
         "url": "https://web.archive.org/web/20261022032323/https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-200/HHCRSP_200_40_51_1.0_R_C.txt"
       },
@@ -1703,6 +1787,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 46573,
+        "sha256": "51dde54cdeb2c0be00658276d9eeb6ead70866fe9a7dfad21a4a7b008abfd105",
         "timestamp": "20261022032220",
         "url": "https://web.archive.org/web/20261022032220/https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-200/HHCRSP_200_40_17_1.6_R_C.txt"
       },
@@ -1717,6 +1803,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 42945,
+        "sha256": "ab100edd94412289aa0c0f06757abd25d892d9c11dacec78ad7b108ed9970fdd",
         "timestamp": "20261022032436",
         "url": "https://web.archive.org/web/20261022032436/https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-200/HHCRSP_200_40_71_1.6_R_C.txt"
       },
@@ -1731,6 +1819,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 102535,
+        "sha256": "a9792584ad52dd0a8ad851fb9d224f63fa4423fc611db7c21fc38463e870f85c",
         "timestamp": "20261022033717",
         "url": "https://web.archive.org/web/20261022033717/https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-300/HHCRSP_300_60_4_1.6_R_C.txt"
       },
@@ -1745,6 +1835,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 97722,
+        "sha256": "fc0a902ca8017adeaa88de1741b796f0b90870fa70234230fc6cd81cd17ba671",
         "timestamp": "20261022034006",
         "url": "https://web.archive.org/web/20261022034006/https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-300/HHCRSP_300_60_82_1.2_R_C.txt"
       },
@@ -1759,6 +1851,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 97666,
+        "sha256": "2108909b5fbaf71eab6ca82eb0917ec293edf7e16605b458967829daa77f16d7",
         "timestamp": "20261022033559",
         "url": "https://web.archive.org/web/20261022033559/https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-300/HHCRSP_300_60_22_1.2_R_C.txt"
       },
@@ -1773,6 +1867,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 95375,
+        "sha256": "f910ec51e3072df683e96a70d24cf289efef474415fe095ab75eefb849cd6d72",
         "timestamp": "20261022033958",
         "url": "https://web.archive.org/web/20261022033958/https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-300/HHCRSP_300_60_81_1.6_R_C.txt"
       },
@@ -1782,6 +1878,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 96642,
+        "sha256": "8ed09c499bef65fac6407b45485e2c071272f80c941664d1012f15a54c5a3eaa",
         "timestamp": "20261022033701",
         "url": "https://web.archive.org/web/20261022033701/https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-300/HHCRSP_300_60_23_1.2_R_C.txt"
       },
@@ -1796,6 +1894,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 97399,
+        "sha256": "5accb2deed3f731b9bbc896d6dccaa6f6e496ca2e0912268d7211f73b7232fb1",
         "timestamp": "20261022033805",
         "url": "https://web.archive.org/web/20261022033805/https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-300/HHCRSP_300_60_69_1.0_R_C.txt"
       },
@@ -1805,6 +1905,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 156224,
+        "sha256": "8c0927e9e1c8f2f4c9f368c936c22ae3df49f97694830c9fbf8b034f3e11677d",
         "timestamp": "20261022034501",
         "url": "https://web.archive.org/web/20261022034501/https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-400/HHCRSP_400_80_59_1.0_R_C.txt"
       },
@@ -1814,6 +1916,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 167437,
+        "sha256": "00a1360dc6bc2920f17595e4a4ff730c4b2faf7cd80261eb429a1b38c8b98599",
         "timestamp": "20261022034102",
         "url": "https://web.archive.org/web/20261022034102/https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-400/HHCRSP_400_80_16_1.2_R_C.txt"
       },
@@ -1823,6 +1927,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 171727,
+        "sha256": "d3145cb9541fc2cd235f240f375886b653ef5680cac077fc2e28a9422e8390d2",
         "timestamp": "20261022034433",
         "url": "https://web.archive.org/web/20261022034433/https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-400/HHCRSP_400_80_51_1.0_R_C.txt"
       },
@@ -1837,6 +1943,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 170422,
+        "sha256": "24475a1b7a38d7edfdaf22775cb16b209d30718a40590fe17a1a4159b537233f",
         "timestamp": "20261022034318",
         "url": "https://web.archive.org/web/20261022034318/https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-400/HHCRSP_400_80_30_1.6_R_C.txt"
       },
@@ -1846,6 +1954,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 162552,
+        "sha256": "332886a2c4d177cdf28dd1830ceed228e962f2429138319d384ce860a5e2b07d",
         "timestamp": "20261022034509",
         "url": "https://web.archive.org/web/20261022034509/https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-400/HHCRSP_400_80_34_1.0_R_C.txt"
       },
@@ -1860,6 +1970,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 173018,
+        "sha256": "777ed389921636d014ab68d0db62bb4457905884352d7d2ed9257916e54633d8",
         "timestamp": "20261022034708",
         "url": "https://web.archive.org/web/20261022034708/https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-400/HHCRSP_400_80_91_1.2_R_C.txt"
       },
@@ -1869,6 +1981,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 178371,
+        "sha256": "7898f8465e7ba0735790343536ab3a90bcaae681b4cdcd4fb3f189c7da55e66b",
         "timestamp": "20261022034425",
         "url": "https://web.archive.org/web/20261022034425/https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-400/HHCRSP_400_80_28_1.2_R_C.txt"
       },
@@ -1878,6 +1992,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 164452,
+        "sha256": "d7cc8d5e358496fe5aa4304bf272bc91a96b56481c6ac202b635238feb7b4548",
         "timestamp": "20261022034651",
         "url": "https://web.archive.org/web/20261022034651/https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-400/HHCRSP_400_80_81_1.6_R_C.txt"
       },
@@ -1887,6 +2003,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 554,
+        "sha256": "19c88779e2965ae1a00e3622a64657b522ffacbd4f19300a37bd484b1c0ae54a",
         "timestamp": "20261022031142",
         "url": "https://web.archive.org/web/20261022031142/https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-10/HHCRSP_10_3_80_1.0_C_R.txt"
       },
@@ -1896,6 +2014,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 533,
+        "sha256": "d72ba32668148c5e62bd1df6533a656073f65f1a133cc69a88707d301aef70e1",
         "timestamp": "20261022031108",
         "url": "https://web.archive.org/web/20261022031108/https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-10/HHCRSP_10_3_56_1.2_R_RC.txt"
       },
@@ -1905,6 +2025,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 534,
+        "sha256": "e54780992419a31158d8323e53a036dcf459b7131ed8cecb521c1f0abb035156",
         "timestamp": "20261022030959",
         "url": "https://web.archive.org/web/20261022030959/https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-10/HHCRSP_10_3_22_1.6_R_C.txt"
       },
@@ -1914,6 +2036,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 531,
+        "sha256": "8335e5abc627aa5b21250e5fd8ef938d7e939d925ac71f3f6ef7698c9b2f4b65",
         "timestamp": "20261022031416",
         "url": "https://web.archive.org/web/20261022031416/https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-10/HHCRSP_10_3_90_1.2_C_RC.txt"
       },
@@ -1923,6 +2047,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 515,
+        "sha256": "920f3342b82b8a41a3447b31073073260628e591f2b13475c2dc1f383a3ef887",
         "timestamp": "20261022031020",
         "url": "https://web.archive.org/web/20261022031020/https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-10/HHCRSP_10_3_46_1.6_R_C.txt"
       },
@@ -1932,6 +2058,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 510,
+        "sha256": "01fd68a680ccee7cd7cc2455a9a4c3622776e3e7124360bd504ae117ded4a441",
         "timestamp": "20261022031441",
         "url": "https://web.archive.org/web/20261022031441/https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-10/HHCRSP_10_3_90_1.2_C_C.txt"
       },
@@ -1941,6 +2069,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 552,
+        "sha256": "c0265eb45c3fe79e5c9f45c65ff78813c695a3a79977502d0b8c17ee1a362bc3",
         "timestamp": "20261022031120",
         "url": "https://web.archive.org/web/20261022031120/https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-10/HHCRSP_10_3_60_1.0_R_RC.txt"
       },
@@ -1959,6 +2089,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 558,
+        "sha256": "f5465583843f4f2029206abcb629aa28c19f3c151ff99a9002d8e3393c74ecc9",
         "timestamp": "20261022030854",
         "url": "https://web.archive.org/web/20261022030854/https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-10/HHCRSP_10_3_11_0.4_R_C.txt"
       },
@@ -1968,6 +2100,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 544,
+        "sha256": "d971ba4f632c32f0feba6a5202a430ef8398399857de368e472dce66f88e4b01",
         "timestamp": "20261022031436",
         "url": "https://web.archive.org/web/20261022031436/https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-10/HHCRSP_10_3_96_1.0_R_C.txt"
       },
@@ -1977,6 +2111,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 1520,
+        "sha256": "0808fa93e25b04e4fa632a45874ffe412cba1549227172b1dcebc109252e16b0",
         "timestamp": "20261022033111",
         "url": "https://web.archive.org/web/20261022033111/https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-25/HHCRSP_25_5_48_1.0_C_C.txt"
       },
@@ -1986,6 +2122,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 1547,
+        "sha256": "5381337607db3a9ba57430d2541f70697b8a90c5808faf1fcd3c6e13a7407843",
         "timestamp": "20261022033402",
         "url": "https://web.archive.org/web/20261022033402/https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-25/HHCRSP_25_5_80_0.8_C_RC.txt"
       },
@@ -1995,6 +2133,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 1567,
+        "sha256": "19fac475a599a6a07bbb29b7e3f41f42d5078c798ea7123be7b9de36ef3e2f7a",
         "timestamp": "20261022033402",
         "url": "https://web.archive.org/web/20261022033402/https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-25/HHCRSP_25_5_70_1.0_R_C.txt"
       },
@@ -2004,6 +2144,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 1567,
+        "sha256": "58848cadc06b660ba02657e478857cb290ba7150bb3b5d7572ee0bc013269d57",
         "timestamp": "20261022033138",
         "url": "https://web.archive.org/web/20261022033138/https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-25/HHCRSP_25_5_56_0.8_R_RC.txt"
       },
@@ -2018,6 +2160,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 1497,
+        "sha256": "638a62143b0f986259b284671327a0082f36d8bf119ee425a07456109000fd0a",
         "timestamp": "20261022033344",
         "url": "https://web.archive.org/web/20261022033344/https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-25/HHCRSP_25_5_76_1.2_C_C.txt"
       },
@@ -2027,6 +2171,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 1585,
+        "sha256": "07eed96c3421a81f8674842853f53aa522685437ca034ca80c465126cee40ce4",
         "timestamp": "20261022032903",
         "url": "https://web.archive.org/web/20261022032903/https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-25/HHCRSP_25_5_21_1.6_R_RC.txt"
       },
@@ -2036,6 +2182,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 1498,
+        "sha256": "bb565c19cd93fb512ab0e3a69136d9308c40cbff25a714e3aa9380ecf05ca182",
         "timestamp": "20261022033105",
         "url": "https://web.archive.org/web/20261022033105/https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-25/HHCRSP_25_5_49_0.4_C_C.txt"
       },
@@ -2050,6 +2198,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 1586,
+        "sha256": "8a626e84fb95545cae6a488b2c7c0e1cd6ffb8ba6f75b6bfce136c8256231a40",
         "timestamp": "20261022033428",
         "url": "https://web.archive.org/web/20261022033428/https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-25/HHCRSP_25_5_97_1.0_R_R.txt"
       },
@@ -2064,6 +2214,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 3783,
+        "sha256": "1f9c2ae7ee5402c4a29b54ddc9bd15d075e3a68e43a79b6763899318bdc7b83f",
         "timestamp": "20261022035441",
         "url": "https://web.archive.org/web/20261022035441/https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-50/HHCRSP_50_10_62_1.2_R_C.txt"
       },
@@ -2073,6 +2225,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 4382,
+        "sha256": "f05a8ff486fe419a5039e77b0502cda2b30e0b73f754ff9efb05255e6a7880a4",
         "timestamp": "20261022035018",
         "url": "https://web.archive.org/web/20261022035018/https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-50/HHCRSP_50_10_2_1.0_C_R.txt"
       },
@@ -2082,6 +2236,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 3861,
+        "sha256": "1e6e980e31455ba542d1647b35c385287e107e1376701d5dfaff0b827735649f",
         "timestamp": "20261022035217",
         "url": "https://web.archive.org/web/20261022035217/https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-50/HHCRSP_50_10_53_1.2_R_C.txt"
       },
@@ -2091,6 +2247,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 4270,
+        "sha256": "467235abebd09ec1cb3fa6ee585d62c3792bc5381ed0a756431dbf433856fdeb",
         "timestamp": "20261022035305",
         "url": "https://web.archive.org/web/20261022035305/https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-50/HHCRSP_50_10_74_1.0_R_RC.txt"
       },
@@ -2100,6 +2258,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 4057,
+        "sha256": "92e44512d4463a8e6ab12f13d68fdfaeae7239536b601f6df5a165e1ad3d0547",
         "timestamp": "20261022035234",
         "url": "https://web.archive.org/web/20261022035234/https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-50/HHCRSP_50_10_60_0.4_C_RC.txt"
       },
@@ -2109,6 +2269,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 3998,
+        "sha256": "ae1281ebed9d53d417e1cb0e8a9f0cd918c1efc308966315d091c32e880a48fc",
         "timestamp": "20261022035149",
         "url": "https://web.archive.org/web/20261022035149/https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-50/HHCRSP_50_10_3_1.6_C_C.txt"
       },
@@ -2118,6 +2280,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 4329,
+        "sha256": "a5680f477e6bf004411027c086f452d37f15280939b3a2ea108296a435d998ec",
         "timestamp": "20261022035529",
         "url": "https://web.archive.org/web/20261022035529/https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-50/HHCRSP_50_10_88_1.6_C_RC.txt"
       },
@@ -2127,6 +2291,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 3963,
+        "sha256": "60d3bcac99101cac4e9a2038278d33b6fec9bd274822d5f663dcaa8a6cafcc3f",
         "timestamp": "20261022034824",
         "url": "https://web.archive.org/web/20261022034824/https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-50/HHCRSP_50_10_100_1.6_C_C.txt"
       },
@@ -2136,6 +2302,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 4304,
+        "sha256": "7c848ef1966444ecc7b9087af122208c677bee1945158f1bd7a4dde34213b175",
         "timestamp": "20261022035313",
         "url": "https://web.archive.org/web/20261022035313/https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-50/HHCRSP_50_10_61_1.0_R_RC.txt"
       },
@@ -2145,6 +2313,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 8380,
+        "sha256": "e29d6b30071552a4b40bdbcf499ae7e0effc2ef9a26f0d75e2e070778d9e8e94",
         "timestamp": "20261022035638",
         "url": "https://web.archive.org/web/20261022035638/https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-75/HHCRSP_75_15_19_0.8_R_C.txt"
       },
@@ -2154,6 +2324,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 7827,
+        "sha256": "2881496e4dea5b06f6f14f4284353172b2f90d4ca1b004d5eebbc0512624c9c9",
         "timestamp": "20261022035651",
         "url": "https://web.archive.org/web/20261022035651/https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-75/HHCRSP_75_15_30_1.0_R_C.txt"
       },
@@ -2163,6 +2335,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 8330,
+        "sha256": "603bd61c4513eb37f1ec722424f72ce8b056e8959c2cedfd440542a2e4b34287",
         "timestamp": "20261022040019",
         "url": "https://web.archive.org/web/20261022040019/https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-75/HHCRSP_75_15_84_0.8_R_RC.txt"
       },
@@ -2172,6 +2346,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 8216,
+        "sha256": "50e00eb0d199370d58d7b94ab4f00c5e1ba28bd8188358c3ca50671b3c72b539",
         "timestamp": "20261022035918",
         "url": "https://web.archive.org/web/20261022035918/https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-75/HHCRSP_75_15_63_1.0_R_RC.txt"
       },
@@ -2181,6 +2357,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 7721,
+        "sha256": "d87ef5418f7be51eecb047c068649eb6f59dd62734fe5f584608b9fe083b75f5",
         "timestamp": "20261022035931",
         "url": "https://web.archive.org/web/20261022035931/https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-75/HHCRSP_75_15_65_1.0_C_C.txt"
       },
@@ -2190,6 +2368,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 8312,
+        "sha256": "aead512ed81c4838d90d4979efb8d1fc05bc58f743a3f5a123e001e236e632cc",
         "timestamp": "20261022035724",
         "url": "https://web.archive.org/web/20261022035724/https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-75/HHCRSP_75_15_32_1.2_R_RC.txt"
       },
@@ -2199,6 +2379,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 7932,
+        "sha256": "413db5ad38d1b086a790e79ace9fad1dced457f8d901d6167d51bad9b1ecfd05",
         "timestamp": "20261022035909",
         "url": "https://web.archive.org/web/20261022035909/https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-75/HHCRSP_75_15_63_0.4_R_C.txt"
       },
@@ -2208,6 +2390,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 8428,
+        "sha256": "4f319368958a8c4cec373a08c93ed61af08423cee35b78d1cb8eaba89af2c6e7",
         "timestamp": "20261022040158",
         "url": "https://web.archive.org/web/20261022040158/https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-75/HHCRSP_75_15_97_0.4_C_C.txt"
       },
@@ -2217,6 +2401,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 8420,
+        "sha256": "9bf491a6420cc0aa897379c49ff2c2a0e33fa39ddcccdeb241288921f332e4c2",
         "timestamp": "20261022035852",
         "url": "https://web.archive.org/web/20261022035852/https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-75/HHCRSP_75_15_40_0.8_R_RC.txt"
       },
@@ -2226,6 +2412,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 8571,
+        "sha256": "77acbce1cf03b12ed4d2eef291e88ea396385dace3ce38110f9a0852630bc93f",
         "timestamp": "20261022035852",
         "url": "https://web.archive.org/web/20261022035852/https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-75/HHCRSP_75_15_5_0.8_C_RC.txt"
       },
@@ -2235,6 +2423,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 13729,
+        "sha256": "feac185e2fa17c6d64417b0e425a97058761a212d1d696ddbd409c850cbd833a",
         "timestamp": "20261022031700",
         "url": "https://web.archive.org/web/20261022031700/https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-100/HHCRSP_100_20_54_1.2_R_RC.txt"
       },
@@ -2244,6 +2434,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 14207,
+        "sha256": "525d0ca1948c847943cc208c335c4ec3cca1ff75506a83322cbebe3aa8943f70",
         "timestamp": "20261022032104",
         "url": "https://web.archive.org/web/20261022032104/https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-100/HHCRSP_100_20_9_1.0_R_R.txt"
       },
@@ -2262,6 +2454,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 12127,
+        "sha256": "d4f3db4b5493dd08c7b317d053dc7c8f9941b6a536708b1249b75e9546fd5add",
         "timestamp": "20261022032024",
         "url": "https://web.archive.org/web/20261022032024/https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-100/HHCRSP_100_20_88_1.2_C_C.txt"
       },
@@ -2271,6 +2465,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 13749,
+        "sha256": "c52c5158454ed4ee35ad3d39eee2712c729296020bcdf19b3544f86458c97884",
         "timestamp": "20261022031833",
         "url": "https://web.archive.org/web/20261022031833/https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-100/HHCRSP_100_20_61_0.4_R_RC.txt"
       },
@@ -2285,6 +2481,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 11757,
+        "sha256": "20f30e6a134c7449179b48027aeb92f7cb3a91cdd3079fc964af25ec18280370",
         "timestamp": "20261022032030",
         "url": "https://web.archive.org/web/20261022032030/https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-100/HHCRSP_100_20_68_1.6_R_C.txt"
       },
@@ -2294,6 +2492,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 14096,
+        "sha256": "644854ed34d1ac68ada9abdf07efc21b3f27bbb01306a4c73e1c55a826db03ea",
         "timestamp": "20261022031801",
         "url": "https://web.archive.org/web/20261022031801/https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-100/HHCRSP_100_20_49_0.4_C_C.txt"
       },
@@ -2303,6 +2503,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 12292,
+        "sha256": "320fb353a64aa6ea27551951e151c8826c2500cb6073031946f0214c12b847df",
         "timestamp": "20261022031516",
         "url": "https://web.archive.org/web/20261022031516/https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-100/HHCRSP_100_20_10_1.2_R_C.txt"
       },
@@ -2312,6 +2514,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 13539,
+        "sha256": "afe02f983e62cb3da7adbff06e5d9b68272387a0cbff005b3e6b0549c2fb03be",
         "timestamp": "20261022031704",
         "url": "https://web.archive.org/web/20261022031704/https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-100/HHCRSP_100_20_35_1.6_C_RC.txt"
       },
@@ -2330,6 +2534,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 41915,
+        "sha256": "967ca566b2b03debc2f22a8cdfc85c12a3d701e4f45ff4a4841f96bf6b8147b7",
         "timestamp": "20261022032515",
         "url": "https://web.archive.org/web/20261022032515/https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-200/HHCRSP_200_40_71_1.6_C_C.txt"
       },
@@ -2339,6 +2545,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 48831,
+        "sha256": "d3b499fe2feb4ea053f2b82830231c18db5cc7d6b8037751ae23131607aaa50d",
         "timestamp": "20261022032606",
         "url": "https://web.archive.org/web/20261022032606/https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-200/HHCRSP_200_40_60_0.4_C_RC.txt"
       },
@@ -2358,6 +2566,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 45866,
+        "sha256": "bf3adba3c85f2327c0dc55749116e43ce44e7967f3561916a6a838ec3516833b",
         "timestamp": "20261022032532",
         "url": "https://web.archive.org/web/20261022032532/https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-200/HHCRSP_200_40_75_1.6_R_C.txt"
       },
@@ -2367,6 +2577,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 50323,
+        "sha256": "ff92220b051b895d7ad675c8459ebcb245e99ef882e05693b8d0123b4c575c52",
         "timestamp": "20261022032736",
         "url": "https://web.archive.org/web/20261022032736/https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-200/HHCRSP_200_40_82_1.0_C_R.txt"
       },
@@ -2376,6 +2588,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 49354,
+        "sha256": "778d58e946da3be085245a08d4a7b8cc3c033b9bffc21345e8b20c64be029d7f",
         "timestamp": "20261022032811",
         "url": "https://web.archive.org/web/20261022032811/https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-200/HHCRSP_200_40_98_1.6_C_RC.txt"
       },
@@ -2385,6 +2599,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 47310,
+        "sha256": "eef6a31489e79814b82a3ea6b0f0ba12a1a988e5ccb4b0f92f5c0b52223e38da",
         "timestamp": "20261022032112",
         "url": "https://web.archive.org/web/20261022032112/https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-200/HHCRSP_200_40_100_0.4_C_C.txt"
       },
@@ -2394,6 +2610,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 50394,
+        "sha256": "2e63c3202a3b8715ff73a0de36aaa726279ba69142f748c05d0b5532d7a0e5d5",
         "timestamp": "20261022032409",
         "url": "https://web.archive.org/web/20261022032409/https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-200/HHCRSP_200_40_69_1.0_C_R.txt"
       },
@@ -2408,6 +2626,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 104657,
+        "sha256": "e4f9d4b379f884cd60ece16f31859d72c100007057e8614dcc8b939694e09659",
         "timestamp": "20261022033507",
         "url": "https://web.archive.org/web/20261022033507/https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-300/HHCRSP_300_60_26_0.4_C_RC.txt"
       },
@@ -2417,6 +2637,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 103354,
+        "sha256": "9bc9bb248413002a76398c0dee7253f76a7b2b81867d0df24975333fc8070c2c",
         "timestamp": "20261022033726",
         "url": "https://web.archive.org/web/20261022033726/https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-300/HHCRSP_300_60_4_1.0_R_C.txt"
       },
@@ -2426,6 +2648,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 106937,
+        "sha256": "11d70178ce38c5d15c65f6ee76b1fe54a757a084532a8c78b99664367a99e82a",
         "timestamp": "20261022033831",
         "url": "https://web.archive.org/web/20261022033831/https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-300/HHCRSP_300_60_68_0.8_C_RC.txt"
       },
@@ -2435,6 +2659,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 95893,
+        "sha256": "ed82c9e192288cd0ddb550418b87fcc10dc5bbd754b67578e06fc47e530afa93",
         "timestamp": "20261022033549",
         "url": "https://web.archive.org/web/20261022033549/https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-300/HHCRSP_300_60_45_1.6_C_C.txt"
       },
@@ -2449,6 +2675,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 103872,
+        "sha256": "ca03f053ddfa5516bc57716e5fe1cdd2f103ce7a6a12aa963a6e42dafc09bb1b",
         "timestamp": "20261022033822",
         "url": "https://web.archive.org/web/20261022033822/https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-300/HHCRSP_300_60_73_0.8_R_RC.txt"
       },
@@ -2458,6 +2686,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 103574,
+        "sha256": "78ed94925d1bef093055ba4e1086b65794dc861280e8823cd923550983b81a78",
         "timestamp": "20261022033616",
         "url": "https://web.archive.org/web/20261022033616/https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-300/HHCRSP_300_60_46_0.4_R_C.txt"
       },
@@ -2472,6 +2702,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 97755,
+        "sha256": "59ef887a7f6888dd1d2df027b508640e1fa715d2de374516eeca919a0a52c6d0",
         "timestamp": "20261022033949",
         "url": "https://web.archive.org/web/20261022033949/https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-300/HHCRSP_300_60_81_0.8_C_C.txt"
       },
@@ -2481,6 +2713,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 178904,
+        "sha256": "0ddf43a4a77e6732afa19b841bac93617798a358f504003f5f4ccddc407722f9",
         "timestamp": "20261022034210",
         "url": "https://web.archive.org/web/20261022034210/https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-400/HHCRSP_400_80_20_0.4_C_RC.txt"
       },
@@ -2510,6 +2744,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 183950,
+        "sha256": "7f394dbc5b5ea9bdf16bea081a0710a31b1ce7a4c8508c21d8ce14668e6e6d9a",
         "timestamp": "20261022034634",
         "url": "https://web.archive.org/web/20261022034634/https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-400/HHCRSP_400_80_77_1.2_R_RC.txt"
       },
@@ -2524,6 +2760,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 184659,
+        "sha256": "4580cf9c959acb9f4df39454bbcb94f8b70cba04699079371e3fd6a5da3ae81a",
         "timestamp": "20261022034307",
         "url": "https://web.archive.org/web/20261022034307/https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-400/HHCRSP_400_80_33_1.0_C_RC.txt"
       },
@@ -2538,6 +2776,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 171458,
+        "sha256": "8f2ad3e3a9633f3b54afd3c905aa7191dc622146012da01c781f123ac553026b",
         "timestamp": "20261022034527",
         "url": "https://web.archive.org/web/20261022034527/https://raw.githubusercontent.com/afkummer/hhcrsp-dataset-2021/262c7b89938ca817b927d4287e709252844b63fd/instances/instances-400/HHCRSP_400_80_60_0.8_C_C.txt"
       },

@@ -57,6 +57,8 @@
     {
       "retrieved": "2026-04-20",
       "snapshot": {
+        "byteLength": 2176,
+        "sha256": "3beb2571820e633f2199299e40660d07ab68fbf7cedec30ca5b5c5c9b4486454",
         "timestamp": "20220812052146",
         "url": "https://web.archive.org/web/20220812052146/http://vlado.fmf.uni-lj.si/pub/networks/data/esna/literature.htm"
       },
@@ -66,6 +68,8 @@
     {
       "retrieved": "2026-04-20",
       "snapshot": {
+        "byteLength": 18644,
+        "sha256": "e0eb0172d4c335a6943da5dac18ea0b54421021b1a3ee99f02a3861253646494",
         "timestamp": "20260316212946",
         "url": "https://web.archive.org/web/20260316212946/https://networks.skewed.de/net/dutch_criticism"
       },

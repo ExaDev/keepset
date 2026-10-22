@@ -97,6 +97,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 597453,
+        "sha256": "8529a1c322ab949b8f2954a2b16e002e4a31447b680d4b7afe5d67d25db14971",
         "timestamp": "20260505033712",
         "url": "https://web.archive.org/web/20260505033712/https://data.ny.gov/Government-Finance/New-York-State-Tax-Warrants-Beginning-7-1-2025/v7ua-z23v"
       },
@@ -106,6 +108,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 19277810,
+        "sha256": "463ad946fb7d88af63e58014929e150887a2132f36331735a92bfe798206ecbf",
         "timestamp": "20260405031545",
         "url": "https://web.archive.org/web/20260405031545/https://data.ny.gov/api/views/v7ua-z23v/rows.csv?accessType=DOWNLOAD"
       },

@@ -29,6 +29,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 6214,
+        "sha256": "ccf42a604271e84189783e68ab7890f52918ed4fef4b4066f95252e96aa6c27d",
         "timestamp": "20260225101323",
         "url": "https://web.archive.org/web/20260225101323/https://repository.overheid.nl/sru"
       },

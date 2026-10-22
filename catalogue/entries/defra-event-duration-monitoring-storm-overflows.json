@@ -30,6 +30,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 4589,
+        "sha256": "77f28e7414e49407dd6f764017eb2dfc966e938a6dbdd198232ebca6eab300a8",
         "timestamp": "20261022003032",
         "url": "https://web.archive.org/web/20261022003032/https://environment.data.gov.uk/dataset/21e15f12-0df8-4bfc-b763-45226c16a8ac"
       },

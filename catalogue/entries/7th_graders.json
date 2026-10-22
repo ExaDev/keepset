@@ -56,6 +56,8 @@
     {
       "retrieved": "2026-04-19",
       "snapshot": {
+        "byteLength": 2906,
+        "sha256": "78ae7aa721b878efcb06b7e7362896498a2843e820c6664b5a6f943f5ee71ee0",
         "timestamp": "20260421060831",
         "url": "https://web.archive.org/web/20260421060831/https://networks.skewed.de/net/7th_graders/files/7th_graders.csv.zip"
       },

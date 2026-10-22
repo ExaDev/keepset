@@ -114,6 +114,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 915881,
+        "sha256": "b6df69caa5e5ef34e1bc260c404484ef7e1c18c91cfe3381e040c6470f0586fd",
         "timestamp": "20260108223816",
         "url": "https://web.archive.org/web/20260108223816/https://data.cityofnewyork.us/Environment/Forestry-Work-Orders/bdjm-n7q4"
       },

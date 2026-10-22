@@ -64,6 +64,8 @@
     {
       "retrieved": "2026-02-16",
       "snapshot": {
+        "byteLength": 31764,
+        "sha256": "2fc91d08bde40cd65013c76356822b57f01e85a1f3d36d5b017ba3c4061f3023",
         "timestamp": "20230601",
         "url": "https://web.archive.org/web/20230601/http://deim.urv.cat/~aarenas/data/xarxes/email.zip"
       },

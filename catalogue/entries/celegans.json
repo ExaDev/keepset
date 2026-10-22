@@ -55,6 +55,8 @@
     {
       "retrieved": "2026-01-17",
       "snapshot": {
+        "byteLength": 1897,
+        "sha256": "55b542a8a49c267d3ff060e2afcbe4af22faea6c17dc46f29a5fbc8973bb712a",
         "timestamp": "20220609094956",
         "url": "https://web.archive.org/web/20220609094956/https://snap.stanford.edu/data/C-elegans-frontal.txt.gz"
       },
@@ -64,6 +66,8 @@
     {
       "retrieved": "2026-01-17",
       "snapshot": {
+        "byteLength": 10050,
+        "sha256": "6f3d52e909c3a76afab4e9a5a3e513b39f2686a199b601f0a1d1590295c38079",
         "timestamp": "20210813214425",
         "url": "https://web.archive.org/web/20210813214425/https://nrvis.com/download/data/bio/bio-celegans-dir.zip"
       },

@@ -55,6 +55,8 @@
     {
       "retrieved": "2026-02-16",
       "snapshot": {
+        "byteLength": 764,
+        "sha256": "e64af2de5976f3811295489e691e79df16b5044a50953c8cc411df5cddb956ee",
         "timestamp": "20230601",
         "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/UciNet/szcig.dat"
       },

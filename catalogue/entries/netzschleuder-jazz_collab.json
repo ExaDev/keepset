@@ -57,6 +57,8 @@
     {
       "retrieved": "2026-04-20",
       "snapshot": {
+        "byteLength": 7002,
+        "sha256": "74a4368a6022657bd3c1e667158dc96f5a3d788fe8a67d6143f0ab55cbed1a5c",
         "timestamp": "20230928153021",
         "url": "https://web.archive.org/web/20230928153021/https://deim.urv.cat/~alexandre.arenas/data/welcome.htm"
       },

@@ -94,6 +94,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 4967,
+        "sha256": "7f2831bfe99234b4fb2261405b4b48bdc3a8e001f8ae27aa0c2c550abe77abb5",
         "timestamp": "20261022040627",
         "url": "https://web.archive.org/web/20261022040627/https://services3.arcgis.com/IgR6ay8jzuIj7VSF/arcgis/rest/services/Weed_Abatement_2017/FeatureServer"
       },

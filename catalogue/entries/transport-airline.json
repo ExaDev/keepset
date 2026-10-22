@@ -56,6 +56,8 @@
     {
       "retrieved": "2026-03-26",
       "snapshot": {
+        "byteLength": 381148,
+        "sha256": "755e1f06fd662c75a3025038354b1f1ec1c479b655fe28fe393f63306ae5a68c",
         "timestamp": "20260731105649",
         "url": "https://web.archive.org/web/20260731105649/https://raw.githubusercontent.com/jpatokal/openflights/master/data/routes.dat"
       },

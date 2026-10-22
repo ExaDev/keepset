@@ -90,6 +90,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 43008,
+        "sha256": "991df9e9ccd9457f9fd6050e535c07c944667818432728a75d8b7e4668d4adca",
         "timestamp": "20261022030846",
         "url": "https://web.archive.org/web/20261022030846/https://raw.githubusercontent.com/Oberfichtner/Clustering_and_TSP_with_R/main/rawdataclear.xls"
       },

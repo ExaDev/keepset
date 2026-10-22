@@ -55,6 +55,8 @@
     {
       "retrieved": "2026-02-16",
       "snapshot": {
+        "byteLength": 7299,
+        "sha256": "e91263efcbef3f1ba3d120647a2e63a237236d16c8c3d5ccee1eb39d1c6a5b47",
         "timestamp": "20230601",
         "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/UciNet/bktec.dat"
       },

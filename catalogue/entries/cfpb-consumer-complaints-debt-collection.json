@@ -36,6 +36,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 356704969,
+        "sha256": "9ae94df79f82a8e84b9b3e22bf8951f8c02489b88f5c4fa9ee32a95e1df760a1",
         "timestamp": "20261022003117",
         "url": "https://web.archive.org/web/20261022003117/https://files.consumerfinance.gov/ccdb/complaints.csv.zip"
       },

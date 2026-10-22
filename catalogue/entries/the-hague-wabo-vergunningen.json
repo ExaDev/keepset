@@ -87,6 +87,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 42752,
+        "sha256": "77697ae3d8dc2015963cdd760adfd6e0d4400800fd5a09251bcf58ed03656b1d",
         "timestamp": "20250409180730",
         "url": "https://web.archive.org/web/20250409180730/https://data.overheid.nl/en/dataset/wabovergunningen"
       },
@@ -96,6 +98,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 42397300,
+        "sha256": "28009eadc8d0aed409d0f85a3030e44dbbb7f731884b0c0ca537df3fa2d47012",
         "timestamp": "20261021014905",
         "url": "https://web.archive.org/web/20261021014905/https://den-haag-opendata.opendatasoft.com/api/explore/v2.1/catalog/datasets/wabovergunningen/exports/csv"
       },

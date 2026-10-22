@@ -58,6 +58,8 @@
     {
       "retrieved": "2026-04-20",
       "snapshot": {
+        "byteLength": 17578,
+        "sha256": "e33832c48d34294687c981f0c7338810c1916aed57d35b566af57436b554243a",
         "timestamp": "20260606101353",
         "url": "https://web.archive.org/web/20260606101353/https://networks.skewed.de/net/interactome_pdz"
       },
@@ -67,6 +69,8 @@
     {
       "retrieved": "2026-04-20",
       "snapshot": {
+        "byteLength": 5432,
+        "sha256": "f02a82726754ea6bd14095ebd4e5dbd1eff5d565862882e90662028ba2e3ebe9",
         "timestamp": "20261022023009",
         "url": "https://web.archive.org/web/20261022023009/https://networks.skewed.de/net/interactome_pdz/files/interactome_pdz.csv.zip"
       },

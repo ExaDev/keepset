@@ -91,6 +91,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 779164,
+        "sha256": "2781d6db6630c771bb2025b8d6ef09ebde3745d852ebcddf5d98071b590f3ffd",
         "timestamp": "20250421133948",
         "url": "https://web.archive.org/web/20250421133948/https://data.norfolk.gov/Government/Towing/4dwc-v3t8"
       },
@@ -100,6 +102,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 2291883,
+        "sha256": "bbcde0ec598a4d4c2ea3e9d8b5f05dab4ced651ff1bd290afd6d163c6bac3e88",
         "timestamp": "20260525180153",
         "url": "https://web.archive.org/web/20260525180153/https://data.norfolk.gov/api/views/4dwc-v3t8/rows.csv?accessType=DOWNLOAD"
       },

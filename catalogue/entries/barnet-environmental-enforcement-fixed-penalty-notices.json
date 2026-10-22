@@ -81,6 +81,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 13110,
+        "sha256": "3d75d364f95952c48338a35e292e7ada4b6e5aad4ad8f2d26c03744884d647c7",
         "timestamp": "20250913203544",
         "url": "https://web.archive.org/web/20250913203544/https://open.barnet.gov.uk/dataset/environmental-enforcement-fixed-penalty-notices-2n1ne"
       },
@@ -90,6 +92,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 545914,
+        "sha256": "a63cde6459ed03b84b63f52934e47d1924d83b0eae1c7160fa55306f450ae126",
         "timestamp": "20260207010022",
         "url": "https://web.archive.org/web/20260207010022/https://open.barnet.gov.uk/download/2n1ne/mpn/FPNs%20to%20date%20Feb%202019%20to%20date.csv"
       },

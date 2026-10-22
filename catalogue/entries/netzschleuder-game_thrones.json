@@ -57,6 +57,8 @@
     {
       "retrieved": "2026-04-20",
       "snapshot": {
+        "byteLength": 5554,
+        "sha256": "ad96028bae9431b945860d70b4ee64bd27ba3351da2e0339bb3cfe25b5a2c77d",
         "timestamp": "20220308184757",
         "url": "https://web.archive.org/web/20220308184757/http://www.macalester.edu/~abeverid/data/stormofswords.csv"
       },
@@ -66,6 +68,8 @@
     {
       "retrieved": "2026-04-20",
       "snapshot": {
+        "byteLength": 18295,
+        "sha256": "cff0d70bf2008cf3cfe8e9dfdd55189fb80105de515be13683a3863121fef658",
         "timestamp": "20260420164259",
         "url": "https://web.archive.org/web/20260420164259/https://networks.skewed.de/net/game_thrones"
       },
@@ -75,6 +79,8 @@
     {
       "retrieved": "2026-04-20",
       "snapshot": {
+        "byteLength": 3995,
+        "sha256": "ba9a90a0096f4cec52fbd7a77e0d7d4fac08064fdfea5caef6b13dfb9fa2a16a",
         "timestamp": "20261022015322",
         "url": "https://web.archive.org/web/20261022015322/https://networks.skewed.de/net/game_thrones/files/game_thrones.csv.zip"
       },

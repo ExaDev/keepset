@@ -98,6 +98,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 402010,
+        "sha256": "5d024a07fc89591868b2a3e207e1aa6fb121ea6a67c5f8afc0411f6886e2547b",
         "timestamp": "20261020231224",
         "url": "https://web.archive.org/web/20261020231224/http://www.vrp-rep.org/datasets/download/angelelli-et-al-2017.zip"
       },

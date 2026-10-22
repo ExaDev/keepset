@@ -57,6 +57,8 @@
     {
       "retrieved": "2026-04-20",
       "snapshot": {
+        "byteLength": 32375,
+        "sha256": "72115718fc42af0e10d8efa3bf2725ef43801217e3ee7a0bdb5a72a4c8ddc033",
         "timestamp": "20260421134847",
         "url": "https://web.archive.org/web/20260421134847/http://konect.cc/networks/moreno_oz"
       },
@@ -66,6 +68,8 @@
     {
       "retrieved": "2026-04-20",
       "snapshot": {
+        "byteLength": 18065,
+        "sha256": "ef67bd8c581a63b2e4733aa933c0333e1fccacb603bfda4e5b64b82207c37e5e",
         "timestamp": "20260520190054",
         "url": "https://web.archive.org/web/20260520190054/https://networks.skewed.de/net/residence_hall"
       },
@@ -75,6 +79,8 @@
     {
       "retrieved": "2026-04-20",
       "snapshot": {
+        "byteLength": 12347,
+        "sha256": "4942c38e18846f9660bc86d4d1e8e1886489e63acf2a0e7c8ddc2aa78b8d6fd4",
         "timestamp": "20240428102613",
         "url": "https://web.archive.org/web/20240428102613/https://networks.skewed.de/net/residence_hall/files/residence_hall.csv.zip"
       },

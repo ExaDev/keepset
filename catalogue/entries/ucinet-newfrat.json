@@ -55,6 +55,8 @@
     {
       "retrieved": "2026-02-16",
       "snapshot": {
+        "byteLength": 13702,
+        "sha256": "884537cbb60cf6c9c8e3cea3fa2d9f4a54fef8981b28151e65d65c5d89d43b46",
         "timestamp": "20230601",
         "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/UciNet/newfrat.dat"
       },

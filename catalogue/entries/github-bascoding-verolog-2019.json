@@ -100,6 +100,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 358949,
+        "sha256": "98de52f03275fe3ec9999d30a847805f9df643246df26edf5402ad9669620884",
         "timestamp": "20261020231753",
         "url": "https://web.archive.org/web/20261020231753/https://codeload.github.com/BasCoding/VeRoLog-2019/zip/refs/heads/main"
       },

@@ -63,6 +63,8 @@
     {
       "retrieved": "2026-04-20",
       "snapshot": {
+        "byteLength": 3006,
+        "sha256": "1ebf44ed01d31d2340461e5454db5f0aa7fe3d73da989437c7175d1a35dafa06",
         "timestamp": "20210525040744",
         "url": "https://web.archive.org/web/20210525040744/https://nrvis.com/download/data/eco/eco-stmarks.zip"
       },

@@ -52,6 +52,8 @@
     {
       "retrieved": "2026-04-19",
       "snapshot": {
+        "byteLength": 375441,
+        "sha256": "c56989ed74dd58a2c3478e800852cf6970ef0480d4291d7314c76fd49473f047",
         "timestamp": "20261020230605",
         "url": "https://web.archive.org/web/20261020230605/http://konect.cc/files/download.tsv.radoslaw_email.tar.bz2"
       },

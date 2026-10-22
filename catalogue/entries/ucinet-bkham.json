@@ -55,6 +55,8 @@
     {
       "retrieved": "2026-02-16",
       "snapshot": {
+        "byteLength": 10123,
+        "sha256": "291ba5716c138591af56609623bf68b39f1ccfcc5f426da0effd488eec43d4b5",
         "timestamp": "20230601",
         "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/UciNet/bkham.dat"
       },

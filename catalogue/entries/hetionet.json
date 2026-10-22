@@ -54,6 +54,8 @@
     {
       "retrieved": "2026-03-03",
       "snapshot": {
+        "byteLength": 12401407,
+        "sha256": "611f0411ac666be4e0270e54bbca67407e14720bfc3099311f0f5eec25c5a947",
         "timestamp": "20261022011839",
         "url": "https://web.archive.org/web/20261022011839/https://media.githubusercontent.com/media/hetio/hetionet/main/hetnet/tsv/hetionet-v1.0-edges.sif.gz"
       },

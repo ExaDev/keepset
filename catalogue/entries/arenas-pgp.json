@@ -59,6 +59,8 @@
     {
       "retrieved": "2026-02-16",
       "snapshot": {
+        "byteLength": 209894,
+        "sha256": "9ed4ab18dc834e3a47e7b22b5e3a896916b956976c8e68cdce392955e1e3dc1d",
         "timestamp": "20230601",
         "url": "https://web.archive.org/web/20230601/http://deim.urv.cat/~aarenas/data/xarxes/PGP.zip"
       },

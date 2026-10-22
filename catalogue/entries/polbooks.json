@@ -80,6 +80,8 @@
     {
       "retrieved": "2026-01-17",
       "snapshot": {
+        "byteLength": 26314,
+        "sha256": "29e2439036fa4e13b478a9d4ceda78b5ab4d4d8252882a7f2b6036b028e34848",
         "timestamp": "20261022011929",
         "url": "https://web.archive.org/web/20261022011929/https://networkdata.ics.uci.edu/data/polbooks/polbooks.gml"
       },

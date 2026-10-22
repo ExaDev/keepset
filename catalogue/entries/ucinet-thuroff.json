@@ -55,6 +55,8 @@
     {
       "retrieved": "2026-02-16",
       "snapshot": {
+        "byteLength": 1264,
+        "sha256": "a93401d7adcfd128a6fa84d87da3aa8e800669a2e0fd5d70a2ebf717714e96e2",
         "timestamp": "20230601",
         "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/UciNet/thuroff.dat"
       },

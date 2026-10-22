@@ -82,6 +82,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 27726,
+        "sha256": "f3987c066ae2c8c751f73edb5d46426cb7e84f59df4bcea8bf9302af78438f2a",
         "timestamp": "20260115051338",
         "url": "https://web.archive.org/web/20260115051338/https://ckan0.cf.opendata.inter.prod-toronto.ca/dataset/utility-cut-permits"
       },
@@ -91,6 +93,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 22890021,
+        "sha256": "b2f5a98b3371122abb7bd4718f7315528789eb903e48af917816eb689d621ca1",
         "timestamp": "20261020231713",
         "url": "https://web.archive.org/web/20261020231713/https://ckan0.cf.opendata.inter.prod-toronto.ca/dataset/43cbc364-b673-49ca-b98b-8b99c5d5f6eb/resource/e2d3c583-efeb-43e7-aeb1-273f4055847d/download/utility-cut-permits.csv"
       },

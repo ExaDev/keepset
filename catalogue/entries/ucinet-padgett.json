@@ -55,6 +55,8 @@
     {
       "retrieved": "2026-02-16",
       "snapshot": {
+        "byteLength": 1508,
+        "sha256": "fa835ccafd51bf763fd4b40559c079385680a94c0f36611b4b2bbd9caae60586",
         "timestamp": "20230601",
         "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/UciNet/padgett.dat"
       },

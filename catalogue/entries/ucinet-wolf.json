@@ -55,6 +55,8 @@
     {
       "retrieved": "2026-02-16",
       "snapshot": {
+        "byteLength": 2169,
+        "sha256": "5f984724e2f5e9cc591bb55776561f68c70fd14acb152266a6f17fcd254d5d40",
         "timestamp": "20230601",
         "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/UciNet/wolf.dat"
       },

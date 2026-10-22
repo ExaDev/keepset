@@ -55,6 +55,8 @@
     {
       "retrieved": "2026-01-17",
       "snapshot": {
+        "byteLength": 3246518,
+        "sha256": "3224079a19bc363c7f68390375dcc3c7b1866618bd528c1ade6dfb088306ddec",
         "timestamp": "20251215170717",
         "url": "https://web.archive.org/web/20251215170717/https://snap.stanford.edu/data/soc-Slashdot0902.txt.gz"
       },

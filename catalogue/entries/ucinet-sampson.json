@@ -55,6 +55,8 @@
     {
       "retrieved": "2026-02-16",
       "snapshot": {
+        "byteLength": 7371,
+        "sha256": "ee427d7e13ce8defa09a880662134e673d558404e13eb2c8a95006b5175568b1",
         "timestamp": "20230601",
         "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/UciNet/sampson.dat"
       },

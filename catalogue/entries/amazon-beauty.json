@@ -51,6 +51,8 @@
     {
       "retrieved": "2026-03-27",
       "snapshot": {
+        "byteLength": 82432164,
+        "sha256": "17d5232b90444beecfe758ce1446e5300230491f3a88ac802992ca95fc4c150f",
         "timestamp": "20261021191005",
         "url": "https://web.archive.org/web/20261021191005/http://jmcauley.ucsd.edu/data/amazon/categoryFiles/ratings_Beauty.csv"
       },

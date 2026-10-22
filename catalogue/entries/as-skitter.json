@@ -56,6 +56,8 @@
     {
       "retrieved": "2026-02-16",
       "snapshot": {
+        "byteLength": 33209863,
+        "sha256": "743d4f91fbcbcace4a70d44d1190fe75869faa1398d3eb73bb2d7663c2417510",
         "timestamp": "20240415083238",
         "url": "https://web.archive.org/web/20240415083238/https://snap.stanford.edu/data/as-skitter.txt.gz"
       },

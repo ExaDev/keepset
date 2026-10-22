@@ -55,6 +55,8 @@
     {
       "retrieved": "2026-01-17",
       "snapshot": {
+        "byteLength": 80846,
+        "sha256": "5064ba72062edf2f122ca12c24bf9b379215d4f410901820748bb3178a4fe400",
         "timestamp": "20160729230456",
         "url": "https://web.archive.org/web/20160729230456/https://snap.stanford.edu/data/p2p-Gnutella09.txt.gz"
       },

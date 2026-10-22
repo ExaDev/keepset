@@ -111,6 +111,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 603113,
+        "sha256": "55a5e1a140c5a9e4566ec1b79207c18b66c3d822353690d4c1b8bdc5d0357ebd",
         "timestamp": "20260711234550",
         "url": "https://web.archive.org/web/20260711234550/https://data.cityofnewyork.us/Housing-Development/Handyman-Work-Order-HWO-Charges/sbnd-xujn"
       },
@@ -120,6 +122,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 33788034,
+        "sha256": "f20f8c45be3d9749bf97c11db5cb2b678283f7eac7c2f68bd789e3bc42e4e4f5",
         "timestamp": "20250201015136",
         "url": "https://web.archive.org/web/20250201015136/https://data.cityofnewyork.us/api/views/sbnd-xujn/rows.csv?accessType=DOWNLOAD"
       },

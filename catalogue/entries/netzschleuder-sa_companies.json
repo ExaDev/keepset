@@ -57,6 +57,8 @@
     {
       "retrieved": "2026-04-20",
       "snapshot": {
+        "byteLength": 18346,
+        "sha256": "aa421ee10708cba86dc7c2985de1249b475050ada1fb522413c88d028f6c1d71",
         "timestamp": "20260415125349",
         "url": "https://web.archive.org/web/20260415125349/http://konect.cc/networks/brunson_south-africa"
       },
@@ -66,6 +68,8 @@
     {
       "retrieved": "2026-04-20",
       "snapshot": {
+        "byteLength": 17250,
+        "sha256": "d0ecffa8b3097582f14bfaee924f6de43835591d142d0fa764fb17836e881606",
         "timestamp": "20260420155849",
         "url": "https://web.archive.org/web/20260420155849/https://networks.skewed.de/net/sa_companies"
       },
@@ -75,6 +79,8 @@
     {
       "retrieved": "2026-04-20",
       "snapshot": {
+        "byteLength": 1873,
+        "sha256": "e76d671d7000a9fc4046c5edc9ff7023a94af013b3eab99874d5c6bc7e26448d",
         "timestamp": "20261022024110",
         "url": "https://web.archive.org/web/20261022024110/https://networks.skewed.de/net/sa_companies/files/sa_companies.csv.zip"
       },

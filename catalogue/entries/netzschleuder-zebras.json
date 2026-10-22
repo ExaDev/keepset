@@ -57,6 +57,8 @@
     {
       "retrieved": "2026-04-20",
       "snapshot": {
+        "byteLength": 3422,
+        "sha256": "82063cb65e38b1002686845198ffd7ae8712874bae24bbda12a06b6350603eaa",
         "timestamp": "20260813220407",
         "url": "https://web.archive.org/web/20260813220407/http://konect.cc/networks/moreno_zebra"
       },
@@ -66,6 +68,8 @@
     {
       "retrieved": "2026-04-20",
       "snapshot": {
+        "byteLength": 17377,
+        "sha256": "0475e3d21af16525e854631582fdeaba7653b4935e6c63ff3504b078b4baf722",
         "timestamp": "20260520200830",
         "url": "https://web.archive.org/web/20260520200830/https://networks.skewed.de/net/zebras"
       },
@@ -75,6 +79,8 @@
     {
       "retrieved": "2026-04-20",
       "snapshot": {
+        "byteLength": 2334,
+        "sha256": "277c7c68eb98ffd792178aaf6b6f1d3b9872cf339ec0b81ac4b14db4f8051f9d",
         "timestamp": "20261022024648",
         "url": "https://web.archive.org/web/20261022024648/https://networks.skewed.de/net/zebras/files/zebras.csv.zip"
       },

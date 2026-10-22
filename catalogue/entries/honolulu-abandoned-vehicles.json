@@ -83,6 +83,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 2010408,
+        "sha256": "97aa7e6051a149eb0e2fcc09b0b275d8eead86d2b99291c7eb363bdbf7d480f1",
         "timestamp": "20230811040953",
         "url": "https://web.archive.org/web/20230811040953/https://data.honolulu.gov/api/views/7mwf-c3z3/rows.csv?accessType=DOWNLOAD"
       },

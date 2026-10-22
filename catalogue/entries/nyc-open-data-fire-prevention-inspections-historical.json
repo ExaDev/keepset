@@ -98,6 +98,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 72298735,
+        "sha256": "679d5672aa17b4127eb2df35fdc8e5901ea546a269a06bf297277b1d87650e25",
         "timestamp": "20250201035112",
         "url": "https://web.archive.org/web/20250201035112/https://data.cityofnewyork.us/api/views/ssq6-fkht/rows.csv?accessType=DOWNLOAD"
       },

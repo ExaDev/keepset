@@ -79,6 +79,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 16083287,
+        "sha256": "9749e9f989bb3dfcccc8bc205c62fc078104cd599cccb903ac9accce497f7b4b",
         "timestamp": "20261020231733",
         "url": "https://web.archive.org/web/20261020231733/https://ckan0.cf.opendata.inter.prod-toronto.ca/dataset/5da2e2e8-659e-4850-ae43-47b7f7ad6b62/resource/05994276-0021-47e1-afa0-ca874733b98f/download/investigations.csv"
       },

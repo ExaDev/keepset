@@ -59,6 +59,8 @@
     {
       "retrieved": "2026-02-16",
       "snapshot": {
+        "byteLength": 120443,
+        "sha256": "c89cd10def5bdc098af485bac86689f464eefae8d484eaf50dd2b6a56b386f1a",
         "timestamp": "20230601",
         "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/cite/SciMet.zip"
       },

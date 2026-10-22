@@ -55,6 +55,8 @@
     {
       "retrieved": "2026-03-26",
       "snapshot": {
+        "byteLength": 85139832,
+        "sha256": "9d05955aa997fbc84953c9eb7786675af80336a356404e75dc18aaa90d3553b0",
         "timestamp": "20250415223558",
         "url": "https://web.archive.org/web/20250415223558/https://snap.stanford.edu/data/cit-Patents.txt.gz"
       },

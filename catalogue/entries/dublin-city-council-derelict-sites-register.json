@@ -100,6 +100,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 586,
+        "sha256": "660723ed2c853273671d44911b12f3cb73126df4a56c2c1b46af90d31e1acf1d",
         "timestamp": "20261022040548",
         "url": "https://web.archive.org/web/20261022040548/https://services-eu1.arcgis.com/PyGgzM45TvWtSBsM/arcgis/rest/services/DCC_Derelict_Sites_Register_Public_points/FeatureServer"
       },

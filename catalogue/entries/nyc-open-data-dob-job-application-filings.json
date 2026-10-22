@@ -122,6 +122,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 179080,
+        "sha256": "f664ece8705915acd2872ce32918952c5c75059955fbe78204bc70865a2674cf",
         "timestamp": "20261006161033",
         "url": "https://web.archive.org/web/20261006161033/https://data.cityofnewyork.us/Housing-Development/DOB-Job-Application-Filings/ic3t-wcy2"
       },

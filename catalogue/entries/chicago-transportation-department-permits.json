@@ -122,6 +122,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 3761249,
+        "sha256": "fb547b0c6e2155f1f365d28977019e7b62d513ec47725017663f1e28cd9c4040",
         "timestamp": "20261020232039",
         "url": "https://web.archive.org/web/20261020232039/https://data.cityofchicago.org/api/views/hr8i-6s6s/rows.csv?accessType=DOWNLOAD"
       },

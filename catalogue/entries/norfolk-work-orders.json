@@ -103,6 +103,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 554627,
+        "sha256": "c3cca1c6509035a0ec4639fc5a51390ccc817b1bc4a3abea18cb7f4869adc038",
         "timestamp": "20260424180733",
         "url": "https://web.archive.org/web/20260424180733/https://data.norfolk.gov/Government/Work-Orders/qzfe-wj25"
       },

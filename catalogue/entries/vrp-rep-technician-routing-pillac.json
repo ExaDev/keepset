@@ -92,6 +92,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 177152,
+        "sha256": "97863231ff459105b42272eb9e72f1cc7175b935ba3d3b2025ba238af393507a",
         "timestamp": "20261020231254",
         "url": "https://web.archive.org/web/20261020231254/http://www.vrp-rep.org/datasets/download/pillac-et-al-2013.zip"
       },

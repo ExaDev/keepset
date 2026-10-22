@@ -57,6 +57,8 @@
     {
       "retrieved": "2026-02-16",
       "snapshot": {
+        "byteLength": 3713659,
+        "sha256": "5133a82c5e86788516170445c26ebe55b5015827f679e66b42f08e87a2fc8190",
         "timestamp": "20061109214015",
         "url": "https://web.archive.org/web/20061109214015/http://www.nd.edu/~networks/resources/www/www.dat.gz"
       },

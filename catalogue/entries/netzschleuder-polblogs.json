@@ -57,6 +57,8 @@
     {
       "retrieved": "2026-04-19",
       "snapshot": {
+        "byteLength": 17898,
+        "sha256": "8a5d8d31df4031fa54ec7d546f61dcffc69e64f8341cabbedd0076b3473dca4c",
         "timestamp": "20260316211227",
         "url": "https://web.archive.org/web/20260316211227/https://networks.skewed.de/net/polblogs"
       },

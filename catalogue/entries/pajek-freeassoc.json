@@ -60,6 +60,8 @@
     {
       "retrieved": "2026-02-16",
       "snapshot": {
+        "byteLength": 781637,
+        "sha256": "6ebf1ea1814cdc208e327dca739496f221507fb34ddc44e1ae1b399dc88be061",
         "timestamp": "20230601",
         "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/dic/fa/Pairs.zip"
       },

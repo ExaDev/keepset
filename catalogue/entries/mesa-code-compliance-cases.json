@@ -119,6 +119,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 219446,
+        "sha256": "c11dbb45f4fa61c09bf93b051fbe86175e66ac73aabbde5aa315cb89ff280b72",
         "timestamp": "20260404200241",
         "url": "https://web.archive.org/web/20260404200241/https://citydata.mesaaz.gov/Code-Compliance/Code-Compliance/hgf6-yenu"
       },
@@ -128,6 +130,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 10444863,
+        "sha256": "7f576376c5a361ae367e7a79b6974d7b296bbb53d1213efb22342ea9401a446b",
         "timestamp": "20261020231655",
         "url": "https://web.archive.org/web/20261020231655/https://citydata.mesaaz.gov/api/views/hgf6-yenu/rows.csv?accessType=DOWNLOAD"
       },

@@ -103,6 +103,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 792500,
+        "sha256": "daa47e15eecce486a33719a401ca5aded9edb7cb0c4ed416405383ab9de1075a",
         "timestamp": "20250421092532",
         "url": "https://web.archive.org/web/20250421092532/https://data.cincinnati-oh.gov/Thriving-Neighborhoods/Vacant-Foreclosed-Property-Registration/w3jp-dfxy"
       },
@@ -112,6 +114,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 323134,
+        "sha256": "d5b140e579065f432b6f09c4c8e4517d87782fbab78f76ec83999f74a5023d08",
         "timestamp": "20261020231859",
         "url": "https://web.archive.org/web/20261020231859/https://data.cincinnati-oh.gov/api/views/w3jp-dfxy/rows.csv?accessType=DOWNLOAD"
       },

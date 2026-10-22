@@ -58,6 +58,8 @@
     {
       "retrieved": "2026-04-20",
       "snapshot": {
+        "byteLength": 18648,
+        "sha256": "11084f5d1cdf3ec733d1660ee9876efad7d69885fb026a144c0d6e31ca4825a0",
         "timestamp": "20260316203136",
         "url": "https://web.archive.org/web/20260316203136/https://networks.skewed.de/net/college_freshmen"
       },

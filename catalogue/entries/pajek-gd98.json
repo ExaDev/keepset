@@ -54,6 +54,8 @@
     {
       "retrieved": "2026-02-16",
       "snapshot": {
+        "byteLength": 4476,
+        "sha256": "1e0475dcb12db1c139935e4c7df4cba49d0e854ebb083319b21bf1fe9892572f",
         "timestamp": "20230601",
         "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/GD/gd98/A98.net"
       },

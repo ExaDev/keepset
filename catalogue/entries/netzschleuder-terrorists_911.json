@@ -57,6 +57,8 @@
     {
       "retrieved": "2026-04-20",
       "snapshot": {
+        "byteLength": 5118,
+        "sha256": "d8d2136850267fe41cda7aca1a4be99e5dac05aff4889847bc2eb636679f15a9",
         "timestamp": "20260421060917",
         "url": "https://web.archive.org/web/20260421060917/https://aaronclauset.github.io/datacode.htm"
       },
@@ -66,6 +68,8 @@
     {
       "retrieved": "2026-04-20",
       "snapshot": {
+        "byteLength": 18324,
+        "sha256": "f18796ee0b31b004362996380b55c105b24f08c3bc0b0f83cf0c138b796c0ff5",
         "timestamp": "20260520195045",
         "url": "https://web.archive.org/web/20260520195045/https://networks.skewed.de/net/terrorists_911"
       },

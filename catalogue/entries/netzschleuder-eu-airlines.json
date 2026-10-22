@@ -58,6 +58,8 @@
     {
       "retrieved": "2026-04-20",
       "snapshot": {
+        "byteLength": 18431,
+        "sha256": "7b1e1ded4a495234c8bf06fad0e684812dc5cf46fbc01b1ccbe4f7c9c8d9d5de",
         "timestamp": "20260420163549",
         "url": "https://web.archive.org/web/20260420163549/https://networks.skewed.de/net/eu_airlines"
       },
@@ -67,6 +69,8 @@
     {
       "retrieved": "2026-04-20",
       "snapshot": {
+        "byteLength": 24291,
+        "sha256": "c327d9c434ef2d4d09a798699adb6fab4a609aa27323d76f62db2b8ccdd599c4",
         "timestamp": "20240428102440",
         "url": "https://web.archive.org/web/20240428102440/https://networks.skewed.de/net/eu_airlines/files/eu_airlines.csv.zip"
       },

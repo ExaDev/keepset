@@ -56,6 +56,8 @@
     {
       "retrieved": "2026-03-27",
       "snapshot": {
+        "byteLength": 65566137,
+        "sha256": "813c411ccb6122564edfe752e7f80c4dcc5aa25fa94c93622f6877a7ba252862",
         "timestamp": "20260917053053",
         "url": "https://web.archive.org/web/20260917053053/https://files.grouplens.org/datasets/movielens/ml-10m.zip"
       },

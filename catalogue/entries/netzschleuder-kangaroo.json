@@ -57,6 +57,8 @@
     {
       "retrieved": "2026-04-20",
       "snapshot": {
+        "byteLength": 3456,
+        "sha256": "5cba12073bee7a10a9e66665300416151c8ce6a38acd51a2b214f3534eec8796",
         "timestamp": "20260828071430",
         "url": "https://web.archive.org/web/20260828071430/http://konect.cc/networks/moreno_kangaroo"
       },
@@ -66,6 +68,8 @@
     {
       "retrieved": "2026-04-20",
       "snapshot": {
+        "byteLength": 17502,
+        "sha256": "e50f311e5b01f7ea63d8bca709ec3eddab1dec71153ff95a7be56fd7e10b6a7b",
         "timestamp": "20260520194402",
         "url": "https://web.archive.org/web/20260520194402/https://networks.skewed.de/net/kangaroo"
       },
@@ -75,6 +79,8 @@
     {
       "retrieved": "2026-04-20",
       "snapshot": {
+        "byteLength": 2203,
+        "sha256": "61a0b3694f4f0dccc1c3b5d75546dd155469f3ee6858b5b622021c150eec7b45",
         "timestamp": "20261022023149",
         "url": "https://web.archive.org/web/20261022023149/https://networks.skewed.de/net/kangaroo/files/kangaroo.csv.zip"
       },

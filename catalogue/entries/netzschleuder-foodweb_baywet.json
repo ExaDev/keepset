@@ -57,6 +57,8 @@
     {
       "retrieved": "2026-04-20",
       "snapshot": {
+        "byteLength": 34284,
+        "sha256": "26e9285a90566540d19e76888889afa71d62493533181d4fee577229d9c19f48",
         "timestamp": "20250213220320",
         "url": "https://web.archive.org/web/20250213220320/http://konect.cc/networks/foodweb-baywet"
       },
@@ -66,6 +68,8 @@
     {
       "retrieved": "2026-04-20",
       "snapshot": {
+        "byteLength": 17987,
+        "sha256": "5d505bd0afb47b2d6a0ddb70bc64b1ee1e51fcdef35623237a71452f1896f601",
         "timestamp": "20260520192441",
         "url": "https://web.archive.org/web/20260520192441/https://networks.skewed.de/net/foodweb_baywet"
       },

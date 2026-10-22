@@ -48,6 +48,8 @@
     {
       "retrieved": "2026-04-20",
       "snapshot": {
+        "byteLength": 171561,
+        "sha256": "7cf221a3805192ebf3a1ef215ea932f17fdb013e38b1fa178ac54309bcc16311",
         "timestamp": "20261022040300",
         "url": "https://web.archive.org/web/20261022040300/https://raw.githubusercontent.com/dwitvliet/nature2021/master/data/synapses/Dataset6_synapses.json"
       },

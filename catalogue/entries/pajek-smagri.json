@@ -59,6 +59,8 @@
     {
       "retrieved": "2026-02-16",
       "snapshot": {
+        "byteLength": 59506,
+        "sha256": "d2a94c312c45bffc6b8d42669a17417df5d5accebab5571dd0b144b594b906fe",
         "timestamp": "20230601",
         "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/cite/SmaGri.zip"
       },

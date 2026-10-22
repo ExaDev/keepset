@@ -97,6 +97,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 3753532,
+        "sha256": "f4f9192c627e7baa10a9395c22345d6bf634147371f80204b4acc23bc7a36518",
         "timestamp": "20250430142721",
         "url": "https://web.archive.org/web/20250430142721/https://opendata.camden.gov.uk/api/views/i6r8-r9vt/rows.csv?accessType=DOWNLOAD"
       },

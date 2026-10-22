@@ -51,6 +51,8 @@
     {
       "retrieved": "2026-04-19",
       "snapshot": {
+        "byteLength": 19060,
+        "sha256": "22dca1ecdc4b4b627b95e3a508f3b8df0feb0df4d35f90815a9ce9e48fef1f60",
         "timestamp": "20260606113052",
         "url": "https://web.archive.org/web/20260606113052/https://networks.skewed.de/net/high_tech_company"
       },
@@ -60,6 +62,8 @@
     {
       "retrieved": "2026-04-19",
       "snapshot": {
+        "byteLength": 1971,
+        "sha256": "76e2d2d6fabb4a5b6105f2ed8ddf8d0cd9dab90ece885bd1930c13c30e435393",
         "timestamp": "20260311124714",
         "url": "https://web.archive.org/web/20260311124714/https://networks.skewed.de/net/high_tech_company/files/high_tech_company.csv.zip"
       },

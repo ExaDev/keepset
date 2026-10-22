@@ -83,6 +83,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 230741,
+        "sha256": "c1b7f3cf6f60a8c4f265b897c3ade206215d0f437cb15bcbf4017bb2e0901c76",
         "timestamp": "20260324201616",
         "url": "https://web.archive.org/web/20260324201616/https://data.cityofnewyork.us/Transportation/Street-Resurfacing-Schedule/xnfm-u3k5"
       },

@@ -53,6 +53,8 @@
     {
       "retrieved": "2026-04-20",
       "snapshot": {
+        "byteLength": 324961,
+        "sha256": "799d490bec42febad6633751f69333f53aa9fd91ee7023a60936b7530add65c9",
         "timestamp": "20261020230556",
         "url": "https://web.archive.org/web/20261020230556/http://konect.cc/files/download.tsv.opsahl-ucsocial.tar.bz2"
       },

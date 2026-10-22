@@ -57,6 +57,8 @@
     {
       "retrieved": "2026-04-20",
       "snapshot": {
+        "byteLength": 17636,
+        "sha256": "b38eb20ecf25ad7ac3c0911abd42c50d698c05d28b95493eb664fbdc6c927575",
         "timestamp": "20260421135427",
         "url": "https://web.archive.org/web/20260421135427/http://konect.cc/networks/unicodelang"
       },
@@ -71,6 +73,8 @@
     {
       "retrieved": "2026-04-20",
       "snapshot": {
+        "byteLength": 19686,
+        "sha256": "c826c6ae59eecf7574488e94df577596e1ed1c9843dee4d3c902c321c6377801",
         "timestamp": "20261022024619",
         "url": "https://web.archive.org/web/20261022024619/https://networks.skewed.de/net/unicodelang/files/unicodelang.csv.zip"
       },

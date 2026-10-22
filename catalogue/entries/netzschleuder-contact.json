@@ -57,6 +57,8 @@
     {
       "retrieved": "2026-04-20",
       "snapshot": {
+        "byteLength": 17486,
+        "sha256": "f77c05d69ecce9f0d1edadbc12dc8177eee229a997bc4cabdec7751c03c2ebd5",
         "timestamp": "20260421133725",
         "url": "https://web.archive.org/web/20260421133725/http://konect.cc/networks/contact"
       },
@@ -66,6 +68,8 @@
     {
       "retrieved": "2026-04-20",
       "snapshot": {
+        "byteLength": 18107,
+        "sha256": "c3199870bc673893cf3c2c64218d5d4dcb847a1d1e3abc31485266adb7686c3b",
         "timestamp": "20260606105117",
         "url": "https://web.archive.org/web/20260606105117/https://networks.skewed.de/net/contact"
       },
@@ -75,6 +79,8 @@
     {
       "retrieved": "2026-04-20",
       "snapshot": {
+        "byteLength": 113619,
+        "sha256": "3ba1c336dfad5cef6d8687e64f585dd8b036091641ef941dad87f3ca20210598",
         "timestamp": "20240420185201",
         "url": "https://web.archive.org/web/20240420185201/https://networks.skewed.de/net/contact/files/contact.csv.zip"
       },

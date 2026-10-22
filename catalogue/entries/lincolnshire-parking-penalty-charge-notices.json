@@ -74,6 +74,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 34205,
+        "sha256": "9092d572f186278c30081bdb6ab816d9fb1f9abdc0aaf5a7c6fca9a10d77b9d8",
         "timestamp": "20261021225301",
         "url": "https://web.archive.org/web/20261021225301/https://data.lincolnshire.gov.uk/@place/pcns"
       },
@@ -83,6 +85,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 17214971,
+        "sha256": "525f66d611e8bdc6cf99029f037c692ac6a476494fe40eb63506f9f50caea066",
         "timestamp": "20260426102618",
         "url": "https://web.archive.org/web/20260426102618/https://blob.datopian.com/resources/cb20cc0f-940b-49c7-a04c-cac7f480ec0e/penaltychargenotices-lwlv1g.csv"
       },

@@ -56,6 +56,8 @@
     {
       "retrieved": "2026-01-17",
       "snapshot": {
+        "byteLength": 290339,
+        "sha256": "7d3e53626e14b8b09fb3b396bece9d481ad606bd64ceab066349ff57d4ada7fc",
         "timestamp": "20230720162750",
         "url": "https://web.archive.org/web/20230720162750/https://snap.stanford.edu/data/wiki-Vote.txt.gz"
       },

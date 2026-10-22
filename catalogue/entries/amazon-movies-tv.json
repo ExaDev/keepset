@@ -51,6 +51,8 @@
     {
       "retrieved": "2026-03-27",
       "snapshot": {
+        "byteLength": 187517953,
+        "sha256": "05fd3bbb387bca99f16b7a64a26abb736429da416e3cc0cc7423483e9ec4c265",
         "timestamp": "20251215134631",
         "url": "https://web.archive.org/web/20251215134631/https://snap.stanford.edu/data/amazon/productGraph/categoryFiles/ratings_Movies_and_TV.csv"
       },

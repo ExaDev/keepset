@@ -60,6 +60,8 @@
     {
       "retrieved": "2026-02-16",
       "snapshot": {
+        "byteLength": 464525,
+        "sha256": "e2c3d4124d18d0dbd6eb9d9091e2c2c245d4b5344948a638d7908efd732cfe96",
         "timestamp": "20230601",
         "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/dic/foldoc/foldoc.zip"
       },

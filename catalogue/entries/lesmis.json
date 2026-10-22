@@ -53,6 +53,8 @@
     {
       "retrieved": "2026-02-16",
       "snapshot": {
+        "byteLength": 2301,
+        "sha256": "04f8ed2c517fbda9c60d244041837a08328ee13c3102efe847e911dc97a27fbe",
         "timestamp": "20230323100419",
         "url": "https://web.archive.org/web/20230323100419/http://konect.cc/files/download.tsv.moreno_lesmis.tar.bz2"
       },

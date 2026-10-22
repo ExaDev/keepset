@@ -55,6 +55,8 @@
     {
       "retrieved": "2026-02-16",
       "snapshot": {
+        "byteLength": 2974,
+        "sha256": "be46907300529702c77383561115caf2ee5c106d77cde32a83705522c1a252c7",
         "timestamp": "20230601",
         "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/UciNet/wiring.dat"
       },

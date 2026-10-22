@@ -60,6 +60,8 @@
     {
       "retrieved": "2026-02-16",
       "snapshot": {
+        "byteLength": 1077481,
+        "sha256": "7190d2211a08ec81a01325aa2ac5478c4939374a98f60904daea42c7999f9868",
         "timestamp": "20230601",
         "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/dic/Wordnet/wordNet.zip"
       },

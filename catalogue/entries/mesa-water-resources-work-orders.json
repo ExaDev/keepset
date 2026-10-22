@@ -111,6 +111,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 823651,
+        "sha256": "9f70933908a4a630e6df12d7951153aedb7eb4c666eef867b75c917062404f35",
         "timestamp": "20250404161041",
         "url": "https://web.archive.org/web/20250404161041/https://citydata.mesaaz.gov/Water-Resources/Water-Resources-Work-Orders-Public-View/7rqv-jcr4"
       },

@@ -129,6 +129,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 168556,
+        "sha256": "78d05cc1c7d35d36eed28aaf98487d7f68bdfe04c9c158e7b5e45f9015cc471d",
         "timestamp": "20260720181509",
         "url": "https://web.archive.org/web/20260720181509/https://data.cityofnewyork.us/Housing-Development/Housing-Maintenance-Code-Violations/wvxf-dwi5"
       },

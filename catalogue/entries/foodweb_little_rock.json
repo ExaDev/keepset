@@ -51,6 +51,8 @@
     {
       "retrieved": "2026-04-19",
       "snapshot": {
+        "byteLength": 18057,
+        "sha256": "ae47d9e061bf1ebc5c98e96c6c156c7bbe8cb5ced4ad7d109eccb26a8628e974",
         "timestamp": "20260520190209",
         "url": "https://web.archive.org/web/20260520190209/https://networks.skewed.de/net/foodweb_little_rock"
       },

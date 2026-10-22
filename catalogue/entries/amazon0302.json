@@ -55,6 +55,8 @@
     {
       "retrieved": "2026-01-17",
       "snapshot": {
+        "byteLength": 4664334,
+        "sha256": "5f1071ac04203b1bc8fc4af5fb473818a180ff1b97e3d7bd716d789801d1f2a3",
         "timestamp": "20220319182916",
         "url": "https://web.archive.org/web/20220319182916/https://snap.stanford.edu/data/amazon0302.txt.gz"
       },

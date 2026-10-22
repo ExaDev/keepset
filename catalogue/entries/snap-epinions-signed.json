@@ -60,6 +60,8 @@
     {
       "retrieved": "2026-03-27",
       "snapshot": {
+        "byteLength": 2972840,
+        "sha256": "214513a32f1375695ceab7d7581e463ebe44daa573492de699b0c5d1cf3dde60",
         "timestamp": "20260324141226",
         "url": "https://web.archive.org/web/20260324141226/https://snap.stanford.edu/data/soc-sign-epinions.txt.gz"
       },

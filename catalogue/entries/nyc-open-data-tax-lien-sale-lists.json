@@ -68,6 +68,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 148383,
+        "sha256": "5f5f49afb40c9380d2104f7d584574f5502bd5c88043c42f19d742c91d8cd631",
         "timestamp": "20260828142634",
         "url": "https://web.archive.org/web/20260828142634/https://data.cityofnewyork.us/City-Government/Tax-Lien-Sale-Lists/9rz4-mjek"
       },
@@ -77,6 +79,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 2923204,
+        "sha256": "0e7b5fa5f19e3df88cb615800a4eeb1b05cade715067f87ac372d854c48264ea",
         "timestamp": "20260609151226",
         "url": "https://web.archive.org/web/20260609151226/https://data.cityofnewyork.us/api/views/9rz4-mjek/rows.csv?accessType=DOWNLOAD"
       },

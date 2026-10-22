@@ -54,6 +54,8 @@
     {
       "retrieved": "2026-02-16",
       "snapshot": {
+        "byteLength": 2569,
+        "sha256": "14c6b05304c9cab02aeb280ab4fc8a732a0b0ebd521d2d6c7ea65240d71898e0",
         "timestamp": "20230601",
         "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/sport/football.net"
       },

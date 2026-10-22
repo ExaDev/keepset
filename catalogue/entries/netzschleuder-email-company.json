@@ -58,6 +58,8 @@
     {
       "retrieved": "2026-04-20",
       "snapshot": {
+        "byteLength": 18327,
+        "sha256": "58a35670c15b1b7c606942f3347b8ea0933b4ce303d730b67524cce19c1d05a9",
         "timestamp": "20260606103138",
         "url": "https://web.archive.org/web/20260606103138/https://networks.skewed.de/net/email_company"
       },
@@ -67,6 +69,8 @@
     {
       "retrieved": "2026-04-20",
       "snapshot": {
+        "byteLength": 376915,
+        "sha256": "04976ecbff84eae54e17c41bb1af2b0cf774b892a1bd2319cabdad1fdbb2eeda",
         "timestamp": "20240428102453",
         "url": "https://web.archive.org/web/20240428102453/https://networks.skewed.de/net/email_company/files/email_company.csv.zip"
       },

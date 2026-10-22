@@ -100,6 +100,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 4846,
+        "sha256": "f918c197c8fa606e08f1c583a4d4284d5b51210d6833b178b451e0a75d418d41",
         "timestamp": "20261022040807",
         "url": "https://web.archive.org/web/20261022040807/https://services3.arcgis.com/vtilYbC3YeF6EBJ1/arcgis/rest/services/service_05f1e63ba1494703b42f0dd606859f0b/FeatureServer"
       },

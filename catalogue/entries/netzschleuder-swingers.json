@@ -57,6 +57,8 @@
     {
       "retrieved": "2026-04-20",
       "snapshot": {
+        "byteLength": 43190,
+        "sha256": "450db49fe907e6cdaea6f8d0e9e785f5ec206e59d56a22c0cb9f0534da9eee7b",
         "timestamp": "20260130124415",
         "url": "https://web.archive.org/web/20260130124415/https://sites.google.com/site/ucinetsoftware/datasets/covert-networks/swingers"
       },
@@ -66,6 +68,8 @@
     {
       "retrieved": "2026-04-20",
       "snapshot": {
+        "byteLength": 17450,
+        "sha256": "c575d7663777f5228fa436134dbf1f5a76c433f0b381c8ef1088e796150b86fd",
         "timestamp": "20260420153650",
         "url": "https://web.archive.org/web/20260420153650/https://networks.skewed.de/net/swingers"
       },

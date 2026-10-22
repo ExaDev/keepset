@@ -61,6 +61,8 @@
     {
       "retrieved": "2026-02-16",
       "snapshot": {
+        "byteLength": 168052,
+        "sha256": "0d4ed463d1627bb7f3e8420effe8f5545fd492ae8f88dab44ce86cee7b26d7e8",
         "timestamp": "20260923154413",
         "url": "https://web.archive.org/web/20260923154413/https://linqs-data.soe.ucsc.edu/public/lbc/cora.tgz"
       },

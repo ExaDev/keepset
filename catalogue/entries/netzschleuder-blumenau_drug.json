@@ -57,6 +57,8 @@
     {
       "retrieved": "2026-04-20",
       "snapshot": {
+        "byteLength": 34992,
+        "sha256": "bd6e01f21d948f734e303c77061c1965712c5351126b0a7072ce2a3daf48b713",
         "timestamp": "20261022021217",
         "url": "https://web.archive.org/web/20261022021217/https://github.com/rionbr/DDIBlumenau/tree/master/csv"
       },
@@ -66,6 +68,8 @@
     {
       "retrieved": "2026-04-20",
       "snapshot": {
+        "byteLength": 4469,
+        "sha256": "a2a6e7ebc467f87abbb264ab2fd9484ed8908c5d2c7337cb18a019ac8c384cd5",
         "timestamp": "20261022013006",
         "url": "https://web.archive.org/web/20261022013006/https://networks.skewed.de/net/blumenau_drug"
       },
@@ -75,6 +79,8 @@
     {
       "retrieved": "2026-04-20",
       "snapshot": {
+        "byteLength": 8875,
+        "sha256": "98e785cd86587723b70a0d9482d044b7ac4d826a346c7e77a7e5dfb17131db55",
         "timestamp": "20240428102501",
         "url": "https://web.archive.org/web/20240428102501/https://networks.skewed.de/net/blumenau_drug/files/blumenau_drug.csv.zip"
       },

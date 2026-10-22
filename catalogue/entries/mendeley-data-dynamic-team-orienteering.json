@@ -39,6 +39,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 106946,
+        "sha256": "59f65b3fa6bd9151b388ad273a7628054d4c28cec280c2f93319b45d9264eb60",
         "timestamp": "20260614110129",
         "url": "https://web.archive.org/web/20260614110129/https://data.mendeley.com/datasets/xnf6c4d5gt/1"
       },

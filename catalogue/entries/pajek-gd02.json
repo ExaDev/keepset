@@ -54,6 +54,8 @@
     {
       "retrieved": "2026-02-16",
       "snapshot": {
+        "byteLength": 4964,
+        "sha256": "bddd219dca48cd6788153cae945c061569db3e7c7240d8d0d2395604f788cfb0",
         "timestamp": "20230601",
         "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/GD/gd02/A02.net"
       },

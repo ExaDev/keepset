@@ -57,6 +57,8 @@
     {
       "retrieved": "2026-04-20",
       "snapshot": {
+        "byteLength": 49321,
+        "sha256": "58c86bef2c3af291322b1129d2cca86bcbd0d2654c28808c6132ff6161fa7fd4",
         "timestamp": "20260228133049",
         "url": "https://web.archive.org/web/20260228133049/https://github.com/benmaier/BFMaierFBnetwork"
       },
@@ -66,6 +68,8 @@
     {
       "retrieved": "2026-04-20",
       "snapshot": {
+        "byteLength": 18673,
+        "sha256": "e497810d8152c729221d3d223ea57b75e3a92053162b6cc9b1982ac6e3e7fe5b",
         "timestamp": "20260606111453",
         "url": "https://web.archive.org/web/20260606111453/https://networks.skewed.de/net/facebook_friends"
       },

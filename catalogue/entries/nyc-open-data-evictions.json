@@ -99,6 +99,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 150812,
+        "sha256": "c13c1e4605c2a289ba1ba877568687551cde5281ae5c9b66611cc2372a8c6d08",
         "timestamp": "20260802004058",
         "url": "https://web.archive.org/web/20260802004058/https://data.cityofnewyork.us/City-Government/Evictions/6z8x-wfk4"
       },

@@ -56,6 +56,8 @@
     {
       "retrieved": "2026-02-16",
       "snapshot": {
+        "byteLength": 13924,
+        "sha256": "697d823a4ac496ea482c6f43a6470fa620ac371cefb0a6c09d8a7e6263250c12",
         "timestamp": "20230601",
         "url": "https://web.archive.org/web/20230601/http://deim.urv.cat/~aarenas/data/xarxes/celegans_metabolic.zip"
       },

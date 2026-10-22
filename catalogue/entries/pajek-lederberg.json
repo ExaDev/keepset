@@ -59,6 +59,8 @@
     {
       "retrieved": "2026-02-16",
       "snapshot": {
+        "byteLength": 426443,
+        "sha256": "2361083e5ab8b0319d8370dd6205a3aeaaecf345e81a7a82869dd2442ff8067a",
         "timestamp": "20230601",
         "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/cite/Lederberg.zip"
       },

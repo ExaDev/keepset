@@ -80,6 +80,8 @@
     {
       "retrieved": "2026-01-17",
       "snapshot": {
+        "byteLength": 33507,
+        "sha256": "c6a333a2f0be20fbd8bfdc6331a43fe411b797b35c653362905895cf5694695a",
         "timestamp": "20200210055345",
         "url": "https://web.archive.org/web/20200210055345/https://networkdata.ics.uci.edu/data/football/football.gml"
       },

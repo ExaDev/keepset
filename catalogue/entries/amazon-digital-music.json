@@ -51,6 +51,8 @@
     {
       "retrieved": "2026-03-27",
       "snapshot": {
+        "byteLength": 34024972,
+        "sha256": "fdf164882460ff26fa2521e01f6a9cf8005ad252ddce308dd03519064f02d80e",
         "timestamp": "20261021191352",
         "url": "https://web.archive.org/web/20261021191352/http://jmcauley.ucsd.edu/data/amazon/categoryFiles/ratings_Digital_Music.csv"
       },

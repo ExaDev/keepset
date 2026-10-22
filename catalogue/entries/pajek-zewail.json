@@ -59,6 +59,8 @@
     {
       "retrieved": "2026-02-16",
       "snapshot": {
+        "byteLength": 521305,
+        "sha256": "3eb2bc4454cbeadb0625de971f98995f3d76a5af23db3b0e35f156ecbe58a2b9",
         "timestamp": "20230601",
         "url": "https://web.archive.org/web/20230601/http://vlado.fmf.uni-lj.si/pub/networks/data/cite/Zewail.zip"
       },

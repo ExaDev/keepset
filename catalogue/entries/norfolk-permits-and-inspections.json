@@ -105,6 +105,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 147594,
+        "sha256": "6f9fb9fd1e3798960518a7f362c95833383ed8d6bfd284a52a4ce0b4c30dd650",
         "timestamp": "20260508134130",
         "url": "https://web.archive.org/web/20260508134130/https://data.norfolk.gov/Permits/Permits-and-Inspections/bnrb-u445"
       },
@@ -114,6 +116,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 134791904,
+        "sha256": "3cae853b55f45b0066b0f1b3a5099d9e74f5bacbfc2efa36e03f8b73fe3def83",
         "timestamp": "20260517183938",
         "url": "https://web.archive.org/web/20260517183938/https://data.norfolk.gov/api/views/bnrb-u445/rows.csv?accessType=DOWNLOAD"
       },

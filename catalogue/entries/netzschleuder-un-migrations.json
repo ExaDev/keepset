@@ -58,6 +58,8 @@
     {
       "retrieved": "2026-04-20",
       "snapshot": {
+        "byteLength": 22577,
+        "sha256": "4ec50492afd36642b9092bc18aa93dd2373c6361036ae051a8e48e5354abb002",
         "timestamp": "20260420163051",
         "url": "https://web.archive.org/web/20260420163051/https://networks.skewed.de/net/un_migrations"
       },

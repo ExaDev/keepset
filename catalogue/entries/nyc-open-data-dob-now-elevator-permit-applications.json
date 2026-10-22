@@ -123,6 +123,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 182619,
+        "sha256": "f04c17f904c122c02693b9ccb2faea3fe14a926c20f358beeabcb98b3414673a",
         "timestamp": "20260911155936",
         "url": "https://web.archive.org/web/20260911155936/https://data.cityofnewyork.us/Housing-Development/DOB-NOW-Build-Elevator-Permit-Applications/kfp4-dz4h"
       },
@@ -132,6 +134,8 @@
     {
       "retrieved": "2026-10-19",
       "snapshot": {
+        "byteLength": 72461421,
+        "sha256": "9434c1157693a5d42b10ab660c91b0847877411ba697e9010f539bc7ebb7ca03",
         "timestamp": "20250131235451",
         "url": "https://web.archive.org/web/20250131235451/https://data.cityofnewyork.us/api/views/kfp4-dz4h/rows.csv?accessType=DOWNLOAD"
       },

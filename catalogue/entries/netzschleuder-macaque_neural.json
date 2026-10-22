@@ -57,6 +57,8 @@
     {
       "retrieved": "2026-04-20",
       "snapshot": {
+        "byteLength": 33330,
+        "sha256": "9c2c9eced878bd760d7d0c3234f9f0599207b0cad1af373b4a6189eb211b753c",
         "timestamp": "20211013021847",
         "url": "https://web.archive.org/web/20211013021847/https://sites.google.com/site/bctnet/datasets"
       },
@@ -66,6 +68,8 @@
     {
       "retrieved": "2026-04-20",
       "snapshot": {
+        "byteLength": 17119,
+        "sha256": "97c929f24343cf583f62fd3da6b9127c27fbd2a1b51ef27c1aa9ee54f465e0fd",
         "timestamp": "20260606110415",
         "url": "https://web.archive.org/web/20260606110415/https://networks.skewed.de/net/macaque_neural"
       },
@@ -75,6 +79,8 @@
     {
       "retrieved": "2026-04-20",
       "snapshot": {
+        "byteLength": 2478,
+        "sha256": "521b563755044f20a82dcff95e86ed5fde8abf2e97298ba1e50b03a9cac9889b",
         "timestamp": "20261022023314",
         "url": "https://web.archive.org/web/20261022023314/https://networks.skewed.de/net/macaque_neural/files/macaque_neural.csv.zip"
       },
