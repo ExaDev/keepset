@@ -12,6 +12,14 @@ const TOWS_CSV = "Latitude,Longitude,Tow_Date,Tow_Description\n42.88,-78.87,2026
 
 /** How many vertices the Pajek file holds, which is how many rows the preview shows. */
 const PAJEK_VERTICES = 4;
+const PAJEK_EDGES = 3;
+
+/** More rows than a page would render at once, so the table must show only a window of them. */
+const MANY_ROWS = 5000;
+
+/** Where the generated tows start, near Buffalo. */
+const BUFFALO_LATITUDE = 42;
+const BUFFALO_LONGITUDE = -78;
 
 const TOWS_URL = "https://data.buffalony.gov/api/views/pamv-gash/rows.csv?accessType=DOWNLOAD";
 
@@ -86,6 +94,28 @@ test("a source the page cannot read offers the file drop, and the dropped file p
   await expect(page.locator(".preview-result table tbody tr")).toHaveCount(PAJEK_VERTICES);
   await expect(page.locator(".preview-provenance")).toContainText("SHA-256");
   expect(captures).toEqual([]);
+  await page.getByText("Edges (3)").click();
+  await expect(page.locator(".preview-result table thead th")).toHaveText(["source", "target"]);
+  await expect(page.locator(".preview-result table tbody tr")).toHaveCount(PAJEK_EDGES);
+  await page.getByText("Meta", { exact: true }).click();
+  await expect(page.locator(".preview-meta")).toContainText("divorce");
+});
+
+test("a result of thousands of rows is browsable to its last row with only a window of it in the page", async ({ page }) => {
+  await wayback(page);
+  const rows = Array.from({ length: MANY_ROWS }, (_, index) => `${String(BUFFALO_LATITUDE + index / MANY_ROWS)},${String(BUFFALO_LONGITUDE + index / MANY_ROWS)},2026-01-01,Tow ${String(index)}`);
+  await page.route(TOWS_URL, async (route: Readonly<Route>) => {
+    await route.fulfill({ status: 200, headers: CORS, contentType: "text/csv", body: `Latitude,Longitude,Tow_Date,Tow_Description\n${rows.join("\n")}\n` });
+  });
+  await page.goto("/datasets/buffalo-recent-tows/");
+  await page.getByRole("button", { name: "Fetch and preview" }).click();
+  await expect(page.getByText(`Nodes (${MANY_ROWS.toLocaleString("en-GB")})`)).toBeVisible();
+  const rendered = page.locator(".preview-table tbody tr[data-index]");
+  expect(await rendered.count()).toBeLessThan(MANY_ROWS);
+  await page.locator(".preview-table").evaluate((frame) => {
+    frame.scrollTo({ top: frame.scrollHeight });
+  });
+  await expect(rendered.last()).toHaveAttribute("data-index", String(MANY_ROWS - 1));
 });
 
 test("a readable live source previews, draws the map from its coordinates and asks the Archive to capture it", async ({ page }) => {

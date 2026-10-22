@@ -2,14 +2,12 @@
 
 import { lazy, Suspense, useEffect, useRef, useState, type ReactNode } from "react";
 import { createRoot } from "react-dom/client";
-import { Button, MantineProvider, Select, Table as MantineTable } from "@mantine/core";
+import { Button, MantineProvider, SegmentedControl, Select } from "@mantine/core";
+import { DataTable } from "./data-table";
 import type { GeoPoint } from "./point-map";
 import { siteRoot } from "./site-root";
 
 const PointMap = lazy(async () => import("./point-map"));
-
-/** How many rows the preview table shows before it stops, whatever the result holds: a tab shows a sample, the JSON download carries the whole result. */
-const PREVIEW_ROWS = 100;
 
 /** How many characters of a SHA-256 the preview shows beside the result, enough to identify it against the report. */
 const HASH_SHOWN = 12;
@@ -49,15 +47,16 @@ function narrowInstances(value: unknown): readonly { readonly id: string; readon
 }
 
 /** What the preview's done answer carries, narrowed from the worker's unknown by checking its shape. */
-function previewOf(data: unknown): { readonly meta: unknown; readonly nodes?: readonly Record<string, unknown>[]; readonly instances?: readonly { readonly id: string; readonly value: unknown }[] } | undefined {
+function previewOf(data: unknown): { readonly meta: unknown; readonly nodes?: readonly Record<string, unknown>[]; readonly edges?: readonly Record<string, unknown>[]; readonly instances?: readonly { readonly id: string; readonly value: unknown }[] } | undefined {
   const record = narrowRecord(data);
   if (record === undefined || !("meta" in record)) {
     return undefined;
   }
   const nodes = narrowRows(record["nodes"]);
+  const edges = narrowRows(record["edges"]);
   const instances = narrowInstances(record["instances"]);
 
-  return { meta: record["meta"], ...(nodes === undefined ? {} : { nodes }), ...(instances === undefined ? {} : { instances }) };
+  return { meta: record["meta"], ...(nodes === undefined ? {} : { nodes }), ...(edges === undefined ? {} : { edges }), ...(instances === undefined ? {} : { instances }) };
 }
 
 /** How many points the map draws before it samples evenly instead, so a tab stays responsive whatever the result holds; the sample is even over the row order, so a spatial pattern survives it. */
@@ -152,7 +151,8 @@ function PlanarCanvas({ points }: { readonly points: readonly PlanarPoint[] }): 
 /** The preview of one dataset: a button that runs the recipe in the worker, the result's nodes in a table, a JSON download, an instance picker for a collection, and a file drop for a source the page could not read. */
 function Preview({ id }: { readonly id: string }): ReactNode {
   const [state, setState] = useState<"idle" | "working" | "done" | "unreadable" | "error">("idle");
-  const [data, setData] = useState<ReturnType<typeof previewOf>>(undefined);
+  const [result, setResult] = useState<unknown>(undefined);
+  const [view, setView] = useState<"nodes" | "edges" | "meta">("nodes");
   const [provenance, setProvenance] = useState<{ readonly sha256: string; readonly byteLength: number } | null>(null);
   const [instance, setInstance] = useState<string | null>(null);
   const [message, setMessage] = useState("");
@@ -169,7 +169,8 @@ function Preview({ id }: { readonly id: string }): ReactNode {
     run.onmessage = (event: MessageEvent<{ readonly kind: string; readonly data?: unknown; readonly provenance?: { readonly sha256: string; readonly byteLength: number }; readonly message?: string }>): void => {
       const answer = event.data;
       if (answer.kind === "done" && answer.data !== undefined && answer.provenance !== undefined) {
-        setData(previewOf(answer.data));
+        setResult(answer.data);
+        setView("nodes");
         setProvenance(answer.provenance);
         setState("done");
 
@@ -204,8 +205,12 @@ function Preview({ id }: { readonly id: string }): ReactNode {
     });
   };
 
+  const data = previewOf(result);
   const chosen = instance !== null && data?.instances !== undefined ? data.instances.find((one) => one.id === instance)?.value : undefined;
-  const rows = data?.nodes ?? previewOf(chosen)?.nodes ?? [];
+  // A collection shows the chosen instance's own nodes, edges and meta; any other result shows its own.
+  const shown = data?.instances === undefined ? data : previewOf(chosen);
+  const rows = shown?.nodes ?? [];
+  const edgeRows = shown?.edges ?? [];
   const geo = geoPointsOf(rows);
   const planar = planarPointsOf(rows);
   const instances = data?.instances;
@@ -223,15 +228,28 @@ function Preview({ id }: { readonly id: string }): ReactNode {
       {state === "done" ? (
         <div className="preview-result">
           {instances !== undefined ? <Select data={instances.map((one) => ({ value: one.id, label: one.id }))} value={instance} onChange={setInstance} placeholder="Choose an instance" /> : null}
-          {rows.length > 0 ? (
-            <MantineTable>
-              <thead><tr>{Object.keys(rows[0] ?? {}).map((column) => <th key={column}>{column}</th>)}</tr></thead>
-              <tbody>{rows.slice(0, PREVIEW_ROWS).map((row, index) => <tr key={String(index)}>{Object.values(row).map((value, at) => <td key={String(at)}>{typeof value === "object" && value !== null ? JSON.stringify(value) : String(value)}</td>)}</tr>)}</tbody>
-            </MantineTable>
+          {shown === undefined ? (
+            <p>Choose an instance to browse it.</p>
           ) : (
-            <p>The result holds no node rows.</p>
+            <>
+              <SegmentedControl
+                value={view}
+                onChange={(next) => {
+                  if (next === "nodes" || next === "edges" || next === "meta") {
+                    setView(next);
+                  }
+                }}
+                data={[
+                  { value: "nodes", label: `Nodes (${rows.length.toLocaleString("en-GB")})` },
+                  ...(shown.edges === undefined ? [] : [{ value: "edges", label: `Edges (${edgeRows.length.toLocaleString("en-GB")})` }]),
+                  { value: "meta", label: "Meta" },
+                ]}
+              />
+              {view === "meta" ? <pre className="preview-meta">{JSON.stringify(shown.meta, undefined, 2)}</pre> : null}
+              {view === "edges" ? <DataTable rows={edgeRows} /> : null}
+              {view === "nodes" ? (rows.length > 0 ? <DataTable rows={rows} /> : <p>The result holds no node rows.</p>) : null}
+            </>
           )}
-          {rows.length > PREVIEW_ROWS ? <p>Showing {String(PREVIEW_ROWS)} of {String(rows.length)} rows; the download carries the whole result.</p> : null}
           {geo === undefined ? null : (
             <Suspense fallback={<p>Loading the map...</p>}>
               <PointMap points={sampled(geo)} total={geo.length} height={CANVAS_HEIGHT} />
@@ -240,7 +258,7 @@ function Preview({ id }: { readonly id: string }): ReactNode {
           {planar === undefined ? null : <PlanarCanvas points={sampled(planar)} />}
           {captured ? <p className="preview-capture">No snapshot of this source was readable, so it was read live and the Internet Archive was asked to capture it, which leaves the next visitor a snapshot to read.</p> : null}
           {provenance !== null ? <p className="preview-provenance">SHA-256 {provenance.sha256.slice(0, HASH_SHOWN)}, {String(provenance.byteLength)} bytes.</p> : null}
-          <Button component="a" href={URL.createObjectURL(new Blob([JSON.stringify(data)], { type: "application/json" }))} download={`${id}.json`}>Download JSON</Button>
+          <Button component="a" href={URL.createObjectURL(new Blob([JSON.stringify(result)], { type: "application/json" }))} download={`${id}.json`}>Download JSON</Button>
         </div>
       ) : null}
     </div>
