@@ -1,3 +1,10 @@
+## [0.51.4](https://github.com/Mearman/keepset/compare/v0.51.3...v0.51.4) (2026-10-22)
+
+
+### Bug Fixes
+
+* **seed:** carry a pin's checksum over when an import regenerates its entry ([bbe8c3a](https://github.com/Mearman/keepset/commit/bbe8c3a12098476d4443ecf068d99650c75f42d9))
+
 ## [0.51.3](https://github.com/Mearman/keepset/compare/v0.51.2...v0.51.3) (2026-10-22)
 
 
