@@ -7,6 +7,12 @@ import { serialise } from "../../src/serialise";
 import { liveEntry } from "../../src/test-support/entries";
 import { apply, entryWrites, reportedIds, staleEntries } from "./emit";
 
+/** A SHA-256 is 64 hex digits. */
+const SHA256_DIGITS = 64;
+
+/** The byte length the carry-over test's committed pin records. */
+const PINNED_BYTES = 4096;
+
 const directories: string[] = [];
 afterAll(() => {
   for (const directory of directories) {
@@ -39,6 +45,17 @@ describe("entryWrites and pinned snapshots", () => {
     expect(written.sources[0]?.snapshot).toEqual({ timestamp: "20260101000000", url: waybackUrl("20260101000000", url) });
     expect(written.sources[0]?.retrieved).toBe(liveEntry.sources[0]?.retrieved);
     expect(written.name).toBe(liveEntry.name);
+  });
+
+  it("carries over the checksum a committed file records for a pin the import keeps, and none for a pin without one", () => {
+    const root = scratch();
+    const url = "https://example.org/data/karate.txt";
+    const sha256 = "a".repeat(SHA256_DIGITS);
+    const committed = parseEntry({ ...liveEntry, sources: [{ url, retrieved: "2026-01-01", status: "live", snapshot: { timestamp: "20260101000000", url: waybackUrl("20260101000000", url), sha256, byteLength: PINNED_BYTES } }] });
+    writeFileSync(join(root, "karate.json"), serialise(committed));
+    const regenerated = parseEntry({ ...liveEntry, sources: [{ url, retrieved: "2026-04-19", status: "live", snapshot: { timestamp: "20260101000000", url: waybackUrl("20260101000000", url) } }] });
+    const written = parseEntry(JSON.parse(entryWrites([regenerated], root).get(join(root, "karate.json")) ?? "null"));
+    expect(written.sources[0]?.snapshot).toMatchObject({ sha256, byteLength: PINNED_BYTES });
   });
 
   it("does not pin a snapshot for a URL the import no longer lists", () => {
