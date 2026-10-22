@@ -27,7 +27,8 @@ self.addEventListener("install", (event) => {
   event.waitUntil(
     precache().then(async ({ version, urls }) => {
       const cache = await caches.open(version);
-      await cache.addAll([...urls]);
+      // `cache: "reload"` skips the browser's HTTP cache. Without it addAll can store a page or script the host's max-age still lets the browser reuse, so a new version's cache is filled with the previous build's files and serves them until the next release.
+      await cache.addAll(urls.map((url) => new Request(url, { cache: "reload" })));
       await self.skipWaiting();
     }),
   );
