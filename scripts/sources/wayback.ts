@@ -71,12 +71,13 @@ export async function findSnapshot(client: PoliteClient, url: string): Promise<s
   return parsed.data;
 }
 
-/** What asking for a capture came to. `saved` carries the capture's timestamp. `refused` is the service's or the host's definite no, with the reason it belongs under and what was observed. `retry` is a failure that says nothing about the URL (a busy service, a timeout), so the URL stays unresolved. `exhausted` means the account's own limit is spent, so asking for more captures is pointless for now. */
+/** What asking for a capture came to. `saved` carries the capture's timestamp. `refused` is the service's or the host's definite no, with the reason it belongs under and what was observed. `retry` is a failure that says nothing about the URL (a busy service, a timeout), so the URL stays unresolved. `exhausted` means the account's own limit is spent, so asking for more captures is pointless for now. `url-limited` means this one URL has been captured as often as a day allows, so it waits for the next day while other URLs go on. */
 export type SaveOutcome =
   | { readonly kind: "saved"; readonly timestamp: string }
   | { readonly kind: "refused"; readonly reason: ExceptionReason; readonly evidence: string }
   | { readonly kind: "retry"; readonly evidence: string }
-  | { readonly kind: "exhausted"; readonly evidence: string };
+  | { readonly kind: "exhausted"; readonly evidence: string }
+  | { readonly kind: "url-limited"; readonly evidence: string };
 
 /** The `status_ext` codes of Save Page Now that are a definite no, by reason (SPN2 Public API Docs, error codes). Codes that describe the service's or the network's passing trouble are deliberately absent: they are retried. */
 const REFUSALS: Readonly<Record<string, ExceptionReason>> = {
@@ -94,8 +95,11 @@ const REFUSALS: Readonly<Record<string, ExceptionReason>> = {
   "error:not-implemented": "source-error",
 };
 
+/** The `status_ext` code that means this URL, not the account, has used up its captures for the day (the account's own count was far below its limit when it was returned). */
+const URL_LIMIT = "error:too-many-daily-captures";
+
 /** The `status_ext` codes that mean the account (or this network address) has used up what Save Page Now allows today. */
-const EXHAUSTIONS: ReadonlySet<string> = new Set(["error:too-many-daily-captures", "error:max-daily-bandwidth", "error:max-daily-bandwidth-from-ip", "error:blocked-client-ip"]);
+const EXHAUSTIONS: ReadonlySet<string> = new Set(["error:max-daily-bandwidth", "error:max-daily-bandwidth-from-ip", "error:blocked-client-ip"]);
 
 /**
  * Sorts a Save Page Now error into the outcome it stands for.
@@ -105,6 +109,9 @@ const EXHAUSTIONS: ReadonlySet<string> = new Set(["error:too-many-daily-captures
  */
 export function classifySaveError(statusExt: string | undefined, message: string | undefined): SaveOutcome {
   const evidence = statusExt ?? message ?? "unspecified error";
+  if (statusExt === URL_LIMIT) {
+    return { kind: "url-limited", evidence };
+  }
   if (statusExt !== undefined && EXHAUSTIONS.has(statusExt)) {
     return { kind: "exhausted", evidence };
   }
