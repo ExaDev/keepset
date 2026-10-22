@@ -23,7 +23,7 @@ export type { DigestPort, Download, DownloadProvenance, FetchedDataset, FetchOpt
 export { downloadUrl } from "../fetch";
 export { captureRequestsFor } from "../resolve";
 export { RecipeError, UnreachableSourceError } from "../errors";
-export { downloadRaw, type DownloadInit, STALL_MILLISECONDS, DOWNLOAD_ATTEMPTS, RETRY_DELAY_MILLISECONDS } from "./download";
+export { downloadRaw, type DownloadInit, STALL_MILLISECONDS } from "./download";
 
 export type BrowserFetchOptions = Omit<FetchOptions, "fetch" | "digest"> & { readonly fetch?: FetchOptions["fetch"] };
 
