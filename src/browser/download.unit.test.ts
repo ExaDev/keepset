@@ -35,18 +35,13 @@ describe("the browser downloader", () => {
     expect(network.urls).toEqual(["https://x.example/file"]);
   });
 
-  it("tries again when the connection fails and keeps the platform's answer of the try that succeeds", async () => {
-    const network = standIn((_url, attempt) => {
-      if (attempt === 1) {
-        throw new TypeError("fetch failed");
-      }
-
-      return new Response("ok", { status: OK });
+  it("fails at once when the connection fails, with the platform's own error, since a refused read and a dropped connection look alike and a retry cannot help", async () => {
+    const network = standIn(() => {
+      throw new TypeError("fetch failed");
     });
     vi.stubGlobal("fetch", network.fetch);
-    const response = await downloadRaw("https://x.example/file", { retryDelayMilliseconds: 1 });
-    expect(await response.text()).toBe("ok");
-    expect(network.urls.length).toBe(2);
+    await expect(downloadRaw("https://x.example/file", {})).rejects.toBeInstanceOf(TypeError);
+    expect(network.urls).toHaveLength(1);
   });
 
   it("refuses a URL that is not http or https without asking the platform", async () => {
@@ -65,6 +60,6 @@ describe("the browser downloader", () => {
       });
     });
     vi.stubGlobal("fetch", silent);
-    await expect(downloadRaw("https://x.example/file", { stallMilliseconds: 50, retryDelayMilliseconds: 1 })).rejects.toThrow("did not finish within 50 milliseconds");
+    await expect(downloadRaw("https://x.example/file", { stallMilliseconds: 50 })).rejects.toThrow("did not finish within 50 milliseconds");
   });
 });

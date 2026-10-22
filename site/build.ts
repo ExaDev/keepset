@@ -5,7 +5,7 @@
 import { copyFileSync, mkdirSync, readFileSync, rmSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
-import { build } from "esbuild";
+import { build, type BuildOptions } from "esbuild";
 import { vanillaExtractPlugin } from "@vanilla-extract/esbuild-plugin";
 import { getManifest, listDatasets, listNamespaces } from "keepset";
 import { buildSite } from "./build-site";
@@ -27,22 +27,22 @@ rmSync(outDir, { recursive: true, force: true });
 mkdirSync(outDir, { recursive: true });
 const files = buildSite({ catalogue: { manifest: getManifest(), listDatasets, listNamespaces }, packageVersion: packageJson.version, siteUrl: SITE_URL, outDir });
 copyFileSync(join(here, "static", "icon.svg"), join(outDir, "icon.svg"));
+/** What both bundles share: the browser target, the minified output and the vanilla-extract plugin. */
+const common: BuildOptions = { outdir: outDir, bundle: true, format: "esm", platform: "browser", jsx: "automatic", minify: true, outExtension: { ".js": ".js" }, plugins: [vanillaExtractPlugin()] };
+
 await build({
-  entryPoints: { app: join(here, "client/app.tsx"), fetchWorker: join(here, "client/fetch-worker.ts"), sw: join(here, "client/sw.ts") },
-  outdir: outDir,
-  bundle: true,
-  format: "esm",
-  platform: "browser",
-  jsx: "automatic",
-  minify: true,
+  ...common,
+  entryPoints: { app: join(here, "client/app.tsx"), fetchWorker: join(here, "client/fetch-worker.ts") },
   splitting: true,
-  outExtension: { ".js": ".js" },
-  plugins: [vanillaExtractPlugin()],
+  // The stream packages in the preview worker read Node's `process`, which a browser lacks; see the shim.
+  inject: [join(here, "process-shim.ts")],
   // unbzip2-stream, the bzip2 reader the archive layer shares with Node, requires Node's `stream`; readable-stream is the same interface as a package, so the preview worker can read a bzip2 archive in a browser.
   alias: { stream: "readable-stream" },
   // Leaflet's stylesheet names its control icons as PNGs; the preview draws circle markers and no controls that use them, so they are inlined rather than shipped as separate files.
   loader: { ".svg": "dataurl", ".png": "dataurl" },
 });
+// The service worker is registered as a classic script, so it is a bundle of its own: no shared chunks to import, and nothing injected.
+await build({ ...common, entryPoints: { sw: join(here, "client/sw.ts") } });
 // After the bundle, so the digest the service worker's cache is named for covers app.js and app.css too.
 finalisePrecache(outDir);
 console.log(`Wrote ${String(files.size)} generated files and the client bundle to site-dist/`);
