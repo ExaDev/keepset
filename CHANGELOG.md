@@ -1,3 +1,10 @@
+## [0.51.3](https://github.com/Mearman/keepset/compare/v0.51.2...v0.51.3) (2026-10-22)
+
+
+### Bug Fixes
+
+* **archive:** pace the checksum pass at a read every thirty seconds ([b37a14c](https://github.com/Mearman/keepset/commit/b37a14c98581d4aee48df816e3c4a4795eb690a2))
+
 ## [0.51.2](https://github.com/Mearman/keepset/compare/v0.51.1...v0.51.2) (2026-10-22)
 
 ## [0.51.1](https://github.com/Mearman/keepset/compare/v0.51.0...v0.51.1) (2026-10-22)
