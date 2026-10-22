@@ -44,6 +44,12 @@ describe("differences", () => {
     expect(differences({ status: 206, url: RAW, headers: new Headers({ "content-type": "text/csv", "content-encoding": "gzip" }), bytes: new Uint8Array() }, { status: 206, url: U, headers: new Headers({ "content-type": "text/csv" }), bytes: new Uint8Array() })).toEqual([]);
   });
 
+  it("does not hold an HTML page to the source's stated length, since a page's length moves with its dynamic parts", () => {
+    const html = { "content-type": "text/html; charset=utf-8" };
+    expect(both("<p>x</p>", "<p>x</p>", { replay: { ...html, "content-length": "17768" }, live: { ...html, "content-length": "17758" } })).toEqual([]);
+    expect(both("<p>x</p>", "<p>y</p>", { replay: html, live: html })).toEqual(["the first bytes differ"]);
+  });
+
   it("names a different media type, a different stated length and different first bytes", () => {
     expect(both("a,b\n", "a,b\n", { replay: { "content-type": "text/html" } })).toEqual(["the capture is text/html and the source is text/csv"]);
     expect(both("a,b\n", "a,b\n", { replay: { "content-range": "bytes 0-1023/12" }, live: { "content-range": "bytes 0-1023/13" } })).toEqual(["the capture is 12 bytes and the source 13"]);

@@ -130,6 +130,9 @@ export function isWaybackPage(head: Pick<Head, "bytes" | "headers">): boolean {
   return !head.headers.has("memento-datetime") || head.headers.has("x-archive-wayback-runtime-error") || prefix.includes(WAYBACK_PAGE_TITLE);
 }
 
+/** The media type of a page. */
+const HTML = "text/html";
+
 /** The media type of a `Content-Type`, without its parameters. */
 function mediaType(headers: Headers): string | undefined {
   return headers.get("content-type")?.split(";")[0]?.trim().toLowerCase();
@@ -155,7 +158,8 @@ export function differences(replay: Head, live: Head): string[] {
   }
   const replayLength = statedLength(replay);
   const liveLength = statedLength(live);
-  if (replayLength !== undefined && liveLength !== undefined && replayLength !== liveLength) {
+  // A page's length moves with its dynamic parts (a "last checked" date, a session token), so for HTML only the type and the first bytes are held to the source.
+  if (replayType !== HTML && replayLength !== undefined && liveLength !== undefined && replayLength !== liveLength) {
     found.push(`the capture is ${String(replayLength)} bytes and the source ${String(liveLength)}`);
   }
   const shared = Math.min(replayBytes.length, liveBytes.length);
