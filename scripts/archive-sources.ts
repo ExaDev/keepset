@@ -28,10 +28,13 @@ import { HTTP_STATUS } from "./sources/http-status";
 import { Pacer, systemClock } from "./sources/pacing";
 import { DEFAULT_POLITENESS, PoliteClient } from "./sources/polite-client";
 import { pinKey, verifyPins } from "./sources/verify-pins";
-import { ANONYMOUS_LIMITS, AUTHENTICATED_LIMITS, MAX_CAPTURE_WAIT_MILLISECONDS, saveAnonymously, saveAuthenticated, WAYBACK_HOST_INTERVAL_MILLISECONDS, WAYBACK_HOST_INTERVALS } from "./sources/wayback";
+import { ANONYMOUS_LIMITS, AUTHENTICATED_LIMITS, MAX_CAPTURE_WAIT_MILLISECONDS, saveAnonymously, saveAuthenticated, WAYBACK_HOST_INTERVALS } from "./sources/wayback";
 
 /** How many URLs the archiver settles at once: enough that one URL waiting out a capture's indexing or a verification backoff does not leave the capture rate and the Wayback hosts' pacing idle, and few enough that they remain what bounds the requests (six workers, each polling its capture, got the machine's connection to the Wayback Machine refused). */
 const ARCHIVE_CONCURRENCY = 3;
+
+/** How long the checksum pass waits between two reads of the Wayback Machine's hosts. The pass downloads each snapshot whole (a checksum is over all its bytes), so unlike the archiver's byte-prefix reads it moves real bytes every request, and a request every five seconds got the machine's connection refused; whole-file downloads also make the true spacing larger than this floor. */
+const CHECKSUM_HOST_INTERVAL_MILLISECONDS = 30_000;
 
 const repoRoot = join(dirname(fileURLToPath(import.meta.url)), "..");
 
@@ -95,7 +98,7 @@ if (values.check === true) {
     const pacer = new Pacer(systemClock);
     const read = async (url: string, timestamp: string): Promise<Read> => {
       const snapshotUrl = rawSnapshotUrl(timestamp, url);
-      await pacer.wait(new URL(snapshotUrl).host, WAYBACK_HOST_INTERVAL_MILLISECONDS);
+      await pacer.wait(new URL(snapshotUrl).host, CHECKSUM_HOST_INTERVAL_MILLISECONDS);
       try {
         const response = await downloadRaw(snapshotUrl, {});
         if (response.status === HTTP_STATUS.tooManyRequests || response.status >= HTTP_STATUS.internalServerError) {
