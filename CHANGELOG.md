@@ -1,3 +1,15 @@
+# [0.50.0](https://github.com/Mearman/keepset/compare/v0.49.6...v0.50.0) (2026-10-22)
+
+
+### Bug Fixes
+
+* **site:** make the preview worker start and offer the file drop without waiting out retries ([ffd2bd1](https://github.com/Mearman/keepset/commit/ffd2bd10b1591c7bbdb3279257c9d623bc271a30))
+
+
+### Features
+
+* **site:** load the map and the preview on demand and render only visible listing rows ([062bde2](https://github.com/Mearman/keepset/commit/062bde2b09e7a33ce1d073596362ff3dad4eb890))
+
 ## [0.49.6](https://github.com/Mearman/keepset/compare/v0.49.5...v0.49.6) (2026-10-22)
 
 
