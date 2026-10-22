@@ -260,9 +260,34 @@ jobs:
           EOF
           node check.mjs
 
+  # The built site in a real browser (the preview, the listing and the lazy chunks), with every request to another origin answered by the tests, so no real host is involved. This is where a missing Node global in the bundle, a retry that delays the file drop or a service worker that fails to evaluate shows up: none of them is visible to the unit tests.
+  browser:
+    name: Browser
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: pnpm/action-setup@ea17c68df8912ef543352723c149a84f56e3d413 # v6.1.0
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: '22'
+          cache: pnpm
+      - uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: ~/.cache/ms-playwright
+          # The browser build is named for the Playwright version, which the lockfile pins.
+          key: playwright-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm build
+      - run: pnpm site
+      - run: pnpm exec playwright install --with-deps chromium
+      - run: pnpm exec playwright test
+
   release:
     name: Release
-    needs: [commitlint, lint, typecheck, package]
+    needs: [commitlint, lint, typecheck, package, browser]
     if: github.ref == 'refs/heads/main' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
     # Deliberately a GitHub-hosted runner, not the resolved one: npm trusted publishing only works from GitHub-hosted runners, so the OIDC token exchange cannot happen on the self-hosted fleet.
     runs-on: ubuntu-latest
@@ -303,7 +328,7 @@ jobs:
 
   required-checks:
     name: Required Checks
-    needs: [commitlint, lint, typecheck, package, actionlint, zizmor, release]
+    needs: [commitlint, lint, typecheck, package, browser, actionlint, zizmor, release]
     # Always runs, even if a dependency failed, so it reports that failure itself rather than being skipped: a required check that is silently absent blocks a PR indefinitely instead of failing it visibly.
     if: always()
     runs-on: ubuntu-latest

@@ -8,7 +8,7 @@
 
 ## Before opening a PR
 
-`pnpm run prepublishOnly` runs the gate CI enforces: lint, build, typecheck, tests, `publint` and `attw --pack --profile esm-only`. Build before lint's type-aware pass and typecheck: both read the built `dist` and the generated schema. CI also packs the tarball and installs it into a clean project on each supported Node line, runs the CLI from it and builds the site, which is the check that the exports map and the bin work for a consumer.
+`pnpm run prepublishOnly` runs the gate CI enforces: lint, build, typecheck, tests, `publint` and `attw --pack --profile esm-only`. Build before lint's type-aware pass and typecheck: both read the built `dist` and the generated schema. CI also packs the tarball and installs it into a clean project on each supported Node line, runs the CLI from it and builds the site, which is the check that the exports map and the bin work for a consumer. A Browser job runs the built site in Chromium (`pnpm run test:e2e`, with Playwright's browser installed once by `pnpm exec playwright install chromium`), answering every request to another origin from the test itself, so the preview, the listing and the lazy chunks are checked where a missing Node global or a blocked cross-origin read would show.
 
 ## Adding an entry
 
