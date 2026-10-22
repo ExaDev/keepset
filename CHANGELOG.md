@@ -1,3 +1,10 @@
+## [0.49.5](https://github.com/Mearman/keepset/compare/v0.49.4...v0.49.5) (2026-10-22)
+
+
+### Bug Fixes
+
+* **archive:** do not hold an HTML page to the source's stated length ([b1151e3](https://github.com/Mearman/keepset/commit/b1151e33fe9068a547f02d5812dde4e081b44527))
+
 ## [0.49.4](https://github.com/Mearman/keepset/compare/v0.49.3...v0.49.4) (2026-10-22)
 
 
