@@ -21,6 +21,8 @@ interface World {
   readonly perDay?: number;
   /** What the capture index says per URL: a timestamp, or none. */
   readonly available?: Readonly<Record<string, string>>;
+  /** A status the capture index answers every lookup with, when a test needs the service itself to be in trouble. */
+  readonly indexStatus?: number;
   /** What the host answers per URL for HEAD and GET: a status, a length and a media type. */
   readonly hosts?: Readonly<Record<string, { status: number; length?: number; finalUrl?: string; type?: string } | "unreachable">>;
   /** What the raw `id_` replay of a capture timestamp answers: a status, a landing timestamp it answers from, a media type, or unreachable. A timestamp not named answers as a good replay of the live source. */
@@ -36,6 +38,9 @@ function run(urls: readonly string[], world: World, overrides: Partial<ArchiveRe
   const network = scriptedNetwork((request) => {
     seen.push(request);
     if (request.url.startsWith("https://web.archive.org/cdx/search/cdx")) {
+      if (world.indexStatus !== undefined) {
+        return new Response("busy", { status: world.indexStatus });
+      }
       const url = new URL(request.url).searchParams.get("url") ?? "";
       const timestamp = world.available?.[url];
 
@@ -351,12 +356,20 @@ describe("archiveSources", () => {
     expect(trial.captured).toEqual([A]);
   });
 
-  it("stops after too many URLs in a row stay unresolved", async () => {
+  it("stops after too many URLs in a row stay unresolved because the Wayback Machine is busy", async () => {
     const urls = Array.from({ length: MAX_CONSECUTIVE_UNRESOLVED + 2 }, (_, index) => `https://example.org/u${String(index)}`);
-    const trial = run(urls, { hosts: Object.fromEntries(urls.map((url) => [url, { status: 429 }])) });
+    const trial = run(urls, { indexStatus: HTTP_STATUS.tooManyRequests });
     const outcome = await trial.result;
     expect(outcome.unresolved).toHaveLength(MAX_CONSECUTIVE_UNRESOLVED);
     expect(outcome.stopped).toMatch(/in a row/);
+  });
+
+  it("goes on past URLs whose own host is in trouble, since that says nothing about the next URL", async () => {
+    const urls = Array.from({ length: MAX_CONSECUTIVE_UNRESOLVED + 2 }, (_, index) => `https://example.org/u${String(index)}`);
+    const trial = run(urls, { hosts: Object.fromEntries(urls.map((url) => [url, { status: HTTP_STATUS.tooManyRequests }])) });
+    const outcome = await trial.result;
+    expect(outcome.unresolved).toEqual(urls);
+    expect(outcome.stopped).toBeUndefined();
   });
 
   it("skips URLs the report already excepts, unless asked to look again", async () => {
