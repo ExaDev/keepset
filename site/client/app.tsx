@@ -39,14 +39,11 @@ const features = tableFeatures({ rowSortingFeature, sortedRowModel: createSorted
 
 type ListingFeatures = typeof features;
 
-/** The count bounds the listing filters by: a minimum and a maximum for nodes and for edges. */
-type BoundKey = "minNodes" | "maxNodes" | "minEdges" | "maxEdges";
-
-/** The ranges the listing filters by, each a labelled pair of inputs so the pair reads as one filter and takes one row of the controls. */
-const RANGES: readonly { readonly label: string; readonly min: BoundKey; readonly max: BoundKey }[] = [
-  { label: "Nodes", min: "minNodes", max: "maxNodes" },
-  { label: "Edges", min: "minEdges", max: "maxEdges" },
-];
+/** The bounds the entities filter sets on an entry's entity total (the sum its Entities column sorts by), each unset until the visitor types one. */
+interface EntityBounds {
+  readonly min: number | undefined;
+  readonly max: number | undefined;
+}
 
 /**
  * Whether a recorded count lies inside the bounds set on it. A count the entry does not record is inside no bound, so setting one hides the entries that cannot answer it.
@@ -74,7 +71,7 @@ function Listing({ records }: { readonly records: readonly SearchRecord[] }): Re
   const [text, setText] = useState("");
   const [kind, setKind] = useState<string | null>(null);
   const [domain, setDomain] = useState<string | null>(null);
-  const [bounds, setBounds] = useState<Readonly<Record<BoundKey, number | undefined>>>({ minNodes: undefined, maxNodes: undefined, minEdges: undefined, maxEdges: undefined });
+  const [bounds, setBounds] = useState<EntityBounds>({ min: undefined, max: undefined });
 
   const kinds = useMemo(() => [...new Set(records.map((record) => record.kind))].sort(), [records]);
   const domains = useMemo(() => [...new Set(records.flatMap((record) => (record.domain === undefined ? [] : [record.domain])))].sort(), [records]);
@@ -89,7 +86,7 @@ function Listing({ records }: { readonly records: readonly SearchRecord[] }): Re
       if (domain !== null && record.domain !== domain) {
         return false;
       }
-      if (!within(record.nodes, bounds.minNodes, bounds.maxNodes) || !within(record.edges, bounds.minEdges, bounds.maxEdges)) {
+      if (!within(entityTotal(record), bounds.min, bounds.max)) {
         return false;
       }
       if (needle === "") {
@@ -107,7 +104,6 @@ function Listing({ records }: { readonly records: readonly SearchRecord[] }): Re
     { accessorKey: "id", header: "Id", cell: (info) => <code>{info.row.original.id}</code> },
     { accessorKey: "kind", header: "Kind" },
     { accessorKey: "domain", header: "Domain" },
-    // An unrecorded count sorts after every recorded one, whichever way the column is sorted.
     /* Sorts by the sum of the recorded counts and shows each with its noun; an entry with no count sorts after every other, whichever way the column is sorted. */
     { id: "entities", accessorFn: (row) => entityTotal(row), header: "Entities", sortUndefined: "last", cell: (info) => entitiesText(info.row.original) },
     { id: "size", accessorFn: (row) => row.bytes, header: "Size", sortUndefined: "last", cell: (info) => formatBytes(info.row.original.bytes) },
@@ -136,14 +132,12 @@ function Listing({ records }: { readonly records: readonly SearchRecord[] }): Re
         <TextInput className="island-search" aria-label="Search the catalogue" placeholder="search the catalogue" value={text} onChange={(event) => { setText(event.currentTarget.value); }} />
         <Select className="island-filter" aria-label="Kind" placeholder="kind" data={kinds} value={kind} onChange={(value) => { setKind(value); }} clearable searchable />
         <Select className="island-filter" aria-label="Domain" placeholder="domain" data={domains} value={domain} onChange={(value) => { setDomain(value); }} clearable searchable />
-        {RANGES.map(({ label, min, max }) => (
-          <div key={label} className="island-range" role="group" aria-label={label}>
-            <span className="island-range-label" aria-hidden="true">{label}</span>
-            {([[min, "Minimum", "min"], [max, "Maximum", "max"]] as const).map(([key, word, placeholder]) => (
-              <NumberInput key={key} className="island-bound" aria-label={`${word} ${label.toLowerCase()}`} placeholder={placeholder} min={0} allowNegative={false} allowDecimal={false} value={bounds[key] ?? ""} onChange={(value) => { setBounds((current) => ({ ...current, [key]: typeof value === "number" ? value : undefined })); }} />
-            ))}
-          </div>
-        ))}
+        <div className="island-range" role="group" aria-label="Entities">
+          <span className="island-range-label" aria-hidden="true">Entities</span>
+          {(["min", "max"] as const).map((key) => (
+            <NumberInput key={key} className="island-bound" aria-label={`${key === "min" ? "Minimum" : "Maximum"} entities`} placeholder={key} min={0} allowNegative={false} allowDecimal={false} value={bounds[key] ?? ""} onChange={(value) => { setBounds((current) => ({ ...current, [key]: typeof value === "number" ? value : undefined })); }} />
+          ))}
+        </div>
         <Badge variant="light" size="lg">
           {String(filtered.length)} of {String(records.length)}
         </Badge>

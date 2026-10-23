@@ -74,19 +74,19 @@ test("no count or size in the listing is cut off, at any width the table fits", 
   expect(cut).toEqual([]);
 });
 
-test("a minimum edge count filters the listing and the count says how many remain", async ({ page }) => {
+test("a minimum entity count filters the listing and the count says how many remain", async ({ page }) => {
   await page.goto("/");
   const badge = page.locator("#island-root .mantine-Badge-root");
   await expect(badge).toBeVisible();
   const [, total] = ((await badge.textContent()) ?? "").split(" of ");
-  await page.getByLabel("Minimum edges").fill("1000000");
+  await page.getByLabel("Minimum entities").fill("1000000");
   await expect(badge).not.toHaveText(new RegExp(`^${String(total)} of`));
   expect(Number(((await badge.textContent()) ?? "").split(" of ")[0])).toBeGreaterThan(0);
 });
 
 test("every filter has an accessible name and a column sorts from the keyboard", async ({ page }) => {
   await page.goto("/");
-  const names = ["Search the catalogue", "Kind", "Domain", "Minimum nodes", "Maximum nodes", "Minimum edges", "Maximum edges"];
+  const names = ["Search the catalogue", "Kind", "Domain", "Minimum entities", "Maximum entities"];
   await Promise.all(names.map(async (name) => expect(page.getByLabel(name, { exact: true }).first()).toBeVisible()));
   const entities = page.locator("#island-root thead th", { hasText: "Entities" });
   await expect(entities).toHaveAttribute("aria-sort", "none");

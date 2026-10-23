@@ -401,7 +401,7 @@ globalStyle(".island-controls", {
   margin: "1rem 0",
 });
 
-/* Each range is a labelled pair of inputs that stays on one row, so the four count bounds take two rows rather than four. */
+/* The range is a labelled pair of inputs that stays on one row. */
 globalStyle(".island-controls .island-range", {
   display: "flex",
   alignItems: "center",
@@ -411,7 +411,7 @@ globalStyle(".island-controls .island-range", {
 globalStyle(".island-controls .island-range-label", {
   color: "var(--muted)",
   fontSize: "var(--mantine-font-size-sm, 0.875rem)",
-  minWidth: "3.25rem",
+  minWidth: "3.75rem",
 });
 globalStyle(".island-controls .island-bound", {
   flex: "1 1 0",
