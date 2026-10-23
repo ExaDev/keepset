@@ -1,3 +1,10 @@
+# [0.52.0](https://github.com/Mearman/keepset/compare/v0.51.4...v0.52.0) (2026-10-23)
+
+
+### Features
+
+* **site:** link a pinned snapshot with and without the archive banner, each with a copy icon ([abaa6e9](https://github.com/Mearman/keepset/commit/abaa6e9fa545f2559e256de689c4c10f74add1e7))
+
 ## [0.51.4](https://github.com/Mearman/keepset/compare/v0.51.3...v0.51.4) (2026-10-22)
 
 
