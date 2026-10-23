@@ -1,3 +1,10 @@
+# [0.55.0](https://github.com/Mearman/keepset/compare/v0.54.0...v0.55.0) (2026-10-23)
+
+
+### Features
+
+* **site:** filter the listing by one entities range in place of node and edge ranges ([2a082ab](https://github.com/Mearman/keepset/commit/2a082ab8a95b1fbf9ddf57095ff887ba9334f258))
+
 # [0.54.0](https://github.com/Mearman/keepset/compare/v0.53.0...v0.54.0) (2026-10-23)
 
 
