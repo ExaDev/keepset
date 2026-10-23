@@ -1,6 +1,7 @@
 /* The site's whole stylesheet, as a vanilla-extract module: a theme contract of colour tokens with a dark-mode override, then one globalStyle rule per element selector the generator's HTML uses. The generator emits plain semantic HTML with no class names of its own, so global styling is the whole surface and nothing has to thread generated class names into the page templates. The module is imported for its side effects by the client entry, so its CSS is compiled into the emitted stylesheet at build time and nothing runs in the browser. */
 
 import { globalStyle } from "@vanilla-extract/css";
+import { LISTING_FLOOR_WIDTH } from "./listing-columns";
 
 /* The colour tokens are written as real custom properties rather than a createGlobalTheme contract: the contract form emits hashed internal names, and the rules below reference var(--border) and friends literally, which then only resolve where a rule happens to define the plain name. Light is the default; the dark override follows the media query rather than a toggle, matching MantineProvider's defaultColorScheme "auto" so the island and the static page never disagree. The border and stripe tokens are Mantine's table colours (gray-3/gray-0 light, dark-4/dark-6 dark) so a static table and the island's Mantine table beside each other read as one system. */
 globalStyle(":root", {
@@ -53,6 +54,11 @@ globalStyle("body", {
   padding: "0 1rem",
   background: "var(--bg)",
   color: "var(--fg)",
+});
+
+/* A page with a listing is a wide table, not prose, so it takes more of a large screen than the 72rem measure the prose pages keep; the description above it has its own measure. */
+globalStyle("body:has(.table-wrap.listing)", {
+  maxWidth: "100rem",
 });
 
 globalStyle("a", {
@@ -156,7 +162,7 @@ globalStyle(".listing thead th", {
   },
 });
 
-/* Every listing row stays on one line: a fixed layout gives each column a set share of the width, and text that does not fit is cut with an ellipsis instead of wrapping (the full value is each cell's title and the entry page's own). The static table and the island's Mantine table share the wrapper's classes, so both get this. */
+/* Every listing row stays on one line: a fixed layout gives each column a set width, and text that does not fit is cut with an ellipsis instead of wrapping (the full value is each cell's title and the entry page's own). The static table and the island's Mantine table share the wrapper's classes, so both get this. */
 globalStyle(".table-wrap.listing table", {
   tableLayout: "fixed",
 });
@@ -168,10 +174,16 @@ globalStyle(".table-wrap.listing th, .table-wrap.listing td", {
   overflowWrap: "normal",
 });
 
-/* Column shares of the width as percentages, in column order; the last column is Recipe on the static table and Tags in the island. The name and id carry the long text in the catalogue, the kind is a short word, the four dimension columns hold a number each, and the shares sum to the whole width. */
-const LISTING_COLUMN_SHARES = { name: 22, id: 20, kind: 7, domain: 13, nodes: 7, edges: 7, instances: 7, size: 7, last: 10 };
-Object.values(LISTING_COLUMN_SHARES).forEach((share, index) => {
-  globalStyle(`.table-wrap.listing th:nth-child(${String(index + 1)})`, { width: `${String(share)}%` });
+/* The wrapper is the container the column widths' container query unit refers to (see listing-columns.ts). */
+globalStyle(".table-wrap.listing", {
+  containerType: "inline-size",
+});
+
+/* The content columns hold short values sized to fit, so they are never cut; digits are tabular so equal-length counts line up. */
+globalStyle(".table-wrap.listing td:nth-child(3), .table-wrap.listing td:nth-child(n+5):nth-child(-n+8)", {
+  overflow: "visible",
+  textOverflow: "clip",
+  fontVariantNumeric: "tabular-nums",
 });
 
 /* The dimension columns (the fifth to the eighth) hold numbers, which read right-aligned. */
@@ -181,7 +193,7 @@ globalStyle(".table-wrap.listing th:nth-child(n+5):nth-child(-n+8), .table-wrap.
 globalStyle(".table-wrap.listing table", {
   "@media": {
     "(max-width: 47.99em)": {
-      minWidth: "64rem",
+      minWidth: LISTING_FLOOR_WIDTH,
     },
   },
 });

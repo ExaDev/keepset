@@ -62,6 +62,18 @@ test("the listing renders only the rows near the viewport and reaches the last o
   await expect(rows.last()).toHaveAttribute("data-index", String(total - 1));
 });
 
+test("no count or size in the listing is cut off, at any width the table fits", async ({ page }) => {
+  await page.goto("/");
+  await expect(page.locator("#island-root.island-live")).toBeVisible();
+  const cut = await page.evaluate(() => {
+    const content = new Set(["Kind", "Nodes", "Edges", "Instances", "Size"]);
+    const headers = [...document.querySelectorAll("#island-root .table-wrap.listing thead th")].map((header) => header.textContent.trim());
+
+    return [...document.querySelectorAll<HTMLTableCellElement>("#island-root .table-wrap.listing tbody tr:not([aria-hidden]) td")].filter((cell) => content.has(headers[cell.cellIndex] ?? "") && cell.scrollWidth > cell.clientWidth).map((cell) => cell.textContent);
+  });
+  expect(cut).toEqual([]);
+});
+
 test("a minimum edge count filters the listing and the count says how many remain", async ({ page }) => {
   await page.goto("/");
   const badge = page.locator("#island-root .mantine-Badge-root");

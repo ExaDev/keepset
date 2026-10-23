@@ -5,6 +5,7 @@ import { Fragment, type ReactNode } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { groupsOf, NAME_SEPARATOR, rawSnapshotUrl, type Archive, type ArchiveMember, type Dataset, type Manifest, type NamespaceNode, type Parser } from "keepset";
 import { dimensionsOf, formatBytes, formatCount } from "./dimensions";
+import { listingColumnWidths } from "./listing-columns";
 import { scriptJson, slug } from "./html";
 import { datasetJsonLd, describe } from "./jsonld";
 
@@ -40,8 +41,11 @@ function Row({ dataset, root }: { readonly dataset: Dataset; readonly root: stri
 
 /** A table listing datasets, inside the wrapper that scrolls it sideways on narrow screens; the class pairs with the stylesheet's sticky desktop header. */
 function Listing({ datasets, root }: { readonly datasets: readonly Dataset[]; readonly root: string }): ReactNode {
+  const widths = listingColumnWidths(datasets.map((dataset) => ({ kind: dataset.kind, ...dimensionsOf(dataset.entry) })));
+  const headers = ["Name", "Id", "Kind", "Domain", "Nodes", "Edges", "Instances", "Size", "Recipe"];
+
   return (
-    <div className="table-wrap listing"><table className="listing"><thead><tr><th scope="col">Name</th><th scope="col">Id</th><th scope="col">Kind</th><th scope="col">Domain</th><th scope="col">Nodes</th><th scope="col">Edges</th><th scope="col">Instances</th><th scope="col">Size</th><th scope="col">Recipe</th></tr></thead><tbody>{datasets.map((dataset) => <Row key={dataset.entry.id} dataset={dataset} root={root} />)}</tbody></table></div>
+    <div className="table-wrap listing"><table className="listing"><thead><tr>{headers.map((header, index) => <th key={header} scope="col" style={{ width: widths[index] }}>{header}</th>)}</tr></thead><tbody>{datasets.map((dataset) => <Row key={dataset.entry.id} dataset={dataset} root={root} />)}</tbody></table></div>
   );
 }
 
