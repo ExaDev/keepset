@@ -304,6 +304,71 @@ globalStyle(".snapshot-link", {
   gap: "0.125rem",
 });
 
+/* The link that skips the site header is off screen until the keyboard focuses it. */
+globalStyle(".skip-link", {
+  position: "absolute",
+  left: "-100vw",
+});
+globalStyle(".skip-link:focus", {
+  position: "static",
+  display: "inline-block",
+  padding: "0.5rem 0",
+});
+
+/* The trail above an entry's title: the listings it belongs to, each a link, separated by a mark the stylesheet draws so a screen reader reads a plain list. */
+globalStyle(".breadcrumb ol", {
+  display: "flex",
+  flexWrap: "wrap",
+  gap: "0.25rem",
+  margin: "1rem 0 0",
+  padding: 0,
+  listStyle: "none",
+  fontSize: "var(--mantine-font-size-sm, 0.875rem)",
+  color: "var(--muted)",
+});
+globalStyle(".breadcrumb li + li::before", {
+  content: '"/"',
+  marginRight: "0.25rem",
+});
+
+/* An entry's headline figures, each a large number over its label, in the units the listing uses. */
+globalStyle(".stats", {
+  display: "flex",
+  flexWrap: "wrap",
+  gap: "0.5rem 2rem",
+  margin: "1rem 0",
+});
+globalStyle(".stats div", {
+  display: "flex",
+  flexDirection: "column-reverse",
+});
+globalStyle(".stats dt", {
+  color: "var(--muted)",
+  fontSize: "var(--mantine-font-size-sm, 0.875rem)",
+});
+globalStyle(".stats dd", {
+  margin: 0,
+  fontSize: "1.5rem",
+  fontWeight: 600,
+  fontVariantNumeric: "tabular-nums",
+});
+
+/* The provenance and crosswalk tables hold long URLs and paths, so below desktop width they keep a floor width and scroll sideways inside their wrapper rather than squeezing each column to a few characters; the URL column keeps room to read. */
+globalStyle("table.provenance, table.crosswalk", {
+  "@media": {
+    "(max-width: 47.99em)": {
+      minWidth: "44rem",
+    },
+  },
+});
+globalStyle("table.provenance td:nth-child(2)", {
+  "@media": {
+    "(max-width: 47.99em)": {
+      minWidth: "16rem",
+    },
+  },
+});
+
 globalStyle(".warning", {
   borderLeft: "3px solid #b35900",
   paddingLeft: "0.75rem",

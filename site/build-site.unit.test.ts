@@ -105,6 +105,22 @@ describe("buildSite on a fixture catalogue", () => {
     expect(page(files, "datasets/auth-walled/index.html")).toContain("This entry has no fetchable recipe yet: the source requires an account to download");
   });
 
+  it("leads an entry page with its trail and headline figures, and says which source the recipe reads", () => {
+    const karate = page(files, "datasets/karate/index.html");
+    expect(karate).toContain('<a class="skip-link" href="#main">Skip to content</a>');
+    expect(karate).toContain('<main id="main" tabindex="-1">');
+    expect(karate).toContain('<nav class="breadcrumb" aria-label="Breadcrumb"><ol><li><a href="../../">All datasets</a></li><li><a href="../../kinds/graph/">graph</a></li>');
+    expect(karate).toContain('<dl class="stats"><div><dt>Nodes</dt><dd>34</dd></div><div><dt>Edges</dt><dd>78</dd></div></dl>');
+    expect(karate).toMatch(/<th scope="col">Read by recipe<\/th>/);
+    expect(karate).toMatch(/<td>0<\/td><td><a href="[^"]*">[^<]*<\/a><\/td><td>live<\/td><td>[^<]*<\/td><td>yes<\/td>/);
+  });
+
+  it("writes an entry's properties and expected counts as labels and readable values", () => {
+    const karate = page(files, "datasets/karate/index.html");
+    expect(karate).toContain('<th scope="row">Nodes</th><td>34</td>');
+    expect(karate).not.toMatch(/<code>(true|false)<\/code>/);
+  });
+
   it("writes a search index whose ids are the catalogue's ids", () => {
     const index: unknown = JSON.parse(page(files, "search-index.json"));
     expect(Array.isArray(index) ? index.map((record: unknown) => (typeof record === "object" && record !== null && "id" in record ? record.id : undefined)) : []).toEqual(catalogue.listDatasets().map((dataset) => dataset.entry.id));
