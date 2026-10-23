@@ -248,6 +248,20 @@ globalStyle(".command code", {
   overflowWrap: "break-word",
 });
 
+/* A pinned snapshot's two links sit side by side in their cell, each followed by its copy icon, and wrap as whole links, never between a link and its icon. */
+globalStyle(".snapshot-links", {
+  display: "flex",
+  flexWrap: "wrap",
+  alignItems: "center",
+  columnGap: "0.75rem",
+});
+
+globalStyle(".snapshot-link", {
+  display: "inline-flex",
+  alignItems: "center",
+  gap: "0.125rem",
+});
+
 globalStyle(".warning", {
   borderLeft: "3px solid #b35900",
   paddingLeft: "0.75rem",

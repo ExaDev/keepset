@@ -1,4 +1,4 @@
-import type { Dataset } from "keepset";
+import { rawSnapshotUrl, type Dataset } from "keepset";
 
 /** A schema.org DataDownload: one place the dataset's bytes can be fetched from. */
 export interface DataDownload {
@@ -67,7 +67,7 @@ export function datasetJsonLd(dataset: Dataset, pageUrl: string, catalogueUrl: s
     isPartOf: { "@type": "DataCatalog", name: dataset.catalogue.id, url: catalogueUrl },
     distribution: entry.sources.map((source) =>
       source.status === "dead" && source.snapshot !== undefined
-        ? { "@type": "DataDownload", contentUrl: source.snapshot.url, archivedAt: source.snapshot.url, ...(source.snapshot.sha256 === undefined ? {} : { sha256: source.snapshot.sha256 }) }
+        ? { "@type": "DataDownload", contentUrl: rawSnapshotUrl(source.snapshot.timestamp, source.url), archivedAt: source.snapshot.url, ...(source.snapshot.sha256 === undefined ? {} : { sha256: source.snapshot.sha256 }) }
         : { "@type": "DataDownload", contentUrl: source.url, ...(source.snapshot === undefined ? {} : { archivedAt: source.snapshot.url }) },
     ),
   };

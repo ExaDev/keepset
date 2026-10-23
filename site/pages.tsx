@@ -3,7 +3,7 @@
 
 import { Fragment, type ReactNode } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
-import { groupsOf, NAME_SEPARATOR, type Archive, type ArchiveMember, type Dataset, type Manifest, type NamespaceNode, type Parser } from "keepset";
+import { groupsOf, NAME_SEPARATOR, rawSnapshotUrl, type Archive, type ArchiveMember, type Dataset, type Manifest, type NamespaceNode, type Parser } from "keepset";
 import { dimensionsOf, formatBytes, formatCount } from "./dimensions";
 import { scriptJson, slug } from "./html";
 import { datasetJsonLd, describe } from "./jsonld";
@@ -96,6 +96,16 @@ function Link({ url }: { readonly url: string }): ReactNode {
   return <a href={url}>{url}</a>;
 }
 
+/** A pinned snapshot's two links, each with a mount for its copy icon: the Wayback Machine page the timestamp names, which wraps the capture in the archive's banner, and the raw capture without it, which is the form a download or a script wants. */
+function SnapshotLinks({ timestamp, pageUrl, rawUrl }: { readonly timestamp: string; readonly pageUrl: string; readonly rawUrl: string }): ReactNode {
+  return (
+    <span className="snapshot-links">
+      <span className="snapshot-link"><a href={pageUrl} title="The Wayback Machine page, with the archive's banner">{timestamp}</a><span data-copy-text={pageUrl} data-copy-label="Copy the snapshot page link" data-copy-style="icon" /></span>
+      <span className="snapshot-link"><a href={rawUrl} title="The archived bytes as captured, without the archive's banner">raw</a><span data-copy-text={rawUrl} data-copy-label="Copy the raw snapshot link" data-copy-style="icon" /></span>
+    </span>
+  );
+}
+
 /** A namespace path written out with each segment linking to the page of the path up to it. */
 function GroupPath({ segments, root }: { readonly segments: readonly string[]; readonly root: string }): ReactNode {
   return (
@@ -161,7 +171,7 @@ export function entryPage(context: PageContext, dataset: Dataset): string {
   const sections: ReactNode[] = [
     <h1 key="name">{entry.name}</h1>,
     entry.description === undefined ? null : <p className="description" key="description">{entry.description}</p>,
-    <p className="command" key="command"><code>{command}</code> <span data-copy-command={command} /></p>,
+    <p className="command" key="command"><code>{command}</code> <span data-copy-text={command} /></p>,
     recipe.status === "fetchable" ? (
       <div className="preview" key="preview" data-preview-id={entry.id}>
         <p className="preview-note">Fetch and preview this dataset on this page, or download the result as JSON. The command line fetches it without a browser.</p>
@@ -183,7 +193,7 @@ export function entryPage(context: PageContext, dataset: Dataset): string {
       ["Catalogue", <Fragment key="catalogue"><code>{dataset.catalogue.id}</code> {dataset.catalogue.version}</Fragment>],
     ]} />,
     <h2 key="sources">Sources and provenance</h2>,
-    <div className="table-wrap" key="sources"><table className="sources"><thead><tr><th scope="col">#</th><th scope="col">URL</th><th scope="col">Status</th><th scope="col">Retrieved</th><th scope="col">Pinned snapshot</th><th scope="col">SHA-256</th></tr></thead><tbody>{entry.sources.map((source, index) => <tr key={String(index)}><td>{String(index)}</td><td><Link url={source.url} /></td><td>{source.status}</td><td>{source.retrieved}</td><td>{source.snapshot === undefined ? "" : <a href={source.snapshot.url}>{source.snapshot.timestamp}</a>}</td><td>{source.snapshot?.sha256 === undefined ? "" : <code title={`${source.snapshot.sha256}, ${String(source.snapshot.byteLength)} bytes`}>{source.snapshot.sha256.slice(0, HASH_SHOWN)}</code>}</td></tr>)}</tbody></table></div>,
+    <div className="table-wrap" key="sources"><table className="sources"><thead><tr><th scope="col">#</th><th scope="col">URL</th><th scope="col">Status</th><th scope="col">Retrieved</th><th scope="col">Pinned snapshot</th><th scope="col">SHA-256</th></tr></thead><tbody>{entry.sources.map((source, index) => <tr key={String(index)}><td>{String(index)}</td><td><Link url={source.url} /></td><td>{source.status}</td><td>{source.retrieved}</td><td>{source.snapshot === undefined ? "" : <SnapshotLinks timestamp={source.snapshot.timestamp} pageUrl={source.snapshot.url} rawUrl={rawSnapshotUrl(source.snapshot.timestamp, source.url)} />}</td><td>{source.snapshot?.sha256 === undefined ? "" : <code title={`${source.snapshot.sha256}, ${String(source.snapshot.byteLength)} bytes`}>{source.snapshot.sha256.slice(0, HASH_SHOWN)}</code>}</td></tr>)}</tbody></table></div>,
     entry.citations.length === 0 ? null : <h2 key="citations">Citations</h2>,
     entry.citations.length === 0 ? null : (
       <ul className="citations" key="citations-list">{entry.citations.map((cited, index) => (

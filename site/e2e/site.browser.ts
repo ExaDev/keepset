@@ -101,6 +101,21 @@ test("a source the page cannot read offers the file drop, and the dropped file p
   await expect(page.locator(".preview-meta")).toContainText("divorce");
 });
 
+test("a pinned snapshot's page link and raw link each copy their own URL", async ({ page, context }) => {
+  await context.grantPermissions(["clipboard-read", "clipboard-write"]);
+  await page.goto("/datasets/divorce/");
+  const pageLink = page.locator(".snapshot-link a").first();
+  const rawLink = page.locator(".snapshot-link a", { hasText: "raw" });
+  const pageUrl = await pageLink.getAttribute("href");
+  const rawUrl = await rawLink.getAttribute("href");
+  expect(rawUrl).toMatch(/^https:\/\/web\.archive\.org\/web\/\d+id_\//);
+  expect(pageUrl).toMatch(/^https:\/\/web\.archive\.org\/web\/\d+\//);
+  await page.getByRole("button", { name: "Copy the raw snapshot link" }).click();
+  expect(await page.evaluate(async () => navigator.clipboard.readText())).toBe(rawUrl);
+  await page.getByRole("button", { name: "Copy the snapshot page link" }).click();
+  expect(await page.evaluate(async () => navigator.clipboard.readText())).toBe(pageUrl);
+});
+
 test("a result of thousands of rows is browsable to its last row with only a window of it in the page", async ({ page }) => {
   await wayback(page);
   const rows = Array.from({ length: MANY_ROWS }, (_, index) => `${String(BUFFALO_LATITUDE + index / MANY_ROWS)},${String(BUFFALO_LONGITUDE + index / MANY_ROWS)},2026-01-01,Tow ${String(index)}`);

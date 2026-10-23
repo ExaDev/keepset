@@ -1,8 +1,8 @@
-/* The client island, now a React application: the whole script the site runs. On a page with a dataset listing it mounts a Mantine-controlled, TanStack-table view over the generated search index (the static table and form stay in the HTML as the no-JS baseline and are hidden once the island is live); on every page it turns each fetch command's mount into a Mantine copy button; everywhere it registers the service worker. Every page still works without it: listings are static, commands are plain text. */
+/* The client island, now a React application: the whole script the site runs. On a page with a dataset listing it mounts a Mantine-controlled, TanStack-table view over the generated search index (the static table and form stay in the HTML as the no-JS baseline and are hidden once the island is live); on every page it turns each copy mount (a fetch command, a snapshot link) into a Mantine copy control; everywhere it registers the service worker. Every page still works without it: listings are static, commands are plain text. */
 
 import { useLayoutEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { createRoot } from "react-dom/client";
-import { Badge, Button, CopyButton, MantineProvider, NumberInput, Select, Table as MantineTable, TextInput, Tooltip } from "@mantine/core";
+import { ActionIcon, Badge, Button, CopyButton, MantineProvider, NumberInput, Select, Table as MantineTable, TextInput, Tooltip } from "@mantine/core";
 import "@mantine/core/styles.css";
 // Imported here and not by the map, because the stylesheet of a lazily loaded chunk is never linked to the page.
 import "leaflet/dist/leaflet.css";
@@ -197,15 +197,44 @@ function Listing({ records }: { readonly records: readonly SearchRecord[] }): Re
   );
 }
 
-/** One fetch command's copy affordance, rendered where the generator left a mount naming the command. */
-function CopyCommand({ command }: { readonly command: string }): ReactNode {
+/** How a copy mount is drawn: a labelled button, as for a fetch command, or a bare icon, as beside a link. */
+type CopyStyle = "button" | "icon";
+
+function isCopyStyle(value: string): value is CopyStyle {
+  return value === "button" || value === "icon";
+}
+
+/** The two-sheet copy glyph, or a tick once the text is on the clipboard. */
+function CopyGlyph({ copied }: { readonly copied: boolean }): ReactNode {
   return (
-    <CopyButton value={command} timeout={2000}>
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      {copied ? (
+        <path d="M5 12l5 5L20 7" />
+      ) : (
+        <>
+          <rect x="9" y="9" width="11" height="11" rx="2" />
+          <path d="M5 15V6a2 2 0 0 1 2-2h9" />
+        </>
+      )}
+    </svg>
+  );
+}
+
+/** One copy affordance, rendered where the generator left a mount naming the text to copy and how to draw it. */
+function CopyText({ text, label, style }: { readonly text: string; readonly label: string; readonly style: CopyStyle }): ReactNode {
+  return (
+    <CopyButton value={text} timeout={2000}>
       {({ copied, copy }) => (
-        <Tooltip label={copied ? "Copied" : "Copy"} withArrow>
-          <Button color={copied ? "teal" : "accent"} size="compact-xs" variant="light" onClick={copy}>
-            {copied ? "Copied" : "Copy"}
-          </Button>
+        <Tooltip label={copied ? "Copied" : label} withArrow>
+          {style === "icon" ? (
+            <ActionIcon aria-label={label} color={copied ? "teal" : "accent"} size="sm" variant="subtle" onClick={copy}>
+              <CopyGlyph copied={copied} />
+            </ActionIcon>
+          ) : (
+            <Button color={copied ? "teal" : "accent"} size="compact-xs" variant="light" onClick={copy}>
+              {copied ? "Copied" : "Copy"}
+            </Button>
+          )}
         </Tooltip>
       )}
     </CopyButton>
@@ -242,14 +271,17 @@ if (document.querySelector("[data-preview-id]") !== null) {
   });
 }
 
-for (const mount of document.querySelectorAll<HTMLElement>("[data-copy-command]")) {
-  const { copyCommand } = mount.dataset;
-  if (copyCommand === undefined) {
-    throw new Error("a copy mount has no command to copy");
+for (const mount of document.querySelectorAll<HTMLElement>("[data-copy-text]")) {
+  const { copyText, copyLabel = "Copy", copyStyle = "button" } = mount.dataset;
+  if (copyText === undefined) {
+    throw new Error("a copy mount has no text to copy");
+  }
+  if (!isCopyStyle(copyStyle)) {
+    throw new Error(`a copy mount asks for the unknown style ${copyStyle}`);
   }
   createRoot(mount).render(
     <MantineProvider defaultColorScheme="auto">
-      <CopyCommand command={copyCommand} />
+      <CopyText text={copyText} label={copyLabel} style={copyStyle} />
     </MantineProvider>,
   );
 }

@@ -92,14 +92,14 @@ describe("buildSite on a fixture catalogue", () => {
     expect(karate).toMatchObject({ name: "Zachary Karate Club", url: `${SITE_URL}datasets/karate/`, keywords: ["graph", "Social network", "network-science", "social-science", "social", "small"], citation: [expect.stringContaining("https://doi.org/10.1086/jar.33.4.3629752") as string] });
     const dead = DatasetJsonLdSchema.parse(jsonLdOf(page(files, "datasets/celegans-metabolic/index.html")));
     expect(dead.license).toBe("https://spdx.org/licenses/CC-BY-4.0.html");
-    expect(dead.distribution).toEqual([{ "@type": "DataDownload", contentUrl: "https://web.archive.org/web/20230601/http://example.edu/~lab/data/celegans_metabolic.zip", archivedAt: "https://web.archive.org/web/20230601/http://example.edu/~lab/data/celegans_metabolic.zip" }]);
+    expect(dead.distribution).toEqual([{ "@type": "DataDownload", contentUrl: "https://web.archive.org/web/20230601id_/http://example.edu/~lab/data/celegans_metabolic.zip", archivedAt: "https://web.archive.org/web/20230601/http://example.edu/~lab/data/celegans_metabolic.zip" }]);
     expect(dead.description).toBe("C. elegans metabolic network, a graph dataset in the fixture catalogue, normalised to graph/v1.");
   });
 
   it("links the exact fetch command and renders the recipe and crosswalk as tables", () => {
     const karate = page(files, "datasets/karate/index.html");
     expect(karate).toContain("<code>npx keepset fetch karate</code>");
-    expect(karate).toContain('<span data-copy-command="npx keepset fetch karate"></span>');
+    expect(karate).toContain('<span data-copy-text="npx keepset fetch karate"></span>');
     expect(karate).toContain("<tr><td>move</td><td><code>nodes[].id</code></td><td><code>nodes[].id</code></td><td>both</td></tr>");
     expect(karate).toContain('<th scope="row">Parser delimiter</th><td><code>&quot;whitespace&quot;</code></td>');
     expect(page(files, "datasets/auth-walled/index.html")).toContain("This entry has no fetchable recipe yet: the source requires an account to download");
@@ -126,6 +126,14 @@ describe("buildSite on a fixture catalogue", () => {
     expect(text).toContain('<th scope="col">SHA-256</th>');
     expect(text).toContain(`<code title="${sha256}, 4096 bytes">${sha256.slice(0, HASH_SHOWN)}</code>`);
     expect(DatasetJsonLdSchema.parse(jsonLdOf(text)).distribution[0]).toMatchObject({ sha256 });
+  });
+
+  it("links a pinned snapshot both as the Wayback page with its banner and as the raw capture, each with a copy mount", () => {
+    const text = page(files, `datasets/${deadEntry.id}/index.html`);
+    const pageUrl = "https://web.archive.org/web/20230601/http://example.edu/~lab/data/celegans_metabolic.zip";
+    const rawUrl = "https://web.archive.org/web/20230601id_/http://example.edu/~lab/data/celegans_metabolic.zip";
+    expect(text).toContain(`<a href="${pageUrl}" title="The Wayback Machine page, with the archive&#x27;s banner">20230601</a><span data-copy-text="${pageUrl}" data-copy-label="Copy the snapshot page link" data-copy-style="icon"></span>`);
+    expect(text).toContain(`<a href="${rawUrl}" title="The archived bytes as captured, without the archive&#x27;s banner">raw</a><span data-copy-text="${rawUrl}" data-copy-label="Copy the raw snapshot link" data-copy-style="icon"></span>`);
   });
 
   it("escapes catalogue text, so data never becomes markup", () => {
