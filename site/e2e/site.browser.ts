@@ -79,9 +79,23 @@ test("a minimum edge count filters the listing and the count says how many remai
   const badge = page.locator("#island-root .mantine-Badge-root");
   await expect(badge).toBeVisible();
   const [, total] = ((await badge.textContent()) ?? "").split(" of ");
-  await page.getByPlaceholder("min edges").fill("1000000");
+  await page.getByLabel("Minimum edges").fill("1000000");
   await expect(badge).not.toHaveText(new RegExp(`^${String(total)} of`));
   expect(Number(((await badge.textContent()) ?? "").split(" of ")[0])).toBeGreaterThan(0);
+});
+
+test("every filter has an accessible name and a column sorts from the keyboard", async ({ page }) => {
+  await page.goto("/");
+  const names = ["Search the catalogue", "Kind", "Domain", "Minimum nodes", "Maximum nodes", "Minimum edges", "Maximum edges"];
+  await Promise.all(names.map(async (name) => expect(page.getByLabel(name, { exact: true }).first()).toBeVisible()));
+  const nodes = page.locator("#island-root thead th", { hasText: "Nodes" });
+  await expect(nodes).toHaveAttribute("aria-sort", "none");
+  await nodes.getByRole("button").focus();
+  // A numeric column sorts largest first, then smallest first.
+  await page.keyboard.press("Enter");
+  await expect(nodes).toHaveAttribute("aria-sort", "descending");
+  await page.keyboard.press("Enter");
+  await expect(nodes).toHaveAttribute("aria-sort", "ascending");
 });
 
 test("the listing loads neither the preview nor the map, and an entry page loads the preview but not the map", async ({ page }) => {
