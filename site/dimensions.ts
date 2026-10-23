@@ -56,3 +56,38 @@ export function formatBytes(bytes: number | undefined): string {
 
   return `${(bytes / BYTES_PER_UNIT ** unit).toLocaleString("en-GB", { maximumFractionDigits: 1 })} ${UNITS[unit] ?? "B"}`;
 }
+
+/** The kinds of entity a dataset's recorded counts stand for, in the order they read, each with its singular and plural noun. A graph's entities are its nodes and edges, a collection's its instances. */
+const ENTITIES = [
+  { key: "nodes", singular: "node", plural: "nodes" },
+  { key: "edges", singular: "edge", plural: "edges" },
+  { key: "instances", singular: "instance", plural: "instances" },
+] as const;
+
+/**
+ * Writes the entities a dataset holds as each recorded count with its noun.
+ * @param dimensions - The recorded dimensions.
+ * @returns The text, such as "34 nodes, 78 edges"; empty where the entry records no count.
+ */
+export function entitiesText(dimensions: Dimensions): string {
+  return ENTITIES.flatMap(({ key, singular, plural }) => {
+    const count = dimensions[key];
+
+    return count === undefined ? [] : [`${formatCount(count)} ${count === 1 ? singular : plural}`];
+  }).join(", ");
+}
+
+/**
+ * The number of entities a dataset holds: the sum of its recorded counts, which is what the entities column sorts by.
+ * @param dimensions - The recorded dimensions.
+ * @returns The sum, or undefined where the entry records no count.
+ */
+export function entityTotal(dimensions: Dimensions): number | undefined {
+  const counts = ENTITIES.flatMap(({ key }) => {
+    const count = dimensions[key];
+
+    return count === undefined ? [] : [count];
+  });
+
+  return counts.length === 0 ? undefined : counts.reduce((total, count) => total + count, 0);
+}

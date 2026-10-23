@@ -130,8 +130,8 @@ describe("buildSite on a fixture catalogue", () => {
     const index: unknown = JSON.parse(page(files, "search-index.json"));
     expect(index).toContainEqual(expect.objectContaining({ id: "karate", nodes: 34, edges: 78 }));
     const listing = page(files, "kinds/graph/index.html");
-    expect(listing).toMatch(/<th scope="col" style="[^"]*">Nodes<\/th><th scope="col" style="[^"]*">Edges<\/th><th scope="col" style="[^"]*">Instances<\/th><th scope="col" style="[^"]*">Size<\/th>/);
-    expect(listing).toContain("<td>34</td><td>78</td>");
+    expect(listing).toMatch(/<th scope="col" style="[^"]*">Entities<\/th><th scope="col" style="[^"]*">Size<\/th>/);
+    expect(listing).toContain('<td title="34 nodes, 78 edges">34 nodes, 78 edges</td>');
   });
 
   it("shows a pinned snapshot's checksum in the sources table and the JSON-LD distribution", () => {

@@ -210,14 +210,14 @@ globalStyle(".table-wrap.listing", {
 });
 
 /* The content columns hold short values sized to fit, so they are never cut; digits are tabular so equal-length counts line up. */
-globalStyle(".table-wrap.listing td:nth-child(3), .table-wrap.listing td:nth-child(n+5):nth-child(-n+8)", {
+globalStyle(".table-wrap.listing td:nth-child(3), .table-wrap.listing td:nth-child(5), .table-wrap.listing td:nth-child(6)", {
   overflow: "visible",
   textOverflow: "clip",
   fontVariantNumeric: "tabular-nums",
 });
 
-/* The dimension columns (the fifth to the eighth) hold numbers, which read right-aligned. */
-globalStyle(".table-wrap.listing th:nth-child(n+5):nth-child(-n+8), .table-wrap.listing td:nth-child(n+5):nth-child(-n+8)", { textAlign: "right" });
+/* The size column (the sixth) holds a number with its unit, which reads right-aligned; the entities column (the fifth) is a phrase and reads left-aligned. */
+globalStyle(".table-wrap.listing th:nth-child(6), .table-wrap.listing td:nth-child(6)", { textAlign: "right" });
 
 /* Below desktop width the shares would leave columns too narrow to read, so the table keeps a floor width and the wrapper scrolls sideways instead. */
 globalStyle(".table-wrap.listing table", {

@@ -1,7 +1,7 @@
 import { parseEntry } from "keepset";
 import { describe, expect, it } from "vitest";
 import { liveEntry, taskCollectionEntry } from "../src/test-support/entries";
-import { dimensionsOf, formatBytes, formatCount } from "./dimensions";
+import { dimensionsOf, entitiesText, entityTotal, formatBytes, formatCount } from "./dimensions";
 
 const KARATE_NODES = 34;
 const KARATE_EDGES = 78;
@@ -38,5 +38,26 @@ describe("formatCount and formatBytes", () => {
     expect(formatBytes(HALF_KIBIBYTE)).toBe("512 B");
     expect(formatBytes(KIBIBYTE_AND_A_HALF)).toBe("1.5 KiB");
     expect(formatBytes(GIBIBYTE)).toBe("1 GiB");
+  });
+});
+
+describe("entitiesText and entityTotal", () => {
+  it("writes each recorded count with its noun and sums them", () => {
+    expect(entitiesText({ nodes: KARATE_NODES, edges: KARATE_EDGES })).toBe("34 nodes, 78 edges");
+    expect(entityTotal({ nodes: KARATE_NODES, edges: KARATE_EDGES })).toBe(KARATE_NODES + KARATE_EDGES);
+  });
+
+  it("uses the singular for a count of one and groups digits", () => {
+    expect(entitiesText({ instances: 1 })).toBe("1 instance");
+    expect(entitiesText({ nodes: MILLIONS })).toBe("1,234,567 nodes");
+  });
+
+  it("writes nothing, and no total, where no count is recorded", () => {
+    expect(entitiesText({ bytes: BYTES_IN_A_FILE })).toBe("");
+    expect(entityTotal({ bytes: BYTES_IN_A_FILE })).toBeUndefined();
+  });
+
+  it("counts a recorded zero as a count", () => {
+    expect(entityTotal({ nodes: 0 })).toBe(0);
   });
 });
