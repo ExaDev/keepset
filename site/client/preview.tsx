@@ -2,7 +2,7 @@
 
 import { lazy, Suspense, useEffect, useRef, useState, type ReactNode } from "react";
 import { createRoot } from "react-dom/client";
-import { Button, MantineProvider, SegmentedControl, Select } from "@mantine/core";
+import { Button, Loader, MantineProvider, SegmentedControl, Select } from "@mantine/core";
 import { DataTable } from "./data-table";
 import type { GeoPoint } from "./point-map";
 import { siteRoot } from "./site-root";
@@ -217,14 +217,14 @@ function Preview({ id }: { readonly id: string }): ReactNode {
 
   return (
     <div className="preview-controls">
-      {state === "working" ? <span>Fetching and running the recipe...</span> : <Button onClick={() => { ask(); }}>Fetch and preview</Button>}
+      {state === "working" ? <span className="preview-working" role="status"><Loader size="xs" /> Fetching and running the recipe...</span> : <Button onClick={() => { ask(); }}>Fetch and preview</Button>}
       {state === "unreadable" ? (
         <div className="preview-drop">
-          <p>The page could not read this source (the host refuses cross-origin requests). Download it with the command above, then drop the file here to preview it.</p>
-          <input type="file" onChange={(event) => { const file = event.target.files?.[0]; if (file !== undefined) { dropped(file); } }} />
+          <p role="status">The page could not read this source: the host may not allow requests from a web page, or the network failed. Download it with the command above, then choose the file here to preview it.</p>
+          <label className="preview-file">Downloaded file <input type="file" onChange={(event) => { const file = event.target.files?.[0]; if (file !== undefined) { dropped(file); } }} /></label>
         </div>
       ) : null}
-      {state === "error" ? <p className="preview-error">{message}</p> : null}
+      {state === "error" ? <p className="preview-error" role="alert">{message}</p> : null}
       {state === "done" ? (
         <div className="preview-result">
           {instances !== undefined ? <Select data={instances.map((one) => ({ value: one.id, label: one.id }))} value={instance} onChange={setInstance} placeholder="Choose an instance" /> : null}

@@ -116,7 +116,8 @@ test("a source the page cannot read offers the file drop, and the dropped file p
   await page.goto("/datasets/divorce/");
   await page.getByRole("button", { name: "Fetch and preview" }).click();
   await expect(page.getByText("The page could not read this source")).toBeVisible();
-  await page.locator('input[type="file"]').setInputFiles({ name: "divorce.net", mimeType: "text/plain", buffer: Buffer.from(PAJEK, "latin1") });
+  await expect(page.getByLabel("Downloaded file")).toBeVisible();
+  await page.getByLabel("Downloaded file").setInputFiles({ name: "divorce.net", mimeType: "text/plain", buffer: Buffer.from(PAJEK, "latin1") });
   await expect(page.locator(".preview-result table tbody tr")).toHaveCount(PAJEK_VERTICES);
   await expect(page.locator(".preview-provenance")).toContainText("SHA-256");
   expect(captures).toEqual([]);
