@@ -9,6 +9,7 @@ import "leaflet/dist/leaflet.css";
 import { useWindowVirtualizer } from "@tanstack/react-virtual";
 import { type ColumnDef, createSortedRowModel, rowSortingFeature, tableFeatures, useTable } from "@tanstack/react-table";
 import { formatBytes, formatCount, type Dimensions } from "../dimensions";
+import { listingColumnWidths } from "../listing-columns";
 import { siteRoot } from "./site-root";
 import "../styles.css";
 
@@ -115,6 +116,8 @@ function Listing({ records }: { readonly records: readonly SearchRecord[] }): Re
   ];
 
   const table = useTable({ key: "listing", features, data: filtered, columns });
+  // Sized from every record, not the filtered ones, so a filter never moves a column.
+  const widths = useMemo(() => listingColumnWidths(records), [records]);
 
   // Only the rows near the viewport are rendered: the table is tall, and the page scrolls (not the table), so the virtualiser follows the window and is told where the table starts in the document.
   const rows = table.getRowModel().rows;
@@ -155,7 +158,7 @@ function Listing({ records }: { readonly records: readonly SearchRecord[] }): Re
                       key={header.id}
                       onClick={header.column.getToggleSortingHandler()}
                       aria-sort={sorted === "asc" ? "ascending" : sorted === "desc" ? "descending" : "none"}
-                      style={{ cursor: header.column.getCanSort() ? "pointer" : "default", userSelect: "none" }}
+                      style={{ width: widths[header.index], cursor: header.column.getCanSort() ? "pointer" : "default", userSelect: "none" }}
                     >
                       <table.FlexRender header={header} />
                       {sorted === false ? "" : sorted === "asc" ? " ↑" : " ↓"}

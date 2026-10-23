@@ -114,7 +114,7 @@ describe("buildSite on a fixture catalogue", () => {
     const index: unknown = JSON.parse(page(files, "search-index.json"));
     expect(index).toContainEqual(expect.objectContaining({ id: "karate", nodes: 34, edges: 78 }));
     const listing = page(files, "kinds/graph/index.html");
-    expect(listing).toContain('<th scope="col">Nodes</th><th scope="col">Edges</th><th scope="col">Instances</th><th scope="col">Size</th>');
+    expect(listing).toMatch(/<th scope="col" style="[^"]*">Nodes<\/th><th scope="col" style="[^"]*">Edges<\/th><th scope="col" style="[^"]*">Instances<\/th><th scope="col" style="[^"]*">Size<\/th>/);
     expect(listing).toContain("<td>34</td><td>78</td>");
   });
 
