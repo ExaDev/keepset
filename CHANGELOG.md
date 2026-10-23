@@ -1,3 +1,17 @@
+# [0.53.0](https://github.com/Mearman/keepset/compare/v0.52.2...v0.53.0) (2026-10-23)
+
+
+### Bug Fixes
+
+* **site:** announce the preview's progress and failures and label its file chooser ([f6a48c7](https://github.com/Mearman/keepset/commit/f6a48c7b3e087cd8d7fdee5f6caa298ea76a1855))
+* **site:** size the listing's content columns from the data so no count is cut ([90dee68](https://github.com/Mearman/keepset/commit/90dee68eba37ed0709a294239e9f2cbafd6b4bc8))
+
+
+### Features
+
+* **site:** label the listing's filters and sort its columns from the keyboard ([fed8676](https://github.com/Mearman/keepset/commit/fed86762f12c9cfedc945cfd8e2e72647480047f))
+* **site:** lead an entry page with its trail and figures, and write its properties for reading ([2ed405a](https://github.com/Mearman/keepset/commit/2ed405abf7389c872f8dc0649ecc4573bf6ced5a))
+
 ## [0.52.2](https://github.com/Mearman/keepset/compare/v0.52.1...v0.52.2) (2026-10-23)
 
 ## [0.52.1](https://github.com/Mearman/keepset/compare/v0.52.0...v0.52.1) (2026-10-23)
