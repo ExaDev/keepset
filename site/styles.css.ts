@@ -151,6 +151,36 @@ globalStyle(".table-wrap.listing", {
   },
 });
 
+/* A sortable header's button fills the cell, so the whole header is the click target; it inherits the header's look and alignment, and a mark beside the label says which way the column sorts. */
+globalStyle("th.sortable", {
+  padding: 0,
+});
+globalStyle(".sort-button", {
+  display: "block",
+  width: "100%",
+  padding: "calc(var(--mantine-spacing-xs, 0.625rem) * 0.7) var(--mantine-spacing-xs, 0.625rem)",
+  border: 0,
+  background: "none",
+  color: "inherit",
+  font: "inherit",
+  textAlign: "inherit",
+  whiteSpace: "inherit",
+  overflow: "hidden",
+  textOverflow: "ellipsis",
+  cursor: "pointer",
+});
+globalStyle(".sort-button:focus-visible", {
+  outline: "2px solid var(--accent)",
+  outlineOffset: "-2px",
+});
+globalStyle(".sort-mark", {
+  opacity: 0.55,
+});
+globalStyle("th[aria-sort=ascending] .sort-mark, th[aria-sort=descending] .sort-mark", {
+  opacity: 1,
+  color: "var(--accent)",
+});
+
 globalStyle(".listing thead th", {
   "@media": {
     "(min-width: 48em)": {
@@ -299,12 +329,28 @@ globalStyle(".island-controls", {
   margin: "1rem 0",
 });
 
+/* Each range is a labelled pair of inputs that stays on one row, so the four count bounds take two rows rather than four. */
+globalStyle(".island-controls .island-range", {
+  display: "flex",
+  alignItems: "center",
+  gap: "0.375rem",
+  flex: "1 1 14rem",
+});
+globalStyle(".island-controls .island-range-label", {
+  color: "var(--muted)",
+  fontSize: "var(--mantine-font-size-sm, 0.875rem)",
+  minWidth: "3.25rem",
+});
+globalStyle(".island-controls .island-bound", {
+  flex: "1 1 0",
+  minWidth: 0,
+});
 globalStyle(".island-controls .island-search", {
   flex: "1 1 16rem",
 });
 
 globalStyle(".island-controls .island-filter", {
-  flex: "1 1 11rem",
+  flex: "1 1 9rem",
   minWidth: "8rem",
 });
 

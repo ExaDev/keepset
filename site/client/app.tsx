@@ -39,13 +39,13 @@ const features = tableFeatures({ rowSortingFeature, sortedRowModel: createSorted
 
 type ListingFeatures = typeof features;
 
-/** The count bounds the listing filters by: a minimum and a maximum for nodes and for edges, with the placeholder each input shows. */
+/** The count bounds the listing filters by: a minimum and a maximum for nodes and for edges. */
 type BoundKey = "minNodes" | "maxNodes" | "minEdges" | "maxEdges";
-const BOUND_INPUTS: readonly (readonly [BoundKey, string])[] = [
-  ["minNodes", "min nodes"],
-  ["maxNodes", "max nodes"],
-  ["minEdges", "min edges"],
-  ["maxEdges", "max edges"],
+
+/** The ranges the listing filters by, each a labelled pair of inputs so the pair reads as one filter and takes one row of the controls. */
+const RANGES: readonly { readonly label: string; readonly min: BoundKey; readonly max: BoundKey }[] = [
+  { label: "Nodes", min: "minNodes", max: "maxNodes" },
+  { label: "Edges", min: "minEdges", max: "maxEdges" },
 ];
 
 /**
@@ -134,11 +134,16 @@ function Listing({ records }: { readonly records: readonly SearchRecord[] }): Re
   return (
     <>
       <div className="island-controls">
-        <TextInput className="island-search" placeholder="search the catalogue" value={text} onChange={(event) => { setText(event.currentTarget.value); }} />
-        <Select className="island-filter" placeholder="kind" data={kinds} value={kind} onChange={(value) => { setKind(value); }} clearable searchable />
-        <Select className="island-filter" placeholder="domain" data={domains} value={domain} onChange={(value) => { setDomain(value); }} clearable searchable />
-        {BOUND_INPUTS.map(([key, placeholder]) => (
-          <NumberInput key={key} className="island-bound" placeholder={placeholder} min={0} allowNegative={false} allowDecimal={false} value={bounds[key] ?? ""} onChange={(value) => { setBounds((current) => ({ ...current, [key]: typeof value === "number" ? value : undefined })); }} />
+        <TextInput className="island-search" aria-label="Search the catalogue" placeholder="search the catalogue" value={text} onChange={(event) => { setText(event.currentTarget.value); }} />
+        <Select className="island-filter" aria-label="Kind" placeholder="kind" data={kinds} value={kind} onChange={(value) => { setKind(value); }} clearable searchable />
+        <Select className="island-filter" aria-label="Domain" placeholder="domain" data={domains} value={domain} onChange={(value) => { setDomain(value); }} clearable searchable />
+        {RANGES.map(({ label, min, max }) => (
+          <div key={label} className="island-range" role="group" aria-label={label}>
+            <span className="island-range-label" aria-hidden="true">{label}</span>
+            {([[min, "Minimum", "min"], [max, "Maximum", "max"]] as const).map(([key, word, placeholder]) => (
+              <NumberInput key={key} className="island-bound" aria-label={`${word} ${label.toLowerCase()}`} placeholder={placeholder} min={0} allowNegative={false} allowDecimal={false} value={bounds[key] ?? ""} onChange={(value) => { setBounds((current) => ({ ...current, [key]: typeof value === "number" ? value : undefined })); }} />
+            ))}
+          </div>
         ))}
         <Badge variant="light" size="lg">
           {String(filtered.length)} of {String(records.length)}
@@ -154,14 +159,12 @@ function Listing({ records }: { readonly records: readonly SearchRecord[] }): Re
                   const sorted = header.column.getIsSorted();
 
                   return (
-                    <MantineTable.Th
-                      key={header.id}
-                      onClick={header.column.getToggleSortingHandler()}
-                      aria-sort={sorted === "asc" ? "ascending" : sorted === "desc" ? "descending" : "none"}
-                      style={{ width: widths[header.index], cursor: header.column.getCanSort() ? "pointer" : "default", userSelect: "none" }}
-                    >
-                      <table.FlexRender header={header} />
-                      {sorted === false ? "" : sorted === "asc" ? " ↑" : " ↓"}
+                    <MantineTable.Th key={header.id} className="sortable" aria-sort={sorted === "asc" ? "ascending" : sorted === "desc" ? "descending" : "none"} style={{ width: widths[header.index] }}>
+                      {/* A button, so a header is reachable and sortable from the keyboard; the mark shows which way the column is sorted, or that it can be. */}
+                      <button type="button" className="sort-button" onClick={header.column.getToggleSortingHandler()}>
+                        <table.FlexRender header={header} />
+                        <span className="sort-mark" aria-hidden="true">{sorted === false ? " ↕" : sorted === "asc" ? " ↑" : " ↓"}</span>
+                      </button>
                     </MantineTable.Th>
                   );
                 })}
