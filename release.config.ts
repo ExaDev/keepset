@@ -25,10 +25,12 @@ export const commitTypes: readonly CommitType[] = [
 ];
 
 /**
- * Runs on `main`. Analyses commits since the last tag, bumps the version, publishes to npmjs.org through trusted OIDC publishing (no stored token, see .github/workflows/ci.yml), creates a versioned tag and GitHub Release with generated notes, and commits CHANGELOG.md and package.json back to main. The repository URL is the one in package.json, over https with the workflow's GITHUB_TOKEN: main has no ruleset, so that token can push the release commit. A ruleset on main would reject that push and need a bypass identity (json-compose's deploy key is the worked example).
+ * Runs on `main`. Analyses commits since the last tag, bumps the version, publishes to npmjs.org through trusted OIDC publishing (no stored token, see .github/workflows/ci.yml), creates a versioned tag and GitHub Release with generated notes, and commits CHANGELOG.md and package.json back to main. The release commit and tag are pushed over SSH with a deploy key that the main ruleset lists as a DeployKey bypass actor, because the workflow's GITHUB_TOKEN cannot bypass a ruleset (see the release job in .github/workflows/ci.yml).
  */
 const config: Options = {
   branches: ['main'],
+  // Deliberately the SSH form, not package.json's own git+https:// repository field (that field stays https://; it is public consumer-facing metadata, unrelated to how this release pushes). semantic-release first tries to push to the repositoryUrl as given, and only if that fails rewrites it to https with the GITHUB_TOKEN embedded; the default GITHUB_TOKEN cannot bypass main's ruleset, so that fallback push would be rejected. The push as given authenticates with the deploy key the Release job provisions through GIT_SSH_COMMAND for the Release step alone.
+  repositoryUrl: 'git@github.com:Mearman/keepset.git',
   plugins: [
     [
       '@semantic-release/commit-analyzer',
