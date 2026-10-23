@@ -4,7 +4,7 @@
 import { Fragment, type ReactNode } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { groupsOf, NAME_SEPARATOR, rawSnapshotUrl, type Archive, type ArchiveMember, type Dataset, type Manifest, type NamespaceNode, type Parser } from "keepset";
-import { dimensionsOf, formatBytes, formatCount } from "./dimensions";
+import { dimensionsOf, entitiesText, formatBytes, formatCount } from "./dimensions";
 import { listingColumnWidths } from "./listing-columns";
 import { propertyLabel, propertyText } from "./properties";
 import { scriptJson, slug } from "./html";
@@ -33,17 +33,18 @@ const HASH_SHOWN = 12;
 /** One row of a listing table. */
 function Row({ dataset, root }: { readonly dataset: Dataset; readonly root: string }): ReactNode {
   const { entry } = dataset;
-  const { nodes, edges, instances, bytes } = dimensionsOf(entry);
+  const dimensions = dimensionsOf(entry);
+  const entities = entitiesText(dimensions);
 
   return (
-    <tr data-id={entry.id}><td title={entry.name}><a href={`${root}datasets/${entry.id}/`}>{entry.name}</a></td><td title={entry.id}><code>{entry.id}</code></td><td>{dataset.kind}</td><td title={entry.domain}>{entry.domain ?? ""}</td><td>{formatCount(nodes)}</td><td>{formatCount(edges)}</td><td>{formatCount(instances)}</td><td>{formatBytes(bytes)}</td><td>{entry.recipe.status === "fetchable" ? "fetchable" : "not fetchable yet"}</td></tr>
+    <tr data-id={entry.id}><td title={entry.name}><a href={`${root}datasets/${entry.id}/`}>{entry.name}</a></td><td title={entry.id}><code>{entry.id}</code></td><td>{dataset.kind}</td><td title={entry.domain}>{entry.domain ?? ""}</td><td title={entities}>{entities}</td><td>{formatBytes(dimensions.bytes)}</td><td>{entry.recipe.status === "fetchable" ? "fetchable" : "not fetchable yet"}</td></tr>
   );
 }
 
 /** A table listing datasets, inside the wrapper that scrolls it sideways on narrow screens; the class pairs with the stylesheet's sticky desktop header. */
 function Listing({ datasets, root }: { readonly datasets: readonly Dataset[]; readonly root: string }): ReactNode {
   const widths = listingColumnWidths(datasets.map((dataset) => ({ kind: dataset.kind, ...dimensionsOf(dataset.entry) })));
-  const headers = ["Name", "Id", "Kind", "Domain", "Nodes", "Edges", "Instances", "Size", "Recipe"];
+  const headers = ["Name", "Id", "Kind", "Domain", "Entities", "Size", "Recipe"];
 
   return (
     <div className="table-wrap listing"><table className="listing"><thead><tr>{headers.map((header, index) => <th key={header} scope="col" style={{ width: widths[index] }}>{header}</th>)}</tr></thead><tbody>{datasets.map((dataset) => <Row key={dataset.entry.id} dataset={dataset} root={root} />)}</tbody></table></div>

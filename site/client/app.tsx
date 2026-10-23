@@ -8,7 +8,7 @@ import "@mantine/core/styles.css";
 import "leaflet/dist/leaflet.css";
 import { useWindowVirtualizer } from "@tanstack/react-virtual";
 import { type ColumnDef, createSortedRowModel, rowSortingFeature, tableFeatures, useTable } from "@tanstack/react-table";
-import { formatBytes, formatCount, type Dimensions } from "../dimensions";
+import { entitiesText, entityTotal, formatBytes, type Dimensions } from "../dimensions";
 import { listingColumnWidths } from "../listing-columns";
 import { siteRoot } from "./site-root";
 import "../styles.css";
@@ -108,9 +108,8 @@ function Listing({ records }: { readonly records: readonly SearchRecord[] }): Re
     { accessorKey: "kind", header: "Kind" },
     { accessorKey: "domain", header: "Domain" },
     // An unrecorded count sorts after every recorded one, whichever way the column is sorted.
-    { id: "nodes", accessorFn: (row) => row.nodes, header: "Nodes", sortUndefined: "last", cell: (info) => formatCount(info.row.original.nodes) },
-    { id: "edges", accessorFn: (row) => row.edges, header: "Edges", sortUndefined: "last", cell: (info) => formatCount(info.row.original.edges) },
-    { id: "instances", accessorFn: (row) => row.instances, header: "Instances", sortUndefined: "last", cell: (info) => formatCount(info.row.original.instances) },
+    /* Sorts by the sum of the recorded counts and shows each with its noun; an entry with no count sorts after every other, whichever way the column is sorted. */
+    { id: "entities", accessorFn: (row) => entityTotal(row), header: "Entities", sortUndefined: "last", cell: (info) => entitiesText(info.row.original) },
     { id: "size", accessorFn: (row) => row.bytes, header: "Size", sortUndefined: "last", cell: (info) => formatBytes(info.row.original.bytes) },
     { id: "tags", accessorFn: (row) => row.tags.join(", "), header: "Tags" },
   ];

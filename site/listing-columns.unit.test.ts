@@ -4,15 +4,13 @@ import { listingColumnWidths } from "./listing-columns";
 const MILLIONS = 1_234_567;
 const EDGES = 78;
 const BYTES = 1536;
-const COLUMNS = 9;
+const COLUMNS = 7;
 const NAME = 0;
 const ID = 1;
 const KIND = 2;
 const DOMAIN = 3;
-const NODES = 4;
-const EDGES_COLUMN = 5;
-const INSTANCES = 6;
-const SIZE = 7;
+const ENTITIES = 4;
+const SIZE = 5;
 /** Characters a header gains once sorted. */
 const SORT_MARK = 2;
 
@@ -35,10 +33,8 @@ describe("listingColumnWidths", () => {
 
   it("sizes each content column to the widest of its header, with a sort mark, and its values", () => {
     expect(charactersOf(widths[KIND])).toBe("Kind".length + SORT_MARK);
-    // "1,234,567" is longer than "Nodes" and its mark; no row records an instance count, so the header decides.
-    expect(charactersOf(widths[NODES])).toBe("1,234,567".length);
-    expect(charactersOf(widths[EDGES_COLUMN])).toBe("Edges".length + SORT_MARK);
-    expect(charactersOf(widths[INSTANCES])).toBe("Instances".length + SORT_MARK);
+    // The widest phrase is the first row's, a count and its noun for each of two entities.
+    expect(charactersOf(widths[ENTITIES])).toBe("1,234,567 nodes, 78 edges".length);
     expect(charactersOf(widths[SIZE])).toBe("1.5 KiB".length);
   });
 
@@ -49,6 +45,6 @@ describe("listingColumnWidths", () => {
   });
 
   it("takes the headers' widths where there are no rows", () => {
-    expect(charactersOf(listingColumnWidths([])[NODES])).toBe("Nodes".length + SORT_MARK);
+    expect(charactersOf(listingColumnWidths([])[ENTITIES])).toBe("Entities".length + SORT_MARK);
   });
 });

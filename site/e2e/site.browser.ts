@@ -66,7 +66,7 @@ test("no count or size in the listing is cut off, at any width the table fits", 
   await page.goto("/");
   await expect(page.locator("#island-root.island-live")).toBeVisible();
   const cut = await page.evaluate(() => {
-    const content = new Set(["Kind", "Nodes", "Edges", "Instances", "Size"]);
+    const content = new Set(["Kind", "Entities", "Size"]);
     const headers = [...document.querySelectorAll("#island-root .table-wrap.listing thead th")].map((header) => header.textContent.trim());
 
     return [...document.querySelectorAll<HTMLTableCellElement>("#island-root .table-wrap.listing tbody tr:not([aria-hidden]) td")].filter((cell) => content.has(headers[cell.cellIndex] ?? "") && cell.scrollWidth > cell.clientWidth).map((cell) => cell.textContent);
@@ -88,14 +88,14 @@ test("every filter has an accessible name and a column sorts from the keyboard",
   await page.goto("/");
   const names = ["Search the catalogue", "Kind", "Domain", "Minimum nodes", "Maximum nodes", "Minimum edges", "Maximum edges"];
   await Promise.all(names.map(async (name) => expect(page.getByLabel(name, { exact: true }).first()).toBeVisible()));
-  const nodes = page.locator("#island-root thead th", { hasText: "Nodes" });
-  await expect(nodes).toHaveAttribute("aria-sort", "none");
-  await nodes.getByRole("button").focus();
+  const entities = page.locator("#island-root thead th", { hasText: "Entities" });
+  await expect(entities).toHaveAttribute("aria-sort", "none");
+  await entities.getByRole("button").focus();
   // A numeric column sorts largest first, then smallest first.
   await page.keyboard.press("Enter");
-  await expect(nodes).toHaveAttribute("aria-sort", "descending");
+  await expect(entities).toHaveAttribute("aria-sort", "descending");
   await page.keyboard.press("Enter");
-  await expect(nodes).toHaveAttribute("aria-sort", "ascending");
+  await expect(entities).toHaveAttribute("aria-sort", "ascending");
 });
 
 test("the listing loads neither the preview nor the map, and an entry page loads the preview but not the map", async ({ page }) => {
