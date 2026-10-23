@@ -1,3 +1,10 @@
+# [0.54.0](https://github.com/Mearman/keepset/compare/v0.53.0...v0.54.0) (2026-10-23)
+
+
+### Features
+
+* **site:** replace the listing's node, edge and instance columns with one entities column ([6b7038f](https://github.com/Mearman/keepset/commit/6b7038f2b340509163d4fff4efc4b68a8f34c31e))
+
 # [0.53.0](https://github.com/Mearman/keepset/compare/v0.52.2...v0.53.0) (2026-10-23)
 
 
