@@ -6,6 +6,7 @@ import { renderToStaticMarkup } from "react-dom/server";
 import { groupsOf, NAME_SEPARATOR, rawSnapshotUrl, type Archive, type ArchiveMember, type Dataset, type Manifest, type NamespaceNode, type Parser } from "keepset";
 import { dimensionsOf, formatBytes, formatCount } from "./dimensions";
 import { listingColumnWidths } from "./listing-columns";
+import { propertyLabel, propertyText } from "./properties";
 import { scriptJson, slug } from "./html";
 import { datasetJsonLd, describe } from "./jsonld";
 
@@ -125,6 +126,18 @@ function GroupPath({ segments, root }: { readonly segments: readonly string[]; r
 }
 
 /**
+ * One recorded property as a row of the properties table: its label and its value written for reading, with the exact value in the cell's title where the shown one is shortened.
+ * @param key - The property key.
+ * @param value - The recorded value.
+ * @returns The row.
+ */
+function propertyRow(key: string, value: unknown): readonly [string, ReactNode] {
+  const { text, exact } = propertyText(key, value);
+
+  return [propertyLabel(key), <span key={key} title={exact}>{text}</span>];
+}
+
+/**
  * Wraps page content in the shared layout: head with the web app manifest and styles, the site header, and the client island's script.
  * @param context - The page context.
  * @param page - The page's own content.
@@ -136,7 +149,7 @@ function Layout(context: PageContext, page: PageContent): string {
 
   return `<!doctype html>
 ${renderToStaticMarkup(
-  <html lang="en-GB"><head><meta charSet="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" /><title>{title}</title><meta name="description" content={description} /><link rel="manifest" href={`${root}manifest.webmanifest`} /><link rel="icon" href={`${root}icon.svg`} type="image/svg+xml" /><link rel="stylesheet" href={`${root}app.css`} /><meta name="theme-color" content="#1f4e79" />{head}</head><body data-root={root}><header><a className="home" href={root}>keepset</a><nav><a href={root}>All datasets</a><a href={`${root}domains/`}>Domains</a><a href={`${root}subjects/`}>Subjects</a><a href={`${root}kinds/`}>Kinds</a><a href={`${root}namespaces/`}>Namespaces</a><a href="https://github.com/Mearman/keepset">Source</a></nav></header><main>{body}</main><footer>Catalogue <code>{manifest.id}</code> {manifest.version}, built by keepset {context.packageVersion}.</footer><script type="module" src={`${root}app.js`} /></body></html>,
+  <html lang="en-GB"><head><meta charSet="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" /><title>{title}</title><meta name="description" content={description} /><link rel="manifest" href={`${root}manifest.webmanifest`} /><link rel="icon" href={`${root}icon.svg`} type="image/svg+xml" /><link rel="stylesheet" href={`${root}app.css`} /><meta name="theme-color" content="#1f4e79" />{head}</head><body data-root={root}><a className="skip-link" href="#main">Skip to content</a><header><a className="home" href={root}>keepset</a><nav><a href={root}>All datasets</a><a href={`${root}domains/`}>Domains</a><a href={`${root}subjects/`}>Subjects</a><a href={`${root}kinds/`}>Kinds</a><a href={`${root}namespaces/`}>Namespaces</a><a href="https://github.com/Mearman/keepset">Source</a></nav></header><main id="main" tabIndex={-1}>{body}</main><footer>Catalogue <code>{manifest.id}</code> {manifest.version}, built by keepset {context.packageVersion}.</footer><script type="module" src={`${root}app.js`} /></body></html>,
 )}
 `;
 }
@@ -172,10 +185,17 @@ export function entryPage(context: PageContext, dataset: Dataset): string {
   const otherGroups = groupsOf(entry).filter((group) => group.join(NAME_SEPARATOR) !== home);
   const licenceNode: ReactNode = licence.kind === "spdx" ? <a href={`https://spdx.org/licenses/${licence.id}.html`}>{licence.id}</a> : licence.kind === "custom" ? <a href={licence.url}>{licence.name}</a> : "not recorded by the source";
 
+  const { nodes, edges, instances, bytes } = dimensionsOf(entry);
+  const figures: readonly (readonly [string, string])[] = [["Nodes", formatCount(nodes)], ["Edges", formatCount(edges)], ["Instances", formatCount(instances)], ["Size", formatBytes(bytes)]].filter((figure): figure is [string, string] => figure[1] !== "");
+  // The entries of the recipe's sources that it reads, so the sources table can say which of the mirrors the fetch uses.
+  const readSources = new Set<number>(recipe.status !== "fetchable" ? [] : "files" in recipe ? recipe.files.map((file) => file.source) : [recipe.source]);
+
   const sections: ReactNode[] = [
+    <nav className="breadcrumb" aria-label="Breadcrumb" key="breadcrumb"><ol><li><a href={context.root}>All datasets</a></li><li><a href={`../../kinds/${slug(dataset.kind)}/`}>{dataset.kind}</a></li>{entry.domain === undefined ? null : <li><a href={`../../domains/${slug(entry.domain)}/`}>{entry.domain}</a></li>}</ol></nav>,
     <h1 key="name">{entry.name}</h1>,
     entry.description === undefined ? null : <p className="description" key="description">{entry.description}</p>,
     <p className="command" key="command"><code>{command}</code> <span data-copy-text={command} /></p>,
+    figures.length === 0 ? null : <dl className="stats" key="stats">{figures.map(([label, value]) => <div key={label}><dt>{label}</dt><dd>{value}</dd></div>)}</dl>,
     recipe.status === "fetchable" ? (
       <div className="preview" key="preview" data-preview-id={entry.id}>
         <p className="preview-note">Fetch and preview this dataset on this page, or download the result as JSON. The command line fetches it without a browser.</p>
@@ -197,7 +217,7 @@ export function entryPage(context: PageContext, dataset: Dataset): string {
       ["Catalogue", <Fragment key="catalogue"><code>{dataset.catalogue.id}</code> {dataset.catalogue.version}</Fragment>],
     ]} />,
     <h2 key="sources">Sources and provenance</h2>,
-    <div className="table-wrap" key="sources"><table className="sources"><thead><tr><th scope="col">#</th><th scope="col">URL</th><th scope="col">Status</th><th scope="col">Retrieved</th><th scope="col">Pinned snapshot</th><th scope="col">SHA-256</th></tr></thead><tbody>{entry.sources.map((source, index) => <tr key={String(index)}><td>{String(index)}</td><td><Link url={source.url} /></td><td>{source.status}</td><td>{source.retrieved}</td><td>{source.snapshot === undefined ? "" : <SnapshotLinks timestamp={source.snapshot.timestamp} pageUrl={source.snapshot.url} rawUrl={rawSnapshotUrl(source.snapshot.timestamp, source.url)} />}</td><td>{source.snapshot?.sha256 === undefined ? "" : <code title={`${source.snapshot.sha256}, ${String(source.snapshot.byteLength)} bytes`}>{source.snapshot.sha256.slice(0, HASH_SHOWN)}</code>}</td></tr>)}</tbody></table></div>,
+    <div className="table-wrap" key="sources"><table className="provenance"><thead><tr><th scope="col">#</th><th scope="col">URL</th><th scope="col">Status</th><th scope="col">Retrieved</th><th scope="col">Read by recipe</th><th scope="col">Pinned snapshot</th><th scope="col">SHA-256</th></tr></thead><tbody>{entry.sources.map((source, index) => <tr key={String(index)}><td>{String(index)}</td><td><Link url={source.url} /></td><td>{source.status}</td><td>{source.retrieved}</td><td>{readSources.has(index) ? "yes" : ""}</td><td>{source.snapshot === undefined ? "" : <SnapshotLinks timestamp={source.snapshot.timestamp} pageUrl={source.snapshot.url} rawUrl={rawSnapshotUrl(source.snapshot.timestamp, source.url)} />}</td><td>{source.snapshot?.sha256 === undefined ? "" : <code title={`${source.snapshot.sha256}, ${String(source.snapshot.byteLength)} bytes`}>{source.snapshot.sha256.slice(0, HASH_SHOWN)}</code>}</td></tr>)}</tbody></table></div>,
     entry.citations.length === 0 ? null : <h2 key="citations">Citations</h2>,
     entry.citations.length === 0 ? null : (
       <ul className="citations" key="citations-list">{entry.citations.map((cited, index) => (
@@ -227,9 +247,9 @@ export function entryPage(context: PageContext, dataset: Dataset): string {
       ...crosswalk.oneWay.map((rule, index) => rule.op === "drop" ? <tr key={`drop-${String(index)}`}><td>drop</td><td><code>{rule.from}</code></td><td /><td>{rule.direction}</td></tr> : <tr key={`default-${String(index)}`}><td>default</td><td><code>{JSON.stringify(rule.value)}</code></td><td><code>{rule.to}</code></td><td>{rule.direction}</td></tr>),
     ]}</tbody></table></div>,
     Object.keys(entry.expectedCounts).length === 0 ? null : <h2 key="counts">Expected counts</h2>,
-    Object.keys(entry.expectedCounts).length === 0 ? null : <Facts key="counts-facts" rows={Object.entries(entry.expectedCounts).map(([key, count]) => [key, count.toLocaleString("en-GB")] as const)} />,
+    Object.keys(entry.expectedCounts).length === 0 ? null : <Facts key="counts-facts" rows={Object.entries(entry.expectedCounts).map(([key, count]) => [propertyLabel(key), formatCount(count)] as const)} />,
     Object.keys(entry.properties).length === 0 ? null : <h2 key="properties">Properties</h2>,
-    Object.keys(entry.properties).length === 0 ? null : <Facts key="properties-facts" rows={Object.entries(entry.properties).map(([key, value]) => [key, <code key={key}>{JSON.stringify(value)}</code>] as const)} />,
+    Object.keys(entry.properties).length === 0 ? null : <Facts key="properties-facts" rows={Object.entries(entry.properties).map(([key, value]) => propertyRow(key, value))} />,
   ];
 
   return Layout(context, {

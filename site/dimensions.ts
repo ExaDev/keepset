@@ -10,6 +10,9 @@ export interface Dimensions {
   readonly bytes?: number;
 }
 
+/** The property key that records the size in bytes of the source's download, which the source catalogue states and is `0` where it stated none. */
+export const BYTES_PROPERTY = "rawBytes";
+
 /**
  * Reads an entry's dimensions. `properties.rawBytes` is the size the source catalogue states and is `0` where it stated none, so a zero is no size and is left out.
  * @param entry - The entry.
@@ -17,7 +20,7 @@ export interface Dimensions {
  */
 export function dimensionsOf(entry: Entry): Dimensions {
   const { expectedCounts, properties } = entry;
-  const bytes = properties["rawBytes"];
+  const bytes = properties[BYTES_PROPERTY];
 
   return {
     ...(expectedCounts["nodes"] === undefined ? {} : { nodes: expectedCounts["nodes"] }),
