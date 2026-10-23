@@ -13,7 +13,7 @@ concurrency:
 permissions:
   contents: read
 
-# Every job runs on ubuntu-latest: this repository lives in the Mearman organisation, which has no self-hosted fleet and no Blacksmith pool, so the ExaDev runner resolver (determine-runner.yml, removed with the move) could never resolve and every run queued forever. The Mearman organisation runs GitHub-hosted jobs without a billing block, and the Release job needs a GitHub-hosted runner for npm trusted publishing regardless.
+# Every job runs on ubuntu-latest: this repository belongs to the Mearman user account, which has no self-hosted fleet and no Blacksmith pool, so the ExaDev runner resolver (determine-runner.yml, removed with the move) could never resolve and every run queued forever. The Mearman account runs GitHub-hosted jobs without a billing block, and the Release job needs a GitHub-hosted runner for npm trusted publishing regardless.
 
 jobs:
   commitlint:
