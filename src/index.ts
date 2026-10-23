@@ -23,6 +23,7 @@ export {
   RecipeSchema,
   RelativePathSchema,
   readsCollection,
+  rawSnapshotUrl,
   RESERVED_META_KEYS,
   SnapshotSchema,
   SourceRecipeSchema,
