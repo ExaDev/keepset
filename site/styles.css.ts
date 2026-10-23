@@ -369,6 +369,13 @@ globalStyle("table.provenance td:nth-child(2)", {
   },
 });
 
+/* The preview's progress line and file chooser sit on one row with their icon or label. */
+globalStyle(".preview-working, .preview-file", {
+  display: "inline-flex",
+  alignItems: "center",
+  gap: "0.5rem",
+});
+
 globalStyle(".warning", {
   borderLeft: "3px solid #b35900",
   paddingLeft: "0.75rem",
