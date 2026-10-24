@@ -1,6 +1,6 @@
 /* How an entry's recorded properties read on its page: a camel-case key as a sentence-case label, and a value as a person would write it, with the exact value kept in the cell's title. The properties of an entry are open-ended, so only a value's own type decides how it reads, apart from the one key the catalogue gives a unit. */
 
-import { BYTES_PROPERTY, formatBytes, formatCount } from "./dimensions";
+import { formatBytes, formatCount, isBytesProperty } from "./dimensions";
 
 /** Significant digits a non-integer property is shown to; the cell's title carries every digit. */
 const SIGNIFICANT_DIGITS = 4;
@@ -33,7 +33,7 @@ export function propertyText(key: string, value: unknown): PropertyText {
     return { text: value ? "yes" : "no" };
   }
   if (typeof value === "number") {
-    if (key === BYTES_PROPERTY) {
+    if (isBytesProperty(key)) {
       return { text: formatBytes(value), exact: `${formatCount(value)} bytes` };
     }
     if (Number.isInteger(value)) {

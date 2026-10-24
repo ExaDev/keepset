@@ -30,6 +30,7 @@ describe("propertyText", () => {
 
   it("writes the byte-size key in its unit and keeps the exact byte count", () => {
     expect(propertyText("rawBytes", KIBIBYTE_AND_A_HALF)).toEqual({ text: "1.5 KiB", exact: "1,536 bytes" });
+    expect(propertyText("downloadBytes", KIBIBYTE_AND_A_HALF)).toEqual({ text: "1.5 KiB", exact: "1,536 bytes" });
   });
 
   it("writes a string as it is and anything else as JSON", () => {
