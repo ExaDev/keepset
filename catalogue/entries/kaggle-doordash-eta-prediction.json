@@ -64,6 +64,7 @@
     "kaggle"
   ],
   "properties": {
+    "probedNodes": 197428,
     "surveyId": "or-31"
   },
   "recipe": {

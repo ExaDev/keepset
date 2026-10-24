@@ -65,6 +65,7 @@
     "cincinnati"
   ],
   "properties": {
+    "probedNodes": 7198,
     "surveyId": "or-91"
   },
   "recipe": {

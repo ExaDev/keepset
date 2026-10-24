@@ -433,6 +433,19 @@ function expectedCountsOf(outcome: CurationItem["outcome"]): Record<string, numb
 }
 
 /**
+ * The node count of a table that grows, as the curation's probe read it: a figure for the listing to show, which a fetch does not assert (that is what `expectedCounts` is for, and a table that grows would warn on every fetch).
+ * @param outcome - The outcome.
+ * @returns The `probedNodes` property, or nothing where the table has an expected count or the probe recorded no rows.
+ */
+function probedNodesOf(outcome: CurationItem["outcome"]): { readonly probedNodes?: number } {
+  if ((outcome.status !== "fetchable" && outcome.status !== "fetchable-arcgis") || outcome.expectedNodes !== undefined || outcome.rowCount === undefined) {
+    return {};
+  }
+
+  return { probedNodes: outcome.rowCount };
+}
+
+/**
  * Builds the entry and the outcome for one surveyed dataset.
  * @param item - The surveyed item.
  * @param curation - Its curation.
@@ -476,7 +489,7 @@ export function convertItem(item: SurveyEntry, curation: CurationItem, probedOn:
     recipe: recipeOf(item.id, outcome, { source: dataUrl === undefined ? 0 : 1, url: givenUrl, firstFile: dataUrl === undefined ? 1 : 2 }),
     crosswalk: outcome.status === "not-fetchable" ? { file: OR_NODES_CROSSWALK } : outcome.status === "fetchable-instance-files" ? instanceFilesCrosswalkOf(outcome) : crosswalkOf(outcome),
     expectedCounts: expectedCountsOf(outcome),
-    properties: { surveyId: item.id, ...((outcome.status === "fetchable-instance-files" || outcome.status === "fetchable-table-collection") && outcome.timeUnit !== undefined ? { timeUnit: outcome.timeUnit } : {}) },
+    properties: { surveyId: item.id, ...probedNodesOf(outcome), ...((outcome.status === "fetchable-instance-files" || outcome.status === "fetchable-table-collection") && outcome.timeUnit !== undefined ? { timeUnit: outcome.timeUnit } : {}) },
   });
 
   return {

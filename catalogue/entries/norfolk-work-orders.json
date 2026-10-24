@@ -58,6 +58,7 @@
     "norfolk"
   ],
   "properties": {
+    "probedNodes": 114632,
     "surveyId": "or-14"
   },
   "recipe": {

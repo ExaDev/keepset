@@ -64,6 +64,7 @@
     "louisville-metro"
   ],
   "properties": {
+    "probedNodes": 13207,
     "surveyId": "or-62"
   },
   "recipe": {

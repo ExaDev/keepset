@@ -53,6 +53,7 @@
     "uc-san-diego"
   ],
   "properties": {
+    "probedNodes": 2881,
     "surveyId": "or-103"
   },
   "recipe": {

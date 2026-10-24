@@ -59,6 +59,7 @@
     "adelaide-city-council"
   ],
   "properties": {
+    "probedNodes": 1119318,
     "surveyId": "or-79"
   },
   "recipe": {

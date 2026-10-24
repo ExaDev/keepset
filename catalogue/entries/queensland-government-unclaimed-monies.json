@@ -49,6 +49,7 @@
     "queensland-government"
   ],
   "properties": {
+    "probedNodes": 2553652,
     "surveyId": "or-124"
   },
   "recipe": {

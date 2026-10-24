@@ -59,6 +59,7 @@
     "defra"
   ],
   "properties": {
+    "probedNodes": 17652,
     "surveyId": "or-50"
   },
   "recipe": {

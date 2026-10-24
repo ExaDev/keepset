@@ -55,6 +55,7 @@
     "buffalo"
   ],
   "properties": {
+    "probedNodes": 139389,
     "surveyId": "or-97"
   },
   "recipe": {

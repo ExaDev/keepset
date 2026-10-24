@@ -58,6 +58,7 @@
     "philadelphia"
   ],
   "properties": {
+    "probedNodes": 54401,
     "surveyId": "or-40"
   },
   "recipe": {

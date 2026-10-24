@@ -45,6 +45,7 @@
     "virginia-beach"
   ],
   "properties": {
+    "probedNodes": 14286,
     "surveyId": "or-47"
   },
   "recipe": {

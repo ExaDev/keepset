@@ -48,6 +48,7 @@
     "douglas-county-co"
   ],
   "properties": {
+    "probedNodes": 780,
     "surveyId": "or-44"
   },
   "recipe": {

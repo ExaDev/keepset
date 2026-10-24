@@ -59,6 +59,7 @@
     "barcelona"
   ],
   "properties": {
+    "probedNodes": 1939,
     "surveyId": "or-75"
   },
   "recipe": {

@@ -80,6 +80,7 @@
     "france-sdes"
   ],
   "properties": {
+    "probedNodes": 100033,
     "surveyId": "or-72"
   },
   "recipe": {

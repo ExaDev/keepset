@@ -59,6 +59,7 @@
     "food-standards-agency"
   ],
   "properties": {
+    "probedNodes": 614459,
     "surveyId": "or-33"
   },
   "recipe": {

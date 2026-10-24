@@ -48,6 +48,7 @@
     "lincolnshire"
   ],
   "properties": {
+    "probedNodes": 34790,
     "surveyId": "or-51"
   },
   "recipe": {

@@ -59,6 +59,7 @@
     "london-fire-brigade"
   ],
   "properties": {
+    "probedNodes": 988279,
     "surveyId": "or-111"
   },
   "recipe": {

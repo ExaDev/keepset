@@ -38,6 +38,7 @@
     "revenue-commissioners-ireland"
   ],
   "properties": {
+    "probedNodes": 55,
     "surveyId": "or-45"
   },
   "recipe": {

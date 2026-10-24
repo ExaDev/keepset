@@ -60,6 +60,7 @@
     "dublin-city-council"
   ],
   "properties": {
+    "probedNodes": 148,
     "surveyId": "or-90"
   },
   "recipe": {

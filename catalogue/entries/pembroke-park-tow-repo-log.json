@@ -58,6 +58,7 @@
     "pembroke-park"
   ],
   "properties": {
+    "probedNodes": 2789,
     "surveyId": "or-96"
   },
   "recipe": {

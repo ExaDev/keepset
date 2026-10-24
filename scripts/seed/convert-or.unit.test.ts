@@ -118,6 +118,14 @@ describe("convertSurvey", () => {
     expect(requests?.expectedCounts).toEqual({});
   });
 
+  it("records the rows a probe read as a probed node count only where the source is not asserted to hold a fixed count", () => {
+    const entryOf = (change: Record<string, unknown>) => convertSurvey(survey, withFirst(change), none).entries.find((entry) => entry.id === "example-service-requests");
+    expect(entryOf({ rowCount: 5 })?.properties).toEqual({ surveyId: "or-10", probedNodes: 5 });
+    expect(entryOf({ rowCount: 5 })?.expectedCounts).toEqual({});
+    expect(entryOf({ rowCount: 5, expectedNodes: 5 })?.properties).toEqual({ surveyId: "or-10" });
+    expect(entryOf({})?.properties).toEqual({ surveyId: "or-10" });
+  });
+
   it("builds a crosswalk that moves meta, ids and each mapped column, and a parser that keeps only the mapped columns", () => {
     expect(requests?.crosswalk).toEqual({
       source: "csv-table",

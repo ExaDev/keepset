@@ -75,6 +75,7 @@
     "mesa"
   ],
   "properties": {
+    "probedNodes": 82360,
     "surveyId": "or-61"
   },
   "recipe": {
