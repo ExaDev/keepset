@@ -22,6 +22,7 @@
   "name": "UMLS Knowledge Graph",
   "properties": {
     "directed": true,
+    "downloadBytes": 35648,
     "heterogeneous": true,
     "multigraph": true,
     "selfLoops": false,

@@ -21,6 +21,7 @@
   "name": "High-Tech Company Multiplex",
   "properties": {
     "directed": true,
+    "downloadBytes": 1971,
     "heterogeneous": true,
     "multigraph": true,
     "selfLoops": false,

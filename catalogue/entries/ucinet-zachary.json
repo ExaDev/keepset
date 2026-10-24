@@ -12,6 +12,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "Social network of a university karate club. Famous for the split following disputes between members.",
+  "domain": "Social network",
   "expectedCounts": {
     "edges": 156,
     "nodes": 34
@@ -31,6 +32,7 @@
     "cyclic": true,
     "density": 0.13903743315508021,
     "directed": false,
+    "downloadBytes": 4849,
     "edgeTypes": 1,
     "heterogeneous": false,
     "multigraph": true,

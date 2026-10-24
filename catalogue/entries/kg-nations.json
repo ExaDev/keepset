@@ -22,6 +22,7 @@
   "name": "Nations Knowledge Graph",
   "properties": {
     "directed": true,
+    "downloadBytes": 8077,
     "heterogeneous": true,
     "multigraph": true,
     "selfLoops": false,

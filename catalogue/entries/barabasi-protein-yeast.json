@@ -9,6 +9,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "Protein-protein interaction network for Saccharomyces cerevisiae (yeast).",
+  "domain": "Biological network",
   "expectedCounts": {
     "edges": 4480,
     "nodes": 1870
@@ -26,6 +27,7 @@
     "cyclic": true,
     "density": 0.0013029931073553016,
     "directed": false,
+    "downloadBytes": 15277,
     "edgeTypes": 1,
     "heterogeneous": false,
     "multigraph": true,

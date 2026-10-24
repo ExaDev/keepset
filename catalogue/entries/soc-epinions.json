@@ -9,6 +9,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "Who-trusts-whom network of Epinions.com.",
+  "domain": "Social network",
   "expectedCounts": {
     "edges": 508837,
     "nodes": 75879
@@ -24,6 +25,7 @@
     "cyclic": true,
     "density": 0.00014094197295205573,
     "directed": true,
+    "downloadBytes": 1630437,
     "edgeTypes": 1,
     "heterogeneous": false,
     "multigraph": false,

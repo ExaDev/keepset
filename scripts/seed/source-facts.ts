@@ -1,31 +1,38 @@
+import { z } from "zod";
+import type { DownloadSizes } from "./download-sizes";
 import { matrixMarketPath, SUITESPARSE_ORIGIN, type SuiteSparseMirror } from "./mirror";
 import { networkDomain, networkName, type NetzschleuderIndex } from "./netzschleuder-index";
 import type { SourceDownload } from "./source";
 import { matrixKey, type SuiteSparseIndex } from "./suitesparse-index";
 
-/* What the collections' own indexes state of their datasets, which the source catalogue leaves unrecorded for most of them: the domain of a SuiteSparse matrix or a Netzschleuder network and the size of a SuiteSparse download. */
+/* What the collections' own indexes and hosts state of their datasets, which the source catalogue leaves unrecorded for most of them: the domain of a SuiteSparse matrix or a Netzschleuder network and the size of a download. */
 
-/** What the indexes of the collections the catalogue draws on state of their datasets. */
+/** The curated domain of each dataset whose source catalogue and collection index state none, by dataset id, each read from the dataset's own description and the topics its collection files it under. */
+export const GraphDomainsSchema = z.object({ domains: z.record(z.string().min(1), z.string().min(1)) }).strict();
+
+/** What the indexes of the collections the catalogue draws on, and the hosts serving its downloads, state of their datasets. */
 export interface SourceFacts {
-  /** The kind and download size of each SuiteSparse matrix. */
+  /** The kind of each SuiteSparse matrix. */
   readonly suiteSparse: SuiteSparseIndex;
   /** The tags of each Netzschleuder network. */
   readonly netzschleuder: NetzschleuderIndex;
+  /** The size of each download a recipe fetches. */
+  readonly downloadSizes: DownloadSizes;
 }
 
 /**
- * The index's record of the SuiteSparse matrix a dataset downloads.
+ * The kind the SuiteSparse index states for the matrix a dataset downloads.
  * @param downloads - The dataset's downloads.
  * @param mirror - The SuiteSparse mirror, whose downloads are laid out as the collection's own.
  * @param index - What the SuiteSparse index states of each matrix.
- * @returns The record of the first download that is a SuiteSparse Matrix Market file the index lists, or undefined.
+ * @returns The kind of the first download that is a SuiteSparse Matrix Market file the index lists, or undefined.
  */
-function matrixOf(downloads: readonly SourceDownload[], mirror: SuiteSparseMirror, index: SuiteSparseIndex): SuiteSparseIndex["matrices"][string] | undefined {
+function kindOf(downloads: readonly SourceDownload[], mirror: SuiteSparseMirror, index: SuiteSparseIndex): string | undefined {
   for (const { url } of downloads) {
     const path = url === undefined ? undefined : (matrixMarketPath(url, SUITESPARSE_ORIGIN) ?? matrixMarketPath(url, mirror.host));
     const key = path === undefined ? undefined : matrixKey(path);
-    if (key !== undefined && Object.hasOwn(index.matrices, key)) {
-      return index.matrices[key];
+    if (key !== undefined && Object.hasOwn(index.kinds, key)) {
+      return index.kinds[key];
     }
   }
 
@@ -50,17 +57,13 @@ function topicOf(downloads: readonly SourceDownload[], index: NetzschleuderIndex
   return undefined;
 }
 
-
 /**
- * What the collections' indexes state of the dataset a set of downloads belongs to.
+ * The domain the collections' indexes give the dataset a set of downloads belongs to.
  * @param downloads - The dataset's downloads.
  * @param mirror - The SuiteSparse mirror, whose downloads are laid out as the collection's own.
  * @param facts - The collections' indexes.
- * @returns The domain a SuiteSparse matrix's kind or a Netzschleuder network's topic gives it, and the size of its SuiteSparse download, each present only where an index states it.
+ * @returns A SuiteSparse matrix's kind or a Netzschleuder network's topic, or undefined where neither index lists the dataset.
  */
-export function factsOf(downloads: readonly SourceDownload[], mirror: SuiteSparseMirror, facts: SourceFacts): { readonly domain?: string; readonly downloadBytes?: number } {
-  const matrix = matrixOf(downloads, mirror, facts.suiteSparse);
-  const domain = matrix?.kind ?? topicOf(downloads, facts.netzschleuder);
-
-  return { ...(domain === undefined ? {} : { domain }), ...(matrix?.downloadBytes === undefined ? {} : { downloadBytes: matrix.downloadBytes }) };
+export function indexedDomainOf(downloads: readonly SourceDownload[], mirror: SuiteSparseMirror, facts: SourceFacts): string | undefined {
+  return kindOf(downloads, mirror, facts.suiteSparse) ?? topicOf(downloads, facts.netzschleuder);
 }

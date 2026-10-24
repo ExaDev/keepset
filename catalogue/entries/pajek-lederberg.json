@@ -12,6 +12,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "Citation network around Joshua Lederberg's genetics research.",
+  "domain": "Citation network",
   "expectedCounts": {
     "edges": 41609,
     "nodes": 8843
@@ -30,6 +31,7 @@
     "cyclic": true,
     "density": 0.0005320514543801272,
     "directed": true,
+    "downloadBytes": 426443,
     "edgeTypes": 1,
     "heterogeneous": false,
     "multigraph": true,

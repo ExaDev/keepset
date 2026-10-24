@@ -9,6 +9,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "Protein-protein interaction network for Homo sapiens from the STRING database v12.0. Edge weights are combined confidence scores normalised to [0, 1].",
+  "domain": "Biological network",
   "expectedCounts": {
     "edges": 13715404,
     "nodes": 19622
@@ -25,6 +26,7 @@
     "cyclic": false,
     "density": 1,
     "directed": false,
+    "downloadBytes": 83164437,
     "edgeTypes": 1,
     "heterogeneous": false,
     "multigraph": true,

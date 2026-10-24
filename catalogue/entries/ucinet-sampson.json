@@ -12,6 +12,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "Social interactions among 18 monks including liking, esteem, influence, and praise, at three time points.",
+  "domain": "Social network",
   "expectedCounts": {
     "edges": 55,
     "nodes": 18
@@ -31,6 +32,7 @@
     "cyclic": true,
     "density": 0.17973856209150327,
     "directed": false,
+    "downloadBytes": 7371,
     "edgeTypes": 1,
     "heterogeneous": false,
     "multigraph": true,

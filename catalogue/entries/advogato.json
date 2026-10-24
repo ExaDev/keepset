@@ -9,6 +9,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "Trust network from the Advogato community, a free software development community founded by Raph Levien. Nodes represent users and directed edges indicate trust certifications with four trust levels: Observer (0.4), Apprentice (0.6), Journeyer (0.8), and Master (1.0). Used for research on attack-resistant trust metrics.",
+  "domain": "Social network",
   "expectedCounts": {
     "edges": 51127,
     "nodes": 6539
@@ -26,6 +27,7 @@
     "cyclic": true,
     "density": 0.6666666666666666,
     "directed": true,
+    "downloadBytes": 179756,
     "edgeTypes": 1,
     "heterogeneous": false,
     "multigraph": false,

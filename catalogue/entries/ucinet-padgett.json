@@ -12,6 +12,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "Business and marriage ties among Renaissance Florentine families. The Medici vs Strozzi conflict.",
+  "domain": "Social network",
   "expectedCounts": {
     "edges": 40,
     "nodes": 16
@@ -31,6 +32,7 @@
     "cyclic": true,
     "density": 0.19047619047619047,
     "directed": false,
+    "downloadBytes": 1508,
     "edgeTypes": 1,
     "heterogeneous": true,
     "multigraph": true,

@@ -12,6 +12,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "Bipartite network of 18 Southern women attending 14 social events in the 1930s. Cell (i,j) is 1 if woman i attended event j. From the same UCINET source as ucinet-davis but preserved in bipartite (two-mode) form rather than one-mode projection.",
+  "domain": "Social network",
   "expectedCounts": {
     "edges": 93,
     "nodes": 32
@@ -27,6 +28,7 @@
   ],
   "properties": {
     "directed": false,
+    "downloadBytes": 836,
     "heterogeneous": true,
     "multigraph": false,
     "selfLoops": false,

@@ -63,6 +63,7 @@
     "new-york-state"
   ],
   "properties": {
+    "downloadBytes": 19277810,
     "probedNodes": 691127,
     "surveyId": "or-39"
   },

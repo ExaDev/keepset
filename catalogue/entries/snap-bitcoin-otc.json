@@ -12,6 +12,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "Weighted, signed, directed network of Bitcoin trading relationships on the OTC exchange. Nodes represent traders, edges represent trust ratings. Edges are weighted from -10 to +10 indicating trust (positive) or distrust (negative). Contains temporal information about when each rating was established.",
+  "domain": "Economic network",
   "expectedCounts": {
     "edges": 35592,
     "nodes": 5881
@@ -30,6 +31,7 @@
     "cyclic": true,
     "density": 0.001243020588612932,
     "directed": true,
+    "downloadBytes": 397258,
     "edgeTypes": 1,
     "heterogeneous": false,
     "multigraph": false,

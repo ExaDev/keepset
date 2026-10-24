@@ -12,6 +12,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "Graph Drawing 1998 contest, Problem A. 38 vertices, 50 arcs.",
+  "domain": "Graph drawing contest",
   "expectedCounts": {
     "edges": 50,
     "nodes": 38
@@ -31,6 +32,7 @@
     "cyclic": true,
     "density": 0.03556187766714083,
     "directed": true,
+    "downloadBytes": 4476,
     "edgeTypes": 1,
     "heterogeneous": false,
     "multigraph": false,

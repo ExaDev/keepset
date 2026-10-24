@@ -12,6 +12,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "Formal and informal ties among 15 employees in an overseas branch office of a large multinational corporation.",
+  "domain": "Social network",
   "expectedCounts": {
     "edges": 34,
     "nodes": 15
@@ -31,6 +32,7 @@
     "cyclic": false,
     "density": 0.1619047619047619,
     "directed": false,
+    "downloadBytes": 1264,
     "edgeTypes": 1,
     "heterogeneous": false,
     "multigraph": false,

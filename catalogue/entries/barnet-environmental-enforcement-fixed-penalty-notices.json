@@ -54,6 +54,7 @@
     "barnet"
   ],
   "properties": {
+    "downloadBytes": 545914,
     "probedNodes": 8760,
     "surveyId": "or-52"
   },

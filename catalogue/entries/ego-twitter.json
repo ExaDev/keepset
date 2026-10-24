@@ -9,6 +9,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "Social circles from Twitter. Nodes are users and edges represent following relationships.",
+  "domain": "Social network",
   "expectedCounts": {
     "edges": 2420766,
     "nodes": 81306
@@ -24,6 +25,7 @@
     "cyclic": true,
     "density": 0.0004061072162436206,
     "directed": true,
+    "downloadBytes": 10621918,
     "edgeTypes": 1,
     "heterogeneous": false,
     "multigraph": true,

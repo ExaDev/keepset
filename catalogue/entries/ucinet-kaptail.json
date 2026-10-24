@@ -12,6 +12,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "Instrumental and sociational interactions among 39 workers in a Zambian tailor shop, observed at two time points.",
+  "domain": "Social network",
   "expectedCounts": {
     "edges": 316,
     "nodes": 39
@@ -31,6 +32,7 @@
     "cyclic": true,
     "density": 0.21322537112010798,
     "directed": false,
+    "downloadBytes": 13270,
     "edgeTypes": 1,
     "heterogeneous": false,
     "multigraph": true,

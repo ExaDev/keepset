@@ -12,6 +12,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "Political event network from the Kansas Event Data System (Gulf War, daily aggregation).",
+  "domain": "Political event network",
   "expectedCounts": {
     "edges": 57131,
     "nodes": 174
@@ -31,6 +32,7 @@
     "cyclic": false,
     "density": 0.03764981761334028,
     "directed": true,
+    "downloadBytes": 243745,
     "edgeTypes": 1,
     "heterogeneous": false,
     "multigraph": true,

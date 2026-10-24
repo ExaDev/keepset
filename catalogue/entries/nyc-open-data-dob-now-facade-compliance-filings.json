@@ -58,6 +58,7 @@
     "nyc-open-data"
   ],
   "properties": {
+    "downloadBytes": 8234753,
     "probedNodes": 87455,
     "surveyId": "or-84"
   },

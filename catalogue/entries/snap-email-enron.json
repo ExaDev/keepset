@@ -12,6 +12,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "Directed, weighted email communication network from the Enron corpus. Nodes represent Enron employees, edges represent email communications. Edge weights correspond to the number of emails sent from one employee to another. Useful for studying directed communication patterns in organisational networks.",
+  "domain": "Communication network",
   "expectedCounts": {
     "edges": 367662,
     "nodes": 36692
@@ -30,6 +31,7 @@
     "cyclic": true,
     "density": 0.00027309755503535,
     "directed": false,
+    "downloadBytes": 1055993,
     "edgeTypes": 1,
     "heterogeneous": false,
     "multigraph": true,

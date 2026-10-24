@@ -9,6 +9,7 @@
     "file": "crosswalks/graph-v1/rated.json"
   },
   "description": "Directed bipartite user-product review network for Beauty products on Amazon. Users are linked to products they reviewed; edge weights are normalised star ratings.",
+  "domain": "Product recommendation network",
   "expectedCounts": {
     "edges": 2023070,
     "nodes": 1459545
@@ -24,6 +25,7 @@
     "cyclic": true,
     "density": 0.0000018993553492670287,
     "directed": true,
+    "downloadBytes": 82432164,
     "edgeTypes": 1,
     "heterogeneous": true,
     "multigraph": false,

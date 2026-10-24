@@ -9,6 +9,7 @@
     "file": "crosswalks/graph-v1/relations-split.json"
   },
   "description": "Heterogeneous knowledge graph from Freebase with 237 relation types. A subset of FB15k created by removing inverse relations to prevent test leakage. Contains entities from multiple domains (people, locations, music, film) with directed relation edges. Standard benchmark for knowledge graph completion and link prediction.",
+  "domain": "Knowledge graph",
   "expectedCounts": {
     "edges": 310116,
     "nodes": 14541
@@ -24,6 +25,7 @@
     "cyclic": true,
     "density": 0.004329004329004329,
     "directed": true,
+    "downloadBytes": 3899580,
     "edgeTypes": 237,
     "heterogeneous": true,
     "multigraph": true,

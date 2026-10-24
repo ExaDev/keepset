@@ -12,6 +12,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "Graph Drawing 2000 contest, Problem A. 352 vertices, 458 arcs.",
+  "domain": "Graph drawing contest",
   "expectedCounts": {
     "edges": 458,
     "nodes": 352
@@ -31,6 +32,7 @@
     "cyclic": true,
     "density": 0.006237006237006237,
     "directed": true,
+    "downloadBytes": 48793,
     "edgeTypes": 1,
     "heterogeneous": false,
     "multigraph": false,

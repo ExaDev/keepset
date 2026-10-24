@@ -9,6 +9,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "Social network from German TV series Lindenstrasse, from Graph Drawing 1999 contest.",
+  "domain": "Social network",
   "expectedCounts": {
     "edges": 326,
     "nodes": 234
@@ -25,6 +26,7 @@
     "cyclic": true,
     "density": 0.00881316098707403,
     "directed": true,
+    "downloadBytes": 165733,
     "edgeTypes": 1,
     "heterogeneous": true,
     "multigraph": true,

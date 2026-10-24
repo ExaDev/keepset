@@ -12,6 +12,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "Weekly sociometric preference rankings from 17 men over 15 weeks in a University of Michigan fraternity.",
+  "domain": "Social network",
   "expectedCounts": {
     "edges": 272,
     "nodes": 17
@@ -31,6 +32,7 @@
     "cyclic": true,
     "density": 1,
     "directed": false,
+    "downloadBytes": 13702,
     "edgeTypes": 1,
     "heterogeneous": false,
     "multigraph": true,

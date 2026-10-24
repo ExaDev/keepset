@@ -21,6 +21,7 @@
   "name": "FAO Trade Network",
   "properties": {
     "directed": true,
+    "downloadBytes": 1313202,
     "heterogeneous": true,
     "multigraph": true,
     "selfLoops": true,

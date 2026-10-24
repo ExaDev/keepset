@@ -9,6 +9,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "Undirected, weighted transportation network of airline routes between world airports. Nodes are major airports globally, edges represent direct flight routes. Edge weights represent the number of direct flights (or airline routes) between airports. Scale-free small-world network demonstrating weight heterogeneity in real transportation systems.",
+  "domain": "Transportation network",
   "expectedCounts": {
     "edges": 67663,
     "nodes": 3425
@@ -25,6 +26,7 @@
     "cyclic": true,
     "density": 0.003205795074698138,
     "directed": false,
+    "downloadBytes": 381148,
     "edgeTypes": 1,
     "heterogeneous": false,
     "multigraph": true,

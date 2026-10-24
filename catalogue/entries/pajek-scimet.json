@@ -12,6 +12,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "Citation network from science of science research.",
+  "domain": "Citation network",
   "expectedCounts": {
     "edges": 10416,
     "nodes": 3084
@@ -30,6 +31,7 @@
     "cyclic": true,
     "density": 0.0010951862289876326,
     "directed": true,
+    "downloadBytes": 120443,
     "edgeTypes": 1,
     "heterogeneous": false,
     "multigraph": true,

@@ -9,6 +9,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "Directed, weighted network representing the neural connectome of Caenorhabditis elegans nematode. Multiple sources available: Stanford SNAP (frontal neurons), Network Data Repository (full connectome), and Hugging Face (comprehensive 2024 data with gap junctions and weights).",
+  "domain": "Neural connectome",
   "expectedCounts": {
     "edges": 764,
     "nodes": 131
@@ -24,6 +25,7 @@
     "cyclic": true,
     "density": 0.08068115091015854,
     "directed": true,
+    "downloadBytes": 1897,
     "edgeTypes": 1,
     "heterogeneous": false,
     "multigraph": false,

@@ -9,6 +9,7 @@
     "file": "crosswalks/graph-v1/rated.json"
   },
   "description": "Directed bipartite user-product review network for Video Games on Amazon. Users are linked to products they reviewed; edge weights are normalised star ratings.",
+  "domain": "Product recommendation network",
   "expectedCounts": {
     "edges": 1324753,
     "nodes": 876977
@@ -24,6 +25,7 @@
     "cyclic": true,
     "density": 0.0000034449981699791964,
     "directed": true,
+    "downloadBytes": 53949503,
     "edgeTypes": 1,
     "heterogeneous": true,
     "multigraph": false,

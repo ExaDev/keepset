@@ -9,6 +9,7 @@
     "file": "crosswalks/graph-v1/rated.json"
   },
   "description": "Directed bipartite user-product review network for Digital Music on Amazon. Users are linked to products they reviewed; edge weights are normalised star ratings.",
+  "domain": "Product recommendation network",
   "expectedCounts": {
     "edges": 836006,
     "nodes": 744649
@@ -24,6 +25,7 @@
     "cyclic": true,
     "density": 0.000003015343215580067,
     "directed": true,
+    "downloadBytes": 34024972,
     "edgeTypes": 1,
     "heterogeneous": true,
     "multigraph": false,

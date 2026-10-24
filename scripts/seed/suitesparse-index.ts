@@ -1,23 +1,15 @@
 import { z } from "zod";
 
-/* What the SuiteSparse Matrix Collection's own index says about a matrix beyond what the pipeline catalogue records: the kind of problem it comes from, which is the entry's domain, and the size of the Matrix Market download the recipe fetches, which is the entry's size. The index page is the only place the collection states a matrix's kind, so it is read once by probe-suitesparse-index.ts and committed, and the import reads the committed copy and never the network. */
+/* What the SuiteSparse Matrix Collection's own index says about a matrix beyond what the pipeline catalogue records: the kind of problem it comes from, which is the entry's domain. The index page is the only place the collection states a matrix's kind, so it is read once by probe-suitesparse-index.ts and committed, and the import reads the committed copy and never the network. */
 
 /** The path a matrix has under the collection's `MM` directory: `MM/<group>/<name>.tar.gz`. */
 const MATRIX_PATH = /^MM\/([^/]+)\/([^/]+)\.tar\.gz$/;
 
-/** The index: the day it was read and, for each matrix named `<group>/<name>`, its kind and the size of its download where one was measured. */
+/** The index: the day it was read and the kind of each matrix named `<group>/<name>`. */
 export const SuiteSparseIndexSchema = z
   .object({
     readOn: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, { message: "must be a date, YYYY-MM-DD" }),
-    matrices: z.record(
-      z.string().regex(/^[^/]+\/[^/]+$/),
-      z
-        .object({
-          kind: z.string().min(1),
-          downloadBytes: z.int().positive().optional(),
-        })
-        .strict(),
-    ),
+    kinds: z.record(z.string().regex(/^[^/]+\/[^/]+$/), z.string().min(1)),
   })
   .strict();
 export type SuiteSparseIndex = z.infer<typeof SuiteSparseIndexSchema>;

@@ -12,6 +12,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "Two-mode network of actors and films. 392,400 actors, 127,823 films, 1,470,418 appearances.",
+  "domain": "Collaboration network",
   "expectedCounts": {
     "edges": 1470404,
     "nodes": 511463
@@ -32,6 +33,7 @@
     "cyclic": true,
     "density": 0.000010866468052283042,
     "directed": false,
+    "downloadBytes": 4248772,
     "edgeTypes": 1,
     "heterogeneous": true,
     "multigraph": false,

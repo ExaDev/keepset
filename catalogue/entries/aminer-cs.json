@@ -9,6 +9,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "Large-scale heterogeneous academic network from AMiner computer science corpus. Contains 3 node types (authors, papers, venues) with undirected co-authorship, authorship, and publication relationships. Used for node classification, clustering, and representation learning. Ground truth labels from Google Scholar Metrics.",
+  "domain": "Academic heterogeneous",
   "expectedCounts": {
     "edges": 50000000,
     "nodes": 4891819
@@ -24,6 +25,7 @@
     "cyclic": true,
     "density": 1.1154847375810512e-7,
     "directed": false,
+    "downloadBytes": 2727161612,
     "edgeTypes": 1,
     "heterogeneous": true,
     "multigraph": false,

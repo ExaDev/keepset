@@ -27,6 +27,7 @@
   ],
   "properties": {
     "directed": true,
+    "downloadBytes": 552662,
     "heterogeneous": false,
     "multigraph": true,
     "selfLoops": false,

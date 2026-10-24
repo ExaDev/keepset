@@ -12,6 +12,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "Gift-giving (taro exchange) among 22 households in a Papuan village.",
+  "domain": "Social network",
   "expectedCounts": {
     "edges": 78,
     "nodes": 22
@@ -31,6 +32,7 @@
     "cyclic": true,
     "density": 0.16883116883116883,
     "directed": false,
+    "downloadBytes": 1067,
     "edgeTypes": 1,
     "heterogeneous": false,
     "multigraph": true,

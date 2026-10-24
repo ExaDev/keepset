@@ -9,6 +9,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "Network of English words of length 2-8, connected if they differ by one letter.",
+  "domain": "Linguistic network",
   "expectedCounts": {
     "edges": 89038,
     "nodes": 52652
@@ -25,6 +26,7 @@
     "cyclic": true,
     "density": 0.00006423679954583274,
     "directed": false,
+    "downloadBytes": 531960,
     "edgeTypes": 1,
     "heterogeneous": true,
     "multigraph": false,

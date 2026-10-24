@@ -50,6 +50,7 @@
     "github-oberfichtner"
   ],
   "properties": {
+    "downloadBytes": 43008,
     "surveyId": "or-38"
   },
   "recipe": {

@@ -12,6 +12,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "Word association network from the University of South Florida Free Association Norms.",
+  "domain": "Linguistic network",
   "expectedCounts": {
     "edges": 72168,
     "nodes": 10617
@@ -31,6 +32,7 @@
     "cyclic": true,
     "density": 0.0006402977011672923,
     "directed": true,
+    "downloadBytes": 781637,
     "edgeTypes": 1,
     "heterogeneous": true,
     "multigraph": false,

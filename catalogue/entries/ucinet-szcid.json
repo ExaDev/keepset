@@ -12,6 +12,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "Corporate interlocks among 16 major Dutch business entities.",
+  "domain": "Economic network",
   "expectedCounts": {
     "edges": 120,
     "nodes": 16
@@ -31,6 +32,7 @@
     "cyclic": true,
     "density": 0.5714285714285714,
     "directed": false,
+    "downloadBytes": 810,
     "edgeTypes": 1,
     "heterogeneous": false,
     "multigraph": true,

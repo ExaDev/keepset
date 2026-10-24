@@ -12,6 +12,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "Cross-reference network from the Online Dictionary for Library and Information Science.",
+  "domain": "Linguistic network",
   "expectedCounts": {
     "edges": 18419,
     "nodes": 2909
@@ -30,6 +31,7 @@
     "cyclic": true,
     "density": 0.002156897698788988,
     "directed": true,
+    "downloadBytes": 61994,
     "edgeTypes": 1,
     "heterogeneous": false,
     "multigraph": true,

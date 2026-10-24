@@ -9,6 +9,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "Very large directed acyclic graph (DAG) of US patent citations. Patents can only cite patents filed earlier, creating a strict temporal ordering. Edge direction goes from citing patent to cited patent. One of the largest real-world DAGs available. Useful for evaluating algorithms on massive acyclic graphs and temporal graphs.",
+  "domain": "Patent citation network",
   "expectedCounts": {
     "edges": 16518948,
     "nodes": 4894081
@@ -24,6 +25,7 @@
     "cyclic": true,
     "density": 0.0000023186327578363246,
     "directed": true,
+    "downloadBytes": 85139832,
     "edgeTypes": 1,
     "heterogeneous": false,
     "multigraph": false,

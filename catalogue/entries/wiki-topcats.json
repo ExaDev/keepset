@@ -9,6 +9,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "Wikipedia hyperlink network among articles in top categories.",
+  "domain": "Web graph",
   "expectedCounts": {
     "edges": 28511807,
     "nodes": 1791489
@@ -24,6 +25,7 @@
     "cyclic": true,
     "density": 0.000015858183359093675,
     "directed": true,
+    "downloadBytes": 99746277,
     "edgeTypes": 1,
     "heterogeneous": false,
     "multigraph": false,

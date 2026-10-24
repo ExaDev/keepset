@@ -24,6 +24,7 @@
   "properties": {
     "backend": "duckdb",
     "directed": true,
+    "downloadBytes": 572877,
     "edgeSourceCol": "work_id",
     "edgeTargetCol": "referenced_work_id",
     "heterogeneous": false,

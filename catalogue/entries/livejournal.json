@@ -9,6 +9,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "Large-scale heterogeneous social network from LiveJournal blogging platform. Contains user nodes and community nodes connected by friendship edges and membership edges. Users can join multiple overlapping communities. Used for community detection and social network analysis.",
+  "domain": "Social network",
   "expectedCounts": {
     "edges": 34681189,
     "nodes": 3997962
@@ -24,6 +25,7 @@
     "cyclic": true,
     "density": 0.000004339570605276457,
     "directed": false,
+    "downloadBytes": 124262769,
     "edgeTypes": 1,
     "heterogeneous": true,
     "multigraph": false,

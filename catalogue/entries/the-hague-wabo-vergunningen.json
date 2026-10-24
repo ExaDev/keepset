@@ -59,6 +59,7 @@
     "the-hague"
   ],
   "properties": {
+    "downloadBytes": 42397300,
     "probedNodes": 88805,
     "surveyId": "or-73"
   },

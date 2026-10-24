@@ -9,6 +9,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "Large-scale heterogeneous knowledge graph from Wikidata. Contains 2.5 million entities connected through 535 relation types with over 17 million factual triples. Challenging benchmark for knowledge graph completion requiring prediction of potential relationships among massive complex facts. Part of the Open Graph Benchmark.",
+  "domain": "Knowledge graph",
   "expectedCounts": {
     "edges": 17137181,
     "nodes": 2500604
@@ -25,6 +26,7 @@
     "cyclic": true,
     "density": 0.000002692292964066484,
     "directed": true,
+    "downloadBytes": 157320561,
     "edgeTypes": 535,
     "heterogeneous": true,
     "multigraph": true,

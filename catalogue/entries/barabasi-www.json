@@ -9,6 +9,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "Hyperlink network of web pages from a 1999 crawl of the nd.edu domain.",
+  "domain": "Web graph",
   "expectedCounts": {
     "edges": 1497135,
     "nodes": 325729
@@ -26,6 +27,7 @@
     "cyclic": true,
     "density": 0.000021066408037288526,
     "directed": true,
+    "downloadBytes": 3713659,
     "edgeTypes": 1,
     "heterogeneous": false,
     "multigraph": true,

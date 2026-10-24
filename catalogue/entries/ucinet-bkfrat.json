@@ -12,6 +12,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "Interaction data from 58 students in a West Virginia fraternity. Includes observed conversation frequency and recalled interaction rankings.",
+  "domain": "Social network",
   "expectedCounts": {
     "edges": 1934,
     "nodes": 58
@@ -31,6 +32,7 @@
     "cyclic": true,
     "density": 0.5849969751966122,
     "directed": false,
+    "downloadBytes": 17491,
     "edgeTypes": 1,
     "heterogeneous": false,
     "multigraph": true,

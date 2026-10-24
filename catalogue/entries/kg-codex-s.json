@@ -22,6 +22,7 @@
   "name": "CoDEx-S Knowledge Graph",
   "properties": {
     "directed": true,
+    "downloadBytes": 175607,
     "heterogeneous": true,
     "multigraph": true,
     "selfLoops": false,

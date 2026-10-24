@@ -9,6 +9,7 @@
     "file": "crosswalks/graph-v1/rated.json"
   },
   "description": "Undirected bipartite user-product review network for Movies and TV on Amazon. Users are linked to products they reviewed; edge weights are normalised star ratings.",
+  "domain": "Product recommendation network",
   "expectedCounts": {
     "edges": 4607047,
     "nodes": 2289561
@@ -24,6 +25,7 @@
     "cyclic": true,
     "density": 0.0000017577147235987306,
     "directed": false,
+    "downloadBytes": 187517953,
     "edgeTypes": 1,
     "heterogeneous": true,
     "multigraph": false,

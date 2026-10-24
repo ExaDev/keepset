@@ -59,6 +59,7 @@
     "london-fire-brigade"
   ],
   "properties": {
+    "downloadBytes": 328582222,
     "probedNodes": 988279,
     "surveyId": "or-111"
   },

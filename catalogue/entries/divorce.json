@@ -9,6 +9,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "Two-mode network of US states and grounds for divorce.",
+  "domain": "Social network",
   "expectedCounts": {
     "edges": 225,
     "nodes": 59
@@ -25,6 +26,7 @@
     "cyclic": true,
     "density": 0.1315020455873758,
     "directed": false,
+    "downloadBytes": 1992,
     "edgeTypes": 1,
     "heterogeneous": true,
     "multigraph": false,

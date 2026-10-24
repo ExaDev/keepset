@@ -12,6 +12,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "Metabolic network of the nematode C. elegans.",
+  "domain": "Biological network",
   "expectedCounts": {
     "edges": 4596,
     "nodes": 453
@@ -30,6 +31,7 @@
     "cyclic": true,
     "density": 0.009963078005040146,
     "directed": false,
+    "downloadBytes": 13924,
     "edgeTypes": 1,
     "heterogeneous": false,
     "multigraph": true,
