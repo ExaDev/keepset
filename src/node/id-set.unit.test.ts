@@ -23,12 +23,21 @@ describe("IdSet", () => {
 
   it("keeps every id through the table and the arena growing many times over", () => {
     const ids = new IdSet();
+    // One assertion over the whole run: a hundred thousand `expect` calls cost far more than the set they check.
+    const wronglyRefused: number[] = [];
     for (let index = 0; index < COUNT; index += 1) {
-      expect(ids.add(idOf(index))).toBe(true);
+      if (!ids.add(idOf(index))) {
+        wronglyRefused.push(index);
+      }
     }
+    const wronglyAccepted: number[] = [];
     for (let index = 0; index < COUNT; index += SAMPLE_STEP) {
-      expect(ids.add(idOf(index))).toBe(false);
+      if (ids.add(idOf(index))) {
+        wronglyAccepted.push(index);
+      }
     }
+    expect(wronglyRefused).toEqual([]);
+    expect(wronglyAccepted).toEqual([]);
     expect(ids.add(idOf(COUNT))).toBe(true);
     expect(ids.size).toBe(COUNT + 1);
   });
