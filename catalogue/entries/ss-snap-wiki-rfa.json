@@ -12,6 +12,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "directed weighted temporal multigraph (11,380 nodes, 188,077 non-zeros)",
+  "domain": "Directed Weighted Temporal Multigraph",
   "expectedCounts": {
     "edges": 188077,
     "nodes": 11380

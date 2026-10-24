@@ -12,6 +12,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "tomography problem (87,616 nodes, 13,734,559 non-zeros)",
+  "domain": "Tomography Problem",
   "expectedCounts": {
     "edges": 13734559,
     "nodes": 154936
@@ -32,6 +33,7 @@
     "cyclic": true,
     "density": 0.0035752426728148214,
     "directed": true,
+    "downloadBytes": 173009912,
     "edgeTypes": 1,
     "heterogeneous": false,
     "multigraph": false,

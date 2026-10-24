@@ -9,6 +9,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "Coauthorship network of scientists working on network theory and experiment, compiled by M. Newman in May 2006.",
+  "domain": "Undirected Weighted Graph",
   "expectedCounts": {
     "edges": 2742,
     "nodes": 1589
@@ -26,6 +27,7 @@
     "cyclic": true,
     "density": 0.0025709544035329526,
     "directed": false,
+    "downloadBytes": 20053,
     "edgeTypes": 1,
     "heterogeneous": false,
     "multigraph": false,

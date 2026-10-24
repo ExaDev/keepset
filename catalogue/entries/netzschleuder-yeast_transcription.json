@@ -13,6 +13,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "Network of operons and their pairwise interactions, via transcription factor-based regulation, within the yeast Saccharomyces cerevisiae[^icon]\n[^icon]: Description obtained from the [ICON](https://icon.colorado.edu) project.",
+  "domain": "Biological network",
   "expectedCounts": {
     "edges": 1094,
     "nodes": 916

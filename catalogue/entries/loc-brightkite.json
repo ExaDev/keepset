@@ -9,6 +9,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "Brightkite location based online social network.",
+  "domain": "Undirected Graph",
   "expectedCounts": {
     "edges": 428156,
     "nodes": 58228

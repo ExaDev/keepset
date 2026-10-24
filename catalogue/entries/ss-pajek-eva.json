@@ -12,6 +12,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "Citation network from EVA (Electronic Visualisation and the Arts) conference proceedings.",
+  "domain": "Directed Graph",
   "expectedCounts": {
     "edges": 6726,
     "nodes": 7253
@@ -32,6 +33,7 @@
     "cyclic": true,
     "density": 0.0002552341732188495,
     "directed": true,
+    "downloadBytes": 80879,
     "edgeTypes": 1,
     "heterogeneous": true,
     "multigraph": false,

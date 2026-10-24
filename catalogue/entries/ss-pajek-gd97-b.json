@@ -12,6 +12,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "Graph Drawing Contest 1997, graph B.",
+  "domain": "Undirected Weighted Graph",
   "expectedCounts": {
     "edges": 132,
     "nodes": 46
@@ -32,6 +33,7 @@
     "cyclic": true,
     "density": 0.12753623188405797,
     "directed": false,
+    "downloadBytes": 2573,
     "edgeTypes": 1,
     "heterogeneous": false,
     "multigraph": false,

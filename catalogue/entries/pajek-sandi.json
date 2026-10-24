@@ -12,6 +12,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "Two-mode network of authors and papers on graph products. 674 authors, 314 papers.",
+  "domain": "Bipartite Graph",
   "expectedCounts": {
     "edges": 613,
     "nodes": 674
@@ -31,6 +32,7 @@
     "cyclic": true,
     "density": 0.00939337666357165,
     "directed": false,
+    "downloadBytes": 8249,
     "edgeTypes": 1,
     "heterogeneous": true,
     "multigraph": false,

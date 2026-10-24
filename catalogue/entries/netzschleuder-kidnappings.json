@@ -13,6 +13,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "Bipartite network of members of the Abu Sayyaf Group in the Philippines, and the kidnapping events they were involved in.[^icon]\n[^icon]: Description obtained from the [ICON](https://icon.colorado.edu) project.",
+  "domain": "Social network",
   "expectedCounts": {
     "edges": 402,
     "nodes": 351

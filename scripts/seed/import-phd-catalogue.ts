@@ -8,7 +8,7 @@
 
    --snapshot also refreshes the committed source copies in scripts/seed/sources/, with every file: URL's path withheld: a local path names a machine, not a public source, and the import drops such downloads whatever their path, so the copy converts to the same entries as the original.
 
-   A SuiteSparse download the University of Florida mirror holds (scripts/seed/sources/suitesparse-mirror.json, written by probe-suitesparse-mirror.ts) is listed as a source ahead of the collection's own link and is the one the recipe fetches.
+   A SuiteSparse download the University of Florida mirror holds (scripts/seed/sources/suitesparse-mirror.json, written by probe-suitesparse-mirror.ts) is listed as a source ahead of the collection's own link and is the one the recipe fetches. A SuiteSparse matrix the source catalogue gives no domain takes the kind the collection's index states for it as its domain, and the size of its download is recorded (scripts/seed/sources/suitesparse-index.json, written by probe-suitesparse-index.ts); a Netzschleuder network the source catalogue gives no domain takes the topic its first tag names (scripts/seed/sources/netzschleuder-index.json, written by probe-netzschleuder-index.ts).
 
    Every entry's licence comes from scripts/seed/sources/graph-licences.json, which records for each publisher (and for each dataset whose terms differ) the page or file the licence was read from; the import fails when a dataset's source falls under no record, and when a record serves no dataset.
 
@@ -23,6 +23,8 @@ import { convertCatalogue } from "./convert";
 import { apply, entryWrites, reportedIds, staleEntries } from "./emit";
 import { GraphLicencesSchema, graphLicenceResolver } from "./licence";
 import { SuiteSparseMirrorSchema } from "./mirror";
+import { NetzschleuderIndexSchema } from "./netzschleuder-index";
+import { SuiteSparseIndexSchema } from "./suitesparse-index";
 import { GraphboxCatalogueSchema, SourceCatalogueSchema } from "./source";
 
 const here = dirname(fileURLToPath(import.meta.url));
@@ -67,7 +69,8 @@ const pipeline = SourceCatalogueSchema.parse(JSON.parse(pipelineText));
 const graphbox = GraphboxCatalogueSchema.parse(JSON.parse(graphboxText));
 const licences = GraphLicencesSchema.parse(JSON.parse(readFileSync(join(sourcesDir, "graph-licences.json"), "utf8")));
 const mirror = SuiteSparseMirrorSchema.parse(JSON.parse(readFileSync(join(sourcesDir, "suitesparse-mirror.json"), "utf8")));
-const { entries, report } = convertCatalogue(pipeline, graphbox, { licences: graphLicenceResolver(licences), mirror });
+const facts = { suiteSparse: SuiteSparseIndexSchema.parse(JSON.parse(readFileSync(join(sourcesDir, "suitesparse-index.json"), "utf8"))), netzschleuder: NetzschleuderIndexSchema.parse(JSON.parse(readFileSync(join(sourcesDir, "netzschleuder-index.json"), "utf8"))) };
+const { entries, report } = convertCatalogue(pipeline, graphbox, { licences: graphLicenceResolver(licences), mirror, facts });
 
 const writes = entryWrites(entries, entriesDir);
 writes.set(reportPath, canonicalJson(report));

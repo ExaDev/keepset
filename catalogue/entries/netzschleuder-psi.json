@@ -13,6 +13,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "Weighted directed network of the light-harvesting Photosystem Ι (PSI) of the plant Pisum sativum. The nodes represent chromophores with different identities (i.e. chlorophyll a, chlorophyll b, β-carotene and derivates, lutein, violaxanthin), while edges represent FRET transfer between chromophores. The link directionality connecting nodes in the PSI network depends on the energy levels of the connected chromophores. The weights correspond to the FRET Efficiency between connected chromophores.",
+  "domain": "Biological network",
   "expectedCounts": {
     "edges": 29390,
     "nodes": 192

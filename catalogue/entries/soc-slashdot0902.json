@@ -9,6 +9,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "Slashdot social network from February 2009.",
+  "domain": "Directed Graph",
   "expectedCounts": {
     "edges": 948464,
     "nodes": 82168
@@ -24,6 +25,7 @@
     "cyclic": true,
     "density": 0.00017256407249715723,
     "directed": true,
+    "downloadBytes": 3173121,
     "edgeTypes": 1,
     "heterogeneous": false,
     "multigraph": false,

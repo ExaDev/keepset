@@ -13,6 +13,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "A network of gift-giving relationships (taro exchange) among households in a Papuan village. Data collected by survey c.1970.[^icon]\n[^icon]: Description obtained from the [ICON](https://icon.colorado.edu) project.",
+  "domain": "Social network",
   "expectedCounts": {
     "edges": 78,
     "nodes": 22

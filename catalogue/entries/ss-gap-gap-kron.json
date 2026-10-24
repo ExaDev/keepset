@@ -12,6 +12,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "random undirected weighted graph (134,217,726 nodes, 4,223,264,644 non-zeros)",
+  "domain": "Random Undirected Weighted Graph",
   "expectedCounts": {
     "edges": 4223264644,
     "nodes": 134217726

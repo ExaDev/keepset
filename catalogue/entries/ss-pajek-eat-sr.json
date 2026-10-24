@@ -12,6 +12,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "Edinburgh Associative Thesaurus, response-stimulus direction.",
+  "domain": "Directed Weighted Graph",
   "expectedCounts": {
     "edges": 325589,
     "nodes": 23218
@@ -32,6 +33,7 @@
     "cyclic": true,
     "density": 0.0011334632895532034,
     "directed": true,
+    "downloadBytes": 1323660,
     "edgeTypes": 1,
     "heterogeneous": true,
     "multigraph": false,

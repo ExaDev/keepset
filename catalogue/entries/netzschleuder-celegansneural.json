@@ -17,6 +17,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "A network representing the neural connections of the Caenorhabditis elegans nematode[^icon]\n[^icon]: Description obtained from the [ICON](https://icon.colorado.edu) project.",
+  "domain": "Biological network",
   "expectedCounts": {
     "edges": 2359,
     "nodes": 297

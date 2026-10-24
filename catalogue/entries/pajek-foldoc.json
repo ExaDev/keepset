@@ -12,6 +12,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "Cross-reference network from the Free On-Line Dictionary of Computing.",
+  "domain": "Directed Weighted Graph",
   "expectedCounts": {
     "edges": 120238,
     "nodes": 13356
@@ -31,6 +32,7 @@
     "cyclic": true,
     "density": 0.0010256356780519167,
     "directed": true,
+    "downloadBytes": 390867,
     "edgeTypes": 1,
     "heterogeneous": false,
     "multigraph": false,

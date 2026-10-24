@@ -9,6 +9,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "Road network of Texas.",
+  "domain": "Undirected Graph",
   "expectedCounts": {
     "edges": 3843320,
     "nodes": 1379917
@@ -24,6 +25,7 @@
     "cyclic": true,
     "density": 0.000002018370688740205,
     "directed": false,
+    "downloadBytes": 7140012,
     "edgeTypes": 1,
     "heterogeneous": false,
     "multigraph": true,

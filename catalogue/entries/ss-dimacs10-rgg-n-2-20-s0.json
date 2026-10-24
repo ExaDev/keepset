@@ -12,6 +12,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "undirected random graph (1,048,576 nodes, 13,783,240 non-zeros)",
+  "domain": "Undirected Random Graph",
   "expectedCounts": {
     "edges": 13783240,
     "nodes": 1048576
@@ -32,6 +33,7 @@
     "cyclic": true,
     "density": 0.000012535795708331098,
     "directed": false,
+    "downloadBytes": 27682473,
     "edgeTypes": 1,
     "heterogeneous": false,
     "multigraph": false,

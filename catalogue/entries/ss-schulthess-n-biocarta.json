@@ -12,6 +12,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "biochemical network (1,922 nodes, 4,335 non-zeros)",
+  "domain": "Biochemical Network",
   "expectedCounts": {
     "edges": 4335,
     "nodes": 3918
@@ -32,6 +33,7 @@
     "cyclic": true,
     "density": 0.0021772869046363403,
     "directed": true,
+    "downloadBytes": 16276,
     "edgeTypes": 1,
     "heterogeneous": false,
     "multigraph": false,

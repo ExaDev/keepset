@@ -9,6 +9,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "Undirected social network of frequent associations between 62 dolphins in a community living off Doubtful Sound, New Zealand.",
+  "domain": "Undirected Graph",
   "expectedCounts": {
     "edges": 159,
     "nodes": 62
@@ -26,6 +27,7 @@
     "cyclic": true,
     "density": 0.08408249603384453,
     "directed": false,
+    "downloadBytes": 1574,
     "edgeTypes": 1,
     "heterogeneous": false,
     "multigraph": false,

@@ -6,7 +6,8 @@ import type { JsonScalar } from "../../src/targets/json-scalar";
 import { HGB_FILES, SPLITS, TRIPLE_FILES, type HgbLayout, type TriplesLayout } from "./graph-layouts";
 import type { GraphLicenceResolver } from "./licence";
 import { matrixMarketPath, mirrorUrl, SUITESPARSE_ORIGIN, type SuiteSparseMirror } from "./mirror";
-import type { GraphboxCatalogue, SourceCatalogue, SourceDataset, SourceDownload, SourceEntry, StructuredCitation } from "./source";
+import { factsOf, type SourceFacts } from "./source-facts";
+import { downloadsOf, type GraphboxCatalogue, type SourceCatalogue, type SourceDataset, type SourceEntry, type StructuredCitation } from "./source";
 
 /** The crosswalk files of graph/v1, each for the fields of the native graph a parser emits: the topology every parser emits, and with it the edge weight, the edge time, both, or (for the ratings parser) node and edge types as well; edge types alone, or with each edge's split (the triples parser); node and edge types (HGB); and those with an edge weight (the counts parser). */
 export const CROSSWALKS = {
@@ -725,28 +726,6 @@ function propertiesOf(dataset: SourceDataset): Record<string, JsonScalar> {
 }
 
 /**
- * Lists a dataset's downloads in catalogue order, flattening the source variants: a bare string or a `homepage` record is a landing page, and a cached-JSON record contributes its URLs.
- * @param sources - The catalogue's sources.
- * @returns Every download, synthetic ones included.
- */
-function downloadsOf(sources: readonly SourceEntry[]): SourceDownload[] {
-  return sources.flatMap((source): SourceDownload[] => {
-    if (typeof source === "string") {
-      return [{ url: source, format: "landing-page" }];
-    }
-    if ("downloads" in source) {
-      return source.downloads;
-    }
-    if ("homepage" in source) {
-      return [{ url: source.homepage, format: "landing-page" }];
-    }
-
-    return source.urls.map((url) => ({ url, format: source.format }));
-  });
-}
-
-
-/**
  * The keepset source for a download URL: a snapshot URL becomes a dead source pinned to its timestamp, as does a download in `UNVERIFIABLE_DOWNLOADS`, and anything else a live one.
  * @param url - The download URL.
  * @param retrieved - The dataset's retrieval date.
@@ -781,6 +760,8 @@ export interface Curation {
   readonly licences: Readonly<GraphLicenceResolver>;
   /** The SuiteSparse files the University of Florida mirror holds. */
   readonly mirror: SuiteSparseMirror;
+  /** What the collections' own indexes state of the datasets the source catalogue leaves a domain or size unrecorded for. */
+  readonly facts: SourceFacts;
 }
 
 /** What the import supplies by dataset id beyond the catalogue's record: replacement names, and recipes for the datasets whose pipeline parser the id chooses. */
@@ -795,14 +776,14 @@ export const OVERRIDES: Overrides = { names: NAME_OVERRIDES, recipes: DATASET_RE
 /**
  * Converts one dataset.
  * @param dataset - The catalogue's dataset.
- * @param licences - Where each dataset's licence was read: the entry's licence is the one its curation records for the source its recipe fetches (its first source when it has no recipe).
- * @param mirror - The SuiteSparse mirror: a download it holds is offered from the mirror ahead of the collection's own link.
+ * @param curation - The curated inputs: where each dataset's licence was read (the entry's licence is the one its curation records for the source its recipe fetches, its first source when it has no recipe), the SuiteSparse mirror (a download it holds is offered from the mirror ahead of the collection's own link), and what the collections' indexes state of their datasets (a dataset the source catalogue gives no domain takes a SuiteSparse matrix's kind or a Netzschleuder network's topic, and a SuiteSparse matrix's download size is recorded as `downloadBytes`).
  * @param overrides - Replacement names and dataset recipes by dataset id; a dataset named in neither keeps the catalogue's name and gets the recipe its format gives.
  * @returns The entry, when the dataset converts, and its outcome for the report.
  * @throws Error when a dataset recipe reads a download in the preferred format and the dataset has none.
  */
-export function convertDataset(dataset: SourceDataset, licences: Readonly<GraphLicenceResolver>, mirror: SuiteSparseMirror, overrides: Overrides = OVERRIDES): { readonly entry?: Entry; readonly outcome: Outcome } {
+export function convertDataset(dataset: SourceDataset, curation: Curation, overrides: Overrides = OVERRIDES): { readonly entry?: Entry; readonly outcome: Outcome } {
   const { id } = dataset;
+  const { licences, mirror, facts } = curation;
   const flags: string[] = [];
   const notConverted = (reason: string): { outcome: Outcome } => ({ outcome: { id, outcome: "not-converted", reason, flags } });
   if (dataset.sources === undefined || dataset.sources === null || dataset.sources.length === 0) {
@@ -915,12 +896,14 @@ export function convertDataset(dataset: SourceDataset, licences: Readonly<GraphL
     flags.push(`corrected against the downloaded file: ${correction.reason}`);
   }
   const description = correction?.description ?? dataset.description;
+  const known = factsOf(all, mirror, facts);
+  const domain = dataset.domain ?? known.domain;
   const entry = parseEntry({
     id,
     ...(named === undefined ? {} : { namespace: named.namespace, aliases: [named.alias] }),
     name: overrides.names.get(id) ?? dataset.name,
     ...(description === undefined || description === "" ? {} : { description }),
-    ...(dataset.domain === undefined ? {} : { domain: dataset.domain }),
+    ...(domain === undefined ? {} : { domain }),
     tags: dataset.category === undefined ? [] : [dataset.category],
     category: "graph/v1",
     sources,
@@ -929,7 +912,7 @@ export function convertDataset(dataset: SourceDataset, licences: Readonly<GraphL
     recipe,
     crosswalk: { file: chosen?.crosswalk ?? CROSSWALKS.topology },
     expectedCounts: (fixed !== undefined && "archive" in fixed ? fixed.counts : undefined) ?? { nodes: correction?.expectedNodes ?? dataset.nodeCount, edges: correction?.expectedEdges ?? dataset.edgeCount },
-    properties: { ...propertiesOf(dataset), ...correction?.properties },
+    properties: { ...propertiesOf(dataset), ...(known.downloadBytes === undefined ? {} : { downloadBytes: known.downloadBytes }), ...correction?.properties },
   });
 
   return { entry, outcome: { id, outcome: flags.length === 0 ? "converted" : "converted-with-flags", recipe: recipe.status, flags } };
@@ -1007,7 +990,7 @@ export function convertCatalogue(pipeline: SourceCatalogue, graphbox: GraphboxCa
   const entries: Entry[] = [];
   const outcomes: Outcome[] = [];
   for (const dataset of Object.values(pipeline.datasets).sort((left, right) => (left.id < right.id ? -1 : 1))) {
-    const converted = convertDataset(dataset, curation.licences, curation.mirror, overrides);
+    const converted = convertDataset(dataset, curation, overrides);
     if (converted.entry !== undefined) {
       entries.push(converted.entry);
     }

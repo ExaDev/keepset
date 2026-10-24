@@ -13,6 +13,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "Dominance interactions among a group of adult female Japanese macaques (Macaca fuscata fuscata), observed during a non-mating season in 1976. Edge weights represent the frequency of interaction.[^icon]\n[^icon]: Description obtained from the [ICON](https://icon.colorado.edu) project.",
+  "domain": "Social network",
   "expectedCounts": {
     "edges": 1187,
     "nodes": 62

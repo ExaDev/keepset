@@ -12,6 +12,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "Two-mode network of 50 divorce cases and 9 predictor variables.",
+  "domain": "Bipartite Graph",
   "expectedCounts": {
     "edges": 225,
     "nodes": 59
@@ -32,6 +33,7 @@
     "cyclic": true,
     "density": 0.17551020408163265,
     "directed": true,
+    "downloadBytes": 1465,
     "edgeTypes": 1,
     "heterogeneous": true,
     "multigraph": false,

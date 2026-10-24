@@ -13,6 +13,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "A network of human proximities among students at Massachusetts Institute of Technology (MIT), as measured by personal mobile phones. Nodes represent people (students from the Media Lab and the Sloan Business School) and an edge connects a pair if the two devices made a Bluetooth handshake at the time. Edges are timestamped.[^icon]\n[^icon]: Description obtained from the [ICON](https://icon.colorado.edu) project.",
+  "domain": "Social network",
   "expectedCounts": {
     "edges": 1086404,
     "nodes": 96

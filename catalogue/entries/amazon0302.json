@@ -9,6 +9,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "Amazon product co-purchasing network from March 2 2003.",
+  "domain": "Directed Graph",
   "expectedCounts": {
     "edges": 1234877,
     "nodes": 262111
@@ -24,6 +25,7 @@
     "cyclic": true,
     "density": 0.000026194088195261075,
     "directed": true,
+    "downloadBytes": 4599117,
     "edgeTypes": 1,
     "heterogeneous": false,
     "multigraph": false,

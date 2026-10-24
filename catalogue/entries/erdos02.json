@@ -9,6 +9,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "Collaboration network centered on Paul Erdos. Nodes are mathematicians who collaborated with Erdos or his collaborators.",
+  "domain": "Undirected Graph",
   "expectedCounts": {
     "edges": 11850,
     "nodes": 6927
@@ -25,6 +26,7 @@
     "cyclic": true,
     "density": 0.0005533706457904673,
     "directed": false,
+    "downloadBytes": 79470,
     "edgeTypes": 1,
     "heterogeneous": false,
     "multigraph": false,

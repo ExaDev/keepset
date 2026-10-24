@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { HttpUrlSchema } from "../../src/entry";
+import type { SourceCatalogue } from "./source";
 
 /* A SuiteSparse download can be fetched from the University of Florida host that served the collection before it moved to Texas A&M, which holds byte-identical copies of most of its files. Its holdings are fixed (matrices added since are absent), so the import cannot assume a given file is there: the files it holds are recorded in scripts/seed/sources/suitesparse-mirror.json, written by scripts/seed/probe-suitesparse-mirror.ts, and the import offers the mirror's copy ahead of the collection's own link for each file the inventory lists. */
 
@@ -41,4 +42,28 @@ export function mirrorUrl(mirror: SuiteSparseMirror, url: string): string | unde
   const path = matrixMarketPath(url, SUITESPARSE_ORIGIN);
 
   return path !== undefined && mirror.holds.includes(path) ? `${mirror.host}${path}` : undefined;
+}
+
+/**
+ * Every SuiteSparse Matrix Market download the catalogue's datasets name.
+ * @param catalogue - The source catalogue.
+ * @returns The `MM/<group>/<name>.tar.gz` paths, sorted.
+ */
+export function suiteSparsePaths(catalogue: SourceCatalogue): string[] {
+  const paths = new Set<string>();
+  for (const dataset of Object.values(catalogue.datasets)) {
+    for (const source of dataset.sources ?? []) {
+      if (typeof source === "string" || !("downloads" in source)) {
+        continue;
+      }
+      for (const download of source.downloads) {
+        const path = download.url === undefined ? undefined : matrixMarketPath(download.url, SUITESPARSE_ORIGIN);
+        if (path !== undefined) {
+          paths.add(path);
+        }
+      }
+    }
+  }
+
+  return [...paths].sort();
 }

@@ -12,6 +12,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "Citation network related to Kohonen self-organising map publications.",
+  "domain": "Directed Graph",
   "expectedCounts": {
     "edges": 12731,
     "nodes": 3772
@@ -32,6 +33,7 @@
     "cyclic": true,
     "density": 0.0017884997777029758,
     "directed": true,
+    "downloadBytes": 67446,
     "edgeTypes": 1,
     "heterogeneous": true,
     "multigraph": false,

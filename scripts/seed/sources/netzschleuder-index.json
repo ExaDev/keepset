@@ -1,0 +1,359 @@
+{
+  "networks": {
+    "7th_graders": [
+      "Social",
+      "Offline",
+      "Multilayer",
+      "Unweighted",
+      "Metadata"
+    ],
+    "bison": [
+      "Social",
+      "Animal",
+      "Weighted"
+    ],
+    "blumenau_drug": [
+      "Biological",
+      "Drug interactions",
+      "Weighted",
+      "Metadata"
+    ],
+    "cattle": [
+      "Social",
+      "Animal",
+      "Weighted"
+    ],
+    "celegans_metabolic": [
+      "Biological",
+      "Metabolic",
+      "Unweighted"
+    ],
+    "celegansneural": [
+      "Biological",
+      "Connectome",
+      "Weighted"
+    ],
+    "ceo_club": [
+      "Social",
+      "Affiliation",
+      "Unweighted"
+    ],
+    "cintestinalis": [
+      "Biological",
+      "Connectome",
+      "Weighted"
+    ],
+    "college_freshmen": [
+      "Social",
+      "Offline",
+      "Weighted",
+      "Timestamps"
+    ],
+    "contact": [
+      "Social",
+      "Offline",
+      "Unweighted",
+      "Timestamps"
+    ],
+    "contiguous_usa": [
+      "Transportation",
+      "Roads",
+      "Unweighted"
+    ],
+    "cs_department": [
+      "Social",
+      "Relationships",
+      "Multilayer",
+      "Unweighted"
+    ],
+    "dutch_criticism": [
+      "Social",
+      "Offline",
+      "Unweighted"
+    ],
+    "elite": [
+      "Social",
+      "Affiliation",
+      "Unweighted"
+    ],
+    "email_company": [
+      "Social",
+      "Communication",
+      "Unweighted",
+      "Multigraph",
+      "Timestamps"
+    ],
+    "eu_airlines": [
+      "Transportation",
+      "Airport",
+      "Multilayer",
+      "Unweighted"
+    ],
+    "facebook_friends": [
+      "Social",
+      "Online",
+      "Unweighted",
+      "Metadata"
+    ],
+    "fao_trade": [
+      "Economic",
+      "Trade",
+      "Weighted",
+      "Multilayer"
+    ],
+    "florentine_families": [
+      "Social",
+      "Relationships",
+      "Multilayer",
+      "Unweighted"
+    ],
+    "foodweb_baywet": [
+      "Biological",
+      "Food web",
+      "Weighted"
+    ],
+    "foodweb_little_rock": [
+      "Biological",
+      "Food web",
+      "Unweighted"
+    ],
+    "football_tsevans": [
+      "Social",
+      "Sports",
+      "Unweighted"
+    ],
+    "game_thrones": [
+      "Social",
+      "Fictional",
+      "Weighted"
+    ],
+    "high_tech_company": [
+      "Social",
+      "Offline",
+      "Multilayer",
+      "Unweighted"
+    ],
+    "highschool": [
+      "Social",
+      "Offline",
+      "Weighted"
+    ],
+    "interactome_pdz": [
+      "Biological",
+      "Protein interactions",
+      "Unweighted"
+    ],
+    "jazz_collab": [
+      "Social",
+      "Collaboration",
+      "Unweighted"
+    ],
+    "kangaroo": [
+      "Social",
+      "Animal",
+      "Weighted"
+    ],
+    "kidnappings": [
+      "Social",
+      "Offline",
+      "Unweighted"
+    ],
+    "law_firm": [
+      "Social",
+      "Offline",
+      "Multilayer",
+      "Unweighted"
+    ],
+    "london_transport": [
+      "Transportation",
+      "Public Transport",
+      "Multilayer",
+      "Weighted"
+    ],
+    "macaque_neural": [
+      "Biological",
+      "Connectome",
+      "Unweighted"
+    ],
+    "macaques": [
+      "Social",
+      "Animal",
+      "Weighted"
+    ],
+    "marvel_partnerships": [
+      "Social",
+      "Fictional",
+      "Unweighted"
+    ],
+    "messal_shale": [
+      "Biological",
+      "Food Web",
+      "Uncertain",
+      "Weighted",
+      "Metadata"
+    ],
+    "montreal": [
+      "Social",
+      "Affiliation",
+      "Unweighted"
+    ],
+    "moreno_sheep": [
+      "Social",
+      "Animal",
+      "Weighted",
+      "Metadata"
+    ],
+    "moreno_taro": [
+      "Social",
+      "Offline",
+      "Unweighted"
+    ],
+    "new_guinea_tribes": [
+      "Social",
+      "Offline",
+      "Signed"
+    ],
+    "november17": [
+      "Social",
+      "Offline",
+      "Unweighted",
+      "Metadata"
+    ],
+    "packet_delays": [
+      "Technological",
+      "Communication",
+      "Weighted"
+    ],
+    "physician_trust": [
+      "Social",
+      "Offline",
+      "Unweighted"
+    ],
+    "plant_pol_kato": [
+      "Biological",
+      "Food web",
+      "Weighted"
+    ],
+    "polblogs": [
+      "Informational",
+      "Web graph",
+      "Unweighted",
+      "Metadata"
+    ],
+    "psi": [
+      "Biological",
+      "Weighted"
+    ],
+    "reality_mining": [
+      "Social",
+      "Offline",
+      "Unweighted",
+      "Timestamps"
+    ],
+    "residence_hall": [
+      "Social",
+      "Offline",
+      "Weighted"
+    ],
+    "revolution": [
+      "Social",
+      "Affiliation",
+      "Unweighted"
+    ],
+    "rhesus_monkey": [
+      "Social",
+      "Animal",
+      "Weighted"
+    ],
+    "sa_companies": [
+      "Social",
+      "Affiliation",
+      "Unweighted"
+    ],
+    "sp_hospital": [
+      "Social",
+      "Offline",
+      "Unweighted",
+      "Temporal",
+      "Metadata"
+    ],
+    "sp_kenyan_households": [
+      "Social",
+      "Offline",
+      "Unweighted",
+      "Temporal",
+      "Metadata"
+    ],
+    "sp_office": [
+      "Social",
+      "Offline",
+      "Weighted",
+      "Temporal",
+      "Metadata"
+    ],
+    "sp_primary_school": [
+      "Social",
+      "Offline",
+      "Weighted",
+      "Temporal",
+      "Metadata"
+    ],
+    "student_cooperation": [
+      "Social",
+      "Offline",
+      "Multigraph",
+      "Unweighted"
+    ],
+    "swingers": [
+      "Social",
+      "Offline",
+      "Unweighted"
+    ],
+    "terrorists_911": [
+      "Social",
+      "Offline",
+      "Unweighted",
+      "Metadata"
+    ],
+    "train_terrorists": [
+      "Social",
+      "Offline",
+      "Weighted"
+    ],
+    "un_migrations": [
+      "Social",
+      "Economic",
+      "Travel",
+      "Political",
+      "Weighted",
+      "Metadata"
+    ],
+    "unicodelang": [
+      "Informational",
+      "Relatedness",
+      "Weighted"
+    ],
+    "wiki_science": [
+      "Informational",
+      "Relatedness",
+      "Unweighted"
+    ],
+    "windsurfers": [
+      "Social",
+      "Offline",
+      "Weighted"
+    ],
+    "yeast_transcription": [
+      "Biological",
+      "Gene regulation",
+      "Unweighted"
+    ],
+    "zebras": [
+      "Social",
+      "Animal",
+      "Unweighted",
+      "Metadata"
+    ]
+  },
+  "readOn": "2026-10-24"
+}

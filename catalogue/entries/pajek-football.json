@@ -12,6 +12,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "World Cup 1998 match network. 35 teams, 118 matches.",
+  "domain": "Directed Weighted Graph",
   "expectedCounts": {
     "edges": 118,
     "nodes": 35
@@ -31,6 +32,7 @@
     "cyclic": true,
     "density": 0.19831932773109243,
     "directed": true,
+    "downloadBytes": 1397,
     "edgeTypes": 1,
     "heterogeneous": false,
     "multigraph": false,

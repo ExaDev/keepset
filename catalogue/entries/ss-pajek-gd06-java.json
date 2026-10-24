@@ -12,6 +12,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "Graph Drawing Contest 2006, Java class dependency graph.",
+  "domain": "Directed Graph",
   "expectedCounts": {
     "edges": 8032,
     "nodes": 1538
@@ -32,6 +33,7 @@
     "cyclic": true,
     "density": 0.006613630152806415,
     "directed": true,
+    "downloadBytes": 30964,
     "edgeTypes": 1,
     "heterogeneous": true,
     "multigraph": false,

@@ -12,6 +12,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "Citation network from Lederberg's Roget thesaurus analysis.",
+  "domain": "Directed Multigraph",
   "expectedCounts": {
     "edges": 41601,
     "nodes": 8324
@@ -32,6 +33,7 @@
     "cyclic": true,
     "density": 0.0011990504939243356,
     "directed": true,
+    "downloadBytes": 184413,
     "edgeTypes": 1,
     "heterogeneous": false,
     "multigraph": false,

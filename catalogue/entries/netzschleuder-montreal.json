@@ -13,6 +13,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "Network representing relationships between gangs, obtained from Montreal Police’s central intelligence database, spanning 2004 to 2007. Nodes are gangs, and an edge represents some kind of relationship between two gangs (as elicited from interviews with gang members).[^icon]\n[^icon]: Description obtained from the [ICON](https://icon.colorado.edu) project.",
+  "domain": "Social network",
   "expectedCounts": {
     "edges": 78,
     "nodes": 35

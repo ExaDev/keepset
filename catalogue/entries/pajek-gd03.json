@@ -12,6 +12,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "Graph Drawing 2003 contest, Problem A. 423 vertices, 578 arcs.",
+  "domain": "Directed Graph",
   "expectedCounts": {
     "edges": 578,
     "nodes": 423
@@ -31,6 +32,7 @@
     "cyclic": true,
     "density": 0.02197802197802198,
     "directed": true,
+    "downloadBytes": 2064,
     "edgeTypes": 1,
     "heterogeneous": true,
     "multigraph": false,

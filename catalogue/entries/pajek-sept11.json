@@ -12,6 +12,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "Daily network of September 11 news connections. 13,332 nodes, 243,447 links.",
+  "domain": "Undirected Weighted Graph Sequence",
   "expectedCounts": {
     "edges": 243447,
     "nodes": 13332
@@ -31,6 +32,7 @@
     "cyclic": true,
     "density": 0.0016703932261908966,
     "directed": false,
+    "downloadBytes": 1573289,
     "edgeTypes": 1,
     "heterogeneous": true,
     "multigraph": true,

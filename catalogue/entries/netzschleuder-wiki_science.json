@@ -13,6 +13,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "A network of scientific fields, extracted from the English Wikipedia in early 2020. Nodes are wikipedia pages representing natural, formal, social and applied sciences, and two nodes are linked if the cosine similarity of the page content is above a threshold. See <http://www.sinnefa.com/wikipediasciencemap/> for an interactive version.[^icon]\n[^icon]: Description obtained from the [ICON](https://icon.colorado.edu) project.",
+  "domain": "Informational network",
   "expectedCounts": {
     "edges": 6523,
     "nodes": 687

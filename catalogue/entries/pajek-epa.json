@@ -12,6 +12,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "Web pages from the US Environmental Protection Agency site.",
+  "domain": "Directed Graph",
   "expectedCounts": {
     "edges": 8965,
     "nodes": 4271
@@ -31,6 +32,7 @@
     "cyclic": true,
     "density": 0.0009770156224896737,
     "directed": true,
+    "downloadBytes": 83915,
     "edgeTypes": 1,
     "heterogeneous": true,
     "multigraph": false,

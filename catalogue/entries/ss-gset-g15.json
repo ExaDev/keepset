@@ -12,6 +12,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "duplicate undirected random graph (800 nodes, 9,322 non-zeros)",
+  "domain": "Duplicate Undirected Random Graph",
   "expectedCounts": {
     "edges": 4661,
     "nodes": 800
@@ -32,6 +33,7 @@
     "cyclic": true,
     "density": 0.014583854818523154,
     "directed": false,
+    "downloadBytes": 13271,
     "edgeTypes": 1,
     "heterogeneous": false,
     "multigraph": false,

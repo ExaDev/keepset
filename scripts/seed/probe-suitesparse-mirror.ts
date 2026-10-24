@@ -9,7 +9,7 @@ import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { parseArgs } from "node:util";
 import { canonicalJson } from "../../src/serialise";
-import { matrixMarketPath, SUITESPARSE_ORIGIN, SuiteSparseMirrorSchema } from "./mirror";
+import { SuiteSparseMirrorSchema, suiteSparsePaths } from "./mirror";
 import { SourceCatalogueSchema } from "./source";
 import { HTTP_STATUS } from "../sources/http-status";
 import { systemClock } from "../sources/pacing";
@@ -22,20 +22,7 @@ const sourcesDir = join(dirname(fileURLToPath(import.meta.url)), "sources");
 const { values } = parseArgs({ options: { pipeline: { type: "string" } }, strict: true });
 const catalogue = SourceCatalogueSchema.parse(JSON.parse(readFileSync(values.pipeline ?? join(sourcesDir, "pipeline-catalog.json"), "utf8")));
 
-const wanted = new Set<string>();
-for (const dataset of Object.values(catalogue.datasets)) {
-  for (const source of dataset.sources ?? []) {
-    if (typeof source === "string" || !("downloads" in source)) {
-      continue;
-    }
-    for (const download of source.downloads) {
-      const path = download.url === undefined ? undefined : matrixMarketPath(download.url, SUITESPARSE_ORIGIN);
-      if (path !== undefined) {
-        wanted.add(path);
-      }
-    }
-  }
-}
+const wanted = suiteSparsePaths(catalogue);
 
 const client = new PoliteClient(fetch, systemClock, DEFAULT_POLITENESS);
 const holds: string[] = [];
@@ -58,9 +45,9 @@ async function probe(remaining: readonly string[]): Promise<void> {
 
   return probe(rest);
 }
-await probe([...wanted].sort());
+await probe(wanted);
 
 const today = new Date(systemClock.now()).toISOString().slice(0, ISO_DATE_LENGTH);
 const inventory = SuiteSparseMirrorSchema.parse({ readOn: today, host: MIRROR_HOST, holds: holds.sort() });
 writeFileSync(join(sourcesDir, "suitesparse-mirror.json"), canonicalJson(inventory));
-console.log(`${String(holds.length)} of ${String(wanted.size)} downloads are on the mirror; not served:\n${missing.sort().join("\n")}`);
+console.log(`${String(holds.length)} of ${String(wanted.length)} downloads are on the mirror; not served:\n${missing.sort().join("\n")}`);

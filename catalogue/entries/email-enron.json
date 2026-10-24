@@ -9,6 +9,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "Email communication network from Enron.",
+  "domain": "Directed Graph",
   "expectedCounts": {
     "edges": 367662,
     "nodes": 36692
@@ -24,6 +25,7 @@
     "cyclic": true,
     "density": 0.00027309755503535,
     "directed": false,
+    "downloadBytes": 517524,
     "edgeTypes": 1,
     "heterogeneous": false,
     "multigraph": true,

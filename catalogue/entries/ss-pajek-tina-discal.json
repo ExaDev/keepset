@@ -12,6 +12,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "Tina's network: discuss/calendar interactions.",
+  "domain": "Directed Graph",
   "expectedCounts": {
     "edges": 41,
     "nodes": 11
@@ -32,6 +33,7 @@
     "cyclic": true,
     "density": 0.5818181818181818,
     "directed": true,
+    "downloadBytes": 907,
     "edgeTypes": 1,
     "heterogeneous": false,
     "multigraph": false,

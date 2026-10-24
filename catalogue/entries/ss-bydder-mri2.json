@@ -12,6 +12,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "computer graphics/vision problem (63,240 nodes, 569,160 non-zeros)",
+  "domain": "Computer Graphics/Vision Problem",
   "expectedCounts": {
     "edges": 569160,
     "nodes": 210696
@@ -32,6 +33,7 @@
     "cyclic": true,
     "density": 0.00007240737878152379,
     "directed": true,
+    "downloadBytes": 7924221,
     "edgeTypes": 1,
     "heterogeneous": false,
     "multigraph": false,

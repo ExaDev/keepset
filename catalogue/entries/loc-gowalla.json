@@ -9,6 +9,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "Gowalla location based online social network.",
+  "domain": "Undirected Graph",
   "expectedCounts": {
     "edges": 1900654,
     "nodes": 196591

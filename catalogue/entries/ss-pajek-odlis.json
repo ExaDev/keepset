@@ -12,6 +12,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "Online Dictionary for Library and Information Science hyperlink network.",
+  "domain": "Directed Multigraph",
   "expectedCounts": {
     "edges": 18246,
     "nodes": 2900
@@ -32,6 +33,7 @@
     "cyclic": true,
     "density": 0.003897182143664284,
     "directed": true,
+    "downloadBytes": 72460,
     "edgeTypes": 1,
     "heterogeneous": true,
     "multigraph": false,

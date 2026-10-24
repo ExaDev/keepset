@@ -9,6 +9,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "Network of cross-references in Roget's Thesaurus.",
+  "domain": "Directed Graph",
   "expectedCounts": {
     "edges": 5075,
     "nodes": 1022
@@ -25,6 +26,7 @@
     "cyclic": true,
     "density": 0.00716030968805503,
     "directed": true,
+    "downloadBytes": 19429,
     "edgeTypes": 1,
     "heterogeneous": false,
     "multigraph": false,

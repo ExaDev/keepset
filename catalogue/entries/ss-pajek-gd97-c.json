@@ -12,6 +12,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "Graph Drawing Contest 1997, graph C.",
+  "domain": "Directed Multigraph",
   "expectedCounts": {
     "edges": 1356,
     "nodes": 455
@@ -32,6 +33,7 @@
     "cyclic": true,
     "density": 0.004513078115495555,
     "directed": true,
+    "downloadBytes": 5579,
     "edgeTypes": 1,
     "heterogeneous": true,
     "multigraph": false,

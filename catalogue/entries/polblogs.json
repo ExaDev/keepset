@@ -9,6 +9,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "Directed network of hyperlinks between weblogs on US politics, recorded in 2005. The 'value' property indicates political leaning: 0 for left/liberal, 1 for right/conservative.",
+  "domain": "Directed Multigraph",
   "expectedCounts": {
     "edges": 19090,
     "nodes": 1490
@@ -26,6 +27,7 @@
     "cyclic": true,
     "density": 0.02233404945515955,
     "directed": true,
+    "downloadBytes": 66091,
     "edgeTypes": 1,
     "heterogeneous": false,
     "multigraph": true,

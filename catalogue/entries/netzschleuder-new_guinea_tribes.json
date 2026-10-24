@@ -13,6 +13,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "A network of friendships among tribes of Gahuku-Gama alliance structure of the Eastern Central Highlands region in New Guinea. Edge sign indicates either friendship (\"rova\") or enmity (\"hint”).[^icon]\n[^icon]: Description obtained from the [ICON](https://icon.colorado.edu) project.",
+  "domain": "Social network",
   "expectedCounts": {
     "edges": 58,
     "nodes": 16

@@ -12,6 +12,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "chemical oceanography problem (400,320 nodes, 6,226,538 non-zeros)",
+  "domain": "Chemical Oceanography Problem",
   "expectedCounts": {
     "edges": 6226538,
     "nodes": 400320

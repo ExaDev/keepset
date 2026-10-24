@@ -12,6 +12,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "bipartite graph (428,440 nodes, 3,782,463 non-zeros)",
+  "domain": "Bipartite Graph",
   "expectedCounts": {
     "edges": 3782463,
     "nodes": 1324748
@@ -32,6 +33,7 @@
     "cyclic": true,
     "density": 0.000009416564750214564,
     "directed": true,
+    "downloadBytes": 22730053,
     "edgeTypes": 1,
     "heterogeneous": false,
     "multigraph": false,

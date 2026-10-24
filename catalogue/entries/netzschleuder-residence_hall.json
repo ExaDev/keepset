@@ -13,6 +13,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "A network of friendships among students living in a residence hall at Australian National University (date unknown). Edge direction indicates that resident i named resident j as a friend, and edge weight indicates the level of friendship: 5 (best friend), 4 (close friend), 3 (friend), 2, 1.[^icon]\n[^icon]: Description obtained from the [ICON](https://icon.colorado.edu) project.",
+  "domain": "Social network",
   "expectedCounts": {
     "edges": 2672,
     "nodes": 217

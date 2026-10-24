@@ -13,6 +13,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "A network of partnerships among characters in the Marvel comic book universe. Nodes are either heroes or villains, and edges represent partnerships between such characters. The partnership network was extracted from Wikipedia pages of these characters, which indicate partnership relations with other such pages.[^icon]\n[^icon]: Description obtained from the [ICON](https://icon.colorado.edu) project.",
+  "domain": "Social network",
   "expectedCounts": {
     "edges": 346,
     "nodes": 350

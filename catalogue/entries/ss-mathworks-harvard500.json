@@ -12,6 +12,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "directed graph (500 nodes, 2,636 non-zeros)",
+  "domain": "Directed Graph",
   "expectedCounts": {
     "edges": 2636,
     "nodes": 500
@@ -32,6 +33,7 @@
     "cyclic": true,
     "density": 0.01696192384769539,
     "directed": true,
+    "downloadBytes": 11807,
     "edgeTypes": 1,
     "heterogeneous": false,
     "multigraph": false,

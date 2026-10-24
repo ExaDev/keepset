@@ -13,6 +13,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "A network of cortical regions in the Macaque cortex[^icon]\n[^icon]: Description obtained from the [ICON](https://icon.colorado.edu) project.",
+  "domain": "Biological network",
   "expectedCounts": {
     "edges": 505,
     "nodes": 47

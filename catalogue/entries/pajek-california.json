@@ -12,6 +12,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "Pages matching the query 'California'. Constructed by expanding a 200-page search engine response set.",
+  "domain": "Directed Graph",
   "expectedCounts": {
     "edges": 16150,
     "nodes": 6175
@@ -31,6 +32,7 @@
     "cyclic": true,
     "density": 0.0008377301180738345,
     "directed": true,
+    "downloadBytes": 179978,
     "edgeTypes": 1,
     "heterogeneous": true,
     "multigraph": false,

@@ -12,6 +12,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "power network problem (29,902 nodes, 274,697 non-zeros)",
+  "domain": "Power Network Problem",
   "expectedCounts": {
     "edges": 274697,
     "nodes": 29902
@@ -32,6 +33,7 @@
     "cyclic": true,
     "density": 0.0003557545084608472,
     "directed": false,
+    "downloadBytes": 1285575,
     "edgeTypes": 1,
     "heterogeneous": false,
     "multigraph": false,

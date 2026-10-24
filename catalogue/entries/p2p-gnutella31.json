@@ -9,6 +9,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "Gnutella peer to peer network from August 31 2002.",
+  "domain": "Directed Graph",
   "expectedCounts": {
     "edges": 147892,
     "nodes": 62586
@@ -24,6 +25,7 @@
     "cyclic": true,
     "density": 0.00007551395650121503,
     "directed": true,
+    "downloadBytes": 531165,
     "edgeTypes": 1,
     "heterogeneous": false,
     "multigraph": false,
