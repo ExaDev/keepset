@@ -58,6 +58,7 @@
     "maryland"
   ],
   "properties": {
+    "probedNodes": 794432,
     "surveyId": "or-42"
   },
   "recipe": {

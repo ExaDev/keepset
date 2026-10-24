@@ -53,6 +53,7 @@
     "temecula"
   ],
   "properties": {
+    "probedNodes": 5375,
     "surveyId": "or-93"
   },
   "recipe": {

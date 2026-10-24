@@ -73,6 +73,7 @@
     "nyc-open-data"
   ],
   "properties": {
+    "probedNodes": 22854982,
     "surveyId": "or-116"
   },
   "recipe": {

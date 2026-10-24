@@ -58,6 +58,7 @@
     "christchurch-city-council"
   ],
   "properties": {
+    "probedNodes": 483,
     "surveyId": "or-114"
   },
   "recipe": {

@@ -59,6 +59,7 @@
     "the-hague"
   ],
   "properties": {
+    "probedNodes": 88805,
     "surveyId": "or-73"
   },
   "recipe": {

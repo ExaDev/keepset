@@ -60,6 +60,7 @@
     "dakota-county"
   ],
   "properties": {
+    "probedNodes": 110,
     "surveyId": "or-46"
   },
   "recipe": {

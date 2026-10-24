@@ -43,6 +43,7 @@
     "los-angeles"
   ],
   "properties": {
+    "probedNodes": 99832,
     "surveyId": "or-104"
   },
   "recipe": {

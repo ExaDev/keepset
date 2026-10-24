@@ -58,6 +58,7 @@
     "orange-county-ca"
   ],
   "properties": {
+    "probedNodes": 23362,
     "surveyId": "or-92"
   },
   "recipe": {

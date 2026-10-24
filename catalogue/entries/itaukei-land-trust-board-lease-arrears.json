@@ -53,6 +53,7 @@
     "itaukei-land-trust-board"
   ],
   "properties": {
+    "probedNodes": 31304,
     "surveyId": "or-41"
   },
   "recipe": {

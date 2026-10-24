@@ -75,6 +75,7 @@
     "northern-powergrid"
   ],
   "properties": {
+    "probedNodes": 473,
     "surveyId": "or-112"
   },
   "recipe": {

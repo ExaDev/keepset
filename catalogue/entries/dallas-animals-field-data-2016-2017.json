@@ -59,6 +59,7 @@
     "dallas"
   ],
   "properties": {
+    "probedNodes": 52363,
     "surveyId": "or-106"
   },
   "recipe": {

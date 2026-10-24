@@ -55,6 +55,7 @@
     "fema"
   ],
   "properties": {
+    "probedNodes": 2725989,
     "surveyId": "or-122"
   },
   "recipe": {

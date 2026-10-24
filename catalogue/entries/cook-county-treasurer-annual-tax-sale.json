@@ -53,6 +53,7 @@
     "cook-county"
   ],
   "properties": {
+    "probedNodes": 200915,
     "surveyId": "or-48"
   },
   "recipe": {

@@ -39,6 +39,7 @@
     "allegheny-county"
   ],
   "properties": {
+    "probedNodes": 87710,
     "surveyId": "or-43"
   },
   "recipe": {

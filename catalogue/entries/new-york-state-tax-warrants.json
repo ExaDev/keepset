@@ -63,6 +63,7 @@
     "new-york-state"
   ],
   "properties": {
+    "probedNodes": 691127,
     "surveyId": "or-39"
   },
   "recipe": {

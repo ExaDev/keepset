@@ -64,6 +64,7 @@
     "camden"
   ],
   "properties": {
+    "probedNodes": 3443,
     "surveyId": "or-70"
   },
   "recipe": {

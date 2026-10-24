@@ -68,6 +68,7 @@
     "arlington-county"
   ],
   "properties": {
+    "probedNodes": 1807,
     "surveyId": "or-113"
   },
   "recipe": {

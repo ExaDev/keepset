@@ -5354,7 +5354,8 @@
           }
         ],
         "skipLines": 0,
-        "status": "fetchable"
+        "status": "fetchable",
+        "rowCount": 614459
       },
       "surveyId": "or-33"
     },
@@ -5393,7 +5394,8 @@
         },
         "numericColumns": [],
         "skipLines": 0,
-        "status": "fetchable"
+        "status": "fetchable",
+        "rowCount": 1463052
       },
       "surveyId": "or-34"
     },
@@ -5984,7 +5986,8 @@
         },
         "numericColumns": [],
         "skipLines": 0,
-        "status": "fetchable"
+        "status": "fetchable",
+        "rowCount": 794432
       },
       "surveyId": "or-42"
     },
@@ -6164,7 +6167,8 @@
         },
         "numericColumns": [],
         "skipLines": 0,
-        "status": "fetchable"
+        "status": "fetchable",
+        "rowCount": 55
       },
       "surveyId": "or-45"
     },
@@ -6576,7 +6580,8 @@
         },
         "numericColumns": [],
         "skipLines": 0,
-        "status": "fetchable"
+        "status": "fetchable",
+        "rowCount": 34790
       },
       "surveyId": "or-51"
     },
@@ -6621,7 +6626,8 @@
         },
         "numericColumns": [],
         "skipLines": 0,
-        "status": "fetchable"
+        "status": "fetchable",
+        "rowCount": 8760
       },
       "surveyId": "or-52"
     },
@@ -6697,7 +6703,8 @@
           }
         ],
         "skipLines": 0,
-        "status": "fetchable"
+        "status": "fetchable",
+        "rowCount": 12836
       },
       "surveyId": "or-54"
     },
@@ -6980,7 +6987,8 @@
         },
         "numericColumns": [],
         "skipLines": 0,
-        "status": "fetchable"
+        "status": "fetchable",
+        "rowCount": 144416
       },
       "surveyId": "or-59"
     },
@@ -7763,7 +7771,8 @@
         },
         "numericColumns": [],
         "skipLines": 0,
-        "status": "fetchable"
+        "status": "fetchable",
+        "rowCount": 201282
       },
       "surveyId": "or-67"
     },
@@ -7813,7 +7822,8 @@
         },
         "numericColumns": [],
         "skipLines": 0,
-        "status": "fetchable"
+        "status": "fetchable",
+        "rowCount": 90966
       },
       "surveyId": "or-68"
     },
@@ -8099,7 +8109,8 @@
           }
         ],
         "skipLines": 0,
-        "status": "fetchable"
+        "status": "fetchable",
+        "rowCount": 436730
       },
       "surveyId": "or-71"
     },
@@ -8420,7 +8431,8 @@
           }
         ],
         "skipLines": 0,
-        "status": "fetchable"
+        "status": "fetchable",
+        "rowCount": 1939
       },
       "surveyId": "or-75"
     },

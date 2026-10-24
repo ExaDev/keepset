@@ -64,6 +64,7 @@
     "new-orleans"
   ],
   "properties": {
+    "probedNodes": 103309,
     "surveyId": "or-100"
   },
   "recipe": {

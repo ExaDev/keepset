@@ -54,6 +54,7 @@
     "leeds"
   ],
   "properties": {
+    "probedNodes": 12836,
     "surveyId": "or-54"
   },
   "recipe": {

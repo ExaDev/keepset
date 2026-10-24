@@ -75,6 +75,7 @@
     "chicago"
   ],
   "properties": {
+    "probedNodes": 824653,
     "surveyId": "or-65"
   },
   "recipe": {

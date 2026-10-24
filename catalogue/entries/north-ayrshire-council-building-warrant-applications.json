@@ -65,6 +65,7 @@
     "north-ayrshire-council"
   ],
   "properties": {
+    "probedNodes": 5940,
     "surveyId": "or-78"
   },
   "recipe": {

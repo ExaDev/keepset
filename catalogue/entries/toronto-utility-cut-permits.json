@@ -55,6 +55,7 @@
     "toronto"
   ],
   "properties": {
+    "probedNodes": 90966,
     "surveyId": "or-68"
   },
   "recipe": {

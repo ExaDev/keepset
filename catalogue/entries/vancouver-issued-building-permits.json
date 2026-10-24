@@ -60,6 +60,7 @@
     "vancouver"
   ],
   "properties": {
+    "probedNodes": 52419,
     "surveyId": "or-69"
   },
   "recipe": {

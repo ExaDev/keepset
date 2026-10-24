@@ -65,6 +65,7 @@
     "montgomery-county-md"
   ],
   "properties": {
+    "probedNodes": 690,
     "surveyId": "or-118"
   },
   "recipe": {

@@ -54,6 +54,7 @@
     "barnet"
   ],
   "properties": {
+    "probedNodes": 8760,
     "surveyId": "or-52"
   },
   "recipe": {

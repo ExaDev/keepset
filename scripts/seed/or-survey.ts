@@ -84,7 +84,7 @@ export const FetchableOutcomeSchema = z
     numericColumns: z.array(z.object({ column: ColumnNameSchema, factor: z.number().positive() }).strict()),
     header: z.array(z.string()).min(1),
     rowCount: z.int().min(0).optional(),
-    /** The node count of a source that does not change, such as a file committed to a repository or a published dataset. The entry records it as `expectedCounts`, so a fetch warns when the result differs. Open-data tables that grow are left without one. */
+    /** The node count of a source that does not change, such as a file committed to a repository or a published dataset. The entry records it as `expectedCounts`, so a fetch warns when the result differs. Open-data tables that grow are left without one, and their `rowCount` is recorded as the entry's `probedNodes` property, a figure the listing shows as approximate and a fetch does not assert. */
     expectedNodes: z.int().min(0).optional(),
     map: FieldMapSchema,
   })

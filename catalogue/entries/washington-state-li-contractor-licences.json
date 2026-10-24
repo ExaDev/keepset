@@ -59,6 +59,7 @@
     "washington-state"
   ],
   "properties": {
+    "probedNodes": 161635,
     "surveyId": "or-20"
   },
   "recipe": {
