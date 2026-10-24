@@ -9,6 +9,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "Heterogeneous biomedical knowledge graph with 5 node types: drugs, diseases, proteins, side effects, and genes. Contains 51 different relation types representing various biomedical relationships (drug-target, gene-disease, protein-gene, disease-symptom, etc.). Useful for evaluating link prediction in highly heterogeneous, multi-relational knowledge graphs.",
+  "domain": "Biomedical knowledge graph",
   "expectedCounts": {
     "edges": 5088454,
     "nodes": 93773
@@ -25,6 +26,7 @@
     "cyclic": true,
     "density": 0.0005063503164744946,
     "directed": true,
+    "downloadBytes": 963312546,
     "edgeTypes": 1,
     "heterogeneous": false,
     "multigraph": true,

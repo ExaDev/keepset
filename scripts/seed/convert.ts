@@ -6,7 +6,8 @@ import type { JsonScalar } from "../../src/targets/json-scalar";
 import { HGB_FILES, SPLITS, TRIPLE_FILES, type HgbLayout, type TriplesLayout } from "./graph-layouts";
 import type { GraphLicenceResolver } from "./licence";
 import { matrixMarketPath, mirrorUrl, SUITESPARSE_ORIGIN, type SuiteSparseMirror } from "./mirror";
-import { factsOf, type SourceFacts } from "./source-facts";
+import { downloadSize } from "./download-sizes";
+import { indexedDomainOf, type SourceFacts } from "./source-facts";
 import { downloadsOf, type GraphboxCatalogue, type SourceCatalogue, type SourceDataset, type SourceEntry, type StructuredCitation } from "./source";
 
 /** The crosswalk files of graph/v1, each for the fields of the native graph a parser emits: the topology every parser emits, and with it the edge weight, the edge time, both, or (for the ratings parser) node and edge types as well; edge types alone, or with each edge's split (the triples parser); node and edge types (HGB); and those with an edge weight (the counts parser). */
@@ -762,6 +763,8 @@ export interface Curation {
   readonly mirror: SuiteSparseMirror;
   /** What the collections' own indexes state of the datasets the source catalogue leaves a domain or size unrecorded for. */
   readonly facts: SourceFacts;
+  /** The curated domain of each dataset by id, for those neither the source catalogue nor an index gives one. */
+  readonly domains: Readonly<Record<string, string>>;
 }
 
 /** What the import supplies by dataset id beyond the catalogue's record: replacement names, and recipes for the datasets whose pipeline parser the id chooses. */
@@ -776,7 +779,7 @@ export const OVERRIDES: Overrides = { names: NAME_OVERRIDES, recipes: DATASET_RE
 /**
  * Converts one dataset.
  * @param dataset - The catalogue's dataset.
- * @param curation - The curated inputs: where each dataset's licence was read (the entry's licence is the one its curation records for the source its recipe fetches, its first source when it has no recipe), the SuiteSparse mirror (a download it holds is offered from the mirror ahead of the collection's own link), and what the collections' indexes state of their datasets (a dataset the source catalogue gives no domain takes a SuiteSparse matrix's kind or a Netzschleuder network's topic, and a SuiteSparse matrix's download size is recorded as `downloadBytes`).
+ * @param curation - The curated inputs: where each dataset's licence was read (the entry's licence is the one its curation records for the source its recipe fetches, its first source when it has no recipe), the SuiteSparse mirror (a download it holds is offered from the mirror ahead of the collection's own link), and what the collections' indexes state of their datasets (a dataset the source catalogue gives no domain takes a SuiteSparse matrix's kind or a Netzschleuder network's topic, and the size of the download its recipe fetches is recorded as `downloadBytes`).
  * @param overrides - Replacement names and dataset recipes by dataset id; a dataset named in neither keeps the catalogue's name and gets the recipe its format gives.
  * @returns The entry, when the dataset converts, and its outcome for the report.
  * @throws Error when a dataset recipe reads a download in the preferred format and the dataset has none.
@@ -886,8 +889,8 @@ export function convertDataset(dataset: SourceDataset, curation: Curation, overr
     recipe = { status: "fetchable", source: urls.indexOf(chosen.url), archive: chosen.archive, parser: chosen.parser };
   }
 
-  const licenceSource = sources[recipe.status === "fetchable" ? recipe.source : 0];
-  if (licenceSource === undefined) {
+  const primarySource = sources[recipe.status === "fetchable" ? recipe.source : 0];
+  if (primarySource === undefined) {
     throw new Error(`${id} has no source to read a licence from`);
   }
   const named = namespaceOf(id);
@@ -896,8 +899,8 @@ export function convertDataset(dataset: SourceDataset, curation: Curation, overr
     flags.push(`corrected against the downloaded file: ${correction.reason}`);
   }
   const description = correction?.description ?? dataset.description;
-  const known = factsOf(all, mirror, facts);
-  const domain = dataset.domain ?? known.domain;
+  const domain = dataset.domain ?? curation.domains[id] ?? indexedDomainOf(all, mirror, facts);
+  const downloadBytes = downloadSize(facts.downloadSizes, primarySource.url);
   const entry = parseEntry({
     id,
     ...(named === undefined ? {} : { namespace: named.namespace, aliases: [named.alias] }),
@@ -907,12 +910,12 @@ export function convertDataset(dataset: SourceDataset, curation: Curation, overr
     tags: dataset.category === undefined ? [] : [dataset.category],
     category: "graph/v1",
     sources,
-    licence: licences.resolve(id, licenceSource.url),
+    licence: licences.resolve(id, primarySource.url),
     citations: citationsOf(dataset.citation),
     recipe,
     crosswalk: { file: chosen?.crosswalk ?? CROSSWALKS.topology },
     expectedCounts: (fixed !== undefined && "archive" in fixed ? fixed.counts : undefined) ?? { nodes: correction?.expectedNodes ?? dataset.nodeCount, edges: correction?.expectedEdges ?? dataset.edgeCount },
-    properties: { ...propertiesOf(dataset), ...(known.downloadBytes === undefined ? {} : { downloadBytes: known.downloadBytes }), ...correction?.properties },
+    properties: { ...propertiesOf(dataset), ...(downloadBytes === undefined ? {} : { downloadBytes }), ...correction?.properties },
   });
 
   return { entry, outcome: { id, outcome: flags.length === 0 ? "converted" : "converted-with-flags", recipe: recipe.status, flags } };
@@ -985,6 +988,15 @@ export function convertCatalogue(pipeline: SourceCatalogue, graphbox: GraphboxCa
     }
     if (dataset.name === name) {
       throw new Error(`the name override for ${id} repeats the name the catalogue already gives it`);
+    }
+  }
+  for (const id of Object.keys(curation.domains)) {
+    const dataset = Object.values(pipeline.datasets).find((candidate) => candidate.id === id);
+    if (dataset === undefined) {
+      throw new Error(`the domain curated for ${id} names no dataset of the catalogue`);
+    }
+    if (dataset.domain !== undefined) {
+      throw new Error(`the domain curated for ${id} repeats the catalogue, which already gives it one`);
     }
   }
   const entries: Entry[] = [];

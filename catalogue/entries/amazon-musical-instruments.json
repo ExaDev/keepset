@@ -9,6 +9,7 @@
     "file": "crosswalks/graph-v1/rated.json"
   },
   "description": "Directed bipartite user-product review network for Musical Instruments on Amazon. Users are linked to products they reviewed; edge weights are normalised star ratings.",
+  "domain": "Product recommendation network",
   "expectedCounts": {
     "edges": 500176,
     "nodes": 422277
@@ -24,6 +25,7 @@
     "cyclic": true,
     "density": 0.000005609950357320079,
     "directed": true,
+    "downloadBytes": 20376609,
     "edgeTypes": 1,
     "heterogeneous": true,
     "multigraph": false,

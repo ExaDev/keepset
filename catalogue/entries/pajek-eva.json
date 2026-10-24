@@ -12,6 +12,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "Corporate ownership network from EVA database. 8,343 entities, 6,726 ownership links.",
+  "domain": "Economic network",
   "expectedCounts": {
     "edges": 6726,
     "nodes": 8322
@@ -30,6 +31,7 @@
     "cyclic": true,
     "density": 0.00009317013848024793,
     "directed": true,
+    "downloadBytes": 208099,
     "edgeTypes": 1,
     "heterogeneous": true,
     "multigraph": false,

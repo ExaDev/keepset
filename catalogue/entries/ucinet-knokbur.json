@@ -12,6 +12,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "Information exchange among 10 organizations in Indianapolis.",
+  "domain": "Social network",
   "expectedCounts": {
     "edges": 49,
     "nodes": 10

@@ -21,6 +21,7 @@
   "name": "Ciona intestinalis Gene Regulatory Network",
   "properties": {
     "directed": true,
+    "downloadBytes": 14492,
     "heterogeneous": true,
     "multigraph": false,
     "selfLoops": true,

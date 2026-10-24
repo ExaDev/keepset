@@ -12,6 +12,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "Citation network around small-world research papers.",
+  "domain": "Citation network",
   "expectedCounts": {
     "edges": 1988,
     "nodes": 396
@@ -30,6 +31,7 @@
     "cyclic": false,
     "density": 0.006354686101521545,
     "directed": true,
+    "downloadBytes": 19535,
     "edgeTypes": 1,
     "heterogeneous": false,
     "multigraph": true,

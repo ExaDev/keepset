@@ -58,6 +58,7 @@
     "toronto"
   ],
   "properties": {
+    "downloadBytes": 86770923,
     "probedNodes": 201282,
     "surveyId": "or-67"
   },

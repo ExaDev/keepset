@@ -55,6 +55,7 @@
     "buffalo"
   ],
   "properties": {
+    "downloadBytes": 5295265,
     "probedNodes": 139389,
     "surveyId": "or-97"
   },

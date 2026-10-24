@@ -12,6 +12,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "Graph Drawing 1995 contest, Problem A. 36 vertices, 57 arcs.",
+  "domain": "Graph drawing contest",
   "expectedCounts": {
     "edges": 57,
     "nodes": 36
@@ -31,6 +32,7 @@
     "cyclic": true,
     "density": 0.06613756613756613,
     "directed": true,
+    "downloadBytes": 4087,
     "edgeTypes": 1,
     "heterogeneous": true,
     "multigraph": false,

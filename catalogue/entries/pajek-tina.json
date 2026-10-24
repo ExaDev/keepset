@@ -12,6 +12,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "Multi-relational social network study (discussion/cognitive agreement).",
+  "domain": "Social network",
   "expectedCounts": {
     "edges": 41,
     "nodes": 11
@@ -31,6 +32,7 @@
     "cyclic": true,
     "density": 0.37272727272727274,
     "directed": true,
+    "downloadBytes": 3033,
     "edgeTypes": 1,
     "heterogeneous": true,
     "multigraph": false,

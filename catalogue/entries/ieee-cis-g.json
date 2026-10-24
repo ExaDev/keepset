@@ -9,6 +9,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "Heterogeneous financial fraud detection graph derived from the IEEE-CIS fraud detection dataset. Contains transaction and identity nodes with 22 edge types representing card, address, email, and device relations.",
+  "domain": "Financial transaction network",
   "expectedCounts": {
     "edges": 1383371,
     "nodes": 1592008
@@ -24,6 +25,7 @@
     "cyclic": true,
     "density": 0.000001091637494805802,
     "directed": true,
+    "downloadBytes": 102132632,
     "edgeTypes": 1,
     "heterogeneous": true,
     "multigraph": false,

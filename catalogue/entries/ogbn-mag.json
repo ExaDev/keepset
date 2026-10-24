@@ -9,6 +9,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "Large heterogeneous graph of academic citations and collaborations from Microsoft Academic Graph. Contains 4 node types: papers, authors, institutions, and fields of study. 5 edge types: author-paper (writes), author-institution (affiliated-with), paper-venue (published-in), and topic edges. Used extensively for heterogeneous graph neural network benchmarking and node classification tasks.",
+  "domain": "Academic heterogeneous",
   "expectedCounts": {
     "edges": 21111007,
     "nodes": 1939743
@@ -25,6 +26,7 @@
     "cyclic": true,
     "density": 0.000011210900219752259,
     "directed": true,
+    "downloadBytes": 431762160,
     "edgeTypes": 1,
     "heterogeneous": true,
     "multigraph": false,

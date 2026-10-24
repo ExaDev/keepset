@@ -12,6 +12,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "Giant component of the network of users of the Pretty-Good-Privacy algorithm for secure information interchange.",
+  "domain": "Social network",
   "expectedCounts": {
     "edges": 24340,
     "nodes": 10680
@@ -30,6 +31,7 @@
     "cyclic": false,
     "density": 0.00021320151945099995,
     "directed": false,
+    "downloadBytes": 209894,
     "edgeTypes": 1,
     "heterogeneous": false,
     "multigraph": true,

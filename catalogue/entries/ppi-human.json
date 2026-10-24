@@ -9,6 +9,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "Undirected, weighted network of human protein interactions. Nodes represent proteins, edges represent confirmed physical interactions. Edge weights represent confidence scores (0-1) from interaction prediction methods and experimental evidence aggregation. Heavily connected biological network useful for studying scale-free properties in real biological systems.",
+  "domain": "Biological network",
   "expectedCounts": {
     "edges": 987845,
     "nodes": 20744
@@ -25,6 +26,7 @@
     "cyclic": true,
     "density": 0.0026566697784573623,
     "directed": false,
+    "downloadBytes": 188866951,
     "edgeTypes": 1,
     "heterogeneous": true,
     "multigraph": false,

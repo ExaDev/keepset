@@ -9,6 +9,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "Heterogeneous social network derived from the Slovak Pokec social network. Contains users with multiple attribute-based node types and 31 edge types representing different social interactions and attribute similarities.",
+  "domain": "Social network",
   "expectedCounts": {
     "edges": 30622564,
     "nodes": 1632803
@@ -24,6 +25,7 @@
     "cyclic": true,
     "density": 0.000016730379518484355,
     "directed": true,
+    "downloadBytes": 132454730,
     "edgeTypes": 1,
     "heterogeneous": true,
     "multigraph": false,

@@ -12,6 +12,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "Friendship choices among 67 prison inmates in a 1950s study.",
+  "domain": "Social network",
   "expectedCounts": {
     "edges": 182,
     "nodes": 67
@@ -31,6 +32,7 @@
     "cyclic": true,
     "density": 0.04115784712799638,
     "directed": false,
+    "downloadBytes": 9301,
     "edgeTypes": 1,
     "heterogeneous": false,
     "multigraph": true,

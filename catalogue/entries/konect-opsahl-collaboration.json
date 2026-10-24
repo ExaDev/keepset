@@ -12,6 +12,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "Bipartite authorship network of the arXiv condensed matter section (cond-mat) from 1995 to 1999: an edge joins an author, a left node, and a paper they wrote, a right node. The network is unweighted and has no repeated pairs.",
+  "domain": "Collaboration network",
   "expectedCounts": {
     "edges": 58595,
     "nodes": 38741
@@ -30,6 +31,7 @@
     "cyclic": true,
     "density": 0.00007808365090394136,
     "directed": false,
+    "downloadBytes": 211241,
     "edgeTypes": 1,
     "heterogeneous": false,
     "multigraph": false,

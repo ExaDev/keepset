@@ -12,6 +12,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "Alliance and antagonism relations among 16 tribes in the Eastern Central Highlands of New Guinea.",
+  "domain": "Social network",
   "expectedCounts": {
     "edges": 58,
     "nodes": 16
@@ -31,6 +32,7 @@
     "cyclic": true,
     "density": 0.24166666666666667,
     "directed": false,
+    "downloadBytes": 1428,
     "edgeTypes": 1,
     "heterogeneous": true,
     "multigraph": true,

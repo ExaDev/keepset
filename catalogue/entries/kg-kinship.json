@@ -22,6 +22,7 @@
   "name": "Kinship Knowledge Graph",
   "properties": {
     "directed": true,
+    "downloadBytes": 42703,
     "heterogeneous": true,
     "multigraph": false,
     "selfLoops": false,

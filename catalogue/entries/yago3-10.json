@@ -9,6 +9,7 @@
     "file": "crosswalks/graph-v1/relations-split.json"
   },
   "description": "Large heterogeneous knowledge graph automatically extracted from Wikipedia and Wikidata. Contains 5 node types: entities, types, literals, relations, and concepts. Contains 37+ relation types (isA, created, hasCapital, etc.). Serves as a reference knowledge base for information retrieval and entity linking. Demonstrates multi-relational graph structure typical of Linked Open Data.",
+  "domain": "Knowledge graph",
   "expectedCounts": {
     "edges": 1089040,
     "nodes": 123182
@@ -24,6 +25,7 @@
     "cyclic": true,
     "density": 0.0004193789497930294,
     "directed": true,
+    "downloadBytes": 19314355,
     "edgeTypes": 37,
     "heterogeneous": true,
     "multigraph": true,

@@ -9,6 +9,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "Co-appearance network of characters in Victor Hugo's novel Les Miserables. Edges connect characters that appear in the same chapter.",
+  "domain": "Social network",
   "expectedCounts": {
     "edges": 254,
     "nodes": 77
@@ -26,6 +27,7 @@
     "cyclic": true,
     "density": 0.08680792891319207,
     "directed": false,
+    "downloadBytes": 2517,
     "edgeTypes": 1,
     "heterogeneous": false,
     "multigraph": false,

@@ -1,2342 +1,613 @@
 {
-  "matrices": {
-    "AG-Monien/bfly": {
-      "downloadBytes": 1090926,
-      "kind": "Undirected Graph Sequence"
-    },
-    "AG-Monien/cage": {
-      "downloadBytes": 40588,
-      "kind": "Undirected Graph Sequence"
-    },
-    "AG-Monien/cca": {
-      "downloadBytes": 853790,
-      "kind": "Undirected Graph Sequence"
-    },
-    "AG-Monien/ccc": {
-      "downloadBytes": 872178,
-      "kind": "Undirected Graph Sequence"
-    },
-    "AG-Monien/debr": {
-      "downloadBytes": 19263403,
-      "kind": "Undirected Graph Sequence"
-    },
-    "AG-Monien/se": {
-      "downloadBytes": 588402,
-      "kind": "Undirected Graph Sequence"
-    },
-    "Andrews/Andrews": {
-      "downloadBytes": 1795158,
-      "kind": "Computer Graphics/Vision Problem"
-    },
-    "Arenas/PGPgiantcompo": {
-      "downloadBytes": 126566,
-      "kind": "Undirected Multigraph"
-    },
-    "Arenas/celegans_metabolic": {
-      "downloadBytes": 13034,
-      "kind": "Undirected Multigraph"
-    },
-    "Arenas/email": {
-      "downloadBytes": 15082,
-      "kind": "Undirected Graph"
-    },
-    "Arenas/jazz": {
-      "downloadBytes": 44330,
-      "kind": "Undirected Multigraph"
-    },
-    "Bai/qh1484": {
-      "downloadBytes": 28247,
-      "kind": "Power Network Problem"
-    },
-    "Bai/qh768": {
-      "downloadBytes": 14357,
-      "kind": "Power Network Problem"
-    },
-    "Bai/qh882": {
-      "downloadBytes": 16539,
-      "kind": "Power Network Problem"
-    },
-    "Barabasi/NotreDame_actors": {
-      "downloadBytes": 5294613,
-      "kind": "Bipartite Graph"
-    },
-    "Barabasi/NotreDame_www": {
-      "downloadBytes": 2472322,
-      "kind": "Directed Graph"
-    },
-    "Barabasi/NotreDame_yeast": {
-      "downloadBytes": 8601,
-      "kind": "Undirected Graph"
-    },
-    "Belcastro/human_gene1": {
-      "downloadBytes": 145422936,
-      "kind": "Undirected Weighted Graph"
-    },
-    "Belcastro/human_gene2": {
-      "downloadBytes": 62401693,
-      "kind": "Undirected Weighted Graph"
-    },
-    "Belcastro/mouse_gene": {
-      "downloadBytes": 163743633,
-      "kind": "Undirected Weighted Graph"
-    },
-    "Buss/12month1": {
-      "downloadBytes": 63449712,
-      "kind": "Undirected Bipartite Graph"
-    },
-    "Buss/connectus": {
-      "downloadBytes": 2760011,
-      "kind": "Undirected Bipartite Graph"
-    },
-    "Bydder/mri1": {
-      "downloadBytes": 7540889,
-      "kind": "Computer Graphics/Vision Problem"
-    },
-    "Bydder/mri2": {
-      "downloadBytes": 7924221,
-      "kind": "Computer Graphics/Vision Problem"
-    },
-    "Clark/tomographic1": {
-      "downloadBytes": 3618358,
-      "kind": "Computer Graphics/Vision Problem"
-    },
-    "DIMACS10/144": {
-      "downloadBytes": 3847471,
-      "kind": "Undirected Graph"
-    },
-    "DIMACS10/333SP": {
-      "downloadBytes": 64964439,
-      "kind": "Undirected Graph"
-    },
-    "DIMACS10/598a": {
-      "downloadBytes": 2935154,
-      "kind": "Undirected Graph"
-    },
-    "DIMACS10/AS365": {
-      "downloadBytes": 77269576,
-      "kind": "Undirected Graph"
-    },
-    "DIMACS10/G_n_pin_pout": {
-      "downloadBytes": 1916406,
-      "kind": "Random Undirected Graph"
-    },
-    "DIMACS10/M6": {
-      "downloadBytes": 70670962,
-      "kind": "Undirected Graph"
-    },
-    "DIMACS10/NACA0015": {
-      "downloadBytes": 20325417,
-      "kind": "Undirected Graph"
-    },
-    "DIMACS10/NLR": {
-      "downloadBytes": 84917056,
-      "kind": "Undirected Graph"
-    },
-    "DIMACS10/adaptive": {
-      "downloadBytes": 46684528,
-      "kind": "Undirected Graph"
-    },
-    "DIMACS10/ak2010": {
-      "downloadBytes": 1305894,
-      "kind": "Undirected Weighted Graph"
-    },
-    "DIMACS10/al2010": {
-      "downloadBytes": 7291521,
-      "kind": "Undirected Weighted Graph"
-    },
-    "DIMACS10/ar2010": {
-      "downloadBytes": 5336610,
-      "kind": "Undirected Weighted Graph"
-    },
-    "DIMACS10/asia_osm": {
-      "downloadBytes": 125844689,
-      "kind": "Undirected Graph"
-    },
-    "DIMACS10/auto": {
-      "downloadBytes": 12909024,
-      "kind": "Undirected Graph"
-    },
-    "DIMACS10/az2010": {
-      "downloadBytes": 7231984,
-      "kind": "Undirected Weighted Graph"
-    },
-    "DIMACS10/belgium_osm": {
-      "downloadBytes": 15008231,
-      "kind": "Undirected Graph"
-    },
-    "DIMACS10/ca2010": {
-      "downloadBytes": 21072110,
-      "kind": "Undirected Weighted Graph"
-    },
-    "DIMACS10/caidaRouterLevel": {
-      "downloadBytes": 2418742,
-      "kind": "Undirected Graph"
-    },
-    "DIMACS10/channel-500x100x100-b050": {
-      "downloadBytes": 105116666,
-      "kind": "Undirected Graph"
-    },
-    "DIMACS10/chesapeake": {
-      "downloadBytes": 3744,
-      "kind": "Undirected Graph"
-    },
-    "DIMACS10/citationCiteseer": {
-      "downloadBytes": 5082095,
-      "kind": "Undirected Graph"
-    },
-    "DIMACS10/co2010": {
-      "downloadBytes": 5770203,
-      "kind": "Undirected Weighted Graph"
-    },
-    "DIMACS10/coAuthorsCiteseer": {
-      "downloadBytes": 2435298,
-      "kind": "Undirected Graph"
-    },
-    "DIMACS10/coAuthorsDBLP": {
-      "downloadBytes": 3206075,
-      "kind": "Undirected Graph"
-    },
-    "DIMACS10/coPapersCiteseer": {
-      "downloadBytes": 36652888,
-      "kind": "Undirected Graph"
-    },
-    "DIMACS10/coPapersDBLP": {
-      "downloadBytes": 36298718,
-      "kind": "Undirected Graph"
-    },
-    "DIMACS10/cs4": {
-      "downloadBytes": 181944,
-      "kind": "Undirected Graph"
-    },
-    "DIMACS10/ct2010": {
-      "downloadBytes": 1976183,
-      "kind": "Undirected Weighted Graph"
-    },
-    "DIMACS10/cti": {
-      "downloadBytes": 152017,
-      "kind": "Undirected Graph"
-    },
-    "DIMACS10/data": {
-      "downloadBytes": 34529,
-      "kind": "Undirected Graph"
-    },
-    "DIMACS10/de2010": {
-      "downloadBytes": 683876,
-      "kind": "Undirected Weighted Graph"
-    },
-    "DIMACS10/delaunay_n10": {
-      "downloadBytes": 10870,
-      "kind": "Undirected Graph"
-    },
-    "DIMACS10/delaunay_n11": {
-      "downloadBytes": 19827,
-      "kind": "Undirected Graph"
-    },
-    "DIMACS10/delaunay_n12": {
-      "downloadBytes": 35632,
-      "kind": "Undirected Graph"
-    },
-    "DIMACS10/delaunay_n13": {
-      "downloadBytes": 68184,
-      "kind": "Undirected Graph"
-    },
-    "DIMACS10/delaunay_n14": {
-      "downloadBytes": 133848,
-      "kind": "Undirected Graph"
-    },
-    "DIMACS10/delaunay_n15": {
-      "downloadBytes": 266967,
-      "kind": "Undirected Graph"
-    },
-    "DIMACS10/delaunay_n16": {
-      "downloadBytes": 532154,
-      "kind": "Undirected Graph"
-    },
-    "DIMACS10/delaunay_n17": {
-      "downloadBytes": 1071728,
-      "kind": "Undirected Graph"
-    },
-    "DIMACS10/delaunay_n18": {
-      "downloadBytes": 2159159,
-      "kind": "Undirected Graph"
-    },
-    "DIMACS10/delaunay_n19": {
-      "downloadBytes": 4329256,
-      "kind": "Undirected Graph"
-    },
-    "DIMACS10/delaunay_n20": {
-      "downloadBytes": 8652052,
-      "kind": "Undirected Graph"
-    },
-    "DIMACS10/delaunay_n21": {
-      "downloadBytes": 17267014,
-      "kind": "Undirected Graph"
-    },
-    "DIMACS10/delaunay_n22": {
-      "downloadBytes": 34463641,
-      "kind": "Undirected Graph"
-    },
-    "DIMACS10/delaunay_n23": {
-      "downloadBytes": 69135195,
-      "kind": "Undirected Graph"
-    },
-    "DIMACS10/delaunay_n24": {
-      "downloadBytes": 141041886,
-      "kind": "Undirected Graph"
-    },
-    "DIMACS10/europe_osm": {
-      "downloadBytes": 543648237,
-      "kind": "Undirected Graph"
-    },
-    "DIMACS10/fe_4elt2": {
-      "downloadBytes": 96328,
-      "kind": "Undirected Graph"
-    },
-    "DIMACS10/fe_body": {
-      "downloadBytes": 394204,
-      "kind": "Undirected Graph"
-    },
-    "DIMACS10/fe_ocean": {
-      "downloadBytes": 1580590,
-      "kind": "Undirected Graph"
-    },
-    "DIMACS10/fe_rotor": {
-      "downloadBytes": 1897512,
-      "kind": "Undirected Graph"
-    },
-    "DIMACS10/fe_sphere": {
-      "downloadBytes": 154912,
-      "kind": "Undirected Graph"
-    },
-    "DIMACS10/fe_tooth": {
-      "downloadBytes": 1134403,
-      "kind": "Undirected Graph"
-    },
-    "DIMACS10/fl2010": {
-      "downloadBytes": 13864196,
-      "kind": "Undirected Weighted Graph"
-    },
-    "DIMACS10/ga2010": {
-      "downloadBytes": 8384909,
-      "kind": "Undirected Weighted Graph"
-    },
-    "DIMACS10/germany_osm": {
-      "downloadBytes": 124650835,
-      "kind": "Undirected Graph"
-    },
-    "DIMACS10/great-britain_osm": {
-      "downloadBytes": 80011603,
-      "kind": "Undirected Graph"
-    },
-    "DIMACS10/hi2010": {
-      "downloadBytes": 726256,
-      "kind": "Undirected Weighted Graph"
-    },
-    "DIMACS10/hugebubbles-00000": {
-      "downloadBytes": 179086260,
-      "kind": "Undirected Graph"
-    },
-    "DIMACS10/hugebubbles-00010": {
-      "downloadBytes": 226152014,
-      "kind": "Undirected Graph"
-    },
-    "DIMACS10/hugebubbles-00020": {
-      "downloadBytes": 244642521,
-      "kind": "Undirected Graph"
-    },
-    "DIMACS10/hugetrace-00000": {
-      "downloadBytes": 43425453,
-      "kind": "Undirected Graph"
-    },
-    "DIMACS10/hugetrace-00010": {
-      "downloadBytes": 122894345,
-      "kind": "Undirected Graph"
-    },
-    "DIMACS10/hugetrace-00020": {
-      "downloadBytes": 169907645,
-      "kind": "Undirected Graph"
-    },
-    "DIMACS10/hugetric-00000": {
-      "downloadBytes": 53121643,
-      "kind": "Undirected Graph"
-    },
-    "DIMACS10/hugetric-00010": {
-      "downloadBytes": 73373186,
-      "kind": "Undirected Graph"
-    },
-    "DIMACS10/hugetric-00020": {
-      "downloadBytes": 79397133,
-      "kind": "Undirected Graph"
-    },
-    "DIMACS10/ia2010": {
-      "downloadBytes": 6060326,
-      "kind": "Undirected Weighted Graph"
-    },
-    "DIMACS10/id2010": {
-      "downloadBytes": 4311766,
-      "kind": "Undirected Weighted Graph"
-    },
-    "DIMACS10/il2010": {
-      "downloadBytes": 12843036,
-      "kind": "Undirected Weighted Graph"
-    },
-    "DIMACS10/in2010": {
-      "downloadBytes": 7520792,
-      "kind": "Undirected Weighted Graph"
-    },
-    "DIMACS10/italy_osm": {
-      "downloadBytes": 68151995,
-      "kind": "Undirected Graph"
-    },
-    "DIMACS10/kron_g500-logn16": {
-      "downloadBytes": 8194967,
-      "kind": "Undirected Multigraph"
-    },
-    "DIMACS10/kron_g500-logn17": {
-      "downloadBytes": 17647165,
-      "kind": "Undirected Multigraph"
-    },
-    "DIMACS10/kron_g500-logn18": {
-      "downloadBytes": 37823365,
-      "kind": "Undirected Multigraph"
-    },
-    "DIMACS10/kron_g500-logn19": {
-      "downloadBytes": 80503299,
-      "kind": "Undirected Multigraph"
-    },
-    "DIMACS10/kron_g500-logn20": {
-      "downloadBytes": 171581843,
-      "kind": "Undirected Multigraph"
-    },
-    "DIMACS10/kron_g500-logn21": {
-      "downloadBytes": 365874566,
-      "kind": "Undirected Multigraph"
-    },
-    "DIMACS10/ks2010": {
-      "downloadBytes": 6638181,
-      "kind": "Undirected Weighted Graph"
-    },
-    "DIMACS10/ky2010": {
-      "downloadBytes": 4606358,
-      "kind": "Undirected Weighted Graph"
-    },
-    "DIMACS10/la2010": {
-      "downloadBytes": 5773891,
-      "kind": "Undirected Weighted Graph"
-    },
-    "DIMACS10/luxembourg_osm": {
-      "downloadBytes": 1142869,
-      "kind": "Undirected Graph"
-    },
-    "DIMACS10/m14b": {
-      "downloadBytes": 5711303,
-      "kind": "Undirected Graph"
-    },
-    "DIMACS10/ma2010": {
-      "downloadBytes": 4545355,
-      "kind": "Undirected Weighted Graph"
-    },
-    "DIMACS10/md2010": {
-      "downloadBytes": 4091382,
-      "kind": "Undirected Weighted Graph"
-    },
-    "DIMACS10/me2010": {
-      "downloadBytes": 2011796,
-      "kind": "Undirected Weighted Graph"
-    },
-    "DIMACS10/mi2010": {
-      "downloadBytes": 9445549,
-      "kind": "Undirected Weighted Graph"
-    },
-    "DIMACS10/mn2010": {
-      "downloadBytes": 7356625,
-      "kind": "Undirected Weighted Graph"
-    },
-    "DIMACS10/mo2010": {
-      "downloadBytes": 9771730,
-      "kind": "Undirected Weighted Graph"
-    },
-    "DIMACS10/ms2010": {
-      "downloadBytes": 4936652,
-      "kind": "Undirected Weighted Graph"
-    },
-    "DIMACS10/mt2010": {
-      "downloadBytes": 3853672,
-      "kind": "Undirected Weighted Graph"
-    },
-    "DIMACS10/nc2010": {
-      "downloadBytes": 8407110,
-      "kind": "Undirected Weighted Graph"
-    },
-    "DIMACS10/nd2010": {
-      "downloadBytes": 3755679,
-      "kind": "Undirected Weighted Graph"
-    },
-    "DIMACS10/ne2010": {
-      "downloadBytes": 5386761,
-      "kind": "Undirected Weighted Graph"
-    },
-    "DIMACS10/netherlands_osm": {
-      "downloadBytes": 21481868,
-      "kind": "Undirected Graph"
-    },
-    "DIMACS10/nh2010": {
-      "downloadBytes": 1390516,
-      "kind": "Undirected Weighted Graph"
-    },
-    "DIMACS10/nj2010": {
-      "downloadBytes": 4839658,
-      "kind": "Undirected Weighted Graph"
-    },
-    "DIMACS10/nm2010": {
-      "downloadBytes": 4961043,
-      "kind": "Undirected Weighted Graph"
-    },
-    "DIMACS10/nv2010": {
-      "downloadBytes": 2495531,
-      "kind": "Undirected Weighted Graph"
-    },
-    "DIMACS10/ny2010": {
-      "downloadBytes": 10204982,
-      "kind": "Undirected Weighted Graph"
-    },
-    "DIMACS10/oh2010": {
-      "downloadBytes": 10423847,
-      "kind": "Undirected Weighted Graph"
-    },
-    "DIMACS10/ok2010": {
-      "downloadBytes": 7539190,
-      "kind": "Undirected Weighted Graph"
-    },
-    "DIMACS10/or2010": {
-      "downloadBytes": 5834230,
-      "kind": "Undirected Weighted Graph"
-    },
-    "DIMACS10/pa2010": {
-      "downloadBytes": 12161586,
-      "kind": "Undirected Weighted Graph"
-    },
-    "DIMACS10/packing-500x100x100-b050": {
-      "downloadBytes": 44400010,
-      "kind": "Undirected Graph"
-    },
-    "DIMACS10/preferentialAttachment": {
-      "downloadBytes": 2027782,
-      "kind": "Random Undirected Graph"
-    },
-    "DIMACS10/rgg_n_2_15_s0": {
-      "downloadBytes": 639795,
-      "kind": "Undirected Random Graph"
-    },
-    "DIMACS10/rgg_n_2_16_s0": {
-      "downloadBytes": 1353044,
-      "kind": "Undirected Random Graph"
-    },
-    "DIMACS10/rgg_n_2_17_s0": {
-      "downloadBytes": 2884262,
-      "kind": "Undirected Random Graph"
-    },
-    "DIMACS10/rgg_n_2_18_s0": {
-      "downloadBytes": 6154570,
-      "kind": "Undirected Random Graph"
-    },
-    "DIMACS10/rgg_n_2_19_s0": {
-      "downloadBytes": 13080253,
-      "kind": "Undirected Random Graph"
-    },
-    "DIMACS10/rgg_n_2_20_s0": {
-      "downloadBytes": 27682473,
-      "kind": "Undirected Random Graph"
-    },
-    "DIMACS10/rgg_n_2_21_s0": {
-      "downloadBytes": 58155699,
-      "kind": "Undirected Random Graph"
-    },
-    "DIMACS10/rgg_n_2_22_s0": {
-      "downloadBytes": 121819483,
-      "kind": "Undirected Random Graph"
-    },
-    "DIMACS10/rgg_n_2_23_s0": {
-      "downloadBytes": 254036886,
-      "kind": "Undirected Random Graph"
-    },
-    "DIMACS10/rgg_n_2_24_s0": {
-      "downloadBytes": 541554039,
-      "kind": "Undirected Random Graph"
-    },
-    "DIMACS10/ri2010": {
-      "downloadBytes": 715109,
-      "kind": "Undirected Weighted Graph"
-    },
-    "DIMACS10/road_central": {
-      "downloadBytes": 82733309,
-      "kind": "Undirected Graph"
-    },
-    "DIMACS10/road_usa": {
-      "downloadBytes": 118610898,
-      "kind": "Undirected Graph"
-    },
-    "DIMACS10/sc2010": {
-      "downloadBytes": 5292789,
-      "kind": "Undirected Weighted Graph"
-    },
-    "DIMACS10/sd2010": {
-      "downloadBytes": 2476323,
-      "kind": "Undirected Weighted Graph"
-    },
-    "DIMACS10/smallworld": {
-      "downloadBytes": 1227189,
-      "kind": "Random Undirected Graph"
-    },
-    "DIMACS10/t60k": {
-      "downloadBytes": 359745,
-      "kind": "Undirected Graph"
-    },
-    "DIMACS10/tn2010": {
-      "downloadBytes": 7008543,
-      "kind": "Undirected Weighted Graph"
-    },
-    "DIMACS10/tx2010": {
-      "downloadBytes": 26566848,
-      "kind": "Undirected Weighted Graph"
-    },
-    "DIMACS10/uk": {
-      "downloadBytes": 27808,
-      "kind": "Undirected Graph"
-    },
-    "DIMACS10/ut2010": {
-      "downloadBytes": 3384655,
-      "kind": "Undirected Weighted Graph"
-    },
-    "DIMACS10/va2010": {
-      "downloadBytes": 8174749,
-      "kind": "Undirected Weighted Graph"
-    },
-    "DIMACS10/venturiLevel3": {
-      "downloadBytes": 26521507,
-      "kind": "Undirected Graph"
-    },
-    "DIMACS10/vsp_barth5_1Ksep_50in_5Kout": {
-      "downloadBytes": 421577,
-      "kind": "Random Unweighted Graph"
-    },
-    "DIMACS10/vsp_bcsstk30_500sep_10in_1Kout": {
-      "downloadBytes": 7250118,
-      "kind": "Random Unweighted Graph"
-    },
-    "DIMACS10/vsp_befref_fxm_2_4_air02": {
-      "downloadBytes": 251468,
-      "kind": "Random Unweighted Graph"
-    },
-    "DIMACS10/vsp_bump2_e18_aa01_model1_crew1": {
-      "downloadBytes": 895019,
-      "kind": "Random Unweighted Graph"
-    },
-    "DIMACS10/vsp_c-30_data_data": {
-      "downloadBytes": 147056,
-      "kind": "Random Unweighted Graph"
-    },
-    "DIMACS10/vsp_c-60_data_cti_cs4": {
-      "downloadBytes": 743108,
-      "kind": "Random Unweighted Graph"
-    },
-    "DIMACS10/vsp_data_and_seymourl": {
-      "downloadBytes": 148072,
-      "kind": "Random Unweighted Graph"
-    },
-    "DIMACS10/vsp_finan512_scagr7-2c_rlfddd": {
-      "downloadBytes": 1626285,
-      "kind": "Random Unweighted Graph"
-    },
-    "DIMACS10/vsp_mod2_pgp2_slptsk": {
-      "downloadBytes": 1295070,
-      "kind": "Random Unweighted Graph"
-    },
-    "DIMACS10/vsp_model1_crew1_cr42_south31": {
-      "downloadBytes": 548373,
-      "kind": "Random Unweighted Graph"
-    },
-    "DIMACS10/vsp_msc10848_300sep_100in_1Kout": {
-      "downloadBytes": 3898536,
-      "kind": "Random Unweighted Graph"
-    },
-    "DIMACS10/vsp_p0291_seymourl_iiasa": {
-      "downloadBytes": 155950,
-      "kind": "Random Unweighted Graph"
-    },
-    "DIMACS10/vsp_sctap1-2b_and_seymourl": {
-      "downloadBytes": 424985,
-      "kind": "Random Unweighted Graph"
-    },
-    "DIMACS10/vsp_south31_slptsk": {
-      "downloadBytes": 540346,
-      "kind": "Random Unweighted Graph"
-    },
-    "DIMACS10/vsp_vibrobox_scagr7-2c_rlfddd": {
-      "downloadBytes": 1220694,
-      "kind": "Random Unweighted Graph"
-    },
-    "DIMACS10/vt2010": {
-      "downloadBytes": 918699,
-      "kind": "Undirected Weighted Graph"
-    },
-    "DIMACS10/wa2010": {
-      "downloadBytes": 5679920,
-      "kind": "Undirected Weighted Graph"
-    },
-    "DIMACS10/wi2010": {
-      "downloadBytes": 7212592,
-      "kind": "Undirected Weighted Graph"
-    },
-    "DIMACS10/wing": {
-      "downloadBytes": 544142,
-      "kind": "Undirected Graph"
-    },
-    "DIMACS10/wing_nodal": {
-      "downloadBytes": 265552,
-      "kind": "Undirected Graph"
-    },
-    "DIMACS10/wv2010": {
-      "downloadBytes": 3823826,
-      "kind": "Undirected Weighted Graph"
-    },
-    "DIMACS10/wy2010": {
-      "downloadBytes": 2545778,
-      "kind": "Undirected Weighted Graph"
-    },
-    "FlowIPM22/Spielman_k100": {
-      "kind": "Undirected Weighted Graph"
-    },
-    "FlowIPM22/Spielman_k200": {
-      "kind": "Undirected Weighted Graph"
-    },
-    "FlowIPM22/Spielman_k300": {
-      "kind": "Undirected Weighted Graph"
-    },
-    "FlowIPM22/Spielman_k400": {
-      "kind": "Undirected Weighted Graph"
-    },
-    "FlowIPM22/Spielman_k500": {
-      "kind": "Undirected Weighted Graph"
-    },
-    "FlowIPM22/Spielman_k600": {
-      "kind": "Undirected Weighted Graph"
-    },
-    "FlowIPM22/uni_chimera_i1": {
-      "kind": "Undirected Weighted Graph"
-    },
-    "FlowIPM22/uni_chimera_i2": {
-      "kind": "Undirected Weighted Graph"
-    },
-    "FlowIPM22/uni_chimera_i3": {
-      "kind": "Undirected Weighted Graph"
-    },
-    "FlowIPM22/uni_chimera_i4": {
-      "kind": "Undirected Weighted Graph"
-    },
-    "FlowIPM22/uni_chimera_i5": {
-      "kind": "Undirected Weighted Graph"
-    },
-    "GAP/GAP-kron": {
-      "kind": "Random Undirected Weighted Graph"
-    },
-    "GAP/GAP-road": {
-      "kind": "Directed Weighted Graph"
-    },
-    "GAP/GAP-twitter": {
-      "kind": "Directed Weighted Graph"
-    },
-    "GAP/GAP-urand": {
-      "kind": "Random Undirected Weighted Graph"
-    },
-    "GAP/GAP-web": {
-      "kind": "Directed Weighted Graph"
-    },
-    "Gaertner/big": {
-      "downloadBytes": 287228,
-      "kind": "Directed Weighted Graph"
-    },
-    "Gaertner/nopoly": {
-      "downloadBytes": 142135,
-      "kind": "Undirected Weighted Graph"
-    },
-    "Gaertner/pesa": {
-      "downloadBytes": 245202,
-      "kind": "Directed Weighted Graph"
-    },
-    "GenBank/kmer_A2a": {
-      "kind": "Undirected Graph"
-    },
-    "GenBank/kmer_P1a": {
-      "kind": "Undirected Graph"
-    },
-    "GenBank/kmer_U1a": {
-      "kind": "Undirected Graph"
-    },
-    "GenBank/kmer_V1r": {
-      "kind": "Undirected Graph"
-    },
-    "GenBank/kmer_V2a": {
-      "kind": "Undirected Graph"
-    },
-    "Gleich/flickr": {
-      "downloadBytes": 32704322,
-      "kind": "Directed Graph"
-    },
-    "Gleich/minnesota": {
-      "downloadBytes": 23015,
-      "kind": "Undirected Graph"
-    },
-    "Gleich/usroads": {
-      "downloadBytes": 1013706,
-      "kind": "Undirected Graph"
-    },
-    "Gleich/usroads-48": {
-      "downloadBytes": 990717,
-      "kind": "Undirected Graph"
-    },
-    "Gleich/wb-cs-stanford": {
-      "downloadBytes": 91848,
-      "kind": "Directed Graph"
-    },
-    "Gleich/wb-edu": {
-      "downloadBytes": 138842052,
-      "kind": "Directed Graph"
-    },
-    "Gleich/wikipedia-20051105": {
-      "downloadBytes": 78560245,
-      "kind": "Directed Graph"
-    },
-    "Gleich/wikipedia-20060925": {
-      "downloadBytes": 154046291,
-      "kind": "Directed Graph"
-    },
-    "Gleich/wikipedia-20061104": {
-      "downloadBytes": 163341991,
-      "kind": "Directed Graph"
-    },
-    "Gleich/wikipedia-20070206": {
-      "downloadBytes": 188025323,
-      "kind": "Directed Graph"
-    },
-    "Gset/G1": {
-      "downloadBytes": 48083,
-      "kind": "Undirected Random Graph"
-    },
-    "Gset/G10": {
-      "downloadBytes": 55180,
-      "kind": "Undirected Weighted Random Graph"
-    },
-    "Gset/G11": {
-      "downloadBytes": 5926,
-      "kind": "Undirected Weighted Random Graph"
-    },
-    "Gset/G12": {
-      "downloadBytes": 6349,
-      "kind": "Undirected Weighted Random Graph"
-    },
-    "Gset/G13": {
-      "downloadBytes": 6412,
-      "kind": "Undirected Weighted Random Graph"
-    },
-    "Gset/G14": {
-      "downloadBytes": 13268,
-      "kind": "Duplicate Undirected Random Graph"
-    },
-    "Gset/G15": {
-      "downloadBytes": 13271,
-      "kind": "Duplicate Undirected Random Graph"
-    },
-    "Gset/G16": {
-      "downloadBytes": 13208,
-      "kind": "Duplicate Undirected Random Graph"
-    },
-    "Gset/G17": {
-      "downloadBytes": 13197,
-      "kind": "Duplicate Undirected Random Graph"
-    },
-    "Gset/G18": {
-      "downloadBytes": 15170,
-      "kind": "Undirected Weighted Random Graph"
-    },
-    "Gset/G19": {
-      "downloadBytes": 15092,
-      "kind": "Undirected Weighted Random Graph"
-    },
-    "Gset/G2": {
-      "downloadBytes": 48374,
-      "kind": "Undirected Random Graph"
-    },
-    "Gset/G20": {
-      "downloadBytes": 15079,
-      "kind": "Undirected Weighted Random Graph"
-    },
-    "Gset/G21": {
-      "downloadBytes": 15069,
-      "kind": "Undirected Weighted Random Graph"
-    },
-    "Gset/G22": {
-      "downloadBytes": 60618,
-      "kind": "Undirected Random Graph"
-    },
-    "Gset/G23": {
-      "downloadBytes": 60486,
-      "kind": "Undirected Random Graph"
-    },
-    "Gset/G24": {
-      "downloadBytes": 60541,
-      "kind": "Undirected Random Graph"
-    },
-    "Gset/G25": {
-      "downloadBytes": 60517,
-      "kind": "Undirected Random Graph"
-    },
-    "Gset/G26": {
-      "downloadBytes": 60530,
-      "kind": "Undirected Random Graph"
-    },
-    "Gset/G27": {
-      "downloadBytes": 69116,
-      "kind": "Undirected Weighted Random Graph"
-    },
-    "Gset/G28": {
-      "downloadBytes": 69136,
-      "kind": "Undirected Weighted Random Graph"
-    },
-    "Gset/G29": {
-      "downloadBytes": 68964,
-      "kind": "Undirected Weighted Random Graph"
-    },
-    "Gset/G3": {
-      "downloadBytes": 48247,
-      "kind": "Undirected Random Graph"
-    },
-    "Gset/G30": {
-      "downloadBytes": 69259,
-      "kind": "Undirected Weighted Random Graph"
-    },
-    "Gset/G31": {
-      "downloadBytes": 69043,
-      "kind": "Undirected Weighted Random Graph"
-    },
-    "Gset/G32": {
-      "downloadBytes": 15812,
-      "kind": "Undirected Weighted Random Graph"
-    },
-    "Gset/G33": {
-      "downloadBytes": 16374,
-      "kind": "Undirected Weighted Random Graph"
-    },
-    "Gset/G34": {
-      "downloadBytes": 16570,
-      "kind": "Undirected Weighted Random Graph"
-    },
-    "Gset/G35": {
-      "downloadBytes": 35526,
-      "kind": "Duplicate Undirected Random Graph"
-    },
-    "Gset/G36": {
-      "downloadBytes": 35697,
-      "kind": "Duplicate Undirected Random Graph"
-    },
-    "Gset/G37": {
-      "downloadBytes": 35654,
-      "kind": "Duplicate Undirected Random Graph"
-    },
-    "Gset/G38": {
-      "downloadBytes": 35544,
-      "kind": "Duplicate Undirected Random Graph"
-    },
-    "Gset/G39": {
-      "downloadBytes": 40205,
-      "kind": "Undirected Weighted Random Graph"
-    },
-    "Gset/G4": {
-      "downloadBytes": 48362,
-      "kind": "Undirected Random Graph"
-    },
-    "Gset/G40": {
-      "downloadBytes": 40297,
-      "kind": "Undirected Weighted Random Graph"
-    },
-    "Gset/G41": {
-      "downloadBytes": 40329,
-      "kind": "Undirected Weighted Random Graph"
-    },
-    "Gset/G42": {
-      "downloadBytes": 40212,
-      "kind": "Undirected Weighted Random Graph"
-    },
-    "Gset/G43": {
-      "downloadBytes": 27688,
-      "kind": "Undirected Random Graph"
-    },
-    "Gset/G44": {
-      "downloadBytes": 27693,
-      "kind": "Undirected Random Graph"
-    },
-    "Gset/G45": {
-      "downloadBytes": 27686,
-      "kind": "Undirected Random Graph"
-    },
-    "Gset/G46": {
-      "downloadBytes": 27771,
-      "kind": "Undirected Random Graph"
-    },
-    "Gset/G47": {
-      "downloadBytes": 27744,
-      "kind": "Undirected Random Graph"
-    },
-    "Gset/G48": {
-      "downloadBytes": 22930,
-      "kind": "Undirected Random Graph"
-    },
-    "Gset/G49": {
-      "downloadBytes": 20144,
-      "kind": "Undirected Random Graph"
-    },
-    "Gset/G5": {
-      "downloadBytes": 48290,
-      "kind": "Undirected Random Graph"
-    },
-    "Gset/G50": {
-      "downloadBytes": 22928,
-      "kind": "Undirected Random Graph"
-    },
-    "Gset/G51": {
-      "downloadBytes": 16865,
-      "kind": "Undirected Random Graph"
-    },
-    "Gset/G52": {
-      "downloadBytes": 16788,
-      "kind": "Undirected Random Graph"
-    },
-    "Gset/G53": {
-      "downloadBytes": 16846,
-      "kind": "Undirected Random Graph"
-    },
-    "Gset/G54": {
-      "downloadBytes": 16830,
-      "kind": "Undirected Random Graph"
-    },
-    "Gset/G55": {
-      "downloadBytes": 46383,
-      "kind": "Duplicate Undirected Random Graph"
-    },
-    "Gset/G56": {
-      "downloadBytes": 52630,
-      "kind": "Undirected Weighted Random Graph"
-    },
-    "Gset/G57": {
-      "downloadBytes": 41878,
-      "kind": "Undirected Weighted Random Graph"
-    },
-    "Gset/G58": {
-      "downloadBytes": 94541,
-      "kind": "Duplicate Undirected Random Graph"
-    },
-    "Gset/G59": {
-      "downloadBytes": 107364,
-      "kind": "Undirected Weighted Random Graph"
-    },
-    "Gset/G6": {
-      "downloadBytes": 55184,
-      "kind": "Undirected Weighted Random Graph"
-    },
-    "Gset/G60": {
-      "downloadBytes": 64952,
-      "kind": "Duplicate Undirected Random Graph"
-    },
-    "Gset/G61": {
-      "downloadBytes": 73602,
-      "kind": "Undirected Weighted Random Graph"
-    },
-    "Gset/G62": {
-      "downloadBytes": 60268,
-      "kind": "Undirected Weighted Random Graph"
-    },
-    "Gset/G63": {
-      "downloadBytes": 135504,
-      "kind": "Duplicate Undirected Random Graph"
-    },
-    "Gset/G64": {
-      "downloadBytes": 154054,
-      "kind": "Undirected Weighted Random Graph"
-    },
-    "Gset/G65": {
-      "downloadBytes": 68702,
-      "kind": "Undirected Weighted Random Graph"
-    },
-    "Gset/G66": {
-      "downloadBytes": 67357,
-      "kind": "Undirected Weighted Random Graph"
-    },
-    "Gset/G67": {
-      "downloadBytes": 74843,
-      "kind": "Undirected Weighted Random Graph"
-    },
-    "Gset/G7": {
-      "downloadBytes": 55387,
-      "kind": "Undirected Weighted Random Graph"
-    },
-    "Gset/G8": {
-      "downloadBytes": 55185,
-      "kind": "Undirected Weighted Random Graph"
-    },
-    "Gset/G9": {
-      "downloadBytes": 55160,
-      "kind": "Undirected Weighted Random Graph"
-    },
-    "HB/1138_bus": {
-      "downloadBytes": 19829,
-      "kind": "Power Network Problem"
-    },
-    "HB/494_bus": {
-      "downloadBytes": 8622,
-      "kind": "Power Network Problem"
-    },
-    "HB/662_bus": {
-      "downloadBytes": 12673,
-      "kind": "Power Network Problem"
-    },
-    "HB/685_bus": {
-      "downloadBytes": 15217,
-      "kind": "Power Network Problem"
-    },
-    "HB/bcspwr01": {
-      "downloadBytes": 636,
-      "kind": "Power Network Problem"
-    },
-    "HB/bcspwr02": {
-      "downloadBytes": 688,
-      "kind": "Power Network Problem"
-    },
-    "HB/bcspwr03": {
-      "downloadBytes": 1175,
-      "kind": "Power Network Problem"
-    },
-    "HB/bcspwr04": {
-      "downloadBytes": 2997,
-      "kind": "Power Network Problem"
-    },
-    "HB/bcspwr05": {
-      "downloadBytes": 3388,
-      "kind": "Power Network Problem"
-    },
-    "HB/bcspwr06": {
-      "downloadBytes": 10254,
-      "kind": "Power Network Problem"
-    },
-    "HB/bcspwr07": {
-      "downloadBytes": 11352,
-      "kind": "Power Network Problem"
-    },
-    "HB/bcspwr08": {
-      "downloadBytes": 11637,
-      "kind": "Power Network Problem"
-    },
-    "HB/bcspwr10": {
-      "downloadBytes": 50844,
-      "kind": "Power Network Problem"
-    },
-    "HB/eris1176": {
-      "downloadBytes": 24049,
-      "kind": "Power Network Problem"
-    },
-    "HB/gemat1": {
-      "downloadBytes": 367224,
-      "kind": "Power Network Problem"
-    },
-    "HB/gemat11": {
-      "downloadBytes": 283875,
-      "kind": "Power Network Problem Sequence"
-    },
-    "HB/gemat12": {
-      "downloadBytes": 283186,
-      "kind": "Subsequent Power Network Problem"
-    },
-    "HB/gre_1107": {
-      "downloadBytes": 22716,
-      "kind": "Directed Weighted Graph"
-    },
-    "HB/gre_115": {
-      "downloadBytes": 2139,
-      "kind": "Directed Weighted Graph"
-    },
-    "HB/gre_185": {
-      "downloadBytes": 4161,
-      "kind": "Directed Weighted Graph"
-    },
-    "HB/gre_216a": {
-      "downloadBytes": 3096,
-      "kind": "Directed Weighted Graph"
-    },
-    "HB/gre_216b": {
-      "downloadBytes": 3320,
-      "kind": "Directed Weighted Graph"
-    },
-    "HB/gre_343": {
-      "downloadBytes": 4688,
-      "kind": "Directed Weighted Graph"
-    },
-    "HB/gre_512": {
-      "downloadBytes": 7010,
-      "kind": "Directed Weighted Graph"
-    },
-    "HB/hor_131": {
-      "downloadBytes": 27252,
-      "kind": "Directed Weighted Graph"
-    },
-    "HB/ibm32": {
-      "downloadBytes": 718,
-      "kind": "Directed Graph"
-    },
-    "HVDC/hvdc1": {
-      "downloadBytes": 1204916,
-      "kind": "Power Network Problem"
-    },
-    "HVDC/hvdc2": {
-      "downloadBytes": 15426112,
-      "kind": "Power Network Problem"
-    },
-    "Hardesty/Hardesty1": {
-      "kind": "Computer Graphics/Vision Problem"
-    },
-    "Hardesty/Hardesty2": {
-      "kind": "Computer Graphics/Vision Problem"
-    },
-    "Hardesty/Hardesty3": {
-      "kind": "Computer Graphics/Vision Problem"
-    },
-    "Harvard_Seismology/JP": {
-      "downloadBytes": 173009912,
-      "kind": "Tomography Problem"
-    },
-    "IPSO/HTC_336_4438": {
-      "downloadBytes": 2323839,
-      "kind": "Power Network Problem"
-    },
-    "IPSO/HTC_336_9129": {
-      "downloadBytes": 2304967,
-      "kind": "Power Network Problem"
-    },
-    "IPSO/OPF_10000": {
-      "downloadBytes": 1955797,
-      "kind": "Power Network Problem"
-    },
-    "IPSO/OPF_3754": {
-      "downloadBytes": 666575,
-      "kind": "Power Network Problem"
-    },
-    "IPSO/OPF_6000": {
-      "downloadBytes": 1285575,
-      "kind": "Power Network Problem"
-    },
-    "IPSO/TSC_OPF_1047": {
-      "downloadBytes": 12624953,
-      "kind": "Power Network Problem"
-    },
-    "Kamvar/Stanford": {
-      "downloadBytes": 9673736,
-      "kind": "Directed Graph"
-    },
-    "Kamvar/Stanford_Berkeley": {
-      "downloadBytes": 19041928,
-      "kind": "Directed Graph"
-    },
-    "Kemelmacher/Kemelmacher": {
-      "downloadBytes": 1061196,
-      "kind": "Computer Graphics/Vision Problem"
-    },
-    "LAW/amazon-2008": {
-      "downloadBytes": 14512007,
-      "kind": "Directed Graph"
-    },
-    "LAW/arabic-2005": {
-      "downloadBytes": 1602141669,
-      "kind": "Directed Graph"
-    },
-    "LAW/cnr-2000": {
-      "downloadBytes": 7688540,
-      "kind": "Directed Graph"
-    },
-    "LAW/dblp-2010": {
-      "downloadBytes": 2235407,
-      "kind": "Undirected Graph"
-    },
-    "LAW/enron": {
-      "downloadBytes": 747744,
-      "kind": "Directed Graph"
-    },
-    "LAW/eu-2005": {
-      "downloadBytes": 47893367,
-      "kind": "Directed Graph"
-    },
-    "LAW/hollywood-2009": {
-      "downloadBytes": 159474427,
-      "kind": "Undirected Graph"
-    },
-    "LAW/in-2004": {
-      "downloadBytes": 38564988,
-      "kind": "Directed Graph"
-    },
-    "LAW/indochina-2004": {
-      "downloadBytes": 470921742,
-      "kind": "Directed Graph"
-    },
-    "LAW/it-2004": {
-      "downloadBytes": 2904222202,
-      "kind": "Directed Graph"
-    },
-    "LAW/ljournal-2008": {
-      "downloadBytes": 257721385,
-      "kind": "Directed Graph"
-    },
-    "LAW/sk-2005": {
-      "downloadBytes": 4974248982,
-      "kind": "Directed Graph"
-    },
-    "LAW/uk-2002": {
-      "downloadBytes": 761971654,
-      "kind": "Directed Graph"
-    },
-    "LAW/uk-2005": {
-      "downloadBytes": 2336896639,
-      "kind": "Directed Graph"
-    },
-    "LAW/webbase-2001": {
-      "downloadBytes": 2659847027,
-      "kind": "Directed Graph"
-    },
-    "LeGresley/LeGresley_2508": {
-      "downloadBytes": 210146,
-      "kind": "Power Network Problem"
-    },
-    "LeGresley/LeGresley_4908": {
-      "downloadBytes": 429699,
-      "kind": "Power Network Problem"
-    },
-    "LeGresley/LeGresley_87936": {
-      "downloadBytes": 8266386,
-      "kind": "Power Network Problem"
-    },
-    "LiuWenzhuo/powersim": {
-      "downloadBytes": 615857,
-      "kind": "Power Network Problem"
-    },
-    "Lourakis/bundle1": {
-      "downloadBytes": 2637491,
-      "kind": "Computer Graphics/Vision Problem"
-    },
-    "Lucifora/cell1": {
-      "downloadBytes": 150384,
-      "kind": "Directed Weighted Graph"
-    },
-    "Lucifora/cell2": {
-      "downloadBytes": 142677,
-      "kind": "Directed Weighted Graph"
-    },
-    "Luong/photogrammetry2": {
-      "downloadBytes": 391798,
-      "kind": "Computer Graphics/Vision Problem"
-    },
-    "MAWI/mawi_201512012345": {
-      "kind": "Undirected Weighted Graph"
-    },
-    "MAWI/mawi_201512020000": {
-      "kind": "Undirected Weighted Graph"
-    },
-    "MAWI/mawi_201512020030": {
-      "kind": "Undirected Weighted Graph"
-    },
-    "MAWI/mawi_201512020130": {
-      "kind": "Undirected Weighted Graph"
-    },
-    "MAWI/mawi_201512020330": {
-      "kind": "Undirected Weighted Graph"
-    },
-    "ML_Graph/Binaryalphadigs_10NN": {
-      "kind": "Undirected Weighted Graph"
-    },
-    "ML_Graph/Ecoli_10NN": {
-      "kind": "Undirected Weighted Graph"
-    },
-    "ML_Graph/Fashion_MNIST_norm_10NN": {
-      "kind": "Undirected Weighted Graph"
-    },
-    "ML_Graph/Glass_10NN": {
-      "kind": "Undirected Weighted Graph"
-    },
-    "ML_Graph/JapaneseVowelsSmall_10NN": {
-      "kind": "Undirected Weighted Graph"
-    },
-    "ML_Graph/Olivetti_norm_10NN": {
-      "kind": "Undirected Weighted Graph"
-    },
-    "ML_Graph/Plants_10NN": {
-      "kind": "Undirected Weighted Graph"
-    },
-    "ML_Graph/Spectro_10NN": {
-      "kind": "Undirected Weighted Graph"
-    },
-    "ML_Graph/Vehicle_10NN": {
-      "kind": "Undirected Weighted Graph"
-    },
-    "ML_Graph/YaleA_10NN": {
-      "kind": "Undirected Weighted Graph"
-    },
-    "ML_Graph/YaleB_10NN": {
-      "kind": "Undirected Weighted Graph"
-    },
-    "ML_Graph/breasttissue_10NN": {
-      "kind": "Undirected Weighted Graph"
-    },
-    "ML_Graph/cnae9_10NN": {
-      "kind": "Undirected Weighted Graph"
-    },
-    "ML_Graph/collins_15NN": {
-      "kind": "Undirected Weighted Graph"
-    },
-    "ML_Graph/dataset12mfeatfactors_10NN": {
-      "kind": "Undirected Weighted Graph"
-    },
-    "ML_Graph/dataset16mfeatkarhunen_10NN": {
-      "kind": "Undirected Weighted Graph"
-    },
-    "ML_Graph/dataset18mfeatmorphological_10NN": {
-      "kind": "Undirected Weighted Graph"
-    },
-    "ML_Graph/dataset20mfeatpixel_10NN": {
-      "kind": "Undirected Weighted Graph"
-    },
-    "ML_Graph/dataset22mfeatzernike_10NN": {
-      "kind": "Undirected Weighted Graph"
-    },
-    "ML_Graph/dermatology_5NN": {
-      "kind": "Undirected Weighted Graph"
-    },
-    "ML_Graph/har_10NN": {
-      "kind": "Undirected Weighted Graph"
-    },
-    "ML_Graph/indianpines_10NN": {
-      "kind": "Undirected Weighted Graph"
-    },
-    "ML_Graph/iris_dataset_30NN": {
-      "kind": "Undirected Weighted Graph"
-    },
-    "ML_Graph/k49_norm_10NN": {
-      "kind": "Undirected Weighted Graph"
-    },
-    "ML_Graph/kmnist_norm_10NN": {
-      "kind": "Undirected Weighted Graph"
-    },
-    "ML_Graph/mice_10NN": {
-      "kind": "Undirected Weighted Graph"
-    },
-    "ML_Graph/micromass_10NN": {
-      "kind": "Undirected Weighted Graph"
-    },
-    "ML_Graph/mnist_test_norm_10NN": {
-      "kind": "Undirected Weighted Graph"
-    },
-    "ML_Graph/optdigits_10NN": {
-      "kind": "Undirected Weighted Graph"
-    },
-    "ML_Graph/plantsmargin_12NN": {
-      "kind": "Undirected Weighted Graph"
-    },
-    "ML_Graph/plantstexture_10NN": {
-      "kind": "Undirected Weighted Graph"
-    },
-    "ML_Graph/semeion_10NN": {
-      "kind": "Undirected Weighted Graph"
-    },
-    "ML_Graph/umistfacesnorm_10NN": {
-      "kind": "Undirected Weighted Graph"
-    },
-    "ML_Graph/usps_norm_5NN": {
-      "kind": "Undirected Weighted Graph"
-    },
-    "ML_Graph/worms20_10NN": {
-      "kind": "Undirected Weighted Graph"
-    },
-    "ML_Graph/yeast_30NN": {
-      "kind": "Undirected Weighted Graph"
-    },
-    "Martin/marine1": {
-      "kind": "Chemical Oceanography Problem"
-    },
-    "MathWorks/Harvard500": {
-      "downloadBytes": 11807,
-      "kind": "Directed Graph"
-    },
-    "MathWorks/tomography": {
-      "downloadBytes": 277324,
-      "kind": "Computer Graphics/Vision Problem"
-    },
-    "Moqri/MISKnowledgeMap": {
-      "downloadBytes": 1474886,
-      "kind": "Undirected Weighted Graph"
-    },
-    "Newman/adjnoun": {
-      "downloadBytes": 2291,
-      "kind": "Undirected Graph"
-    },
-    "Newman/as-22july06": {
-      "downloadBytes": 205141,
-      "kind": "Undirected Graph"
-    },
-    "Newman/astro-ph": {
-      "downloadBytes": 584513,
-      "kind": "Undirected Weighted Graph"
-    },
-    "Newman/celegansneural": {
-      "downloadBytes": 9007,
-      "kind": "Directed Weighted Graph"
-    },
-    "Newman/cond-mat": {
-      "downloadBytes": 295237,
-      "kind": "Undirected Weighted Graph"
-    },
-    "Newman/cond-mat-2003": {
-      "downloadBytes": 700052,
-      "kind": "Undirected Weighted Graph"
-    },
-    "Newman/cond-mat-2005": {
-      "downloadBytes": 1013685,
-      "kind": "Undirected Weighted Graph"
-    },
-    "Newman/dolphins": {
-      "downloadBytes": 1574,
-      "kind": "Undirected Graph"
-    },
-    "Newman/football": {
-      "downloadBytes": 3460,
-      "kind": "Undirected Multigraph"
-    },
-    "Newman/hep-th": {
-      "downloadBytes": 118383,
-      "kind": "Undirected Weighted Graph"
-    },
-    "Newman/karate": {
-      "downloadBytes": 830,
-      "kind": "Undirected Graph"
-    },
-    "Newman/lesmis": {
-      "downloadBytes": 1971,
-      "kind": "Undirected Weighted Graph"
-    },
-    "Newman/netscience": {
-      "downloadBytes": 20053,
-      "kind": "Undirected Weighted Graph"
-    },
-    "Newman/polblogs": {
-      "downloadBytes": 66091,
-      "kind": "Directed Multigraph"
-    },
-    "Newman/polbooks": {
-      "downloadBytes": 3095,
-      "kind": "Undirected Graph"
-    },
-    "Newman/power": {
-      "downloadBytes": 24325,
-      "kind": "Undirected Graph"
-    },
-    "Pajek/CSphd": {
-      "downloadBytes": 24234,
-      "kind": "Directed Graph"
-    },
-    "Pajek/California": {
-      "downloadBytes": 179978,
-      "kind": "Directed Graph"
-    },
-    "Pajek/Cities": {
-      "downloadBytes": 4989,
-      "kind": "Weighted Bipartite Graph"
-    },
-    "Pajek/EAT_RS": {
-      "downloadBytes": 1311683,
-      "kind": "Directed Weighted Graph"
-    },
-    "Pajek/EAT_SR": {
-      "downloadBytes": 1323660,
-      "kind": "Directed Weighted Graph"
-    },
-    "Pajek/EPA": {
-      "downloadBytes": 83915,
-      "kind": "Directed Graph"
-    },
-    "Pajek/EVA": {
-      "downloadBytes": 80879,
-      "kind": "Directed Graph"
-    },
-    "Pajek/Erdos02": {
-      "downloadBytes": 79470,
-      "kind": "Undirected Graph"
-    },
-    "Pajek/Erdos971": {
-      "downloadBytes": 8865,
-      "kind": "Undirected Graph"
-    },
-    "Pajek/Erdos972": {
-      "downloadBytes": 63844,
-      "kind": "Undirected Graph"
-    },
-    "Pajek/Erdos981": {
-      "downloadBytes": 9120,
-      "kind": "Undirected Graph"
-    },
-    "Pajek/Erdos982": {
-      "downloadBytes": 68036,
-      "kind": "Undirected Graph"
-    },
-    "Pajek/Erdos991": {
-      "downloadBytes": 9224,
-      "kind": "Undirected Graph"
-    },
-    "Pajek/Erdos992": {
-      "downloadBytes": 70491,
-      "kind": "Undirected Graph"
-    },
-    "Pajek/FA": {
-      "downloadBytes": 402412,
-      "kind": "Directed Weighted Graph"
-    },
-    "Pajek/GD00_a": {
-      "downloadBytes": 5859,
-      "kind": "Directed Graph"
-    },
-    "Pajek/GD00_c": {
-      "downloadBytes": 10584,
-      "kind": "Directed Multigraph"
-    },
-    "Pajek/GD01_Acap": {
-      "downloadBytes": 7082,
-      "kind": "Directed Multigraph"
-    },
-    "Pajek/GD01_a": {
-      "downloadBytes": 6206,
-      "kind": "Directed Weighted Graph"
-    },
-    "Pajek/GD01_b": {
-      "downloadBytes": 987,
-      "kind": "Directed Graph"
-    },
-    "Pajek/GD01_c": {
-      "downloadBytes": 1394,
-      "kind": "Directed Multigraph"
-    },
-    "Pajek/GD02_a": {
-      "downloadBytes": 1288,
-      "kind": "Directed Graph"
-    },
-    "Pajek/GD02_b": {
-      "downloadBytes": 1867,
-      "kind": "Directed Graph"
-    },
-    "Pajek/GD06_Java": {
-      "downloadBytes": 30964,
-      "kind": "Directed Graph"
-    },
-    "Pajek/GD06_theory": {
-      "downloadBytes": 1032,
-      "kind": "Undirected Graph"
-    },
-    "Pajek/GD95_a": {
-      "downloadBytes": 1141,
-      "kind": "Directed Graph"
-    },
-    "Pajek/GD95_b": {
-      "downloadBytes": 1860,
-      "kind": "Directed Graph"
-    },
-    "Pajek/GD95_c": {
-      "downloadBytes": 1524,
-      "kind": "Directed Graph"
-    },
-    "Pajek/GD96_a": {
-      "downloadBytes": 11888,
-      "kind": "Directed Multigraph"
-    },
-    "Pajek/GD96_b": {
-      "downloadBytes": 2136,
-      "kind": "Directed Graph"
-    },
-    "Pajek/GD96_c": {
-      "downloadBytes": 1309,
-      "kind": "Undirected Graph"
-    },
-    "Pajek/GD96_d": {
-      "downloadBytes": 3602,
-      "kind": "Directed Graph"
-    },
-    "Pajek/GD97_a": {
-      "downloadBytes": 1600,
-      "kind": "Directed Graph"
-    },
-    "Pajek/GD97_b": {
-      "downloadBytes": 2573,
-      "kind": "Undirected Weighted Graph"
-    },
-    "Pajek/GD97_c": {
-      "downloadBytes": 5579,
-      "kind": "Directed Multigraph"
-    },
-    "Pajek/GD98_a": {
-      "downloadBytes": 1300,
-      "kind": "Directed Graph"
-    },
-    "Pajek/GD98_b": {
-      "downloadBytes": 2160,
-      "kind": "Directed Graph"
-    },
-    "Pajek/GD98_c": {
-      "downloadBytes": 1780,
-      "kind": "Undirected Graph"
-    },
-    "Pajek/GD99_b": {
-      "downloadBytes": 1519,
-      "kind": "Undirected Multigraph"
-    },
-    "Pajek/GD99_c": {
-      "downloadBytes": 2064,
-      "kind": "Directed Graph"
-    },
-    "Pajek/GlossGT": {
-      "downloadBytes": 1949,
-      "kind": "Directed Graph"
-    },
-    "Pajek/HEP-th": {
-      "downloadBytes": 1180281,
-      "kind": "Directed Graph"
-    },
-    "Pajek/HEP-th-new": {
-      "downloadBytes": 1229840,
-      "kind": "Directed Graph"
-    },
-    "Pajek/IMDB": {
-      "downloadBytes": 22730053,
-      "kind": "Bipartite Graph"
-    },
-    "Pajek/Journals": {
-      "downloadBytes": 22837,
-      "kind": "Undirected Weighted Graph"
-    },
-    "Pajek/Kohonen": {
-      "downloadBytes": 67446,
-      "kind": "Directed Graph"
-    },
-    "Pajek/Lederberg": {
-      "downloadBytes": 184413,
-      "kind": "Directed Multigraph"
-    },
-    "Pajek/ODLIS": {
-      "downloadBytes": 72460,
-      "kind": "Directed Multigraph"
-    },
-    "Pajek/Ragusa16": {
-      "downloadBytes": 1161,
-      "kind": "Directed Weighted Graph"
-    },
-    "Pajek/Ragusa18": {
-      "downloadBytes": 1095,
-      "kind": "Directed Weighted Graph"
-    },
-    "Pajek/Reuters911": {
-      "downloadBytes": 1573289,
-      "kind": "Undirected Weighted Graph Sequence"
-    },
-    "Pajek/Roget": {
-      "downloadBytes": 19429,
-      "kind": "Directed Graph"
-    },
-    "Pajek/Sandi_authors": {
-      "downloadBytes": 1979,
-      "kind": "Undirected Weighted Graph"
-    },
-    "Pajek/Sandi_sandi": {
-      "downloadBytes": 8249,
-      "kind": "Bipartite Graph"
-    },
-    "Pajek/SciMet": {
-      "downloadBytes": 50965,
-      "kind": "Directed Multigraph"
-    },
-    "Pajek/SmaGri": {
-      "downloadBytes": 21472,
-      "kind": "Directed Multigraph"
-    },
-    "Pajek/SmallW": {
-      "downloadBytes": 6314,
-      "kind": "Directed Multigraph"
-    },
-    "Pajek/Stranke94": {
-      "downloadBytes": 1310,
-      "kind": "Undirected Weighted Graph"
-    },
-    "Pajek/Tina_AskCal": {
-      "downloadBytes": 752,
-      "kind": "Directed Graph"
-    },
-    "Pajek/Tina_AskCog": {
-      "downloadBytes": 770,
-      "kind": "Directed Graph"
-    },
-    "Pajek/Tina_DisCal": {
-      "downloadBytes": 907,
-      "kind": "Directed Graph"
-    },
-    "Pajek/Tina_DisCog": {
-      "downloadBytes": 785,
-      "kind": "Directed Graph"
-    },
-    "Pajek/USAir97": {
-      "downloadBytes": 16041,
-      "kind": "Undirected Weighted Graph"
-    },
-    "Pajek/USpowerGrid": {
-      "downloadBytes": 23601,
-      "kind": "Undirected Graph"
-    },
-    "Pajek/Wordnet3": {
-      "downloadBytes": 853221,
-      "kind": "Directed Weighted Graph"
-    },
-    "Pajek/WorldCities": {
-      "downloadBytes": 22374,
-      "kind": "Weighted Bipartite Graph"
-    },
-    "Pajek/Zewail": {
-      "downloadBytes": 209623,
-      "kind": "Directed Multigraph"
-    },
-    "Pajek/dictionary28": {
-      "downloadBytes": 481612,
-      "kind": "Undirected Graph"
-    },
-    "Pajek/divorce": {
-      "downloadBytes": 1465,
-      "kind": "Bipartite Graph"
-    },
-    "Pajek/foldoc": {
-      "downloadBytes": 390867,
-      "kind": "Directed Weighted Graph"
-    },
-    "Pajek/football": {
-      "downloadBytes": 1397,
-      "kind": "Directed Weighted Graph"
-    },
-    "Pajek/geom": {
-      "downloadBytes": 96238,
-      "kind": "Undirected Weighted Graph"
-    },
-    "Pajek/internet": {
-      "downloadBytes": 1300995,
-      "kind": "Directed Weighted Graph"
-    },
-    "Pajek/patents": {
-      "downloadBytes": 91759652,
-      "kind": "Directed Graph"
-    },
-    "Pajek/patents_main": {
-      "downloadBytes": 4600334,
-      "kind": "Directed Weighted Graph"
-    },
-    "Pajek/yeast": {
-      "downloadBytes": 55790,
-      "kind": "Undirected Graph"
-    },
-    "PowerSystem/power197k": {
-      "kind": "Power Network Problem"
-    },
-    "QY/case39": {
-      "downloadBytes": 70796436,
-      "kind": "Power Network Problem Sequence"
-    },
-    "QY/case9": {
-      "downloadBytes": 10327274,
-      "kind": "Power Network Problem Sequence"
-    },
-    "SNAP/CollegeMsg": {
-      "kind": "Directed Temporal Multigraph"
-    },
-    "SNAP/Oregon-1": {
-      "downloadBytes": 713484,
-      "kind": "Undirected Graph Sequence"
-    },
-    "SNAP/Oregon-2": {
-      "downloadBytes": 972774,
-      "kind": "Undirected Graph Sequence"
-    },
-    "SNAP/amazon0302": {
-      "downloadBytes": 4599117,
-      "kind": "Directed Graph"
-    },
-    "SNAP/amazon0312": {
-      "downloadBytes": 11303646,
-      "kind": "Directed Graph"
-    },
-    "SNAP/amazon0505": {
-      "downloadBytes": 11718887,
-      "kind": "Directed Graph"
-    },
-    "SNAP/amazon0601": {
-      "downloadBytes": 11812992,
-      "kind": "Directed Graph"
-    },
-    "SNAP/as-735": {
-      "downloadBytes": 19517636,
-      "kind": "Undirected Graph Sequence"
-    },
-    "SNAP/as-Skitter": {
-      "downloadBytes": 33172905,
-      "kind": "Undirected Graph"
-    },
-    "SNAP/as-caida": {
-      "downloadBytes": 39905726,
-      "kind": "Directed Weighted Graph Sequence"
-    },
-    "SNAP/ca-AstroPh": {
-      "downloadBytes": 710282,
-      "kind": "Undirected Graph"
-    },
-    "SNAP/ca-CondMat": {
-      "downloadBytes": 406001,
-      "kind": "Undirected Graph"
-    },
-    "SNAP/ca-GrQc": {
-      "downloadBytes": 64632,
-      "kind": "Undirected Graph"
-    },
-    "SNAP/ca-HepPh": {
-      "downloadBytes": 399881,
-      "kind": "Undirected Graph"
-    },
-    "SNAP/ca-HepTh": {
-      "downloadBytes": 119367,
-      "kind": "Undirected Graph"
-    },
-    "SNAP/cit-HepPh": {
-      "downloadBytes": 1532654,
-      "kind": "Directed Graph"
-    },
-    "SNAP/cit-HepTh": {
-      "downloadBytes": 1221742,
-      "kind": "Directed Graph"
-    },
-    "SNAP/cit-Patents": {
-      "downloadBytes": 92787780,
-      "kind": "Directed Graph"
-    },
-    "SNAP/com-Amazon": {
-      "kind": "Undirected Graph With Communities"
-    },
-    "SNAP/com-DBLP": {
-      "kind": "Undirected Graph With Communities"
-    },
-    "SNAP/com-Friendster": {
-      "kind": "Undirected Graph With Communities"
-    },
-    "SNAP/com-LiveJournal": {
-      "kind": "Undirected Graph With Communities"
-    },
-    "SNAP/com-Orkut": {
-      "kind": "Undirected Graph With Communities"
-    },
-    "SNAP/com-Youtube": {
-      "kind": "Undirected Graph With Communities"
-    },
-    "SNAP/email-Enron": {
-      "downloadBytes": 517524,
-      "kind": "Directed Graph"
-    },
-    "SNAP/email-Eu-core": {
-      "kind": "Directed Graph With Communities"
-    },
-    "SNAP/email-Eu-core-temporal": {
-      "kind": "Directed Temporal Multigraph"
-    },
-    "SNAP/email-EuAll": {
-      "downloadBytes": 1476091,
-      "kind": "Directed Graph"
-    },
-    "SNAP/higgs-twitter": {
-      "kind": "Directed Temporal Multigraph"
-    },
-    "SNAP/loc-Brightkite": {
-      "kind": "Undirected Graph"
-    },
-    "SNAP/loc-Gowalla": {
-      "kind": "Undirected Graph"
-    },
-    "SNAP/p2p-Gnutella04": {
-      "downloadBytes": 134423,
-      "kind": "Directed Graph"
-    },
-    "SNAP/p2p-Gnutella05": {
-      "downloadBytes": 106293,
-      "kind": "Directed Graph"
-    },
-    "SNAP/p2p-Gnutella06": {
-      "downloadBytes": 104922,
-      "kind": "Directed Graph"
-    },
-    "SNAP/p2p-Gnutella08": {
-      "downloadBytes": 66590,
-      "kind": "Directed Graph"
-    },
-    "SNAP/p2p-Gnutella09": {
-      "downloadBytes": 84510,
-      "kind": "Directed Graph"
-    },
-    "SNAP/p2p-Gnutella24": {
-      "downloadBytes": 230079,
-      "kind": "Directed Graph"
-    },
-    "SNAP/p2p-Gnutella25": {
-      "downloadBytes": 190602,
-      "kind": "Directed Graph"
-    },
-    "SNAP/p2p-Gnutella30": {
-      "downloadBytes": 310661,
-      "kind": "Directed Graph"
-    },
-    "SNAP/p2p-Gnutella31": {
-      "downloadBytes": 531165,
-      "kind": "Directed Graph"
-    },
-    "SNAP/roadNet-CA": {
-      "downloadBytes": 10363140,
-      "kind": "Undirected Graph"
-    },
-    "SNAP/roadNet-PA": {
-      "downloadBytes": 5712800,
-      "kind": "Undirected Graph"
-    },
-    "SNAP/roadNet-TX": {
-      "downloadBytes": 7140012,
-      "kind": "Undirected Graph"
-    },
-    "SNAP/soc-Epinions1": {
-      "downloadBytes": 1552639,
-      "kind": "Directed Graph"
-    },
-    "SNAP/soc-LiveJournal1": {
-      "downloadBytes": 255621157,
-      "kind": "Directed Graph"
-    },
-    "SNAP/soc-Pokec": {
-      "kind": "Directed Graph"
-    },
-    "SNAP/soc-Slashdot0811": {
-      "downloadBytes": 3023537,
-      "kind": "Directed Graph"
-    },
-    "SNAP/soc-Slashdot0902": {
-      "downloadBytes": 3173121,
-      "kind": "Directed Graph"
-    },
-    "SNAP/soc-sign-Slashdot081106": {
-      "downloadBytes": 1888142,
-      "kind": "Directed Weighted Graph"
-    },
-    "SNAP/soc-sign-Slashdot090216": {
-      "downloadBytes": 1997393,
-      "kind": "Directed Weighted Graph"
-    },
-    "SNAP/soc-sign-Slashdot090221": {
-      "downloadBytes": 2009421,
-      "kind": "Directed Weighted Graph"
-    },
-    "SNAP/soc-sign-bitcoin-alpha": {
-      "kind": "Directed Weighted Temporal Graph"
-    },
-    "SNAP/soc-sign-bitcoin-otc": {
-      "kind": "Directed Weighted Temporal Graph"
-    },
-    "SNAP/soc-sign-epinions": {
-      "downloadBytes": 2977158,
-      "kind": "Directed Weighted Graph"
-    },
-    "SNAP/sx-askubuntu": {
-      "kind": "Directed Temporal Multigraph"
-    },
-    "SNAP/sx-mathoverflow": {
-      "kind": "Directed Temporal Multigraph"
-    },
-    "SNAP/sx-stackoverflow": {
-      "kind": "Directed Temporal Multigraph"
-    },
-    "SNAP/sx-superuser": {
-      "kind": "Directed Temporal Multigraph"
-    },
-    "SNAP/twitter7": {
-      "kind": "Directed Graph"
-    },
-    "SNAP/web-BerkStan": {
-      "downloadBytes": 18379157,
-      "kind": "Directed Graph"
-    },
-    "SNAP/web-Google": {
-      "downloadBytes": 23640340,
-      "kind": "Directed Graph"
-    },
-    "SNAP/web-NotreDame": {
-      "downloadBytes": 3664135,
-      "kind": "Directed Graph"
-    },
-    "SNAP/web-Stanford": {
-      "downloadBytes": 9227742,
-      "kind": "Directed Graph"
-    },
-    "SNAP/wiki-RfA": {
-      "kind": "Directed Weighted Temporal Multigraph"
-    },
-    "SNAP/wiki-Talk": {
-      "downloadBytes": 18261816,
-      "kind": "Directed Graph"
-    },
-    "SNAP/wiki-Vote": {
-      "downloadBytes": 279643,
-      "kind": "Directed Graph"
-    },
-    "SNAP/wiki-talk-temporal": {
-      "kind": "Directed Temporal Multigraph"
-    },
-    "SNAP/wiki-topcats": {
-      "kind": "Directed Graph With Communities"
-    },
-    "Schulthess/N_biocarta": {
-      "downloadBytes": 16276,
-      "kind": "Biochemical Network"
-    },
-    "Schulthess/N_pid": {
-      "downloadBytes": 29701,
-      "kind": "Biochemical Network"
-    },
-    "Schulthess/N_reactome": {
-      "downloadBytes": 149543,
-      "kind": "Biochemical Network"
-    },
-    "Simon/appu": {
-      "downloadBytes": 21362811,
-      "kind": "Directed Weighted Random Graph"
-    },
-    "Sorensen/Linux_call_graph": {
-      "downloadBytes": 3879303,
-      "kind": "Directed Weighted Graph"
-    },
-    "Sumner/graphics": {
-      "downloadBytes": 1351628,
-      "kind": "Computer Graphics/Vision Problem"
-    },
-    "Sybrandt/AGATHA_2015": {
-      "kind": "Undirected Graph"
-    },
-    "Sybrandt/MOLIERE_2016": {
-      "kind": "Undirected Weighted Graph"
-    },
-    "TAMU_SmartGridCenter/ACTIVSg10K": {
-      "kind": "Power Network Problem"
-    },
-    "TAMU_SmartGridCenter/ACTIVSg2000": {
-      "kind": "Power Network Problem"
-    },
-    "TAMU_SmartGridCenter/ACTIVSg70K": {
-      "kind": "Power Network Problem"
-    },
-    "TSOPF/TSOPF_FS_b162_c1": {
-      "downloadBytes": 1979317,
-      "kind": "Power Network Problem"
-    },
-    "TSOPF/TSOPF_FS_b162_c3": {
-      "downloadBytes": 5768335,
-      "kind": "Power Network Problem"
-    },
-    "TSOPF/TSOPF_FS_b162_c4": {
-      "downloadBytes": 7654380,
-      "kind": "Power Network Problem"
-    },
-    "TSOPF/TSOPF_FS_b300": {
-      "downloadBytes": 16380361,
-      "kind": "Power Network Problem"
-    },
-    "TSOPF/TSOPF_FS_b300_c1": {
-      "downloadBytes": 16019773,
-      "kind": "Power Network Problem"
-    },
-    "TSOPF/TSOPF_FS_b300_c2": {
-      "downloadBytes": 31747254,
-      "kind": "Power Network Problem"
-    },
-    "TSOPF/TSOPF_FS_b300_c3": {
-      "downloadBytes": 47516834,
-      "kind": "Power Network Problem"
-    },
-    "TSOPF/TSOPF_FS_b39_c19": {
-      "downloadBytes": 3357120,
-      "kind": "Power Network Problem"
-    },
-    "TSOPF/TSOPF_FS_b39_c30": {
-      "downloadBytes": 5306595,
-      "kind": "Power Network Problem"
-    },
-    "TSOPF/TSOPF_FS_b39_c7": {
-      "downloadBytes": 1254181,
-      "kind": "Power Network Problem"
-    },
-    "TSOPF/TSOPF_FS_b9_c1": {
-      "downloadBytes": 54757,
-      "kind": "Power Network Problem"
-    },
-    "TSOPF/TSOPF_FS_b9_c6": {
-      "downloadBytes": 300081,
-      "kind": "Power Network Problem"
-    },
-    "TSOPF/TSOPF_RS_b162_c1": {
-      "downloadBytes": 1341323,
-      "kind": "Power Network Problem"
-    },
-    "TSOPF/TSOPF_RS_b162_c3": {
-      "downloadBytes": 4002722,
-      "kind": "Power Network Problem"
-    },
-    "TSOPF/TSOPF_RS_b162_c4": {
-      "downloadBytes": 5285770,
-      "kind": "Power Network Problem"
-    },
-    "TSOPF/TSOPF_RS_b2052_c1": {
-      "downloadBytes": 50516218,
-      "kind": "Power Network Problem"
-    },
-    "TSOPF/TSOPF_RS_b2383": {
-      "downloadBytes": 132959387,
-      "kind": "Power Network Problem"
-    },
-    "TSOPF/TSOPF_RS_b2383_c1": {
-      "downloadBytes": 133046672,
-      "kind": "Power Network Problem"
-    },
-    "TSOPF/TSOPF_RS_b300_c1": {
-      "downloadBytes": 11415315,
-      "kind": "Power Network Problem"
-    },
-    "TSOPF/TSOPF_RS_b300_c2": {
-      "downloadBytes": 22795124,
-      "kind": "Power Network Problem"
-    },
-    "TSOPF/TSOPF_RS_b300_c3": {
-      "downloadBytes": 34156957,
-      "kind": "Power Network Problem"
-    },
-    "TSOPF/TSOPF_RS_b39_c19": {
-      "downloadBytes": 2030279,
-      "kind": "Power Network Problem"
-    },
-    "TSOPF/TSOPF_RS_b39_c30": {
-      "downloadBytes": 3168602,
-      "kind": "Power Network Problem"
-    },
-    "TSOPF/TSOPF_RS_b39_c7": {
-      "downloadBytes": 752003,
-      "kind": "Power Network Problem"
-    },
-    "TSOPF/TSOPF_RS_b678_c1": {
-      "downloadBytes": 26848287,
-      "kind": "Power Network Problem"
-    },
-    "TSOPF/TSOPF_RS_b678_c2": {
-      "downloadBytes": 53424248,
-      "kind": "Power Network Problem"
-    },
-    "TSOPF/TSOPF_RS_b9_c6": {
-      "downloadBytes": 187125,
-      "kind": "Power Network Problem"
-    },
-    "Tromble/language": {
-      "downloadBytes": 6937840,
-      "kind": "Directed Weighted Graph"
-    },
-    "Williams/pdb1HYS": {
-      "downloadBytes": 18925428,
-      "kind": "Weighted Undirected Graph"
-    },
-    "Williams/webbase-1M": {
-      "downloadBytes": 11360460,
-      "kind": "Weighted Directed Graph"
-    },
-    "YCheng/psse0": {
-      "downloadBytes": 1098781,
-      "kind": "Power Network Problem"
-    },
-    "YCheng/psse1": {
-      "downloadBytes": 741481,
-      "kind": "Power Network Problem"
-    },
-    "YCheng/psse2": {
-      "downloadBytes": 1209876,
-      "kind": "Power Network Problem"
-    },
-    "Yoshiyasu/image_interp": {
-      "downloadBytes": 4383548,
-      "kind": "Computer Graphics/Vision Problem"
-    },
-    "Yoshiyasu/mesh_deform": {
-      "downloadBytes": 10663149,
-      "kind": "Computer Graphics/Vision Problem"
-    },
-    "vanHeukelum/cage10": {
-      "downloadBytes": 647278,
-      "kind": "Directed Weighted Graph"
-    },
-    "vanHeukelum/cage11": {
-      "downloadBytes": 2473855,
-      "kind": "Directed Weighted Graph"
-    },
-    "vanHeukelum/cage12": {
-      "downloadBytes": 8965754,
-      "kind": "Directed Weighted Graph"
-    },
-    "vanHeukelum/cage13": {
-      "downloadBytes": 33100233,
-      "kind": "Directed Weighted Graph"
-    },
-    "vanHeukelum/cage14": {
-      "downloadBytes": 121196637,
-      "kind": "Directed Weighted Graph"
-    },
-    "vanHeukelum/cage15": {
-      "downloadBytes": 418138521,
-      "kind": "Directed Weighted Graph"
-    },
-    "vanHeukelum/cage3": {
-      "downloadBytes": 593,
-      "kind": "Directed Weighted Graph"
-    },
-    "vanHeukelum/cage4": {
-      "downloadBytes": 700,
-      "kind": "Directed Weighted Graph"
-    },
-    "vanHeukelum/cage5": {
-      "downloadBytes": 1495,
-      "kind": "Directed Weighted Graph"
-    },
-    "vanHeukelum/cage6": {
-      "downloadBytes": 3720,
-      "kind": "Directed Weighted Graph"
-    },
-    "vanHeukelum/cage7": {
-      "downloadBytes": 13753,
-      "kind": "Directed Weighted Graph"
-    },
-    "vanHeukelum/cage8": {
-      "downloadBytes": 46111,
-      "kind": "Directed Weighted Graph"
-    },
-    "vanHeukelum/cage9": {
-      "downloadBytes": 181536,
-      "kind": "Directed Weighted Graph"
-    }
+  "kinds": {
+    "AG-Monien/bfly": "Undirected Graph Sequence",
+    "AG-Monien/cage": "Undirected Graph Sequence",
+    "AG-Monien/cca": "Undirected Graph Sequence",
+    "AG-Monien/ccc": "Undirected Graph Sequence",
+    "AG-Monien/debr": "Undirected Graph Sequence",
+    "AG-Monien/se": "Undirected Graph Sequence",
+    "Andrews/Andrews": "Computer Graphics/Vision Problem",
+    "Arenas/PGPgiantcompo": "Undirected Multigraph",
+    "Arenas/celegans_metabolic": "Undirected Multigraph",
+    "Arenas/email": "Undirected Graph",
+    "Arenas/jazz": "Undirected Multigraph",
+    "Bai/qh1484": "Power Network Problem",
+    "Bai/qh768": "Power Network Problem",
+    "Bai/qh882": "Power Network Problem",
+    "Barabasi/NotreDame_actors": "Bipartite Graph",
+    "Barabasi/NotreDame_www": "Directed Graph",
+    "Barabasi/NotreDame_yeast": "Undirected Graph",
+    "Belcastro/human_gene1": "Undirected Weighted Graph",
+    "Belcastro/human_gene2": "Undirected Weighted Graph",
+    "Belcastro/mouse_gene": "Undirected Weighted Graph",
+    "Buss/12month1": "Undirected Bipartite Graph",
+    "Buss/connectus": "Undirected Bipartite Graph",
+    "Bydder/mri1": "Computer Graphics/Vision Problem",
+    "Bydder/mri2": "Computer Graphics/Vision Problem",
+    "Clark/tomographic1": "Computer Graphics/Vision Problem",
+    "DIMACS10/144": "Undirected Graph",
+    "DIMACS10/333SP": "Undirected Graph",
+    "DIMACS10/598a": "Undirected Graph",
+    "DIMACS10/AS365": "Undirected Graph",
+    "DIMACS10/G_n_pin_pout": "Random Undirected Graph",
+    "DIMACS10/M6": "Undirected Graph",
+    "DIMACS10/NACA0015": "Undirected Graph",
+    "DIMACS10/NLR": "Undirected Graph",
+    "DIMACS10/adaptive": "Undirected Graph",
+    "DIMACS10/ak2010": "Undirected Weighted Graph",
+    "DIMACS10/al2010": "Undirected Weighted Graph",
+    "DIMACS10/ar2010": "Undirected Weighted Graph",
+    "DIMACS10/asia_osm": "Undirected Graph",
+    "DIMACS10/auto": "Undirected Graph",
+    "DIMACS10/az2010": "Undirected Weighted Graph",
+    "DIMACS10/belgium_osm": "Undirected Graph",
+    "DIMACS10/ca2010": "Undirected Weighted Graph",
+    "DIMACS10/caidaRouterLevel": "Undirected Graph",
+    "DIMACS10/channel-500x100x100-b050": "Undirected Graph",
+    "DIMACS10/chesapeake": "Undirected Graph",
+    "DIMACS10/citationCiteseer": "Undirected Graph",
+    "DIMACS10/co2010": "Undirected Weighted Graph",
+    "DIMACS10/coAuthorsCiteseer": "Undirected Graph",
+    "DIMACS10/coAuthorsDBLP": "Undirected Graph",
+    "DIMACS10/coPapersCiteseer": "Undirected Graph",
+    "DIMACS10/coPapersDBLP": "Undirected Graph",
+    "DIMACS10/cs4": "Undirected Graph",
+    "DIMACS10/ct2010": "Undirected Weighted Graph",
+    "DIMACS10/cti": "Undirected Graph",
+    "DIMACS10/data": "Undirected Graph",
+    "DIMACS10/de2010": "Undirected Weighted Graph",
+    "DIMACS10/delaunay_n10": "Undirected Graph",
+    "DIMACS10/delaunay_n11": "Undirected Graph",
+    "DIMACS10/delaunay_n12": "Undirected Graph",
+    "DIMACS10/delaunay_n13": "Undirected Graph",
+    "DIMACS10/delaunay_n14": "Undirected Graph",
+    "DIMACS10/delaunay_n15": "Undirected Graph",
+    "DIMACS10/delaunay_n16": "Undirected Graph",
+    "DIMACS10/delaunay_n17": "Undirected Graph",
+    "DIMACS10/delaunay_n18": "Undirected Graph",
+    "DIMACS10/delaunay_n19": "Undirected Graph",
+    "DIMACS10/delaunay_n20": "Undirected Graph",
+    "DIMACS10/delaunay_n21": "Undirected Graph",
+    "DIMACS10/delaunay_n22": "Undirected Graph",
+    "DIMACS10/delaunay_n23": "Undirected Graph",
+    "DIMACS10/delaunay_n24": "Undirected Graph",
+    "DIMACS10/europe_osm": "Undirected Graph",
+    "DIMACS10/fe_4elt2": "Undirected Graph",
+    "DIMACS10/fe_body": "Undirected Graph",
+    "DIMACS10/fe_ocean": "Undirected Graph",
+    "DIMACS10/fe_rotor": "Undirected Graph",
+    "DIMACS10/fe_sphere": "Undirected Graph",
+    "DIMACS10/fe_tooth": "Undirected Graph",
+    "DIMACS10/fl2010": "Undirected Weighted Graph",
+    "DIMACS10/ga2010": "Undirected Weighted Graph",
+    "DIMACS10/germany_osm": "Undirected Graph",
+    "DIMACS10/great-britain_osm": "Undirected Graph",
+    "DIMACS10/hi2010": "Undirected Weighted Graph",
+    "DIMACS10/hugebubbles-00000": "Undirected Graph",
+    "DIMACS10/hugebubbles-00010": "Undirected Graph",
+    "DIMACS10/hugebubbles-00020": "Undirected Graph",
+    "DIMACS10/hugetrace-00000": "Undirected Graph",
+    "DIMACS10/hugetrace-00010": "Undirected Graph",
+    "DIMACS10/hugetrace-00020": "Undirected Graph",
+    "DIMACS10/hugetric-00000": "Undirected Graph",
+    "DIMACS10/hugetric-00010": "Undirected Graph",
+    "DIMACS10/hugetric-00020": "Undirected Graph",
+    "DIMACS10/ia2010": "Undirected Weighted Graph",
+    "DIMACS10/id2010": "Undirected Weighted Graph",
+    "DIMACS10/il2010": "Undirected Weighted Graph",
+    "DIMACS10/in2010": "Undirected Weighted Graph",
+    "DIMACS10/italy_osm": "Undirected Graph",
+    "DIMACS10/kron_g500-logn16": "Undirected Multigraph",
+    "DIMACS10/kron_g500-logn17": "Undirected Multigraph",
+    "DIMACS10/kron_g500-logn18": "Undirected Multigraph",
+    "DIMACS10/kron_g500-logn19": "Undirected Multigraph",
+    "DIMACS10/kron_g500-logn20": "Undirected Multigraph",
+    "DIMACS10/kron_g500-logn21": "Undirected Multigraph",
+    "DIMACS10/ks2010": "Undirected Weighted Graph",
+    "DIMACS10/ky2010": "Undirected Weighted Graph",
+    "DIMACS10/la2010": "Undirected Weighted Graph",
+    "DIMACS10/luxembourg_osm": "Undirected Graph",
+    "DIMACS10/m14b": "Undirected Graph",
+    "DIMACS10/ma2010": "Undirected Weighted Graph",
+    "DIMACS10/md2010": "Undirected Weighted Graph",
+    "DIMACS10/me2010": "Undirected Weighted Graph",
+    "DIMACS10/mi2010": "Undirected Weighted Graph",
+    "DIMACS10/mn2010": "Undirected Weighted Graph",
+    "DIMACS10/mo2010": "Undirected Weighted Graph",
+    "DIMACS10/ms2010": "Undirected Weighted Graph",
+    "DIMACS10/mt2010": "Undirected Weighted Graph",
+    "DIMACS10/nc2010": "Undirected Weighted Graph",
+    "DIMACS10/nd2010": "Undirected Weighted Graph",
+    "DIMACS10/ne2010": "Undirected Weighted Graph",
+    "DIMACS10/netherlands_osm": "Undirected Graph",
+    "DIMACS10/nh2010": "Undirected Weighted Graph",
+    "DIMACS10/nj2010": "Undirected Weighted Graph",
+    "DIMACS10/nm2010": "Undirected Weighted Graph",
+    "DIMACS10/nv2010": "Undirected Weighted Graph",
+    "DIMACS10/ny2010": "Undirected Weighted Graph",
+    "DIMACS10/oh2010": "Undirected Weighted Graph",
+    "DIMACS10/ok2010": "Undirected Weighted Graph",
+    "DIMACS10/or2010": "Undirected Weighted Graph",
+    "DIMACS10/pa2010": "Undirected Weighted Graph",
+    "DIMACS10/packing-500x100x100-b050": "Undirected Graph",
+    "DIMACS10/preferentialAttachment": "Random Undirected Graph",
+    "DIMACS10/rgg_n_2_15_s0": "Undirected Random Graph",
+    "DIMACS10/rgg_n_2_16_s0": "Undirected Random Graph",
+    "DIMACS10/rgg_n_2_17_s0": "Undirected Random Graph",
+    "DIMACS10/rgg_n_2_18_s0": "Undirected Random Graph",
+    "DIMACS10/rgg_n_2_19_s0": "Undirected Random Graph",
+    "DIMACS10/rgg_n_2_20_s0": "Undirected Random Graph",
+    "DIMACS10/rgg_n_2_21_s0": "Undirected Random Graph",
+    "DIMACS10/rgg_n_2_22_s0": "Undirected Random Graph",
+    "DIMACS10/rgg_n_2_23_s0": "Undirected Random Graph",
+    "DIMACS10/rgg_n_2_24_s0": "Undirected Random Graph",
+    "DIMACS10/ri2010": "Undirected Weighted Graph",
+    "DIMACS10/road_central": "Undirected Graph",
+    "DIMACS10/road_usa": "Undirected Graph",
+    "DIMACS10/sc2010": "Undirected Weighted Graph",
+    "DIMACS10/sd2010": "Undirected Weighted Graph",
+    "DIMACS10/smallworld": "Random Undirected Graph",
+    "DIMACS10/t60k": "Undirected Graph",
+    "DIMACS10/tn2010": "Undirected Weighted Graph",
+    "DIMACS10/tx2010": "Undirected Weighted Graph",
+    "DIMACS10/uk": "Undirected Graph",
+    "DIMACS10/ut2010": "Undirected Weighted Graph",
+    "DIMACS10/va2010": "Undirected Weighted Graph",
+    "DIMACS10/venturiLevel3": "Undirected Graph",
+    "DIMACS10/vsp_barth5_1Ksep_50in_5Kout": "Random Unweighted Graph",
+    "DIMACS10/vsp_bcsstk30_500sep_10in_1Kout": "Random Unweighted Graph",
+    "DIMACS10/vsp_befref_fxm_2_4_air02": "Random Unweighted Graph",
+    "DIMACS10/vsp_bump2_e18_aa01_model1_crew1": "Random Unweighted Graph",
+    "DIMACS10/vsp_c-30_data_data": "Random Unweighted Graph",
+    "DIMACS10/vsp_c-60_data_cti_cs4": "Random Unweighted Graph",
+    "DIMACS10/vsp_data_and_seymourl": "Random Unweighted Graph",
+    "DIMACS10/vsp_finan512_scagr7-2c_rlfddd": "Random Unweighted Graph",
+    "DIMACS10/vsp_mod2_pgp2_slptsk": "Random Unweighted Graph",
+    "DIMACS10/vsp_model1_crew1_cr42_south31": "Random Unweighted Graph",
+    "DIMACS10/vsp_msc10848_300sep_100in_1Kout": "Random Unweighted Graph",
+    "DIMACS10/vsp_p0291_seymourl_iiasa": "Random Unweighted Graph",
+    "DIMACS10/vsp_sctap1-2b_and_seymourl": "Random Unweighted Graph",
+    "DIMACS10/vsp_south31_slptsk": "Random Unweighted Graph",
+    "DIMACS10/vsp_vibrobox_scagr7-2c_rlfddd": "Random Unweighted Graph",
+    "DIMACS10/vt2010": "Undirected Weighted Graph",
+    "DIMACS10/wa2010": "Undirected Weighted Graph",
+    "DIMACS10/wi2010": "Undirected Weighted Graph",
+    "DIMACS10/wing": "Undirected Graph",
+    "DIMACS10/wing_nodal": "Undirected Graph",
+    "DIMACS10/wv2010": "Undirected Weighted Graph",
+    "DIMACS10/wy2010": "Undirected Weighted Graph",
+    "FlowIPM22/Spielman_k100": "Undirected Weighted Graph",
+    "FlowIPM22/Spielman_k200": "Undirected Weighted Graph",
+    "FlowIPM22/Spielman_k300": "Undirected Weighted Graph",
+    "FlowIPM22/Spielman_k400": "Undirected Weighted Graph",
+    "FlowIPM22/Spielman_k500": "Undirected Weighted Graph",
+    "FlowIPM22/Spielman_k600": "Undirected Weighted Graph",
+    "FlowIPM22/uni_chimera_i1": "Undirected Weighted Graph",
+    "FlowIPM22/uni_chimera_i2": "Undirected Weighted Graph",
+    "FlowIPM22/uni_chimera_i3": "Undirected Weighted Graph",
+    "FlowIPM22/uni_chimera_i4": "Undirected Weighted Graph",
+    "FlowIPM22/uni_chimera_i5": "Undirected Weighted Graph",
+    "GAP/GAP-kron": "Random Undirected Weighted Graph",
+    "GAP/GAP-road": "Directed Weighted Graph",
+    "GAP/GAP-twitter": "Directed Weighted Graph",
+    "GAP/GAP-urand": "Random Undirected Weighted Graph",
+    "GAP/GAP-web": "Directed Weighted Graph",
+    "Gaertner/big": "Directed Weighted Graph",
+    "Gaertner/nopoly": "Undirected Weighted Graph",
+    "Gaertner/pesa": "Directed Weighted Graph",
+    "GenBank/kmer_A2a": "Undirected Graph",
+    "GenBank/kmer_P1a": "Undirected Graph",
+    "GenBank/kmer_U1a": "Undirected Graph",
+    "GenBank/kmer_V1r": "Undirected Graph",
+    "GenBank/kmer_V2a": "Undirected Graph",
+    "Gleich/flickr": "Directed Graph",
+    "Gleich/minnesota": "Undirected Graph",
+    "Gleich/usroads": "Undirected Graph",
+    "Gleich/usroads-48": "Undirected Graph",
+    "Gleich/wb-cs-stanford": "Directed Graph",
+    "Gleich/wb-edu": "Directed Graph",
+    "Gleich/wikipedia-20051105": "Directed Graph",
+    "Gleich/wikipedia-20060925": "Directed Graph",
+    "Gleich/wikipedia-20061104": "Directed Graph",
+    "Gleich/wikipedia-20070206": "Directed Graph",
+    "Gset/G1": "Undirected Random Graph",
+    "Gset/G10": "Undirected Weighted Random Graph",
+    "Gset/G11": "Undirected Weighted Random Graph",
+    "Gset/G12": "Undirected Weighted Random Graph",
+    "Gset/G13": "Undirected Weighted Random Graph",
+    "Gset/G14": "Duplicate Undirected Random Graph",
+    "Gset/G15": "Duplicate Undirected Random Graph",
+    "Gset/G16": "Duplicate Undirected Random Graph",
+    "Gset/G17": "Duplicate Undirected Random Graph",
+    "Gset/G18": "Undirected Weighted Random Graph",
+    "Gset/G19": "Undirected Weighted Random Graph",
+    "Gset/G2": "Undirected Random Graph",
+    "Gset/G20": "Undirected Weighted Random Graph",
+    "Gset/G21": "Undirected Weighted Random Graph",
+    "Gset/G22": "Undirected Random Graph",
+    "Gset/G23": "Undirected Random Graph",
+    "Gset/G24": "Undirected Random Graph",
+    "Gset/G25": "Undirected Random Graph",
+    "Gset/G26": "Undirected Random Graph",
+    "Gset/G27": "Undirected Weighted Random Graph",
+    "Gset/G28": "Undirected Weighted Random Graph",
+    "Gset/G29": "Undirected Weighted Random Graph",
+    "Gset/G3": "Undirected Random Graph",
+    "Gset/G30": "Undirected Weighted Random Graph",
+    "Gset/G31": "Undirected Weighted Random Graph",
+    "Gset/G32": "Undirected Weighted Random Graph",
+    "Gset/G33": "Undirected Weighted Random Graph",
+    "Gset/G34": "Undirected Weighted Random Graph",
+    "Gset/G35": "Duplicate Undirected Random Graph",
+    "Gset/G36": "Duplicate Undirected Random Graph",
+    "Gset/G37": "Duplicate Undirected Random Graph",
+    "Gset/G38": "Duplicate Undirected Random Graph",
+    "Gset/G39": "Undirected Weighted Random Graph",
+    "Gset/G4": "Undirected Random Graph",
+    "Gset/G40": "Undirected Weighted Random Graph",
+    "Gset/G41": "Undirected Weighted Random Graph",
+    "Gset/G42": "Undirected Weighted Random Graph",
+    "Gset/G43": "Undirected Random Graph",
+    "Gset/G44": "Undirected Random Graph",
+    "Gset/G45": "Undirected Random Graph",
+    "Gset/G46": "Undirected Random Graph",
+    "Gset/G47": "Undirected Random Graph",
+    "Gset/G48": "Undirected Random Graph",
+    "Gset/G49": "Undirected Random Graph",
+    "Gset/G5": "Undirected Random Graph",
+    "Gset/G50": "Undirected Random Graph",
+    "Gset/G51": "Undirected Random Graph",
+    "Gset/G52": "Undirected Random Graph",
+    "Gset/G53": "Undirected Random Graph",
+    "Gset/G54": "Undirected Random Graph",
+    "Gset/G55": "Duplicate Undirected Random Graph",
+    "Gset/G56": "Undirected Weighted Random Graph",
+    "Gset/G57": "Undirected Weighted Random Graph",
+    "Gset/G58": "Duplicate Undirected Random Graph",
+    "Gset/G59": "Undirected Weighted Random Graph",
+    "Gset/G6": "Undirected Weighted Random Graph",
+    "Gset/G60": "Duplicate Undirected Random Graph",
+    "Gset/G61": "Undirected Weighted Random Graph",
+    "Gset/G62": "Undirected Weighted Random Graph",
+    "Gset/G63": "Duplicate Undirected Random Graph",
+    "Gset/G64": "Undirected Weighted Random Graph",
+    "Gset/G65": "Undirected Weighted Random Graph",
+    "Gset/G66": "Undirected Weighted Random Graph",
+    "Gset/G67": "Undirected Weighted Random Graph",
+    "Gset/G7": "Undirected Weighted Random Graph",
+    "Gset/G8": "Undirected Weighted Random Graph",
+    "Gset/G9": "Undirected Weighted Random Graph",
+    "HB/1138_bus": "Power Network Problem",
+    "HB/494_bus": "Power Network Problem",
+    "HB/662_bus": "Power Network Problem",
+    "HB/685_bus": "Power Network Problem",
+    "HB/bcspwr01": "Power Network Problem",
+    "HB/bcspwr02": "Power Network Problem",
+    "HB/bcspwr03": "Power Network Problem",
+    "HB/bcspwr04": "Power Network Problem",
+    "HB/bcspwr05": "Power Network Problem",
+    "HB/bcspwr06": "Power Network Problem",
+    "HB/bcspwr07": "Power Network Problem",
+    "HB/bcspwr08": "Power Network Problem",
+    "HB/bcspwr10": "Power Network Problem",
+    "HB/eris1176": "Power Network Problem",
+    "HB/gemat1": "Power Network Problem",
+    "HB/gemat11": "Power Network Problem Sequence",
+    "HB/gemat12": "Subsequent Power Network Problem",
+    "HB/gre_1107": "Directed Weighted Graph",
+    "HB/gre_115": "Directed Weighted Graph",
+    "HB/gre_185": "Directed Weighted Graph",
+    "HB/gre_216a": "Directed Weighted Graph",
+    "HB/gre_216b": "Directed Weighted Graph",
+    "HB/gre_343": "Directed Weighted Graph",
+    "HB/gre_512": "Directed Weighted Graph",
+    "HB/hor_131": "Directed Weighted Graph",
+    "HB/ibm32": "Directed Graph",
+    "HVDC/hvdc1": "Power Network Problem",
+    "HVDC/hvdc2": "Power Network Problem",
+    "Hardesty/Hardesty1": "Computer Graphics/Vision Problem",
+    "Hardesty/Hardesty2": "Computer Graphics/Vision Problem",
+    "Hardesty/Hardesty3": "Computer Graphics/Vision Problem",
+    "Harvard_Seismology/JP": "Tomography Problem",
+    "IPSO/HTC_336_4438": "Power Network Problem",
+    "IPSO/HTC_336_9129": "Power Network Problem",
+    "IPSO/OPF_10000": "Power Network Problem",
+    "IPSO/OPF_3754": "Power Network Problem",
+    "IPSO/OPF_6000": "Power Network Problem",
+    "IPSO/TSC_OPF_1047": "Power Network Problem",
+    "Kamvar/Stanford": "Directed Graph",
+    "Kamvar/Stanford_Berkeley": "Directed Graph",
+    "Kemelmacher/Kemelmacher": "Computer Graphics/Vision Problem",
+    "LAW/amazon-2008": "Directed Graph",
+    "LAW/arabic-2005": "Directed Graph",
+    "LAW/cnr-2000": "Directed Graph",
+    "LAW/dblp-2010": "Undirected Graph",
+    "LAW/enron": "Directed Graph",
+    "LAW/eu-2005": "Directed Graph",
+    "LAW/hollywood-2009": "Undirected Graph",
+    "LAW/in-2004": "Directed Graph",
+    "LAW/indochina-2004": "Directed Graph",
+    "LAW/it-2004": "Directed Graph",
+    "LAW/ljournal-2008": "Directed Graph",
+    "LAW/sk-2005": "Directed Graph",
+    "LAW/uk-2002": "Directed Graph",
+    "LAW/uk-2005": "Directed Graph",
+    "LAW/webbase-2001": "Directed Graph",
+    "LeGresley/LeGresley_2508": "Power Network Problem",
+    "LeGresley/LeGresley_4908": "Power Network Problem",
+    "LeGresley/LeGresley_87936": "Power Network Problem",
+    "LiuWenzhuo/powersim": "Power Network Problem",
+    "Lourakis/bundle1": "Computer Graphics/Vision Problem",
+    "Lucifora/cell1": "Directed Weighted Graph",
+    "Lucifora/cell2": "Directed Weighted Graph",
+    "Luong/photogrammetry2": "Computer Graphics/Vision Problem",
+    "MAWI/mawi_201512012345": "Undirected Weighted Graph",
+    "MAWI/mawi_201512020000": "Undirected Weighted Graph",
+    "MAWI/mawi_201512020030": "Undirected Weighted Graph",
+    "MAWI/mawi_201512020130": "Undirected Weighted Graph",
+    "MAWI/mawi_201512020330": "Undirected Weighted Graph",
+    "ML_Graph/Binaryalphadigs_10NN": "Undirected Weighted Graph",
+    "ML_Graph/Ecoli_10NN": "Undirected Weighted Graph",
+    "ML_Graph/Fashion_MNIST_norm_10NN": "Undirected Weighted Graph",
+    "ML_Graph/Glass_10NN": "Undirected Weighted Graph",
+    "ML_Graph/JapaneseVowelsSmall_10NN": "Undirected Weighted Graph",
+    "ML_Graph/Olivetti_norm_10NN": "Undirected Weighted Graph",
+    "ML_Graph/Plants_10NN": "Undirected Weighted Graph",
+    "ML_Graph/Spectro_10NN": "Undirected Weighted Graph",
+    "ML_Graph/Vehicle_10NN": "Undirected Weighted Graph",
+    "ML_Graph/YaleA_10NN": "Undirected Weighted Graph",
+    "ML_Graph/YaleB_10NN": "Undirected Weighted Graph",
+    "ML_Graph/breasttissue_10NN": "Undirected Weighted Graph",
+    "ML_Graph/cnae9_10NN": "Undirected Weighted Graph",
+    "ML_Graph/collins_15NN": "Undirected Weighted Graph",
+    "ML_Graph/dataset12mfeatfactors_10NN": "Undirected Weighted Graph",
+    "ML_Graph/dataset16mfeatkarhunen_10NN": "Undirected Weighted Graph",
+    "ML_Graph/dataset18mfeatmorphological_10NN": "Undirected Weighted Graph",
+    "ML_Graph/dataset20mfeatpixel_10NN": "Undirected Weighted Graph",
+    "ML_Graph/dataset22mfeatzernike_10NN": "Undirected Weighted Graph",
+    "ML_Graph/dermatology_5NN": "Undirected Weighted Graph",
+    "ML_Graph/har_10NN": "Undirected Weighted Graph",
+    "ML_Graph/indianpines_10NN": "Undirected Weighted Graph",
+    "ML_Graph/iris_dataset_30NN": "Undirected Weighted Graph",
+    "ML_Graph/k49_norm_10NN": "Undirected Weighted Graph",
+    "ML_Graph/kmnist_norm_10NN": "Undirected Weighted Graph",
+    "ML_Graph/mice_10NN": "Undirected Weighted Graph",
+    "ML_Graph/micromass_10NN": "Undirected Weighted Graph",
+    "ML_Graph/mnist_test_norm_10NN": "Undirected Weighted Graph",
+    "ML_Graph/optdigits_10NN": "Undirected Weighted Graph",
+    "ML_Graph/plantsmargin_12NN": "Undirected Weighted Graph",
+    "ML_Graph/plantstexture_10NN": "Undirected Weighted Graph",
+    "ML_Graph/semeion_10NN": "Undirected Weighted Graph",
+    "ML_Graph/umistfacesnorm_10NN": "Undirected Weighted Graph",
+    "ML_Graph/usps_norm_5NN": "Undirected Weighted Graph",
+    "ML_Graph/worms20_10NN": "Undirected Weighted Graph",
+    "ML_Graph/yeast_30NN": "Undirected Weighted Graph",
+    "Martin/marine1": "Chemical Oceanography Problem",
+    "MathWorks/Harvard500": "Directed Graph",
+    "MathWorks/tomography": "Computer Graphics/Vision Problem",
+    "Moqri/MISKnowledgeMap": "Undirected Weighted Graph",
+    "Newman/adjnoun": "Undirected Graph",
+    "Newman/as-22july06": "Undirected Graph",
+    "Newman/astro-ph": "Undirected Weighted Graph",
+    "Newman/celegansneural": "Directed Weighted Graph",
+    "Newman/cond-mat": "Undirected Weighted Graph",
+    "Newman/cond-mat-2003": "Undirected Weighted Graph",
+    "Newman/cond-mat-2005": "Undirected Weighted Graph",
+    "Newman/dolphins": "Undirected Graph",
+    "Newman/football": "Undirected Multigraph",
+    "Newman/hep-th": "Undirected Weighted Graph",
+    "Newman/karate": "Undirected Graph",
+    "Newman/lesmis": "Undirected Weighted Graph",
+    "Newman/netscience": "Undirected Weighted Graph",
+    "Newman/polblogs": "Directed Multigraph",
+    "Newman/polbooks": "Undirected Graph",
+    "Newman/power": "Undirected Graph",
+    "Pajek/CSphd": "Directed Graph",
+    "Pajek/California": "Directed Graph",
+    "Pajek/Cities": "Weighted Bipartite Graph",
+    "Pajek/EAT_RS": "Directed Weighted Graph",
+    "Pajek/EAT_SR": "Directed Weighted Graph",
+    "Pajek/EPA": "Directed Graph",
+    "Pajek/EVA": "Directed Graph",
+    "Pajek/Erdos02": "Undirected Graph",
+    "Pajek/Erdos971": "Undirected Graph",
+    "Pajek/Erdos972": "Undirected Graph",
+    "Pajek/Erdos981": "Undirected Graph",
+    "Pajek/Erdos982": "Undirected Graph",
+    "Pajek/Erdos991": "Undirected Graph",
+    "Pajek/Erdos992": "Undirected Graph",
+    "Pajek/FA": "Directed Weighted Graph",
+    "Pajek/GD00_a": "Directed Graph",
+    "Pajek/GD00_c": "Directed Multigraph",
+    "Pajek/GD01_Acap": "Directed Multigraph",
+    "Pajek/GD01_a": "Directed Weighted Graph",
+    "Pajek/GD01_b": "Directed Graph",
+    "Pajek/GD01_c": "Directed Multigraph",
+    "Pajek/GD02_a": "Directed Graph",
+    "Pajek/GD02_b": "Directed Graph",
+    "Pajek/GD06_Java": "Directed Graph",
+    "Pajek/GD06_theory": "Undirected Graph",
+    "Pajek/GD95_a": "Directed Graph",
+    "Pajek/GD95_b": "Directed Graph",
+    "Pajek/GD95_c": "Directed Graph",
+    "Pajek/GD96_a": "Directed Multigraph",
+    "Pajek/GD96_b": "Directed Graph",
+    "Pajek/GD96_c": "Undirected Graph",
+    "Pajek/GD96_d": "Directed Graph",
+    "Pajek/GD97_a": "Directed Graph",
+    "Pajek/GD97_b": "Undirected Weighted Graph",
+    "Pajek/GD97_c": "Directed Multigraph",
+    "Pajek/GD98_a": "Directed Graph",
+    "Pajek/GD98_b": "Directed Graph",
+    "Pajek/GD98_c": "Undirected Graph",
+    "Pajek/GD99_b": "Undirected Multigraph",
+    "Pajek/GD99_c": "Directed Graph",
+    "Pajek/GlossGT": "Directed Graph",
+    "Pajek/HEP-th": "Directed Graph",
+    "Pajek/HEP-th-new": "Directed Graph",
+    "Pajek/IMDB": "Bipartite Graph",
+    "Pajek/Journals": "Undirected Weighted Graph",
+    "Pajek/Kohonen": "Directed Graph",
+    "Pajek/Lederberg": "Directed Multigraph",
+    "Pajek/ODLIS": "Directed Multigraph",
+    "Pajek/Ragusa16": "Directed Weighted Graph",
+    "Pajek/Ragusa18": "Directed Weighted Graph",
+    "Pajek/Reuters911": "Undirected Weighted Graph Sequence",
+    "Pajek/Roget": "Directed Graph",
+    "Pajek/Sandi_authors": "Undirected Weighted Graph",
+    "Pajek/Sandi_sandi": "Bipartite Graph",
+    "Pajek/SciMet": "Directed Multigraph",
+    "Pajek/SmaGri": "Directed Multigraph",
+    "Pajek/SmallW": "Directed Multigraph",
+    "Pajek/Stranke94": "Undirected Weighted Graph",
+    "Pajek/Tina_AskCal": "Directed Graph",
+    "Pajek/Tina_AskCog": "Directed Graph",
+    "Pajek/Tina_DisCal": "Directed Graph",
+    "Pajek/Tina_DisCog": "Directed Graph",
+    "Pajek/USAir97": "Undirected Weighted Graph",
+    "Pajek/USpowerGrid": "Undirected Graph",
+    "Pajek/Wordnet3": "Directed Weighted Graph",
+    "Pajek/WorldCities": "Weighted Bipartite Graph",
+    "Pajek/Zewail": "Directed Multigraph",
+    "Pajek/dictionary28": "Undirected Graph",
+    "Pajek/divorce": "Bipartite Graph",
+    "Pajek/foldoc": "Directed Weighted Graph",
+    "Pajek/football": "Directed Weighted Graph",
+    "Pajek/geom": "Undirected Weighted Graph",
+    "Pajek/internet": "Directed Weighted Graph",
+    "Pajek/patents": "Directed Graph",
+    "Pajek/patents_main": "Directed Weighted Graph",
+    "Pajek/yeast": "Undirected Graph",
+    "PowerSystem/power197k": "Power Network Problem",
+    "QY/case39": "Power Network Problem Sequence",
+    "QY/case9": "Power Network Problem Sequence",
+    "SNAP/CollegeMsg": "Directed Temporal Multigraph",
+    "SNAP/Oregon-1": "Undirected Graph Sequence",
+    "SNAP/Oregon-2": "Undirected Graph Sequence",
+    "SNAP/amazon0302": "Directed Graph",
+    "SNAP/amazon0312": "Directed Graph",
+    "SNAP/amazon0505": "Directed Graph",
+    "SNAP/amazon0601": "Directed Graph",
+    "SNAP/as-735": "Undirected Graph Sequence",
+    "SNAP/as-Skitter": "Undirected Graph",
+    "SNAP/as-caida": "Directed Weighted Graph Sequence",
+    "SNAP/ca-AstroPh": "Undirected Graph",
+    "SNAP/ca-CondMat": "Undirected Graph",
+    "SNAP/ca-GrQc": "Undirected Graph",
+    "SNAP/ca-HepPh": "Undirected Graph",
+    "SNAP/ca-HepTh": "Undirected Graph",
+    "SNAP/cit-HepPh": "Directed Graph",
+    "SNAP/cit-HepTh": "Directed Graph",
+    "SNAP/cit-Patents": "Directed Graph",
+    "SNAP/com-Amazon": "Undirected Graph With Communities",
+    "SNAP/com-DBLP": "Undirected Graph With Communities",
+    "SNAP/com-Friendster": "Undirected Graph With Communities",
+    "SNAP/com-LiveJournal": "Undirected Graph With Communities",
+    "SNAP/com-Orkut": "Undirected Graph With Communities",
+    "SNAP/com-Youtube": "Undirected Graph With Communities",
+    "SNAP/email-Enron": "Directed Graph",
+    "SNAP/email-Eu-core": "Directed Graph With Communities",
+    "SNAP/email-Eu-core-temporal": "Directed Temporal Multigraph",
+    "SNAP/email-EuAll": "Directed Graph",
+    "SNAP/higgs-twitter": "Directed Temporal Multigraph",
+    "SNAP/loc-Brightkite": "Undirected Graph",
+    "SNAP/loc-Gowalla": "Undirected Graph",
+    "SNAP/p2p-Gnutella04": "Directed Graph",
+    "SNAP/p2p-Gnutella05": "Directed Graph",
+    "SNAP/p2p-Gnutella06": "Directed Graph",
+    "SNAP/p2p-Gnutella08": "Directed Graph",
+    "SNAP/p2p-Gnutella09": "Directed Graph",
+    "SNAP/p2p-Gnutella24": "Directed Graph",
+    "SNAP/p2p-Gnutella25": "Directed Graph",
+    "SNAP/p2p-Gnutella30": "Directed Graph",
+    "SNAP/p2p-Gnutella31": "Directed Graph",
+    "SNAP/roadNet-CA": "Undirected Graph",
+    "SNAP/roadNet-PA": "Undirected Graph",
+    "SNAP/roadNet-TX": "Undirected Graph",
+    "SNAP/soc-Epinions1": "Directed Graph",
+    "SNAP/soc-LiveJournal1": "Directed Graph",
+    "SNAP/soc-Pokec": "Directed Graph",
+    "SNAP/soc-Slashdot0811": "Directed Graph",
+    "SNAP/soc-Slashdot0902": "Directed Graph",
+    "SNAP/soc-sign-Slashdot081106": "Directed Weighted Graph",
+    "SNAP/soc-sign-Slashdot090216": "Directed Weighted Graph",
+    "SNAP/soc-sign-Slashdot090221": "Directed Weighted Graph",
+    "SNAP/soc-sign-bitcoin-alpha": "Directed Weighted Temporal Graph",
+    "SNAP/soc-sign-bitcoin-otc": "Directed Weighted Temporal Graph",
+    "SNAP/soc-sign-epinions": "Directed Weighted Graph",
+    "SNAP/sx-askubuntu": "Directed Temporal Multigraph",
+    "SNAP/sx-mathoverflow": "Directed Temporal Multigraph",
+    "SNAP/sx-stackoverflow": "Directed Temporal Multigraph",
+    "SNAP/sx-superuser": "Directed Temporal Multigraph",
+    "SNAP/twitter7": "Directed Graph",
+    "SNAP/web-BerkStan": "Directed Graph",
+    "SNAP/web-Google": "Directed Graph",
+    "SNAP/web-NotreDame": "Directed Graph",
+    "SNAP/web-Stanford": "Directed Graph",
+    "SNAP/wiki-RfA": "Directed Weighted Temporal Multigraph",
+    "SNAP/wiki-Talk": "Directed Graph",
+    "SNAP/wiki-Vote": "Directed Graph",
+    "SNAP/wiki-talk-temporal": "Directed Temporal Multigraph",
+    "SNAP/wiki-topcats": "Directed Graph With Communities",
+    "Schulthess/N_biocarta": "Biochemical Network",
+    "Schulthess/N_pid": "Biochemical Network",
+    "Schulthess/N_reactome": "Biochemical Network",
+    "Simon/appu": "Directed Weighted Random Graph",
+    "Sorensen/Linux_call_graph": "Directed Weighted Graph",
+    "Sumner/graphics": "Computer Graphics/Vision Problem",
+    "Sybrandt/AGATHA_2015": "Undirected Graph",
+    "Sybrandt/MOLIERE_2016": "Undirected Weighted Graph",
+    "TAMU_SmartGridCenter/ACTIVSg10K": "Power Network Problem",
+    "TAMU_SmartGridCenter/ACTIVSg2000": "Power Network Problem",
+    "TAMU_SmartGridCenter/ACTIVSg70K": "Power Network Problem",
+    "TSOPF/TSOPF_FS_b162_c1": "Power Network Problem",
+    "TSOPF/TSOPF_FS_b162_c3": "Power Network Problem",
+    "TSOPF/TSOPF_FS_b162_c4": "Power Network Problem",
+    "TSOPF/TSOPF_FS_b300": "Power Network Problem",
+    "TSOPF/TSOPF_FS_b300_c1": "Power Network Problem",
+    "TSOPF/TSOPF_FS_b300_c2": "Power Network Problem",
+    "TSOPF/TSOPF_FS_b300_c3": "Power Network Problem",
+    "TSOPF/TSOPF_FS_b39_c19": "Power Network Problem",
+    "TSOPF/TSOPF_FS_b39_c30": "Power Network Problem",
+    "TSOPF/TSOPF_FS_b39_c7": "Power Network Problem",
+    "TSOPF/TSOPF_FS_b9_c1": "Power Network Problem",
+    "TSOPF/TSOPF_FS_b9_c6": "Power Network Problem",
+    "TSOPF/TSOPF_RS_b162_c1": "Power Network Problem",
+    "TSOPF/TSOPF_RS_b162_c3": "Power Network Problem",
+    "TSOPF/TSOPF_RS_b162_c4": "Power Network Problem",
+    "TSOPF/TSOPF_RS_b2052_c1": "Power Network Problem",
+    "TSOPF/TSOPF_RS_b2383": "Power Network Problem",
+    "TSOPF/TSOPF_RS_b2383_c1": "Power Network Problem",
+    "TSOPF/TSOPF_RS_b300_c1": "Power Network Problem",
+    "TSOPF/TSOPF_RS_b300_c2": "Power Network Problem",
+    "TSOPF/TSOPF_RS_b300_c3": "Power Network Problem",
+    "TSOPF/TSOPF_RS_b39_c19": "Power Network Problem",
+    "TSOPF/TSOPF_RS_b39_c30": "Power Network Problem",
+    "TSOPF/TSOPF_RS_b39_c7": "Power Network Problem",
+    "TSOPF/TSOPF_RS_b678_c1": "Power Network Problem",
+    "TSOPF/TSOPF_RS_b678_c2": "Power Network Problem",
+    "TSOPF/TSOPF_RS_b9_c6": "Power Network Problem",
+    "Tromble/language": "Directed Weighted Graph",
+    "Williams/pdb1HYS": "Weighted Undirected Graph",
+    "Williams/webbase-1M": "Weighted Directed Graph",
+    "YCheng/psse0": "Power Network Problem",
+    "YCheng/psse1": "Power Network Problem",
+    "YCheng/psse2": "Power Network Problem",
+    "Yoshiyasu/image_interp": "Computer Graphics/Vision Problem",
+    "Yoshiyasu/mesh_deform": "Computer Graphics/Vision Problem",
+    "vanHeukelum/cage10": "Directed Weighted Graph",
+    "vanHeukelum/cage11": "Directed Weighted Graph",
+    "vanHeukelum/cage12": "Directed Weighted Graph",
+    "vanHeukelum/cage13": "Directed Weighted Graph",
+    "vanHeukelum/cage14": "Directed Weighted Graph",
+    "vanHeukelum/cage15": "Directed Weighted Graph",
+    "vanHeukelum/cage3": "Directed Weighted Graph",
+    "vanHeukelum/cage4": "Directed Weighted Graph",
+    "vanHeukelum/cage5": "Directed Weighted Graph",
+    "vanHeukelum/cage6": "Directed Weighted Graph",
+    "vanHeukelum/cage7": "Directed Weighted Graph",
+    "vanHeukelum/cage8": "Directed Weighted Graph",
+    "vanHeukelum/cage9": "Directed Weighted Graph"
   },
   "readOn": "2026-10-24"
 }

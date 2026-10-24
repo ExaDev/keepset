@@ -9,6 +9,7 @@
     "file": "crosswalks/graph-v1/rated.json"
   },
   "description": "Bipartite user-movie rating network from the GroupLens research group. 10,000,054 ratings from 69,878 users on 10,677 movies. Edge weights are ratings normalised to [0, 1].",
+  "domain": "Movie recommendation network",
   "expectedCounts": {
     "edges": 10000054,
     "nodes": 80555
@@ -26,6 +27,7 @@
     "cyclic": true,
     "density": 0.0030821426003302156,
     "directed": false,
+    "downloadBytes": 65566137,
     "edgeTypes": 1,
     "heterogeneous": true,
     "multigraph": false,

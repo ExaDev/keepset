@@ -21,6 +21,7 @@
   "name": "Little Rock Lake Food Web",
   "properties": {
     "directed": true,
+    "downloadBytes": 20,
     "heterogeneous": true,
     "multigraph": false,
     "selfLoops": true,

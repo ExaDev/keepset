@@ -21,6 +21,7 @@
   "name": "Human Herpesvirus 4 Genetic Interactome",
   "properties": {
     "directed": true,
+    "downloadBytes": 6068,
     "heterogeneous": true,
     "multigraph": true,
     "selfLoops": false,

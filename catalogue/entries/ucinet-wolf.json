@@ -12,6 +12,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "Interactions and kin relationships among 20 monkeys observed in Ocala, Florida.",
+  "domain": "Social network",
   "expectedCounts": {
     "edges": 15,
     "nodes": 20
@@ -31,6 +32,7 @@
     "cyclic": false,
     "density": 0.0625,
     "directed": false,
+    "downloadBytes": 2169,
     "edgeTypes": 1,
     "heterogeneous": false,
     "multigraph": false,

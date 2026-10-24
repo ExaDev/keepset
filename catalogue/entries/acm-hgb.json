@@ -9,6 +9,7 @@
     "file": "crosswalks/graph-v1/typed.json"
   },
   "description": "The ACM network as the Heterogeneous Graph Benchmark suite ships it, the same file as the acm entry. Contains papers, authors, subjects and terms, linked by citation, reference, authorship, subject and term relations, each listed in both directions. Used for benchmarking heterogeneous graph neural networks on node classification.",
+  "domain": "Academic heterogeneous",
   "expectedCounts": {
     "edges": 547872,
     "nodes": 10942
@@ -24,6 +25,7 @@
     "cyclic": true,
     "density": 0.004575930276299103,
     "directed": true,
+    "downloadBytes": 4131275,
     "edgeTypes": 8,
     "heterogeneous": true,
     "multigraph": true,

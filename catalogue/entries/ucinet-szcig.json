@@ -12,6 +12,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "Corporate interlocks among 15 major West German business entities.",
+  "domain": "Economic network",
   "expectedCounts": {
     "edges": 134,
     "nodes": 15
@@ -31,6 +32,7 @@
     "cyclic": true,
     "density": 0.7362637362637363,
     "directed": false,
+    "downloadBytes": 764,
     "edgeTypes": 1,
     "heterogeneous": false,
     "multigraph": true,

@@ -12,6 +12,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "Cognitive social structure data: 21 managers' perceptions of advice-seeking relationships.",
+  "domain": "Social network",
   "expectedCounts": {
     "edges": 277,
     "nodes": 21
@@ -31,6 +32,7 @@
     "cyclic": true,
     "density": 0.6595238095238095,
     "directed": false,
+    "downloadBytes": 19681,
     "edgeTypes": 1,
     "heterogeneous": false,
     "multigraph": true,

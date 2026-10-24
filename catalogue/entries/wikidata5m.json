@@ -9,6 +9,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "Large-scale heterogeneous knowledge graph from Wikidata 2021 dump. Contains ~5M entities connected by 822 relation types with ~21M triples. Each entity paired with Wikipedia article text for joint structured-unstructured modeling. Supports transductive and inductive link prediction settings.",
+  "domain": "Knowledge graph",
   "expectedCounts": {
     "edges": 20624575,
     "nodes": 4594485
@@ -24,6 +25,7 @@
     "cyclic": true,
     "density": 9.770379358670848e-7,
     "directed": true,
+    "downloadBytes": 168258020,
     "edgeTypes": 822,
     "heterogeneous": true,
     "multigraph": false,

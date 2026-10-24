@@ -12,6 +12,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "World Cup network from Graph Drawing 2006 contest. 79 vertices, 1,460 arcs.",
+  "domain": "Sports network",
   "expectedCounts": {
     "edges": 1460,
     "nodes": 79
@@ -31,6 +32,7 @@
     "cyclic": true,
     "density": 0.14913311783720246,
     "directed": true,
+    "downloadBytes": 6490,
     "edgeTypes": 1,
     "heterogeneous": true,
     "multigraph": true,

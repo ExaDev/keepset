@@ -1,8 +1,8 @@
-/* Records what the SuiteSparse Matrix Collection's index says about each matrix the pipeline catalogue downloads from it: its kind (the entry's domain) and, for each download the University of Florida mirror serves, the size of that download.
+/* Records the kind the SuiteSparse Matrix Collection's index states for each matrix the pipeline catalogue downloads from it.
 
    pnpm exec tsx scripts/seed/probe-suitesparse-index.ts [--pipeline <catalog.json>]
 
-   --pipeline defaults to the committed copy in scripts/seed/sources/. The collection's index page is requested once, and each download the committed mirror inventory (suitesparse-mirror.json) lists is requested from the mirror with a HEAD request, paced per host by the polite client, for its Content-Length. The result is written to scripts/seed/sources/suitesparse-index.json, which the import reads and `seed:check` verifies the entries against. A matrix the index page does not list, a download the mirror does not hold and a download whose request failed on every attempt are left without that fact and named, so the script can be run again. */
+   --pipeline defaults to the committed copy in scripts/seed/sources/. The collection's index page is requested once, through the polite client, and each matrix's kind is written to scripts/seed/sources/suitesparse-index.json, which the import reads and `seed:check` verifies the entries against. A matrix the index page does not list is left out and named. */
 
 import { readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
@@ -11,8 +11,8 @@ import { parseArgs } from "node:util";
 import { canonicalJson } from "../../src/serialise";
 import { HTTP_STATUS } from "../sources/http-status";
 import { systemClock } from "../sources/pacing";
-import { DEFAULT_POLITENESS, PoliteClient, RequestFailure } from "../sources/polite-client";
-import { SuiteSparseMirrorSchema, suiteSparsePaths } from "./mirror";
+import { DEFAULT_POLITENESS, PoliteClient } from "../sources/polite-client";
+import { suiteSparsePaths } from "./mirror";
 import { SourceCatalogueSchema } from "./source";
 import { matrixKey, parseIndexKinds, SuiteSparseIndexSchema } from "./suitesparse-index";
 
@@ -24,73 +24,26 @@ const INDEX_TIMEOUT_MILLISECONDS = 600_000;
 const sourcesDir = join(dirname(fileURLToPath(import.meta.url)), "sources");
 const { values } = parseArgs({ options: { pipeline: { type: "string" } }, strict: true });
 const catalogue = SourceCatalogueSchema.parse(JSON.parse(readFileSync(values.pipeline ?? join(sourcesDir, "pipeline-catalog.json"), "utf8")));
-const mirror = SuiteSparseMirrorSchema.parse(JSON.parse(readFileSync(join(sourcesDir, "suitesparse-mirror.json"), "utf8")));
-const held = new Set(mirror.holds);
 
 const client = new PoliteClient(fetch, systemClock, { ...DEFAULT_POLITENESS, timeoutMilliseconds: INDEX_TIMEOUT_MILLISECONDS });
 const page = await client.request(INDEX_URL);
 if (page.status !== HTTP_STATUS.ok) {
   throw new Error(`${INDEX_URL} answered ${String(page.status)}`);
 }
-const kinds = parseIndexKinds(await page.text());
+const listed = parseIndexKinds(await page.text());
 
-const sizes = new Map<string, number>();
-const unmeasured: string[] = [];
-/**
- * Requests a download's headers.
- * @param url - The download's URL.
- * @returns The response, or the failure when the connection failed on every attempt.
- */
-async function head(url: string): Promise<Response | RequestFailure> {
-  try {
-    return await client.request(url, { method: "HEAD" });
-  } catch (error) {
-    if (error instanceof RequestFailure) {
-      return error;
-    }
-    throw error;
-  }
-}
-
-/**
- * Requests the remaining downloads one after another, the client pacing them.
- * @param remaining - The paths not yet requested.
- */
-async function measure(remaining: readonly string[]): Promise<void> {
-  const [path, ...rest] = remaining;
-  if (path === undefined) {
-    return;
-  }
-  const response = await head(`${mirror.host}${path}`);
-  if (response instanceof RequestFailure) {
-    unmeasured.push(`${path} ${response.message}`);
-  } else {
-    const length = Number(response.headers.get("content-length"));
-    if (response.status === HTTP_STATUS.ok && Number.isInteger(length) && length > 0) {
-      sizes.set(path, length);
-    } else {
-      unmeasured.push(`${path} ${String(response.status)}`);
-    }
-  }
-
-  return measure(rest);
-}
-const wanted = suiteSparsePaths(catalogue);
-await measure(wanted.filter((path) => held.has(path)));
-
-const matrices: Record<string, { kind: string; downloadBytes?: number }> = {};
+const kinds: Record<string, string> = {};
 const unlisted: string[] = [];
-for (const path of wanted) {
+for (const path of suiteSparsePaths(catalogue)) {
   const key = matrixKey(path);
-  const kind = key === undefined ? undefined : kinds.get(key);
+  const kind = key === undefined ? undefined : listed.get(key);
   if (key === undefined || kind === undefined) {
     unlisted.push(path);
-    continue;
+  } else {
+    kinds[key] = kind;
   }
-  const downloadBytes = sizes.get(path);
-  matrices[key] = { kind, ...(downloadBytes === undefined ? {} : { downloadBytes }) };
 }
 
 const today = new Date(systemClock.now()).toISOString().slice(0, ISO_DATE_LENGTH);
-writeFileSync(join(sourcesDir, "suitesparse-index.json"), canonicalJson(SuiteSparseIndexSchema.parse({ readOn: today, matrices })));
-console.log(`${String(Object.keys(matrices).length)} of ${String(wanted.length)} matrices have a kind and ${String(sizes.size)} have a download size.\nNot listed on the index page:\n${unlisted.join("\n")}\nSize not read:\n${unmeasured.join("\n")}`);
+writeFileSync(join(sourcesDir, "suitesparse-index.json"), canonicalJson(SuiteSparseIndexSchema.parse({ readOn: today, kinds })));
+console.log(`${String(Object.keys(kinds).length)} matrices have a kind; not listed on the index page:\n${unlisted.join("\n")}`);

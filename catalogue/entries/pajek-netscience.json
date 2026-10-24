@@ -12,6 +12,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "Collaboration network of network science researchers. 1,589 authors.",
+  "domain": "Collaboration network",
   "expectedCounts": {
     "edges": 2742,
     "nodes": 1589
@@ -31,6 +32,7 @@
     "cyclic": true,
     "density": 0.0021733168683312383,
     "directed": false,
+    "downloadBytes": 24282,
     "edgeTypes": 1,
     "heterogeneous": false,
     "multigraph": false,

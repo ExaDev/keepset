@@ -12,6 +12,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "Directed signed trust network from Epinions.com. Users express trust (+1) or distrust (-1) towards other users. Edge weights are ±1.",
+  "domain": "Social network",
   "expectedCounts": {
     "edges": 841372,
     "nodes": 131828
@@ -30,6 +31,7 @@
     "cyclic": true,
     "density": 0.00008191540346643227,
     "directed": true,
+    "downloadBytes": 2972840,
     "edgeTypes": 1,
     "heterogeneous": false,
     "multigraph": false,

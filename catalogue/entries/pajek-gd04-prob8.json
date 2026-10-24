@@ -12,6 +12,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "Graph Drawing 2004 crossing minimisation contest, Problem 8. 100 nodes, 477 edges.",
+  "domain": "Graph drawing contest",
   "expectedCounts": {
     "edges": 477,
     "nodes": 100
@@ -31,6 +32,7 @@
     "cyclic": true,
     "density": 0.09636363636363636,
     "directed": false,
+    "downloadBytes": 242204,
     "edgeTypes": 1,
     "heterogeneous": false,
     "multigraph": false,

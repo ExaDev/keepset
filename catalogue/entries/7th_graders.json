@@ -21,6 +21,7 @@
   "name": "Seventh Graders Network",
   "properties": {
     "directed": true,
+    "downloadBytes": 2906,
     "heterogeneous": true,
     "multigraph": true,
     "selfLoops": false,

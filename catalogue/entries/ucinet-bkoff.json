@@ -12,6 +12,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "Interactions in a small business office among 40 employees, observed over two four-day periods.",
+  "domain": "Social network",
   "expectedCounts": {
     "edges": 476,
     "nodes": 40
@@ -31,6 +32,7 @@
     "cyclic": true,
     "density": 0.30512820512820515,
     "directed": false,
+    "downloadBytes": 10011,
     "edgeTypes": 1,
     "heterogeneous": false,
     "multigraph": true,

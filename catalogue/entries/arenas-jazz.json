@@ -12,6 +12,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "Collaboration network of jazz musicians. Nodes are musicians and edges represent playing together in a band.",
+  "domain": "Collaboration network",
   "expectedCounts": {
     "edges": 5484,
     "nodes": 198
@@ -30,6 +31,7 @@
     "cyclic": false,
     "density": 0.07029687740347638,
     "directed": false,
+    "downloadBytes": 15283,
     "edgeTypes": 1,
     "heterogeneous": false,
     "multigraph": true,

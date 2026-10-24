@@ -21,6 +21,7 @@
   "name": "Bovine Genetic Interactome (Bos taurus)",
   "properties": {
     "directed": true,
+    "downloadBytes": 8793,
     "heterogeneous": true,
     "multigraph": true,
     "selfLoops": true,

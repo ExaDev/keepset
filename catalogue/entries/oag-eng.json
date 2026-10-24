@@ -9,6 +9,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "Heterogeneous academic graph from the Open Academic Graph, focused on engineering papers. Contains papers, authors, venues, institutions, and fields of study with 22 relation types.",
+  "domain": "Academic heterogeneous",
   "expectedCounts": {
     "edges": 12346854,
     "nodes": 929315
@@ -24,6 +25,7 @@
     "cyclic": false,
     "density": 0,
     "directed": true,
+    "downloadBytes": 8521870935,
     "edgeTypes": 1,
     "heterogeneous": true,
     "multigraph": false,

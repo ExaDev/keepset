@@ -41,9 +41,9 @@ describe("matrixKey", () => {
 });
 
 describe("SuiteSparseIndexSchema", () => {
-  it("accepts a size only as a positive whole number of bytes", () => {
-    expect(SuiteSparseIndexSchema.safeParse({ readOn: "2026-10-24", matrices: { "G/m": { kind: "k", downloadBytes: 1 } } }).success).toBe(true);
-    expect(SuiteSparseIndexSchema.safeParse({ readOn: "2026-10-24", matrices: { "G/m": { kind: "k", downloadBytes: 0 } } }).success).toBe(false);
-    expect(SuiteSparseIndexSchema.safeParse({ readOn: "2026-10-24", matrices: { "not-a-key": { kind: "k" } } }).success).toBe(false);
+  it("names each matrix by its group and name", () => {
+    expect(SuiteSparseIndexSchema.safeParse({ readOn: "2026-10-24", kinds: { "G/m": "k" } }).success).toBe(true);
+    expect(SuiteSparseIndexSchema.safeParse({ readOn: "2026-10-24", kinds: { "not-a-key": "k" } }).success).toBe(false);
+    expect(SuiteSparseIndexSchema.safeParse({ readOn: "2026-10-24", kinds: { "G/m": "" } }).success).toBe(false);
   });
 });

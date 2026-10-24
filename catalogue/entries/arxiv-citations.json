@@ -9,6 +9,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "Directed acyclic graph of paper citations from arXiv high-energy physics preprints. Papers can only cite papers published before them. Medium-sized DAG with clear temporal ordering. Useful for benchmarking DAG algorithms on realistic citation networks and temporal graph analysis.",
+  "domain": "Citation network",
   "expectedCounts": {
     "edges": 421578,
     "nodes": 34546
@@ -24,6 +25,7 @@
     "cyclic": true,
     "density": 0.0007054197642773696,
     "directed": true,
+    "downloadBytes": 1664504,
     "edgeTypes": 1,
     "heterogeneous": false,
     "multigraph": false,

@@ -12,6 +12,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "Observational data on 14 Western Electric employees from the famous Hawthorne studies.",
+  "domain": "Social network",
   "expectedCounts": {
     "edges": 56,
     "nodes": 14
@@ -31,6 +32,7 @@
     "cyclic": true,
     "density": 0.42424242424242425,
     "directed": false,
+    "downloadBytes": 2974,
     "edgeTypes": 1,
     "heterogeneous": false,
     "multigraph": true,

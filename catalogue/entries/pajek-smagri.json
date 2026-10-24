@@ -12,6 +12,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "Citation network from Scientometrics literature.",
+  "domain": "Citation network",
   "expectedCounts": {
     "edges": 4922,
     "nodes": 1059
@@ -30,6 +31,7 @@
     "cyclic": true,
     "density": 0.00439031007959501,
     "directed": true,
+    "downloadBytes": 59506,
     "edgeTypes": 1,
     "heterogeneous": false,
     "multigraph": true,

@@ -21,6 +21,7 @@
   "name": "Messel Shale Food Web",
   "properties": {
     "directed": true,
+    "downloadBytes": 20,
     "heterogeneous": true,
     "multigraph": false,
     "selfLoops": true,
