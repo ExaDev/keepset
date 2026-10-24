@@ -1,3 +1,12 @@
+# [0.56.0](https://github.com/Mearman/keepset/compare/v0.55.0...v0.56.0) (2026-10-24)
+
+
+### Features
+
+* **seed:** record the rows each open data table held when it was probed ([40edf65](https://github.com/Mearman/keepset/commit/40edf6509723bee2c4e1c0db6f64f18e45f3fc3e))
+* **seed:** take a graph's domain and download size from its collection's index ([5b44cb6](https://github.com/Mearman/keepset/commit/5b44cb611c36d8aaab325274bc22721d4f3c24ee))
+* **site:** show a probed node count as approximate and prefer the download's size ([429dc8d](https://github.com/Mearman/keepset/commit/429dc8d45b3db99e80b57858d27881716e4f9c6d))
+
 # [0.55.0](https://github.com/Mearman/keepset/compare/v0.54.0...v0.55.0) (2026-10-23)
 
 
