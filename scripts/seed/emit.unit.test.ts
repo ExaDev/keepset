@@ -58,6 +58,20 @@ describe("entryWrites and pinned snapshots", () => {
     expect(written.sources[0]?.snapshot).toMatchObject({ sha256, byteLength: PINNED_BYTES });
   });
 
+  it("records the carried checksum's byte length as the download's size, replacing a size read from the live URL, and records none without a checksum", () => {
+    const root = scratch();
+    const url = "https://example.org/data/karate.txt";
+    const pin = { timestamp: "20260101000000", url: waybackUrl("20260101000000", url) };
+    const committed = parseEntry({ ...liveEntry, sources: [{ url, retrieved: "2026-01-01", status: "live", snapshot: { ...pin, sha256: "a".repeat(SHA256_DIGITS), byteLength: PINNED_BYTES } }] });
+    writeFileSync(join(root, "karate.json"), serialise(committed));
+    const regenerated = parseEntry({ ...liveEntry, properties: { downloadBytes: 1 }, sources: [{ url, retrieved: "2026-04-19", status: "live", snapshot: pin }] });
+    const sized = parseEntry(JSON.parse(entryWrites([regenerated], root).get(join(root, "karate.json")) ?? "null"));
+    expect(sized.properties["downloadBytes"]).toBe(PINNED_BYTES);
+    const empty = scratch();
+    const unsized = parseEntry(JSON.parse(entryWrites([regenerated], empty).get(join(empty, "karate.json")) ?? "null"));
+    expect(unsized.properties["downloadBytes"]).toBe(1);
+  });
+
   it("does not pin a snapshot for a URL the import no longer lists", () => {
     const root = scratch();
     const committed = parseEntry({ ...liveEntry, sources: [{ url: "https://example.org/other", retrieved: "2026-01-01", status: "live", snapshot: { timestamp: "20260101000000", url: waybackUrl("20260101000000", "https://example.org/other") } }] });

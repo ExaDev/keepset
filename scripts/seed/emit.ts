@@ -13,7 +13,19 @@ export interface Output {
 }
 
 /**
- * The files for a set of entries. An import does not know the snapshots `scripts/archive-sources.ts` pins on live sources, nor the checksums it records on them, so an entry carries both over from its committed file URL it still lists without one; every other field is the import's.
+ * The entry with the size of the pinned snapshot its recipe fetches recorded as `downloadBytes`: a fetch resolves a pinned snapshot first, so its recorded byte length is exactly the download, and it replaces any size read from the live URL.
+ * @param entry - The entry.
+ * @returns The entry with the snapshot's byte length as `downloadBytes`, or the same entry when its recipe fetches no source with a recorded checksum.
+ */
+function withSnapshotSize(entry: Entry): Entry {
+  const source = "source" in entry.recipe ? entry.sources[entry.recipe.source] : undefined;
+  const byteLength = source?.snapshot?.byteLength;
+
+  return byteLength === undefined ? entry : { ...entry, properties: { ...entry.properties, downloadBytes: byteLength } };
+}
+
+/**
+ * The files for a set of entries. An import does not know the snapshots `scripts/archive-sources.ts` pins on live sources, nor the checksums it records on them, so an entry carries both over from its committed file URL it still lists without one, and a pinned snapshot's recorded size becomes the entry's `downloadBytes`; every other field is the import's.
  * @param entries - The entries.
  * @param entriesDir - The directory entry files live in.
  * @returns Each entry's file path mapped to its serialised text.
@@ -42,7 +54,7 @@ export function entryWrites(entries: readonly Entry[], entriesDir: string): Map<
         }
       }
 
-      return [path, serialise(carried)];
+      return [path, serialise(withSnapshotSize(carried))];
     }),
   );
 }
