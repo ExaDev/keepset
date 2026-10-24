@@ -12,6 +12,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "directed temporal multigraph (1,005 nodes, 24,929 non-zeros)",
+  "domain": "Directed Temporal Multigraph",
   "expectedCounts": {
     "edges": 997001,
     "nodes": 332337

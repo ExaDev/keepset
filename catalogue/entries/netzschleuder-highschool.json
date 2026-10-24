@@ -13,6 +13,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "A network of friendships among male students in a small high school in Illinois from 1958. An arc points from student i to student j if i named j as a friend, in either of two identical surveys (from Fall and Spring semesters). Edge weights are the number of surveys in which the friendship was named.[^icon]\n[^icon]: Description obtained from the [ICON](https://icon.colorado.edu) project.",
+  "domain": "Social network",
   "expectedCounts": {
     "edges": 366,
     "nodes": 70

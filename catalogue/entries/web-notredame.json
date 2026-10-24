@@ -9,6 +9,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "Web graph of Notre Dame.",
+  "domain": "Directed Graph",
   "expectedCounts": {
     "edges": 1497134,
     "nodes": 325729
@@ -24,6 +25,7 @@
     "cyclic": true,
     "density": 0.000021066408037288526,
     "directed": true,
+    "downloadBytes": 3664135,
     "edgeTypes": 1,
     "heterogeneous": false,
     "multigraph": false,

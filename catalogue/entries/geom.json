@@ -9,6 +9,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "Collaboration network of computational geometry researchers.",
+  "domain": "Undirected Weighted Graph",
   "expectedCounts": {
     "edges": 11898,
     "nodes": 7343
@@ -25,6 +26,7 @@
     "cyclic": true,
     "density": 0.0006276176119693188,
     "directed": false,
+    "downloadBytes": 96238,
     "edgeTypes": 1,
     "heterogeneous": false,
     "multigraph": false,

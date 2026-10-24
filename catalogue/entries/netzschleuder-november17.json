@@ -13,6 +13,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "A network representing connections among members of the November 17 (N17) Greek terrorist group. Nodes are members, and an edge exists if two members have some connection in the past. Metadata include role, function, resources. Some attributes are missing.[^icon]\n[^icon]: Description obtained from the [ICON](https://icon.colorado.edu) project.",
+  "domain": "Social network",
   "expectedCounts": {
     "edges": 66,
     "nodes": 22

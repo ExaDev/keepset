@@ -12,6 +12,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "Word adjacency network from a dictionary. Edges connect words differing by one letter.",
+  "domain": "Undirected Graph",
   "expectedCounts": {
     "edges": 89038,
     "nodes": 39327
@@ -32,6 +33,7 @@
     "cyclic": true,
     "density": 0.00011514227306719542,
     "directed": false,
+    "downloadBytes": 481612,
     "edgeTypes": 1,
     "heterogeneous": true,
     "multigraph": false,

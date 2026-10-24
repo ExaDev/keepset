@@ -12,6 +12,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "Web graph of Slovenian research agency (ARRS) pages.",
+  "domain": "Directed Weighted Graph",
   "expectedCounts": {
     "edges": 72176,
     "nodes": 10617
@@ -32,6 +33,7 @@
     "cyclic": true,
     "density": 0.0011319662718341623,
     "directed": true,
+    "downloadBytes": 402412,
     "edgeTypes": 1,
     "heterogeneous": true,
     "multigraph": false,

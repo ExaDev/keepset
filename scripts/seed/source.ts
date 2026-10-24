@@ -72,3 +72,24 @@ export const GraphboxCatalogueSchema = z.looseObject({
   datasets: z.record(z.string(), GraphboxDatasetSchema),
 });
 export type GraphboxCatalogue = z.infer<typeof GraphboxCatalogueSchema>;
+
+/**
+ * Lists a dataset's downloads in catalogue order, flattening the source variants: a bare string or a `homepage` record is a landing page, and a cached-JSON record contributes its URLs.
+ * @param sources - The catalogue's sources.
+ * @returns Every download, synthetic ones included.
+ */
+export function downloadsOf(sources: readonly SourceEntry[]): SourceDownload[] {
+  return sources.flatMap((source): SourceDownload[] => {
+    if (typeof source === "string") {
+      return [{ url: source, format: "landing-page" }];
+    }
+    if ("downloads" in source) {
+      return source.downloads;
+    }
+    if ("homepage" in source) {
+      return [{ url: source.homepage, format: "landing-page" }];
+    }
+
+    return source.urls.map((url) => ({ url, format: source.format }));
+  });
+}

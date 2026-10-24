@@ -12,6 +12,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "Updated citation network from high-energy physics theory papers on arXiv.",
+  "domain": "Directed Graph",
   "expectedCounts": {
     "edges": 352807,
     "nodes": 27770
@@ -32,6 +33,7 @@
     "cyclic": true,
     "density": 0.0009137683330762914,
     "directed": true,
+    "downloadBytes": 1229840,
     "edgeTypes": 1,
     "heterogeneous": true,
     "multigraph": false,

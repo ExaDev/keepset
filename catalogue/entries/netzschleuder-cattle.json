@@ -13,6 +13,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "Dominance interactions among a group of dairy cattle at the Iberia Livestock Experiment Station in Jenerette, Louisiana. Edge weights represent the frequency of interaction. The two versions below are equivalent.[^icon]\n[^icon]: Description obtained from the [ICON](https://icon.colorado.edu) project.",
+  "domain": "Social network",
   "expectedCounts": {
     "edges": 217,
     "nodes": 28

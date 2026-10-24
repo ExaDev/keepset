@@ -9,6 +9,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "Weighted network of coauthorships between scientists posting preprints on the Condensed Matter E-Print Archive between Jan 1, 1995 and June 30, 2003.",
+  "domain": "Undirected Weighted Graph",
   "expectedCounts": {
     "edges": 120029,
     "nodes": 31163
@@ -26,6 +27,7 @@
     "cyclic": true,
     "density": 0.00025874421202396933,
     "directed": false,
+    "downloadBytes": 700052,
     "edgeTypes": 1,
     "heterogeneous": false,
     "multigraph": false,

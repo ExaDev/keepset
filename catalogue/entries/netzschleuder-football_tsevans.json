@@ -17,6 +17,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "A network of American football games between Division IA colleges during regular season Fall 2000. This version contains some corrections made by T. S. Evans, in particular:\n\nThere are are two issues with the original GN file. First three teams met twice in one season so the graph is not simple. This is easily dealt with if required. Secondly, the assignments to conferences, the node values, seem to be for the 2001 season and not the 2000 season. The games do appear to be for the 2000 season as ",
+  "domain": "Social network",
   "expectedCounts": {
     "edges": 613,
     "nodes": 115

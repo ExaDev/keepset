@@ -12,6 +12,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "Small-world network dataset.",
+  "domain": "Directed Multigraph",
   "expectedCounts": {
     "edges": 994,
     "nodes": 233
@@ -32,6 +33,7 @@
     "cyclic": true,
     "density": 0.03677667603966257,
     "directed": true,
+    "downloadBytes": 6314,
     "edgeTypes": 1,
     "heterogeneous": false,
     "multigraph": false,

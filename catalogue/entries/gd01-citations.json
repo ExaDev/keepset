@@ -9,6 +9,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "Citation network from Graph Drawing proceedings, from GD 2001 contest.",
+  "domain": "Directed Weighted Graph",
   "expectedCounts": {
     "edges": 645,
     "nodes": 311
@@ -25,6 +26,7 @@
     "cyclic": true,
     "density": 0.019155367992577294,
     "directed": true,
+    "downloadBytes": 6206,
     "edgeTypes": 1,
     "heterogeneous": false,
     "multigraph": false,

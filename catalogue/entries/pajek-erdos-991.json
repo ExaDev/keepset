@@ -12,6 +12,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "Core Erdos collaboration network, 1999 version.",
+  "domain": "Undirected Graph",
   "expectedCounts": {
     "edges": 1417,
     "nodes": 492
@@ -31,6 +32,7 @@
     "cyclic": true,
     "density": 0.013779891277922028,
     "directed": false,
+    "downloadBytes": 9224,
     "edgeTypes": 1,
     "heterogeneous": false,
     "multigraph": false,

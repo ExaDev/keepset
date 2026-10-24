@@ -13,6 +13,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "Networks of carbon exchanges among species in the cypress wetlands of South Florida. One network covers the wet and the other the dry season. Each node represents a taxon (similar to a species), and a directed edge indicates that one taxon uses another as food.[^icon]\n[^icon]: Description obtained from the [ICON](https://icon.colorado.edu) project.",
+  "domain": "Biological network",
   "expectedCounts": {
     "edges": 2106,
     "nodes": 128

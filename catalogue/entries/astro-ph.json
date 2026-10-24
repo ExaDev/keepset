@@ -9,6 +9,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "Weighted network of coauthorships between scientists posting preprints on the Astrophysics E-Print Archive between Jan 1, 1995 and December 31, 1999.",
+  "domain": "Undirected Weighted Graph",
   "expectedCounts": {
     "edges": 121251,
     "nodes": 16706
@@ -26,6 +27,7 @@
     "cyclic": true,
     "density": 0.0009419087154657844,
     "directed": false,
+    "downloadBytes": 584513,
     "edgeTypes": 1,
     "heterogeneous": false,
     "multigraph": false,

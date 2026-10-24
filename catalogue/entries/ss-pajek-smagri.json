@@ -12,6 +12,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "Small graph drawing contest network.",
+  "domain": "Directed Multigraph",
   "expectedCounts": {
     "edges": 4919,
     "nodes": 1024
@@ -32,6 +33,7 @@
     "cyclic": true,
     "density": 0.009387600806451613,
     "directed": true,
+    "downloadBytes": 21472,
     "edgeTypes": 1,
     "heterogeneous": false,
     "multigraph": false,

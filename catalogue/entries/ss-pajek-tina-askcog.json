@@ -12,6 +12,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "Tina's network: ask/cognitive interactions.",
+  "domain": "Directed Graph",
   "expectedCounts": {
     "edges": 36,
     "nodes": 11
@@ -32,6 +33,7 @@
     "cyclic": true,
     "density": 0.4909090909090909,
     "directed": true,
+    "downloadBytes": 770,
     "edgeTypes": 1,
     "heterogeneous": false,
     "multigraph": false,

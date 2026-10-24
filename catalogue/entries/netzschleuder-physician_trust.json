@@ -13,6 +13,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "A network of trust relationships among physicians in four midwestern (USA) cities in 1966. Edge direction indicates that node i trusts or asks for advice from node j. Each of the four components represent the network within a given city.[^icon]\n[^icon]: Description obtained from the [ICON](https://icon.colorado.edu) project.",
+  "domain": "Social network",
   "expectedCounts": {
     "edges": 1098,
     "nodes": 241

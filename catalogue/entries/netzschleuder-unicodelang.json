@@ -13,6 +13,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "A bipartite network of languages and the countries in which they are spoken, as estimated by Unicode. Edges are weighted by the proportion of the given country's population that is literate in a particular language.[^icon]\n[^icon]: Description obtained from the [ICON](https://icon.colorado.edu) project.",
+  "domain": "Informational network",
   "expectedCounts": {
     "edges": 1255,
     "nodes": 868

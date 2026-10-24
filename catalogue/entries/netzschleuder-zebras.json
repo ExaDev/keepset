@@ -13,6 +13,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "Social interactions among a group of wild Grevy's zebras (Equus grevyi), observed in Mpala Ranch in Kenya in 2002. Metadata (UCINET version) provides animal sex and lactation status.[^icon]\n[^icon]: Description obtained from the [ICON](https://icon.colorado.edu) project.",
+  "domain": "Social network",
   "expectedCounts": {
     "edges": 111,
     "nodes": 27

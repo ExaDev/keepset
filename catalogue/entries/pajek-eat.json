@@ -12,6 +12,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "Word association network from the Edinburgh Associative Thesaurus. 23,219 words, 325,624 associations.",
+  "domain": "Directed Weighted Graph",
   "expectedCounts": {
     "edges": 325593,
     "nodes": 23219
@@ -31,6 +32,7 @@
     "cyclic": true,
     "density": 0.0011323305963121687,
     "directed": true,
+    "downloadBytes": 1311683,
     "edgeTypes": 1,
     "heterogeneous": true,
     "multigraph": false,

@@ -12,6 +12,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "Graph Drawing 2002 contest, Problem A. 23 vertices, 87 arcs.",
+  "domain": "Directed Graph",
   "expectedCounts": {
     "edges": 87,
     "nodes": 23
@@ -31,6 +32,7 @@
     "cyclic": true,
     "density": 0.233201581027668,
     "directed": true,
+    "downloadBytes": 1288,
     "edgeTypes": 1,
     "heterogeneous": false,
     "multigraph": false,

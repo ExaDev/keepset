@@ -12,6 +12,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "undirected graph (55,042,369 nodes, 117,217,600 non-zeros)",
+  "domain": "Undirected Graph",
   "expectedCounts": {
     "edges": 117217600,
     "nodes": 55042369

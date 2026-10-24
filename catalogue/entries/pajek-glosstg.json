@@ -12,6 +12,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "Glossary of graph theory terms and their cross-references.",
+  "domain": "Directed Graph",
   "expectedCounts": {
     "edges": 122,
     "nodes": 67
@@ -31,6 +32,7 @@
     "cyclic": false,
     "density": 0.023082942097026604,
     "directed": true,
+    "downloadBytes": 1949,
     "edgeTypes": 1,
     "heterogeneous": false,
     "multigraph": false,

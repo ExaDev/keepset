@@ -9,6 +9,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "US airline routes network from 1997. Nodes are airports, edges are flight routes.",
+  "domain": "Undirected Weighted Graph",
   "expectedCounts": {
     "edges": 2126,
     "nodes": 332
@@ -25,6 +26,7 @@
     "cyclic": true,
     "density": 0.0386925344884068,
     "directed": false,
+    "downloadBytes": 16041,
     "edgeTypes": 1,
     "heterogeneous": false,
     "multigraph": false,

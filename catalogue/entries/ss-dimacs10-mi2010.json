@@ -12,6 +12,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "undirected weighted graph (329,885 nodes, 1,578,090 non-zeros)",
+  "domain": "Undirected Weighted Graph",
   "expectedCounts": {
     "edges": 1578090,
     "nodes": 329885
@@ -32,6 +33,7 @@
     "cyclic": true,
     "density": 0.000014501333730233827,
     "directed": false,
+    "downloadBytes": 9445549,
     "edgeTypes": 1,
     "heterogeneous": false,
     "multigraph": false,

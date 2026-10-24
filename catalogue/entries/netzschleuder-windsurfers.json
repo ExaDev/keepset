@@ -13,6 +13,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "A network of interpersonal contacts among windsurfers in southern California during the Fall of 1986. The edge weights indicate the perception of social affiliations majored by the tasks in which each individual was asked​ to sort cards with other surfer’s name in the order of closeness.[^icon]\n[^icon]: Description obtained from the [ICON](https://icon.colorado.edu) project.",
+  "domain": "Social network",
   "expectedCounts": {
     "edges": 336,
     "nodes": 43

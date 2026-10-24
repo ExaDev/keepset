@@ -13,6 +13,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "A network of contiguous states in the USA, in which each state is a node and two nodes are connected if they share a land-based geographic border. The dataset includes the lower 48 states, and the District of Columbia.[^icon]\n[^icon]: Description obtained from the [ICON](https://icon.colorado.edu) project.",
+  "domain": "Transportation network",
   "expectedCounts": {
     "edges": 107,
     "nodes": 49

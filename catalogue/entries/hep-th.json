@@ -9,6 +9,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "Weighted network of coauthorships between scientists posting preprints on the High-Energy Theory E-Print Archive between Jan 1, 1995 and December 31, 1999.",
+  "domain": "Undirected Weighted Graph",
   "expectedCounts": {
     "edges": 15751,
     "nodes": 8361
@@ -26,6 +27,7 @@
     "cyclic": true,
     "density": 0.0005440338046324214,
     "directed": false,
+    "downloadBytes": 118383,
     "edgeTypes": 1,
     "heterogeneous": false,
     "multigraph": false,

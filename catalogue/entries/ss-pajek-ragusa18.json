@@ -12,6 +12,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "Social network from Ragusa study with 18 individuals.",
+  "domain": "Directed Weighted Graph",
   "expectedCounts": {
     "edges": 64,
     "nodes": 23
@@ -32,6 +33,7 @@
     "cyclic": true,
     "density": 0.2134387351778656,
     "directed": true,
+    "downloadBytes": 1095,
     "edgeTypes": 1,
     "heterogeneous": false,
     "multigraph": false,

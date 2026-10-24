@@ -12,6 +12,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "High-energy physics theory citation network (KDD Cup 2003). 27,770 papers, 352,807 citations.",
+  "domain": "Directed Graph",
   "expectedCounts": {
     "edges": 342437,
     "nodes": 27240
@@ -31,6 +32,7 @@
     "cyclic": true,
     "density": 0.0009216898720894434,
     "directed": true,
+    "downloadBytes": 1180281,
     "edgeTypes": 1,
     "heterogeneous": true,
     "multigraph": false,

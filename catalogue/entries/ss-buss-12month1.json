@@ -12,6 +12,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "undirected bipartite graph (12,471 nodes, 22,624,727 non-zeros)",
+  "domain": "Undirected Bipartite Graph",
   "expectedCounts": {
     "edges": 22624727,
     "nodes": 885093
@@ -32,6 +33,7 @@
     "cyclic": true,
     "density": 0.000059102196438584194,
     "directed": false,
+    "downloadBytes": 63449712,
     "edgeTypes": 1,
     "heterogeneous": false,
     "multigraph": false,

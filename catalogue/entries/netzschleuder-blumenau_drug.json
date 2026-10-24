@@ -13,6 +13,7 @@
     "file": "crosswalks/graph-v1/topology.json"
   },
   "description": "A network of drug-drug interactions, extracted from 18 months of electronic health records (EHRs) from the city of Blumenau in Southern Brazil. Nodes are annotated with drug information (separate file), and edges are weighted by the severity of the interaction, along with other information.[^icon]\n[^icon]: Description obtained from the [ICON](https://icon.colorado.edu) project.",
+  "domain": "Biological network",
   "expectedCounts": {
     "edges": 181,
     "nodes": 75
