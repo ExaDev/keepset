@@ -1,3 +1,11 @@
+# [0.57.0](https://github.com/Mearman/keepset/compare/v0.56.0...v0.57.0) (2026-10-24)
+
+
+### Features
+
+* **seed:** give every graph a domain and a download size ([0b7b9e5](https://github.com/Mearman/keepset/commit/0b7b9e590fabe8c5797b398e933b2c77569e6578))
+* **seed:** take a pinned snapshot's recorded size as the download's size ([0290285](https://github.com/Mearman/keepset/commit/029028595f760d08e685adabef24aaddaaa6cf20))
+
 # [0.56.0](https://github.com/Mearman/keepset/compare/v0.55.0...v0.56.0) (2026-10-24)
 
 
