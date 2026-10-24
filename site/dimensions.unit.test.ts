@@ -18,8 +18,20 @@ describe("dimensionsOf", () => {
     expect(dimensionsOf(parseEntry({ ...liveEntry, properties: { rawBytes: 0 } }))).not.toHaveProperty("bytes");
   });
 
+  it("prefers the size of the download over the raw size the source states", () => {
+    expect(dimensionsOf(parseEntry({ ...liveEntry, properties: { rawBytes: BYTES_IN_A_FILE, downloadBytes: KIBIBYTE } }))).toHaveProperty("bytes", KIBIBYTE);
+    expect(dimensionsOf(parseEntry({ ...liveEntry, properties: { rawBytes: 0, downloadBytes: KIBIBYTE } }))).toHaveProperty("bytes", KIBIBYTE);
+    expect(dimensionsOf(parseEntry({ ...liveEntry, properties: { rawBytes: BYTES_IN_A_FILE } }))).toHaveProperty("bytes", BYTES_IN_A_FILE);
+  });
+
   it("reads a collection's instance count", () => {
     expect(dimensionsOf(parseEntry(taskCollectionEntry))).toEqual({ instances: 2 });
+  });
+
+  it("reads a probed node count as approximate, and never over an asserted one", () => {
+    const probedEntry = parseEntry({ ...liveEntry, expectedCounts: {}, properties: { probedNodes: KARATE_NODES } });
+    expect(dimensionsOf(probedEntry)).toEqual({ nodes: KARATE_NODES, probed: true });
+    expect(dimensionsOf(parseEntry({ ...liveEntry, properties: { probedNodes: 1 } }))).toEqual({ nodes: KARATE_NODES, edges: KARATE_EDGES });
   });
 
   it("leaves out what an entry does not record", () => {
@@ -50,6 +62,11 @@ describe("entitiesText and entityTotal", () => {
   it("uses the singular for a count of one and groups digits", () => {
     expect(entitiesText({ instances: 1 })).toBe("1 instance");
     expect(entitiesText({ nodes: MILLIONS })).toBe("1,234,567 nodes");
+  });
+
+  it("writes a probed node count as approximate and counts it in the total", () => {
+    expect(entitiesText({ nodes: KARATE_NODES, probed: true })).toBe("about 34 nodes");
+    expect(entityTotal({ nodes: KARATE_NODES, probed: true })).toBe(KARATE_NODES);
   });
 
   it("writes nothing, and no total, where no count is recorded", () => {

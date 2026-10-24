@@ -8,25 +8,45 @@ export interface Dimensions {
   readonly edges?: number;
   readonly instances?: number;
   readonly bytes?: number;
+  /** True where `nodes` is a count a probe read from a source that grows and not one the entry asserts, so it is shown as approximate. */
+  readonly probed?: true;
 }
 
-/** The property key that records the size in bytes of the source's download, which the source catalogue states and is `0` where it stated none. */
+/** The property key that records the size in bytes of the source's raw data, which the source catalogue states and is `0` where it stated none. */
 export const BYTES_PROPERTY = "rawBytes";
 
+/** The property key that records the size in bytes of the download the recipe fetches, as the collection's host reports it. */
+export const DOWNLOAD_BYTES_PROPERTY = "downloadBytes";
+
 /**
- * Reads an entry's dimensions. `properties.rawBytes` is the size the source catalogue states and is `0` where it stated none, so a zero is no size and is left out.
+ * Whether a property records a size in bytes.
+ * @param key - The property key.
+ * @returns True for the raw size and the download size.
+ */
+export function isBytesProperty(key: string): boolean {
+  return key === BYTES_PROPERTY || key === DOWNLOAD_BYTES_PROPERTY;
+}
+
+/** The property key that records the node count a probe read from a source that grows, which a fetch does not assert. */
+export const PROBED_NODES_PROPERTY = "probedNodes";
+
+/**
+ * Reads an entry's dimensions. The size is what a fetch downloads where the entry records it (`properties.downloadBytes`), else the raw size the source catalogue states (`properties.rawBytes`, `0` where it stated none, so a zero is no size and is left out).
  * @param entry - The entry.
  * @returns The dimensions the entry records.
  */
 export function dimensionsOf(entry: Entry): Dimensions {
   const { expectedCounts, properties } = entry;
-  const bytes = properties[BYTES_PROPERTY];
+  const bytes = [properties[DOWNLOAD_BYTES_PROPERTY], properties[BYTES_PROPERTY]].find((candidate): candidate is number => typeof candidate === "number" && candidate > 0);
+  const probed = properties[PROBED_NODES_PROPERTY];
+  const asserted = expectedCounts["nodes"];
+  const nodes: Dimensions = asserted !== undefined ? { nodes: asserted } : typeof probed === "number" ? { nodes: probed, probed: true } : {};
 
   return {
-    ...(expectedCounts["nodes"] === undefined ? {} : { nodes: expectedCounts["nodes"] }),
+    ...nodes,
     ...(expectedCounts["edges"] === undefined ? {} : { edges: expectedCounts["edges"] }),
     ...(expectedCounts["instances"] === undefined ? {} : { instances: expectedCounts["instances"] }),
-    ...(typeof bytes === "number" && bytes > 0 ? { bytes } : {}),
+    ...(bytes === undefined ? {} : { bytes }),
   };
 }
 
@@ -67,13 +87,13 @@ const ENTITIES = [
 /**
  * Writes the entities a dataset holds as each recorded count with its noun.
  * @param dimensions - The recorded dimensions.
- * @returns The text, such as "34 nodes, 78 edges"; empty where the entry records no count.
+ * @returns The text, such as "34 nodes, 78 edges", or "about 1,200 nodes" where the node count is a probed one; empty where the entry records no count.
  */
 export function entitiesText(dimensions: Dimensions): string {
   return ENTITIES.flatMap(({ key, singular, plural }) => {
     const count = dimensions[key];
 
-    return count === undefined ? [] : [`${formatCount(count)} ${count === 1 ? singular : plural}`];
+    return count === undefined ? [] : [`${key === "nodes" && dimensions.probed === true ? "about " : ""}${formatCount(count)} ${count === 1 ? singular : plural}`];
   }).join(", ");
 }
 
